@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Aggregates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.3 Aggregates</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I2710"></A> An <I>aggregate</I> combines 
+component values into a composite value of an array type, record type, 
+or record extension.] <A NAME="I2711"></A></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">aggregate</SPAN><A NAME="I2712"></A><A NAME="S0106"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2713"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2714"></A><SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2715"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+<A NAME="I2716"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+shall be a single array type, record type, or record extension.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>See <A HREF="AA-8-6.html">8.6</A>, 
+&ldquo;<A HREF="AA-8-6.html">The Context of Overload Resolution</A>&rdquo; 
+for the meaning of &ldquo;shall be a single ... type.&rdquo;&nbsp;</div>
+<div class="paranum"><a name="p3.b">3.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3">There are additional rules for each kind of aggregate. 
+These aggregate rules are additive; a legal expression needs to satisfy 
+all of the applicable rules. That means the rule given here must be satisfied 
+even when it is syntactically possible to tell which specific kind of 
+aggregate is being used.</span>&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+shall not be of a class-wide type.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>When the expected type 
+in some context is class-wide, an aggregate has to be explicitly qualified 
+by the specific type of value to be created, so that the expected type 
+for the aggregate itself is specific.&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We used to disallow <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
+of a type with unknown discriminants. However, that was unnecessarily 
+restrictive in the case of an extension aggregate, and irrelevant to 
+a record aggregate (since a type that is legal for a record aggregate 
+could not possibly have unknown discriminants) and to an array aggregate 
+(the only specific types that can have unknown discriminants are private 
+types, private extensions, and types derived from them).&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I2717"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+an anonymous object is created and values for the components or ancestor 
+part are obtained (as described in the subsequent subclause for each 
+kind of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>) 
+and assigned into the corresponding components or ancestor part of the 
+anonymous object. <A NAME="I2718"></A>Obtaining the values and the assignments 
+occur in an arbitrary order.<A NAME="I2719"></A> The value of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+is the value of this object.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The ancestor part is the 
+set of components inherited from the ancestor type. The syntactic category 
+<SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
+is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+that specifies how the ancestor part of the anonymous object should be 
+initialized.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The assignment operations 
+do the necessary value adjustment, as described in <A HREF="AA-7-6.html">7.6</A>. 
+Note that the value as a whole is not adjusted &mdash; just the subcomponents 
+(and ancestor part, if any). <A HREF="AA-7-6.html">7.6</A> also describes 
+when this anonymous object is finalized.</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="Annotations">If the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+the Initialize procedure for the ancestor type is applied to the ancestor 
+part after default-initializing it, unless the procedure is abstract, 
+as described in <A HREF="AA-7-6.html">7.6</A>. The Adjust procedure for 
+the ancestor type is not called in this case, since there is no assignment 
+to the ancestor part as a whole.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I2720"></A><A NAME="I2721"></A>If an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+is of a tagged type, a check is made that its value belongs to the first 
+subtype of the type. <A NAME="I2722"></A>Constraint_Error is raised if 
+this check fails.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This check ensures that 
+no values of a tagged type are ever outside the first subtype, as required 
+for inherited dispatching operations to work properly (see <A HREF="AA-3-4.html">3.4</A>). 
+This check will always succeed if the first subtype is unconstrained. 
+This check is not extended to untagged types to preserve upward compatibility. 
+</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations"><A NAME="I2723"></A>We now allow <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>s. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p6.c">6.c</a></div>
+<div class="Annotations">We have adopted new wording for expressing the 
+rule that the type of an aggregate shall be determinable from the outside, 
+though using the fact that it is nonlimited record (extension) or array.</div>
+<div class="paranum"><a name="p6.d">6.d</a></div>
+<div class="Annotations">An <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+now creates an anonymous object. This is necessary so that controlled 
+types will work (see <A HREF="AA-7-6.html">7.6</A>).&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p6.e">6.e/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+<A NAME="I2724"></A>In Ada 95, a limited type is not considered when 
+resolving an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>. 
+Since Ada 2005 now allows limited <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s, 
+we can have incompatibilities. For example:&nbsp;</div>
+<div class="paranum"><a name="p6.f">6.f/2</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Lim&nbsp;<B>is</B>&nbsp;<B>limited</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comp:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p6.g">6.g/2</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Not_Lim&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Comp:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p6.h">6.h/2</a></div>
+<div class="SmallExamples"><B>procedure</B>&nbsp;P(X:&nbsp;Lim);<BR>
+<B>procedure</B>&nbsp;P(X:&nbsp;Not_Lim);</div>
+<div class="paranum"><a name="p6.i">6.i/2</a></div>
+<div class="SmallExamples">P((Comp&nbsp;=&gt;&nbsp;123));&nbsp;--&nbsp;<SPAN Class="roman"><I>Illegal&nbsp;in&nbsp;Ada&nbsp;2005,&nbsp;legal&nbsp;in&nbsp;Ada&nbsp;95</I></SPAN></div>
+<div class="paranum"><a name="p6.j">6.j/2</a></div>
+<div class="Annotations">The call to P is ambiguous in Ada 2005, while 
+it would not be ambiguous in Ada 95 as the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+could not have a limited type. Qualifying the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+will eliminate any ambiguity. This construction would be rather confusing 
+to a maintenance programmer, so it should be avoided, and thus we expect 
+it to be rare.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p6.k">6.k/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+<A NAME="I2725"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">Aggregate</A></SPAN>s 
+can be of a limited type.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

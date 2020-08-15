@@ -1,0 +1,338 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Multiplying Operators</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.5 Multiplying Operators</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3062"></A><A NAME="I3063"></A><A NAME="I3064"></A><A NAME="I3065"></A><A NAME="I3066"></A><A NAME="I3067"></A><A NAME="I3068"></A><A NAME="I3069"></A><A NAME="I3070"></A><A NAME="I3071"></A><A NAME="I3072"></A><A NAME="I3073"></A><A NAME="I3074"></A><A NAME="I3075"></A><A NAME="I3076"></A><A NAME="I3077"></A>The 
+multiplying operators * (multiplication), / (division), <B>mod</B> (modulus), 
+and <B>rem</B> (remainder) are predefined for every specific integer 
+type <I>T</I>:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;*&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;/&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;<B>mod</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;<B>rem</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">Signed integer multiplication has its conventional 
+meaning.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Signed integer division 
+and remainder are defined by the relation:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">A&nbsp;=&nbsp;(A/B)*B&nbsp;+&nbsp;(A&nbsp;<B>rem</B>&nbsp;B)</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">where (A <B>rem</B> 
+B) has the sign of A and an absolute value less than the absolute value 
+of B. Signed integer division satisfies the identity:&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">(-A)/B&nbsp;=&nbsp;-(A/B)&nbsp;=&nbsp;A/(-B)</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0260-1.TXT">AI05-0260-1</A></I>} 
+The signed integer modulus operator is defined such that the result of 
+A <B>mod</B> B is either zero, or has the sign of B and an absolute value 
+less than the absolute value of B; in addition, for some signed integer 
+value N, this result satisfies the relation:&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">A&nbsp;=&nbsp;B*N&nbsp;+&nbsp;(A&nbsp;<B>mod</B>&nbsp;B)</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="WideAbove">The multiplying operators on modular types are 
+defined in terms of the corresponding signed integer operators[, followed 
+by a reduction modulo the modulus if the result is outside the base range 
+of the type] [(which is only possible for the &quot;*&quot; operator)]. 
+</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The above identity satisfied 
+by signed integer division is not satisfied by modular division because 
+of the difference in effect of negation.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Multiplication and 
+division operators are predefined for every specific floating point type 
+<I>T</I>:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;*&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;/&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following multiplication 
+and division operators, with an operand of the predefined type Integer, 
+are predefined for every specific fixed point type <I>T</I>:&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;*&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;*&quot;(Left&nbsp;:&nbsp;Integer;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;/&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">[All of the above multiplying 
+operators are usable with an operand of an appropriate universal numeric 
+type.] The following additional multiplying operators for <I>root_real</I> 
+are predefined[, and are usable when both operands are of an appropriate 
+universal or root numeric type, and the result is allowed to be of type 
+<I>root_real</I>, as in a <SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN>]: 
+</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>These operators are analogous 
+to the multiplying operators involving fixed or floating point types 
+where <I>root_real</I> substitutes for the fixed or floating point type, 
+and <I>root_integer</I> substitutes for Integer. Only values of the corresponding 
+universal numeric types are implicitly convertible to these root numeric 
+types, so these operators are really restricted to use with operands 
+of a universal type, or the specified root numeric types.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;*&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;/&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN></div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;*&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;*&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;/&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Multiplication and 
+division between any two fixed point types are provided by the following 
+two predefined operators:&nbsp;</div>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B><I>Universal_fixed</I> 
+is the universal type for the class of fixed point types, meaning that 
+these operators take operands of any fixed point types (not necessarily 
+the same) and return a result that is implicitly (or explicitly) convertible 
+to any fixed point type.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;*&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_fixed</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>universal_fixed</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;/&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_fixed</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>universal_fixed</I></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p19.1">19.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00420.TXT">AI95-00420-01</A></I>} 
+The above two fixed-fixed multiplying operators shall not be used in 
+a context where the expected type for the result is itself <I>universal_fixed</I> 
+[&mdash; the context has to identify some other numeric type to which 
+the result is to be converted, either explicitly or implicitly]. Unless 
+the predefined universal operator is identified using an expanded name 
+with <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+denoting the package Standard, an explicit conversion is required on 
+the result when using the above fixed-fixed multiplication operator if 
+either operand is of a type having a user-defined primitive multiplication 
+operator such that:&nbsp;</div>
+<div class="paranum"><a name="p19.2">19.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0020-1.TXT">AI05-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0209-1.TXT">AI05-0209-1</A></I>} 
+it is declared immediately within the same declaration list as the type 
+or any partial or incomplete view thereof; and</div>
+<div class="paranum"><a name="p19.3">19.3/2</a></div>
+<div class="Bulleted">both of its formal parameters are of a fixed-point 
+type.&nbsp;</div>
+<div class="paranum"><a name="p19.4">19.4/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00420.TXT">AI95-00420-01</A></I>} 
+A corresponding requirement applies to the universal fixed-fixed division 
+operator.</div>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The <I>small</I> of <I>universal_fixed</I> 
+is infinitesimal; no loss of precision is permitted. However, fixed-fixed 
+division is impractical to implement when an exact result is required, 
+and multiplication will sometimes result in unanticipated overflows in 
+such circumstances, so we require an explicit conversion to be inserted 
+in expressions like A * B * C if A, B, and C are each of some fixed point 
+type.</div>
+<div class="paranum"><a name="p19.b">19.b/2</a></div>
+<div class="Annotations">On the other hand, X := A * B; is permitted 
+by this rule, even if X, A, and B are all of different fixed point types, 
+since the expected type for the result of the multiplication is the type 
+of X, which is necessarily not <I>universal_fixed</I>.</div>
+<div class="paranum"><a name="p19.c">19.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00420.TXT">AI95-00420-01</A></I>} 
+We have made these into Name Resolution rules to ensure that user-defined 
+primitive fixed-fixed operators are not made unusable due to the presence 
+of these universal fixed-fixed operators. But we do allow these operators 
+to be used if prefixed by package Standard, so that they can be used 
+in the definitions of user-defined operators.&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 20 was 
+deleted.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">The multiplication and division operators for real 
+types have their conventional meaning. [For floating point types, the 
+accuracy of the result is determined by the precision of the result type. 
+For decimal fixed point types, the result is truncated toward zero if 
+the mathematical result is between two multiples of the <I>small</I> 
+of the specific result type (possibly determined by context); for ordinary 
+fixed point types, if the mathematical result is between two multiples 
+of the <I>small</I>, it is unspecified which of the two is the result. 
+<A NAME="I3078"></A>]</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal"><A NAME="I3079"></A><A NAME="I3080"></A><A NAME="I3081"></A>The 
+exception Constraint_Error is raised by integer division, <B>rem</B>, 
+and <B>mod</B> if the right operand is zero. [Similarly, for a real type 
+<I>T</I> with <I>T'</I>Machine_Overflows True, division by zero raises 
+Constraint_Error.]&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">17&nbsp;&nbsp;For positive 
+A and B, A/B is the quotient and A <B>rem</B> B is the remainder when 
+A is divided by B. The following relations are satisfied by the rem operator: 
+</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;<B>rem</B>&nbsp;(-B)&nbsp;=&nbsp;&nbsp;&nbsp;A&nbsp;<B>rem</B>&nbsp;B<BR>
+&nbsp;&nbsp;&nbsp;(-A)&nbsp;<B>rem</B>&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;=&nbsp;-(A&nbsp;<B>rem</B>&nbsp;B)</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">18&nbsp;&nbsp;For any 
+signed integer K, the following identity holds:&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;A&nbsp;<B>mod</B>&nbsp;B&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;(A&nbsp;+&nbsp;K*B)&nbsp;<B>mod</B>&nbsp;B</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">The relations between 
+signed integer division, remainder, and modulus are illustrated by the 
+following table:&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;A/B&nbsp;&nbsp;&nbsp;A&nbsp;<B>rem</B>&nbsp;B&nbsp;&nbsp;A&nbsp;<B>mod</B>&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A/B&nbsp;&nbsp;&nbsp;A&nbsp;<B>rem</B>&nbsp;B&nbsp;&nbsp;&nbsp;A&nbsp;<B>mod</B>&nbsp;B</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-10&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<BR>
+&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-11&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4<BR>
+&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-12&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3<BR>
+&nbsp;&nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-13&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2<BR>
+&nbsp;&nbsp;&nbsp;14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-14&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;A/B&nbsp;&nbsp;&nbsp;A&nbsp;<B>rem</B>&nbsp;B&nbsp;&nbsp;A&nbsp;<B>mod</B>&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;&nbsp;A/B&nbsp;&nbsp;&nbsp;A&nbsp;<B>rem</B>&nbsp;B&nbsp;&nbsp;&nbsp;A&nbsp;<B>mod</B>&nbsp;B<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-10&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<BR>
+&nbsp;&nbsp;&nbsp;11&nbsp;&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-11&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1<BR>
+&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-12&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2<BR>
+&nbsp;&nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-13&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3<BR>
+&nbsp;&nbsp;&nbsp;14&nbsp;&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;-2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-14&nbsp;&nbsp;&nbsp;-5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-4</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of expressions 
+involving multiplying operators:</I>&nbsp;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Examples">I&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1;<BR>
+J&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;2;<BR>
+K&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;3;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples">X&nbsp;:&nbsp;Real&nbsp;:=&nbsp;1.0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;see&nbsp;<A HREF="AA-3-5-7.html">3.5.7</A></I></SPAN><BR>
+Y&nbsp;:&nbsp;Real&nbsp;:=&nbsp;2.0;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples">F&nbsp;:&nbsp;Fraction&nbsp;:=&nbsp;0.25;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;see&nbsp;<A HREF="AA-3-5-9.html">3.5.9</A></I></SPAN><BR>
+G&nbsp;:&nbsp;Fraction&nbsp;:=&nbsp;0.5;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples"><SPAN Class="roman"><I>Expression</I></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Value</I></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Result&nbsp;Type</I></SPAN><BR>
+<BR>
+<SPAN Class="roman">I*J</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">2</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>same&nbsp;as&nbsp;I&nbsp;and&nbsp;J,&nbsp;that&nbsp;is,&nbsp;Integer</I></SPAN><BR>
+<SPAN Class="roman">K/J</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">1</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>same&nbsp;as&nbsp;K&nbsp;and&nbsp;J,&nbsp;that&nbsp;is,&nbsp;Integer</I></SPAN><BR>
+<SPAN Class="roman">K&nbsp;<B>mod</B>&nbsp;J</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">1</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>same&nbsp;as&nbsp;K&nbsp;and&nbsp;J,&nbsp;that&nbsp;is,&nbsp;Integer</I></SPAN><BR>
+<BR>
+<SPAN Class="roman">X/Y</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">0.5</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>same&nbsp;as&nbsp;X&nbsp;and&nbsp;Y,&nbsp;that&nbsp;is,&nbsp;Real</I></SPAN><BR>
+<SPAN Class="roman">F/2</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">0.125</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>same&nbsp;as&nbsp;F,&nbsp;that&nbsp;is,&nbsp;Fraction</I></SPAN><BR>
+<BR>
+<SPAN Class="roman">3*F</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">0.75</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>same&nbsp;as&nbsp;F,&nbsp;that&nbsp;is,&nbsp;Fraction</I></SPAN><BR>
+<SPAN Class="roman">0.75*G</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">0.375</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>universal_fixed,&nbsp;implicitly&nbsp;convertible</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>to&nbsp;any&nbsp;fixed&nbsp;point&nbsp;type</I></SPAN><BR>
+<SPAN Class="roman">Fraction(F*G)</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">0.125</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Fraction,&nbsp;as&nbsp;stated&nbsp;by&nbsp;the&nbsp;conversion</I></SPAN><BR>
+<SPAN Class="roman">Real(J)*Y</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman">4.0</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Real,&nbsp;the&nbsp;type&nbsp;of&nbsp;both&nbsp;operands&nbsp;after</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>conversion&nbsp;of&nbsp;J</I></SPAN></div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p35.a.1">35.a.1/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00420.TXT">AI95-00420-01</A></I>} 
+<A NAME="I3082"></A>The universal fixed-fixed multiplying operators are 
+now directly available (see below). Any attempt to use user-defined fixed-fixed 
+multiplying operators will be ambiguous with the universal ones. The 
+only way to use the user-defined operators is to fully qualify them in 
+a prefix call. This problem was not documented during the design of Ada 
+95, and has been mitigated by Ada 2005.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p35.a">35.a</a></div>
+<div class="Annotations"><A NAME="I3083"></A>Explicit conversion of the 
+result of multiplying or dividing two fixed point numbers is no longer 
+required, provided the context uniquely determines some specific fixed 
+point result type. This is to improve support for decimal fixed point, 
+where requiring explicit conversion on every fixed-fixed multiply or 
+divide was felt to be inappropriate.</div>
+<div class="paranum"><a name="p35.b">35.b</a></div>
+<div class="Annotations">The type <I>universal_fixed</I> is covered by 
+<I>universal_real</I>, so real literals and fixed point operands may 
+be multiplied or divided directly, without any explicit conversions required. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p35.c">35.c</a></div>
+<div class="Annotations">We have used the normal syntax for function 
+definition rather than a tabular format.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p35.d">35.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00364.TXT">AI95-00364-01</A></I>} 
+<A NAME="I3084"></A>We have changed the resolution rules for the universal 
+fixed-fixed multiplying operators to remove the incompatibility with 
+Ada 83 discussed above. The solution is to hide the universal operators 
+in some circumstances. As a result, some legal Ada 95 programs will require 
+the insertion of an explicit conversion around a fixed-fixed multiply 
+operator. This change is likely to catch as many bugs as it causes, since 
+it is unlikely that the user wanted to use predefined operators when 
+they had defined user-defined versions.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p35.e">35.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0020-1.TXT">AI05-0020-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0209-1.TXT">AI05-0209-1</A></I>} 
+<B>Correction:</B> Wording was added to clarify that <I>universal_fixed</I> 
+&quot;*&quot; and &quot;/&quot; does not apply if an appropriate operator 
+is declared for a partial (or incomplete) view of the designated type. 
+Otherwise, adding a partial (or incomplete) view could make some &quot;*&quot; 
+and &quot;/&quot; operators ambiguous.</div>
+<div class="paranum"><a name="p35.f">35.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0260-1.TXT">AI05-0260-1</A></I>} 
+<B>Correction:</B> The wording for the <B>mod</B> operator was corrected 
+so that a result of 0 does not have to have &quot;the sign of B&quot; 
+(which is impossible if B is negative).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

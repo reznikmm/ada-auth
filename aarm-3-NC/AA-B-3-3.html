@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Unchecked Union Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.3.3 Unchecked Union Types</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<A NAME="I8105"></A>[Specifying aspect Unchecked_Union to have the value 
+True defines an interface correspondence between a given discriminated 
+type and some C union. The aspect requires that the associated type shall 
+be given a representation that allocates no space for its discriminant(s).] 
+</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 through 
+3 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+For a discriminated record type having a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>, 
+the following language-defined representation aspect may be specified:</div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;Unchecked_Union</div><div class="WideHanging-Body"><br clear="left">
+The type of aspect Unchecked_Union is Boolean. If directly specified, 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0308">aspect_definition</A></SPAN> 
+shall be a static expression. If not specified (including by inheritance), 
+the aspect is False.<A NAME="I8106"></A><A NAME="I8107"></A></div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Unchecked_Union: 
+</B>Type is used to interface to a C union type.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 4 and 
+5 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<A NAME="I8108"></A><A NAME="I8109"></A><A NAME="I8110"></A>A type for 
+which aspect Unchecked_Union is True is called an <I>unchecked union 
+type</I>. A subtype of an unchecked union type is defined to be an <I>unchecked 
+union subtype</I>. An object of an unchecked union type is defined to 
+be an <I>unchecked union object</I>.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+All component subtypes of an unchecked union type shall be C-compatible.</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+If a component subtype of an unchecked union type is subject to a per-object 
+constraint, then the component subtype shall be an unchecked union subtype.</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0026-1.TXT">AI05-0026-1</A></I>} 
+Any name that denotes a discriminant of an object of an unchecked union 
+type shall occur within the declarative region of the type, and shall 
+not occur within a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0312">record_representation_clause</A></SPAN>.</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0026-1.TXT">AI05-0026-1</A></I>} 
+The type of a component declared in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+of an unchecked union type shall not need finalization. In addition to 
+the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+this rule also applies in the private part of an instance of a generic 
+unit.<A NAME="I8111"></A> For an unchecked union type declared within 
+the body of a generic unit, or within the body of any of its descendant 
+library units, no part of the type of a component declared in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+of the unchecked union type shall be of a formal private type or formal 
+private extension declared within the formal part of the generic unit.</div>
+<div class="paranum"><a name="p10.a">10.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0026-1.TXT">AI05-0026-1</A></I>} 
+The last part is a classic assume-the-worst rule that avoids dependence 
+on the actuals in a generic body. We did not include this in the definition 
+of &ldquo;needs finalization&rdquo; as it has a bad interaction with 
+the use of that term for the No_Nested_Finalization restriction.&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+The completion of an incomplete or private type declaration having a 
+<SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+shall not be an unchecked union type.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+An unchecked union subtype shall only be passed as a generic actual parameter 
+if the corresponding formal type has no known discriminants or is an 
+unchecked union type.</div>
+<div class="paranum"><a name="p12.a">12.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This includes formal private 
+types without a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
+formal derived types that do not inherit any discriminants (formal derived 
+types do not have <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>s), 
+and formal derived types that are unchecked union types.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+An unchecked union type is eligible for convention C.</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+All objects of an unchecked union type have the same size.</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+Discriminants of objects of an unchecked union type are of size zero.</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+Any check which would require reading a discriminant of an unchecked 
+union object is suppressed (see <A HREF="AA-11-5.html">11.5</A>). These 
+checks include:</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted">The check performed when addressing a variant component 
+(i.e., a component that was declared in a variant part) of an unchecked 
+union object that the object has this component (see <A HREF="AA-4-1-3.html">4.1.3</A>).</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Bulleted">Any checks associated with a type or subtype conversion 
+of a value of an unchecked union type (see <A HREF="AA-4-6.html">4.6</A>). 
+This includes, for example, the check associated with the implicit subtype 
+conversion of an assignment statement.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Bulleted">The subtype membership check associated with the 
+evaluation of a qualified expression (see <A HREF="AA-4-7.html">4.7</A>) 
+or an uninitialized allocator (see <A HREF="AA-4-8.html">4.8</A>).&nbsp;</div>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>If a suppressed check would 
+have failed, execution is erroneous (see <A HREF="AA-11-5.html">11.5</A>). 
+An implementation is always allowed to make a suppressed check if it 
+can somehow determine the discriminant value.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+A view of an unchecked union object (including a type conversion or function 
+call) has <I>inferable discriminants</I> if it has a constrained nominal 
+subtype, unless the object is a component of an enclosing unchecked union 
+object that is subject to a per-object constraint and the enclosing object 
+lacks inferable discriminants.<A NAME="I8112"></A></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+An expression of an unchecked union type has inferable discriminants 
+if it is either a name of an object with inferable discriminants or a 
+qualified expression whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a constrained subtype.</div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+Program_Error is raised in the following cases:<A NAME="I8113"></A></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Bulleted">Evaluation of the predefined equality operator 
+for an unchecked union type if either of the operands lacks inferable 
+discriminants.</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Bulleted">Evaluation of the predefined equality operator 
+for a type which has a subcomponent of an unchecked union type whose 
+nominal subtype is unconstrained.</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Bulleted">Evaluation of a membership test if the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a constrained unchecked union subtype and the expression lacks 
+inferable discriminants.</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Bulleted">Conversion from a derived unchecked union type 
+to an unconstrained non-unchecked-union type if the operand of the conversion 
+lacks inferable discriminants.</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Bulleted">Execution of the default implementation of the 
+Write or Read attribute of an unchecked union type.</div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Bulleted">Execution of the default implementation of the 
+Output or Input attribute of an unchecked union type if the type lacks 
+default discriminant values.&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 29 was 
+deleted.</I></SPAN>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">11&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+The use of an unchecked union to obtain the effect of an unchecked conversion 
+results in erroneous execution (see <A HREF="AA-11-5.html">11.5</A>). 
+Execution of the following example is erroneous even if Float'Size = 
+Integer'Size:</div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="SmallIndented2Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<B>type</B>&nbsp;T&nbsp;(Flag&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Flag&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;False&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F1&nbsp;:&nbsp;Float&nbsp;:=&nbsp;0.0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;True&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F2&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;case</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Unchecked_Union;</div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="SmallIndented2Examples">X&nbsp;:&nbsp;T;<BR>
+Y&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;X.F2;&nbsp;--&nbsp;<SPAN Class="roman"><I>erroneous</I></SPAN></div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p32.a">32.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00216.TXT">AI95-00216-01</A></I>} 
+<A NAME="I8114"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+Unchecked_Union is new.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p32.b">32.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0026-1.TXT">AI05-0026-1</A></I>} 
+<A NAME="I8115"></A><B>Correction:</B> The use of discriminants on Unchecked_Union 
+types is now illegal in <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0312">record_representation_clause</A></SPAN>s, 
+as it makes no sense to specify a position for something that is not 
+supposed to exist. It is very unlikely that this change will have any 
+impact on existing code.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p32.c">32.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<A NAME="I8116"></A>Aspect Unchecked_Union is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Unchecked_Union is now obsolescent.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p32.d">32.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0026-1.TXT">AI05-0026-1</A></I>} 
+<B>Correction:</B> Revised the rules to use the &ldquo;needs finalization&rdquo; 
+definition, and eliminated generic contract issues.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

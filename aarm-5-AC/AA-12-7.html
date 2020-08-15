@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Formal Packages</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>12.7 Formal Packages</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I5582"></A> <A NAME="I5583"></A>Formal 
+packages can be used to pass packages to a generic unit. The <SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN> 
+declares that the formal package is an instance of a given generic package. 
+Upon instantiation, the actual package has to be an instance of that 
+generic package.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<SPAN Class="swiss">formal_package_declaration</SPAN><A NAME="I5584"></A><A NAME="S0304"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;<A NAME="I5585"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5586"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;&nbsp;<A NAME="I5587"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5588"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<SPAN Class="swiss">formal_package_actual_part</SPAN><A NAME="I5589"></A><A NAME="S0305"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2">([<B>others</B>&nbsp;=&gt;]&nbsp;&lt;&gt;)<BR>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I5590"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0280">generic_actual_part</A></SPAN>]<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I5591"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5592"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>}&nbsp;[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;])</span><span class="delete2">(&lt;&gt;)&nbsp;|&nbsp;[<A NAME="I5593"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0280">generic_actual_part</A></SPAN></span>]</div>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">formal_package_association</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5594"></A><A NAME="S0306"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5595"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0281">generic_association</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>generic_formal_parameter_</I><A NAME="I5596"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</span></div>
+<div class="paranum"><a name="p3.2">3.2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2">Any positional <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
+shall precede any named <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s.</span> 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I5597"></A>The <I>generic_package_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall denote a generic package (the <I>template</I> for the formal package); 
+the formal package is an instance of the template.</div>
+<div class="paranum"><a name="p4.1">4.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0025-1.TXT">AI05-0025-1</A></I>} 
+<span class="insert3">The <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
+shall denote a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+of the template. If two or more formal subprograms of the template have 
+the same defining name, then named associations are not allowed for the 
+corresponding actuals.</span></div>
+<div class="paranum"><a name="p4.2">4.2/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00398.TXT">AI95-00398-01</A></I>} 
+<span class="insert2">A <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+shall contain at most one <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
+for each formal parameter. If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+does not include &ldquo;<B>others</B> =&gt; &lt;&gt;&rdquo;, each formal 
+parameter without an association shall have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0302">subprogram_default</A></SPAN>.</span></div>
+<div class="paranum"><a name="p4.3">4.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0200-1.TXT">AI05-0200-1</A></I>} 
+<span class="insert3">The rules for matching between <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
+and the generic formals of the template are as follows:</span>&nbsp;</div>
+<div class="paranum"><a name="p4.4">4.4/3</a></div>
+<div class="Bulleted"><span class="insert3">If all of the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
+are given by generic associations, the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0282">explicit_generic_actual_parameter</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
+shall be legal for an instantiation of the template.</span></div>
+<div class="paranum"><a name="p4.5">4.5/3</a></div>
+<div class="Bulleted"><span class="insert3">If a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
+for a formal type <I>T</I> of the template is given by &lt;&gt;, then 
+the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
+for any other <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+of the template that mentions <I>T</I> directly or indirectly must be 
+given by &lt;&gt; as well.</span></div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0200-1.TXT">AI05-0200-1</A></I>} 
+<span class="insert3">The above rule is simple to state, though it does 
+not reflect the fact that the formal package functions like an instantiation 
+of a special kind, where each box association for a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+<I>F</I> is replaced with a new entity <I>F</I>' that has the same characteristics 
+as <I>F</I>: if <I>F</I> is a formal discrete type then <I>F</I>' is 
+a discrete type, if <I>F</I> is a formal subprogram then <I>F</I>' is 
+a subprogram with a similar signature, etc. In practice this is achieved 
+by making the association into a copy of the declaration of the generic 
+formal.</span></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+The actual shall be an instance of the template. If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+is (&lt;&gt;)<span class="insert2">&nbsp;or (<B>others</B> =&gt; &lt;&gt;)</span>, 
+[then the actual may be any instance of the template]; otherwise, <span class="insert2">certain 
+of the actual parameters</span><span class="delete2">&nbsp;each actual parameter</span> 
+of the actual instance shall match the corresponding actual <span class="insert2">parameters</span><span class="delete2">&nbsp;parameter</span> 
+of the formal package<span class="insert2">, determined</span><span class="delete2">&nbsp;[(whether the actual parameter is given explicitly or by default)],</span> 
+as follows:</div>
+<div class="paranum"><a name="p5.1">5.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2">If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+includes <SPAN Class="swiss"><A HREF="AA-12-3.html#S0281">generic_association</A></SPAN>s 
+as well as associations with &lt;&gt;, then only the actual parameters 
+specified explicitly with <SPAN Class="swiss"><A HREF="AA-12-3.html#S0281">generic_association</A></SPAN>s 
+are required to match;</span></div>
+<div class="paranum"><a name="p5.2">5.2/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2">Otherwise, all actual parameters shall match[, 
+whether any actual parameter is given explicitly or by default].</span> 
+</div>
+<div class="paranum"><a name="p5.3">5.3/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2">The rules for matching of actual parameters between 
+the actual instance and the formal package are as follows:</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+For a formal object of mode <B>in</B><span class="insert2">,</span> the 
+actuals match if they are static expressions with the same value, or 
+if they statically denote the same constant, or if they are both the 
+literal <B>null</B>.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We can't simply require full 
+conformance between the two actual parameter expressions, because the 
+two expressions are being evaluated at different times.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">For a formal subtype, the actuals match if they 
+denote statically matching subtypes. <A NAME="I5598"></A></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">For other kinds of formals, the actuals match if 
+they statically denote the same entity.&nbsp;</div>
+<div class="paranum"><a name="p8.1">8.1/1</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0039">8652/0039</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00213.TXT">AI95-00213-01</A></I>} 
+<span class="insert1">For the purposes of matching, any actual parameter 
+that is the name of a formal object of mode <B>in</B> is replaced by 
+the formal object's actual expression (recursively).</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN> 
+declares a generic formal package.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<A NAME="I5599"></A>The visible part of a formal package includes the 
+first list of <SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>. 
+In addition, <span class="insert2">for each actual parameter that is 
+not required to match, a copy of the declaration of the corresponding 
+formal parameter of the template is included in the visible part of the 
+formal package. If the copied declaration is for a formal type, copies 
+of the implicit declarations of the primitive subprograms of the formal 
+type are also included in the visible part of</span><span class="delete2">&nbsp;if 
+the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+is (&lt;&gt;), it also includes the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+of the template for</span> the formal package.</div>
+<div class="paranum"><a name="p10.a">10.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+is (&lt;&gt;), then the declarations that occur immediately within the 
+<SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+of the template for the formal package are visible outside the formal 
+package, and can be denoted by expanded names outside the formal package.<span class="insert2">If 
+only some of the actual parameters are given by &lt;&gt;, then the declaration 
+corresponding to those parameters (but not the others) are made visible.</span> 
+</div>
+<div class="paranum"><a name="p10.b">10.b/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+We always want either the actuals or the formals of an instance to be 
+<span class="insert3">nameable</span><span class="delete3">&nbsp;namable</span> 
+from outside, but never both. If both were <span class="insert3">nameable</span><span class="delete3">&nbsp;namable</span>, 
+one would get some funny anomalies since they denote the same entity, 
+but, in the case of types at least, they might have different and inconsistent 
+sets of primitive operators due to predefined operator &ldquo;reemergence.&rdquo; 
+Formal derived types exacerbate the difference. We want the implicit 
+declarations of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+as well as the explicit declarations, so we get operations on the formal 
+types.&nbsp;</div>
+<div class="paranum"><a name="p10.c">10.c</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A generic formal package 
+is a package, and is an instance. Hence, it is possible to pass a generic 
+formal package as an actual to another generic formal package.&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2">For the purposes of matching, if the actual instance 
+<I>A</I> is itself a formal package, then the actual parameters of <I>A</I> 
+are those specified explicitly or implicitly in the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+for <I>A</I>, plus, for those not specified, the copies of the formal 
+parameters of the template included in the visible part of <I>A</I>.</span></div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<span class="insert2"><I>Example of a generic package with formal package 
+parameters:</I></span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Containers.Ordered_Maps;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-A-18-6.html">A.18.6</A></I></SPAN><BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Mapping_1&nbsp;<B>is&nbsp;new</B>&nbsp;Ada.Containers.Ordered_Maps(&lt;&gt;);<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Mapping_2&nbsp;<B>is&nbsp;new</B>&nbsp;Ada.Containers.Ordered_Maps<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Key_Type&nbsp;=&gt;&nbsp;Mapping_1.Element_Type,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;);<BR>
+<B>package</B>&nbsp;Ordered_Join&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Provide&nbsp;a&nbsp;&quot;join&quot;&nbsp;between&nbsp;two&nbsp;mappings</I></SPAN></span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Key_Type&nbsp;<B>is</B>&nbsp;Mapping_1.Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Element_Type&nbsp;<B>is</B>&nbsp;Mapping_2.Element_Type;</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Lookup(Key&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Ordered_Join;</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<span class="insert2"><I>Example of an instantiation of a package with 
+formal packages:</I></span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Containers.Ordered_Maps;<BR>
+<B>package</B>&nbsp;Symbol_Package&nbsp;<B>is</B></span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0178-1.TXT">AI12-0178-1</A></I>} 
+<span class="insert2"></span><span class="insert5">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Key_String&nbsp;<B>is</B>&nbsp;String(1..5);<BR>
+</span><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;String_Id&nbsp;<B>is</B>&nbsp;...</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Symbol_Info&nbsp;<B>is</B>&nbsp;...</span></div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0178-1.TXT">AI12-0178-1</A></I>} 
+<span class="insert2">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;String_Table&nbsp;<B>is&nbsp;new</B>&nbsp;Ada.Containers.Ordered_Maps<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Key_Type&nbsp;=&gt;&nbsp;</span><span class="insert5">Key_String</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;String</span></span><span class="insert2">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type&nbsp;=&gt;&nbsp;String_Id);</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Symbol_Table&nbsp;<B>is&nbsp;new</B>&nbsp;Ada.Containers.Ordered_Maps<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Key_Type&nbsp;=&gt;&nbsp;String_Id,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type&nbsp;=&gt;&nbsp;Symbol_Info);</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;String_Info&nbsp;<B>is&nbsp;new</B>&nbsp;Ordered_Join(Mapping_1&nbsp;=&gt;&nbsp;String_Table,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mapping_2&nbsp;=&gt;&nbsp;Symbol_Table);</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;Apple_Info&nbsp;:&nbsp;<B>constant</B>&nbsp;Symbol_Info&nbsp;:=&nbsp;String_Info.Lookup(&quot;Apple&quot;);</span></div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Examples"><span class="insert2"><B>end</B>&nbsp;Symbol_Package;</span></div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p25.a">25.a</a></div>
+<div class="Annotations"><A NAME="I5600"></A>Formal packages are new 
+to Ada 95.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p25.b">25.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00398.TXT">AI95-00398-01</A></I>} 
+<span class="insert2"><A NAME="I5601"></A>It's now allowed to mix actuals 
+of a formal package that are specified with those that are not specified.</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p25.c">25.c/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0039">8652/0039</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00213.TXT">AI95-00213-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Corrected the description of 
+formal package matching to say that formal parameters are always replaced 
+by their actual parameters (recursively). This matches the actual practice 
+of compilers, as the ACATS has always required this behavior.</span></div>
+<div class="paranum"><a name="p25.d">25.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
+<span class="insert2">The description of which operations are visible 
+in a formal package has been clarified. We also specify how matching 
+is done when the actual is a formal package.</span>&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p25.e">25.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0025-1.TXT">AI05-0025-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0200-1.TXT">AI05-0200-1</A></I>} 
+<span class="insert3"><A NAME="I5602"></A><B>Correction:</B> Added missing 
+rules for parameters of generic formal package that parallel those in 
+<A HREF="AA-12-3.html">12.3</A>, as well as some specific to &lt;&gt; 
+parameters. These are technically incompatibilities because generic formal 
+package parameters that Ada 95 and Ada 2005 would have considered legal 
+now have to be rejected. But this should not be an issue in practice 
+as such formal parameters could not have matched any actual generics. 
+And it is quite likely that implementations already enforce some of these 
+rules.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p25.f">25.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<span class="insert3"><A NAME="I5603"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN>. 
+This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

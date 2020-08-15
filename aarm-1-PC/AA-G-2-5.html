@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Performance Requirements for Random Number Generation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>G.2.5 Performance Requirements for Random Number Generation</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In the strict mode, the performance of Numerics.Float_Random 
+and Numerics.Discrete_Random shall be as specified here.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">Two different calls to the time-dependent Reset procedure 
+shall reset the generator to different states, provided that the calls 
+are separated in time by at least one second and not more than fifty 
+years.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The implementation's representations of generator 
+states and its algorithms for generating random numbers shall yield a 
+period of at least 2<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">31</SPAN></SPAN></SUP>&ndash;2; 
+much longer periods are desirable but not required.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The implementations of Numerics.Float_Random.Random 
+and Numerics.Discrete_Random.Random shall pass at least 85% of the individual 
+trials in a suite of statistical tests. For Numerics.Float_Random, the 
+tests are applied directly to the floating point values generated (i.e., 
+they are not converted to integers first), while for Numerics.Discrete_Random 
+they are applied to the generated values of various discrete types. Each 
+test suite performs 6 different tests, with each test repeated 10 times, 
+yielding a total of 60 individual trials. An individual trial is deemed 
+to pass if the chi-square value (or other statistic) calculated for the 
+observed counts or distribution falls within the range of values corresponding 
+to the 2.5 and 97.5 percentage points for the relevant degrees of freedom 
+(i.e., it shall be neither too high nor too low). For the purpose of 
+determining the degrees of freedom, measurement categories are combined 
+whenever the expected counts are fewer than 5.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>In the floating 
+point random number test suite, the generator is reset to a time-dependent 
+state at the beginning of the run. The test suite incorporates the following 
+tests, adapted from D. E. Knuth, <I>The Art of Computer Programming, 
+vol. 2: Seminumerical Algorithms.</I>  In the descriptions below, the 
+given number of degrees of freedom is the number before reduction due 
+to any necessary combination of measurement categories with small expected 
+counts; it is one less than the number of measurement categories.&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="SmallBulleted">Proportional Distribution Test (a variant 
+of the Equidistribution Test). The interval 0.0 .. 1.0 is partitioned 
+into <SPAN Class="roman"><I>K</I></SPAN> subintervals. <SPAN Class="roman"><I>K</I></SPAN> 
+is chosen randomly between 4 and 25 for each repetition of the test, 
+along with the boundaries of the subintervals (subject to the constraint 
+that at least 2 of the subintervals have a width of 0.001 or more). 5000 
+random floating point numbers are generated. The counts of random numbers 
+falling into each subinterval are tallied and compared with the expected 
+counts, which are proportional to the widths of the subintervals. The 
+number of degrees of freedom for the chi-square test is <SPAN Class="roman"><I>K</I></SPAN>&ndash;1.</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="SmallBulleted">Gap Test. The bounds of a range <SPAN Class="roman"><I>A</I></SPAN> 
+.. <SPAN Class="roman"><I>B</I></SPAN>, with 0.0 &le; <SPAN Class="roman"><I>A</I></SPAN> 
+&lt; <SPAN Class="roman"><I>B</I></SPAN> &le; 1.0, are chosen randomly 
+for each repetition of the test, subject to the constraint that 0.2 &le; 
+<SPAN Class="roman"><I>B</I></SPAN>&ndash;<SPAN Class="roman"><I>A</I></SPAN> 
+&le; 0.6. Random floating point numbers are generated until 5000 falling 
+into the range <SPAN Class="roman"><I>A</I></SPAN> .. <SPAN Class="roman"><I>B</I></SPAN> 
+have been encountered. Each of these 5000 is preceded by a &ldquo;gap&rdquo; 
+(of length greater than or equal to 0) of consecutive random numbers 
+not falling into the range <SPAN Class="roman"><I>A</I></SPAN> .. <SPAN Class="roman"><I>B</I></SPAN>. 
+The counts of gaps of each length from 0 to 15, and of all lengths greater 
+than 15 lumped together, are tallied and compared with the expected counts. 
+Let <SPAN Class="roman"><I>P</I></SPAN> = <SPAN Class="roman"><I>B</I></SPAN>&ndash;<SPAN Class="roman"><I>A</I></SPAN>. 
+The probability that a gap has a length of <SPAN Class="roman"><I>L</I></SPAN> 
+is (1&ndash;<SPAN Class="roman"><I>P</I></SPAN>) <SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>L</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP> 
+&middot; <SPAN Class="roman"><I>P</I></SPAN> for <SPAN Class="roman"><I>L</I></SPAN> 
+&le; 15, while the probability that a gap has a length of 16 or more 
+is (1&ndash;<SPAN Class="roman"><I>P</I></SPAN>) <SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">16</SPAN></SPAN></SUP>. 
+The number of degrees of freedom for the chi-square test is 16.</div>
+<div class="paranum"><a name="p4.d">4.d</a></div>
+<div class="SmallBulleted">Permutation Test. 5000 tuples of 4 different 
+random floating point numbers are generated. (An entire 4-tuple is discarded 
+in the unlikely event that it contains any two exactly equal components.) 
+The counts of each of the 4! = 24 possible relative orderings of the 
+components of the 4-tuples are tallied and compared with the expected 
+counts. Each of the possible relative orderings has an equal probability. 
+The number of degrees of freedom for the chi-square test is 23.</div>
+<div class="paranum"><a name="p4.e">4.e</a></div>
+<div class="SmallBulleted">Increasing-Runs Test. Random floating point 
+numbers are generated until 5000 increasing runs have been observed. 
+An &ldquo;increasing run&rdquo; is a sequence of random numbers in strictly 
+increasing order; it is followed by a random number that is strictly 
+smaller than the preceding random number. (A run under construction is 
+entirely discarded in the unlikely event that one random number is followed 
+immediately by an exactly equal random number.) The decreasing random 
+number that follows an increasing run is discarded and not included with 
+the next increasing run. The counts of increasing runs of each length 
+from 1 to 4, and of all lengths greater than 4 lumped together, are tallied 
+and compared with the expected counts. The probability that an increasing 
+run has a length of <SPAN Class="roman"><I>L</I></SPAN> is 1/<SPAN Class="roman"><I>L</I></SPAN>! 
+&ndash; 1/(<SPAN Class="roman"><I>L</I></SPAN>+1)! for <SPAN Class="roman"><I>L</I></SPAN> 
+&le; 4, while the probability that an increasing run has a length of 
+5 or more is 1/5!. The number of degrees of freedom for the chi-square 
+test is 4.</div>
+<div class="paranum"><a name="p4.f">4.f</a></div>
+<div class="SmallBulleted">Decreasing-Runs Test. The test is similar 
+to the Increasing Runs Test, but with decreasing runs.</div>
+<div class="paranum"><a name="p4.g">4.g</a></div>
+<div class="SmallBulleted">Maximum-of-<SPAN Class="roman"><I>t</I></SPAN> 
+Test (with <SPAN Class="roman"><I>t</I></SPAN> = 5). 5000 tuples of 5 
+random floating point numbers are generated. The maximum of the components 
+of each 5-tuple is determined and raised to the 5th power. The uniformity 
+of the resulting values over the range 0.0 .. 1.0 is tested as in the 
+Proportional Distribution Test.&nbsp;</div>
+<div class="paranum"><a name="p4.h">4.h</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>In the discrete 
+random number test suite, Numerics.Discrete_Random is instantiated as 
+described below. The generator is reset to a time-dependent state after 
+each instantiation. The test suite incorporates the following tests, 
+adapted from D. E. Knuth (<I>op. cit.</I>) and other sources. The given 
+number of degrees of freedom for the chi-square test is reduced by any 
+necessary combination of measurement categories with small expected counts, 
+as described above.&nbsp;</div>
+<div class="paranum"><a name="p4.i">4.i</a></div>
+<div class="SmallBulleted">Equidistribution Test. In each repetition 
+of the test, a number <SPAN Class="roman"><I>R</I></SPAN> between 2 and 
+30 is chosen randomly, and Numerics.Discrete_Random is instantiated with 
+an integer subtype whose range is 1 .. <SPAN Class="roman"><I>R</I></SPAN>. 
+5000 integers are generated randomly from this range. The counts of occurrences 
+of each integer in the range are tallied and compared with the expected 
+counts, which have equal probabilities. The number of degrees of freedom 
+for the chi-square test is <SPAN Class="roman"><I>R</I></SPAN>&ndash;1.</div>
+<div class="paranum"><a name="p4.j">4.j</a></div>
+<div class="SmallBulleted">Simplified Poker Test. Numerics.Discrete_Random 
+is instantiated once with an enumeration subtype representing the 13 
+denominations (Two through Ten, Jack, Queen, King, and Ace) of an infinite 
+deck of playing cards. 2000 &ldquo;poker&rdquo; hands (5-tuples of values 
+of this subtype) are generated randomly. The counts of hands containing 
+exactly <SPAN Class="roman"><I>K</I></SPAN> different denominations (1 
+&le; <SPAN Class="roman"><I>K</I></SPAN> &le; 5) are tallied and compared 
+with the expected counts. The probability that a hand contains exactly 
+<SPAN Class="roman"><I>K</I></SPAN> different denominations is given 
+by a formula in Knuth. The number of degrees of freedom for the chi-square 
+test is 4.</div>
+<div class="paranum"><a name="p4.k">4.k</a></div>
+<div class="SmallBulleted">Coupon Collector's Test. Numerics.Discrete_Random 
+is instantiated in each repetition of the test with an integer subtype 
+whose range is 1 .. <SPAN Class="roman"><I>R</I></SPAN>, where <SPAN Class="roman"><I>R</I></SPAN> 
+varies systematically from 2 to 11. Integers are generated randomly from 
+this range until each value in the range has occurred, and the number 
+<SPAN Class="roman"><I>K</I></SPAN> of integers generated is recorded. 
+This constitutes a &ldquo;coupon collector's segment&rdquo; of length 
+<SPAN Class="roman"><I>K</I></SPAN>. 2000 such segments are generated. 
+The counts of segments of each length from <SPAN Class="roman"><I>R</I></SPAN> 
+to <SPAN Class="roman"><I>R</I></SPAN>+29, and of all lengths greater 
+than <SPAN Class="roman"><I>R</I></SPAN>+29 lumped together, are tallied 
+and compared with the expected counts. The probability that a segment 
+has any given length is given by formulas in Knuth. The number of degrees 
+of freedom for the chi-square test is 30.</div>
+<div class="paranum"><a name="p4.l">4.l</a></div>
+<div class="SmallBulleted">Craps Test (Lengths of Games). Numerics.Discrete_Random 
+is instantiated once with an integer subtype whose range is 1 .. 6 (representing 
+the six numbers on a die). 5000 craps games are played, and their lengths 
+are recorded. (The length of a craps game is the number of rolls of the 
+pair of dice required to produce a win or a loss. A game is won on the 
+first roll if the dice show 7 or 11; it is lost if they show 2, 3, or 
+12. If the dice show some other sum on the first roll, it is called the 
+<I>point</I>, and the game is won if and only if the point is rolled 
+again before a 7 is rolled.) The counts of games of each length from 
+1 to 18, and of all lengths greater than 18 lumped together, are tallied 
+and compared with the expected counts. For 2 &le; <SPAN Class="roman"><I>S</I></SPAN> 
+&le; 12, let <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>S</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUB> 
+be the probability that a roll of a pair of dice shows the sum <SPAN Class="roman"><I>S</I></SPAN>, 
+and let <SPAN Class="roman"><I>Q</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>S</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>) 
+= <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>S</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUB> 
+&middot; (1 &ndash; (<SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>S</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUB> 
++ <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">7</SPAN></SPAN></SUB>)) 
+<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>L</I></SPAN></SPAN><SPAN STYLE="font-size: 64%">&ndash;2</SPAN></SPAN></SUP> 
+&middot; (<SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>S</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUB> 
++ <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">7</SPAN></SPAN></SUB>). 
+Then, the probability that a game has a length of 1 is <SPAN Class="roman"><I>D</I></SPAN> 
+<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">7</SPAN></SPAN></SUB> 
++ <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">11</SPAN></SPAN></SUB> 
++ <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">2</SPAN></SPAN></SUB> 
++ <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">3</SPAN></SPAN></SUB> 
++ <SPAN Class="roman"><I>D</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">12</SPAN></SPAN></SUB> 
+and, for <SPAN Class="roman"><I>L</I></SPAN> &gt; 1, the probability 
+that a game has a length of <SPAN Class="roman"><I>L</I></SPAN> is <SPAN Class="roman"><I>Q</I></SPAN> 
+<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">4</SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>) 
++ <SPAN Class="roman"><I>Q</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">5</SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>) 
++ <SPAN Class="roman"><I>Q</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">6</SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>) 
++ <SPAN Class="roman"><I>Q</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">8</SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>) 
++ <SPAN Class="roman"><I>Q</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">9</SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>) 
++ <SPAN Class="roman"><I>Q</I></SPAN> <SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">10</SPAN></SPAN></SUB>(<SPAN Class="roman"><I>L</I></SPAN>). 
+The number of degrees of freedom for the chi-square test is 18.</div>
+<div class="paranum"><a name="p4.m">4.m</a></div>
+<div class="SmallBulleted">Craps Test (Lengths of Passes). This test 
+is similar to the last, but enough craps games are played for 3000 losses 
+to occur. A string of wins followed by a loss is called a <I>pass</I>, 
+and its length is the number of wins preceding the loss. The counts of 
+passes of each length from 0 to 7, and of all lengths greater than 7 
+lumped together, are tallied and compared with the expected counts. For 
+<SPAN Class="roman"><I>L</I></SPAN> &ge; 0, the probability that a pass 
+has a length of <SPAN Class="roman"><I>L</I></SPAN> is <SPAN Class="roman"><I>W</I></SPAN> 
+<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>L</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP> 
+&middot; (1&ndash;<SPAN Class="roman"><I>W</I></SPAN>), where <SPAN Class="roman"><I>W</I></SPAN>, 
+the probability that a game ends in a win, is 244.0/495.0. The number 
+of degrees of freedom for the chi-square test is 8.</div>
+<div class="paranum"><a name="p4.n">4.n</a></div>
+<div class="SmallBulleted">Collision Test. Numerics.Discrete_Random is 
+instantiated once with an integer or enumeration type representing binary 
+bits. 15 successive calls on the Random function are used to obtain the 
+bits of a 15-bit binary integer between 0 and 32767. 3000 such integers 
+are generated, and the number of collisions (integers previously generated) 
+is counted and compared with the expected count. A chi-square test is 
+not used to assess the number of collisions; rather, the limits on the 
+number of collisions, corresponding to the 2.5 and 97.5 percentage points, 
+are (from formulas in Knuth) 112 and 154. The test passes if and only 
+if the number of collisions is in this range.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

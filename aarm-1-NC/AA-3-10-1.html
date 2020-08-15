@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Incomplete Type Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.10.1 Incomplete Type Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">There are no particular limitations on the designated 
+type of an access type. In particular, the type of a component of the 
+designated type can be another access type, or even the same access type. 
+This permits mutually dependent and recursive access types. An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+can be used to introduce a type to be used as a designated type, while 
+deferring its full definition to a subsequent <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">incomplete_type_declaration</SPAN><A NAME="I2181"></A><A NAME="S0078"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>type</B>&nbsp;<A NAME="I2182"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;[<A NAME="I2183"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0056">discriminant_part</A></SPAN>];</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I2184"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+requires a completion, which shall be a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN>. 
+[If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+occurs immediately within either the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0162">package_specification</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+shall occur later and immediately within this visible part or <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN>. 
+If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+occurs immediately within the private part of a given <SPAN Class="swiss"><A HREF="AA-7-1.html#S0162">package_specification</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+shall occur later and immediately within either the private part itself, 
+or the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+of the corresponding <SPAN Class="swiss"><A HREF="AA-7-2.html#S0163">package_body</A></SPAN>.] 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This is implied by the next AARM-only 
+rule, plus the rules in <A HREF="AA-3-11-1.html">3.11.1</A>, &ldquo;<A HREF="AA-3-11-1.html">Completions 
+of Declarations</A>&rdquo; which require a completion to appear later 
+and immediately within the same declarative region.&nbsp;</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+occurs immediately within the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0162">package_specification</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+shall occur immediately within this visible part.&nbsp;</div>
+<div class="paranum"><a name="p3.c">3.c</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If the implementation supports 
+it, an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+can be completed by a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Import.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0058">known_discriminant_part</A></SPAN>, 
+then a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+that completes it shall have a fully conforming (explicit) <SPAN Class="swiss"><A HREF="AA-3-7.html#S0058">known_discriminant_part</A></SPAN> 
+(see <A HREF="AA-6-3-1.html">6.3.1</A>). <A NAME="I2185"></A>[If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+has no <SPAN Class="swiss"><A HREF="AA-3-7.html#S0056">discriminant_part</A></SPAN> 
+(or an <SPAN Class="swiss"><A HREF="AA-3-7.html#S0057">unknown_discriminant_part</A></SPAN>), 
+then a corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+is nevertheless allowed to have discriminants, either explicitly, or 
+inherited via derivation.]</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The only allowed uses 
+of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+that denotes an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+are as follows:&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>No need to say &quot;prior 
+to the end of the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN>&quot; 
+since the name would not denote the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+after the end of the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN>. 
+Also, with child library units, it would not be well defined whether 
+they come before or after the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+for deferred incomplete types.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0024">subtype_indication</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0074">access_to_object_definition</A></SPAN>; 
+[the only form of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">constraint</A></SPAN> 
+allowed in this <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0024">subtype_indication</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0061">discriminant_constraint</A></SPAN>;] 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>We now allow <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0061">discriminant_constraint</A></SPAN>s 
+even if the full type is deferred to the package body. However, there 
+is no particular implementation burden because we have dropped the concept 
+of the dependent compatibility check. In other words, we have effectively 
+repealed AI83-00007.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+defining the subtype of a parameter or result of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0076">access_to_subprogram_definition</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This allows, for example, a record 
+to have a component designating a subprogram that takes that same record 
+type as a parameter.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0077">access_definition</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0086">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0093">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0094">attribute_designator</A></SPAN> 
+is Class; such an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0093">attribute_reference</A></SPAN> 
+is similarly restricted to the uses allowed here; when used in this way, 
+the corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+shall declare a tagged type, and the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0093">attribute_reference</A></SPAN> 
+shall occur in the same library unit as the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is to prevent children from 
+imposing requirements on their ancestor library units for deferred incomplete 
+types.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">A dereference (whether implicit or explicit &mdash; 
+see <A HREF="AA-4-1.html">4.1</A>) shall not be of an incomplete type. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2186"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+declares an incomplete type and its first subtype; the first subtype 
+is unconstrained if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0058">known_discriminant_part</A></SPAN> 
+appears.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>If an <SPAN Class="swiss"><A HREF="AA-3-7.html#S0057">unknown_discriminant_part</A></SPAN> 
+or no <SPAN Class="swiss"><A HREF="AA-3-7.html#S0056">discriminant_part</A></SPAN> 
+appears, then the constrainedness of the first subtype doesn't matter 
+for any other rules or semantics, so we don't bother defining it. The 
+case with a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0058">known_discriminant_part</A></SPAN> 
+is the only case in which a constraint could later be given in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0024">subtype_indication</A></SPAN> 
+naming the incomplete type.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I2187"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+has no effect.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>An incomplete type has no real 
+existence, so it doesn't need to be &quot;created&quot; in the usual 
+sense we do for other types. It is roughly equivalent to a &quot;forward;&quot; 
+declaration in Pascal. Private types are different, because they have 
+a different set of characteristics from their full type.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">80&nbsp;&nbsp;<A NAME="I2188"></A>Within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+and a corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+cannot be separated by an intervening body. This is because a type has 
+to be completely defined before it is frozen, and a body freezes all 
+types declared prior to it in the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+(see <A HREF="AA-13-14.html">13.14</A>).</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a recursive 
+type:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>type</B>&nbsp;Cell;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;incomplete&nbsp;type&nbsp;declaration</I></SPAN><BR>
+<B>type</B>&nbsp;Link&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Cell;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>type</B>&nbsp;Cell&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Succ&nbsp;&nbsp;&nbsp;:&nbsp;Link;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pred&nbsp;&nbsp;&nbsp;:&nbsp;Link;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">Head&nbsp;&nbsp;&nbsp;:&nbsp;Link&nbsp;&nbsp;:=&nbsp;<B>new</B>&nbsp;Cell'(0,&nbsp;<B>null</B>,&nbsp;<B>null</B>);<BR>
+Next&nbsp;&nbsp;&nbsp;:&nbsp;Link&nbsp;&nbsp;:=&nbsp;Head.Succ;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal"><I>Examples of mutually dependent access types:</I> 
+</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples"><B>type</B>&nbsp;Person(&lt;&gt;);&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;incomplete&nbsp;type&nbsp;declaration</I></SPAN><BR>
+<B>type</B>&nbsp;Car;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;incomplete&nbsp;type&nbsp;declaration</I></SPAN></div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples"><B>type</B>&nbsp;Person_Name&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Person;<BR>
+<B>type</B>&nbsp;Car_Name&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Car;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples"><B>type</B>&nbsp;Car&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Owner&nbsp;&nbsp;&nbsp;:&nbsp;Person_Name;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples"><B>type</B>&nbsp;Person(Sex&nbsp;:&nbsp;Gender)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String(1&nbsp;..&nbsp;20);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Birth&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Date;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;130;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vehicle&nbsp;&nbsp;:&nbsp;Car_Name;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Sex&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;M&nbsp;=&gt;&nbsp;Wife&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Person_Name(Sex&nbsp;=&gt;&nbsp;F);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;F&nbsp;=&gt;&nbsp;Husband&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Person_Name(Sex&nbsp;=&gt;&nbsp;M);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">My_Car,&nbsp;Your_Car,&nbsp;Next_Car&nbsp;:&nbsp;Car_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Car;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-4-8.html">4.8</A></I></SPAN><BR>
+George&nbsp;:&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person(M);<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+George.Vehicle&nbsp;:=&nbsp;Your_Car;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p23.a">23.a</a></div>
+<div class="Annotations"><A NAME="I2189"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0021">full_type_declaration</A></SPAN> 
+that completes an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+may have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0058">known_discriminant_part</A></SPAN> 
+even if the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN> 
+does not.</div>
+<div class="paranum"><a name="p23.b">23.b/1</a></div>
+<div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0061">discriminant_constraint</A></SPAN> 
+may be applied to an incomplete type, even if its completion is deferred 
+to the package body, because there is no &ldquo;dependent compatibility 
+check&rdquo; required any more. Of course, the constraint can be specified 
+only if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0058">known_discriminant_part</A></SPAN> 
+was given in the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0078">incomplete_type_declaration</A></SPAN>. 
+As mentioned in the previous paragraph, that is no longer required even 
+when the full type has discriminants.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p23.c">23.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Dereferences producing 
+incomplete types were not explicitly disallowed in RM83, though AI83-00039 
+indicated that it was not strictly necessary since troublesome cases 
+would result in Constraint_Error at run time, since the access value 
+would necessarily be null. However, this introduces an undesirable implementation 
+burden, as illustrated by Example 4 of AI83-00039:&nbsp;</div>
+<div class="paranum"><a name="p23.d">23.d</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Pack&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Pri&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Sep;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Pri&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Sep;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Pri;<BR>
+<B>end</B>&nbsp;Pack;</div>
+<div class="paranum"><a name="p23.e">23.e</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;<B>body</B>&nbsp;Pack&nbsp;<B>is</B>&nbsp;--<SPAN Class="roman"><I>&nbsp;Could&nbsp;be&nbsp;separately&nbsp;compiled!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Sep&nbsp;<B>is</B>&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:=&nbsp;<B>new</B>&nbsp;Sep;<BR>
+<B>end</B>&nbsp;Pack;</div>
+<div class="paranum"><a name="p23.f">23.f</a></div>
+<div class="SmallExamples"><B>pragma</B>&nbsp;Elaborate(Pack);<BR>
+<B>private</B>&nbsp;<B>package</B>&nbsp;Pack.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;X.<B>all</B>'Size;&nbsp;--<SPAN Class="roman"><I>&nbsp;Legal,&nbsp;by&nbsp;AI-00039.</I></SPAN><BR>
+<B>end</B>&nbsp;Pack.Child;</div>
+<div class="paranum"><a name="p23.g">23.g</a></div>
+<div class="Annotations">Generating code for the above example could 
+be a serious implementation burden, since it would require all aliased 
+objects to store size dope, and for that dope to be in the same format 
+for all kinds of types (or some other equivalently inefficient implementation). 
+On the contrary, most implementations allocate dope differently (or not 
+at all) for different designated subtypes.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

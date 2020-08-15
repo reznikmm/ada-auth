@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Renaming Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>8.5 Renaming Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-5.html#S0169">renaming_declaration</A></SPAN> 
+declares another name for an entity, such as an object, exception, package, 
+subprogram, entry, or generic unit. Alternatively, a <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0173">subprogram_renaming_declaration</A></SPAN> 
+can be the completion of a previous <SPAN Class="swiss"><A HREF="RM-6-1.html#S0141">subprogram_declaration</A></SPAN>.</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">renaming_declaration</SPAN><A NAME="I3257"></A><A NAME="S0169"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3258"></A><SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0170">object_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3259"></A><SPAN Class="swiss"><A HREF="RM-8-5-2.html#S0171">exception_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3260"></A><SPAN Class="swiss"><A HREF="RM-8-5-3.html#S0172">package_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3261"></A><SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0173">subprogram_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3262"></A><SPAN Class="swiss"><A HREF="RM-8-5-5.html#S0174">generic_renaming_declaration</A></SPAN></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3263"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0169">renaming_declaration</A></SPAN> 
+evaluates the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+that follows the reserved word <B>renames</B> and thereby determines 
+the view and entity denoted by this name <A NAME="I3264"></A><A NAME="I3265"></A>(the 
+<I>renamed view</I> and <I>renamed entity</I>). A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="RM-8-5.html#S0169">renaming_declaration</A></SPAN> 
+denotes (a new view of) the renamed entity.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Notes">8&nbsp;&nbsp;Renaming may be used to resolve name 
+conflicts and to act as a shorthand. Renaming with a different <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0147">operator_symbol</A></SPAN> 
+does not hide the old <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>; 
+the new <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+and the old <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+need not be visible at the same places.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Notes">9&nbsp;&nbsp;A task or protected object that is declared 
+by an explicit <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+can be renamed as an object. However, a single task or protected object 
+cannot be renamed since the corresponding type is anonymous (meaning 
+it has no nameable subtypes). For similar reasons, an object of an anonymous 
+array or access type cannot be renamed.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">10&nbsp;&nbsp;A subtype 
+defined without any additional constraint can be used to achieve the 
+effect of renaming another subtype (including a task or protected subtype) 
+as in&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Mode&nbsp;<B>is</B>&nbsp;Ada.Text_IO.File_Mode;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

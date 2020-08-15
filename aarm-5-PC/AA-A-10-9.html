@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Input-Output for Real Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.10.9 Input-Output for Real Types</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The following procedures are defined in the generic 
+packages Float_IO, Fixed_IO, and Decimal_IO, which have to be instantiated 
+for the appropriate floating point, ordinary fixed point, or decimal 
+fixed point type respectively (indicated by Num in the specifications).</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Values are output as 
+decimal literals without low line characters. The format of each value 
+output consists of a Fore field, a decimal point, an Aft field, and (if 
+a nonzero Exp parameter is supplied) the letter E and an Exp field. The 
+two possible formats thus correspond to:</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">Fore&nbsp;&nbsp;.&nbsp;&nbsp;Aft</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">and to:</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">Fore&nbsp;&nbsp;.&nbsp;&nbsp;Aft&nbsp;&nbsp;E&nbsp;&nbsp;Exp</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">without any spaces between these fields. The Fore 
+field may include leading spaces, and a minus sign for negative values. 
+The Aft field includes only decimal digits (possibly with trailing zeros). 
+The Exp field includes the sign (plus or minus) and the exponent (possibly 
+with leading zeros).</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For floating point 
+types, the default lengths of these fields are defined by the following 
+variables that are declared in the generic package Float_IO:</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples" style="margin-bottom: 0.9em">Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;2;<BR>
+Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Digits-1;<BR>
+Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;3;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For ordinary or decimal 
+fixed point types, the default lengths of these fields are defined by 
+the following variables that are declared in the generic packages Fixed_IO 
+and Decimal_IO, respectively:</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples" style="margin-bottom: 0.9em">Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Fore;<BR>
+Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Num'Aft;<BR>
+Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;0;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following procedures 
+are provided:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;0);<BR>
+<B>procedure</B>&nbsp;Get(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;0);</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em">If the value of 
+the parameter Width is zero, skips any leading blanks, line terminators, 
+or page terminators, then reads the longest possible sequence of characters 
+matching the syntax of any of the following (see <A HREF="AA-2-4.html">2.4</A>): 
+</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Indented3Bulleted">[+|&ndash;]<SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented3Bulleted">[+|&ndash;]<SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>.[<SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Indented3Bulleted">[+|&ndash;].<SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0008">numeral</A></SPAN>[<SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented3Bulleted">[+|&ndash;]<SPAN Class="swiss"><A HREF="AA-2-4-2.html#S0012">base</A></SPAN>#<SPAN Class="swiss"><A HREF="AA-2-4-2.html#S0013">based_numeral</A></SPAN>.#[<SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Indented3Bulleted">[+|&ndash;]<SPAN Class="swiss"><A HREF="AA-2-4-2.html#S0012">base</A></SPAN>#.<SPAN Class="swiss"><A HREF="AA-2-4-2.html#S0013">based_numeral</A></SPAN>#[<SPAN Class="swiss"><A HREF="AA-2-4-1.html#S0009">exponent</A></SPAN>] 
+</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented2">If a nonzero value of Width is supplied, then 
+exactly Width characters are input, or the characters (possibly none) 
+up to a line terminator, whichever comes first; any skipped leading blanks 
+are included in the count.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Indented2">Returns in the parameter Item the value of type 
+Num that corresponds to the sequence input, preserving the sign (positive 
+if none has been specified) of a zero value if Num is a floating point 
+type and Num'Signed_Zeros is True.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Data_Error 
+is propagated if the sequence input does not have the required syntax 
+or if the value obtained is not of the subtype Num.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Put(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);<BR>
+<BR>
+<B>procedure</B>&nbsp;Put(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Indented2">Outputs the value of the parameter Item as a decimal 
+literal with the format defined by Fore, Aft and Exp. If the value is 
+negative, or if Num is a floating point type where Num'Signed_Zeros is 
+True and the value is a negatively signed zero, then a minus sign is 
+included in the integer part. If Exp has the value zero, then the integer 
+part to be output has as many digits as are needed to represent the integer 
+part of the value of Item, overriding Fore if necessary, or consists 
+of the digit zero if the value of Item has no integer part.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Indented2">If Exp has a value greater than zero, then the 
+integer part to be output has a single digit, which is nonzero except 
+for the value 0.0 of Item.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Indented2">In both cases, however, if the integer part to 
+be output has fewer than Fore characters, including any minus sign, then 
+leading spaces are first output to make up the difference. The number 
+of digits of the fractional part is given by Aft, or is one if Aft equals 
+zero. The value is rounded; a value of exactly one half in the last place 
+is rounded away from zero.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Exp has the value 
+zero, there is no exponent part. If Exp has a value greater than zero, 
+then the exponent part to be output has as many digits as are needed 
+to represent the exponent part of the value of Item (for which a single 
+digit integer part is used), and includes an initial sign (plus or minus). 
+If the exponent part to be output has fewer than Exp characters, including 
+the sign, then leading zeros precede the digits, to make up the difference. 
+For the value 0.0 of Item, the exponent has the value zero.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Num;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive);</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Indented2">Reads a real value from the beginning of the given 
+string, following the same rule as the Get procedure that reads a real 
+value from a file, but treating the end of the string as a file terminator. 
+Returns, in the parameter Item, the value of type Num that corresponds 
+to the sequence input. Returns in Last the index value such that From(Last) 
+is the last character read.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Data_Error 
+is propagated if the sequence input does not have the required syntax, 
+or if the value obtained is not of the subtype Num.</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Outputs the value 
+of the parameter Item to the given string, following the same rule as 
+for output to a file, using a value for Fore such that the sequence of 
+characters output exactly fills the string, including any leading spaces. 
+</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Float_Text_IO is a 
+library package that is a nongeneric equivalent to Text_IO.Float_IO for 
+the predefined type Float:&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I7197"></A><BR>
+<B>package</B>&nbsp;Ada.Float_Text_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Text_IO.Float_IO(Float);</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Normal">For each predefined floating point type, a nongeneric 
+equivalent to Text_IO.Float_IO is provided, with names such as Ada.Long_Float_Text_IO.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal">An implementation may extend Get [and Put] for floating 
+point types to support special values such as infinities and NaNs.</div>
+<div class="paranum"><a name="p35.a">35.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+See also the similar permission for the Wide_Wide_Value, Wide_Value, 
+and Value attributes in <A HREF="AA-3-5.html">3.5</A>.&nbsp;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Normal">The implementation of Put need not produce an output 
+value with greater accuracy than is supported for the base subtype. The 
+additional accuracy, if any, of the value produced by Put when the number 
+of requested digits in the integer and fractional parts exceeds the required 
+accuracy is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p36.a">36.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The required accuracy is 
+thus Num'Base'Digits digits if Num is a floating point subtype. For a 
+fixed point subtype the required accuracy is a function of the subtype's 
+Fore, Aft, and Delta attributes.&nbsp;</div>
+<div class="paranum"><a name="p36.b">36.b</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The accuracy 
+of the value produced by Put.</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal">The nongeneric equivalent packages may, but need 
+not, be actual instantiations of the generic package for the appropriate 
+predefined type.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Notes">34&nbsp;&nbsp;For an item with a positive value, if 
+output to a string exactly fills the string without leading spaces, then 
+output of the corresponding negative value will propagate Layout_Error.</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Notes">35&nbsp;&nbsp;The rules for the Value attribute (see 
+<A HREF="AA-3-5.html">3.5</A>) and the rules for Get are based on the 
+same set of formats.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p40">40/1</a></div>
+<div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Examples"><B>package</B>&nbsp;Real_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Float_IO(Real);&nbsp;<B>use</B>&nbsp;Real_IO;<BR>
+--<SPAN Class="roman"><I>&nbsp;default&nbsp;format&nbsp;used&nbsp;at&nbsp;instantiation,&nbsp;Default_Exp&nbsp;=&nbsp;3</I></SPAN></div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Examples">X&nbsp;:&nbsp;Real&nbsp;:=&nbsp;-123.4567;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;digits&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-5-7.html">3.5.7</A>)</I></SPAN></div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Examples">Put(X);&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;default&nbsp;format</I></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>&quot;&ndash;&#8203;1.2345670E+02&quot;</I></SPAN><BR>
+Put(X,&nbsp;Fore&nbsp;=&gt;&nbsp;5,&nbsp;Aft&nbsp;=&gt;&nbsp;3,&nbsp;Exp&nbsp;=&gt;&nbsp;2);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&quot;bbb&ndash;&#8203;1.235E+2&quot;</I></SPAN><BR>
+Put(X,&nbsp;5,&nbsp;3,&nbsp;0);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&quot;b&ndash;&#8203;123.457&quot;</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

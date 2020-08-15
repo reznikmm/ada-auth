@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Containers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-17-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18 <span class="insert2">Containers</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><span class="insert2">This clause presents the specifications 
+of the package Containers and several child packages, which provide facilities 
+for storing collections of elements.</span></div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal"><span class="insert2">A variety of sequence and associative 
+containers are provided. Each container includes a <I>cursor</I> type. 
+A cursor is a reference to an element within a container. Many operations 
+on cursors are common to all of the containers. A cursor referencing 
+an element in a container is considered to be overlapping&nbsp;</span><span class="insert5">only 
+</span><span class="insert2">with the&nbsp;</span><span class="insert5">element</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;container 
+object</span></span><span class="insert2">&nbsp;itself.<A NAME="I7274"></A> 
+<A NAME="I7275"></A></span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal"><span class="insert2">Within this clause we provide 
+Implementation Advice for the desired average or worst case time complexity 
+of certain operations on a container. This advice is expressed using 
+the Landau symbol <I>O</I>(X). Presuming f is some function of a length 
+parameter N and t(N) is the time the operation takes (on average or worst 
+case, as specified) for the length N, a complexity of <I>O</I>(f(N)) 
+means that there exists a finite A such that for any N, t(N)/f(N) &lt; 
+A. <A NAME="I7276"></A><A NAME="I7277"></A></span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal"><span class="insert2">If the advice suggests that 
+the complexity should be less than <I>O</I>(f(N)), then for any arbitrarily 
+small positive real D, there should exist a positive integer M such that 
+for all N &gt; M, t(N)/f(N) &lt; D.</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal"><span class="insert3">When a formal function is used 
+to provide an ordering for a container, it is generally required to define 
+a strict weak ordering. A function &quot;&lt;&quot; defines a <I>strict 
+weak ordering</I><A NAME="I7278"></A> if it is irreflexive, asymmetric, 
+transitive, and in addition, if <I>x</I> &lt; <I>y</I> for any values 
+<I>x</I> and <I>y</I>, then for all other values <I>z</I>, (<I>x</I> 
+&lt; <I>z</I>) or (<I>z</I> &lt; <I>y</I>).</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6/4</a></div>
+<div class="Normal"><span class="insert4">Certain subprograms declared 
+within instances of some of the generic packages presented in this clause 
+are said to <I>perform indefinite insertion</I>. These subprograms are 
+those corresponding (in the sense of the copying described in subclause 
+<A HREF="RM-12-3.html">12.3</A>) to subprograms that have formal parameters 
+of a generic formal indefinite type and that are identified as performing 
+indefinite insertion in the subclause defining the generic package.<A NAME="I7279"></A></span></div>
+<div class="paranum"><a name="p7">7/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert4">If 
+a subprogram performs indefinite insertion, then certain run-time checks 
+are performed as part of a call to the subprogram; if any of these checks 
+fail, then the resulting exception is propagated to the caller and the 
+container is not modified by the call. These checks are performed for 
+each parameter corresponding (in the sense of the copying described in 
+<A HREF="RM-12-3.html">12.3</A>) to a parameter in the corresponding 
+generic whose type is a generic formal indefinite type. The checks performed 
+for a given parameter are those checks explicitly specified in subclause 
+<A HREF="RM-4-8.html">4.8</A> that would be performed as part of the 
+evaluation of an initialized allocator whose access type is declared 
+immediately within the instance, where:</span></div>
+<div class="paranum"><a name="p8">8/4</a></div>
+<div class="Bulleted"><span class="insert4">the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+is that of the parameter; and</span></div>
+<div class="paranum"><a name="p9">9/4</a></div>
+<div class="Bulleted"><span class="insert4">the designated subtype of 
+the access type is the subtype of the parameter; and</span></div>
+<div class="paranum"><a name="p10">10/4</a></div>
+<div class="Bulleted"><span class="insert4">finalization of the collection 
+of the access type has started if and only if the finalization of the 
+instance has started.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal"><span class="insert5">For an indefinite container 
+(one whose type is defined in an instance of a child package of Containers 
+whose <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
+contains &quot;Indefinite&quot;), each element of the container shall 
+be created when it is inserted into the container and finalized when 
+it is deleted from the container (or when the container object is finalized 
+if the element has not been deleted). For a bounded container (one whose 
+type is defined in an instance of a child package of Containers whose 
+<SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
+starts with &quot;Bounded&quot;) that is not an indefinite container, 
+all of the elements of the capacity of the container shall be created 
+and default initialized when the container object is created; the elements 
+shall be finalized when the container object is finalized. For other 
+kinds of containers, when elements are created and finalized is unspecified.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-17-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

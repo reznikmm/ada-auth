@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>User-Defined Literals</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.2.1 <span class="insert5">User-Defined Literals</span><span class="delete5"></span></H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><span class="insert5">Using one or more of the aspects 
+defined below, a type may be specified to allow the use of one or more 
+kinds of literals as values of the type.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
+following nonoverridable, type-related operational aspects may be specified 
+for any type <I>T</I>:</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">Integer_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a primitive function of <I>T</I> with one parameter of type 
+String and a result type of <I>T</I>.<A NAME="I2511"></A><A NAME="I2512"></A></span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">Real_Literal</span></div><div class="WideHanging-Body">
+<span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a primitive function of <I>T</I> with one parameter of type 
+String and a result type of <I>T</I>.<A NAME="I2513"></A><A NAME="I2514"></A></span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="WideHanging-Term"><span class="insert5">String_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a primitive function of <I>T</I> with one parameter of type 
+Wide_Wide_String and a result type of <I>T</I>.<A NAME="I2515"></A><A NAME="I2516"></A></span></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">A type with a specified 
+String_Literal aspect is considered a <I>string type</I>.<A NAME="I2517"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal"><span class="insert5">The Integer_Literal or Real_Literal 
+aspect shall not be specified for a type <I>T</I> if the full view of 
+<I>T</I> is a numeric type. The String_Literal aspect shall not be specified 
+for a type <I>T</I> if the full view of <I>T</I> is a string type (in 
+the absence of the String_Literal aspect specification). <A NAME="I2518"></A>In 
+addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules also apply in the private part of an instance of a generic 
+unit.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal"><span class="insert5">For the evaluation of an integer 
+(or real) literal with expected type having an Integer_Literal (or Real_Literal) 
+aspect specified, the value is the result of a call on the function specified 
+by the aspect, with the parameter being a string with lower bound one 
+whose value corresponds to the textual representation of the integer 
+(or real) literal.</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="insert5">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
+with expected type having a String_Literal aspect specified, the value 
+is the result of a call on the function specified by the aspect, with 
+the parameter being the Wide_Wide_String with lower bound one that corresponds 
+to the literal.</span>&nbsp;</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal"><span class="insert5">It is a bounded error if the 
+evaluation of a literal with expected type having a corresponding _Literal 
+aspect specified, propagates an exception. The possible effect is that 
+an error is reported prior to run time, or Program_Error or the exception 
+propagated by the evaluation is raised at the point of use of the value 
+of the literal.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

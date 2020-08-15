@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Shared Variables</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.10 Shared Variables</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I4186"></A><A NAME="I4187"></A>If two different 
+objects, including nonoverlapping parts of the same object, are <I>independently 
+addressable</I>, they can be manipulated concurrently by two different 
+tasks without synchronization. Normally, any two nonoverlapping objects 
+are independently addressable. However, if packing, record layout, or 
+Component_Size is specified for a given composite object, then it is 
+implementation defined whether or not two nonoverlapping parts of that 
+composite object are independently addressable.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><B>Implementation defined:&nbsp;</B>Whether or not 
+two nonoverlapping parts of a composite object are independently addressable, 
+in the case where packing, record layout, or Component_Size is specified 
+for the object.</div>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Independent addressability 
+is the only high level semantic effect of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Pack. If two objects are independently addressable, the implementation 
+should allocate them in such a way that each can be written by the hardware 
+without writing the other. For example, unless the user asks for it, 
+it is generally not feasible to choose a bit-packed representation on 
+a machine without an atomic bit field insertion instruction, because 
+there might be tasks that update neighboring subcomponents concurrently, 
+and locking operations on all subcomponents is generally not a good idea.</div>
+<div class="paranum"><a name="p1.c">1.c</a></div>
+<div class="Annotations">Even if packing or one of the other above-mentioned 
+aspects is specified, subcomponents should still be updated independently 
+if the hardware efficiently supports it.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">[Separate tasks normally 
+proceed independently and concurrently with one another. However, task 
+interactions can be used to synchronize the actions of two or more tasks 
+to allow, for example, meaningful communication by the direct updating 
+and reading of variables shared between the tasks.] The actions of two 
+different tasks are synchronized in this sense when an action of one 
+task <I>signals</I> an action of the other task; <A NAME="I4188"></A>an 
+action A1 is defined to signal an action A2 under the following circumstances: 
+</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">If A1 and A2 are part of the execution of the same 
+task, and the language rules require A1 to be performed before A2;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">If A1 is the action of an activator that initiates 
+the activation of a task, and A2 is part of the execution of the task 
+that is activated;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">If A1 is part of the activation of a task, and 
+A2 is the action of waiting for completion of the activation;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">If A1 is part of the execution of a task, and A2 
+is the action of waiting for the termination of the task;</div>
+<div class="paranum"><a name="p6.1">6.1/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0031">8652/0031</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00118.TXT">AI95-00118-01</A></I>} 
+If A1 is the termination of a task T, and A2 is either the evaluation 
+of the expression T'Terminated or a call to Ada.Task_Identification.Is_Terminated 
+with an actual parameter that identifies T (see <A HREF="AA-C-7-1.html">C.7.1</A>);</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">If A1 is the action of issuing an entry call, and 
+A2 is part of the corresponding execution of the appropriate <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0201">accept_statement</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Evaluating the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0202">entry_index</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0201">accept_statement</A></SPAN> 
+is not synchronized with a corresponding entry call, nor is evaluating 
+the entry barrier of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">If A1 is part of the execution of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0201">accept_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN>, 
+and A2 is the action of returning from the corresponding entry call;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">If A1 is part of the execution of a protected procedure 
+body or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN> 
+for a given protected object, and A2 is part of a later execution of 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN> 
+for the same protected object;&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The underlying principle here 
+is that for one action to &ldquo;signal&rdquo; a second, the second action 
+has to follow a potentially blocking operation, whose blocking is dependent 
+on the first action in some way. Protected procedures are not potentially 
+blocking, so they can only be &quot;signalers,&quot; they cannot be signaled. 
+</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Protected subprogram calls 
+are not defined to signal one another, which means that such calls alone 
+cannot be used to synchronize access to shared data outside of a protected 
+object.&nbsp;</div>
+<div class="paranum"><a name="p9.c">9.c</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The point of this distinction 
+is so that on multiprocessors with inconsistent caches, the caches only 
+need to be refreshed at the beginning of an entry body, and forced out 
+at the end of an entry body or protected procedure that leaves an entry 
+open. Protected function calls, and protected subprogram calls for entryless 
+protected objects do not require full cache consistency. Entryless protected 
+objects are intended to be treated roughly like atomic objects &mdash; 
+each operation is indivisible with respect to other operations (unless 
+both are reads), but such operations cannot be used to synchronize access 
+to other nonvolatile shared variables.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">If A1 signals some 
+action that in turn signals A2.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4189"></A>Given 
+an action of assigning to an object, and an action of reading or updating 
+a part of the same object (or of a neighboring object if the two are 
+not independently addressable), then the execution of the actions is 
+erroneous unless the actions are <I>sequential</I>. <A NAME="I4190"></A>Two 
+actions are sequential if one of the following is true:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">One action signals the other;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">Both actions occur as part of the execution of 
+the same task;&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Any two actions of the same task 
+are sequential, even if one does not signal the other because they can 
+be executed in an &ldquo;arbitrary&rdquo; (but necessarily equivalent 
+to some &ldquo;sequential&rdquo;) order.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">Both actions occur as part of protected actions 
+on the same protected object, and at most one of the actions is part 
+of a call on a protected function of the protected object.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Because actions within protected 
+actions do not always imply signaling, we have to mention them here explicitly 
+to make sure that actions occurring within different protected actions 
+of the same protected object are sequential with respect to one another 
+(unless both are part of calls on protected functions).&nbsp;</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>It doesn't matter whether 
+or not the variable being assigned is actually a subcomponent of the 
+protected object; globals can be safely updated from within the bodies 
+of protected procedures or entries.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Atomic or Atomic_Components may also be used to ensure that certain reads 
+and updates are sequential &mdash; see <A HREF="AA-C-6.html">C.6</A>. 
+</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If two actions are &ldquo;sequential&rdquo; 
+it is known that their executions don't overlap in time, but it is not 
+necessarily specified which occurs first. For example, all actions of 
+a single task are sequential, even though the exact order of execution 
+is not fully specified for all constructs.&nbsp;</div>
+<div class="paranum"><a name="p15.b">15.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Note that if two assignments 
+to the same variable are sequential, but neither signals the other, then 
+the program is not erroneous, but it is not specified which assignment 
+ultimately prevails. Such a situation usually corresponds to a programming 
+mistake, but in some (rare) cases, the order makes no difference, and 
+for this reason this situation is not considered erroneous nor even a 
+bounded error. In Ada 83, this was considered an &ldquo;incorrect order 
+dependence&rdquo; if the &ldquo;effect&rdquo; of the program was affected, 
+but &ldquo;effect&rdquo; was never fully defined. In Ada 95, this situation 
+represents a potential nonportability, and a friendly compiler might 
+want to warn the programmer about the situation, but it is not considered 
+an error. An example where this would come up would be in gathering statistics 
+as part of referencing some information, where the assignments associated 
+with statistics gathering don't need to be ordered since they are just 
+accumulating aggregate counts, sums, products, etc.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p15.c">15.c/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0031">8652/0031</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00118.TXT">AI95-00118-01</A></I>} 
+<B>Corrigendum:</B> Clarified that a task T2 can rely on values of variables 
+that are updated by another task T1, if task T2 first verifies that T1'Terminated 
+is True.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

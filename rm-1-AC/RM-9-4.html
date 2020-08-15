@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Protected Units and Protected Objects</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.4 Protected Units and Protected Objects</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I3384"></A><A NAME="I3385"></A><A NAME="I3386"></A><A NAME="I3387"></A>A 
+<I>protected object</I> provides coordinated access to shared data, through 
+calls on its visible <I>protected operations</I>, which can be <I>protected 
+subprograms</I> or <I>protected entries</I>. <A NAME="I3388"></A><A NAME="I3389"></A><A NAME="I3390"></A>A 
+<I>protected unit</I> is declared by a <I>protected declaration</I>, 
+which has a corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0185">protected_body</A></SPAN>. 
+A protected declaration may be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0180">protected_type_declaration</A></SPAN>, 
+in which case it declares a named protected type; alternatively, it may 
+be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0181">single_protected_declaration</A></SPAN>, 
+in which case it defines an anonymous protected type, as well as declaring 
+a named protected object of that type. <A NAME="I3391"></A></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">protected_type_declaration</SPAN><A NAME="I3392"></A><A NAME="S0180"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>protected</B>&nbsp;<B>type</B>&nbsp;<A NAME="I3393"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3394"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0058">known_discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I3395"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">single_protected_declaration</SPAN><A NAME="I3396"></A><A NAME="S0181"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>protected</B>&nbsp;<A NAME="I3397"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<A NAME="I3398"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">protected_definition</SPAN><A NAME="I3399"></A><A NAME="S0182"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I3400"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0183">protected_operation_declaration</A></SPAN>&nbsp;}<BR>
+[&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I3401"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0184">protected_element_declaration</A></SPAN>&nbsp;}&nbsp;]<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>protected_</I><A NAME="I3402"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Indented1"><SPAN Class="swiss">protected_operation_declaration</SPAN><A NAME="I3403"></A><A NAME="S0183"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3404"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0141">subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3405"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0187">entry_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="insert1"><A NAME="I3406"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0263">aspect_clause</A></SPAN></span><span class="delete1"><A NAME="I3407"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0264">&nbsp;representation_clause</A></SPAN></span></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">protected_element_declaration</SPAN><A NAME="I3408"></A><A NAME="S0184"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3409"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0183">protected_operation_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3410"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">component_declaration</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">protected_body</SPAN><A NAME="I3411"></A><A NAME="S0185"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>protected</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3412"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I3413"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0186">protected_operation_item</A></SPAN>&nbsp;}<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>protected_</I><A NAME="I3414"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="paranum"><a name="p8">8/1</a></div>
+<div class="Indented1"><SPAN Class="swiss">protected_operation_item</SPAN><A NAME="I3415"></A><A NAME="S0186"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3416"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0141">subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3417"></A><SPAN Class="swiss"><A HREF="RM-6-3.html#S0154">subprogram_body</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3418"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0190">entry_body</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="insert1"><A NAME="I3419"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0263">aspect_clause</A></SPAN></span><span class="delete1"><A NAME="I3420"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0264">&nbsp;representation_clause</A></SPAN></span></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented1">If a <I>protected_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+appears at the end of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0185">protected_body</A></SPAN>, 
+it shall repeat the <SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I3421"></A>A protected declaration requires 
+a completion, which shall be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0185">protected_body</A></SPAN>, 
+and every <SPAN Class="swiss"><A HREF="RM-9-4.html#S0185">protected_body</A></SPAN> 
+shall be the completion of some protected declaration.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN> 
+defines a protected type and its first subtype. <A NAME="I3422"></A>The 
+list of <SPAN Class="swiss"><A HREF="RM-9-4.html#S0183">protected_operation_declaration</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN>, 
+together with the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0058">known_discriminant_part</A></SPAN>, 
+if any, is called the visible part of the protected unit. <A NAME="I3423"></A>The 
+optional list of <SPAN Class="swiss"><A HREF="RM-9-4.html#S0184">protected_element_declaration</A></SPAN>s 
+after the reserved word <B>private</B> is called the private part of 
+the protected unit.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I3424"></A>The elaboration of a protected 
+declaration elaborates the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN>. 
+<A NAME="I3425"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0181">single_protected_declaration</A></SPAN> 
+also creates an object of an (anonymous) protected type.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I3426"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN> 
+creates the protected type and its first subtype; it also includes the 
+elaboration of the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">component_declaration</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="RM-9-4.html#S0183">protected_operation_declaration</A></SPAN>s 
+in the given order.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I3427"></A>As part of the initialization 
+of a protected object, any per-object constraints (see <A HREF="RM-3-8.html">3.8</A>) 
+are elaborated.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I3428"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0185">protected_body</A></SPAN> 
+has no other effect than to establish that protected operations of the 
+type can from then on be called without failing the Elaboration_Check.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The content of an object 
+of a given protected type includes:&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">The values of the components of the protected object, 
+including (implicitly) an entry queue for each entry declared for the 
+protected object;&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted"><A NAME="I3429"></A>A representation of the state 
+of the execution resource <I>associated</I> with the protected object 
+(one such resource is associated with each protected object).&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">The execution resource associated with a protected 
+object has to be acquired to read or update any components of the protected 
+object; it can be acquired (as part of a protected action &mdash; see 
+<A HREF="RM-9-5-1.html">9.5.1</A>) either for concurrent read-only access, 
+or for exclusive read-write access.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I3430"></A><A NAME="I3431"></A>As the first 
+step of the <I>finalization</I> of a protected object, each call remaining 
+on any entry queue of the object is removed from its queue and Program_Error 
+is raised at the place of the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0194">entry_call_statement</A></SPAN>. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">13&nbsp;&nbsp;Within the declaration or body of a 
+protected unit, the name of the protected unit denotes the current instance 
+of the unit (see <A HREF="RM-8-6.html">8.6</A>), rather than the first 
+subtype of the corresponding protected type (and thus the name cannot 
+be used as a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>). 
+</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">14&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0091">selected_component</A></SPAN> 
+can be used to denote a discriminant of a protected object (see <A HREF="RM-4-1-3.html">4.1.3</A>). 
+Within a protected unit, the name of a discriminant of the protected 
+type denotes the corresponding discriminant of the current instance of 
+the unit.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Notes">15&nbsp;&nbsp;A protected type is a limited type (see 
+<A HREF="RM-7-5.html">7.5</A>), and hence has neither an assignment operation 
+nor predefined equality operators.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">16&nbsp;&nbsp;The bodies of the protected operations 
+given in the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0185">protected_body</A></SPAN> 
+define the actions that take place upon calls to the protected operations.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Notes">17&nbsp;&nbsp;The declarations in the private part 
+are only visible within the private part and the body of the protected 
+unit.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of declaration 
+of protected type and corresponding body:</I>&nbsp;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>protected</B>&nbsp;<B>type</B>&nbsp;Resource&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;Seize;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Release;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;Busy&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False;<BR>
+<B>end</B>&nbsp;Resource;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples"><B>protected</B>&nbsp;<B>body</B>&nbsp;Resource&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;Seize&nbsp;<B>when&nbsp;not</B>&nbsp;Busy&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Busy&nbsp;:=&nbsp;True;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Seize;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Release&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Busy&nbsp;:=&nbsp;False;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Release;<BR>
+<B>end</B>&nbsp;Resource;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+single protected declaration and corresponding body:</I>&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples"><B>protected</B>&nbsp;Shared_Array&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;Index,&nbsp;Item,&nbsp;and&nbsp;Item_Array&nbsp;are&nbsp;global&nbsp;types</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;Component&nbsp;&nbsp;&nbsp;&nbsp;(N&nbsp;:&nbsp;<B>in</B>&nbsp;Index)&nbsp;return&nbsp;Item;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Set_Component(N&nbsp;:&nbsp;<B>in</B>&nbsp;Index;&nbsp;E&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Item);<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;Table&nbsp;:&nbsp;Item_Array(Index)&nbsp;:=&nbsp;(others&nbsp;=&gt;&nbsp;Null_Item);<BR>
+<B>end</B>&nbsp;Shared_Array;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Examples"><B>protected</B>&nbsp;<B>body</B>&nbsp;Shared_Array&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Component(N&nbsp;:&nbsp;<B>in</B>&nbsp;Index)&nbsp;<B>return</B>&nbsp;Item&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Table(N);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Component;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Set_Component(N&nbsp;:&nbsp;<B>in</B>&nbsp;Index;&nbsp;E&nbsp;:&nbsp;<B>in</B>&nbsp;Item)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Table(N)&nbsp;:=&nbsp;E;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Set_Component;<BR>
+<B>end</B>&nbsp;Shared_Array;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of protected 
+objects:</I>&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples">Control&nbsp;&nbsp;:&nbsp;Resource;<BR>
+Flags&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>(1&nbsp;..&nbsp;100)&nbsp;<B>of</B>&nbsp;Resource;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

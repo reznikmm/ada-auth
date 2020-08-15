@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Limited Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.5 Limited Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">A limited type is (a view of) a type for which copying 
+(such as for an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>) 
+is not allowed. A nonlimited type is a (view of a) type for which copying 
+is allowed.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">If a tagged record type has any limited components, 
+then the reserved word <B>limited</B> shall appear in its <SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN>. 
+If the reserved word <B>limited</B> appears in the definition of a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+its parent type and any progenitor interfaces shall be limited.&nbsp;</div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;In the following contexts, 
+an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a limited type is not permitted unless it is an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>, 
+a parenthesized <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN> 
+whose operand is permitted by this rule, or a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+all of whose <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
+are permitted by this rule:&nbsp;</div>
+<div class="paranum"><a name="p2.2">2.2/2</a></div>
+<div class="Bulleted">the initialization <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+(see <A HREF="RM-3-3-1.html">3.3.1</A>)</div>
+<div class="paranum"><a name="p2.3">2.3/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
+(see <A HREF="RM-3-8.html">3.8</A>)</div>
+<div class="paranum"><a name="p2.4">2.4/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
+(see <A HREF="RM-4-3-1.html">4.3.1</A>)</div>
+<div class="paranum"><a name="p2.5">2.5/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+for an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+(see <A HREF="RM-4-3-2.html">4.3.2</A>)</div>
+<div class="paranum"><a name="p2.6">2.6/2</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0116">array_component_association</A></SPAN> 
+(see <A HREF="RM-4-3-3.html">4.3.3</A>)</div>
+<div class="paranum"><a name="p2.7">2.7/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN> 
+of an initialized allocator (see <A HREF="RM-4-8.html">4.8</A>)</div>
+<div class="paranum"><a name="p2.8">2.8/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a return statement (see <A HREF="RM-6-5.html">6.5</A>)</div>
+<div class="paranum"><a name="p2.9">2.9/4</a></div>
+<div class="Bulleted">the return expression of an expression function 
+(see <A HREF="RM-6-8.html">6.8</A>)</div>
+<div class="paranum"><a name="p2.10">2.10/3</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+or actual parameter for a formal object of mode <B>in</B> (see <A HREF="RM-12-4.html">12.4</A>)</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3645"></A>A 
+view of a type is <I>limited</I> if it is one of the following:&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Bulleted">a type with the reserved word <B>limited</B>, <B>synchronized</B>, 
+<B>task</B>, or <B>protected</B> in its definition;&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Bulleted">a class-wide type whose specific type is limited;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">a composite type with a limited component;</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">an incomplete view;</div>
+<div class="paranum"><a name="p6.2">6.2/2</a></div>
+<div class="Bulleted">a derived type whose parent is limited and is not 
+an interface.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I3646"></A>Otherwise, the type is nonlimited.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">There are no predefined equality operators for a 
+limited type.</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A type is <I>immutably 
+limited</I> if it is one of the following:<A NAME="I3647"></A><A NAME="I3648"></A></div>
+<div class="paranum"><a name="p8.2">8.2/3</a></div>
+<div class="Bulleted">An explicitly limited record type;</div>
+<div class="paranum"><a name="p8.3">8.3/3</a></div>
+<div class="Bulleted">A record extension with the reserved word <B>limited</B>;</div>
+<div class="paranum"><a name="p8.4">8.4/3</a></div>
+<div class="Bulleted">A nonformal limited private type that is tagged 
+or has at least one access discriminant with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>;</div>
+<div class="paranum"><a name="p8.5">8.5/3</a></div>
+<div class="Bulleted">A task type, a protected type, or a synchronized 
+interface;</div>
+<div class="paranum"><a name="p8.6">8.6/3</a></div>
+<div class="Bulleted">A type derived from an immutably limited type.</div>
+<div class="paranum"><a name="p8.7">8.7/3</a></div>
+<div class="Normal">&nbsp;A descendant of a generic formal limited private 
+type is presumed to be immutably limited except within the body of a 
+generic unit or a body declared within the declarative region of a generic 
+unit, if the formal type is declared within the formal part of the generic 
+unit.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Notes">15&nbsp;&nbsp;While it is allowed to write initializations 
+of limited objects, such initializations never copy a limited object. 
+The source of such an assignment operation must be an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>, 
+and such <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>s 
+must be built directly in the target object (see <A HREF="RM-7-6.html">7.6</A>). 
+</div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>Paragraphs 10 through 
+15 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">16&nbsp;&nbsp;<A NAME="I3649"></A><A NAME="I3650"></A><A NAME="I3651"></A>As 
+illustrated in <A HREF="RM-7-3-1.html">7.3.1</A>, an untagged limited 
+type can become nonlimited under certain circumstances.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a package 
+with a limited type:</I>&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples"><B>package</B>&nbsp;IO_Package&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Name&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Open&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Close(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Read&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Integer);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Write(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Integer);<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Name&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>limited</B>&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal_Name&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>end</B>&nbsp;IO_Package;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples"><B>package</B>&nbsp;<B>body</B>&nbsp;IO_Package&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Limit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;200;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Descriptor&nbsp;<B>is</B>&nbsp;<B>record</B>&nbsp;&nbsp;...&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>array</B>&nbsp;(1&nbsp;..&nbsp;Limit)&nbsp;<B>of</B>&nbsp;File_Descriptor;<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Open&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name)&nbsp;<B>is</B>&nbsp;&nbsp;...&nbsp;&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Close(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name)&nbsp;<B>is</B>&nbsp;&nbsp;...&nbsp;&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Read&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Integer)&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Write(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Integer)&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;IO_Package;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">17&nbsp;&nbsp;<I>Notes on the example:</I> In the 
+example above, an outside subprogram making use of IO_Package may obtain 
+a file name by calling Open and later use it in calls to Read and Write. 
+Thus, outside the package, a file name obtained from Open acts as a kind 
+of password; its internal properties (such as containing a numeric value) 
+are not known and no other operations (such as addition or comparison 
+of internal names) can be performed on a file name. Most importantly, 
+clients of the package cannot make copies of objects of type File_Name.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">This example is characteristic of any case where complete 
+control over the operations of a type is desired. Such packages serve 
+a dual purpose. They prevent a user from making use of the internal structure 
+of the type. They also implement the notion of an encapsulated data type 
+where the only operations on the type are those given in the package 
+specification.</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Notes">The fact that the full view of File_Name is explicitly 
+declared <B>limited</B> means that parameter passing will always be by 
+reference and function results will always be built directly in the result 
+object (see <A HREF="RM-6-2.html">6.2</A> and <A HREF="RM-6-5.html">6.5</A>).</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

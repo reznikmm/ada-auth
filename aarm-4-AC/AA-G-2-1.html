@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Model of Floating Point Arithmetic</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>G.2.1 Model of Floating Point Arithmetic</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In the strict mode, the predefined operations of 
+a floating point type shall satisfy the accuracy requirements specified 
+here and shall avoid or signal overflow in the situations described. 
+This behavior is presented in terms of a model of floating point arithmetic 
+that builds on the concept of the canonical form (see <A HREF="AA-A-5-3.html">A.5.3</A>). 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">Associated with each floating point type is an infinite 
+set of model numbers. The model numbers of a type are used to define 
+the accuracy requirements that have to be satisfied by certain predefined 
+operations of the type; through certain attributes of the model numbers, 
+they are also used to explain the meaning of a user-declared floating 
+point type declaration. The model numbers of a derived type are those 
+of the parent type; the model numbers of a subtype are those of its type.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I9491"></A>The <I>model numbers</I> of a 
+floating point type T are zero and all the values expressible in the 
+canonical form (for the type T), in which <I>mantissa</I> has T'Model_Mantissa 
+digits and <I>exponent</I> has a value greater than or equal to T'Model_Emin. 
+(These attributes are defined in <A HREF="AA-G-2-2.html">G.2.2</A>.) 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The model is capable of describing 
+the behavior of most existing hardware that has a mantissa-exponent representation. 
+As applied to a type T, it is parameterized by the values of T'Machine_Radix, 
+T'Model_Mantissa, T'Model_Emin, T'Safe_First, and T'Safe_Last. The values 
+of these attributes are determined by how, and how well, the hardware 
+behaves. They in turn determine the set of model numbers and the safe 
+range of the type, which figure in the accuracy and range (overflow avoidance) 
+requirements.</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations">In hardware that is free of arithmetic anomalies, 
+T'Model_Mantissa, T'Model_Emin, T'Safe_First, and T'Safe_Last will yield 
+the same values as T'Machine_Mantissa, T'Machine_Emin, T'Base'First, 
+and T'Base'Last, respectively, and the model numbers in the safe range 
+of the type T will coincide with the machine numbers of the type T. In 
+less perfect hardware, it is not possible for the model-oriented attributes 
+to have these optimal values, since the hardware, by definition, and 
+therefore the implementation, cannot conform to the stringencies of the 
+resulting model; in this case, the values yielded by the model-oriented 
+parameters have to be made more conservative (i.e., have to be penalized), 
+with the result that the model numbers are more widely separated than 
+the machine numbers, and the safe range is a subrange of the base range. 
+The implementation will then be able to conform to the requirements of 
+the weaker model defined by the sparser set of model numbers and the 
+smaller safe range.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I9492"></A>A <I>model interval</I> of a 
+floating point type is any interval whose bounds are model numbers of 
+the type. <A NAME="I9493"></A>The <I>model interval</I> of a type T <I>associated 
+with a value</I> <I>v</I> is the smallest model interval of T that includes 
+<I>v</I>. (The model interval associated with a model number of a type 
+consists of that number only.)&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The accuracy requirements for the evaluation of certain 
+predefined operations of floating point types are as follows.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This subclause does not cover 
+the accuracy of an operation of a static expression; such operations 
+have to be evaluated exactly (see <A HREF="AA-4-9.html">4.9</A>). It 
+also does not cover the accuracy of the predefined attributes of a floating 
+point subtype that yield a value of the type; such operations also yield 
+exact results (see <A HREF="AA-3-5-8.html">3.5.8</A> and <A HREF="AA-A-5-3.html">A.5.3</A>). 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I9494"></A>An <I>operand interval</I> is 
+the model interval, of the type specified for the operand of an operation, 
+associated with the value of the operand.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For any predefined 
+arithmetic operation that yields a result of a floating point type T, 
+the required bounds on the result are given by a model interval of T 
+(called the <I>result interval</I>) defined in terms of the operand values 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted"><A NAME="I9495"></A>The result interval is the 
+smallest model interval of T that includes the minimum and the maximum 
+of all the values obtained by applying the (exact) mathematical operation 
+to values arbitrarily selected from the respective operand intervals. 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The result interval of an exponentiation is obtained 
+by applying the above rule to the sequence of multiplications defined 
+by the exponent, assuming arbitrary association of the factors, and to 
+the final division in the case of a negative exponent.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The result interval of a conversion of a numeric 
+value to a floating point type T is the model interval of T associated 
+with the operand value, except when the source expression is of a fixed 
+point type with a <I>small</I> that is not a power of T'Machine_Radix 
+or is a fixed point multiplication or division either of whose operands 
+has a <I>small</I> that is not a power of T'Machine_Radix; in these cases, 
+the result interval is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The result interval 
+in certain cases of fixed-to-float conversion.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I9496"></A><A NAME="I9497"></A>For any of 
+the foregoing operations, the implementation shall deliver a value that 
+belongs to the result interval when both bounds of the result interval 
+are in the safe range of the result type T, as determined by the values 
+of T'Safe_First and T'Safe_Last; otherwise,&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted"><A NAME="I9498"></A>if T'Machine_Overflows is True, 
+the implementation shall either deliver a value that belongs to the result 
+interval or raise Constraint_Error;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">if T'Machine_Overflows is False, the result is 
+implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The result of 
+a floating point arithmetic operation in overflow situations, when the 
+Machine_Overflows attribute of the result type is False.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">For any predefined relation on operands of a floating 
+point type T, the implementation may deliver any value (i.e., either 
+True or False) obtained by applying the (exact) mathematical comparison 
+to values arbitrarily chosen from the respective operand intervals.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">The result of a membership test is defined in terms 
+of comparisons of the operand value with the lower and upper bounds of 
+the given range or type mark (the usual rules apply to these comparisons). 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">If the underlying floating point hardware implements 
+division as multiplication by a reciprocal, the result interval for division 
+(and exponentiation by a negative exponent) is implementation defined. 
+</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The result interval 
+for division (or exponentiation by a negative exponent), when the floating 
+point hardware implements division as multiplication by a reciprocal.</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations">The Ada 95 model numbers of a floating point 
+type that are in the safe range of the type are comparable to the Ada 
+83 safe numbers of the type. There is no analog of the Ada 83 model numbers. 
+The Ada 95 model numbers, when not restricted to the safe range, are 
+an infinite set.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 83</H4>
+<div class="paranum"><a name="p16.c">16.c</a></div>
+<div class="Annotations"><A NAME="I9499"></A>Giving the model numbers 
+the hardware radix, instead of always a radix of two, allows (in conjunction 
+with other changes) some borderline declared types to be represented 
+with less precision than in Ada 83 (i.e., with single precision, whereas 
+Ada 83 would have used double precision). Because the lower precision 
+satisfies the requirements of the model (and did so in Ada 83 as well), 
+this change is viewed as a desirable correction of an anomaly, rather 
+than a worrisome inconsistency. (Of course, the wider representation 
+chosen in Ada 83 also remains eligible for selection in Ada 95.)</div>
+<div class="paranum"><a name="p16.d">16.d</a></div>
+<div class="Annotations">As an example of this phenomenon, assume that 
+Float is represented in single precision and that a double precision 
+type is also available. Also assume hexadecimal hardware with clean properties, 
+for example certain IBM hardware. Then,&nbsp;</div>
+<div class="paranum"><a name="p16.e">16.e</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;Float'Digits&nbsp;<B>range</B>&nbsp;-Float'Last&nbsp;..&nbsp;Float'Last;</div>
+<div class="paranum"><a name="p16.f">16.f</a></div>
+<div class="Annotations">results in T being represented in double precision 
+in Ada 83 and in single precision in Ada 95. The latter is intuitively 
+correct; the former is counterintuitive. The reason why the double precision 
+type is used in Ada 83 is that Float has model and safe numbers (in Ada 
+83) with 21 binary digits in their mantissas, as is required to model 
+the hypothesized hexadecimal hardware using a binary radix; thus Float'Last, 
+which is not a model number, is slightly outside the range of safe numbers 
+of the single precision type, making that type ineligible for selection 
+as the representation of T even though it provides adequate precision. 
+In Ada 95, Float'Last (the same value as before) is a model number and 
+is in the safe range of Float on the hypothesized hardware, making Float 
+eligible for the representation of T.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p16.g">16.g</a></div>
+<div class="Annotations"><A NAME="I9500"></A>Giving the model numbers 
+the hardware radix allows for practical implementations on decimal hardware. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p16.h">16.h</a></div>
+<div class="Annotations">The wording of the model of floating point arithmetic 
+has been simplified to a large extent.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,561 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Maps</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.4 <span class="insert2">Maps</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><span class="insert2">The language-defined generic 
+packages Containers.Hashed_Maps and Containers.Ordered_Maps provide private 
+types Map and Cursor, and a set of operations for each type. A map container 
+allows an arbitrary type to be used as a key to find the element associated 
+with that key. A hashed map uses a hash function to organize the keys, 
+while an ordered map orders the keys per a specified relation. <A NAME="I7091"></A><A NAME="I7092"></A></span></div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal"><span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;section</span></span><span class="insert2">&nbsp;describes the declarations that are common to both kinds of maps. See 
+<A HREF="RM-A-18-5.html">A.18.5</A> for a description of the semantics 
+specific to Containers.Hashed_Maps and <A HREF="RM-A-18-6.html">A.18.6</A> 
+for a description of the semantics specific to Containers.Ordered_Maps.</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal"><span class="insert2">The actual function for the 
+generic formal function &quot;=&quot; on Element_Type values is expected 
+to define a reflexive and symmetric relationship and return the same 
+result value each time it is called with a particular pair of values. 
+If it behaves in some other manner, the function &quot;=&quot; on map 
+values returns an unspecified value. The exact arguments and number of 
+calls of this generic formal function by the function &quot;=&quot; on 
+map values are unspecified.<A NAME="I7093"></A></span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal"><span class="insert2">The type Map is used to represent 
+maps. The type Map needs finalization<A NAME="I7094"></A> (see <A HREF="RM-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I7095"></A>A map contains 
+pairs of keys and elements, called <I>nodes</I>. Map cursors designate 
+nodes, but also can be thought of as designating an element (the element 
+contained in the node) for consistency with the other containers. There 
+exists an equivalence relation on keys, whose definition is different 
+for hashed maps and ordered maps. A map never contains two or more nodes 
+with equivalent keys. The <I>length</I> of a map is the number of nodes 
+it contains.<A NAME="I7096"></A></span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I7097"></A><A NAME="I7098"></A><A NAME="I7099"></A>Each 
+nonempty map has two particular nodes called the <I>first node</I> and 
+the <I>last node</I> (which may be the same). Each node except for the 
+last node has a <I>successor node</I>. If there are no other intervening 
+operations, starting with the first node and repeatedly going to the 
+successor node will visit each node in the map exactly once until the 
+last node is reached. The exact definition of these terms is different 
+for hashed maps and ordered maps.</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><span class="insert2">Some operations of these generic 
+packages have access-to-subprogram parameters. To ensure such operations 
+are well-defined, they guard against certain actions by the designated 
+subprogram. In particular, some operations check for &ldquo;tampering 
+with cursors&rdquo; of a container because they depend on the set of 
+elements of the container remaining constant, and others check for &ldquo;tampering 
+with elements&rdquo; of a container because they depend on elements of 
+the container not being replaced.</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7100"></A>A 
+subprogram is said to <I>tamper with cursors</I> of a map object <I>M</I> 
+if:</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Bulleted"><span class="insert2">it inserts or deletes elements 
+of <I>M</I>, that is, it calls the Insert, Include, Clear, Delete, or 
+Exclude procedures with <I>M</I> as a parameter; or</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Bulleted"><span class="insert2">it finalizes <I>M</I>; or</span></div>
+<div class="paranum"><a name="p10.1">10.1/3</a></div>
+<div class="Bulleted"><span class="insert3">it calls the Assign procedure 
+with <I>M</I> as the Target parameter; or</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Bulleted"><span class="insert2">it calls the Move procedure 
+with <I>M</I> as a parameter; or</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Bulleted"><span class="insert2">it calls one of the operations 
+defined to tamper with the cursors of <I>M</I>.</span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7101"></A>A 
+subprogram is said to <I>tamper with elements</I> of a map object <I>M</I> 
+if:</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Bulleted"><span class="insert2">it tampers with cursors of 
+<I>M</I>; or</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Bulleted"><span class="insert2">it replaces one or more elements 
+of <I>M</I>, that is, it calls the Replace or Replace_Element procedures 
+with <I>M</I> as a parameter.</span></div>
+<div class="paranum"><a name="p15.1">15.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I7102"></A><A NAME="I7103"></A>When 
+tampering with cursors is <I>prohibited</I> for a particular map object 
+<I>M</I>, Program_Error is propagated by a call of any language-defined 
+subprogram that is defined to tamper with the cursors of <I>M</I>, leaving 
+<I>M</I> unmodified. Similarly, when tampering with elements is <I>prohibited</I> 
+for a particular map object <I>M</I>, Program_Error is propagated by 
+a call of any language-defined subprogram that is defined to tamper with 
+the elements of <I>M</I> (or tamper with the cursors of <I>M</I>), leaving 
+<I>M</I> unmodified.</span>&nbsp;</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal"><span class="insert2">Empty_Map represents the empty 
+Map object. It has a length of 0. If an object of type Map is not otherwise 
+initialized, it is initialized to the same value as Empty_Map.</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal"><span class="insert2">No_Element represents a cursor 
+that designates no node. If an object of type Cursor is not otherwise 
+initialized, it is initialized to the same value as No_Element.</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Normal"><span class="insert2">The predefined &quot;=&quot; 
+operator for type Cursor returns True if both cursors are No_Element, 
+or designate the same element in the same container.</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal"><span class="insert2">Execution of the default implementation 
+of the Input, Output, Read, or Write attribute of type Cursor raises 
+Program_Error.</span></div>
+<div class="paranum"><a name="p19.1">19.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">Map'Write for a Map object 
+<I>M</I> writes Length(<I>M</I>) elements of the map to the stream. It 
+also may write additional information about the map.</span></div>
+<div class="paranum"><a name="p19.2">19.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">Map'Read reads the representation 
+of a map from the stream, and assigns to <I>Item</I> a map with the same 
+length and elements as was written by Map'Write.</span></div>
+<div class="paranum"><a name="p19.3">19.3/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p19.4">19.4/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+True if Position designates an element, and returns False otherwise.</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em"><span class="insert2">If 
+Left and Right denote the same map object, then the function returns 
+True. If Left and Right have different lengths, then the function returns 
+False. Otherwise, for each key <I>K</I> in Left, the function returns 
+False if:</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Indented3Bulleted"><span class="insert2">a key equivalent 
+to <I>K</I> is not present in Right; or</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Indented3Bulleted"><span class="insert2">the element associated 
+with <I>K</I> in Left is not equal to the element associated with <I>K</I> 
+in Right (using the generic formal equality operator for elements).</span> 
+</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+the function has not returned a result after checking all of the keys, 
+it returns True. Any exception raised during evaluation of key equivalence 
+or element equality is propagated.</span>&nbsp;</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Length&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the number of nodes in Container.</span></div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Length (Container) = 0.</span></div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map);</span></div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Removes 
+all the nodes from Container.</span></div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type;</span></div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
+Key returns the key component of the node designated by Position.</span></div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
+Element returns the element component of the node designated by Position.</span></div>
+<div class="paranum"><a name="p35">35/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated; if Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Replace_Element assigns New_Item to the element of the node designated 
+by Position.</span></div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
+Query_Element calls Process.<B>all</B> with the key and element from 
+the node designated by Position as the arguments.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of&nbsp;</span><span class="insert3">the map that contains 
+the element designated by Position is prohibited during the execution 
+of the call on Process.<B>all</B></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Container</span></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p39">39/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p40">40/3</a></div>
+<div class="Indented2"><span class="insert2">If Position equals No_Element, 
+then Constraint_Error is propagated; if Position does not designate an 
+element in Container, then Program_Error is propagated. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Update_Element calls Process.<B>all</B> with the key and element from 
+the node designated by Position as the arguments.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of Container</span><span class="insert3">&nbsp;is prohibited 
+during the execution of the call on Process.<B>all</B></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p41">41/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Element_Type is unconstrained and definite, then the actual Element parameter 
+of Process.<B>all</B> shall be unconstrained.</span></div>
+<div class="paranum"><a name="p41.1">41.1/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p41.2">41.2/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p41.3">41.3/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">The 
+types Constant_Reference_Type and Reference_Type need finalization.<A NAME="I7104"></A></span></div>
+<div class="paranum"><a name="p41.4">41.4/3</a></div>
+<div class="Indented2"><span class="insert3">The default initialization 
+of an object of type Constant_Reference_Type or Reference_Type propagates 
+Program_Error.</span></div>
+<div class="paranum"><a name="p41.5">41.5/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p41.6">41.6/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a map given a cursor.</span></div>
+<div class="paranum"><a name="p41.7">41.7/3</a></div>
+<div class="Indented2"><span class="insert3">If Position equals No_Element, 
+then Constraint_Error is propagated; if Position does not designate an 
+element in Container, then Program_Error is propagated. Otherwise, Constant_Reference 
+returns an object whose discriminant is an access value that designates 
+the element designated by Position. Tampering with the elements of Container 
+is prohibited while the object returned by Constant_Reference exists 
+and has not been finalized.</span></div>
+<div class="paranum"><a name="p41.8">41.8/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p41.9">41.9/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Variable_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to an 
+individual element of a map given a cursor.</span></div>
+<div class="paranum"><a name="p41.10">41.10/3</a></div>
+<div class="Indented2"><span class="insert3">If Position equals No_Element, 
+then Constraint_Error is propagated; if Position does not designate an 
+element in Container, then Program_Error is propagated. Otherwise, Reference 
+returns an object whose discriminant is an access value that designates 
+the element designated by Position. Tampering with the elements of Container 
+is prohibited while the object returned by Reference exists and has not 
+been finalized.</span></div>
+<div class="paranum"><a name="p41.11">41.11/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p41.12">41.12/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a map given a key value.</span></div>
+<div class="paranum"><a name="p41.13">41.13/3</a></div>
+<div class="Indented2"><span class="insert3">Equivalent to Constant_Reference 
+(Container, Find (Container, Key)).</span></div>
+<div class="paranum"><a name="p41.14">41.14/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p41.15">41.15/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Variable_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to an 
+individual element of a map given a key value.</span></div>
+<div class="paranum"><a name="p41.16">41.16/3</a></div>
+<div class="Indented2"><span class="insert3">Equivalent to Reference 
+(Container, Find (Container, Key)).</span></div>
+<div class="paranum"><a name="p41.17">41.17/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map);</span></div>
+<div class="paranum"><a name="p41.18">41.18/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Target denotes the same object as Source, the operation has no effect. 
+Otherwise, the key/element pairs of Source are copied to Target as for 
+an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+assigning Source to Target.</span>&nbsp;</div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map);</span></div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Target denotes the same object as Source, then&nbsp;</span><span class="insert3">the 
+operation</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Move</span></span><span class="insert2">&nbsp;has no effect. Otherwise,&nbsp;</span><span class="insert3">the operation 
+is equivalent to Assign (Target, Source) followed by Clear (Source)</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Move 
+first calls Clear (Target). Then, each node from Source is removed from 
+Source and inserted into Target. The length of Source is 0 after a successful 
+call to Move</span></span><span class="insert2">.</span></div>
+<div class="paranum"><a name="p44">44/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
+<div class="paranum"><a name="p45">45/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Insert 
+checks if a node with a key equivalent to Key is already present in Container. 
+If a match is found, Inserted is set to False and Position designates 
+the element with the matching key. Otherwise, Insert allocates a new 
+node, initializes it to Key and New_Item, and adds it to Container; Inserted 
+is set to True and Position designates the newly-inserted node. Any exception 
+raised during allocation is propagated and Container is not modified.</span></div>
+<div class="paranum"><a name="p46">46/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserted&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
+<div class="paranum"><a name="p47">47/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Insert 
+inserts Key into Container as per the five-parameter Insert, with the 
+difference that an element initialized by default (see <A HREF="RM-3-3-1.html">3.3.1</A>) 
+is inserted.</span></div>
+<div class="paranum"><a name="p48">48/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p49">49/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Insert 
+inserts Key and New_Item into Container as per the five-parameter Insert, 
+with the difference that if a node with a key equivalent to Key is already 
+in the map, then Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Include&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p51">51/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Include 
+inserts Key and New_Item into Container as per the five-parameter Insert, 
+with the difference that if a node with a key equivalent to Key is already 
+in the map, then this operation assigns Key and New_Item to the matching 
+node. Any exception raised during assignment is propagated.</span></div>
+<div class="paranum"><a name="p52">52/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p53">53/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Replace 
+checks if a node with a key equivalent to Key is present in Container. 
+If a match is found, Replace assigns Key and New_Item to the matching 
+node; otherwise, Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p54">54/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Exclude&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type);</span></div>
+<div class="paranum"><a name="p55">55/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Exclude 
+checks if a node with a key equivalent to Key is present in Container. 
+If a match is found, Exclude removes the node from the map.</span></div>
+<div class="paranum"><a name="p56">56/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type);</span></div>
+<div class="paranum"><a name="p57">57/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Delete 
+checks if a node with a key equivalent to Key is present in Container. 
+If a match is found, Delete removes the node from the map; otherwise, 
+Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p58">58/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p59">59/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. If Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise, Delete removes the node designated by Position from the map. 
+Position is set to No_Element on return.</span></div>
+<div class="paranum"><a name="p60">60/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;First&nbsp;(Container&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p61">61/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Length (Container) = 0, then First returns No_Element. Otherwise, First 
+returns a cursor that designates the first node in Container.</span></div>
+<div class="paranum"><a name="p62">62/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Next&nbsp;(Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p63">63/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a cursor that designates the successor of the node designated by Position. 
+If Position designates the last node, then No_Element is returned. If 
+Position equals No_Element, then No_Element is returned.</span></div>
+<div class="paranum"><a name="p64">64/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Next&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p65">65/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Position := Next (Position).</span></div>
+<div class="paranum"><a name="p66">66/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Find&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p67">67/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Length (Container) equals 0, then Find returns No_Element. Otherwise, 
+Find checks if a node with a key equivalent to Key is present in Container. 
+If a match is found, a cursor designating the matching node is returned; 
+otherwise, No_Element is returned.</span></div>
+<div class="paranum"><a name="p68">68/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p69">69/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Element (Find (Container, Key)).</span></div>
+<div class="paranum"><a name="p70">70/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Contains&nbsp;(Container&nbsp;:&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Key_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p71">71/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Find (Container, Key) /= No_Element.</span></div>
+<div class="paranum"><a name="p72">72/3</a></div>
+<div class="Examples"><span class="insert2"></span><span class="insert2"><span class="delete3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert2"><span class="delete3">Returns 
+True if Position designates an element, and returns False otherwise.</span></span><span class="insert2"></span></div>
+<div class="Indented2"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+72 and 73 were moved above.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p74">74/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Iterate<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p75">75/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Iterate 
+calls Process.<B>all</B> with a cursor that designates each node in Container, 
+starting with the first node and moving the cursor according to the successor 
+relation.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the cursors of Container</span><span class="insert3">&nbsp;is prohibited 
+during the execution of a call on Process.<B>all</B></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p75.1">75.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I7105"></A>It is 
+a bounded error for the actual function associated with a generic formal 
+subprogram, when called as part of an operation of a map package, to 
+tamper with elements of any map parameter of the operation. Either Program_Error 
+is raised, or the operation works as defined on the value of the map 
+either prior to, or subsequent to, some or all of the modifications to 
+the map.</span></div>
+<div class="paranum"><a name="p75.2">75.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I7106"></A>It is 
+a bounded error to call any subprogram declared in the visible part of 
+a map package when the associated container has been finalized. If the 
+operation takes Container as an <B>in out</B> parameter, then it raises 
+Constraint_Error or Program_Error. Otherwise, the operation either proceeds 
+as it would for an empty container, or it raises Constraint_Error or 
+Program_Error.</span>&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p76">76/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">A 
+Cursor value is <I>invalid</I> if any of the following have occurred 
+since it was created:<A NAME="I7107"></A> <A NAME="I7108"></A></span></div>
+<div class="paranum"><a name="p77">77/2</a></div>
+<div class="Bulleted"><span class="insert2">The map that contains the 
+node it designates has been finalized;</span></div>
+<div class="paranum"><a name="p77.1">77.1/3</a></div>
+<div class="Bulleted"><span class="insert3">The map that contains the 
+node it designates has been used as the Target of a call to Assign, or 
+as the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>;</span></div>
+<div class="paranum"><a name="p78">78/2</a></div>
+<div class="Bulleted"><span class="insert2">The map that contains the 
+node it designates has been used as the Source or Target of a call to 
+Move; or</span></div>
+<div class="paranum"><a name="p79">79/3</a></div>
+<div class="Bulleted"><span class="insert2">The node it designates has 
+been&nbsp;</span><span class="insert3">removed</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;deleted</span></span><span class="insert2">&nbsp;from the map</span><span class="insert3">&nbsp;that previously contained the 
+node</span><span class="insert2">.</span>&nbsp;</div>
+<div class="paranum"><a name="p80">80/2</a></div>
+<div class="Normal"><span class="insert2">The result of &quot;=&quot; 
+or Has_Element is unspecified if these functions are called with an invalid 
+cursor parameter.<A NAME="I7109"></A> Execution is erroneous if any other 
+subprogram declared in Containers.Hashed_Maps or Containers.Ordered_Maps 
+is called with an invalid cursor parameter.<A NAME="I7110"></A></span></div>
+<div class="paranum"><a name="p80.1">80.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">Execution is erroneous if 
+the map associated with the result of a call to Reference or Constant_Reference 
+is finalized before the result object returned by the call to Reference 
+or Constant_Reference is finalized.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p81">81/2</a></div>
+<div class="Normal"><span class="insert2">No storage associated with 
+a Map object shall be lost upon assignment or scope exit.</span></div>
+<div class="paranum"><a name="p82">82/3</a></div>
+<div class="Normal"><span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+for a map shall have the effect of copying the elements from the source 
+map object to the target map object</span><span class="insert3">&nbsp;and 
+changing the length of the target object to that of the source object</span><span class="insert2">.</span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p83">83/2</a></div>
+<div class="Normal"><span class="insert2">Move should not copy elements, 
+and should minimize copying of internal data structures.</span>&nbsp;</div>
+<div class="paranum"><a name="p84">84/2</a></div>
+<div class="Normal"><span class="insert2">If an exception is propagated 
+from a map operation, no storage should be lost, nor any elements removed 
+from a map unless specified by the operation.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

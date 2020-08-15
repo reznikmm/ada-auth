@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Dynamic Priorities for Tasks</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.5.1 <span class="insert2">Dynamic Priorities for Tasks</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+describes how the base priority of a task can be modified or queried 
+at run time.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples"><B>with</B>&nbsp;System;<BR>
+<B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="RM-C-7-1.html">C.7.1</A></I></SPAN><BR>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities&nbsp;<B>is</B><A NAME="I8157"></A><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dynamic_Priorities);</span></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8158"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8159"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Dynamic_Priorities;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">The procedure Set_Priority sets the base priority 
+of the specified task to the specified Priority value. Set_Priority has 
+no effect if the task is terminated.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The function Get_Priority returns T's current base 
+priority. <A NAME="I8160"></A>Tasking_Error is raised if the task is 
+terminated.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I8161"></A>Program_Error is raised by Set_Priority 
+and Get_Priority if T is equal to Null_Task_Id.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal"><span class="insert2">On a system with a single processor, 
+the setting of</span><span class="delete2">&nbsp;Setting</span> the <span class="delete2">task's 
+</span>base priority<span class="insert2">&nbsp;of a task <I>T</I></span> 
+to the new value <span class="insert2">occurs immediately at the first 
+point when <I>T</I> is outside the execution of</span><span class="delete2">&nbsp;takes 
+place as soon as is practical but not while the task is performing</span> 
+a protected action<span class="delete2">. This setting occurs no later 
+then the next abort completion point of the task T (see <A HREF="RM-9-8.html">9.8</A>)</span>.</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal"><span class="delete2"><A NAME="I8162"></A>If a task 
+is blocked on a protected entry call, and the call is queued, it is a 
+bounded error to raise its base priority above the ceiling priority of 
+the corresponding protected object. When an entry call is cancelled, 
+it is a bounded error if the priority of the calling task is higher than 
+the ceiling priority of the corresponding protected object. <A NAME="I8163"></A>In 
+either of these cases, either Program_Error is raised in the task that 
+called the entry, or its priority is temporarily lowered, or both, or 
+neither.</span>&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
+11 was deleted.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I8164"></A>If any subprogram in this package 
+is called with a parameter T that specifies a task object that no longer 
+exists, the execution of the program is erroneous.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">On a multiprocessor, the 
+implementation shall document any conditions that cause the completion 
+of the setting of the priority of a task to be delayed later than what 
+is specified for a single processor.</span>&nbsp;</div>
+
+<H4 Class="centered">Metrics</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The implementation 
+shall document the following metric:&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">The execution time of a call to Set_Priority, for 
+the nonpreempting case, in processor clock cycles. This is measured for 
+a call that modifies the priority of a ready task that is not running 
+(which cannot be the calling one), where the new base priority of the 
+affected task is lower than the active priority of the calling task, 
+and the affected task is not on any entry queue and is not executing 
+a protected operation.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Notes">29&nbsp;&nbsp;Setting a task's base priority affects 
+task dispatching. First, it can change the task's active priority. Second, 
+under the <span class="insert2">FIFO_Within_Priorities</span><span class="delete2">&nbsp;standard 
+task dispatching</span> policy it always causes the task to move to the 
+tail of the ready queue corresponding to its active priority, even if 
+the new base priority is unchanged.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">30&nbsp;&nbsp;Under the priority queuing policy, setting 
+a task's base priority has an effect on a queued entry call if the task 
+is blocked waiting for the call. That is, setting the base priority of 
+a task causes the priority of a queued entry call from that task to be 
+updated and the call to be removed and then reinserted in the entry queue 
+at the new priority (see <A HREF="RM-D-4.html">D.4</A>), unless the call 
+originated from the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0243">triggering_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN>.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Notes">31&nbsp;&nbsp;The effect of two or more Set_Priority 
+calls executed in parallel on the same task is defined as executing these 
+calls in some serial order.</div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Notes">32&nbsp;&nbsp;The rule for when Tasking_Error is raised 
+for Set_Priority or Get_Priority is different from the rule for when 
+Tasking_Error is raised on an entry call (see <A HREF="RM-9-5-3.html">9.5.3</A>). 
+In particular, <span class="delete3">setting or&nbsp;</span>querying the priority 
+of a completed or an abnormal task is allowed, so long as the task is 
+not yet terminated<span class="insert3">, and setting the priority of 
+a task is allowed for any task state (including for terminated tasks)</span>.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Notes">33&nbsp;&nbsp;Changing the priorities of a set of 
+tasks can be performed by a series of calls to Set_Priority for each 
+task separately. For this to work reliably, it should be done within 
+a protected operation that has high enough ceiling priority to guarantee 
+that the operation completes without being preempted by any of the affected 
+tasks.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

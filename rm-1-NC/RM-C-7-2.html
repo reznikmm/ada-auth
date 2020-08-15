@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Task_Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>C.7.2 The Package Task_Attributes</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+generic library package exists:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<B>use</B>&nbsp;Ada.Task_Identification;<BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Attribute&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;Initial_Value&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
+<B>package</B>&nbsp;Ada.Task_Attributes&nbsp;<B>is</B><A NAME="I5843"></A></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5844"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5845"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5846"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute_Handle;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5847"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5848"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Task_Attributes;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">When an instance of Task_Attributes is elaborated 
+in a given active partition, an object of the actual type corresponding 
+to the formal type Attribute is implicitly created for each task (of 
+that partition) that exists and is not yet terminated. This object acts 
+as a user-defined attribute of the task. A task created previously in 
+the partition and not yet terminated has this attribute from that point 
+on. Each task subsequently created in the partition will have this attribute 
+when created. In all these cases, the initial value of the given attribute 
+is Initial_Value.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The Value operation returns the value of the corresponding 
+attribute of T.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The Reference operation returns an access value that 
+designates the corresponding attribute of T.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">The Set_Value operation performs any finalization 
+on the old value of the attribute of T and assigns Val to that attribute 
+(see <A HREF="RM-5-2.html">5.2</A> and <A HREF="RM-7-6.html">7.6</A>).</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">The effect of the Reinitialize operation is the same 
+as Set_Value where the Val parameter is replaced with Initial_Value. 
+</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I5849"></A>For all the operations declared 
+in this package, Tasking_Error is raised if the task identified by T 
+is terminated. <A NAME="I5850"></A>Program_Error is raised if the value 
+of T is Null_Task_Id.</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p13.1">13.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5851"></A>If the package Ada.Task_Attributes 
+is instantiated with a controlled type and the controlled type has user-defined 
+Adjust or Finalize operations that in turn access task attributes by 
+any of the above operations, then a call of Set_Value of the instantiated 
+package constitutes a bounded error. The call may perform as expected 
+or may result in forever blocking the calling task and subsequently some 
+or all tasks of the partition.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I5852"></A>It is erroneous to dereference 
+the access value returned by a given call on Reference after a subsequent 
+call on Reinitialize for the same task attribute, or after the associated 
+task terminates.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I5853"></A>If a value of Task_Id is passed 
+as a parameter to any of the operations declared in this package and 
+the corresponding task object no longer exists, the execution of the 
+program is erroneous.</div>
+<div class="paranum"><a name="p15.1">15.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5854"></A>Accesses to task attributes 
+via a value of type Attribute_Handle are erroneous if executed concurrently 
+with each other or with calls of any of the operations declared in package 
+Task_Attributes.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p16">16/1</a></div>
+<div class="Normal">For a given attribute of a given task, the implementation 
+shall perform the operations declared in this package atomically with 
+respect to any of these operations of the same attribute of the same 
+task. The granularity of any locking mechanism necessary to achieve such 
+atomicity is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">When a task terminates, the implementation shall 
+finalize all attributes of the task, and reclaim any other storage associated 
+with the attributes.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">The implementation shall document the limit on the 
+number of attributes per task, if any, and the limit on the total storage 
+for attribute values per task, if such a limit exists.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">In addition, if these limits can be configured, the 
+implementation shall document how to configure them.&nbsp;</div>
+
+<H4 Class="centered">Metrics</H4>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">The implementation shall document the following metrics: 
+A task calling the following subprograms shall execute in a sufficiently 
+high priority as to not be preempted during the measurement period. This 
+period shall start just before issuing the call and end just after the 
+call completes. If the attributes of task T are accessed by the measurement 
+tests, no other task shall access attributes of that task during the 
+measurement period. For all measurements described here, the Attribute 
+type shall be a scalar whose size is equal to the size of the predefined 
+integer size. For each measurement, two cases shall be documented: one 
+where the accessed attributes are of the calling task (that is, the default 
+value for the T parameter is used), and the other, where T identifies 
+another, nonterminated, task.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following calls 
+(to subprograms in the Task_Attributes package) shall be measured:&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">a call to Value, where the return value is Initial_Value;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">a call to Value, where the return value is not 
+equal to Initial_Value;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">a call to Reference, where the return value designates 
+a value equal to Initial_Value;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Bulleted">a call to Reference, where the return value designates 
+a value not equal to Initial_Value;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Bulleted">a call to Set_Value where the Val parameter is 
+not equal to Initial_Value and the old attribute value is equal to Initial_Value.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Bulleted">a call to Set_Value where the Val parameter is 
+not equal to Initial_Value and the old attribute value is not equal to 
+Initial_Value.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal">An implementation need not actually create the object 
+corresponding to a task attribute until its value is set to something 
+other than that of Initial_Value, or until Reference is called for the 
+task attribute. Similarly, when the value of the attribute is to be reinitialized 
+to that of Initial_Value, the object may instead be finalized and its 
+storage reclaimed, to be recreated when needed later. While the object 
+does not exist, the function Value may simply return Initial_Value, rather 
+than implicitly creating the object.&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal">An implementation is allowed to place restrictions 
+on the maximum number of attributes a task may have, the maximum size 
+of each attribute, and the total storage size allocated for all the attributes 
+of a task.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Normal">Some implementations are targeted to domains in which 
+memory use at run time must be completely deterministic. For such implementations, 
+it is recommended that the storage for task attributes will be pre-allocated 
+statically and not from the heap. This can be accomplished by either 
+placing restrictions on the number and the size of the task's attributes, 
+or by using the pre-allocated storage for the first N attribute objects, 
+and the heap for the others. In the latter case, N should be documented.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Notes">12&nbsp;&nbsp;An attribute always exists (after instantiation), 
+and has the initial value. It need not occupy memory until the first 
+operation that potentially changes the attribute value. The same holds 
+true after Reinitialize.</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Notes">13&nbsp;&nbsp;The result of the Reference function 
+should be used with care; it is always safe to use that result in the 
+task body whose attribute is being accessed. However, when the result 
+is being used by another task, the programmer must make sure that the 
+task whose attribute is being accessed is not yet terminated. Failing 
+to do so could make the program execution erroneous.</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Notes">14&nbsp;&nbsp;As specified in <A HREF="RM-C-7-1.html">C.7.1</A>, 
+if the parameter T (in a call on a subprogram of an instance of this 
+package) identifies a nonexistent task, the execution of the program 
+is erroneous.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Packed Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.2 Packed Types</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">The Pack aspect having the value True specifies that 
+storage minimization should be the main criterion when selecting the 
+representation of a composite type.&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 through 
+4 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a full type declaration 
+of a composite type, the following language-defined representation aspect 
+may be specified:</div>
+<div class="paranum"><a name="p5.1">5.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;Pack</div><div class="WideHanging-Body">
+The type of aspect Pack is Boolean. When aspect Pack is True for a type, 
+the type (or the extension part) is said to be <I>packed</I>. For a type 
+extension, the parent part is packed as for the parent type, and specifying 
+Pack causes packing only of the extension part. <A NAME="I4904"></A><A NAME="I4905"></A><A NAME="I4906"></A></div>
+<div class="paranum"><a name="p5.2">5.2/3</a></div>
+<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_definition</A></SPAN> 
+shall be a static expression. If not specified (including by inheritance), 
+the aspect is False.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">If a type is packed, then the implementation should 
+try to minimize storage allocated to objects of the type, possibly at 
+the expense of speed of accessing components, subject to reasonable complexity 
+in addressing calculations.&nbsp;</div>
+<div class="paranum"><a name="p6.1">6.1/2</a></div>
+<div class="Normal">&nbsp;If a packed type has a component that is not of 
+a by-reference type and has no aliased part, then such a component need 
+not be aligned according to the Alignment of its subtype; in particular 
+it need not be allocated on a storage element boundary.</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4907"></A>The 
+recommended level of support for the Pack aspect is:&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">For a packed record type, the components should 
+be packed as tightly as possible subject to the Sizes of the component 
+subtypes, and subject to any <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0312">record_representation_clause</A></SPAN> 
+that applies to the type; the implementation may, but need not, reorder 
+components or cross aligned word boundaries to improve the packing. A 
+component whose Size is greater than the word size may be allocated an 
+integral number of words.</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Bulleted">For a packed array type, if the Size of the component 
+subtype is less than or equal to the word size, Component_Size should 
+be less than or equal to the Size of the component subtype, rounded up 
+to the nearest factor of the word size.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

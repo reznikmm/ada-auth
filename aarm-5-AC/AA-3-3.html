@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Objects and Named Numbers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.3 Objects and Named Numbers</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[Objects are created at run time and contain a value 
+of a given type. <A NAME="I1595"></A>An object can be created and initialized 
+as part of elaborating a declaration, evaluating an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>, 
+or passing a parameter by copy. Prior to reclaiming the storage for an 
+object, it is finalized if necessary (see <A HREF="AA-7-6-1.html">7.6.1</A>).] 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1596"></A>All 
+of the following are objects:&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An object is either a 
+constant or a variable. An object contains a value. An object is created 
+by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+or by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>. 
+A formal parameter is (a view of) an object. A subcomponent of an object 
+is an object.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">the entity declared by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">a formal parameter of a subprogram, entry, or generic 
+subprogram;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">a generic formal object;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a loop parameter;</div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
+<span class="insert5">the index parameter of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>;</span></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">a choice parameter of an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0269">exception_handler</A></SPAN>;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">an entry index of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">the result of dereferencing an access-to-object 
+value (see <A HREF="AA-4-1.html">4.1</A>);</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+the <span class="insert2">return object&nbsp;</span><span class="insert3">of 
+a function</span><span class="delete3"></span><span class="insert2"><span class="delete3">&nbsp;created 
+as the&nbsp;</span></span><span class="delete3">result of evaluating a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+(or the equivalent operator invocation &mdash; see <A HREF="AA-6-6.html">6.6</A>)</span>;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">the result of evaluating an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p11.1">11.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
+<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+whose operand denotes an object;</span></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">a component, slice, or view conversion of another 
+object.&nbsp;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
+<A NAME="I1597"></A><A NAME="I1598"></A><A NAME="I1599"></A><A NAME="I1600"></A><A NAME="I1601"></A><A NAME="I1602"></A>An 
+object is either a <I>constant</I> object or a <I>variable</I> object.<span class="delete3">&nbsp;The value of a constant object cannot be changed between its initialization 
+and its finalization, whereas the value of a variable object can be changed.</span> 
+Similarly, a view of an object is either a <I>constant</I> or a <I>variable</I>. 
+All views of a constant <span class="insert3">elementary&nbsp;</span>object 
+are constant. <span class="insert3">All views of a constant composite 
+object are constant, except for parts that are of controlled or immutably 
+limited types; variable views of those parts and their subcomponents 
+may exist. In this sense, objects of controlled and immutably limited 
+types are <I>inherently mutable</I><A NAME="I1603"></A>.&nbsp;</span>A constant 
+view of <span class="insert3">an</span><span class="delete3">&nbsp;a variable</span> 
+object cannot be used to modify <span class="insert3">its value</span><span class="delete3">&nbsp;the 
+value of the variable</span>. The terms constant and variable by themselves 
+refer to constant and variable views of objects.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I1604"></A>The value of an object is <I>read</I> 
+when the value of any part of the object is evaluated, or when the value 
+of an enclosing object is evaluated. <A NAME="I1605"></A>The value of 
+a variable is <I>updated</I> when an assignment is performed to any part 
+of the variable, or when an assignment is performed to an enclosing object. 
+</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Reading and updating are 
+intended to include read/write references of any kind, even if they are 
+not associated with the evaluation of a particular construct. Consider, 
+for example, the expression &ldquo;X.<B>all</B>(F)&rdquo;, where X is 
+an access-to-array object, and F is a function. The implementation is 
+allowed to first evaluate &ldquo;X.<B>all</B>&rdquo; and then F. Finally, 
+a read is performed to get the value of the F'th component of the array. 
+Note that the array is not necessarily read as part of the evaluation 
+of &ldquo;X.<B>all</B>&rdquo;. This is important, because if F were to 
+free X using Unchecked_Deallocation, we want the execution of the final 
+read to be erroneous.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Whether a view of an 
+object is constant or variable is determined by the definition of the 
+view. The following (and no others) represent constants:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">an object declared by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+with the reserved word <B>constant</B>;</div>
+<div class="paranum"><a name="p16.a">16.a/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>To 
+be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
+<span class="insert2">We mean the word <B>constant</B> as defined by 
+the grammar for <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
+not some random word <B>constant</B>. Thus,</span>&nbsp;</div>
+<div class="paranum"><a name="p16.b">16.b/2</a></div>
+<div class="SmallExamples"><span class="insert2">X&nbsp;:&nbsp;<B>access&nbsp;constant</B>&nbsp;T;</span></div>
+<div class="paranum"><a name="p16.c">16.c/2</a></div>
+<div class="Annotations"><span class="insert2">is not a constant.</span> 
+</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">a formal parameter or generic formal object of 
+mode <B>in</B>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">a discriminant;</div>
+<div class="paranum"><a name="p18.1">18.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">a loop parameter unless specified to be a variable 
+for a generalized loop (see <A HREF="AA-5-5-2.html">5.5.2</A>);</span></div>
+<div class="paranum"><a name="p18.2">18.2/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
+<span class="insert5">the index parameter of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+a <span class="delete3">loop parameter,&nbsp;</span>choice parameter<span class="delete3">,</span> 
+or entry index;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">the dereference of an access-to-constant value;</div>
+<div class="paranum"><a name="p20.1">20.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+<span class="insert3">the return object declared by an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+with the reserved word <B>constant</B>;</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+the <span class="insert3">object denoted by</span><span class="delete3">&nbsp;result 
+of evaluating</span> a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p21.1">21.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
+<span class="insert3">the result of evaluating a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN>;</span></div>
+<div class="paranum"><a name="p21.2">21.2/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
+<span class="insert5">a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+when used in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the assignment (see <A HREF="AA-5-2-1.html">5.2.1</A>);</span></div>
+<div class="paranum"><a name="p21.3">21.3/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0120-1.TXT">AI05-0120-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
+<span class="insert3">within the body of a protected function (or a function 
+declared immediately within a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>), 
+the current instance of the enclosing protected unit;</span></div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, or 
+view conversion of a constant.&nbsp;</div>
+<div class="paranum"><a name="p22.a">22.a/2</a></div>
+<div class="Annotations"><span class="delete2"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+<span class="delete2">A noninvertible view conversion to a general access 
+type is also defined to be a constant &mdash; see <A HREF="AA-4-6.html">4.6</A>.</span> 
+</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<A NAME="I1606"></A>At the place where a view of an object is defined, 
+a <I>nominal subtype</I> is associated with the view. <A NAME="I1607"></A><A NAME="I1608"></A>The 
+object's <I>actual subtype</I> (that is, its subtype) can be more restrictive 
+than the nominal subtype of the view; it always is if the nominal subtype 
+is an <I>indefinite subtype</I>. <A NAME="I1609"></A><A NAME="I1610"></A>A 
+subtype is an indefinite subtype if it is an unconstrained array subtype, 
+or if it has unknown discriminants or unconstrained discriminants without 
+defaults (see <A HREF="AA-3-7.html">3.7</A>); otherwise<span class="insert3">,</span> 
+the subtype is a <I>definite</I> subtype [(all elementary subtypes are 
+definite subtypes)]. [A class-wide subtype is defined to have unknown 
+discriminants, and is therefore an indefinite subtype. An indefinite 
+subtype does not by itself provide enough information to create an object; 
+an additional <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
+or explicit initialization <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is necessary (see <A HREF="AA-3-3-1.html">3.3.1</A>). A component cannot 
+have an indefinite nominal subtype.]</div>
+<div class="paranum"><a name="p23.1">23.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<span class="insert3">A view of a composite object is <I>known to be 
+constrained</I> if:<A NAME="I1611"></A><A NAME="I1612"></A></span></div>
+<div class="paranum"><a name="p23.2">23.2/3</a></div>
+<div class="Bulleted"><span class="insert3">its nominal subtype is constrained, 
+and is not an untagged partial view; or</span></div>
+<div class="paranum"><a name="p23.3">23.3/3</a></div>
+<div class="Bulleted"><span class="insert3">its nominal subtype is indefinite; 
+or</span></div>
+<div class="paranum"><a name="p23.4">23.4/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0093-1.TXT">AI05-0093-1</A></I>} 
+<span class="insert3">its type is immutably limited (see <A HREF="AA-7-5.html">7.5</A>); 
+or</span></div>
+<div class="paranum"><a name="p23.5">23.5/3</a></div>
+<div class="Bulleted"><span class="insert3">it is part of a stand-alone 
+constant (including a generic formal object of mode <B>in</B>); or</span></div>
+<div class="paranum"><a name="p23.6">23.6/3</a></div>
+<div class="Bulleted"><span class="insert3">it is part of a formal parameter 
+of mode <B>in</B>; or</span></div>
+<div class="paranum"><a name="p23.7">23.7/3</a></div>
+<div class="Bulleted"><span class="insert3">it is part of the object 
+denoted by a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>; 
+or</span></div>
+<div class="paranum"><a name="p23.8">23.8/3</a></div>
+<div class="Bulleted"><span class="insert3">it is part of a constant 
+return object of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>; 
+or</span></div>
+<div class="paranum"><a name="p23.9">23.9/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0041-1.TXT">AI05-0041-1</A></I>} 
+<span class="insert3">it is a dereference of a pool-specific access type, 
+and there is no ancestor of its type that has a constrained partial view.</span></div>
+<div class="paranum"><a name="p23.a">23.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>We 
+do not include dereferences of general access types because they might 
+denote stand-alone aliased unconstrained variables. That's true even 
+for access-to-constant types (the denoted object does not have to be 
+a constant).</span></div>
+<div class="paranum"><a name="p23.b">23.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<span class="insert3">There are other cases that could have been included 
+in this definition (view conversions, the current instance of a type, 
+objects of a formal discriminated private type), but these are not relevant 
+to the places this term is used, so they were not included. If this term 
+is used in additional places, the definition should be checked to see 
+if any of these additional cases are relevant and appropriate wording 
+added if necessary.</span>&nbsp;</div>
+<div class="paranum"><a name="p23.10">23.10/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0041-1.TXT">AI05-0041-1</A></I>} 
+<span class="insert3">For the purposes of determining within a generic 
+body whether an object is known to be constrained:</span>&nbsp;</div>
+<div class="paranum"><a name="p23.11">23.11/3</a></div>
+<div class="Bulleted"><span class="insert3">if a subtype is a descendant 
+of an untagged generic formal private or derived type, and the subtype 
+is not an unconstrained array subtype, it is not considered indefinite 
+and is considered to have a constrained partial view;</span></div>
+<div class="paranum"><a name="p23.12">23.12/3</a></div>
+<div class="Bulleted"><span class="insert3">if a subtype is a descendant 
+of a formal access type, it is not considered pool-specific.</span></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal"><A NAME="I1613"></A>A <I>named number</I> provides 
+a name for a numeric value known at compile time. It is declared by a 
+<SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN>. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Notes">10&nbsp;&nbsp;A constant cannot be the target of an 
+assignment operation, nor be passed as an <B>in</B> <B>out</B> or <B>out</B> 
+parameter, between its initialization and finalization, if any.</div>
+<div class="paranum"><a name="p25.1">25.1/3</a></div>
+<div class="Notes">11&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
+<span class="insert3">The value of a constant object cannot be changed 
+after its initialization, except in some cases where the object has a 
+controlled or immutably limited part (see <A HREF="AA-7-5.html">7.5</A>, 
+<A HREF="AA-7-6.html">7.6</A>, and <A HREF="AA-13-9-1.html">13.9.1</A>).</span></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Notes">12&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+The nominal and actual subtypes of an elementary object are always the 
+same. For a discriminated or array object, if the nominal subtype is 
+constrained<span class="insert3">,</span> then so is the actual subtype. 
+</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p26.a">26.a</a></div>
+<div class="Annotations"><A NAME="I1614"></A>There are additional kinds 
+of objects (choice parameters and entry indices of entry bodies).</div>
+<div class="paranum"><a name="p26.b">26.b</a></div>
+<div class="Annotations">The result of a function and of evaluating an 
+aggregate are considered (constant) objects. This is necessary to explain 
+the action of finalization on such things. Because a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+is also syntactically a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+(see <A HREF="AA-4-1.html">4.1</A>), the result of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+can be renamed, thereby allowing repeated use of the result without calling 
+the function again.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p26.c">26.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause 
+and its subclauses</span> now <span class="insert3">follows</span><span class="delete3">&nbsp;follow</span> 
+the <span class="delete3">clause and&nbsp;</span>subclauses on types and subtypes, 
+to cut down on the number of forward references.</div>
+<div class="paranum"><a name="p26.d">26.d</a></div>
+<div class="Annotations">The term nominal subtype is new. It is used 
+to distinguish what is known at compile time about an object's constraint, 
+versus what its &quot;true&quot; run-time constraint is.</div>
+<div class="paranum"><a name="p26.e">26.e</a></div>
+<div class="Annotations">The terms definite and indefinite (which apply 
+to subtypes) are new. They are used to aid in the description of generic 
+formal type matching, and to specify when an explicit initial value is 
+required in an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p26.f">26.f</a></div>
+<div class="Annotations">We have moved the syntax for <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN> 
+down into their respective subclauses, to keep the syntax close to the 
+description of the associated semantics.</div>
+<div class="paranum"><a name="p26.g">26.g</a></div>
+<div class="Annotations">We talk about variables and constants here, 
+since the discussion is not specific to <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s, 
+and it seems better to have the list of the kinds of constants juxtaposed 
+with the kinds of objects.</div>
+<div class="paranum"><a name="p26.h">26.h</a></div>
+<div class="Annotations">We no longer talk about indirect updating due 
+to parameter passing. Parameter passing is handled in 6.2 and 6.4.1 in 
+a way that there is no need to mention it here in the definition of read 
+and update. Reading and updating now includes the case of evaluating 
+or assigning to an enclosing object.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p26.i">26.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">Clarified that the return object is the object 
+created by a function call.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p26.j">26.j/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+<span class="insert3"><A NAME="I1615"></A>Added wording to allow return 
+objects to be declared as constants, and corrected the definition of 
+return objects as objects.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p26.k">26.k/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0041-1.TXT">AI05-0041-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0093-1.TXT">AI05-0093-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Added a definition of <I>known 
+to be constrained</I>, for use in other rules.</span></div>
+<div class="paranum"><a name="p26.l">26.l/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
+<span class="insert3"><B>Correction:</B> We now recognize the fact that 
+not all declared constant objects are immutable; for those that a variable 
+view can be constructed, they can be changed via that view.</span></div>
+<div class="paranum"><a name="p26.m">26.m/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0120-1.TXT">AI05-0120-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Added the current instance of 
+a protected object to the list of constant views; since the list claims 
+to include all possibilities, it had better include that one.</span></div>
+<div class="paranum"><a name="p26.n">26.n/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
+<span class="insert3">The result of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+is defined to be a constant view and is defined to be an object if the 
+operand of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+is an object. These definitions, combined with some grammar changes, 
+allow <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN>s 
+to be used in more places. See <A HREF="AA-4-1.html">4.1</A> for details.</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p26.o">26.o/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
+<span class="insert5">Added a rule defining a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN> 
+as a constant (see <A HREF="AA-5-2-1.html">5.2.1</A>).</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

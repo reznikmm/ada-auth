@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>ASCII</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>J.5 ASCII</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following declaration 
+exists in the declaration of package Standard:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>package</B>&nbsp;ASCII&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;Control&nbsp;characters:</I></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;NUL&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>nul</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SOH&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>;<BR>
+&nbsp;&nbsp;STX&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>stx</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETX&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>etx</I></SPAN>;<BR>
+&nbsp;&nbsp;EOT&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>eot</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ENQ&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>enq</I></SPAN>;<BR>
+&nbsp;&nbsp;ACK&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>ack</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BEL&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>bel</I></SPAN>;<BR>
+&nbsp;&nbsp;BS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>bs</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>ht</I></SPAN>;<BR>
+&nbsp;&nbsp;LF&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>lf</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>vt</I></SPAN>;<BR>
+&nbsp;&nbsp;FF&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>ff</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CR&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>cr</I></SPAN>;<BR>
+&nbsp;&nbsp;SO&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>so</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SI&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>si</I></SPAN>;<BR>
+&nbsp;&nbsp;DLE&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>dle</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DC1&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>dc1</I></SPAN>;<BR>
+&nbsp;&nbsp;DC2&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>dc2</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DC3&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>dc3</I></SPAN>;<BR>
+&nbsp;&nbsp;DC4&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>dc4</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NAK&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>nak</I></SPAN>;<BR>
+&nbsp;&nbsp;SYN&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>syn</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETB&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>etb</I></SPAN>;<BR>
+&nbsp;&nbsp;CAN&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>can</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EM&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>em</I></SPAN>;<BR>
+&nbsp;&nbsp;SUB&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>sub</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ESC&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>esc</I></SPAN>;<BR>
+&nbsp;&nbsp;FS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>fs</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>gs</I></SPAN>;<BR>
+&nbsp;&nbsp;RS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>rs</I></SPAN>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;US&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>us</I></SPAN>;<BR>
+&nbsp;&nbsp;DEL&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;<SPAN Class="roman"><I>del</I></SPAN>;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Other&nbsp;characters:</I></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;Exclam&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'!';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotation&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'&quot;';<BR>
+&nbsp;&nbsp;Sharp&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'#';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dollar&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'$';<BR>
+&nbsp;&nbsp;Percent&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'%';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ampersand&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'&amp;';<BR>
+&nbsp;&nbsp;Colon&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;':';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Semicolon&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;';';<BR>
+&nbsp;&nbsp;Query&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'?';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Sign&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'@';<BR>
+&nbsp;&nbsp;L_Bracket:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'[';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Back_Slash:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'\';<BR>
+&nbsp;&nbsp;R_Bracket:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;']';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Circumflex:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'^';<BR>
+&nbsp;&nbsp;Underline:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'_';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'`';<BR>
+&nbsp;&nbsp;L_Brace&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'{';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'|';<BR>
+&nbsp;&nbsp;R_Brace&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'}';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'&#126;';</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Lower&nbsp;case&nbsp;letters:</I></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;LC_A:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'a';<BR>
+&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;LC_Z:&nbsp;<B>constant</B>&nbsp;Character:=&nbsp;'z';</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples"><B>end</B>&nbsp;ASCII;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

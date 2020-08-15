@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Private Operations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.3.1 Private Operations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[For a type declared in the visible part of a package 
+or generic package, certain operations on the type do not become visible 
+until later in the package &mdash; either in the private part or the 
+body. <A NAME="I4050"></A>Such <I>private operations</I> are available 
+only inside the declarative region of the package or generic package.] 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The predefined operators that exist for a given type 
+are determined by the classes to which the type belongs. For example, 
+an integer type has a predefined &quot;+&quot; operator. In most cases, 
+the predefined operators of a type are declared immediately after the 
+definition of the type; the exceptions are explained below. Inherited 
+subprograms are also implicitly declared immediately after the definition 
+of the type, except as stated below.</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+For a composite type, the characteristics (see <A HREF="AA-7-3.html">7.3</A>) 
+of the type are determined in part by the characteristics of its component 
+types. At the place where the composite type is declared, the only characteristics 
+of component types used are those characteristics visible at that place. 
+If later immediately within the declarative region in which the composite 
+type is declared additional characteristics become visible for a component 
+type, then any corresponding characteristics become visible for the composite 
+type. Any additional predefined operators are implicitly declared at 
+that place.<span class="insert3">&nbsp;If there is no such place, then additional 
+predefined operators are not declared at all, but they still exist.</span></div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+<span class="insert3">We say that the predefined operators exist because 
+they can emerge in some unusual generic instantiations. See <A HREF="AA-12-5.html">12.5</A>.</span> 
+</div>
+<div class="paranum"><a name="p3.b">3.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+<span class="insert3">The predefined operators for the underlying class 
+of a type always exist, even if there is no visibility on that underlying 
+class. This rule is simply about where (if ever) those operators are 
+declared (and thus become usable). The &ldquo;additional predefined operators&rdquo; 
+defined by this rule are any that are not declared at the point of the 
+original type declaration. For instance, a type derived from a private 
+type whose full type is type String always will have a &quot;&gt;&quot; 
+operator, but where that operator is declared (and thus whether it is 
+visible) will depend on the visibility of the full type of the parent 
+type.</span>&nbsp;</div>
+<div class="paranum"><a name="p4">4/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
+The corresponding rule applies to a type defined by a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+if there is a place immediately within the declarative region in which 
+the type is declared where additional characteristics of its parent type 
+become visible.</div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
+<A NAME="I4051"></A><A NAME="I4052"></A><A NAME="I4053"></A>[For example, 
+an array type whose component type is limited private becomes nonlimited 
+if the full view of the component type is nonlimited and visible at some 
+later place immediately within the declarative region in which the array 
+type is declared. In such a case, the predefined &quot;=&quot; operator 
+is implicitly declared at that place, and assignment is allowed after 
+that place.]</div>
+<div class="paranum"><a name="p5.1">5.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">A type is a <I>descendant</I><A NAME="I4054"></A> 
+of the full view of some ancestor of its parent type only if the current 
+view it has of its parent is a descendant of the full view of that ancestor. 
+More generally, at any given place, a type is descended from the same 
+view of an ancestor as that from which the current view of its parent 
+is descended. This view determines what characteristics are inherited 
+from the ancestor[, and, for example, whether the type is considered 
+to be a descendant of a record type, or a descendant only through record 
+extensions of a more distant ancestor].</span></div>
+<div class="paranum"><a name="p5.2">5.2/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
+<span class="insert3">[It is possible for there to be places where a 
+derived type is visibly a descendant of an ancestor type, but not a descendant 
+of even a partial view of the ancestor type, because the parent of the 
+derived type is not visibly a descendant of the ancestor.  In this case, 
+the derived type inherits no characteristics from that ancestor, but 
+nevertheless is within the derivation class of the ancestor for the purposes 
+of type conversion, the &quot;covers&quot; relationship, and matching 
+against a formal derived type. In this case the derived type is considered 
+to be a <I>descendant</I> of an incomplete view of the ancestor.<A NAME="I4055"></A>]</span></div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Discussion: 
+</B>Here is an example of this situation:</span>&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;C&nbsp;:&nbsp;<B>constant</B>&nbsp;T;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;new</B>&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;C&nbsp;:&nbsp;<B>constant</B>&nbsp;T&nbsp;:=&nbsp;42;<BR>
+<B>end</B>&nbsp;P;</span></div>
+<div class="paranum"><a name="p5.c">5.c/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>with</B>&nbsp;P;<BR>
+<B>package</B>&nbsp;Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T2&nbsp;<B>is&nbsp;new</B>&nbsp;P.T;<BR>
+<B>end</B>&nbsp;Q;</span></div>
+<div class="paranum"><a name="p5.d">5.d/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>with</B>&nbsp;Q;<BR>
+<B>package</B>&nbsp;P.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T3&nbsp;<B>is&nbsp;new</B>&nbsp;Q.T2;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Int&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;52;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;V&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(P.C);&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal:&nbsp;conversion&nbsp;allowed</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;W&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(Int);&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal:&nbsp;conversion&nbsp;allowed</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(42);&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Error:&nbsp;T3&nbsp;is&nbsp;not&nbsp;a&nbsp;numeric&nbsp;type</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;:&nbsp;T3&nbsp;:=&nbsp;X&nbsp;+&nbsp;1;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Error:&nbsp;no&nbsp;visible&nbsp;&quot;+&quot;&nbsp;operator</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Z&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(Integer(W)&nbsp;+&nbsp;1);&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal:&nbsp;convert&nbsp;to&nbsp;Integer&nbsp;first</I></SPAN><BR>
+<B>end</B>&nbsp;P.Child;</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+Inherited primitive subprograms follow a different rule. For a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+each inherited primitive subprogram is implicitly declared at the earliest 
+place, if any, immediately within the declarative region in which the 
+<SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+occurs, but after the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+where the corresponding declaration from the parent is visible. If there 
+is no such place, then the inherited subprogram is not declared at all<span class="insert3">, 
+but it still exists</span>. [<span class="insert3">For a tagged type, 
+it is possible to dispatch to an</span><span class="delete3">&nbsp;An</span> 
+inherited subprogram that is not declared at all<span class="delete3">cannot 
+be named in a call and cannot be overridden, but for a tagged type, it 
+is possible to dispatch to it</span>.]</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN>, 
+each inherited subprogram is declared immediately after the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN> 
+if the corresponding declaration from the ancestor is visible at that 
+place. Otherwise, the inherited subprogram is not declared for the private 
+extension, [though it might be for the full type].&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a/1</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>There is no need for the &ldquo;earliest 
+place immediately within the declarative region&rdquo; business here, 
+because a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN> 
+will be completed with a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
+so we can hang the necessary private implicit declarations on the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The above rules matter only 
+when the component type (or parent type) is declared in the visible part 
+of a package, and the composite type (or derived type) is declared within 
+the declarative region of that package (possibly in a nested package 
+or a child package).</div>
+<div class="paranum"><a name="p7.c">7.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Consider:&nbsp;</div>
+<div class="paranum"><a name="p7.d">7.d</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Parent&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Root&nbsp;<B>is</B>&nbsp;<B>tagged</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op1(X&nbsp;:&nbsp;Root);</div>
+<div class="paranum"><a name="p7.e">7.e</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Int&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1..10;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op2(X&nbsp;:&nbsp;Root);</div>
+<div class="paranum"><a name="p7.f">7.f</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Another_Int&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;My_Int;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Int_Op(X&nbsp;:&nbsp;My_Int);<BR>
+<B>end</B>&nbsp;Parent;</div>
+<div class="paranum"><a name="p7.g">7.g</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Parent;&nbsp;<B>use</B>&nbsp;Parent;<BR>
+<B>package</B>&nbsp;Unrelated&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T2&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Root&nbsp;<B>with</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op2(X&nbsp;:&nbsp;T2);<BR>
+<B>end</B>&nbsp;Unrelated;</div>
+<div class="paranum"><a name="p7.h">7.h</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Parent.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T3&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Root&nbsp;<B>with</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Op1(T3)&nbsp;implicitly&nbsp;declared&nbsp;here.</I></SPAN></div>
+<div class="paranum"><a name="p7.i">7.i</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Nested&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T4&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Root&nbsp;<B>with</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Nested;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Op2(T3)&nbsp;implicitly&nbsp;declared&nbsp;here.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Parent.Child;</div>
+<div class="paranum"><a name="p7.j">7.j</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Unrelated;&nbsp;<B>use</B>&nbsp;Unrelated;<BR>
+<B>package</B>&nbsp;<B>body</B>&nbsp;Parent.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;Nested&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Op2(T4)&nbsp;implicitly&nbsp;declared&nbsp;here.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Nested;</div>
+<div class="paranum"><a name="p7.k">7.k</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T5&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;T2&nbsp;<B>with</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+<B>end</B>&nbsp;Parent.Child;</div>
+<div class="paranum"><a name="p7.l">7.l</a></div>
+<div class="Annotations">Another_Int does not inherit Int_Op, because 
+Int_Op does not &ldquo;exist&rdquo; at the place where Another_Int is 
+declared.</div>
+<div class="paranum"><a name="p7.m">7.m/1</a></div>
+<div class="Annotations">Type T2 inherits Op1 and Op2 from Root. However, 
+the inherited Op2 is never declared, because Parent.Op2 is never visible 
+immediately within the declarative region of T2. T2 explicitly declares 
+its own Op2, but this is unrelated to the inherited one &mdash; it does 
+not override the inherited one, and occupies a different slot in the 
+type descriptor.</div>
+<div class="paranum"><a name="p7.n">7.n</a></div>
+<div class="Annotations">T3 inherits both Op1 and Op2. Op1 is implicitly 
+declared immediately after the type declaration, whereas Op2 is declared 
+at the beginning of the private part. Note that if Child were a private 
+child of Parent, then Op1 and Op2 would both be implicitly declared immediately 
+after the type declaration.</div>
+<div class="paranum"><a name="p7.o">7.o/1</a></div>
+<div class="Annotations">T4 is similar to T3, except that the earliest 
+place immediately within the declarative region containing T4 where Root's 
+Op2 is visible is in the body of Nested.</div>
+<div class="paranum"><a name="p7.p">7.p</a></div>
+<div class="Annotations">If T3 or T4 were to declare a type-conformant 
+Op2, this would override the one inherited from Root. This is different 
+from the situation with T2.</div>
+<div class="paranum"><a name="p7.q">7.q</a></div>
+<div class="Annotations">T5 inherits Op1 and two Op2's from T2. Op1 is 
+implicitly declared immediately after the declaration of T5, as is the 
+Op2 that came from Unrelated.Op2. However, the Op2 that originally came 
+from Parent.Op2 is never implicitly declared for T5, since T2's version 
+of that Op2 is never visible (anywhere &mdash; it never got declared 
+either).</div>
+<div class="paranum"><a name="p7.r">7.r</a></div>
+<div class="Annotations">For all of these rules, implicit private parts 
+and bodies are assumed as needed.</div>
+<div class="paranum"><a name="p7.s">7.s</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">It is possible 
+for characteristics of a type to be revealed in more than one place:</div>
+<div class="paranum"><a name="p7.t">7.t</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Comp1&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Comp1&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Boolean;<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p7.u">7.u</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P.Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;R&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Comp2&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;A&nbsp;<B>is</B>&nbsp;<B>array</B>(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Comp2;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Comp2&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Comp1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;A&nbsp;becomes&nbsp;nonlimited&nbsp;here.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&quot;=&quot;(A,&nbsp;A)&nbsp;return&nbsp;Boolean&nbsp;is&nbsp;implicitly&nbsp;declared&nbsp;here.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;R;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Now&nbsp;we&nbsp;find&nbsp;out&nbsp;what&nbsp;Comp1&nbsp;really&nbsp;is,&nbsp;which&nbsp;reveals</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;more&nbsp;information&nbsp;about&nbsp;Comp2,&nbsp;but&nbsp;we're&nbsp;not&nbsp;within</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;the&nbsp;immediate&nbsp;scope&nbsp;of&nbsp;Comp2,&nbsp;so&nbsp;we&nbsp;don't&nbsp;do&nbsp;anything</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;about&nbsp;it&nbsp;yet.</I></SPAN><BR>
+<B>end</B>&nbsp;P.Q;</div>
+<div class="paranum"><a name="p7.v">7.v</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;<B>body</B>&nbsp;P.Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;R&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Things&nbsp;like&nbsp;&quot;<B>xor</B>&quot;(A,A)&nbsp;return&nbsp;A&nbsp;are&nbsp;implicitly</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;declared&nbsp;here.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;R;<BR>
+<B>end</B>&nbsp;P.Q;</div>
+<div class="paranum"><a name="p7.v.1">7.v.1/1</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
+We say <I>immediately</I> within the declarative region in order that 
+types do not gain operations within a nested scope. Consider:&nbsp;</div>
+<div class="paranum"><a name="p7.v.2">7.v.2/1</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Outer&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Inner&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Inner_Type&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Inner_Type&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Inner;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Outer_Type&nbsp;<B>is</B>&nbsp;<B>array</B>(Natural&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Inner.Inner_Type;<BR>
+<B>end</B>&nbsp;Outer;</div>
+<div class="paranum"><a name="p7.v.3">7.v.3/1</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;<B>body</B>&nbsp;Outer&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;Inner&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;At&nbsp;this&nbsp;point,&nbsp;we&nbsp;can&nbsp;see&nbsp;that&nbsp;Inner_Type&nbsp;is&nbsp;a&nbsp;Boolean&nbsp;type.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;But&nbsp;we&nbsp;don't&nbsp;want&nbsp;Outer_Type&nbsp;to&nbsp;gain&nbsp;an&nbsp;&quot;and&quot;&nbsp;operator&nbsp;here.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Inner;<BR>
+<B>end</B>&nbsp;Outer;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">[The Class attribute 
+is defined for tagged subtypes in <A HREF="AA-3-9.html">3.9</A>. In addition,] 
+for every subtype S of an untagged private type whose full view is tagged, 
+the following attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
+<A NAME="I4056"></A><A NAME="I4057"></A>Denotes the class-wide subtype 
+corresponding to the full view of S. This attribute is allowed only from 
+the beginning of the private part in which the full view is declared, 
+until the declaration of the full view. [After the full view, the Class 
+attribute of the full view can be used.]&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">9&nbsp;&nbsp;Because a partial view and a full view 
+are two different views of one and the same type, outside of the defining 
+package the characteristics of the type are those defined by the visible 
+part. Within these outside program units the type is just a private type 
+or private extension, and any language rule that applies only to another 
+class of types does not apply. The fact that the full declaration might 
+implement a private type with a type of a particular class (for example, 
+as an array type) is relevant only within the declarative region of the 
+package itself including any child units.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">The consequences of this actual implementation are, 
+however, valid everywhere. For example: any default initialization of 
+components takes place; the attribute Size provides the size of the full 
+view; finalization is still done for controlled components of the full 
+view; task dependence rules still apply to components that are task objects.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Notes">10&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+Partial views provide <span class="insert2">initialization</span><span class="delete2">&nbsp;assignment 
+(unless the view is limited)</span>, membership tests, selected components 
+for the selection of discriminants and inherited components, qualification, 
+and explicit conversion.<span class="insert2">&nbsp;Nonlimited partial views 
+also allow use of <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>s.</span></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">11&nbsp;&nbsp;For a subtype S of a partial view, S'Size 
+is defined (see <A HREF="AA-13-3.html">13.3</A>). For an object A of 
+a partial view, the attributes A'Size and A'Address are defined (see 
+<A HREF="AA-13-3.html">13.3</A>). The Position, First_Bit, and Last_Bit 
+attributes are also defined for discriminants and inherited components. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a type 
+with private operations:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>package</B>&nbsp;Key_Manager&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Key&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;Null_Key&nbsp;:&nbsp;<B>constant</B>&nbsp;Key;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;deferred&nbsp;constant&nbsp;declaration&nbsp;(see&nbsp;<A HREF="AA-7-4.html">7.4</A>)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get_Key(K&nbsp;:&nbsp;<B>out</B>&nbsp;Key);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(X,&nbsp;Y&nbsp;:&nbsp;Key)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Key&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Natural;<BR>
+&nbsp;&nbsp;&nbsp;Null_Key&nbsp;:&nbsp;<B>constant</B>&nbsp;Key&nbsp;:=&nbsp;Key'First;<BR>
+<B>end</B>&nbsp;Key_Manager;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>package</B>&nbsp;<B>body</B>&nbsp;Key_Manager&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Last_Key&nbsp;:&nbsp;Key&nbsp;:=&nbsp;Null_Key;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get_Key(K&nbsp;:&nbsp;<B>out</B>&nbsp;Key)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last_Key&nbsp;:=&nbsp;Last_Key&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K&nbsp;:=&nbsp;Last_Key;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Get_Key;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(X,&nbsp;Y&nbsp;:&nbsp;Key)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural(X)&nbsp;&lt;&nbsp;Natural(Y);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;&quot;&lt;&quot;;<BR>
+<B>end</B>&nbsp;Key_Manager;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">12&nbsp;&nbsp;<I>Notes on the example:</I> Outside 
+of the package Key_Manager, the operations available for objects of type 
+Key include assignment, the comparison for equality or inequality, the 
+procedure Get_Key and the operator &quot;&lt;&quot;; they do not include 
+other relational operators such as &quot;&gt;=&quot;, or arithmetic operators.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Notes">The explicitly declared operator &quot;&lt;&quot; 
+hides the predefined operator &quot;&lt;&quot; implicitly declared by 
+the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
+Within the body of the function, an explicit conversion of X and Y to 
+the subtype Natural is necessary to invoke the &quot;&lt;&quot; operator 
+of the parent type. Alternatively, the result of the function could be 
+written as not (X &gt;= Y), since the operator &quot;&gt;=&quot; is not 
+redefined.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Notes">The value of the variable Last_Key, declared in the 
+package body, remains unchanged between calls of the procedure Get_Key. 
+(See also the NOTES of <A HREF="AA-7-2.html">7.2</A>.)&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p20.a">20.a</a></div>
+<div class="Annotations">The phrase in RM83-7.4.2(7), &ldquo;...after 
+the full type declaration&rdquo;, doesn't work in the presence of child 
+units, so we define that rule in terms of visibility.</div>
+<div class="paranum"><a name="p20.b">20.b</a></div>
+<div class="Annotations">The definition of the Constrained attribute 
+for private types has been moved to &ldquo;Obsolescent Features.&rdquo; 
+(The Constrained attribute of an object has not been moved there.)&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p20.c">20.c/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0018">8652/0018</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Clarified when additional operations 
+are declared.</span></div>
+<div class="paranum"><a name="p20.d">20.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+<span class="insert2">Revised the note on operations of partial views 
+to reflect that limited types do have an assignment operation, but not 
+<SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>s.</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p20.e">20.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Revised the wording to say that 
+predefined operations still exist even if they are never declared, because 
+it is possible to reference them in a generic unit.</span></div>
+<div class="paranum"><a name="p20.f">20.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Clarified that the characteristics 
+of a descendant of a private type depend on the visibility of the full 
+view of the direct ancestor. This has to be the case (so that privacy 
+is not violated), but it wasn't spelled out in earlier versions of Ada.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

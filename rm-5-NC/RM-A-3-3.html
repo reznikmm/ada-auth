@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Characters.Latin_1</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-3-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.3.3 The Package Characters.Latin_1</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The package Characters.Latin_1 declares constants 
+for characters in ISO 8859-1.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Characters.Latin_1 has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Characters.Latin_1&nbsp;<B>is</B><A NAME="I5717"></A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Latin_1);</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Control&nbsp;characters:</I></SPAN><A NAME="I5718"></A></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5719"></A>NUL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(0);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5720"></A>SOH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(1);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5721"></A>STX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(2);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5722"></A>ETX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(3);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5723"></A>EOT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(4);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5724"></A>ENQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(5);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5725"></A>ACK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(6);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5726"></A>BEL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(7);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5727"></A>BS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(8);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5728"></A>HT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(9);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5729"></A>LF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(10);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5730"></A>VT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(11);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5731"></A>FF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(12);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5732"></A>CR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(13);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5733"></A>SO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(14);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5734"></A>SI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(15);</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5735"></A>DLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(16);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5736"></A>DC1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(17);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5737"></A>DC2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(18);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5738"></A>DC3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(19);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5739"></A>DC4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(20);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5740"></A>NAK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(21);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5741"></A>SYN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(22);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5742"></A>ETB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(23);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5743"></A>CAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(24);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5744"></A>EM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(25);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5745"></A>SUB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(26);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5746"></A>ESC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(27);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5747"></A>FS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(28);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5748"></A>GS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(29);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5749"></A>RS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(30);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5750"></A>US&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(31);</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;ISO&nbsp;646&nbsp;graphic&nbsp;characters:</I></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5751"></A>Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&nbsp;';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(32)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5752"></A>Exclamation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'!';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(33)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5753"></A>Quotation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&quot;';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(34)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5754"></A>Number_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'#';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(35)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5755"></A>Dollar_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'$';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(36)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5756"></A>Percent_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'%';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(37)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5757"></A>Ampersand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&amp;';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(38)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5758"></A>Apostrophe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;''';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(39)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5759"></A>Left_Parenthesis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'(';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(40)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5760"></A>Right_Parenthesis&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;')';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(41)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5761"></A>Asterisk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'*';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(42)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5762"></A>Plus_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'+';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(43)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5763"></A>Comma&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;',';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(44)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5764"></A>Hyphen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'-';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(45)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5765"></A>Minus_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;Hyphen;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5766"></A>Full_Stop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'.';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(46)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5767"></A>Solidus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'/';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(47)</I></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Decimal&nbsp;digits&nbsp;'0'&nbsp;though&nbsp;'9'&nbsp;are&nbsp;at&nbsp;positions&nbsp;48&nbsp;through&nbsp;57</I></SPAN></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5768"></A>Colon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;':';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(58)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5769"></A>Semicolon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;';';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(59)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5770"></A>Less_Than_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&lt;';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(60)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5771"></A>Equals_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'=';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(61)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5772"></A>Greater_Than_Sign&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&gt;';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(62)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5773"></A>Question&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'?';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(63)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5774"></A>Commercial_At&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'@';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(64)</I></SPAN></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Letters&nbsp;'A'&nbsp;through&nbsp;'Z'&nbsp;are&nbsp;at&nbsp;positions&nbsp;65&nbsp;through&nbsp;90</I></SPAN></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5775"></A>Left_Square_Bracket&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'[';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(91)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5776"></A>Reverse_Solidus&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'\';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(92)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5777"></A>Right_Square_Bracket&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;']';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(93)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5778"></A>Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'^';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(94)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5779"></A>Low_Line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'_';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(95)</I></SPAN></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5780"></A>Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'`';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(96)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5781"></A>LC_A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'a';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(97)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5782"></A>LC_B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'b';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(98)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5783"></A>LC_C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'c';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(99)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5784"></A>LC_D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'d';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(100)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5785"></A>LC_E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'e';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(101)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5786"></A>LC_F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'f';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(102)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5787"></A>LC_G&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'g';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(103)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5788"></A>LC_H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'h';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(104)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5789"></A>LC_I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'i';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(105)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5790"></A>LC_J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'j';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(106)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5791"></A>LC_K&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'k';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(107)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5792"></A>LC_L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'l';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(108)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5793"></A>LC_M&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'m';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(109)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5794"></A>LC_N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'n';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(110)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5795"></A>LC_O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'o';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(111)</I></SPAN></div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5796"></A>LC_P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'p';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(112)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5797"></A>LC_Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'q';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(113)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5798"></A>LC_R&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'r';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(114)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5799"></A>LC_S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'s';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(115)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5800"></A>LC_T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'t';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(116)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5801"></A>LC_U&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'u';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(117)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5802"></A>LC_V&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'v';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(118)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5803"></A>LC_W&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'w';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(119)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5804"></A>LC_X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'x';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(120)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5805"></A>LC_Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'y';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(121)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5806"></A>LC_Z&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'z';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(122)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5807"></A>Left_Curly_Bracket&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'{';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(123)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5808"></A>Vertical_Line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'|';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(124)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5809"></A>Right_Curly_Bracket&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'}';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(125)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5810"></A>Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&#126;';&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Character'Val(126)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5811"></A>DEL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(127);</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;ISO&nbsp;6429&nbsp;control&nbsp;characters:</I></SPAN><A NAME="I5812"></A></div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5813"></A>IS4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;FS;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5814"></A>IS3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;GS;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5815"></A>IS2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;RS;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5816"></A>IS1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;US;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5817"></A>Reserved_128&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(128);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5818"></A>Reserved_129&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(129);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5819"></A>BPH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(130);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5820"></A>NBH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(131);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5821"></A>Reserved_132&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(132);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5822"></A>NEL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(133);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5823"></A>SSA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(134);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5824"></A>ESA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(135);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5825"></A>HTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(136);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5826"></A>HTJ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(137);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5827"></A>VTS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(138);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5828"></A>PLD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(139);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5829"></A>PLU&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(140);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5830"></A>RI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(141);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5831"></A>SS2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(142);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5832"></A>SS3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(143);</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5833"></A>DCS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(144);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5834"></A>PU1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(145);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5835"></A>PU2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(146);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5836"></A>STS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(147);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5837"></A>CCH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(148);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5838"></A>MW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(149);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5839"></A>SPA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(150);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5840"></A>EPA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(151);</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5841"></A>SOS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(152);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5842"></A>Reserved_153&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(153);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5843"></A>SCI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(154);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5844"></A>CSI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(155);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5845"></A>ST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(156);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5846"></A>OSC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(157);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5847"></A>PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(158);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5848"></A>APC&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(159);</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Other&nbsp;graphic&nbsp;characters:</I></SPAN></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Character&nbsp;positions&nbsp;160&nbsp;(16#A0#)&nbsp;..&nbsp;175&nbsp;(16#AF#):</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5849"></A>No_Break_Space&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&nbsp;';&nbsp;--<SPAN Class="roman"><I>Character'Val(160)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5850"></A>NBSP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;No_Break_Space;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5851"></A>Inverted_Exclamation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&iexcl;';&nbsp;--<SPAN Class="roman"><I>Character'Val(161)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5852"></A>Cent_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&cent;';&nbsp;--<SPAN Class="roman"><I>Character'Val(162)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5853"></A>Pound_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&pound;';&nbsp;--<SPAN Class="roman"><I>Character'Val(163)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5854"></A>Currency_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&curren;';&nbsp;--<SPAN Class="roman"><I>Character'Val(164)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5855"></A>Yen_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&yen;';&nbsp;--<SPAN Class="roman"><I>Character'Val(165)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5856"></A>Broken_Bar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&brvbar;';&nbsp;--<SPAN Class="roman"><I>Character'Val(166)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5857"></A>Section_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&sect;';&nbsp;--<SPAN Class="roman"><I>Character'Val(167)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5858"></A>Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&uml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(168)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5859"></A>Copyright_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&copy;';&nbsp;--<SPAN Class="roman"><I>Character'Val(169)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5860"></A>Feminine_Ordinal_Indicator&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ordf;';&nbsp;--<SPAN Class="roman"><I>Character'Val(170)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5861"></A>Left_Angle_Quotation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&laquo;';&nbsp;--<SPAN Class="roman"><I>Character'Val(171)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5862"></A>Not_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&not;';&nbsp;--<SPAN Class="roman"><I>Character'Val(172)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5863"></A>Soft_Hyphen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;Character'Val(173);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5864"></A>Registered_Trade_Mark_Sign&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&reg;';&nbsp;--<SPAN Class="roman"><I>Character'Val(174)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5865"></A>Macron&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&macr;';&nbsp;--<SPAN Class="roman"><I>Character'Val(175)</I></SPAN></div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Character&nbsp;positions&nbsp;176&nbsp;(16#B0#)&nbsp;..&nbsp;191&nbsp;(16#BF#):</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5866"></A>Degree_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&deg;';&nbsp;--<SPAN Class="roman"><I>Character'Val(176)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5867"></A>Ring_Above&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;Degree_Sign;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5868"></A>Plus_Minus_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&plusmn;';&nbsp;--<SPAN Class="roman"><I>Character'Val(177)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5869"></A>Superscript_Two&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&sup2;';&nbsp;--<SPAN Class="roman"><I>Character'Val(178)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5870"></A>Superscript_Three&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&sup3;';&nbsp;--<SPAN Class="roman"><I>Character'Val(179)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5871"></A>Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&acute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(180)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5872"></A>Micro_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&micro;';&nbsp;--<SPAN Class="roman"><I>Character'Val(181)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5873"></A>Pilcrow_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&para;';&nbsp;--<SPAN Class="roman"><I>Character'Val(182)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5874"></A>Paragraph_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;Pilcrow_Sign;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5875"></A>Middle_Dot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&middot;';&nbsp;--<SPAN Class="roman"><I>Character'Val(183)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5876"></A>Cedilla&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&cedil;';&nbsp;--<SPAN Class="roman"><I>Character'Val(184)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5877"></A>Superscript_One&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&sup1;';&nbsp;--<SPAN Class="roman"><I>Character'Val(185)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5878"></A>Masculine_Ordinal_Indicator:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ordm;';&nbsp;--<SPAN Class="roman"><I>Character'Val(186)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5879"></A>Right_Angle_Quotation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&raquo;';&nbsp;--<SPAN Class="roman"><I>Character'Val(187)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5880"></A>Fraction_One_Quarter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&frac14;';&nbsp;--<SPAN Class="roman"><I>Character'Val(188)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5881"></A>Fraction_One_Half&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&frac12;';&nbsp;--<SPAN Class="roman"><I>Character'Val(189)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5882"></A>Fraction_Three_Quarters&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&frac34;';&nbsp;--<SPAN Class="roman"><I>Character'Val(190)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5883"></A>Inverted_Question&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&iquest;';&nbsp;--<SPAN Class="roman"><I>Character'Val(191)</I></SPAN></div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Character&nbsp;positions&nbsp;192&nbsp;(16#C0#)&nbsp;..&nbsp;207&nbsp;(16#CF#):</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5884"></A>UC_A_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Agrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(192)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5885"></A>UC_A_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Aacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(193)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5886"></A>UC_A_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Acirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(194)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5887"></A>UC_A_Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Atilde;';&nbsp;--<SPAN Class="roman"><I>Character'Val(195)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5888"></A>UC_A_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Auml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(196)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5889"></A>UC_A_Ring&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Aring;';&nbsp;--<SPAN Class="roman"><I>Character'Val(197)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5890"></A>UC_AE_Diphthong&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&AElig;';&nbsp;--<SPAN Class="roman"><I>Character'Val(198)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5891"></A>UC_C_Cedilla&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ccedil;';&nbsp;--<SPAN Class="roman"><I>Character'Val(199)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5892"></A>UC_E_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Egrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(200)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5893"></A>UC_E_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Eacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(201)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5894"></A>UC_E_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ecirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(202)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5895"></A>UC_E_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Euml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(203)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5896"></A>UC_I_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Igrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(204)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5897"></A>UC_I_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Iacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(205)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5898"></A>UC_I_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Icirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(206)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5899"></A>UC_I_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Iuml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(207)</I></SPAN></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Character&nbsp;positions&nbsp;208&nbsp;(16#D0#)&nbsp;..&nbsp;223&nbsp;(16#DF#):</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5900"></A>UC_Icelandic_Eth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ETH;';&nbsp;--<SPAN Class="roman"><I>Character'Val(208)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5901"></A>UC_N_Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ntilde;';&nbsp;--<SPAN Class="roman"><I>Character'Val(209)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5902"></A>UC_O_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ograve;';&nbsp;--<SPAN Class="roman"><I>Character'Val(210)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5903"></A>UC_O_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Oacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(211)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5904"></A>UC_O_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ocirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(212)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5905"></A>UC_O_Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Otilde;';&nbsp;--<SPAN Class="roman"><I>Character'Val(213)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5906"></A>UC_O_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ouml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(214)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5907"></A>Multiplication_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&times;';&nbsp;--<SPAN Class="roman"><I>Character'Val(215)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5908"></A>UC_O_Oblique_Stroke&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Oslash;';&nbsp;--<SPAN Class="roman"><I>Character'Val(216)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5909"></A>UC_U_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ugrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(217)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5910"></A>UC_U_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Uacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(218)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5911"></A>UC_U_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Ucirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(219)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5912"></A>UC_U_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Uuml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(220)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5913"></A>UC_Y_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&Yacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(221)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5914"></A>UC_Icelandic_Thorn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&THORN;';&nbsp;--<SPAN Class="roman"><I>Character'Val(222)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5915"></A>LC_German_Sharp_S&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&szlig;';&nbsp;--<SPAN Class="roman"><I>Character'Val(223)</I></SPAN></div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Character&nbsp;positions&nbsp;224&nbsp;(16#E0#)&nbsp;..&nbsp;239&nbsp;(16#EF#):</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5916"></A>LC_A_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&agrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(224)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5917"></A>LC_A_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&aacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(225)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5918"></A>LC_A_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&acirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(226)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5919"></A>LC_A_Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&atilde;';&nbsp;--<SPAN Class="roman"><I>Character'Val(227)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5920"></A>LC_A_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&auml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(228)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5921"></A>LC_A_Ring&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&aring;';&nbsp;--<SPAN Class="roman"><I>Character'Val(229)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5922"></A>LC_AE_Diphthong&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&aelig;';&nbsp;--<SPAN Class="roman"><I>Character'Val(230)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5923"></A>LC_C_Cedilla&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ccedil;';&nbsp;--<SPAN Class="roman"><I>Character'Val(231)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5924"></A>LC_E_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&egrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(232)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5925"></A>LC_E_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&eacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(233)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5926"></A>LC_E_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ecirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(234)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5927"></A>LC_E_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&euml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(235)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5928"></A>LC_I_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&igrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(236)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5929"></A>LC_I_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&iacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(237)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5930"></A>LC_I_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&icirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(238)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5931"></A>LC_I_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&iuml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(239)</I></SPAN></div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;Character&nbsp;positions&nbsp;240&nbsp;(16#F0#)&nbsp;..&nbsp;255&nbsp;(16#FF#):</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5932"></A>LC_Icelandic_Eth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&eth;';&nbsp;--<SPAN Class="roman"><I>Character'Val(240)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5933"></A>LC_N_Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ntilde;';&nbsp;--<SPAN Class="roman"><I>Character'Val(241)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5934"></A>LC_O_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ograve;';&nbsp;--<SPAN Class="roman"><I>Character'Val(242)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5935"></A>LC_O_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&oacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(243)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5936"></A>LC_O_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ocirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(244)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5937"></A>LC_O_Tilde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&otilde;';&nbsp;--<SPAN Class="roman"><I>Character'Val(245)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5938"></A>LC_O_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ouml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(246)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5939"></A>Division_Sign&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&divide;';&nbsp;--<SPAN Class="roman"><I>Character'Val(247)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5940"></A>LC_O_Oblique_Stroke&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&oslash;';&nbsp;--<SPAN Class="roman"><I>Character'Val(248)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5941"></A>LC_U_Grave&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ugrave;';&nbsp;--<SPAN Class="roman"><I>Character'Val(249)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5942"></A>LC_U_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&uacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(250)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5943"></A>LC_U_Circumflex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&ucirc;';&nbsp;--<SPAN Class="roman"><I>Character'Val(251)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5944"></A>LC_U_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&uuml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(252)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5945"></A>LC_Y_Acute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&yacute;';&nbsp;--<SPAN Class="roman"><I>Character'Val(253)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5946"></A>LC_Icelandic_Thorn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&thorn;';&nbsp;--<SPAN Class="roman"><I>Character'Val(254)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5947"></A>LC_Y_Diaeresis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Character&nbsp;:=&nbsp;'&yuml;';&nbsp;--<SPAN Class="roman"><I>Character'Val(255)</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Characters.Latin_1;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">An implementation may provide additional packages 
+as children of Ada.Characters, to declare names for the symbols of the 
+local character set or other character sets.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-3-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

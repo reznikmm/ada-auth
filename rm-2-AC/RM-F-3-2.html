@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Edited Output Generation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Indented2Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 4.3em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>F.3.2 Edited Output Generation</H1>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The contents of an 
+edited output string are based on:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Bulleted">A value, Item, of some decimal type Num,</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">An expanded picture String Pic_String,</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">A Boolean value, Blank_When_Zero,</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">A Currency string,</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">A Fill character,</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">A Separator character, and</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">A Radix_Mark character.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The combination of a True value for Blank_When_Zero 
+and a '*' character in Pic_String is inconsistent; no edited output string 
+is defined.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">A layout error is identified in the rules below if 
+leading nonzero digits of Item, character values of the Currency string, 
+or a negative sign would be truncated; in such cases no edited output 
+string is defined.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">The edited output string has lower bound 1 and upper 
+bound N where N = Pic_String'Length + Currency_Length_Adjustment &ndash; 
+Radix_Adjustment, and&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">Currency_Length_Adjustment = Currency'Length &ndash; 
+1 if there is some occurrence of '$' in Pic_String, and 0 otherwise.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">Radix_Adjustment = 1 if there is an occurrence 
+of 'V' or 'v' in Pic_Str, and 0 otherwise.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7412"></A>Let 
+the magnitude of Item be expressed as a base-10 number I<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">p</SPAN></SPAN></SUB>&middot;&middot;&middot;I<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1</SPAN></SPAN></SUB>.F<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1</SPAN></SPAN></SUB>&middot;&middot;&middot;F<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">q</SPAN></SPAN></SUB>, 
+called the <I>displayed</I> <I>magnitude</I> of Item, where:&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">q = Min(Max(Num'Scale, 0), n) where n is 0 if Pic_String 
+has no <SPAN Class="swiss">radix</SPAN> and is otherwise the number of 
+digit positions following <SPAN Class="swiss">radix</SPAN> in Pic_String, 
+where a digit position corresponds to an occurrence of '9', a <SPAN Class="swiss">zero_suppression_char</SPAN> 
+(for an <SPAN Class="swiss">all_zero_suppression_number</SPAN>), a <SPAN Class="swiss">currency_char</SPAN> 
+(for an <SPAN Class="swiss">all_currency_number</SPAN>), or a <SPAN Class="swiss">sign_char</SPAN> 
+(for an <SPAN Class="swiss">all_sign_number</SPAN>).</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">I<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">p</SPAN></SPAN></SUB> 
+/= 0 if p&gt;0.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">If n &lt; Num'Scale, then the above number is the 
+result of rounding (away from 0 if exactly midway between values).</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">If Blank_When_Zero = True and the displayed magnitude 
+of Item is zero, then the edited output string comprises all space character 
+values. Otherwise, the picture String is treated as a sequence of instances 
+of syntactic categories based on the rules in <A HREF="RM-F-3-1.html">F.3.1</A>, 
+and the edited output string is the concatenation of string values derived 
+from these categories according to the following mapping rules.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">Table F-1 shows the mapping from a sign control symbol 
+to a corresponding character or string in the edited output. In the columns 
+showing the edited output, a lower-case 'b' represents the space character. 
+If there is no sign control symbol but the value of Item is negative, 
+a layout error occurs and no edited output string is produced.</div>
+<div class="Indented1"><TABLE frame="border" rules="all" border="2" cellpadding="4"><CAPTION><B>Table F-1: Edited Output for Sign Control Symbols</B></CAPTION>
+<TR><TH align="center"><B>Sign Control Symbol</B><TH align="center"><B>Edited 
+Output for <BR>
+Nonnegative Number</B><TH align="center"><B>Edited Output for <BR>
+Negative Number</B>
+<TR><TD align="center">'+'<TD align="center">'+'<TD align="center">'&ndash;'
+<TR><TD align="center">'&ndash;'<TD align="center">'b'<TD align="center">'&ndash;'
+<TR><TD align="center">'&lt;'<TD align="center">'b'<TD align="center">'('
+<TR><TD align="center">'&gt;'<TD align="center">'b'<TD align="center">')'
+<TR><TD align="center">&quot;CR&quot;<TD align="center">&quot;bb&quot;<TD align="center">&quot;CR&quot;
+<TR><TD align="center">&quot;DB&quot;<TD align="center">&quot;bb&quot;<TD align="center">&quot;DB&quot;
+</table></div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">An instance of <SPAN Class="swiss">fixed_LHS_sign</SPAN> 
+maps to a character as shown in Table F-1.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">An instance of <SPAN Class="swiss">fixed_$_char</SPAN> 
+maps to Currency.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">An instance of <SPAN Class="swiss">direct_insertion</SPAN> 
+maps to Separator if <SPAN Class="swiss">direct_insertion</SPAN> = '_', 
+and to the <SPAN Class="swiss">direct_insertion</SPAN> Character otherwise.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">number</SPAN> 
+maps to a string <I>integer_part</I> &amp; <I>radix_part</I> &amp; <I>fraction_part</I> 
+where:&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">The string for <I>integer_part</I> is obtained 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Indented2Enumerated-Term">1.</div><div class="Indented2Enumerated-Body">
+Occurrences of '9' in <SPAN Class="swiss">fore_digits</SPAN> of <SPAN Class="swiss">number</SPAN> 
+are replaced from right to left with the decimal digit character values 
+for I<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1</SPAN></SPAN></SUB>, 
+..., I<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">p</SPAN></SPAN></SUB>, 
+respectively.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented2Enumerated-Term">2.</div><div class="Indented2Enumerated-Body">
+Each occurrence of '9' in <SPAN Class="swiss">fore_digits</SPAN> to the 
+left of the leftmost '9' replaced according to rule 1 is replaced with 
+'0'.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Indented2Enumerated-Term">3.</div><div class="Indented2Enumerated-Body">
+If p exceeds the number of occurrences of '9' in <SPAN Class="swiss">fore_digits</SPAN> 
+of <SPAN Class="swiss">number</SPAN>, then the excess leftmost digits 
+are eligible for use in the mapping of an instance of <SPAN Class="swiss">zero_suppression</SPAN>, 
+<SPAN Class="swiss">floating_LHS_sign</SPAN>, <SPAN Class="swiss">floating_$_currency</SPAN>, 
+or <SPAN Class="swiss">floating_#_currency</SPAN> to the left of <SPAN Class="swiss">number</SPAN>; 
+if there is no such instance, then a layout error occurs and no edited 
+output string is produced.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">The <I>radix_part</I> 
+is:&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Indented2NestedBulleted">&quot;&quot; if <SPAN Class="swiss">number</SPAN> 
+does not include a <SPAN Class="swiss">radix</SPAN>, if <SPAN Class="swiss">radix</SPAN> 
+= 'V', or if <SPAN Class="swiss">radix</SPAN> = 'v'</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Indented2NestedBulleted">Radix_Mark if <SPAN Class="swiss">number</SPAN> 
+includes '.' as <SPAN Class="swiss">radix</SPAN>&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">The string for <I>fraction_part</I> 
+is obtained as follows:&nbsp;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Indented2Enumerated-Term">1.</div><div class="Indented2Enumerated-Body">
+Occurrences of '9' in <SPAN Class="swiss">aft_digits</SPAN> of <SPAN Class="swiss">number</SPAN> 
+are replaced from left to right with the decimal digit character values 
+for F<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1</SPAN></SPAN></SUB>, 
+... F<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">q</SPAN></SPAN></SUB>.</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Indented2Enumerated-Term">2.</div><div class="Indented2Enumerated-Body">
+Each occurrence of '9' in <SPAN Class="swiss">aft_digits</SPAN> to the 
+right of the rightmost '9' replaced according to rule 1 is replaced by 
+'0'.&nbsp;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">zero_suppression</SPAN> 
+maps to the string obtained as follows:&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+The rightmost 'Z', 'z', or '*' Character values are replaced with the 
+excess digits (if any) from the <I>integer_part</I> of the mapping of 
+the <SPAN Class="swiss">number</SPAN> to the right of the <SPAN Class="swiss">zero_suppression</SPAN> 
+instance,</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
+A <SPAN Class="swiss">context_sensitive_insertion</SPAN> Character is 
+replaced as though it were a <SPAN Class="swiss">direct_insertion</SPAN> 
+Character, if it occurs to the right of some 'Z', 'z', or '*' in <SPAN Class="swiss">zero_suppression</SPAN> 
+that has been mapped to an excess digit,</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Enumerated-Term" style="margin-bottom: 0.3em">3.</div><div class="Enumerated-Body">
+Each Character to the left of the leftmost Character replaced according 
+to rule 1 above is replaced by:&nbsp;</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Indented2NestedBulleted">the space character if the zero 
+suppression Character is 'Z' or 'z', or</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Indented2NestedBulleted">the Fill character if the zero suppression 
+Character is '*'.&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Enumerated-Term">4.</div><div class="Enumerated-Body">
+A layout error occurs if some excess digits remain after all 'Z', 'z', 
+and '*' Character values in <SPAN Class="swiss">zero_suppression</SPAN> 
+have been replaced via rule 1; no edited output string is produced.&nbsp;</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Normal">An instance of <SPAN Class="swiss">RHS_sign</SPAN> 
+maps to a character or string as shown in Table F-1.</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Normal">An instance of <SPAN Class="swiss">floating_LHS_sign</SPAN> 
+maps to the string obtained as follows.&nbsp;</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+Up to all but one of the rightmost <SPAN Class="swiss">LHS_Sign</SPAN> 
+Character values are replaced by the excess digits (if any) from the 
+<I>integer_part</I> of the mapping of the <SPAN Class="swiss">number</SPAN> 
+to the right of the <SPAN Class="swiss">floating_LHS_sign</SPAN> instance.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
+The next Character to the left is replaced with the character given by 
+the entry in Table F-1 corresponding to the <SPAN Class="swiss">LHS_Sign</SPAN> 
+Character.</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
+A <SPAN Class="swiss">context_sensitive_insertion</SPAN> Character is 
+replaced as though it were a <SPAN Class="swiss">direct_insertion</SPAN> 
+Character, if it occurs to the right of the leftmost <SPAN Class="swiss">LHS_Sign</SPAN> 
+character replaced according to rule 1.</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Enumerated-Term">4.</div><div class="Enumerated-Body">
+Any other Character is replaced by the space character..</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Enumerated-Term">5.</div><div class="Enumerated-Body">
+A layout error occurs if some excess digits remain after replacement 
+via rule 1; no edited output string is produced.&nbsp;</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Normal">An instance of <SPAN Class="swiss">fixed_#_currency</SPAN> 
+maps to the Currency string with n space character values concatenated 
+on the left (if the instance does not follow a <SPAN Class="swiss">radix</SPAN>) 
+or on the right (if the instance does follow a <SPAN Class="swiss">radix</SPAN>), 
+where n is the difference between the length of the <SPAN Class="swiss">fixed_#_currency</SPAN> 
+instance and Currency'Length. A layout error occurs if Currency'Length 
+exceeds the length of the <SPAN Class="swiss">fixed_#_currency</SPAN> 
+instance; no edited output string is produced.</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">floating_$_currency</SPAN> 
+maps to the string obtained as follows:&nbsp;</div>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+Up to all but one of the rightmost '$' Character values are replaced 
+with the excess digits (if any) from the <I>integer_part</I> of the mapping 
+of the <SPAN Class="swiss">number</SPAN> to the right of the <SPAN Class="swiss">floating_$_currency</SPAN> 
+instance.</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
+The next Character to the left is replaced by the Currency string.</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
+A <SPAN Class="swiss">context_sensitive_insertion</SPAN> Character is 
+replaced as though it were a <SPAN Class="swiss">direct_insertion</SPAN> 
+Character, if it occurs to the right of the leftmost '$' Character replaced 
+via rule 1.</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="Enumerated-Term">4.</div><div class="Enumerated-Body">
+Each other Character is replaced by the space character.</div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Enumerated-Term">5.</div><div class="Enumerated-Body">
+A layout error occurs if some excess digits remain after replacement 
+by rule 1; no edited output string is produced.&nbsp;</div>
+<div class="paranum"><a name="p55">55</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">floating_#_currency</SPAN> 
+maps to the string obtained as follows:&nbsp;</div>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+Up to all but one of the rightmost '#' Character values are replaced 
+with the excess digits (if any) from the <I>integer_part</I> of the mapping 
+of the <SPAN Class="swiss">number</SPAN> to the right of the <SPAN Class="swiss">floating_#_currency</SPAN> 
+instance.</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
+The substring whose last Character occurs at the position immediately 
+preceding the leftmost Character replaced via rule 1, and whose length 
+is Currency'Length, is replaced by the Currency string.</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
+A <SPAN Class="swiss">context_sensitive_insertion</SPAN> Character is 
+replaced as though it were a <SPAN Class="swiss">direct_insertion</SPAN> 
+Character, if it occurs to the right of the leftmost '#' replaced via 
+rule 1.</div>
+<div class="paranum"><a name="p59">59</a></div>
+<div class="Enumerated-Term">4.</div><div class="Enumerated-Body">
+Any other Character is replaced by the space character.</div>
+<div class="paranum"><a name="p60">60</a></div>
+<div class="Enumerated-Term">5.</div><div class="Enumerated-Body">
+A layout error occurs if some excess digits remain after replacement 
+rule 1, or if there is no substring with the required length for replacement 
+rule 2; no edited output string is produced.&nbsp;</div>
+<div class="paranum"><a name="p61">61</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">all_zero_suppression_number</SPAN> 
+maps to:&nbsp;</div>
+<div class="paranum"><a name="p62">62</a></div>
+<div class="Bulleted">a string of all spaces if the displayed magnitude 
+of Item is zero, the <SPAN Class="swiss">zero_suppression_char</SPAN> 
+is 'Z' or 'z', and the instance of <SPAN Class="swiss">all_zero_suppression_number</SPAN> 
+does not have a <SPAN Class="swiss">radix</SPAN> at its last character 
+position;</div>
+<div class="paranum"><a name="p63">63</a></div>
+<div class="Bulleted">a string containing the Fill character in each 
+position except for the character (if any) corresponding to <SPAN Class="swiss">radix</SPAN>, 
+if <SPAN Class="swiss">zero_suppression_char</SPAN> = '*' and the displayed 
+magnitude of Item is zero;</div>
+<div class="paranum"><a name="p64">64</a></div>
+<div class="Bulleted">otherwise, the same result as if each <SPAN Class="swiss">zero_suppression_char</SPAN> 
+in <SPAN Class="swiss">all_zero_suppression_aft</SPAN> were '9', interpreting 
+the instance of <SPAN Class="swiss">all_zero_suppression_number</SPAN> 
+as either <SPAN Class="swiss">zero_suppression</SPAN> <SPAN Class="swiss">number</SPAN> 
+(if a <SPAN Class="swiss">radix</SPAN> and <SPAN Class="swiss">all_zero_suppression_aft</SPAN> 
+are present), or as <SPAN Class="swiss">zero_suppression</SPAN> otherwise. 
+</div>
+<div class="paranum"><a name="p65">65</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">all_sign_number</SPAN> 
+maps to:&nbsp;</div>
+<div class="paranum"><a name="p66">66</a></div>
+<div class="Bulleted">a string of all spaces if the displayed magnitude 
+of Item is zero and the instance of <SPAN Class="swiss">all_sign_number</SPAN> 
+does not have a <SPAN Class="swiss">radix</SPAN> at its last character 
+position;</div>
+<div class="paranum"><a name="p67">67</a></div>
+<div class="Bulleted">otherwise, the same result as if each <SPAN Class="swiss">sign_char</SPAN> 
+in <SPAN Class="swiss">all_sign_number_aft</SPAN> were '9', interpreting 
+the instance of <SPAN Class="swiss">all_sign_number</SPAN> as either 
+<SPAN Class="swiss">floating_LHS_sign</SPAN> <SPAN Class="swiss">number</SPAN> 
+(if a <SPAN Class="swiss">radix</SPAN> and <SPAN Class="swiss">all_sign_number_aft</SPAN> 
+are present), or as <SPAN Class="swiss">floating_LHS_sign</SPAN> otherwise. 
+</div>
+<div class="paranum"><a name="p68">68</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An instance of <SPAN Class="swiss">all_currency_number</SPAN> 
+maps to:&nbsp;</div>
+<div class="paranum"><a name="p69">69</a></div>
+<div class="Bulleted">a string of all spaces if the displayed magnitude 
+of Item is zero and the instance of <SPAN Class="swiss">all_currency_number</SPAN> 
+does not have a <SPAN Class="swiss">radix</SPAN> at its last character 
+position;</div>
+<div class="paranum"><a name="p70">70</a></div>
+<div class="Bulleted">otherwise, the same result as if each <SPAN Class="swiss">currency_char</SPAN> 
+in <SPAN Class="swiss">all_currency_number_aft</SPAN> were '9', interpreting 
+the instance of <SPAN Class="swiss">all_currency_number</SPAN> as <SPAN Class="swiss">floating_$_currency</SPAN> 
+<SPAN Class="swiss">number</SPAN> or <SPAN Class="swiss">floating_#_currency</SPAN> 
+<SPAN Class="swiss">number</SPAN> (if a <SPAN Class="swiss">radix</SPAN> 
+and <SPAN Class="swiss">all_currency_number_aft</SPAN> are present), 
+or as <SPAN Class="swiss">floating_$_currency</SPAN> or <SPAN Class="swiss">floating_#_currency</SPAN> 
+otherwise.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p71">71</a></div>
+<div class="Normal">In the result string values shown below, 'b' represents 
+the space character.&nbsp;</div>
+<div class="paranum"><a name="p72">72</a></div>
+<div class="Examples">Item:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Picture&nbsp;and&nbsp;Result&nbsp;Strings:</div>
+<div class="paranum"><a name="p73">73</a></div>
+<div class="Examples">123456.78&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Picture:&nbsp;&nbsp;&quot;-###**_***_**9.99&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert1">Result:</span><span class="delete1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&quot;bbb$***123,456.78&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;bbFF***123.456,78&quot;&nbsp;(currency&nbsp;=&nbsp;&quot;FF&quot;,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separator&nbsp;=&nbsp;'.',<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;radix&nbsp;mark&nbsp;=&nbsp;',')</div>
+<div class="paranum"><a name="p74">74/1</a></div>
+<div class="Examples">123456.78&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Picture:&nbsp;&nbsp;&quot;-<span class="delete1">$$</span>$**_***_**9.99&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result:&nbsp;&nbsp;&nbsp;&quot;<span class="delete1">bb</span>b$***123,456.78&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;b<span class="delete1">bb</span>FF***123.456,78&quot;&nbsp;(currency&nbsp;=&nbsp;&quot;FF&quot;,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="delete1">&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separator&nbsp;=&nbsp;'.',<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="delete1">&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;radix&nbsp;mark&nbsp;=&nbsp;',')</div>
+<div class="paranum"><a name="p75">75</a></div>
+<div class="Examples">0.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Picture:&nbsp;&quot;-$$$$$$.$$&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result:&nbsp;&nbsp;&quot;bbbbbbbbbb&quot;</div>
+<div class="paranum"><a name="p76">76</a></div>
+<div class="Examples">0.20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Picture:&nbsp;&quot;-$$$$$$.$$&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result:&nbsp;&nbsp;&quot;bbbbbb$.20&quot;</div>
+<div class="paranum"><a name="p77">77</a></div>
+<div class="Examples">-1234.565&nbsp;&nbsp;&nbsp;&nbsp;Picture:&nbsp;&quot;&lt;&lt;&lt;&lt;_&lt;&lt;&lt;.&lt;&lt;###&gt;&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result:&nbsp;&nbsp;&quot;bb(1,234.57DMb)&quot;&nbsp;&nbsp;(currency&nbsp;=&nbsp;&quot;DM&quot;)</div>
+<div class="paranum"><a name="p78">78</a></div>
+<div class="Examples">12345.67&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Picture:&nbsp;&quot;###_###_##9.99&quot;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result:&nbsp;&nbsp;&quot;bbCHF12,345.67&quot;&nbsp;&nbsp;&nbsp;(currency&nbsp;=&nbsp;&quot;CHF&quot;)</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

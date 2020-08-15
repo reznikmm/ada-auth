@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Execution Time Timers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-14-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.14.1 <span class="insert2">Execution Time Timers</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">This clause describes a language-defined package 
+that provides a facility for calling a handler when a task has used a 
+defined amount of CPU time.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The following language-defined library package 
+exists:</span>&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples"><span class="insert2"><B>with</B>&nbsp;System;<BR>
+<B>package</B>&nbsp;Ada.Execution_Time.Timers&nbsp;<B>is</B><A NAME="I7705"></A></span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7706"></A>Timer&nbsp;(T&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>tagged&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7707"></A>Timer_Handler&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access&nbsp;protected&nbsp;procedure</B>&nbsp;(TM&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer);</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I7708"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7709"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timer_Handler);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7710"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Time&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Time;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timer_Handler);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7711"></A>Current_Handler&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Timer_Handler;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7712"></A>Cancel_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7713"></A>Time_Remaining&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Time_Span;</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I7714"></A>Timer_Resource_Error&nbsp;:&nbsp;<B>exception</B>;</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><span class="insert2"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Execution_Time.Timers;</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The type Timer represents an execution-time event 
+for a single task and is capable of detecting execution-time overruns. 
+The access discriminant T identifies the task concerned. The type Timer 
+needs finalization (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">An object of type Timer is said to be <I>set</I> 
+if it is associated with a nonnull value of type Timer_Handler and <I>cleared</I> 
+otherwise. All Timer objects are initially cleared. <A NAME="I7715"></A><A NAME="I7716"></A></span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The type Timer_Handler identifies a protected procedure 
+to be executed by the implementation when the timer expires. Such a protected 
+procedure is called a <I>handler</I>. <A NAME="I7717"></A></span></div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>Type 
+Timer is tagged. This makes it possible to share a handler between several 
+events. In simple cases, 'Access can be used to compare the parameter 
+with a specific timer object (this works because a tagged type is a by-reference 
+type). In more complex cases, a type extension of type Timer can be declared; 
+a double type conversion can be used to access the extension data. An 
+example of how this can be done can be found for the similar type Timing_Event, 
+see <A HREF="AA-D-15.html">D.15</A>.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">When a Timer object is created, or upon the first 
+call of a Set_Handler procedure with the timer as parameter, the resources 
+required to operate an execution-time timer based on the associated execution-time 
+clock are allocated and initialized. If this operation would exceed the 
+available resources, Timer_Resource_Error is raised.</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The procedures Set_Handler associate the handler 
+Handler with the timer TM; if Handler is <B>null</B>, the timer is cleared, 
+otherwise it is set. The first procedure Set_Handler loads the timer 
+TM with an interval specified by the Time_Span parameter. In this mode, 
+the timer TM <I>expires</I> when the execution time of the task identified 
+by TM.T.<B>all</B> has increased by In_Time; if In_Time is less than 
+or equal to zero, the timer expires immediately. The second procedure 
+Set_Handler loads the timer TM with the absolute value specified by At_Time. 
+In this mode, the timer TM expires when the execution time of the task 
+identified by TM.T.<B>all</B> reaches At_Time; if the value of At_Time 
+has already been reached when Set_Handler is called, the timer expires 
+immediately.<A NAME="I7718"></A></span></div>
+<div class="paranum"><a name="p15.a">15.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Note: 
+</B>Since an access-to-constant can designate a variable, the Task_Id 
+value designated by the discriminant of a Timer object can be changed 
+after the object is created. Thus, an implementation cannot use the value 
+of the Task_Id other than where this Standard specifies. For instance, 
+the Task_Id should be read when the timer is set, but it should not be 
+used when the timer expires (as it may designate a different task at 
+that point).</span>&nbsp;</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">A call of a procedure Set_Handler for a timer that 
+is already set replaces the handler and the (absolute or relative) execution 
+time; if Handler is not <B>null</B>, the timer remains set.</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">When a timer expires, the associated handler is 
+executed, passing the timer as parameter. The initial action of the execution 
+of the handler is to clear the event.</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The function Current_Handler returns the handler 
+associated with the timer TM if that timer is set; otherwise it returns 
+<B>null</B>.</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The procedure Cancel_Handler clears the timer if 
+it is set. Cancelled is assigned True if the timer was set prior to it 
+being cleared; otherwise it is assigned False.</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The function Time_Remaining returns the execution 
+time interval that remains until the timer TM would expire, if that timer 
+is set; otherwise it returns Time_Span_Zero.</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">The constant Min_Handler_Ceiling is the minimum 
+ceiling priority required for a protected object with a handler to ensure 
+that no ceiling violation will occur when that handler is invoked.</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">As part of the finalization of an object of type 
+Timer, the timer is cleared.</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">For all the subprograms defined in this package, 
+Tasking_Error is raised if the task identified by TM.T.<B>all</B> has 
+terminated, and Program_Error is raised if the value of TM.T.<B>all</B> 
+is Task_Identification.Null_Task_Id.</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">An exception propagated from a handler invoked 
+as part of the expiration of a timer has no effect.</span></div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2"><A NAME="I7719"></A>For a call of any of the subprograms 
+defined in this package, if the task identified by TM.T.<B>all</B> no 
+longer exists, the execution of the program is erroneous.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">For a given Timer object, the implementation shall 
+perform the operations declared in this package atomically with respect 
+to any of these operations on the same Timer object. The replacement 
+of a handler by a call of Set_Handler shall be performed atomically with 
+respect to the execution of the handler.</span></div>
+<div class="paranum"><a name="p26.a">26.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This prevents 
+various race conditions. In particular it ensures that if an event occurs 
+when Set_Handler is changing the handler then either the new or old handler 
+is executed in response to the appropriate event. It is never possible 
+for a new handler to be executed in response to an old event</span>&nbsp;</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">When an object of type Timer is finalized, the 
+system resources used by the timer shall be deallocated.</span></div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">Implementations may limit the number of timers 
+that can be defined for each task. If this limit is exceeded then Timer_Resource_Error 
+is raised.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Notes">45&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2">A Timer_Handler can be associated with several 
+Timer objects.</span></div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p29.a">29.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00307.TXT">AI95-00307-01</A></I>} 
+<span class="insert2"><A NAME="I7720"></A>The package Execution_Time.Timers 
+is new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-14-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

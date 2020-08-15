@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Subtype Predicates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2.4 <span class="insert3">Subtype Predicates</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><span class="insert3">The language-defined <I>predicate 
+aspects</I> Static_Predicate and Dynamic_Predicate may be used to define 
+properties of subtypes. A <I>predicate specification</I> is an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN> 
+for one of the two predicate aspects.<A NAME="I1484"></A><A NAME="I1485"></A><A NAME="I1486"></A><A NAME="I1487"></A><A NAME="I1488"></A><A NAME="I1489"></A><A NAME="I1490"></A> 
+General rules for aspects and <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN>s 
+are found in Clause</span><span class="insert3"><span class="delete3">&nbsp;Section</span></span><span class="insert3">&nbsp;<A HREF="RM-13.html">13</A> (<A HREF="RM-13-1.html">13.1</A> and <A HREF="RM-13-1-1.html">13.1.1</A> 
+respectively).</span>&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal"><span class="insert3">The expected type for a predicate 
+aspect <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is any boolean type.<A NAME="I1491"></A></span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">A 
+predicate specification may be given on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN>, 
+and applies to the declared subtype. In addition, predicate specifications 
+apply to certain other subtypes:</span>&nbsp;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Bulleted"><span class="insert3">For a (first) subtype defined 
+by a derived type declaration, the predicates of the parent subtype and 
+the progenitor subtypes apply.</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Bulleted"><span class="insert3">For a subtype created by 
+a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
+the predicate of the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+applies.</span>&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><span class="insert3">The <I>predicate</I> of a subtype 
+consists of all predicate specifications that apply, and-ed together; 
+if no predicate specifications apply, the predicate is True (in particular, 
+the predicate of a base subtype is True).<A NAME="I1492"></A></span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">Predicate 
+checks are defined to be <I>enabled</I> or <I>disabled</I> for a given 
+subtype as follows:<A NAME="I1493"></A><A NAME="I1494"></A><A NAME="I1495"></A></span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">If 
+a subtype is declared by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
+that includes a predicate specification, then:</span>&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Indented2Bulleted"><span class="insert3">if performing checks 
+is required by the Static_Predicate assertion policy (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
+and the declaration includes a Static_Predicate specification, then predicate 
+checks are enabled for the subtype;</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Indented2Bulleted"><span class="insert3">if performing checks 
+is required by the Dynamic_Predicate assertion policy (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
+and the declaration includes a Dynamic_Predicate specification, then 
+predicate checks are enabled for the subtype;</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Indented2Bulleted"><span class="insert3">otherwise, predicate 
+checks are disabled for the subtype, regardless of whether predicate 
+checking is enabled for any other subtypes mentioned in the declaration;</span> 
+</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Bulleted"><span class="insert3">If a subtype is defined by 
+a derived type declaration that does not include a predicate specification, 
+then predicate checks are enabled for the subtype if and only if predicate 
+checks are enabled for at least one of the parent subtype and the progenitor 
+subtypes;</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted"><span class="insert3">If a subtype is created by 
+a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+other than in one of the previous cases, then predicate checks are enabled 
+for the subtype if and only if predicate checks are enabled for the subtype 
+denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>;</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted"><span class="insert3">Otherwise, predicate checks 
+are disabled for the given subtype.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a Static_Predicate specification shall be <I>predicate-static</I>; 
+that is, one of the following:<A NAME="I1496"></A><A NAME="I1497"></A></span> 
+</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Bulleted"><span class="insert3">a static expression;</span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Bulleted"><span class="insert3">a membership test whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN> 
+is the current instance, and whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0121">membership_choice_list</A></SPAN> 
+meets the requirements for a static membership test (see <A HREF="RM-4-9.html">4.9</A>);</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Bulleted"><span class="insert3">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0136">case_expression</A></SPAN> 
+whose <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is the current instance, and whose <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
+are static expressions;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Bulleted"><span class="insert3">a call to a predefined equality 
+or ordering operator, where one operand is the current instance, and 
+the other is a static expression;</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Bulleted"><span class="insert3">a call to a predefined boolean 
+logical operator, where each operand is predicate-static;</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Bulleted"><span class="insert3">a short-circuit control form 
+where both operands are predicate-static; or</span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Bulleted"><span class="insert3">a parenthesized predicate-static 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Normal"><span class="insert3">A predicate shall not be specified 
+for an incomplete subtype.</span></div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Normal"><span class="insert3">If a predicate applies to a 
+subtype, then that predicate shall not mention any other subtype to which 
+the same predicate applies.</span></div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Normal"><span class="insert3">An index subtype, <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1-2.html#S0097">slice</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0054">constrained_array_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0224">entry_index_specification</A></SPAN> 
+shall not denote a subtype to which predicate specifications apply.</span></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is First, Last, or Range shall not denote a scalar subtype to which predicate 
+specifications apply.</span></div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0158">loop_parameter_specification</A></SPAN> 
+shall not denote a nonstatic subtype to which predicate specifications 
+apply or any subtype to which Dynamic_Predicate specifications apply.</span></div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal"><span class="insert3">The <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0115">named_array_aggregate</A></SPAN> 
+shall not denote a nonstatic subtype to which predicate specifications 
+apply.</span></div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Normal"><span class="insert3">In addition to the places where 
+Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.<A NAME="I1498"></A></span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">If 
+predicate checks are enabled for a given subtype, then:</span>&nbsp;</div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Indented2"><span class="insert3">On every subtype conversion, 
+the predicate of the target subtype is evaluated, and a check is performed 
+that the predicate is True. This includes all parameter passing, except 
+for certain parameters passed by reference, which are covered by the 
+following rule:  After normal completion and leaving of a subprogram, 
+for each <B>in out</B> or <B>out</B> parameter that is passed by reference, 
+the predicate of the subtype of the actual is evaluated, and a check 
+is performed that the predicate is True. For an object created by an 
+<SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+with no explicit initialization <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+or by an uninitialized <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>, 
+if any subcomponents have <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s, 
+the predicate of the nominal subtype of the created object is evaluated, 
+and a check is performed that the predicate is True. Assertions.Assertion_Error 
+is raised if any of these checks fail.<A NAME="I1499"></A><A NAME="I1500"></A><A NAME="I1501"></A><A NAME="I1502"></A><A NAME="I1503"></A></span></div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Normal"><span class="insert3">A value <I>satisfies</I> a 
+predicate if the predicate is True for that value.<A NAME="I1504"></A></span></div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Normal"><span class="insert3">If any of the above Legality 
+Rules is violated in an instance of a generic unit, Program_Error is 
+raised at the point of the violation.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Notes">5&nbsp;&nbsp;<span class="insert3">A predicate specification 
+does not cause a subtype to be considered constrained.</span></div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Notes">6&nbsp;&nbsp;<span class="insert3">A Static_Predicate, 
+like a constraint, always remains True for all objects of the subtype, 
+except in the case of uninitialized variables and other invalid values. 
+A Dynamic_Predicate, on the other hand, is checked as specified above, 
+but can become False at other times. For example, the predicate of a 
+record subtype is not checked when a subcomponent is modified.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

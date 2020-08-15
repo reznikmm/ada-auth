@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragma Inspection_Point</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>H.3.2 Pragma Inspection_Point</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">An occurrence of a pragma Inspection_Point identifies 
+a set of objects each of whose values is to be available at the point(s) 
+during program execution corresponding to the position of the pragma 
+in the compilation unit. The purpose of such a pragma is to facilitate 
+code validation.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Inspection points are a high 
+level equivalent of break points used by debuggers.</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Inspection_Point is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7944"></A><A NAME="I7945"></A>Inspection_Point[(<I>object_</I><A NAME="I7946"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+{, <I>object_</I><A NAME="I7947"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>})]; 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">A pragma Inspection_Point is allowed wherever a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0131">statement</A></SPAN> 
+is allowed. Each <I>object_</I>name shall statically denote the declaration 
+of an object.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The static denotation is 
+required, since no dynamic evaluation of a name is involved in this pragma.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0093">8652/0093</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00207.TXT">AI95-00207-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+<A NAME="I7948"></A>An <I>inspection point</I> is a point in the object 
+code corresponding to the occurrence of a pragma Inspection_Point in 
+the compilation unit. <A NAME="I7949"></A>An object is <I>inspectable</I> 
+at an inspection point if the corresponding pragma Inspection_Point either 
+has an argument denoting that object, or has no arguments and the declaration 
+of the object is visible at the inspection point.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If a pragma Inspection_Point 
+is in an in-lined subprogram, there might be numerous inspection points 
+in the object code corresponding to the single occurrence of the pragma 
+in the source; similar considerations apply if such a pragma is in a 
+generic, or in a loop that has been &ldquo;unrolled&rdquo; by an optimizer.</div>
+<div class="paranum"><a name="p5.a.1">5.a.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0093">8652/0093</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00207.TXT">AI95-00207-01</A></I>} 
+The short form of the pragma is a convenient shorthand for listing all 
+objects which could be explicitly made inspectable by the long form of 
+the pragma; thus only visible objects are made inspectable by it. Objects 
+that are not visible at the point of the pragma are not made inspectable 
+by the short form pragma. This is necessary so that implementations need 
+not keep information about (or prevent optimizations on) a unit simply 
+because some other unit <I>might</I> contain a short form Inspection_Point 
+pragma.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b/1</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="defect1.html#8652/0093">8652/0093</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00207.TXT">AI95-00207-01</A></I>} 
+If the short form of the pragma is used, then all visible objects are 
+inspectable. This implies that global objects from other compilation 
+units are inspectable. A good interactive debugging system could provide 
+information similar to a post-mortem dump at such inspection points. 
+The annex does not require that any inspection facility is provided, 
+merely that the information is available to understand the state of the 
+machine at those points.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">Execution of a pragma Inspection_Point has no effect. 
+</div>
+<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+Although an inspection point has no (semantic) effect, the removal or 
+adding of a new point could change the machine code generated by the 
+compiler.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">Reaching an inspection point is an external interaction 
+with respect to the values of the inspectable objects at that point (see 
+<A HREF="AA-1-1-3.html">1.1.3</A>).&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The compiler is inhibited 
+from moving an assignment to an inspectable variable past an inspection 
+point for that variable. On the other hand, the evaluation of an expression 
+that might raise an exception may be moved past an inspection point (see 
+<A HREF="AA-11-6.html">11.6</A>).</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">For each inspection point, the implementation shall 
+identify a mapping between each inspectable object and the machine resources 
+(such as memory locations or registers) from which the object's value 
+can be obtained.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p8.b">8.b/2</a></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>For each inspection 
+point, a mapping between each inspectable object and the machine resources 
+where the object's value can be obtained shall be provided.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00209.TXT">AI95-00209-01</A></I>} 
+The implementation is not allowed to perform &ldquo;dead store elimination&rdquo; 
+on the last assignment to a variable prior to a point where the variable 
+is inspectable. Thus an inspection point has the effect of an implicit 
+read of each of its inspectable objects.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">8&nbsp;&nbsp;Inspection points are useful in maintaining 
+a correspondence between the state of the program in source code terms, 
+and the machine state during the program's execution. Assertions about 
+the values of program objects can be tested in machine terms at inspection 
+points. Object code between inspection points can be processed by automated 
+tools to verify programs mechanically.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Although it is not a requirement 
+of the annex, it would be useful if the state of the stack and heap could 
+be interrogated. This would allow users to check that a program did not 
+have a `storage leak'.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">9&nbsp;&nbsp;The identification of the mapping from 
+source program objects to machine resources is allowed to be in the form 
+of an annotated object listing, in human-readable or tool-processable 
+form.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In principle, it is easy 
+to check an implementation for this pragma, since one merely needs to 
+check the content of objects against those values known from the source 
+listing. In practice, one needs a tool similar to an interactive debugger 
+to perform the check.</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p11.b">11.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0093">8652/0093</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00207.TXT">AI95-00207-01</A></I>} 
+<B>Corrigendum:</B> Corrected the definition of the Inspection_Point 
+pragma to apply to only variables visible at the point of the pragma. 
+Otherwise, the compiler would have to assume that some other code somewhere 
+could have a pragma Inspection_Point, preventing many optimizations (such 
+as unused object elimination).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

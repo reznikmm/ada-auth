@@ -1,0 +1,755 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Parameter Associations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.4.1 Parameter Associations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I3776"></A> A parameter association defines 
+the association between an actual parameter and a formal parameter.] 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">The parameter passing rules for <B>out</B> parameters 
+are designed to ensure that the parts of a type that have implicit initial 
+values (see <A HREF="AA-3-3-1.html">3.3.1</A>) don't become &ldquo;de-initialized&rdquo; 
+by being passed as an <B>out</B> parameter.</div>
+<div class="paranum"><a name="p1.b">1.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
+For explicitly aliased parameters of functions, we will ensure at the 
+call site that a part of the parameter can be returned as part of the 
+function result without creating a dangling pointer. We do this with 
+accessibility checks at the call site that all actual objects of explicitly 
+aliased parameters live at least as long as the function result; then 
+we can allow them to be returned as access discriminants or anonymous 
+access results, as those have the master of the function result.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0118-1.TXT">AI05-0118-1</A></I>} 
+The <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+of a named <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN> 
+of the view being called; <A NAME="I3777"></A><A NAME="I3778"></A><A NAME="I3779"></A><A NAME="I3780"></A>this 
+is the formal parameter of the association. The formal parameter for 
+a positional <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+is the parameter with the corresponding position in the formal part of 
+the view being called.</div>
+<div class="paranum"><a name="p2.a">2.a/3</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0118-1.TXT">AI05-0118-1</A></I>} 
+For positional parameters, the &ldquo;corresponding position&rdquo; is 
+calculated after any transformation of prefixed views.&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3781"></A>The <I>actual parameter</I> is 
+either the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0185">explicit_actual_parameter</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+for a given formal parameter, or the corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+if no <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+is given for the formal parameter. <A NAME="I3782"></A>The expected type 
+for an actual parameter is the type of the corresponding formal parameter. 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+is the one of the corresponding formal parameter in the profile of the 
+view denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of the call.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">If the mode is <B>in</B>, the actual is interpreted 
+as an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>; 
+otherwise, the actual is interpreted only as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+if possible.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a/4</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+This formally resolves the ambiguity present in the syntax rule for <SPAN Class="swiss"><A HREF="AA-6-4.html#S0185">explicit_actual_parameter</A></SPAN>. 
+This matters as an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is evaluated and represents a value while a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+by itself can be an object; if the mode is not <B>in</B>, we want the 
+parameter to interpreted as an object. Note that we don't actually require 
+that the actual be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+if the mode is not <B>in</B>; we do that below.</div>
+<div class="paranum"><a name="p4.b">4.b/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+This wording uses &quot;interpreted as&quot; rather than &quot;shall 
+be&quot; so that this rule is not used to resolve overloading; it is 
+solely about evaluation as described above. We definitely do not want 
+to allow oddities like the presence of parentheses requiring the selection 
+of an <B>in</B> formal parameter as opposed to an otherwise matching 
+<B>in out</B> parameter.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If the mode is <B>in out</B> or <B>out</B>, the actual 
+shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes a variable.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We no longer need &ldquo;or 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
+whose argument is the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of a variable,&rdquo; because a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
+is now a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+and a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
+of a variable is a variable.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>The 
+requirement that the actual be a (variable) <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is not an overload resolution rule, since we don't want the difference 
+between <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> to 
+be used to resolve overloading. For example:&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="SmallExamples">procedure&nbsp;Print(X&nbsp;:&nbsp;<B>in</B>&nbsp;Integer;&nbsp;Y&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True);<BR>
+procedure&nbsp;Print(Z&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Integer);<BR>
+.&nbsp;.&nbsp;.<BR>
+Print(3);&nbsp;--<SPAN Class="roman"><I>&nbsp;Ambiguous!</I></SPAN><BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p5.d">5.d</a></div>
+<div class="Annotations">The above call to Print is ambiguous even though 
+the call is not compatible with the second Print which requires an actual 
+that is a (variable) <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+(&ldquo;3&rdquo; is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+not a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>). 
+This requirement is a legality rule, so overload resolution fails before 
+it is considered, meaning that the call is ambiguous.&nbsp;</div>
+<div class="paranum"><a name="p5.1">5.1/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+If the mode is <B>out</B>, the actual parameter is a view conversion, 
+and the type of the formal parameter is an access type or a scalar type 
+that has the Default_Value aspect specified, then&nbsp;</div>
+<div class="paranum"><a name="p5.2">5.2/4</a></div>
+<div class="Bulleted">there shall exist a type (other than a root numeric 
+type) that is an ancestor of both the target type and the operand type; 
+and</div>
+<div class="paranum"><a name="p5.3">5.3/4</a></div>
+<div class="Bulleted">in the case of a scalar type, the type of the operand 
+of the conversion shall have the Default_Value aspect specified.&nbsp;</div>
+<div class="paranum"><a name="p5.4">5.4/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+<A NAME="I3783"></A>In addition to the places where Legality Rules normally 
+apply (see <A HREF="AA-12-3.html">12.3</A>), these rules also apply in 
+the private part of an instance of a generic unit.</div>
+<div class="paranum"><a name="p5.e">5.e/4</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>These rules are needed in order 
+to ensure that a well-defined parameter value is passed.&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0102-1.TXT">AI05-0102-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
+If the formal parameter is an explicitly aliased parameter, the type 
+of the actual parameter shall be tagged or the actual parameter shall 
+be an aliased view of an object. Further, if the formal parameter subtype 
+<I>F</I> is untagged:</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">the subtype <I>F</I> shall statically match the 
+nominal subtype of the actual object; or</div>
+<div class="paranum"><a name="p6.2">6.2/3</a></div>
+<div class="Bulleted">the subtype <I>F</I> shall be unconstrained, discriminated 
+in its full view, and unconstrained in any partial view.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Tagged objects (and tagged 
+<SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
+for <B>in</B> parameters) do not need to be aliased. This matches the 
+behavior of unaliased formal parameters of tagged types, which allow 
+'Access to be taken of the formal parameter regardless of the form of 
+the actual parameter.&nbsp;</div>
+<div class="paranum"><a name="p6.b">6.b/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We need the subtype check on 
+untagged actual parameters so that the requirements of 'Access are not 
+lost. 'Access makes its checks against the nominal subtype of its prefix, 
+and parameter passing can change that subtype. But we don't want this 
+parameter passing to change the objects that would be allowed as the 
+prefix of 'Access. This is particularly important for arrays, where we 
+don't want to require any additional implementation burden.&nbsp;</div>
+<div class="paranum"><a name="p6.b.1">6.b.1/4</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
+We assume the worst in a generic body whether or not a formal subtype 
+has a constrained partial view; specifically, in a generic body a discriminated 
+subtype is considered to have a constrained partial view if it is a descendant 
+of an untagged generic formal private or derived type (see <A HREF="AA-12-5-1.html">12.5.1</A> 
+for the formal definition of this rule).&nbsp;</div>
+<div class="paranum"><a name="p6.3">6.3/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
+<A NAME="I3784"></A>In addition to the places where Legality Rules normally 
+apply (see <A HREF="AA-12-3.html">12.3</A>), these rules also apply in 
+the private part of an instance of a generic unit.</div>
+<div class="paranum"><a name="p6.4">6.4/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+In a function call, the accessibility level of the actual object for 
+each explicitly aliased parameter shall not be statically deeper than 
+the accessibility level of the master of the call (see <A HREF="AA-3-10-2.html">3.10.2</A>).</div>
+<div class="paranum"><a name="p6.c">6.c/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Since explicitly aliased 
+parameters are either tagged or required to be objects, there is always 
+an object (possibly anonymous) to talk about. This is discussing the 
+static accessibility level of the actual object; it does not depend on 
+any runtime information (for instance when the actual object is a formal 
+parameter of another subprogram, it does not depend on the actual parameter 
+of that other subprogram).&nbsp;</div>
+<div class="paranum"><a name="p6.d">6.d/4</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
+This accessibility check (and its dynamic cousin as well) can only fail 
+if the master of the function call (which is defined in the Heart of 
+Darkness, or <A HREF="AA-3-10-2.html">3.10.2</A> if you prefer) is different 
+than the master directly enclosing the call. The most likely place where 
+this will occur is in the initializer of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>; 
+in almost all other cases this check will always pass.&nbsp;</div>
+<div class="paranum"><a name="p6.5">6.5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+Two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are <I>known to denote the same object</I> if:<A NAME="I3785"></A></div>
+<div class="paranum"><a name="p6.6">6.6/3</a></div>
+<div class="Bulleted">both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+statically denote the same stand-alone object or parameter; or</div>
+<div class="paranum"><a name="p6.7">6.7/3</a></div>
+<div class="Bulleted">both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>s, 
+their <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es 
+are known to denote the same object, and their <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>s 
+denote the same component; or</div>
+<div class="paranum"><a name="p6.8">6.8/3</a></div>
+<div class="Bulleted">both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are dereferences (implicit or explicit) and the dereferenced <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are known to denote the same object; or</div>
+<div class="paranum"><a name="p6.9">6.9/3</a></div>
+<div class="Bulleted">both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s, 
+their <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es 
+are known to denote the same object, and each of the pairs of corresponding 
+index values are either both static expressions with the same static 
+value or both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+that are known to denote the same object; or</div>
+<div class="paranum"><a name="p6.10">6.10/3</a></div>
+<div class="Bulleted">both <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>s, 
+their <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es 
+are known to denote the same object, and the two <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>s 
+have statically matching index constraints; or</div>
+<div class="paranum"><a name="p6.11">6.11/3</a></div>
+<div class="Bulleted">one of the two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+statically denotes a renaming declaration whose renamed <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is known to denote the same object as the other, the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of any dereference within the renamed <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is not a variable, and any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+within the renamed <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+contains no references to variables nor calls on nonstatic functions. 
+</div>
+<div class="paranum"><a name="p6.e">6.e/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>This 
+exposes known renamings of slices, indexing, and so on to this definition. 
+In particular, if we have&nbsp;</div>
+<div class="paranum"><a name="p6.f">6.f/3</a></div>
+<div class="SmallExamples" style="margin-bottom: 0.4em">C&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;S(1);</div>
+<div class="paranum"><a name="p6.g">6.g/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">then C and S(1) 
+are known to denote the same object.</div>
+<div class="paranum"><a name="p6.h">6.h/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">We need the requirement 
+that no variables occur in the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es 
+of dereferences and in (index) <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+of the renamed object in order to avoid problems from later changes to 
+those parts of renamed names. Consider:</div>
+<div class="paranum"><a name="p6.i">6.i/3</a></div>
+<div class="SmallExamples" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Ref&nbsp;<B>is&nbsp;access</B>&nbsp;Some_Type;<BR>
+&nbsp;&nbsp;&nbsp;Ptr&nbsp;:&nbsp;Ref&nbsp;:=&nbsp;<B>new</B>&nbsp;Some_Type'(...);<BR>
+&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Some_Type&nbsp;<B>renames</B>&nbsp;Ptr.<B>all</B>;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Ptr&nbsp;:=&nbsp;<B>new</B>&nbsp;Some_Type'(...);<BR>
+&nbsp;&nbsp;&nbsp;P&nbsp;(Func_With_Out_Params&nbsp;(Ptr.<B>all</B>),&nbsp;X);</div>
+<div class="paranum"><a name="p6.j">6.j/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">X and Ptr.<B>all</B> 
+should not be known to denote the same object, since they denote different 
+allocated objects (and this is not an unreasonable thing to do).&nbsp;</div>
+<div class="paranum"><a name="p6.k">6.k/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>To be honest: 
+</B>The exclusion of variables from renamed object_names is not enough 
+to prevent altering the value of the name or expression by another access 
+path. For instance, both <B>in</B> parameters passed by reference and 
+access-to-constant values can designate variables. For the intended use 
+of &quot;known to be the same object&quot;, this is OK; the modification 
+via another access path is very tricky and it is OK to reject code that 
+would be buggy except for the tricky code. Assuming Element is an elementary 
+type, consider the following example:&nbsp;</div>
+<div class="paranum"><a name="p6.l">6.l/3</a></div>
+<div class="SmallExamples">Global&nbsp;:&nbsp;Tagged_Type;</div>
+<div class="paranum"><a name="p6.m">6.m/3</a></div>
+<div class="SmallExamples"><B>procedure</B>&nbsp;Foo&nbsp;(Param&nbsp;:&nbsp;<B>in</B>&nbsp;Tagged_Type&nbsp;:=&nbsp;Global)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Element&nbsp;<B>renames</B>&nbsp;Some_Global_Array&nbsp;(Param.C);<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Global.C&nbsp;:=&nbsp;Global.C&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;Swap&nbsp;(X,&nbsp;Some_Global_Array&nbsp;(Param.C));</div>
+<div class="paranum"><a name="p6.n">6.n/3</a></div>
+<div class="Annotations">The rules will flag the call of procedure Swap 
+as illegal, since X and Some_Global_Array (Parameter.C) are known to 
+denote the same object (even though they will actually represent different 
+objects if Param = Global). But this is only incorrect if the parameter 
+actually is Global and not some other value; the error could exist for 
+some calls. So this flagging seems harmless.</div>
+<div class="paranum"><a name="p6.o">6.o/3</a></div>
+<div class="Annotations">Similar examples can be constructed using stand-alone 
+composite constants with controlled or immutably limited components, 
+and (as previously noted) with dereferences of access-to-constant values. 
+Even when these examples flag a call incorrectly, that call depends on 
+very tricky code (modifying the value of a constant); the code is likely 
+to confuse future maintainers as well and thus we do not mind rejecting 
+it.&nbsp;</div>
+<div class="paranum"><a name="p6.p">6.p/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Whether or not <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es 
+are known to denote the same object is determined statically. If the 
+name contains some dynamic portion other than a dereference, <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, 
+it is not &quot;known to denote the same object&quot;.</div>
+<div class="paranum"><a name="p6.q">6.q/3</a></div>
+<div class="Annotations">These rules make no attempt to handle slices 
+of objects that are known to be the same when the slices have dynamic 
+bounds (other than the trivial case of bounds being defined by the same 
+subtype), even when the bounds could be proven to be the same, as it 
+is just too complex to get right and these rules are intended to be conservative. 
+</div>
+<div class="paranum"><a name="p6.r">6.r/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>&quot;Known to denote the same object&quot; is intended to be an 
+equivalence relationship, that is, it is reflexive, symmetric, and transitive. 
+We believe this follows from the rules. For instance, given the following 
+declarations:&nbsp;</div>
+<div class="paranum"><a name="p6.s">6.s/3</a></div>
+<div class="SmallExamples" style="margin-bottom: 0.4em">S&nbsp;&nbsp;&nbsp;:&nbsp;String(1..10);<BR>
+ONE&nbsp;:&nbsp;<B>constant</B>&nbsp;Natural&nbsp;:=&nbsp;1;<BR>
+R&nbsp;&nbsp;&nbsp;:&nbsp;Character&nbsp;<B>renames</B>&nbsp;S(1);</div>
+<div class="paranum"><a name="p6.t">6.t/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">the names R and 
+S(1) are known to denote the same object by the sixth bullet, and S(1) 
+and S(ONE) are known to denote the same object by the fourth bullet, 
+so using the sixth bullet on R and S(ONE), we simply have to test S(1) 
+vs. S(ONE), which we already know denote the same object.&nbsp;</div>
+<div class="paranum"><a name="p6.12">6.12/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+Two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are <I>known to refer to the same object</I> if <A NAME="I3786"></A></div>
+<div class="paranum"><a name="p6.13">6.13/3</a></div>
+<div class="Bulleted">The two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are known to denote the same object; or</div>
+<div class="paranum"><a name="p6.14">6.14/3</a></div>
+<div class="Bulleted">One of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+is a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+and its <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+is known to refer to the same object as the other <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
+or</div>
+<div class="paranum"><a name="p6.15">6.15/3</a></div>
+<div class="Bulleted">One of the two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+statically denotes a renaming declaration whose renamed <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is known to refer to the same object as the other <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p6.u">6.u/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This ensures that names Prefix.Comp 
+and Prefix are known to refer to the same object for the purposes of 
+the rules below. This intentionally does not include dereferences; we 
+only want to worry about accesses to the same object, and a dereference 
+changes the object in question. (There is nothing shared between an access 
+value and the object it designates.)&nbsp;</div>
+<div class="paranum"><a name="p6.16">6.16/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+If a call <I>C</I> has two or more parameters of mode <B>in out</B> or 
+<B>out</B> that are of an elementary type, then the call is legal only 
+if:</div>
+<div class="paranum"><a name="p6.17">6.17/3</a></div>
+<div class="Bulleted">For each <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<I>N</I> that is passed as a parameter of mode <B>in out</B> or <B>out</B> 
+to the call <I>C</I>, there is no other <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+among the other parameters of mode <B>in out</B> or <B>out</B> to <I>C</I> 
+that is known to denote the same object.</div>
+<div class="paranum"><a name="p6.v">6.v/3</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>This means <I>visibly</I> 
+an elementary type; it does not include partial views of elementary types 
+(partial views are always composite). That's necessary to avoid having 
+Legality Rules depend on the contents of the private part.&nbsp;</div>
+<div class="paranum"><a name="p6.18">6.18/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+If a construct <I>C</I> has two or more direct constituents that are 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+whose evaluation may occur in an arbitrary order, at least one of which 
+contains a function call with an <B>in out</B> or <B>out</B> parameter, 
+then the construct is legal only if:</div>
+<div class="paranum"><a name="p6.w">6.w/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>All of the places where 
+the language allows an arbitrary order can be found by looking in the 
+index under &quot;arbitrary order, allowed&quot;. Note that this listing 
+includes places that don't involve <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+(such as checks or finalization).&nbsp;</div>
+<div class="paranum"><a name="p6.19">6.19/3</a></div>
+<div class="Bulleted">For each name <I>N</I> that is passed as a parameter 
+of mode <B>in out</B> or <B>out</B> to some inner function call <I>C2</I> 
+(not including the construct <I>C</I> itself), there is no other <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+anywhere within a direct constituent of the construct <I>C</I> other 
+than the one containing <I>C2</I>, that is known to refer to the same 
+object.&nbsp;</div>
+<div class="paranum"><a name="p6.x">6.x/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This requirement cannot 
+fail for a procedure or entry call alone; there must be at least one 
+function with an <B>in out</B> or <B>out</B> parameter called as part 
+of a parameter expression of the call in order for it to fail.&nbsp;</div>
+<div class="paranum"><a name="p6.y">6.y/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>These rules prevent obvious cases 
+of dependence on the order of evaluation of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s. 
+Such dependence is usually a bug, and in any case, is not portable to 
+another implementation (or even another optimization setting).</div>
+<div class="paranum"><a name="p6.z">6.z/3</a></div>
+<div class="Annotations">In the case that the top-level construct C is 
+a call, these rules do not require checks for most <B>in out</B> parameters, 
+as the rules about evaluation of calls prevent problems. Similarly, we 
+do not need checks for short circuit operations or other operations with 
+a defined order of evaluation. The rules about arbitrary order (see <A HREF="AA-1-1-4.html">1.1.4</A>) 
+allow evaluating parameters and writing parameters back in an arbitrary 
+order, but not interleaving of evaluating parameters of one call with 
+writing parameters back from another &mdash; that would not correspond 
+to any allowed sequential order.&nbsp;</div>
+<div class="paranum"><a name="p6.20">6.20/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+For the purposes of checking this rule:</div>
+<div class="paranum"><a name="p6.21">6.21/3</a></div>
+<div class="Bulleted">For an array <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+associated with a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+that has two or more discrete choices, or that has a nonstatic range, 
+is considered as two or more separate occurrences of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>;</div>
+<div class="paranum"><a name="p6.22">6.22/3</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">For a record <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>:</div>
+<div class="paranum"><a name="p6.23">6.23/3</a></div>
+<div class="Indented2NestedBulleted">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
+is considered to occur once for each associated component; and</div>
+<div class="paranum"><a name="p6.24">6.24/3</a></div>
+<div class="Indented2NestedBulleted">The <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+for each <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
+with &lt;&gt; for which the associated component has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+is considered part of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p6.25">6.25/3</a></div>
+<div class="Bulleted">For a call, any <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+evaluated as part of the call is considered part of the call.&nbsp;</div>
+<div class="paranum"><a name="p6.aa">6.aa/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>We do not check expressions 
+that are evaluated only because of a component initialized by default 
+in an aggregate (via &lt;&gt;).&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3787"></A>For 
+the evaluation of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN>: 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">The actual parameter is first evaluated.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">For an access parameter, the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+is elaborated, which creates the anonymous access type.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">For a parameter [(of any mode)] that is passed 
+by reference (see <A HREF="AA-6-2.html">6.2</A>), a view conversion of 
+the actual parameter to the nominal subtype of the formal parameter is 
+evaluated, and the formal parameter denotes that conversion. <A NAME="I3788"></A></div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We are always allowing sliding, 
+even for [<B>in</B>] <B>out</B> by-reference parameters.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted"><A NAME="I3789"></A>For an <B>in</B> or <B>in out</B> 
+parameter that is passed by copy (see <A HREF="AA-6-2.html">6.2</A>), 
+the formal parameter object is created, and the value of the actual parameter 
+is converted to the nominal subtype of the formal parameter and assigned 
+to the formal. <A NAME="I3790"></A></div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The conversion mentioned 
+here is a value conversion.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">For an <B>out</B> 
+parameter that is passed by copy, the formal parameter object is created, 
+and:&nbsp;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0196-1.TXT">AI05-0196-1</A></I>} 
+For an access type, the formal parameter is initialized from the value 
+of the actual, without checking that the value satisfies any constraint, 
+any predicate, or any exclusion of the null value;&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This preserves the Language Design 
+Principle that an object of an access type is always initialized with 
+a &ldquo;reasonable&rdquo; value.&nbsp;</div>
+<div class="paranum"><a name="p13.1">13.1/4</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+For a scalar type that has the Default_Value aspect specified, the formal 
+parameter is initialized from the value of the actual, without checking 
+that the value satisfies any constraint or any predicate. Furthermore, 
+if the actual parameter is a view conversion and either</div>
+<div class="paranum"><a name="p13.2">13.2/4</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+there exists no type (other than a root numeric type) that is an ancestor 
+of both the target type and the type of the operand of the conversion; 
+or</div>
+<div class="paranum"><a name="p13.3">13.3/4</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+the Default_Value aspect is unspecified for the type of the operand of 
+the conversion&nbsp;</div>
+<div class="paranum"><a name="p13.4">13.4/4</a></div>
+<div class="Indented2Bulleted-NoPrefix">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+then Program_Error is raised;<A NAME="I3791"></A></div>
+<div class="paranum"><a name="p13.b">13.b/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This preserves the Language Design 
+Principle that all objects of a type with an implicit initial value are 
+initialized. This is important so that a programmer can guarantee that 
+all objects of a scalar type have a valid value with a carefully chosen 
+Default_Value.&nbsp;</div>
+<div class="paranum"><a name="p13.c">13.c/3</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This rule means 
+that <B>out</B> parameters of a subtype <I>T</I> with a specified Default_Value 
+need to be large enough to support any possible value of the base type 
+of <I>T</I>. In contrast, a type that does not have a Default_Value only 
+need support the size of the subtype (since no values are passed in). 
+</div>
+<div class="paranum"><a name="p13.d">13.d/4</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The Program_Error case can 
+only occur in the body of an instance of a generic unit. Legality Rules 
+will catch all other cases. Implementations that macro-expand generics 
+can always detect this case when the enclosing instance body is expanded. 
+</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Indented2Bulleted">For a composite type with discriminants 
+or that has implicit initial values for any subcomponents (see <A HREF="AA-3-3-1.html">3.3.1</A>), 
+the behavior is as for an <B>in out</B> parameter passed by copy.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This ensures that no part of 
+an object of such a type can become &ldquo;de-initialized&rdquo; by being 
+part of an <B>out</B> parameter.&nbsp;</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This includes an array 
+type whose component type is an access type, and a record type with a 
+component that has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
+among other things.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented2Bulleted">For any other type, the formal parameter 
+is uninitialized. If composite, a view conversion of the actual parameter 
+to the nominal subtype of the formal is evaluated [(which might raise 
+Constraint_Error)], and the actual subtype of the formal is that of the 
+view conversion. If elementary, the actual subtype of the formal is given 
+by its nominal subtype.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+This case covers scalar types that do not have Default_Value specified, 
+and composite types whose subcomponent's subtypes do not have any implicit 
+initial values. The view conversion for composite types ensures that 
+if the lengths don't match between an actual and a formal array parameter, 
+the Constraint_Error is raised before the call, rather than after.&nbsp;</div>
+<div class="paranum"><a name="p15.1">15.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+In a function call, for each explicitly aliased parameter, a check is 
+made that the accessibility level of the master of the actual object 
+is not deeper than that of the  master of the call (see <A HREF="AA-3-10-2.html">3.10.2</A>). 
+</div>
+<div class="paranum"><a name="p15.a.1">15.a.1/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If the actual object to 
+a call <I>C</I> is a formal parameter of some function call <I>F</I>, 
+no dynamic check against the master of the actual parameter of <I>F</I> 
+is necessary. Any case which could fail the dynamic check is already 
+statically illegal (either at the call site of <I>F</I>, or at the call 
+site <I>C</I>). This is important, as it would require nasty distributed 
+overhead to accurately know the dynamic accessibility of a formal parameter 
+(all tagged and explicitly aliased parameters would have to carry accessibility 
+levels).&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><A NAME="I3792"></A><A NAME="I3793"></A>A formal 
+parameter of mode <B>in out</B> or <B>out</B> with discriminants is constrained 
+if either its nominal subtype or the actual parameter is constrained.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I3794"></A><A NAME="I3795"></A><A NAME="I3796"></A><A NAME="I3797"></A><A NAME="I3798"></A>After 
+normal completion and leaving of a subprogram, for each <B>in out</B> 
+or <B>out</B> parameter that is passed by copy, the value of the formal 
+parameter is converted to the subtype of the variable given as the actual 
+parameter and assigned to it. <A NAME="I3799"></A>These conversions and 
+assignments occur in an arbitrary order.<A NAME="I3800"></A>&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The conversions mentioned 
+above during parameter passing might raise Constraint_Error &mdash; (see 
+<A HREF="AA-4-6.html">4.6</A>).&nbsp;</div>
+<div class="paranum"><a name="p17.b">17.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If any conversion or assignment 
+as part of parameter passing propagates an exception, the exception is 
+raised at the place of the subprogram call; that is, it cannot be handled 
+inside the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p17.c">17.c</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Since these checks happen before 
+or after executing the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>, 
+the execution of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+does not dynamically enclose them, so it can't handle the exceptions. 
+</div>
+<div class="paranum"><a name="p17.d">17.d</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The variable we're talking 
+about is the one denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+given as the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0185">explicit_actual_parameter</A></SPAN>. 
+If this <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN>, 
+then the rules in <A HREF="AA-4-6.html">4.6</A> for assigning to a view 
+conversion apply. That is, if X is of subtype S1, and the actual is S2(X), 
+the above-mentioned conversion will convert to S2, and the one mentioned 
+in <A HREF="AA-4-6.html">4.6</A> will convert to S1.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<A NAME="I3801"></A>If the nominal subtype of a formal parameter with 
+discriminants is constrained or indefinite, and the parameter is passed 
+by reference, then the execution of the call is erroneous if the value 
+of any discriminant of the actual is changed while the formal parameter 
+exists (that is, before leaving the corresponding callable construct). 
+</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><A NAME="I3802"></A>In Ada 95, a program can 
+rely on the fact that passing an object as an <B>out</B> parameter does 
+not &ldquo;de-initialize&rdquo; any parts of the object whose subtypes 
+have implicit initial values. (This generalizes the RM83 rule that required 
+copy-in for parts that were discriminants or of an access type.)&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p18.b">18.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+We have eliminated the subclause on Default Parameters, as it is subsumed 
+by earlier subclauses.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2005</H4>
+<div class="paranum"><a name="p18.c">18.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0196-1.TXT">AI05-0196-1</A></I>} 
+<A NAME="I3803"></A><B>Correction:</B> Clarified that <B>out</B> parameters 
+of an access type are not checked for null exclusions when they are passed 
+in (which is similar to the behavior for constraints). This was unspecified 
+in Ada 2005, so a program which depends on the behavior of an implementation 
+which does check the exclusion may malfunction. But a program depending 
+on an exception being raised is unlikely.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p18.d">18.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+<A NAME="I3804"></A>Additional rules have been added to make illegal 
+passing the same elementary object to more than one <B>in out</B> or 
+<B>out</B> parameters of the same call. In this case, the result in the 
+object could depend on the compiler version, optimization settings, and 
+potentially the phase of the moon, so this check will mostly reject programs 
+that are nonportable and could fail with any change. Even when the result 
+is expected to be the same in both parameters, the code is unnecessarily 
+tricky. Programs which fail this new check should be rare and are easily 
+fixed by adding a temporary object.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p18.e">18.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+<B>Correction:</B> A missing rule was added to cover cases that were 
+missed in Ada 95 and Ada 2005; specifically, that an <B>in</B> parameter 
+passed by reference might have its discriminants changed via another 
+path. Such cases are erroneous as requiring compilers to detect such 
+errors would be expensive, and requiring such cases to work would be 
+a major change of the user model (<B>in</B> parameters with discriminants 
+could no longer be assumed constant). This is not an inconsistency, as 
+compilers are not required to change any current behavior.</div>
+<div class="paranum"><a name="p18.f">18.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0102-1.TXT">AI05-0102-1</A></I>} 
+<B>Correction:</B> Moved implicit conversion Legality Rule to <A HREF="AA-8-6.html">8.6</A>.</div>
+<div class="paranum"><a name="p18.g">18.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0118-1.TXT">AI05-0118-1</A></I>} 
+<B>Correction:</B> Added a definition for positional parameters, as this 
+is missing from Ada 95 and later.</div>
+<div class="paranum"><a name="p18.h">18.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
+Rules have been added defining the legality and dynamic checks needed 
+for explicitly aliased parameters (see <A HREF="AA-6-1.html">6.1</A>).</div>
+<div class="paranum"><a name="p18.i">18.i/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+Additional rules have been added such that passing an object to an <B>in 
+out</B> or <B>out</B> parameter of a function is illegal if it is used 
+elsewhere in a construct which allows evaluation in an arbitrary order. 
+Such calls are not portable (since the results may depend on the evaluation 
+order), and the results could even vary because of optimization settings 
+and the like. Thus they've been banned.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2012</H4>
+<div class="paranum"><a name="p18.j">18.j/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0074-1.TXT">AI12-0074-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+<A NAME="I3805"></A><B>Corrigendum:</B> Added rules to ensure that the 
+value passed into a <B>out</B> parameter for elementary types is well-defined 
+in the case of a view conversion. The new rules can be incompatible. 
+For a view conversion to an unrelated type with the Default_Value aspect 
+specified, the aspect is new in Ada 2012 so it should be unlikely to 
+occur in existing code. For a view conversion to an unrelated access 
+type, the incompatibility is possible as this could be written in Ada 
+95, but such a view conversion is thought to be rare. In both cases, 
+declaring and passing a temporary rather than a view conversion will 
+eliminate the problem.</div>
+<div class="paranum"><a name="p18.k">18.k/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
+<B>Corrigendum:</B> Because of a rule added in <A HREF="AA-12-5-1.html">12.5.1</A>, 
+the checks for the passing of an object to an explicitly aliased parameter 
+in a generic body were strengthened to use an assume the worst rule. 
+This case is rather unlikely as a formal private or derived type with 
+discriminants is required along with an explicitly aliased parameter 
+whose type doesn't statically match the formal type. Such a program is 
+very unlikely, especially as explicitly aliased parameters are a new 
+Ada 2012 feature.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

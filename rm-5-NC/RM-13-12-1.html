@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Language-Defined Restrictions and Profiles</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented5NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left:  11.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented5NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left:  11.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-13.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.12.1 Language-Defined Restrictions and Profiles</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
+are language defined (additional restrictions are defined in the Specialized 
+Needs Annexes):</div>
+<div class="paranum"><a name="p1.1">1.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I5514"></A><A NAME="I5515"></A>No_Implementation_Aspect_Specifications 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no implementation-defined aspects specified by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>. 
+This restriction applies only to the current compilation or environment, 
+not the entire partition.&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="WideHanging-Term"><A NAME="I5516"></A><A NAME="I5517"></A>No_Implementation_Attributes 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no implementation-defined attributes. This restriction applies 
+only to the current compilation or environment, not the entire partition. 
+</div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I5518"></A><A NAME="I5519"></A>No_Implementation_Identifiers 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no usage names that denote declarations with implementation-defined 
+identifiers that occur within language-defined packages or instances 
+of language-defined generic packages. Such identifiers can arise as follows: 
+</div>
+<div class="paranum"><a name="p2.2">2.2/3</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em">The following 
+language-defined packages and generic packages allow implementation-defined 
+identifiers:</div>
+<div class="paranum"><a name="p2.3">2.3/3</a></div>
+<div class="Indented5NestedBulleted">package System (see <A HREF="RM-13-7.html">13.7</A>);</div>
+<div class="paranum"><a name="p2.4">2.4/3</a></div>
+<div class="Indented5NestedBulleted">package Standard (see <A HREF="RM-A-1.html">A.1</A>);</div>
+<div class="paranum"><a name="p2.5">2.5/3</a></div>
+<div class="Indented5NestedBulleted">package Ada.Command_Line (see <A HREF="RM-A-15.html">A.15</A>);</div>
+<div class="paranum"><a name="p2.6">2.6/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.C (see <A HREF="RM-B-3.html">B.3</A>);</div>
+<div class="paranum"><a name="p2.7">2.7/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.C.Strings (see 
+<A HREF="RM-B-3-1.html">B.3.1</A>);</div>
+<div class="paranum"><a name="p2.8">2.8/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.C.Pointers (see 
+<A HREF="RM-B-3-2.html">B.3.2</A>);</div>
+<div class="paranum"><a name="p2.9">2.9/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.COBOL (see <A HREF="RM-B-4.html">B.4</A>);</div>
+<div class="paranum"><a name="p2.10">2.10/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.Fortran (see 
+<A HREF="RM-B-5.html">B.5</A>);&nbsp;</div>
+<div class="paranum"><a name="p2.11">2.11/3</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em">The following 
+language-defined packages contain only implementation-defined identifiers:</div>
+<div class="paranum"><a name="p2.12">2.12/3</a></div>
+<div class="Indented5NestedBulleted">package System.Machine_Code (see 
+<A HREF="RM-13-8.html">13.8</A>);</div>
+<div class="paranum"><a name="p2.13">2.13/3</a></div>
+<div class="Indented5NestedBulleted">package Ada.Directories.Information 
+(see <A HREF="RM-A-16.html">A.16</A>);</div>
+<div class="paranum"><a name="p2.14">2.14/3</a></div>
+<div class="Indented5NestedBulleted">nested Implementation packages of 
+the Queue containers (see <A HREF="RM-A-18-28.html">A.18.28</A>-31);</div>
+<div class="paranum"><a name="p2.15">2.15/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces (see <A HREF="RM-B-2.html">B.2</A>);</div>
+<div class="paranum"><a name="p2.16">2.16/3</a></div>
+<div class="Indented5NestedBulleted">package Ada.Interrupts.Names (see 
+<A HREF="RM-C-3-2.html">C.3.2</A>).</div>
+<div class="paranum"><a name="p2.17">2.17/3</a></div>
+<div class="WideHanging-Body">For package Standard, Standard.Long_Integer 
+and Standard.Long_Float are considered language-defined identifiers, 
+but identifiers such as Standard.Short_Short_Integer are considered implementation-defined.</div>
+<div class="paranum"><a name="p2.18">2.18/3</a></div>
+<div class="WideHanging-Body">This restriction applies only to the current 
+compilation or environment, not the entire partition.</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="WideHanging-Term"><A NAME="I5520"></A><A NAME="I5521"></A>No_Implementation_Pragmas 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no implementation-defined pragmas or pragma arguments. This 
+restriction applies only to the current compilation or environment, not 
+the entire partition.</div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I5522"></A><A NAME="I5523"></A>No_Implementation_Units 
+</div><div class="WideHanging-Body"><br clear="left">
+There is no mention in the <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN> 
+of any implementation-defined descendants of packages Ada, Interfaces, 
+or System. This restriction applies only to the current compilation or 
+environment, not the entire partition.</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="WideHanging-Term"><A NAME="I5524"></A><A NAME="I5525"></A>No_Obsolescent_Features 
+</div><div class="WideHanging-Body"><br clear="left">
+There is no use of language features defined in Annex J. It is implementation 
+defined whether uses of the renamings of <A HREF="RM-J-1.html">J.1</A> 
+and of the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
+of <A HREF="RM-J-15.html">J.15</A> are detected by this restriction. 
+This restriction applies only to the current compilation or environment, 
+not the entire partition.&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
+are language defined:</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="WideHanging-Term"><A NAME="I5526"></A><A NAME="I5527"></A>No_Dependence 
+</div><div class="WideHanging-Body">
+Specifies a library unit on which there are no semantic dependences.</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I5528"></A><A NAME="I5529"></A>No_Specification_of_Aspect 
+</div><div class="WideHanging-Body"><br clear="left">
+Identifies an aspect for which no <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+is given.</div>
+<div class="paranum"><a name="p6.2">6.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I5530"></A><A NAME="I5531"></A>No_Use_Of_Attribute 
+</div><div class="WideHanging-Body"><br clear="left">
+Identifies an attribute for which no <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+is given.</div>
+<div class="paranum"><a name="p6.3">6.3/3</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I5532"></A><A NAME="I5533"></A>No_Use_Of_Pragma 
+</div><div class="WideHanging-Body"><br clear="left">
+Identifies a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+which is not to be used.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
+of a No_Dependence restriction shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> shall 
+have the form of a full expanded name of a library unit, but need not 
+denote a unit present in the environment.</div>
+<div class="paranum"><a name="p7.1">7.1/3</a></div>
+<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
+of a No_Specification_of_Aspect restriction shall be an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>; 
+this is an identifier specific to a pragma (see <A HREF="RM-2-8.html">2.8</A>) 
+and does not denote any declaration.</div>
+<div class="paranum"><a name="p7.2">7.2/3</a></div>
+<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
+of a No_Use_Of_Attribute restriction shall be an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+or one of the reserved words Access, Delta, Digits, Mod, or Range; this 
+is an identifier specific to a pragma.</div>
+<div class="paranum"><a name="p7.3">7.3/3</a></div>
+<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
+of a No_Use_Of_Pragma restriction shall be an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+or the reserved word Interface; this is an identifier specific to a pragma.</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">No compilation unit included in the partition shall 
+depend semantically on the library unit identified by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+of a No_Dependence restriction.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+is language defined:</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="WideHanging-Term"><A NAME="I5534"></A>No_Implementation_Extensions 
+</div><div class="WideHanging-Body"><br clear="left">
+</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal">For usage profile No_Implementation_Extensions, there 
+shall be no <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>s.</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The No_Implementation_Extensions 
+usage profile is equivalent to the following restrictions:&nbsp;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples">No_Implementation_Aspect_Specifications,<BR>
+No_Implementation_Attributes,<BR>
+No_Implementation_Identifiers,<BR>
+No_Implementation_Pragmas,<BR>
+No_Implementation_Units.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-13.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

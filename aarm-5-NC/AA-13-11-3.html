@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Default Storage Pools</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11.3 Default Storage Pools</H1>
+<div class="paranum"><a name="p1">1/4</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+[Pragma and aspect Default_Storage_Pool specify the storage pool that 
+will be used in the absence of an explicit specification of a storage 
+pool or storage size for an access type.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;<B>pragma</B> <A NAME="I5805"></A><A NAME="I5806"></A>Default_Storage_Pool 
+(<A NAME="I5807"></A><SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN>); 
+</div>
+<div class="paranum"><a name="p3.1">3.1/4</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+<SPAN Class="swiss">storage_pool_indicator</SPAN><A NAME="I5808"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>storage_pool_</I><A NAME="I5809"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B>&nbsp;|&nbsp;Standard</div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Default_Storage_Pool 
+is allowed immediately within the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+or as a configuration pragma.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3.3">3.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is expected to be of type Root_Storage_Pool'Class.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall denote a variable.</div>
+<div class="paranum"><a name="p4.1">4.1/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+The Standard <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+is an identifier specific to a pragma (see <A HREF="AA-2-8.html">2.8</A>) 
+and does not denote any declaration. If the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+is Standard, then there shall not be a declaration with <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+Standard that is immediately visible at the point of the pragma, other 
+than package Standard itself.</div>
+<div class="paranum"><a name="p4.a.1">4.a.1/4</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We considered having the Standard 
+<SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+resolve to package Standard rather than being an identifier specific 
+to a pragma. That would eliminate the need for a special check. But it 
+would be bizarre to have something that could resolve to either an object 
+or a (single) package, and resolving to package Standard would imply 
+that the standard pool is an object declared in that package. A storage 
+pool object must be a variable (see <A HREF="AA-13-11.html">13.11</A>), 
+yet preelaborable packages depend on package Standard, which would require 
+implementers to implement the standard storage pool with Preelaborable_Initialization, 
+which is an unnecessary restriction.</div>
+<div class="paranum"><a name="p4.a.2">4.a.2/4</a></div>
+<div class="Annotations">No declaration of Standard can ever be use-visible, 
+as the language-defined nonoverloadable definition of Standard will hide 
+any use-visible declarations. Thus we need only concern ourselves with 
+eliminating any possible confusion with regard to immediately visible 
+declarations with the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+Standard.&nbsp;</div>
+<div class="paranum"><a name="p4.2">4.2/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+If the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+shall be either <B>null</B> or Standard, and it defines the <I>default 
+pool</I><A NAME="I5810"></A><A NAME="I5811"></A><A NAME="I5812"></A> 
+to be the given <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+within all applicable compilation units (see <A HREF="AA-10-1-5.html">10.1.5</A>), 
+except within the immediate scope of another <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool. Otherwise, [the pragma occurs immediately within 
+a sequence of declarations, and] it defines the default pool within the 
+immediate scope of the pragma to be the given <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN>, 
+except within the immediate scope of a later pragma Default_Storage_Pool. 
+[Thus, an inner pragma overrides an outer one.]</div>
+<div class="paranum"><a name="p4.3">4.3/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Default_Storage_Pool 
+shall not be used as a configuration pragma that applies to a compilation 
+unit that is within the immediate scope of another <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool.</div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>This 
+is to prevent confusion in cases like this:&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b/3</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Parent&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;pragma&nbsp;Default_Storage_Pool(...);<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Parent;</div>
+<div class="paranum"><a name="p4.c">4.c/3</a></div>
+<div class="SmallExamples"><B>pragma</B>&nbsp;Default_Storage_Pool(...);&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+<B>package</B>&nbsp;Parent.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Parent.Child;</div>
+<div class="paranum"><a name="p4.d">4.d/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">where the Default_Storage_Pool 
+on Parent.Child would not (if it were legal) override the one in Parent. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/4</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+The language-defined aspect Default_Storage_Pool may be specified for 
+a generic instance; it defines the default pool for access types within 
+an instance.<A NAME="I5813"></A><A NAME="I5814"></A> .</div>
+<div class="paranum"><a name="p5.1">5.1/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+The Default_Storage_Pool aspect may be specified as Standard, which is 
+an identifier specific to an aspect (see <A HREF="AA-13-1-1.html">13.1.1</A>) 
+and defines the default pool to be Standard. In this case, there shall 
+not be a declaration with <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+Standard that is immediately visible at the point of the aspect specification, 
+other than package Standard itself.</div>
+<div class="paranum"><a name="p5.2">5.2/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+Otherwise, the expected type for the Default_Storage_Pool aspect is Root_Storage_Pool'Class 
+and the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes a variable. This aspect overrides any Default_Storage_Pool 
+pragma that might apply to the generic unit; if the aspect is not specified, 
+the default pool of the instance is that defined for the generic unit.</div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Default_Storage_Pool: 
+</B>Default storage pool for a generic instance.</div>
+<div class="paranum"><a name="p5.3">5.3/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0136-1.TXT">AI12-0136-1</A></I>} 
+The effect of specifying the aspect Default_Storage_Pool on an instance 
+of a language-defined generic unit is implementation-defined.</div>
+<div class="paranum"><a name="p5.a.1">5.a.1/4</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The effect of 
+specifying aspect Default_Storage_Pool on an instance of a language-defined 
+generic unit.</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+For nonderived access types declared in places where the default pool 
+is defined by the pragma or aspect, their Storage_Pool or Storage_Size 
+attribute is determined as follows, unless Storage_Pool or Storage_Size 
+is specified for the type:</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+If the default pool is <B>null</B>, the Storage_Size attribute is defined 
+by the language to be zero. [Therefore, an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+for such a type is illegal.]</div>
+<div class="paranum"><a name="p6.2">6.2/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+If the default pool is neither <B>null</B> nor Standard, the Storage_Pool 
+attribute is that pool.</div>
+<div class="paranum"><a name="p6.3">6.3/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
+Otherwise (including when the default pool is specified as Standard), 
+the standard storage pool is used for the type as described in <A HREF="AA-13-11.html">13.11</A>.</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+Default_Storage_Pool is the only way to specify the storage pool for 
+an anonymous access type.</div>
+<div class="paranum"><a name="p6.b">6.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+Note that coextensions should be allocated in the same pool (or on the 
+stack) as the outer object (see <A HREF="AA-13-11.html">13.11</A>); the 
+Storage_Pool of the access discriminant (and hence the Default_Storage_Pool) 
+is supposed to be ignored for coextensions. This matches the required 
+finalization point for coextensions.</div>
+<div class="paranum"><a name="p6.b.1">6.b.1/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+The default storage pool for an allocator that occurs within an instance 
+of a generic is defined by the Default_Storage_Pool aspect of the instantiation 
+(if specified), or by the Default_Storage_Pool pragma that applied to 
+the generic; the Default_Storage_Pool pragma that applies to the instantiation 
+is irrelevant.</div>
+<div class="paranum"><a name="p6.b.2">6.b.2/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+It is possible to specify the Default_Storage_Pool aspect for an instantiation 
+such that allocations will fail. For example, the generic unit might 
+be expecting a pool that supports certain sizes and alignments, and the 
+one on the instance might be more restrictive. It is the programmer's 
+responsibility to get this right.</div>
+<div class="paranum"><a name="p6.b.3">6.b.3/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+The semantics of the Default_Storage_Pool aspect are similar to passing 
+a pool object as a generic formal, and putting pragma Default_Storage_Pool 
+at the top of the generic's visible part, specifying that formal.&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+An object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+that is passed as the actual parameter to an access parameter may be 
+allocated on the stack, and automatically reclaimed, regardless of the 
+default pool.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+This matches the required finalization point for such an allocated object. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Notes">32&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+Default_Storage_Pool may be used with restrictions No_Coextensions and 
+No_Access_Parameter_Allocators (see <A HREF="AA-H-4.html">H.4</A>) to 
+ensure that all <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+use the default pool.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p9.a">9.a/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p9.b">9.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<A NAME="I5815"></A>Pragma Controlled has been dropped from Ada, as it 
+has no effect in any known Ada implementations and it seems to promise 
+capabilities not expected in Ada implementations. This is usually not 
+an incompatibility, as the pragma merely becomes unrecognized (with a 
+warning) and can be implemented as an implementation-defined pragma if 
+desired. However, it is incompatible if it is (now) implemented as an 
+implementation-defined pragma, someone used this pragma in a unit, and 
+they also used restriction No_Implementation_Pragmas on that unit. In 
+that case, the pragma would now violate the restriction; but use of this 
+pragma (which does nothing) should be very rare, so this is not a significant 
+issue.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p9.c">9.c/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<A NAME="I5816"></A>The pragma Default_Storage_Pool and aspect Default_Storage_Pool 
+are new.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p9.d">9.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The entire discussion of garbage collection (and especially that of controlled 
+objects) is deleted. Ada 2012 provides subpools (see <A HREF="AA-13-11-4.html">13.11.4</A>) 
+for storage management of objects, including controlled objects, a mechanism 
+which is much more predictable than garbage collection. Note that no 
+version of Ada allows early finalization of controlled objects (other 
+than via the use of Unchecked_Deallocation or Unchecked_Deallocate_Subpool), 
+so that garbage collection of such objects would be ineffective in the 
+standard mode anyway.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p9.e">9.e/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
+<A NAME="I5817"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+Standard is new.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p9.f">9.f/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0136-1.TXT">AI12-0136-1</A></I>} 
+<B>Corrigendum:</B> We now explicitly say that the behavior of language-defined 
+generic units when given the Default_Storage_Pool aspect is implementation-defined. 
+Portable code cannot rely on such a package using a particular pool implementation. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Entry Queuing Policies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.4 Entry Queuing Policies</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0074">8652/0074</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00068.TXT">AI95-00068-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+[<A NAME="I8617"></A> This subclause specifies a mechanism for a user 
+to choose an entry <I>queuing policy</I>. It also defines two such policies. 
+Other policies are implementation defined.]&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+queuing policies.</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Queuing_Policy is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8618"></A><A NAME="I8619"></A>Queuing_Policy(<I>policy_</I><A NAME="I8620"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
+The <I>policy_</I><A NAME="I8621"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall be either FIFO_Queuing, Ordered_FIFO_Queuing, Priority_Queuing 
+or an implementation-defined <A NAME="I8622"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I8623"></A><A NAME="I8624"></A>A Queuing_Policy 
+pragma is a configuration pragma.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I8625"></A>[A <I>queuing policy</I> governs 
+the order in which tasks are queued for entry service, and the order 
+in which different entry queues are considered for service.] The queuing 
+policy is specified by a Queuing_Policy pragma.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The queuing policy includes 
+entry queuing order, the choice among open alternatives of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN>, 
+and the choice among queued entry calls of a protected object when more 
+than one <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0226">entry_barrier</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN> 
+is True.&nbsp;</div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0163-1.TXT">AI12-0163-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
+Three queuing policies, FIFO_Queuing, Ordered_FIFO_Queuing, and Priority_Queuing, 
+are language defined. If no Queuing_Policy pragma applies to any of the 
+program units comprising the partition, the queuing policy for that partition 
+is FIFO_Queuing.<A NAME="I8626"></A><A NAME="I8627"></A> The rules for 
+the FIFO_Queuing policy are specified in <A HREF="AA-9-5-3.html">9.5.3</A> 
+and <A HREF="AA-9-7-1.html">9.7.1</A>.</div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0163-1.TXT">AI12-0163-1</A></I>} 
+The Ordered_FIFO_Queuing policy is defined as follows:<A NAME="I8628"></A><A NAME="I8629"></A></div>
+<div class="paranum"><a name="p7.2">7.2/5</a></div>
+<div class="Bulleted">Calls are selected on a given entry queue in order 
+of arrival.</div>
+<div class="paranum"><a name="p7.3">7.3/5</a></div>
+<div class="Bulleted">When more than one condition of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0226">entry_barrier</A></SPAN> 
+of a protected object becomes True, and more than one of the respective 
+queues is nonempty, the call that arrived first is selected.</div>
+<div class="paranum"><a name="p7.4">7.4/5</a></div>
+<div class="Bulleted">If the expiration time of two or more open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>s 
+is the same and no other <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN>s 
+are open, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
+that is first in textual order in the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
+is executed.</div>
+<div class="paranum"><a name="p7.5">7.5/5</a></div>
+<div class="Bulleted">When more than one alternative of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
+is open and has queued calls, the alternative whose queue has the call 
+that arrived first is selected.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>A possible implementation 
+for this policy would be to assign a sequence number to each queued entry 
+call, where the sequence number is incremented globally across all queues 
+associated with the protected object or <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p7.b">7.b/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>It would have been marginally 
+easier to use textual order for the case when multiple queues are selectable. 
+But textual order can lead to unfair queue servicing, since the queues 
+in earlier textual order will end up starving the later ones if calls 
+arrive fast enough. Applying arrival first as the selector provides fairness 
+for this policy.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The Priority_Queuing 
+policy is defined as follows:<A NAME="I8630"></A><A NAME="I8631"></A></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted"><A NAME="I8632"></A>The calls to an entry [(including 
+a member of an entry family)] are queued in an order consistent with 
+the priorities of the calls. The <I>priority of an entry call</I> is 
+initialized from the active priority of the calling task at the time 
+the call is made, but can change later. Within the same priority, the 
+order is consistent with the calling (or requeuing, or priority setting) 
+time (that is, a FIFO order).</div>
+<div class="paranum"><a name="p10">10/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0075">8652/0075</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00205.TXT">AI95-00205-01</A></I>} 
+After a call is first queued, changes to the active priority of a task 
+do not affect the priority of the call, unless the base priority of the 
+task is set while the task is blocked on an entry call.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">When the base priority of a task is set (see <A HREF="AA-D-5.html">D.5</A>), 
+if the task is blocked on an entry call, and the call is queued, the 
+priority of the call is updated to the new active priority of the calling 
+task. This causes the call to be removed from and then reinserted in 
+the queue at the new active priority.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>A task is blocked on an entry 
+call if the entry call is simple, conditional, or timed. If the call 
+came from the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0246">triggering_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0244">asynchronous_select</A></SPAN>, 
+or a requeue thereof, then the task is not blocked on that call; such 
+calls do not have their priority updated. Thus, there can exist many 
+queued calls from a given task (caused by many nested ATC's), but a task 
+can be blocked on only one call at a time.</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations">A previous version of Ada 9X required queue 
+reordering in the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0244">asynchronous_select</A></SPAN> 
+case as well. If the call corresponds to a &ldquo;synchronous&rdquo; 
+entry call, then the task is blocked while queued, and it makes good 
+sense to move it up in the queue if its priority is raised.</div>
+<div class="paranum"><a name="p11.c">11.c</a></div>
+<div class="Annotations">However, if the entry call is &ldquo;asynchronous,&rdquo; 
+that is, it is due to an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0244">asynchronous_select</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0246">triggering_statement</A></SPAN> 
+is an entry call, then the task is not waiting for this entry call, so 
+the placement of the entry call on the queue is irrelevant to the rate 
+at which the task proceeds.</div>
+<div class="paranum"><a name="p11.d">11.d</a></div>
+<div class="Annotations">Furthermore, when an entry is used for <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0244">asynchronous_select</A></SPAN>s, 
+it is almost certain to be a &ldquo;broadcast&rdquo; entry or have only 
+one caller at a time. For example, if the entry is used to notify tasks 
+of a mode switch, then all tasks on the entry queue would be signaled 
+when the mode changes. Similarly, if it is indicating some interrupting 
+event such as a control-C, all tasks sensitive to the interrupt will 
+want to be informed that the event occurred. Hence, the order on such 
+a queue is essentially irrelevant.</div>
+<div class="paranum"><a name="p11.e">11.e</a></div>
+<div class="Annotations">Given the above, it seems an unnecessary semantic 
+and implementation complexity to specify that asynchronous queued calls 
+are moved in response to dynamic priority changes. Furthermore, it is 
+somewhat inconsistent, since the call was originally queued based on 
+the active priority of the task, but dynamic priority changes are changing 
+the base priority of the task, and only indirectly the active priority. 
+We say explicitly that asynchronous queued calls are not affected by 
+normal changes in active priority during the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0247">abortable_part</A></SPAN>. 
+Saying that, if a change in the base priority affects the active priority, 
+then we do want the calls reordered, would be inconsistent. It would 
+also require the implementation to maintain a readily accessible list 
+of all queued calls which would not otherwise be necessary.</div>
+<div class="paranum"><a name="p11.f">11.f</a></div>
+<div class="Annotations">Several rules were removed or simplified when 
+we changed the rules so that calls due to <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0244">asynchronous_select</A></SPAN>s 
+are never moved due to intervening changes in active priority, be they 
+due to protected actions, some other priority inheritance, or changes 
+in the base priority.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">When more than one <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0226">entry_barrier</A></SPAN> 
+of a protected object becomes True, and more than one of the respective 
+queues is nonempty, the call with the highest priority is selected. If 
+more than one such call has the same priority, the call that is queued 
+on the entry whose declaration is first in textual order in the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN> 
+is selected. For members of the same entry family, the one with the lower 
+family index is selected.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">If the expiration time of two or more open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>s 
+is the same and no other <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN>s 
+are open, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
+that is first in textual order in the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
+is executed.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">When more than one alternative of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
+is open and has queued calls, an alternative whose queue has the highest-priority 
+call at its head is selected. If two or more open alternatives have equal-priority 
+queued calls, then a call on the entry in the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN> 
+that is first in textual order in the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
+is selected.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+Implementations are allowed to define other queuing policies, but need 
+not support more than one queuing policy per partition.&nbsp;</div>
+<div class="paranum"><a name="p15.a.1">15.a.1/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="defect2.html#8652/0116">8652/0116</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00069.TXT">AI95-00069-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+This rule is really redundant, as <A HREF="AA-10-1-5.html">10.1.5</A> 
+allows an implementation to limit the use of configuration pragmas to 
+an empty environment. In that case, there would be no way to have multiple 
+policies in a partition.&nbsp;</div>
+<div class="paranum"><a name="p15.1">15.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+Implementations are allowed to defer the reordering of entry queues following 
+a change of base priority of a task blocked on the entry call if it is 
+not practical to reorder the queue immediately.&nbsp;</div>
+<div class="paranum"><a name="p15.a.2">15.a.2/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Priority change is immediate, 
+but the effect of the change on entry queues can be deferred. That is 
+necessary in order to implement priority changes on top of a non-Ada 
+kernel.&nbsp;</div>
+<div class="paranum"><a name="p15.a.3">15.a.3/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The reordering should occur 
+as soon as the blocked task can itself perform the reinsertion into the 
+entry queue.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">The implementation should use names that end with 
+&ldquo;_Queuing&rdquo; for implementation-defined queuing policies.</div>
+<div class="paranum"><a name="p16.a">16.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Names that end 
+with &ldquo;_Queuing&rdquo; should be used for implementation-defined 
+queuing policies.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">single_task_declaration</A></SPAN>), 
+protected type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN>), 
+or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>, 
+the following language-defined representation aspect may be specified:</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="WideHanging-Term">Max_Entry_Queue_Length</div><div class="WideHanging-Body"><br clear="left">
+The type of aspect Max_Entry_Queue_Length is Integer.<A NAME="I8633"></A><A NAME="I8634"></A></div>
+<div class="paranum"><a name="p18.a">18.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Max_Entry_Queue_Length: 
+</B>The maximum entry queue length for a task type, protected type, or 
+entry.</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="WideHanging-Term">If directly specified, the aspect_definition 
+shall be a static expression no less than -1. If not specified, the aspect 
+has value -1 (representing no additional restriction on queue length). 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+If the Max_Entry_Queue_Length aspect for a type has a nonnegative value, 
+the Max_Entry_Queue_Length aspect for every individual entry of that 
+type shall not be greater than the value of the aspect for the type. 
+The Max_Entry_Queue_Length aspect of a type is nonoverridable.</div>
+<div class="paranum"><a name="p20.a">20.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Aspect Max_Entry_Queue_Length 
+can specify less than the partition-wide or type-wide default, but it 
+can't expand the length of a queue.&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+If a restriction Max_Entry_Queue_Length applies to a partition, any value 
+specified for the Max_Entry_Queue_Length aspect specified for the declaration 
+of a type or entry in the partition shall not be greater than the value 
+of the restriction.</div>
+<div class="paranum"><a name="p21.a">21.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>13.12(6) says that the 
+restriction value has to be static, so this is statically checkable. 
+But the restriction does not have to be in the same compilation as the 
+aspect, so the check cannot, in general, be done until link time.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+If a nonconfirming value is specified for Max_Entry_Queue_Length for 
+a type, and an entry call or requeue would cause the queue for any entry 
+of the type to become longer than the specified value, then Program_Error 
+is raised at the point of the call or requeue.<A NAME="I8635"></A></div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+If a nonconfirming value is specified for Max_Entry_Queue_Length for 
+an entry, and an entry call or requeue would cause the queue for an entry 
+to become longer than the specified value, then Program_Error is raised 
+at the point of the call or requeue.<A NAME="I8636"></A>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p23.a">23.a/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0074">8652/0074</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00068.TXT">AI95-00068-01</A></I>} 
+<B>Corrigendum:</B> Corrected the number of queuing policies defined.</div>
+<div class="paranum"><a name="p23.b">23.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0075">8652/0075</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00205.TXT">AI95-00205-01</A></I>} 
+<B>Corrigendum:</B> Corrected so that a call of Set_Priority in an abortable 
+part does not change the priority of the triggering entry call.</div>
+<div class="paranum"><a name="p23.c">23.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+Added a permission to defer queue reordering when the base priority of 
+a task is changed. This is a counterpart to stronger requirements on 
+the implementation of priority change.</div>
+<div class="paranum"><a name="p23.d">23.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+Clarified that an implementation need support only one queuing policy 
+(of any kind, language-defined or otherwise) per partition.</div>
+<div class="paranum"><a name="p23.e">23.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+Fixed wording to make clear that <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+never appears inside of a unit; rather it &ldquo;applies to&rdquo; the 
+unit.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p23.f">23.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0163-1.TXT">AI12-0163-1</A></I>} 
+<A NAME="I8637"></A>Defined the new queuing policy Ordered_FIFO_Queuing.</div>
+<div class="paranum"><a name="p23.g">23.g/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+Defined the new aspect Max_Enty_Queue_Length.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

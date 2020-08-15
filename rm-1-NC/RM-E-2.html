@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Categorization of Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.2 Categorization of Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Library units can be categorized according to the 
+role they play in a distributed program. Certain restrictions are associated 
+with each category to ensure that the semantics of a distributed program 
+remain close to the semantics for a nondistributed program.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I6021"></A><A NAME="I6022"></A><A NAME="I6023"></A><A NAME="I6024"></A><A NAME="I6025"></A>A 
+<I>categorization pragma</I> is a library unit pragma (see <A HREF="RM-10-1-5.html">10.1.5</A>) 
+that restricts the declarations, child units, or semantic dependences 
+of the library unit to which it applies. A <I>categorized library unit</I> 
+is a library unit to which a categorization pragma applies.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The pragmas Shared_Passive, Remote_Types, and Remote_Call_Interface 
+are categorization pragmas. In addition, for the purposes of this Annex, 
+the pragma Pure (see <A HREF="RM-10-2-1.html">10.2.1</A>) is considered 
+a categorization pragma.</div>
+<div class="paranum"><a name="p4">4/1</a></div>
+<div class="Normal"><A NAME="I6026"></A>A library package or generic 
+library package is called a <I>shared passive</I> library unit if a Shared_Passive 
+pragma applies to it. <A NAME="I6027"></A> A library package or generic 
+library package is called a <I>remote types</I> library unit if a Remote_Types 
+pragma applies to it. <A NAME="I6028"></A> A library unit is called a 
+<I>remote call interface</I> if a Remote_Call_Interface pragma applies 
+to it. <A NAME="I6029"></A>A <I>normal library unit</I> is one to which 
+no categorization pragma applies.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The various categories of library units and the associated 
+restrictions are described in this clause and its subclauses. The categories 
+are related hierarchically in that the library units of one category 
+can depend semantically only on library units of that category or an 
+earlier one, except that the body of a remote types or remote call interface 
+library unit is unrestricted.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The overall hierarchy 
+(including declared pure) is as follows:&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="WideHanging-Term">Declared Pure&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Can depend only on other declared pure library units;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="WideHanging-Term">Shared Passive&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Can depend only on other shared passive or declared pure library units;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="WideHanging-Term">Remote Types&nbsp;</div><div class="WideHanging-Body">
+The declaration of the library unit can depend only on other remote types 
+library units, or one of the above library unit categories, or limited 
+views, or preelaborated normal library units that are mentioned only 
+in private with clauses; the body of the library unit is unrestricted;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="WideHanging-Term">Remote Call Interface&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+The declaration of the library unit can depend only on other remote call 
+interfaces, or one of the above; the body of the library unit is unrestricted;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="WideHanging-Term">Normal&nbsp;</div><div class="WideHanging-Body">
+Unrestricted.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Declared pure and shared passive library units are 
+preelaborated. The declaration of a remote types or remote call interface 
+library unit is required to be preelaborable.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">Implementations are allowed to define other categorization 
+pragmas.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

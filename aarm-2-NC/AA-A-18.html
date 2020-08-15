@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Containers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18 Containers</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+This clause presents the specifications of the package Containers and 
+several child packages, which provide facilities for storing collections 
+of elements.</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+A variety of sequence and associative containers are provided. Each container 
+includes a <I>cursor</I> type. A cursor is a reference to an element 
+within a container. Many operations on cursors are common to all of the 
+containers. A cursor referencing an element in a container is considered 
+to be overlapping with the container object itself.<A NAME="I6451"></A> 
+<A NAME="I6452"></A></div>
+<div class="paranum"><a name="p2.a">2.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The last sentence is intended 
+to clarify that operations that just use a cursor are on the same footing 
+as operations that use a container in terms of the reentrancy rules of 
+<A HREF="AA-A.html">Annex A</A>.&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+Within this clause we provide Implementation Advice for the desired average 
+or worst case time complexity of certain operations on a container. This 
+advice is expressed using the Landau symbol <I>O</I>(X). Presuming f 
+is some function of a length parameter N and t(N) is the time the operation 
+takes (on average or worst case, as specified) for the length N, a complexity 
+of <I>O</I>(f(N)) means that there exists a finite A such that for any 
+N, t(N)/f(N) &lt; A. <A NAME="I6453"></A><A NAME="I6454"></A></div>
+<div class="paranum"><a name="p3.a">3.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Of course, an implementation 
+can do better than a specified <I>O</I>(f(N)): for example, <I>O</I>(1) 
+meets the requirements for <I>O</I>(log N).</div>
+<div class="paranum"><a name="p3.b">3.b/2</a></div>
+<div class="Annotations">This concept seems to have as many names as 
+there are authors. We used &ldquo;Landau symbol&rdquo; because that's 
+what our reference does. But we'd also seen this referred as big-O notation<A NAME="I6455"></A> 
+(sometimes written as <I>big-oh</I>), and as Bachmann notation. Whatever 
+the name, it always has the above definition.&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">If the advice suggests that the complexity should 
+be less than <I>O</I>(f(N)), then for any arbitrarily small positive 
+real D, there should exist a positive integer M such that for all N &gt; 
+M, t(N)/f(N) &lt; D.</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+This clause provides a number of useful containers for Ada. Only the 
+most useful containers are provided. Ones that are relatively easy to 
+code, redundant, or rarely used are omitted from this set, even if they 
+are generally included in containers libraries.</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="Annotations">The containers packages are modeled on the Standard 
+Template Library (STL), an algorithms and data structure library popularized 
+by Alexander Stepanov, and included in the C++ standard library. The 
+structure and terminology differ from the STL where that better maps 
+to common Ada usage. For instance, what the STL calls &ldquo;iterators&rdquo; 
+are called &ldquo;cursors&rdquo; here.</div>
+<div class="paranum"><a name="p4.c">4.c/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The following 
+major nonlimited containers are provided:</div>
+<div class="paranum"><a name="p4.d">4.d/2</a></div>
+<div class="SmallBulleted">(Expandable) Vectors of any nonlimited type;</div>
+<div class="paranum"><a name="p4.e">4.e/2</a></div>
+<div class="SmallBulleted">Doubly-linked Lists of any nonlimited type;</div>
+<div class="paranum"><a name="p4.f">4.f/2</a></div>
+<div class="SmallBulleted">Hashed Maps keyed by any nonlimited hashable 
+type, and containing any nonlimited type;</div>
+<div class="paranum"><a name="p4.g">4.g/2</a></div>
+<div class="SmallBulleted">Ordered Maps keyed by any nonlimited ordered 
+type, and containing any nonlimited type;</div>
+<div class="paranum"><a name="p4.h">4.h/2</a></div>
+<div class="SmallBulleted">Hashed Sets of any nonlimited hashable type; 
+and</div>
+<div class="paranum"><a name="p4.i">4.i/2</a></div>
+<div class="SmallBulleted">Ordered Sets of any nonlimited ordered type.</div>
+<div class="paranum"><a name="p4.j">4.j/2</a></div>
+<div class="Annotations">Separate versions for definite and indefinite 
+element types are provided, as those for definite types can be implemented 
+more efficiently.</div>
+<div class="paranum"><a name="p4.k">4.k/2</a></div>
+<div class="Annotations">Each container includes a cursor, which is a 
+reference to an element within a container. Cursors generally remain 
+valid as long as the container exists and the element referenced is not 
+deleted. Many operations on cursors are common to all of the containers. 
+This makes it possible to write generic algorithms that work on any kind 
+of container.</div>
+<div class="paranum"><a name="p4.l">4.l/2</a></div>
+<div class="Annotations">The containers packages are structured so that 
+additional packages can be added in the future. Indeed, we hope that 
+these packages provide the basis for a more extensive secondary standard 
+for containers.</div>
+<div class="paranum"><a name="p4.m">4.m/2</a></div>
+<div class="Annotations">If containers with similar functionality (but 
+different performance characteristics) are provided (by the implementation 
+or by a secondary standard), we suggest that a prefix be used to identify 
+the class of the functionality: &quot;Ada.Containers.Bounded_Sets&quot; 
+(for a set with a maximum number of elements); &quot;Ada.Containers.Protected_Maps&quot; 
+(for a map which can be accessed by multiple tasks at one time); &quot;Ada.Containers.Persistent_Vectors&quot; 
+(for a persistent vector which continues to exist between executions 
+of a program) and so on.</div>
+<div class="paranum"><a name="p4.n">4.n/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Note that the 
+language already includes several requirements that are important to 
+the use of containers. These include:</div>
+<div class="paranum"><a name="p4.o">4.o/2</a></div>
+<div class="SmallBulleted">Library packages must be reentrant &ndash; 
+multiple tasks can use the packages as long as they operate on separate 
+containers. Thus, it is only necessary for a user to protect a container 
+if a single container needs to be used by multiple tasks.</div>
+<div class="paranum"><a name="p4.p">4.p/2</a></div>
+<div class="SmallBulleted">Language-defined types must stream &quot;properly&quot;. 
+That means that the stream attributes can be used to implement persistence 
+of containers when necessary, and containers can be passed between partitions 
+of a program.</div>
+<div class="paranum"><a name="p4.q">4.q/2</a></div>
+<div class="SmallBulleted">Equality of language-defined types must compose 
+&ldquo;properly&rdquo;. This means that the version of &quot;=&quot; 
+directly used by users is the same one that will be used in generics 
+and in predefined equality operators of types with components of the 
+containers and/or cursors. This prevents the abstraction from breaking 
+unexpectedly.</div>
+<div class="paranum"><a name="p4.r">4.r/2</a></div>
+<div class="Annotations">If a container's element type is controlled, 
+the point at which the element is finalized will depend on the implementation 
+of the container. We do not specify precisely where this will happen 
+(it will happen no later than the finalization of the container, of course) 
+in order to give implementation's flexibility to cache, block, or split 
+the nodes of the container. In particular, Delete does not necessarily 
+finalize the element; the implementation may (or may not) hold the space 
+for reuse.</div>
+<div class="paranum"><a name="p4.s">4.s/2</a></div>
+<div class="Annotations">This is not likely to be a hardship, as the 
+element type has to be nonlimited. Types used to manage scarce resources 
+generally need to be limited. Otherwise, the amount of resources needed 
+is hard to control, as the language allows a lot of variation in the 
+number or order of adjusts/finalizations. For common uses of nonlimited 
+controlled types such as managing storage, the types already have to 
+manage arbitrary copies.</div>
+<div class="paranum"><a name="p4.t">4.t/2</a></div>
+<div class="Annotations">The use of controlled types also brings up the 
+possibility of failure of finalization (and thus deallocation) of an 
+element. This is a &ldquo;serious bug&rdquo;, as AI95-179 puts it, so 
+we don't try to specify what happens in that case. The implementation 
+should propagate the exception.&nbsp;</div>
+<div class="paranum"><a name="p4.u">4.u/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>It is expected that 
+exceptions propagated from these operations do not damage containers. 
+That is, if Storage_Error is propagated because of an allocation failure, 
+or Constraint_Error is propagated by the assignment of elements, the 
+container can continue to be used without further exceptions. The intent 
+is that it should be possible to recover from errors without losing data. 
+We don't try to state this formally in most cases, because it is hard 
+to define precisely what is and is not allowed behavior.&nbsp;</div>
+<div class="paranum"><a name="p4.v">4.v/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>When this clause 
+says that the behavior of something is unspecified<A NAME="I6456"></A>, 
+we really mean that any result of executing Ada code short of erroneous 
+execution is allowed. We do not mean that memory not belonging to the 
+parameters of the operation can be trashed. When we mean to allow erroneous 
+behavior, we specifically say that execution is erroneous. All this means 
+if the containers are written in Ada is that checks should not be suppressed 
+or removed assuming some behavior of other code, and that the implementation 
+should take care to avoid creating internal dangling accesses by assuming 
+behavior from generic formals that can't be guaranteed. We don't try 
+to say this normatively because it would be fairly complex, and implementers 
+are unlikely to increase their support costs by fielding implementations 
+that are unstable if given buggy hash functions, et al.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p4.w">4.w/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<A NAME="I6457"></A>This clause is new. It just provides an introduction 
+to the following subclauses.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

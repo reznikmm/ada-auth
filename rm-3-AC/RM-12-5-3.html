@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Formal Array Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>12.5.3 Formal Array Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">The <span class="insert2">category</span><span class="delete2">&nbsp;class</span> 
+determined for a formal array type is the <span class="insert2">category</span><span class="delete2">&nbsp;class</span> 
+of all array types.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">formal_array_type_definition</SPAN><A NAME="I4980"></A><A NAME="S0292"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4981"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The only form of <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+that is allowed within the declaration of a generic formal (constrained) 
+array subtype is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a formal array 
+subtype, the actual subtype shall satisfy the following conditions:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">The formal array type and the actual array type 
+shall have the same dimensionality; the formal subtype and the actual 
+subtype shall be either both constrained or both unconstrained.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">For each index position, the index types shall 
+be the same, and the index subtypes (if unconstrained), or the index 
+ranges (if constrained), shall statically match (see <A HREF="RM-4-9-1.html">4.9.1</A>). 
+<A NAME="I4982"></A></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">The component subtypes of the formal and actual 
+array types shall statically match. <A NAME="I4983"></A></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">If the formal type has aliased components, then 
+so shall the actual.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of formal 
+array types:</I>&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;given&nbsp;the&nbsp;generic&nbsp;package&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Item&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index&nbsp;&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Vector&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Index&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Item;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Table&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Index)&nbsp;<B>of</B>&nbsp;Item;<BR>
+<B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;and&nbsp;the&nbsp;types&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>type</B>&nbsp;Mix&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Color&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Boolean;<BR>
+<B>type</B>&nbsp;Option&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Color)&nbsp;<B>of</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;then&nbsp;Mix&nbsp;can&nbsp;match&nbsp;Vector&nbsp;and&nbsp;Option&nbsp;can&nbsp;match&nbsp;Table&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>package</B>&nbsp;R&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;P(Item&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Boolean,&nbsp;Index&nbsp;=&gt;&nbsp;Color,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector&nbsp;=&gt;&nbsp;Mix,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Table&nbsp;=&gt;&nbsp;Option);</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;Note&nbsp;that&nbsp;Mix&nbsp;cannot&nbsp;match&nbsp;Table&nbsp;and&nbsp;Option&nbsp;cannot&nbsp;match&nbsp;Vector</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

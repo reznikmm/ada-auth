@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Non-Preemptive Dispatching</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.4 Non-Preemptive Dispatching</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">This subclause defines a non-preemptive task dispatching 
+policy.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+Non_Preemptive_FIFO_Within_Priorities is a task dispatching policy.<A NAME="I8134"></A><A NAME="I8135"></A></div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p2.2">2.2/5</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Dispatching.Non_Preemptive<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8136"></A><BR>
+&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Non_Preemptive);</span><BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8137"></A>Yield_To_Higher;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8138"></A>Yield_To_Same_Or_Higher&nbsp;<B>renames</B>&nbsp;Yield;<BR>
+<B>end</B>&nbsp;Ada.Dispatching.Non_Preemptive;</div>
+<div class="paranum"><a name="p2.3">2.3/3</a></div>
+<div class="Normal">&nbsp;A call of Yield_To_Higher is a task dispatching 
+point for this policy. If the task at the head of the highest priority 
+ready queue has a higher active priority than the calling task, then 
+the calling task is preempted.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">Non_Preemptive_FIFO_Within_Priorities shall not be 
+specified as the <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+of <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching (see <A HREF="RM-D-2-2.html">D.2.2</A>).</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">When Non_Preemptive_FIFO_Within_Priorities is in 
+effect, modifications to the ready queues occur only as follows:</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Bulleted">When a blocked task becomes ready, it is added 
+at the tail of the ready queue for its active priority.</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">When the active priority of a ready task that is 
+not running changes, or the setting of its base priority takes effect, 
+the task is removed from the ready queue for its old active priority 
+and is added at the tail of the ready queue for its new active priority.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted">When the setting of the base priority of a running 
+task takes effect, the task is added to the tail of the ready queue for 
+its active priority.</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted">When a task executes a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN> 
+that does not result in blocking, it is added to the tail of the ready 
+queue for its active priority.&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal">For this policy, blocking or termination of a task, 
+a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN>, 
+a call to Yield_To_Higher, and a call to Yield_To_Same_Or_Higher or Yield 
+are the only task dispatching points (see <A HREF="RM-D-2-1.html">D.2.1</A>).<A NAME="I8139"></A> 
+<A NAME="I8140"></A></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">An implementation shall allow, for a single partition, 
+both the task dispatching policy to be specified as Non_Preemptive_FIFO_Within_Priorities 
+and also the locking policy (see <A HREF="RM-D-3.html">D.3</A>) to be 
+specified as Ceiling_Locking.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal">Since implementations are allowed to round all ceiling 
+priorities in subrange System.Priority to System.Priority'Last (see <A HREF="RM-D-3.html">D.3</A>), 
+an implementation may allow a task of a partition using the Non_Premptive_FIFO_Within_Priorities 
+policy to execute within a protected object without raising its active 
+priority provided the associated protected unit does not contain any 
+subprograms with aspects Interrupt_Handler or Attach_Handler specified, 
+nor does the unit have aspect Interrupt_Priority  specified. When the 
+locking policy (see <A HREF="RM-D-3.html">D.3</A>) is Ceiling_Locking, 
+an implementation taking advantage of this permission shall ensure that 
+a call to Yield_to_Higher that occurs within a protected action uses 
+the ceiling priority of the protected object (rather than the active 
+priority of the task) when determining whether to preempt the task.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

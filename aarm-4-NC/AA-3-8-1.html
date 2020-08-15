@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Variant Parts and Discrete Choices</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.8.1 Variant Parts and Discrete Choices</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A record type with a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+specifies alternative lists of components. Each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+defines the components for the value or values of the discriminant covered 
+by its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I2201"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">Discrete_choice_list</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+are said to <I>cover</I> values as defined below; which <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+covers a value determines which of various alternatives is chosen. These 
+are used in <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>s. 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="Annotations">The definition of &ldquo;cover&rdquo; in this 
+subclause and the rules about discrete choices are designed so that they 
+are also appropriate for array aggregates and case statements.</div>
+<div class="paranum"><a name="p1.c">1.c</a></div>
+<div class="Annotations">The rules of this subclause intentionally parallel 
+those for case statements.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">variant_part</SPAN><A NAME="I2202"></A><A NAME="S0071"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>discriminant_</I><A NAME="I2203"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2204"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I2205"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">variant</SPAN><A NAME="I2206"></A><A NAME="S0072"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I2207"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2208"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">discrete_choice_list</SPAN><A NAME="I2209"></A><A NAME="S0073"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2210"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>&nbsp;{|&nbsp;<A NAME="I2211"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>}</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
+<SPAN Class="swiss">discrete_choice</SPAN><A NAME="I2212"></A><A NAME="S0074"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2213"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">choice_expression</A></SPAN>&nbsp;|&nbsp;<I>discrete_</I><A NAME="I2214"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I2215"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>&nbsp;|&nbsp;<B>others</B></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I2216"></A>The <I>discriminant_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+shall resolve to denote a discriminant (called the <I>discriminant of 
+the&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-3-8-1.html#S0071">variant_part</A></I></SPAN><I></I>) 
+specified in the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+that contains the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>. 
+<A NAME="I2217"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+is the type of the discriminant of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+has to have a (new) <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>; 
+the discriminant of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+cannot be an inherited discriminant.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">The discriminant of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+shall be of a discrete type.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>It shall not be of an access 
+type, named or anonymous.</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">choice_expression</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>s 
+given as <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+shall be static. The <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<B>others</B> shall appear alone in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
+and such a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
+if it appears, shall be the last one in the enclosing construct.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2218"></A>A 
+<SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+is defined to <I>cover a value</I> in the following cases:&nbsp;</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">choice_expression</A></SPAN> 
+covers a value if the value equals the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">choice_expression</A></SPAN> 
+converted to the expected type.</div>
+<div class="paranum"><a name="p10.1">10.1/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+covers all values (possibly none) that belong to the subtype and that 
+satisfy the static predicates of the subtype (see <A HREF="AA-3-2-4.html">3.2.4</A>).</div>
+<div class="paranum"><a name="p10.a">10.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+A dynamic predicate is never allowed in this case (for <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>s, 
+a subtype with a dynamic predicate isn't static and thus isn't allowed 
+in a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>, 
+and for a choice in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
+a dynamic predicate is explicitly disallowed &mdash; see <A HREF="AA-3-2-4.html">3.2.4</A>). 
+</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+covers all values (possibly none) that belong to the range.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<B>others</B> covers all values of its expected type that are not covered 
+by previous <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>s 
+of the same construct.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>s, 
+this includes values outside the range of the static subtype (if any) 
+to be covered by the choices. It even includes values outside the base 
+range of the case expression's type, since values of numeric types (and 
+undefined values of any scalar type?) can be outside their base range. 
+</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I2219"></A>A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+covers a value if one of its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+covers the value.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The possible values 
+of the discriminant of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+shall be covered as follows:&nbsp;</div>
+<div class="paranum"><a name="p15">15/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+If the discriminant is of a static constrained scalar subtype then, except 
+within an instance of a generic unit, each non-<B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+shall cover only values in that subtype that satisfy its predicates, 
+and each value of that subtype that satisfies its predicates shall be 
+covered by some <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+[(either explicitly or by <B>others</B>)];</div>
+<div class="paranum"><a name="p15.a">15.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+The exemption for a discriminated type declared in an instance allows 
+the following example:&nbsp;</div>
+<div class="paranum"><a name="p15.b">15.b/3</a></div>
+<div class="SmallExamples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;new</B>&nbsp;Integer;<BR>
+<B>package</B>&nbsp;G&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Rec&nbsp;(Discrim&nbsp;:&nbsp;T)&nbsp;<B>is&nbsp;record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Discrim&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;-10&nbsp;..&nbsp;-1&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foo&nbsp;:&nbsp;Float;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when&nbsp;others</B>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;case</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;record</B>;<BR>
+<B>end</B>&nbsp;G;</div>
+<div class="paranum"><a name="p15.c">15.c/3</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;I&nbsp;<B>is&nbsp;new</B>&nbsp;G&nbsp;(Natural);&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal</I></SPAN></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If the type of the discriminant is a descendant of a generic formal scalar 
+type, then the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+shall have an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The base range is not known statically 
+in this case.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">Otherwise, each value of the base range of the 
+type of the discriminant shall be covered [(either explicitly or by <B>others</B>)]. 
+</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">Two distinct <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+shall not cover the same value.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+is specified by <B>null</B>, the variant has no components.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I2220"></A><A NAME="I2221"></A>The discriminant 
+of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+is said to <I>govern</I> the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+and its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s. 
+In addition, the discriminant of a derived type governs a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+and its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s 
+if it corresponds (see <A HREF="AA-3-7.html">3.7</A>) to the discriminant 
+of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">A record value contains the values of the components 
+of a particular <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+only if the value of the discriminant governing the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+is covered by the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>. 
+This rule applies in turn to any further <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+that is, itself, included in the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
+of the given <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>.</div>
+<div class="paranum"><a name="p21.1">21.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+When an object of a discriminated type <I>T</I> is initialized by default, 
+Constraint_Error is raised if no <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+of any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+of <I>T</I> covers the value of the discriminant that governs the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>. 
+When a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+appears in the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
+of another <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+<I>V</I>, this test is only applied if the value of the discriminant 
+governing <I>V</I> is covered by the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+of <I>V</I>.&nbsp;</div>
+<div class="paranum"><a name="p21.a">21.a/3</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This is not a &ldquo;check&rdquo;; 
+it cannot be suppressed. However, in most cases it is not necessary to 
+generate any code to raise this exception. A test is needed (and can 
+fail) in the case where the discriminant subtype has a Static_Predicate 
+specified, it also has predicate checking disabled, and the discriminant 
+governs a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+which lacks a <B>when others</B> choice.</div>
+<div class="paranum"><a name="p21.b">21.b/3</a></div>
+<div class="Annotations">The test also could fail for a static discriminant 
+subtype with range checking suppressed and the discriminant governs a 
+<SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+which lacks a <B>when others</B> choice. But execution is erroneous if 
+a range check that would have failed is suppressed (see <A HREF="AA-11-5.html">11.5</A>), 
+so an implementation does not have to generate code to check this case. 
+(An unchecked failed predicate does not cause erroneous execution, so 
+the test is required in that case.)</div>
+<div class="paranum"><a name="p21.c">21.c/3</a></div>
+<div class="Annotations">Like the checks associated with a per-object 
+constraint, this test is not made during the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal"><A NAME="I2222"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
+of each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+in the order in which they appear.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of record 
+type with a variant part:&nbsp;</I></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples"><B>type</B>&nbsp;Device&nbsp;<B>is</B>&nbsp;(Printer,&nbsp;Disk,&nbsp;Drum);<BR>
+<B>type</B>&nbsp;State&nbsp;&nbsp;<B>is</B>&nbsp;(Open,&nbsp;Closed);</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples"><B>type</B>&nbsp;Peripheral(Unit&nbsp;:&nbsp;Device&nbsp;:=&nbsp;Disk)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status&nbsp;:&nbsp;State;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Unit&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Printer&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Line_Count&nbsp;:&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Page_Size;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<B>others</B>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cylinder&nbsp;&nbsp;&nbsp;:&nbsp;Cylinder_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Track&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Track_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of record 
+subtypes:</I>&nbsp;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>subtype</B>&nbsp;Drum_Unit&nbsp;<B>is</B>&nbsp;Peripheral(Drum);<BR>
+<B>subtype</B>&nbsp;Disk_Unit&nbsp;<B>is</B>&nbsp;Peripheral(Disk);</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of constrained 
+record variables:</I>&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples">Writer&nbsp;&nbsp;&nbsp;:&nbsp;Peripheral(Unit&nbsp;&nbsp;=&gt;&nbsp;Printer);<BR>
+Archive&nbsp;&nbsp;:&nbsp;Disk_Unit;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p29.a">29.a</a></div>
+<div class="Annotations"><A NAME="I2223"></A>In Ada 83, the discriminant 
+of a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN> 
+is not allowed to be of a generic formal type. This restriction is removed 
+in Ada 95; an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+is required in this case.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p29.b">29.b</a></div>
+<div class="Annotations">The syntactic category <SPAN Class="swiss">choice</SPAN> 
+is removed. The syntax rules for <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+now use <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+instead. The syntax rule for <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN> 
+now defines its own syntax for named associations.</div>
+<div class="paranum"><a name="p29.c">29.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+We have added the term Discrete Choice to the title since this is where 
+they are talked about. This is analogous to the name of the subclause 
+&quot;Index Constraints and Discrete Ranges&quot; in the subclause on 
+Array Types.</div>
+<div class="paranum"><a name="p29.d">29.d</a></div>
+<div class="Annotations">The rule requiring that the discriminant denote 
+a discriminant of the type being defined seems to have been left implicit 
+in RM83.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p29.e">29.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0158-1.TXT">AI05-0158-1</A></I>} 
+<A NAME="I2224"></A>Membership tests are no longer allowed as a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>, 
+in order that those tests can be expanded to allow multiple tests in 
+a single expression without ambiguity. Since a membership test has a 
+boolean type, they are very unlikely to be used as a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p29.f">29.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+<A NAME="I2225"></A>Subtypes with static predicates can be used in <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s, 
+and the coverage rules are modified to respect the predicates.</div>
+<div class="paranum"><a name="p29.g">29.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+Variants in generic specifications are no longer rejected if the subtype 
+of the actual type does not include all of the case choices. This probably 
+isn't useful, but it is consistent with the treatment of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>s. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p29.h">29.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+Added a test that some <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
+covers the value of a discriminant that governs a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>. 
+This is similar to the test that some case limb covers the value of the 
+<I>Selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>. 
+This test cannot change the behavior of any nonerroneous Ada 2005 program, 
+so it is not an inconsistency.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p29.i">29.i/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+<B>Corrigendum:</B> Updated wording of the coverage rules to use the 
+new term &quot;satisfies the predicates&quot; (see <A HREF="AA-3-2-4.html">3.2.4</A>). 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

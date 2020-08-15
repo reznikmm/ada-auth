@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Enumeration Representation Clauses</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.4 Enumeration Representation Clauses</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN> 
+specifies the internal codes for enumeration literals.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I5127"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5128"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5129"></A><SPAN Class="swiss"><A HREF="RM-13-4.html#S0312">enumeration_aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I5130"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5131"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I5132"></A>The <SPAN Class="swiss"><A HREF="RM-13-4.html#S0312">enumeration_aggregate</A></SPAN> 
+shall be written as a one-dimensional <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
+for which the index subtype is the unconstrained subtype of the enumeration 
+type, and each component expression is expected to be of any integer 
+type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN> 
+shall denote an enumeration subtype.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">Each component of the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+shall be given by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+rather than a &lt;&gt;. The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
+given in the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+shall be static, and shall specify distinct integer codes for each value 
+of the enumeration type; the associated integer codes shall satisfy the 
+predefined ordering relation of the type.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><span class="insert3"><A NAME="I5133"></A></span><span class="delete3"><A NAME="I5134"></A><A NAME="I5135"></A></span>An 
+<SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN> 
+specifies the <I>coding</I> aspect of representation. <A NAME="I5136"></A>The 
+coding consists of the <I>internal code</I> for each enumeration literal, 
+that is, the integral value used internally to represent each literal.<span class="insert3"><A NAME="I5137"></A><A NAME="I5138"></A></span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">For nonboolean enumeration types, if the coding is 
+not specified for the type, then for each value of the type, the internal 
+code shall be equal to its position number.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5139"></A>The 
+recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN>s 
+is:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">An implementation should support at least the internal 
+codes in the range System.Min_Int..System.Max_Int. An implementation 
+need not support <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN>s 
+for boolean types.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Notes">13&nbsp;&nbsp;Unchecked_Conversion may be used to 
+query the internal codes used for an enumeration type. The attributes 
+of the type, such as Succ, Pred, and Pos, are unaffected by the <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN>. 
+For example, Pos always returns the position number, <I>not</I> the internal 
+integer code that might have been specified in an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN><span class="delete3">}</span>. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of an enumeration 
+representation clause:</I>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>type</B>&nbsp;Mix_Code&nbsp;<B>is</B>&nbsp;(ADD,&nbsp;SUB,&nbsp;MUL,&nbsp;LDA,&nbsp;STA,&nbsp;STZ);</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>for</B>&nbsp;Mix_Code&nbsp;<B>use</B><BR>
+&nbsp;&nbsp;&nbsp;(ADD&nbsp;=&gt;&nbsp;1,&nbsp;SUB&nbsp;=&gt;&nbsp;2,&nbsp;MUL&nbsp;=&gt;&nbsp;3,&nbsp;LDA&nbsp;=&gt;&nbsp;8,&nbsp;STA&nbsp;=&gt;&nbsp;24,&nbsp;STZ&nbsp;=&gt;33);</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

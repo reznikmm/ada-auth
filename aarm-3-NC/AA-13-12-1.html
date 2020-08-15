@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Language-Defined Restrictions and Profiles</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented5NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left:  11.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented5NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left:  11.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.12.1 Language-Defined Restrictions and Profiles</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
+The following <I>restriction_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+are language defined (additional restrictions are defined in the Specialized 
+Needs Annexes):</div>
+<div class="paranum"><a name="p1.1">1.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+<A NAME="I5752"></A><A NAME="I5753"></A>No_Implementation_Aspect_Specifications 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no implementation-defined aspects specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0306">aspect_specification</A></SPAN>. 
+This restriction applies only to the current compilation or environment, 
+not the entire partition.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+This restriction (as well as others below) applies only to the current 
+compilation, because it is likely that the runtime (and possibly user-written 
+low-level code) will need to use implementation-defined aspects. But 
+a partition-wide restriction applies everywhere, including the runtime. 
+</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
+<A NAME="I5754"></A><A NAME="I5755"></A>No_Implementation_Attributes 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no implementation-defined attributes. This restriction applies 
+only to the current compilation or environment, not the entire partition. 
+</div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<A NAME="I5756"></A><A NAME="I5757"></A>No_Implementation_Identifiers 
+</div><div class="WideHanging-Body"><br clear="left">
+There are no usage names that denote declarations with implementation-defined 
+identifiers that occur within language-defined packages or instances 
+of language-defined generic packages. Such identifiers can arise as follows: 
+</div>
+<div class="paranum"><a name="p2.2">2.2/3</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em">The following 
+language-defined packages and generic packages allow implementation-defined 
+identifiers:</div>
+<div class="paranum"><a name="p2.3">2.3/3</a></div>
+<div class="Indented5NestedBulleted">package System (see <A HREF="AA-13-7.html">13.7</A>);</div>
+<div class="paranum"><a name="p2.4">2.4/3</a></div>
+<div class="Indented5NestedBulleted">package Standard (see <A HREF="AA-A-1.html">A.1</A>);</div>
+<div class="paranum"><a name="p2.5">2.5/3</a></div>
+<div class="Indented5NestedBulleted">package Ada.Command_Line (see <A HREF="AA-A-15.html">A.15</A>);</div>
+<div class="paranum"><a name="p2.6">2.6/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.C (see <A HREF="AA-B-3.html">B.3</A>);</div>
+<div class="paranum"><a name="p2.7">2.7/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.C.Strings (see 
+<A HREF="AA-B-3-1.html">B.3.1</A>);</div>
+<div class="paranum"><a name="p2.8">2.8/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.C.Pointers (see 
+<A HREF="AA-B-3-2.html">B.3.2</A>);</div>
+<div class="paranum"><a name="p2.9">2.9/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.COBOL (see <A HREF="AA-B-4.html">B.4</A>);</div>
+<div class="paranum"><a name="p2.10">2.10/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces.Fortran (see 
+<A HREF="AA-B-5.html">B.5</A>);&nbsp;</div>
+<div class="paranum"><a name="p2.11">2.11/3</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em">The following 
+language-defined packages contain only implementation-defined identifiers:</div>
+<div class="paranum"><a name="p2.12">2.12/3</a></div>
+<div class="Indented5NestedBulleted">package System.Machine_Code (see 
+<A HREF="AA-13-8.html">13.8</A>);</div>
+<div class="paranum"><a name="p2.13">2.13/3</a></div>
+<div class="Indented5NestedBulleted">package Ada.Directories.Information 
+(see <A HREF="AA-A-16.html">A.16</A>);</div>
+<div class="paranum"><a name="p2.14">2.14/3</a></div>
+<div class="Indented5NestedBulleted">nested Implementation packages of 
+the Queue containers (see <A HREF="AA-A-18-28.html">A.18.28</A>-31);</div>
+<div class="paranum"><a name="p2.15">2.15/3</a></div>
+<div class="Indented5NestedBulleted">package Interfaces (see <A HREF="AA-B-2.html">B.2</A>);</div>
+<div class="paranum"><a name="p2.16">2.16/3</a></div>
+<div class="Indented5NestedBulleted">package Ada.Interrupts.Names (see 
+<A HREF="AA-C-3-2.html">C.3.2</A>).</div>
+<div class="paranum"><a name="p2.17">2.17/3</a></div>
+<div class="WideHanging-Body">For package Standard, Standard.Long_Integer 
+and Standard.Long_Float are considered language-defined identifiers, 
+but identifiers such as Standard.Short_Short_Integer are considered implementation-defined.</div>
+<div class="paranum"><a name="p2.18">2.18/3</a></div>
+<div class="WideHanging-Body">This restriction applies only to the current 
+compilation or environment, not the entire partition.</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
+<A NAME="I5758"></A><A NAME="I5759"></A>No_Implementation_Pragmas&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There are no implementation-defined pragmas or pragma arguments. This 
+restriction applies only to the current compilation or environment, not 
+the entire partition.</div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0242-1.TXT">AI05-0242-1</A></I>} 
+<A NAME="I5760"></A><A NAME="I5761"></A>No_Implementation_Units&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There is no mention in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
+of any implementation-defined descendants of packages Ada, Interfaces, 
+or System. This restriction applies only to the current compilation or 
+environment, not the entire partition.</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00368.TXT">AI95-00368-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<A NAME="I5762"></A><A NAME="I5763"></A>No_Obsolescent_Features&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+There is no use of language features defined in Annex J. It is implementation 
+defined whether uses of the renamings of <A HREF="AA-J-1.html">J.1</A> 
+and of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+of <A HREF="AA-J-15.html">J.15</A> are detected by this restriction. 
+This restriction applies only to the current compilation or environment, 
+not the entire partition.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>A 
+user could compile a rename like&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Ada.Text_IO;<BR>
+<B>package</B>&nbsp;Text_IO&nbsp;<B>renames</B>&nbsp;Ada.Text_IO;</div>
+<div class="paranum"><a name="p4.c">4.c/2</a></div>
+<div class="Annotations">Such a rename must not be disallowed by this 
+restriction, nor should the compilation of such a rename be restricted 
+by an implementation. Many implementations implement the renames of <A HREF="AA-J-1.html">J.1</A> 
+by compiling them normally; we do not want to require implementations 
+to use a special mechanism to implement these renames.</div>
+<div class="paranum"><a name="p4.d">4.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The pragmas have the same functionality as the corresponding aspect (unlike 
+the typical obsolescent feature), and rejecting them could be a significant 
+portability problem for existing code.&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+are language defined:</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+<A NAME="I5764"></A><A NAME="I5765"></A>No_Dependence&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Specifies a library unit on which there are no semantic dependences.</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+<A NAME="I5766"></A><A NAME="I5767"></A>No_Specification_of_Aspect&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Identifies an aspect for which no <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0306">aspect_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-13-3.html#S0309">attribute_definition_clause</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+is given.</div>
+<div class="paranum"><a name="p6.2">6.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
+<A NAME="I5768"></A><A NAME="I5769"></A>No_Use_Of_Attribute&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Identifies an attribute for which no <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-13-3.html#S0309">attribute_definition_clause</A></SPAN> 
+is given.</div>
+<div class="paranum"><a name="p6.3">6.3/3</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
+<A NAME="I5770"></A><A NAME="I5771"></A>No_Use_Of_Pragma&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Identifies a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+which is not to be used.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+of a No_Dependence restriction shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> shall 
+have the form of a full expanded name of a library unit, but need not 
+denote a unit present in the environment.</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is not resolved.&nbsp;</div>
+<div class="paranum"><a name="p7.1">7.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+of a No_Specification_of_Aspect restriction shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>; 
+this is an identifier specific to a pragma (see <A HREF="AA-2-8.html">2.8</A>) 
+and does not denote any declaration.</div>
+<div class="paranum"><a name="p7.b">7.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+is not resolved as it is an identifier specific to a pragma. As for No_Dependence, 
+there is no check that the aspect <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+is meaningful; it might refer to an implementation-defined aspect on 
+one implementation, but nothing at all on another implementation.&nbsp;</div>
+<div class="paranum"><a name="p7.2">7.2/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+of a No_Use_Of_Attribute restriction shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+or one of the reserved words Access, Delta, Digits, Mod, or Range; this 
+is an identifier specific to a pragma.</div>
+<div class="paranum"><a name="p7.c">7.c/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+is not resolved as it is an identifier specific to a pragma. There is 
+no check that the attribute identifier refers to a known <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>; 
+it might refer to an implementation-defined attribute on one implementation, 
+but nothing at all on another implementation.&nbsp;</div>
+<div class="paranum"><a name="p7.3">7.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+of a No_Use_Of_Pragma restriction shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+or the reserved word Interface; this is an identifier specific to a pragma.</div>
+<div class="paranum"><a name="p7.d">7.d/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This <SPAN Class="swiss"><A HREF="AA-13-12.html#S0320">restriction_parameter_argument</A></SPAN> 
+is not resolved as it is an identifier specific to a pragma. There is 
+no check that the pragma identifier refers to a known <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>; 
+it might refer to an implementation-defined pragma on one implementation, 
+but nothing at all on another implementation.&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+No compilation unit included in the partition shall depend semantically 
+on the library unit identified by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of a No_Dependence restriction.</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>There is no requirement 
+that the library unit actually exist. One possible use of the pragma 
+is to prevent the use of implementation-defined units; when the program 
+is ported to a different compiler, it is perfectly reasonable that no 
+unit with the name exist.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+The following <I>profile_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+is language defined:</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+<A NAME="I5772"></A>No_Implementation_Extensions&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+For usage profile No_Implementation_Extensions, there shall be no <I>profile_</I><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>s.</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+The No_Implementation_Extensions usage profile is equivalent to the following 
+restrictions:&nbsp;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples">No_Implementation_Aspect_Specifications,<BR>
+No_Implementation_Attributes,<BR>
+No_Implementation_Identifiers,<BR>
+No_Implementation_Pragmas,<BR>
+No_Implementation_Units.</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00368.TXT">AI95-00368-01</A></I>} 
+<A NAME="I5773"></A>Restrictions No_Implementation_Attributes, No_Implementation_Pragmas, 
+and No_Obsolescent_Features are new.</div>
+<div class="paranum"><a name="p13.b">13.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+Restriction No_Dependence is new.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p13.c">13.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0242-1.TXT">AI05-0242-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
+<A NAME="I5774"></A>Restrictions No_Implementation_Aspect_Specifications, 
+No_Implementation_Identifiers, No_Implementation_Units, No_Specification_of_Aspect, 
+No_Use_of_Attribute, and No_Use_of_Pragma are new.</div>
+<div class="paranum"><a name="p13.d">13.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+Profile No_Implementation_Extensions is new.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

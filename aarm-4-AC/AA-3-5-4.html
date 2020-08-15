@@ -1,0 +1,490 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Integer Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.5.4 Integer Types</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1901"></A><A NAME="I1902"></A><A NAME="I1903"></A>An 
+<SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN> 
+defines an integer type; it defines either a <I>signed</I> integer type, 
+or a <I>modular</I> integer type. The base range of a signed integer 
+type includes at least the values of the specified range. A modular type 
+is an integer type with all arithmetic modulo a specified positive <I>modulus</I>; 
+such a type corresponds to an unsigned type with wrap-around semantics. 
+<A NAME="I1904"></A></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">integer_type_definition</SPAN><A NAME="I1905"></A><A NAME="S0041"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1906"></A><SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1907"></A><SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">signed_integer_type_definition</SPAN><A NAME="I1908"></A><A NAME="S0042"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>range</B>&nbsp;<I>static_</I><A NAME="I1909"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN>&nbsp;..&nbsp;<I>static_</I><A NAME="I1910"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We don't call this a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>, 
+because it is rather different &mdash; not only is it required to be 
+static, but the associated overload resolution rules are different than 
+for normal range constraints. A similar comment applies to <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>. 
+This used to be <SPAN Class="swiss">integer_range_specification</SPAN> 
+but when we added support for modular types, it seemed overkill to have 
+three levels of syntax rules, and just calling these <SPAN Class="swiss">signed_integer_range_specification</SPAN> 
+and <SPAN Class="swiss">modular_range_specification</SPAN> loses the 
+fact that they are defining different classes of types, which is important 
+for the generic type matching rules.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">modular_type_definition</SPAN><A NAME="I1911"></A><A NAME="S0043"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>mod</B>&nbsp;<I>static_</I><A NAME="I1912"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I1913"></A>Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
+is expected to be of any integer type; they need not be of the same type. 
+<A NAME="I1914"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN> 
+is likewise expected to be of any integer type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
+shall be static, and their values shall be in the range System.Min_Int 
+.. System.Max_Int.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I1915"></A><A NAME="I1916"></A><A NAME="I1917"></A>The 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN> 
+shall be static, and its value (the <I>modulus</I>) shall be positive, 
+and shall be no greater than System.Max_Binary_Modulus if a power of 
+2, or no greater than System.Max_Nonbinary_Modulus if not.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>For a 2's-complement machine, 
+supporting nonbinary moduli greater than System.Max_Int can be quite 
+difficult, whereas essentially any binary moduli are straightforward 
+to support, up to 2*System.Max_Int+2, so this justifies having two separate 
+limits.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The set of values for a signed integer type is the 
+(infinite) set of mathematical integers[, though only values of the base 
+range of the type are fully supported for run-time operations]. The set 
+of values for a modular integer type are the values from 0 to one less 
+than the modulus, inclusive.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1918"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
+defines an integer type whose base range includes at least the values 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN>s 
+and is symmetric about zero, excepting possibly an extra negative value. 
+<A NAME="I1919"></A><A NAME="I1920"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
+also defines a constrained first subtype of the type, with a range whose 
+bounds are given by the values of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN>s, 
+converted to the type being defined.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+The base range of a signed integer type might be much larger than is 
+necessary to satisfy the <span class="insert2">above</span><span class="delete2">&nbsp;aboved</span> 
+requirements.&nbsp;</div>
+<div class="paranum"><a name="p9.a.1">9.a.1/1</a></div>
+<div class="Annotations"><span class="insert1"><B>To be honest:&nbsp;</B>The 
+conversion mentioned above is not an <I>implicit subtype conversion</I> 
+(which is something that happens at overload resolution, see <A HREF="AA-4-6.html">4.6</A>), 
+although it happens implicitly. Therefore, the freezing rules are not 
+invoked on the type (which is important so that representation items 
+can be given for the type). <A NAME="I1921"></A></span></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I1922"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN> 
+defines a modular type whose base range is from zero to one less than 
+the given modulus. <A NAME="I1923"></A><A NAME="I1924"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN> 
+also defines a constrained first subtype of the type with a range that 
+is the same as the base range of the type.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I1925"></A>There is a predefined signed 
+integer subtype named Integer[, declared in the visible part of package 
+Standard]. It is constrained to the base range of its type.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Integer is a constrained subtype, 
+rather than an unconstrained subtype. This means that on assignment to 
+an object of subtype Integer, a range check is required. On the other 
+hand, an object of subtype Integer'Base is unconstrained, and no range 
+check (only overflow check) is required on assignment. For example, if 
+the object is held in an extended-length register, its value might be 
+outside of Integer'First .. Integer'Last. All parameter and result subtypes 
+of the predefined integer operators are of such unconstrained subtypes, 
+allowing extended-length registers to be used as operands or for the 
+result. In an earlier version of Ada 95, Integer was unconstrained. However, 
+the fact that certain Constraint_Errors might be omitted or appear elsewhere 
+was felt to be an undesirable upward inconsistency in this case. Note 
+that for Float, the opposite conclusion was reached, partly because of 
+the high cost of performing range checks when not actually necessary. 
+Objects of subtype Float are unconstrained, and no range checks, only 
+overflow checks, are performed for them.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1926"></A><A NAME="I1927"></A>Integer 
+has two predefined subtypes, [declared in the visible part of package 
+Standard:]&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>subtype</B>&nbsp;Natural&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;Integer'Last;<BR>
+<B>subtype</B>&nbsp;Positive&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Integer'Last;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I1928"></A><A NAME="I1929"></A><A NAME="I1930"></A>A 
+type defined by an <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN> 
+is implicitly derived from <I>root_integer</I>, an anonymous predefined 
+(specific) integer type, whose base range is System.Min_Int .. System.Max_Int. 
+However, the base range of the new type is not inherited from <I>root_integer</I>, 
+but is instead determined by the range or modulus specified by the <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN>. 
+<A NAME="I1931"></A><A NAME="I1932"></A>[Integer literals are all of 
+the type <I>universal_integer</I>, the universal type (see <A HREF="AA-3-4-1.html">3.4.1</A>) 
+for the class rooted at <I>root_integer</I>, allowing their use with 
+the operations of any integer type.]&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This implicit derivation 
+is not considered exactly equivalent to explicit derivation via a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>. 
+In particular, integer types defined via a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+inherit their base range from their parent type. A type defined by an 
+<SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN> 
+does not necessarily inherit its base range from <I>root_integer</I>. 
+It is not specified whether the implicit derivation from <I>root_integer</I> 
+is direct or indirect, not that it really matters. All we want is for 
+all integer types to be descendants of <I>root_integer</I>.</div>
+<div class="paranum"><a name="p14.a.1">14.a.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect2.html#8652/0099">8652/0099</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00152.TXT">AI95-00152-01</A></I>} 
+<span class="insert1">Note that this derivation does not imply any inheritance 
+of subprograms. Subprograms are inherited only for types derived by a 
+<SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+(see <A HREF="AA-3-4.html">3.4</A>), or a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN> 
+(see <A HREF="AA-7-3.html">7.3</A>, <A HREF="AA-7-3-1.html">7.3.1</A>, 
+and <A HREF="AA-12-5-1.html">12.5.1</A>).</span>&nbsp;</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>It is the intent 
+that even nonstandard integer types (see below) will be descendants of 
+<I>root_integer</I>, even though they might have a base range that exceeds 
+that of <I>root_integer</I>. This causes no problem for static calculations, 
+which are performed without range restrictions (see <A HREF="AA-4-9.html">4.9</A>). 
+However for run-time calculations, it is possible that Constraint_Error 
+might be raised when using an operator of <I>root_integer</I> on the 
+result of 'Val applied to a value of a nonstandard integer type.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I1933"></A>The <I>position number</I> of 
+an integer value is equal to the value.</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00340.TXT">AI95-00340-01</A></I>} 
+For every modular subtype S, the following <span class="insert2">attributes 
+are</span><span class="delete2">&nbsp;attribute is</span> defined:&nbsp;</div>
+<div class="paranum"><a name="p16.1">16.1/2</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">S'Mod</span></div><div class="WideHanging-Body">
+<span class="insert2"><A NAME="I1934"></A><A NAME="I1935"></A></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00340.TXT">AI95-00340-01</A></I>} 
+<span class="insert2"></span><span class="insert2">S'Mod denotes a function 
+with the following specification:</span></div>
+<div class="paranum"><a name="p16.2">16.2/2</a></div>
+<div class="Indented4Examples"><span class="insert2"><B>function</B>&nbsp;S'Mod&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</span></div>
+<div class="paranum"><a name="p16.3">16.3/2</a></div>
+<div class="WideHanging-Body"><span class="insert2">This function returns 
+<I>Arg</I> <B>mod</B> S'Modulus, as a value of the type of S.</span></div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="WideHanging-Term">S'Modulus</div><div class="WideHanging-Body">
+<A NAME="I1936"></A><A NAME="I1937"></A>S'Modulus yields the modulus 
+of the type of S, as a value of the type <I>universal_integer</I>.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal"><A NAME="I1938"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN> 
+creates the integer type and its first subtype.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">For a modular type, if the result of the execution 
+of a predefined operator (see <A HREF="AA-4-5.html">4.5</A>) is outside 
+the base range of the type, the result is reduced modulo the modulus 
+of the type to a value that is within the base range of the type.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I1939"></A><A NAME="I1940"></A><A NAME="I1941"></A>For 
+a signed integer type, the exception Constraint_Error is raised by the 
+execution of an operation that cannot deliver the correct result because 
+it is outside the base range of the type. [<A NAME="I1942"></A><A NAME="I1943"></A> 
+<A NAME="I1944"></A>For any integer type, Constraint_Error is raised 
+by the operators &quot;/&quot;, &quot;<B>rem</B>&quot;, and &quot;<B>mod</B>&quot; 
+if the right operand is zero.]</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I1945"></A>In an implementation, the range 
+of Integer shall include the range &ndash;2**15+1 .. +2**15&ndash;1.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal"><A NAME="I1946"></A>If Long_Integer is predefined 
+for an implementation, then its range shall include the range &ndash;2**31+1 
+.. +2**31&ndash;1.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal">System.Max_Binary_Modulus shall be at least 2**16. 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal">For the execution of a predefined operation of a 
+signed integer type, the implementation need not raise Constraint_Error 
+if the result is outside the base range of the type, so long as the correct 
+result is produced.&nbsp;</div>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Constraint_Error is never 
+raised for operations on modular types, except for divide-by-zero (and 
+<B>rem</B>/<B>mod</B>-by-zero).&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal"><A NAME="I1947"></A><A NAME="I1948"></A>An implementation 
+may provide additional predefined signed integer types[, declared in 
+the visible part of Standard], whose first subtypes have names of the 
+form Short_Integer, Long_Integer, Short_Short_Integer, Long_Long_Integer, 
+etc. Different predefined integer types are allowed to have the same 
+base range. However, the range of Integer should be no wider than that 
+of Long_Integer. Similarly, the range of Short_Integer (if provided) 
+should be no wider than Integer. Corresponding recommendations apply 
+to any other predefined integer types. There need not be a named integer 
+type corresponding to each distinct base range supported by an implementation. 
+The range of each first subtype should be the base range of its type. 
+</div>
+<div class="paranum"><a name="p25.a">25.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The predefined 
+integer types declared in Standard.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal"><A NAME="I1949"></A>An implementation may provide 
+<I>nonstandard integer types</I>, descendants of <I>root_integer</I> 
+that are declared outside of the specification of package Standard, which 
+need not have all the standard characteristics of a type defined by an 
+<SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN>. 
+For example, a nonstandard integer type might have an asymmetric base 
+range or it might not be allowed as an array or loop index (a very long 
+integer). Any type descended from a nonstandard integer type is also 
+nonstandard. An implementation may place arbitrary restrictions on the 
+use of such types; it is implementation defined whether operators that 
+are predefined for &ldquo;any integer type&rdquo; are defined for a particular 
+nonstandard integer type. [In any case, such types are not permitted 
+as <SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">explicit_generic_actual_parameter</A></SPAN>s 
+for formal scalar types &mdash; see <A HREF="AA-12-5-2.html">12.5.2</A>.] 
+</div>
+<div class="paranum"><a name="p26.a">26.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Any nonstandard 
+integer types and the operators defined for them.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal"><A NAME="I1950"></A>For a one's complement machine, 
+the high bound of the base range of a modular type whose modulus is one 
+less than a power of 2 may be equal to the modulus, rather than one less 
+than the modulus. It is implementation defined for which powers of 2, 
+if any, this permission is exercised.</div>
+<div class="paranum"><a name="p27.1">27.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0003">8652/0003</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00095.TXT">AI95-00095-01</A></I>} 
+<span class="insert1">For a one's complement machine, implementations 
+may support nonbinary modulus values greater than System.Max_Nonbinary_Modulus. 
+It is implementation defined which specific values greater than System.Max_Nonbinary_Modulus, 
+if any, are supported.</span>&nbsp;</div>
+<div class="paranum"><a name="p27.a.1">27.a.1/1</a></div>
+<div class="Annotations"><span class="insert1"><B>Reason:&nbsp;</B>On a one's 
+complement machine, the natural full word type would have a modulus of 
+2**Word_Size&ndash;1. However, we would want to allow the all-ones bit 
+pattern (which represents negative zero as a number) in logical operations. 
+These permissions are intended to allow that and the natural modulus 
+value without burdening implementations with supporting expensive modulus 
+values.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal"><A NAME="I1951"></A>An implementation should support 
+Long_Integer in addition to Integer if the target machine supports 32-bit 
+(or longer) arithmetic. No other named integer subtypes are recommended 
+for package Standard. Instead, appropriate named integer subtypes should 
+be provided in the library package Interfaces (see <A HREF="AA-B-2.html">B.2</A>). 
+</div>
+<div class="paranum"><a name="p28.a.1">28.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">Long_Integer should be declared in Standard 
+if the target supports 32-bit arithmetic. No other named integer subtypes 
+should be declared in Standard.</span></div>
+<div class="paranum"><a name="p28.a">28.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>To promote portability, 
+implementations should explicitly declare the integer (sub)types Integer 
+and Long_Integer in Standard, and leave other predefined integer types 
+anonymous. For implementations that already support Byte_Integer, etc., 
+upward compatibility argues for keeping such declarations in Standard 
+during the transition period, but perhaps generating a warning on use. 
+A separate package Interfaces in the predefined environment is available 
+for pre-declaring types such as Integer_8, Integer_16, etc. See <A HREF="AA-B-2.html">B.2</A>. 
+In any case, if the user declares a subtype (first or not) whose range 
+fits in, for example, a byte, the implementation can store variables 
+of the subtype in a single byte, even if the base range of the type is 
+wider.&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal"><A NAME="I1952"></A>An implementation for a two's 
+complement machine should support modular types with a binary modulus 
+up to System.Max_Int*2+2. An implementation should support a nonbinary 
+modulus up to Integer'Last.&nbsp;</div>
+<div class="paranum"><a name="p29.a.1">29.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">For a two's complement target, modular 
+types with a binary modulus up to System.Max_Int*2+2 should be supported. 
+A nonbinary modulus up to Integer'Last should be supported.</span></div>
+<div class="paranum"><a name="p29.a">29.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Modular types provide bit-wise 
+&quot;<B>and</B>&quot;, &quot;<B>or</B>&quot;, &quot;<B>xor</B>&quot;, 
+and &quot;<B>not</B>&quot; operations. It is important for systems programming 
+that these be available for all integer types of the target hardware. 
+</div>
+<div class="paranum"><a name="p29.b">29.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that on a one's complement 
+machine, the largest supported modular type would normally have a nonbinary 
+modulus. On a two's complement machine, the largest supported modular 
+type would normally have a binary modulus.&nbsp;</div>
+<div class="paranum"><a name="p29.c">29.c</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Supporting a nonbinary 
+modulus greater than Integer'Last can impose an undesirable implementation 
+burden on some machines.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Notes">33&nbsp;&nbsp;<A NAME="I1953"></A><A NAME="I1954"></A>Integer 
+literals are of the anonymous predefined integer type <I>universal_integer</I>. 
+Other integer types have no literals. However, the overload resolution 
+rules (see <A HREF="AA-8-6.html">8.6</A>, &ldquo;<A HREF="AA-8-6.html">The 
+Context of Overload Resolution</A>&rdquo;) allow expressions of the type 
+<I>universal_integer</I> whenever an integer type is expected.</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Notes">34&nbsp;&nbsp;The same arithmetic operators are predefined 
+for all signed integer types defined by a <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0042">signed_integer_type_definition</A></SPAN> 
+(see <A HREF="AA-4-5.html">4.5</A>, &ldquo;<A HREF="AA-4-5.html">Operators 
+and Expression Evaluation</A>&rdquo;). For modular types, these same 
+operators are predefined, plus bit-wise logical operators (<B>and</B>, 
+<B>or</B>, <B>xor</B>, and <B>not</B>). In addition, for the unsigned 
+types declared in the language-defined package Interfaces (see <A HREF="AA-B-2.html">B.2</A>), 
+functions are defined that provide bit-wise shifting and rotating.</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Notes">35&nbsp;&nbsp;Modular types match a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0275">generic_formal_parameter_declaration</A></SPAN> 
+of the form &quot;<B>type</B> T <B>is mod</B> &lt;&gt;;&quot;; signed 
+integer types match &quot;<B>type</B> T <B>is range</B> &lt;&gt;;&quot; 
+(see <A HREF="AA-12-5-2.html">12.5.2</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of integer 
+types and subtypes:&nbsp;</I></div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples"><B>type</B>&nbsp;Page_Num&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;2_000;<BR>
+<B>type</B>&nbsp;Line_Size&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Max_Line_Size;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples"><B>subtype</B>&nbsp;Small_Int&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;&nbsp;&nbsp;<B>range</B>&nbsp;-10&nbsp;..&nbsp;10;<BR>
+<B>subtype</B>&nbsp;Column_Ptr&nbsp;&nbsp;<B>is</B>&nbsp;Line_Size&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;10;<BR>
+<B>subtype</B>&nbsp;Buffer_Size&nbsp;<B>is</B>&nbsp;Integer&nbsp;&nbsp;&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;Max;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Examples"><B>type</B>&nbsp;Byte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;256;&nbsp;--<SPAN Class="roman"><I>&nbsp;an&nbsp;unsigned&nbsp;byte</I></SPAN><BR>
+<B>type</B>&nbsp;Hash_Index&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;97;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;modulus&nbsp;is&nbsp;prime</I></SPAN></div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p36.a">36.a</a></div>
+<div class="Annotations"><A NAME="I1955"></A>An implementation is allowed 
+to support any number of distinct base ranges for integer types, even 
+if fewer integer types are explicitly declared in Standard.</div>
+<div class="paranum"><a name="p36.b">36.b</a></div>
+<div class="Annotations">Modular (unsigned, wrap-around) types are new. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p36.c">36.c</a></div>
+<div class="Annotations">Ada 83's integer types are now called &quot;signed&quot; 
+integer types, to contrast them with &quot;modular&quot; integer types.</div>
+<div class="paranum"><a name="p36.d">36.d</a></div>
+<div class="Annotations">Standard.Integer, Standard.Long_Integer, etc., 
+denote constrained subtypes of predefined integer types, consistent with 
+the Ada 95 model that only subtypes have names.</div>
+<div class="paranum"><a name="p36.e">36.e</a></div>
+<div class="Annotations">We now impose minimum requirements on the base 
+range of Integer and Long_Integer.</div>
+<div class="paranum"><a name="p36.f">36.f</a></div>
+<div class="Annotations">We no longer explain integer type definition 
+in terms of an equivalence to a normal type derivation, except to say 
+that all integer types are by definition implicitly derived from <I>root_integer</I>. 
+This is for various reasons.</div>
+<div class="paranum"><a name="p36.g">36.g</a></div>
+<div class="Annotations">First of all, the equivalence with a type derivation 
+and a subtype declaration was not perfect, and was the source of various 
+AIs (for example, is the conversion of the bounds static? Is a numeric 
+type a derived type with respect to other rules of the language?)</div>
+<div class="paranum"><a name="p36.h">36.h</a></div>
+<div class="Annotations">Secondly, we don't want to require that every 
+integer size supported shall have a corresponding named type in Standard. 
+Adding named types to Standard creates nonportabilities.</div>
+<div class="paranum"><a name="p36.i">36.i</a></div>
+<div class="Annotations">Thirdly, we don't want the set of types that 
+match a formal derived type &quot;type T is new Integer;&quot; to depend 
+on the particular underlying integer representation chosen to implement 
+a given user-defined integer type. Hence, we would have needed anonymous 
+integer types as parent types for the implicit derivation anyway. We 
+have simply chosen to identify only one anonymous integer type &mdash; 
+<I>root_integer</I>, and stated that every integer type is derived from 
+it.</div>
+<div class="paranum"><a name="p36.j">36.j</a></div>
+<div class="Annotations">Finally, the &ldquo;fiction&rdquo; that there 
+were distinct preexisting predefined types for every supported representation 
+breaks down for fixed point with arbitrary smalls, and was never exploited 
+for enumeration types, array types, etc. Hence, there seems little benefit 
+to pushing an explicit equivalence between integer type definition and 
+normal type derivation.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p36.k">36.k/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00340.TXT">AI95-00340-01</A></I>} 
+<span class="insert2"><A NAME="I1956"></A>The Mod attribute is new. It 
+eases mixing of signed and unsigned values in an expression, which can 
+be difficult as there may be no type which can contain all of the values 
+of both of the types involved.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p36.l">36.l/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0003">8652/0003</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00095.TXT">AI95-00095-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Added additional permissions 
+for modular types on one's complement machines.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

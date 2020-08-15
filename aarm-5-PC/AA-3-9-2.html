@@ -1,0 +1,627 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Dispatching Operations of Tagged Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.9.2 Dispatching Operations of Tagged Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00335.TXT">AI95-00335-01</A></I>} 
+<A NAME="I2313"></A><A NAME="I2314"></A><A NAME="I2315"></A><A NAME="I2316"></A><A NAME="I2317"></A><A NAME="I2318"></A><A NAME="I2319"></A><A NAME="I2320"></A>The 
+primitive subprograms of a tagged type, the subprograms declared by <SPAN Class="swiss"><A HREF="AA-12-6.html#S0301">formal_abstract_subprogram_declaration</A></SPAN>s, 
+and the stream attributes of a specific tagged type that are available 
+(see <A HREF="AA-13-13-2.html">13.13.2</A>) at the end of the declaration 
+list where the type is declared are called <I>dispatching operations</I>. 
+[A dispatching operation can be called using a statically determined 
+<I>controlling</I> tag, in which case the body to be executed is determined 
+at compile time. Alternatively, the controlling tag can be dynamically 
+determined, in which case the call <I>dispatches</I> to a body that is 
+determined at run time;] such a call is termed a <I>dispatching call</I>. 
+[As explained below, the properties of the operands and the context of 
+a particular call on a dispatching operation determine how the controlling 
+tag is determined, and hence whether or not the call is a dispatching 
+call. Run-time polymorphism is achieved when a dispatching operation 
+is called by a dispatching call.] <A NAME="I2321"></A><A NAME="I2322"></A><A NAME="I2323"></A><A NAME="I2324"></A><A NAME="I2325"></A></div>
+<div class="paranum"><a name="p1.a.1">1.a.1/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00335.TXT">AI95-00335-01</A></I>} 
+For the stream attributes of a type declared immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN> 
+that has a partial view, the declaration list to consider is the visible 
+part of the package. Stream attributes that are not available in the 
+same declaration list are not dispatching as there is no guarantee that 
+descendants of the type have available attributes (there is such a guarantee 
+for visibly available attributes). If we allowed dispatching for any 
+available attribute, then for attributes defined in the private part 
+we could end up executing a nonexistent body.&nbsp;</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">The controlling tag determination rules are 
+analogous to the overload resolution rules, except they deal with run-time 
+type identification (tags) rather than compile-time type resolution. 
+As with overload resolution, controlling tag determination may depend 
+on operands or result context.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0076-1.TXT">AI05-0076-1</A></I>} 
+<A NAME="I2326"></A><A NAME="I2327"></A>A <I>call on a dispatching operation</I> 
+is a call whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+denotes the declaration of a dispatching operation. <A NAME="I2328"></A>A 
+<I>controlling operand</I> in a call on a dispatching operation of a 
+tagged type <I>T</I> is one whose corresponding formal parameter is of 
+type <I>T</I> or is of an anonymous access type with designated type 
+<I>T</I>; <A NAME="I2329"></A>the corresponding formal parameter is called 
+a <I>controlling formal parameter</I>. If the controlling formal parameter 
+is an access parameter, the controlling operand is the object designated 
+by the actual parameter, rather than the actual parameter itself. <A NAME="I2330"></A><A NAME="I2331"></A>If 
+the call is to a (primitive) function with result type <I>T</I> (a <I>function 
+with a controlling result</I>), then the call has a <I>controlling result</I> 
+&mdash; the context of the call can control the dispatching. Similarly, 
+if the call is to a function with an access result type designating <I>T</I> 
+(a <I>function with a controlling access result</I>), then the call has 
+a <I>controlling access result</I>, and the context can similarly control 
+dispatching.<A NAME="I2332"></A><A NAME="I2333"></A>&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This definition implies 
+that a call through the dereference of an access-to-subprogram value 
+is never considered a call on a dispatching operation. Note also that 
+if the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+denotes a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>, 
+the place where the renaming occurs determines whether it is primitive; 
+the thing being renamed is irrelevant.&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or expression of a tagged type is either <I>statically</I> tagged, <I>dynamically</I> 
+tagged, or <I>tag indeterminate</I>, according to whether, when used 
+as a controlling operand, the tag that controls dispatching is determined 
+statically by the operand's (specific) type, dynamically by its tag at 
+run time, or from context. A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+or parenthesized expression is statically, dynamically, or indeterminately 
+tagged according to its operand. For other kinds of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+and expressions, this is determined as follows:&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<A NAME="I2334"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or expression is <I>statically tagged</I> if it is of a specific tagged 
+type and, if it is a call with a controlling result or controlling access 
+result, it has at least one statically tagged controlling operand;&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>It is illegal to have both 
+statically tagged and dynamically tagged controlling operands in the 
+same call -- see below.&nbsp;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<A NAME="I2335"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or expression is <I>dynamically tagged</I> if it is of a class-wide type, 
+or it is a call with a controlling result or controlling access result 
+and at least one dynamically tagged controlling operand;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<A NAME="I2336"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or expression is <I>tag indeterminate</I> if it is a call with a controlling 
+result or controlling access result, all of whose controlling operands 
+(if any) are tag indeterminate.&nbsp;</div>
+<div class="paranum"><a name="p7">7/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+[A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
+is statically or dynamically tagged according to whether the type determined 
+by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+is specific or class-wide, respectively.] For an object that is designated 
+by an expression whose expected type is an anonymous access-to-specific 
+tagged type, the object is dynamically tagged if the expression, ignoring 
+enclosing parentheses, is of the form X'Access, where X is of a class-wide 
+type, or is of the form <B>new</B> T'(...), where T denotes a class-wide 
+subtype. Otherwise, the object is statically or dynamically tagged according 
+to whether the designated type of the type of the expression is specific 
+or class-wide, respectively.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
+is never tag indeterminate, even if its operand is. A designated object 
+is never tag indeterminate.</div>
+<div class="paranum"><a name="p7.a.1">7.a.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+Allocators and access attributes of class-wide types can be used as the 
+controlling parameters of dispatching calls.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">A call on a dispatching operation shall not have 
+both dynamically tagged and statically tagged controlling operands.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This restriction is intended 
+to minimize confusion between whether the dynamically tagged operands 
+are implicitly converted to, or tag checked against the specific type 
+of the statically tagged operand(s).&nbsp;</div>
+<div class="paranum"><a name="p9">9/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+If the expected type for an expression or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is some specific tagged type, then the expression or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall not be dynamically tagged unless it is a controlling operand in 
+a call on a dispatching operation. Similarly, if the expected type for 
+an expression is an anonymous access-to-specific tagged type, then the 
+object designated by the expression shall not be dynamically tagged unless 
+it is a controlling operand in a call on a dispatching operation.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This prevents implicit &quot;truncation&quot; 
+of a dynamically-tagged value to the specific type of the target object/formal. 
+An explicit conversion is required to request this truncation.&nbsp;</div>
+<div class="paranum"><a name="p9.b">9.b/4</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00252.TXT">AI95-00252-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
+This rule applies to all expressions or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+with a specific expected type, not just those that are actual parameters 
+to a dispatching call. This rule does not apply to a membership test 
+whose <span class="insert4"><I>tested_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">&nbsp;expression</A></SPAN></span> 
+is class-wide, since any type that covers the tested type is explicitly 
+allowed. See <A HREF="AA-4-5-2.html">4.5.2</A>. This rule also doesn't 
+apply to a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+is a subprogram, since the rules explicitly say that the prefix may be 
+class-wide (see <A HREF="AA-4-1-3.html">4.1.3</A>).&nbsp;</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0011">8652/0011</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00117.TXT">AI95-00117-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00430.TXT">AI95-00430-01</A></I>} 
+In the declaration of a dispatching operation of a tagged type, everywhere 
+a subtype of the tagged type appears as a subtype of the profile (see 
+<A HREF="AA-6-1.html">6.1</A>), it shall statically match the first subtype 
+of the tagged type. <A NAME="I2337"></A>If the dispatching operation 
+overrides an inherited subprogram, it shall be subtype conformant with 
+the inherited subprogram. <A NAME="I2338"></A>The convention of an inherited 
+dispatching operation is the convention of the corresponding primitive 
+operation of the parent or progenitor type. The default convention of 
+a dispatching operation that overrides an inherited primitive operation 
+is the convention of the inherited operation; if the operation overrides 
+multiple inherited operations, then they shall all have the same convention. 
+An explicitly declared dispatching operation shall not be of convention 
+Intrinsic.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>These rules ensure that constraint 
+checks can be performed by the caller in a dispatching call, and parameter 
+passing conventions match up properly. A special rule on aggregates prevents 
+values of a tagged type from being created that are outside of its first 
+subtype.&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+for a controlling formal parameter of a dispatching operation shall be 
+tag indeterminate.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+This rule ensures that the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+always produces the &quot;correct&quot; tag when called with or without 
+dispatching, or when inherited by a descendant. If it were statically 
+tagged, the default would be useless for a dispatching call; if it were 
+dynamically tagged, the default would be useless for a nondispatching 
+call.</div>
+<div class="paranum"><a name="p11.b">11.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+</div>
+<div class="paranum"><a name="p11.1">11.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00404.TXT">AI95-00404-01</A></I>} 
+If a dispatching operation is defined by a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN> 
+or the instantiation of a generic subprogram, any access parameter of 
+the renamed subprogram or the generic subprogram that corresponds to 
+a controlling access parameter of the dispatching operation, shall have 
+a subtype that excludes null.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">A given subprogram shall not be a dispatching operation 
+of two or more distinct tagged types.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This restriction minimizes confusion 
+since multiple dispatching is not provided. The normal solution is to 
+replace all but one of the tagged types with their class-wide types. 
+</div>
+<div class="paranum"><a name="p12.a.1">12.a.1/1</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="defect2.html#8652/0098">8652/0098</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00183.TXT">AI95-00183-01</A></I>} 
+This restriction applies even if the partial view (see <A HREF="AA-7-3.html">7.3</A>) 
+of one or both of the types is untagged. This follows from the definition 
+of dispatching operation: the operation is a dispatching operation anywhere 
+the full views of the (tagged) types are visible.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The explicit declaration of a primitive subprogram 
+of a tagged type shall occur before the type is frozen (see <A HREF="AA-13-14.html">13.14</A>). 
+[For example, new dispatching operations cannot be added after objects 
+or values of the type exist, nor after deriving a record extension from 
+it, nor after a body.]</div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+This rule is needed because (1) we don't want people dispatching to things 
+that haven't been declared yet, and (2) we want to allow the static part 
+of tagged type descriptors to be static (allocated statically, and initialized 
+to link-time-known symbols). Suppose T2 inherits primitive P from T1, 
+and then overrides P. Suppose P is called <I>before</I> the declaration 
+of the overriding P. What should it dispatch to? If the answer is the 
+new P, we've violated the first principle above. If the answer is the 
+old P, we've violated the second principle. (A call to the new one necessarily 
+raises Program_Error, but that's beside the point.)</div>
+<div class="paranum"><a name="p13.b">13.b</a></div>
+<div class="Annotations">Note that a call upon a dispatching operation 
+of type <I>T</I> will freeze <I>T</I>.</div>
+<div class="paranum"><a name="p13.c">13.c</a></div>
+<div class="Annotations">We considered applying this rule to all derived 
+types, for uniformity. However, that would be upward incompatible, so 
+we rejected the idea. As in Ada 83, for an untagged type, the above call 
+upon P will call the old P (which is arguably confusing).&nbsp;</div>
+<div class="paranum"><a name="p13.d">13.d/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+Because of this rule, the type descriptor can be created (presumably 
+containing linker symbols pointing at the not-yet-compiled bodies) at 
+the first freezing point of the type. It also prevents, for a (nonincomplete) 
+tagged type declared in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+overriding in the body or by a child subprogram.&nbsp;</div>
+<div class="paranum"><a name="p13.e">13.e/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+A consequence is that for a tagged type declaration in a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+only the last (overriding) primitive subprogram can be declared by a 
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>. 
+(Other overridings must be provided by <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>s.) 
+</div>
+<div class="paranum"><a name="p13.f">13.f/3</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0222-1.TXT">AI05-0222-1</A></I>} 
+This rule applies only to &quot;original&quot; declarations and not to 
+the completion of a primitive subprogram, even though a completion is 
+technically an explicit declaration, and it may declare a primitive subprogram. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2339"></A><A NAME="I2340"></A>For 
+the execution of a call on a dispatching operation of a type <I>T</I>, 
+the <I>controlling tag value</I> determines which subprogram body is 
+executed. The controlling tag value is defined as follows:&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted"><A NAME="I2341"></A>If one or more controlling 
+operands are statically tagged, then the controlling tag value is <I>statically 
+determined</I> to be the tag of <I>T</I>.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">If one or more controlling operands are dynamically 
+tagged, then the controlling tag value is not statically determined, 
+but is rather determined by the tags of the controlling operands. <A NAME="I2342"></A><A NAME="I2343"></A>If 
+there is more than one dynamically tagged controlling operand, a check 
+is made that they all have the same tag. <A NAME="I2344"></A>If this 
+check fails, Constraint_Error is raised unless the call is a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+denotes the declaration of an equality operator (predefined or user defined) 
+that returns Boolean, in which case the result of the call is defined 
+to indicate inequality, and no <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+is executed. This check is performed prior to evaluating any tag-indeterminate 
+controlling operands.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Tag mismatch is considered an 
+error (except for &quot;=&quot; and &quot;/=&quot;) since the corresponding 
+primitive subprograms in each specific type expect all controlling operands 
+to be of the same type. For tag mismatch with an equality operator, rather 
+than raising an exception, &quot;=&quot; returns False and &quot;/=&quot; 
+returns True. No equality operator is actually invoked, since there is 
+no common tag value to control the dispatch. Equality is a special case 
+to be consistent with the existing Ada 83 principle that equality comparisons, 
+even between objects with different constraints, never raise Constraint_Error. 
+</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00196.TXT">AI95-00196-01</A></I>} 
+If all of the controlling operands (if any) are tag-indeterminate, then: 
+</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00239.TXT">AI95-00239-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+If the call has a controlling result or controlling access result and 
+is itself, or designates, a (possibly parenthesized or qualified) controlling 
+operand of an enclosing call on a dispatching operation of a descendant 
+of type <I>T</I>, then its controlling tag value is determined by the 
+controlling tag value of this enclosing call;</div>
+<div class="paranum"><a name="p18.a">18.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00239.TXT">AI95-00239-01</A></I>} 
+For code that a user can write explicitly, the only contexts that can 
+control dispatching of a function with a controlling result of type T 
+are those that involve controlling operands of the same type T: if the 
+two types differ there is an illegality and the dynamic semantics are 
+irrelevant.</div>
+<div class="paranum"><a name="p18.b">18.b/2</a></div>
+<div class="Annotations">In the case of an inherited subprogram however, 
+if a default expression is a function call, it may be of type T while 
+the parameter is of a type derived from T. To cover this case, we talk 
+about &quot;a descendant of T&quot; above. This is safe, because if the 
+type of the parameter is descended from the type of the function result, 
+it is guaranteed to inherit or override the function, and this ensures 
+that there will be an appropriate body to dispatch to. Note that abstract 
+functions are not an issue here because the call to the function is a 
+dispatching call, so it is guaranteed to always land on a concrete body. 
+</div>
+<div class="paranum"><a name="p18.1">18.1/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00196.TXT">AI95-00196-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+If the call has a controlling result or controlling access result and 
+(possibly parenthesized, qualified, or dereferenced) is the expression 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+whose target is of a class-wide type, then its controlling tag value 
+is determined by the target;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented2NestedBulleted"><A NAME="I2345"></A>Otherwise, the 
+controlling tag value is statically determined to be the tag of type 
+<I>T</I>.&nbsp;</div>
+<div class="paranum"><a name="p19.a">19.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This includes the cases 
+of a tag-indeterminate procedure call, and a tag-indeterminate <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+that is used to initialize a class-wide formal parameter or class-wide 
+object.&nbsp;</div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+For the execution of a call on a dispatching operation, the action performed 
+is determined by the properties of the corresponding dispatching operation 
+of the specific type identified by the controlling tag value:</div>
+<div class="paranum"><a name="p20.1">20.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+if the corresponding operation is explicitly declared for this type, 
+[even if the declaration occurs in a private part], then the action comprises 
+an invocation of the explicit body for the operation;</div>
+<div class="paranum"><a name="p20.2">20.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+if the corresponding operation is implicitly declared for this type and 
+is implemented by an entry or protected subprogram (see <A HREF="AA-9-1.html">9.1</A> 
+and <A HREF="AA-9-4.html">9.4</A>), then the action comprises a call 
+on this entry or protected subprogram, with the target object being given 
+by the first actual parameter of the call, and the actual parameters 
+of the entry or protected subprogram being given by the remaining actual 
+parameters of the call, if any;</div>
+<div class="paranum"><a name="p20.3">20.3/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0197-1.TXT">AI05-0197-1</A></I>} 
+if the corresponding operation is a predefined operator then the action 
+comprises an invocation of that operator;</div>
+<div class="paranum"><a name="p20.4">20.4/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0197-1.TXT">AI05-0197-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0250-1.TXT">AI05-0250-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0254-1.TXT">AI05-0254-1</A></I>} 
+otherwise, the action is the same as the action for the corresponding 
+operation of the parent type or progenitor type from which the operation 
+was inherited except that additional invariant checks (see <A HREF="AA-7-3-2.html">7.3.2</A>) 
+and class-wide postcondition checks (see <A HREF="AA-6-1-1.html">6.1.1</A>) 
+may apply. If there is more than one such corresponding operation, the 
+action is that for the operation that is not a null procedure, if any; 
+otherwise, the action is that of an arbitrary one of the operations. 
+</div>
+<div class="paranum"><a name="p20.a">20.a/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+</div>
+<div class="paranum"><a name="p20.a.1">20.a.1/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+&ldquo;Corresponding dispatching operation&rdquo; refers to the inheritance 
+relationship between subprograms. Primitive operations are always inherited 
+for a type T, but they might not be declared if the primitive operation 
+is never visible within the immediate scope of the type T. If no corresponding 
+operation is declared, the last bullet is used and the corresponding 
+operation of the parent type is executed (an explicit body that happens 
+to have the same name and profile is not called in that case).</div>
+<div class="paranum"><a name="p20.a.2">20.a.2/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+We have to talk about progenitors in the last bullet in case the corresponding 
+operation is a null procedure inherited from an interface. In that case, 
+the parent type might not even have the operation in question.</div>
+<div class="paranum"><a name="p20.a.3">20.a.3/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0197-1.TXT">AI05-0197-1</A></I>} 
+For the last bullet, if there are multiple corresponding operations for 
+the parent and progenitors, all but one of them have to be a null procedure. 
+(If the progenitors declared abstract routines, there would have to be 
+an explicit overriding of the operation, and then the first bullet would 
+apply.) We call the nonnull routine if one exists.</div>
+<div class="paranum"><a name="p20.a.4">20.a.4/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+Any explicit declaration for an inherited corresponding operation has 
+to be an overriding routine. These rules mean that a dispatching call 
+executes the overriding routine (if any) for the specific type.&nbsp;</div>
+<div class="paranum"><a name="p20.b">20.b/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+The wording of the above rules is intended to ensure that the same body 
+is executed for a given tag, whether that tag is determined statically 
+or dynamically. For a type declared in a package, it doesn't matter whether 
+a given subprogram is overridden in the visible part or the private part, 
+and it doesn't matter whether the call is inside or outside the package. 
+For example:&nbsp;</div>
+<div class="paranum"><a name="p20.c">20.c</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P1&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T1&nbsp;<B>is</B>&nbsp;<B>tagged</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op_A(Arg&nbsp;:&nbsp;<B>in</B>&nbsp;T1);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op_B(Arg&nbsp;:&nbsp;<B>in</B>&nbsp;T1);<BR>
+<B>end</B>&nbsp;P1;</div>
+<div class="paranum"><a name="p20.d">20.d</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;P1;&nbsp;<B>use</B>&nbsp;P1;<BR>
+<B>package</B>&nbsp;P2&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T2&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;T1&nbsp;<B>with</B>&nbsp;<B>null</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op_A(Param&nbsp;:&nbsp;<B>in</B>&nbsp;T2);<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op_B(Param&nbsp;:&nbsp;<B>in</B>&nbsp;T2);<BR>
+<B>end</B>&nbsp;P2;</div>
+<div class="paranum"><a name="p20.e">20.e/1</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;P1;&nbsp;<B>with</B>&nbsp;P2;<BR>
+<B>procedure</B>&nbsp;Main&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;P2.T2;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;:&nbsp;P1.T1'Class&nbsp;:=&nbsp;X;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P2.Op_A(Param&nbsp;=&gt;&nbsp;X);&nbsp;--<SPAN Class="roman"><I>&nbsp;Nondispatching&nbsp;call&nbsp;to&nbsp;a&nbsp;dispatching&nbsp;operation.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P1.Op_A(Arg&nbsp;=&gt;&nbsp;Y);&nbsp;--<SPAN Class="roman"><I>&nbsp;Dispatching&nbsp;call.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P2.Op_B(Arg&nbsp;=&gt;&nbsp;X);&nbsp;--<SPAN Class="roman"><I>&nbsp;Nondispatching&nbsp;call&nbsp;to&nbsp;a&nbsp;dispatching&nbsp;operation.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;P1.Op_B(Arg&nbsp;=&gt;&nbsp;Y);&nbsp;--<SPAN Class="roman"><I>&nbsp;Dispatching&nbsp;call.</I></SPAN><BR>
+<B>end</B>&nbsp;Main;</div>
+<div class="paranum"><a name="p20.f">20.f</a></div>
+<div class="Annotations">The two calls to Op_A both execute the body 
+of Op_A that has to occur in the body of package P2. Similarly, the two 
+calls to Op_B both execute the body of Op_B that has to occur in the 
+body of package P2, even though Op_B is overridden in the private part 
+of P2. Note, however, that the formal parameter names are different for 
+P2.Op_A versus P2.Op_B. The overriding declaration for P2.Op_B is not 
+visible in Main, so the name in the call actually denotes the implicit 
+declaration of Op_B inherited from T1.</div>
+<div class="paranum"><a name="p20.g">20.g</a></div>
+<div class="Annotations">If a call occurs in the program text before 
+an overriding, which can happen only if the call is part of a default 
+expression, the overriding will still take effect for that call.</div>
+<div class="paranum"><a name="p20.h">20.h</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Even when a tag 
+is not <I>statically determined</I>, a compiler might still be able to 
+figure it out and thereby avoid the overhead of run-time dispatching. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">78&nbsp;&nbsp;The body to be executed for a call on 
+a dispatching operation is determined by the tag; it does not matter 
+whether that tag is determined statically or dynamically, and it does 
+not matter whether the subprogram's declaration is visible at the place 
+of the call.</div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Notes">79&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+This subclause covers calls on dispatching subprograms of a tagged type. 
+Rules for tagged type membership tests are described in <A HREF="AA-4-5-2.html">4.5.2</A>. 
+Controlling tag determination for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+is described in <A HREF="AA-5-2.html">5.2</A>.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Notes">80&nbsp;&nbsp;A dispatching call can dispatch to a 
+body whose declaration is not visible at the place of the call.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">81&nbsp;&nbsp;A call through an access-to-subprogram 
+value is never a dispatching call, even if the access value designates 
+a dispatching operation. Similarly a call whose <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+denotes a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN> 
+cannot be a dispatching call unless the renaming itself is the declaration 
+of a primitive subprogram.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><A NAME="I2346"></A>The concept of dispatching 
+operations is new.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p24.b">24.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00404.TXT">AI95-00404-01</A></I>} 
+<A NAME="I2347"></A>If a dispatching operation is defined by a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN>, 
+and it has a controlling access parameter, Ada 2005 requires the subtype 
+of the parameter to exclude null. The same applies to instantiations. 
+This is required so that all calls to the subprogram operate the same 
+way (controlling access parameters have to exclude null so that dispatching 
+calls will work). Since Ada 95 didn't have the notion of access subtypes 
+that exclude null, and all access parameters excluded null, it had no 
+such rules. These rules will require the addition of an explicit <B>not 
+null</B> on nondispatching operations that are later renamed to be dispatching, 
+or on a generic that is used to define a dispatching operation.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p24.c">24.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<A NAME="I2348"></A>Functions that have an access result type can be 
+dispatching in the same way as a function that returns a tagged object 
+directly.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p24.d">24.d/3</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<B>Corrigendum:</B> Allocators and access attributes of objects of class-wide 
+types can be used as the controlling parameter in a dispatching calls. 
+This was an oversight in the definition of Ada 95. (See <A HREF="AA-3-10-2.html">3.10.2</A> 
+and <A HREF="AA-4-8.html">4.8</A>).</div>
+<div class="paranum"><a name="p24.e">24.e/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0011">8652/0011</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00117.TXT">AI95-00117-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00430.TXT">AI95-00430-01</A></I>} 
+<B>Corrigendum:</B> Corrected the conventions of dispatching operations. 
+This is extended in Ada 2005 to cover operations inherited from progenitors, 
+and to ensure that the conventions of all inherited operations are the 
+same.</div>
+<div class="paranum"><a name="p24.f">24.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00196.TXT">AI95-00196-01</A></I>} 
+Clarified the wording to ensure that functions with no controlling operands 
+are tag-indeterminate, and to describe that the controlling tag can come 
+from the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>.</div>
+<div class="paranum"><a name="p24.g">24.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00239.TXT">AI95-00239-01</A></I>} 
+Fixed the wording to cover default expressions inherited by derived subprograms. 
+A literal reading of the old wording would have implied that operations 
+would be called with objects of the wrong type.</div>
+<div class="paranum"><a name="p24.h">24.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+An abstract formal subprogram is a dispatching operation, even though 
+it is not a primitive operation. See <A HREF="AA-12-6.html">12.6</A>, 
+&ldquo;<A HREF="AA-12-6.html">Formal Subprograms</A>&rdquo;.</div>
+<div class="paranum"><a name="p24.i">24.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+Dispatching calls include operations implemented by entries and protected 
+operations, so we have to update the wording to reflect that.</div>
+<div class="paranum"><a name="p24.j">24.j/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00335.TXT">AI95-00335-01</A></I>} 
+A stream attribute of a tagged type is usually a dispatching operation, 
+even though it is not a primitive operation. If they weren't dispatching, 
+T'Class'Input and T'Class'Output wouldn't work.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p24.k">24.k/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0076-1.TXT">AI05-0076-1</A></I>} 
+<B>Correction:</B> Defined &ldquo;function with a controlling result&rdquo;, 
+as it is used in <A HREF="AA-3-9-3.html">3.9.3</A>.</div>
+<div class="paranum"><a name="p24.l">24.l/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0126-1.TXT">AI05-0126-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0197-1.TXT">AI05-0197-1</A></I>} 
+<B>Correction:</B> Corrected holes in the definition of dynamic dispatching: 
+the behavior for operations that are never declared and/or inherited 
+from a progenitor were not specified.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

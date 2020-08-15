@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Deferred Constants</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.4 Deferred Constants</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Deferred constant declarations may be used to declare 
+constants in the visible part of a package, but with the value of the 
+constant given in the private part. They may also be used to declare 
+constants imported from other languages (see <A HREF="RM-B.html">Annex 
+B</A>).&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal"><A NAME="I3697"></A>A <I>deferred constant declaration</I> 
+is an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+with the reserved word <B>constant</B> but no initialization expression. 
+<A NAME="I3698"></A>The constant declared by a deferred constant declaration 
+is called a <I>deferred constant</I>. <A NAME="I3699"></A><span class="insert3">Unless 
+the Import aspect (see <A HREF="RM-B-1.html">B.1</A>) is True for a deferred 
+constant declaration, the&nbsp;</span><span class="delete3">A</span> deferred 
+constant declaration requires a completion, which shall be a full constant 
+declaration (called the <I>full declaration</I> of the deferred constant)<span class="delete3">, 
+or a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Import (see <A HREF="RM-B.html">Annex B</A>)</span>. <A NAME="I3700"></A></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A deferred constant 
+declaration that is completed by a full constant declaration shall occur 
+immediately within the visible part of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>. 
+For this case, the following additional rules apply to the corresponding 
+full declaration:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">The full declaration shall occur immediately within 
+the private part of the same package;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Bulleted">The deferred and full constants shall have the 
+same type, or shall have statically matching anonymous access subtypes; 
+</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Bulleted">If the deferred constant declaration includes a 
+<SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<span class="insert3"><I>S</I>&nbsp;</span>that defines a constrained subtype, 
+then the <span class="insert3">constraint</span><span class="delete3">&nbsp;subtype</span> 
+defined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+in the full declaration shall match <span class="insert3">the constraint 
+defined by <I>S</I></span><span class="delete3">&nbsp;it</span> statically. 
+On the other hand, if the subtype of the deferred constant is unconstrained, 
+then the full declaration is still allowed to impose a constraint. The 
+constant itself will be constrained, like all constants;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted">If the deferred constant declaration includes the 
+reserved word <B>aliased</B>, then the full declaration shall also;&nbsp;</div>
+<div class="paranum"><a name="p7.1">7.1/2</a></div>
+<div class="Bulleted">If the subtype of the deferred constant declaration 
+excludes null, the subtype of the full declaration shall also exclude 
+null.&nbsp;</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">A deferred constant declaration <span class="insert3">for 
+which the</span><span class="delete3">&nbsp;that is completed by a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+Import <span class="insert3">aspect is True&nbsp;</span>need not appear in 
+the visible part of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>, 
+and has no full constant declaration.</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">The completion of a deferred constant declaration 
+shall occur before the constant is frozen (see <A HREF="RM-13-14.html">13.14</A>).</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal"><A NAME="I3701"></A>The elaboration of a deferred 
+constant declaration elaborates the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert3">, 
+<SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>,</span> 
+or (only allowed in the case of an imported constant) the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN>. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">14&nbsp;&nbsp;The full constant declaration for a 
+deferred constant that is of a given private type or private extension 
+is not allowed before the corresponding <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
+This is a consequence of the freezing rules for types (see <A HREF="RM-13-14.html">13.14</A>). 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of deferred 
+constant declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">Null_Key&nbsp;:&nbsp;<B>constant</B>&nbsp;Key;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-7-3-1.html">7.3.1</A></I></SPAN></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples">CPU_Identifier&nbsp;:&nbsp;<B>constant</B>&nbsp;String(1..8)<span class="delete3">;</span><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>with</B></span><span class="delete3"><B>&nbsp;pragma</B></span>&nbsp;Import<span class="insert3">&nbsp;=&gt;&nbsp;True,&nbsp;Convention&nbsp;=&gt;&nbsp;</span><span class="delete3">(</span>Assembler,&nbsp;<span class="delete3">CPU_Identifier,&nbsp;</span>Link_Name&nbsp;=&gt;&nbsp;&quot;CPU_ID&quot;<span class="delete3">)</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-B-1.html">B.1</A></I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

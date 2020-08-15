@@ -1,0 +1,474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Scalar Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.5 Scalar Types</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1581"></A><I>Scalar</I> types comprise 
+enumeration types, integer types, and real types. <A NAME="I1582"></A>Enumeration 
+types and integer types are called <I>discrete</I> types; <A NAME="I1583"></A>each 
+value of a discrete type has a <I>position number</I> which is an integer 
+value. <A NAME="I1584"></A>Integer types and real types are called <I>numeric</I> 
+types. All scalar types are ordered, that is, all relational operators 
+are predefined for their values.</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">range_constraint</SPAN><A NAME="I1585"></A><A NAME="S0036"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I1586"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">range</SPAN><A NAME="I1587"></A><A NAME="S0037"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1588"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1589"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>&nbsp;..&nbsp;<A NAME="I1590"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I1591"></A><A NAME="I1592"></A><A NAME="I1593"></A><A NAME="I1594"></A>A 
+<I>range</I> has a <I>lower bound</I> and an <I>upper bound</I> and specifies 
+a subset of the values of some scalar type (the <I>type of the range</I>). 
+A range with lower bound L and upper bound R is described by &ldquo;L 
+.. R&rdquo;. <A NAME="I1595"></A>If R is less than L, then the range 
+is a <I>null range</I>, and specifies an empty set of values. Otherwise, 
+the range specifies the values of the type from the lower bound to the 
+upper bound, inclusive. <A NAME="I1596"></A>A value <I>belongs</I> to 
+a range if it is of the type of the range, and is in the subset of values 
+specified by the range. <A NAME="I1597"></A>A value <I>satisfies</I> 
+a range constraint if it belongs to the associated range. <A NAME="I1598"></A>One 
+range is <I>included</I> in another if all values that belong to the 
+first range also belong to the second.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I1599"></A>For a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+containing a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+either directly or as part of some other <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0030">scalar_constraint</A></SPAN>, 
+the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+shall resolve to that of the type determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+<A NAME="I1600"></A>For a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+of a given type, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+(likewise, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>s 
+of the equivalent <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+for a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>) 
+are expected to be of the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I1601"></A>The <I>base range</I> of a scalar 
+type is the range of finite values of the type that can be represented 
+in every unconstrained object of the type; it is also the range supported 
+at a minimum for intermediate values during the evaluation of expressions 
+involving predefined operators of the type.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I1602"></A><A NAME="I1603"></A>A constrained 
+scalar subtype is one to which a range constraint applies. <A NAME="I1604"></A>The 
+<I>range</I> of a constrained scalar subtype is the range associated 
+with the range constraint of the subtype. The <I>range</I> of an unconstrained 
+scalar subtype is the base range of its type.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I1605"></A>A range is <I>compatible</I> 
+with a scalar subtype if and only if it is either a null range or each 
+bound of the range belongs to the range of the subtype. <A NAME="I1606"></A>A 
+<SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN> 
+is <I>compatible</I> with a scalar subtype if and only if its range is 
+compatible with the subtype.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1607"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN> 
+consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
+<A NAME="I1608"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+determines a lower bound and an upper bound. If <SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>s 
+are given to specify bounds, the evaluation of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+evaluates these <SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>s 
+in an arbitrary order, and converts them to the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>.<A NAME="I1609"></A> 
+<A NAME="I1610"></A>If a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
+is given, the evaluation of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><I>Attributes</I></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every scalar subtype 
+S, the following attributes are defined:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="WideHanging-Term">S'First</div><div class="WideHanging-Body">
+<A NAME="I1611"></A><A NAME="I1612"></A>S'First denotes the lower bound 
+of the range of S. The value of this attribute is of the type of S.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="WideHanging-Term">S'Last</div><div class="WideHanging-Body">
+<A NAME="I1613"></A><A NAME="I1614"></A>S'Last denotes the upper bound 
+of the range of S. The value of this attribute is of the type of S.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideHanging-Term">S'Range</div><div class="WideHanging-Body">
+<A NAME="I1615"></A><A NAME="I1616"></A>S'Range is equivalent to the 
+<SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> S'First 
+.. S'Last.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="WideHanging-Term">S'Base</div><div class="WideHanging-Body">
+<A NAME="I1617"></A><A NAME="I1618"></A>S'Base denotes an unconstrained 
+subtype of the type of S. This unconstrained subtype is called the <I>base 
+subtype</I> of the type. <A NAME="I1619"></A></div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Min</div><div class="WideHanging-Body">
+<A NAME="I1620"></A><A NAME="I1621"></A>S'Min denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Min(<SPAN Class="roman"><I>Left</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Right</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="WideHanging-Body">The function returns the lesser of the 
+values of the two parameters.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Max</div><div class="WideHanging-Body">
+<A NAME="I1622"></A><A NAME="I1623"></A>S'Max denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Max(<SPAN Class="roman"><I>Left</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Right</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="WideHanging-Body">The function returns the greater of the 
+values of the two parameters.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Succ</div><div class="WideHanging-Body">
+<A NAME="I1624"></A><A NAME="I1625"></A>S'Succ denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Succ(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="WideHanging-Body"><A NAME="I1626"></A>For an enumeration 
+type, the function returns the value whose position number is one more 
+than that of the value of <I>Arg</I>; <A NAME="I1627"></A><A NAME="I1628"></A>Constraint_Error 
+is raised if there is no such value of the type. For an integer type, 
+the function returns the result of adding one to the value of <I>Arg</I>. 
+For a fixed point type, the function returns the result of adding <I>small</I> 
+to the value of <I>Arg</I>. For a floating point type, the function returns 
+the machine number (as defined in <A HREF="RM-3-5-7.html">3.5.7</A>) 
+immediately above the value of <I>Arg</I>; <A NAME="I1629"></A><A NAME="I1630"></A>Constraint_Error 
+is raised if there is no such machine number.&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Pred</div><div class="WideHanging-Body">
+<A NAME="I1631"></A><A NAME="I1632"></A>S'Pred denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Pred(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="WideHanging-Body"><A NAME="I1633"></A>For an enumeration 
+type, the function returns the value whose position number is one less 
+than that of the value of <I>Arg</I>; <A NAME="I1634"></A><A NAME="I1635"></A>Constraint_Error 
+is raised if there is no such value of the type. For an integer type, 
+the function returns the result of subtracting one from the value of 
+<I>Arg</I>. For a fixed point type, the function returns the result of 
+subtracting <I>small</I> from the value of <I>Arg</I>. For a floating 
+point type, the function returns the machine number (as defined in <A HREF="RM-3-5-7.html">3.5.7</A>) 
+immediately below the value of <I>Arg</I>; <A NAME="I1636"></A><A NAME="I1637"></A>Constraint_Error 
+is raised if there is no such machine number.&nbsp;</div>
+<div class="paranum"><a name="p27.1">27.1/2</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I1638"></A><A NAME="I1639"></A>S'Wide_Wide_Image denotes a function 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p27.2">27.2/2</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String</div>
+<div class="paranum"><a name="p27.3">27.3/2</a></div>
+<div class="WideHanging-Body"><A NAME="I1640"></A>The function returns 
+an <I>image</I> of the value of <I>Arg</I>, that is, a sequence of characters 
+representing the value in display form. The lower bound of the result 
+is one.</div>
+<div class="paranum"><a name="p27.4">27.4/2</a></div>
+<div class="WideHanging-Body">The image of an integer value is the corresponding 
+decimal literal, without underlines, leading zeros, exponent, or trailing 
+spaces, but with a single leading character that is either a minus sign 
+or a space.&nbsp;</div>
+<div class="paranum"><a name="p27.5">27.5/2</a></div>
+<div class="WideHanging-Body"><A NAME="I1641"></A>The image of an enumeration 
+value is either the corresponding identifier in upper case or the corresponding 
+character literal (including the two apostrophes); neither leading nor 
+trailing spaces are included. For a <I>nongraphic character</I> (a value 
+of a character type that has no enumeration literal associated with it), 
+the result is a corresponding language-defined name in upper case (for 
+example, the image of the nongraphic character identified as <I>nul</I> 
+is &ldquo;NUL&rdquo; &mdash; the quotes are not part of the image).&nbsp;</div>
+<div class="paranum"><a name="p27.6">27.6/2</a></div>
+<div class="WideHanging-Body">The image of a floating point value is 
+a decimal real literal best approximating the value (rounded away from 
+zero if halfway between) with a single leading character that is either 
+a minus sign or a space, a single digit (that is nonzero unless the value 
+is zero), a decimal point, S'Digits&ndash;1 (see <A HREF="RM-3-5-8.html">3.5.8</A>) 
+digits after the decimal point (but one if S'Digits is one), an upper 
+case E, the sign of the exponent (either + or &ndash;), and two or more 
+digits (with leading zeros if necessary) representing the exponent. If 
+S'Signed_Zeros is True, then the leading character is a minus sign for 
+a negatively signed zero.&nbsp;</div>
+<div class="paranum"><a name="p27.7">27.7/2</a></div>
+<div class="WideHanging-Body">The image of a fixed point value is a decimal 
+real literal best approximating the value (rounded away from zero if 
+halfway between) with a single leading character that is either a minus 
+sign or a space, one or more digits before the decimal point (with no 
+redundant leading zeros), a decimal point, and S'Aft (see <A HREF="RM-3-5-10.html">3.5.10</A>) 
+digits after the decimal point.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Image</div><div class="WideHanging-Body">
+<A NAME="I1642"></A><A NAME="I1643"></A>S'Wide_Image denotes a function 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String</div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="WideHanging-Body"><A NAME="I1644"></A>The function returns 
+an image of the value of <I>Arg</I> as a Wide_String. The lower bound 
+of the result is one. The image has the same sequence of graphic characters 
+as defined for S'Wide_Wide_Image if all the graphic characters are defined 
+in Wide_Character; otherwise, the sequence of characters is implementation 
+defined (but no shorter than that of S'Wide_Wide_Image for the same value 
+of Arg).&nbsp;</div>
+<div class="WideHanging-Body"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+31 through 34 were moved to Wide_Wide_Image.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Image</div><div class="WideHanging-Body">
+<A NAME="I1645"></A><A NAME="I1646"></A>S'Image denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;String</div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="WideHanging-Body">The function returns an image of the value 
+of <I>Arg</I> as a String. The lower bound of the result is one. The 
+image has the same sequence of graphic characters as that defined for 
+S'Wide_Wide_Image if all the graphic characters are defined in Character; 
+otherwise, the sequence of characters is implementation defined (but 
+no shorter than that of S'Wide_Wide_Image for the same value of <I>Arg</I>). 
+</div>
+<div class="paranum"><a name="p37.1">37.1/2</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Wide_Wide_Width</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I1647"></A><A NAME="I1648"></A>S'Wide_Wide_Width denotes the 
+maximum length of a Wide_Wide_String returned by S'Wide_Wide_Image over 
+all values of the subtype S. It denotes zero for a subtype that has a 
+null range. Its type is <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="WideHanging-Term">S'Wide_Width</div><div class="WideHanging-Body">
+<A NAME="I1649"></A><A NAME="I1650"></A>S'Wide_Width denotes the maximum 
+length of a Wide_String returned by S'Wide_Image over all values of the 
+subtype S. It denotes zero for a subtype that has a null range. Its type 
+is <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="WideHanging-Term">S'Width</div><div class="WideHanging-Body">
+<A NAME="I1651"></A><A NAME="I1652"></A>S'Width denotes the maximum length 
+of a String returned by S'Image over all values of the subtype S. It 
+denotes zero for a subtype that has a null range. Its type is <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p39.1">39.1/2</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Wide_Wide_Value</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I1653"></A><A NAME="I1654"></A>S'Wide_Wide_Value denotes a function 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p39.2">39.2/2</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Wide_Value(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;Wide_Wide_String)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p39.3">39.3/2</a></div>
+<div class="WideHanging-Body">This function returns a value given an 
+image of the value as a Wide_Wide_String, ignoring any leading or trailing 
+spaces.</div>
+<div class="paranum"><a name="p39.4">39.4/3</a></div>
+<div class="WideHanging-Body"><A NAME="I1655"></A><A NAME="I1656"></A>For 
+the evaluation of a call on S'Wide_Wide_Value for an enumeration subtype 
+S, if the sequence of characters of the parameter (ignoring leading and 
+trailing spaces) has the syntax of an enumeration literal and if it corresponds 
+to a literal of the type of S (or corresponds to the result of S'Wide_Wide_Image 
+for a nongraphic character of the type), the result is the corresponding 
+enumeration value; <A NAME="I1657"></A><A NAME="I1658"></A>otherwise, 
+Constraint_Error is raised.&nbsp;</div>
+<div class="paranum"><a name="p39.5">39.5/3</a></div>
+<div class="WideHanging-Body"><A NAME="I1659"></A>For the evaluation 
+of a call on S'Wide_Wide_Value for an integer subtype S, if the sequence 
+of characters of the parameter (ignoring leading and trailing spaces) 
+has the syntax of an integer literal, with an optional leading sign character 
+(plus or minus for a signed type; only plus for a modular type), and 
+the corresponding numeric value belongs to the base range of the type 
+of S, then that value is the result; <A NAME="I1660"></A><A NAME="I1661"></A>otherwise, 
+Constraint_Error is raised.</div>
+<div class="paranum"><a name="p39.6">39.6/2</a></div>
+<div class="WideHanging-Body" style="margin-bottom: 0.4em">For the evaluation 
+of a call on S'Wide_Wide_Value for a real subtype S, if the sequence 
+of characters of the parameter (ignoring leading and trailing spaces) 
+has the syntax of one of the following:&nbsp;</div>
+<div class="paranum"><a name="p39.7">39.7/2</a></div>
+<div class="Indented4Bulleted"><SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN></div>
+<div class="paranum"><a name="p39.8">39.8/2</a></div>
+<div class="Indented4Bulleted"><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0008">numeral</A></SPAN>.[<SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p39.9">39.9/2</a></div>
+<div class="Indented4Bulleted">.<SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0008">numeral</A></SPAN>[<SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p39.10">39.10/2</a></div>
+<div class="Indented4Bulleted"><SPAN Class="swiss"><A HREF="RM-2-4-2.html#S0012">base</A></SPAN>#<SPAN Class="swiss"><A HREF="RM-2-4-2.html#S0013">based_numeral</A></SPAN>.#[<SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p39.11">39.11/2</a></div>
+<div class="Indented4Bulleted"><SPAN Class="swiss"><A HREF="RM-2-4-2.html#S0012">base</A></SPAN>#.<SPAN Class="swiss"><A HREF="RM-2-4-2.html#S0013">based_numeral</A></SPAN>#[<SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN>] 
+</div>
+<div class="paranum"><a name="p39.12">39.12/3</a></div>
+<div class="WideHanging-Body"><A NAME="I1662"></A>with an optional leading 
+sign character (plus or minus), and if the corresponding numeric value 
+belongs to the base range of the type of S, then that value is the result; 
+<A NAME="I1663"></A><A NAME="I1664"></A>otherwise, Constraint_Error is 
+raised. The sign of a zero value is preserved (positive if none has been 
+specified) if S'Signed_Zeros is True.</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Value</div><div class="WideHanging-Body">
+<A NAME="I1665"></A><A NAME="I1666"></A>S'Wide_Value denotes a function 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Value(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;Wide_String)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="WideHanging-Body">This function returns a value given an 
+image of the value as a Wide_String, ignoring any leading or trailing 
+spaces.</div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="WideHanging-Body"><A NAME="I1667"></A><A NAME="I1668"></A>For 
+the evaluation of a call on S'Wide_Value for an enumeration subtype S, 
+if the sequence of characters of the parameter (ignoring leading and 
+trailing spaces) has the syntax of an enumeration literal and if it corresponds 
+to a literal of the type of S (or corresponds to the result of S'Wide_Image 
+for a value of the type), the result is the corresponding enumeration 
+value; <A NAME="I1669"></A><A NAME="I1670"></A>otherwise, Constraint_Error 
+is raised. For a numeric subtype S, the evaluation of a call on S'Wide_Value 
+with <I>Arg</I> of type Wide_String is equivalent to a call on S'Wide_Wide_Value 
+for a corresponding <I>Arg</I> of type Wide_Wide_String.&nbsp;</div>
+<div class="WideHanging-Body"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+44 through 51 were moved to Wide_Wide_Value.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Value</div><div class="WideHanging-Body">
+<A NAME="I1671"></A><A NAME="I1672"></A>S'Value denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Value(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;String)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="WideHanging-Body">This function returns a value given an 
+image of the value as a String, ignoring any leading or trailing spaces.</div>
+<div class="paranum"><a name="p55">55/3</a></div>
+<div class="WideHanging-Body"><A NAME="I1673"></A><A NAME="I1674"></A>For 
+the evaluation of a call on S'Value for an enumeration subtype S, if 
+the sequence of characters of the parameter (ignoring leading and trailing 
+spaces) has the syntax of an enumeration literal and if it corresponds 
+to a literal of the type of S (or corresponds to the result of S'Image 
+for a value of the type), the result is the corresponding enumeration 
+value; <A NAME="I1675"></A><A NAME="I1676"></A>otherwise, Constraint_Error 
+is raised. For a numeric subtype S, the evaluation of a call on S'Value 
+with <I>Arg</I> of type String is equivalent to a call on S'Wide_Wide_Value 
+for a corresponding <I>Arg</I> of type Wide_Wide_String.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p56">56/2</a></div>
+<div class="Normal">An implementation may extend the Wide_Wide_Value, 
+Wide_Value, Value, Wide_Wide_Image, Wide_Image, and Image attributes 
+of a floating point type to support special values such as infinities 
+and NaNs.</div>
+<div class="paranum"><a name="p56.1">56.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;An implementation may extend the Wide_Wide_Value, 
+Wide_Value, and Value attributes of a character type to accept strings 
+of the form &ldquo;Hex_<I>hhhhhhhh</I>&rdquo; (ignoring case) for any 
+character (not just the ones for which Wide_Wide_Image would produce 
+that form &mdash; see <A HREF="RM-3-5-2.html">3.5.2</A>), as well as 
+three-character strings of the form &ldquo;'<I>X</I>'&rdquo;, where <I>X</I> 
+is any character, including nongraphic characters.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p56.2">56.2/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For a scalar type, 
+the following language-defined representation aspect may be specified 
+with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN> 
+(see <A HREF="RM-13-1-1.html">13.1.1</A>):&nbsp;</div>
+<div class="paranum"><a name="p56.3">56.3/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Default_Value</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a static expression, and that expression 
+shall be explicit, even if the aspect has a boolean type. Default_Value 
+shall be specified only on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>.<A NAME="I1677"></A><A NAME="I1678"></A> 
+</div>
+<div class="paranum"><a name="p56.4">56.4/3</a></div>
+<div class="Normal">&nbsp;&nbsp;If a derived type with no primitive subprograms 
+inherits a boolean Default_Value aspect, the aspect may be specified 
+to have any value for the derived type.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p56.5">56.5/3</a></div>
+<div class="Normal">&nbsp;&nbsp;The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+specified for the Default_Value aspect is the type defined by the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+on which it appears.<A NAME="I1679"></A>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Notes">24&nbsp;&nbsp;The evaluation of S'First or S'Last 
+never raises an exception. If a scalar subtype S has a nonnull range, 
+S'First and S'Last belong to this range. These values can, for example, 
+always be assigned to a variable of subtype S.&nbsp;</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Notes">25&nbsp;&nbsp;For a subtype of a scalar type, the 
+result delivered by the attributes Succ, Pred, and Value might not belong 
+to the subtype; similarly, the actual parameters of the attributes Succ, 
+Pred, and Image need not belong to the subtype.</div>
+<div class="paranum"><a name="p59">59</a></div>
+<div class="Notes">26&nbsp;&nbsp;For any value V (including any nongraphic 
+character) of an enumeration subtype S, S'Value(S'Image(V)) equals V, 
+as do S'Wide_Value(S'Wide_Image(V)) and S'Wide_Wide_Value(S'Wide_Wide_Image(V)). 
+None of these expressions ever raise Constraint_Error.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p60">60</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of ranges:</I> 
+</div>
+<div class="paranum"><a name="p61">61</a></div>
+<div class="Examples">-10&nbsp;..&nbsp;10<BR>
+X&nbsp;..&nbsp;X&nbsp;+&nbsp;1<BR>
+0.0&nbsp;..&nbsp;2.0*Pi<BR>
+Red&nbsp;..&nbsp;Green&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-5-1.html">3.5.1</A></I></SPAN><BR>
+1&nbsp;..&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;null&nbsp;range</I></SPAN><BR>
+Table'Range&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;range&nbsp;attribute&nbsp;reference&nbsp;(see&nbsp;<A HREF="RM-3-6.html">3.6</A>)</I></SPAN></div>
+<div class="paranum"><a name="p62">62</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of range 
+constraints:</I>&nbsp;</div>
+<div class="paranum"><a name="p63">63</a></div>
+<div class="Examples"><B>range</B>&nbsp;-999.0&nbsp;..&nbsp;+999.0<BR>
+<B>range</B>&nbsp;S'First+1&nbsp;..&nbsp;S'Last-1</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

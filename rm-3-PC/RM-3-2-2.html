@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Subtype Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2.2 Subtype Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
+declares a subtype of some previously declared type, as defined by a 
+<SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1"><SPAN Class="swiss">subtype_declaration</SPAN><A NAME="I1451"></A><A NAME="S0026"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I1452"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<A NAME="I1453"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1454"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN>]</span>;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">subtype_indication</SPAN><A NAME="I1455"></A><A NAME="S0027"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<span class="insert2">[<A NAME="I1456"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I1457"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[<A NAME="I1458"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>]</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">subtype_mark</SPAN><A NAME="I1459"></A><A NAME="S0028"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>subtype_</I><A NAME="I1460"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">constraint</SPAN><A NAME="I1461"></A><A NAME="S0029"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1462"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0030">scalar_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1463"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">scalar_constraint</SPAN><A NAME="I1464"></A><A NAME="S0030"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1465"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1466"></A><SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1467"></A><SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">composite_constraint</SPAN><A NAME="I1468"></A><A NAME="S0031"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1469"></A><SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1470"></A><SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+shall resolve to denote a subtype. <A NAME="I1471"></A>The type <I>determined 
+by</I> a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+is the type of the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1472"></A>The 
+elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
+consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+<A NAME="I1473"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+creates a new subtype. If the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+does not include a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>, 
+the new subtype has the same (possibly null) constraint as that denoted 
+by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+that includes a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+proceeds as follows:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">The <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+is first elaborated.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted"><A NAME="I1474"></A><A NAME="I1475"></A>A check 
+is then made that the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+is <I>compatible</I> with the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">The condition imposed by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+is the condition obtained after elaboration of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>. 
+<A NAME="I1476"></A>The rules defining compatibility are given for each 
+form of <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+in the appropriate subclause. These rules are such that if a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+is <I>compatible</I> with a subtype, then the condition imposed by the 
+<SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+cannot contradict any condition already imposed by the subtype on its 
+values. <A NAME="I1477"></A>The exception Constraint_Error is raised 
+if any check of compatibility fails.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">4&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0030">scalar_constraint</A></SPAN> 
+may be applied to a subtype of an appropriate scalar type (see <A HREF="RM-3-5.html">3.5</A>, 
+<A HREF="RM-3-5-9.html">3.5.9</A>, and <A HREF="RM-J-3.html">J.3</A>), 
+even if the subtype is already constrained. On the other hand, a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0031">composite_constraint</A></SPAN> 
+may be applied to a composite subtype (or an access-to-composite subtype) 
+only if the composite subtype is unconstrained (see <A HREF="RM-3-6-1.html">3.6.1</A> 
+and <A HREF="RM-3-7-1.html">3.7.1</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of subtype 
+declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Examples"><B>subtype</B>&nbsp;Rainbow&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Color&nbsp;<B>range</B>&nbsp;Red&nbsp;..&nbsp;Blue;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-2-1.html">3.2.1</A></I></SPAN><BR>
+<B>subtype</B>&nbsp;Red_Blue&nbsp;&nbsp;<B>is</B>&nbsp;Rainbow;<BR>
+<B>subtype</B>&nbsp;Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Integer;<BR>
+<B>subtype</B>&nbsp;Small_Int&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-10&nbsp;..&nbsp;10;<BR>
+<B>subtype</B>&nbsp;Up_To_K&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Column&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;K;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-2-1.html">3.2.1</A></I></SPAN><BR>
+<B>subtype</B>&nbsp;Square&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Matrix(1&nbsp;..&nbsp;10,&nbsp;1&nbsp;..&nbsp;10);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-6.html">3.6</A></I></SPAN><BR>
+<B>subtype</B>&nbsp;Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Person(Sex&nbsp;=&gt;&nbsp;M);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN><span class="insert2"><BR>
+<B>subtype</B>&nbsp;Binop_Ref&nbsp;<B>is&nbsp;not&nbsp;null</B>&nbsp;Binop_Ptr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10.html">3.10</A></I></SPAN></span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Round Robin Dispatching</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.5 Round Robin Dispatching</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+[This clause defines the task dispatching policy Round_Robin_Within_Priorities 
+and the package Round_Robin.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The <I>policy</I>_<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+Round_Robin_Within_Priorities is a task dispatching policy.</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The following language-defined library package exists:&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples"><B>with</B>&nbsp;System;<BR>
+<B>with</B>&nbsp;Ada.Real_Time;<BR>
+<B>package</B>&nbsp;Ada.Dispatching.Round_Robin&nbsp;<B>is</B><A NAME="I7358"></A><BR>
+&nbsp;&nbsp;<A NAME="I7359"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7360"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7361"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7362"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time_Span;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7363"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>end</B>&nbsp;Ada.Dispatching.Round_Robin;</div>
+<div class="paranum"><a name="p4.a.1">4.a.1/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
+Default_Quantum in Dispatching.Round_Robin.</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+When task dispatching policy Round_Robin_Within_Priorities is the single 
+policy in effect for a partition, each task with priority in the range 
+of System.Interrupt_Priority is dispatched according to policy FIFO_Within_Priorities.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The procedures Set_Quantum set the required Quantum value for a single 
+priority level Pri or a range of priority levels Low .. High. If no quantum 
+is set for a Round Robin priority level, Default_Quantum is used.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The function Actual_Quantum returns the actual quantum used by the implementation 
+for the priority level Pri.</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The function Is_Round_Robin returns True if priority Pri is covered by 
+task dispatching policy Round_Robin_Within_Priorities; otherwise it returns 
+False.</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+A call of Actual_Quantum or Set_Quantum raises exception Dispatching.Dispatching_Policy_Error 
+if a predefined policy other than Round_Robin_Within_Priorities applies 
+to the specified priority or any of the priorities in the specified range.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+For Round_Robin_Within_Priorities, the dispatching rules for FIFO_Within_Priorities 
+apply with the following additional rules:</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Bulleted">When a task is added or moved to the tail of the 
+ready queue for its base priority, it has an execution time budget equal 
+to the quantum for that priority level. This will also occur when a blocked 
+task becomes executable again.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Bulleted">When a task is preempted (by a higher priority 
+task) and is added to the head of the ready queue for its priority level, 
+it retains its remaining budget.</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Bulleted">While a task is executing, its budget is decreased 
+by the amount of execution time it uses. The accuracy of this accounting 
+is the same as that for execution time clocks (see <A HREF="AA-D-14.html">D.14</A>). 
+</div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that this happens 
+even when the task is executing at a higher, inherited priority, and 
+even if that higher priority is dispatched by a different policy than 
+round robin.&nbsp;</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Bulleted">When a task has exhausted its budget and is without 
+an inherited priority (and is not executing within a protected operation), 
+it is moved to the tail of the ready queue for its priority level. This 
+is a task dispatching point.</div>
+<div class="paranum"><a name="p14.a">14.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In this case, it will be 
+given a budget as described in the first bullet.</div>
+<div class="paranum"><a name="p14.b">14.b/2</a></div>
+<div class="Annotations">The rules for FIFO_Within_Priority (to which 
+these bullets are added) say that a task that has its base priority set 
+to a Round Robin priority is moved to the tail of the ready queue for 
+its new priority level, and then will be given a budget as described 
+in the first bullet. That happens whether or not the task's original 
+base priority was a Round Robin priority.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00333.TXT">AI95-00333-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+An implementation shall allow, for a single partition, both the task 
+dispatching policy to be specified as Round_Robin_Within_Priorities and 
+also the locking policy (see <A HREF="AA-D-3.html">D.3</A>) to be specified 
+as Ceiling_Locking.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is the preferred combination 
+of the Round_Robin_Within_Priorities policy with a locking policy, and 
+we want that combination to be portable.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+An implementation shall document the quantum values supported.&nbsp;</div>
+<div class="paranum"><a name="p16.a.1">16.a.1/2</a></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>The quantum 
+values supported for round robin dispatching.</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+An implementation shall document the accuracy with which it detects the 
+exhaustion of the budget of a task.&nbsp;</div>
+<div class="paranum"><a name="p17.a.1">17.a.1/2</a></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>The accuracy 
+of the detection of the exhaustion of the budget of a task for round 
+robin dispatching.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Notes">16&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+Due to implementation constraints, the quantum value returned by Actual_Quantum 
+might not be identical to that set with Set_Quantum.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Notes">17&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+A task that executes continuously with an inherited priority will not 
+be subject to round robin dispatching.</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<A NAME="I7364"></A>Policy Round_Robin_Within_Priorities and package 
+Dispatching.Round_Robin are new.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Unchecked Storage Deallocation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11.2 Unchecked Storage Deallocation</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I5906"></A> <A NAME="I5907"></A><A NAME="I5908"></A><A NAME="I5909"></A><A NAME="I5910"></A>Unchecked 
+storage deallocation of an object designated by a value of an access 
+type is achieved by a call to an instance of the generic procedure Unchecked_Deallocation.] 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+generic library procedure exists:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Name&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;&nbsp;Object;<BR>
+<A NAME="I5911"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocation(X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Name)<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</span><span class="delete3">;<BR>
+<B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Ada.Unchecked_Deallocation);</span><BR>
+<B>pragma</B>&nbsp;Preelaborate(Ada.Unchecked_Deallocation);</div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The <span class="insert3">aspect</span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
+Convention implies that the attribute Access is not allowed for instances 
+of Unchecked_Deallocation.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0157-1.TXT">AI05-0157-1</A></I>} 
+<span class="insert3">A call on an instance of Unchecked_Deallocation 
+is illegal if the actual access type of the instance is a type for which 
+the Storage_Size has been specified by a static expression with value 
+zero or is defined by the language to be zero. <A NAME="I5912"></A>In 
+addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit.</span></div>
+<div class="paranum"><a name="p3.b">3.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>This 
+rule is the same as the rule for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>s. 
+We could have left the last sentence out, as a call to Unchecked_Deallocation 
+cannot occur in a specification as it is a procedure call, but we left 
+it for consistency and to avoid future maintenance hazards.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Given an instance of 
+Unchecked_Deallocation declared as follows:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Free&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Unchecked_Deallocation(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>object_subtype_name</I></SPAN>,&nbsp;<SPAN Class="roman"><I>access_to_variable_subtype_name</I></SPAN>);</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">Procedure Free has 
+the following effect:&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+After executing Free(X), the value of X is <B>null</B>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
+Free(X), when X is already equal to <B>null</B>, has no effect.</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0107-1.TXT">AI05-0107-1</A></I>} 
+Free(X), when X is not equal to <B>null</B> first performs finalization<span class="insert2">&nbsp;of the object designated by X (and any coextensions of the object &mdash; 
+see <A HREF="AA-3-10-2.html">3.10.2</A>)</span>, as described in <span class="insert2"><A HREF="AA-7-6-1.html">7.6.1</A></span><span class="delete2"><A HREF="AA-7-6.html">&nbsp;7.6</A></span>. 
+It then deallocates the storage occupied by the object designated by 
+X<span class="insert2">&nbsp;(and any coextensions)</span>. If the storage 
+pool is a user-defined object, then the storage is deallocated by calling 
+Deallocate<span class="insert3">&nbsp;as described in <A HREF="AA-13-11.html">13.11</A></span><span class="delete3">, 
+passing <I>access_to_variable_subtype_name</I>'Storage_Pool as the Pool 
+parameter. Storage_Address is the value returned in the Storage_Address 
+parameter of the corresponding Allocate call. Size_In_Storage_Elements 
+and Alignment are the same values passed to the corresponding Allocate 
+call</span>. There is one exception: if the object being freed contains 
+tasks, the object might not be deallocated.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0107-1.TXT">AI05-0107-1</A></I>} 
+Free calls only the specified Deallocate procedure to do deallocation.<span class="delete3">&nbsp;For any given object deallocation, the number of calls to Free (usually 
+one) will be equal to the number of Allocate calls it took to allocate 
+the object. We do not define the relative order of multiple calls used 
+to deallocate the same object &mdash; that is, if the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+allocated two pieces <I>x</I> and <I>y</I>, then Free might deallocate 
+<I>x</I> and then <I>y</I>, or it might deallocate <I>y</I> and then 
+<I>x</I>.</span>&nbsp;</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<A NAME="I5913"></A><A NAME="I5914"></A><A NAME="I5915"></A><A NAME="I5916"></A>After 
+Free(X), the object designated by X, and any subcomponents <span class="insert2">(and 
+coextensions)&nbsp;</span>thereof, no longer exist; their storage can be reused 
+for other purposes.&nbsp;</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5917"></A>It 
+is a bounded error to free a discriminated, unterminated task object. 
+The possible consequences are:&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is an error because the 
+task might refer to its discriminants, and the discriminants might be 
+deallocated by freeing the task object.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">No exception is raised.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted"><A NAME="I5918"></A><A NAME="I5919"></A>Program_Error 
+or Tasking_Error is raised at the point of the deallocation.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted"><A NAME="I5920"></A><A NAME="I5921"></A>Program_Error 
+or Tasking_Error is raised in the task the next time it references any 
+of the discriminants.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This last case presumes 
+an implementation where the task references its discriminants indirectly, 
+and the pointer is nulled out when the task object is deallocated.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">In the first two cases, the storage for the discriminants 
+(and for any enclosing object if it is designated by an access discriminant 
+of the task) is not reclaimed prior to task termination.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The storage might never 
+be reclaimed.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<A NAME="I5922"></A><A NAME="I5923"></A>Evaluating a name that denotes 
+a nonexistent object<span class="insert3">, or a protected subprogram 
+or subprogram renaming whose associated object (if any) is nonexistent, 
+</span>is erroneous. The execution of a call to an instance of Unchecked_Deallocation 
+is erroneous if the object was created other than by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+for an access type whose pool is Name'Storage_Pool.</div>
+<div class="paranum"><a name="p16.a">16.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">The part about a protected subprogram is intended 
+to cover the case of an access-to-protected-subprogram where the associated 
+object has been deallocated. The part about a subprogram renaming is 
+intended to cover the case of a renaming of a prefixed view where the 
+prefix object has been deallocated, or the case of a renaming of an entry 
+or protected subprogram where the associated task or protected object 
+has been deallocated.</span>&nbsp;</div>
+<div class="paranum"><a name="p16.b">16.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0157-1.TXT">AI05-0157-1</A></I>} 
+<span class="insert3">This text does not cover the case of a name that 
+contains a null access value, as <B>null</B> does not denote an object 
+(rather than denoting a nonexistent object).</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">For a standard storage pool, Free should actually 
+reclaim the storage.&nbsp;</div>
+<div class="paranum"><a name="p17.a.1">17.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">For a standard storage pool, an instance 
+of Unchecked_Deallocation should actually reclaim the storage.</span></div>
+<div class="paranum"><a name="p17.a">17.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+This is not a testable property, since we do not <span class="insert2">know 
+</span>how much storage is used by a given pool element, nor whether 
+fragmentation can occur.&nbsp;</div>
+<div class="paranum"><a name="p17.1">17.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0157-1.TXT">AI05-0157-1</A></I>} 
+<span class="insert3">A call on an instance of Unchecked_Deallocation 
+with a nonnull access value should raise Program_Error if the actual 
+access type of the instance is a type for which the Storage_Size has 
+been specified to be zero or is defined by the language to be zero.</span> 
+</div>
+<div class="paranum"><a name="p17.a.1">17.a.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">A call on an instance of Unchecked_Deallocation 
+with a nonnull access value should raise Program_Error if the actual 
+access type of the instance is a type for which the Storage_Size has 
+been specified to be zero or is defined by the language to be zero.</span></div>
+<div class="paranum"><a name="p17.b">17.b</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>If 
+the call is not illegal (as in a generic body), we recommend that it 
+raise Program_Error. Since the execution of this call is erroneous (any 
+allocator from the pool will have raised Storage_Error, so the nonnull 
+access value must have been allocated from a different pool or be a stack-allocated 
+object), we can't require any behavior &mdash; anything at all would 
+be a legitimate implementation.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">31&nbsp;&nbsp;The rules here that refer to Free apply 
+to any instance of Unchecked_Deallocation.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Notes">32&nbsp;&nbsp;Unchecked_Deallocation cannot be instantiated 
+for an access-to-constant type. This is implied by the rules of <A HREF="AA-12-5-4.html">12.5.4</A>. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">The rules for coextensions are clarified (mainly 
+by adding that term). In theory, this reflects no change from Ada 95 
+(coextensions existed in Ada 95, they just didn't have a name).</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p19.b">19.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Added a rule that using an access-to-protected-subprogram 
+is erroneous if the associated object no longer exists. It is hard to 
+imagine an alternative meaning here, and this has no effect on correct 
+programs.</span></div>
+<div class="paranum"><a name="p19.c">19.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0107-1.TXT">AI05-0107-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Moved the requirements on an 
+implementation-generated call to Deallocate to <A HREF="AA-13-11.html">13.11</A>, 
+in order to put all of the rules associated with implementation-generated 
+calls to Allocate and Deallocate together.</span></div>
+<div class="paranum"><a name="p19.d">19.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0157-1.TXT">AI05-0157-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Added wording so that calling 
+an instance of Unchecked_Deallocation is treated similarly to <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>s 
+for access types where <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>s 
+would be banned.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

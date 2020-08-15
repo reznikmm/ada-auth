@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Model of Fixed Point Arithmetic</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>G.2.3 Model of Fixed Point Arithmetic</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In the strict mode, the predefined arithmetic operations 
+of a fixed point type shall satisfy the accuracy requirements specified 
+here and shall avoid or signal overflow in the situations described. 
+</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The accuracy requirements for the predefined fixed 
+point arithmetic operations and conversions, and the results of relations 
+on fixed point operands, are given below.&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The operands of the fixed point adding operators, 
+absolute value, and comparisons have the same type. These operations 
+are required to yield exact results, unless they overflow.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">Multiplications and divisions are allowed between 
+operands of any two fixed point types; the result has to be (implicitly 
+or explicitly) converted to some other numeric type. For purposes of 
+defining the accuracy rules, the multiplication or division and the conversion 
+are treated as a single operation whose accuracy depends on three types 
+(those of the operands and the result). For decimal fixed point types, 
+the attribute T'Round may be used to imply explicit conversion with rounding 
+(see <A HREF="RM-3-5-10.html">3.5.10</A>).</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">When the result type is a floating point type, the 
+accuracy is as given in <A HREF="RM-G-2-1.html">G.2.1</A>. <A NAME="I8573"></A>For 
+some combinations of the operand and result types in the remaining cases, 
+the result is required to belong to a small set of values called the 
+<I>perfect result set</I>; <A NAME="I8574"></A>for other combinations, 
+it is required merely to belong to a generally larger and implementation-defined 
+set of values called the <I>close result set</I>. When the result type 
+is a decimal fixed point type, the perfect result set contains a single 
+value; thus, operations on decimal types are always fully specified. 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">When one operand of a fixed-fixed multiplication 
+or division is of type <I>universal_real</I>, that operand is not implicitly 
+converted in the usual sense, since the context does not determine a 
+unique target type, but the accuracy of the result of the multiplication 
+or division (i.e., whether the result has to belong to the perfect result 
+set or merely the close result set) depends on the value of the operand 
+of type <I>universal_real</I> and on the types of the other operand and 
+of the result.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a fixed point multiplication 
+or division whose (exact) mathematical result is <SPAN Class="roman"><I>v</I></SPAN>, 
+and for the conversion of a value <SPAN Class="roman"><I>v</I></SPAN> 
+to a fixed point type, the perfect result set and close result set are 
+defined as follows:&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">If the result type 
+is an ordinary fixed point type with a <I>small</I> of <SPAN Class="roman"><I>s</I></SPAN>, 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented2NestedBulleted">if <SPAN Class="roman"><I>v</I></SPAN> 
+is an integer multiple of <SPAN Class="roman"><I>s</I></SPAN>, then the 
+perfect result set contains only the value <SPAN Class="roman"><I>v</I></SPAN>;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented2NestedBulleted">otherwise, it contains the integer 
+multiple of <SPAN Class="roman"><I>s</I></SPAN> just below <SPAN Class="roman"><I>v</I></SPAN> 
+and the integer multiple of <SPAN Class="roman"><I>s</I></SPAN> just 
+above <SPAN Class="roman"><I>v</I></SPAN>.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted-NoPrefix">The close result set is an implementation-defined 
+set of consecutive integer multiples of <SPAN Class="roman"><I>s</I></SPAN> 
+containing the perfect result set as a subset.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">If the result type 
+is a decimal type with a <I>small</I> of <SPAN Class="roman"><I>s</I></SPAN>, 
+</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented2NestedBulleted">if <SPAN Class="roman"><I>v</I></SPAN> 
+is an integer multiple of <SPAN Class="roman"><I>s</I></SPAN>, then the 
+perfect result set contains only the value <SPAN Class="roman"><I>v</I></SPAN>;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Indented2NestedBulleted">otherwise, if truncation applies<span class="insert3">,</span> 
+then it contains only the integer multiple of <SPAN Class="roman"><I>s</I></SPAN> 
+in the direction toward zero, whereas if rounding applies<span class="insert3">,</span> 
+then it contains only the nearest integer multiple of <SPAN Class="roman"><I>s</I></SPAN> 
+(with ties broken by rounding away from zero).&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted-NoPrefix">The close result set is an implementation-defined 
+set of consecutive integer multiples of <SPAN Class="roman"><I>s</I></SPAN> 
+containing the perfect result set as a subset.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">If the result type 
+is an integer type,&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented2NestedBulleted">if <SPAN Class="roman"><I>v</I></SPAN> 
+is an integer, then the perfect result set contains only the value <SPAN Class="roman"><I>v</I></SPAN>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Indented2NestedBulleted">otherwise, it contains the integer 
+nearest to the value <SPAN Class="roman"><I>v</I></SPAN> (if <SPAN Class="roman"><I>v</I></SPAN> 
+lies equally distant from two consecutive integers, the perfect result 
+set contains the one that is further from zero).&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted-NoPrefix">The close result set is an implementation-defined 
+set of consecutive integers containing the perfect result set as a subset. 
+</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">The result of a fixed point multiplication or division 
+shall belong either to the perfect result set or to the close result 
+set, as described below, if overflow does not occur. In the following 
+cases, if the result type is a fixed point type, let <SPAN Class="roman"><I>s</I></SPAN> 
+be its <I>small</I>; otherwise, i.e. when the result type is an integer 
+type, let <SPAN Class="roman"><I>s</I></SPAN> be 1.0.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Bulleted">For a multiplication or division neither of whose 
+operands is of type <I>universal_real</I>, let <SPAN Class="roman"><I>l</I></SPAN> 
+and <SPAN Class="roman"><I>r</I></SPAN> be the <I>smalls</I> of the left 
+and right operands. For a multiplication, if (<SPAN Class="roman"><I>l</I></SPAN> 
+&middot; <SPAN Class="roman"><I>r</I></SPAN>) / <SPAN Class="roman"><I>s</I></SPAN> 
+is an integer or the reciprocal of an integer (the <I>smalls</I> are 
+said to be &ldquo;compatible&rdquo; in this case), the result shall belong 
+to the perfect result set; otherwise, it belongs to the close result 
+set. For a division, if <SPAN Class="roman"><I>l</I></SPAN> / (<SPAN Class="roman"><I>r</I></SPAN> 
+&middot; <SPAN Class="roman"><I>s</I></SPAN>) is an integer or the reciprocal 
+of an integer (i.e., the <I>smalls</I> are compatible), the result shall 
+belong to the perfect result set; otherwise, it belongs to the close 
+result set.&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">For a multiplication or division having one <I>universal_real</I> 
+operand with a value of <SPAN Class="roman"><I>v</I></SPAN>, note that 
+it is always possible to factor <SPAN Class="roman"><I>v</I></SPAN> as 
+an integer multiple of a &ldquo;compatible&rdquo; <I>small</I>, but the 
+integer multiple may be &ldquo;too big.&rdquo; If there exists a factorization 
+in which that multiple is less than some implementation-defined limit, 
+the result shall belong to the perfect result set; otherwise, it belongs 
+to the close result set.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal">A multiplication P * Q of an operand of a fixed point 
+type F by an operand of an integer type I, or vice-versa, and a division 
+P / Q of an operand of a fixed point type F by an operand of an integer 
+type I, are also allowed. In these cases, the result has a type of F; 
+explicit conversion of the result is never required. The accuracy required 
+in these cases is the same as that required for a multiplication F(P 
+* Q) or a division F(P / Q) obtained by interpreting the operand of the 
+integer type to have a fixed point type with a <I>small</I> of 1.0.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal">The accuracy of the result of a conversion from an 
+integer or fixed point type to a fixed point type, or from a fixed point 
+type to an integer type, is the same as that of a fixed point multiplication 
+of the source value by a fixed point operand having a <I>small</I> of 
+1.0 and a value of 1.0, as given by the foregoing rules. The result of 
+a conversion from a floating point type to a fixed point type shall belong 
+to the close result set. The result of a conversion of a <I>universal_real</I> 
+operand to a fixed point type shall belong to the perfect result set.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">The possibility of overflow in the result of a predefined 
+arithmetic operation or conversion yielding a result of a fixed point 
+type T is analogous to that for floating point types, except for being 
+related to the base range instead of the safe range. <A NAME="I8575"></A><A NAME="I8576"></A>If 
+all of the permitted results belong to the base range of T, then the 
+implementation shall deliver one of the permitted results; otherwise, 
+</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Bulleted"><A NAME="I8577"></A>if T'Machine_Overflows is True, 
+the implementation shall either deliver one of the permitted results 
+or raise Constraint_Error;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Bulleted">if T'Machine_Overflows is False, the result is 
+implementation defined.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

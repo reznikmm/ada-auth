@@ -1,0 +1,1148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Multiway_Trees</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.10 The Generic Package Containers.Multiway_Trees</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">The language-defined generic package Containers.Multiway_Trees 
+provides private types Tree and Cursor, and a set of operations for each 
+type. A multiway tree container is well-suited to represent nested structures.</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">A multiway tree container object manages a tree of 
+internal <I>nodes</I>,  each of which contains an element and pointers 
+to the parent, first child, last child, next (successor) sibling, and 
+previous (predecessor) sibling internal nodes.<A NAME="I7138"></A> A 
+cursor designates a particular node within a tree (and by extension the 
+element contained in that node, if any). A cursor keeps designating the 
+same node (and element) as long as the node is part of the container, 
+even if the node is moved within the container.</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">A <I>subtree</I> is a particular node (which <I>roots 
+the subtree</I>) and all of its child nodes (including all of the children 
+of the child nodes, recursively). <A NAME="I7139"></A><A NAME="I7140"></A><A NAME="I7141"></A>There 
+is a special node, the <I>root</I>, which is always present and has neither 
+an associated element value nor any parent node. The root node provides 
+a place to add nodes to an otherwise empty tree and represents the base 
+of the tree.<A NAME="I7142"></A><A NAME="I7143"></A></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">A node that has no children is called a <I>leaf node</I>.<A NAME="I7144"></A> 
+The <I>ancestors</I> of a node are the node itself, its parent node, 
+the parent of the parent node, and so on until a node with no parent 
+is reached.<A NAME="I7145"></A> Similarly, the <I>descendants</I> of 
+a node are the node itself, its child nodes, the children of each child 
+node, and so on.<A NAME="I7146"></A></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">The nodes of a subtree can be visited in several 
+different orders. For a <I>depth-first order</I>, after visiting a node, 
+the nodes of its child list are each visited in depth-first order, with 
+each child node visited in natural order (first child to last child).<A NAME="I7147"></A></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The generic library 
+package Containers.Multiway_Trees has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Iterator_Interfaces;<BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Ada.Containers.Multiway_Trees&nbsp;<B>is</B><A NAME="I7148"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Multiway_Trees);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Multiway_Trees);</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7149"></A>Tree&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Iterator&nbsp;&nbsp;=&gt;&nbsp;Iterate,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator_Element&nbsp;&nbsp;=&gt;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Tree);</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7150"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7151"></A>Empty_Tree&nbsp;:&nbsp;<B>constant</B>&nbsp;Tree;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7152"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7153"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7154"></A>Tree_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7155"></A>Equal_Subtree&nbsp;(Left_Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right_Position:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7156"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7157"></A>Node_Count&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7158"></A>Subtree_Node_Count&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7159"></A>Depth&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7160"></A>Is_Root&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7161"></A>Is_Leaf&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7162"></A>Root&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7163"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7164"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7165"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7166"></A>Query_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7167"></A>Update_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7168"></A>Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7169"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7170"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7171"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7172"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Tree);</div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7173"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Tree;</div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7174"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7175"></A>Delete_Leaf&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7176"></A>Delete_Subtree&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7177"></A>Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7178"></A>Find&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p39">39/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7179"></A>Find_In_Subtree&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p40">40/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7180"></A>Ancestor_Find&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p41">41/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7181"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p42">42/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7182"></A>Iterate<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7183"></A>Iterate_Subtree<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p44">44/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7184"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</div>
+<div class="paranum"><a name="p45">45/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7185"></A>Iterate_Subtree&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</div>
+<div class="paranum"><a name="p46">46/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7186"></A>Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p47">47/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7187"></A>Child_Depth&nbsp;(Parent,&nbsp;Child&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p48">48/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7188"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p49">49/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7189"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p50">50/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7190"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p51">51/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7191"></A>Prepend_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p52">52/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7192"></A>Append_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p53">53/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7193"></A>Delete_Children&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p54">54/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7194"></A>Copy_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p55">55/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7195"></A>Splice_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p56">56/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7196"></A>Splice_Subtree&nbsp;(Container:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p57">57/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7197"></A>Splice_Children&nbsp;(Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p58">58/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7198"></A>Splice_Children&nbsp;(Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p59">59/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7199"></A>Parent&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p60">60/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7200"></A>First_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p61">61/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7201"></A>First_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="paranum"><a name="p62">62/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7202"></A>Last_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p63">63/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7203"></A>Last_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="paranum"><a name="p64">64/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7204"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p65">65/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7205"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p66">66/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7206"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p67">67/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7207"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p68">68/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7208"></A>Iterate_Children<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p69">69/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7209"></A>Reverse_Iterate_Children<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p70">70/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7210"></A>Iterate_Children&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;&nbsp;Parent&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Reversible_Iterator'Class;</div>
+<div class="paranum"><a name="p71">71/3</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Containers.Multiway_Trees;</div>
+<div class="paranum"><a name="p72">72/3</a></div>
+<div class="Normal">The actual function for the generic formal function 
+&quot;=&quot; on Element_Type values is expected to define a reflexive 
+and symmetric relationship and return the same result value each time 
+it is called with a particular pair of values. If it behaves in some 
+other manner, the functions Find, Reverse_Find, Equal_Subtree, and &quot;=&quot; 
+on tree values return an unspecified value. The exact arguments and number 
+of calls of this generic formal function by the functions Find, Reverse_Find, 
+Equal_Subtree, and &quot;=&quot; on tree values are unspecified.<A NAME="I7211"></A></div>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Normal">The type Tree is used to represent trees. The type 
+Tree needs finalization<A NAME="I7212"></A> (see <A HREF="RM-7-6.html">7.6</A>).</div>
+<div class="paranum"><a name="p74">74/3</a></div>
+<div class="Normal">Empty_Tree represents the empty Tree object. It contains 
+only the root node (Node_Count (Empty_Tree) returns 1). If an object 
+of type Tree is not otherwise initialized, it is initialized to the same 
+value as Empty_Tree.</div>
+<div class="paranum"><a name="p75">75/3</a></div>
+<div class="Normal">No_Element represents a cursor that designates no 
+element. If an object of type Cursor is not otherwise initialized, it 
+is initialized to the same value as No_Element.</div>
+<div class="paranum"><a name="p76">76/3</a></div>
+<div class="Normal">The predefined &quot;=&quot; operator for type Cursor 
+returns True if both cursors are No_Element, or designate the same element 
+in the same container.</div>
+<div class="paranum"><a name="p77">77/3</a></div>
+<div class="Normal">Execution of the default implementation of the Input, 
+Output, Read, or Write attribute of type Cursor raises Program_Error.</div>
+<div class="paranum"><a name="p78">78/3</a></div>
+<div class="Normal">Tree'Write for a Tree object <I>T</I> writes Node_Count(<I>T</I>) 
+- 1 elements of the tree to the stream. It also may write additional 
+information about the tree.</div>
+<div class="paranum"><a name="p79">79/3</a></div>
+<div class="Normal">Tree'Read reads the representation of a tree from 
+the stream, and assigns to <I>Item</I> a tree with the same elements 
+and structure as was written by Tree'Write.</div>
+<div class="paranum"><a name="p80">80/3</a></div>
+<div class="Normal">Some operations of this generic package have access-to-subprogram 
+parameters. To ensure such operations are well-defined, they guard against 
+certain actions by the designated subprogram. In particular, some operations 
+check for &quot;tampering with cursors&quot; of a container because they 
+depend on the set of elements of the container remaining constant, and 
+others check for &quot;tampering with elements&quot; of a container because 
+they depend on elements of the container not being replaced.</div>
+<div class="paranum"><a name="p81">81/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7213"></A>A 
+subprogram is said to <I>tamper with cursors</I> of a tree object <I>T</I> 
+if:</div>
+<div class="paranum"><a name="p82">82/3</a></div>
+<div class="Bulleted">it inserts or deletes elements of <I>T</I>, that 
+is, it calls the Clear, Delete_Leaf, Insert_Child, Delete_Children, Delete_Subtree, 
+or Copy_Subtree procedures with <I>T</I> as a parameter; or</div>
+<div class="paranum"><a name="p83">83/3</a></div>
+<div class="Bulleted">it reorders the elements of <I>T</I>, that is, 
+it calls the Splice_Subtree or Splice_Children procedures with <I>T</I> 
+as a parameter; or</div>
+<div class="paranum"><a name="p84">84/3</a></div>
+<div class="Bulleted">it finalizes <I>T</I>; or</div>
+<div class="paranum"><a name="p85">85/3</a></div>
+<div class="Bulleted">it calls Assign with <I>T</I> as the Target parameter; 
+or</div>
+<div class="paranum"><a name="p86">86/3</a></div>
+<div class="Bulleted">it calls the Move procedure with <I>T</I> as a 
+parameter.</div>
+<div class="paranum"><a name="p87">87/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7214"></A>A 
+subprogram is said to <I>tamper with elements</I> of a tree object <I>T</I> 
+if:</div>
+<div class="paranum"><a name="p88">88/3</a></div>
+<div class="Bulleted">it tampers with cursors of <I>T</I>; or</div>
+<div class="paranum"><a name="p89">89/3</a></div>
+<div class="Bulleted">it replaces one or more elements of <I>T</I>, that 
+is, it calls the Replace_Element or Swap procedures with <I>T</I> as 
+a parameter.</div>
+<div class="paranum"><a name="p90">90/3</a></div>
+<div class="Normal"><A NAME="I7215"></A><A NAME="I7216"></A>When tampering 
+with cursors is <I>prohibited</I> for a particular tree object <I>T</I>, 
+Program_Error is propagated by a call of any language-defined subprogram 
+that is defined to tamper with the cursors of <I>T</I>, leaving <I>T</I> 
+unmodified. Similarly, when tampering with elements is <I>prohibited</I> 
+for a particular tree object <I>T</I>, Program_Error is propagated by 
+a call of any language-defined subprogram that is defined to tamper with 
+the elements of <I>T</I> (or tamper with the cursors of <I>T</I>), leaving 
+<I>T</I> unmodified.&nbsp;</div>
+<div class="paranum"><a name="p91">91/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p92">92/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+Position designates an element, and returns False otherwise. In particular, 
+Has_Element returns False if the cursor designates a root node or equals 
+No_Element.</div>
+<div class="paranum"><a name="p93">93/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Equal_Subtree&nbsp;(Left_Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right_Position:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p94">94/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Left_Position 
+or Right_Position equals No_Element, propagates Constraint_Error. If 
+the number of child nodes of the element designated by Left_Position 
+is different from the number of child nodes of the element designated 
+by Right_Position, the function returns False. If Left_Position designates 
+a root node and Right_Position does not, the function returns False. 
+If Right_Position designates a root node and Left_Position does not, 
+the function returns False. Unless both cursors designate a root node, 
+the elements are compared using the generic formal equality operator. 
+If the result of the element comparison is False, the function returns 
+False. Otherwise, it calls Equal_Subtree on a cursor designating each 
+child element of the element designated by Left_Position and a cursor 
+designating the corresponding child element of the element designated 
+by Right_Position. If any such call returns False, the function returns 
+False; otherwise, it returns True. Any exception raised during the evaluation 
+of element equality is propagated.</div>
+<div class="paranum"><a name="p95">95/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p96">96/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Left and Right 
+denote the same tree object, then the function returns True. Otherwise, 
+it calls Equal_Subtree with cursors designating the root nodes of Left 
+and Right; the result is returned. Any exception raised during the evaluation 
+of Equal_Subtree is propagated.</div>
+<div class="paranum"><a name="p97">97/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Node_Count&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p98">98/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Node_Count returns 
+the number of nodes in Container.</div>
+<div class="paranum"><a name="p99">99/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Subtree_Node_Count&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p100">100/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position is No_Element, 
+Subtree_Node_Count returns 0; otherwise, Subtree_Node_Count returns the 
+number of nodes in the subtree that is rooted by Position.</div>
+<div class="paranum"><a name="p101">101/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p102">102/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Node_Count 
+(Container) = 1.</div>
+<div class="paranum"><a name="p103">103/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Depth&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p104">104/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, Depth returns 0; otherwise, Depth returns the number of ancestor 
+nodes of the node designated by Position (including the node itself).</div>
+<div class="paranum"><a name="p105">105/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Root&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p106">106/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Is_Root returns 
+True if the Position designates the root node of some tree; and returns 
+False otherwise.</div>
+<div class="paranum"><a name="p107">107/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Leaf&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p108">108/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Is_Leaf returns 
+True if Position designates a node that does not have any child nodes; 
+and returns False otherwise.</div>
+<div class="paranum"><a name="p109">109/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Root&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p110">110/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Root returns a cursor 
+that designates the root node of Container.</div>
+<div class="paranum"><a name="p111">111/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
+<div class="paranum"><a name="p112">112/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Removes all the 
+elements from Container.</div>
+<div class="paranum"><a name="p113">113/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="paranum"><a name="p114">114/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated; if Position designates 
+the root node of a tree, then Program_Error is propagated. Otherwise, 
+Element returns the element designated by Position.</div>
+<div class="paranum"><a name="p115">115/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</div>
+<div class="paranum"><a name="p116">116/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated; if Position does not 
+designate an element in Container (including if it designates the root 
+node), then Program_Error is propagated. Otherwise, Replace_Element assigns 
+the value New_Item to the element designated by Position.</div>
+<div class="paranum"><a name="p117">117/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</div>
+<div class="paranum"><a name="p118">118/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated; if Position designates 
+the root node of a tree, then Program_Error is propagated. Otherwise, 
+Query_Element calls Process.<B>all</B> with the element designated by 
+Position as the argument. Tampering with the elements of the tree that 
+contains the element designated by Position is prohibited during the 
+execution of the call on Process.<B>all</B>. Any exception raised by 
+Process.<B>all</B> is propagated.</div>
+<div class="paranum"><a name="p119">119/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</div>
+<div class="paranum"><a name="p120">120/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated; if Position does not 
+designate an element in Container (including if it designates the root 
+node), then Program_Error is propagated. Otherwise, Update_Element calls 
+Process.<B>all</B> with the element designated by Position as the argument. 
+Tampering with the elements of Container is prohibited during the execution 
+of the call on Process.<B>all</B>. Any exception raised by Process.<B>all</B> 
+is propagated.</div>
+<div class="paranum"><a name="p121">121/3</a></div>
+<div class="Indented2">If Element_Type is unconstrained and definite, 
+then the actual Element parameter of Process.<B>all</B> shall be unconstrained.</div>
+<div class="paranum"><a name="p122">122/3</a></div>
+<div class="Examples"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
+<div class="paranum"><a name="p123">123/3</a></div>
+<div class="Examples"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
+<div class="paranum"><a name="p124">124/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The types Constant_Reference_Type 
+and Reference_Type need finalization.<A NAME="I7217"></A></div>
+<div class="paranum"><a name="p125">125/3</a></div>
+<div class="Indented2">The default initialization of an object of type 
+Constant_Reference_Type or Reference_Type propagates Program_Error.</div>
+<div class="paranum"><a name="p126">126/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
+<div class="paranum"><a name="p127">127/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">This function (combined 
+with the Constant_Indexing and Implicit_Dereference aspects) provides 
+a convenient way to gain read access to an individual element of a tree 
+given a cursor.</div>
+<div class="paranum"><a name="p128">128/3</a></div>
+<div class="Indented2">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container, 
+then Program_Error is propagated. Otherwise, Constant_Reference returns 
+an object whose discriminant is an access value that designates the element 
+designated by Position. Tampering with the elements of Container is prohibited 
+while the object returned by Constant_Reference exists and has not been 
+finalized.</div>
+<div class="paranum"><a name="p129">129/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
+<div class="paranum"><a name="p130">130/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">This function (combined 
+with the Variable_Indexing and Implicit_Dereference aspects) provides 
+a convenient way to gain read and write access to an individual element 
+of a tree given a cursor.</div>
+<div class="paranum"><a name="p131">131/3</a></div>
+<div class="Indented2">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container, 
+then Program_Error is propagated. Otherwise, Reference returns an object 
+whose discriminant is an access value that designates the element designated 
+by Position. Tampering with the elements of Container is prohibited while 
+the object returned by Reference exists and has not been finalized.</div>
+<div class="paranum"><a name="p132">132/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Tree);</div>
+<div class="paranum"><a name="p133">133/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Target denotes 
+the same object as Source, the operation has no effect. Otherwise, the 
+elements of Source are copied to Target as for an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+assigning Source to Target.</div>
+<div class="paranum"><a name="p134">134/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Tree;</div>
+<div class="paranum"><a name="p135">135/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns a tree with 
+the same structure as Source and whose elements are initialized from 
+the corresponding elements of Source.</div>
+<div class="paranum"><a name="p136">136/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
+<div class="paranum"><a name="p137">137/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Target denotes 
+the same object as Source, then the operation has no effect. Otherwise, 
+Move first calls Clear (Target). Then, the nodes other than the root 
+node in Source are moved to Target (in the same positions). After Move 
+completes, Node_Count (Target) is the number of nodes originally in Source, 
+and Node_Count (Source) is 1.</div>
+<div class="paranum"><a name="p138">138/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Delete_Leaf&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p139">139/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated; if Position does not 
+designate an element in Container (including if it designates the root 
+node), then Program_Error is propagated. If the element designated by 
+position has any child elements, then Constraint_Error is propagated. 
+Otherwise, Delete_Leaf removes (from Container) the element designated 
+by Position. Finally, Position is set to No_Element.</div>
+<div class="paranum"><a name="p140">140/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Delete_Subtree&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p141">141/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated. If Position does not 
+designate an element in Container (including if it designates the root 
+node), then Program_Error is propagated. Otherwise, Delete_Subtree removes 
+(from Container) the subtree designated by Position (that is, all descendants 
+of the node designated by Position including the node itself), and Position 
+is set to No_Element.</div>
+<div class="paranum"><a name="p142">142/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p143">143/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If either I or J 
+equals No_Element, then Constraint_Error is propagated. If either I or 
+J do not designate an element in Container (including if either designates 
+the root node), then Program_Error is propagated. Otherwise, Swap exchanges 
+the values of the elements designated by I and J.</div>
+<div class="paranum"><a name="p144">144/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Find&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p145">145/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Find searches the 
+elements of Container for an element equal to Item (using the generic 
+formal equality operator). The search starts at the root node. The search 
+traverses the tree in a depth-first order. If no equal element is found, 
+then Find returns No_Element. Otherwise, it returns a cursor designating 
+the first equal element encountered.</div>
+<div class="paranum"><a name="p146">146/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Find_In_Subtree&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p147">147/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated. Find_In_Subtree searches 
+the subtree rooted by Position for an element equal to Item (using the 
+generic formal equality operator). The search starts at the element designated 
+by Position. The search traverses the subtree in a depth-first order. 
+If no equal element is found, then Find returns No_Element. Otherwise, 
+it returns a cursor designating the first equal element encountered.</div>
+<div class="paranum"><a name="p148">148/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Ancestor_Find&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p149">149/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated. Otherwise, Ancestor_Find 
+searches for an element equal to Item (using the generic formal equality 
+operator). The search starts at the node designated by Position, and 
+checks each ancestor proceeding toward the root of the subtree. If no 
+equal element is found, then Ancestor_Find returns No_Element. Otherwise, 
+it returns a cursor designating the first equal element encountered. 
+</div>
+<div class="paranum"><a name="p150">150/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Contains&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p151">151/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Find 
+(Container, Item) /= No_Element.</div>
+<div class="paranum"><a name="p152">152/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Iterate<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p153">153/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Iterate calls Process.<B>all</B> 
+with a cursor that designates each element in Container, starting with 
+the root node and proceeding in a depth-first order. Tampering with the 
+cursors of Container is prohibited during the execution of a call on 
+Process.<B>all</B>. Any exception raised by Process.<B>all</B> is propagated.</div>
+<div class="paranum"><a name="p154">154/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Iterate_Subtree<BR>
+&nbsp;&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p155">155/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated. Otherwise, Iterate_Subtree 
+calls Process.<B>all</B> with a cursor that designates each element in 
+the subtree rooted by the node designated by Position, starting with 
+the node designated by Position and proceeding in a depth-first order. 
+Tampering with the cursors of the tree that contains the element designated 
+by Position is prohibited during the execution of a call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</div>
+<div class="paranum"><a name="p156">156/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</div>
+<div class="paranum"><a name="p157">157/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Iterate returns 
+an iterator object (see <A HREF="RM-5-5-1.html">5.5.1</A>) that will 
+generate a value for a loop parameter (see <A HREF="RM-5-5-2.html">5.5.2</A>) 
+designating each node in Container, starting with the root node and proceeding 
+in a depth-first order. Tampering with the cursors of Container is prohibited 
+while the iterator object exists (in particular, in the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</div>
+<div class="paranum"><a name="p158">158/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Iterate_Subtree&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</div>
+<div class="paranum"><a name="p159">159/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element, then Constraint_Error is propagated. Otherwise, Iterate_Subtree 
+returns an iterator object (see <A HREF="RM-5-5-1.html">5.5.1</A>) that 
+will generate a value for a loop parameter (see <A HREF="RM-5-5-2.html">5.5.2</A>) 
+designating each element in the subtree rooted by the node designated 
+by Position, starting with the node designated by Position and proceeding 
+in a depth-first order. If Position equals No_Element, then Constraint_Error 
+is propagated. Tampering with the cursors of the container that contains 
+the node designated by Position is prohibited while the iterator object 
+exists (in particular, in the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</div>
+<div class="paranum"><a name="p160">160/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p161">161/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Child_Count returns 
+the number of child nodes of the node designated by Parent.</div>
+<div class="paranum"><a name="p162">162/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Child_Depth&nbsp;(Parent,&nbsp;Child&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="paranum"><a name="p163">163/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Child or Parent 
+is equal to No_Element, then Constraint_Error is propagated. Otherwise, 
+Child_Depth returns the number of ancestor nodes of Child (including 
+Child itself), up to but not including Parent; Program_Error is propagated 
+if Parent is not an ancestor of Child.</div>
+<div class="paranum"><a name="p164">164/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p165">165/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Container, then Program_Error is propagated. If Before is not 
+equal to No_Element, and does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+Parent does not designate the parent node of the node designated by Before, 
+then Constraint_Error is propagated. Otherwise, Insert_Child allocates 
+Count nodes containing copies of New_Item and inserts them as children 
+of Parent. If Parent already has child nodes, then the new nodes are 
+inserted prior to the node designated by Before, or, if Before equals 
+No_Element, the new nodes are inserted after the last existing child 
+node of Parent. Any exception raised during allocation of internal storage 
+is propagated, and Container is not modified.</div>
+<div class="paranum"><a name="p166">166/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p167">167/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Container, then Program_Error is propagated. If Before is not 
+equal to No_Element, and does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+Parent does not designate the parent node of the node designated by Before, 
+then Constraint_Error is propagated. Otherwise, Insert_Child allocates 
+Count nodes containing copies of New_Item and inserts them as children 
+of Parent. If Parent already has child nodes, then the new nodes are 
+inserted prior to the node designated by Before, or, if Before equals 
+No_Element, the new nodes are inserted after the last existing child 
+node of Parent. Position designates the first newly-inserted node, or 
+if Count equals 0, then Position is assigned the value of Before. Any 
+exception raised during allocation of internal storage is propagated, 
+and Container is not modified.</div>
+<div class="paranum"><a name="p168">168/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p169">169/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Container, then Program_Error is propagated. If Before is not 
+equal to No_Element, and does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+Parent does not designate the parent node of the node designated by Before, 
+then Constraint_Error is propagated. Otherwise, Insert_Child allocates 
+Count nodes, the elements contained in the new nodes are initialized 
+by default (see <A HREF="RM-3-3-1.html">3.3.1</A>), and the new nodes 
+are inserted as children of Parent. If Parent already has child nodes, 
+then the new nodes are inserted prior to the node designated by Before, 
+or, if Before equals No_Element, the new nodes are inserted after the 
+last existing child node of Parent. Position designates the first newly-inserted 
+node, or if Count equals 0, then Position is assigned the value of Before. 
+Any exception raised during allocation of internal storage is propagated, 
+and Container is not modified.</div>
+<div class="paranum"><a name="p170">170/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Prepend_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p171">171/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Insert_Child 
+(Container, Parent, First_Child (Container, Parent), New_Item, Count).</div>
+<div class="paranum"><a name="p172">172/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Append_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p173">173/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Insert_Child 
+(Container, Parent, No_Element, New_Item, Count).</div>
+<div class="paranum"><a name="p174">174/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Delete_Children&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p175">175/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Container, Program_Error is propagated. Otherwise, Delete_Children 
+removes (from Container) all of the descendants of Parent other than 
+Parent itself.</div>
+<div class="paranum"><a name="p176">176/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Copy_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p177">177/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Target, then Program_Error is propagated. If Before is not 
+equal to No_Element, and does not designate a node in Target, then Program_Error 
+is propagated. If Before is not equal to No_Element, and Parent does 
+not designate the parent node of the node designated by Before, then 
+Constraint_Error is propagated. If Source designates a root node, then 
+Constraint_Error is propagated. If Source is equal to No_Element, then 
+the operation has no effect. Otherwise, the subtree rooted by Source 
+(which can be from any tree; it does not have to be a subtree of Target) 
+is copied (new nodes are allocated to create a new subtree with the same 
+structure as the Source subtree, with each element initialized from the 
+corresponding element of the Source subtree) and inserted into Target 
+as a child of Parent. If Parent already has child nodes, then the new 
+nodes are inserted prior to the node designated by Before, or, if Before 
+equals No_Element, the new nodes are inserted after the last existing 
+child node of Parent. The parent of the newly created subtree is set 
+to Parent, and the overall count of Target is incremented by Subtree_Node_Count 
+(Source). Any exception raised during allocation of internal storage 
+is propagated, and Container is not modified.</div>
+<div class="paranum"><a name="p178">178/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Splice_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p179">179/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Target, then Program_Error is propagated. If Before is not 
+equal to No_Element, and does not designate a node in Target, then Program_Error 
+is propagated. If Before is not equal to No_Element, and Parent does 
+not designate the parent node of the node designated by Before, then 
+Constraint_Error is propagated. If Position equals No_Element, Constraint_Error 
+is propagated. If Position does not designate a node in Source or designates 
+a root node, then Program_Error is propagated. If Source denotes the 
+same object as Target, then: if Position equals Before there is no effect; 
+if Position designates an ancestor of Parent (including Parent itself), 
+Constraint_Error is propagated; otherwise, the subtree rooted by the 
+element designated by Position is moved to be a child of Parent. If Parent 
+already has child nodes, then the moved nodes are inserted prior to the 
+node designated by Before, or, if Before equals No_Element, the moved 
+nodes are inserted after the last existing child node of Parent. In each 
+of these cases, Position and the count of Target are unchanged, and the 
+parent of the element designated by Position is set to Parent.</div>
+<div class="paranum"><a name="p180">180/3</a></div>
+<div class="Indented2">Otherwise (if Source does not denote the same 
+object as Target), the subtree designated by Position is removed from 
+Source and moved to Target. The subtree is inserted as a child of Parent. 
+If Parent already has child nodes, then the moved nodes are inserted 
+prior to the node designated by Before, or, if Before equals No_Element, 
+the moved nodes are inserted after the last existing child node of Parent. 
+In each of these cases, the count of Target is incremented by Subtree_Node_Count 
+(Position), and the count of Source is decremented by Subtree_Node_Count 
+(Position), Position is updated to represent an element in Target.</div>
+<div class="paranum"><a name="p181">181/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Splice_Subtree&nbsp;(Container:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p182">182/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated. If Parent does not designate 
+a node in Container, then Program_Error is propagated. If Before is not 
+equal to No_Element, and does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+Parent does not designate the parent node of the node designated by Before, 
+then Constraint_Error is propagated. If Position equals No_Element, Constraint_Error 
+is propagated. If Position does not designate a node in Container or 
+designates a root node, then Program_Error is propagated. If Position 
+equals Before, there is no effect. If Position designates an ancestor 
+of Parent (including Parent itself), Constraint_Error is propagated. 
+Otherwise, the subtree rooted by the element designated by Position is 
+moved to be a child of Parent. If Parent already has child nodes, then 
+the moved nodes are inserted prior to the node designated by Before, 
+or, if Before equals No_Element, the moved nodes are inserted after the 
+last existing child node of Parent. The parent of the element designated 
+by Position is set to Parent.</div>
+<div class="paranum"><a name="p183">183/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Splice_Children&nbsp;(Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p184">184/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Target_Parent 
+equals No_Element, then Constraint_Error is propagated. If Target_Parent 
+does not designate a node in Target, then Program_Error is propagated. 
+If Before is not equal to No_Element, and does not designate an element 
+in Target, then Program_Error is propagated. If Source_Parent equals 
+No_Element, then Constraint_Error is propagated. If Source_Parent does 
+not designate a node in Source, then Program_Error is propagated. If 
+Before is not equal to No_Element, and Target_Parent does not designate 
+the parent node of the node designated by Before, then Constraint_Error 
+is propagated.</div>
+<div class="paranum"><a name="p185">185/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em">If Source denotes 
+the same object as Target, then:</div>
+<div class="paranum"><a name="p186">186/3</a></div>
+<div class="Indented3Bulleted">if Target_Parent equals Source_Parent 
+there is no effect; else</div>
+<div class="paranum"><a name="p187">187/3</a></div>
+<div class="Indented3Bulleted">if Source_Parent is an ancestor of Target_Parent 
+other than Target_Parent itself, then Constraint_Error is propagated; 
+else</div>
+<div class="paranum"><a name="p188">188/3</a></div>
+<div class="Indented3Bulleted">the child elements (and the further descendants) 
+of Source_Parent are moved to be child elements of Target_Parent. If 
+Target_Parent already has child elements, then the moved elements are 
+inserted prior to the node designated by Before, or, if Before equals 
+No_Element, the moved elements are inserted after the last existing child 
+node of Target_Parent. The parent of each moved child element is set 
+to Target_Parent.&nbsp;</div>
+<div class="paranum"><a name="p189">189/3</a></div>
+<div class="Indented2">Otherwise (if Source does not denote the same 
+object as Target), the child elements (and the further descendants) of 
+Source_Parent are removed from Source and moved to Target. The child 
+elements are inserted as children of Target_Parent. If Target_Parent 
+already has child elements, then the moved elements are inserted prior 
+to the node designated by Before, or, if Before equals No_Element, the 
+moved elements are inserted after the last existing child node of Target_Parent. 
+In each of these cases, the overall count of Target is incremented by 
+Subtree_Node_Count (Source_Parent)-1, and the overall count of Source 
+is decremented by Subtree_Node_Count (Source_Parent)-1.</div>
+<div class="paranum"><a name="p190">190/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Splice_Children&nbsp;(Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
+<div class="paranum"><a name="p191">191/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Target_Parent 
+equals No_Element, then Constraint_Error is propagated. If Target_Parent 
+does not designate a node in Container, then Program_Error is propagated. 
+If Before is not equal to No_Element, and does not designate an element 
+in Container, then Program_Error is propagated. If Source_Parent equals 
+No_Element, then Constraint_Error is propagated. If Source_Parent does 
+not designate a node in Container, then Program_Error is propagated. 
+If Before is not equal to No_Element, and Target_Parent does not designate 
+the parent node of the node designated by Before, then Constraint_Error 
+is propagated. If Target_Parent equals Source_Parent there is no effect. 
+If Source_Parent is an ancestor of Target_Parent other than Target_Parent 
+itself, then Constraint_Error is propagated. Otherwise, the child elements 
+(and the further descendants) of Source_Parent are moved to be child 
+elements of Target_Parent. If Target_Parent already has child elements, 
+then the moved elements are inserted prior to the node designated by 
+Before, or, if Before equals No_Element, the moved elements are inserted 
+after the last existing child node of Target_Parent. The parent of each 
+moved child element is set to Target_Parent.</div>
+<div class="paranum"><a name="p192">192/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Parent&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p193">193/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position is equal 
+to No_Element or designates a root node, No_Element is returned. Otherwise, 
+a cursor designating the parent node of the node designated by Position 
+is returned.</div>
+<div class="paranum"><a name="p194">194/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;First_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p195">195/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent is equal 
+to No_Element, then Constraint_Error is propagated. Otherwise, First_Child 
+returns a cursor designating the first child node of the node designated 
+by Parent; if there is no such node, No_Element is returned.</div>
+<div class="paranum"><a name="p196">196/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;First_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="paranum"><a name="p197">197/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Element 
+(First_Child (Parent)).</div>
+<div class="paranum"><a name="p198">198/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Last_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p199">199/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent is equal 
+to No_Element, then Constraint_Error is propagated. Otherwise, Last_Child 
+returns a cursor designating the last child node of the node designated 
+by Parent; if there is no such node, No_Element is returned.</div>
+<div class="paranum"><a name="p200">200/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Last_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="paranum"><a name="p201">201/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Element 
+(Last_Child (Parent)).</div>
+<div class="paranum"><a name="p202">202/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Next_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p203">203/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element or designates the last child node of its parent, then Next_Sibling 
+returns the value No_Element. Otherwise, it returns a cursor that designates 
+the successor (with the same parent) of the node designated by Position.</div>
+<div class="paranum"><a name="p204">204/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="paranum"><a name="p205">205/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Position equals 
+No_Element or designates the first child node of its parent, then Previous_Sibling 
+returns the value No_Element. Otherwise, it returns a cursor that designates 
+the predecessor (with the same parent) of the node designated by Position.</div>
+<div class="paranum"><a name="p206">206/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Next_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p207">207/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Position 
+:= Next_Sibling (Position);</div>
+<div class="paranum"><a name="p208">208/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="paranum"><a name="p209">209/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Position 
+:= Previous_Sibling (Position);</div>
+<div class="paranum"><a name="p210">210/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Iterate_Children<BR>
+&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p211">211/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated.</div>
+<div class="paranum"><a name="p212">212/3</a></div>
+<div class="Indented2">Iterate_Children calls Process.<B>all</B> with 
+a cursor that designates each child node of Parent, starting with the 
+first child node and moving the cursor as per the Next_Sibling function.</div>
+<div class="paranum"><a name="p213">213/3</a></div>
+<div class="Indented2">Tampering with the cursors of the tree containing 
+Parent is prohibited during the execution of a call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</div>
+<div class="paranum"><a name="p214">214/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Reverse_Iterate_Children<BR>
+&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
+<div class="paranum"><a name="p215">215/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">If Parent equals 
+No_Element, then Constraint_Error is propagated.</div>
+<div class="paranum"><a name="p216">216/3</a></div>
+<div class="Indented2">Reverse_Iterate_Children calls Process.<B>all</B> 
+with a cursor that designates each child node of Parent, starting with 
+the last child node and moving the cursor as per the Previous_Sibling 
+function.</div>
+<div class="paranum"><a name="p217">217/3</a></div>
+<div class="Indented2">Tampering with the cursors of the tree containing 
+Parent is prohibited during the execution of a call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</div>
+<div class="paranum"><a name="p218">218/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Iterate_Children&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;&nbsp;Parent&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Reversible_Iterator'Class;</div>
+<div class="paranum"><a name="p219">219/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Iterate_Children 
+returns a reversible iterator object (see <A HREF="RM-5-5-1.html">5.5.1</A>) 
+that will generate a value for a loop parameter (see <A HREF="RM-5-5-2.html">5.5.2</A>) 
+designating each child node of Parent. If Parent equals No_Element, then 
+Constraint_Error is propagated. If Parent does not designate a node in 
+Container, then Program_Error is propagated. Otherwise, when used as 
+a forward iterator, the nodes are designated starting with the first 
+child node and moving the cursor as per the function Next_Sibling; when 
+used as a reverse iterator, the nodes are designated starting with the 
+last child node and moving the cursor as per the function Previous_Sibling. 
+Tampering with the cursors of Container is prohibited while the iterator 
+object exists (in particular, in the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p220">220/3</a></div>
+<div class="Normal">&nbsp;<A NAME="I7218"></A>It is a bounded error for the 
+actual function associated with a generic formal subprogram, when called 
+as part of an operation of this package, to tamper with elements of any 
+Tree parameter of the operation. Either Program_Error is raised, or the 
+operation works as defined on the value of the Tree either prior to, 
+or subsequent to, some or all of the modifications to the Tree.</div>
+<div class="paranum"><a name="p221">221/3</a></div>
+<div class="Normal">&nbsp;<A NAME="I7219"></A>It is a bounded error to call 
+any subprogram declared in the visible part of Containers.Multiway_Trees 
+when the associated container has been finalized. If the operation takes 
+Container as an <B>in out</B> parameter, then it raises Constraint_Error 
+or Program_Error. Otherwise, the operation either proceeds as it would 
+for an empty container, or it raises Constraint_Error or Program_Error. 
+</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p222">222/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A Cursor value is 
+<I>invalid</I> if any of the following have occurred since it was created:<A NAME="I7220"></A> 
+<A NAME="I7221"></A></div>
+<div class="paranum"><a name="p223">223/3</a></div>
+<div class="Bulleted">The tree that contains the element it designates 
+has been finalized;</div>
+<div class="paranum"><a name="p224">224/3</a></div>
+<div class="Bulleted">The tree that contains the element it designates 
+has been used as the Source or Target of a call to Move;</div>
+<div class="paranum"><a name="p225">225/3</a></div>
+<div class="Bulleted">The tree that contains the element it designates 
+has been used as the Target of a call to Assign or the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p226">226/3</a></div>
+<div class="Bulleted">The element it designates has been removed from 
+the tree that previously contained the element.&nbsp;</div>
+<div class="paranum"><a name="p227">227/3</a></div>
+<div class="Normal">&nbsp;The result of &quot;=&quot; or Has_Element is unspecified 
+if it is called with an invalid cursor parameter.<A NAME="I7222"></A> 
+Execution is erroneous if any other subprogram declared in Containers.Multiway_Trees 
+is called with an invalid cursor parameter.</div>
+<div class="paranum"><a name="p228">228/3</a></div>
+<div class="Normal">&nbsp;Execution is erroneous if the tree associated with 
+the result of a call to Reference or Constant_Reference is finalized 
+before the result object returned by the call to Reference or Constant_Reference 
+is finalized.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p229">229/3</a></div>
+<div class="Normal">&nbsp;No storage associated with a multiway tree object 
+shall be lost upon assignment or scope exit.</div>
+<div class="paranum"><a name="p230">230/3</a></div>
+<div class="Normal">&nbsp;The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+for a tree shall have the effect of copying the elements from the source 
+tree object to the target tree object and changing the node count of 
+the target object to that of the source object.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p231">231/3</a></div>
+<div class="Normal">&nbsp;Containers.Multiway_Trees should be implemented 
+similarly to a multiway tree. In particular, if <I>N</I> is the overall 
+number of nodes for a particular tree, then the worst-case time complexity 
+of Element, Parent, First_Child, Last_Child, Next_Sibling, Previous_Sibling, 
+Insert_Child with Count=1, and Delete should be <I>O</I>(log <I>N</I>). 
+</div>
+<div class="paranum"><a name="p232">232/3</a></div>
+<div class="Normal">&nbsp;Move should not copy elements, and should minimize 
+copying of internal data structures.&nbsp;</div>
+<div class="paranum"><a name="p233">233/3</a></div>
+<div class="Normal">&nbsp;If an exception is propagated from a tree operation, 
+no storage should be lost, nor any elements removed from a tree unless 
+specified by the operation.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

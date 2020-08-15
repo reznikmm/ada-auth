@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.1 Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1320"></A>The language defines several 
+kinds of named <I>entities</I> that are declared by declarations. <A NAME="I1321"></A>The 
+entity's <I>name</I> is defined by the declaration, usually by a <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>, 
+but sometimes by a <SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0156">defining_operator_symbol</A></SPAN>.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">There are several forms of declaration. A <SPAN Class="swiss"><A HREF="RM-3-1.html#S0021">basic_declaration</A></SPAN> 
+is a form of declaration defined as follows.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">basic_declaration</SPAN><A NAME="I1322"></A><A NAME="S0021"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1323"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1324"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1325"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1326"></A><SPAN Class="swiss"><A HREF="RM-3-3-2.html#S0034">number_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1327"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0148">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I1328"></A><SPAN Class="swiss"><A HREF="RM-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<span class="insert2"><A NAME="I1329"></A><SPAN Class="swiss"><A HREF="RM-6-7.html#S0172">null_procedure_declaration</A></SPAN>&nbsp;|&nbsp;</span><A NAME="I1330"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0173">package_declaration</A></SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;|</span><span class="delete2">&nbsp;|</span>&nbsp;<A NAME="I1331"></A><SPAN Class="swiss"><A HREF="RM-8-5.html#S0182">renaming_declaration</A></SPAN><span class="insert2">&nbsp;|</span><span class="delete2"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;</span><A NAME="I1332"></A><SPAN Class="swiss"><A HREF="RM-11-1.html#S0246">exception_declaration</A></SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;|</span><span class="delete2">&nbsp;|</span>&nbsp;<A NAME="I1333"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0252">generic_declaration</A></SPAN><span class="insert2">&nbsp;|</span><span class="delete2"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;</span><A NAME="I1334"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0257">generic_instantiation</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">defining_identifier</SPAN><A NAME="I1335"></A><A NAME="S0022"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1336"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I1337"></A>A <I>declaration</I> is a language 
+construct that associates a name with (a view of) an entity. <A NAME="I1338"></A><A NAME="I1339"></A>A 
+declaration may appear explicitly in the program text (an <I>explicit</I> 
+declaration), or may be supposed to occur at a given place in the text 
+as a consequence of the semantics of another construct (an <I>implicit</I> 
+declaration).&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal"><A NAME="I1340"></A>Each of the following is defined 
+to be a declaration: any <SPAN Class="swiss"><A HREF="RM-3-1.html#S0021">basic_declaration</A></SPAN>; 
+an <SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0144">loop_parameter_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0160">parameter_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0162">subprogram_body</A></SPAN>; 
+an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0200">entry_declaration</A></SPAN>; 
+an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0206">entry_index_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-11-2.html#S0249">choice_parameter_specification</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0256">generic_formal_parameter_declaration</A></SPAN>.<span class="insert2">&nbsp;In addition, an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0170">extended_return_statement</A></SPAN> 
+is a declaration of its <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I1341"></A><A NAME="I1342"></A>All declarations 
+contain a <I>definition</I> for a <I>view</I> of an entity. A view consists 
+of an identification of the entity (the entity <I>of</I> the view), plus 
+view-specific characteristics that affect the use of the entity through 
+that view (such as mode of access to an object, formal parameter names 
+and defaults for a subprogram, or visibility to components of a type). 
+In most cases, a declaration also contains the definition for the entity 
+itself (a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0182">renaming_declaration</A></SPAN> 
+is an example of a declaration that does not define a new entity, but 
+instead defines a view of an existing entity (see <A HREF="RM-8-5.html">8.5</A>)).</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I1343"></A>For each declaration, the language 
+rules define a certain region of text called the <I>scope</I> of the 
+declaration (see <A HREF="RM-8-2.html">8.2</A>). Most declarations associate 
+an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+with a declared entity. Within its scope, and only there, there are places 
+where it is possible to use the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+to refer to the declaration, the view it defines, and the associated 
+entity; these places are defined by the visibility rules (see <A HREF="RM-8-3.html">8.3</A>). 
+<A NAME="I1344"></A>At such places the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+is said to be a <I>name</I> of the entity (the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>); 
+<A NAME="I1345"></A>the name is said to <I>denote</I> the declaration, 
+the view, and the associated entity (see <A HREF="RM-8-6.html">8.6</A>). 
+<A NAME="I1346"></A>The declaration is said to <I>declare</I> the name, 
+the view, and in most cases, the entity itself.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">As an alternative to an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+an enumeration literal can be declared with a <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
+as its name (see <A HREF="RM-3-5-1.html">3.5.1</A>), and a function can 
+be declared with an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0155">operator_symbol</A></SPAN> 
+as its name (see <A HREF="RM-6-1.html">6.1</A>).</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I1347"></A>The syntax rules use the terms 
+<SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0040">defining_character_literal</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-6-1.html#S0156">defining_operator_symbol</A></SPAN> 
+for the defining occurrence of a name; these are collectively called 
+<I>defining names</I>. <A NAME="I1348"></A>The terms <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+are used for usage occurrences of <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="RM-6-1.html#S0155">operator_symbol</A></SPAN>s. 
+These are collectively called <I>usage names</I>.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I1349"></A>The process by which a construct 
+achieves its run-time effect is called <I>execution</I>. <A NAME="I1350"></A><A NAME="I1351"></A>This 
+process is also called <I>elaboration</I> for declarations and <I>evaluation</I> 
+for expressions. One of the terms execution, elaboration, or evaluation 
+is defined by this International Standard for each construct that has 
+a run-time effect.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">1&nbsp;&nbsp;<A NAME="I1352"></A>At compile time, 
+the declaration of an entity <I>declares</I> the entity. <A NAME="I1353"></A>At 
+run time, the elaboration of the declaration <I>creates</I> the entity. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Null Procedures</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.7 Null Procedures</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-6-7.html#S0172">null_procedure_declaration</A></SPAN> 
+provides a shorthand to declare a procedure with an empty body.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">null_procedure_declaration</SPAN><A NAME="I3239"></A><A NAME="S0172"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I3240"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0178">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3241"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0150">procedure_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>null</B>;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-6-7.html#S0172">null_procedure_declaration</A></SPAN> 
+declares a <I>null procedure</I>.<A NAME="I3242"></A><A NAME="I3243"></A> 
+A completion is not allowed for a <SPAN Class="swiss"><A HREF="RM-6-7.html#S0172">null_procedure_declaration</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">The execution of a null procedure is invoked by a 
+subprogram call. For the execution of a subprogram call on a null procedure, 
+the execution of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0162">subprogram_body</A></SPAN> 
+has no effect.&nbsp;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal"><A NAME="I3244"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-6-7.html#S0172">null_procedure_declaration</A></SPAN> 
+has no effect.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Simplify(Expr&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Expression)&nbsp;<B>is&nbsp;null</B>;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-9.html">3.9</A></I></SPAN><BR>
+--<SPAN Class="roman"><I>&nbsp;By&nbsp;default,&nbsp;Simplify&nbsp;does&nbsp;nothing,&nbsp;but&nbsp;it&nbsp;may&nbsp;be&nbsp;overridden&nbsp;in&nbsp;extensions&nbsp;of&nbsp;Expression</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

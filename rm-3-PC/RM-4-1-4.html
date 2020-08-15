@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-1-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.1.4 Attributes</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2514"></A>An <I>attribute</I> is a characteristic 
+of an entity that can be queried via an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">attribute_reference</SPAN><A NAME="I2515"></A><A NAME="S0100"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2516"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2517"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">attribute_designator</SPAN><A NAME="I2518"></A><A NAME="S0101"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2519"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>[(<I>static_</I><A NAME="I2520"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>)]<BR>
+&nbsp;&nbsp;|&nbsp;Access&nbsp;|&nbsp;Delta&nbsp;|&nbsp;Digits<span class="insert3">&nbsp;|&nbsp;Mod</span></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">range_attribute_reference</SPAN><A NAME="I2521"></A><A NAME="S0102"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2522"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2523"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0103">range_attribute_designator</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">range_attribute_designator</SPAN><A NAME="I2524"></A><A NAME="S0103"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>Range[(<I>static_</I><A NAME="I2525"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>)]</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">In an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>, 
+if the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is for an attribute defined for (at least some) objects of an access 
+type, then the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is never interpreted as an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN>; 
+otherwise (and for all <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>s), 
+if the type of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+within the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is of an access type, the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is interpreted as an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN>. 
+Similarly, if the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is for an attribute defined for (at least some) functions, then the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is never interpreted as a parameterless <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>; 
+otherwise (and for all <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>s), 
+if the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+consists of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a function, it is interpreted as a parameterless <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I2526"></A><A NAME="I2527"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+if any, in an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0103">range_attribute_designator</A></SPAN> 
+is expected to be of any integer type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+if any, in an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0103">range_attribute_designator</A></SPAN> 
+shall be static.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+denotes a value, an object, a subprogram, or some other kind of program 
+entity.<span class="insert3">&nbsp;For an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+that denotes a value or an object, if its type is scalar, then its nominal 
+subtype is the base subtype of the type; if its type is tagged, its nominal 
+subtype is the first subtype of the type; otherwise, its nominal subtype 
+is a subtype of the type without any constraint or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>. 
+Similarly, unless explicitly specified otherwise, for an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+that denotes a function, when its result type is scalar, its result subtype 
+is the base subtype of the type, when its result type is tagged, the 
+result subtype is the first subtype of the type, and when the result 
+type is some other type, the result subtype is a subtype of the type 
+without any constraint or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
+X'Range(N) is equivalent to the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+X'First(N) .. X'Last(N), except that the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is only evaluated once. Similarly, X'Range is equivalent to X'First .. 
+X'Last, except that the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is only evaluated once.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2528"></A><A NAME="I2529"></A>The evaluation 
+of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+(or <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>) 
+consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p12">12/1</a></div>
+<div class="Normal">An implementation may provide implementation-defined 
+attributes; the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+for an implementation-defined attribute shall differ from those of the 
+language-defined attributes unless supplied for compatibility with a 
+previous edition of this International Standard.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">4&nbsp;&nbsp;Attributes are defined throughout this 
+International Standard, and are summarized in <A HREF="RM-K-2.html">K.2</A>.</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Notes">5&nbsp;&nbsp;In general, the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+(or a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>) 
+has to be resolved without using any context. However, in the case of 
+the Access attribute, the expected type for the <span class="insert2"><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">&nbsp;prefix</A></SPAN></span> 
+has to be a single access type, and<span class="delete2">&nbsp;if it is an 
+access-to-subprogram type (see <A HREF="RM-3-10-2.html">3.10.2</A>) then</span> 
+the resolution of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+can use the fact that the<span class="insert2">&nbsp;type of the object or 
+the</span> profile of the callable entity denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+has to <span class="insert2">match the designated type or&nbsp;</span>be type 
+conformant with the designated profile of the access type. <A NAME="I2530"></A></div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of attributes:</I> 
+</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">Color'First&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;minimum&nbsp;value&nbsp;of&nbsp;the&nbsp;enumeration&nbsp;type&nbsp;Color&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-5-1.html">3.5.1</A>)</I></SPAN><BR>
+Rainbow'Base'First&nbsp;--<SPAN Class="roman"><I>&nbsp;same&nbsp;as&nbsp;Color'First&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-5-1.html">3.5.1</A>)</I></SPAN><BR>
+Real'Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;precision&nbsp;of&nbsp;the&nbsp;type&nbsp;Real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-5-7.html">3.5.7</A>)</I></SPAN><BR>
+Board'Last(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;upper&nbsp;bound&nbsp;of&nbsp;the&nbsp;second&nbsp;dimension&nbsp;of&nbsp;Board&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-6-1.html">3.6.1</A>)</I></SPAN><BR>
+Board'Range(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;index&nbsp;range&nbsp;of&nbsp;the&nbsp;first&nbsp;dimension&nbsp;of&nbsp;Board&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-6-1.html">3.6.1</A>)</I></SPAN><BR>
+Pool(K)'Terminated&nbsp;--<SPAN Class="roman"><I>&nbsp;True&nbsp;if&nbsp;task&nbsp;Pool(K)&nbsp;is&nbsp;terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-9-1.html">9.1</A>)</I></SPAN><BR>
+Date'Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;number&nbsp;of&nbsp;bits&nbsp;for&nbsp;records&nbsp;of&nbsp;type&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-8.html">3.8</A>)</I></SPAN><BR>
+Message'Address&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;address&nbsp;of&nbsp;the&nbsp;record&nbsp;variable&nbsp;Message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="RM-3-7-1.html">3.7.1</A>)</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-1-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

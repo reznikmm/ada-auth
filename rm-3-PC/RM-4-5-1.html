@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Logical Operators and Short-circuit Control Forms</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.1 Logical Operators and Short-circuit Control Forms</H1>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2825"></A><A NAME="I2826"></A><A NAME="I2827"></A>An 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+consisting of two <SPAN Class="swiss"><A HREF="RM-4-4.html#S0120">relation</A></SPAN>s 
+connected by <B>and then</B> or <B>or else</B> (a <I>short-circuit control 
+form</I>) shall resolve to be of some boolean type; <A NAME="I2828"></A>the 
+expected type for both <SPAN Class="swiss"><A HREF="RM-4-4.html#S0120">relation</A></SPAN>s 
+is that same boolean type.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2829"></A><A NAME="I2830"></A><A NAME="I2831"></A><A NAME="I2832"></A><A NAME="I2833"></A><A NAME="I2834"></A><A NAME="I2835"></A><A NAME="I2836"></A>The 
+following logical operators are predefined for every boolean type <I>T</I>, 
+for every modular type <I>T</I>, and for every one-dimensional array 
+type <I>T</I> whose component type is a boolean type: <A NAME="I2837"></A></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;<B>and</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;<B>or</B>&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;<B>xor</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">For boolean types, the predefined logical operators 
+<B>and</B>, <B>or</B>, and <B>xor</B> perform the conventional operations 
+of conjunction, inclusive disjunction, and exclusive disjunction, respectively.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">For modular types, the predefined logical operators 
+are defined on a bit-by-bit basis, using the binary representation of 
+the value of the operands to yield a binary representation for the result, 
+where zero represents False and one represents True. If this result is 
+outside the base range of the type, a final subtraction by the modulus 
+is performed to bring the result into the base range of the type.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The logical operators on arrays are performed on 
+a component-by-component basis on matching components (as for equality 
+&mdash; see <A HREF="RM-4-5-2.html">4.5.2</A>), using the predefined 
+logical operator for the component type. The bounds of the resulting 
+array are those of the left operand.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I2838"></A>The short-circuit control forms 
+<B>and then</B> and <B>or else</B> deliver the same result as the corresponding 
+predefined <B>and</B> and <B>or</B> operators for boolean types, except 
+that the left operand is always evaluated first, and the right operand 
+is not evaluated if the value of the left operand determines the result.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I2839"></A><A NAME="I2840"></A>For the logical 
+operators on arrays, a check is made that for each component of the left 
+operand there is a matching component of the right operand, and vice 
+versa. <A NAME="I2841"></A><A NAME="I2842"></A>Also, a check is made 
+that each component of the result belongs to the component subtype. <A NAME="I2843"></A>The 
+exception Constraint_Error is raised if either of the above checks fails. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">12&nbsp;&nbsp;The conventional 
+meaning of the logical operators is given by the following truth table: 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Annotations">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;B&nbsp;(A&nbsp;<B>and</B>&nbsp;B)&nbsp;(A&nbsp;<B>or</B>&nbsp;B)&nbsp;(A&nbsp;<B>xor</B>&nbsp;B)<BR>
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;False<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;False&nbsp;&nbsp;False&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;False&nbsp;&nbsp;True&nbsp;&nbsp;&nbsp;True<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;False&nbsp;&nbsp;False&nbsp;&nbsp;False&nbsp;&nbsp;False&nbsp;&nbsp;False</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of logical 
+operators:</I>&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">Sunny&nbsp;<B>or</B>&nbsp;Warm<BR>
+Filter(1&nbsp;..&nbsp;10)&nbsp;<B>and</B>&nbsp;Filter(15&nbsp;..&nbsp;24)&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-6-1.html">3.6.1</A>&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of short-circuit 
+control forms:</I>&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">Next_Car.Owner&nbsp;/=&nbsp;<B>null</B>&nbsp;<B>and</B>&nbsp;<B>then</B>&nbsp;Next_Car.Owner.Age&nbsp;&gt;&nbsp;25&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN><BR>
+N&nbsp;=&nbsp;0&nbsp;<B>or</B>&nbsp;<B>else</B>&nbsp;A(N)&nbsp;=&nbsp;Hit_Value</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

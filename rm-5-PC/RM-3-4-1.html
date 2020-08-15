@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Derivation Classes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.4.1 Derivation Classes</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In addition to the various language-defined classes 
+of types, types can be grouped into <I>derivation classes</I>.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal"><A NAME="I1574"></A>A derived type is <I>derived 
+from</I> its parent type <I>directly</I>; it is derived <I>indirectly</I> 
+from any type from which its parent type is derived. A derived type, 
+interface type, type extension, task type, protected type, or formal 
+derived type is also derived from every ancestor of each of its progenitor 
+types, if any. <A NAME="I1575"></A><A NAME="I1576"></A><A NAME="I1577"></A>The 
+derivation class of types for a type <I>T</I> (also called the class 
+<I>rooted</I> at <I>T</I>) is the set consisting of <I>T</I> (the <I>root 
+type</I> of the class) and all types derived from <I>T</I> (directly 
+or indirectly) plus any associated universal or class-wide types (defined 
+below).&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">Every type is either a <I>specific</I> type, a <I>class-wide</I> 
+type, or a <I>universal</I> type. <A NAME="I1578"></A>A specific type 
+is one defined by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-12-5.html#S0298">formal_type_declaration</A></SPAN>, 
+or a full type definition embedded in another construct. Class-wide and 
+universal types are implicitly defined, to act as representatives for 
+an entire class of types, as follows:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="WideHanging-Term"><A NAME="I1579"></A>Class-wide types&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Class-wide types are defined for (and belong to) each derivation class 
+rooted at a tagged type (see <A HREF="RM-3-9.html">3.9</A>). Given a 
+subtype S of a tagged type <I>T</I>, S'Class is the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+for a corresponding subtype of the tagged class-wide type <I>T</I>'Class. 
+Such types are called &ldquo;class-wide&rdquo; because when a formal 
+parameter is defined to be of a class-wide type <I>T</I>'Class, an actual 
+parameter of any type in the derivation class rooted at <I>T</I> is acceptable 
+(see <A HREF="RM-8-6.html">8.6</A>).</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="WideHanging-Body"><A NAME="I1580"></A>The set of values for 
+a class-wide type <I>T</I>'Class is the discriminated union of the set 
+of values of each specific type in the derivation class rooted at <I>T</I> 
+(the tag acts as the implicit discriminant &mdash; see <A HREF="RM-3-9.html">3.9</A>). 
+Class-wide types have no primitive subprograms of their own. However, 
+as explained in <A HREF="RM-3-9-2.html">3.9.2</A>, operands of a class-wide 
+type <I>T</I>'Class can be used as part of a dispatching call on a primitive 
+subprogram of the type <I>T</I>. The only components (including discriminants) 
+of <I>T</I>'Class that are visible are those of <I>T</I>. If S is a first 
+subtype, then S'Class is a first subtype.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="WideHanging-Term"><A NAME="I1581"></A>Universal types&nbsp;</div><div class="WideHanging-Body"><br clear="left">
+Universal types are defined for (and belong to) the integer, real, fixed 
+point, and access classes, and are referred to in this standard as respectively, 
+<I>universal_integer</I>, <I>universal_real</I>, <I>universal_fixed</I>, 
+and <I>universal_access</I><A NAME="I1582"></A><A NAME="I1583"></A><A NAME="I1584"></A><A NAME="I1585"></A>. 
+These are analogous to class-wide types for these language-defined elementary 
+classes. As with class-wide types, if a formal parameter is of a universal 
+type, then an actual parameter of any type in the corresponding class 
+is acceptable. In addition, a value of a universal type (including an 
+integer or real <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN>, 
+or the literal <B>null</B>) is &ldquo;universal&rdquo; in that it is 
+acceptable where some particular type in the class is expected (see <A HREF="RM-8-6.html">8.6</A>).</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="WideHanging-Body">The set of values of a universal type is 
+the undiscriminated union of the set of values possible for any definable 
+type in the associated class. Like class-wide types, universal types 
+have no primitive subprograms of their own. However, their &ldquo;universality&rdquo; 
+allows them to be used as operands with the primitive subprograms of 
+any type in the corresponding class.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I1586"></A><A NAME="I1587"></A>The integer 
+and real numeric classes each have a specific root type in addition to 
+their universal type, named respectively <I>root_integer</I> and <I>root_real</I>.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1588"></A>A class-wide or universal type 
+is said to <I>cover</I> all of the types in its class. A specific type 
+covers only itself.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal"><A NAME="I1589"></A>A specific type <I>T2</I> is 
+defined to be a <I>descendant</I> of a type <I>T1</I> if <I>T2</I> is 
+the same as <I>T1</I>, or if <I>T2</I> is derived (directly or indirectly) 
+from <I>T1</I>. A class-wide type <I>T2</I>'Class is defined to be a 
+descendant of type <I>T1</I> if <I>T2</I> is a descendant of <I>T1</I>. 
+Similarly, the numeric universal types are defined to be descendants 
+of the root types of their classes. <A NAME="I1590"></A>If a type <I>T2</I> 
+is a descendant of a type <I>T1</I>, then <I>T1</I> is called an <I>ancestor</I> 
+of <I>T2</I>. <A NAME="I1591"></A><A NAME="I1592"></A>An <I>ultimate 
+ancestor</I> of a type is an ancestor of that type that is not itself 
+a descendant of any other type. Every untagged type has a unique ultimate 
+ancestor.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I1593"></A>An inherited component (including 
+an inherited discriminant) of a derived type is inherited <I>from</I> 
+a given ancestor of the type if the corresponding component was inherited 
+by each derived type in the chain of derivations going back to the given 
+ancestor.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">26&nbsp;&nbsp;Because operands of a universal type 
+are acceptable to the predefined operators of any type in their class, 
+ambiguity can result. For <I>universal_integer</I> and <I>universal_real</I>, 
+this potential ambiguity is resolved by giving a preference (see <A HREF="RM-8-6.html">8.6</A>) 
+to the predefined operators of the corresponding root types (<I>root_integer</I> 
+and <I>root_real</I>, respectively). Hence, in an apparently ambiguous 
+expression like&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Annotations">1&nbsp;+&nbsp;4&nbsp;&lt;&nbsp;7</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">where each of the literals is of type <I>universal_integer</I>, 
+the predefined operators of <I>root_integer</I> will be preferred over 
+those of other specific integer types, thereby resolving the ambiguity. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

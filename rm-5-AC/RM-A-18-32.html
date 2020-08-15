@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Bounded_Indefinite_Holders</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-31.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-33.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.32 <span class="insert5">The Generic Package Containers.Bounded_Indefinite_Holders</span><span class="delete5"></span></H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><span class="insert5">For each instance of The language-defined 
+generic package Containers.Bounded_Indefinite_Holders<A NAME="I7949"></A> 
+provides a private type Holder and a set of operations for that type. 
+It provides the same operations as the package Containers.Indefinite_Holders 
+(see <A HREF="RM-A-18-18.html">A.18.18</A>), with the difference that 
+the maximum storage is bounded.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
+declaration of the generic library package Containers.Bounded_Indefinite_Holders 
+has the same contents and semantics as Containers.Indefinite_Holders 
+except:</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Bulleted"><span class="insert5">The following is added to 
+the context clause:</span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;System.Storage_Elements;&nbsp;<B>use</B>&nbsp;System.Storage_Elements;</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">An 
+additional generic parameter follows Element_Type:</span></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;&nbsp;Max_Element_Size_in_Storage_Elements&nbsp;:&nbsp;Storage_Count;</span></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">Add 
+to the precondition of To_Holder and Replace_Element:</span></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Examples"><span class="insert5">&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;(<B>if</B>&nbsp;New_Item'Size&nbsp;&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max_Element_Size_in_Storage_Elements&nbsp;*&nbsp;System.Storage_Unit<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>then&nbsp;raise</B>&nbsp;Program_Error)</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="insert5"><A NAME="I7950"></A>It is a 
+bounded error to assign from a bounded holder object while tampering 
+with elements of that object is prohibited. Either Program_Error is raised 
+by the assignment, execution proceeds with the target object prohibiting 
+tampering with elements, or execution proceeds normally.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">For 
+each instance of Containers.Indefinite_Holders and each instance of Containers.Bounded_Indefinite_Holders, 
+if the two instances meet the following conditions, then the output generated 
+by the Holder'Output or Holder'Write subprograms of either instance shall 
+be readable by the Holder'Input or Holder'Read of the other instance, 
+respectively:</span></div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Bulleted"><span class="insert5">the Element_Type parameters 
+of the two instances are statically matching subtypes of the same type; 
+and</span></div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted"><span class="insert5">the output generated by Element_Type'Output 
+or Element_Type'Write is readable by Element_Type'Input or Element_Type'Read, 
+respectively (where Element_Type denotes the type of the two actual Element_Type 
+parameters).</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal"><span class="insert5">Bounded holder objects should 
+be implemented without dynamic allocation and any finalization should 
+be trivial unless Element_Type needs finalization.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-31.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-33.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

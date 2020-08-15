@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Input-Output for Bounded Strings</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.10.11 <span class="insert2">Input-Output for Bounded Strings</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><span class="insert2">The package Text_IO.Bounded_IO 
+provides input-output in human-readable form for Bounded_Strings.</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
+generic library package Text_IO.Bounded_IO has the following declaration:</span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Strings.Bounded;<BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Bounded&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Strings.Bounded.Generic_Bounded_Length&nbsp;(&lt;&gt;);<BR>
+<B>package</B>&nbsp;Ada.Text_IO.Bounded_IO&nbsp;<B>is</B><A NAME="I6727"></A></span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6728"></A>Put<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6729"></A>Put<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6730"></A>Put_Line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6731"></A>Put_Line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6732"></A>Get_Line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Bounded.Bounded_String;</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6733"></A>Get_Line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Bounded.Bounded_String;</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6734"></A>Get_Line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6735"></A>Get_Line<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Text_IO.Bounded_IO;</span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">For 
+an item of type Bounded_String, the following subprograms are provided:</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Put<BR>
+&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Indented2"><span class="insert2">Equivalent to Text_IO.Put 
+(File, Bounded.To_String(Item));</span></div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Put<BR>
+&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Indented2"><span class="insert2">Equivalent to Text_IO.Put 
+(Bounded.To_String(Item));</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Put_Line<BR>
+&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Indented2"><span class="insert2">Equivalent to Text_IO.Put_Line 
+(File, Bounded.To_String(Item));</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Put_Line<BR>
+&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Indented2"><span class="insert2">Equivalent to Text_IO.Put_Line 
+(Bounded.To_String(Item));</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Get_Line<BR>
+&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Bounded.Bounded_String;</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Indented2"><span class="insert2">Returns Bounded.To_Bounded_String(Text_IO.Get_Line(File));</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Get_Line<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Bounded.Bounded_String;</span></div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Indented2"><span class="insert2">Returns Bounded.To_Bounded_String(Text_IO.Get_Line);</span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Get_Line<BR>
+&nbsp;&nbsp;&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Indented2"><span class="insert2">Equivalent to Item := Get_Line 
+(File);</span></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Get_Line<BR>
+&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>out</B>&nbsp;Bounded.Bounded_String);</span></div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Indented2"><span class="insert2">Equivalent to Item := Get_Line;</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

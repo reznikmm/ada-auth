@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragma Reviewable</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>H.3.1 Pragma Reviewable</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">This pragma directs the implementation to provide 
+information to facilitate analysis and review of a program's object code, 
+in particular to allow determination of execution time and storage usage 
+and to identify the correspondence between the source and object programs. 
+</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Since the purpose of this 
+pragma is to provide information to the user, it is hard to objectively 
+test for conformity. In practice, users want the information in an easily 
+understood and convenient form, but neither of these properties can be 
+easily measured.</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Reviewable is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9424"></A><A NAME="I9425"></A>Reviewable; 
+</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I9426"></A><A NAME="I9427"></A>Pragma Reviewable 
+is a configuration pragma. It applies to all <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN>s 
+included in a partition.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The implementation 
+shall provide the following information for any compilation unit to which 
+such a pragma applies:&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The list of requirements 
+can be checked for, even if issues like intelligibility are not addressed.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">Where compiler-generated run-time checks remain; 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>A constraint check which 
+is implemented via a check on the upper and lower bound should clearly 
+be indicated. If a check is implicit in the form of machine instructions 
+used (such an overflow checking), this should also be covered by the 
+documentation. It is particularly important to cover those checks which 
+are not obvious from the source code, such as that for stack overflow.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">An identification of any construct with a language-defined 
+check that is recognized prior to run time as certain to fail if executed 
+(even if the generation of run-time checks has been suppressed);&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In this case, if the compiler 
+determines that a check must fail, the user should be informed of this. 
+However, since it is not in general possible to know what the compiler 
+will detect, it is not easy to test for this. In practice, it is thought 
+that compilers claiming conformity to this Annex will perform significant 
+optimizations and therefore <I>will</I> detect such situations. Of course, 
+such events could well indicate a programmer error.</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00209.TXT">AI95-00209-01</A></I>} 
+For each read of a scalar object, an identification of the read as either 
+&ldquo;known to be initialized,&rdquo; or &ldquo;possibly uninitialized,&rdquo; 
+independent of whether pragma Normalize_Scalars applies;&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This issue again raises the 
+question as to what the compiler has determined. A lazy implementation 
+could clearly mark all scalars as &ldquo;possibly uninitialized&rdquo;, 
+but this would be very unhelpful to the user. It should be possible to 
+analyze a range of scalar uses and note the percentage in each class. 
+Note that an access marked &ldquo;known to be initialized&rdquo; does 
+not imply that the value is in range, since the initialization could 
+be from an (erroneous) call of unchecked conversion, or by means external 
+to the Ada program.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">Where run-time support routines are implicitly 
+invoked;&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Validators will need to know 
+the calls invoked in order to check for the correct functionality. For 
+instance, for some safety applications, it may be necessary to ensure 
+that certain sections of code can execute in a particular time.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">An object code listing, 
+including:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Indented2NestedBulleted">Machine instructions, with relative 
+offsets;&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The machine instructions 
+should be in a format that is easily understood, such as the symbolic 
+format of the assembler. The relative offsets are needed in numeric format, 
+to check any alignment restrictions that the architecture might impose.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Indented2NestedBulleted">Where each data object is stored 
+during its lifetime;&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This requirement implies 
+that if the optimizer assigns a variable to a register, this needs to 
+be evident.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented2NestedBulleted">Correspondence with the source program, 
+including an identification of the code produced per declaration and 
+per statement.&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This correspondence will 
+be quite complex when extensive optimization is performed. In particular, 
+address calculation to access some data structures could be moved from 
+the actual access. However, when all the machine code arising from a 
+statement or declaration is in one basic block, this must be indicated 
+by the implementation.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">An identification of each construct for which the 
+implementation detects the possibility of erroneous execution;&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This requirement is quite 
+vague. In general, it is hard for compilers to detect erroneous execution 
+and therefore the requirement will be rarely invoked. However, if the 
+pragma Suppress is used and the compiler can show that a predefined exception 
+will be raised, then such an identification would be useful.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted" style="margin-bottom: 0.7em">For each subprogram, 
+block, task, or other construct implemented by reserving and subsequently 
+freeing an area on a run-time stack, an identification of the length 
+of the fixed-size portion of the area and an indication of whether the 
+non-fixed size portion is reserved on the stack or in a dynamically-managed 
+storage region.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This requirement is vital 
+for those requiring to show that the storage available to a program is 
+sufficient. This is crucial in those cases in which the internal checks 
+for stack overflow are suppressed (perhaps by <B>pragma</B> Restrictions(No_Exceptions)). 
+</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The implementation 
+shall provide the following information for any partition to which the 
+pragma applies:&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">An object code listing of the entire partition, 
+including initialization and finalization code as well as run-time system 
+components, and with an identification of those instructions and data 
+that will be relocated at load time;&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The object code listing should 
+enable a validator to estimate upper bounds for the time taken by critical 
+parts of a program. Similarly, by an analysis of the entire partition, 
+it should be possible to ensure that the storage requirements are suitably 
+bounded, assuming that the partition was written in an appropriate manner.</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">A description of the run-time model relevant to 
+the partition.&nbsp;</div>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, a description 
+of the storage model is vital, since the Ada language does not explicitly 
+define such a model.&nbsp;</div>
+<div class="paranum"><a name="p18.1">18.1</a></div>
+<div class="Normal">The implementation shall provide control- and data-flow 
+information, both within each compilation unit and across the compilation 
+units of the partition.&nbsp;</div>
+<div class="paranum"><a name="p18.b">18.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This requirement is quite 
+vague, since it is unclear what control and data flow information the 
+compiler has produced. It is really a plea not to throw away information 
+that could be useful to the validator. Note that the data flow information 
+is relevant to the detection of &ldquo;possibly uninitialized&rdquo; 
+objects referred to above.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">The implementation should provide the above information 
+in both a human-readable and machine-readable form, and should document 
+the latter so as to ease further processing by automated tools.&nbsp;</div>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The information 
+produced by <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Reviewable should be provided in both a human-readable and machine-readable 
+form, and the latter form should be documented.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">Object code listings should be provided both in a 
+symbolic format and also in an appropriate numeric format (such as hexadecimal 
+or octal).&nbsp;</div>
+<div class="paranum"><a name="p20.a">20.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Object code listings 
+should be provided both in a symbolic format and in a numeric format.</div>
+<div class="paranum"><a name="p20.b">20.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is to enable other tools 
+to perform any analysis that the user needed to aid validation. The format 
+should be in some agreed form.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">6&nbsp;&nbsp;The order of elaboration of library units 
+will be documented even in the absence of <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Reviewable (see <A HREF="AA-10-2.html">10.2</A>).&nbsp;</div>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There might be some interactions 
+between pragma Reviewable and compiler optimizations. For example, an 
+implementation may disable some optimizations when pragma Reviewable 
+is in force if it would be overly complicated to provide the detailed 
+information to allow review of the optimized object code. See also <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Optimize (<A HREF="AA-2-8.html">2.8</A>).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p21.b">21.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00209.TXT">AI95-00209-01</A></I>} 
+The wording was clarified that pragma Reviewable applies to each read 
+of an object, as it makes no sense to talk about the state of an object 
+that will immediately be overwritten.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

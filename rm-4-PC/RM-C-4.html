@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Preelaboration Requirements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>C.4 Preelaboration Requirements</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+specifies additional implementation and documentation requirements for 
+the Preelaborate pragma (see <A HREF="RM-10-2-1.html">10.2.1</A>).&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The implementation shall not incur any run-time overhead 
+for the elaboration checks of subprograms and <SPAN Class="swiss">protected_bodies</SPAN> 
+declared in preelaborated library units. <A NAME="I7848"></A></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The implementation shall not execute any memory write 
+operations after load time for the elaboration of constant objects declared 
+immediately within the declarative region of a preelaborated library 
+package, so long as the subtype and initial expression (or default initial 
+expressions if initialized by default) of the <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+satisfy the following restrictions. <A NAME="I7849"></A>The meaning of 
+<I>load time</I> is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">Any <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a statically constrained subtype, with statically constrained 
+subcomponents, if any;</div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Bulleted">no <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a controlled type, a private type, a private extension, a generic 
+formal private type, a generic formal derived type, or a descendant of 
+such a type;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">any <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+is a static constraint;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">any <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+is for an access-to-constant type;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">any uses of predefined operators appear only within 
+static expressions;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">any <SPAN Class="swiss">primaries</SPAN> that are 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s, other 
+than <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
+for the Access or Address attributes, appear only within static expressions; 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">any <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that is not part of a static expression is an expanded name or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+that statically denotes some entity;&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+is static;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">no language-defined check associated with the elaboration 
+of the <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+can fail.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">The implementation shall document any circumstances 
+under which the elaboration of a preelaborated package causes code to 
+be executed at run time.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The implementation shall document whether the method 
+used for initialization of preelaborated variables allows a partition 
+to be restarted without reloading.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">It is recommended that preelaborated packages be 
+implemented in such a way that there should be little or no code executed 
+at run time for the elaboration of entities not already covered by the 
+Implementation Requirements.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

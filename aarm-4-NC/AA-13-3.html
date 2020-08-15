@@ -1,0 +1,1579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Operational and Representation Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.3 Operational and Representation Attributes</H1>
+<div class="paranum"><a name="p1">1/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+[<A NAME="I5425"></A> <A NAME="I5426"></A>The values of certain implementation-dependent 
+characteristics can be obtained by interrogating appropriate operational 
+or representation attributes. <A NAME="I5427"></A>Some of these attributes 
+are specifiable via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>.] 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">In general, the meaning of a given attribute 
+should not depend on whether the attribute was specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>, 
+or chosen by default by the implementation.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">attribute_definition_clause</SPAN><A NAME="I5428"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I5429"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>'<A NAME="I5430"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5431"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I5432"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>'<A NAME="I5433"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5434"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a value, the form with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+shall be used. Otherwise, the form with a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall be used.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I5435"></A>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a value or an object, the expected 
+type for the expression or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is that of the attribute. <A NAME="I5436"></A>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a subprogram, the expected profile 
+for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is the profile required for the attribute. For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes some other kind of entity, the 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> shall 
+resolve to denote an entity of the appropriate kind.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, the Size attribute 
+is of type <I>universal_integer</I>. Therefore, the expected type for 
+Y in &ldquo;<B>for</B> X'Size <B>use</B> Y;&rdquo; is <I>universal_integer</I>, 
+which means that Y can be of any integer type.&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For attributes that denote 
+subprograms, the required profile is indicated separately for the individual 
+attributes.&nbsp;</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> need 
+not statically denote the entity it denotes. For example, the following 
+kinds of things are allowed:&nbsp;</div>
+<div class="paranum"><a name="p4.d">4.d</a></div>
+<div class="SmallExamples"><B>for</B>&nbsp;Some_Access_Type'Storage_Pool&nbsp;<B>use</B>&nbsp;Storage_Pool_Array(I);<BR>
+<B>for</B>&nbsp;Some_Type'Read&nbsp;<B>use</B>&nbsp;Subprogram_Pointer.<B>all</B>;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<A NAME="I5437"></A><A NAME="I5438"></A>An <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is allowed in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+only if this International Standard explicitly allows it, or for an implementation-defined 
+attribute if the implementation allows it. <A NAME="I5439"></A>Each specifiable 
+attribute constitutes an <A NAME="I5440"></A>operational aspect or aspect 
+of representation; the name of the aspect is that of the attribute.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For each specifiable attribute, 
+we generally say something like, &ldquo;The ... attribute may be specified 
+for ... via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>.&rdquo;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations">The above wording allows for T'Class'Alignment, 
+T'Class'Size, T'Class'Input, and T'Class'Output to be specifiable.</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="Annotations">A specifiable attribute is not necessarily specifiable 
+for all entities for which it is defined. For example, one is allowed 
+to ask T'Component_Size for an array subtype T, but &ldquo;<B>for</B> 
+T'Component_Size <B>use</B> ...&rdquo; is only allowed if T is a first 
+subtype, because Component_Size is a type-related aspect.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a subprogram, the profile shall 
+be mode conformant with the one required for the attribute, and the convention 
+shall be Ada. Additional requirements are defined for particular attributes. 
+<A NAME="I5441"></A></div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>This implies, for example, that if one writes:&nbsp;</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="SmallExamples"><B>for</B>&nbsp;T'Read&nbsp;<B>use</B>&nbsp;R;</div>
+<div class="paranum"><a name="p6.c">6.c</a></div>
+<div class="Annotations">R has to be a procedure with two parameters 
+with the appropriate subtypes and modes as shown in <A HREF="AA-13-13-2.html">13.13.2</A>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+<A NAME="I5442"></A><A NAME="I5443"></A><A NAME="I5444"></A><A NAME="I5445"></A><A NAME="I5446"></A><A NAME="I5447"></A><A NAME="I5448"></A><A NAME="I5449"></A><A NAME="I5450"></A><A NAME="I5451"></A><A NAME="I5452"></A><A NAME="I5453"></A><A NAME="I5454"></A><A NAME="I5455"></A><A NAME="I5456"></A>A 
+<I>Size clause</I> is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is Size. Similar definitions apply to the other specifiable attributes. 
+</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5457"></A><A NAME="I5458"></A>An 
+<SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+is type-related or subtype-specific if the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+denotes a type-related or subtype-specific attribute, respectively.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I5459"></A><A NAME="I5460"></A>A <I>storage 
+element</I> is an addressable element of storage in the machine. <A NAME="I5461"></A>A 
+<I>word</I> is the largest amount of storage that can be conveniently 
+and efficiently manipulated by the hardware, given the implementation's 
+run-time model. A word consists of an integral number of storage elements. 
+</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>A storage element is not 
+intended to be a single bit, unless the machine can efficiently address 
+individual bits.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, on a machine 
+with 8-bit storage elements, if there exist 32-bit integer registers, 
+with a full set of arithmetic and logical instructions to manipulate 
+those registers, a word ought to be 4 storage elements &mdash; that is, 
+32 bits.&nbsp;</div>
+<div class="paranum"><a name="p8.c">8.c</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The &ldquo;given the implementation's 
+run-time model&rdquo; part is intended to imply that, for example, on 
+an 80386 running MS-DOS, the word might be 16 bits, even though the hardware 
+can support 32 bits.</div>
+<div class="paranum"><a name="p8.d">8.d</a></div>
+<div class="Annotations">A word is what ACID refers to as a &ldquo;natural 
+hardware boundary&rdquo;.</div>
+<div class="paranum"><a name="p8.e">8.e</a></div>
+<div class="Annotations">Storage elements may, but need not be, independently 
+addressable (see <A HREF="AA-9-10.html">9.10</A>, &ldquo;<A HREF="AA-9-10.html">Shared 
+Variables</A>&rdquo;). Words are expected to be independently addressable. 
+</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
+<A NAME="I5462"></A>A <I>machine scalar</I> is an amount of storage that 
+can be conveniently and efficiently loaded, stored, or operated upon 
+by the hardware. Machine scalars consist of an integral number of storage 
+elements. The set of machine scalars is implementation defined, but includes 
+at least the storage element and the word. Machine scalars are used to 
+interpret <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN>s 
+when the nondefault bit ordering applies.&nbsp;</div>
+<div class="paranum"><a name="p8.e.1">8.e.1/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The set of machine 
+scalars.</div>
+<div class="paranum"><a name="p8.f">8.f/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
+A single storage element is a machine scalar in all Ada implementations. 
+Similarly, a word is a machine scalar in all implementations (although 
+it might be the same as a storage element). An implementation may define 
+other machine scalars that make sense on the target (a half-word, for 
+instance).&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+The following representation attributes are defined: Address, Alignment, 
+Size, Object_Size, Storage_Size, Component_Size, Has_Same_Storage, and 
+Overlaps_Storage.</div>
+<div class="paranum"><a name="p10">10/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an object, program unit, or label:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="WideHanging-Term">X'Address</div><div class="WideHanging-Body">
+<A NAME="I5463"></A><A NAME="I5464"></A>Denotes the address of the first 
+of the storage elements allocated to X. For a program unit or label, 
+this value refers to the machine code associated with the corresponding 
+body or <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">statement</A></SPAN>. 
+The value of this attribute is of type System.Address.</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Here, the &ldquo;first 
+of the storage elements&rdquo; is intended to mean the one with the lowest 
+address; the endianness of the machine doesn't matter.&nbsp;</div>
+<div class="paranum"><a name="p11.1">11.1/3</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0095-1.TXT">AI05-0095-1</A></I>} 
+The prefix of X'Address shall not statically denote a subprogram that 
+has convention Intrinsic. X'Address raises Program_Error if X denotes 
+a subprogram that has convention Intrinsic.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="WideHanging-Body"><A NAME="I5465"></A><A NAME="I5466"></A>Address 
+may be specified for stand-alone objects and for program units via an 
+<SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>.<A NAME="I5467"></A><A NAME="I5468"></A> 
+</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Address is not allowed 
+for enumeration literals, predefined operators, derived task types, or 
+derived protected types, since they are not program units.</div>
+<div class="paranum"><a name="p12.b">12.b/3</a></div>
+<div class="Annotations">Address is not allowed for intrinsic subprograms, 
+either. That can be checked statically unless the prefix is a generic 
+formal subprogram and the attribute reference is in the body of a generic 
+unit. We define that case to raise Program_Error, in order that the compiler 
+does not have to build a wrapper for intrinsic subprograms.</div>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations">The validity of a given address depends on the 
+run-time model; thus, in order to use Address clauses correctly, one 
+needs intimate knowledge of the run-time model.</div>
+<div class="paranum"><a name="p12.d">12.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+If the Address of an object is specified, any explicit or implicit initialization 
+takes place as usual, unless the Import aspect is also specified for 
+the object (in which case any necessary initialization is presumably 
+done in the foreign language).</div>
+<div class="paranum"><a name="p12.e">12.e</a></div>
+<div class="Annotations">Any compilation unit containing an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+of a given type depends semantically on the declaration of the package 
+in which the type is declared, even if not mentioned in an applicable 
+<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
+&mdash; see <A HREF="AA-10-1-1.html">10.1.1</A>. In this case, it means 
+that if a compilation unit contains X'Address, then it depends on the 
+declaration of System. Otherwise, the fact that the value of Address 
+is of a type in System wouldn't make sense; it would violate the &ldquo;legality 
+determinable via semantic dependences&rdquo; Language Design Principle.</div>
+<div class="paranum"><a name="p12.f">12.f</a></div>
+<div class="Annotations">AI83-00305 &mdash; If X is a task type, then 
+within the body of X, X denotes the current task object; thus, X'Address 
+denotes the object's address.</div>
+<div class="paranum"><a name="p12.g">12.g</a></div>
+<div class="Annotations">Interrupt entries and their addresses are described 
+in <A HREF="AA-J-7-1.html">J.7.1</A>, &ldquo;<A HREF="AA-J-7-1.html">Interrupt 
+Entries</A>&rdquo;.</div>
+<div class="paranum"><a name="p12.h">12.h</a></div>
+<div class="Annotations">If X is not allocated on a storage element boundary, 
+X'Address points at the first of the storage elements that contains any 
+part of X. This is important for the definition of the Position attribute 
+to be sensible.&nbsp;</div>
+<div class="paranum"><a name="p12.i">12.i/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Address:&nbsp;</B>Machine 
+address of an entity.</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0009-1.TXT">AI05-0009-1</A></I>} 
+<A NAME="I5469"></A>If an Address is specified, it is the programmer's 
+responsibility to ensure that the address is valid and appropriate for 
+the entity and its use; otherwise, program execution is erroneous.</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>&ldquo;Appropriate for the 
+entity and its use&rdquo; covers cases such as misaligned addresses, 
+read-only code addresses for variable data objects (and nonexecutable 
+data addresses for code units), and addresses which would force objects 
+that are supposed to be independently addressable to not be. Such addresses 
+may be &ldquo;valid&rdquo; as they designate locations that are accessible 
+to the program, but the program execution is still erroneous (meaning 
+that implementations do not have to worry about these cases).&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">For an array X, X'Address should point at the first 
+component of the array, and not at the array bounds.&nbsp;</div>
+<div class="paranum"><a name="p14.a.1">14.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>For an array X, 
+X'Address should point at the first component of the array rather than 
+the array bounds.</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>On the other hand, we have 
+no advice to offer about discriminants and tag fields; whether or not 
+the address points at them is not specified by the language. If discriminants 
+are stored separately, then the Position of a discriminant might be negative, 
+or might raise an exception.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I5470"></A>The recommended level of support 
+for the Address attribute is:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">X'Address should 
+produce a useful result if X is an object that is aliased or of a by-reference 
+type, or is an entity whose Address has been specified.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Aliased objects are the ones 
+for which the Unchecked_Access attribute is allowed; hence, these have 
+to be allocated on an addressable boundary anyway. Similar considerations 
+apply to objects of a by-reference type.</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations">An implementation need not go to any trouble 
+to make Address work in other cases. For example, if an object X is not 
+aliased and not of a by-reference type, and the implementation chooses 
+to store it in a register, X'Address might return System.Null_Address 
+(assuming registers are not addressable). For a subprogram whose calling 
+convention is Intrinsic, or for a package, the implementation need not 
+generate an out-of-line piece of code for it.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">An implementation should support Address clauses 
+for imported subprograms.</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+</div>
+<div class="paranum"><a name="p18.a">18.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">If the Address of an object is specified, or it 
+is imported or exported, then the implementation should not perform optimizations 
+based on assumptions of no aliases.&nbsp;</div>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
+level of support for the Address attribute should be followed.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Notes">2&nbsp;&nbsp;The specification of a link name with 
+the Link_Name aspect (see <A HREF="AA-B-1.html">B.1</A>) for a subprogram 
+or object is an alternative to explicit specification of its link-time 
+address, allowing a link-time directive to place the subprogram or object 
+within memory.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">3&nbsp;&nbsp;The rules for the Size attribute imply, 
+for an aliased object X, that if X'Size = Storage_Unit, then X'Address 
+points at a storage element containing all of the bits of X, and only 
+the bits of X.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations">The intended meaning of the various attributes, 
+and their <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>s, 
+is more explicit.</div>
+<div class="paranum"><a name="p21.b">21.b</a></div>
+<div class="Annotations">The <SPAN Class="swiss">address_clause</SPAN> 
+has been renamed to <SPAN Class="swiss"><A HREF="AA-J-7.html#S0323">at_clause</A></SPAN> 
+and moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
+Features</A>&rdquo;. One can use an Address clause (&ldquo;for T'Address 
+<B>use</B> ...;&rdquo;) instead.</div>
+<div class="paranum"><a name="p21.c">21.c</a></div>
+<div class="Annotations">The attributes defined in RM83-13.7.3 are moved 
+to <A HREF="AA-G.html">Annex G</A>, <A HREF="AA-A-5-3.html">A.5.3</A>, 
+and <A HREF="AA-A-5-4.html">A.5.4</A>.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p21.c.1">21.c.1/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+Defined that the names of aspects are the same as the name of the attribute; 
+that gives a name to use in <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>s 
+(see <A HREF="AA-13-1-1.html">13.1.1</A>).&nbsp;</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p21.d">21.d</a></div>
+<div class="Annotations">By default, the Alignment of a subtype should 
+reflect the &ldquo;natural&rdquo; alignment for objects of the subtype 
+on the machine. The Alignment, whether specified or default, should be 
+known at compile time, even though Addresses are generally not known 
+at compile time. (The generated code should never need to check at run 
+time the number of zero bits at the end of an address to determine an 
+alignment).</div>
+<div class="paranum"><a name="p21.e">21.e</a></div>
+<div class="Annotations">There are two symmetric purposes of Alignment 
+clauses, depending on whether or not the implementation has control over 
+object allocation. If the implementation allocates an object, the implementation 
+should ensure that the Address and Alignment are consistent with each 
+other. If something outside the implementation allocates an object, the 
+implementation should be allowed to assume that the Address and Alignment 
+are consistent, but should not assume stricter alignments than that. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an object:&nbsp;</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="WideHanging-Term">X'Alignment</div><div class="WideHanging-Body">
+<A NAME="I5471"></A><A NAME="I5472"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+The value of this attribute is of type <I>universal_integer</I>, and 
+nonnegative; zero means that the object is not necessarily aligned on 
+a storage element boundary. If X'Alignment is not zero, then X is aligned 
+on a storage unit boundary and X'Address is an integral multiple of X'Alignment 
+(that is, the Address modulo the Alignment is zero).</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="WideHanging-Term"></div><div class="WideHanging-Body">
+<SPAN STYLE="font-size: 80%"><I>This paragraph was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+</div>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The Alignment is passed 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+to the Allocate operation; the implementation has to choose a value such 
+that if the address returned by Allocate is aligned as requested, the 
+generated code can correctly access the object.</div>
+<div class="paranum"><a name="p24.b">24.b</a></div>
+<div class="Annotations">The above mention of &ldquo;modulo&rdquo; is 
+referring to the &quot;<B>mod</B>&quot; operator declared in System.Storage_Elements; 
+if X <B>mod</B> N = 0, then X is by definition aligned on an N-storage-element 
+boundary.&nbsp;</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5473"></A><A NAME="I5474"></A>Alignment may be specified for 
+[stand-alone] objects via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.</div>
+<div class="paranum"><a name="p25.a">25.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Alignment (object): 
+</B>Alignment of an object.</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="WideHanging-Term"></div><div class="WideHanging-Body">
+<SPAN STYLE="font-size: 80%"><I>This paragraph was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00247.TXT">AI95-00247-01</A></I>} 
+</div>
+<div class="paranum"><a name="p26.1">26.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+For every subtype S:&nbsp;</div>
+<div class="paranum"><a name="p26.2">26.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;S'Alignment</div><div class="WideHanging-Body">
+<A NAME="I5475"></A><A NAME="I5476"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+The value of this attribute is of type <I>universal_integer</I>, and 
+nonnegative.</div>
+<div class="paranum"><a name="p26.3">26.3/2</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+For an object X of subtype S, if S'Alignment is not zero, then X'Alignment 
+is a nonzero integral multiple of S'Alignment unless specified otherwise 
+by a representation item.</div>
+<div class="paranum"><a name="p26.4">26.4/2</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5477"></A><A NAME="I5478"></A>Alignment may be specified for 
+first subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.<A NAME="I5479"></A><A NAME="I5480"></A></div>
+<div class="paranum"><a name="p26.a">26.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Alignment (subtype): 
+</B>Alignment of a subtype.</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal"><A NAME="I5481"></A>Program execution is erroneous 
+if an Address clause is given that conflicts with the Alignment.&nbsp;</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The user has to either 
+give an Alignment clause also, or else know what Alignment the implementation 
+will choose by default.&nbsp;</div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5482"></A>For an object that is not allocated under control 
+of the implementation, execution is erroneous if the object is not aligned 
+according to its Alignment.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p28.1">28.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0116-1.TXT">AI05-0116-1</A></I>} 
+For any tagged specific subtype <I>S</I>, <I>S</I>'Class'Alignment should 
+equal <I>S</I>'Alignment.</div>
+<div class="paranum"><a name="p28.a">28.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>A tagged object should never 
+be less aligned than the alignment of the type of its view, so for a 
+class-wide type T'Class, the alignment should be no greater than that 
+of any type covered by T'Class. If the implementation only supports alignments 
+that are required by the recommended level of support (and this is most 
+likely), then the alignment of any covered type has to be the same or 
+greater than that of T &mdash; which leaves the only reasonable value 
+of T'Class'Alignment being T'Alignment. Thus we recommend this, but don't 
+require it so that in the unlikely case that the implementation does 
+support smaller alignments for covered types, it can select a smaller 
+value for T'Class'Alignment.&nbsp;</div>
+<div class="paranum"><a name="p28.a.1">28.a.1/3</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>For any tagged 
+specific subtype <I>S</I>, <I>S</I>'Class'Alignment should equal <I>S</I>'Alignment.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal"><A NAME="I5483"></A>The recommended level of support 
+for the Alignment attribute for subtypes is:&nbsp;</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+An implementation should support an Alignment clause for a discrete type, 
+fixed point type, record type, or array type, specifying an Alignment 
+value that is zero or a power of two, subject to the following:</div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+An implementation need not support an Alignment clause for a signed integer 
+type specifying an Alignment greater than the largest Alignment value 
+that is ever chosen by default by the implementation for any signed integer 
+type. A corresponding limitation may be imposed for modular integer types, 
+fixed point types, enumeration types, record types, and array types.</div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+An implementation need not support a nonconfirming Alignment clause which 
+could enable the creation of an object of an elementary type which cannot 
+be easily loaded and stored by available machine instructions.</div>
+<div class="paranum"><a name="p32.1">32.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+An implementation need not support an Alignment specified for a derived 
+tagged type which is not a multiple of the Alignment of the parent type. 
+An implementation need not support a nonconfirming Alignment specified 
+for a derived untagged by-reference type.&nbsp;</div>
+<div class="paranum"><a name="p32.a">32.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+There is no recommendation to support any nonconfirming Alignment clauses 
+for types not mentioned above. Remember that <A HREF="AA-13-1.html">13.1</A> 
+requires support for confirming Alignment clauses for all types.&nbsp;</div>
+<div class="paranum"><a name="p32.b">32.b/3</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0116-1.TXT">AI05-0116-1</A></I>} 
+An implementation that tries to support other alignments for derived 
+tagged types will need to allow inherited subprograms to be passed objects 
+that are less aligned than expected by the parent subprogram and type. 
+This is unlikely to work if alignment has any effect on code selection. 
+Similar issues arise for untagged derived types whose parameters are 
+passed by reference.&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5484"></A>The 
+recommended level of support for the Alignment attribute for objects 
+is:&nbsp;</div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Bulleted">For stand-alone library-level objects of statically 
+constrained subtypes, the implementation should support all Alignments 
+supported by the target linker. For example, page alignment is likely 
+to be supported for such objects, but not for subtypes.</div>
+<div class="paranum"><a name="p35.1">35.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+For other objects, an implementation should at least support the alignments 
+supported for their subtype, subject to the following:</div>
+<div class="paranum"><a name="p35.2">35.2/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+An implementation need not support Alignments specified for objects of 
+a by-reference type or for objects of types containing aliased subcomponents 
+if the specified Alignment is not a multiple of the Alignment of the 
+subtype of the object.&nbsp;</div>
+<div class="paranum"><a name="p35.a">35.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
+level of support for the Alignment attribute should be followed.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Notes">4&nbsp;&nbsp;Alignment is a subtype-specific attribute.</div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00247.TXT">AI95-00247-01</A></I>} 
+</div>
+<div class="paranum"><a name="p37.a">37.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Notes">5&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN>, 
+Component_Size clause, or specifying the Pack aspect as True can override 
+a specified Alignment.&nbsp;</div>
+<div class="paranum"><a name="p38.a">38.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Most objects are allocated 
+by the implementation; for these, the implementation obeys the Alignment. 
+The implementation is of course allowed to make an object <I>more</I> 
+aligned than its Alignment requires &mdash; an object whose Alignment 
+is 4 might just happen to land at an address that's a multiple of 4096. 
+For formal parameters, the implementation might want to force an Alignment 
+stricter than the parameter's subtype. For example, on some systems, 
+it is customary to always align parameters to 4 storage elements.</div>
+<div class="paranum"><a name="p38.b">38.b</a></div>
+<div class="Annotations">Hence, one might initially assume that the implementation 
+could evilly make all Alignments 1 by default, even though integers, 
+say, are normally aligned on a 4-storage-element boundary. However, the 
+implementation cannot get away with that &mdash; if the Alignment is 
+1, the generated code cannot assume an Alignment of 4, at least not for 
+objects allocated outside the control of the implementation.</div>
+<div class="paranum"><a name="p38.c">38.c</a></div>
+<div class="Annotations">Of course implementations can assume anything 
+they can prove, but typically an implementation will be unable to prove 
+much about the alignment of, say, an imported object. Furthermore, the 
+information about where an address &ldquo;came from&rdquo; can be lost 
+to the compiler due to separate compilation.</div>
+<div class="paranum"><a name="p38.d">38.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The Alignment of an object that is a component of a packed composite 
+object will usually be 0, to indicate that the component is not necessarily 
+aligned on a storage element boundary. For a subtype, an Alignment of 
+0 means that objects of the subtype are not normally aligned on a storage 
+element boundary at all. For example, an implementation might choose 
+to make Component_Size be 1 for an array of Booleans, even when the Pack 
+aspect has not been specified for the array. In this case, Boolean'Alignment 
+would be 0. (In the presence of tasking, this would in general be feasible 
+only on a machine that had atomic test-bit and set-bit instructions.)</div>
+<div class="paranum"><a name="p38.e">38.e</a></div>
+<div class="Annotations">If the machine has no particular natural alignments, 
+then all subtype Alignments will probably be 1 by default.</div>
+<div class="paranum"><a name="p38.f">38.f</a></div>
+<div class="Annotations">Specifying an Alignment of 0 in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+does not require the implementation to do anything (except return 0 when 
+the Alignment is queried). However, it might be taken as advice on some 
+implementations.</div>
+<div class="paranum"><a name="p38.g">38.g</a></div>
+<div class="Annotations">It is an error for an Address clause to disobey 
+the object's Alignment. The error cannot be detected at compile time, 
+in general, because the Address is not necessarily known at compile time 
+(and is almost certainly not static). We do not require a run-time check, 
+since efficiency seems paramount here, and Address clauses are treading 
+on thin ice anyway. Hence, this misuse of Address clauses is just like 
+any other misuse of Address clauses &mdash; it's erroneous.</div>
+<div class="paranum"><a name="p38.h">38.h</a></div>
+<div class="Annotations">A type extension can have a stricter Alignment 
+than its parent. This can happen, for example, if the Alignment of the 
+parent is 4, but the extension contains a component with Alignment 8. 
+The Alignment of a class-wide type or object will have to be the maximum 
+possible Alignment of any extension.</div>
+<div class="paranum"><a name="p38.i">38.i</a></div>
+<div class="Annotations">The recommended level of support for the Alignment 
+attribute is intended to reflect a minimum useful set of capabilities. 
+An implementation can assume that all Alignments are multiples of each 
+other &mdash; 1, 2, 4, and 8 might be the only supported Alignments for 
+subtypes. An Alignment of 3 or 6 is unlikely to be useful. For objects 
+that can be allocated statically, we recommend that the implementation 
+support larger alignments, such as 4096. We do not recommend such large 
+alignments for subtypes, because the maximum subtype alignment will also 
+have to be used as the alignment of stack frames, heap objects, and class-wide 
+objects. Similarly, we do not recommend such large alignments for stack-allocated 
+objects.</div>
+<div class="paranum"><a name="p38.j">38.j</a></div>
+<div class="Annotations">If the maximum default Alignment is 8 (say, 
+Long_Float'Alignment = 8), then the implementation can refuse to accept 
+stricter alignments for subtypes. This simplifies the generated code, 
+since the compiler can align the stack and class-wide types to this maximum 
+without a substantial waste of space (or time).</div>
+<div class="paranum"><a name="p38.k">38.k</a></div>
+<div class="Annotations">Note that the recommended level of support takes 
+into account interactions between Size and Alignment. For example, on 
+a 32-bit machine with 8-bit storage elements, where load and store instructions 
+have to be aligned according to the size of the thing being loaded or 
+stored, the implementation might accept an Alignment of 1 if the Size 
+is 8, but might reject an Alignment of 1 if the Size is 32. On a machine 
+where unaligned loads and stores are merely inefficient (as opposed to 
+causing hardware traps), we would expect an Alignment of 1 to be supported 
+for any Size.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p38.l">38.l</a></div>
+<div class="Annotations">The nonnegative part is missing from RM83 (for 
+<SPAN Class="swiss"><A HREF="AA-J-8.html#S0324">mod_clause</A></SPAN>s, 
+nee <SPAN Class="swiss">alignment_clause</SPAN>s, which are an obsolete 
+version of Alignment clauses).&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p39">39/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an object:&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="WideHanging-Term">X'Size</div><div class="WideHanging-Body">
+<A NAME="I5485"></A><A NAME="I5486"></A>Denotes the size in bits of the 
+representation of the object. The value of this attribute is of the type 
+<I>universal_integer</I>.&nbsp;</div>
+<div class="paranum"><a name="p40.a">40.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that Size is in bits 
+even if Machine_Radix is 10. Each decimal digit (and the sign) is presumably 
+represented as some number of bits.&nbsp;</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="WideHanging-Body"><A NAME="I5487"></A><A NAME="I5488"></A>Size 
+may be specified for [stand-alone] objects via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static and its value nonnegative.<A NAME="I5489"></A><A NAME="I5490"></A></div>
+<div class="paranum"><a name="p41.a">41.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Size (object): 
+</B>Size in bits of an object.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p41.1">41.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+The size of an array object should not include its bounds.&nbsp;</div>
+<div class="paranum"><a name="p41.a.1">41.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The Size of an 
+array object should not include its bounds.</div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5491"></A>The recommended level of support for the Size attribute 
+of objects is the same as for subtypes (see below), except that only 
+a confirming Size clause need be supported for an aliased elementary 
+object.&nbsp;</div>
+<div class="paranum"><a name="p43">43/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every subtype S: 
+</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Size</div><div class="WideHanging-Body">
+<A NAME="I5492"></A><A NAME="I5493"></A>If S is definite, denotes the 
+size [(in bits)] that the implementation would choose for the following 
+objects of subtype S:&nbsp;</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Indented4Bulleted">A record component of subtype S when the 
+record type is packed.</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Indented4Bulleted">The formal parameter of an instance of 
+Unchecked_Conversion that converts from subtype S to some other subtype. 
+</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="WideHanging-Body">If S is indefinite, the meaning is implementation 
+defined. The value of this attribute is of the type <I>universal_integer</I>. 
+<A NAME="I5494"></A><A NAME="I5495"></A>The Size of an object is at least 
+as large as that of its subtype, unless the object's Size is determined 
+by a Size clause, a component_clause, or a Component_Size clause. Size 
+may be specified for first subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static and its value nonnegative.<A NAME="I5496"></A><A NAME="I5497"></A> 
+</div>
+<div class="paranum"><a name="p48.a">48.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The meaning of 
+Size for indefinite subtypes.</div>
+<div class="paranum"><a name="p48.b">48.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>The 
+effects of specifying the Size of a subtype are:&nbsp;</div>
+<div class="paranum"><a name="p48.c">48.c</a></div>
+<div class="SmallBulleted">Unchecked_Conversion works in a predictable 
+manner.</div>
+<div class="paranum"><a name="p48.d">48.d</a></div>
+<div class="SmallBulleted">A composite type cannot be packed so tightly 
+as to override the specified Size of a component's subtype.</div>
+<div class="paranum"><a name="p48.e">48.e</a></div>
+<div class="SmallBulleted">Assuming the Implementation Advice is obeyed, 
+if the specified Size allows independent addressability, then the Size 
+of certain objects of the subtype should be equal to the subtype's Size. 
+This applies to stand-alone objects and to components (unless a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN> 
+or a Component_Size clause applies).&nbsp;</div>
+<div class="paranum"><a name="p48.f">48.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN> 
+or a Component_Size clause can cause an object to be smaller than its 
+subtype's specified size. The aspect Pack cannot; if a component subtype's 
+size is specified, this limits how tightly the composite object can be 
+packed.</div>
+<div class="paranum"><a name="p48.g">48.g</a></div>
+<div class="Annotations">The Size of a class-wide (tagged) subtype is 
+unspecified, because it's not clear what it should mean; it should certainly 
+not depend on all of the descendants that happen to exist in a given 
+program. Note that this cannot be detected at compile time, because in 
+a generic unit, it is not necessarily known whether a given subtype is 
+class-wide. It might raise an exception on some implementations.&nbsp;</div>
+<div class="paranum"><a name="p48.h">48.h</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>A Size clause for a numeric subtype need not affect the underlying 
+numeric type. For example, if I say:&nbsp;</div>
+<div class="paranum"><a name="p48.i">48.i</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;S&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1..2;<BR>
+<B>for</B>&nbsp;S'Size&nbsp;<B>use</B>&nbsp;64;<BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p48.j">48.j</a></div>
+<div class="Annotations">I am not guaranteed that S'Base'Last &gt;= 2**63&ndash;1, 
+nor that intermediate results will be represented in 64 bits.&nbsp;</div>
+<div class="paranum"><a name="p48.k">48.k</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>There is no need to complicate 
+implementations for this sort of thing, because the right way to affect 
+the base range of a type is to use the normal way of declaring the base 
+range:&nbsp;</div>
+<div class="paranum"><a name="p48.l">48.l</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Big&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;-2**63&nbsp;..&nbsp;2**63&nbsp;-&nbsp;1;<BR>
+<B>subtype</B>&nbsp;Small&nbsp;<B>is</B>&nbsp;Big&nbsp;<B>range</B>&nbsp;1..1000;<BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p48.m">48.m</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The Size of a large unconstrained 
+subtype (e.g. String'Size) is likely to raise Constraint_Error, since 
+it is a nonstatic expression of type <I>universal_integer</I> that might 
+overflow the largest signed integer type. There is no requirement that 
+the largest integer type be able to represent the size in bits of the 
+largest possible object.&nbsp;</div>
+<div class="paranum"><a name="p48.n">48.n/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Size (subtype): 
+</B>Size in bits of a subtype.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Normal">In an implementation, Boolean'Size shall be 1.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+If the Size of a subtype allows for efficient independent addressability 
+(see <A HREF="AA-9-10.html">9.10</A>) on the target architecture, then 
+the Size of the following objects of the subtype should equal the Size 
+of the subtype:&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 51 and 
+52 were moved to the Implementation Advice for attribute Object_Size.</I></SPAN> 
+</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Bulleted">Aliased objects (including components).</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Bulleted">Unaliased components, unless the Size of the component 
+is determined by a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN> 
+or Component_Size clause.&nbsp;</div>
+<div class="paranum"><a name="p52.a.1">52.a.1/4</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If the Size of 
+a subtype allows for efficient independent addressability, then the Size 
+of most objects of the subtype should equal the Size of the subtype.</div>
+<div class="paranum"><a name="p52.a">52.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Thus, on a typical 32-bit 
+machine, &ldquo;<B>for</B> S'Size <B>use</B> 32;&rdquo; will guarantee 
+that aliased objects of subtype S, and components whose subtype is S, 
+will have Size = 32 (assuming the implementation chooses to obey this 
+Implementation Advice). On the other hand, if one writes, &ldquo;<B>for</B> 
+S2'Size <B>use</B> 5;&rdquo; then stand-alone objects of subtype S2 will 
+typically have their Size rounded up to ensure independent addressability.</div>
+<div class="paranum"><a name="p52.b">52.b</a></div>
+<div class="Annotations">Note that &ldquo;<B>for</B> S'Size <B>use</B> 
+32;&rdquo; does not cause things like formal parameters to have Size 
+= 32 &mdash; the implementation is allowed to make all parameters be 
+at least 64 bits, for example.</div>
+<div class="paranum"><a name="p52.c">52.c</a></div>
+<div class="Annotations">Note that &ldquo;<B>for</B> S2'Size <B>use</B> 
+5;&rdquo; requires record components whose subtype is S2 to be exactly 
+5 bits if the record type is packed. The same is not true of array components; 
+their Size may be rounded up to the nearest factor of the word size. 
+</div>
+<div class="paranum"><a name="p52.d">52.d/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+<A NAME="I5498"></A>On most machines, arrays don't contain gaps between 
+elementary components; if the Component_Size is greater than the Size 
+of the component subtype, the extra bits are generally considered part 
+of each component, rather than gaps between components. On the other 
+hand, a record might contain gaps between elementary components, depending 
+on what sorts of loads, stores, and masking operations are generally 
+done by the generated code.</div>
+<div class="paranum"><a name="p52.e">52.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+For an array, any extra bits stored for each elementary component will 
+generally be part of the component &mdash; the whole point of storing 
+extra bits is to make loads and stores more efficient by avoiding the 
+need to mask out extra bits. The PDP-10 is one counter-example; since 
+the hardware supports byte strings with a gap at the end of each word, 
+one would want to pack in that manner.&nbsp;</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="Normal">A Size clause on a composite subtype should not affect 
+the internal layout of components.&nbsp;</div>
+<div class="paranum"><a name="p53.a.1">53.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>A Size clause 
+on a composite subtype should not affect the internal layout of components.</div>
+<div class="paranum"><a name="p53.a">53.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+That's what Pack aspects, <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0313">record_representation_clause</A></SPAN>s, 
+and Component_Size clauses are for.&nbsp;</div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5499"></A>The 
+recommended level of support for the Size attribute of subtypes is:&nbsp;</div>
+<div class="paranum"><a name="p55">55</a></div>
+<div class="Bulleted">The Size (if not specified) of a static discrete 
+or fixed point subtype should be the number of bits needed to represent 
+each value belonging to the subtype using an unbiased representation, 
+leaving space for a sign bit only if the subtype contains negative values. 
+If such a subtype is a first subtype, then an implementation should support 
+a specified Size for it that reflects this representation.</div>
+<div class="paranum"><a name="p55.a">55.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This applies to 
+static enumeration subtypes, using the internal codes used to represent 
+the values.</div>
+<div class="paranum"><a name="p55.b">55.b</a></div>
+<div class="Annotations">For a two's-complement machine, this implies 
+that for a static signed integer subtype S, if all values of S are in 
+the range 0 .. 2<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>n</I></SPAN></SPAN></SUP>&ndash;1, 
+or all values of S are in the range &ndash;2<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>n&ndash;1</I></SPAN></SPAN></SUP> 
+.. 2<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>n&ndash;1</I></SPAN></SPAN></SUP>&ndash;1, 
+for some <I>n</I> less than or equal to the word size, then S'Size should 
+be &lt;= the smallest such <I>n</I>. For a one's-complement machine, 
+it is the same except that in the second range, the lower bound &ldquo;&ndash;2<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>n&ndash;1</I></SPAN></SPAN></SUP>&rdquo; 
+is replaced by &ldquo;&ndash;2<SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"><I>n&ndash;1</I></SPAN></SPAN></SUP>+1&rdquo;.</div>
+<div class="paranum"><a name="p55.c">55.c</a></div>
+<div class="Annotations">If an integer subtype (whether signed or unsigned) 
+contains no negative values, the Size should not include space for a 
+sign bit.</div>
+<div class="paranum"><a name="p55.d">55.d</a></div>
+<div class="Annotations">Typically, the implementation will choose to 
+make the Size of a subtype be exactly the smallest such <I>n</I>. However, 
+it might, for example, choose a biased representation, in which case 
+it could choose a smaller value.</div>
+<div class="paranum"><a name="p55.e">55.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+On most machines, it is in general not a good idea to pack (parts of) 
+multiple stand-alone objects into the same storage element, because (1) 
+it usually doesn't save much space, and (2) it requires locking to prevent 
+tasks from interfering with each other, since separate stand-alone objects 
+are independently addressable. Therefore, if S'Size = 2 on a machine 
+with 8-bit storage elements, the size of a stand-alone object of subtype 
+S will probably not be 2. It might, for example, be 8, 16 or 32, depending 
+on the availability and efficiency of various machine instructions. The 
+same applies to components of composite types, unless Pack, Component_Size, 
+or record layout is specified.</div>
+<div class="paranum"><a name="p55.f">55.f</a></div>
+<div class="Annotations">For an unconstrained discriminated object, if 
+the implementation allocates the maximum possible size, then the Size 
+attribute should return that maximum possible size.&nbsp;</div>
+<div class="paranum"><a name="p55.g">55.g</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The Size of an object X 
+is not usually the same as that of its subtype S. If X is a stand-alone 
+object or a parameter, for example, most implementations will round X'Size 
+up to a storage element boundary, or more, so X'Size might be greater 
+than S'Size. On the other hand, X'Size cannot be less than S'Size, even 
+if the implementation can prove, for example, that the range of values 
+actually taken on by X during execution is smaller than the range of 
+S.</div>
+<div class="paranum"><a name="p55.h">55.h</a></div>
+<div class="Annotations">For example, if S is a first integer subtype 
+whose range is 0..3, S'Size will be probably be 2 bits, and components 
+of packed composite types of this subtype will be 2 bits (assuming Storage_Unit 
+is a multiple of 2), but stand-alone objects and parameters will probably 
+not have a size of 2 bits; they might be rounded up to 32 bits, for example. 
+On the other hand, Unchecked_Conversion will use the 2-bit size, even 
+when converting a stand-alone object, as one would expect.</div>
+<div class="paranum"><a name="p55.i">55.i</a></div>
+<div class="Annotations">Another reason for making the Size of an object 
+bigger than its subtype's Size is to support the run-time detection of 
+uninitialized variables. <A NAME="I5500"></A>The implementation might 
+add an extra value to a discrete subtype that represents the uninitialized 
+state, and check for this value on use. In some cases, the extra value 
+will require an extra bit in the representation of the object. Such detection 
+is not required by the language. If it is provided, the implementation 
+has to be able to turn it off. For example, if the programmer gives a 
+<SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0313">record_representation_clause</A></SPAN> 
+or Component_Size clause that makes a component too small to allow the 
+extra bit, then the implementation will not be able to perform the checking 
+(not using this method, anyway).</div>
+<div class="paranum"><a name="p55.j">55.j</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The fact that 
+the size of an object is not necessarily the same as its subtype can 
+be confusing:&nbsp;</div>
+<div class="paranum"><a name="p55.k">55.k</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Device_Register&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0..2**8&nbsp;-&nbsp;1;<BR>
+<B>for</B>&nbsp;Device_Register'Size&nbsp;<B>use</B>&nbsp;8;&nbsp;--<SPAN Class="roman"><I>&nbsp;Confusing!</I></SPAN><BR>
+My_Device&nbsp;:&nbsp;Device_Register;<BR>
+<B>for</B>&nbsp;My_Device'Address&nbsp;<B>use</B>&nbsp;To_Address(16#FF00#);<BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p55.l">55.l</a></div>
+<div class="Annotations">The programmer might think that My_Device'Size 
+is 8, and that My_Device'Address points at an 8-bit location. However, 
+this is not true. In Ada 83 (and in Ada 95), My_Device'Size might well 
+be 32, and My_Device'Address might well point at the high-order 8 bits 
+of the 32-bit object, which are always all zero bits. If My_Device'Address 
+is passed to an assembly language subprogram, based on the programmer's 
+assumption, the program will not work properly.&nbsp;</div>
+<div class="paranum"><a name="p55.m">55.m</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>It is not reasonable to require 
+that an implementation allocate exactly 8 bits to all objects of subtype 
+Device_Register. For example, in many run-time models, stand-alone objects 
+and parameters are always aligned to a word boundary. Such run-time models 
+are generally based on hardware considerations that are beyond the control 
+of the implementer. (It is reasonable to require that an implementation 
+allocate exactly 8 bits to all components of subtype Device_Register, 
+if packed.)&nbsp;</div>
+<div class="paranum"><a name="p55.n">55.n</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>The correct way to write the above code is like this:&nbsp;</div>
+<div class="paranum"><a name="p55.o">55.o</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Device_Register&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0..2**8&nbsp;-&nbsp;1;<BR>
+My_Device&nbsp;:&nbsp;Device_Register;<BR>
+<B>for</B>&nbsp;My_Device'Size&nbsp;<B>use</B>&nbsp;8;<BR>
+<B>for</B>&nbsp;My_Device'Address&nbsp;<B>use</B>&nbsp;To_Address(16#FF00#);<BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p55.p">55.p</a></div>
+<div class="Annotations">If the implementation cannot accept 8-bit stand-alone 
+objects, then this will be illegal. However, on a machine where an 8-bit 
+device register exists, the implementation will probably be able to accept 
+8-bit stand-alone objects. Therefore, My_Device'Size will be 8, and My_Device'Address 
+will point at those 8 bits, as desired.</div>
+<div class="paranum"><a name="p55.q">55.q</a></div>
+<div class="Annotations">If an object of subtype Device_Register is passed 
+to a foreign language subprogram, it will be passed according to that 
+subprogram's conventions. Most foreign language implementations have 
+similar run-time model restrictions. For example, when passing to a C 
+function, where the argument is of the C type char* (that is, pointer 
+to char), the C compiler will generally expect a full word value, either 
+on the stack, or in a register. It will <I>not</I> expect a single byte. 
+Thus, Size clauses for subtypes really have nothing to do with passing 
+parameters to foreign language subprograms.&nbsp;</div>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Bulleted">For a subtype implemented with levels of indirection, 
+the Size should include the size of the pointers, but not the size of 
+what they point at.&nbsp;</div>
+<div class="paranum"><a name="p56.a">56.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, if a task 
+object is represented as a pointer to some information (including a task 
+stack), then the size of the object should be the size of the pointer. 
+The Storage_Size, on the other hand, should include the size of the stack. 
+</div>
+<div class="paranum"><a name="p56.1">56.1/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+An implementation should support a Size clause for a discrete type, fixed 
+point type, record type, or array type, subject to the following:&nbsp;</div>
+<div class="paranum"><a name="p56.2">56.2/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+An implementation need not support a Size clause for a signed integer 
+type specifying a Size greater than that of the largest signed integer 
+type supported by the implementation in the absence of a size clause 
+(that is, when the size is chosen by default). A corresponding limitation 
+may be imposed for modular integer types, fixed point types, enumeration 
+types, record types, and array types.</div>
+<div class="paranum"><a name="p56.b">56.b/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+Note that the &ldquo;corresponding limitation&rdquo; for a record or 
+array type implies that an implementation may impose some reasonable 
+maximum size for records and arrays (e.g. 2**32 bits), which is an upper 
+bound (&ldquo;capacity&rdquo; limit) on the size, whether chosen by default 
+or by being specified by the user. The largest size supported for records 
+need not be the same as the largest size supported for arrays.&nbsp;</div>
+<div class="paranum"><a name="p56.b.1">56.b.1/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0155-1.TXT">AI05-0155-1</A></I>} 
+Only Size clauses with a size greater than or equal to the Size that 
+would be chosen by default may be safely presumed to be supported on 
+nonstatic elementary subtypes. Implementations may choose to support 
+smaller sizes, but only if the Size allows any value of the subtype to 
+be represented, for any possible value of the bounds.&nbsp;</div>
+<div class="paranum"><a name="p56.3">56.3/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+A nonconfirming size clause for the first subtype of a derived untagged 
+by-reference type need not be supported.&nbsp;</div>
+<div class="paranum"><a name="p56.c">56.c/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
+level of support for the Size attribute should be followed.</div>
+<div class="paranum"><a name="p56.d">56.d/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+There is no recommendation to support any nonconfirming Size clauses 
+for types not mentioned above. Remember that <A HREF="AA-13-1.html">13.1</A> 
+requires support for confirming Size clauses for all types.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Notes">6&nbsp;&nbsp;Size is a subtype-specific attribute.</div>
+<div class="paranum"><a name="p58">58/3</a></div>
+<div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN> 
+or Component_Size clause can override a specified Size. Aspect Pack cannot. 
+</div>
+
+<H4 Class="centered">Inconsistencies With Ada 83</H4>
+<div class="paranum"><a name="p58.a.1">58.a.1/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+<A NAME="I5501"></A>We specify the meaning of Size in much more detail 
+than Ada 83. This is not technically an inconsistency, but it is in practice, 
+as most Ada 83 compilers use a different definition for Size than is 
+required here. This should have been documented more explicitly during 
+the Ada 9X process.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p58.a">58.a</a></div>
+<div class="Annotations">The requirement for a nonnegative value in a 
+Size clause was not in RM83, but it's hard to see how it would make sense. 
+For uniformity, we forbid negative sizes, rather than letting implementations 
+define their meaning.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p59">59/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+T that denotes a task object [(after any implicit dereference)]:&nbsp;</div>
+<div class="paranum"><a name="p60">60/3</a></div>
+<div class="WideHanging-Term">T'Storage_Size</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5502"></A><A NAME="I5503"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+Denotes the number of storage elements reserved for the task. The value 
+of this attribute is of the type <I>universal_integer</I>. The Storage_Size 
+includes the size of the task's stack, if any. The language does not 
+specify whether or not it includes other storage associated with the 
+task (such as the &ldquo;task control block&rdquo; used by some implementations.) 
+If the aspect Storage_Size is specified for the type of the object, the 
+value of the Storage_Size attribute is at least the value determined 
+by the aspect.&nbsp;</div>
+<div class="paranum"><a name="p60.a">60.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The value of this attribute 
+is never negative, since it is impossible to &ldquo;reserve&rdquo; a 
+negative number of storage elements.</div>
+<div class="paranum"><a name="p60.b">60.b</a></div>
+<div class="Annotations">If the implementation chooses to allocate an 
+initial amount of storage, and then increase this as needed, the Storage_Size 
+cannot include the additional amounts (assuming the allocation of the 
+additional amounts can raise Storage_Error); this is inherent in the 
+meaning of &ldquo;reserved.&rdquo;</div>
+<div class="paranum"><a name="p60.c">60.c</a></div>
+<div class="Annotations">The implementation is allowed to allocate different 
+amounts of storage for different tasks of the same subtype.</div>
+<div class="paranum"><a name="p60.d">60.d</a></div>
+<div class="Annotations">Storage_Size is also defined for access subtypes 
+&mdash; see <A HREF="AA-13-11.html">13.11</A>.&nbsp;</div>
+<div class="paranum"><a name="p61">61/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00229.TXT">AI95-0229-1</A></I>} 
+[Aspect Storage_Size specifies the amount of storage to be reserved for 
+the execution of a task.]&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 62 through 
+65 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p65.1">65.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>), 
+the following language-defined representation aspect may be specified:</div>
+<div class="paranum"><a name="p65.2">65.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Storage_Size</div><div class="WideHanging-Body"><br clear="left">
+The Storage_Size aspect is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+which shall be of any integer type.<A NAME="I5504"></A><A NAME="I5505"></A></div>
+<div class="paranum"><a name="p65.a">65.a/3</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>This definition somewhat 
+conflicts with the &quot;automatic&quot; one for the obsolescent attribute 
+Storage_Size (which can be specified). The only difference is where the 
+given expression is evaluated. We intend for the above definition to 
+supersede that &quot;automatic&quot; definition for this attribute.&nbsp;</div>
+<div class="paranum"><a name="p65.b">65.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that the value of 
+the Storage_Size aspect <I>is</I> an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>; 
+it is not the <I>value</I> of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>. 
+The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is evaluated for each object of the type (see below).&nbsp;</div>
+<div class="paranum"><a name="p65.c">65.c/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Storage_Size 
+(task):&nbsp;</B>Size in storage elements reserved for a task type or single 
+task object.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p65.3">65.3/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The Storage_Size aspect shall not be specified for a task interface type. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p66">66/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+When a task object is created, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+(if any) associated with the Storage_Size aspect of its type is evaluated; 
+the Storage_Size attribute of the newly created task object is at least 
+the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>.</div>
+<div class="paranum"><a name="p66.a">66.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The implementation is allowed 
+to round up a specified Storage_Size amount. For example, if the implementation 
+always allocates in chunks of 4096 bytes, the number 200 might be rounded 
+up to 4096. Also, if the user specifies a negative number, the implementation 
+has to normalize this to 0, or perhaps to a positive number.</div>
+<div class="paranum"><a name="p66.b">66.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+If the Storage_Size aspect is not specified for the type of the task 
+object, the value of the Storage_Size attribute is unspecified.&nbsp;</div>
+<div class="paranum"><a name="p67">67</a></div>
+<div class="Normal"><A NAME="I5506"></A><A NAME="I5507"></A><A NAME="I5508"></A>At 
+the point of task object creation, or upon task activation, Storage_Error 
+is raised if there is insufficient free storage to accommodate the requested 
+Storage_Size.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p68">68/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an array subtype or array object [(after any implicit 
+dereference)]:&nbsp;</div>
+<div class="paranum"><a name="p69">69</a></div>
+<div class="WideHanging-Term">X'Component_Size</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5509"></A><A NAME="I5510"></A>Denotes the size in bits of components 
+of the type of X. The value of this attribute is of type <I>universal_integer</I>. 
+</div>
+<div class="paranum"><a name="p70">70</a></div>
+<div class="WideHanging-Body"><A NAME="I5511"></A><A NAME="I5512"></A>Component_Size 
+may be specified for array types via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.<A NAME="I5513"></A><A NAME="I5514"></A></div>
+<div class="paranum"><a name="p70.a">70.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The intent is that 
+the value of X'Component_Size is always nonnegative. If the array is 
+stored &ldquo;backwards&rdquo; in memory (which might be caused by an 
+implementation-defined pragma), X'Component_Size is still positive.&nbsp;</div>
+<div class="paranum"><a name="p70.b">70.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For an array object A, 
+A'Component_Size = A(I)'Size for any index I.&nbsp;</div>
+<div class="paranum"><a name="p70.c">70.c/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Component_Size: 
+</B>Size in bits of a component of an array type.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p71">71</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5515"></A>The 
+recommended level of support for the Component_Size attribute is:&nbsp;</div>
+<div class="paranum"><a name="p72">72</a></div>
+<div class="Bulleted">An implementation need not support specified Component_Sizes 
+that are less than the Size of the component subtype.</div>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+An implementation should support specified Component_Sizes that are factors 
+and multiples of the word size. For such Component_Sizes, the array should 
+contain no gaps between components. For other Component_Sizes (if supported), 
+the array should contain no gaps between components when Pack is also 
+specified; the implementation should forbid this combination in cases 
+where it cannot support a no-gaps representation.&nbsp;</div>
+<div class="paranum"><a name="p73.a">73.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+For example, if Storage_Unit = 8, and Word_Size = 32, then the user is 
+allowed to specify a Component_Size of 1, 2, 4, 8, 16, and 32, with no 
+gaps. In addition, <I>n</I>*32 is allowed for positive integers <I>n</I>, 
+again with no gaps. If the implementation accepts Component_Size = 3, 
+then it might allocate 10 components per word, with a 2-bit gap at the 
+end of each word (unless Pack is also specified), or it might not have 
+any internal gaps at all. (There can be gaps at either end of the array.) 
+</div>
+<div class="paranum"><a name="p73.b">73.b/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
+level of support for the Component_Size attribute should be followed.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p73.1">73.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an object:&nbsp;</div>
+<div class="paranum"><a name="p73.2">73.2/4</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;X'Has_Same_Storage</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5516"></A><A NAME="I5517"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+X'Has_Same_Storage denotes a function with the following specification:</div>
+<div class="paranum"><a name="p73.3">73.3/3</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;X'Has_Same_Storage&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>any_type</I></SPAN>)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Boolean</div>
+<div class="paranum"><a name="p73.4">73.4/4</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0077-1.TXT">AI12-0077-1</A></I>} 
+The actual parameter shall be a name that denotes an object. The object 
+denoted by the actual parameter can be of any type. This function evaluates 
+the names of the objects involved. It returns True if the representation 
+of the object denoted by the actual parameter occupies exactly the same 
+bits as the representation of the object denoted by X and the objects 
+occupy at least one bit; otherwise, it returns False.</div>
+<div class="paranum"><a name="p73.c">73.c/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Has_Same_Storage means that, 
+if the representation is contiguous, the objects sit at the same address 
+and occupy the same length of memory.&nbsp;</div>
+<div class="paranum"><a name="p73.5">73.5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an object:&nbsp;</div>
+<div class="paranum"><a name="p73.6">73.6/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;X'Overlaps_Storage</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5518"></A><A NAME="I5519"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+X'Overlaps_Storage denotes a function with the following specification:</div>
+<div class="paranum"><a name="p73.7">73.7/3</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;X'Overlaps_Storage&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>any_type</I></SPAN>)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Boolean</div>
+<div class="paranum"><a name="p73.8">73.8/3</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+The actual parameter shall be a name that denotes an object. The object 
+denoted by the actual parameter can be of any type. This function evaluates 
+the names of the objects involved and returns True if the representation 
+of the object denoted by the actual parameter shares at least one bit 
+with the representation of the object denoted by X; otherwise, it returns 
+False.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p73.9">73.9/3</a></div>
+<div class="Notes">8&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+X'Has_Same_Storage(Y) implies X'Overlaps_Storage(Y).</div>
+<div class="paranum"><a name="p73.10">73.10/3</a></div>
+<div class="Notes">9&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+X'Has_Same_Storage(Y) and X'Overlaps_Storage(Y) are not considered to 
+be reads of X and Y.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p73.11">73.11/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+The following type-related operational attribute is defined: External_Tag.</div>
+<div class="paranum"><a name="p74">74/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+For every subtype S of a tagged type <I>T</I> (specific or class-wide):</div>
+<div class="paranum"><a name="p75">75/3</a></div>
+<div class="WideHanging-Term">S'External_Tag</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5520"></A><A NAME="I5521"></A>{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
+<A NAME="I5522"></A><A NAME="I5523"></A>S'External_Tag denotes an external 
+string representation for S'Tag; it is of the predefined type String. 
+External_Tag may be specified for a specific tagged type via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static.<A NAME="I5524"></A><A NAME="I5525"></A> 
+The default external tag representation is implementation defined. See 
+<A HREF="AA-13-13-2.html">13.13.2</A>. The value of External_Tag is never 
+inherited[; the default value is always used unless a new value is directly 
+specified for a type].&nbsp;</div>
+<div class="paranum"><a name="p75.a">75.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The default external 
+representation for a type tag.</div>
+<div class="paranum"><a name="p75.b">75.b/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>External_Tag: 
+</B>Unique identifier for a tagged type in streams.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p75.1">75.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0113-1.TXT">AI05-0113-1</A></I>} 
+If a user-specified external tag S'External_Tag is the same as T'External_Tag 
+for some other tagged type declared by a different declaration in the 
+partition, Program_Error is raised by the elaboration of the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>.</div>
+<div class="paranum"><a name="p75.c">75.c/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This rule does not depend 
+on the visibility of the other tagged type, but it does depend on the 
+existence of the other tagged type. The other tagged type could have 
+the default external tag or a user-specified external tag.</div>
+<div class="paranum"><a name="p75.d">75.d/3</a></div>
+<div class="Annotations">This rule allows the same declaration to be 
+elaborated multiple times. In that case, different types could have the 
+same external tag. If that happens, Internal_Tag would return some unspecified 
+tag, and Descendant_Tag probably would return the intended tag (using 
+the given ancestor to determine which type is intended). However, in 
+some cases (such as multiple instantiations of a derived tagged type 
+declared in a generic body), Tag_Error might be raised by Descendant_Tag 
+if multiple types are identified.</div>
+<div class="paranum"><a name="p75.e">75.e/3</a></div>
+<div class="Annotations">Note that while there is a race condition inherent 
+in this definition (which attribute_definition_clause raises Program_Error 
+depends on the order of elaboration), it doesn't matter as a program 
+with two such clauses is simply wrong. Two types that both come from 
+the same declaration are allowed, as noted previously.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p76">76</a></div>
+<div class="Normal">In an implementation, the default external tag for 
+each specific tagged type declared in a partition shall be distinct, 
+so long as the type is declared outside an instance of a generic body. 
+If the compilation unit in which a given tagged type is declared, and 
+all compilation units on which it semantically depends, are the same 
+in two different partitions, then the external tag for the type shall 
+be the same in the two partitions. What it means for a compilation unit 
+to be the same in two different partitions is implementation defined. 
+At a minimum, if the compilation unit is not recompiled between building 
+the two different partitions that include it, the compilation unit is 
+considered the same in the two partitions.&nbsp;</div>
+<div class="paranum"><a name="p76.a">76.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>What determines 
+whether a compilation unit is the same in two different partitions.</div>
+<div class="paranum"><a name="p76.b">76.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>These requirements are important 
+because external tags are used for input/output of class-wide types. 
+These requirements ensure that what is written by one program can be 
+read back by some other program so long as they share the same declaration 
+for the type (and everything it depends on).</div>
+<div class="paranum"><a name="p76.c">76.c</a></div>
+<div class="Annotations">The user may specify the external tag if (s)he 
+wishes its value to be stable even across changes to the compilation 
+unit in which the type is declared (or changes in some unit on which 
+it depends).</div>
+<div class="paranum"><a name="p76.d">76.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+We use a String rather than a Stream_Element_Array to represent an external 
+tag for portability.&nbsp;</div>
+<div class="paranum"><a name="p76.e">76.e</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that the characters 
+of an external tag need not all be graphic characters. In other words, 
+the external tag can be a sequence of arbitrary 8-bit bytes.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p76.1">76.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0113-1.TXT">AI05-0113-1</A></I>} 
+If a user-specified external tag S'External_Tag is the same as T'External_Tag 
+for some other tagged type declared by a different declaration in the 
+partition, the partition may be rejected.</div>
+<div class="paranum"><a name="p76.f">76.f/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This is, in general, a 
+post-compilation check. This permission is intended for implementations 
+that do link-time construction of the external tag lookup table; implementations 
+that dynamically construct the table will likely prefer to raise Program_Error 
+upon elaboration of the problem construct. We don't want this check to 
+require any implementation complexity, as it will be very rare that there 
+would be a problem.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p77">77/2</a></div>
+<div class="Notes">10&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+The following language-defined attributes are specifiable, at least for 
+some of the kinds of entities to which they apply: Address, Alignment, 
+Bit_Order, Component_Size, External_Tag, Input, Machine_Radix, Output, 
+Read, Size, Small, Storage_Pool, Storage_Size, Stream_Size, and Write.</div>
+<div class="paranum"><a name="p78">78</a></div>
+<div class="Notes">11&nbsp;&nbsp;It follows from the general rules in 
+<A HREF="AA-13-1.html">13.1</A> that if one writes &ldquo;<B>for</B> 
+X'Size <B>use</B> Y;&rdquo; then the X'Size <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+will return Y (assuming the implementation allows the Size clause). The 
+same is true for all of the specifiable attributes except Storage_Size. 
+</div>
+<div class="paranum"><a name="p78.a">78.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>An implementation may specify 
+that an implementation-defined attribute is specifiable for certain entities. 
+This follows from the fact that the semantics of implementation-defined 
+attributes is implementation defined. An implementation is not allowed 
+to make a language-defined attribute specifiable if it isn't.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p79">79</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of attribute 
+definition clauses:</I>&nbsp;</div>
+<div class="paranum"><a name="p80">80</a></div>
+<div class="Examples">Byte&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;8;<BR>
+Page&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;2**12;</div>
+<div class="paranum"><a name="p81">81</a></div>
+<div class="Examples"><B>type</B>&nbsp;Medium&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;65_000;<BR>
+<B>for</B>&nbsp;Medium'Size&nbsp;<B>use</B>&nbsp;2*Byte;<BR>
+<B>for</B>&nbsp;Medium'Alignment&nbsp;<B>use</B>&nbsp;2;<BR>
+Device_Register&nbsp;:&nbsp;Medium;<BR>
+<B>for</B>&nbsp;Device_Register'Size&nbsp;<B>use</B>&nbsp;Medium'Size;<BR>
+<B>for</B>&nbsp;Device_Register'Address&nbsp;<B>use</B>&nbsp;System.Storage_Elements.To_Address(16#FFFF_0020#);</div>
+<div class="paranum"><a name="p82">82</a></div>
+<div class="Examples"><B>type</B>&nbsp;Short&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;0.01&nbsp;<B>range</B>&nbsp;-100.0&nbsp;..&nbsp;100.0;<BR>
+<B>for</B>&nbsp;Short'Size&nbsp;<B>use</B>&nbsp;15;</div>
+<div class="paranum"><a name="p83">83</a></div>
+<div class="Examples"><B>for</B>&nbsp;Car_Name'Storage_Size&nbsp;<B>use</B>&nbsp;--<SPAN Class="roman"><I>&nbsp;specify&nbsp;access&nbsp;type's&nbsp;storage&nbsp;pool&nbsp;size</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2000*((Car'Size/System.Storage_Unit)&nbsp;+1);&nbsp;--<SPAN Class="roman"><I>&nbsp;approximately&nbsp;2000&nbsp;cars</I></SPAN></div>
+<div class="paranum"><a name="p84">84/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>function</B>&nbsp;My_Input(Stream&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;T;<BR>
+<B>for</B>&nbsp;T'Input&nbsp;<B>use</B>&nbsp;My_Input;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-13-13-2.html">13.13.2</A></I></SPAN></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p85">85</a></div>
+<div class="Notes">12&nbsp;&nbsp;<I>Notes on the examples:</I> In the 
+Size clause for Short, fifteen bits is the minimum necessary, since the 
+type definition requires Short'Small &lt;= 2**(&ndash;7).&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p85.a">85.a</a></div>
+<div class="Annotations"><A NAME="I5526"></A>The syntax rule for <SPAN Class="swiss">length_clause</SPAN> 
+is replaced with the new syntax rule for <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>, 
+and it is modified to allow a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+(as well as an expression).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p85.b">85.b</a></div>
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+now requires that the prefix of the attribute be a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>; 
+in Ada 83 this rule was stated in the text.</div>
+<div class="paranum"><a name="p85.c">85.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+In Ada 83, the relationship between a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0304">aspect_clause</A></SPAN> 
+specifying a certain aspect and an attribute that queried that aspect 
+was unclear. In Ada 95, they are the same, except for certain explicit 
+exceptions.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p85.d">85.d/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+<B>Corrigendum:</B> Added wording to specify for each attribute whether 
+it is an operational or representation attribute.</div>
+<div class="paranum"><a name="p85.e">85.e/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+<B>Corrigendum:</B> Added wording to specify that External_Tag is never 
+inherited.</div>
+<div class="paranum"><a name="p85.f">85.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00051.TXT">AI95-00051-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00291.TXT">AI95-00291-01</A></I>} 
+Adjusted the Recommended Level of Support for Alignment to eliminate 
+nonsense requirements and to ensure that useful capabilities are required.</div>
+<div class="paranum"><a name="p85.g">85.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00051.TXT">AI95-00051-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00291.TXT">AI95-00291-01</A></I>} 
+Adjusted the Recommended Level of Support for Size to eliminate nonsense 
+requirements and to ensure that useful capabilities are required. Also 
+eliminated any dependence on whether an aspect was specified (a confirming 
+representation item should not affect the semantics).</div>
+<div class="paranum"><a name="p85.h">85.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+Added the definition of machine scalar.</div>
+<div class="paranum"><a name="p85.i">85.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00247.TXT">AI95-00247-01</A></I>} 
+Removed the requirement that specified alignments for a composite type 
+cannot override those for their components, because it was never intended 
+to apply to components whose location was specified with a representation 
+item. Moreover, it causes a difference in legality when a confirming 
+alignment is specified for one of the composite types.</div>
+<div class="paranum"><a name="p85.j">85.j/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+Removed recommended level of support rules about types with by-reference 
+and aliased parts, because there are now blanket rules covering all recommended 
+level of support rules.</div>
+<div class="paranum"><a name="p85.k">85.k/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+Split the definition of Alignment for subtypes and for objects. This 
+simplified the wording and eliminated confusion about which rules applied 
+to objects, which applied to subtypes, and which applied to both.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2005</H4>
+<div class="paranum"><a name="p85.l">85.l/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00095.TXT">AI95-0095-1</A></I>} 
+<A NAME="I5527"></A><B>Correction:</B> An address attribute with a prefix 
+of a generic formal subprogram whose actual parameter has convention 
+Intrinsic now raises Program_Error. Since it is unlikely that such an 
+attribute would have done anything useful (a subprogram with convention 
+Intrinsic is not expected to have a normal subprogram body), it is highly 
+unlikely that any existing programs would notice the difference, and 
+any that do probably are buggy.</div>
+<div class="paranum"><a name="p85.m">85.m/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00113.TXT">AI95-0113-1</A></I>} 
+<B>Correction:</B> User-specified external tags that conflict with other 
+external tags raise Program_Error (or are optionally illegal). This was 
+legal and did not raise an exception in the past, although the effects 
+were not defined. So while a program might depend on such behavior, the 
+results were not portable (even to different versions of the same implementation). 
+Such programs should be rare.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p85.n">85.n/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0095-1.TXT">AI05-0095-1</A></I>} 
+<A NAME="I5528"></A><B>Correction:</B> An address attribute with a prefix 
+of a subprogram with convention Intrinsic is now illegal. Such attributes 
+are very unlikely to have provided a useful answer (the intended meaning 
+of convention Intrinsic is that there is no actual subprogram body for 
+the operation), so this is highly unlikely to affect any existing programs 
+unless they have a hidden bug.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p85.o">85.o/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0191-1.TXT">AI05-0191-1</A></I>} 
+<A NAME="I5529"></A>Attributes Has_Same_Storage and Overlaps_Storage 
+are new.</div>
+<div class="paranum"><a name="p85.p">85.p/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+Aspect Storage_Size is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Storage_Size is now obsolescent, joining attribute Storage_Size for task 
+types.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p85.q">85.q/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0009-1.TXT">AI05-0009-1</A></I>} 
+<B>Correction:</B> Improved the description of erroneous execution for 
+address clauses to make it clear that specifying an address inappropriate 
+for the entity will lead to erroneous execution.</div>
+<div class="paranum"><a name="p85.r">85.r/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0116-1.TXT">AI05-0116-1</A></I>} 
+<B>Correction:</B> Added Implementation Advice for the alignment of class-wide 
+types.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p85.s">85.s/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0070-1.TXT">AI12-0070-1</A></I>} 
+<B>Corrigendum:</B> Clarified the behavior of Has_Same_Storage when 'Size 
+= 0.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

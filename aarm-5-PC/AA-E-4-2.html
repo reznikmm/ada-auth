@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Example of Use of a Remote Access-to-Class-Wide Type</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.4.2 Example of Use of a Remote Access-to-Class-Wide Type</H1>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of using 
+a remote access-to-class-wide type to achieve dynamic binding across 
+active partitions:</I>&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>package</B>&nbsp;Tapes&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Tapes);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Tape&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Primitive&nbsp;dispatching&nbsp;operations&nbsp;where</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Tape&nbsp;is&nbsp;controlling&nbsp;operand</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Copy&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>access</B>&nbsp;Tape;&nbsp;Num_Recs&nbsp;:&nbsp;<B>in</B>&nbsp;Natural)&nbsp;<B>is</B>&nbsp;<B>abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Rewind&nbsp;(T&nbsp;:&nbsp;<B>access</B>&nbsp;Tape)&nbsp;<B>is</B>&nbsp;<B>abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;More&nbsp;operations</I></SPAN><BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Tape&nbsp;<B>is</B>&nbsp;...<BR>
+<B>end</B>&nbsp;Tapes;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples"><B>with</B>&nbsp;Tapes;<BR>
+<B>package</B>&nbsp;Name_Server&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Call_Interface;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Dynamic&nbsp;binding&nbsp;to&nbsp;remote&nbsp;operations&nbsp;is&nbsp;achieved</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;using&nbsp;the&nbsp;access-to-limited-class-wide&nbsp;type&nbsp;Tape_Ptr</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Tape_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Tapes.Tape'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;The&nbsp;following&nbsp;statically&nbsp;bound&nbsp;remote&nbsp;operations</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;allow&nbsp;for&nbsp;a&nbsp;name-server&nbsp;capability&nbsp;in&nbsp;this&nbsp;example</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;Find&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Name&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Tape_Ptr;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Register&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Tape_Ptr);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Remove&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Tape_Ptr);<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;More&nbsp;operations</I></SPAN><BR>
+<B>end</B>&nbsp;Name_Server;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples"><B>package</B>&nbsp;Tape_Driver&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Declarations&nbsp;are&nbsp;not&nbsp;shown,&nbsp;they&nbsp;are&nbsp;irrelevant&nbsp;here</I></SPAN><BR>
+<B>end</B>&nbsp;Tape_Driver;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples"><B>with</B>&nbsp;Tapes,&nbsp;Name_Server;<BR>
+<B>package&nbsp;body</B>&nbsp;Tape_Driver&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;New_Tape&nbsp;<B>is&nbsp;new</B>&nbsp;Tapes.Tape&nbsp;<B>with</B>&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Copy<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>access</B>&nbsp;New_Tape;&nbsp;Num_Recs:&nbsp;<B>in</B>&nbsp;Natural)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Copy;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Rewind&nbsp;(T&nbsp;:&nbsp;<B>access</B>&nbsp;New_Tape)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Rewind;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Objects&nbsp;remotely&nbsp;accessible&nbsp;through&nbsp;use</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;of&nbsp;Name_Server&nbsp;operations</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;Tape1,&nbsp;Tape2&nbsp;:&nbsp;<B>aliased</B>&nbsp;New_Tape;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Name_Server.Register&nbsp;(&quot;NINE-TRACK&quot;,&nbsp;&nbsp;Tape1'Access);<BR>
+&nbsp;&nbsp;&nbsp;Name_Server.Register&nbsp;(&quot;SEVEN-TRACK&quot;,&nbsp;Tape2'Access);<BR>
+<B>end</B>&nbsp;Tape_Driver;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples"><B>with</B>&nbsp;Tapes,&nbsp;Name_Server;<BR>
+<SPAN Class="roman"><I>--&nbsp;Tape_Driver&nbsp;is&nbsp;not&nbsp;needed&nbsp;and&nbsp;thus&nbsp;not&nbsp;mentioned&nbsp;in&nbsp;the&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="AA-10-1-2.html#S0258">with_clause</A></I></SPAN><SPAN Class="roman"><I></I></SPAN><BR>
+<B>procedure</B>&nbsp;Tape_Client&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;T1,&nbsp;T2&nbsp;:&nbsp;Name_Server.Tape_Ptr;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;T1&nbsp;:=&nbsp;Name_Server.Find&nbsp;(&quot;NINE-TRACK&quot;);<BR>
+&nbsp;&nbsp;&nbsp;T2&nbsp;:=&nbsp;Name_Server.Find&nbsp;(&quot;SEVEN-TRACK&quot;);<BR>
+&nbsp;&nbsp;&nbsp;Tapes.Rewind&nbsp;(T1);<BR>
+&nbsp;&nbsp;&nbsp;Tapes.Rewind&nbsp;(T2);<BR>
+&nbsp;&nbsp;&nbsp;Tapes.Copy&nbsp;(T1,&nbsp;T2,&nbsp;3);<BR>
+<B>end</B>&nbsp;Tape_Client;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Notes on the example</I>: 
+</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The example does not show 
+the case where tapes are removed from or added to the system. In the 
+former case, an appropriate exception needs to be defined to instruct 
+the client to use another tape. In the latter, the Name_Server should 
+have a query function visible to the clients to inform them about the 
+availability of the tapes in the system.&nbsp;</div>
+<div class="paranum"><a name="p8">8/1</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">The package Tapes provides the necessary declarations 
+of the type and its primitive operations.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">Name_Server is a remote call interface package 
+and is elaborated in a separate active partition to provide the necessary 
+naming services (such as Register and Find) to the entire distributed 
+program through remote subprogram calls.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">Tape_Driver is a normal package that is elaborated 
+in a partition configured on the processing node that is connected to 
+the tape device(s). The abstract operations are overridden to support 
+the locally declared tape devices (Tape1, Tape2). The package is not 
+visible to its clients, but it exports the tape devices (as remote objects) 
+through the services of the Name_Server. This allows for tape devices 
+to be dynamically added, removed or replaced without requiring the modification 
+of the clients' code.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The Tape_Client procedure references only declarations 
+in the Tapes and Name_Server packages. Before using a tape for the first 
+time, it needs to query the Name_Server for a system-wide identity for 
+that tape. From then on, it can use that identity to access the tape 
+device.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">Values of remote access type Tape_Ptr include the 
+necessary information to complete the remote dispatching operations that 
+result from dereferencing the controlling operands T1 and T2.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

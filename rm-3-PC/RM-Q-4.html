@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Language-Defined Exceptions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Index {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Q.4 <span class="insert2">Language-Defined Exceptions</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><span class="insert2">This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;lists all language-defined exceptions.<A NAME="I10262"></A></span>&nbsp;</div>
+<div class="Normal">&nbsp;</div>
+<div class="Index">Argument_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-A-5.html#I6299">A.5(3/2)</A></div>
+<div class="Index">Assertion_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Assertions&nbsp;&nbsp; <A HREF="RM-11-4-2.html#I4756">11.4.2(13/2)</A></div>
+<div class="Index">Capacity_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-1.html#I6909">A.18.1(5.1/3)</A></div>
+<div class="Index">Communication_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.RPC&nbsp;&nbsp; <A HREF="RM-E-5.html#I8504">E.5(5)</A></div>
+<div class="Index">Constraint_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="RM-A-1.html#I5636">A.1(46)</A></div>
+<div class="Index">Conversion_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="RM-B-4.html#I7820">B.4(30)</A></div>
+<div class="Index">Data_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6543">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6812">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6512">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Storage_IO&nbsp;&nbsp; <A HREF="RM-A-9.html#I6550">A.9(9)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6793">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6716">A.10.1(85)</A></div>
+<div class="Index">Device_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6541">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="RM-A-16.html#I6866">A.16(43/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6810">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6510">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6791">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6714">A.10.1(85)</A></div>
+<div class="Index">Dispatching_Domain_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> System.Multiprocessors.Dispatching_Domains&nbsp;&nbsp; 
+<A HREF="RM-D-16-1.html#I8375">D.16.1(4/3)</A></div>
+<div class="Index">Dispatching_Policy_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Dispatching&nbsp;&nbsp; <A HREF="RM-D-2-1.html#I8045">D.2.1(1.2/3)</A>, 
+<A HREF="RM-D-2-1.html#I8047">D.2.1(1.4/3)</A></div>
+<div class="Index">Encoding_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; <A HREF="RM-A-4-11.html#I6261">A.4.11(8/3)</A></div>
+<div class="Index">End_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6542">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6811">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6511">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6792">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6715">A.10.1(85)</A></div>
+<div class="Index">Group_Budget_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Group_Budgets&nbsp;&nbsp; 
+<A HREF="RM-D-14-2.html#I8344">D.14.2(11/2)</A></div>
+<div class="Index">Index_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-1.html#I5967">A.4.1(5)</A></div>
+<div class="Index">Layout_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6813">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6717">A.10.1(85)</A></div>
+<div class="Index">Length_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-1.html#I5965">A.4.1(5)</A></div>
+<div class="Index">Mode_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6538">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6807">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6507">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6788">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6711">A.10.1(85)</A></div>
+<div class="Index">Name_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6539">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="RM-A-16.html#I6864">A.16(43/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6808">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6508">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6789">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6712">A.10.1(85)</A></div>
+<div class="Index">Pattern_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-1.html#I5966">A.4.1(5)</A></div>
+<div class="Index">Picture_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="RM-F-3-3.html#I8539">F.3.3(9)</A></div>
+<div class="Index">Pointer_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C.Pointers&nbsp;&nbsp; <A HREF="RM-B-3-2.html#I7761">B.3.2(8)</A></div>
+<div class="Index">Program_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="RM-A-1.html#I5637">A.1(46)</A></div>
+<div class="Index">Status_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6537">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="RM-A-16.html#I6863">A.16(43/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6806">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6506">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6787">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6710">A.10.1(85)</A></div>
+<div class="Index">Storage_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="RM-A-1.html#I5638">A.1(46)</A></div>
+<div class="Index">Tag_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Tags&nbsp;&nbsp; <A HREF="RM-3-9.html#I2184">3.9(8)</A></div>
+<div class="Index">Tasking_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="RM-A-1.html#I5639">A.1(46)</A></div>
+<div class="Index">Terminator_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="RM-B-3.html#I7732">B.3(40)</A></div>
+<div class="Index">Time_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar&nbsp;&nbsp; <A HREF="RM-9-6.html#I4303">9.6(18)</A></div>
+<div class="Index">Timer_Resource_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Timers&nbsp;&nbsp; <A HREF="RM-D-14-1.html#I8321">D.14.1(9/2)</A></div>
+<div class="Index">Translation_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-1.html#I5968">A.4.1(5)</A></div>
+<div class="Index">Unknown_Zone_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Calendar.Time_Zones&nbsp;&nbsp; <A HREF="RM-9-6-1.html#I4316">9.6.1(5/2)</A></div>
+<div class="Index">Use_Error<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Direct_IO&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6540">A.8.4(18)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Directories&nbsp;&nbsp; <A HREF="RM-A-16.html#I6865">A.16(43/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.IO_Exceptions&nbsp;&nbsp; <A HREF="RM-A-13.html#I6809">A.13(4)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Sequential_IO&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6509">A.8.1(15)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Streams.Stream_IO&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6790">A.12.1(26)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6713">A.10.1(85)</A></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,775 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Compilation Units - Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.AnnotationsWideAbove {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallEnumerated-Body {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallEnumerated-Term {float: left; font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 7.4em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>10.1.1 Compilation Units - Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+is a compilation unit that is the declaration, body, or renaming of a 
+library unit. Each library unit (except Standard) has a <I>parent unit</I>, 
+which is a library package or generic library package.] <A NAME="I4948"></A>A 
+library unit is a <I>child</I> of its parent unit. The <I>root</I> library 
+units are the children of the predefined library package Standard.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Standard is a library unit. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">compilation</SPAN><A NAME="I4949"></A><A NAME="S0249"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4950"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>}</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">compilation_unit</SPAN><A NAME="I4951"></A><A NAME="S0250"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4952"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN>&nbsp;<A NAME="I4953"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4954"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN>&nbsp;<A NAME="I4955"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_item</SPAN><A NAME="I4956"></A><A NAME="S0251"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<A NAME="I4957"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">library_unit_declaration</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4958"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0254">library_unit_body</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<B>private</B>]&nbsp;<A NAME="I4959"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_declaration</SPAN><A NAME="I4960"></A><A NAME="S0252"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4961"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4962"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4963"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4964"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_renaming_declaration</SPAN><A NAME="I4965"></A><A NAME="S0253"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4966"></A><SPAN Class="swiss"><A HREF="AA-8-5-3.html#S0205">package_renaming_declaration</A></SPAN><BR>
+&nbsp;|&nbsp;<A NAME="I4967"></A><SPAN Class="swiss"><A HREF="AA-8-5-5.html#S0207">generic_renaming_declaration</A></SPAN><BR>
+&nbsp;|&nbsp;<A NAME="I4968"></A><SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_body</SPAN><A NAME="I4969"></A><A NAME="S0254"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4970"></A><SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>&nbsp;|&nbsp;<A NAME="I4971"></A><SPAN Class="swiss"><A HREF="AA-7-2.html#S0195">package_body</A></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1"><SPAN Class="swiss">parent_unit_name</SPAN><A NAME="I4972"></A><A NAME="S0255"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4973"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="paranum"><a name="p8.1">8.1/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00397.TXT">AI95-00397-01</A></I>} 
+<span class="insert2">An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+is not allowed in a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN> 
+that declares a library unit.</span></div>
+<div class="paranum"><a name="p8.a.1">8.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>All of 
+the listed items syntactically include <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>, 
+but a library unit can never override anything. A majority of the ARG 
+thought that allowing <B>not overriding</B> in that case would be confusing 
+instead of helpful.</span>&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I4974"></A><A NAME="I4975"></A><A NAME="I4976"></A><A NAME="I4977"></A><A NAME="I4978"></A>A 
+<I>library unit</I> is a program unit that is declared by a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>. 
+When a program unit is a library unit, the prefix &ldquo;library&rdquo; 
+is used to refer to it (or &ldquo;generic library&rdquo; if generic), 
+as well as to its declaration and body, as in &ldquo;library procedure&rdquo;, 
+&ldquo;library <SPAN Class="swiss"><A HREF="AA-7-2.html#S0195">package_body</A></SPAN>&rdquo;, 
+or &ldquo;generic library package&rdquo;. <A NAME="I4979"></A>The term 
+<I>compilation unit</I> is used to refer to a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>. 
+When the meaning is clear from context, the term is also used to refer 
+to the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
+or to the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN> 
+[(that is, the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
+without the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN> 
+and the <B>separate</B> (<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>))]. 
+</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>In this example:&nbsp;</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Ada.Text_IO;<BR>
+<B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p9.c">9.c</a></div>
+<div class="Annotations">the term &ldquo;compilation unit&rdquo; can 
+refer to this text: &ldquo;<B>with</B> Ada.Text_IO; <B>package</B> P 
+<B>is</B> ... <B>end</B> P;&rdquo; or to this text: &ldquo;<B>package</B> 
+P <B>is</B> ... <B>end</B> P;&rdquo;. We use this shorthand because it 
+corresponds to common usage.</div>
+<div class="paranum"><a name="p9.d">9.d</a></div>
+<div class="Annotations">We like to use the word &ldquo;unit&rdquo; for 
+declaration-plus-body things, and &ldquo;item&rdquo; for declaration 
+or body separately (as in <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>). 
+The terms &ldquo;<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>,&rdquo; 
+&ldquo;compilation unit,&rdquo; and &ldquo;<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN>&rdquo; 
+are exceptions to this rule. We considered changing &ldquo;<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>,&rdquo; 
+&ldquo;compilation unit&rdquo; to &ldquo;<SPAN Class="swiss">compilation_item</SPAN>,&rdquo; 
+&ldquo;compilation item,&rdquo; respectively, but we decided not to. 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I4980"></A><A NAME="I4981"></A>The <I>parent 
+declaration</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+(and of the library unit) is the declaration denoted by the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>, 
+if any, of the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>. 
+<A NAME="I4982"></A>If there is no <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>, 
+the parent declaration is the declaration of Standard, the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+is a <I>root</I> <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>, 
+and the library unit (renaming) is a <I>root</I> library unit (renaming). 
+The declaration and body of Standard itself have no parent declaration. 
+<A NAME="I4983"></A>The <I>parent unit</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+or library unit is the library unit declared by its parent declaration. 
+</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The declaration and body 
+of Standard are presumed to exist from the beginning of time, as it were. 
+There is no way to actually write them, since there is no syntactic way 
+to indicate lack of a parent. An attempt to compile a package Standard 
+would result in Standard.Standard.&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Library units (other than Standard) 
+have &ldquo;parent declarations&rdquo; and &ldquo;parent units&rdquo;. 
+Subunits have &ldquo;parent bodies&rdquo;. We didn't bother to define 
+the other possibilities: parent body of a library unit, parent declaration 
+of a subunit, parent unit of a subunit. These are not needed, and might 
+get in the way of a correct definition of &ldquo;child.&rdquo;&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">[The children of a library unit occur immediately 
+within the declarative region of the declaration of the library unit.] 
+<A NAME="I4984"></A>The <I>ancestors</I> of a library unit are itself, 
+its parent, its parent's parent, and so on. [(Standard is an ancestor 
+of every library unit.)] <A NAME="I4985"></A>The <I>descendant</I> relation 
+is the inverse of the ancestor relation.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>These definitions are worded 
+carefully to avoid defining subunits as children. Only library units 
+can be children.</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations">We use the unadorned term &ldquo;ancestors&rdquo; 
+here to concisely define both &ldquo;ancestor unit&rdquo; and &ldquo;ancestor 
+declaration.&rdquo;&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I4986"></A><A NAME="I4987"></A><A NAME="I4988"></A><A NAME="I4989"></A>A 
+<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">library_unit_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN> 
+is <I>private</I> if the declaration is immediately preceded by the reserved 
+word <B>private</B>; it is otherwise <I>public</I>. A library unit is 
+private or public according to its declaration. <A NAME="I4990"></A>The 
+<I>public descendants</I> of a library unit are the library unit itself, 
+and the public descendants of its public children. <A NAME="I4991"></A>Its 
+other descendants are <I>private descendants</I>.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The first concept defined 
+here is that a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+is either public or private (not in relation to anything else &mdash; 
+it's just a property of the library unit). The second concept is that 
+a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+is a public descendant or private descendant <I>of a given ancestor</I>. 
+A given <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+can be a public descendant of one of its ancestors, but a private descendant 
+of some other ancestor.</div>
+<div class="paranum"><a name="p12.b">12.b</a></div>
+<div class="Annotations">A subprogram declared by a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+(as opposed to a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>) 
+is always public, since the syntax rules disallow the reserved word <B>private</B> 
+on a body.</div>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations">Note that a private library unit is a <I>public</I> 
+descendant of itself, but a <I>private</I> descendant of its parent. 
+This is because it is visible outside itself &mdash; its privateness 
+means that it is not visible outside its parent.</div>
+<div class="paranum"><a name="p12.d">12.d</a></div>
+<div class="Annotations">Private children of Standard are legal, and 
+follow the normal rules. It is intended that implementations might have 
+some method for taking an existing environment, and treating it as a 
+package to be &ldquo;imported&rdquo; into another environment, treating 
+children of Standard in the imported environment as children of the imported 
+package.&nbsp;</div>
+<div class="paranum"><a name="p12.e">12.e</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>Suppose we have a public library unit A, a private library unit A.B, 
+and a public library unit A.B.C. A.B.C is a public descendant of itself 
+and of A.B, but a private descendant of A; since A.B is private to A, 
+we don't allow A.B.C to escape outside A either. This is similar to the 
+situation that would occur with physical nesting, like this:&nbsp;</div>
+<div class="paranum"><a name="p12.f">12.f</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;A&nbsp;<B>is</B><BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;B&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;C&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;C;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;B;<BR>
+<B>end</B>&nbsp;A;</div>
+<div class="paranum"><a name="p12.g">12.g</a></div>
+<div class="Annotations">Here, A.B.C is visible outside itself and outside 
+A.B, but not outside A. (Note that this example is intended to illustrate 
+the visibility of program units from the outside; the visibility within 
+child units is not quite identical to that of physically nested units, 
+since child units are nested after their parent's declaration.)&nbsp;</div>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2">For each library <SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
+in the environment, there is an implicit declaration of a <I>limited 
+view</I> of that library package.<A NAME="I4992"></A> The limited view 
+of a package contains:</span></div>
+<div class="paranum"><a name="p12.2">12.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0129-1.TXT">AI05-0129-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert2">For each</span><span class="insert2"><span class="delete3">&nbsp;nested</span></span><span class="insert2">&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN></span><span class="insert3">&nbsp;occurring immediately within the visible part</span><span class="insert2">, 
+a declaration of the limited view of that package, with the same <SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN>.</span></div>
+<div class="paranum"><a name="p12.3">12.3/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0108-1.TXT">AI05-0108-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0129-1.TXT">AI05-0129-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert2">For each <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+</span><span class="insert3">occurring immediately within</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;in</span></span><span class="insert2">&nbsp;the visible part</span><span class="insert3">&nbsp;that is not an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN></span><span class="insert2">, 
+an incomplete view of the type</span><span class="insert3">&nbsp;with no <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN></span><span class="insert2">; 
+if the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+is tagged, then the view is a tagged incomplete view.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.g.1">12.g.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0108-1.TXT">AI05-0108-1</A></I>} 
+<span class="insert3">The incomplete view of a type does not have a discriminant_part 
+even if the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+does have one. This is necessary because semantic analysis (and the associated 
+dependence on <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s) 
+would be necessary to determine the types of the discriminants.</span></div>
+<div class="paranum"><a name="p12.g.2">12.g.2/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0129-1.TXT">AI05-0129-1</A></I>} 
+<span class="insert3">No incomplete views of incomplete types are included 
+in the limited view. The rules of <A HREF="AA-3-10-1.html">3.10.1</A> 
+ensure that the completion of any visible incomplete type is declared 
+in the same visible part, so such an incomplete view would simply be 
+redundant.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.g.3">12.g.3/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2">The implementation model of a limited view is that 
+it can be determined solely from the syntax of the source of the unit, 
+without any semantic analysis. That allows it to be created without the 
+semantic dependences of a full unit, which is necessary for it to break 
+mutual dependences of units.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.g.4">12.g.4/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>The 
+limited view does not include package instances and their contents. Semantic 
+analysis of a unit (and dependence on its <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s) 
+would be needed to determine the contents of an instance.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.4">12.4/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">The limited view of a library 
+<SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
+is private if that library <SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
+is immediately preceded by the reserved word <B>private</B>.</span></div>
+<div class="paranum"><a name="p12.5">12.5/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">[There is no syntax for declaring 
+limited views of packages, because they are always implicit.] The implicit 
+declaration of a limited view of a library package [is not the declaration 
+of a library unit (the library <SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
+is); nonetheless, it] is a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>. 
+The implicit declaration of the limited view of a library package forms 
+an (implicit) compilation unit whose <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN> 
+is empty.</span></div>
+<div class="paranum"><a name="p12.6">12.6/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">A library <SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
+is the completion of the declaration of its limited view.</span></div>
+<div class="paranum"><a name="p12.h">12.h/2</a></div>
+<div class="Annotations"><span class="insert2"><B>To be honest:&nbsp;</B>This 
+is notwithstanding the rule in <A HREF="AA-3-11-1.html">3.11.1</A> that 
+says that implicit declarations don't have completions.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.i">12.i/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This rule 
+explains where to find the completions of the incomplete views defined 
+by the limited view.</span>&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The parent unit of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+shall be a [library] package or generic [library] package.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN> 
+of a given declaration or body has a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>, 
+then the given declaration or body shall be a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>. 
+The body of a program unit shall be a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+if and only if the declaration of the program unit is a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>. 
+In a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN>, 
+the [(old)] <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall denote a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We could have allowed nested 
+program units to be children of other program units; their semantics 
+would make sense. We disallow them to keep things simpler and because 
+they wouldn't be particularly useful.&nbsp;</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN> 
+[(which can be used within a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+and in the <B>separate</B> clause of a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN>)], 
+and each of its <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es, 
+shall not denote a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>. 
+[On the other hand, a name that denotes a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN> 
+is allowed in a <span class="insert2"><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0260">nonlimited_with_clause</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">&nbsp;with_clause</A></SPAN></span> 
+and other places where the name of a library unit is allowed.]</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">If a library package is an instance of a generic 
+package, then every child of the library package shall either be itself 
+an instance or be a renaming of a library unit.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>A child of an instance of 
+a given generic unit will often be an instance of a (generic) child of 
+the given generic unit. This is not required, however.&nbsp;</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>Instances 
+are forbidden from having noninstance children for two reasons:&nbsp;</div>
+<div class="paranum"><a name="p16.c">16.c</a></div>
+<div class="SmallEnumerated-Term">1.</div><div class="SmallEnumerated-Body">
+We want all source code that can depend on information from the private 
+part of a library unit to be inside the &quot;subsystem&quot; rooted 
+at the library unit. If an instance of a generic unit were allowed to 
+have a noninstance as a child, the source code of that child might depend 
+on information from the private part of the generic unit, even though 
+it is outside the subsystem rooted at the generic unit.</div>
+<div class="paranum"><a name="p16.d">16.d</a></div>
+<div class="SmallEnumerated-Term">2.</div><div class="SmallEnumerated-Body">
+Disallowing noninstance children simplifies the description of the semantics 
+of children of generic packages.&nbsp;</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
+A child of a generic library package shall either be itself a generic 
+unit or be a renaming of some other child of the same generic unit.<span class="delete3">&nbsp;The renaming of a child of a generic package shall occur only within 
+the declarative region of the generic package.</span></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">A child of a parent generic package shall be instantiated 
+or renamed only within the declarative region of the parent generic.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00331.TXT">AI95-00331-01</A></I>} 
+For each <span class="insert2">child <I>C</I></span><span class="delete2">&nbsp;declaration 
+or renaming of a generic unit as a child</span> of some parent generic 
+package<span class="insert2">&nbsp;<I>P</I></span>, there is a corresponding 
+declaration <span class="insert2"><I>C</I></span> nested immediately 
+within each instance <span class="insert2">of <I>P</I>. For the purposes 
+of this rule, if a child <I>C</I> itself has a child <I>D</I>, each corresponding 
+declaration for <I>C</I> has a corresponding child <I>D</I></span><span class="delete2">&nbsp;of 
+the parent</span>. [<span class="insert2">The corresponding</span><span class="delete2">&nbsp;This</span> 
+declaration <span class="insert2">for a child within an instance&nbsp;</span>is 
+visible only within the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+that mentions the <span class="insert2">(original)&nbsp;</span>child generic 
+unit.]</div>
+<div class="paranum"><a name="p19.a">19.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Within the child, 
+like anything nested in a generic unit, one can make up-level references 
+to the current instance of its parent, and thereby gain access to the 
+formal parameters of the parent, to the types declared in the parent, 
+etc. This &ldquo;nesting&rdquo; model applies even within the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+of the child, as it does for a generic child of a nongeneric unit.&nbsp;</div>
+<div class="paranum"><a name="p19.b">19.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Suppose P is a generic 
+library package, and P.C is a generic child of P. P.C can be instantiated 
+inside the declarative region of P. Outside P, P.C can be mentioned only 
+in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>. 
+Conceptually, an instance I of P is a package that has a nested generic 
+unit called I.C. Mentioning P.C in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+allows I.C to be instantiated. I need not be a library unit, and the 
+instantiation of I.C need not be a library unit. If I is a library unit, 
+and an instance of I.C is a child of I, then this instance has to be 
+called something other than C.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">A library subprogram shall not override a primitive 
+subprogram.&nbsp;</div>
+<div class="paranum"><a name="p20.a">20.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This prevents certain obscure 
+anomalies. For example, if a library subprogram were to override a subprogram 
+declared in its parent package, then in a compilation unit that depends 
+<I>in</I>directly on the library subprogram, the library subprogram could 
+hide the overridden operation from all visibility, but the library subprogram 
+itself would not be visible.</div>
+<div class="paranum"><a name="p20.b">20.b</a></div>
+<div class="Annotations">Note that even without this rule, such subprograms 
+would be illegal for tagged types, because of the freezing rules.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">The defining name of a function that is a compilation 
+unit shall not be an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Since overloading is not permitted 
+among compilation units, it seems unlikely that it would be useful to 
+define one as an operator. Note that a subunit could be renamed within 
+its parent to be an operator.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN> 
+is a renaming-as-declaration, not a renaming-as-body.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">[There are two kinds 
+of dependences among compilation units:]&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">[The <I>semantic dependences</I> (see below) are 
+the ones needed to check the compile-time rules across compilation unit 
+boundaries; a compilation unit depends semantically on the other compilation 
+units needed to determine its legality. The visibility rules are based 
+on the semantic dependences.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Bulleted">The <I>elaboration dependences</I> (see <A HREF="AA-10-2.html">10.2</A>) 
+determine the order of elaboration of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s.] 
+</div>
+<div class="paranum"><a name="p25.a">25.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Don't confuse these kinds 
+of dependences with the run-time dependences among tasks and masters 
+defined in <A HREF="AA-9-3.html">9.3</A>, &ldquo;<A HREF="AA-9-3.html">Task 
+Dependence - Termination of Tasks</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<A NAME="I4993"></A><A NAME="I4994"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+depends semantically upon its parent declaration. A subunit depends semantically 
+upon its parent body. A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0254">library_unit_body</A></SPAN> 
+depends semantically upon the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">library_unit_declaration</A></SPAN>, 
+if any. <span class="insert2">The declaration of the limited view of 
+a library package depends semantically upon the declaration of the limited 
+view of its parent. The declaration of a library package depends semantically 
+upon the declaration of its limited view.</span> A compilation unit depends 
+semantically upon each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+of the compilation unit. In addition, if a given compilation unit contains 
+an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+of a type defined in another compilation unit, then the given compilation 
+unit depends semantically upon the other compilation unit. The semantic 
+dependence relationship is transitive.</div>
+<div class="paranum"><a name="p26.a">26.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The &ldquo;if any&rdquo; 
+in the third sentence is necessary because library subprograms are not 
+required to have a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p26.b">26.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If a given compilation 
+unit contains a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0270">choice_parameter_specification</A></SPAN>, 
+then the given compilation unit depends semantically upon the declaration 
+of Ada.Exceptions.</div>
+<div class="paranum"><a name="p26.c">26.c</a></div>
+<div class="Annotations">If a given compilation unit contains a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+with an argument of a type defined in another compilation unit, then 
+the given compilation unit depends semantically upon the other compilation 
+unit.&nbsp;</div>
+<div class="paranum"><a name="p26.d">26.d</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, a compilation 
+unit containing X'Address depends semantically upon the declaration of 
+package System.</div>
+<div class="paranum"><a name="p26.e">26.e</a></div>
+<div class="Annotations">For the Address attribute, this fixes a hole 
+in Ada 83. Note that in almost all cases, the dependence will need to 
+exist due to <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s, 
+even without this rule. Hence, the rule has very little effect on programmers.</div>
+<div class="paranum"><a name="p26.f">26.f</a></div>
+<div class="Annotations">Note that the semantic dependence does not have 
+the same effect as a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>; 
+in order to denote a declaration in one of those packages, a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+will generally be needed.</div>
+<div class="paranum"><a name="p26.g">26.g</a></div>
+<div class="Annotations">Note that no special rule is needed for an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+since an expression after <B>use</B> will require semantic dependence 
+upon the compilation unit containing the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+of interest.</div>
+<div class="paranum"><a name="p26.h">26.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2">Unlike a full view of a package, a limited view 
+does not depend semantically on units mentioned in <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
+that defines the package. Formally, this is achieved by saying that the 
+limited view has an empty <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN>. 
+This is necessary so that they can be useful for their intended purpose: 
+allowing mutual dependences between packages. The lack of semantic dependence 
+limits the contents of a limited view to the items that can be determined 
+solely from the syntax of the source of the package, without any semantic 
+analysis. That allows it to be created without the semantic dependences 
+of a full package.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p26.1">26.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2">The elaboration of the declaration of the limited 
+view of a package has no effect.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes">1&nbsp;&nbsp;A simple program may consist of a single 
+compilation unit. A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+need not have any compilation units; for example, its text can consist 
+of <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s. 
+</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Such <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+cannot have any arguments that are <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s, 
+by a previous rule of this subclause. A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+can even be entirely empty, which is probably not useful.</div>
+<div class="paranum"><a name="p27.b">27.b</a></div>
+<div class="Annotations">Some interesting properties of the three kinds 
+of dependence: The elaboration dependences also include the semantic 
+dependences, except that subunits are taken together with their parents. 
+The semantic dependences partly determine the order in which the compilation 
+units appear in the environment at compile time. At run time, the order 
+is partly determined by the elaboration dependences.</div>
+<div class="paranum"><a name="p27.c">27.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The model whereby 
+a child is inside its parent's declarative region, after the parent's 
+declaration, as explained in <A HREF="AA-8-1.html">8.1</A>, has the following 
+ramifications:&nbsp;</div>
+<div class="paranum"><a name="p27.d">27.d</a></div>
+<div class="SmallBulleted">The restrictions on &ldquo;early&rdquo; use 
+of a private type (RM83-7.4.1(4)) or a deferred constant (RM83-7.4.3(2)) 
+do not apply to uses in child units, because they follow the full declaration.</div>
+<div class="paranum"><a name="p27.e">27.e</a></div>
+<div class="SmallBulleted">A library subprogram is never primitive, even 
+if its profile includes a type declared immediately within the parent's 
+<SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+because the child is not declared immediately within the same <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN> 
+as the type (so it doesn't declare a new primitive subprogram), and because 
+the child is forbidden from overriding an old primitive subprogram. It 
+is immediately within the same declarative region, but not the same <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>. 
+Thus, for a tagged type, it is not possible to call a child subprogram 
+in a dispatching manner. (This is also forbidden by the freezing rules.) 
+Similarly, it is not possible for the user to declare primitive subprograms 
+of the types declared in the declaration of Standard, such as Integer 
+(even if the rules were changed to allow a library unit whose name is 
+an operator symbol).</div>
+<div class="paranum"><a name="p27.f">27.f</a></div>
+<div class="SmallBulleted">When the parent unit is &ldquo;used&rdquo; 
+the simple names of the with'd child units are directly visible (see 
+<A HREF="AA-8-4.html">8.4</A>, &ldquo;<A HREF="AA-8-4.html">Use Clauses</A>&rdquo;).</div>
+<div class="paranum"><a name="p27.g">27.g</a></div>
+<div class="SmallBulleted">When a parent body with's its own child, the 
+defining name of the child is directly visible, and the parent body is 
+not allowed to include a declaration of a homograph of the child unit 
+immediately within the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of the body (RM83-8.3(17)).&nbsp;</div>
+<div class="paranum"><a name="p27.h">27.h</a></div>
+<div class="Annotations">Note that &ldquo;declaration of a library unit&rdquo; 
+is different from &ldquo;<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">library_unit_declaration</A></SPAN>&rdquo; 
+&mdash; the former includes <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>. 
+Also, we sometimes really mean &ldquo;declaration of a view of a library 
+unit&rdquo;, which includes <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN>s.</div>
+<div class="paranum"><a name="p27.i">27.i</a></div>
+<div class="Annotations">The visibility rules generally imply that the 
+renamed view of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN> 
+has to be mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p27.j">27.j</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The real rule is that the 
+renamed library unit has to be visible in the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0253">library_unit_renaming_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p27.k">27.k</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>In most cases, &ldquo;has to 
+be visible&rdquo; means there has to be a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>. 
+However, it is possible in obscure cases to avoid the need for a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>; 
+in particular, a compilation unit such as &ldquo;<B>package</B> P.Q <B>renames</B> 
+P;&rdquo; is legal with no <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s 
+(though not particularly interesting). ASCII is physically nested in 
+Standard, and so is not a library unit, and cannot be renamed as a library 
+unit.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Notes">2&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="AA-6-1.html#S0170">designator</A></SPAN> 
+of a library function cannot be an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>, 
+but a nonlibrary <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN> 
+is allowed to rename a library function as an operator. Within a partition, 
+two library subprograms are required to have distinct names and hence 
+cannot overload each other. However, <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>s 
+are allowed to define overloaded names for such subprograms, and a locally 
+declared subprogram is allowed to overload a library subprogram. The 
+expanded name Standard.L can be used to denote a root library unit L 
+(unless the declaration of Standard is hidden) since root library unit 
+declarations occur immediately within the declarative region of package 
+Standard.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of library 
+units:</I>&nbsp;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Examples"><B>package</B>&nbsp;Rational_Numbers.IO&nbsp;<B>is</B>&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;public&nbsp;child&nbsp;of&nbsp;Rational_Numbers,&nbsp;see&nbsp;<A HREF="AA-7-1.html">7.1</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Put(R&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Rational);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get(R&nbsp;:&nbsp;<B>out</B>&nbsp;Rational);<BR>
+<B>end</B>&nbsp;Rational_Numbers.IO;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples"><B>private&nbsp;procedure</B>&nbsp;Rational_Numbers.Reduce(R&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Rational);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;private&nbsp;child&nbsp;of&nbsp;Rational_Numbers</I></SPAN></div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Examples"><B>with</B>&nbsp;Rational_Numbers.Reduce;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;refer&nbsp;to&nbsp;a&nbsp;private&nbsp;child</I></SPAN><BR>
+<B>package&nbsp;body</B>&nbsp;Rational_Numbers&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Rational_Numbers;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>with</B>&nbsp;Rational_Numbers.IO;&nbsp;<B>use</B>&nbsp;Rational_Numbers;<BR>
+<B>with</B>&nbsp;Ada.Text_io;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-A-10.html">A.10</A></I></SPAN><BR>
+<B>procedure</B>&nbsp;Main&nbsp;<B>is</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;root&nbsp;library&nbsp;procedure</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;R&nbsp;:&nbsp;Rational;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;R&nbsp;:=&nbsp;5/3;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;construct&nbsp;a&nbsp;rational&nbsp;number,&nbsp;see&nbsp;<A HREF="AA-7-1.html">7.1</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;Ada.Text_IO.Put(&quot;The&nbsp;answer&nbsp;is:&nbsp;&quot;);<BR>
+&nbsp;&nbsp;&nbsp;IO.Put(R);<BR>
+&nbsp;&nbsp;&nbsp;Ada.Text_IO.New_Line;<BR>
+<B>end</B>&nbsp;Main;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples"><B>with</B>&nbsp;Rational_Numbers.IO;<BR>
+<B>package</B>&nbsp;Rational_IO&nbsp;<B>renames</B>&nbsp;Rational_Numbers.IO;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;library&nbsp;unit&nbsp;renaming&nbsp;declaration</I></SPAN></div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal">Each of the above <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s 
+can be submitted to the compiler separately.&nbsp;</div>
+<div class="paranum"><a name="p35.a">35.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B><I>Example of a generic package with children:</I></div>
+<div class="paranum"><a name="p35.b">35.b</a></div>
+<div class="SmallExamples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>function</B>&nbsp;Image(E&nbsp;:&nbsp;Element)&nbsp;<B>return</B>&nbsp;String;<BR>
+<B>package</B>&nbsp;Generic_Bags&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Bag&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;&nbsp;--<SPAN Class="roman"><I>&nbsp;A&nbsp;bag&nbsp;of&nbsp;Elements.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Add(B&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Bag;&nbsp;E&nbsp;:&nbsp;Element);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Bag_Image(B&nbsp;:&nbsp;Bag)&nbsp;<B>return</B>&nbsp;String;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Bag&nbsp;<B>is</B>&nbsp;...;<BR>
+<B>end</B>&nbsp;Generic_Bags;</div>
+<div class="paranum"><a name="p35.c">35.c</a></div>
+<div class="SmallExamples"><B>generic</B><BR>
+<B>package</B>&nbsp;Generic_Bags.Generic_Iterators&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;various&nbsp;additional&nbsp;operations&nbsp;on&nbsp;Bags.</I></SPAN></div>
+<div class="paranum"><a name="p35.d">35.d</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>procedure</B>&nbsp;Use_Element(E&nbsp;:&nbsp;<B>in</B>&nbsp;Element);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Called&nbsp;once&nbsp;per&nbsp;bag&nbsp;element.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Iterate(B&nbsp;:&nbsp;<B>in</B>&nbsp;Bag);<BR>
+<B>end</B>&nbsp;Generic_Bags.Generic_Iterators;</div>
+<div class="paranum"><a name="p35.e">35.e</a></div>
+<div class="AnnotationsWideAbove" style="margin-bottom: 0.4em">A package 
+that instantiates the above generic units:&nbsp;</div>
+<div class="paranum"><a name="p35.f">35.f</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Generic_Bags;<BR>
+<B>with</B>&nbsp;Generic_Bags.Generic_Iterators;<BR>
+<B>package</B>&nbsp;My_Abstraction&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Type&nbsp;<B>is</B>&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Image(X&nbsp;:&nbsp;My_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Bags_Of_My_Type&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Generic_Bags(My_Type,&nbsp;Image);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Iterators_Of_Bags_Of_My_Type&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Bags_Of_My_Type.Generic_Iterators;<BR>
+<B>end</B>&nbsp;My_Abstraction;</div>
+<div class="paranum"><a name="p35.g">35.g</a></div>
+<div class="Annotations">In the above example, Bags_Of_My_Type has a 
+nested generic unit called Generic_Iterators. The second <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+makes that nested unit visible.</div>
+<div class="paranum"><a name="p35.h">35.h</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Here we show how 
+the generic body could depend on one of its own children:&nbsp;</div>
+<div class="paranum"><a name="p35.i">35.i</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Generic_Bags.Generic_Iterators;<BR>
+<B>package</B>&nbsp;<B>body</B>&nbsp;Generic_Bags&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Add(B&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Bag;&nbsp;E&nbsp;:&nbsp;Element)&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;Add;</div>
+<div class="paranum"><a name="p35.j">35.j</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Iters&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Generic_Iterators;</div>
+<div class="paranum"><a name="p35.k">35.k</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Bag_Image(B&nbsp;:&nbsp;Bag)&nbsp;<B>return</B>&nbsp;String&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer&nbsp;:&nbsp;String(1..10_000);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;</div>
+<div class="paranum"><a name="p35.l">35.l</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Append_Image(E&nbsp;:&nbsp;<B>in</B>&nbsp;Element)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>constant</B>&nbsp;String&nbsp;:=&nbsp;Image(E);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Last&nbsp;/=&nbsp;0&nbsp;<B>then</B>&nbsp;--<SPAN Class="roman"><I>&nbsp;Insert&nbsp;a&nbsp;comma.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:=&nbsp;Last&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer(Last)&nbsp;:=&nbsp;',';<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buffer(Last+1&nbsp;..&nbsp;Last+Im'Length)&nbsp;:=&nbsp;Im;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:=&nbsp;Last&nbsp;+&nbsp;Im'Length;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Append_Image;</div>
+<div class="paranum"><a name="p35.m">35.m</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Append_All&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Iters.Iterate(Append_Image);<BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_All(B);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Buffer(1..Last);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Bag_Image;<BR>
+<B>end</B>&nbsp;Generic_Bags;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p35.n">35.n</a></div>
+<div class="Annotations"><A NAME="I4995"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+is modified to allow the reserved word <B>private</B> before a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">library_unit_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p35.o">35.o</a></div>
+<div class="Annotations">Children (other than children of Standard) are 
+new in Ada 95.</div>
+<div class="paranum"><a name="p35.p">35.p</a></div>
+<div class="Annotations">Library unit renaming is new in Ada 95.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p35.q">35.q</a></div>
+<div class="Annotations">Standard is considered a library unit in Ada 
+95. This simplifies the descriptions, since it implies that the parent 
+of each library unit is a library unit. (Standard itself has no parent, 
+of course.) As in Ada 83, the language does not define any way to recompile 
+Standard, since the name given in the declaration of a library unit is 
+always interpreted in relation to Standard. That is, an attempt to compile 
+a package Standard would result in Standard.Standard.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p35.r">35.r/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2"><A NAME="I4996"></A>The concept of a limited view 
+is new. Combined with <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0259">limited_with_clause</A></SPAN>s 
+(see <A HREF="AA-10-1-2.html">10.1.2</A>), they facilitate construction 
+of mutually recursive types in multiple packages.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p35.s">35.s/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00331.TXT">AI95-00331-01</A></I>} 
+<span class="insert2">Clarified the wording so that a grandchild generic 
+unit will work as expected.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p35.t">35.t/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0108-1.TXT">AI05-0108-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0129-1.TXT">AI05-0129-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Clarified the wording so that 
+it is clear that limited views of types never have discriminants and 
+never are of incomplete types.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

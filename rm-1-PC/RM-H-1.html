@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragma Normalize_Scalars</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-H.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-H-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>H.1 Pragma Normalize_Scalars</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">This pragma ensures that an otherwise uninitialized 
+scalar object is set to a predictable value, but out of range if possible. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN> 
+Normalize_Scalars is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I6284"></A><A NAME="I6285"></A>Normalize_Scalars; 
+</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I6286"></A><A NAME="I6287"></A>Pragma Normalize_Scalars 
+is a configuration pragma. It applies to all <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0215">compilation_unit</A></SPAN>s 
+included in a partition.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN> 
+Normalize_Scalars applies, the implementation shall document the implicit 
+initial value for scalar subtypes, and shall identify each case in which 
+such a value is used and is not an invalid representation.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">Whenever possible, the implicit initial value for 
+a scalar subtype should be an invalid representation (see <A HREF="RM-13-9-1.html">13.9.1</A>). 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Notes">2&nbsp;&nbsp;The initialization requirement applies 
+to uninitialized scalar objects that are subcomponents of composite objects, 
+to allocated objects, and to stand-alone objects. It also applies to 
+scalar <B>out</B> parameters. Scalar subcomponents of composite <B>out</B> 
+parameters are initialized to the corresponding part of the actual, by 
+virtue of <A HREF="RM-6-4-1.html">6.4.1</A>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">3&nbsp;&nbsp;The initialization requirement does not 
+apply to a scalar for which pragma Import has been specified, since initialization 
+of an imported object is performed solely by the foreign language environment 
+(see <A HREF="RM-B-1.html">B.1</A>).</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">4&nbsp;&nbsp;The use of pragma Normalize_Scalars in 
+conjunction with Pragma Restrictions(No_Exceptions) may result in erroneous 
+execution (see <A HREF="RM-H-4.html">H.4</A>).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-H.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-H-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

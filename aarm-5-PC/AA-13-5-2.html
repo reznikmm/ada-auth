@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Storage Place Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.5.2 Storage Place Attributes</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5637"></A>For 
+a component C of a composite, non-array object R, the <I>storage place 
+attributes</I> are defined:&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The storage place attributes 
+are not (individually) specifiable, but the user may control their values 
+by giving a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="WideHanging-Term">R.C'Position</div><div class="WideHanging-Body">
+<A NAME="I5638"></A><A NAME="I5639"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+If the nondefault bit ordering applies to the composite type, and if 
+a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0318">position</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN>; 
+otherwise, denotes the same value as R.C'Address &ndash; R'Address. The 
+value of this attribute is of the type <I>universal_integer</I>.&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+Thus, for the default bit order, R.C'Position is the offset of C in storage 
+elements from the beginning of the object, where the first storage element 
+of an object is numbered zero. R'Address + R.C'Position = R.C'Address. 
+For record extensions, the offset is not measured from the beginning 
+of the extension part, but from the beginning of the whole object, as 
+usual.</div>
+<div class="paranum"><a name="p2.b">2.b</a></div>
+<div class="Annotations">In &ldquo;R.C'Address &ndash; R'Address&rdquo;, 
+the &quot;&ndash;&quot; operator is the one in System.Storage_Elements 
+that takes two Addresses and returns a Storage_Offset.&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="WideHanging-Term">R.C'First_Bit</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5640"></A><A NAME="I5641"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+If the nondefault bit ordering applies to the composite type, and if 
+a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0319">first_bit</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN>; 
+otherwise, denotes the offset, from the start of the first of the storage 
+elements occupied by C, of the first bit occupied by C. This offset is 
+measured in bits. The first bit of a storage element is numbered zero. 
+The value of this attribute is of the type <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="WideHanging-Term">R.C'Last_Bit</div><div class="WideHanging-Body">
+<A NAME="I5642"></A><A NAME="I5643"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+If the nondefault bit ordering applies to the composite type, and if 
+a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0320">last_bit</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN>; 
+otherwise, denotes the offset, from the start of the first of the storage 
+elements occupied by C, of the last bit occupied by C. This offset is 
+measured in bits. The value of this attribute is of the type <I>universal_integer</I>. 
+</div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+The ordering of bits in a storage element is defined in <A HREF="AA-13-5-3.html">13.5.3</A>, 
+&ldquo;<A HREF="AA-13-5-3.html">Bit Ordering</A>&rdquo;.</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations">R.C'Size = R.C'Last_Bit &ndash; R.C'First_Bit 
++ 1. (Unless the implementation chooses an indirection representation.)</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations">If a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
+applies to a component, then that component will be at the same relative 
+storage place in all objects of the type. Otherwise, there is no such 
+requirement.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I5644"></A><A NAME="I5645"></A>If a component 
+is represented using some form of pointer (such as an offset) to the 
+actual data of the component, and this data is contiguous with the rest 
+of the object, then the storage place attributes should reflect the place 
+of the actual data, not the pointer. If a component is allocated discontiguously 
+from the rest of the object, then a warning should be generated upon 
+reference to one of its storage place attributes.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>For discontiguous components, 
+these attributes make no sense. For example, an implementation might 
+allocate dynamic-sized components on the heap. For another example, an 
+implementation might allocate the discriminants separately from the other 
+components, so that multiple objects of the same subtype can share discriminants. 
+Such representations cannot happen if there is a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
+for that component.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If a component 
+is represented using a pointer to the actual data of the component which 
+is contiguous with the rest of the object, then the storage place attributes 
+should reflect the place of the actual data. If a component is allocated 
+discontiguously from the rest of the object, then a warning should be 
+generated upon reference to one of its storage place attributes.</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p5.c">5.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<A NAME="I5646"></A><B>Amendment Correction:</B> The meaning of the storage 
+place attributes for the nondefault bit order is now clearly defined, 
+and can be different than that given by strictly following the Ada 95 
+wording. Any code which depends on the original Ada 95 values for a type 
+using the nondefault bit order where they are different will break.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

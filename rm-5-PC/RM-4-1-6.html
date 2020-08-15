@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>User-Defined Indexing</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-1-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.1.6 User-Defined Indexing</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Given a tagged type 
+<I>T</I>, the following type-related, operational aspects may be specified:</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="WideHanging-Term">Constant_Indexing</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes one or more functions declared immediately within the same 
+declaration list in which <I>T</I> is declared. All such functions shall 
+have at least two parameters, the first of which is of type <I>T</I> 
+or <I>T</I>'Class, or is an access-to-constant parameter with designated 
+type <I>T</I> or <I>T</I>'Class.<A NAME="I2479"></A><A NAME="I2480"></A></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="WideHanging-Term">Variable_Indexing</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes one or more functions declared immediately within the same 
+declaration list in which <I>T</I> is declared. All such functions shall 
+have at least two parameters, the first of which is of type <I>T</I> 
+or <I>T</I>'Class, or is an access parameter with designated type <I>T</I> 
+or <I>T</I>'Class. All such functions shall have a return type that is 
+a reference type (see <A HREF="RM-4-1-5.html">4.1.5</A>), whose reference 
+discriminant is of an access-to-variable type.<A NAME="I2481"></A><A NAME="I2482"></A> 
+</div>
+<div class="paranum"><a name="p4">4/4</a></div>
+<div class="Normal">These aspects are inherited by descendants of <I>T</I> 
+(including the class-wide type <I>T</I>'Class).<span class="delete4">&nbsp;The aspects shall not be overridden, but the functions they denote may 
+be.</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">An <I>indexable container type</I> is (a view of) 
+a tagged type with at least one of the aspects Constant_Indexing or Variable_Indexing 
+specified.<A NAME="I2483"></A> An <I>indexable container object</I> is 
+an object of an indexable container type.<A NAME="I2484"></A> A <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes the result of calling a function named by a Constant_Indexing 
+or Variable_Indexing aspect.</div>
+<div class="paranum"><a name="p5.1">5.1/4</a></div>
+<div class="Normal">&nbsp;<span class="insert4">The Constant_Indexing and 
+Variable_Indexing aspects are nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</span></div>
+<div class="Normal"><span class="insert4"></span><span class="insert4"><span class="delete5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+6 through 9 were deleted.</I></SPAN></span></span><span class="insert4"></span> 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete4">The 
+Constant_Indexing or Variable_Indexing aspect shall not be specified:</span><span class="insert5">If 
+an ancestor of a type <I>T</I> is an indexable container type, then any 
+explicit specification of the Constant_Indexing or Variable_Indexing 
+aspects shall be confirming; that is, the specified <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall match the inherited aspect (see <A HREF="RM-13-1-1.html">13.1.1</A>).</span> 
+</div>
+<div class="paranum"><a name="p7">7/4</a></div>
+<div class="Bulleted"><span class="delete4">on a derived type if the 
+parent type has the corresponding aspect specified or inherited; or</span></div>
+<div class="paranum"><a name="p8">8/4</a></div>
+<div class="Bulleted"><span class="delete4">on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+if the type has a tagged partial view.</span>&nbsp;</div>
+<div class="Normal"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+7 through 8 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="delete4"><A NAME="I2485"></A>In addition 
+to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.</span> <span class="insert5"><A NAME="I2486"></A>In addition to 
+the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit.</span></div>
+<div class="paranum"><a name="p9.1">9.1/5</a></div>
+<div class="Normal">&nbsp;<span class="insert5">A <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is illegal if the equivalent prefixed view (see below) is illegal.</span> 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Indented1"><SPAN Class="swiss">generalized_indexing</SPAN><A NAME="I2487"></A><A NAME="S0105"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>indexable_container_object_</I><A NAME="I2488"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I2489"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal">The expected type for the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is any indexable container type.<A NAME="I2490"></A></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">If the Constant_Indexing 
+aspect is specified for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is interpreted as a <I>constant indexing</I> under the following circumstances:<A NAME="I2491"></A><A NAME="I2492"></A></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted">when the Variable_Indexing aspect is not specified 
+for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted">when the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+denotes a constant;</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Bulleted">when the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is used within a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0131">primary</A></SPAN> 
+where a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+denoting a constant is permitted.</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">Otherwise, the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is interpreted as a <I>variable indexing</I>.<A NAME="I2493"></A><A NAME="I2494"></A></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal">When a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+is interpreted as a constant (or variable) indexing, it is equivalent 
+to a call on a prefixed view of one of the functions named by the Constant_Indexing 
+(or Variable_Indexing) aspect of the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+with the given <SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN>, 
+and with the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+as the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of the prefixed view.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18/4</a></div>
+<div class="Notes">6&nbsp;&nbsp;<span class="insert4">The Constant_Indexing 
+and Variable_Indexing aspects cannot be redefined when inherited for 
+a derived type, but the functions that they denote can be modified by 
+overriding or overloading.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples"><B>type</B>&nbsp;Indexed_Barrel&nbsp;<B>is&nbsp;tagged</B>&nbsp;...<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Find;<BR>
+&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Indexed_Barrel&nbsp;is&nbsp;an&nbsp;indexable&nbsp;container&nbsp;type,</I></SPAN><BR>
+&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Find&nbsp;is&nbsp;the&nbsp;generalized&nbsp;indexing&nbsp;operation.</I></SPAN></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Find&nbsp;(B&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Indexed_Barrel;&nbsp;Key&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Ref_Element;<BR>
+&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Return&nbsp;a&nbsp;reference&nbsp;to&nbsp;an&nbsp;element&nbsp;of&nbsp;a&nbsp;barrel&nbsp;(see&nbsp;<A HREF="RM-4-1-5.html">4.1.5</A>).</I></SPAN></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples">IB:&nbsp;<B>aliased</B>&nbsp;Indexed_Barrel;</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples">--&nbsp;<SPAN Class="roman"><I>All&nbsp;of&nbsp;the&nbsp;following&nbsp;calls&nbsp;are&nbsp;then&nbsp;equivalent:</I></SPAN><BR>
+Find&nbsp;(IB,&quot;pear&quot;).Data.<B>all</B>&nbsp;:=&nbsp;Element'(...);&nbsp;--&nbsp;<SPAN Class="roman"><I>Traditional&nbsp;call</I></SPAN><BR>
+IB.Find&nbsp;(&quot;pear&quot;).Data.<B>all</B>&nbsp;:=&nbsp;Element'(...);&nbsp;--&nbsp;<SPAN Class="roman"><I>Call&nbsp;of&nbsp;prefixed&nbsp;view</I></SPAN><BR>
+IB.Find&nbsp;(&quot;pear&quot;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Element'(...);&nbsp;--&nbsp;<SPAN Class="roman"><I>Implicit&nbsp;dereference&nbsp;(see&nbsp;<A HREF="RM-4-1-5.html">4.1.5</A>)</I></SPAN><BR>
+IB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&quot;pear&quot;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Element'(...);&nbsp;--&nbsp;<SPAN Class="roman"><I>Implicit&nbsp;indexing&nbsp;and&nbsp;dereference</I></SPAN><BR>
+IB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&quot;pear&quot;).Data.<B>all</B>&nbsp;:=&nbsp;Element'(...);&nbsp;--&nbsp;<SPAN Class="roman"><I>Implicit&nbsp;indexing&nbsp;only</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-1-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

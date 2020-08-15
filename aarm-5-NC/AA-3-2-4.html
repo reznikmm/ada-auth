@@ -1,0 +1,510 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Subtype Predicates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2.4 Subtype Predicates</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The language-defined <I>predicate aspects</I> Static_Predicate and Dynamic_Predicate 
+may be used to define properties of subtypes. A <I>predicate specification</I> 
+is an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+for one of the two predicate aspects.<A NAME="I1511"></A><A NAME="I1512"></A><A NAME="I1513"></A><A NAME="I1514"></A><A NAME="I1515"></A><A NAME="I1516"></A><A NAME="I1517"></A> 
+General rules for aspects and <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
+are found in Clause <A HREF="AA-13.html">13</A> (<A HREF="AA-13-1.html">13.1</A> 
+and <A HREF="AA-13-1-1.html">13.1.1</A> respectively).&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Static_Predicate: 
+</B>Condition that must hold true for objects of a given subtype; the 
+subtype may be static.</div>
+<div class="paranum"><a name="p1.b">1.b/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Dynamic_Predicate: 
+</B>Condition that must hold true for objects of a given subtype; the 
+subtype is not static.</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+The expected type for a predicate aspect <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is any boolean type.<A NAME="I1518"></A></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+A predicate specification may be given on a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>, 
+and applies to the declared subtype. In addition, predicate specifications 
+apply to certain other subtypes:&nbsp;</div>
+<div class="paranum"><a name="p4">4/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0099-1.TXT">AI12-0099-1</A></I>} 
+For a (first) subtype defined by a type declaration, any predicates of 
+parent or progenitor subtypes apply.</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Bulleted">For a subtype created by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
+the predicate of the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+applies.&nbsp;</div>
+<div class="paranum"><a name="p6">6/4</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+Predicate checks are defined to be <I>enabled</I> or <I>disabled</I> 
+for a given subtype as follows:<A NAME="I1519"></A><A NAME="I1520"></A><A NAME="I1521"></A></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">If a subtype is declared 
+by a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
+that includes a predicate specification, then:&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Indented2Bulleted">if performing checks is required by the 
+Static_Predicate assertion policy (see <A HREF="AA-11-4-2.html">11.4.2</A>) 
+and the declaration includes a Static_Predicate specification, then predicate 
+checks are enabled for the subtype;</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Indented2Bulleted">if performing checks is required by the 
+Dynamic_Predicate assertion policy (see <A HREF="AA-11-4-2.html">11.4.2</A>) 
+and the declaration includes a Dynamic_Predicate specification, then 
+predicate checks are enabled for the subtype;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Indented2Bulleted">otherwise, predicate checks are disabled 
+for the subtype[, regardless of whether predicate checking is enabled 
+for any other subtypes mentioned in the declaration];&nbsp;</div>
+<div class="paranum"><a name="p12">12/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0099-1.TXT">AI12-0099-1</A></I>} 
+If a subtype is defined by a type declaration that does not include a 
+predicate specification, then predicate checks are enabled for the subtype 
+if and only if any predicate checks are enabled for parent or progenitor 
+subtypes;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted">If a subtype is created by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+other than in one of the previous cases, then predicate checks are enabled 
+for the subtype if and only if predicate checks are enabled for the subtype 
+denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted">Otherwise, predicate checks are disabled for the 
+given subtype.</div>
+<div class="paranum"><a name="p14.a">14.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In this case, no predicate 
+specifications can apply to the subtype and so it doesn't typically matter 
+whether predicate checks are enabled. This rule does make a difference, 
+however, when determining whether predicate checks are enabled for another 
+type when this type is one of multiple progenitors. See the &ldquo;derived 
+type declaration&rdquo; wording above.</div>
+<div class="paranum"><a name="p14.b">14.b/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+Even when predicate checks are disabled, a predicate can affect various 
+Legality Rules, the results of membership tests, the items in a <B>for</B> 
+loop, and the result of the Valid attribute.&nbsp;</div>
+<div class="paranum"><a name="p14.1">14.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+For a subtype with a directly-specified predicate aspect, the following 
+additional language-defined aspect may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+(see <A HREF="AA-13-1-1.html">13.1.1</A>):</div>
+<div class="paranum"><a name="p14.2">14.2/4</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Predicate_Failure</div><div class="WideHanging-Body"><br clear="left">
+ This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+which determines the action to be performed when a predicate check fails 
+because a directly-specified predicate aspect of the subtype evaluates 
+to False, as explained below.&nbsp;</div>
+<div class="paranum"><a name="p14.b.1">14.b.1/4</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Predicate_Failure: 
+</B>Action to be performed when a predicate check fails.</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p14.3">14.3/4</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+The expected type for the Predicate_Failure <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is String.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a Static_Predicate specification shall be <I>predicate-static</I>; 
+that is, one of the following:<A NAME="I1522"></A><A NAME="I1523"></A> 
+</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Bulleted">a static expression;</div>
+<div class="paranum"><a name="p17">17/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0039-1.TXT">AI12-0039-1</A></I>} 
+a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN> 
+is the current instance, and whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">membership_choice_list</A></SPAN> 
+meets the requirements for a static membership test (see <A HREF="AA-4-9.html">4.9</A>);</div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0137">case_expression</A></SPAN> 
+whose <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is the current instance, and whose <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+are static expressions;</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Bulleted">a call to a predefined equality or ordering operator, 
+where one operand is the current instance, and the other is a static 
+expression;</div>
+<div class="paranum"><a name="p20">20/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0099-1.TXT">AI12-0099-1</A></I>} 
+a call to a predefined boolean operator <B>and</B>, <B>or</B>, <B>xor</B>, 
+or <B>not</B>, where each operand is predicate-static;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+a short-circuit control form where both operands are predicate-static; 
+or</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Bulleted">a parenthesized predicate-static <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+A predicate shall not be specified for an incomplete subtype.</div>
+<div class="paranum"><a name="p23.a">23.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The expression of such a predicate 
+could not depend on the properties of the value of the type (since it 
+doesn't have any), so it is useless and we don't want to require the 
+added complexity needed to support it.&nbsp;</div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0287-1.TXT">AI05-0287-1</A></I>} 
+If a predicate applies to a subtype, then that predicate shall not mention 
+any other subtype to which the same predicate applies.</div>
+<div class="paranum"><a name="p24.a">24.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>This 
+is intended to prevent recursive predicates, which cause definitional 
+problems for static predicates. Inside of the predicate, the subtype 
+name refers to the current instance of the subtype, which is an object, 
+so a direct use of the subtype name cannot be recursive. But other subtypes 
+naming the same type might:&nbsp;</div>
+<div class="paranum"><a name="p24.b">24.b/3</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Really_Ugly&nbsp;<B>is&nbsp;private</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Ugly&nbsp;<B>is</B>&nbsp;Really_Ugly;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Really_Ugly&nbsp;<B>is&nbsp;new</B>&nbsp;Integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Static_Predicate&nbsp;=&gt;&nbsp;Really_Ugly&nbsp;<B>not&nbsp;in</B>&nbsp;Ugly;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN></div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+An index subtype, <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0057">index_constraint</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0054">constrained_array_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0227">entry_index_specification</A></SPAN> 
+shall not denote a subtype to which predicate specifications apply.</div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is First, Last, or Range shall not denote a scalar subtype to which predicate 
+specifications apply.</div>
+<div class="paranum"><a name="p26.a">26.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0297-1.TXT">AI05-0297-1</A></I>} 
+This is to prevent confusion about whether the First value is the lowest 
+value of the subtype (which does not depend on the predicate) or the 
+lowest value of the subtype which meets the predicate. (For a dynamic 
+predicate, determining this latter value is expensive as it would usually 
+require a loop.) For a static subtype that has a static predicate, the 
+First_Valid and Last_Valid attributes (see <A HREF="AA-3-5-5.html">3.5.5</A>) 
+can be used instead.&nbsp;</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0287-1.TXT">AI05-0287-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0160">loop_parameter_specification</A></SPAN> 
+shall not denote a nonstatic subtype to which predicate specifications 
+apply or any subtype to which Dynamic_Predicate specifications apply.</div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN> 
+shall not denote a nonstatic subtype to which predicate specifications 
+apply.</div>
+<div class="paranum"><a name="p28.a">28.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+This rule prevents noncontiguous dynamically bounded array aggregates, 
+which could be expensive to check for. (Array aggregates have rules to 
+prevent problems with static subtypes.) We define this rule here so that 
+the runtime generic body check applies.&nbsp;</div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+In addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.<A NAME="I1524"></A>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p29.1">29.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+If any of the above Legality Rules is violated in an instance of a generic 
+unit, Program_Error is raised at the point of the violation.</div>
+<div class="paranum"><a name="p29.a">29.a/4</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This is the usual way around 
+the contract model; this applies even in instance bodies. Note that errors 
+in instance specifications will be detected at compile-time by the &quot;re-check&quot; 
+of the specification, only errors in the body should raise Program_Error. 
+</div>
+<div class="paranum"><a name="p29.2">29.2/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+To determine whether a value <I>satisfies the predicates</I> of a subtype 
+<I>S</I>, the following tests are performed in the following order, until 
+one of the tests fails, in which case the predicates are not satisfied 
+and no further tests are performed, or all of the tests succeed, in which 
+case the predicates are satisfied:<A NAME="I1525"></A><A NAME="I1526"></A></div>
+<div class="paranum"><a name="p29.3">29.3/4</a></div>
+<div class="Bulleted">the value is first tested to determine whether 
+it satisfies any constraints or any null exclusion of <I>S</I>;</div>
+<div class="paranum"><a name="p29.4">29.4/4</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">then:</div>
+<div class="paranum"><a name="p29.5">29.5/4</a></div>
+<div class="Indented2Bulleted">if <I>S</I> is a first subtype, the value 
+is tested to determine whether it satisfies the predicates of the parent 
+and progenitor subtypes (if any) of <I>S</I> (in an arbitrary order);</div>
+<div class="paranum"><a name="p29.b">29.b/4</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This rule has an effect 
+for derived types (which have a parent subtype and may have progenitors) 
+and for task and protected types (which may have progentitors). Other 
+kinds of type declarations can have neither, and no test is required 
+for other first subtypes.&nbsp;</div>
+<div class="paranum"><a name="p29.6">29.6/4</a></div>
+<div class="Indented2Bulleted">if <I>S</I> is defined by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
+the value is tested to determine whether it satisfies the predicates 
+of the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p29.7">29.7/4</a></div>
+<div class="Bulleted">finally, if <I>S</I> is defined by a declaration 
+to which one or more predicate specifications apply, the predicates are 
+evaluated (in an arbitrary order) to test that all of them yield True 
+for the given value.&nbsp;</div>
+<div class="paranum"><a name="p29.b.1">29.b.1/4</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>It is important to stop on 
+the first of the above steps that fails, as later steps might presume 
+that the earlier steps had succeeded.&nbsp;</div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+If predicate checks are enabled for a given subtype, then:&nbsp;</div>
+<div class="paranum"><a name="p31">31/4</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+[On every subtype conversion, a check is performed that the operand satisfies 
+the predicates of the target subtype. This includes all parameter passing, 
+except for certain parameters passed by reference, which are covered 
+by the following rule: ] After normal completion and leaving of a subprogram, 
+for each <B>in out</B> or <B>out</B> parameter that is passed by reference, 
+a check is performed that the value of the parameter satisfies the predicates 
+of the subtype of the actual. For an object created by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+with no explicit initialization <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+or by an uninitialized <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>, 
+if any subcomponents have <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>s, 
+a check is performed that the value of the created object satisfies the 
+predicates of the nominal subtype.<A NAME="I1527"></A><A NAME="I1528"></A><A NAME="I1529"></A><A NAME="I1530"></A></div>
+<div class="paranum"><a name="p31.1">31.1/4</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+If any of the predicate checks fail, Assertion_Error is raised, unless 
+the subtype whose directly-specified predicate aspect evaluated to False 
+also has a directly-specified Predicate_Failure aspect. In that case, 
+the specified Predicate_Failure <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is evaluated; if the evaluation of the Predicate_Failure <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+propagates an exception occurrence, then this occurrence is propagated 
+for the failure of the predicate check; otherwise, Assertion_Error is 
+raised, with an associated message string defined by the value of the 
+Predicate_Failure <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>. 
+In the absence of such a Predicate_Failure aspect, an implementation-defined 
+message string is associated with the Assertion_Error exception.<A NAME="I1531"></A></div>
+<div class="paranum"><a name="p31.a">31.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Predicates are not evaluated 
+at the point of the (sub)type declaration.&nbsp;</div>
+<div class="paranum"><a name="p31.b">31.b/3</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Static_Predicate 
+checks can be removed even in the presence of potentially invalid values, 
+just as constraint checks can be removed.&nbsp;</div>
+<div class="paranum"><a name="p31.c">31.c/4</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The message string 
+associated with the Assertion_Error exception raised by the failure of 
+a predicate check if there is no applicable Predicate_Failure aspect.</div>
+<div class="paranum"><a name="p32">32/4</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+</div>
+<div class="paranum"><a name="p33">33/4</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0276-1.TXT">AI05-0276-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+</div>
+<div class="paranum"><a name="p33.a">33.a/4</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Notes">5&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+A predicate specification does not cause a subtype to be considered constrained.</div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Notes">6&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+A Static_Predicate, like a constraint, always remains True for all objects 
+of the subtype, except in the case of uninitialized variables and other 
+invalid values. A Dynamic_Predicate, on the other hand, is checked as 
+specified above, but can become False at other times. For example, the 
+predicate of a record subtype is not checked when a subcomponent is modified.</div>
+<div class="paranum"><a name="p36">36/4</a></div>
+<div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+No predicates apply to the base subtype of a scalar type; every value 
+of a scalar type <I>T</I> is considered to satisfy the predicates of 
+<I>T</I>'Base.</div>
+<div class="paranum"><a name="p37">37/4</a></div>
+<div class="Notes">8&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+Predicate_Failure <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+are never evaluated during the evaluation of a membership test (see <A HREF="AA-4-5-2.html">4.5.2</A>) 
+or Valid attribute (see <A HREF="AA-13-9-2.html">13.9.2</A>).</div>
+<div class="paranum"><a name="p38">38/4</a></div>
+<div class="Notes">9&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+A Predicate_Failure <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+can be a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+(see <A HREF="AA-11-3.html">11.3</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p39">39/4</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+<B>subtype</B>&nbsp;Basic_Letter&nbsp;<B>is</B>&nbsp;Character&nbsp;--&nbsp;<SPAN Class="roman"><I>See&nbsp;<A HREF="AA-A-3-2.html">A.3.2</A>&nbsp;for&nbsp;&quot;basic&nbsp;letter&quot;.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Static_Predicate&nbsp;=&gt;&nbsp;Basic_Letter&nbsp;<B>in</B>&nbsp;'A'..'Z'&nbsp;|&nbsp;'a'..'z'&nbsp;|&nbsp;'&AElig;'&nbsp;|&nbsp;'&aelig;'&nbsp;|&nbsp;'&ETH;'&nbsp;|&nbsp;'&eth;'&nbsp;|&nbsp;'&THORN;'&nbsp;|&nbsp;'&thorn;'&nbsp;|&nbsp;'&szlig;';</div>
+<div class="paranum"><a name="p40">40/4</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+<B>subtype</B>&nbsp;Even_Integer&nbsp;<B>is</B>&nbsp;Integer<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;Even_Integer&nbsp;<B>mod</B>&nbsp;2&nbsp;=&nbsp;0,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;&quot;Even_Integer&nbsp;must&nbsp;be&nbsp;a&nbsp;multiple&nbsp;of&nbsp;2&quot;;</div>
+<div class="paranum"><a name="p41">41/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+<I>Text_IO (see <A HREF="AA-A-10-1.html">A.10.1</A>) could have used 
+predicates to describe some common exceptional conditions as follows:</I></div>
+<div class="paranum"><a name="p42">42/4</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.IO_Exceptions;<BR>
+<B>package</B>&nbsp;Ada.Text_IO&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p43">43/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
+<div class="paranum"><a name="p44">44/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Open_File_Type&nbsp;<B>is</B>&nbsp;File_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;Is_Open&nbsp;(Open_File_Type),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;<B>raise</B>&nbsp;Status_Error&nbsp;<B>with</B>&nbsp;&quot;File&nbsp;not&nbsp;open&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Input_File_Type&nbsp;<B>is</B>&nbsp;Open_File_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;Mode&nbsp;(Input_File_Type)&nbsp;=&nbsp;In_File,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;<B>raise</B>&nbsp;Mode_Error&nbsp;<B>with</B>&nbsp;&quot;Cannot&nbsp;read&nbsp;file:&nbsp;&quot;&nbsp;&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;(Input_File_Type);<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Output_File_Type&nbsp;<B>is</B>&nbsp;Open_File_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;&nbsp;Mode&nbsp;(Output_File_Type)&nbsp;/=&nbsp;In_File,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Predicate_Failure&nbsp;=&gt;&nbsp;<B>raise</B>&nbsp;Mode_Error&nbsp;<B>with</B>&nbsp;&quot;Cannot&nbsp;write&nbsp;file:&nbsp;&quot;&nbsp;&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;(Output_File_Type);</div>
+<div class="paranum"><a name="p45">45/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;...</div>
+<div class="paranum"><a name="p46">46/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Mode&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;Open_File_Type)&nbsp;<B>return</B>&nbsp;File_Mode;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Name&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;Open_File_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Form&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;Open_File_Type)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p47">47/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;...</div>
+<div class="paranum"><a name="p48">48/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;Input_File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Character);</div>
+<div class="paranum"><a name="p49">49/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Put&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;Output_File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character);</div>
+<div class="paranum"><a name="p50">50/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;...</div>
+<div class="paranum"><a name="p51">51/4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Similarly&nbsp;for&nbsp;all&nbsp;of&nbsp;the&nbsp;other&nbsp;input&nbsp;and&nbsp;output&nbsp;subprograms.</I></SPAN></div>
+<div class="paranum"><a name="p51.a">51.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We didn't change the language-defined 
+Text_IO this way for Ada 202x as it would be incompatible in marginal 
+cases: these subprogram specifications would not be subtype conformant 
+with existing access-to-subprogram types, so Put_Line'Access (for instance) 
+would become illegal in existing code. The gain would not be worth the 
+disruption.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p51.b">51.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0276-1.TXT">AI05-0276-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+<A NAME="I1532"></A>Predicate aspects are new in Ada 2012.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p51.c">51.c/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0054-2.TXT">AI12-0054-2</A></I>} 
+<A NAME="I1533"></A><B>Corrigendum:</B> The Predicate_Failure aspect 
+is new. We can consider this a correction as it is always possible for 
+implementers to add implementation-defined aspects, so the same is true 
+for language-defined aspects.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p51.d">51.d/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
+<B>Corrigendum:</B> Specified the order of evaluation of most predicates, 
+by defining the new term &quot;satisfies the predicates of the subtype&quot;. 
+This is not inconsistent, as the order previously was unspecified, so 
+any code depending on the order was incorrect. The change is necessary 
+so that the Predicate_Failure aspect has consistent results in cases 
+where multiple predicates and aspects apply; see the Ada.Text_IO example 
+above for such a case.</div>
+<div class="paranum"><a name="p51.e">51.e/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0099-1.TXT">AI12-0099-1</A></I>} 
+<B>Corrigendum:</B> Revised wording to ensure all kinds of types are 
+covered, including the anonymous task associated with a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">single_task_declaration</A></SPAN>, 
+and generalized it.</div>
+<div class="paranum"><a name="p51.f">51.f/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0099-1.TXT">AI12-0099-1</A></I>} 
+<B>Corrigendum:</B> Revised wording to list the boolean operators that 
+can be predicate-static, to eliminate confusion about whether <B>not</B> 
+is included.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

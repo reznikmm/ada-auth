@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Decimal</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>F.2 The Package Decimal</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Decimal has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Decimal&nbsp;<B>is</B><A NAME="I7402"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Decimal);</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7403"></A>Max_Scale&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7404"></A>Min_Scale&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7405"></A>Min_Delta&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;10.0**(-Max_Scale);<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7406"></A>Max_Delta&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;10.0**(-Min_Scale);</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7407"></A>Max_Decimal_Digits&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Dividend_Type&nbsp;&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Divisor_Type&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Quotient_Type&nbsp;&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Remainder_Type&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7408"></A>Divide&nbsp;(Dividend&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Dividend_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Divisor_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Quotient_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remainder&nbsp;:&nbsp;<B>out</B>&nbsp;Remainder_Type);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Divide);</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Decimal;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">Max_Scale is the largest N such that 10.0**(&ndash;N) 
+is allowed as a decimal type's delta. Its type is <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">Min_Scale is the smallest N such that 10.0**(&ndash;N) 
+is allowed as a decimal type's delta. Its type is <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">Min_Delta is the smallest value allowed for <I>delta</I> 
+in a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN>. 
+Its type is <I>universal_real</I>.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">Max_Delta is the largest value allowed for <I>delta</I> 
+in a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN>. 
+Its type is <I>universal_real</I>.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Max_Decimal_Digits is the largest value allowed for 
+<I>digits</I> in a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN>. 
+Its type is <I>universal_integer</I>.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The effect of Divide is as follows. The value of 
+Quotient is Quotient_Type(Dividend/Divisor). The value of Remainder is 
+Remainder_Type(Intermediate), where Intermediate is the difference between 
+Dividend and the product of Divisor and Quotient; this result is computed 
+exactly.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">Decimal.Max_Decimal_Digits shall be at least 18.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">Decimal.Max_Scale shall be at least 18.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">Decimal.Min_Scale shall be at most 0.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Notes">1&nbsp;&nbsp;The effect of division yielding a quotient 
+with control over rounding versus truncation is obtained by applying 
+either the function attribute Quotient_Type'Round or the conversion Quotient_Type 
+to the expression Dividend/Divisor.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

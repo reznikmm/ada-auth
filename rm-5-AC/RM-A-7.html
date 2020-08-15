@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>External Files and File Objects</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.7 External Files and File Objects</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I6792"></A><A NAME="I6793"></A><A NAME="I6794"></A>Values 
+input from the external environment of the program, or output to the 
+external environment, are considered to occupy <I>external files</I>. 
+An external file can be anything external to the program that can produce 
+a value to be read or receive a value to be written. An external file 
+is identified by a string (the <I>name</I>). A second string (the <I>form</I>) 
+gives further system-dependent characteristics that may be associated 
+with the file, such as the physical organization or access rights. The 
+conventions governing the interpretation of such strings shall be documented.</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal"><A NAME="I6795"></A>Input and output operations are 
+expressed as operations on objects of some <I>file type</I>, rather than 
+directly in terms of the external files. In the remainder of this <span class="insert3">clause</span><span class="delete3">&nbsp;section</span>, 
+the term <I>file</I> is always used to refer to a file object; the term 
+<I>external file</I> is used otherwise.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">Input-output for sequential files of values of a 
+single element type is defined by means of the generic package Sequential_IO. 
+In order to define sequential input-output for a given element type, 
+an instantiation of this generic unit, with the given type as actual 
+parameter, has to be declared. The resulting package contains the declaration 
+of a file type (called File_Type) for files of such elements, as well 
+as the operations applicable to these files, such as the Open, Read, 
+and Write procedures.</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">Input-output for direct access files is likewise 
+defined by a generic package called Direct_IO. Input-output in human-readable 
+form is defined by the (nongeneric) packages Text_IO for Character and 
+String data, <span class="delete2">and&nbsp;</span>Wide_Text_IO for Wide_Character 
+and Wide_String data<span class="insert2">, and Wide_Wide_Text_IO for 
+Wide_Wide_Character and Wide_Wide_String data</span>. Input-output for 
+files containing streams of elements representing values of possibly 
+different types is defined by means of the (nongeneric) package Streams.Stream_IO.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">Before input or output operations can be performed 
+on a file, the file first has to be associated with an external file. 
+While such an association is in effect, the file is said to be <I>open</I>, 
+and otherwise the file is said to be <I>closed</I>.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The language does not define what happens to external 
+files after the completion of the main program and all the library tasks 
+(in particular, if corresponding files have not been closed). <A NAME="I6796"></A><A NAME="I6797"></A><A NAME="I6798"></A>The 
+effect of input-output for access types is unspecified.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6799"></A>An 
+open file has a <I>current mode</I>, which is a value of one of the following 
+enumeration types:&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples"><B>type</B>&nbsp;File_Mode&nbsp;<B>is</B>&nbsp;(In_File,&nbsp;Inout_File,&nbsp;Out_File);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;for&nbsp;Direct_IO</I></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented2">These values correspond respectively to the cases 
+where only reading, both reading and writing, or only writing are to 
+be performed.&nbsp;</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><B>type</B>&nbsp;File_Mode&nbsp;<B>is</B>&nbsp;(In_File,&nbsp;Out_File,&nbsp;Append_File);<BR>
+--<SPAN Class="roman"><I>&nbsp;&nbsp;for&nbsp;Sequential_IO,&nbsp;Text_IO,&nbsp;Wide_Text_IO,&nbsp;</I></SPAN><span class="insert2"><SPAN Class="roman"><I>Wide_Wide_Text_IO,&nbsp;</I></SPAN></span><SPAN Class="roman"><I>and&nbsp;Stream_IO</I></SPAN></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Indented2">These values correspond respectively to the cases 
+where only reading, only writing, or only appending are to be performed.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The mode of a file 
+can be changed.&nbsp;</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal">Several file management operations are common to 
+Sequential_IO, Direct_IO, Text_IO, <span class="delete2">and&nbsp;</span>Wide_Text_IO<span class="insert2">, 
+and Wide_Wide_Text_IO</span>. These operations are described in subclause 
+<A HREF="RM-A-8-2.html">A.8.2</A> for sequential and direct files. Any 
+additional effects concerning text input-output are described in subclause 
+<A HREF="RM-A-10-2.html">A.10.2</A>.</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal">The exceptions that can be propagated by the execution 
+of an input-output subprogram are defined in the package IO_Exceptions; 
+the situations in which they can be propagated are described following 
+the description of the subprogram (and in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+<A HREF="RM-A-13.html">A.13</A>). <A NAME="I6800"></A><A NAME="I6801"></A>The 
+exceptions Storage_Error and Program_Error may be propagated. (Program_Error 
+can only be propagated due to errors made by the caller of the subprogram.) 
+Finally, exceptions can be propagated in certain implementation-defined 
+situations.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Notes">24&nbsp;&nbsp;Each instantiation of the generic packages 
+Sequential_IO and Direct_IO declares a different type File_Type. In the 
+case of Text_IO, Wide_Text_IO, <span class="insert2">Wide_Wide_Text_IO, 
+</span>and Streams.Stream_IO, the corresponding type File_Type is unique.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">25&nbsp;&nbsp;A bidirectional device can often be 
+modeled as two sequential files associated with the device, one of mode 
+In_File, and one of mode Out_File. An implementation may restrict the 
+number of files that may be associated with a given external file.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,1178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Operations of Access Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented5NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left:  11.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented5NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left:  11.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallNestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallNestedBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.10.2 Operations of Access Types</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[The attribute Access is used to create access values 
+designating aliased objects and nonintrinsic subprograms. The &ldquo;accessibility&rdquo; 
+rules prevent dangling references (in the absence of uses of certain 
+unchecked features &mdash; see Section <A HREF="AA-13.html">13</A>).] 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">It should be possible for an access value to 
+designate an object declared by an object declaration, or a subcomponent 
+thereof. In implementation terms, this means pointing at stack-allocated 
+and statically allocated data structures. However, dangling references 
+should be prevented, primarily via compile-time rules, so long as features 
+like Unchecked_Access and Unchecked_Deallocation are not used.</div>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="Annotations">In order to create such access values, we require 
+that the access type be a general access type, that the designated object 
+be aliased, and that the accessibility rules be obeyed.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235-01</A></I>} 
+<A NAME="I2413"></A>For an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+with <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+Access (or Unchecked_Access &mdash; see <A HREF="AA-13-10.html">13.10</A>), 
+the expected type shall be a single access type<span class="insert2">&nbsp;<I>A</I> such that:</span><span class="delete2">&nbsp;[; the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of such an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+is never interpreted as an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN>]. 
+<A NAME="I2414"></A>If the expected type is an access-to-subprogram type, 
+then the expected profile of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+is the designated profile of the access type.</span>&nbsp;</div>
+<div class="paranum"><a name="p2.1">2.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235-01</A></I>} 
+<span class="insert2"><I>A</I> is an access-to-object type with designated 
+type <I>D</I> and the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+is <I>D</I>'Class or is covered by <I>D</I>, or</span></div>
+<div class="paranum"><a name="p2.2">2.2/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235-01</A></I>} 
+<span class="insert2"><I>A</I> is an access-to-subprogram type whose 
+designated profile is type conformant with that of the prefix.</span> 
+</div>
+<div class="paranum"><a name="p2.3">2.3/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235-01</A></I>} 
+<span class="insert2">[The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of such an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+is never interpreted as an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN> 
+or a parameterless <SPAN Class="swiss"><A HREF="AA-6-4.html#S0164">function_call</A></SPAN> 
+(see <A HREF="AA-4-1-4.html">4.1.4</A>).] <A NAME="I2415"></A><A NAME="I2416"></A>The 
+designated type or profile of the expected type of the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+is the expected type or profile for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Saying that the expected 
+type shall be a &quot;single access type&quot; is our &quot;new&quot; 
+way of saying that the type has to be determinable from context using 
+only the fact that it is an access type. See <A HREF="AA-4-2.html">4.2</A> 
+and <A HREF="AA-8-6.html">8.6</A>. Specifying the expected profile only 
+implies type conformance. The more stringent subtype conformance is required 
+by a Legality Rule. This is the only Resolution Rule that applies to 
+the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> in 
+a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> of 
+an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>. 
+In all other cases, the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+has to be resolved without using context. See <A HREF="AA-4-1-4.html">4.1.4</A>.</div>
+<div class="paranum"><a name="p2.b">2.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235-01</A></I>} 
+<span class="insert2">Saying &ldquo;single access type&rdquo; is a bit 
+of a fudge. Both the context and the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+may provide both multiple types; &ldquo;single&rdquo; only means that 
+a single, specific interpretation must remain after resolution. We say 
+&ldquo;single&rdquo; here to trigger the Legality Rules of <A HREF="AA-8-6.html">8.6</A>. 
+The resolution of an access attribute is similar to that of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0137">assignment_statement</A></SPAN>. 
+For example:</span>&nbsp;</div>
+<div class="paranum"><a name="p2.c">2.c/2</a></div>
+<div class="SmallExamples"><span class="insert2"><B>type</B>&nbsp;Int_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Integer;<BR>
+<B>type</B>&nbsp;Char_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Character;<BR>
+<B>type</B>&nbsp;Float_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Float;</span></div>
+<div class="paranum"><a name="p2.d">2.d/2</a></div>
+<div class="SmallExamples"><span class="insert2"><B>function</B>&nbsp;Zap&nbsp;(Val&nbsp;:&nbsp;Int_Ptr)&nbsp;<B>return</B>&nbsp;Float;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>(1)</I></SPAN><BR>
+<B>function</B>&nbsp;Zap&nbsp;(Val&nbsp;:&nbsp;Float_Ptr)&nbsp;<B>return</B>&nbsp;Float;&nbsp;--&nbsp;<SPAN Class="roman"><I>(2)</I></SPAN><BR>
+<B>function</B>&nbsp;Zop&nbsp;<B>return</B>&nbsp;Int_Ptr;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>(3)</I></SPAN><BR>
+<B>function</B>&nbsp;Zop&nbsp;<B>return</B>&nbsp;Char_Ptr;&nbsp;--&nbsp;<SPAN Class="roman"><I>(4)</I></SPAN></span></div>
+<div class="paranum"><a name="p2.e">2.e/2</a></div>
+<div class="SmallExamples"><span class="insert2">Result&nbsp;:&nbsp;Float&nbsp;:=&nbsp;Zap&nbsp;(Zop.<B>all</B>'Access);&nbsp;--&nbsp;<SPAN Class="roman"><I>Resolves&nbsp;to&nbsp;Zap&nbsp;(1)&nbsp;and&nbsp;Zop&nbsp;(3).</I></SPAN></span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
+<A NAME="I2417"></A><A NAME="I2418"></A><A NAME="I2419"></A><A NAME="I2420"></A><A NAME="I2421"></A><A NAME="I2422"></A>[The 
+accessibility rules, which prevent dangling references, are written in 
+terms of <I>accessibility levels</I>, which reflect the run-time nesting 
+of <I>masters</I>. As explained in <A HREF="AA-7-6-1.html">7.6.1</A>, 
+a master is the execution of a <span class="insert2">certain construct, 
+such as</span><span class="delete2">,<SPAN Class="swiss"><A HREF="AA-9-1.html#S0192">task_body</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0145">block_statement</A></SPAN>,</span> 
+a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0162">subprogram_body</A></SPAN><span class="delete2">, 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN>, 
+or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0201">accept_statement</A></SPAN></span>. 
+An accessibility level is <I>deeper than</I> another if it is more deeply 
+nested at run time. For example, an object declared local to a called 
+subprogram has a deeper accessibility level than an object declared local 
+to the calling subprogram. The accessibility rules for access types require 
+that the accessibility level of an object designated by an access value 
+be no deeper than that of the access type. This ensures that the object 
+will live at least as long as the access type, which in turn ensures 
+that the access value cannot later designate an object that no longer 
+exists. The Unchecked_Access attribute may be used to circumvent the 
+accessibility rules.]</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2423"></A><A NAME="I2424"></A>[A given 
+accessibility level is said to be <I>statically deeper</I> than another 
+if the given level is known at compile time (as defined below) to be 
+deeper than the other for all possible executions. In most cases, accessibility 
+is enforced at compile time by Legality Rules. Run-time accessibility 
+checks are also used, since the Legality Rules do not cover certain cases 
+involving access parameters and generic packages.]</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Each master, and each 
+entity and view created by it, has an accessibility level:&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">The accessibility level of a given master is deeper 
+than that of each dynamically enclosing master, and deeper than that 
+of each master upon which the task executing the given master directly 
+depends (see <A HREF="AA-9-3.html">9.3</A>).</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+An entity or view <span class="insert2">defined</span><span class="delete2">&nbsp;created</span> 
+by a declaration<span class="insert2">&nbsp;and created as part of its elaboration</span> 
+has the same accessibility level as the innermost <span class="delete2">enclosing 
+</span>master <span class="insert2">of the declaration&nbsp;</span>except 
+in the cases of renaming and derived access types described below. A 
+parameter of a master has the same accessibility level as the master. 
+</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">This rule defines the &ldquo;normal&rdquo; accessibility 
+of entities. In the absence of special rules below, we intend for this 
+rule to apply.</span>&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">This rule defines the accessibility of all named 
+access types, as well as the accessibility level of all anonymous access 
+types other than those for access parameters and access discriminants. 
+Special rules exist for the accessibility level of such anonymous types. 
+Components, stand-alone objects, and function results whose (anonymous) 
+type is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+have accessibility levels corresponding to named access types defined 
+at the same point.</span>&nbsp;</div>
+<div class="paranum"><a name="p7.c">7.c/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2">Because accessibility level is determined by where 
+the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+is elaborated, for a type extension, the anonymous access types of components 
+(other than access discriminants) inherited from the parent have the 
+same accessibility as they did in the parent; those in the extension 
+part have the accessibility determined by the scope where the type extension 
+is declared. Similarly, the types of the nondiscriminant access components 
+of a derived untagged type have the same accessibility as they did in 
+the parent.</span>&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">The accessibility level of a view of an object 
+or subprogram defined by a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0182">renaming_declaration</A></SPAN> 
+is the same as that of the renamed view.</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+The accessibility level of a view conversion<span class="insert2">, <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN>, 
+or parenthesized expression,</span> is the same as that of the operand.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">The</span><span class="delete2">&nbsp;For a function 
+whose result type is a return-by-reference type, the accessibility level 
+of the result object is the same as that of the master that elaborated 
+the function body. For any other function, the</span> accessibility level 
+of <span class="insert2">an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN> 
+or the result of a function call [(or equivalent use of an operator)] 
+that is used (in its entirety) to directly initialize part of an</span><span class="delete2">&nbsp;the 
+result</span> object is that of the <span class="insert2">object being 
+initialized. In other contexts, the accessibility level of an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN> 
+or the result of a function call is that of the innermost master that 
+evaluates the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN> 
+or function call</span><span class="delete2">&nbsp;execution of the called 
+function</span>.</div>
+<div class="paranum"><a name="p10.a">10.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">The first sentence is talking about a static use 
+of the entire return object &mdash; a slice that happens to be the entire 
+return object doesn't count. On the other hand, this is intended to allow 
+parentheses and <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN>s.</span> 
+</div>
+<div class="paranum"><a name="p10.b">10.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">If the function is used as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>, 
+the second sentence applies. Similarly, an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0137">assignment_statement</A></SPAN> 
+is not an initialization of an object, so the second sentence applies.</span> 
+</div>
+<div class="paranum"><a name="p10.c">10.c/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">The &ldquo;innermost master which evaluated the 
+function call&rdquo; does not include the function call itself (which 
+might be a master).</span></div>
+<div class="paranum"><a name="p10.d">10.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">We really mean the innermost master here, which 
+could be a very short lifetime. Consider a function call used as a parameter 
+of a procedure call. In this case the innermost master which evaluated 
+the function call is the procedure call.</span>&nbsp;</div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">Within a return statement, the accessibility level 
+of the return object is that of the execution of the return statement. 
+If the return statement completes normally by returning from the function, 
+then prior to leaving the function, the accessibility level of the return 
+object changes to be a level determined by the point of call, as does 
+the level of any coextensions (see below) of the return object.</span></div>
+<div class="paranum"><a name="p10.e">10.e/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>We define 
+the accessibility level of the return object during the return statement 
+to be that of the return statement itself so that the object may be designated 
+by objects local to the return statement, but not by objects outside 
+the return statement. In addition, the intent is that the return object 
+gets finalized if the return statement ends without actually returning 
+(for example, due to propagating an exception, or a goto). For a normal 
+return, of course, no finalization is done before returning.</span>&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">The accessibility level of a derived access type 
+is the same as that of its ultimate ancestor.</div>
+<div class="paranum"><a name="p11.1">11.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2">The accessibility level of the anonymous access 
+type defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0183">object_renaming_declaration</A></SPAN> 
+is the same as that of the renamed view.</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2"></span>The accessibility level of the anonymous 
+access type of an access discriminant <span class="insert2">in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>, 
+or in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0171">return_subtype_indication</A></SPAN> 
+of a return statement is determined as follows:</span><span class="delete2">&nbsp;is 
+the same as that of the containing object or associated constrained subtype.</span></div>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="Indented2NestedBulleted"><span class="insert2">If the value 
+of the access discriminant is determined by a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
+the accessibility level of the object or subprogram designated by the 
+associated value (or library level if the value is null);</span>&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>Discussion: 
+</B>This deals with the following cases, when they occur in the context 
+of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+or return statement:</span>&nbsp;</div>
+<div class="paranum"><a name="p12.b">12.b/2</a></div>
+<div class="SmallNestedBulleted"><span class="insert2">An <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0109">extension_aggregate</A></SPAN> 
+where the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0110">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denoting a constrained subtype;</span></div>
+<div class="paranum"><a name="p12.c">12.c/2</a></div>
+<div class="SmallNestedBulleted"><span class="insert2">An uninitialized 
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+where the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+defines a constrained subtype;</span></div>
+<div class="paranum"><a name="p12.d">12.d/2</a></div>
+<div class="SmallNestedBulleted"><span class="insert2">A discriminant 
+of an object with a constrained nominal subtype, including constrained 
+components, the result of calling a function with a constrained result 
+subtype, the dereference of an access-to-constrained subtype, etc.</span> 
+</div>
+<div class="paranum"><a name="p12.2">12.2/2</a></div>
+<div class="Indented2NestedBulleted"><span class="insert2">If the value 
+of the access discriminant is determined by a <SPAN Class="swiss">component_association</SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN>, 
+the accessibility level of the object or subprogram designated by the 
+associated value (or library level if the value is null);</span></div>
+<div class="paranum"><a name="p12.e">12.e/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>In 
+this bullet, the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN> 
+has to occur in the context of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+or return statement, while the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+of the previous bullet can occur anywhere (it doesn't have to be directly 
+given in the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+or return statement).</span>&nbsp;</div>
+<div class="paranum"><a name="p12.3">12.3/2</a></div>
+<div class="Indented2NestedBulleted"><span class="insert2">In other cases, 
+where the value of the access discriminant is determined by an object 
+with an unconstrained nominal subtype, the accessibility level of the 
+object.</span></div>
+<div class="paranum"><a name="p12.f">12.f/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">In other words, if you know the value of the discriminant 
+for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+or return statement from a discriminant constraint or an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN> 
+component association, then that determines the accessibility level; 
+if you don't know it, then it is based on the object itself.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.4">12.4/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">The accessibility level of the anonymous access 
+type of an access discriminant in any other context is that of the enclosing 
+object.</span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+The accessibility level of the anonymous access type of an access parameter<span class="insert2">&nbsp;specifying an access-to-object type</span> is the same as that of the 
+view designated by the actual.<span class="delete2">&nbsp;If the actual is 
+an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>, 
+this is the accessibility level of the execution of the called subprogram.</span> 
+</div>
+<div class="paranum"><a name="p13.1">13.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+<span class="insert2">The accessibility level of the anonymous access 
+type of an access parameter specifying an access-to-subprogram type is 
+deeper than that of any master; all such anonymous access types have 
+this same level.</span>&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B><A NAME="I2425"></A><A NAME="I2426"></A>These 
+represent &ldquo;downward closures&rdquo; and thus require passing of 
+static links or global display information (along with generic sharing 
+information if the implementation does sharing) along with the address 
+of the subprogram. We must prevent conversions of these to types with 
+&ldquo;normal&rdquo; accessibility, as those typically don't include 
+the extra information needed to make a call.</span>&nbsp;</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2"></span>The accessibility level of an object created 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+is the same as that of the access type<span class="insert2">, except 
+for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+of an anonymous access type that defines the value of an access parameter 
+or an access discriminant. For an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+defining the value of an access parameter, the accessibility level is 
+that of the innermost master of the call. For one defining an access 
+discriminant, the accessibility level is determined as follows:</span><span class="delete2">.</span></div>
+<div class="paranum"><a name="p14.1">14.1/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+used to define the constraint in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>, 
+the level of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>;</span></div>
+<div class="paranum"><a name="p14.2">14.2/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+used to define the constraint in a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>, 
+the level of the enclosing type;</span></div>
+<div class="paranum"><a name="p14.3">14.3/2</a></div>
+<div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+used to define the discriminant of an object, the level of the object.</span></div>
+<div class="paranum"><a name="p14.4">14.4/2</a></div>
+<div class="Bulleted-NoPrefix">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2"><A NAME="I2427"></A>In this last case, the allocated 
+object is said to be a <I>coextension</I> of the object whose discriminant 
+designates it, as well as of any object of which the discriminated object 
+is itself a coextension or subcomponent. All coextensions of an object 
+are finalized when the object is finalized (see <A HREF="AA-7-6-1.html">7.6.1</A>).</span> 
+</div>
+<div class="paranum"><a name="p14.a.1">14.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>The 
+rules of access discriminants are such that when the space for an object 
+with a coextension is reclaimed, the space for the coextensions can be 
+reclaimed. Hence, there is implementation advice (see 13.11) that an 
+object and its coextensions all be allocated from the same storage pool 
+(or stack frame, in the case of a declared object).</span>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">The accessibility level of a view of an object 
+or subprogram denoted by a dereference of an access value is the same 
+as that of the access type.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">The accessibility level of a component, protected 
+subprogram, or entry of (a view of) a composite object is the same as 
+that of (the view of) the composite object.&nbsp;</div>
+<div class="paranum"><a name="p16.1">16.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">In the above rules, the operand of a view conversion, 
+parenthesized expression or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+is considered to be used in a context if the view conversion, parenthesized 
+expression or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+itself is used in that context.</span></div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I2428"></A><A NAME="I2429"></A>One 
+accessibility level is defined to be <I>statically deeper</I> than another 
+in the following cases:&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">For a master that is statically nested within another 
+master, the accessibility level of the inner master is statically deeper 
+than that of the outer master.&nbsp;</div>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>Strictly speaking, this 
+should talk about the <I>constructs</I> (such as <SPAN Class="swiss">subprogram_bodies</SPAN>) 
+being statically nested within one another; the masters are really the 
+<I>executions</I> of those constructs.&nbsp;</div>
+<div class="paranum"><a name="p18.b">18.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If a given accessibility 
+level is statically deeper than another, then each level defined to be 
+the same as the given level is statically deeper than each level defined 
+to be the same as the other level.&nbsp;</div>
+<div class="paranum"><a name="p18.1">18.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+<span class="insert2">The accessibility level of the anonymous access 
+type of an access parameter specifying an access-to-subprogram type is 
+statically deeper than that of any master; all such anonymous access 
+types have this same level.</span>&nbsp;</div>
+<div class="paranum"><a name="p18.c">18.c/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>This 
+rule means that it is illegal to convert an access parameter specifying 
+an access to subprogram to a named access to subprogram type, but it 
+is allowed to pass such an access parameter to another access parameter 
+(the implicit conversion's accessibility will succeed).</span>&nbsp;</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+The statically deeper relationship does not apply to the accessibility 
+level of the anonymous type of an access parameter<span class="insert2">&nbsp;specifying an access-to-object type</span>; that is, such an accessibility 
+level is not considered to be statically deeper, nor statically shallower, 
+than any other.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">[For determining whether one level is statically 
+deeper than another when within a generic package body, the generic package 
+is presumed to be instantiated at the same level as where it was declared; 
+run-time checks are needed in the case of more deeply nested instantiations.] 
+</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Bulleted">For determining whether one level is statically 
+deeper than another when within the declarative region of a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+the current instance of the type is presumed to be an object created 
+at a deeper level than that of the type.&nbsp;</div>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In other words, the rules 
+are checked at compile time of the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+in an assume-the-worst manner.&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal"><A NAME="I2430"></A><A NAME="I2431"></A>The accessibility 
+level of all library units is called the <I>library level</I>; a library-level 
+declaration or entity is one whose accessibility level is the library 
+level.&nbsp;</div>
+<div class="paranum"><a name="p22.a">22.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0231">Library_unit_declaration</A></SPAN>s 
+are library level. Nested declarations are library level if they are 
+nested only within packages (possibly more than one), and not within 
+subprograms, tasks, etc.&nbsp;</div>
+<div class="paranum"><a name="p22.b">22.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>To be honest: 
+</B>The definition of the accessibility level of the anonymous type of 
+an access parameter<span class="insert2">&nbsp;specifying an access-to-object 
+type</span> cheats a bit, since it refers to the view designated by the 
+actual, but access values designate objects, not views of objects. What 
+we really mean is the view that &ldquo;would be&rdquo; denoted by an 
+expression &ldquo;X.<B>all</B>&rdquo;, where X is the actual, even though 
+such an expression is a figment of our imagination. The definition is 
+intended to be equivalent to the following more verbose version: The 
+accessibility level of the anonymous type of an access parameter is as 
+follows:&nbsp;</div>
+<div class="paranum"><a name="p22.c">22.c</a></div>
+<div class="SmallBulleted">if the actual is an expression of a named 
+access type &mdash; the accessibility level of that type;</div>
+<div class="paranum"><a name="p22.d">22.d</a></div>
+<div class="SmallBulleted">if the actual is an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+&mdash; the accessibility level of the execution of the called subprogram;</div>
+<div class="paranum"><a name="p22.e">22.e/1</a></div>
+<div class="SmallBulleted">if the actual is a reference to the Access 
+attribute &mdash; the accessibility level of the view denoted by the 
+<span class="insert1"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span>;</div>
+<div class="paranum"><a name="p22.f">22.f</a></div>
+<div class="SmallBulleted">if the actual is a reference to the Unchecked_Access 
+attribute &mdash; library accessibility level;</div>
+<div class="paranum"><a name="p22.g">22.g</a></div>
+<div class="SmallBulleted">if the actual is an access parameter &mdash; 
+the accessibility level of its type.&nbsp;</div>
+<div class="paranum"><a name="p22.h">22.h</a></div>
+<div class="Annotations">Note that the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+case is explicitly mentioned in the RM95, because otherwise the definition 
+would be circular: the level of the anonymous type is that of the view 
+designated by the actual, which is that of the access type.&nbsp;</div>
+<div class="paranum"><a name="p22.i">22.i</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>A deeper accessibility level 
+implies a shorter maximum lifetime. Hence, when a rule requires X to 
+have a level that is &ldquo;not deeper than&rdquo; Y's level, this requires 
+that X has a lifetime at least as long as Y. (We say &ldquo;maximum lifetime&rdquo; 
+here, because the accessibility level really represents an upper bound 
+on the lifetime; an object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+can have its lifetime prematurely ended by an instance of Unchecked_Deallocation.)</div>
+<div class="paranum"><a name="p22.j">22.j</a></div>
+<div class="Annotations">Package elaborations are not masters, and are 
+therefore invisible to the accessibility rules: an object declared immediately 
+within a package has the same accessibility level as an object declared 
+immediately within the declarative region containing the package. This 
+is true even in the body of a package; it jibes with the fact that objects 
+declared in a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0175">package_body</A></SPAN> 
+live as long as objects declared outside the package, even though the 
+body objects are not visible outside the package.</div>
+<div class="paranum"><a name="p22.k">22.k</a></div>
+<div class="Annotations">Note that the level of the <I>view</I> denoted 
+by X.<B>all</B> can be different from the level of the <I>object</I> 
+denoted by X.<B>all</B>. The former is determined by the type of X; the 
+latter is determined either by the type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>, 
+or by the master in which the object was declared. The former is used 
+in several Legality Rules and run-time checks; the latter is used to 
+define when X.<B>all</B> gets finalized. The level of a view reflects 
+what we can conservatively &ldquo;know&rdquo; about the object of that 
+view; for example, due to <SPAN Class="swiss"><A HREF="AA-4-6.html#S0127">type_conversion</A></SPAN>s, 
+an access value might designate an object that was allocated by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+for a different access type.</div>
+<div class="paranum"><a name="p22.l">22.l</a></div>
+<div class="Annotations">Similarly, the level of the view denoted by 
+X.<B>all</B>.Comp can be different from the level of the object denoted 
+by X.<B>all</B>.Comp.</div>
+<div class="paranum"><a name="p22.m">22.m</a></div>
+<div class="Annotations">If Y is statically deeper than X, this implies 
+that Y will be (dynamically) deeper than X in all possible executions.</div>
+<div class="paranum"><a name="p22.n">22.n</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Most accessibility 
+checking is done at compile time; the rules are stated in terms of &ldquo;statically 
+deeper than&rdquo;. The exceptions are:&nbsp;</div>
+<div class="paranum"><a name="p22.o">22.o/2</a></div>
+<div class="SmallBulleted">Checks involving access parameters<span class="insert2">&nbsp;of an access-to-object type</span>. The fact that &ldquo;statically deeper 
+than&rdquo; is not defined for the anonymous access type of an access 
+parameter implies that any rule saying &ldquo;shall not be statically 
+deeper than&rdquo; does not apply to such a type, nor to anything defined 
+to have &ldquo;the same&rdquo; level as such a type.</div>
+<div class="paranum"><a name="p22.p">22.p</a></div>
+<div class="SmallBulleted">Checks involving entities and views within 
+generic packages. This is because an instantiation can be at a level 
+that is more deeply nested than the generic package itself. In implementations 
+that use a macro-expansion model of generics, these violations can be 
+detected at macro-expansion time. For implementations that share generics, 
+run-time code is needed to detect the error.</div>
+<div class="paranum"><a name="p22.q">22.q/2</a></div>
+<div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+Checks during function return<span class="insert2">&nbsp;and <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>s, 
+for nested type extensions and access discriminants</span>.&nbsp;</div>
+<div class="paranum"><a name="p22.r">22.r</a></div>
+<div class="Annotations">Note that run-time checks are not required for 
+access discriminants, because their accessibility is determined statically 
+by the accessibility level of the enclosing object.</div>
+<div class="paranum"><a name="p22.s">22.s/2</a></div>
+<div class="Annotations"><span class="delete2">This&nbsp;</span>The accessibility 
+level of the result object of a function reflects the time when that 
+object will be finalized; we don't allow pointers to the object to survive 
+beyond that time.</div>
+<div class="paranum"><a name="p22.t">22.t</a></div>
+<div class="Annotations">We sometimes use the terms &ldquo;accessible&rdquo; 
+and &ldquo;inaccessible&rdquo; to mean that something has an accessibility 
+level that is not deeper, or deeper, respectively, than something else. 
+</div>
+<div class="paranum"><a name="p22.u">22.u/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+If an accessibility Legality Rule is satisfied, then the corresponding 
+run-time check (if any) cannot fail (and a reasonable implementation 
+will not generate any checking code) unless <span class="insert2">one 
+of the cases requiring run-time checks mentioned previously is</span><span class="delete2">&nbsp;access 
+parameters or shared generic bodies are</span> involved.</div>
+<div class="paranum"><a name="p22.v">22.v</a></div>
+<div class="Annotations">Accessibility levels are defined in terms of 
+the relations &ldquo;the same as&rdquo; and &ldquo;deeper than&rdquo;. 
+To make the discussion more concrete, we can assign actual numbers to 
+each level. Here, we assume that library-level accessibility is level 
+0, and each level defined as &ldquo;deeper than&rdquo; is one level deeper. 
+Thus, a subprogram directly called from the environment task (such as 
+the main subprogram) would be at level 1, and so on.</div>
+<div class="paranum"><a name="p22.w">22.w/2</a></div>
+<div class="Annotations">Accessibility is not enforced at compile time 
+for access parameters<span class="insert2">&nbsp;of an access-to-object type</span>. 
+The &ldquo;obvious&rdquo; implementation of the run-time checks would 
+be inefficient, and would involve distributed overhead; therefore, an 
+efficient method is given below. The &ldquo;obvious&rdquo; implementation 
+would be to pass the level of the caller at each subprogram call, task 
+creation, etc. This level would be incremented by 1 for each dynamically 
+nested master. An Accessibility_Check would be implemented as a simple 
+comparison &mdash; checking that X is not deeper than Y would involve 
+checking that X &lt;= Y.</div>
+<div class="paranum"><a name="p22.x">22.x</a></div>
+<div class="Annotations">A more efficient method is based on passing 
+<I>static</I> nesting levels (within constructs that correspond at run 
+time to masters &mdash; packages don't count). Whenever an access parameter 
+is passed, an implicit extra parameter is passed with it. The extra parameter 
+represents (in an indirect way) the accessibility level of the anonymous 
+access type, and, therefore, the level of the view denoted by a dereference 
+of the access parameter. This is analogous to the implicit &ldquo;Constrained&rdquo; 
+bit associated with certain formal parameters of an unconstrained but 
+definite composite subtype. In this method, we avoid distributed overhead: 
+it is not necessary to pass any extra information to subprograms that 
+have no access parameters. For anything other than an access parameter 
+and its anonymous type, the static nesting level is known at compile 
+time, and is defined analogously to the RM95 definition of accessibility 
+level (e.g. derived access types get their nesting level from their parent). 
+Checking &ldquo;not deeper than&rdquo; is a &quot;&lt;=&quot; test on 
+the levels.</div>
+<div class="paranum"><a name="p22.y">22.y/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">For each access 
+parameter<span class="insert2">&nbsp;of an access-to-object type</span>, the 
+static depth passed depends on the actual, as follows:&nbsp;</div>
+<div class="paranum"><a name="p22.z">22.z</a></div>
+<div class="SmallBulleted">If the actual is an expression of a named 
+access type, pass the static nesting level of that type.</div>
+<div class="paranum"><a name="p22.aa">22.aa</a></div>
+<div class="SmallBulleted">If the actual is an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>, 
+pass the static nesting level of the caller, plus one.</div>
+<div class="paranum"><a name="p22.bb">22.bb/1</a></div>
+<div class="SmallBulleted">If the actual is a reference to the Access 
+attribute, pass the level of the view denoted by the <span class="insert1"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span>.</div>
+<div class="paranum"><a name="p22.cc">22.cc</a></div>
+<div class="SmallBulleted">If the actual is a reference to the Unchecked_Access 
+attribute, pass 0 (the library accessibility level).</div>
+<div class="paranum"><a name="p22.dd">22.dd/2</a></div>
+<div class="SmallBulleted">If the actual is an access parameter<span class="insert2">&nbsp;of an access-to-object type</span>, usually just pass along the level 
+passed in. However, if the static nesting level of the formal (access) 
+parameter is greater than the static nesting level of the actual (access) 
+parameter, the level to be passed is the minimum of the static nesting 
+level of the access parameter and the actual level passed in.&nbsp;</div>
+<div class="paranum"><a name="p22.ee">22.ee/2</a></div>
+<div class="Annotations">For the Accessibility_Check associated with 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0127">type_conversion</A></SPAN> 
+of an access parameter<span class="insert2">&nbsp;of an access-to-object type</span> 
+of a given subprogram to a named access type, if the target type is statically 
+nested within the subprogram, do nothing; the check can't fail in this 
+case. Otherwise, check that the value passed in is &lt;= the static nesting 
+depth of the target type. The other Accessibility_Checks are handled 
+in a similar manner.</div>
+<div class="paranum"><a name="p22.ff">22.ff</a></div>
+<div class="Annotations">This method, using statically known values most 
+of the time, is efficient, and, more importantly, avoids distributed 
+overhead.</div>
+<div class="paranum"><a name="p22.gg">22.gg</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>Examples of accessibility:&nbsp;</div>
+<div class="paranum"><a name="p22.hh">22.hh</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;<B>body</B>&nbsp;Lib_Unit&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>tagged</B>&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;A0&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;T;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Global:&nbsp;A0&nbsp;:=&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;P(X:&nbsp;T)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y:&nbsp;<B>aliased</B>&nbsp;T;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;A1&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;T;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ptr0:&nbsp;A0&nbsp;:=&nbsp;Global;&nbsp;--<SPAN Class="roman"><I>&nbsp;OK.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ptr1:&nbsp;A1&nbsp;:=&nbsp;X'Access;&nbsp;--<SPAN Class="roman"><I>&nbsp;OK.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ptr1&nbsp;:=&nbsp;Y'Access;&nbsp;--<SPAN Class="roman"><I>&nbsp;OK;</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ptr0&nbsp;:=&nbsp;A0(Ptr1);&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal&nbsp;type&nbsp;conversion!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ptr0&nbsp;:=&nbsp;X'Access;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal&nbsp;reference&nbsp;to&nbsp;Access&nbsp;attribute!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ptr0&nbsp;:=&nbsp;Y'Access;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal&nbsp;reference&nbsp;to&nbsp;Access&nbsp;attribute!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Global&nbsp;:=&nbsp;Ptr0;&nbsp;--<SPAN Class="roman"><I>&nbsp;OK.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;P;<BR>
+<B>end</B>&nbsp;Lib_Unit;</div>
+<div class="paranum"><a name="p22.ii">22.ii</a></div>
+<div class="Annotations">The above illegal statements are illegal because 
+the accessibility level of X and Y are statically deeper than the accessibility 
+level of A0. In every possible execution of any program including this 
+library unit, if P is called, the accessibility level of X will be (dynamically) 
+deeper than that of A0. Note that the accessibility levels of X and Y 
+are the same.</div>
+<div class="paranum"><a name="p22.jj">22.jj/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Here's an example 
+involving access parameters<span class="insert2">&nbsp;of an access-to-object 
+type</span>:&nbsp;</div>
+<div class="paranum"><a name="p22.kk">22.kk</a></div>
+<div class="SmallExamples"><B>procedure</B>&nbsp;Main&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Level_1_Type&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Integer;</div>
+<div class="paranum"><a name="p22.ll">22.ll</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;P(X:&nbsp;<B>access</B>&nbsp;Integer)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Nested_Type&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;Nested_Type(X)&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;(1)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;Level_1_Type(X)&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;(2)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p22.mm">22.mm</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Q(X:&nbsp;<B>access</B>&nbsp;Integer)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Nested(X:&nbsp;<B>access</B>&nbsp;Integer)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(X);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Nested;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nested(X);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Q;</div>
+<div class="paranum"><a name="p22.nn">22.nn</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;R&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Level_2:&nbsp;<B>aliased</B>&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q(Level_2'Access);&nbsp;--<SPAN Class="roman"><I>&nbsp;(3)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;R;</div>
+<div class="paranum"><a name="p22.oo">22.oo</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;Level_1:&nbsp;<B>aliased</B>&nbsp;Integer;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Q(Level_1'Access);&nbsp;--<SPAN Class="roman"><I>&nbsp;(4)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;R;<BR>
+<B>end</B>&nbsp;Main;</div>
+<div class="paranum"><a name="p22.pp">22.pp</a></div>
+<div class="Annotations">The run-time Accessibility_Check at (1) can 
+never fail, and no code should be generated to check it. The check at 
+(2) will fail when called from (3), but not when called from (4).</div>
+<div class="paranum"><a name="p22.qq">22.qq</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Within a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+the rules are checked in an assume-the-worst manner. For example:&nbsp;</div>
+<div class="paranum"><a name="p22.rr">22.rr</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Int_Ptr&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Rec(D:&nbsp;<B>access</B>&nbsp;Integer)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Rec_Ptr&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Rec;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;F(X:&nbsp;Rec_Ptr)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;G(X:&nbsp;<B>access</B>&nbsp;Rec)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Rec(D:&nbsp;<B>access</B>&nbsp;Integer)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C1:&nbsp;Int_Ptr&nbsp;:=&nbsp;Int_Ptr(D);&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C2:&nbsp;Rec_Ptr&nbsp;:=&nbsp;Rec'Access;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C3:&nbsp;Boolean&nbsp;:=&nbsp;F(Rec'Access);&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C4:&nbsp;Boolean&nbsp;:=&nbsp;G(Rec'Access);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p22.ss">22.ss</a></div>
+<div class="Annotations">C1, C2, and C3 are all illegal, because one 
+might declare an object of type Rec at a more deeply nested place than 
+the declaration of the type. C4 is legal, but the accessibility level 
+of the object will be passed to function G, and constraint checks within 
+G will prevent it from doing any evil deeds.</div>
+<div class="paranum"><a name="p22.tt">22.tt</a></div>
+<div class="Annotations">Note that we cannot defer the checks on C1, 
+C2, and C3 until compile-time of the object creation, because that would 
+cause violation of the privacy of private parts. Furthermore, the problems 
+might occur within a task or protected body, which the compiler can't 
+see while compiling an object creation.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">The following attribute 
+is defined for a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X that denotes an aliased view of an object:&nbsp;</div>
+<div class="paranum"><a name="p24">24/1</a></div>
+<div class="WideHanging-Term"><span class="insert1">X'Access</span></div><div class="WideHanging-Body">
+<span class="insert1"><A NAME="I2432"></A><A NAME="I2433"></A></span>{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+<span class="insert1"></span>X'Access yields an access value that designates 
+the object denoted by X. The type of X'Access is an access-to-object 
+type, as determined by the expected type. The expected type shall be 
+a general access type. <A NAME="I2434"></A>X shall denote an aliased 
+view of an object[, including possibly the current instance (see <A HREF="AA-8-6.html">8.6</A>) 
+of a limited type within its definition, or a formal parameter or generic 
+formal object of a tagged type]. The view denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X shall satisfy the following additional requirements, presuming the 
+expected type for X'Access is the general access type <I>A</I><span class="insert1">&nbsp;with designated type <I>D</I></span>:&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Indented4Bulleted">If <I>A</I> is an access-to-variable type, 
+then the view shall be a variable; [on the other hand, if <I>A</I> is 
+an access-to-constant type, the view may be either a constant or a variable.] 
+</div>
+<div class="paranum"><a name="p25.a">25.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The current instance of a 
+limited type is considered a variable.&nbsp;</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Indented4Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+The view shall not be a subcomponent that depends on discriminants of 
+a variable whose nominal subtype is unconstrained, unless this subtype 
+is indefinite, or the variable is <span class="insert2">constrained by 
+its initial value</span><span class="delete2">&nbsp;aliased</span>.</div>
+<div class="paranum"><a name="p26.a">26.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This restriction is intended 
+to be similar to the restriction on renaming discriminant-dependent subcomponents. 
+</div>
+<div class="paranum"><a name="p26.b">26.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This prevents references to subcomponents 
+that might disappear or move or change constraints after creating the 
+reference.&nbsp;</div>
+<div class="paranum"><a name="p26.c">26.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Implementation 
+Note:&nbsp;</B>There was some thought to making this restriction more stringent, 
+roughly: &quot;X shall not denote a subcomponent of a variable with discriminant-dependent 
+subcomponents, if the nominal subtype of the variable is an unconstrained 
+definite subtype.&quot; This was because in some implementations, it 
+is not just the discriminant-dependent subcomponents that might move 
+as the result of an assignment that changed the discriminants of the 
+enclosing object. However, it was decided not to make this change because 
+a reasonable implementation strategy was identified to avoid such problems, 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p26.d">26.d</a></div>
+<div class="SmallBulleted">Place non-discriminant-dependent components 
+with any aliased parts at offsets preceding any discriminant-dependent 
+components in a discriminated record type with defaulted discriminants.</div>
+<div class="paranum"><a name="p26.e">26.e</a></div>
+<div class="SmallBulleted">Preallocate the maximum space for unconstrained 
+discriminated variables with aliased subcomponents, rather than allocating 
+the initial size and moving them to a larger (heap-resident) place if 
+they grow as the result of an assignment.&nbsp;</div>
+<div class="paranum"><a name="p26.f">26.f</a></div>
+<div class="Annotations">Note that for objects of a by-reference type, 
+it is not an error for a programmer to take advantage of the fact that 
+such objects are passed by reference. Therefore, the above approach is 
+also necessary for discriminated record types with components of a by-reference 
+type.</div>
+<div class="paranum"><a name="p26.g">26.g</a></div>
+<div class="Annotations">To make the above strategy work, it is important 
+that a component of a derived type is defined to be discriminant-dependent 
+if it is inherited and the parent subtype constraint is defined in terms 
+of a discriminant of the derived type (see <A HREF="AA-3-7.html">3.7</A>). 
+</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Indented4Bulleted">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+If <span class="insert1"><I>A</I> is a named access type and <I>D</I> 
+is a tagged type</span><span class="delete1">&nbsp;the designated type of 
+<I>A</I> is tagged</span>, then the type of the view shall be covered 
+by <span class="insert1"><I>D</I></span><span class="delete1">&nbsp;the designated 
+type</span>; <span class="insert1">if <I>A</I> is anonymous and <I>D</I> 
+is tagged, then the type of the view shall be either <I>D</I>'Class or 
+a type covered by&nbsp;</span><span class="insert2"><I>D</I></span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;D</span></span><span class="insert1">;</span> 
+if <span class="insert1"><I>D</I> is untagged</span><span class="delete1"><I>&nbsp;A</I>'s 
+designated type is not tagged</span>, then the type of the view shall 
+be <span class="insert1"><I>D</I></span><span class="delete1">&nbsp;the same</span>, 
+and <span class="insert2">either:</span><span class="delete2"></span><span class="delete1">&nbsp;either 
+</span><span class="delete2"><I>A</I>'s designated subtype shall&nbsp;</span><span class="insert1"><span class="delete2">either 
+</span></span><span class="delete2">statically match the nominal subtype 
+of the view</span><span class="insert1"><span class="delete2">&nbsp;or be</span></span><span class="delete2"></span><span class="delete1">, 
+or the designated subtype shall be</span><span class="delete2">&nbsp;discriminated 
+and unconstrained; <A NAME="I2435"></A></span></div>
+<div class="paranum"><a name="p27.1">27.1/2</a></div>
+<div class="Indented5NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+<span class="insert2">the designated subtype of <I>A</I> shall statically 
+match the nominal subtype of the view; or<A NAME="I2436"></A></span></div>
+<div class="paranum"><a name="p27.2">27.2/2</a></div>
+<div class="Indented5NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+<span class="insert2"><I>D</I> shall be discriminated in its full view 
+and unconstrained in any partial view, and the designated subtype of 
+<I>A</I> shall be unconstrained.</span>&nbsp;</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This ensures that 
+the dope for an aliased array object can always be stored contiguous 
+with it, but need not be if its nominal subtype is constrained.&nbsp;</div>
+<div class="paranum"><a name="p27.a.1">27.a.1/1</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+<span class="insert1">An access attribute can be used as the controlling 
+operand in a dispatching call; see <A HREF="AA-3-9-2.html">3.9.2</A>.</span></div>
+<div class="paranum"><a name="p27.a.2">27.a.2/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+<span class="insert2">This does not require that types have a partial 
+view in order to allow an access attribute of an unconstrained discriminated 
+object, only that any partial view that does exist is unconstrained.</span> 
+</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Indented4Bulleted">The accessibility level of the view shall 
+not be statically deeper than that of the access type <I>A</I>. In addition 
+to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit.<A NAME="I2437"></A> <A NAME="I2438"></A></div>
+<div class="paranum"><a name="p28.a">28.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In an instance body, a 
+run-time check applies.</div>
+<div class="paranum"><a name="p28.b">28.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+If <I>A</I> is an anonymous<span class="insert2">&nbsp;access-to-object type 
+of an access parameter</span><span class="delete2">&nbsp;access type</span>, 
+then the view can never have a deeper accessibility level than <I>A</I><span class="insert2">. 
+The same is true for an anonymous access-to-object type of an access 
+discriminant</span>, except when X'Access is used to initialize an access 
+discriminant of an object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>. 
+The latter case is illegal if the accessibility level of X is statically 
+deeper than that of the access type of the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN>; 
+a run-time check is needed in the case where the initial value comes 
+from an access parameter.<span class="insert2">&nbsp;Other anonymous access-to-object 
+types have &quot;normal&quot; accessibility checks.</span>&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="WideHanging-Body"><A NAME="I2439"></A><A NAME="I2440"></A><A NAME="I2441"></A>A 
+check is made that the accessibility level of X is not deeper than that 
+of the access type <I>A</I>. If this check fails, Program_Error is raised. 
+</div>
+<div class="paranum"><a name="p29.a">29.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The check is needed for 
+access parameters <span class="insert2">&nbsp;of an access-to-object type</span> 
+and in instance bodies.</div>
+<div class="paranum"><a name="p29.b">29.b/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>This check requires 
+that some indication of lifetime is passed as an implicit parameter along 
+with access parameters<span class="insert2">&nbsp;of an access-to-object type</span>.No 
+such requirement applies to <span class="insert2">other anonymous access 
+types</span><span class="delete2">&nbsp;access discriminants</span>, since 
+the checks associated with them are all compile-time checks.&nbsp;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="WideHanging-Body"><A NAME="I2442"></A>If the nominal subtype 
+of X does not statically match the designated subtype of <I>A</I>, a 
+view conversion of X to the designated subtype is evaluated (which might 
+raise Constraint_Error &mdash; see <A HREF="AA-4-6.html">4.6</A>) and 
+the value of X'Access designates that view.&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Normal">The following attribute is defined for a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+P that denotes a subprogram:&nbsp;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="WideHanging-Term"><A NAME="I2443"></A>The accessibility level 
+of P shall not be statically deeper than that of <I>S</I>. <A NAME="I2444"></A>In 
+addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit. The profile of P shall be subtype-conformant with the designated 
+profile of <I>S</I>, and shall not be Intrinsic. <A NAME="I2445"></A>If 
+the subprogram denoted by P is declared within a generic <span class="insert2">unit, 
+and the expression P'Access occurs within the body of that generic unit 
+or within the body of a generic unit declared within the declarative 
+region of the generic unit, then the ultimate ancestor of <I>S</I> shall 
+be either a nonformal type declared within the generic unit or an anonymous 
+access type of an access parameter.</span><span class="delete2">&nbsp;body, 
+<I>S</I> shall be declared within the generic body.</span></div>
+<div class="paranum"><a name="p32.a">32.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00229.TXT">AI95-00229-01</A></I>} 
+The part about generic bodies is worded in terms of the denoted subprogram, 
+not the denoted view; this implies that renaming is invisible to this 
+part of the rule.<span class="insert2">&nbsp;&ldquo;Declared within the declarative 
+region of the generic&rdquo; is referring to child and nested generic 
+units.</span> This rule is partly to prevent contract model problems 
+with respect to the accessibility rules, and partly to ease shared-generic-body 
+implementations, in which a subprogram declared in an instance needs 
+to have a different calling convention from other subprograms with the 
+same profile.</div>
+<div class="paranum"><a name="p32.b">32.b</a></div>
+<div class="Annotations">Overload resolution ensures only that the profile 
+is type-conformant. This rule specifies that subtype conformance is required 
+(which also requires matching calling conventions). P cannot denote an 
+entry because access-to-subprogram types never have the <I>entry</I> 
+calling convention. P cannot denote an enumeration literal or an attribute 
+function because these have intrinsic calling conventions.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Notes">84&nbsp;&nbsp;The Unchecked_Access attribute yields 
+the same result as the Access attribute for objects, but has fewer restrictions 
+(see <A HREF="AA-13-10.html">13.10</A>). There are other predefined operations 
+that yield access values: an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0129">allocator</A></SPAN> 
+can be used to create an object, and return an access value that designates 
+it (see <A HREF="AA-4-8.html">4.8</A>); evaluating the literal <B>null</B> 
+yields a null access value that designates no entity at all (see <A HREF="AA-4-2.html">4.2</A>).</div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Notes">85&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<A NAME="I2446"></A>The predefined operations of an access type also 
+include the assignment operation, qualification, and membership tests. 
+Explicit conversion is allowed between general access types with matching 
+designated subtypes; explicit conversion is allowed between access-to-subprogram 
+types with subtype conformant profiles (see <A HREF="AA-4-6.html">4.6</A>). 
+<A NAME="I2447"></A>Named access types have predefined equality operators; 
+anonymous access types do not<span class="insert2">, but they can use 
+the predefined equality operators for <I>universal_access</I>&nbsp;</span>(see 
+<A HREF="AA-4-5-2.html">4.5.2</A>).&nbsp;</div>
+<div class="paranum"><a name="p34.a">34.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2">Anonymous access types can use the universal access 
+equality operators declared in Standard, while named access types cannot 
+for compatibility reasons.&nbsp;</span>By not having equality operators for 
+anonymous access types, we eliminate the need to specify exactly where 
+the predefined operators for anonymous access types would be defined, 
+as well as the need for an implementer to insert an implicit declaration 
+for &quot;=&quot;, etc. at the appropriate place in their symbol table. 
+Note that <span class="insert2">&quot;:=&quot;,&nbsp;</span>'Access<span class="insert2">,</span> 
+and &quot;.<B>all</B>&quot; are defined<span class="delete2">, and &quot;:=&quot; 
+is defined though useless since all instances are constant. The literal 
+<B>null</B> is also defined for the purposes of overload resolution, 
+but is disallowed by a Legality Rules of this subclause</span>.&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Notes">86&nbsp;&nbsp;The object or subprogram designated 
+by an access value can be named with a dereference, either an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN>. 
+See <A HREF="AA-4-1.html">4.1</A>.</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Notes">87&nbsp;&nbsp;A call through the dereference of an 
+access-to-subprogram value is never a dispatching call.&nbsp;</div>
+<div class="paranum"><a name="p36.a">36.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>See <A HREF="AA-3-9-2.html">3.9.2</A>. 
+</div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Notes">88&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+<A NAME="I2448"></A><A NAME="I2449"></A><span class="insert2">The</span><span class="delete2">&nbsp;The 
+accessibility rules imply that it is not possible to use the</span> Access 
+attribute<span class="insert2">&nbsp;for subprograms and parameters of an 
+anonymous access-to-subprogram type may together be used</span> to implement 
+&ldquo;downward closures&rdquo; &mdash; that is, to pass a more-nested 
+subprogram as a parameter to a less-nested subprogram, as might be <span class="insert2">appropriate</span><span class="delete2">&nbsp;desired 
+for example</span> for an iterator abstraction<span class="insert2">&nbsp;or numerical integration. Downward</span><span class="delete2">. Instead, 
+downward</span> closures can <span class="insert2">also&nbsp;</span>be implemented 
+using generic formal subprograms (see <A HREF="AA-12-6.html">12.6</A>). 
+Note that Unchecked_Access is not allowed for subprograms.</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Notes">89&nbsp;&nbsp;Note that using an access-to-class-wide 
+tagged type with a dispatching operation is a potentially more structured 
+alternative to using an access-to-subprogram type.</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Notes">90&nbsp;&nbsp;An implementation may consider two access-to-subprogram 
+values to be unequal, even though they designate the same subprogram. 
+This might be because one points directly to the subprogram, while the 
+other points to a special prologue that performs an Elaboration_Check 
+and then jumps to the subprogram. See <A HREF="AA-4-5-2.html">4.5.2</A>. 
+</div>
+<div class="paranum"><a name="p39.a">39.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If equality of access-to-subprogram 
+values is important to the logic of a program, a reference to the Access 
+attribute of a subprogram should be evaluated only once and stored in 
+a global constant for subsequent use and equality comparison.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of use of 
+the Access attribute:</I>&nbsp;</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Examples">Martha&nbsp;:&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person(F);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A></I></SPAN><BR>
+Cars&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>&nbsp;(1..2)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;Car;<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+Martha.Vehicle&nbsp;:=&nbsp;Cars(1)'Access;<BR>
+George.Vehicle&nbsp;:=&nbsp;Cars(2)'Access;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p41.a">41.a</a></div>
+<div class="Annotations"><A NAME="I2450"></A>We no longer make things 
+like 'Last and &quot;.component&quot; (basic) operations of an access 
+type that need to be &quot;declared&quot; somewhere. Instead, implicit 
+dereference in a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+takes care of them all. This means that there should never be a case 
+when X.<B>all</B>'Last is legal while X'Last is not. See AI83-00154. 
+</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p41.b">41.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+<span class="insert2"><A NAME="I2451"></A> Aliased variables are not 
+necessarily constrained in Ada 2005 (see <A HREF="AA-3-6.html">3.6</A>). 
+Therefore, a subcomponent of an aliased variable may disappear or change 
+shape, and taking 'Access of such a subcomponent thus is illegal, while 
+the same operation would have been legal in Ada 95. Note that most allocated 
+objects are still constrained by their initial value (see <A HREF="AA-4-8.html">4.8</A>), 
+and thus legality of 'Access didn't change for them. For example:</span> 
+</div>
+<div class="paranum"><a name="p41.c">41.c/2</a></div>
+<div class="SmallExamples" style="margin-bottom: 0.4em"><span class="insert2"><B>type</B>&nbsp;T1&nbsp;(D1&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;D1&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;False&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C1&nbsp;:&nbsp;<B>aliased</B>&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;True&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>type</B>&nbsp;Acc_Int&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Integer;</span></div>
+<div class="paranum"><a name="p41.d">41.d/2</a></div>
+<div class="SmallExamples"><span class="insert2">A_T&nbsp;:&nbsp;<B>aliased</B>&nbsp;T1;<BR>
+Ptr&nbsp;:&nbsp;Acc_Int&nbsp;:=&nbsp;A_T.C1'Access;&nbsp;--&nbsp;<SPAN Class="roman"><I>Illegal&nbsp;in&nbsp;Ada&nbsp;2005,&nbsp;legal&nbsp;in&nbsp;Ada&nbsp;95</I></SPAN><BR>
+A_T&nbsp;:=&nbsp;(D1&nbsp;=&gt;&nbsp;True);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Raised&nbsp;Constraint_Error&nbsp;in&nbsp;Ada&nbsp;95,&nbsp;but&nbsp;does&nbsp;not</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>in&nbsp;Ada&nbsp;2005,&nbsp;so&nbsp;Ptr&nbsp;would&nbsp;become&nbsp;invalid&nbsp;when&nbsp;this</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>is&nbsp;assigned&nbsp;(thus&nbsp;Ptr&nbsp;is&nbsp;illegal).</I></SPAN></span></div>
+<div class="paranum"><a name="p41.e">41.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+<span class="insert2">If a discriminated full type has a partial view 
+(private type) that is constrained, we do not allow 'Access on objects 
+to create a value of an object of an access-to-unconstrained type. Ada 
+95 allowed this attribute and various access subtypes, requiring that 
+the heap object be constrained and thus making details of the implementation 
+of the private type visible to the client of the private type. See <A HREF="AA-4-8.html">4.8</A> 
+for more on this topic.</span></div>
+<div class="paranum"><a name="p41.f">41.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00229.TXT">AI95-00229-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+<span class="insert2"><B>Amendment Correction:</B> Taking 'Access of 
+a subprogram declared in a generic unit in the body of that generic is 
+no longer allowed. Such references can easily be used to create dangling 
+pointers, as Legality Rules are not rechecked in instance bodies. At 
+the same time, the rules were loosened a bit where that is harmless, 
+and also to allow any routine to be passed to an access parameter of 
+an access-to-subprogram type. The now illegal uses of 'Access can almost 
+always be moved to the private part of the generic unit, where they are 
+still legal (and rechecked upon instantiation for possibly dangling pointers).</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p41.g">41.g/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0010">8652/0010</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00127.TXT">AI95-00127-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> <A NAME="I2452"></A>Access 
+attributes of objects of class-wide types can be used as the controlling 
+parameter in a dispatching calls (see <A HREF="AA-3-9-2.html">3.9.2</A>). 
+This was an oversight in Ada 95.</span></div>
+<div class="paranum"><a name="p41.h">41.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00235.TXT">AI95-00235-01</A></I>} 
+<span class="insert2"><B>Amendment Correction:</B> The type of the prefix 
+can now be used in resolving Access attributes. This allows more uses 
+of the Access attribute to resolve. For example:</span>&nbsp;</div>
+<div class="paranum"><a name="p41.i">41.i/2</a></div>
+<div class="SmallExamples"><span class="insert2"><B>type</B>&nbsp;Int_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Integer;<BR>
+<B>type</B>&nbsp;Float_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Float;</span></div>
+<div class="paranum"><a name="p41.j">41.j/2</a></div>
+<div class="SmallExamples"><span class="insert2"><B>function</B>&nbsp;Zap&nbsp;(Val&nbsp;:&nbsp;Int_Ptr)&nbsp;<B>return</B>&nbsp;Float;<BR>
+<B>function</B>&nbsp;Zap&nbsp;(Val&nbsp;:&nbsp;Float_Ptr)&nbsp;<B>return</B>&nbsp;Float;</span></div>
+<div class="paranum"><a name="p41.k">41.k/2</a></div>
+<div class="SmallExamples"><span class="insert2">Value&nbsp;:&nbsp;<B>aliased</B>&nbsp;Integer&nbsp;:=&nbsp;10;</span></div>
+<div class="paranum"><a name="p41.l">41.l/2</a></div>
+<div class="SmallExamples"><span class="insert2">Result1&nbsp;:&nbsp;Float&nbsp;:=&nbsp;Zap&nbsp;(Value'access);&nbsp;--&nbsp;<SPAN Class="roman"><I>Ambiguous&nbsp;in&nbsp;Ada&nbsp;95;&nbsp;resolves&nbsp;in&nbsp;Ada&nbsp;2005.</I></SPAN><BR>
+Result2&nbsp;:&nbsp;Float&nbsp;:=&nbsp;Zap&nbsp;(Int_Ptr'(Value'access));&nbsp;--&nbsp;<SPAN Class="roman"><I>Resolves&nbsp;in&nbsp;Ada&nbsp;95&nbsp;and&nbsp;Ada&nbsp;2005.</I></SPAN></span></div>
+<div class="paranum"><a name="p41.m">41.m/2</a></div>
+<div class="Annotations"><span class="insert2">This change is upward 
+compatible; any expression that does not resolve by the new rules would 
+have failed a Legality Rule.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p41.n">41.n/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00162.TXT">AI95-00162-01</A></I>} 
+<span class="insert2">Adjusted the wording to reflect the fact that expressions 
+and function calls are masters.</span></div>
+<div class="paranum"><a name="p41.o">41.o/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">Defined the accessibility of the various new kinds 
+and uses of anonymous access types.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

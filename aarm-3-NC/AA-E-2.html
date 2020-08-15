@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Categorization of Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.2 Categorization of Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[Library units can be categorized according to the 
+role they play in a distributed program. Certain restrictions are associated 
+with each category to ensure that the semantics of a distributed program 
+remain close to the semantics for a nondistributed program.]</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+<A NAME="I8718"></A><A NAME="I8719"></A><A NAME="I8720"></A><A NAME="I8721"></A><A NAME="I8722"></A><A NAME="I8723"></A>A 
+<I>categorization pragma</I> is a library unit pragma (see <A HREF="AA-10-1-5.html">10.1.5</A>) 
+that specifies a corresponding <I>categorization aspect</I>. A categorization 
+aspect restricts the declarations, child units, or semantic dependences 
+of the library unit to which it applies. A <I>categorized library unit</I> 
+is a library unit that has a categorization aspect that is True.</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+The pragmas Shared_Passive, Remote_Types, and Remote_Call_Interface are 
+categorization pragmas, and the associated aspects are categorization 
+aspects. In addition, for the purposes of this Annex, the aspect Pure 
+(see <A HREF="AA-10-2-1.html">10.2.1</A>) is considered a categorization 
+aspect and the pragma Pure is considered a categorization pragma.</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+[<A NAME="I8724"></A> A library package or generic library package is 
+called a <I>shared passive</I> library unit if the Shared_Passive aspect 
+of the unit is True. <A NAME="I8725"></A> A library package or generic 
+library package is called a <I>remote types</I> library unit if the Remote_Types 
+aspect of the unit is True. <A NAME="I8726"></A> A library unit is called 
+a <I>remote call interface</I> if the Remote_Call_Interface aspect of 
+the unit is True.] <A NAME="I8727"></A>A <I>normal library unit</I> is 
+one for which no categorization aspect is True.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+These terms (other than &ldquo;normal library unit&rdquo;) are really 
+defined in the following subclauses.&nbsp;</div>
+<div class="paranum"><a name="p4.a.1">4.a.1/1</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
+A library subprogram can be a remote call interface, but it cannot be 
+a remote types or shared passive library unit.&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+[The various categories of library units and the associated restrictions 
+are described in this and the following subclauses. The categories are 
+related hierarchically in that the library units of one category can 
+depend semantically only on library units of that category or an earlier 
+one in the hierarchy, except that the body of a remote types or remote 
+call interface library unit is unrestricted, the declaration of a remote 
+types or remote call interface library unit may depend on preelaborated 
+normal library units that are mentioned only in private with clauses, 
+and all categories can depend on limited views.</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+The overall hierarchy (including declared pure) is as follows, with a 
+lower-numbered category being &ldquo;earlier in the hierarchy&rdquo; 
+in the sense of the previous paragraph:&nbsp;</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Enumerated-Term">&nbsp;1.</div><div class="Enumerated-Body">
+Declared Pure</div>
+<div class="paranum"><a name="p6.2">6.2/3</a></div>
+<div class="Enumerated-Term">&nbsp;2.</div><div class="Enumerated-Body">
+Shared Passive</div>
+<div class="paranum"><a name="p6.3">6.3/3</a></div>
+<div class="Enumerated-Term">&nbsp;3.</div><div class="Enumerated-Body">
+Remote Types</div>
+<div class="paranum"><a name="p6.4">6.4/3</a></div>
+<div class="Enumerated-Term">&nbsp;4.</div><div class="Enumerated-Body">
+Remote Call Interface</div>
+<div class="paranum"><a name="p6.5">6.5/3</a></div>
+<div class="Enumerated-Term">&nbsp;5.</div><div class="Enumerated-Body">
+Normal (no restrictions)&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 7 through 
+11 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Declared pure and shared passive library units are 
+preelaborated. The declaration of a remote types or remote call interface 
+library unit is required to be preelaborable. ]</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 13 was 
+deleted.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">Implementations are allowed to define other categorization 
+pragmas.</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p14.a">14.a/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
+<B>Corrigendum:</B> Clarified that a library subprogram can be a remote 
+call interface unit.</div>
+<div class="paranum"><a name="p14.b">14.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0079">8652/0079</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00208.TXT">AI95-00208-01</A></I>} 
+<B>Corrigendum:</B> Removed the requirement that types be represented 
+the same in all partitions, because it prevents the definition of heterogeneous 
+distributed systems and goes much further than required.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p14.c">14.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+We now allow private withs of preelaborated units in Remote Types and 
+Remote Call Interface units; this is documented as an extension in the 
+subclauses where this is defined normatively.</div>
+<div class="paranum"><a name="p14.d">14.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+We have introduced categorization aspects; these are documented as extensions 
+in the subclauses where they actually are defined.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

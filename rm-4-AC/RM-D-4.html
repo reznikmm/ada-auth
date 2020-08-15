@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Entry Queuing Policies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.4 Entry Queuing Policies</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><A NAME="I8227"></A>This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+specifies a mechanism for a user to choose an entry <I>queuing policy</I>. 
+It also defines <span class="insert1">two</span><span class="delete1">&nbsp;one</span> 
+such polic<span class="insert1">ies</span><span class="delete1">&nbsp;y</span>. 
+Other policies are implementation defined.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Queuing_Policy is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8228"></A><A NAME="I8229"></A>Queuing_Policy(<I>policy_</I><A NAME="I8230"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The <I>policy_</I><A NAME="I8231"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall be either FIFO_Queuing, Priority_Queuing or an implementation-defined 
+<A NAME="I8232"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>.</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I8233"></A><A NAME="I8234"></A>A Queuing_Policy 
+pragma is a configuration pragma.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I8235"></A>A <I>queuing policy</I> governs 
+the order in which tasks are queued for entry service, and the order 
+in which different entry queues are considered for service. The queuing 
+policy is specified by a Queuing_Policy pragma.&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">Two queuing policies, FIFO_Queuing and Priority_Queuing, 
+are language defined. If no Queuing_Policy pragma <span class="insert2">applies 
+to</span><span class="delete2">&nbsp;appears in</span> any of the program 
+units comprising the partition, the queuing policy for that partition 
+is FIFO_Queuing.<span class="insert3"><A NAME="I8236"></A><A NAME="I8237"></A></span> 
+The rules for this policy are specified in <A HREF="RM-9-5-3.html">9.5.3</A> 
+and <A HREF="RM-9-7-1.html">9.7.1</A>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The Priority_Queuing 
+policy is defined as follows:<span class="insert3"><A NAME="I8238"></A><A NAME="I8239"></A></span></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted"><A NAME="I8240"></A>The calls to an entry (including 
+a member of an entry family) are queued in an order consistent with the 
+priorities of the calls. The <I>priority of an entry call</I> is initialized 
+from the active priority of the calling task at the time the call is 
+made, but can change later. Within the same priority, the order is consistent 
+with the calling (or requeuing, or priority setting) time (that is, a 
+FIFO order).</div>
+<div class="paranum"><a name="p10">10/1</a></div>
+<div class="Bulleted">After a call is first queued, changes to the active 
+priority of a task do not affect the priority of the call, unless the 
+base priority of the task is set<span class="insert1">&nbsp;while the task 
+is blocked on an entry call</span>.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">When the base priority of a task is set (see <A HREF="RM-D-5.html">D.5</A>), 
+if the task is blocked on an entry call, and the call is queued, the 
+priority of the call is updated to the new active priority of the calling 
+task. This causes the call to be removed from and then reinserted in 
+the queue at the new active priority.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">When more than one <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN> 
+of a protected object becomes True, and more than one of the respective 
+queues is nonempty, the call with the highest priority is selected. If 
+more than one such call has the same priority, the call that is queued 
+on the entry whose declaration is first in textual order in the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
+is selected. For members of the same entry family, the one with the lower 
+family index is selected.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">If the expiration time of two or more open <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0235">delay_alternative</A></SPAN>s 
+is the same and no other <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0234">accept_alternative</A></SPAN>s 
+are open, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0235">delay_alternative</A></SPAN> 
+that is first in textual order in the <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0231">selective_accept</A></SPAN> 
+is executed.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">When more than one alternative of a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0231">selective_accept</A></SPAN> 
+is open and has queued calls, an alternative whose queue has the highest-priority 
+call at its head is selected. If two or more open alternatives have equal-priority 
+queued calls, then a call on the entry in the <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0234">accept_alternative</A></SPAN> 
+that is first in textual order in the <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0231">selective_accept</A></SPAN> 
+is selected.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">Implementations are allowed to define other queuing 
+policies, but need not support more than one <span class="insert2">queuing</span><span class="delete2">&nbsp;such</span> 
+policy per partition.&nbsp;</div>
+<div class="paranum"><a name="p15.1">15.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">Implementations are allowed 
+to defer the reordering of entry queues following a change of base priority 
+of a task blocked on the entry call if it is not practical to reorder 
+the queue immediately.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">The implementation should use names that end with 
+&ldquo;_Queuing&rdquo; for implementation-defined queuing policies.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

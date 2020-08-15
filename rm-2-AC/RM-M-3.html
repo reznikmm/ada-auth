@@ -1,0 +1,587 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Implementation Advice</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-M-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-N.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>M.3 <span class="insert2">Implementation Advice</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I7903"></A><A NAME="I7904"></A>This 
+International Standard sometimes gives advice about handling certain 
+target machine dependences. Each Ada implementation must document whether 
+that advice is followed:</span>&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Bulleted"><span class="insert2">Program_Error should be raised 
+when an unsupported Specialized Needs Annex feature is used at run time.</span><span class="insert2">&nbsp;See <A HREF="RM-1-1-3.html">1.1.3</A>(20).</span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Bulleted"><span class="insert2">Implementation-defined extensions 
+to the functionality of a language-defined library unit should be provided 
+by adding children to the library unit.</span><span class="insert2">&nbsp;See <A HREF="RM-1-1-3.html">1.1.3</A>(21).</span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Bulleted"><span class="insert2">If a bounded error or erroneous 
+execution is detected, Program_Error should be raised.</span><span class="insert2">&nbsp;See <A HREF="RM-1-1-5.html">1.1.5</A>(12).</span></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Bulleted"><span class="insert2">Implementation-defined pragmas 
+should have no semantic effect for error-free programs.</span><span class="insert2">&nbsp;See <A HREF="RM-2-8.html">2.8</A>(16).</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted"><span class="insert2">Implementation-defined pragmas 
+should not make an illegal program legal, unless they complete a declaration 
+or configure the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0230">library_item</A></SPAN>s 
+in an environment.</span><span class="insert2">&nbsp;See <A HREF="RM-2-8.html">2.8</A>(19).</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted"><span class="insert2">Long_Integer should be declared 
+in Standard if the target supports 32-bit arithmetic. No other named 
+integer subtypes should be declared in Standard.</span><span class="insert2">&nbsp;See <A HREF="RM-3-5-4.html">3.5.4</A>(28).</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted"><span class="insert2">For a two's complement target, 
+modular types with a binary modulus up to System.Max_Int*2+2 should be 
+supported. A nonbinary modulus up to Integer'Last should be supported.</span><span class="insert2">&nbsp;See <A HREF="RM-3-5-4.html">3.5.4</A>(29).</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Bulleted"><span class="insert2">Program_Error should be raised 
+for the evaluation of S'Pos for an enumeration type, if the value of 
+the operand does not correspond to the internal code for any enumeration 
+literal of the type.</span><span class="insert2">&nbsp;See <A HREF="RM-3-5-5.html">3.5.5</A>(8).</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Bulleted"><span class="insert2">Long_Float should be declared 
+in Standard if the target supports 11 or more digits of precision. No 
+other named float subtypes should be declared in Standard.</span><span class="insert2">&nbsp;See <A HREF="RM-3-5-7.html">3.5.7</A>(17).</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Bulleted"><span class="insert2">Multidimensional arrays should 
+be represented in row-major order, unless the array has convention Fortran.</span><span class="insert2">&nbsp;See <A HREF="RM-3-6-2.html">3.6.2</A>(11).</span></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted"><span class="insert2">Tags.Internal_Tag should 
+return the tag of a type whose innermost master is the master of the 
+point of the function call.</span>. See <A HREF="RM-3-9.html">3.9</A>(26.1/2).</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Bulleted"><span class="insert2">A real static expression 
+with a nonformal type that is not part of a larger static expression 
+should be rounded the same as the target system.</span><span class="insert2">&nbsp;See <A HREF="RM-4-9.html">4.9</A>(38.1/2).</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Bulleted"><span class="insert2">The value of Duration'Small 
+should be no greater than 100 microseconds.</span><span class="insert2">&nbsp;See <A HREF="RM-9-6.html">9.6</A>(30).</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Bulleted"><span class="insert2">The time base for <SPAN Class="swiss"><A HREF="RM-9-6.html#S0211">delay_relative_statement</A></SPAN>s 
+should be monotonic.</span><span class="insert2">&nbsp;See <A HREF="RM-9-6.html">9.6</A>(31).</span></div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Bulleted"><span class="insert2">Leap seconds should be supported 
+if the target system supports them. Otherwise, operations in Calendar.Formatting 
+should return results consistent with no leap seconds.</span><span class="insert2">&nbsp;See <A HREF="RM-9-6-1.html">9.6.1</A>(89/2).</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted"><span class="insert2">When applied to a generic 
+unit, a program unit pragma that is not a library unit pragma should 
+apply to each instance of the generic unit for which there is not an 
+overriding pragma applied directly to the instance.</span><span class="insert2">&nbsp;See <A HREF="RM-10-1-5.html">10.1.5</A>(10/1).</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Bulleted"><span class="insert2">A type declared in a preelaborated 
+package should have the same representation in every elaboration of a 
+given version of the package.</span><span class="insert2">&nbsp;See <A HREF="RM-10-2-1.html">10.2.1</A>(12).</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Bulleted"><span class="insert2">Exception_Information should 
+provide information useful for debugging, and should include the Exception_Name 
+and Exception_Message.</span><span class="insert2">&nbsp;See <A HREF="RM-11-4-1.html">11.4.1</A>(19).</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Bulleted"><span class="insert2">Exception_Message by default 
+should be short, provide information useful for debugging, and should 
+not include the Exception_Name.</span><span class="insert2">&nbsp;See <A HREF="RM-11-4-1.html">11.4.1</A>(19).</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Bulleted"><span class="insert2">Code executed for checks 
+that have been suppressed should be minimized.</span><span class="insert2">&nbsp;See <A HREF="RM-11-5.html">11.5</A>(28).</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for all representation items should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-1.html">13.1</A>(29/2).</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Bulleted"><span class="insert2">Storage allocated to objects 
+of a packed type should be minimized.</span><span class="insert2">&nbsp;See 
+<A HREF="RM-13-2.html">13.2</A>(6).</span></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for pragma Pack should be followed.</span> See <A HREF="RM-13-2.html">13.2</A>(9).</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Bulleted"><span class="insert2">For an array X, X'Address 
+should point at the first component of the array rather than the array 
+bounds.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(14).</span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for the Address attribute should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(19).</span></div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for the Alignment attribute should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(35).</span></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Bulleted"><span class="insert2">The Size of an array object 
+should not include its bounds.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(41.1/2).</span></div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Bulleted"><span class="insert2">If the Size of a subtype 
+allows for efficient independent addressability, then the Size of most 
+objects of the subtype should equal the Size of the subtype.</span> See 
+<A HREF="RM-13-3.html">13.3</A>(52).</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Bulleted"><span class="insert2">A Size clause on a composite 
+subtype should not affect the internal layout of components.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(53).</span></div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for the Size attribute should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(56).</span></div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for the Component_Size attribute should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-3.html">13.3</A>(73).</span></div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for <SPAN Class="swiss"><A HREF="RM-13-4.html#S0287">enumeration_representation_clause</A></SPAN>s 
+should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-4.html">13.4</A>(10).</span></div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0289">record_representation_clause</A></SPAN>s 
+should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-5-1.html">13.5.1</A>(22).</span></div>
+<div class="paranum"><a name="p35">35/2</a></div>
+<div class="Bulleted"><span class="insert2">If a component is represented 
+using a pointer to the actual data of the component which is contiguous 
+with the rest of the object, then the storage place attributes should 
+reflect the place of the actual data. If a component is allocated discontiguously 
+from the rest of the object, then a warning should be generated upon 
+reference to one of its storage place attributes.</span><span class="insert2">&nbsp;See <A HREF="RM-13-5-2.html">13.5.2</A>(5).</span></div>
+<div class="paranum"><a name="p36">36/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for the nondefault bit ordering should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-5-3.html">13.5.3</A>(8).</span></div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Bulleted"><span class="insert2">Type System.Address should 
+be a private type.</span><span class="insert2">&nbsp;See <A HREF="RM-13-7.html">13.7</A>(37).</span></div>
+<div class="paranum"><a name="p38">38/2</a></div>
+<div class="Bulleted"><span class="insert2">Operations in System and 
+its children should reflect the target environment; operations that do 
+not make sense should raise Program_Error.</span><span class="insert2">&nbsp;See <A HREF="RM-13-7-1.html">13.7.1</A>(16).</span></div>
+<div class="paranum"><a name="p39">39/2</a></div>
+<div class="Bulleted"><span class="insert2">Since the Size of an array 
+object generally does not include its bounds, the bounds should not be 
+part of the converted data in an instance of Unchecked_Conversion.</span><span class="insert2">&nbsp;See <A HREF="RM-13-9.html">13.9</A>(14/2).</span></div>
+<div class="paranum"><a name="p40">40/2</a></div>
+<div class="Bulleted"><span class="insert2">There should not be unnecessary 
+run-time checks on the result of an Unchecked_Conversion; the result 
+should be returned by reference when possible. Restrictions on Unchecked_Conversions 
+should be avoided.</span><span class="insert2">&nbsp;See <A HREF="RM-13-9.html">13.9</A>(15).</span></div>
+<div class="paranum"><a name="p41">41/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for Unchecked_Conversion should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-9.html">13.9</A>(17).</span></div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Bulleted"><span class="insert2">Any cases in which heap storage 
+is dynamically allocated other than as part of the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0129">allocator</A></SPAN> 
+should be documented.</span><span class="insert2">&nbsp;See <A HREF="RM-13-11.html">13.11</A>(23).</span></div>
+<div class="paranum"><a name="p43">43/2</a></div>
+<div class="Bulleted"><span class="insert2">A default storage pool for 
+an access-to-constant type should not have overhead to support deallocation 
+of individual objects.</span><span class="insert2">&nbsp;See <A HREF="RM-13-11.html">13.11</A>(24).</span></div>
+<div class="paranum"><a name="p44">44/2</a></div>
+<div class="Bulleted"><span class="insert2">Usually, a storage pool for 
+an access discriminant or access parameter should be created at the point 
+of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0129">allocator</A></SPAN>, 
+and be reclaimed when the designated object becomes inaccessible. For 
+other anonymous access types, the pool should be created at the point 
+where the type is elaborated and need not support deallocation of individual 
+objects.</span><span class="insert2">&nbsp;See <A HREF="RM-13-11.html">13.11</A>(25).</span></div>
+<div class="paranum"><a name="p45">45/2</a></div>
+<div class="Bulleted"><span class="insert2">For a standard storage pool, 
+an instance of Unchecked_Deallocation should actually reclaim the storage.</span><span class="insert2">&nbsp;See <A HREF="RM-13-11-2.html">13.11.2</A>(17).</span></div>
+<div class="paranum"><a name="p46">46/2</a></div>
+<div class="Bulleted"><span class="insert2">If not specified, the value 
+of Stream_Size for an elementary type should be the number of bits that 
+corresponds to the minimum number of stream elements required by the 
+first subtype of the type, rounded up to the nearest factor or multiple 
+of the word size that is also a multiple of the stream element size.</span><span class="insert2">&nbsp;See <A HREF="RM-13-13-2.html">13.13.2</A>(2.4/2).</span></div>
+<div class="paranum"><a name="p47">47/2</a></div>
+<div class="Bulleted"><span class="insert2">The recommended level of 
+support for the Stream_Size attribute should be followed.</span><span class="insert2">&nbsp;See <A HREF="RM-13-13-2.html">13.13.2</A>(2.6/2).</span></div>
+<div class="paranum"><a name="p48">48/2</a></div>
+<div class="Bulleted"><span class="insert2">If an implementation provides 
+additional named predefined integer types, then the names should end 
+with &ldquo;Integer&rdquo;. If an implementation provides additional 
+named predefined floating point types, then the names should end with 
+&ldquo;Float&rdquo;.</span><span class="insert2">&nbsp;See <A HREF="RM-A-1.html">A.1</A>(52).</span></div>
+<div class="paranum"><a name="p49">49/2</a></div>
+<div class="Bulleted"><span class="insert2">Implementation-defined operations 
+on Wide_Character, Wide_String, Wide_Wide_Character, and Wide_Wide_String 
+should be child units of Wide_Characters or Wide_Wide_Characters.</span><span class="insert2">&nbsp;See <A HREF="RM-A-3-1.html">A.3.1</A>(7/2).</span></div>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Bulleted"><span class="insert2">Bounded string objects should 
+not be implemented by implicit pointers and dynamic allocation.</span><span class="insert2">&nbsp;See <A HREF="RM-A-4-4.html">A.4.4</A>(106).</span></div>
+<div class="paranum"><a name="p51">51/2</a></div>
+<div class="Bulleted"><span class="insert2">Strings.Hash should be good 
+a hash function, returning a wide spread of values for different string 
+values, and similar strings should rarely return the same value.</span><span class="insert2">&nbsp;See <A HREF="RM-A-4-9.html">A.4.9</A>(12/2).</span></div>
+<div class="paranum"><a name="p52">52/2</a></div>
+<div class="Bulleted"><span class="insert2">Any storage associated with 
+an object of type Generator of the random number packages should be reclaimed 
+on exit from the scope of the object.</span><span class="insert2">&nbsp;See 
+<A HREF="RM-A-5-2.html">A.5.2</A>(46).</span></div>
+<div class="paranum"><a name="p53">53/2</a></div>
+<div class="Bulleted"><span class="insert2">Each value of Initiator passed 
+to Reset for the random number packages should initiate a distinct sequence 
+of random numbers, or, if that is not possible, be at least a rapidly 
+varying function of the initiator value.</span><span class="insert2">&nbsp;See <A HREF="RM-A-5-2.html">A.5.2</A>(47).</span></div>
+<div class="paranum"><a name="p54">54/2</a></div>
+<div class="Bulleted"><span class="insert2">Get_Immediate should be implemented 
+with unbuffered input; input should be available immediately; line-editing 
+should be disabled.</span><span class="insert2">&nbsp;See <A HREF="RM-A-10-7.html">A.10.7</A>(23).</span></div>
+<div class="paranum"><a name="p55">55/2</a></div>
+<div class="Bulleted"><span class="insert2">Package Directories.Information 
+should be provided to retrieve other information about a file.</span><span class="insert2">&nbsp;See <A HREF="RM-A-16.html">A.16</A>(124/2).</span></div>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Bulleted"><span class="insert2">Directories.Start_Search 
+and Directories.Search should raise Use_Error for malformed patterns.</span> 
+See <A HREF="RM-A-16.html">A.16</A>(125).</div>
+<div class="paranum"><a name="p57">57/2</a></div>
+<div class="Bulleted"><span class="insert2">Directories.Rename should 
+be supported at least when both New_Name and Old_Name are simple names 
+and New_Name does not identify an existing external file.</span><span class="insert2">&nbsp;See <A HREF="RM-A-16.html">A.16</A>(126/2).</span></div>
+<div class="paranum"><a name="p58">58/2</a></div>
+<div class="Bulleted"><span class="insert2">If the execution environment 
+supports subprocesses, the current environment variables should be used 
+to initialize the environment variables of a subprocess.</span><span class="insert2">&nbsp;See <A HREF="RM-A-17.html">A.17</A>(32/2).</span></div>
+<div class="paranum"><a name="p59">59/2</a></div>
+<div class="Bulleted"><span class="insert2">Changes to the environment 
+variables made outside the control of Environment_Variables should be 
+reflected immediately.</span><span class="insert2">&nbsp;See <A HREF="RM-A-17.html">A.17</A>(33/2).</span></div>
+<div class="paranum"><a name="p60">60/2</a></div>
+<div class="Bulleted"><span class="insert2">Containers.Hash_Type'Modulus 
+should be at least 2**32. Containers.Count_Type'Last should be at least 
+2**31&ndash;1.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-1.html">A.18.1</A>(8/2).</span></div>
+<div class="paranum"><a name="p61">61/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of Element for Containers.Vector should be <I>O</I>(log <I>N</I>).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-2.html">A.18.2</A>(256/2).</span></div>
+<div class="paranum"><a name="p62">62/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of Append with Count = 1 when <I>N</I> is less than the capacity for 
+Containers.Vector should be <I>O</I>(log <I>N</I>).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-2.html">A.18.2</A>(257/2).</span></div>
+<div class="paranum"><a name="p63">63/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of Prepend with Count = 1 and Delete_First with Count=1 for Containers.Vectors 
+should be <I>O</I>(<I>N</I> log <I>N</I>).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-2.html">A.18.2</A>(258/2).</span></div>
+<div class="paranum"><a name="p64">64/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of a call on procedure Sort of an instance of Containers.Vectors.Generic_Sorting 
+should be <I>O</I>(<I>N</I>**2), and the average time complexity should 
+be better than <I>O</I>(<I>N</I>**2).</span><span class="insert2">&nbsp;See 
+<A HREF="RM-A-18-2.html">A.18.2</A>(259/2).</span></div>
+<div class="paranum"><a name="p65">65/2</a></div>
+<div class="Bulleted"><span class="insert2">Containers.Vectors.Generic_Sorting.Sort 
+and Containers.Vectors.Generic_Sorting.Merge should minimize copying 
+of elements.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-2.html">A.18.2</A>(260/2).</span></div>
+<div class="paranum"><a name="p66">66/2</a></div>
+<div class="Bulleted"><span class="insert2">Containers.Vectors.Move should 
+not copy elements, and should minimize copying of internal data structures.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-2.html">A.18.2</A>(261/2).</span></div>
+<div class="paranum"><a name="p67">67/2</a></div>
+<div class="Bulleted"><span class="insert2">If an exception is propagated 
+from a vector operation, no storage should be lost, nor any elements 
+removed from a vector unless specified by the operation.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-2.html">A.18.2</A>(262/2).</span></div>
+<div class="paranum"><a name="p68">68/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of Element, Insert with Count=1, and Delete with Count=1 for Containers.Doubly_Linked_Lists 
+should be <I>O</I>(log <I>N</I>).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-3.html">A.18.3</A>(160/2).</span></div>
+<div class="paranum"><a name="p69">69/2</a></div>
+<div class="Bulleted"><span class="insert2">A call on procedure Sort 
+of an instance of Containers.Doubly_Linked_Lists.Generic_Sorting should 
+have an average time complexity better than <I>O</I>(<I>N</I>**2) and 
+worst case no worse than <I>O</I>(<I>N</I>**2).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-3.html">A.18.3</A>(161/2).</span></div>
+<div class="paranum"><a name="p70">70/2</a></div>
+<div class="Bulleted"><span class="insert2">Containers.Doubly_Linked_Lists.Move 
+should not copy elements, and should minimize copying of internal data 
+structures.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-3.html">A.18.3</A>(162/2).</span></div>
+<div class="paranum"><a name="p71">71/2</a></div>
+<div class="Bulleted"><span class="insert2">If an exception is propagated 
+from a list operation, no storage should be lost, nor any elements removed 
+from a list unless specified by the operation.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-3.html">A.18.3</A>(163/2).</span></div>
+<div class="paranum"><a name="p72">72/2</a></div>
+<div class="Bulleted"><span class="insert2">Move for a map should not 
+copy elements, and should minimize copying of internal data structures.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-4.html">A.18.4</A>(83/2).</span></div>
+<div class="paranum"><a name="p73">73/2</a></div>
+<div class="Bulleted"><span class="insert2">If an exception is propagated 
+from a map operation, no storage should be lost, nor any elements removed 
+from a map unless specified by the operation.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-4.html">A.18.4</A>(84/2).</span></div>
+<div class="paranum"><a name="p74">74/2</a></div>
+<div class="Bulleted"><span class="insert2">The average time complexity 
+of Element, Insert, Include, Replace, Delete, Exclude and Find operations 
+that take a key parameter for Containers.Hashed_Maps should be <I>O</I>(log 
+<I>N</I>). The average time complexity of the subprograms of Containers.Hashed_Maps 
+that take a cursor parameter should be <I>O</I>(1). The average time 
+complexity of Containers.Hashed_Maps.Reserve_Capacity should be <I>O</I>(<I>N</I>).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-5.html">A.18.5</A>(62/2).</span></div>
+<div class="paranum"><a name="p75">75/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of Element, Insert, Include, Replace, Delete, Exclude and Find operations 
+that take a key parameter for Containers.Ordered_Maps should be <I>O</I>((log 
+<I>N</I>)**2) or better. The worst-case time complexity of the subprograms 
+of Containers.Ordered_Maps that take a cursor parameter should be <I>O</I>(1).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-6.html">A.18.6</A>(95/2).</span></div>
+<div class="paranum"><a name="p76">76/2</a></div>
+<div class="Bulleted"><span class="insert2">Move for sets should not 
+copy elements, and should minimize copying of internal data structures.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-7.html">A.18.7</A>(104/2).</span></div>
+<div class="paranum"><a name="p77">77/2</a></div>
+<div class="Bulleted"><span class="insert2">If an exception is propagated 
+from a set operation, no storage should be lost, nor any elements removed 
+from a set unless specified by the operation.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-7.html">A.18.7</A>(105/2).</span></div>
+<div class="paranum"><a name="p78">78/2</a></div>
+<div class="Bulleted"><span class="insert2">The average time complexity 
+of the Insert, Include, Replace, Delete, Exclude and Find operations 
+of Containers.Hashed_Sets that take an element parameter should be <I>O</I>(log 
+<I>N</I>). The average time complexity of the subprograms of Containers.Hashed_Sets 
+that take a cursor parameter should be <I>O</I>(1). The average time 
+complexity of Containers.Hashed_Sets.Reserve_Capacity should be <I>O</I>(<I>N</I>).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-8.html">A.18.8</A>(88/2).</span></div>
+<div class="paranum"><a name="p79">79/2</a></div>
+<div class="Bulleted"><span class="insert2">The worst-case time complexity 
+of the Insert, Include, Replace, Delete, Exclude and Find operations 
+of Containers.Ordered_Sets that take an element parameter should be <I>O</I>((log 
+<I>N</I>)**2). The worst-case time complexity of the subprograms of Containers.Ordered_Sets 
+that take a cursor parameter should be <I>O</I>(1).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-9.html">A.18.9</A>(116/2).</span></div>
+<div class="paranum"><a name="p80">80/2</a></div>
+<div class="Bulleted"><span class="insert2">Containers.Generic_Array_Sort 
+and Containers.Generic_Constrained_Array_Sort should have an average 
+time complexity better than <I>O</I>(<I>N</I>**2) and worst case no worse 
+than <I>O</I>(<I>N</I>**2).</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-16.html">A.18.16</A>(10/2).</span></div>
+<div class="paranum"><a name="p81">81/2</a></div>
+<div class="Bulleted"><span class="insert2">Containers.Generic_Array_Sort 
+and Containers.Generic_Constrained_Array_Sort should minimize copying 
+of elements.</span><span class="insert2">&nbsp;See <A HREF="RM-A-18-16.html">A.18.16</A>(11/2).</span></div>
+<div class="paranum"><a name="p82">82</a></div>
+<div class="Bulleted"><span class="insert2">If <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+ Export is supported for a language, the main program should be able 
+to be written in that language. Subprograms named &quot;adainit&quot; 
+and &quot;adafinal&quot; should be provided for elaboration and finalization 
+of the environment task.</span> See <A HREF="RM-B-1.html">B.1</A>(39).</div>
+<div class="paranum"><a name="p83">83</a></div>
+<div class="Bulleted"><span class="insert2">Automatic elaboration of 
+preelaborated packages should be provided when <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Export is supported.</span> See <A HREF="RM-B-1.html">B.1</A>(40).</div>
+<div class="paranum"><a name="p84">84</a></div>
+<div class="Bulleted"><span class="insert2">For each supported convention 
+<I>L</I> other than Intrinsic, <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
+Import and Export should be supported for objects of <I>L</I>-compatible 
+types and for subprograms, and <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Convention should be supported for <I>L</I>-eligible types and for subprograms.</span> 
+See <A HREF="RM-B-1.html">B.1</A>(41).</div>
+<div class="paranum"><a name="p85">85/2</a></div>
+<div class="Bulleted"><span class="insert2">If an interface to C, COBOL, 
+or Fortran is provided, the corresponding package or packages described 
+in <A HREF="RM-B.html">Annex B</A>, &ldquo;<A HREF="RM-B.html">Interface 
+to Other Languages</A>&rdquo; should also be provided.</span><span class="insert2">&nbsp;See <A HREF="RM-B-2.html">B.2</A>(13).</span></div>
+<div class="paranum"><a name="p86">86/2</a></div>
+<div class="Bulleted"><span class="insert2">The constants nul, wide_nul, 
+char16_nul, and char32_nul in package Interfaces.C should have a representation 
+of zero.</span><span class="insert2">&nbsp;See <A HREF="RM-B-3.html">B.3</A>(62.1/2).</span></div>
+<div class="paranum"><a name="p87">87/2</a></div>
+<div class="Bulleted"><span class="insert2">If C interfacing is supported, 
+the interface correspondences between Ada and C should be supported.</span><span class="insert2">&nbsp;See <A HREF="RM-B-3.html">B.3</A>(71).</span></div>
+<div class="paranum"><a name="p88">88/2</a></div>
+<div class="Bulleted"><span class="insert2">If COBOL interfacing is supported, 
+the interface correspondences between Ada and COBOL should be supported.</span><span class="insert2">&nbsp;See <A HREF="RM-B-4.html">B.4</A>(98).</span></div>
+<div class="paranum"><a name="p89">89/2</a></div>
+<div class="Bulleted"><span class="insert2">If Fortran interfacing is 
+supported, the interface correspondences between Ada and Fortran should 
+be supported.</span><span class="insert2">&nbsp;See <A HREF="RM-B-5.html">B.5</A>(26).</span></div>
+<div class="paranum"><a name="p90">90/2</a></div>
+<div class="Bulleted"><span class="insert2">The machine code or intrinsics 
+support should allow access to all operations normally available to assembly 
+language programmers for the target environment.</span><span class="insert2">&nbsp;See <A HREF="RM-C-1.html">C.1</A>(3).</span></div>
+<div class="paranum"><a name="p91">91/2</a></div>
+<div class="Bulleted"><span class="insert2">Interface to assembler should 
+be supported; the default assembler should be associated with the convention 
+identifier Assembler.</span><span class="insert2">&nbsp;See <A HREF="RM-C-1.html">C.1</A>(4).</span></div>
+<div class="paranum"><a name="p92">92/2</a></div>
+<div class="Bulleted"><span class="insert2">If an entity is exported 
+to assembly language, then the implementation should allocate it at an 
+addressable location even if not otherwise referenced from the Ada code. 
+A call to a machine code or assembler subprogram should be treated as 
+if it could read or update every object that is specified as exported.</span><span class="insert2">&nbsp;See <A HREF="RM-C-1.html">C.1</A>(5).</span></div>
+<div class="paranum"><a name="p93">93/2</a></div>
+<div class="Bulleted"><span class="insert2">Little or no overhead should 
+be associated with calling intrinsic and machine-code subprograms.</span><span class="insert2">&nbsp;See <A HREF="RM-C-1.html">C.1</A>(10).</span></div>
+<div class="paranum"><a name="p94">94/2</a></div>
+<div class="Bulleted"><span class="insert2">Intrinsic subprograms should 
+be provided to access any machine operations that provide special capabilities 
+or efficiency not normally available.</span><span class="insert2">&nbsp;See 
+<A HREF="RM-C-1.html">C.1</A>(16).</span></div>
+<div class="paranum"><a name="p95">95/2</a></div>
+<div class="Bulleted"><span class="insert2">If the Ceiling_Locking policy 
+is not in effect and the target system allows for finer-grained control 
+of interrupt blocking, a means for the application to specify which interrupts 
+are to be blocked during protected actions should be provided.</span><span class="insert2">&nbsp;See <A HREF="RM-C-3.html">C.3</A>(28/2).</span></div>
+<div class="paranum"><a name="p96">96/2</a></div>
+<div class="Bulleted"><span class="insert2">Interrupt handlers should 
+be called directly by the hardware.</span><span class="insert2">&nbsp;See 
+<A HREF="RM-C-3-1.html">C.3.1</A>(20).</span></div>
+<div class="paranum"><a name="p97">97/2</a></div>
+<div class="Bulleted"><span class="insert2">Violations of any implementation-defined 
+restrictions on interrupt handlers should be detected before run time.</span><span class="insert2">&nbsp;See <A HREF="RM-C-3-1.html">C.3.1</A>(21).</span></div>
+<div class="paranum"><a name="p98">98/2</a></div>
+<div class="Bulleted"><span class="insert2">If implementation-defined 
+forms of interrupt handler procedures are supported, then for each such 
+form of a handler, a type analogous to Parameterless_Handler should be 
+specified in a child package of Interrupts, with the same operations 
+as in the predefined package Interrupts.</span><span class="insert2">&nbsp;See <A HREF="RM-C-3-2.html">C.3.2</A>(25).</span></div>
+<div class="paranum"><a name="p99">99/2</a></div>
+<div class="Bulleted"><span class="insert2">Preelaborated packages should 
+be implemented such that little or no code is executed at run time for 
+the elaboration of entities.</span><span class="insert2">&nbsp;See <A HREF="RM-C-4.html">C.4</A>(14).</span></div>
+<div class="paranum"><a name="p100">100</a></div>
+<div class="Bulleted"><span class="insert2">If <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Discard_Names applies to an entity, then the amount of storage used for 
+storing names associated with that entity should be reduced.</span> See 
+<A HREF="RM-C-5.html">C.5</A>(8).</div>
+<div class="paranum"><a name="p101">101/2</a></div>
+<div class="Bulleted"><span class="insert2">A load or store of a volatile 
+object whose size is a multiple of System.Storage_Unit and whose alignment 
+is nonzero, should be implemented by accessing exactly the bits of the 
+object and no others.</span><span class="insert2">&nbsp;See <A HREF="RM-C-6.html">C.6</A>(22/2).</span></div>
+<div class="paranum"><a name="p102">102/2</a></div>
+<div class="Bulleted"><span class="insert2">A load or store of an atomic 
+object should be implemented by a single load or store instruction.</span><span class="insert2">&nbsp;See <A HREF="RM-C-6.html">C.6</A>(23/2).</span></div>
+<div class="paranum"><a name="p103">103/2</a></div>
+<div class="Bulleted"><span class="insert2">If the target domain requires 
+deterministic memory use at run time, storage for task attributes should 
+be pre-allocated statically and the number of attributes pre-allocated 
+should be documented.</span><span class="insert2">&nbsp;See <A HREF="RM-C-7-2.html">C.7.2</A>(30).</span></div>
+<div class="paranum"><a name="p104">104/2</a></div>
+<div class="Bulleted"><span class="insert2">Finalization of task attributes 
+and reclamation of associated storage should be performed as soon as 
+possible after task termination.</span><span class="insert2">&nbsp;See <A HREF="RM-C-7-2.html">C.7.2</A>(30.1/2).</span></div>
+<div class="paranum"><a name="p105">105/2</a></div>
+<div class="Bulleted"><span class="insert2">Names that end with &ldquo;_Locking&rdquo; 
+should be used for implementation-defined locking policies.</span><span class="insert2">&nbsp;See <A HREF="RM-D-3.html">D.3</A>(17).</span></div>
+<div class="paranum"><a name="p106">106/2</a></div>
+<div class="Bulleted"><span class="insert2">Names that end with &ldquo;_Queuing&rdquo; 
+should be used for implementation-defined queuing policies.</span><span class="insert2">&nbsp;See <A HREF="RM-D-4.html">D.4</A>(16).</span></div>
+<div class="paranum"><a name="p107">107/2</a></div>
+<div class="Bulleted"><span class="insert2">The <SPAN Class="swiss"><A HREF="RM-9-8.html#S0227">abort_statement</A></SPAN> 
+should not require the task executing the statement to block.</span><span class="insert2">&nbsp;See <A HREF="RM-D-6.html">D.6</A>(9).</span></div>
+<div class="paranum"><a name="p108">108/2</a></div>
+<div class="Bulleted"><span class="insert2">On a multi-processor, the 
+delay associated with aborting a task on another processor should be 
+bounded.</span><span class="insert2">&nbsp;See <A HREF="RM-D-6.html">D.6</A>(10).</span></div>
+<div class="paranum"><a name="p109">109/2</a></div>
+<div class="Bulleted"><span class="insert2">When feasible, specified 
+restrictions should be used to produce a more efficient implementation.</span><span class="insert2">&nbsp;See <A HREF="RM-D-7.html">D.7</A>(21).</span></div>
+<div class="paranum"><a name="p110">110/2</a></div>
+<div class="Bulleted"><span class="insert2">When appropriate, mechanisms 
+to change the value of Tick should be provided.</span><span class="insert2">&nbsp;See <A HREF="RM-D-8.html">D.8</A>(47).</span></div>
+<div class="paranum"><a name="p111">111/2</a></div>
+<div class="Bulleted"><span class="insert2">Calendar.Clock and Real_Time.Clock 
+should be transformations of the same time base.</span><span class="insert2">&nbsp;See <A HREF="RM-D-8.html">D.8</A>(48).</span></div>
+<div class="paranum"><a name="p112">112/2</a></div>
+<div class="Bulleted"><span class="insert2">The &ldquo;best&rdquo; time 
+base which exists in the underlying system should be available to the 
+application through Real_Time.Clock.</span><span class="insert2">&nbsp;See 
+<A HREF="RM-D-8.html">D.8</A>(49).</span></div>
+<div class="paranum"><a name="p113">113/2</a></div>
+<div class="Bulleted"><span class="insert2">When appropriate, implementations 
+should provide configuration mechanisms to change the value of Execution_Time.CPU_Tick.</span><span class="insert2">&nbsp;See <A HREF="RM-D-14.html">D.14</A>(29/2).</span></div>
+<div class="paranum"><a name="p114">114/2</a></div>
+<div class="Bulleted"><span class="insert2">For a timing event, the handler 
+should be executed directly by the real-time clock interrupt mechanism.</span><span class="insert2">&nbsp;See <A HREF="RM-D-15.html">D.15</A>(25).</span></div>
+<div class="paranum"><a name="p115">115/2</a></div>
+<div class="Bulleted"><span class="insert2">The PCS should allow for 
+multiple tasks to call the RPC-receiver.</span><span class="insert2">&nbsp;See <A HREF="RM-E-5.html">E.5</A>(28).</span></div>
+<div class="paranum"><a name="p116">116/2</a></div>
+<div class="Bulleted"><span class="insert2">The System.RPC.Write operation 
+should raise Storage_Error if it runs out of space when writing an item.</span><span class="insert2">&nbsp;See <A HREF="RM-E-5.html">E.5</A>(29).</span></div>
+<div class="paranum"><a name="p117">117/2</a></div>
+<div class="Bulleted"><span class="insert2">If COBOL (respectively, C) 
+is supported in the target environment, then interfacing to COBOL (respectively, 
+C) should be supported as specified in <A HREF="RM-B.html">Annex B</A>.</span><span class="insert2">&nbsp;See <A HREF="RM-F.html">F</A>(7).</span></div>
+<div class="paranum"><a name="p118">118/2</a></div>
+<div class="Bulleted"><span class="insert2">Packed decimal should be 
+used as the internal representation for objects of subtype <I>S</I> when 
+<I>S</I>'Machine_Radix = 10.</span><span class="insert2">&nbsp;See <A HREF="RM-F-1.html">F.1</A>(2).</span></div>
+<div class="paranum"><a name="p119">119/2</a></div>
+<div class="Bulleted"><span class="insert2">If Fortran (respectively, 
+C) is supported in the target environment, then interfacing to Fortran 
+(respectively, C) should be supported as specified in <A HREF="RM-B.html">Annex 
+B</A>.</span><span class="insert2">&nbsp;See <A HREF="RM-G.html">G</A>(7).</span></div>
+<div class="paranum"><a name="p120">120/2</a></div>
+<div class="Bulleted"><span class="insert2">Mixed real and complex operations 
+(as well as pure-imaginary and complex operations) should not be performed 
+by converting the real (resp. pure-imaginary) operand to complex.</span><span class="insert2">&nbsp;See <A HREF="RM-G-1-1.html">G.1.1</A>(56).</span></div>
+<div class="paranum"><a name="p121">121</a></div>
+<div class="Bulleted"><span class="insert2">If Real'Signed_Zeros is true 
+for Numerics.Generic_Complex_Types, a rational treatment of the signs 
+of zero results and result components should be provided.</span> See 
+<A HREF="RM-G-1-1.html">G.1.1</A>(58).</div>
+<div class="paranum"><a name="p122">122</a></div>
+<div class="Bulleted"><span class="insert2">If Complex_Types.Real'Signed_Zeros 
+is true for Numerics.Generic_Complex_Elementary_Functions, a rational 
+treatment of the signs of zero results and result components should be 
+provided.</span> See <A HREF="RM-G-1-2.html">G.1.2</A>(49).</div>
+<div class="paranum"><a name="p123">123/2</a></div>
+<div class="Bulleted"><span class="insert2">For elementary functions, 
+the forward trigonometric functions without a Cycle parameter should 
+not be implemented by calling the corresponding version with a Cycle 
+parameter. Log without a Base parameter should not be implemented by 
+calling Log with a Base parameter.</span><span class="insert2">&nbsp;See <A HREF="RM-G-2-4.html">G.2.4</A>(19).</span></div>
+<div class="paranum"><a name="p124">124/2</a></div>
+<div class="Bulleted"><span class="insert2">For complex arithmetic, the 
+Compose_From_Polar function without a Cycle parameter should not be implemented 
+by calling Compose_From_Polar with a Cycle parameter.</span><span class="insert2">&nbsp;See <A HREF="RM-G-2-6.html">G.2.6</A>(15).</span></div>
+<div class="paranum"><a name="p125">125/2</a></div>
+<div class="Bulleted"><span class="insert2">Solve and Inverse for Numerics.Generic_Real_Arrays 
+should be implemented using established techniques such as LU decomposition 
+and the result should be refined by an iteration on the residuals.</span><span class="insert2">&nbsp;See <A HREF="RM-G-3-1.html">G.3.1</A>(88/2).</span></div>
+<div class="paranum"><a name="p126">126/2</a></div>
+<div class="Bulleted"><span class="insert2">The equality operator should 
+be used to test that a matrix in Numerics.Generic_Real_Arrays is symmetric.</span><span class="insert2">&nbsp;See <A HREF="RM-G-3-1.html">G.3.1</A>(90/2).</span></div>
+<div class="paranum"><a name="p127">127/2</a></div>
+<div class="Bulleted"><span class="insert2">Solve and Inverse for Numerics.Generic_Complex_Arrays 
+should be implemented using established techniques and the result should 
+be refined by an iteration on the residuals.</span><span class="insert2">&nbsp;See <A HREF="RM-G-3-2.html">G.3.2</A>(158/2).</span></div>
+<div class="paranum"><a name="p128">128/2</a></div>
+<div class="Bulleted"><span class="insert2">The equality and negation 
+operators should be used to test that a matrix is Hermitian.</span><span class="insert2">&nbsp;See <A HREF="RM-G-3-2.html">G.3.2</A>(160/2).</span></div>
+<div class="paranum"><a name="p129">129/2</a></div>
+<div class="Bulleted"><span class="insert2">Mixed real and complex operations 
+should not be performed by converting the real operand to complex.</span><span class="insert2">&nbsp;See <A HREF="RM-G-3-2.html">G.3.2</A>(161/2).</span></div>
+<div class="paranum"><a name="p130">130/2</a></div>
+<div class="Bulleted"><span class="insert2">The information produced 
+by <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Reviewable should be provided in both a human-readable and machine-readable 
+form, and the latter form should be documented.</span><span class="insert2">&nbsp;See <A HREF="RM-H-3-1.html">H.3.1</A>(19).</span></div>
+<div class="paranum"><a name="p131">131/2</a></div>
+<div class="Bulleted"><span class="insert2">Object code listings should 
+be provided both in a symbolic format and in a numeric format.</span><span class="insert2">&nbsp;See <A HREF="RM-H-3-1.html">H.3.1</A>(20).</span></div>
+<div class="paranum"><a name="p132">132</a></div>
+<div class="Bulleted"><span class="insert2">If the partition elaboration 
+policy is Sequential and the Environment task becomes permanently blocked 
+during elaboration then the partition should be immediately terminated.</span> 
+See <A HREF="RM-H-6.html">H.6</A>(15/2).</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-M-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-N.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

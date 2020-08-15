@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Extension Aggregates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.3.2 Extension Aggregates</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN> 
+specifies a value for a type that is a record extension by specifying 
+a value or subtype for an ancestor of the type, followed by associations 
+for any components not determined by the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">extension_aggregate</SPAN><A NAME="I2297"></A><A NAME="S0102"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2298"></A><SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN>&nbsp;<B>with</B>&nbsp;<A NAME="I2299"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0099">record_component_association_list</A></SPAN>)</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">ancestor_part</SPAN><A NAME="I2300"></A><A NAME="S0103"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2301"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2302"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2303"></A>The expected type for an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN> 
+shall be a single nonlimited type that is a record extension. <A NAME="I2304"></A>If 
+the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>, 
+it is expected to be of any nonlimited tagged type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>, 
+it shall denote a specific tagged subtype. The type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN> 
+shall be derived from the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN>, 
+through one or more record extensions (and no private extensions).&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I2305"></A>For the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0099">record_component_association_list</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN>, 
+the only components <I>needed</I> are those of the composite value defined 
+by the aggregate that are not inherited from the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN>, 
+plus any inherited discriminants if the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+that denotes an unconstrained subtype.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I2306"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0099">record_component_association_list</A></SPAN> 
+is evaluated. If the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>, 
+it is also evaluated; if the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>, 
+the components of the value of the aggregate not given by the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0099">record_component_association_list</A></SPAN> 
+are initialized by default as for an object of the ancestor type. Any 
+implicit initializations or evaluations are performed in an arbitrary 
+order, except that the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+for a discriminant is evaluated prior to any other evaluation or initialization 
+that depends on it.<A NAME="I2307"></A></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I2308"></A><A NAME="I2309"></A>If the type 
+of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+has discriminants that are not inherited by the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN>, 
+then, unless the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+that denotes an unconstrained subtype, a check is made that each discriminant 
+of the ancestor has the value specified for a corresponding discriminant, 
+either in the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0099">record_component_association_list</A></SPAN>, 
+or in the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0032">derived_type_definition</A></SPAN> 
+for some ancestor of the type of the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN>. 
+<A NAME="I2310"></A>Constraint_Error is raised if this check fails.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">8&nbsp;&nbsp;If all components of the value of the 
+<SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0102">extension_aggregate</A></SPAN> 
+are determined by the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0099">record_component_association_list</A></SPAN> 
+is required to be simply <B>null record</B>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">9&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0103">ancestor_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>, 
+then its type can be abstract. If its type is controlled, then as the 
+last step of evaluating the aggregate, the Initialize procedure of the 
+ancestor type is called, unless the Initialize procedure is abstract 
+(see <A HREF="RM-7-6.html">7.6</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of extension 
+aggregates (for types defined in <A HREF="RM-3-9-1.html">3.9.1</A>):</I> 
+</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">Painted_Point'(Point&nbsp;<B>with</B>&nbsp;Red)<BR>
+(Point'(P)&nbsp;<B>with</B>&nbsp;Paint&nbsp;=&gt;&nbsp;Black)</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">(Expression&nbsp;<B>with</B>&nbsp;Left&nbsp;=&gt;&nbsp;1.2,&nbsp;Right&nbsp;=&gt;&nbsp;3.4)<BR>
+Addition'(Binop&nbsp;<B>with&nbsp;null&nbsp;record</B>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;presuming&nbsp;Binop&nbsp;is&nbsp;of&nbsp;type&nbsp;Binary_Operation</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

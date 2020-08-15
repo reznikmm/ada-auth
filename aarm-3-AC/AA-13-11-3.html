@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Default Storage Pools</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11.3 <span class="insert3">Default Storage Pools</span><span class="delete3">Pragma Controlled</span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"></span><span class="delete3">[Pragma Controlled 
+is used to prevent any automatic reclamation of storage (garbage collection) 
+for the objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>s 
+of a given access type.]</span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<span class="insert3">Default_Storage_Pool</span><span class="delete3">&nbsp;Controlled</span> 
+is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I5924"></A><A NAME="I5925"></A>Default_Storage_Pool 
+(<A NAME="I5926"></A><SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0318">storage_pool_indicator</A></SPAN>);</span> 
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I5927"></A><A NAME="I5928"></A>Controlled(<I>first_subtype_</I><A NAME="I5929"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0305">local_name</A></SPAN>);</span></div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><span class="delete3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">Not to be confused with type Finalization.Controlled.</span> 
+</div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">storage_pool_indicator</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5930"></A><A NAME="S0318"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>storage_pool_</I><A NAME="I5931"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B></span></div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool is allowed immediately within the visible part of 
+a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+or as a configuration pragma.</span>&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3.3">3.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is expected to be of type Root_Storage_Pool'Class.</span>&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall denote a variable.</span><span class="delete3">&nbsp;The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0305">local_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Controlled shall denote a nonderived access subtype.</span></div>
+<div class="paranum"><a name="p4.1">4.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0318">storage_pool_indicator</A></SPAN> 
+shall be <B>null</B>, and it defines the <I>default pool</I><A NAME="I5932"></A><A NAME="I5933"></A><A NAME="I5934"></A> 
+to be <B>null</B> within all applicable compilation units (see <A HREF="AA-10-1-5.html">10.1.5</A>), 
+except within the immediate scope of another <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool. Otherwise, [the pragma occurs immediately within 
+a sequence of declarations, and] it defines the default pool within the 
+immediate scope of the pragma to be either <B>null</B> or the pool denoted 
+by the <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+except within the immediate scope of a later pragma Default_Storage_Pool. 
+[Thus, an inner pragma overrides an outer one.]</span></div>
+<div class="paranum"><a name="p4.2">4.2/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool shall not be used as a configuration pragma that 
+applies to a compilation unit that is within the immediate scope of another 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Default_Storage_Pool.</span></div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Reason: 
+</B>This is to prevent confusion in cases like this:</span>&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>package</B>&nbsp;Parent&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;pragma&nbsp;Default_Storage_Pool(...);<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Parent;</span></div>
+<div class="paranum"><a name="p4.c">4.c/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>pragma</B>&nbsp;Default_Storage_Pool(...);&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+<B>package</B>&nbsp;Parent.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Parent.Child;</span></div>
+<div class="paranum"><a name="p4.d">4.d/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em"><span class="insert3">where 
+the Default_Storage_Pool on Parent.Child would not (if it were legal) 
+override the one in Parent.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">The language-defined aspect Default_Storage_Pool 
+may be specified for a generic instance; it defines the default pool 
+for access types within an instance.<A NAME="I5935"></A><A NAME="I5936"></A> 
+The expected type for the Default_Storage_Pool aspect is Root_Storage_Pool'Class. 
+The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0308">aspect_definition</A></SPAN> 
+must be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes a variable. This aspect overrides any Default_Storage_Pool 
+pragma that might apply to the generic unit; if the aspect is not specified, 
+the default pool of the instance is that defined for the generic unit</span><span class="delete3"><A NAME="I5937"></A> 
+<A NAME="I5938"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Controlled is a representation pragma <A NAME="I5939"></A><A NAME="I5940"></A>that 
+specifies the <I>controlled</I> aspect of representation</span>.</div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert3"><B>Default_Storage_Pool:&nbsp;</B></span><span class="insert3">Default 
+storage pool for a generic instance.</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"></span><span class="insert3">For nonderived access 
+types declared in places where the default pool is defined by the pragma 
+or aspect, their Storage_Pool or Storage_Size attribute is determined 
+as follows, unless Storage_Pool or Storage_Size is specified for the 
+type:</span><span class="delete3"><A NAME="I5941"></A> <I>Garbage collection</I> 
+is a process that automatically reclaims storage, or moves objects to 
+a different address, while the objects still exist.</span></div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">If the default pool is <B>null</B>, the Storage_Size 
+attribute is defined by the language to be zero. [Therefore, an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+for such a type is illegal.]</span></div>
+<div class="paranum"><a name="p6.2">6.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">If the default pool is nonnull, the Storage_Pool 
+attribute is that pool.</span></div>
+<div class="paranum"><a name="p6.3">6.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">Otherwise, there is no default pool; the standard 
+storage pool is used for the type as described in <A HREF="AA-13-11.html">13.11</A>.</span></div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">Default_Storage_Pool is the only way to specify 
+the storage pool for an anonymous access type</span><span class="delete3">&nbsp;Storage 
+reclamation upon leaving a master is not considered garbage collection</span>.</div>
+<div class="paranum"><a name="p6.b">6.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+Note that <span class="insert3">coextensions should be allocated in the 
+same pool (or on the stack) as the outer object (see <A HREF="AA-13-11.html">13.11</A>); 
+the Storage_Pool of the access discriminant (and hence the Default_Storage_Pool) 
+is supposed to be ignored for coextensions. This matches the required 
+finalization point for coextensions</span><span class="delete3">&nbsp;garbage 
+collection includes compaction of a pool (&ldquo;moved to a different 
+Address&rdquo;), even if storage reclamation is not done</span>.</div>
+<div class="paranum"><a name="p6.b.1">6.b.1/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">The default storage pool for an allocator that 
+occurs within an instance of a generic is defined by the Default_Storage_Pool 
+aspect of the instantiation (if specified), or by the Default_Storage_Pool 
+pragma that applied to the generic; the Default_Storage_Pool pragma that 
+applies to the instantiation is irrelevant.</span></div>
+<div class="paranum"><a name="p6.b.2">6.b.2/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">It is possible to specify the Default_Storage_Pool 
+aspect for an instantiation such that allocations will fail. For example, 
+the generic unit might be expecting a pool that supports certain sizes 
+and alignments, and the one on the instance might be more restrictive. 
+It is the programmer's responsibility to get this right.</span></div>
+<div class="paranum"><a name="p6.b.3">6.b.3/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">The semantics of the Default_Storage_Pool aspect 
+are similar to passing a pool object as a generic formal, and putting 
+pragma Default_Storage_Pool at the top of the generic's visible part, 
+specifying that formal.</span>&nbsp;</div>
+<div class="paranum"><a name="p6.c">6.c/3</a></div>
+<div class="Annotations"><span class="delete3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">Programs that will be damaged by automatic storage 
+reclamation are just as likely to be damaged by having objects moved 
+to different locations in memory. A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Controlled should turn off both flavors of garbage collection.</span> 
+</div>
+<div class="paranum"><a name="p6.d">6.d/3</a></div>
+<div class="Annotations"><span class="delete3"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">If garbage collection reclaims the storage of a 
+controlled object, it should first finalize it. Finalization is not done 
+when moving an object; any self-relative pointers will have to be updated 
+by the garbage collector. If an implementation provides garbage collection 
+for a storage pool containing controlled objects (see <A HREF="AA-7-6.html">7.6</A>), 
+then it should provide a means for deferring garbage collection of those 
+controlled objects.</span>&nbsp;</div>
+<div class="paranum"><a name="p6.e">6.e/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="delete3"><B>Reason: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">This allows the manager of a resource released 
+by a Finalize operation to defer garbage collection during its critical 
+regions; it is up to the author of the Finalize operation to do so. Garbage 
+collection, at least in some systems, can happen asynchronously with 
+respect to normal user code. Note that it is not enough to defer garbage 
+collection during Initialize, Adjust, and Finalize, because the resource 
+in question might be used in other situations as well. For example:</span> 
+</div>
+<div class="paranum"><a name="p6.f">6.f/3</a></div>
+<div class="SmallExamples"><span class="delete3"><B>with</B>&nbsp;Ada.Finalization;<BR>
+<B>package</B>&nbsp;P&nbsp;<B>is</B></span></div>
+<div class="paranum"><a name="p6.g">6.g/3</a></div>
+<div class="SmallExamples"><span class="delete3">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Controlled&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Finalization.Limited_Controlled&nbsp;<B>with</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Finalize(Object&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;My_Controlled);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Controlled_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;My_Controlled;</span></div>
+<div class="paranum"><a name="p6.h">6.h/3</a></div>
+<div class="SmallExamples"><span class="delete3">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Non_Reentrant;</span></div>
+<div class="paranum"><a name="p6.i">6.i/3</a></div>
+<div class="SmallExamples"><span class="delete3"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;P;</span></div>
+<div class="paranum"><a name="p6.j">6.j/3</a></div>
+<div class="SmallExamples"><span class="delete3"><B>package</B>&nbsp;<B>body</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;<B>array</B>(Integer&nbsp;<B>range</B>&nbsp;1..10)&nbsp;<B>of</B>&nbsp;Integer;</span></div>
+<div class="paranum"><a name="p6.k">6.k/3</a></div>
+<div class="SmallExamples"><span class="delete3">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Non_Reentrant&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:=&nbsp;X&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;If&nbsp;the&nbsp;system&nbsp;decides&nbsp;to&nbsp;do&nbsp;a&nbsp;garbage&nbsp;collection&nbsp;here,</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;then&nbsp;we're&nbsp;in&nbsp;trouble,&nbsp;because&nbsp;it&nbsp;will&nbsp;call&nbsp;Finalize&nbsp;on</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;the&nbsp;collected&nbsp;objects;&nbsp;we&nbsp;essentially&nbsp;have&nbsp;two&nbsp;threads</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;of&nbsp;control&nbsp;erroneously&nbsp;accessing&nbsp;shared&nbsp;variables.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;garbage&nbsp;collector&nbsp;behaves&nbsp;like&nbsp;a&nbsp;separate&nbsp;thread</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;of&nbsp;control,&nbsp;even&nbsp;though&nbsp;the&nbsp;user&nbsp;hasn't&nbsp;declared</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;any&nbsp;tasks.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A(X)&nbsp;:=&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Non_Reentrant;</span></div>
+<div class="paranum"><a name="p6.l">6.l/3</a></div>
+<div class="SmallExamples"><span class="delete3">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Finalize(Object&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;My_Controlled)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non_Reentrant;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Finalize;<BR>
+<B>end</B>&nbsp;P;</span></div>
+<div class="paranum"><a name="p6.m">6.m/3</a></div>
+<div class="SmallExamples"><span class="delete3"><B>with</B>&nbsp;P;&nbsp;<B>use</B>&nbsp;P;<BR>
+<B>procedure</B>&nbsp;Main&nbsp;<B>is</B><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<B>new</B>&nbsp;My_Controlled&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;allocate&nbsp;some&nbsp;objects</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<SPAN Class="roman"><I>&nbsp;forget&nbsp;the&nbsp;pointers&nbsp;to&nbsp;some&nbsp;of&nbsp;them,&nbsp;so&nbsp;they&nbsp;become&nbsp;garbage</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Non_Reentrant;<BR>
+<B>end</B>&nbsp;Main;</span></div>
+<div class="paranum"><a name="p6.n">6.n/3</a></div>
+<div class="Annotations"><span class="delete3">It is the user's responsibility 
+to protect against this sort of thing, and the implementation's responsibility 
+to provide the necessary operations.</span></div>
+<div class="paranum"><a name="p6.o">6.o/3</a></div>
+<div class="Annotations"><span class="delete3">We do not give these operations 
+names, nor explain their exact semantics, because different implementations 
+of garbage collection might have different needs, and because garbage 
+collection is not supported by most Ada implementations, so portability 
+is not important here. Another reason not to turn off garbage collection 
+during each entire Finalize operation is that it would create a serial 
+bottleneck; it might be only part of the Finalize operation that conflicts 
+with some other resource. It is the intention that the mechanisms provided 
+be finer-grained than pragma Controlled.</span>&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Controlled is specified for an access type with a standard storage pool, 
+then garbage collection is not performed for objects in that pool.</span> 
+</div>
+<div class="paranum"><a name="p7.a">7.a/3</a></div>
+<div class="Annotations"><span class="delete3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">If Controlled is not specified, the implementation 
+may, but need not, perform garbage collection. If Storage_Pool is specified, 
+then a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Controlled for that type is ignored.</span>&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b/3</a></div>
+<div class="Annotations"><span class="delete3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">Controlled means that implementation-provided garbage 
+collection is turned off; if the Storage_Pool is specified, the pool 
+controls whether garbage collection is done.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">An object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+that is passed as the actual parameter to an access parameter may be 
+allocated on the stack, and automatically reclaimed, regardless of the 
+default pool</span><span class="delete3">&nbsp;An implementation need not 
+support garbage collection, in which case, a pragma Controlled has no 
+effect</span>.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">This matches the required finalization point for 
+such an allocated object.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Notes">33&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3">Default_Storage_Pool may be used with restrictions 
+No_Coextensions and No_Access_Parameter_Allocators (see <A HREF="AA-H-4.html">H.4</A>) 
+to ensure that all <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>s 
+use the default pool.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p9.a">9.a/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">Ada 83 used the term &ldquo;automatic storage reclamation&rdquo; 
+to refer to what is known traditionally as &ldquo;garbage collection&rdquo;. 
+Because of the existence of storage pools (see <A HREF="AA-13-11.html">13.11</A>), 
+we need to distinguish this from the storage reclamation that might happen 
+upon leaving a master. Therefore, we now use the term &ldquo;garbage 
+collection&rdquo; in its normal computer-science sense. This has the 
+additional advantage of making our terminology more accessible to people 
+outside the Ada world.</span>&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p9.b">9.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"><A NAME="I5942"></A>Pragma Controlled has been 
+dropped from Ada, as it has no effect in any known Ada implementations 
+and it seems to promise capabilities not expected in Ada implementations. 
+This is usually not an incompatibility, as the pragma merely becomes 
+unrecognized (with a warning) and can be implemented as an implementation-defined 
+pragma if desired. However, it is incompatible if it is (now) implemented 
+as an implementation-defined pragma, someone used this pragma in a unit, 
+and they also used restriction No_Implementation_Pragmas on that unit. 
+In that case, the pragma would now violate the restriction; but use of 
+this pragma (which does nothing) should be very rare, so this is not 
+a significant issue.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p9.c">9.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
+<span class="insert3"><A NAME="I5943"></A>The pragma Default_Storage_Pool 
+is new.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p9.d">9.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">The entire discussion of garbage collection (and 
+especially that of controlled objects) is deleted. Ada 2012 provides 
+subpools (see <A HREF="AA-13-11-4.html">13.11.4</A>) for storage management 
+of objects, including controlled objects, a mechanism which is much more 
+predictable than garbage collection. Note that no version of Ada allows 
+early finalization of controlled objects (other than via the use of Unchecked_Deallocation 
+or Unchecked_Deallocate_Subpool), so that garbage collection of such 
+objects would be ineffective in the standard mode anyway.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

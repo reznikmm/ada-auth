@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package System.Storage_Elements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.7.1 The Package System.Storage_Elements</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<A NAME="I5883"></A><B>package</B>&nbsp;System.Storage_Elements&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<span class="insert2">Pure(</span><span class="delete2">&nbsp;Preelaborate(System.</span>Storage_Elements);</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5884"></A>Storage_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5885"></A>Storage_Count&nbsp;<B>is</B>&nbsp;Storage_Offset&nbsp;<B>range</B>&nbsp;0..Storage_Offset'Last;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5886"></A>Storage_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Storage_Element'Size&nbsp;<B>use</B>&nbsp;Storage_Unit;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5887"></A>Storage_Array&nbsp;<B>is</B>&nbsp;<B>array</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Storage_Offset&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;Storage_Element;<BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Storage_Array'Component_Size&nbsp;<B>use</B>&nbsp;Storage_Unit;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5888"></A>Address&nbsp;Arithmetic:</I></SPAN></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;(Left&nbsp;:&nbsp;Address;&nbsp;Right&nbsp;:&nbsp;Storage_Offset)<span class="delete3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;(Left&nbsp;:&nbsp;Storage_Offset;&nbsp;Right&nbsp;:&nbsp;Address)<span class="delete3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;(Left&nbsp;:&nbsp;Address;&nbsp;Right&nbsp;:&nbsp;Storage_Offset)<span class="delete3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Address)<span class="delete3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;<B>return</B>&nbsp;Storage_Offset<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>mod</B>&quot;(Left&nbsp;:&nbsp;Address;&nbsp;Right&nbsp;:&nbsp;Storage_Offset)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Storage_Offset<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Conversion&nbsp;to/from&nbsp;integers:</I></SPAN></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5889"></A>Integer_Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5890"></A>To_Address(Value&nbsp;:&nbsp;Integer_Address)&nbsp;<B>return</B>&nbsp;Address<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5891"></A>To_Integer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Integer_Address<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;&quot;+&quot;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;...and&nbsp;so&nbsp;on&nbsp;for&nbsp;all&nbsp;language-defined&nbsp;subprograms&nbsp;declared&nbsp;in&nbsp;this&nbsp;package.</I></SPAN><BR>
+</span><B>end</B>&nbsp;System.Storage_Elements;</div>
+<div class="paranum"><a name="p11.a">11.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The Convention <span class="insert3">aspects</span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN>s</span> 
+imply that the attribute Access is not allowed for those operations.</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations">The <B>mod</B> function is needed so that the 
+definition of Alignment makes sense.&nbsp;</div>
+<div class="paranum"><a name="p11.c">11.c/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The range of Storage_Elements.Storage_Offset, 
+the modulus of Storage_Elements.Storage_Element, and the declaration 
+of Storage_Elements.Integer_Address.</span>.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Storage_Element represents a storage element. Storage_Offset 
+represents an offset in storage elements. Storage_Count represents a 
+number of storage elements. <A NAME="I5892"></A><A NAME="I5893"></A>Storage_Array 
+represents a contiguous sequence of storage elements.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The index subtype of Storage_Array 
+is Storage_Offset because we wish to allow maximum flexibility. Most 
+Storage_Arrays will probably have a lower bound of 0 or 1, but other 
+lower bounds, including negative ones, make sense in some situations.</div>
+<div class="paranum"><a name="p12.b">12.b/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+<span class="delete2">Note that there are some language-defined subprograms 
+that fill part of a Storage_Array, and return the index of the last element 
+filled as a Storage_Offset. The Read procedures in Streams (see <A HREF="AA-13-13-1.html">13.13.1</A>), 
+Streams.Stream_IO (see <A HREF="AA-A-12-1.html">A.12.1</A>), and System.RPC 
+(see <A HREF="AA-E-5.html">E.5</A>) behave in this manner. These will 
+raise Constraint_Error if the resulting Last value is not in Storage_Offset. 
+This implies that the Storage_Array passed to these subprograms should 
+not have a lower bound of Storage_Offset'First, because then a read of 
+0 elements would always raise Constraint_Error. A better choice of lower 
+bound is 1.</span>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">Integer_Address is a [(signed or modular)] integer 
+subtype. To_Address and To_Integer convert back and forth between this 
+type and Address.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">Storage_Offset'Last shall be greater than or equal 
+to Integer'Last or the largest possible storage offset, whichever is 
+smaller. Storage_Offset'First shall be &lt;= (&ndash;Storage_Offset'Last). 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<span class="delete2">Package System.Storage_Elements may be declared 
+pure.</span>&nbsp;</div>
+<div class="Normal"><span class="insert2"><SPAN STYLE="font-size: 80%"><I>Paragraph 
+15 was deleted.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">Operations in System and its children should reflect 
+the target environment semantics as closely as is reasonable. For example, 
+on most machines, it makes sense for address arithmetic to &ldquo;wrap 
+around.&rdquo; <A NAME="I5894"></A>Operations that do not make sense 
+should raise Program_Error.&nbsp;</div>
+<div class="paranum"><a name="p16.a.1">16.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">Operations in System and its children 
+should reflect the target environment; operations that do not make sense 
+should raise Program_Error.</span></div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, on a segmented 
+architecture, X &lt; Y might raise Program_Error if X and Y do not point 
+at the same segment (assuming segments are unordered). Similarly, on 
+a segmented architecture, the conversions between Integer_Address and 
+Address might not make sense for some values, and so might raise Program_Error. 
+</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We considered making Storage_Element 
+a private type. However, it is better to declare it as a modular type 
+in the visible part, since code that uses it is already low level, and 
+might as well have access to the underlying representation. We also considered 
+allowing Storage_Element to be any integer type, signed integer or modular, 
+but it is better to have uniformity across implementations in this regard, 
+and viewing storage elements as unsigned seemed to make the most sense. 
+</div>
+<div class="paranum"><a name="p16.c">16.c</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>To_Address is intended 
+for use in Address clauses. Implementations should overload To_Address 
+if appropriate. For example, on a segmented architecture, it might make 
+sense to have a record type representing a segment/offset pair, and have 
+a To_Address conversion that converts from that record type to type Address. 
+</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p16.d">16.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<span class="insert2"><A NAME="I5895"></A>Package System.Storage_Elements 
+is now Pure, so it can be portably used in more places. (Ada 95 allowed 
+it to be Pure, but did not require that.)</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

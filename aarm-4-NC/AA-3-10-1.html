@@ -1,0 +1,548 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Incomplete Type Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.10.1 Incomplete Type Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">There are no particular limitations on the designated 
+type of an access type. In particular, the type of a component of the 
+designated type can be another access type, or even the same access type. 
+This permits mutually dependent and recursive access types. An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+can be used to introduce a type to be used as a designated type, while 
+deferring its full definition to a subsequent <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<SPAN Class="swiss">incomplete_type_declaration</SPAN><A NAME="I2442"></A><A NAME="S0085"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>type</B>&nbsp;<A NAME="I2443"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I2444"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>];</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2.1">2.1/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0137-1.TXT">AI12-0137-1</A></I>} 
+<A NAME="I2445"></A><A NAME="I2446"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+declares an <I>incomplete view</I> of a type and its first subtype; the 
+first subtype is unconstrained if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
+appears. If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+includes the reserved word <B>tagged</B>, it declares a <I>tagged incomplete 
+view</I>.<A NAME="I2447"></A><A NAME="I2448"></A> If <I>T</I> denotes 
+a tagged incomplete view, then <I>T</I>'Class denotes a tagged incomplete 
+view. [An incomplete view of a type is a limited view of the type (see 
+<A HREF="AA-7-5.html">7.5</A>).]</div>
+<div class="paranum"><a name="p2.2">2.2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+Given an access type <I>A</I> whose designated type <I>T</I> is an incomplete 
+view, a dereference of a value of type <I>A</I> also has this incomplete 
+view except when:&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0208-1.TXT">AI05-0208-1</A></I>} 
+Whether the designated type is an incomplete view (and thus whether this 
+set of rules applies) is determined by the view of the type at the declaration 
+of the access type; it does not change during the life of the type.&nbsp;</div>
+<div class="paranum"><a name="p2.3">2.3/2</a></div>
+<div class="Bulleted">it occurs within the immediate scope of the completion 
+of <I>T</I>, or</div>
+<div class="paranum"><a name="p2.4">2.4/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0208-1.TXT">AI05-0208-1</A></I>} 
+it occurs within the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN> 
+that mentions a library package in whose visible part the completion 
+of <I>T</I> is declared, or</div>
+<div class="paranum"><a name="p2.5">2.5/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0208-1.TXT">AI05-0208-1</A></I>} 
+it occurs within the scope of the completion of <I>T</I> and <I>T</I> 
+is an incomplete view declared by an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p2.6">2.6/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
+In these cases, the dereference has the view of <I>T</I> visible at the 
+point of the dereference.&nbsp;</div>
+<div class="paranum"><a name="p2.b">2.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>We need the &ldquo;in whose visible part&rdquo; rule so that the 
+second rule doesn't trigger in the body of a package with a <B>with</B> 
+of a child unit:&nbsp;</div>
+<div class="paranum"><a name="p2.c">2.c/2</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;PtrT&nbsp;<B>is&nbsp;access</B>&nbsp;T;<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p2.d">2.d/2</a></div>
+<div class="SmallExamples"><B>private&nbsp;package</B>&nbsp;P.C&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Ptr&nbsp;:&nbsp;PtrT;<BR>
+<B>end</B>&nbsp;P.C;</div>
+<div class="paranum"><a name="p2.e">2.e/3</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<B>with</B>&nbsp;P.C;<BR>
+<B>package&nbsp;body</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Ptr.all'Size&nbsp;is&nbsp;not&nbsp;legal&nbsp;here,&nbsp;but&nbsp;we&nbsp;are&nbsp;within&nbsp;the&nbsp;scope</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>of&nbsp;a&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></I></SPAN><SPAN Class="roman"><I>&nbsp;for&nbsp;P.</I></SPAN><BR>
+<B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>Ptr.all'Size&nbsp;is&nbsp;legal&nbsp;here.</I></SPAN><BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p2.7">2.7/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00412.TXT">AI95-00412-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0208-1.TXT">AI05-0208-1</A></I>} 
+Similarly, if a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
+defining a subtype of an incomplete view <I>T</I>, the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes an incomplete view except under the same three circumstances 
+given above, in which case it denotes the view of <I>T</I> visible at 
+the point of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
+<A NAME="I2449"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+requires a completion, which shall be a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+other than an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN>. 
+[If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+occurs immediately within either the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+shall occur later and immediately within this visible part or <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>. 
+If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+occurs immediately within the private part of a given <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+shall occur later and immediately within either the private part itself, 
+or the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of the corresponding <SPAN Class="swiss"><A HREF="AA-7-2.html#S0192">package_body</A></SPAN>.] 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This is implied by the next AARM-only 
+rule, plus the rules in <A HREF="AA-3-11-1.html">3.11.1</A>, &ldquo;<A HREF="AA-3-11-1.html">Completions 
+of Declarations</A>&rdquo; which require a completion to appear later 
+and immediately within the same declarative region.&nbsp;</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+occurs immediately within the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN>, 
+then the completing <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+shall occur immediately within this visible part.&nbsp;</div>
+<div class="paranum"><a name="p3.c">3.c</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>If the implementation supports 
+it, an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+can be imported (using aspect Import, see <A HREF="AA-B-1.html">B.1</A>), 
+in which case no explicit completion is allowed.&nbsp;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
+If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+includes the reserved word <B>tagged</B>, then a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+that completes it shall declare a tagged type. If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
+then a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+that completes it shall have a fully conforming (explicit) <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+(see <A HREF="AA-6-3-1.html">6.3.1</A>). <A NAME="I2450"></A>[If an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+has no <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
+(or an <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN>), 
+then a corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+is nevertheless allowed to have discriminants, either explicitly, or 
+inherited via derivation.]</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> that 
+denotes an incomplete view of a type may be used as follows:&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0098-1.TXT">AI05-0098-1</A></I>} 
+as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0080">access_to_object_definition</A></SPAN>; 
+[the only form of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
+allowed in this <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+[(a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
+is not allowed)];]&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>We now allow <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 
+even if the full type is deferred to the package body. However, there 
+is no particular implementation burden because we have dropped the concept 
+of the dependent compatibility check. In other words, we have effectively 
+repealed AI83-00007.&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00412.TXT">AI95-00412-01</A></I>} 
+as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+shall not have a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+for an access-to-object type;&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>This does not mean any 
+random <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in a construct that makes up an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
+such as a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0174">formal_part</A></SPAN>, 
+just the one given directly in the syntax of <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+defining the subtype of a parameter or result in a profile occurring 
+within a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0021">basic_declaration</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p8.b">8.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>But not in the profile 
+for a body or entry.&nbsp;</div>
+<div class="paranum"><a name="p8.2">8.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+as a generic actual parameter whose corresponding generic formal parameter 
+is a formal incomplete type (see <A HREF="AA-12-5-1.html">12.5.1</A>). 
+</div>
+<div class="paranum"><a name="p8.3">8.3/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+If such a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+denotes a tagged incomplete view, it may also be used:</div>
+<div class="paranum"><a name="p8.4">8.4/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+as the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+defining the subtype of a parameter in the profile for a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is Class; such an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+is restricted to the uses allowed here; it denotes a tagged incomplete 
+view.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+</div>
+<div class="paranum"><a name="p9.1">9.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<SPAN STYLE="font-size: 80%"><I>This 
+paragraph was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+</div>
+<div class="paranum"><a name="p9.2">9.2/3</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0098-1.TXT">AI05-0098-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+</div>
+<div class="paranum"><a name="p9.b">9.b/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p9.3">9.3/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+If any of the above uses occurs as part of the declaration of a primitive 
+subprogram of the incomplete view, and the declaration occurs immediately 
+within the private part of a package, then the completion of the incomplete 
+view shall also occur immediately within the private part; it shall not 
+be deferred to the package body.&nbsp;</div>
+<div class="paranum"><a name="p9.c">9.c/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This fixes a hole in Ada 95 where 
+a dispatching operation with an access parameter could be declared in 
+a private part and a dispatching call on it could occur in a child even 
+though there is no visibility on the full type, requiring access to the 
+controlling tag without access to the representation of the type.&nbsp;</div>
+<div class="paranum"><a name="p9.4">9.4/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+No other uses of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes an incomplete view of a type are allowed.</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> that 
+denotes an object shall not be of an incomplete view. An actual parameter 
+in a call shall not be of an untagged incomplete view. The result object 
+of a function call shall not be of an incomplete view. A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+shall not denote a subprogram having a formal parameter of an untagged 
+incomplete view, nor a return type that is an incomplete view.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We used to disallow all dereferences 
+of an incomplete type. Now we only disallow such dereferences when used 
+as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>. 
+Dereferences used in other contexts do not pose a problem since normal 
+type matching will preclude their use except when the full type is &ldquo;nearby&rdquo; 
+as context (for example, as the expected type).</div>
+<div class="paranum"><a name="p10.b">10.b/2</a></div>
+<div class="Annotations">This also disallows <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>es 
+that are directly of an incomplete view. For instance, a parameter <I>P</I> 
+can be declared of a tagged incomplete type, but we don't want to allow 
+<I>P</I>'Size, <I>P</I>'Alignment, or the like, as representation values 
+aren't known for an incomplete view.</div>
+<div class="paranum"><a name="p10.c">10.c/2</a></div>
+<div class="Annotations">We say &ldquo;denotes an object&rdquo; so that 
+prefixes that directly name an incomplete view are not covered; the previous 
+rules cover such cases, and we certainly don't want to ban Incomp'Class.</div>
+<div class="paranum"><a name="p10.d">10.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+As subprogram profiles now may include any kind of incomplete type, we 
+also disallow passing objects of untagged incomplete types in subprogram 
+calls (as the parameter passing method is not known as it is for tagged 
+types) and disallow returning any sort of incomplete objects (since we 
+don't know how big they are).&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 11 was 
+deleted.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I2451"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+has no effect.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>An incomplete type has no real 
+existence, so it doesn't need to be &quot;created&quot; in the usual 
+sense we do for other types. It is roughly equivalent to a &quot;forward;&quot; 
+declaration in Pascal. Private types are different, because they have 
+a different set of characteristics from their full type.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">89&nbsp;&nbsp;<A NAME="I2452"></A>Within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+and a corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+cannot be separated by an intervening body. This is because a type has 
+to be completely defined before it is frozen, and a body freezes all 
+types declared prior to it in the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+(see <A HREF="AA-13-14.html">13.14</A>).</div>
+<div class="paranum"><a name="p13.1">13.1/3</a></div>
+<div class="Notes">90&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> that 
+denotes an object of an incomplete view is defined to be of a limited 
+type. Hence, the target of an assignment statement cannot be of an incomplete 
+view.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a recursive 
+type:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>type</B>&nbsp;Cell;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;incomplete&nbsp;type&nbsp;declaration</I></SPAN><BR>
+<B>type</B>&nbsp;Link&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Cell;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>type</B>&nbsp;Cell&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Succ&nbsp;&nbsp;&nbsp;:&nbsp;Link;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pred&nbsp;&nbsp;&nbsp;:&nbsp;Link;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">Head&nbsp;&nbsp;&nbsp;:&nbsp;Link&nbsp;&nbsp;:=&nbsp;<B>new</B>&nbsp;Cell'(0,&nbsp;<B>null</B>,&nbsp;<B>null</B>);<BR>
+Next&nbsp;&nbsp;&nbsp;:&nbsp;Link&nbsp;&nbsp;:=&nbsp;Head.Succ;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal"><I>Examples of mutually dependent access types:</I> 
+</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<B>type</B>&nbsp;Person(&lt;&gt;);&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;incomplete&nbsp;type&nbsp;declaration</I></SPAN><BR>
+<B>type</B>&nbsp;Car&nbsp;<B>is&nbsp;tagged</B>;&nbsp;--<SPAN Class="roman"><I>&nbsp;incomplete&nbsp;type&nbsp;declaration</I></SPAN></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<B>type</B>&nbsp;Person_Name&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Person;<BR>
+<B>type</B>&nbsp;Car_Name&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Car'Class;</div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<B>type</B>&nbsp;Car&nbsp;<B>is</B>&nbsp;<B>tagged</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Owner&nbsp;&nbsp;&nbsp;:&nbsp;Person_Name;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples"><B>type</B>&nbsp;Person(Sex&nbsp;:&nbsp;Gender)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String(1&nbsp;..&nbsp;20);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Birth&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Date;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;130;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vehicle&nbsp;&nbsp;:&nbsp;Car_Name;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Sex&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;M&nbsp;=&gt;&nbsp;Wife&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Person_Name(Sex&nbsp;=&gt;&nbsp;F);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;F&nbsp;=&gt;&nbsp;Husband&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Person_Name(Sex&nbsp;=&gt;&nbsp;M);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">My_Car,&nbsp;Your_Car,&nbsp;Next_Car&nbsp;:&nbsp;Car_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Car;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-4-8.html">4.8</A></I></SPAN><BR>
+George&nbsp;:&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person(M);<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+George.Vehicle&nbsp;:=&nbsp;Your_Car;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p23.a">23.a</a></div>
+<div class="Annotations"><A NAME="I2453"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+that completes an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+may have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+even if the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
+does not.</div>
+<div class="paranum"><a name="p23.b">23.b/1</a></div>
+<div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+may be applied to an incomplete type, even if its completion is deferred 
+to the package body, because there is no &ldquo;dependent compatibility 
+check&rdquo; required any more. Of course, the constraint can be specified 
+only if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+was given in the <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN>. 
+As mentioned in the previous paragraph, that is no longer required even 
+when the full type has discriminants.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p23.c">23.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Dereferences producing 
+incomplete types were not explicitly disallowed in RM83, though AI83-00039 
+indicated that it was not strictly necessary since troublesome cases 
+would result in Constraint_Error at run time, since the access value 
+would necessarily be null. However, this introduces an undesirable implementation 
+burden, as illustrated by Example 4 of AI83-00039:&nbsp;</div>
+<div class="paranum"><a name="p23.d">23.d</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Pack&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Pri&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Sep;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Pri&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Sep;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Pri;<BR>
+<B>end</B>&nbsp;Pack;</div>
+<div class="paranum"><a name="p23.e">23.e</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;<B>body</B>&nbsp;Pack&nbsp;<B>is</B>&nbsp;--<SPAN Class="roman"><I>&nbsp;Could&nbsp;be&nbsp;separately&nbsp;compiled!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Sep&nbsp;<B>is</B>&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:=&nbsp;<B>new</B>&nbsp;Sep;<BR>
+<B>end</B>&nbsp;Pack;</div>
+<div class="paranum"><a name="p23.f">23.f</a></div>
+<div class="SmallExamples"><B>pragma</B>&nbsp;Elaborate(Pack);<BR>
+<B>private</B>&nbsp;<B>package</B>&nbsp;Pack.Child&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;X.<B>all</B>'Size;&nbsp;--<SPAN Class="roman"><I>&nbsp;Legal,&nbsp;by&nbsp;AI-00039.</I></SPAN><BR>
+<B>end</B>&nbsp;Pack.Child;</div>
+<div class="paranum"><a name="p23.g">23.g</a></div>
+<div class="Annotations">Generating code for the above example could 
+be a serious implementation burden, since it would require all aliased 
+objects to store size dope, and for that dope to be in the same format 
+for all kinds of types (or some other equivalently inefficient implementation). 
+On the contrary, most implementations allocate dope differently (or not 
+at all) for different designated subtypes.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p23.h">23.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<A NAME="I2454"></A>It is now illegal to use an incomplete view (type) 
+as the parameter or result of an access-to-subprogram type unless the 
+incomplete view is completed in the same declaration list as the use. 
+This was allowed in Ada 95 for incomplete types where the completion 
+was deferred to the body. By disallowing this rare use of incomplete 
+views, we can allow the use of incomplete views in many more places, 
+which is especially valuable for limited views.</div>
+<div class="paranum"><a name="p23.i">23.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+It is now illegal to use an incomplete view (type) in a primitive subprogram 
+of the type unless the incomplete view is completed in the package specification. 
+This was allowed in Ada 95 for incomplete types where the completion 
+was deferred to the body (the use would have to be in an access parameter). 
+This incompatibility was caused by the fix for the hole noted in Legality 
+Rules above.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p23.j">23.j/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<A NAME="I2455"></A>Tagged incomplete types are new. They are allowed 
+in parameter declarations as well as the usual places, as tagged types 
+are always by-reference types (and thus there can be no code generation 
+issue).</div>
+<div class="paranum"><a name="p23.k">23.k/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00412.TXT">AI95-00412-01</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
+can be used to give a new name to an incomplete view of a type. This 
+is valuable to give shorter names to entities imported with a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p23.l">23.l/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+The description of incomplete types as <I>incomplete views</I> is new. 
+Ada 95 defined these as separate types, but neglected to give any rules 
+for matching them with other types. Luckily, implementers did the right 
+thing anyway. This change also makes it easier to describe the meaning 
+of a limited view.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p23.m">23.m/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0098-1.TXT">AI05-0098-1</A></I>} 
+<A NAME="I2456"></A><B>Correction:</B> Fixed the definition so that an 
+anonymous access-to-subprogram type can use an incomplete view in the 
+same way that a named access-to-subprogram type can.</div>
+<div class="paranum"><a name="p23.n">23.n/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
+Incomplete types now can be used in subprogram declarations. The type 
+has to be complete before any calls or the body is declared. This reduces 
+the places where access types are required for types imported from limited 
+views of packages.</div>
+<div class="paranum"><a name="p23.o">23.o/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
+Incomplete types now can be completed by private types and private extensions. 
+Since this can already happen for limited views, there is no remaining 
+reason to disallow it for explicitly declared incomplete types.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p23.p">23.p/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0208-1.TXT">AI05-0208-1</A></I>} 
+<B>Correction:</B> Changed the rules of uses of dereferences of incomplete 
+views such that it does not introduce an unintentional incompatibility 
+with Ada 83 and Ada 95.</div>
+<div class="paranum"><a name="p23.q">23.q/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+Incomplete types now can be used as actuals to formal incomplete types 
+(see <A HREF="AA-12-5-1.html">12.5.1</A>).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p23.r">23.r/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0137-1.TXT">AI12-0137-1</A></I>} 
+<B>Corrigndum:</B> Changed the wording to clarify that the class-wide 
+type associated with a specific tagged type that has an incomplete view 
+is also an incomplete view. While this was previously undefined, an interpretation 
+where it is not an incomplete view is leads to semantic nonsense, and 
+thus we don't consider this a potential incompatibility, as compilers 
+most likely are doing the right thing.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

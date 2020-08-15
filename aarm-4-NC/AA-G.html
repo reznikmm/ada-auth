@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Numerics</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-F-3-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Annex G</H1>
+<H2>(normative)</H2>
+<H1>Numerics</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I9006"></A>The Numerics Annex specifies 
+</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Bulleted">features for complex arithmetic, including complex 
+I/O;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">a mode (&ldquo;strict mode&rdquo;), in which the 
+predefined arithmetic operations of floating point and fixed point types 
+and the functions and operations of various predefined packages have 
+to provide guaranteed accuracy or conform to other numeric performance 
+requirements, which the Numerics Annex also specifies;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">a mode (&ldquo;relaxed mode&rdquo;), in which no 
+accuracy or other numeric performance requirements need be satisfied, 
+as for implementations not conforming to the Numerics Annex;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+models of floating point and fixed point arithmetic on which the accuracy 
+requirements of strict mode are based;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+the definitions of the model-oriented attributes of floating point types 
+that apply in the strict mode; and</div>
+<div class="paranum"><a name="p6.1">6.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+features for the manipulation of real and complex vectors and matrices. 
+</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+If Fortran (respectively, C) is widely supported in the target environment, 
+implementations supporting the Numerics Annex should provide the child 
+package Interfaces.Fortran (respectively, Interfaces.C) specified in 
+<A HREF="AA-B.html">Annex B</A> and should support a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+of Fortran (respectively, C) for the Convention aspect (see <A HREF="AA-B.html">Annex 
+B</A>), thus allowing Ada programs to interface with programs written 
+in that language.&nbsp;</div>
+<div class="paranum"><a name="p7.a.1">7.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If Fortran (respectively, 
+C) is supported in the target environment, then interfacing to Fortran 
+(respectively, C) should be supported as specified in <A HREF="AA-B.html">Annex 
+B</A>.</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><A NAME="I9007"></A>This Annex is new to Ada 
+95.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-F-3-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

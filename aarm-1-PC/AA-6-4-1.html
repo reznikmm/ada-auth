@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Parameter Associations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.4.1 Parameter Associations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I3168"></A> A parameter association defines 
+the association between an actual parameter and a formal parameter.] 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">The parameter passing rules for <B>out</B> parameters 
+are designed to ensure that the parts of a type that have implicit initial 
+values (see <A HREF="AA-3-3-1.html">3.3.1</A>) don't become &ldquo;de-initialized&rdquo; 
+by being passed as an <B>out</B> parameter.</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0092">selector_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0158">parameter_association</A></SPAN> 
+shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0152">parameter_specification</A></SPAN> 
+of the view being called.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3169"></A>The <I>actual parameter</I> is 
+either the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0159">explicit_actual_parameter</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0158">parameter_association</A></SPAN> 
+for a given formal parameter, or the corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">default_expression</A></SPAN> 
+if no <SPAN Class="swiss"><A HREF="AA-6-4.html#S0158">parameter_association</A></SPAN> 
+is given for the formal parameter. <A NAME="I3170"></A>The expected type 
+for an actual parameter is the type of the corresponding formal parameter. 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The corresponding <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">default_expression</A></SPAN> 
+is the one of the corresponding formal parameter in the profile of the 
+view denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0086">prefix</A></SPAN> 
+of the call.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">If the mode is <B>in</B>, the actual is interpreted 
+as an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN>; 
+otherwise, the actual is interpreted only as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>, 
+if possible.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This formally resolves 
+the ambiguity present in the syntax rule for <SPAN Class="swiss"><A HREF="AA-6-4.html#S0159">explicit_actual_parameter</A></SPAN>. 
+ Note that we don't actually require that the actual be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+if the mode is not <B>in</B>; we do that below.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If the mode is <B>in out</B> or <B>out</B>, the actual 
+shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+that denotes a variable.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We no longer need &ldquo;or 
+a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0120">type_conversion</A></SPAN> 
+whose argument is the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+of a variable,&rdquo; because a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0120">type_conversion</A></SPAN> 
+is now a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>, 
+and a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0120">type_conversion</A></SPAN> 
+of a variable is a variable.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>The 
+requirement that the actual be a (variable) <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+is not an overload resolution rule, since we don't want the difference 
+between <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> to 
+be used to resolve overloading. For example:&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="SmallExamples">procedure&nbsp;Print(X&nbsp;:&nbsp;<B>in</B>&nbsp;Integer;&nbsp;Y&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True);<BR>
+procedure&nbsp;Print(Z&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Integer);<BR>
+.&nbsp;.&nbsp;.<BR>
+Print(3);&nbsp;--<SPAN Class="roman"><I>&nbsp;Ambiguous!</I></SPAN><BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p5.d">5.d</a></div>
+<div class="Annotations">The above call to Print is ambiguous even though 
+the call is not compatible with the second Print which requires an actual 
+that is a (variable) <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+(&ldquo;3&rdquo; is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN>, 
+not a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>). 
+This requirement is a legality rule, so overload resolution fails before 
+it is considered, meaning that the call is ambiguous.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The type of the actual 
+parameter associated with an access parameter shall be convertible (see 
+<A HREF="AA-4-6.html">4.6</A>) to its anonymous access type. <A NAME="I3171"></A></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3172"></A>For 
+the evaluation of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0158">parameter_association</A></SPAN>: 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">The actual parameter is first evaluated.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">For an access parameter, the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0077">access_definition</A></SPAN> 
+is elaborated, which creates the anonymous access type.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">For a parameter [(of any mode)] that is passed 
+by reference (see <A HREF="AA-6-2.html">6.2</A>), a view conversion of 
+the actual parameter to the nominal subtype of the formal parameter is 
+evaluated, and the formal parameter denotes that conversion. <A NAME="I3173"></A></div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We are always allowing sliding, 
+even for [<B>in</B>] <B>out</B> by-reference parameters.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted"><A NAME="I3174"></A>For an <B>in</B> or <B>in out</B> 
+parameter that is passed by copy (see <A HREF="AA-6-2.html">6.2</A>), 
+the formal parameter object is created, and the value of the actual parameter 
+is converted to the nominal subtype of the formal parameter and assigned 
+to the formal. <A NAME="I3175"></A></div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The conversion mentioned 
+here is a value conversion.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">For an <B>out</B> 
+parameter that is passed by copy, the formal parameter object is created, 
+and:&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented2Bulleted">For an access type, the formal parameter 
+is initialized from the value of the actual, without a constraint check; 
+</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This preserves the Language Design 
+Principle that an object of an access type is always initialized with 
+a &ldquo;reasonable&rdquo; value.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Indented2Bulleted">For a composite type with discriminants 
+or that has implicit initial values for any subcomponents (see <A HREF="AA-3-3-1.html">3.3.1</A>), 
+the behavior is as for an <B>in out</B> parameter passed by copy.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This ensures that no part of 
+an object of such a type can become &ldquo;de-initialized&rdquo; by being 
+part of an <B>out</B> parameter.&nbsp;</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This includes an array 
+type whose component type is an access type, and a record type with a 
+component that has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">default_expression</A></SPAN>, 
+among other things.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented2Bulleted">For any other type, the formal parameter 
+is uninitialized. If composite, a view conversion of the actual parameter 
+to the nominal subtype of the formal is evaluated [(which might raise 
+Constraint_Error)], and the actual subtype of the formal is that of the 
+view conversion. If elementary, the actual subtype of the formal is given 
+by its nominal subtype.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This case covers scalar 
+types, and composite types whose subcomponent's subtypes do not have 
+any implicit initial values. The view conversion for composite types 
+ensures that if the lengths don't match between an actual and a formal 
+array parameter, the Constraint_Error is raised before the call, rather 
+than after.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><A NAME="I3176"></A><A NAME="I3177"></A>A formal 
+parameter of mode <B>in out</B> or <B>out</B> with discriminants is constrained 
+if either its nominal subtype or the actual parameter is constrained.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I3178"></A><A NAME="I3179"></A><A NAME="I3180"></A><A NAME="I3181"></A><A NAME="I3182"></A>After 
+normal completion and leaving of a subprogram, for each <B>in out</B> 
+or <B>out</B> parameter that is passed by copy, the value of the formal 
+parameter is converted to the subtype of the variable given as the actual 
+parameter and assigned to it. <A NAME="I3183"></A>These conversions and 
+assignments occur in an arbitrary order.<A NAME="I3184"></A>&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The conversions mentioned 
+above during parameter passing might raise Constraint_Error &mdash; (see 
+<A HREF="AA-4-6.html">4.6</A>).&nbsp;</div>
+<div class="paranum"><a name="p17.b">17.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If any conversion or assignment 
+as part of parameter passing propagates an exception, the exception is 
+raised at the place of the subprogram call; that is, it cannot be handled 
+inside the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p17.c">17.c</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Since these checks happen before 
+or after executing the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN>, 
+the execution of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+does not dynamically enclose them, so it can't handle the exceptions. 
+</div>
+<div class="paranum"><a name="p17.d">17.d</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The variable we're talking 
+about is the one denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+given as the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0159">explicit_actual_parameter</A></SPAN>. 
+If this <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0120">type_conversion</A></SPAN>, 
+then the rules in <A HREF="AA-4-6.html">4.6</A> for assigning to a view 
+conversion apply. That is, if X is of subtype S1, and the actual is S2(X), 
+the above-mentioned conversion will convert to S2, and the one mentioned 
+in <A HREF="AA-4-6.html">4.6</A> will convert to S1.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p17.e">17.e</a></div>
+<div class="Annotations"><A NAME="I3185"></A>In Ada 95, a program can 
+rely on the fact that passing an object as an <B>out</B> parameter does 
+not &ldquo;de-initialize&rdquo; any parts of the object whose subtypes 
+have implicit initial values. (This generalizes the RM83 rule that required 
+copy-in for parts that were discriminants or of an access type.)&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p17.f">17.f</a></div>
+<div class="Annotations">We have eliminated the subclause on Default 
+Parameters, as it is subsumed by earlier clauses and subclauses.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

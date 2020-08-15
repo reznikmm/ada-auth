@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Task and Entry Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.9 Task and Entry Attributes</H1>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+T that is of a task type (after any implicit dereference), the following 
+attributes are defined:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="WideHanging-Term">T'Callable</div><div class="WideHanging-Body">
+<A NAME="I4679"></A><A NAME="I4680"></A>Yields the value True when the 
+task denoted by T is <I>callable</I>, and False otherwise; <A NAME="I4681"></A><A NAME="I4682"></A>a 
+task is callable unless it is completed or abnormal. The value of this 
+attribute is of the predefined type Boolean.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="WideHanging-Term">T'Terminated</div><div class="WideHanging-Body">
+<A NAME="I4683"></A><A NAME="I4684"></A>Yields the value True if the 
+task denoted by T is terminated, and False otherwise. The value of this 
+attribute is of the predefined type Boolean.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+E that denotes an entry of a task or protected unit, the following attribute 
+is defined. This attribute is only allowed within the body of the task 
+or protected unit, but excluding, in the case of an entry of a task unit, 
+within any program unit that is, itself, inner to the body of the task 
+unit.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="WideHanging-Term">E'Count</div><div class="WideHanging-Body">
+<A NAME="I4685"></A><A NAME="I4686"></A>Yields the number of calls presently 
+queued on the entry E of the current instance of the unit. The value 
+of this attribute is of the type <I>universal_integer</I>.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Notes">45&nbsp;&nbsp;For the Count attribute, the entry can 
+be either a single entry or an entry of a family. The name of the entry 
+or entry family can be either a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+or an expanded name.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Notes">46&nbsp;&nbsp;Within task units, algorithms interrogating 
+the attribute E'Count should take precautions to allow for the increase 
+of the value of this attribute for incoming entry calls, and its decrease, 
+for example with <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0254">timed_entry_call</A></SPAN>s. 
+Also, a <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0257">conditional_entry_call</A></SPAN> 
+may briefly increase this value, even if the conditional call is not 
+accepted.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">47&nbsp;&nbsp;Within protected units, algorithms interrogating 
+the attribute E'Count in the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0240">entry_barrier</A></SPAN> 
+for the entry E should take precautions to allow for the evaluation of 
+the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
+of the barrier both before and after queuing a given caller.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Reduced Accuracy Subtypes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>J.3 Reduced Accuracy Subtypes</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+may be used to define a floating point subtype with a new value for its 
+requested decimal precision, as reflected by its Digits attribute. Similarly, 
+a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+may be used to define an ordinary fixed point subtype with a new value 
+for its <I>delta</I>, as reflected by its Delta attribute.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">delta_constraint</SPAN><A NAME="I8808"></A><A NAME="S0321"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;<I>static_</I><A NAME="I8809"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>&nbsp;[<A NAME="I8810"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>]</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I8811"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+is expected to be of any real type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+shall be static.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+shall denote an ordinary fixed point subtype.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I8812"></A>For a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+shall denote either a decimal fixed point subtype or a floating point 
+subtype (notwithstanding the rule given in <A HREF="RM-3-5-9.html">3.5.9</A> 
+that only allows a decimal fixed point subtype).&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+that denotes an ordinary fixed point subtype and a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+defines an ordinary fixed point subtype with a <I>delta</I> given by 
+the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN>. 
+If the <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+then the ordinary fixed point subtype is constrained by the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+that denotes a floating point subtype and a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+defines a floating point subtype with a requested decimal precision (as 
+reflected by its Digits attribute) given by the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>. 
+If the <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+then the floating point subtype is constrained by the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I8813"></A>A <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+is <I>compatible</I> with an ordinary fixed point subtype if the value 
+of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is no less than the <I>delta</I> of the subtype, and the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+if any, is compatible with the subtype.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I8814"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+is <I>compatible</I> with a floating point subtype if the value of the 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is no greater than the requested decimal precision of the subtype, and 
+the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+if any, is compatible with the subtype.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I8815"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0321">delta_constraint</A></SPAN> 
+consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+if any.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-J-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

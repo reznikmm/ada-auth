@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package System.Address_To_Access_Conversions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.7.2 The Package System.Address_To_Access_Conversions</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+generic library package exists:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><A NAME="I5573"></A><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+<B>package</B>&nbsp;System.Address_To_Access_Conversions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Address_To_Access_Conversions);</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object_Pointer&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Object;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5574"></A>To_Pointer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Object_Pointer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5575"></A>To_Address(Value&nbsp;:&nbsp;Object_Pointer)&nbsp;<B>return</B>&nbsp;Address<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<B>end</B>&nbsp;System.Address_To_Access_Conversions;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+The To_Pointer and To_Address subprograms convert back and forth between 
+values of types Object_Pointer and Address. To_Pointer(X'Address) is 
+equal to X'Unchecked_Access for any X that allows Unchecked_Access. To_Pointer(Null_Address) 
+returns <B>null</B>. <A NAME="I5576"></A>For other addresses, the behavior 
+is unspecified. To_Address(<B>null</B>) returns Null_Address. To_Address(Y), 
+where Y /= <B>null</B>, returns Y.<B>all</B>'Address.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+The programmer should ensure that the address passed to To_Pointer is 
+either Null_Address, or the address of an object of type Object. (If 
+Object is not a by-reference type, the object ought to be aliased; recall 
+that the Address attribute is not required to provide a useful result 
+for other objects.) Otherwise, the behavior of the program is unspecified; 
+it might raise an exception or crash, for example.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Unspecified is almost the same 
+thing as erroneous; they both allow arbitrarily bad behavior. We don't 
+say erroneous here, because the implementation might allow the address 
+passed to To_Pointer to point at some memory that just happens to &ldquo;look 
+like&rdquo; an object of type Object. That's not necessarily an error; 
+it's just not portable. However, if the actual type passed to Object 
+is (for example) an array type, the programmer would need to be aware 
+of any dope that the implementation expects to exist, when passing an 
+address that did not come from the Address attribute of an object of 
+type Object.</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="Annotations">One might wonder why To_Pointer and To_Address 
+are any better than unchecked conversions. The answer is that Address 
+does not necessarily have the same representation as an access type. 
+For example, an access value might point at the bounds of an array when 
+an address would point at the first element. Or an access value might 
+be an offset in words from someplace, whereas an address might be an 
+offset in bytes from the beginning of memory.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An implementation may place restrictions on instantiations 
+of Address_To_Access_Conversions.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, if the hardware 
+requires aligned loads and stores, then dereferencing an access value 
+that is not properly aligned might raise an exception.</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations">For another example, if the implementation has 
+chosen to use negative component offsets (from an access value), it might 
+not be possible to preserve the semantics, since negative offsets from 
+the Address are not allowed. (The Address attribute always points at 
+&ldquo;the first of the storage elements....&rdquo;) Note that while 
+the implementation knows how to convert an access value into an address, 
+it might not be able to do the reverse. To avoid generic contract model 
+violations, the restriction might have to be detected at run time in 
+some cases.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

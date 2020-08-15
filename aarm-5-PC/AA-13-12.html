@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragma Restrictions and Pragma Profile</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-12-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.12 Pragma Restrictions and Pragma Profile</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+[A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions expresses the user's intent to abide by certain restrictions. 
+A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Profile 
+expresses the user's intent to abide by a set of Restrictions or other 
+specified run-time policies. These may facilitate the construction of 
+simpler run-time environments.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5873"></A><A NAME="I5874"></A>Restrictions(<A NAME="I5875"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0323">restriction</A></SPAN>{, 
+<A NAME="I5876"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0323">restriction</A></SPAN>});</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+<SPAN Class="swiss">restriction</SPAN><A NAME="I5877"></A><A NAME="S0323"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>restriction_</I><A NAME="I5878"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>restriction_parameter_</I><A NAME="I5879"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I5880"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN></div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+<SPAN Class="swiss">restriction_parameter_argument</SPAN><A NAME="I5881"></A><A NAME="S0324"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5882"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5883"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I5884"></A>Unless otherwise specified for 
+a particular restriction, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is expected to be of any integer type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">Unless otherwise specified for a particular restriction, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+shall be static, and its value shall be nonnegative.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00394.TXT">AI95-00394-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+</div>
+<div class="paranum"><a name="p7.a">7.a/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 7 was deleted.</I></SPAN> 
+</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
+<A NAME="I5885"></A><A NAME="I5886"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions is a configuration pragma. If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions applies to any compilation unit included in the partition, 
+this may impose either (or both) of two kinds of requirements, as specified 
+for the particular restriction:</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
+A restriction may impose requirements on some or all of the units comprising 
+the partition. Unless otherwise specified for a particular restriction, 
+such a requirement applies to all of the units comprising the partition 
+and is enforced via a post-compilation check.</div>
+<div class="paranum"><a name="p8.2">8.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
+A restriction may impose requirements on the run-time behavior of the 
+program, as indicated by the specification of run-time behavior associated 
+with a violation of the requirement.</div>
+<div class="paranum"><a name="p8.a.1">8.a.1/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In this latter case, there 
+is no post-compilation check needed for the requirement.&nbsp;</div>
+<div class="paranum"><a name="p8.3">8.3/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
+For the purpose of checking whether a partition contains constructs that 
+violate any restriction (unless specified otherwise for a particular 
+restriction):</div>
+<div class="paranum"><a name="p8.4">8.4/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
+Generic instances are logically expanded at the point of instantiation;</div>
+<div class="paranum"><a name="p8.5">8.5/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
+If an object of a type is declared or allocated and not explicitly initialized, 
+then all expressions appearing in the definition for the type and any 
+of its ancestors are presumed to be used;</div>
+<div class="paranum"><a name="p8.6">8.6/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+for a formal parameter or a generic formal object is considered to be 
+used if and only if the corresponding actual parameter is not provided 
+in a given call or instantiation.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p8.7">8.7/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+An implementation may provide implementation-defined restrictions; the 
+identifier for an implementation-defined restriction shall differ from 
+those of the language-defined restrictions.&nbsp;</div>
+<div class="paranum"><a name="p8.a.2">8.a.2/3</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+restrictions allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">An implementation may place limitations on the values 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+that are supported, and limitations on the supported combinations of 
+restrictions. The consequences of violating such limitations are implementation 
+defined.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The consequences 
+of violating limitations on Restrictions <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s.</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Such limitations may be 
+enforced at compile time or at run time. Alternatively, the implementation 
+is allowed to declare violations of the restrictions to be erroneous, 
+and not enforce them at all.&nbsp;</div>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
+An implementation is permitted to omit restriction checks for code that 
+is recognized at compile time to be unreachable and for which no code 
+is generated.</div>
+<div class="paranum"><a name="p9.2">9.2/1</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0043">8652/0043</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00190.TXT">AI95-00190-01</A></I>} 
+Whenever enforcement of a restriction is not required prior to execution, 
+an implementation may nevertheless enforce the restriction prior to execution 
+of a partition to which the restriction applies, provided that every 
+execution of the partition would violate the restriction.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Profile is as follows:&nbsp;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5887"></A><A NAME="I5888"></A>Profile 
+(<I>profile_</I><A NAME="I5889"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+{, <I>profile_</I><A NAME="I5890"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>});</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+The <I>profile_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall be the name of a usage profile. The semantics of any <I>profile_</I><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
+are defined by the usage profile specified by the <I>profile_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+A profile is equivalent to the set of configuration pragmas that is defined 
+for each usage profile.&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
+<A NAME="I5891"></A><A NAME="I5892"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Profile is a configuration pragma. There may be more than one <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Profile for a partition.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+An implementation may provide implementation-defined usage profiles; 
+the identifier for an implementation-defined usage profile shall differ 
+from those of the language-defined usage profiles.</div>
+<div class="paranum"><a name="p15.a.1">15.a.1/3</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+usage profiles allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Profile.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Notes">36&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00347.TXT">AI95-00347-01</A></I>} 
+Restrictions intended to facilitate the construction of efficient tasking 
+run-time systems are defined in <A HREF="AA-D-7.html">D.7</A>. Restrictions 
+intended for use when constructing high integrity systems are defined 
+in <A HREF="AA-H-4.html">H.4</A>.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Notes">37&nbsp;&nbsp;An implementation has to enforce the 
+restrictions in cases where enforcement is required, even if it chooses 
+not to take advantage of the restrictions in terms of efficiency.&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>It is not the intent that 
+an implementation will support a different run-time system for every 
+possible combination of restrictions. An implementation might support 
+only two run-time systems, and document a set of restrictions that is 
+sufficient to allow use of the more efficient and safe one.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p17.b">17.b</a></div>
+<div class="Annotations"><A NAME="I5893"></A>Pragma Restrictions is new 
+to Ada 95.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p17.c">17.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
+<A NAME="I5894"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+Profile is new; it was moved here by Ada 2012 and renamed to a &quot;usage 
+profile&quot; but was otherwise unchanged.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p17.d">17.d/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0042">8652/0042</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00130.TXT">AI95-00130-01</A></I>} 
+<B>Corrigendum:</B> Corrected the wording so that restrictions are checked 
+inside of generic instantiations and in default expressions. Since not 
+making these checks would violate the purpose of restrictions, we are 
+not documenting this as an incompatibility.</div>
+<div class="paranum"><a name="p17.e">17.e/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0043">8652/0043</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00190.TXT">AI95-00190-01</A></I>} 
+<B>Corrigendum:</B> Added a permission that restrictions can be enforced 
+at compile-time. While this is technically incompatible, documenting 
+it as such would be unnecessarily alarming - there should not be any 
+programs depending on the runtime failure of restrictions.</div>
+<div class="paranum"><a name="p17.f">17.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
+The syntax of a <SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+has been defined to better support restriction No_Dependence (see <A HREF="AA-13-12-1.html">13.12.1</A>). 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p17.g">17.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
+<B>Correction</B>: When restrictions are checked has been clarified. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-12-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

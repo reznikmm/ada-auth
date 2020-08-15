@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE></TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Title {font-family: "Times New Roman", Times, serif; font-size: 195%; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<div class="Normal" style="text-align: right"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"><B>Ada 
+Reference Manual</B>, ISO/IEC 8652:</SPAN></SPAN><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="insert5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;202x(E)</SPAN></SPAN></span><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;2012(E)</SPAN></SPAN></span></span><span class="insert4"><span class="delete5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;with COR.1:2016</SPAN></SPAN></span></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span></span><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;2007(E) 
+Ed. 3</SPAN></SPAN></span></span><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="delete2"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;1995(E)</SPAN></SPAN></span><span class="insert1"><span class="delete2"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;with COR.1:2001</SPAN></SPAN></span></span><span class="delete2"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></div>
+<div class="Normal">&nbsp;<BR>
+&nbsp;<BR>
+&nbsp;<BR>
+</div>
+<div class="Normal">&nbsp;<BR>
+&nbsp;<BR>
+</div>
+<div class="Normal">&nbsp;</div>
+<div class="Normal">&nbsp;<BR>
+&nbsp;<BR>
+&nbsp;<BR>
+&nbsp;<BR>
+</div>
+<div class="Normal">&nbsp;<BR>
+</div>
+<div class="Title" style="text-align: center"><SPAN Class="swiss"><B>Annotated 
+Ada Reference Manual</B></SPAN></div>
+<div class="Normal">&nbsp;</div>
+<div class="Normal" style="text-align: center"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">ISO/IEC 
+8652:</SPAN></SPAN><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="insert5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;202x</SPAN></SPAN></span><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;2012</SPAN></SPAN></span></span><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></span><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;1995</SPAN></SPAN></span><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">(E)</SPAN></SPAN><span class="insert5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">, 
+Draft 11</SPAN></SPAN></span><SPAN Class="swiss"><SPAN STYLE="font-size: 125%"></SPAN></SPAN></div>
+<div class="Normal" style="text-align: center"><SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss"></SPAN></span><span class="insert4"><SPAN Class="swiss"></SPAN></span><span class="insert4"><span class="delete5"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">with 
+Technical Corrigendum 1</SPAN></SPAN></span></span><span class="insert4"><SPAN Class="swiss"></SPAN></span><span class="insert3"><SPAN Class="swiss"></SPAN></span><SPAN Class="swiss"></SPAN><span class="delete3"><SPAN Class="swiss"></SPAN></span><span class="insert1"><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">&nbsp;with 
+Technical Corrigendum 1</SPAN></SPAN></span></span><span class="delete3"><SPAN Class="swiss"></SPAN></span><SPAN Class="swiss"></SPAN></div>
+<div class="Normal" style="text-align: center"><SPAN Class="swiss"></SPAN><span class="delete3"><SPAN Class="swiss"></SPAN></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">and 
+Amendment 1</SPAN></SPAN></span></span><span class="delete3"><SPAN Class="swiss"></SPAN></span><SPAN Class="swiss"></SPAN></div>
+<div class="Normal">&nbsp;</div>
+<div class="Normal" style="text-align: center"><SPAN Class="swiss"><SPAN STYLE="font-size: 125%">Language 
+and Standard Libraries</SPAN></SPAN></div>
+<div class="Normal">&nbsp;<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+</div>
+<div class="Normal">Copyright &copy; 1992, 1993, 1994, 1995  Intermetrics, 
+Inc.</div>
+<div class="Normal"><span class="insert1">Copyright &copy; 2000  The 
+MITRE Corporation, Inc.</span></div>
+<div class="Normal"><span class="insert2">Copyright &copy; 2004, 2005, 
+2006  AXE Consultants</span></div>
+<div class="Normal"><span class="insert2">Copyright &copy; 2004, 2005, 
+2006  Ada-Europe</span></div>
+<div class="Normal"><span class="insert3">Copyright &copy; 2008, 2009, 
+2010, 2011, 2012</span><span class="insert4">, 2013, 2014, 2015, 2016</span><span class="insert5">, 
+2017</span><span class="insert4"></span><span class="insert3">&nbsp; AXE Consultants</span> 
+</div>
+<div class="Normal">&nbsp;<BR>
+<BR>
+<BR>
+<BR>
+<BR>
+</div>
+<div class="Normal"><B>Ada Reference Manual - Language and Standard Libraries</B></div>
+<div class="Normal">Copyright &copy; 1992, 1993, 1994, 1995, Intermetrics, 
+Inc.</div>
+<div class="Normal">This copyright is assigned to the U.S. Government. 
+ All rights reserved.</div>
+<div class="Normal">This document may be copied, in whole or in part, 
+in any form or by any means, as is or with alterations, provided that 
+(1) alterations are clearly marked as alterations and (2) this copyright 
+notice is included unmodified in any copy. Compiled copies of standard 
+library units and examples need not contain this copyright notice so 
+long as the notice is included in all copies of source code and documentation.</div>
+
+<HR SIZE=1>
+
+<div class="Normal">&nbsp;</div>
+<div class="Normal"><span class="insert1"><B>Technical Corrigendum 1</B></span></div>
+<div class="Normal"><span class="insert1">Copyright &copy; 2000, The 
+MITRE Corporation.  All Rights Reserved.</span></div>
+<div class="Normal"><span class="insert1">This document may be copied, 
+in whole or in part, in any form or by any means, as is, or with alterations, 
+provided that (1) alterations are clearly marked as alterations and (2) 
+this copyright notice is included unmodified in any copy. Any other use 
+or distribution of this document is prohibited without the prior express 
+permission of MITRE.</span></div>
+<div class="Normal"><span class="insert1">You use this document on the 
+condition that you indemnify and hold harmless MITRE, its Board of Trustees, 
+officers, agents, and employees, from any and all liability or damages 
+to yourself or your hardware or software, or third parties, including 
+attorneys' fees, court costs, and other related costs and expenses, arising 
+out of your use of this document irrespective of the cause of said liability.</span></div>
+<div class="Normal"><span class="insert1">MITRE MAKES THIS DOCUMENT AVAILABLE 
+ON AN &quot;AS IS&quot; BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, 
+AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY, OR FUNCTIONING 
+OF THIS DOCUMENT.  IN NO EVENT WILL MITRE BE LIABLE FOR ANY GENERAL, 
+CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES, EVEN 
+IF MITRE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span></div>
+<div class="Normal">&nbsp;</div>
+<div class="Normal"><span class="insert2"><B>Amendment 1</B></span></div>
+<div class="Normal"><span class="insert2">Copyright &copy; 2004, 2005, 
+2006</span><span class="insert3">, 2007</span><span class="insert2">, 
+AXE Consultants.  All Rights Reserved.</span></div>
+<div class="Normal"><span class="insert2">This document may be copied, 
+in whole or in part, in any form or by any means, as is, or with alterations, 
+provided that (1) alterations are clearly marked as alterations and (2) 
+this copyright notice is included unmodified in any copy. Any other use 
+or distribution of this document is prohibited without the prior express 
+permission of AXE.</span></div>
+<div class="Normal"><span class="insert2">You use this document on the 
+condition that you indemnify and hold harmless AXE, its board, officers, 
+agents, and employees, from any and all liability or damages to yourself 
+or your hardware or software, or third parties, including attorneys' 
+fees, court costs, and other related costs and expenses, arising out 
+of your use of this document irrespective of the cause of said liability.</span></div>
+<div class="Normal"><span class="insert2">AXE MAKES THIS DOCUMENT AVAILABLE 
+ON AN &quot;AS IS&quot; BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, 
+AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY, OR FUNCTIONING 
+OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY GENERAL, CONSEQUENTIAL, 
+INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES, EVEN IF AXE HAS 
+BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span></div>
+<div class="Normal"><span class="insert3"><B>Third Edition</B></span></div>
+<div class="Normal"><span class="insert3">Copyright &copy; 2008, 2009, 
+2010, 2011, 2012 AXE Consultants.  All Rights Reserved.</span></div>
+<div class="Normal"><span class="insert3">This document may be copied, 
+in whole or in part, in any form or by any means, as is, or with alterations, 
+provided that (1) alterations are clearly marked as alterations and (2) 
+this copyright notice is included unmodified in any copy. Any other use 
+or distribution of this document is prohibited without the prior express 
+permission of AXE.</span></div>
+<div class="Normal"><span class="insert3">You use this document on the 
+condition that you indemnify and hold harmless AXE, its board, officers, 
+agents, and employees, from any and all liability or damages to yourself 
+or your hardware or software, or third parties, including attorneys' 
+fees, court costs, and other related costs and expenses, arising out 
+of your use of this document irrespective of the cause of said liability.</span></div>
+<div class="Normal"><span class="insert3">AXE MAKES THIS DOCUMENT AVAILABLE 
+ON AN &quot;AS IS&quot; BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, 
+AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY, OR FUNCTIONING 
+OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY GENERAL, CONSEQUENTIAL, 
+INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES, EVEN IF AXE HAS 
+BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span></div>
+<div class="Normal"><span class="insert4"><B>Technical Corrigendum 1 
+for Ada 2012</B></span></div>
+<div class="Normal"><span class="insert4">Copyright &copy; 2013, 2014, 
+2015, 2016 AXE Consultants.  All Rights Reserved.</span></div>
+<div class="Normal"><span class="insert4">This document may be copied, 
+in whole or in part, in any form or by any means, as is, or with alterations, 
+provided that (1) alterations are clearly marked as alterations and (2) 
+this copyright notice is included unmodified in any copy. Any other use 
+or distribution of this document is prohibited without the prior express 
+permission of AXE.</span></div>
+<div class="Normal"><span class="insert4">You use this document on the 
+condition that you indemnify and hold harmless AXE, its board, officers, 
+agents, and employees, from any and all liability or damages to yourself 
+or your hardware or software, or third parties, including attorneys' 
+fees, court costs, and other related costs and expenses, arising out 
+of your use of this document irrespective of the cause of said liability.</span></div>
+<div class="Normal"><span class="insert4">AXE MAKES THIS DOCUMENT AVAILABLE 
+ON AN &quot;AS IS&quot; BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, 
+AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY, OR FUNCTIONING 
+OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY GENERAL, CONSEQUENTIAL, 
+INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES, EVEN IF AXE HAS 
+BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span></div>
+<div class="Normal"><span class="insert5"><B>Ada 202x version</B></span></div>
+<div class="Normal"><span class="insert5">Copyright &copy; 2016, 2017 
+AXE Consultants.  All Rights Reserved.</span></div>
+<div class="Normal"><span class="insert5">This document may be copied, 
+in whole or in part, in any form or by any means, as is, or with alterations, 
+provided that (1) alterations are clearly marked as alterations and (2) 
+this copyright notice is included unmodified in any copy. Any other use 
+or distribution of this document is prohibited without the prior express 
+permission of AXE.</span></div>
+<div class="Normal"><span class="insert5">You use this document on the 
+condition that you indemnify and hold harmless AXE, its board, officers, 
+agents, and employees, from any and all liability or damages to yourself 
+or your hardware or software, or third parties, including attorneys' 
+fees, court costs, and other related costs and expenses, arising out 
+of your use of this document irrespective of the cause of said liability.</span></div>
+<div class="Normal"><span class="insert5">AXE MAKES THIS DOCUMENT AVAILABLE 
+ON AN &quot;AS IS&quot; BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, 
+AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY, OR FUNCTIONING 
+OF THIS DOCUMENT. IN NO EVENT WILL AXE BE LIABLE FOR ANY GENERAL, CONSEQUENTIAL, 
+INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES, EVEN IF AXE HAS 
+BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</span></div>
+<div class="Normal">&nbsp;</div>
+<div class="Normal"><span class="insert2"><B>Ada 2005 Consolidated Standard</B></span></div>
+<div class="Normal"><span class="insert2">Copyright &copy; 2004, 2005, 
+2006, Ada-Europe.</span></div>
+<div class="Normal"><span class="insert2">This document may be copied, 
+in whole or in part, in any form or by any means, as is, or with alterations, 
+provided that (1) alterations are clearly marked as alterations and (2) 
+this copyright notice is included unmodified in any copy. Any other use 
+or distribution of this document is prohibited without the prior express 
+permission of Ada-Europe.</span></div>
+<div class="Normal"><span class="insert2">You use this document on the 
+condition that you indemnify and hold harmless Ada-Europe and its Board 
+from any and all liability or damages to yourself or your hardware or 
+software, or third parties, including attorneys' fees, court costs, and 
+other related costs and expenses, arising out of your use of this document 
+irrespective of the cause of said liability.</span></div>
+<div class="Normal"><span class="insert2">ADA-EUROPE MAKES THIS DOCUMENT 
+AVAILABLE ON AN &quot;AS IS&quot; BASIS AND MAKES NO WARRANTY, EXPRESS 
+OR IMPLIED, AS TO THE ACCURACY, CAPABILITY, EFFICIENCY MERCHANTABILITY, 
+OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL ADA-EUROPE BE LIABLE 
+FOR ANY GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL 
+DAMAGES, EVEN IF ADA-EUROPE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH 
+DAMAGES.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

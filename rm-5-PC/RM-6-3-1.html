@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Conformance Rules</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.3.1 Conformance Rules</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I3554"></A><A NAME="I3555"></A><A NAME="I3556"></A><A NAME="I3557"></A><A NAME="I3558"></A>When 
+subprogram profiles are given in more than one place, they are required 
+to conform in one of four ways: type conformance, mode conformance, subtype 
+conformance, or full conformance.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3559"></A><A NAME="I3560"></A>As 
+explained in <A HREF="RM-B-1.html">B.1</A>, &ldquo;<A HREF="RM-B-1.html">Interfacing 
+Aspects</A>&rdquo;, a <I>convention</I> can be specified for an entity. 
+Unless this International Standard states otherwise, the default convention 
+of an entity is Ada. For a callable entity or access-to-subprogram type, 
+the convention is called the <I>calling convention</I>. The following 
+conventions are defined by the language:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Bulleted"><A NAME="I3561"></A><A NAME="I3562"></A>The default 
+calling convention for any subprogram not listed below is <I>Ada</I>. 
+The Convention aspect may be specified to override the default calling 
+convention (see <A HREF="RM-B-1.html">B.1</A>).&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3563"></A><A NAME="I3564"></A>The 
+<I>Intrinsic</I> calling convention represents subprograms that are &ldquo;built 
+in&rdquo; to the compiler. The default calling convention is Intrinsic 
+for the following:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented2NestedBulleted">an enumeration literal;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented2NestedBulleted">a &quot;/=&quot; operator declared 
+implicitly due to the declaration of &quot;=&quot; (see <A HREF="RM-6-6.html">6.6</A>);</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented2NestedBulleted">any other implicitly declared subprogram 
+unless it is a dispatching operation of a tagged type;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented2NestedBulleted">an inherited subprogram of a generic 
+formal tagged type with unknown discriminants;&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented2NestedBulleted">an attribute that is a subprogram;</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Indented2NestedBulleted">a subprogram declared immediately 
+within a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN>;</div>
+<div class="paranum"><a name="p10.1">10.1/4</a></div>
+<div class="Indented2NestedBulleted">any prefixed view of a subprogram 
+(see <A HREF="RM-4-1-3.html">4.1.3</A>)<span class="insert4">&nbsp;without 
+synchronization kind (see <A HREF="RM-9-5.html">9.5</A>) By_Entry or 
+By_Protected_Procedure</span>.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted-NoPrefix">The Access attribute is not allowed for 
+Intrinsic subprograms.&nbsp;</div>
+<div class="paranum"><a name="p12">12/4</a></div>
+<div class="Bulleted"><A NAME="I3565"></A><A NAME="I3566"></A>The default 
+calling convention is <I>protected</I> for a protected subprogram,<span class="insert4">&nbsp;for a prefixed view of a subprogram with a synchronization kind of By_Protected_Procedure,</span> 
+and for an access-to-subprogram type with the reserved word <B>protected</B> 
+in its definition.</div>
+<div class="paranum"><a name="p13">13/4</a></div>
+<div class="Bulleted"><A NAME="I3567"></A><A NAME="I3568"></A>The default 
+calling convention is <I>entry</I> for an entry<span class="insert4">&nbsp;and for a prefixed view of a subprogram with a synchronization kind of 
+By_Entry</span>.</div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Bulleted">The calling convention for an anonymous access-to-subprogram 
+parameter or anonymous access-to-subprogram result is <I>protected</I> 
+if the reserved word <B>protected</B> appears in its definition; otherwise, 
+it is the convention of the <span class="insert5">entity</span><span class="delete5">&nbsp;subprogram</span> 
+that <span class="insert5">has</span><span class="delete5">&nbsp;contains</span> 
+the parameter<span class="insert5">&nbsp;or result, unless that entity has 
+convention <I>protected</I>, <I>entry</I>, or Intrinsic, in which case 
+the convention is Ada</span>.&nbsp;</div>
+<div class="paranum"><a name="p13.2">13.2/1</a></div>
+<div class="Bulleted">If not specified above as Intrinsic, the calling 
+convention for any inherited or overriding dispatching operation of a 
+tagged type is that of the corresponding subprogram of the parent type. 
+The default calling convention for a new dispatching operation of a tagged 
+type is the convention of the type.&nbsp;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal">Of these four conventions, only Ada and Intrinsic 
+are allowed as a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+in the specification of a Convention aspect.&nbsp;</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal"><A NAME="I3569"></A><A NAME="I3570"></A>Two profiles 
+are <I>type conformant</I> if they have the same number of parameters, 
+and both have a result if either does, and corresponding parameter and 
+result types are the same, or, for access parameters or access results, 
+corresponding designated types are the same, or corresponding designated 
+profiles are type conformant. <A NAME="I3571"></A></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3572"></A><A NAME="I3573"></A>Two 
+profiles are <I>mode conformant</I> if:</div>
+<div class="paranum"><a name="p16.1">16.1/3</a></div>
+<div class="Bulleted">they are type conformant; and</div>
+<div class="paranum"><a name="p16.2">16.2/3</a></div>
+<div class="Bulleted">corresponding parameters have identical modes and 
+both or neither are explicitly aliased parameters; and</div>
+<div class="paranum"><a name="p16.3">16.3/3</a></div>
+<div class="Bulleted">for corresponding access parameters and any access 
+result type, the designated subtypes statically match and either both 
+or neither are access-to-constant, or the designated profiles are subtype 
+conformant. <A NAME="I3574"></A></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal"><A NAME="I3575"></A><A NAME="I3576"></A>Two profiles 
+are <I>subtype conformant</I> if they are mode conformant, corresponding 
+subtypes of the profile statically match, and the associated calling 
+conventions are the same. The profile of a generic formal subprogram 
+is not subtype conformant with any other profile. <A NAME="I3577"></A></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3578"></A><A NAME="I3579"></A>Two 
+profiles are <I>fully conformant</I> if they are subtype conformant, 
+if they have access-to-subprogram results whose designated profiles are 
+fully conformant, and for corresponding parameters:&nbsp;</div>
+<div class="paranum"><a name="p18.1">18.1/3</a></div>
+<div class="Bulleted">they have the same names; and</div>
+<div class="paranum"><a name="p18.2">18.2/3</a></div>
+<div class="Bulleted">both or neither have <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>s; 
+and</div>
+<div class="paranum"><a name="p18.3">18.3/3</a></div>
+<div class="Bulleted">neither have <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s, 
+or they both have <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
+that are fully conformant with one another; and</div>
+<div class="paranum"><a name="p18.4">18.4/3</a></div>
+<div class="Bulleted">for access-to-subprogram parameters, the designated 
+profiles are fully conformant.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3580"></A>Two 
+expressions are <I>fully conformant</I> if, after replacing each use 
+of an operator with the equivalent <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN>: 
+</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">each constituent construct of one corresponds to 
+an instance of the same syntactic category in the other, except that 
+an expanded name may correspond to a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+(or <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>) 
+or to a different expanded name in the other; and</div>
+<div class="paranum"><a name="p20.1">20.1/4</a></div>
+<div class="Bulleted"><span class="insert4">corresponding <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>s 
+occurring within the two expressions are the same; and</span></div>
+<div class="paranum"><a name="p21">21/4</a></div>
+<div class="Bulleted">each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+that is not part of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an expanded name in one denotes the same declaration as the corresponding 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+in the other<span class="insert4">, or they denote corresponding declarations 
+occurring within the two expressions</span>; and&nbsp;</div>
+<div class="paranum"><a name="p21.1">21.1/3</a></div>
+<div class="Bulleted">each <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+in one is the same as the corresponding <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+in the other; and</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0131">primary</A></SPAN> 
+that is a literal in one has the same value as the corresponding literal 
+in the other.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal"><A NAME="I3581"></A>Two <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>s 
+are <I>fully conformant</I> if they have the same number of discriminants, 
+and discriminants in the same positions have the same names, statically 
+matching subtypes, and <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
+that are fully conformant with one another. <A NAME="I3582"></A></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal"><A NAME="I3583"></A>Two <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+are <I>fully conformant</I> if they are both <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>s 
+or are both <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s, 
+the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
+(if any) denote the same subtype, and the corresponding <SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s 
+(if any) fully conform.&nbsp;</div>
+<div class="paranum"><a name="p24.1">24.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<A NAME="I3584"></A>The <I>prefixed view profile</I> 
+of a subprogram is the profile obtained by omitting the first parameter 
+of that subprogram. There is no prefixed view profile for a parameterless 
+subprogram. For the purposes of defining subtype and mode conformance, 
+the convention of a prefixed view profile is considered to match that 
+of either an entry or a protected operation.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">An implementation may declare an operator declared 
+in a language-defined library unit to be intrinsic.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Simple and Compound Statements - Sequences of Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.1 Simple and Compound Statements - Sequences of Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN> 
+is either simple or compound. A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0148">simple_statement</A></SPAN> 
+encloses no other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>. 
+A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0149">compound_statement</A></SPAN> 
+can enclose <SPAN Class="swiss"><A HREF="AA-5-1.html#S0148">simple_statement</A></SPAN>s 
+and other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0149">compound_statement</A></SPAN>s.] 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0179-1.TXT">AI05-0179-1</A></I>} 
+<SPAN Class="swiss">sequence_of_statements</SPAN><A NAME="I3379"></A><A NAME="S0146"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3380"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>&nbsp;{<A NAME="I3381"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>}&nbsp;{<A NAME="I3382"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN>}</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">statement</SPAN><A NAME="I3383"></A><A NAME="S0147"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<A NAME="I3384"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN>}&nbsp;<A NAME="I3385"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0148">simple_statement</A></SPAN>&nbsp;|&nbsp;{<A NAME="I3386"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN>}&nbsp;<A NAME="I3387"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0149">compound_statement</A></SPAN></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<SPAN Class="swiss">simple_statement</SPAN><A NAME="I3388"></A><A NAME="S0148"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3389"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0150">null_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3390"></A><SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3391"></A><SPAN Class="swiss"><A HREF="AA-5-7.html#S0164">exit_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3392"></A><SPAN Class="swiss"><A HREF="AA-5-8.html#S0165">goto_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3393"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3394"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3395"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0228">entry_call_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3396"></A><SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3397"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3398"></A><SPAN Class="swiss"><A HREF="AA-9-8.html#S0248">abort_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3399"></A><SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3400"></A><SPAN Class="swiss"><A HREF="AA-13-8.html#S0321">code_statement</A></SPAN></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<SPAN Class="swiss">compound_statement</SPAN><A NAME="I3401"></A><A NAME="S0149"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3402"></A><SPAN Class="swiss"><A HREF="AA-5-3.html#S0155">if_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3403"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0156">case_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3404"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3405"></A><SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3406"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3407"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3408"></A><SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">null_statement</SPAN><A NAME="I3409"></A><A NAME="S0150"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">label</SPAN><A NAME="I3410"></A><A NAME="S0151"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&lt;&lt;<I>label_</I><A NAME="I3411"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>&gt;&gt;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1"><SPAN Class="swiss">statement_identifier</SPAN><A NAME="I3412"></A><A NAME="S0152"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3413"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented1">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN> 
+shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+(not an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>). 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN> 
+shall resolve to denote its corresponding implicit declaration (see below). 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">Distinct <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+shall be used for all <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>s 
+that appear in the same body, including inner <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>s 
+but excluding inner program units.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">For each <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>, 
+there is an implicit declaration (with the specified <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>) 
+at the end of the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of the innermost <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN> 
+or body that encloses the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>. 
+The implicit declarations occur in the same order as the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>s 
+occur in the source text. If a usage name denotes such an implicit declaration, 
+the entity it denotes is the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN> 
+with the given <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We talk in terms of individual 
+<SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>s 
+here rather than in terms of the corresponding statements, since a given 
+<SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN> 
+may have multiple <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN>s.</div>
+<div class="paranum"><a name="p12.b">12.b</a></div>
+<div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN> 
+that has no explicit <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+has an implicit empty <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+so this rule can safely refer to the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>.</div>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations">The scope of a declaration starts at the place 
+of the declaration itself (see <A HREF="AA-8-2.html">8.2</A>). In the 
+case of a label, loop, or block name, it follows from this rule that 
+the scope of the implicit declaration starts before the first explicit 
+occurrence of the corresponding name, since this occurrence is either 
+in a statement label, a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="AA-5-8.html#S0165">goto_statement</A></SPAN>. 
+An implicit declaration in a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN> 
+may hide a declaration given in an outer program unit or <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN> 
+(according to the usual rules of hiding explained in <A HREF="AA-8-3.html">8.3</A>).</div>
+<div class="paranum"><a name="p12.d">12.d</a></div>
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN> 
+uses <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN> 
+which is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+(not a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>), 
+because labels are implicitly declared. The same applies to loop and 
+block names. In other words, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN> 
+itself is not the defining occurrence; the implicit declaration is.</div>
+<div class="paranum"><a name="p12.e">12.e</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">We cannot consider 
+the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN> 
+to be a defining occurrence. An example that can tell the difference 
+is this:&nbsp;</div>
+<div class="paranum"><a name="p12.f">12.f</a></div>
+<div class="SmallExamples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Label&nbsp;Foo&nbsp;is&nbsp;implicitly&nbsp;declared&nbsp;here.</I></SPAN><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Foo&nbsp;<B>in</B>&nbsp;...&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;Foo&gt;&gt;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>;<BR>
+<B>end</B>;<BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p12.g">12.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The label in this example is hidden from itself by the loop parameter 
+with the same name; the example is illegal. We considered creating a 
+new syntactic category name, separate from <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>, 
+for use in the case of statement labels. However, that would confuse 
+the rules in Clause 8, so we didn't do it.&nbsp;</div>
+<div class="paranum"><a name="p12.1">12.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0179-1.TXT">AI05-0179-1</A></I>} 
+If one or more <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN>s 
+end a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>, 
+an implicit <SPAN Class="swiss"><A HREF="AA-5-1.html#S0150">null_statement</A></SPAN> 
+follows the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN>s 
+before any following constructs.</div>
+<div class="paranum"><a name="p12.g.1">12.g.1/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The semantics of a <SPAN Class="swiss"><A HREF="AA-5-8.html#S0165">goto_statement</A></SPAN> 
+is defined in terms of the statement having (following) that label. Thus 
+we ensure that every label has a following statement, which might be 
+implicit.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I3414"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0150">null_statement</A></SPAN> 
+has no effect.</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3415"></A>A <I>transfer of control</I> is the run-time action 
+of an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0164">exit_statement</A></SPAN>, 
+return statement, <SPAN Class="swiss"><A HREF="AA-5-8.html#S0165">goto_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>, 
+selection of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>, 
+raising of an exception, or an abort, which causes the next action performed 
+to be one other than what would normally be expected from the other rules 
+of the language. [As explained in <A HREF="AA-7-6-1.html">7.6.1</A>, 
+a transfer of control can cause the execution of constructs to be completed 
+and then left, which may trigger finalization.]</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I3416"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+consists of the execution of the individual <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>s 
+in succession until the <SPAN Class="swiss">sequence_</SPAN> is completed. 
+</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>It could be completed by 
+reaching the end of it, or by a transfer of control.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">1&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN> 
+that appears immediately within the declarative region of a named <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
+is nevertheless implicitly declared immediately within the declarative 
+region of the innermost enclosing body or <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>; 
+in other words, the expanded name for a named statement is not affected 
+by whether the statement occurs inside or outside a named loop or an 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
+&mdash; only nesting within <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>s 
+is relevant to the form of its expanded name.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>Each comment in the following example gives the expanded name associated 
+with an entity declared in the task body:&nbsp;</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="SmallExamples"><B>task&nbsp;body</B>&nbsp;Compute&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Sum&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Sum</I></SPAN><BR>
+<B>begin</B><BR>
+&nbsp;Outer:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Outer</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1..10&nbsp;<B>loop</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Outer.I</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Blk:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Blk</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Blk.Sum</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>accept</B>&nbsp;Ent(I&nbsp;:&nbsp;out&nbsp;Integer;&nbsp;J&nbsp;:&nbsp;in&nbsp;Integer)&nbsp;<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Ent.I,&nbsp;Compute.Ent.J</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compute.Ent.I&nbsp;:=&nbsp;Compute.Outer.I;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inner:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Blk.Inner</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;1..10&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Compute.Blk.Inner.J</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum&nbsp;:=&nbsp;Sum&nbsp;+&nbsp;Compute.Blk.Inner.J&nbsp;*&nbsp;Compute.Ent.J;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>&nbsp;Inner;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Ent;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compute.Sum&nbsp;:=&nbsp;Compute.Sum&nbsp;+&nbsp;Compute.Blk.Sum;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Blk;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>&nbsp;Outer;<BR>
+&nbsp;&nbsp;&nbsp;Record_Result(Sum);<BR>
+<B>end</B>&nbsp;Compute;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of labeled 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&lt;&lt;Here&gt;&gt;&nbsp;&lt;&lt;Ici&gt;&gt;&nbsp;&lt;&lt;Aqui&gt;&gt;&nbsp;&lt;&lt;Hier&gt;&gt;&nbsp;<B>null</B>;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&lt;&lt;After&gt;&gt;&nbsp;X&nbsp;:=&nbsp;1;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p19.a">19.a</a></div>
+<div class="Annotations"><A NAME="I3417"></A>The <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
+is new.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p19.b">19.b</a></div>
+<div class="Annotations">We define the syntactic category <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">statement_identifier</A></SPAN> 
+to simplify the description. It is used for labels, loop names, and block 
+names. We define the entity associated with the implicit declarations 
+of statement names.</div>
+<div class="paranum"><a name="p19.c">19.c</a></div>
+<div class="Annotations">Completion includes completion caused by a transfer 
+of control, although RM83-5.1(6) did not take this view.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p19.d">19.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3418"></A>The <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+is new (<SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+is merely renamed).&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p19.e">19.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00179.TXT">AI95-0179-1</A></I>} 
+<A NAME="I3419"></A>A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">label</A></SPAN> 
+can end a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>, 
+eliminating the requirement for having an explicit <B>null</B>; statement 
+after an ending label (a common use).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

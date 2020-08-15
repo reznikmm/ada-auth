@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Storage Management</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11 Storage Management</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I5371"></A><A NAME="I5372"></A><A NAME="I5373"></A><A NAME="I5374"></A>Each 
+access-to-object type has an associated storage pool. The storage allocated 
+by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+comes from the pool; instances of Unchecked_Deallocation return storage 
+to the pool. Several access types can share the same pool.</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">A storage pool is a variable of a type in the class 
+rooted at Root_Storage_Pool, which is an abstract limited controlled 
+type. By default, the implementation chooses a <I>standard storage pool</I> 
+for each access<span class="insert2">-to-object</span> type. The user 
+may define new pool types, and may override the choice of pool for an 
+access<span class="insert2">-to-object</span> type by specifying Storage_Pool 
+for the type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">If Storage_Pool is specified for a given access type, 
+Storage_Size shall not be specified for it.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Finalization;<BR>
+<B>with</B>&nbsp;System.Storage_Elements;<BR>
+<A NAME="I5375"></A><B>package</B>&nbsp;System.Storage_Pools&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(System.Storage_Pools);</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5376"></A>Root_Storage_Pool&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>abstract</B>&nbsp;<B>new</B>&nbsp;Ada.Finalization.Limited_Controlled&nbsp;<B>with</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Root_Storage_Pool);</span></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5377"></A>Allocate(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Root_Storage_Pool;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count)&nbsp;<B>is</B>&nbsp;<B>abstract</B>;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5378"></A>Deallocate(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Root_Storage_Pool;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>in</B>&nbsp;Address;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count)&nbsp;<B>is</B>&nbsp;<B>abstract</B>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5379"></A>Storage_Size(Pool&nbsp;:&nbsp;Root_Storage_Pool)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Storage_Elements.Storage_Count&nbsp;<B>is</B>&nbsp;<B>abstract</B>;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;System.Storage_Pools;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I5380"></A><A NAME="I5381"></A>A <I>storage 
+pool type</I> (or <I>pool type</I>) is a descendant of Root_Storage_Pool. 
+<A NAME="I5382"></A><A NAME="I5383"></A><A NAME="I5384"></A>The <I>elements</I> 
+of a storage pool are the objects allocated in the pool by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s. 
+</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every access<span class="insert2">-to-object</span> 
+subtype S, the following representation attributes are defined:&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="WideHanging-Term">S'Storage_Pool</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5385"></A><A NAME="I5386"></A>Denotes the storage pool of the 
+type of S. The type of this attribute is Root_Storage_Pool'Class.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideHanging-Term">S'Storage_Size</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5387"></A><A NAME="I5388"></A>Yields the result of calling 
+Storage_Size(S'Storage_Pool), which is intended to be a measure of the 
+number of storage elements reserved for the pool. The type of this attribute 
+is <I>universal_integer</I>.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I5389"></A><A NAME="I5390"></A><A NAME="I5391"></A><A NAME="I5392"></A>Storage_Size 
+or Storage_Pool may be specified for a nonderived access-to-object type 
+via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0309">attribute_definition_clause</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> in 
+a Storage_Pool clause shall denote a variable.<span class="insert3"><A NAME="I5393"></A><A NAME="I5394"></A><A NAME="I5395"></A><A NAME="I5396"></A></span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+of <span class="insert3">a&nbsp;</span>type <I>T</I> <span class="insert3">that 
+does not support subpools&nbsp;</span>allocates storage from <I>T</I>'s storage 
+pool. If the storage pool is a user-defined object, then the storage 
+is allocated by calling Allocate<span class="insert3">&nbsp;as described below. 
+<SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">Allocator</A></SPAN>s 
+for types that support subpools are described in <A HREF="RM-13-11-4.html">13.11.4</A>.</span><span class="delete3">, 
+passing T'Storage_Pool as the Pool parameter. The Size_In_Storage_Elements 
+parameter indicates the number of storage elements to be allocated, and 
+is no more than D'Max_Size_In_Storage_Elements, where D is the designated 
+subtype. The Alignment parameter is D'Alignment. <A NAME="I5397"></A><A NAME="I5398"></A>The 
+result returned in the Storage_Address parameter is used by the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+as the address of the allocated storage, which is a contiguous block 
+of memory of Size_In_Storage_Elements storage elements. Any exception 
+propagated by Allocate is propagated by the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I5399"></A>If Storage_Pool is not specified 
+for a type defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0080">access_to_object_definition</A></SPAN>, 
+then the implementation chooses a standard storage pool for it in an 
+implementation-defined manner. <A NAME="I5400"></A><A NAME="I5401"></A><A NAME="I5402"></A>In 
+this case, the exception Storage_Error is raised by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+if there is not enough storage. It is implementation defined whether 
+or not the implementation provides user-accessible names for the standard 
+pool type(s).&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">If Storage_Size is specified for an access type, 
+then the Storage_Size of this pool is at least that requested, and the 
+storage for the pool is reclaimed when the master containing the declaration 
+of the access type is left. <A NAME="I5403"></A>If the implementation 
+cannot satisfy the request, Storage_Error is raised at the point of the 
+<SPAN Class="swiss"><A HREF="RM-13-3.html#S0309">attribute_definition_clause</A></SPAN>. 
+If neither Storage_Pool nor Storage_Size are specified, then the meaning 
+of Storage_Size is implementation defined.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">If Storage_Pool is specified for an access type, 
+then the specified pool is used.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I5404"></A>The effect of calling Allocate 
+and Deallocate for a standard storage pool directly (rather than implicitly 
+via an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+or an instance of Unchecked_Deallocation) is unspecified.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I5405"></A>If Storage_Pool is specified 
+for an access type, then if Allocate can satisfy the request, it should 
+allocate a contiguous block of memory, and return the address of the 
+first storage element in Storage_Address. The block should contain Size_In_Storage_Elements 
+storage elements, and should be aligned according to Alignment. The allocated 
+storage should not be used for any other purpose while the pool element 
+remains in existence. If the request cannot be satisfied, then Allocate 
+should propagate an exception (such as Storage_Error). If Allocate behaves 
+in any other manner, then the program execution is erroneous.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p21.1">21.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">The 
+Allocate procedure of a user-defined storage pool object <I>P</I> may 
+be called by the implementation only to allocate storage for a type <I>T</I> 
+whose pool is <I>P</I>, only at the following points:</span></div>
+<div class="paranum"><a name="p21.2">21.2/3</a></div>
+<div class="Bulleted"><span class="insert3">During the execution of an 
+<SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+of type <I>T</I>;</span></div>
+<div class="paranum"><a name="p21.3">21.3/3</a></div>
+<div class="Bulleted"><span class="insert3">During the execution of a 
+return statement for a function whose result is built-in-place in the 
+result of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+of type <I>T</I>;</span></div>
+<div class="paranum"><a name="p21.4">21.4/3</a></div>
+<div class="Bulleted"><span class="insert3">During the execution of an 
+assignment operation with a target of an allocated object of type <I>T</I> 
+with a part that has an unconstrained discriminated subtype with defaults.</span></div>
+<div class="paranum"><a name="p21.5">21.5/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">For each of the calls of 
+Allocate described above, <I>P</I> (equivalent to <I>T</I>'Storage_Pool) 
+is passed as the Pool parameter. The Size_In_Storage_Elements parameter 
+indicates the number of storage elements to be allocated, and is no more 
+than <I>D</I>'Max_Size_In_Storage_Elements, where <I>D</I> is the designated 
+subtype of <I>T</I>. The Alignment parameter is a nonzero integral multiple 
+of <I>D</I>'Alignment if <I>D</I> is a specific type, and otherwise is 
+a nonzero integral multiple of the alignment of the specific type identified 
+by the tag of the object being created; it is unspecified if there is 
+no such value. The Alignment parameter is no more than <I>D</I>'Max_Alignment_For_Allocation. 
+The result returned in the Storage_Address parameter is used as the address 
+of the allocated storage, which is a contiguous block of memory of Size_In_Storage_Elements 
+storage elements. Any exception propagated by Allocate is propagated 
+by the construct that contained the call.</span></div>
+<div class="paranum"><a name="p21.6">21.6/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The number of calls to Allocate 
+needed to implement an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+for any particular type is unspecified.<A NAME="I5406"></A> <A NAME="I5407"></A><A NAME="I5408"></A>The 
+number of calls to Deallocate needed to implement an instance of Unchecked_Deallocation 
+(see <A HREF="RM-13-11-2.html">13.11.2</A>) for any particular object 
+is the same as the number of Allocate calls for that object.</span></div>
+<div class="paranum"><a name="p21.7">21.7/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The Deallocate procedure 
+of a user-defined storage pool object <I>P</I> may be called by the implementation 
+to deallocate storage for a type <I>T</I> whose pool is <I>P</I> only 
+at the places when an Allocate call is allowed for <I>P</I>, during the 
+execution of an instance of Unchecked_Deallocation for <I>T</I>, or as 
+part of the finalization of the collection of <I>T</I>. For such a call 
+of Deallocate, <I>P</I> (equivalent to <I>T</I>'Storage_Pool) is passed 
+as the Pool parameter. The value of the Storage_Address parameter for 
+a call to Deallocate is the value returned in the Storage_Address parameter 
+of the corresponding successful call to Allocate. The values of the Size_In_Storage_Elements 
+and Alignment parameters are the same values passed to the corresponding 
+Allocate call. Any exception propagated by Deallocate is propagated by 
+the construct that contained the call.</span></div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">An implementation shall document the set of values 
+that a user-defined Allocate procedure needs to accept for the Alignment 
+parameter. An implementation shall document how the standard storage 
+pool is chosen, and how storage is allocated by standard storage pools. 
+</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal">An implementation should document any cases in which 
+it dynamically allocates heap storage for a purpose other than the evaluation 
+of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal">A default (implementation-provided) storage pool 
+for an access-to-constant type should not have overhead to support deallocation 
+of individual objects.&nbsp;</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"></span><span class="insert2">The</span><span class="delete2">&nbsp;A</span> 
+storage pool <span class="insert2">used&nbsp;</span>for <span class="insert2">an 
+<SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+of&nbsp;</span>an anonymous access type should be <span class="insert2">determined 
+as follows:</span><span class="delete2">&nbsp;created at the point of an allocator 
+for the type, and be reclaimed when the designated object becomes inaccessible;</span></div>
+<div class="paranum"><a name="p25.1">25.1/2</a></div>
+<div class="Bulleted"><span class="insert2">If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+is defining a coextension (see <A HREF="RM-3-10-2.html">3.10.2</A>) of 
+an object being created by an outer <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>, 
+then the storage pool used for the outer <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+should also be used for the coextension;</span></div>
+<div class="paranum"><a name="p25.2">25.2/2</a></div>
+<div class="Bulleted"><span class="insert2">For other access discriminants 
+and access parameters, the storage pool should be created at the point 
+of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>, 
+and be reclaimed when the allocated object becomes inaccessible;</span></div>
+<div class="paranum"><a name="p25.3">25.3/3</a></div>
+<div class="Bulleted"><span class="insert3">If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+defines the result of a function with an access result, the storage pool 
+is determined as though the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+were in place of the call of the function. If the call is the operand 
+of a type conversion, the storage pool is that of the target access type 
+of the conversion. If the call is itself defining the result of a function 
+with an access result, this rule is applied recursively;</span></div>
+<div class="paranum"><a name="p25.4">25.4/2</a></div>
+<div class="Bulleted"><span class="insert2">Otherwise, a default storage 
+pool should be created at the point where the anonymous access type is 
+elaborated; such a storage pool need not support deallocation of individual 
+objects.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Notes">28&nbsp;&nbsp;A user-defined storage pool type can 
+be obtained by extending the Root_Storage_Pool type, and overriding the 
+primitive subprograms Allocate, Deallocate, and Storage_Size. A user-defined 
+storage pool can then be obtained by declaring an object of the type 
+extension. The user can override Initialize and Finalize if there is 
+any need for nontrivial initialization and finalization for a user-defined 
+pool type. For example, Finalize might reclaim blocks of storage that 
+are allocated separately from the pool object itself.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">29&nbsp;&nbsp;The writer 
+of the user-defined allocation and deallocation procedures, and users 
+of <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s 
+for the associated access type, are responsible for dealing with any 
+interactions with tasking. In particular:&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Indented2SmallBulleted">If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s 
+are used in different tasks, they require mutual exclusion.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Indented2SmallBulleted">If they are used inside protected 
+objects, they cannot block.</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Indented2SmallBulleted">If they are used by interrupt handlers 
+(see <A HREF="RM-C-3.html">C.3</A>, &ldquo;<A HREF="RM-C-3.html">Interrupt 
+Support</A>&rdquo;), the mutual exclusion mechanism has to work properly 
+in that context.&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Notes">30&nbsp;&nbsp;The primitives Allocate, Deallocate, 
+and Storage_Size are declared as abstract (see <A HREF="RM-3-9-3.html">3.9.3</A>), 
+and therefore they have to be overridden when a new (nonabstract) storage 
+pool type is declared.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">To associate an access 
+type with a storage pool object, the user first declares a pool object 
+of some type derived from Root_Storage_Pool. Then, the user defines its 
+Storage_Pool attribute, as follows:</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples">Pool_Object&nbsp;:&nbsp;Some_Storage_Pool_Type;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples"><B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Designated;<BR>
+<B>for</B>&nbsp;T'Storage_Pool&nbsp;<B>use</B>&nbsp;Pool_Object;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">Another access type 
+may be added to an existing storage pool, via:&nbsp;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Examples"><B>for</B>&nbsp;T2'Storage_Pool&nbsp;<B>use</B>&nbsp;T'Storage_Pool;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal">The semantics of this is implementation defined for 
+a standard storage pool.&nbsp;</div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">As usual, a derivative 
+of Root_Storage_Pool may define additional operations. For example, <span class="insert3">consider 
+the</span><span class="delete3">&nbsp;presuming that</span> Mark_Release_Pool_Type 
+<span class="insert3">defined in <A HREF="RM-13-11-6.html">13.11.6</A>, 
+that&nbsp;</span>has two additional operations, Mark and Release, the following 
+is a possible use:&nbsp;</div>
+<div class="paranum"><a name="p39">39/3</a></div>
+<div class="Examples"><B>type</B>&nbsp;Mark_Release_Pool_Type<BR>
+&nbsp;&nbsp;&nbsp;(Pool_Size&nbsp;:&nbsp;Storage_Elements.Storage_Count<span class="delete3">;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Block_Size&nbsp;:&nbsp;Storage_Elements.Storage_Count</span>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;<span class="insert3">Subpools.Root_Storage_Pool_With_Subpools</span><span class="delete3">&nbsp;Root_Storage_Pool</span>&nbsp;<B>with&nbsp;private</B>;<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>As&nbsp;defined&nbsp;in&nbsp;package&nbsp;MR_Pool,&nbsp;see&nbsp;<A HREF="RM-13-11-6.html">13.11.6</A></I></SPAN></span></div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Examples">...</div>
+<div class="paranum"><a name="p41">41/3</a></div>
+<div class="Examples"><span class="insert3">Our_Pool</span><span class="delete3">&nbsp;MR_Pool</span>&nbsp;:&nbsp;Mark_Release_Pool_Type&nbsp;(Pool_Size&nbsp;=&gt;&nbsp;2000<span class="delete3">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Block_Size&nbsp;=&gt;&nbsp;100</span>);<BR>
+<span class="insert3">My_Mark&nbsp;:&nbsp;MR_Pool.Subpool_Handle;&nbsp;--&nbsp;<SPAN Class="roman"><I>See&nbsp;<A HREF="RM-13-11-6.html">13.11.6</A></I></SPAN></span></div>
+<div class="paranum"><a name="p42">42/3</a></div>
+<div class="Examples"><B>type</B>&nbsp;Acc&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;...;<BR>
+<B>for</B>&nbsp;Acc'Storage_Pool&nbsp;<B>use</B>&nbsp;<span class="insert3">Our_Pool</span><span class="delete3">&nbsp;MR_Pool</span>;<BR>
+...</div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Examples"><span class="insert3">My_Mark&nbsp;:=&nbsp;</span>Mark(<span class="insert3">Our_Pool</span><span class="delete3">&nbsp;MR_Pool</span>);<BR>
+...&nbsp;--<SPAN Class="roman"><I>&nbsp;Allocate&nbsp;objects&nbsp;using&nbsp;&ldquo;<B>new</B>&nbsp;</I></SPAN><span class="insert3"><SPAN Class="roman"><I>(My_Mark)&nbsp;</I></SPAN></span><SPAN Class="roman"><I>Designated(...)&rdquo;.</I></SPAN><BR>
+Release(<span class="insert3">My_Mark</span><span class="delete3">&nbsp;MR_Pool</span>);&nbsp;--<SPAN Class="roman"><I>&nbsp;</I></SPAN><span class="insert3"><SPAN Class="roman"><I>Finalize&nbsp;objects&nbsp;and&nbsp;reclaim</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete3"><SPAN Class="roman"><I>&nbsp;Reclaim&nbsp;the</I></SPAN></span><SPAN Class="roman"><I>&nbsp;storage.</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Task Dispatching Pragmas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.2 <span class="insert2">Task Dispatching Pragmas</span><span class="delete2">The Standard Task Dispatching Policy</span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<span class="insert2">[This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;allows a single task dispatching policy to be defined for all priorities, 
+or the range of priorities to be split into subranges that are assigned 
+individual dispatching policies.]</span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Task_Dispatching_Policy is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8716"></A><A NAME="I8717"></A>Task_Dispatching_Policy(<I>policy_</I><A NAME="I8718"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching is as follows:</span>&nbsp;</div>
+<div class="paranum"><a name="p3.2">3.2/2</a></div>
+<div class="Indented1">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> 
+<A NAME="I8719"></A><A NAME="I8720"></A>Priority_Specific_Dispatching 
+(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>policy_</I><A NAME="I8721"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+<I>first_priority_</I><A NAME="I8722"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+<I>last_priority_</I><A NAME="I8723"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>);</span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3.3">3.3/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">The expected type for <I>first_priority_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+and <I>last_priority_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is Integer.</span>&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+<span class="insert2">used in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Task_Dispatching_Policy shall be the name of a task dispatching policy</span><span class="delete2">&nbsp;shall 
+either be FIFO_Within_Priorities or an implementation-defined <A NAME="I8724"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN></span>. 
+</div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2"><B>Implementation defined: 
+</B></span><span class="delete2">Implementation-defined <I>policy_</I><A NAME="I8725"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Task_Dispatching_Policy.</span></div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+used in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching shall be the name of a task dispatching 
+policy.</span></div>
+<div class="paranum"><a name="p4.2">4.2/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">Both <I>first_priority_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+and <I>last_priority_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+shall be static expressions in the range of System.Any_Priority; <I>last_priority_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+shall have a value greater than or equal to <I>first_priority_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4.3">4.3/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+Task_Dispatching_Policy specifies the single task dispatching policy.</span></div>
+<div class="paranum"><a name="p4.4">4.4/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+Priority_Specific_Dispatching specifies the task dispatching policy for 
+the specified range of priorities. Tasks with base priorities within 
+the range of priorities specified in a Priority_Specific_Dispatching 
+pragma have their active priorities determined according to the specified 
+dispatching policy. Tasks with active priorities within the range of 
+priorities specified in a Priority_Specific_Dispatching pragma are dispatched 
+according to the specified dispatching policy.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">Each ready queue is managed by exactly one policy. 
+Anything else would be chaos. The ready queue is determined by the active 
+priority. However, how the active priority is calculated is determined 
+by the policy; in order to break out of this circle, we have to say that 
+the active priority is calculated by the method determined by the policy 
+of the base priority.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.5">4.5/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert2">If a partition contains one or more Priority_Specific_Dispatching 
+pragmas</span><span class="insert3">,</span><span class="insert2">&nbsp;the 
+dispatching policy for priorities not covered by any Priority_Specific_Dispatching 
+pragmas is FIFO_Within_Priorities.</span></div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<A NAME="I8726"></A><A NAME="I8727"></A>A Task_Dispatching_Policy pragma 
+is a configuration pragma.<span class="insert2">&nbsp;A Priority_Specific_Dispatching 
+pragma is a configuration pragma. <A NAME="I8728"></A><A NAME="I8729"></A></span></div>
+<div class="paranum"><a name="p5.1">5.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">The priority ranges specified in more than one 
+Priority_Specific_Dispatching pragma within the same partition shall 
+not be overlapping.</span></div>
+<div class="paranum"><a name="p5.2">5.2/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">If a partition contains one or more Priority_Specific_Dispatching 
+pragmas it shall not contain a Task_Dispatching_Policy pragma.</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00333.TXT">AI95-00333-01</A></I>} 
+<span class="delete2">If the FIFO_Within_Priorities policy is specified 
+for a partition, then the Ceiling_Locking policy (see <A HREF="AA-D-3.html">D.3</A>) 
+shall also be specified for the partition.</span></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<A NAME="I8730"></A>[A <I>task dispatching policy</I> specifies the details 
+of task dispatching that are not covered by the basic task dispatching 
+model. These rules govern when tasks are inserted into and deleted from 
+the ready queues<span class="delete2">, and whether a task is inserted 
+at the head or the tail of the queue for its active priority</span>.] 
+<span class="insert2">A single</span><span class="delete2">&nbsp;The</span> 
+task dispatching policy is specified by a Task_Dispatching_Policy <span class="delete2">configuration 
+</span>pragma. <span class="insert2">Pragma Priority_Specific_Dispatching 
+assigns distinct dispatching policies to subranges of System.Any_Priority.</span><span class="delete2"><A NAME="I8731"></A> If 
+no such pragma appears in any of the program units comprising a partition, 
+the task dispatching policy for that partition is unspecified.</span></div>
+<div class="paranum"><a name="p7.1">7.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"><A NAME="I8732"></A>If neither <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+applies to any of the program units comprising a partition, the task 
+dispatching policy for that partition is unspecified.</span></div>
+<div class="paranum"><a name="p7.2">7.2/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert2">If a partition contains one or more Priority_Specific_Dispatching 
+pragmas</span><span class="insert3">,</span><span class="insert2">&nbsp;a 
+task dispatching point occurs for the currently running task of a processor 
+whenever there is a nonempty ready queue for that processor with a higher 
+priority than the priority of the running task.</span></div>
+<div class="paranum"><a name="p7.a">7.a/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert2">If we have priority specific dispatching then we 
+want preemption across the entire range of priorities. That prevents 
+higher priority tasks from being blocked by lower priority tasks that 
+have a different policy. On the other hand, if we have a single policy 
+for the entire partition, we want the characteristics of that policy 
+to apply for preemption; specifically, we&nbsp;</span><span class="insert3">might</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;may</span></span><span class="insert2">&nbsp;not require any preemption. Note that policy Non_Preemptive_FIFO_Within_Priorities 
+is not allowed in a priority specific dispatching pragma.</span>&nbsp;</div>
+<div class="paranum"><a name="p7.3">7.3/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">A task that has its base priority changed may move 
+from one dispatching policy to another. It is immediately subject to 
+the new dispatching policy.</span></div>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>Once 
+subject to the new dispatching policy, it may be immediately preempted 
+or dispatched, according the rules of the new policy.</span>&nbsp;</div>
+<div class="Normal"><span class="insert2"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+7 through 13 were moved to D.2.3.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">The language defines only one task dispatching 
+policy, FIFO_Within_Priorities; when this policy is in effect, modifications 
+to the ready queues occur only as follows:</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">When a blocked task becomes ready, it is added 
+at the tail of the ready queue for its active priority.</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">When the active priority of a ready task that is 
+not running changes, or the setting of its base priority takes effect, 
+the task is removed from the ready queue for its old active priority 
+and is added at the tail of the ready queue for its new active priority, 
+except in the case where the active priority is lowered due to the loss 
+of inherited priority, in which case the task is added at the head of 
+the ready queue for its new active priority.</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">When the setting of the base priority of a running 
+task takes effect, the task is added to the tail of the ready queue for 
+its active priority.</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">When a task executes a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0227">delay_statement</A></SPAN> 
+that does not result in blocking, it is added to the tail of the ready 
+queue for its active priority.</span>&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a/2</a></div>
+<div class="Annotations"><span class="delete2"><B>Ramification:&nbsp;</B>If 
+the delay does result in blocking, the task moves to the &ldquo;delay 
+queue&rdquo;, not to the ready queue.</span>&nbsp;</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2"><A NAME="I8733"></A><A NAME="I8734"></A>Each of 
+the events specified above is a task dispatching point (see <A HREF="AA-D-2-1.html">D.2.1</A>).</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">In addition, when a task is preempted, it is added 
+at the head of the ready queue for its active priority.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p14.1">14.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00333.TXT">AI95-00333-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">An implementation shall allow, for a single partition, 
+both the locking policy (see <A HREF="AA-D-3.html">D.3</A>) to be specified 
+as Ceiling_Locking and also one or more Priority_Specific_Dispatching 
+pragmas to be given.</span>&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="Normal"><span class="insert2"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+14 through 16 were moved to D.2.3.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2"><A NAME="I8735"></A><I>Priority inversion</I> is 
+the duration for which a task remains at the head of the highest priority 
+ready queue while the processor executes a lower priority task. The implementation 
+shall document:</span>&nbsp;</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">The maximum priority inversion a user task can 
+experience due to activity of the implementation (on behalf of lower 
+priority tasks), and</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">whether execution of a task can be preempted by 
+the implementation processing of delay expirations for lower priority 
+tasks, and if so, for how long.</span>&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2"><B>Implementation defined: 
+</B></span><span class="delete2">Implementation-defined aspects of priority 
+inversion.</span></div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+Implementations are allowed to define other task dispatching policies, 
+but need not support more than one <span class="insert2">task dispatching</span><span class="delete2">&nbsp;such</span> 
+policy per partition.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2">An implementation need not support <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching if it is infeasible to support it in the 
+target environment.</span><span class="delete2">&nbsp;[For optimization purposes,] 
+an implementation may alter the points at which task dispatching occurs, 
+in an implementation defined manner. However, a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0227">delay_statement</A></SPAN> 
+always corresponds to at least one task dispatching point.</span></div>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation 
+defined task dispatching<span class="insert2">&nbsp;policies</span>.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="Notes"><span class="insert2"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+19 through 21 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Notes">14&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">If the active priority of a running task is lowered 
+due to loss of inherited priority (as it is on completion of a protected 
+operation) and there is a ready task of the same active priority that 
+is not running, the running task continues to run (provided that there 
+is no higher priority task).</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Notes">15&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">The setting of a task's base priority as a result 
+of a call to Set_Priority does not always take effect immediately when 
+Set_Priority is called. The effect of setting the task's base priority 
+is deferred while the affected task performs a protected action.</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Notes">16&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="delete2">Setting the base priority of a ready task causes 
+the task to move to the end of the queue for its active priority, regardless 
+of whether the active priority of the task actually changes.</span></div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p22.a">22.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00333.TXT">AI95-00333-01</A></I>} 
+<span class="insert2"><A NAME="I8736"></A><B>Amendment Correction:</B> 
+It is no longer required to specify Ceiling_Locking with the language-defined 
+task dispatching policies; we only require that implementations <I>allow</I> 
+them to be used together.</span></div>
+<div class="paranum"><a name="p22.b">22.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert2"><B>Pragma</B> Priority_Specific_Dispatching is 
+new; it allows&nbsp;</span><span class="insert3">the specification of</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;specifying</span></span><span class="insert2">&nbsp;different policies for different priorities.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p22.c">22.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+<span class="insert2">Clarified that an implementation need support only 
+one task dispatching policy (of any kind, language-defined or otherwise) 
+per partition.</span></div>
+<div class="paranum"><a name="p22.d">22.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert2">This description is simplified to describe only 
+the rules for the Task_Dispatching_Policy pragma that are common to all 
+policies. In particular, rules about preemption are moved elsewhere. 
+This makes it easier to add other policies (which&nbsp;</span><span class="insert3">might</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;may</span></span><span class="insert2">&nbsp;not involve preemption).</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

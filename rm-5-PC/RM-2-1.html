@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Character Set</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.1 Character Set</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><A NAME="I1132"></A>The character repertoire for 
+the text of an Ada program consists of the entire coding space described 
+by the ISO/IEC 10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span> 
+Universal <span class="delete5">Multiple-Octet&nbsp;</span>Coded Character 
+Set. This coding space is organized in <I>planes</I>, each plane comprising 
+65536 characters.<A NAME="I1133"></A> <A NAME="I1134"></A></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="Indented1"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 and 
+3 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1"></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1"></div>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
+<div class="Indented1">A <SPAN Class="swiss">character</SPAN> is defined 
+by this International Standard for each cell in the coding space described 
+by ISO/IEC 10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span>, 
+regardless of whether or not ISO/IEC 10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span> 
+allocates a character to that cell.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal">The coded representation for characters is implementation 
+defined (it need not be a representation defined within ISO/IEC 10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span>). 
+A character whose relative code point in its plane is 16#FFFE# or 16#FFFF# 
+is not allowed anywhere in the text of a program. The only characters 
+allowed outside of comments are those in categories <SPAN Class="swiss">other_format</SPAN>, 
+<SPAN Class="swiss">format_effector</SPAN>, and <SPAN Class="swiss">graphic_character</SPAN>. 
+</div>
+<div class="paranum"><a name="p4.1">4.1/5</a></div>
+<div class="Normal">&nbsp;The semantics of an Ada program whose text is not 
+in Normalization Form <span class="insert5">C</span><span class="delete5">&nbsp;KC</span> 
+(as defined by Clause 21 of ISO/IEC 10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span>) 
+is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal">The description of the language definition in this 
+International Standard uses the character properties General Category, 
+Simple Uppercase Mapping, Uppercase Mapping, and Special Case Condition 
+of the documents referenced by <span class="delete5">the note in&nbsp;</span>Clause 
+<span class="insert5">2</span><span class="delete5">&nbsp;1</span> of ISO/IEC 
+10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span>. 
+The actual set of graphic symbols used by an implementation for the visual 
+representation of the text of an Ada program is not specified. <A NAME="I1135"></A></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Characters are categorized 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="WideHanging-Term"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="WideHanging-Term"><A NAME="I1136"></A><SPAN Class="swiss">letter_uppercase</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Uppercase&rdquo;.</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="WideHanging-Term"><A NAME="I1137"></A><SPAN Class="swiss">letter_lowercase</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Lowercase&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p9.1">9.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I1138"></A><SPAN Class="swiss">letter_titlecase</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Titlecase&rdquo;.</div>
+<div class="paranum"><a name="p9.2">9.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I1139"></A><SPAN Class="swiss">letter_modifier</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Modifier&rdquo;.</div>
+<div class="paranum"><a name="p9.3">9.3/2</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I1140"></A><SPAN Class="swiss">letter_other</SPAN></div><div class="WideHanging-Body">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Other&rdquo;.</div>
+<div class="paranum"><a name="p9.4">9.4/2</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I1141"></A><SPAN Class="swiss">mark_non_spacing</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Mark, Non-Spacing&rdquo;.</div>
+<div class="paranum"><a name="p9.5">9.5/2</a></div>
+<div class="WideHanging-Term">&nbsp;<A NAME="I1142"></A><SPAN Class="swiss">mark_spacing_combining</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Mark, Spacing 
+Combining&rdquo;.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="WideHanging-Term"><A NAME="I1143"></A><SPAN Class="swiss">number_decimal</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Number, 
+Decimal&rdquo;.</div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1144"></A><SPAN Class="swiss">number_letter</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Number, 
+Letter&rdquo;.</div>
+<div class="paranum"><a name="p10.2">10.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1145"></A><SPAN Class="swiss">punctuation_connector</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Punctuation, 
+Connector&rdquo;.</div>
+<div class="paranum"><a name="p10.3">10.3/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1146"></A><SPAN Class="swiss">other_format</SPAN></div><div class="WideHanging-Body">
+Any character whose General Category is defined to be &ldquo;Other, Format&rdquo;.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="WideHanging-Term"><A NAME="I1147"></A><SPAN Class="swiss">separator_space</SPAN></div><div class="WideHanging-Body">
+Any character whose General Category is defined to be &ldquo;Separator, 
+Space&rdquo;.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="WideHanging-Term"><A NAME="I1148"></A><SPAN Class="swiss">separator_line</SPAN></div><div class="WideHanging-Body">
+Any character whose General Category is defined to be &ldquo;Separator, 
+Line&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1149"></A><SPAN Class="swiss">separator_paragraph</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Separator, 
+Paragraph&rdquo;.</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="WideHanging-Term"><A NAME="I1150"></A><SPAN Class="swiss">format_effector</SPAN></div><div class="WideHanging-Body"><br clear="left">
+The characters whose code points are 16#09# (CHARACTER TABULATION), 16#0A# 
+(LINE FEED), 16#0B# (LINE TABULATION), 16#0C# (FORM FEED), 16#0D# (CARRIAGE 
+RETURN), 16#85# (NEXT LINE), and the characters in categories <SPAN Class="swiss">separator_line</SPAN> 
+and <SPAN Class="swiss">separator_paragraph</SPAN>. <A NAME="I1151"></A></div>
+<div class="paranum"><a name="p13.1">13.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1152"></A><SPAN Class="swiss">other_control</SPAN></div><div class="WideHanging-Body">
+Any character whose General Category is defined to be &ldquo;Other, Control&rdquo;, 
+and which is not defined to be a <SPAN Class="swiss">format_effector</SPAN>.</div>
+<div class="paranum"><a name="p13.2">13.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1153"></A><SPAN Class="swiss">other_private_use</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Other, Private 
+Use&rdquo;.</div>
+<div class="paranum"><a name="p13.3">13.3/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<A NAME="I1154"></A><SPAN Class="swiss">other_surrogate</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Other, Surrogate&rdquo;.</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="WideHanging-Term"><A NAME="I1155"></A><SPAN Class="swiss">graphic_character</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character that is not in the categories <SPAN Class="swiss">other_control</SPAN>, 
+<SPAN Class="swiss">other_private_use</SPAN>, <SPAN Class="swiss">other_surrogate</SPAN>, 
+<SPAN Class="swiss">format_effector</SPAN>, and whose relative code point 
+in its plane is neither 16#FFFE# nor 16#FFFF#.&nbsp;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following names 
+are used when referring to certain characters (the first name is that 
+given in ISO/IEC 10646:<span class="insert5">2017</span><span class="delete5">&nbsp;2011</span>): 
+<A NAME="I1156"></A><A NAME="I1157"></A><A NAME="I1158"></A><A NAME="I1159"></A><A NAME="I1160"></A><A NAME="I1161"></A><A NAME="I1162"></A><A NAME="I1163"></A><A NAME="I1164"></A><A NAME="I1165"></A><A NAME="I1166"></A><A NAME="I1167"></A><A NAME="I1168"></A><A NAME="I1169"></A><A NAME="I1170"></A><A NAME="I1171"></A><A NAME="I1172"></A><A NAME="I1173"></A><A NAME="I1174"></A><A NAME="I1175"></A><A NAME="I1176"></A><A NAME="I1177"></A><A NAME="I1178"></A><A NAME="I1179"></A><A NAME="I1180"></A><A NAME="I1181"></A><A NAME="I1182"></A><A NAME="I1183"></A><span class="insert5"><A NAME="I1184"></A><A NAME="I1185"></A><A NAME="I1186"></A></span></div>
+<div class="Indented2"><table width="70%">
+<TR><TD align="left">&nbsp;&nbsp;graphic symbol<TD align="left">name<TD align="left">&nbsp;&nbsp;graphic symbol<TD align="left">name<TD align="left">
+<TR><TD align="left">&nbsp;<TD align="left">&nbsp;<TD align="left">&nbsp;<TD align="left">&nbsp;<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;<TD align="left">quotation mark<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<TD align="left">colon<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#<TD align="left">number sign<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;<TD align="left">semicolon<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<TD align="left">ampersand<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<TD align="left">less-than sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<TD align="left">apostrophe, tick<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=<TD align="left">equals sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<TD align="left">left parenthesis<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;<TD align="left">greater-than sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<TD align="left">right parenthesis<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<TD align="left">low line, underline<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<TD align="left">asterisk, multiply<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<TD align="left">vertical line<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+<TD align="left">plus sign<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<TD align="left">solidus, divide<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,<TD align="left">comma<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!<TD align="left">exclamation point<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ndash;<TD align="left">hyphen-minus, minus<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%<TD align="left">percent sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<TD align="left">full stop, dot, point<TD align="left"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[</span><TD align="left"><span class="insert5">left square bracket</span><TD align="left">
+<TR><TD align="left"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@</span><TD align="left"><span class="insert5">commerical at, at sign</span><TD align="left"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</span> <TD align="left"><span class="insert5">right square bracket</span> <TD align="left">
+</table></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">An Ada implementation shall accept Ada source code 
+in UTF-8 encoding, with or without a BOM (see <A HREF="RM-A-4-11.html">A.4.11</A>), 
+where every character is represented by its code point. The character 
+pair CARRIAGE RETURN/LINE FEED (code points 16#0D# 16#0A#) signifies 
+a single end of line (see <A HREF="RM-2-2.html">2.2</A>); every other 
+occurrence of a <SPAN Class="swiss">format_effector</SPAN> other than 
+the character whose code point position is 16#09# (CHARACTER TABULATION) 
+also signifies a single end of line.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal">The categories defined above, as well as case mapping 
+and folding, may be based on an implementation-defined version of ISO/IEC 
+10646 (2003 edition or later).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Notes">1&nbsp;&nbsp;The characters in categories <SPAN Class="swiss">other_control</SPAN>, 
+<SPAN Class="swiss">other_private_use</SPAN>, and <SPAN Class="swiss">other_surrogate</SPAN> 
+are only allowed in comments.</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Notes"></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

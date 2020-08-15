@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Derived Types and Classes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-4-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.4 Derived Types and Classes</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><A NAME="I1586"></A>A <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
+defines a <span class="insert2"><I>derived type</I></span><span class="delete2">&nbsp;new 
+type</span> (and its first subtype) whose characteristics are <I>derived</I> 
+from those of a <span class="insert2">parent type, and possibly from 
+progenitor types</span><span class="delete2"><I>&nbsp;parent type</I></span>. 
+<A NAME="I1587"></A></div>
+<div class="paranum"><a name="p1.1">1.1/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I1588"></A><A NAME="I1589"></A>A 
+<I>class of types</I> is a set of types that is closed under derivation; 
+that is, if the parent or a progenitor type of a derived type belongs 
+to a class, then so does the derived type. By saying that a particular 
+group of types forms a class, we are saying that all derivatives of a 
+type in the set inherit the characteristics that define that set. The 
+more general term <I>category of types</I> is used for a set of types 
+whose defining characteristics are not necessarily inherited by derivatives; 
+for example, limited, abstract, and interface are all categories of types, 
+but not classes of types.</span></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">derived_type_definition</SPAN><A NAME="I1590"></A><A NAME="S0035"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span>[<B>abstract</B>]&nbsp;<span class="insert2">[<B>limited</B>]&nbsp;</span><B>new</B>&nbsp;<I>parent_</I><A NAME="I1591"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;[<span class="insert2">[<B>and</B>&nbsp;<A NAME="I1592"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;</span><A NAME="I1593"></A><SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>]</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal"><A NAME="I1594"></A><A NAME="I1595"></A>The <I>parent_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+defines the <I>parent subtype</I>; its type is the <span class="insert2"><I>parent 
+type</I></span><span class="delete2">&nbsp;parent type</span>. <span class="insert2">The 
+<SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
+defines the progenitor types (see <A HREF="RM-3-9-4.html">3.9.4</A>). 
+A derived type has one parent type and zero or more progenitor types.</span></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">A type shall be completely defined (see <A HREF="RM-3-11-1.html">3.11.1</A>) 
+prior to being specified as the parent type in a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
+&mdash; the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>s 
+for the parent type and any of its subcomponents have to precede the 
+<SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal"><A NAME="I1596"></A>If there is a <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
+the derived type is called a <I>record extension</I> of the parent type. 
+A <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+shall be provided if and only if the parent type is a tagged type.<span class="insert2">&nbsp;An <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
+shall be provided only if the parent type is a tagged type.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.1">5.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert2">If the reserved word <B>limited</B> 
+appears in a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+the parent type shall be a limited type.</span><span class="insert3">&nbsp;If the parent type is a tagged formal type, then in addition to the places 
+where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit.<A NAME="I1597"></A></span><span class="insert2"></span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I1598"></A><A NAME="I1599"></A>The first 
+subtype of the derived type is unconstrained if a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+is provided in the declaration of the derived type, or if the parent 
+subtype is unconstrained. <A NAME="I1600"></A>Otherwise, the constraint 
+of the first subtype <I>corresponds</I> to that of the parent subtype 
+in the following sense: it is the same as that of the parent subtype 
+except that for a range constraint (implicit or explicit), the value 
+of each bound of its range is replaced by the corresponding value of 
+the derived type.&nbsp;</div>
+<div class="paranum"><a name="p6.1">6.1/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">The first subtype of the derived 
+type excludes null (see <A HREF="RM-3-10.html">3.10</A>) if and only 
+if the parent subtype excludes null.</span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The <span class="insert3"><I>characteristics</I><A NAME="I1601"></A> 
+and implicitly declared primitive subprograms</span><span class="delete3">&nbsp;characteristics</span> 
+of the derived type are defined as follows:&nbsp;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted"><span class="insert2">If the parent type or a progenitor 
+type belongs to a class of types, then the derived type also belongs 
+to that class. The following sets of types, as well as any higher-level 
+sets composed from them, are classes in this sense, and hence the characteristics 
+defining these classes are inherited by derived types from their parent 
+or progenitor types: signed integer, modular integer, ordinary fixed, 
+decimal fixed, floating point, enumeration, boolean, character, access-to-constant, 
+general access-to-variable, pool-specific access-to-variable, access-to-subprogram, 
+array, string, non-array composite, nonlimited, untagged record, tagged, 
+task, protected, and synchronized tagged</span><span class="delete2">&nbsp;Each 
+class of types that includes the parent type also includes the derived 
+type</span>.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">If the parent type is an elementary type or an 
+array type, then the set of possible values of the derived type is a 
+copy of the set of possible values of the parent type. For a scalar type, 
+the base range of the derived type is the same as that of the parent 
+type.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">If the parent type is a composite type other than 
+an array type, then the components, protected subprograms, and entries 
+that are declared for the derived type are as follows:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Indented2NestedBulleted">The discriminants specified by a 
+new <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
+if there is one; otherwise, each discriminant of the parent type (implicitly 
+declared in the same order with the same specifications) &mdash; <A NAME="I1602"></A><A NAME="I1603"></A>in 
+the latter case, the discriminants are said to be <I>inherited</I>, or 
+if unknown in the parent, are also unknown in the derived type;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Indented2NestedBulleted">Each nondiscriminant component, 
+entry, and protected subprogram of the parent type, implicitly declared 
+in the same order with the same declarations; <A NAME="I1604"></A><A NAME="I1605"></A><A NAME="I1606"></A>these 
+components, entries, and protected subprograms are said to be <I>inherited</I>; 
+</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented2NestedBulleted">Each component declared in a <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
+if any.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted-NoPrefix">Declarations of components, protected 
+subprograms, and entries, whether implicit or explicit, occur immediately 
+within the declarative region of the type, in the order indicated above, 
+following the parent <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2">The derived type is limited 
+if and only if the parent type is limited.</span>&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">For each predefined operator of the parent type, 
+there is a corresponding predefined operator of the derived type.&nbsp;</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted"><A NAME="I1607"></A>For each user-defined primitive 
+subprogram (other than a user-defined equality operator &mdash; see below) 
+of the parent type<span class="insert2">&nbsp;or of a progenitor type</span> 
+that already exists at the place of the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+there exists a corresponding <I>inherited</I> primitive subprogram of 
+the derived type with the same defining name. <A NAME="I1608"></A>Primitive 
+user-defined equality operators of the parent type<span class="insert2">&nbsp;and any progenitor types</span> are also inherited by the derived type, 
+except when the derived type is a nonlimited record extension, and the 
+inherited operator would have a profile that is type conformant with 
+the profile of the corresponding predefined equality operator; in this 
+case, the user-defined equality operator is not inherited, but is rather 
+incorporated into the implementation of the predefined equality operator 
+of the record extension (see <A HREF="RM-4-5-2.html">4.5.2</A>). <A NAME="I1609"></A></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Bulleted-NoPrefix">The profile of an inherited subprogram 
+(including an inherited enumeration literal) is obtained from the profile 
+of the corresponding (user-defined) primitive subprogram of the parent<span class="insert2">&nbsp;or progenitor</span> type, after systematic replacement of each subtype 
+of its profile (see <A HREF="RM-6-1.html">6.1</A>) that is of the parent<span class="insert2">&nbsp;or progenitor</span> type<span class="insert3">, other than those subtypes 
+found in the designated profile of an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>,</span> 
+with a <I>corresponding subtype</I> of the derived type. <A NAME="I1610"></A>For 
+a given subtype of the parent<span class="insert2">&nbsp;or progenitor</span> 
+type, the corresponding subtype of the derived type is defined as follows: 
+</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented2NestedBulleted">If the declaration of the derived 
+type has neither a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+nor a <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
+then the corresponding subtype has a constraint that corresponds (as 
+defined above for the first subtype of the derived type) to that of the 
+given subtype.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Indented2NestedBulleted">If the derived type is a record 
+extension, then the corresponding subtype is the first subtype of the 
+derived type.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Indented2NestedBulleted">If the derived type has a new <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+but is not a record extension, then the corresponding subtype is constrained 
+to those values that when converted to the parent type belong to the 
+given subtype (see <A HREF="RM-4-6.html">4.6</A>). <A NAME="I1611"></A></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Bulleted-NoPrefix">The same formal parameters have <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
+in the profile of the inherited subprogram. Any type mismatch due to 
+the systematic replacement of the parent<span class="insert2">&nbsp;or progenitor</span> 
+type by the derived type is handled as part of the normal type conversion 
+associated with parameter passing &mdash; see <A HREF="RM-6-4-1.html">6.4.1</A>. 
+</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Normal">If a primitive subprogram of the parent<span class="insert2">&nbsp;or progenitor</span> type is visible at the place of the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+then the corresponding inherited subprogram is implicitly declared immediately 
+after the <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>. 
+Otherwise, the inherited subprogram is implicitly declared later or not 
+at all, as explained in <A HREF="RM-7-3-1.html">7.3.1</A>.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal"><A NAME="I1612"></A>A derived type can also be defined 
+by a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN> 
+(see <A HREF="RM-7-3.html">7.3</A>) or a <SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0286">formal_derived_type_definition</A></SPAN> 
+(see <A HREF="RM-12-5-1.html">12.5.1</A>). Such a derived type is a partial 
+view of the corresponding full or actual type.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">All numeric types are derived types, in that they 
+are implicitly derived from a corresponding root numeric type (see <A HREF="RM-3-5-4.html">3.5.4</A> 
+and <A HREF="RM-3-5-6.html">3.5.6</A>).</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal"><A NAME="I1613"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
+creates the derived type and its first subtype, and consists of the elaboration 
+of the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+and the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>, 
+if any. If the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+depends on a discriminant, then only those expressions that do not depend 
+on a discriminant are evaluated.&nbsp;</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Normal"><A NAME="I1614"></A>For the execution of a call on 
+an inherited subprogram, a call on the corresponding primitive subprogram 
+of the parent<span class="insert2">&nbsp;or progenitor</span> type is performed; 
+the normal conversion of each actual parameter to the subtype of the 
+corresponding formal parameter (see <A HREF="RM-6-4-1.html">6.4.1</A>) 
+performs any necessary type conversion as well. If the result type of 
+the inherited subprogram is the derived type, the result of calling the 
+<span class="delete2">parent's&nbsp;</span>subprogram<span class="insert2">&nbsp;of the parent or progenitor</span> is converted to the derived type<span class="insert2">, 
+or in the case of a null extension, extended to the derived type using 
+the equivalent of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+with the original result as the <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
+and <B>null record</B> as the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN></span>. 
+<A NAME="I1615"></A></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Notes">16&nbsp;&nbsp;<A NAME="I1616"></A>Classes are closed 
+under derivation &mdash; any class that contains a type also contains 
+its derivatives. Operations available for a given class of types are 
+available for the derived types in that class.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Notes">17&nbsp;&nbsp;Evaluating an inherited enumeration 
+literal is equivalent to evaluating the corresponding enumeration literal 
+of the parent type, and then converting the result to the derived type. 
+This follows from their equivalence to parameterless functions. <A NAME="I1617"></A></div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Notes">18&nbsp;&nbsp;A generic subprogram is not a subprogram, 
+and hence cannot be a primitive subprogram and cannot be inherited by 
+a derived type. On the other hand, an instance of a generic subprogram 
+can be a primitive subprogram, and hence can be inherited.</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Notes">19&nbsp;&nbsp;If the parent type is an access type, 
+then the parent and the derived type share the same storage pool; there 
+is a <B>null</B> access value for the derived type and it is the implicit 
+initial value for the type. See <A HREF="RM-3-10.html">3.10</A>.</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Notes">20&nbsp;&nbsp;If the parent type is a boolean type, 
+the predefined relational operators of the derived type deliver a result 
+of the predefined type Boolean (see <A HREF="RM-4-5-2.html">4.5.2</A>). 
+If the parent type is an integer type, the right operand of the predefined 
+exponentiation operator is of the predefined type Integer (see <A HREF="RM-4-5-6.html">4.5.6</A>).</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Notes">21&nbsp;&nbsp;Any discriminants of the parent type 
+are either all inherited, or completely replaced with a new set of discriminants.</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Notes">22&nbsp;&nbsp;For an inherited subprogram, the subtype 
+of a formal parameter of the derived type need not have any value in 
+common with the first subtype of the derived type.&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Notes">23&nbsp;&nbsp;If the reserved word <B>abstract</B> 
+is given in the declaration of a type, the type is abstract (see <A HREF="RM-3-9-3.html">3.9.3</A>).</div>
+<div class="paranum"><a name="p35.1">35.1/2</a></div>
+<div class="Notes">24&nbsp;&nbsp;<span class="insert2">An interface type 
+that has a progenitor type &ldquo;is derived from&rdquo; that type. A 
+<SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+however, never defines an interface type.</span></div>
+<div class="paranum"><a name="p35.2">35.2/2</a></div>
+<div class="Notes">25&nbsp;&nbsp;<span class="insert2">It is illegal 
+for the parent type of a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN> 
+to be a synchronized tagged type.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of derived 
+type declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Examples"><B>type</B>&nbsp;Local_Coordinate&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Coordinate;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;two&nbsp;different&nbsp;types</I></SPAN><BR>
+<B>type</B>&nbsp;Midweek&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Day&nbsp;<B>range</B>&nbsp;Tue&nbsp;..&nbsp;Thu;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-5-1.html">3.5.1</A></I></SPAN><BR>
+<B>type</B>&nbsp;Counter&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Positive;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;same&nbsp;range&nbsp;as&nbsp;Positive&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Examples"><B>type</B>&nbsp;Special_Key&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Key_Manager.Key;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-7-3-1.html">7.3.1</A></I></SPAN><BR>
+&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;the&nbsp;inherited&nbsp;subprograms&nbsp;have&nbsp;the&nbsp;following&nbsp;specifications:&nbsp;</I></SPAN><BR>
+&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;procedure&nbsp;Get_Key(K&nbsp;:&nbsp;out&nbsp;Special_Key);</I></SPAN><BR>
+&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;&quot;&lt;&quot;(X,Y&nbsp;:&nbsp;Special_Key)&nbsp;return&nbsp;Boolean;</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-4-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

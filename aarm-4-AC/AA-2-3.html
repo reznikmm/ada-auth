@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Identifiers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.3 Identifiers</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">Identifier</A></SPAN>s 
+are used as names.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<SPAN Class="swiss">identifier</SPAN><A NAME="I1281"></A><A NAME="S0002"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I1282"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0003">identifier_start</A></SPAN>&nbsp;{<A NAME="I1283"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0003">identifier_start</A></SPAN>&nbsp;|&nbsp;<A NAME="I1284"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0005">identifier_extend</A></SPAN>}</span><span class="delete2"><A NAME="I1285"></A><SPAN Class="swiss">&nbsp;identifier_letter</SPAN>&nbsp;{[<A NAME="I1286"></A><SPAN Class="swiss">underline</SPAN>]&nbsp;<A NAME="I1287"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0004">letter_or_digit</A></SPAN>}</span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">identifier_start</SPAN></span><SPAN Class="swiss"></SPAN><span class="delete2"><SPAN Class="swiss">&nbsp;letter_or_digit</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I1288"></A><A NAME="S0003"></A><A NAME="S0004"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1289"></A><SPAN Class="swiss">letter_uppercase</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1290"></A><SPAN Class="swiss">letter_lowercase</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1291"></A><SPAN Class="swiss">letter_titlecase</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1292"></A><SPAN Class="swiss">letter_modifier</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1293"></A><SPAN Class="swiss">letter_other</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1294"></A><SPAN Class="swiss">number_letter</SPAN></span><span class="delete2"><A NAME="I1295"></A><SPAN Class="swiss">&nbsp;identifier_letter</SPAN>&nbsp;|&nbsp;<A NAME="I1296"></A><SPAN Class="swiss">digit</SPAN></span></div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">identifier_extend</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I1297"></A><A NAME="S0005"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1298"></A><SPAN Class="swiss">mark_non_spacing</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1299"></A><SPAN Class="swiss">mark_spacing_combining</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1300"></A><SPAN Class="swiss">number_decimal</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1301"></A><SPAN Class="swiss">punctuation_connector</SPAN></span><span class="insert2"><span class="delete3"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1302"></A><SPAN Class="swiss">other_format</SPAN></span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<span class="insert2"></span><span class="insert3">An</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;After 
+eliminating the characters in category <SPAN Class="swiss">other_format</SPAN>, 
+an</span></span><span class="insert2">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall not contain two consecutive characters in category&nbsp;</span><span class="insert3"><SPAN Class="swiss">punctuation_connector</SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;punctuation_connector</span></span><span class="insert2">, 
+or end with a character in that category.</span><span class="delete2">&nbsp;An 
+<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall not be a reserved word.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This rule 
+was stated in the syntax in Ada 95, but that has gotten too complex in 
+Ada 2005.</span><span class="insert2"><span class="delete3">&nbsp;Since <SPAN Class="swiss">other_format</SPAN> 
+characters usually do not display, we do not want to count them as separating 
+two underscores.</span></span><span class="insert2"></span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<span class="insert2">Two <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+are&nbsp;</span><span class="insert2">considered the same if they consist 
+of the same sequence of characters after applying&nbsp;</span><span class="insert3">locale-independent 
+simple case folding, as defined by documents referenced in the note in 
+Clause 1 of ISO/IEC 10646:2011.<A NAME="I1303"></A></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;the 
+following transformations (in this order):</span></span><span class="insert2"></span><span class="delete2">&nbsp;All 
+characters of an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+are significant, including any underline character. <A NAME="I1304"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">Identifier</A></SPAN>s 
+differing only in the use of corresponding upper and lower case letters 
+are considered the same.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.1">5.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<span class="insert2"></span><span class="insert2"><span class="delete3">The 
+characters in category <SPAN Class="swiss">other_format</SPAN> are eliminated.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p5.2">5.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<span class="insert2"></span><span class="insert2"><span class="delete3">The 
+remaining sequence of characters is converted to upper case. <A NAME="I1305"></A></span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert3">Simple case folding is a mapping to lower case, 
+so this is matching the defining (lower case) version of a reserved word. 
+We could have mentioned case folding of the reserved words, but as that 
+is an identity function, it would have no effect.</span><span class="delete3"></span><span class="delete2">&nbsp;Two 
+of the letters of ISO 8859-1 appear only as lower case, &quot;sharp s&quot; 
+and &quot;y with diaeresis.&quot; These two letters have no corresponding 
+upper case letter (in particular, they are not considered equivalent 
+to one another).</span><span class="delete3"></span></div>
+<div class="paranum"><a name="p5.a.1">5.a.1/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert3">The &ldquo;documents referenced&rdquo; means Unicode. 
+Note that simple case folding is supposed to be compatible between Unicode 
+versions, so the Unicode version used doesn't matter.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.3">5.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert2">After applying&nbsp;</span><span class="insert3">simple 
+case folding</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;these 
+transformations</span></span><span class="insert2">, an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall not be identical to a reserved word</span><span class="insert2"><span class="delete3">&nbsp;(in upper case)</span></span><span class="insert2">.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Note: 
+</B>We match the reserved words after&nbsp;</span><span class="insert3">applying 
+case folding</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;doing 
+these transformations</span></span><span class="insert2">&nbsp;so that the 
+rules for <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+and reserved words are the same.&nbsp;</span><span class="insert2"><span class="delete3">(This 
+allows <SPAN Class="swiss">other_format</SPAN> characters, which usually 
+don't display, in a reserved word without changing it to an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.) 
+</span></span><span class="insert2">Since a compiler usually will lexically 
+process <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+and reserved words the same way (often with the same code), this will 
+prevent a lot of headaches.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert2">The rules for reserved words differ in one way: 
+they define case conversion on letters rather than sequences. This means 
+that&nbsp;</span><span class="insert3">it is possible that there exist&nbsp;</span><span class="insert2">some 
+unusual sequences&nbsp;</span><span class="insert3">that&nbsp;</span><span class="insert2">are 
+neither <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+nor reserved words.&nbsp;</span><span class="insert3">We are not aware of 
+any such sequences so long as we use simple case folding (as opposed 
+to full case folding), but we have defined the rules in case any are 
+introduced in future character set standards. This originally was a problem 
+when converting to upper case:</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;For 
+instance,</span></span><span class="insert2">&nbsp;&ldquo;&#0305;f&rdquo; 
+and &ldquo;acce&szlig;&rdquo; have upper case conversions of &ldquo;IF&rdquo; 
+and &ldquo;ACCESS&rdquo; respectively.&nbsp;</span><span class="insert3">We 
+would not want these to be treated as reserved words. But neither of 
+these cases exist when using simple case folding.</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;These 
+are not <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s, 
+because the transformed values are identical to a reserved word. But 
+they are not reserved words, either, because the original values do not 
+match any reserved word as defined or with any number of characters of 
+the reserved word in upper case. Thus, these odd constructions are just 
+illegal, and should not appear in the source of a program.</span></span><span class="insert2"></span> 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">In a nonstandard mode, an implementation may support 
+other upper/lower case equivalence rules for <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s[, 
+to accommodate local conventions].&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>Discussion: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert2">For instance, in most languages, the&nbsp;</span><span class="insert3">simple 
+case folded</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;uppercase</span></span><span class="insert2">&nbsp;equivalent of LATIN&nbsp;</span><span class="insert3">CAPITAL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;SMALL</span></span><span class="insert2">&nbsp;LETTER I (</span><span class="insert3">&nbsp;an upper</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;a 
+lower</span></span><span class="insert2">&nbsp;case letter&nbsp;</span><span class="insert3">without</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;with</span></span><span class="insert2">&nbsp;a dot above) is LATIN&nbsp;</span><span class="insert3">SMALL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;CAPITAL</span></span><span class="insert2">&nbsp;LETTER I (</span><span class="insert3">&nbsp;a lower</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;an 
+upper</span></span><span class="insert2">&nbsp;case letter&nbsp;</span><span class="insert3">with</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;without</span></span><span class="insert2">&nbsp;a dot above). In Turkish, though, LATIN&nbsp;</span><span class="insert3">CAPITAL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;SMALL</span></span><span class="insert2">&nbsp;LETTER I and LATIN&nbsp;</span><span class="insert3">CAPITAL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;SMALL</span></span><span class="insert2">&nbsp;LETTER&nbsp;</span><span class="insert2"><span class="delete3">DOTLESS&nbsp;</span></span><span class="insert2">I</span><span class="insert3">&nbsp;WITH DOT ABOVE</span><span class="insert2">&nbsp;are two distinct letters, 
+so the&nbsp;</span><span class="insert3">case folded</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;upper 
+case</span></span><span class="insert2">&nbsp;equivalent of LATIN&nbsp;</span><span class="insert3">CAPITAL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;SMALL</span></span><span class="insert2">&nbsp;LETTER I is LATIN&nbsp;</span><span class="insert3">SMALL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;CAPITAL</span></span><span class="insert2">&nbsp;LETTER&nbsp;</span><span class="insert3">DOTLESS&nbsp;</span><span class="insert2">I</span><span class="insert2"><span class="delete3">&nbsp;WITH DOT ABOVE</span></span><span class="insert2">, and the&nbsp;</span><span class="insert3">case 
+folded</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;upper 
+case</span></span><span class="insert2">&nbsp;equivalent of LATIN&nbsp;</span><span class="insert3">CAPITAL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;SMALL</span></span><span class="insert2">&nbsp;LETTER&nbsp;</span><span class="insert2"><span class="delete3">DOTLESS&nbsp;</span></span><span class="insert2">I</span><span class="insert3">&nbsp;WITH DOT ABOVE</span><span class="insert2">&nbsp;is LATIN&nbsp;</span><span class="insert3">SMALL</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;CAPITAL</span></span><span class="insert2">&nbsp;LETTER I. Take for instance the following identifier (which is the name 
+of a city on the Tigris river in Eastern Anatolia):</span></div>
+<div class="paranum"><a name="p6.b">6.b/3</a></div>
+<div class="SmallExamples"><span class="insert2"></span><span class="insert3">D&#0304;YARBAKIR</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;diyarbak&#0305;r</span></span><span class="insert2">&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;first&nbsp;i&nbsp;is&nbsp;dotted,&nbsp;the&nbsp;second&nbsp;isn't.</I></SPAN></span></div>
+<div class="paranum"><a name="p6.c">6.c/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"></span><span class="insert3">A 
+Turkish reader would expect that the above identifier is equivalent to</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Locale-independent 
+conversion to upper case results in</span></span><span class="insert2">:</span> 
+</div>
+<div class="paranum"><a name="p6.d">6.d/3</a></div>
+<div class="SmallExamples"><span class="insert2"></span><span class="insert3">diyarbak&#0305;r</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;DIYARBAKIR&nbsp;--&nbsp;<SPAN Class="roman"><I>Both&nbsp;Is&nbsp;are&nbsp;dotless.</I></SPAN></span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p6.d.1">6.d.1/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">However, 
+locale-independent simple case folding (and thus Ada) maps this to:</span> 
+</div>
+<div class="paranum"><a name="p6.d.2">6.d.2/3</a></div>
+<div class="SmallExamples"><span class="insert3">d&#0304;yarbakir</span></div>
+<div class="paranum"><a name="p6.e">6.e/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"></span><span class="insert3">which 
+is different from any of the following identifiers</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;This 
+means that the four following sequences of characters represent the same 
+identifier, even though for a locutor of Turkish they would probably 
+be considered distinct words</span></span><span class="insert2">:</span> 
+</div>
+<div class="paranum"><a name="p6.f">6.f/2</a></div>
+<div class="SmallExamples"><span class="insert2">diyarbakir<BR>
+diyarbak&#0305;r<BR>
+d&#0305;yarbakir<BR>
+d&#0305;yarbak&#0305;r</span></div>
+<div class="paranum"><a name="p6.f.1">6.f.1/3</a></div>
+<div class="Annotations"><span class="insert3">including the &ldquo;correct&rdquo; 
+matching identifier for Turkish. Upper case conversion (used in '[Wide_]Wide_Image) 
+introduces additional problems.</span></div>
+<div class="paranum"><a name="p6.g">6.g/3</a></div>
+<div class="Annotations"><span class="insert2">An implementation targeting 
+the Turkish market is allowed (in fact, expected) to provide a nonstandard 
+mode where case folding is appropriate for Turkish.</span><span class="insert2"><span class="delete3">&nbsp;This would cause the original identifier to be converted to:</span></span><span class="insert2"></span> 
+</div>
+<div class="paranum"><a name="p6.h">6.h/3</a></div>
+<div class="SmallExamples"><span class="insert2"></span><span class="insert2"><span class="delete3">D&#0304;YARBAKIR&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;first&nbsp;I&nbsp;is&nbsp;dotted,&nbsp;the&nbsp;second&nbsp;isn't.</I></SPAN></span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p6.i">6.i/3</a></div>
+<div class="Annotations"><span class="insert2"></span><span class="insert2"><span class="delete3">and 
+the four sequences of characters shown above would represent four distinct 
+identifiers.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p6.j">6.j/2</a></div>
+<div class="Annotations"><span class="insert2">Lithuanian and Azeri are 
+two other languages that present similar idiosyncrasies.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p6.1">6.1/2</a></div>
+<div class="Notes">3&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">Identifier</A></SPAN>s 
+differing only in the use of corresponding upper and lower case letters 
+are considered the same.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of identifiers:</I> 
+</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;Get_Symbol&nbsp;&nbsp;&nbsp;Ethelyn&nbsp;&nbsp;&nbsp;Marion<BR>
+Snobol_4&nbsp;&nbsp;&nbsp;X1&nbsp;&nbsp;&nbsp;Page_Count&nbsp;&nbsp;&nbsp;Store_Next_Item<span class="insert2"><BR>
+&#928;&#955;&#940;&#964;&#969;&#957;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Plato</I></SPAN><BR>
+&#1063;&#1072;&#1081;&#1082;&#1086;&#1074;&#1089;&#1082;&#1080;&#1081;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Tchaikovsky</I></SPAN><BR>
+&#952;&nbsp;&nbsp;&#966;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Angles</I></SPAN></span></div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations">We no longer include reserved words as <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s. 
+This is not a language change. In Ada 83, <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+included reserved words. However, this complicated several other rules 
+(for example, regarding implementation-defined attributes and pragmas, 
+etc.). We now explicitly allow certain reserved words for attribute designators, 
+to make up for the loss.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Because syntax rules are 
+relevant to overload resolution, it means that if it looks like a reserved 
+word, it is not an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
+As a side effect, implementations cannot use reserved words as implementation-defined 
+attributes or pragma names.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p8.c">8.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"><A NAME="I1306"></A>An <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+can use any letter defined by ISO-10646:2003, along with several other 
+categories. This should ease programming in languages other than English.</span> 
+</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p8.d">8.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0091-1.TXT">AI05-0091-1</A></I>} 
+<span class="insert3"><A NAME="I1307"></A><B>Correction:</B> <SPAN Class="swiss">other_format</SPAN> 
+characters were removed from identifiers as the Unicode recommendations 
+have changed. This change can only affect programs written for the original 
+Ada 2005, so there should be few such programs.</span></div>
+<div class="paranum"><a name="p8.e">8.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0227-1.TXT">AI05-0227-1</A></I>} 
+<span class="insert3"><B>Correction:</B> We now specify simple case folding 
+rather than full case folding. That potentially could change identifier 
+equivalence, although it is more likely that identifiers that are considered 
+the same in original Ada 2005 will now be considered different. This 
+change was made because the original Ada 2005 definition was incompatible 
+(and even inconsistent in unusual cases) with the Ada 95 identifier equivalence 
+rules. As such, the Ada 2005 rules were rarely fully implemented, and 
+in any case, only Ada 2005 identifiers containing wide characters could 
+be affected.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

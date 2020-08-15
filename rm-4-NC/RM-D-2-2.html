@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Task Dispatching Pragmas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.2 Task Dispatching Pragmas</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">This subclause allows a single task dispatching policy 
+to be defined for all priorities, or the range of priorities to be split 
+into subranges that are assigned individual dispatching policies.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Task_Dispatching_Policy is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7784"></A><A NAME="I7785"></A>Task_Dispatching_Policy(<I>policy_</I><A NAME="I7786"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3.2">3.2/2</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7787"></A><A NAME="I7788"></A>Priority_Specific_Dispatching 
+(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>policy_</I><A NAME="I7789"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+<I>first_priority_</I><A NAME="I7790"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+<I>last_priority_</I><A NAME="I7791"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3.3">3.3/2</a></div>
+<div class="Normal">&nbsp;The expected type for <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is Integer.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+used in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Task_Dispatching_Policy shall be the name of a task dispatching policy. 
+</div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Normal">&nbsp;The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+used in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching shall be the name of a task dispatching 
+policy.</div>
+<div class="paranum"><a name="p4.2">4.2/2</a></div>
+<div class="Normal">&nbsp;Both <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+shall be static expressions in the range of System.Any_Priority; <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+shall have a value greater than or equal to <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4.3">4.3/2</a></div>
+<div class="Normal">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN> 
+Task_Dispatching_Policy specifies the single task dispatching policy.</div>
+<div class="paranum"><a name="p4.4">4.4/2</a></div>
+<div class="Normal">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN> 
+Priority_Specific_Dispatching specifies the task dispatching policy for 
+the specified range of priorities. Tasks with base priorities within 
+the range of priorities specified in a Priority_Specific_Dispatching 
+pragma have their active priorities determined according to the specified 
+dispatching policy. Tasks with active priorities within the range of 
+priorities specified in a Priority_Specific_Dispatching pragma are dispatched 
+according to the specified dispatching policy.&nbsp;</div>
+<div class="paranum"><a name="p4.5">4.5/3</a></div>
+<div class="Normal">&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
+pragmas, the dispatching policy for priorities not covered by any Priority_Specific_Dispatching 
+pragmas is FIFO_Within_Priorities.</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal"><A NAME="I7792"></A><A NAME="I7793"></A>A Task_Dispatching_Policy 
+pragma is a configuration pragma. A Priority_Specific_Dispatching pragma 
+is a configuration pragma. <A NAME="I7794"></A><A NAME="I7795"></A></div>
+<div class="paranum"><a name="p5.1">5.1/2</a></div>
+<div class="Normal">&nbsp;The priority ranges specified in more than one Priority_Specific_Dispatching 
+pragma within the same partition shall not be overlapping.</div>
+<div class="paranum"><a name="p5.2">5.2/2</a></div>
+<div class="Normal">&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
+pragmas it shall not contain a Task_Dispatching_Policy pragma.</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><A NAME="I7796"></A>A <I>task dispatching policy</I> 
+specifies the details of task dispatching that are not covered by the 
+basic task dispatching model. These rules govern when tasks are inserted 
+into and deleted from the ready queues. A single task dispatching policy 
+is specified by a Task_Dispatching_Policy pragma. Pragma Priority_Specific_Dispatching 
+assigns distinct dispatching policies to subranges of System.Any_Priority.</div>
+<div class="paranum"><a name="p7.1">7.1/2</a></div>
+<div class="Normal">&nbsp;<A NAME="I7797"></A>If neither <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+applies to any of the program units comprising a partition, the task 
+dispatching policy for that partition is unspecified.</div>
+<div class="paranum"><a name="p7.2">7.2/3</a></div>
+<div class="Normal">&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
+pragmas, a task dispatching point occurs for the currently running task 
+of a processor whenever there is a nonempty ready queue for that processor 
+with a higher priority than the priority of the running task.</div>
+<div class="paranum"><a name="p7.3">7.3/2</a></div>
+<div class="Normal">&nbsp;A task that has its base priority changed may move 
+from one dispatching policy to another. It is immediately subject to 
+the new dispatching policy.</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 7 through 
+13 were moved to D.2.3.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p14.1">14.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;An implementation shall allow, for a single partition, 
+both the locking policy (see <A HREF="RM-D-3.html">D.3</A>) to be specified 
+as Ceiling_Locking and also one or more Priority_Specific_Dispatching 
+pragmas to be given.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 14 through 
+16 were moved to D.2.3.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Normal">Implementations are allowed to define other task 
+dispatching policies, but need not support more than one task dispatching 
+policy per partition.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal">An implementation need not support <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Priority_Specific_Dispatching if it is infeasible to support it in the 
+target environment.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>Paragraphs 19 through 
+21 were deleted.</I></SPAN>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

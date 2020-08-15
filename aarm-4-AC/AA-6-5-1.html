@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Nonreturning Procedures</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.5.1 <span class="insert3">Nonreturning Procedures</span><span class="delete3"><span class="insert2">Pragma No_Return</span></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert2"></span><span class="insert3">Specifying aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;A 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span></span><span class="insert2">&nbsp;No_Return&nbsp;</span><span class="insert3">to have the value True&nbsp;</span><span class="insert2">indicates 
+that a procedure cannot return normally[; it may propagate an exception 
+or loop forever].</span>&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span><span class="insert3">Aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;Pragma</A></SPAN></span></span><span class="insert2">&nbsp;No_Deposit<A NAME="I3995"></A> will have to wait for Ada&nbsp;</span><span class="insert3">2020</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;2017</span></span><span class="insert2">. 
+:-)</span>&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+2 and 3 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert2"></span><span class="insert2"><span class="delete3">The 
+form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+No_Return, which is a representation pragma (see <A HREF="AA-13-1.html">13.1</A>), 
+is as follows:</span></span><span class="insert2"></span>&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<span class="insert2"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
+<A NAME="I3996"></A><A NAME="I3997"></A>No_Return(<I>procedure_</I><A NAME="I3998"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>{, 
+<I>procedure_</I><A NAME="I3999"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>});</span></span><span class="insert2"></span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">For a procedure or generic procedure, the following 
+language-defined representation aspect may be specified:</span>&nbsp;</div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert3">No_Return</span></div><div class="WideHanging-Body">
+<span class="insert3">The type of aspect No_Return is Boolean. When aspect 
+No_Return is True for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I4000"></A><A NAME="I4001"></A><A NAME="I4002"></A></span></div>
+<div class="paranum"><a name="p3.3">3.3/3</a></div>
+<div class="WideHanging-Body"><span class="insert3">If directly specified, 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0309">aspect_definition</A></SPAN> 
+shall be a static expression. [This aspect is never inherited;] if not 
+directly specified, the aspect is False.</span></div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert3"><B>No_Return:&nbsp;</B></span><span class="insert3">A 
+procedure will not return normally.</span></div>
+<div class="paranum"><a name="p3.4">3.4/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">If a generic procedure is nonreturning, then so 
+are its instances. If a procedure declared within a generic unit is nonreturning, 
+then so are the corresponding copies of that procedure in instances.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert2"></span><span class="insert3">Aspect No_Return</span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4003"></A> Each 
+<I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN> 
+shall denote one or more procedures or generic procedures; the denoted 
+entities are <I>nonreturning</I>. The <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN></span></span><span class="insert2">&nbsp;shall not&nbsp;</span><span class="insert3">be specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;denote</span></span><span class="insert2">&nbsp;a null procedure nor an instance of a generic unit.</span></div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>A null 
+procedure cannot have the appropriate nonreturning semantics, as it does 
+not raise an exception or loop forever.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert2">The procedure can be abstract.</span><span class="insert2"><span class="delete3">&nbsp;The denoted declaration can be a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0199">renaming_declaration</A></SPAN> 
+if it obeys the usual rules for representation pragmas: the renaming 
+has to occur immediately within the same declarative region as the renamed 
+subprogram.</span></span><span class="insert2">&nbsp;If a nonreturning procedure 
+is renamed (anywhere) calls through the new name still have the nonreturning 
+semantics.</span>&nbsp;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2">A return statement shall not apply to a nonreturning 
+procedure or generic procedure.</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2">A procedure shall be nonreturning if it overrides 
+a dispatching nonreturning procedure. <A NAME="I4004"></A>In addition 
+to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit.</span></div>
+<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This ensures 
+that dispatching calls to nonreturning procedures will, in fact, not 
+return.</span>&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2">If a renaming-as-body completes a nonreturning 
+procedure declaration, then the renamed procedure shall be nonreturning.</span></div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This ensures 
+that no extra code is needed to implement the renames (that is, no wrapper 
+is needed) as the body has the same property.</span>&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
+8 was deleted.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert2"></span><span class="insert2"><span class="delete3">If 
+a generic procedure is nonreturning, then so are its instances. If a 
+procedure declared within a generic unit is nonreturning, then so are 
+the corresponding copies of that procedure in instances.</span></span><span class="insert2"></span> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2">If the body of a nonreturning procedure completes 
+normally, Program_Error is raised at the point of the call. <A NAME="I4005"></A></span></div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>Note 
+that there is no name for suppressing this check, since the check represents 
+a bug, imposes no time overhead, and minimal space overhead (since it 
+can usually be statically eliminated as dead code).</span>&nbsp;</div>
+<div class="paranum"><a name="p9.b">9.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Note: 
+</B>If a nonreturning procedure tries to return, we raise Program_Error. 
+This is stated as happening at the call site, because we do not wish 
+to allow the procedure to handle the exception (and then, perhaps, try 
+to return again!). However, the expected run-time model is that the compiler 
+will generate <B>raise</B> Program_Error at the end of the procedure 
+body (but not handleable by the procedure itself), as opposed to doing 
+it at the call site. (This is just like the typical run-time model for 
+functions that fall off the end without returning a value). The reason 
+is indirect calls: in P.<B>all</B>(...);, the compiler cannot know whether 
+P designates a nonreturning procedure or a normal one. Putting the <B>raise</B> 
+Program_Error in the procedure's generated code solves this problem neatly.</span></div>
+<div class="paranum"><a name="p9.c">9.c/2</a></div>
+<div class="Annotations"><span class="insert2">Similarly, if one passes 
+a nonreturning procedure to a generic formal parameter, the compiler 
+cannot know this at call sites (in shared code implementations); the 
+raise-in-body solution deals with this neatly.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert2"><B>procedure</B>&nbsp;Fail(Msg&nbsp;:&nbsp;String)</span><span class="insert2"><span class="delete3">;</span></span><span class="insert2">&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;raises&nbsp;Fatal_Error&nbsp;exception</I></SPAN><BR>
+</span><span class="insert3">&nbsp;&nbsp;&nbsp;<B>with</B></span><span class="insert2"></span><span class="insert2"><span class="delete3"><B>&nbsp;pragma</B></span></span><span class="insert2">&nbsp;No_Return</span><span class="insert2"><span class="delete3">(Fail)</span></span><span class="insert2">;<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Inform&nbsp;compiler&nbsp;and&nbsp;reader&nbsp;that&nbsp;procedure&nbsp;never&nbsp;returns&nbsp;normally</I></SPAN></span></div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p10.a">10.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
+<span class="insert2"><A NAME="I4006"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+No_Return is new.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p10.b">10.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"><A NAME="I4007"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+No_Return is now obsolescent.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

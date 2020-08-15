@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Formal Parameter Modes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.2 Formal Parameter Modes</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0160">parameter_specification</A></SPAN> 
+declares a formal parameter of mode <B>in</B>, <B>in out</B>, or <B>out</B>.] 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I3387"></A><A NAME="I3388"></A><A NAME="I3389"></A><A NAME="I3390"></A><A NAME="I3391"></A><A NAME="I3392"></A>A 
+parameter is passed either <I>by copy</I> or <I>by reference</I>. [When 
+a parameter is passed by copy, the formal parameter denotes a separate 
+object from the actual parameter, and any information transfer between 
+the two occurs only before and after executing the subprogram. When a 
+parameter is passed by reference, the formal parameter denotes (a view 
+of) the object denoted by the actual parameter; reads and updates of 
+the formal parameter directly reference the actual parameter object.]</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3393"></A>A type is a <I>by-copy type</I> 
+if it is an elementary type, or if it is a descendant of a private type 
+whose full type is a by-copy type. A parameter of a by-copy type is passed 
+by copy.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3394"></A>A 
+type is a <I>by-reference type</I> if it is a descendant of one of the 
+following:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">a tagged type;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a task or protected type;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">a nonprivate type with the reserved word <B>limited</B> 
+in its declaration;&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A limited private type 
+is by-reference only if it falls under one of the other categories.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">a composite type with a subcomponent of a by-reference 
+type;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">a private type whose full type is a by-reference 
+type.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">A parameter of a by-reference type is passed by reference. 
+<A NAME="I3395"></A>Each value of a by-reference type has an associated 
+object. For a parenthesized expression, <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-4-6.html#S0127">type_conversion</A></SPAN>, 
+this object is the one associated with the operand.</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>By-reference parameter 
+passing makes sense only if there is an object to reference; hence, we 
+define such an object for each case.</div>
+<div class="paranum"><a name="p10.b">10.b</a></div>
+<div class="Annotations">Since tagged types are by-reference types, this 
+implies that every value of a tagged type has an associated object. This 
+simplifies things, because we can define the tag to be a property of 
+the object, and not of the value of the object, which makes it clearer 
+that object tags never change.</div>
+<div class="paranum"><a name="p10.c">10.c</a></div>
+<div class="Annotations">We considered simplifying things even more by 
+making every value (and therefore every expression) have an associated 
+object. After all, there is little semantic difference between a constant 
+object and a value. However, this would cause problems for untagged types. 
+In particular, we would have to do a constraint check on every read of 
+a type conversion (or a renaming thereof) in certain cases.</div>
+<div class="paranum"><a name="p10.d">10.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+We do not want this definition to depend on the view of the type; privateness 
+is essentially ignored for this definition. Otherwise, things would be 
+confusing (does the rule apply at the call site, at the site of the declaration 
+of the subprogram, at the site of the <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0169">&nbsp;return_statement</A></SPAN></span>?), 
+and requiring different calls to use different mechanisms would be an 
+implementation burden.</div>
+<div class="paranum"><a name="p10.e">10.e</a></div>
+<div class="Annotations"><A HREF="AA-C-6.html">C.6</A>, &ldquo;<A HREF="AA-C-6.html">Shared 
+Variable Control</A>&rdquo; says that a composite type with an atomic 
+or volatile subcomponent is a by-reference type, among other things.</div>
+<div class="paranum"><a name="p10.f">10.f</a></div>
+<div class="Annotations"><A NAME="I3396"></A>Every value of a limited 
+by-reference type is the value of one and only one limited object. The 
+<I>associated object</I> of a value of a limited by-reference type is 
+the object whose value it represents. <A NAME="I3397"></A>Two values 
+of a limited by-reference type are the <I>same</I> if and only if they 
+represent the value of the same object.</div>
+<div class="paranum"><a name="p10.g">10.g</a></div>
+<div class="Annotations">We say &ldquo;by-reference&rdquo; above because 
+these statements are not always true for limited private types whose 
+underlying type is nonlimited (unfortunately).&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I3398"></A>For parameters of other types, 
+it is unspecified whether the parameter is passed by copy or by reference. 
+</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There is no need to incorporate 
+the discussion of AI83-00178, which requires pass-by-copy for certain 
+kinds of actual parameters, while allowing pass-by-reference for others. 
+This is because we explicitly indicate that a function creates an anonymous 
+constant object for its result, unless the type is a return-by-reference 
+type (see <A HREF="AA-6-5.html">6.5</A>). We also provide a special dispensation 
+for instances of Unchecked_Conversion to return by reference, even if 
+the result type is not a return-by-reference type (see <A HREF="AA-13-9.html">13.9</A>). 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I3399"></A><A NAME="I3400"></A><A NAME="I3401"></A><A NAME="I3402"></A>If 
+one <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> denotes 
+a part of a formal parameter, and a second <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+denotes a part of a distinct formal parameter or an object that is not 
+part of a formal parameter, then the two <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+are considered <I>distinct access paths</I>. If an object is of a type 
+for which the parameter passing mechanism is not specified, then it is 
+a bounded error to assign to the object via one access path, and then 
+read the value of the object via a distinct access path, unless the first 
+access path denotes a part of a formal parameter that no longer exists 
+at the point of the second access [(due to leaving the corresponding 
+callable construct).] <A NAME="I3403"></A>The possible consequences are 
+that Program_Error is raised, or the newly assigned value is read, or 
+some old value of the object is read.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, if we call &ldquo;P(X 
+=&gt; Global_Variable, Y =&gt; Global_Variable)&rdquo;, then within P, 
+the names &ldquo;X&rdquo;, &ldquo;Y&rdquo;, and &ldquo;Global_Variable&rdquo; 
+are all distinct access paths. If Global_Variable's type is neither pass-by-copy 
+nor pass-by-reference, then it is a bounded error to assign to Global_Variable 
+and then read X or Y, since the language does not specify whether the 
+old or the new value would be read. On the other hand, if Global_Variable's 
+type is pass-by-copy, then the old value would always be read, and there 
+is no error. Similarly, if Global_Variable's type is defined by the language 
+to be pass-by-reference, then the new value would always be read, and 
+again there is no error.&nbsp;</div>
+<div class="paranum"><a name="p12.b">12.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We are saying <I>assign</I> here, 
+not <I>update</I>, because updating any subcomponent is considered to 
+update the enclosing object.</div>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations">The &ldquo;still exists&rdquo; part is so that 
+a read after the subprogram returns is OK.</div>
+<div class="paranum"><a name="p12.d">12.d</a></div>
+<div class="Annotations">If the parameter is of a by-copy type, then 
+there is no issue here &mdash; the formal is not a view of the actual. 
+If the parameter is of a by-reference type, then the programmer may depend 
+on updates through one access path being visible through some other access 
+path, just as if the parameter were of an access type.&nbsp;</div>
+<div class="paranum"><a name="p12.e">12.e</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The implementation 
+can keep a copy in a register of a parameter whose parameter-passing 
+mechanism is not specified. If a different access path is used to update 
+the object (creating a bounded error situation), then the implementation 
+can still use the value of the register, even though the in-memory version 
+of the object has been changed. However, to keep the error properly bounded, 
+if the implementation chooses to read the in-memory version, it has to 
+be consistent -- it cannot then assume that something it has proven about 
+the register is true of the memory location. For example, suppose the 
+formal parameter is L, the value of L(6) is now in a register, and L(6) 
+is used in an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
+as in &ldquo;A(L(6)) := 99;&rdquo;, where A has bounds 1..3. If the implementation 
+can prove that the value for L(6) in the register is in the range 1..3, 
+then it need not perform the constraint check if it uses the register 
+value. However, if the memory value of L(6) has been changed to 4, and 
+the implementation uses that memory value, then it had better not alter 
+memory outside of A.</div>
+<div class="paranum"><a name="p12.f">12.f</a></div>
+<div class="Annotations">Note that the rule allows the implementation 
+to pass a parameter by reference and then keep just part of it in a register, 
+or, equivalently, to pass part of the parameter by reference and another 
+part by copy.&nbsp;</div>
+<div class="paranum"><a name="p12.g">12.g</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>We 
+do not want to go so far as to say that the mere presence of aliasing 
+is wrong. We wish to be able to write the following sorts of things in 
+standard Ada:&nbsp;</div>
+<div class="paranum"><a name="p12.h">12.h</a></div>
+<div class="SmallExamples"><B>procedure</B>&nbsp;Move&nbsp;(&nbsp;Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drop&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Truncation&nbsp;:=&nbsp;Error;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Justify&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Alignment&nbsp;&nbsp;:=&nbsp;Left;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pad&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Character&nbsp;&nbsp;:=&nbsp;Space);<BR>
+--<SPAN Class="roman"><I>&nbsp;Copies&nbsp;elements&nbsp;from&nbsp;Source&nbsp;to&nbsp;Target&nbsp;(safely&nbsp;if&nbsp;they&nbsp;overlap)</I></SPAN></div>
+<div class="paranum"><a name="p12.i">12.i</a></div>
+<div class="Annotations">This is from the standard string handling package. 
+It would be embarrassing if this couldn't be written in Ada!</div>
+<div class="paranum"><a name="p12.j">12.j</a></div>
+<div class="Annotations">The &ldquo;then&rdquo; before &ldquo;read&rdquo; 
+in the rule implies that the implementation can move a read to an earlier 
+place in the code, but not to a later place after a potentially aliased 
+assignment. Thus, if the subprogram reads one of its parameters into 
+a local variable, and then updates another potentially aliased one, the 
+local copy is safe &mdash; it is known to have the old value. For example, 
+the above-mentioned Move subprogram can be implemented by copying Source 
+into a local variable before assigning into Target.</div>
+<div class="paranum"><a name="p12.k">12.k</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">For an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0137">assignment_statement</A></SPAN> 
+assigning one array parameter to another, the implementation has to check 
+which direction to copy at run time, in general, in case the actual parameters 
+are overlapping slices. For example:&nbsp;</div>
+<div class="paranum"><a name="p12.l">12.l</a></div>
+<div class="SmallExamples"><B>procedure</B>&nbsp;Copy(X&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;String;&nbsp;Y:&nbsp;String)&nbsp;<B>is</B><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:=&nbsp;Y;<BR>
+<B>end</B>&nbsp;Copy;</div>
+<div class="paranum"><a name="p12.m">12.m</a></div>
+<div class="Annotations">It would be wrong for the compiler to assume 
+that X and Y do not overlap (unless, of course, it can prove otherwise). 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">5&nbsp;&nbsp;A formal parameter of mode <B>in</B> 
+is a constant view (see <A HREF="AA-3-3.html">3.3</A>); it cannot be 
+updated within the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0162">subprogram_body</A></SPAN>.</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><A NAME="I3404"></A>The value of an <B>out</B> 
+parameter may be read. An <B>out</B> parameter is treated like a declared 
+variable without an explicit initial expression.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p13.b">13.b</a></div>
+<div class="Annotations">Discussion of copy-in for parts of out parameters 
+is now covered in <A HREF="AA-6-4-1.html">6.4.1</A>, &ldquo;<A HREF="AA-6-4-1.html">Parameter 
+Associations</A>&rdquo;.</div>
+<div class="paranum"><a name="p13.c">13.c</a></div>
+<div class="Annotations">The concept of a by-reference type is new to 
+Ada 95.</div>
+<div class="paranum"><a name="p13.d">13.d</a></div>
+<div class="Annotations">We now cover in a general way in <A HREF="AA-3-7-2.html">3.7.2</A> 
+the rule regarding erroneous execution when a discriminant is changed 
+and one of the parameters depends on the discriminant.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

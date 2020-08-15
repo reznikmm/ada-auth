@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Identifiers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.3 Identifiers</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">Identifier</A></SPAN>s 
+are used as names.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<SPAN Class="swiss">identifier</SPAN><A NAME="I1217"></A><A NAME="S0002"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I1218"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0003">identifier_start</A></SPAN>&nbsp;{<A NAME="I1219"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0003">identifier_start</A></SPAN>&nbsp;|&nbsp;<A NAME="I1220"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0005">identifier_extend</A></SPAN>}</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<SPAN Class="swiss">identifier_start</SPAN><A NAME="I1221"></A><A NAME="S0003"></A><A NAME="S0004"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1222"></A><SPAN Class="swiss">letter_uppercase</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1223"></A><SPAN Class="swiss">letter_lowercase</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1224"></A><SPAN Class="swiss">letter_titlecase</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1225"></A><SPAN Class="swiss">letter_modifier</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1226"></A><SPAN Class="swiss">letter_other</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1227"></A><SPAN Class="swiss">number_letter</SPAN></div>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<SPAN Class="swiss">identifier_extend</SPAN><A NAME="I1228"></A><A NAME="S0005"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1229"></A><SPAN Class="swiss">mark_non_spacing</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1230"></A><SPAN Class="swiss">mark_spacing_combining</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1231"></A><SPAN Class="swiss">number_decimal</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1232"></A><SPAN Class="swiss">punctuation_connector</SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1233"></A><SPAN Class="swiss">other_format</SPAN></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+After eliminating the characters in category <SPAN Class="swiss">other_format</SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall not contain two consecutive characters in category punctuation_connector, 
+or end with a character in that category.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This rule was stated in the syntax 
+in Ada 95, but that has gotten too complex in Ada 2005. Since <SPAN Class="swiss">other_format</SPAN> 
+characters usually do not display, we do not want to count them as separating 
+two underscores.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+Two <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+are considered the same if they consist of the same sequence of characters 
+after applying the following transformations (in this order):&nbsp;</div>
+<div class="paranum"><a name="p5.1">5.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+The characters in category <SPAN Class="swiss">other_format</SPAN> are 
+eliminated.</div>
+<div class="paranum"><a name="p5.2">5.2/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+The remaining sequence of characters is converted to upper case. <A NAME="I1234"></A></div>
+<div class="paranum"><a name="p5.3">5.3/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+After applying these transformations, an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall not be identical to a reserved word (in upper case).&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>We match the reserved 
+words after doing these transformations so that the rules for <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+and reserved words are the same. (This allows <SPAN Class="swiss">other_format</SPAN> 
+characters, which usually don't display, in a reserved word without changing 
+it to an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.) 
+Since a compiler usually will lexically process <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+and reserved words the same way (often with the same code), this will 
+prevent a lot of headaches.&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The rules for reserved 
+words differ in one way: they define case conversion on letters rather 
+than sequences. This means that some unusual sequences are neither <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+nor reserved words. For instance, &ldquo;&#0305;f&rdquo; and &ldquo;acce&szlig;&rdquo; 
+have upper case conversions of &ldquo;IF&rdquo; and &ldquo;ACCESS&rdquo; 
+respectively. These are not <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s, 
+because the transformed values are identical to a reserved word. But 
+they are not reserved words, either, because the original values do not 
+match any reserved word as defined or with any number of characters of 
+the reserved word in upper case. Thus, these odd constructions are just 
+illegal, and should not appear in the source of a program.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">In a nonstandard mode, an implementation may support 
+other upper/lower case equivalence rules for <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s[, 
+to accommodate local conventions].&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+For instance, in most languages, the uppercase equivalent of LATIN SMALL 
+LETTER I (a lower case letter with a dot above) is LATIN CAPITAL LETTER 
+I (an upper case letter without a dot above). In Turkish, though, LATIN 
+SMALL LETTER I and LATIN SMALL LETTER DOTLESS I are two distinct letters, 
+so the upper case equivalent of LATIN SMALL LETTER I is LATIN CAPITAL 
+LETTER I WITH DOT ABOVE, and the upper case equivalent of LATIN SMALL 
+LETTER DOTLESS I is LATIN CAPITAL LETTER I. Take for instance the following 
+identifier (which is the name of a city on the Tigris river in Eastern 
+Anatolia):</div>
+<div class="paranum"><a name="p6.b">6.b/2</a></div>
+<div class="SmallExamples">diyarbak&#0305;r&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;first&nbsp;i&nbsp;is&nbsp;dotted,&nbsp;the&nbsp;second&nbsp;isn't.</I></SPAN></div>
+<div class="paranum"><a name="p6.c">6.c/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Locale-independent 
+conversion to upper case results in:&nbsp;</div>
+<div class="paranum"><a name="p6.d">6.d/2</a></div>
+<div class="SmallExamples">DIYARBAKIR&nbsp;--&nbsp;<SPAN Class="roman"><I>Both&nbsp;Is&nbsp;are&nbsp;dotless.</I></SPAN></div>
+<div class="paranum"><a name="p6.e">6.e/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">This means that 
+the four following sequences of characters represent the same identifier, 
+even though for a locutor of Turkish they would probably be considered 
+distinct words:&nbsp;</div>
+<div class="paranum"><a name="p6.f">6.f/2</a></div>
+<div class="SmallExamples">diyarbakir<BR>
+diyarbak&#0305;r<BR>
+d&#0305;yarbakir<BR>
+d&#0305;yarbak&#0305;r</div>
+<div class="paranum"><a name="p6.g">6.g/2</a></div>
+<div class="Annotations">An implementation targeting the Turkish market 
+is allowed (in fact, expected) to provide a nonstandard mode where case 
+folding is appropriate for Turkish. This would cause the original identifier 
+to be converted to:&nbsp;</div>
+<div class="paranum"><a name="p6.h">6.h/2</a></div>
+<div class="SmallExamples">D&#0304;YARBAKIR&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;first&nbsp;I&nbsp;is&nbsp;dotted,&nbsp;the&nbsp;second&nbsp;isn't.</I></SPAN></div>
+<div class="paranum"><a name="p6.i">6.i/2</a></div>
+<div class="Annotations">and the four sequences of characters shown above 
+would represent four distinct identifiers.</div>
+<div class="paranum"><a name="p6.j">6.j/2</a></div>
+<div class="Annotations">Lithuanian and Azeri are two other languages 
+that present similar idiosyncrasies.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p6.1">6.1/2</a></div>
+<div class="Notes">3&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">Identifier</A></SPAN>s 
+differing only in the use of corresponding upper and lower case letters 
+are considered the same.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of identifiers:</I> 
+</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;Get_Symbol&nbsp;&nbsp;&nbsp;Ethelyn&nbsp;&nbsp;&nbsp;Marion<BR>
+Snobol_4&nbsp;&nbsp;&nbsp;X1&nbsp;&nbsp;&nbsp;Page_Count&nbsp;&nbsp;&nbsp;Store_Next_Item<BR>
+&#928;&#955;&#940;&#964;&#969;&#957;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Plato</I></SPAN><BR>
+&#1063;&#1072;&#1081;&#1082;&#1086;&#1074;&#1089;&#1082;&#1080;&#1081;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Tchaikovsky</I></SPAN><BR>
+&#952;&nbsp;&nbsp;&#966;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Angles</I></SPAN></div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations">We no longer include reserved words as <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s. 
+This is not a language change. In Ada 83, <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+included reserved words. However, this complicated several other rules 
+(for example, regarding implementation-defined attributes and pragmas, 
+etc.). We now explicitly allow certain reserved words for attribute designators, 
+to make up for the loss.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Because syntax rules are 
+relevant to overload resolution, it means that if it looks like a reserved 
+word, it is not an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
+As a side effect, implementations cannot use reserved words as implementation-defined 
+attributes or pragma names.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p8.c">8.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1235"></A>An <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+can use any letter defined by ISO-10646:2003, along with several other 
+categories. This should ease programming in languages other than English. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

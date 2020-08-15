@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Accuracy Requirements for Complex Arithmetic</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-H.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>G.2.6 Accuracy Requirements for Complex Arithmetic</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In the strict mode, the performance of Numerics.Generic_Complex_Types 
+and Numerics.Generic_Complex_Elementary_Functions shall be as specified 
+here.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">When an exception is not raised, the result of evaluating 
+a real function of an instance <I>CT</I> of Numerics.Generic_Complex_Types 
+(i.e., a function that yields a value of subtype <I>CT</I>.Real'Base 
+or <I>CT</I>.Imaginary) belongs to a result interval defined as for a 
+real elementary function (see <A HREF="RM-G-2-4.html">G.2.4</A>).</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I6260"></A>When an exception is not raised, 
+each component of the result of evaluating a complex function of such 
+an instance, or of an instance of Numerics.Generic_Complex_Elementary_Functions 
+obtained by instantiating the latter with <I>CT</I> (i.e., a function 
+that yields a value of subtype <I>CT</I>.Complex), also belongs to a 
+<I>result interval</I>. The result intervals for the components of the 
+result are either defined by a <I>maximum relative error</I> bound or 
+by a <I>maximum box error</I> bound. <A NAME="I6261"></A>When the result 
+interval for the real (resp., imaginary) component is defined by maximum 
+relative error, it is defined as for that of a real function, relative 
+to the exact value of the real (resp., imaginary) part of the result 
+of the corresponding mathematical function. <A NAME="I6262"></A>When 
+defined by maximum box error, the result interval for a component of 
+the result is the smallest model interval of <I>CT</I>.Real that contains 
+all the values of the corresponding part of <SPAN Class="roman"><I>f</I></SPAN> 
+&middot; (1.0 + <SPAN Class="roman"><I>d</I></SPAN>), where <SPAN Class="roman"><I>f</I></SPAN> 
+is the exact complex value of the corresponding mathematical function 
+at the given parameter values, <SPAN Class="roman"><I>d</I></SPAN> is 
+complex, and |<SPAN Class="roman"><I>d</I></SPAN>| is less than or equal 
+to the given maximum box error. <A NAME="I6263"></A><A NAME="I6264"></A>The 
+function delivers a value that belongs to the result interval (or a value 
+both of whose components belong to their respective result intervals) 
+when both bounds of the result interval(s) belong to the safe range of 
+<I>CT</I>.Real; otherwise,&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted"><A NAME="I6265"></A>if <I>CT</I>.Real'Machine_Overflows 
+is True, the function either delivers a value that belongs to the result 
+interval (or a value both of whose components belong to their respective 
+result intervals) or raises Constraint_Error, signaling overflow;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">if <I>CT</I>.Real'Machine_Overflows is False, the 
+result is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The error bounds for particular complex functions 
+are tabulated below. In the table, the error bound is given as the coefficient 
+of <I>CT</I>.Real'Model_Epsilon.</div>
+<div class="paranum"><a name="p7">7/1</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN></div>
+<div class="Indented1"><TABLE frame="border" rules="all" border="2" cellpadding="4"><CAPTION><B>Error Bounds for Particular Complex Functions</B></CAPTION>
+<TR><TH align="center"><B>Function or Operator</B><TH align="center"><B>Nature 
+of <BR>
+Result</B><TH align="center"><B>Nature of <BR>
+Bound</B><TH align="center"><B>Error Bound</B>
+<TR><TD align="center">Modulus<TD align="center">real<TD align="center">max. 
+rel. error<TD align="center">3.0
+<TR><TD align="center">Argument<TD align="center">real<TD align="center">max. 
+rel. error<TD align="center">4.0
+<TR><TD align="center">Compose_From_Polar<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">3.0
+<TR><TD align="center">&quot;*&quot; (both operands complex)<TD align="center">complex<TD align="center">max. 
+box error<TD align="center">5.0
+<TR><TD align="center">&quot;/&quot; (right operand complex)<TD align="center">complex<TD align="center">max. 
+box error<TD align="center">13.0
+<TR><TD align="center">Sqrt<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">6.0
+<TR><TD align="center">Log<TD align="center">complex<TD align="center">max. 
+box error<TD align="center">13.0
+<TR><TD align="center">Exp (complex parameter)<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">7.0
+<TR><TD align="center">Exp (imaginary parameter)<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">2.0
+<TR><TD align="center">Sin, Cos, Sinh, and Cosh<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">11.0
+<TR><TD align="center">Tan, Cot, Tanh, and Coth<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">35.0
+<TR><TD align="center">inverse trigonometric<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">14.0
+<TR><TD align="center">inverse hyperbolic<TD align="center">complex<TD align="center">max. 
+rel. error<TD align="center">14.0
+</table></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The maximum relative error given above applies throughout 
+the domain of the Compose_From_Polar function when the Cycle parameter 
+is specified. When the Cycle parameter is omitted, the maximum relative 
+error applies only when the absolute value of the parameter Argument 
+is less than or equal to the angle threshold (see <A HREF="RM-G-2-4.html">G.2.4</A>). 
+For the Exp function, and for the forward hyperbolic (resp., trigonometric) 
+functions, the maximum relative error given above likewise applies only 
+when the absolute value of the imaginary (resp., real) component of the 
+parameter X (or the absolute value of the parameter itself, in the case 
+of the Exp function with a parameter of pure-imaginary type) is less 
+than or equal to the angle threshold. For larger angles, the accuracy 
+is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The prescribed results 
+specified in <A HREF="RM-G-1-2.html">G.1.2</A> for certain functions 
+at particular parameter values take precedence over the error bounds; 
+effectively, they narrow to a single value the result interval allowed 
+by the error bounds for a component of the result. Additional rules with 
+a similar effect are given below for certain inverse trigonometric and 
+inverse hyperbolic functions, at particular parameter values for which 
+a component of the mathematical result is transcendental. In each case, 
+the accuracy rule, which takes precedence over the error bounds, is that 
+the result interval for the stated result component is the model interval 
+of <I>CT</I>.Real associated with the component's exact mathematical 
+value. The cases in question are as follows:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">When the parameter X has the value zero, the real 
+(resp., imaginary) component of the result of the Arccot (resp., Arccoth) 
+function is in the model interval of <I>CT</I>.Real associated with the 
+value &pi;/2.0.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">When the parameter X has the value one, the real 
+component of the result of the Arcsin function is in the model interval 
+of <I>CT</I>.Real associated with the value &pi;/2.0.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">When the parameter X has the value &ndash;1.0, 
+the real component of the result of the Arcsin (resp., Arccos) function 
+is in the model interval of <I>CT</I>.Real associated with the value 
+&ndash;&pi;/2.0 (resp., &pi;).&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The amount by which a component of the result of 
+an inverse trigonometric or inverse hyperbolic function is allowed to 
+spill over into a quadrant adjacent to the one corresponding to the principal 
+branch, as given in <A HREF="RM-G-1-2.html">G.1.2</A>, is limited. The 
+rule is that the result belongs to the smallest model interval of <I>CT</I>.Real 
+that contains both boundaries of the quadrant corresponding to the principal 
+branch. This rule also takes precedence to the maximum error bounds, 
+effectively narrowing the result interval allowed by them.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">Finally, the results allowed by the error bounds 
+are narrowed by one further rule: The absolute value of each component 
+of the result of the Exp function, for a pure-imaginary parameter, never 
+exceeds one.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">The version of the Compose_From_Polar function without 
+a Cycle parameter should not be implemented by calling the corresponding 
+version with a Cycle parameter of 2.0*Numerics.Pi, since this will not 
+provide the required accuracy in some portions of the domain.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-H.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

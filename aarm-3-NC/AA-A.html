@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Predefined Language Environment</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Annex A</H1>
+<H2>(normative)</H2>
+<H1>Predefined Language Environment</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">[<A NAME="I5877"></A> 
+<A NAME="I5878"></A>This Annex contains the specifications of library 
+units that shall be provided by every implementation. There are three 
+root library units: Ada, Interfaces, and System; other library units 
+are children of these:]</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0047">8652/0047</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00081.TXT">AI95-00081-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00424.TXT">AI95-00424-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0137-1.TXT">AI05-0137-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0168-1.TXT">AI05-0168-1</A></I>} 
+&nbsp;<BR>
+&nbsp;</div>
+<div class="Indented1">[<SPAN STYLE="font-size: 80%">Standard&nbsp;&mdash;&nbsp;<A HREF="AA-A-1.html">A.1</A><BR>
+&nbsp;&nbsp;Ada&nbsp;&mdash;&nbsp;<A HREF="AA-A-2.html">A.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Assertions&nbsp;&mdash;&nbsp;<A HREF="AA-11-4-2.html">11.4.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Asynchronous_Task_Control&nbsp;&mdash;&nbsp;<A HREF="AA-D-11.html">D.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Calendar&nbsp;&mdash;&nbsp;<A HREF="AA-9-6.html">9.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arithmetic&nbsp;&mdash;&nbsp;<A HREF="AA-9-6-1.html">9.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formatting&nbsp;&mdash;&nbsp;<A HREF="AA-9-6-1.html">9.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zones&nbsp;&mdash;&nbsp;<A HREF="AA-9-6-1.html">9.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Characters&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-1.html">A.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conversions&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-4.html">A.3.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-2.html">A.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latin_1&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-3.html">A.3.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Command_Line&nbsp;&mdash;&nbsp;<A HREF="AA-A-15.html">A.15</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Complex_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-3.html">G.1.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Containers&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-1.html">A.18.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Doubly_Linked_Lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-20.html">A.18.20</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-21.html">A.18.21</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-23.html">A.18.23</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-25.html">A.18.25</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-22.html">A.18.22</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-24.html">A.18.24</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Priority_Queues&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-31.html">A.18.31</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Synchronized_Queues<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-29.html">A.18.29</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Vectors&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-19.html">A.18.19</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doubly_Linked_Lists&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-3.html">A.18.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Array_Sort&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-26.html">A.18.26</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Constrained_Array_Sort<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-26.html">A.18.26</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Sort&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-26.html">A.18.26</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-5.html">A.18.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-8.html">A.18.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Doubly_Linked_Lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-12.html">A.18.12</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-13.html">A.18.13</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-15.html">A.18.15</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Holders&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-18.html">A.18.18</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-17.html">A.18.17</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-14.html">A.18.14</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-16.html">A.18.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Vectors&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-11.html">A.18.11</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Containers&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-10.html">A.18.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-6.html">A.18.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-9.html">A.18.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Synchronized_Queue_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-27.html">A.18.27</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_Priority_Queues<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-30.html">A.18.30</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_Synchronized_Queues<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-28.html">A.18.28</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectors&nbsp;&mdash;&nbsp;<A HREF="AA-A-18-2.html">A.18.2</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Decimal&nbsp;&mdash;&nbsp;<A HREF="AA-F-2.html">F.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Direct_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-8-4.html">A.8.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Directories&nbsp;&mdash;&nbsp;<A HREF="AA-A-16.html">A.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hierarchical_File_Names&nbsp;&mdash;&nbsp;<A HREF="AA-A-16-1.html">A.16.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Information&nbsp;&mdash;&nbsp;<A HREF="AA-A-16.html">A.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Dispatching&nbsp;&mdash;&nbsp;<A HREF="AA-D-2-1.html">D.2.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDF&nbsp;&mdash;&nbsp;<A HREF="AA-D-2-6.html">D.2.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non_Preemptive&nbsp;&mdash;&nbsp;<A HREF="AA-D-2-4.html">D.2.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round_Robin&nbsp;&mdash;&nbsp;<A HREF="AA-D-2-5.html">D.2.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Dynamic_Priorities&nbsp;&mdash;&nbsp;<A HREF="AA-D-5-1.html">D.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Environment_Variables&nbsp;&mdash;&nbsp;<A HREF="AA-A-17.html">A.17</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Exceptions&nbsp;&mdash;&nbsp;<A HREF="AA-11-4-1.html">11.4.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Execution_Time&nbsp;&mdash;&nbsp;<A HREF="AA-D-14.html">D.14</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group_Budgets&nbsp;&mdash;&nbsp;<A HREF="AA-D-14-2.html">D.14.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupts&nbsp;&mdash;&nbsp;<A HREF="AA-D-14-3.html">D.14.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timers&nbsp;&mdash;&nbsp;<A HREF="AA-D-14-1.html">D.14.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Finalization&nbsp;&mdash;&nbsp;<A HREF="AA-7-6.html">7.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Float_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-10-9.html">A.10.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Float_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Float_Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-10-8.html">A.10.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer_Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Interrupts&nbsp;&mdash;&nbsp;<A HREF="AA-C-3-2.html">C.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names&nbsp;&mdash;&nbsp;<A HREF="AA-C-3-2.html">C.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;IO_Exceptions&nbsp;&mdash;&nbsp;<A HREF="AA-A-13.html">A.13</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator_Interfaces&nbsp;&mdash;&nbsp;<A HREF="AA-5-5-1.html">5.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Locales&nbsp;&mdash;&nbsp;<A HREF="AA-A-19.html">A.19</A><BR>
+</SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Numerics&nbsp;&mdash;&nbsp;<A HREF="AA-A-5.html">A.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Arrays&nbsp;&mdash;&nbsp;<A HREF="AA-G-3-2.html">G.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-2.html">G.1.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Types&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-1.html">G.1.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discrete_Random&nbsp;&mdash;&nbsp;<A HREF="AA-A-5-2.html">A.5.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="AA-A-5-1.html">A.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float_Random&nbsp;&mdash;&nbsp;<A HREF="AA-A-5-2.html">A.5.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Complex_Arrays&nbsp;&mdash;&nbsp;<A HREF="AA-G-3-2.html">G.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Complex_Elementary_Functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-2.html">G.1.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Complex_Types&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-1.html">G.1.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="AA-A-5-1.html">A.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Real_Arrays&nbsp;&mdash;&nbsp;<A HREF="AA-G-3-1.html">G.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real_Arrays&nbsp;&mdash;&nbsp;<A HREF="AA-G-3-1.html">G.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Real_Time&nbsp;&mdash;&nbsp;<A HREF="AA-D-8.html">D.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timing_Events&nbsp;&mdash;&nbsp;<A HREF="AA-D-15.html">D.15</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Sequential_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-8-1.html">A.8.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Storage_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-9.html">A.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Streams&nbsp;&mdash;&nbsp;<A HREF="AA-13-13-1.html">13.13.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-12-1.html">A.12.1</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-1.html">A.4.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-4.html">A.4.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-3.html">A.4.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-2.html">A.4.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-6.html">A.4.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-5.html">A.4.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTF_Encoding&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conversions&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Strings&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Strings&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-11.html">A.4.11</A><BR>
+</SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Fixed&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Constants&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Unbounded&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Bounded&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Fixed&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Maps&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Constants&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Unbounded&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="AA-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Synchronous_Barriers&nbsp;&mdash;&nbsp;<A HREF="AA-D-10-1.html">D.10.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Synchronous_Task_Control&nbsp;&mdash;&nbsp;<A HREF="AA-D-10.html">D.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDF&nbsp;&mdash;&nbsp;<A HREF="AA-D-10.html">D.10</A><BR>
+</SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Tags&nbsp;&mdash;&nbsp;<A HREF="AA-3-9.html">3.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Dispatching_Constructor&nbsp;&mdash;&nbsp;<A HREF="AA-3-9.html">3.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Task_Attributes&nbsp;&mdash;&nbsp;<A HREF="AA-C-7-2.html">C.7.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Task_Identification&nbsp;&mdash;&nbsp;<A HREF="AA-C-7-1.html">C.7.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Task_Termination&nbsp;&mdash;&nbsp;<A HREF="AA-C-7-3.html">C.7.3</A></SPAN><BR>
+<SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-10-1.html">A.10.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-10-11.html">A.10.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-3.html">G.1.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="AA-F-3-3.html">F.3.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="AA-A-12-2.html">A.12.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-10-12.html">A.10.12</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Conversion&nbsp;&mdash;&nbsp;<A HREF="AA-13-9.html">13.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Deallocate_Subpool&nbsp;&mdash;&nbsp;<A HREF="AA-13-11-5.html">13.11.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Deallocation&nbsp;&mdash;&nbsp;<A HREF="AA-13-11-2.html">13.11.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Characters&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-1.html">A.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-5.html">A.3.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-4.html">G.1.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="AA-F-3-4.html">F.3.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="AA-A-12-3.html">A.12.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Characters&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-1.html">A.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="AA-A-3-6.html">A.3.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="AA-G-1-5.html">G.1.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="AA-F-3-5.html">F.3.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="AA-A-12-4.html">A.12.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="AA-A-11.html">A.11</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;Interfaces&nbsp;&mdash;&nbsp;<A HREF="AA-B-2.html">B.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;&mdash;&nbsp;<A HREF="AA-B-3.html">B.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pointers&nbsp;&mdash;&nbsp;<A HREF="AA-B-3-2.html">B.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="AA-B-3-1.html">B.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;COBOL&nbsp;&mdash;&nbsp;<A HREF="AA-B-4.html">B.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Fortran&nbsp;&mdash;&nbsp;<A HREF="AA-B-5.html">B.5</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;System&nbsp;&mdash;&nbsp;<A HREF="AA-13-7.html">13.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Address_To_Access_Conversions&nbsp;&mdash;&nbsp;<A HREF="AA-13-7-2.html">13.7.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Machine_Code&nbsp;&mdash;&nbsp;<A HREF="AA-13-8.html">13.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Multiprocessors&nbsp;&mdash;&nbsp;<A HREF="AA-D-16.html">D.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dispatching_Domains&nbsp;&mdash;&nbsp;<A HREF="AA-D-16-1.html">D.16.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;RPC&nbsp;&mdash;&nbsp;<A HREF="AA-E-5.html">E.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Storage_Elements&nbsp;&mdash;&nbsp;<A HREF="AA-13-7-1.html">13.7.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Storage_Pools&nbsp;&mdash;&nbsp;<A HREF="AA-13-11.html">13.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpools&nbsp;&mdash;&nbsp;<A HREF="AA-13-11-4.html">13.11.4</A></SPAN>]</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In running text, we generally 
+leave out the &ldquo;Ada.&rdquo; when referring to a child of Ada.&nbsp;</div>
+<div class="paranum"><a name="p2.b">2.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We had no strict rule for which 
+of Ada, Interfaces, or System should be the parent of a given library 
+unit. However, we have tried to place as many things as possible under 
+Ada, except that interfacing is a separate category, and we have tried 
+to place library units whose use is highly nonportable under System. 
+</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+The implementation shall ensure that each language-defined subprogram 
+is reentrant<A NAME="I5879"></A> in the sense that concurrent calls on 
+the same subprogram perform as specified, so long as all parameters that 
+could be passed by reference denote nonoverlapping objects.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, simultaneous 
+calls to Text_IO.Put will work properly, so long as they are going to 
+two different files. On the other hand, simultaneous output to the same 
+file constitutes erroneous use of shared variables.&nbsp;</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>Here, &ldquo;language defined 
+subprogram&rdquo; means a language defined library subprogram, a subprogram 
+declared in the visible part of a language defined library package, an 
+instance of a language defined generic library subprogram, or a subprogram 
+declared in the visible part of an instance of a language defined generic 
+library package.&nbsp;</div>
+<div class="paranum"><a name="p3.c">3.c</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The rule implies that any 
+data local to the private part or body of the package has to be somehow 
+protected against simultaneous access.&nbsp;</div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0048-1.TXT">AI05-0048-1</A></I>} 
+If a descendant of a language-defined tagged type is declared, the implementation 
+shall ensure that each inherited language-defined subprogram behaves 
+as described in this International Standard. In particular, overriding 
+a language-defined subprogram shall not alter the effect of any inherited 
+language-defined subprogram.&nbsp;</div>
+<div class="paranum"><a name="p3.d">3.d/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This means that internally the 
+implementation must not do redispatching unless it is required by the 
+Standard. So when we say that some subprogram Bar is equivalent to Foo, 
+overriding Foo for a derived type doesn't change the semantics of Bar, 
+and in particular it means that Bar may no longer be equivalent to Foo. 
+The word &ldquo;equivalent&rdquo; is always a bit of a lie anyway.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The implementation may restrict the replacement of 
+language-defined compilation units. The implementation may restrict children 
+of language-defined library units (other than Standard).&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, the implementation 
+may say, &ldquo;you cannot compile a library unit called System&rdquo; 
+or &ldquo;you cannot compile a child of package System&rdquo; or &ldquo;if 
+you compile a library unit called System, it has to be a package, and 
+it has to contain at least the following declarations: ...&rdquo;.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations">Many of Ada 83's language-defined library units 
+are now children of Ada or System. For upward compatibility, these are 
+renamed as root library units (see <A HREF="AA-J-1.html">J.1</A>).</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations">The order and lettering of the annexes has been 
+changed.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p4.d">4.d/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0047">8652/0047</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00081.TXT">AI95-00081-01</A></I>} 
+<B>Corrigendum:</B> Units missing from the list of predefined units were 
+added.</div>
+<div class="paranum"><a name="p4.e">4.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00424.TXT">AI95-00424-01</A></I>} 
+Added new units to the list of predefined units.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p4.f">4.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0048-1.TXT">AI05-0048-1</A></I>} 
+<B>Correction:</B> Added wording to ban redispatching unless it is explicitly 
+required, in order to safeguard portability when overriding language-defined 
+routines.</div>
+<div class="paranum"><a name="p4.g">4.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
+<B>Correction:</B> Added a permission to omit pragma Remote_Types from 
+language-defined units if Annex E is not supported. This was later removed, 
+as a better method of supporting the reason is now available. Note that 
+this requires all implementations to provide minimal support for the 
+Remote_Types categorization even if Annex E is not supported; being unable 
+to compile language-defined units is not allowed.</div>
+<div class="paranum"><a name="p4.h">4.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0137-1.TXT">AI05-0137-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0168-1.TXT">AI05-0168-1</A></I>} 
+Added various new units to the list of predefined units.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

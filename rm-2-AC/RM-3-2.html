@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Types and Subtypes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2 Types and Subtypes</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1354"></A><A NAME="I1355"></A>A <I>type</I> 
+is characterized by a set of values, and a set of <I>primitive operations</I> 
+which implement the fundamental aspects of its semantics. <A NAME="I1356"></A>An 
+<I>object</I> of a given type is a run-time entity that contains (has) 
+a value of the type.&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I1357"></A></span><A NAME="I1358"></A>Types 
+are grouped into <span class="insert2"><I>categories</I></span><span class="delete2"><I>&nbsp;classes</I></span> 
+of types<span class="delete2">, reflecting the similarity of their values 
+and primitive operations</span>. <A NAME="I1359"></A>There exist several 
+<I>language-defined&nbsp;</I><span class="insert2"><I>categories</I></span><I></I><span class="delete2"><I>&nbsp;classes</I></span><I></I> 
+of types (see NOTES below)<span class="insert2">, reflecting the similarity 
+of their values and primitive operations</span>.<span class="insert2"><A NAME="I1360"></A> 
+Most categories of types form <I>classes</I> of types.</span> <A NAME="I1361"></A><I>Elementary</I> 
+types are those whose values are logically indivisible; <A NAME="I1362"></A><A NAME="I1363"></A><I>composite</I> 
+types are those whose values are composed of <I>component</I> values. 
+<A NAME="I1364"></A></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I1365"></A>The elementary types are the 
+<I>scalar</I> types (<I>discrete</I> and <I>real</I>) and the <I>access</I> 
+types (whose values provide access to objects or subprograms). <A NAME="I1366"></A><A NAME="I1367"></A>Discrete 
+types are either <I>integer</I> types or are defined by enumeration of 
+their values (<I>enumeration</I> types). <A NAME="I1368"></A>Real types 
+are either <I>floating point</I> types or <I>fixed point</I> types.</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">The composite types are the <I>record</I> types, 
+<I>record extensions</I>, <I>array</I> types, <span class="insert2"><I>interface</I> 
+types,&nbsp;</span><I>task</I> types, and <I>protected</I> types.<span class="delete2"><A NAME="I1369"></A> 
+<A NAME="I1370"></A>A <I>private</I> type or <I>private extension</I> 
+represents a partial view (see <A HREF="RM-7-3.html">7.3</A>) of a type, 
+providing support for data abstraction. A partial view is a composite 
+type.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I1371"></A><A NAME="I1372"></A><A NAME="I1373"></A>There 
+can be multiple views of a type with varying sets of operations. An <I>incomplete</I> 
+type represents an incomplete view (see <A HREF="RM-3-10-1.html">3.10.1</A>) 
+of a type with a very restricted usage, providing support for recursive 
+data structures. A <I>private</I> type or <I>private extension</I> represents 
+a partial view (see <A HREF="RM-7-3.html">7.3</A>) of a type, providing 
+support for data abstraction. The full view (see <A HREF="RM-3-2-1.html">3.2.1</A>) 
+of a type represents its complete definition. An incomplete or partial 
+view is considered a composite type, even if the full view is not.</span> 
+</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal"><A NAME="I1374"></A>Certain composite types (and<span class="delete2">&nbsp;partial</span> views thereof) have special components called <I>discriminants</I> 
+whose values affect the presence, constraints, or initialization of other 
+components. Discriminants can be thought of as parameters of the type.</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal"><A NAME="I1375"></A>The term <I>subcomponent</I> 
+is used in this International Standard in place of the term component 
+to indicate either a component, or a component of another subcomponent. 
+Where other subcomponents are excluded, the term component is used instead. 
+<A NAME="I1376"></A>Similarly, a <I>part</I> of an object or value is 
+used to mean the whole object or value, or any set of its subcomponents.<span class="insert2">&nbsp;The terms component, subcomponent, and part are also applied to a type 
+meaning the component, subcomponent, or part of objects and values of 
+the type.<A NAME="I1377"></A><A NAME="I1378"></A></span>&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><A NAME="I1379"></A>The set of possible values for 
+an object of a given type can be subjected to a condition that is called 
+a <I>constraint</I> <A NAME="I1380"></A><A NAME="I1381"></A>(the case 
+of a <I>null constraint</I> that specifies no restriction is also included); 
+the rules for which values satisfy a given kind of constraint are given 
+in <A HREF="RM-3-5.html">3.5</A> for <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>s, 
+<A HREF="RM-3-6-1.html">3.6.1</A> for <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0057">index_constraint</A></SPAN>s, 
+and <A HREF="RM-3-7-1.html">3.7.1</A> for <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s.<span class="insert2">&nbsp;The set of possible values for an object of an access type can also be 
+subjected to a condition that excludes the null value (see <A HREF="RM-3-10.html">3.10</A>).</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal"><A NAME="I1382"></A>A <I>subtype</I> of a given type 
+is a combination of the type, a constraint on values of the type, and 
+certain attributes specific to the subtype. The given type is called 
+the <span class="insert2"><I>type of the subtype</I></span><span class="delete2">&nbsp;type 
+<I>of</I> the subtype</span>.<span class="insert2"><A NAME="I1383"></A> 
+<A NAME="I1384"></A></span>Similarly, the associated constraint is called 
+the <span class="insert2"><I>constraint of the subtype</I></span><span class="delete2">&nbsp;constraint 
+<I>of</I> the subtype</span>.<span class="insert2"><A NAME="I1385"></A> 
+<A NAME="I1386"></A></span> The set of values of a subtype consists of 
+the values of its type that satisfy its constraint<span class="insert2">&nbsp;and any exclusion of the null value</span>. <A NAME="I1387"></A>Such 
+values <I>belong</I> to the subtype.<span class="insert2"><A NAME="I1388"></A> 
+<A NAME="I1389"></A></span></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1390"></A><A NAME="I1391"></A><A NAME="I1392"></A><A NAME="I1393"></A>A 
+subtype is called an <I>unconstrained</I> subtype if its type has unknown 
+discriminants, or if its type allows range, index, or discriminant constraints, 
+but the subtype does not impose such a constraint; otherwise, the subtype 
+is called a <I>constrained</I> subtype (since it has no unconstrained 
+characteristics).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Notes">2&nbsp;&nbsp;<span class="insert2">Any set of types 
+can be called a &ldquo;category&rdquo; of types, and any</span><span class="delete2">&nbsp;Any</span> 
+set of types that is closed under derivation (see <A HREF="RM-3-4.html">3.4</A>) 
+can be called a &ldquo;class&rdquo; of types. However, only certain <span class="insert2">categories 
+and&nbsp;</span>classes are used in the description of the rules of the language 
+&mdash; generally those that have their own particular set of primitive 
+operations (see <A HREF="RM-3-2-3.html">3.2.3</A>), or that correspond 
+to a set of types that are matched by a given kind of generic formal 
+type (see <A HREF="RM-12-5.html">12.5</A>). <A NAME="I1394"></A>The following 
+are examples of &ldquo;interesting&rdquo; <I>language-defined classes</I>: 
+elementary, scalar, discrete, enumeration, character, boolean, integer, 
+signed integer, modular, real, floating point, fixed point, ordinary 
+fixed point, decimal fixed point, numeric, access, access-to-object, 
+access-to-subprogram, composite, array, string, (untagged) record, tagged, 
+task, protected, nonlimited. Special syntax is provided to define types 
+in each of these classes.<span class="insert2">&nbsp;In addition to these 
+classes, the following are examples of &ldquo;interesting&rdquo; <I>language-defined 
+categories</I>: <A NAME="I1395"></A>abstract, incomplete, interface, 
+limited, private, record.</span>&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Notes">These language-defined <span class="insert2">categories</span><span class="delete2">&nbsp;classes</span> 
+are organized like this:&nbsp;</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Annotations">all&nbsp;types<BR>
+&nbsp;&nbsp;&nbsp;elementary<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scalar<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discrete<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enumeration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other&nbsp;enumeration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signed&nbsp;integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modular&nbsp;integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;real<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floating&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ordinary&nbsp;fixed&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimal&nbsp;fixed&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access-to-object<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access-to-subprogram<BR>
+&nbsp;&nbsp;&nbsp;composite<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;untagged</span><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other&nbsp;array<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2">&nbsp;&nbsp;&nbsp;</span><span class="delete2">untagged&nbsp;</span>record<span class="delete2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged</span><BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task<BR>
+<span class="insert2">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged&nbsp;(including&nbsp;interfaces)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nonlimited&nbsp;tagged&nbsp;record<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limited&nbsp;tagged<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limited&nbsp;tagged&nbsp;record<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized&nbsp;tagged<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged&nbsp;task<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged&nbsp;protected</span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Notes"><span class="insert2">There are other categories, 
+such as</span><span class="delete2">&nbsp;The classes</span> &ldquo;numeric&rdquo; 
+and &ldquo;<span class="insert2">discriminated</span><span class="delete2">&nbsp;nonlimited</span>&rdquo;<span class="insert2">, 
+which</span> represent other <span class="insert2">categorization</span><span class="delete2">&nbsp;classification</span> 
+dimensions<span class="insert2">, but</span><span class="delete2">&nbsp;and</span> 
+do not fit into the above strictly hierarchical picture.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Edited Output for Decimal Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>F.3 Edited Output for Decimal Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The child packages 
+Text_IO.Editing<span class="insert2">,</span><span class="delete2">&nbsp;and</span> 
+Wide_Text_IO.Editing<span class="insert2">, and Wide_Wide_Text_IO.Editing</span> 
+provide localizable formatted text output, known as <I>edited output</I><A NAME="I8623"></A>, 
+for decimal types. An edited output string is a function of a numeric 
+value, program-specifiable locale elements, and a format control value. 
+The numeric value is of some decimal type. The locale elements are:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Bulleted">the currency string;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">the digits group separator character;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">the radix mark character; and</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">the fill character that replaces leading zeros 
+of the numeric value.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">For Text_IO.Editing the edited output and currency 
+strings are of type String, and the locale characters are of type Character. 
+For Wide_Text_IO.Editing their types are Wide_String and Wide_Character, 
+respectively.<span class="insert2">&nbsp;For Wide_Wide_Text_IO.Editing their 
+types are Wide_Wide_String and Wide_Wide_Character, respectively.</span></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">Each of the locale elements has a default value that 
+can be replaced or explicitly overridden.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">A format-control value is of the private type Picture; 
+it determines the composition of the edited output string and controls 
+the form and placement of the sign, the position of the locale elements 
+and the decimal digits, the presence or absence of a radix mark, suppression 
+of leading zeros, and insertion of particular character values.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A Picture object is 
+composed from a String value, known as a <I>picture String</I>, that 
+serves as a template for the edited output string, and a Boolean value 
+that controls whether a string of all space characters is produced when 
+the number's value is zero. A picture String comprises a sequence of 
+one- or two-Character symbols, each serving as a placeholder for a character 
+or string at a corresponding position in the edited output string. The 
+picture String symbols fall into several categories based on their effect 
+on the edited output string:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented1">&nbsp;&nbsp;&nbsp;Decimal&nbsp;Digit:&nbsp;&nbsp;'9'<BR>
+&nbsp;&nbsp;&nbsp;Radix&nbsp;Control:&nbsp;&nbsp;'.'&nbsp;&nbsp;'V'<BR>
+&nbsp;&nbsp;&nbsp;Sign&nbsp;Control:&nbsp;&nbsp;'+'&nbsp;&nbsp;'&ndash;'&nbsp;&nbsp;'&lt;'&nbsp;&nbsp;'&gt;'&nbsp;&nbsp;&quot;CR&quot;&nbsp;&nbsp;&quot;DB&quot;<BR>
+&nbsp;&nbsp;&nbsp;Currency&nbsp;Control:&nbsp;&nbsp;'$'&nbsp;&nbsp;'#'<BR>
+&nbsp;&nbsp;&nbsp;Zero&nbsp;Suppression:&nbsp;&nbsp;'Z'&nbsp;&nbsp;'*'<BR>
+&nbsp;&nbsp;&nbsp;Simple&nbsp;Insertion:&nbsp;&nbsp;'_'&nbsp;&nbsp;'B'&nbsp;&nbsp;'0'&nbsp;&nbsp;'/'</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">The entries are not case-sensitive. Mixed- or lower-case 
+forms for &quot;CR&quot; and &quot;DB&quot;, and lower-case forms for 
+'V', 'Z', and 'B', have the same effect as the upper-case symbols shown.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">An occurrence of a '9' Character in the picture String 
+represents a decimal digit position in the edited output string.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">A radix control Character in the picture String indicates 
+the position of the radix mark in the edited output string: an actual 
+character position for '.', or an assumed position for 'V'.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">A sign control Character in the picture String affects 
+the form of the sign in the edited output string. The '&lt;' and '&gt;' 
+Character values indicate parentheses for negative values. A Character 
+'+', '&ndash;', or '&lt;' appears either singly, signifying a fixed-position 
+sign in the edited output, or repeated, signifying a floating-position 
+sign that is preceded by zero or more space characters and that replaces 
+a leading 0.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">A currency control Character in the picture String 
+indicates an occurrence of the currency string in the edited output string. 
+The '$' Character represents the complete currency string; the '#' Character 
+represents one character of the currency string. A '$' Character appears 
+either singly, indicating a fixed-position currency string in the edited 
+output, or repeated, indicating a floating-position currency string that 
+occurs in place of a leading 0. A sequence of '#' Character values indicates 
+either a fixed- or floating-position currency string, depending on context.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">A zero suppression Character in the picture String 
+allows a leading zero to be replaced by either the space character (for 
+'Z') or the fill character (for '*').</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">A simple insertion Character in the picture String 
+represents, in general, either itself (if '/' or '0'), the space character 
+(if 'B'), or the digits group separator character (if '_'). In some contexts 
+it is treated as part of a floating sign, floating currency, or zero 
+suppression string.</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Normal">An example of a picture String is &quot;&lt;###Z_ZZ9.99&gt;&quot;. 
+If the currency string is &quot;<span class="insert2">kr</span><span class="delete2">&nbsp;FF</span>&quot;, 
+the separator character is ',', and the radix mark is '.' then the edited 
+output string values for the decimal values 32.10 and &ndash;5432.10 
+are &quot;bb<span class="insert2">kr</span><span class="delete2">&nbsp;FF</span>bbb32.10b&quot; 
+and &quot;(b<span class="insert2">kr</span><span class="delete2">&nbsp;FF</span>5,432.10)&quot;, 
+respectively, where 'b' indicates the space character.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal">The generic packages Text_IO.Decimal_IO<span class="insert2">,</span><span class="delete2">&nbsp;and</span> Wide_Text_IO.Decimal_IO<span class="insert2">, and Wide_Wide_Text_IO.Decimal_IO</span> 
+(see <A HREF="RM-A-10-9.html">A.10.9</A>, &ldquo;<A HREF="RM-A-10-9.html">Input-Output 
+for Real Types</A>&rdquo;) provide text input and nonedited text output 
+for decimal types.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Notes">2&nbsp;&nbsp;A picture String is of type Standard.String, 
+<span class="insert2">for all of</span><span class="delete2">&nbsp;both for</span> 
+Text_IO.Editing<span class="insert2">,</span><span class="delete2">&nbsp;and</span> 
+Wide_Text_IO.Editing<span class="insert2">, and Wide_Wide_Text_IO.Editing</span>. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

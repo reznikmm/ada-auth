@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Bit Ordering</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.5.3 Bit Ordering</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[The Bit_Order attribute specifies the interpretation 
+of the storage place attributes.]&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The intention is to provide uniformity 
+in the interpretation of storage places across implementations on a particular 
+machine by allowing the user to specify the Bit_Order. It is not intended 
+to fully support data interoperability across different machines, although 
+it can be used for that purpose in some situations.</div>
+<div class="paranum"><a name="p1.b">1.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+We can't require all implementations on a given machine to use the same 
+bit ordering by default; if the user cares, a <span class="delete2"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+</span>Bit_Order <span class="insert2"><SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+</span>can be used to force all implementations to use the same bit ordering. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I5836"></A>A bit ordering is a method of 
+interpreting the meaning of the storage place attributes. <A NAME="I5837"></A><A NAME="I5838"></A><A NAME="I5839"></A>High_Order_First 
+[(known in the vernacular as &ldquo;big endian&rdquo;)] means that the 
+first bit of a storage element (bit 0) is the most significant bit (interpreting 
+the sequence of bits that represent a component as an unsigned integer 
+value). <A NAME="I5840"></A><A NAME="I5841"></A><A NAME="I5842"></A>Low_Order_First 
+[(known in the vernacular as &ldquo;little endian&rdquo;)] means the 
+opposite: the first bit is the least significant.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every specific 
+record subtype S, the following attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="WideHanging-Term">S'Bit_Order</div><div class="WideHanging-Body">
+<A NAME="I5843"></A><A NAME="I5844"></A>Denotes the bit ordering for 
+the type of S. The value of this attribute is of type System.Bit_Order. 
+<A NAME="I5845"></A><A NAME="I5846"></A>Bit_Order may be specified for 
+specific record types via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static.<span class="insert3"><A NAME="I5847"></A><A NAME="I5848"></A></span></div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert3"><B>Bit_Order:&nbsp;</B></span><span class="insert3">Order 
+of bit numbering in a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0313">record_representation_clause</A></SPAN>.</span></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If Word_Size = Storage_Unit, the default bit ordering 
+is implementation defined. If Word_Size &gt; Storage_Unit, the default 
+bit ordering is the same as the ordering of storage elements in a word, 
+when interpreted as an integer. <A NAME="I5849"></A></div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>If Word_Size 
+= Storage_Unit, the default bit ordering.</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Consider machines whose 
+Word_Size = 32, and whose Storage_Unit = 8. Assume the default bit ordering 
+applies. On a machine with big-endian addresses, the most significant 
+storage element of an integer is at the address of the integer. Therefore, 
+bit zero of a storage element is the most significant bit. On a machine 
+with little-endian addresses, the least significant storage element of 
+an integer is at the address of the integer. Therefore, bit zero of a 
+storage element is the least significant bit.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The storage place attributes of a component of a 
+type are interpreted according to the bit ordering of the type.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This implies that the interpretation 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0315">position</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">first_bit</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">last_bit</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0314">component_clause</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0313">record_representation_clause</A></SPAN> 
+obey the bit ordering given in a representation item.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5850"></A>The 
+recommended level of support for the nondefault bit ordering is:&nbsp;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<span class="insert2">The</span><span class="delete2">&nbsp;If Word_Size = 
+Storage_Unit, then the</span> implementation should support the nondefault 
+bit ordering in addition to the default bit ordering.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<span class="insert2">The</span><span class="delete2">&nbsp;If Word_Size = 
+Storage_Unit, the</span> implementation should support both bit orderings. 
+<span class="insert2">Implementations</span><span class="delete2">&nbsp;We 
+don't push for support of the nondefault bit ordering when Word_Size 
+&gt; Storage_Unit (except of course for upward compatibility with a preexisting 
+implementation whose Ada 83 bit order did not correspond to the required 
+Ada 95 default bit order), because implementations</span> are required 
+to support storage positions that cross storage element boundaries when 
+Word_Size &gt; Storage_Unit<span class="insert2">&nbsp;but the definition 
+of the storage place attributes for the nondefault bit order ensures 
+that such</span><span class="delete2">. Such</span> storage positions 
+will <span class="insert2">not&nbsp;</span>be split into two or three pieces<span class="insert2">. 
+Thus, there is no significant implementation burden to supporting the 
+nondefault bit order, given that the set of machine scalars is implementation-defined</span><span class="delete2">&nbsp;if the nondefault bit ordering is used, which could be onerous to support. 
+However, if Word_Size = Storage_Unit, there might not be a natural bit 
+ordering, but the splitting problem need not occur</span>.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">The recommended level of support for 
+the nondefault bit ordering should be followed.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Notes">17&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<span class="insert2">Bit_Order clauses make it possible to write <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0313">record_representation_clause</A></SPAN>s 
+that can be ported between machines having different bit ordering. They 
+do not guarantee transparent exchange of data between such machines.</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><A NAME="I5851"></A>The Bit_Order attribute 
+is new to Ada 95.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p9.b">9.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00133.TXT">AI95-00133-01</A></I>} 
+<span class="insert2">We now suggest that all implementations support 
+the nondefault bit order.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

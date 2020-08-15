@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Literals</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.2 Literals</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I2581"></A> A <I>literal</I> represents 
+a value literally, that is, by means of notation suited to its kind.] 
+A literal is either a <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
+the literal <B>null</B>, or a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>. 
+<A NAME="I2582"></A></div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>An enumeration literal that 
+is an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+rather than a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+is not considered a <I>literal</I> in the above sense, because it involves 
+no special notation &ldquo;suited to its kind.&rdquo; It might more properly 
+be called an <SPAN Class="swiss">enumeration_identifier</SPAN>, except 
+for historical reasons.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="delete2"><A NAME="I2583"></A>The expected type for a literal 
+<B>null</B> shall be a single access type.</span>&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a/2</a></div>
+<div class="Annotations"><span class="delete2"><B>Discussion:&nbsp;</B>This 
+new wording (&quot;expected type ... shall be a single ... type&quot;) 
+replaces the old &quot;shall be determinable&quot; stuff. It reflects 
+an attempt to simplify and unify the description of the rules for resolving 
+aggregates, literals, type conversions, etc. See <A HREF="AA-8-6.html">8.6</A>, 
+&ldquo;<A HREF="AA-8-6.html">The Context of Overload Resolution</A>&rdquo; 
+for the details.</span>&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I2584"></A><A NAME="I2585"></A>For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that consists of a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
+either its expected type shall be a single character type, in which case 
+it is interpreted as a parameterless <SPAN Class="swiss"><A HREF="AA-6-4.html#S0164">function_call</A></SPAN> 
+that yields the corresponding value of the character type, or its expected 
+profile shall correspond to a parameterless function with a character 
+result type, in which case it is interpreted as the name of the corresponding 
+parameterless function declared as part of the character type's definition 
+(see <A HREF="AA-3-5-1.html">3.5.1</A>). In either case, the <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+denotes the <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>See <A HREF="AA-4-1-3.html">4.1.3</A> 
+for the resolution rules for a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2586"></A>The expected type for a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0120">primary</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
+shall be a single string type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall correspond to a <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
+of the expected type, or of the result type of the expected profile.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">For each character of a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
+with a given expected string type, there shall be a corresponding <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
+of the component type of the expected string type.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="delete2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
+<span class="delete2">A literal <SPAN Class="swiss">null</SPAN> shall 
+not be of an anonymous access type[, since such types do not have a null 
+value (see <A HREF="AA-3-10.html">3.10</A>)].</span>&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><span class="delete2"><B>Reason:&nbsp;</B>This is 
+a legality rule rather than an overloading rule, to simplify implementations.</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+An integer literal is of type <I>universal_integer</I>. A real literal 
+is of type <I>universal_real</I>.<span class="insert2">&nbsp;The literal <B>null</B> 
+is of type <I>universal_access</I>.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I2587"></A><A NAME="I2588"></A><A NAME="I2589"></A><A NAME="I2590"></A>The 
+evaluation of a numeric literal, or the literal <B>null</B>, yields the 
+represented value.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I2591"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0120">primary</A></SPAN> 
+yields an array value containing the value of each character of the sequence 
+of characters of the <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>, 
+as defined in <A HREF="AA-2-6.html">2.6</A>. The bounds of this array 
+value are determined according to the rules for <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0112">positional_array_aggregate</A></SPAN>s 
+(see <A HREF="AA-4-3-3.html">4.3.3</A>), except that for a null string 
+literal, the upper bound is the predecessor of the lower bound.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2592"></A><A NAME="I2593"></A>For the evaluation 
+of a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
+of type <I>T</I>, a check is made that the value of each character of 
+the <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
+belongs to the component subtype of <I>T</I>. For the evaluation of a 
+null string literal, a check is made that its lower bound is greater 
+than the lower bound of the base range of the index type. <A NAME="I2594"></A>The 
+exception Constraint_Error is raised if either of these checks fails. 
+</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The checks on the characters 
+need not involve more than two checks altogether, since one need only 
+check the characters of the string with the lowest and highest position 
+numbers against the range of the component subtype.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">6&nbsp;&nbsp;Enumeration literals that are <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+rather than <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>s 
+follow the normal rules for <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+when used in a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+(see <A HREF="AA-4-1.html">4.1</A> and <A HREF="AA-4-1-3.html">4.1.3</A>). 
+<SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">Character_literal</A></SPAN>s 
+used as <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>s 
+follow the normal rules for expanded names (see <A HREF="AA-4-1-3.html">4.1.3</A>). 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of literals:</I> 
+</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">3.14159_26536&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;real&nbsp;literal</I></SPAN><BR>
+1_345&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;an&nbsp;integer&nbsp;literal</I></SPAN><BR>
+'A'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;character&nbsp;literal</I></SPAN><BR>
+&quot;Some&nbsp;Text&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;string&nbsp;literal&nbsp;</I></SPAN></div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><A NAME="I2595"></A>Because <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>s 
+are now treated like other literals, in that they are resolved using 
+context rather than depending on direct visibility, additional qualification 
+might be necessary when passing a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+to an overloaded subprogram.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><A NAME="I2596"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">Character_literal</A></SPAN>s 
+are now treated analogously to <B>null</B> and <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>s, 
+in that they are resolved using context, rather than their content; the 
+declaration of the corresponding <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0040">defining_character_literal</A></SPAN> 
+need not be directly visible.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p14.c">14.c</a></div>
+<div class="Annotations">Name Resolution rules for enumeration literals 
+that are not <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>s 
+are not included anymore, since they are neither syntactically nor semantically 
+&quot;literals&quot; but are rather names of parameterless functions. 
+</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p14.d">14.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
+<span class="insert2"><A NAME="I2597"></A><B>Null</B> now has type <I>universal_access</I>, 
+which is similar to other literals. <B>Null</B> can be used with anonymous 
+access types.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

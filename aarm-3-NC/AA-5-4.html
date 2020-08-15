@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Case Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.4 Case Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+selects for execution one of a number of alternative <SPAN Class="swiss">sequences_of_statements</SPAN>; 
+the chosen alternative is defined by the value of an expression.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<SPAN Class="swiss">case_statement</SPAN><A NAME="I3405"></A><A NAME="S0154"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3406"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3407"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0155">case_statement_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3408"></A><SPAN Class="swiss"><A HREF="AA-5-4.html#S0155">case_statement_alternative</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">case_statement_alternative</SPAN><A NAME="I3409"></A><A NAME="S0155"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3410"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3411"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<A NAME="I3412"></A><A NAME="I3413"></A>The <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is expected to be of any discrete type. <A NAME="I3414"></A>The expected 
+type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+is the type of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">choice_expression</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>s 
+given as <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+shall be static. [A <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<B>others</B>, if present, shall appear alone and in the last <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>.]</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0240-1.TXT">AI05-0240-1</A></I>} 
+The possible values of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+shall be covered (see <A HREF="AA-3-8-1.html">3.8.1</A>) as follows: 
+</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0240-1.TXT">AI05-0240-1</A></I>} 
+The meaning of &quot;covered&quot; here and in the following rules is 
+that of the term &quot;cover a value&quot; that is defined in <A HREF="AA-3-8-1.html">3.8.1</A>. 
+</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+If the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+[(including a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0179">function_call</A></SPAN>)] 
+having a static and constrained nominal subtype, then each non-<B>others</B> 
+<SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+shall cover only values in that subtype that satisfy its predicate (see 
+<A HREF="AA-3-2-4.html">3.2.4</A>), and each value of that subtype that 
+satisfies its predicate shall be covered by some <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+[(either explicitly or by <B>others</B>)].&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Although not official <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
+of objects, a value conversion still has a defined nominal subtype, namely 
+its target subtype. See <A HREF="AA-4-6.html">4.6</A>.&nbsp;</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+If the type of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is <I>root_integer</I>, <I>universal_integer</I>, or a descendant of 
+a formal scalar type, then the <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+shall have an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is because the base range 
+is implementation defined for <I>root_integer</I> and <I>universal_integer</I>, 
+and not known statically in the case of a formal scalar type.&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+Otherwise, each value of the base range of the type of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+shall be covered [(either explicitly or by <B>others</B>)].&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">Two distinct <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+shall not cover the same value.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+The goal of these coverage rules is that any possible value of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+should be covered by exactly one <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>, 
+and that this should be checked at compile time. The goal is achieved 
+in most cases, but there are two minor loopholes:&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b</a></div>
+<div class="SmallBulleted">If the expression reads an object with an 
+invalid representation (e.g. an uninitialized object), then the value 
+can be outside the covered range. This can happen for static constrained 
+subtypes, as well as nonstatic or unconstrained subtypes. It cannot, 
+however, happen if the <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+has the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<B>others</B>, because <B>others</B> covers all values, even those outside 
+the subtype.</div>
+<div class="paranum"><a name="p10.c">10.c/3</a></div>
+<div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+If the compiler chooses to represent the value of an expression of an 
+unconstrained subtype in a way that includes values outside the bounds 
+of the subtype, then those values can be outside the covered range. For 
+example, if X: Integer := Integer'Last;, and the case <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is X+1, then the implementation might choose to produce the correct value, 
+which is outside the bounds of Integer. (It might raise Constraint_Error 
+instead.) This case can only happen for nongeneric subtypes that are 
+either unconstrained or nonstatic (or both). It can only happen if there 
+is no <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p10.d">10.d</a></div>
+<div class="Annotations">In the uninitialized variable case, the value 
+might be anything; hence, any alternative can be chosen, or Constraint_Error 
+can be raised. (We intend to prevent, however, jumping to random memory 
+locations and the like.) In the out-of-range case, the behavior is more 
+sensible: if there is an <B>others</B>, then the implementation may choose 
+to raise Constraint_Error on the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+(as usual), or it may choose to correctly evaluate the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+and therefore choose the <B>others</B> alternative. Otherwise (no <B>others</B>), 
+Constraint_Error is raised either way &mdash; on the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+evaluation, or for the <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+itself.</div>
+<div class="paranum"><a name="p10.e">10.e</a></div>
+<div class="Annotations">For an enumeration type with a discontiguous 
+set of internal codes (see <A HREF="AA-13-4.html">13.4</A>), the only 
+way to get values in between the proper values is via an object with 
+an invalid representation; there is no &ldquo;out-of-range&rdquo; situation 
+that can produce them.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<A NAME="I3415"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is first evaluated.</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+If the value of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is covered by the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+of some <SPAN Class="swiss"><A HREF="AA-5-4.html#S0155">case_statement_alternative</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss">_alternative</SPAN> is executed.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I3416"></A><A NAME="I3417"></A><A NAME="I3418"></A>Otherwise 
+(the value is not covered by any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
+perhaps due to being outside the base range), Constraint_Error is raised. 
+</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In this case, the value 
+is outside the base range of its type, or is an invalid representation.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">4&nbsp;&nbsp;The execution of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+chooses one and only one alternative. Qualification of the expression 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+by a static subtype can often be used to limit the number of choices 
+that need be given explicitly.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of case 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>case</B>&nbsp;Sensor&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Elevation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Record_Elevation(Sensor_Value);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Azimuth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Record_Azimuth&nbsp;&nbsp;(Sensor_Value);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Distance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Record_Distance&nbsp;(Sensor_Value);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<B>others</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>null</B>;<BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><B>case</B>&nbsp;Today&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Mon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Compute_Initial_Balance;<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Fri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Compute_Closing_Balance;<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Tue&nbsp;..&nbsp;Thu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Generate_Report(Today);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Sat&nbsp;..&nbsp;Sun&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>null</B>;<BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples"><B>case</B>&nbsp;Bin_Number(Count)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Update_Bin(1);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Update_Bin(2);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;3&nbsp;|&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty_Bin(1);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty_Bin(2);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<B>others</B>&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>raise</B>&nbsp;Error;<BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p18.a.1">18.a.1/1</a></div>
+<div class="Annotations"><A NAME="I3419"></A>In Ada 95, <SPAN Class="swiss"><A HREF="AA-6-4.html#S0179">function_call</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>s 
+are <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s, 
+whereas in Ada 83, they were <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s. 
+Therefore, if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0179">function_call</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>, 
+and the result subtype is static, it is illegal to specify a choice outside 
+the bounds of the subtype. For this case in Ada 83 choices only are required 
+to be in the base range of the type.</div>
+<div class="paranum"><a name="p18.a.2">18.a.2/1</a></div>
+<div class="Annotations">In addition, the rule about which choices must 
+be covered is unchanged in Ada 95. Therefore, for a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0179">function_call</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>, 
+Ada 83 required covering all choices in the base range, while Ada 95 
+only requires covering choices in the bounds of the subtype. If the <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+does not include an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>, 
+then a legal Ada 83 <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+will be illegal in Ada 95 if the bounds of the subtype are different 
+than the bounds of the base type.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><A NAME="I3420"></A>In Ada 83, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+is not allowed to be of a generic formal type. This restriction is removed 
+in Ada 95; an <B>others</B> <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+is required instead.</div>
+<div class="paranum"><a name="p18.b">18.b</a></div>
+<div class="Annotations">In Ada 95, a function call is the name of an 
+object; this was not true in Ada 83 (see <A HREF="AA-4-1.html">4.1</A>, 
+&ldquo;<A HREF="AA-4-1.html">Names</A>&rdquo;). This change makes the 
+following <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+legal:&nbsp;</div>
+<div class="paranum"><a name="p18.c">18.c</a></div>
+<div class="SmallExamples"><B>subtype</B>&nbsp;S&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1..2;<BR>
+<B>function</B>&nbsp;F&nbsp;<B>return</B>&nbsp;S;<BR>
+<B>case</B>&nbsp;F&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;1&nbsp;=&gt;&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;2&nbsp;=&gt;&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;No&nbsp;<B>others</B>&nbsp;needed.</I></SPAN><BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p18.d">18.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+Note that the result subtype given in a function <SPAN Class="swiss"><A HREF="AA-8-5.html#S0199">renaming_declaration</A></SPAN> 
+is ignored; for a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+whose expression calls a such a function, the full coverage rules are 
+checked using the result subtype of the original function. Note that 
+predefined operators such as &quot;+&quot; have an unconstrained result 
+subtype (see <A HREF="AA-4-5-1.html">4.5.1</A>). Note that generic formal 
+functions do not have static result subtypes. Note that the result subtype 
+of an inherited subprogram need not correspond to any nameable subtype; 
+there is still a perfectly good result subtype, though.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p18.e">18.e</a></div>
+<div class="Annotations">Ada 83 forgot to say what happens for &ldquo;legally&rdquo; 
+out-of-bounds values.</div>
+<div class="paranum"><a name="p18.f">18.f</a></div>
+<div class="Annotations">We take advantage of rules and terms (e.g. <I>cover 
+a value</I>) defined for <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>s 
+in <A HREF="AA-3-8-1.html">3.8.1</A>, &ldquo;<A HREF="AA-3-8-1.html">Variant 
+Parts and Discrete Choices</A>&rdquo;.</div>
+<div class="paranum"><a name="p18.g">18.g</a></div>
+<div class="Annotations">In the Name Resolution Rule for the case expression, 
+we no longer need RM83-5.4(3)'s &ldquo;which must be determinable independently 
+of the context in which the expression occurs, but using the fact that 
+the expression must be of a discrete type,&rdquo; because the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is now a complete context. See <A HREF="AA-8-6.html">8.6</A>, &ldquo;<A HREF="AA-8-6.html">The 
+Context of Overload Resolution</A>&rdquo;.</div>
+<div class="paranum"><a name="p18.h">18.h</a></div>
+<div class="Annotations">Since <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>s 
+are now defined as <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s, 
+their coverage rule is now covered under the general rule for <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s, 
+rather than being separated out along with <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN>s. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p18.i">18.i/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
+Rewording to reflect that a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
+is now a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</div>
+<div class="paranum"><a name="p18.j">18.j/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+Revised for changes to <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+made to allow static predicates (see <A HREF="AA-3-2-4.html">3.2.4</A>) 
+as case choices (see <A HREF="AA-3-8-1.html">3.8.1</A>).</div>
+<div class="paranum"><a name="p18.k">18.k/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+Added the <I>selecting_</I> prefix to make this wording consistent with 
+<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>, 
+and to clarify which <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is being talked about in the wording.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

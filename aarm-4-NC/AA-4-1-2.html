@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Slices</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-1-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.1.2 Slices</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I2591"></A> A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+denotes a one-dimensional array formed by a sequence of consecutive components 
+of a one-dimensional array. A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+of a variable is a variable; a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+of a constant is a constant;] a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+of a value is a value.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">slice</SPAN><A NAME="I2592"></A><A NAME="S0097"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2593"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>(<A NAME="I2594"></A><SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>)</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+shall resolve to denote a one-dimensional array (after any implicit dereference).</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2595"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+is the index type of the array type.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+denotes a one-dimensional array formed by the sequence of consecutive 
+components of the array denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>, 
+corresponding to the range of values of the index given by the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The type of the <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+is that of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>. 
+Its bounds are those defined by the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I2596"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+and the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+are evaluated in an arbitrary order.<A NAME="I2597"></A> <A NAME="I2598"></A><A NAME="I2599"></A><A NAME="I2600"></A>If 
+the <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+is not a <I>null slice</I> (a <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+where the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+is a null range), then a check is made that the bounds of the <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+belong to the index range of the array denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>. 
+<A NAME="I2601"></A>Constraint_Error is raised if this check fails.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">2&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+is not permitted as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of an Access <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>, 
+even if the components or the array as a whole are aliased. See <A HREF="AA-3-10-2.html">3.10.2</A>. 
+</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Slices are not aliased, by <A HREF="AA-3-10.html">3.10</A>, 
+&ldquo;<A HREF="AA-3-10.html">Access Types</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is to ease implementation 
+of general-access-to-array. If slices were aliased, implementations would 
+need to store array dope with the access values, which is not always 
+desirable given access-to-incomplete types completed in a package body. 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">3&nbsp;&nbsp;For a one-dimensional array A, the <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+A(N .. N) denotes an array that has only one component; its type is the 
+type of A. On the other hand, A(N) denotes a component of the array A 
+and has the corresponding component type.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of slices:</I> 
+</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;Stars(1&nbsp;..&nbsp;15)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;slice&nbsp;of&nbsp;15&nbsp;characters&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-6-3.html">3.6.3</A>)</I></SPAN><BR>
+&nbsp;&nbsp;Page(10&nbsp;..&nbsp;10&nbsp;+&nbsp;Size)&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;slice&nbsp;of&nbsp;1&nbsp;+&nbsp;Size&nbsp;components&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-6.html">3.6</A>)</I></SPAN><BR>
+&nbsp;&nbsp;Page(L)(A&nbsp;..&nbsp;B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;slice&nbsp;of&nbsp;the&nbsp;array&nbsp;Page(L)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-6.html">3.6</A>)</I></SPAN><BR>
+&nbsp;&nbsp;Stars(1&nbsp;..&nbsp;0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;null&nbsp;slice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-6-3.html">3.6.3</A>)</I></SPAN><BR>
+&nbsp;&nbsp;My_Schedule(Weekday)&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;bounds&nbsp;given&nbsp;by&nbsp;subtype&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-6-1.html">3.6.1</A>&nbsp;and&nbsp;<A HREF="AA-3-5-1.html">3.5.1</A>)</I></SPAN><BR>
+&nbsp;&nbsp;Stars(5&nbsp;..&nbsp;15)(K)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;same&nbsp;as&nbsp;Stars(K)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(see&nbsp;<A HREF="AA-3-6-3.html">3.6.3</A>)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;provided&nbsp;that&nbsp;K&nbsp;is&nbsp;in&nbsp;5&nbsp;..&nbsp;15</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-1-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,349 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Data Validity</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-9-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.9.1 Data Validity</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Certain actions that can potentially lead to erroneous 
+execution are not directly erroneous, but instead can cause objects to 
+become <I>abnormal</I>. Subsequent uses of abnormal objects can be erroneous.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">A scalar object can have an <I>invalid representation</I>, 
+which means that the object's representation does not represent any value 
+of the object's subtype. <A NAME="I5597"></A>The primary cause of invalid 
+representations is uninitialized variables.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">Abnormal objects and invalid representations are 
+explained in this subclause.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5598"></A><A NAME="I5599"></A>When 
+an object is first created, and any explicit or default initializations 
+have been performed, the object and all of its parts are in the <I>normal</I> 
+state. Subsequent operations generally leave them normal. However, an 
+object or part of an object can become <I>abnormal</I> in the following 
+ways:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted"><A NAME="I5600"></A>An assignment to the object 
+is disrupted due to an abort (see <A HREF="AA-9-8.html">9.8</A>) or due 
+to the failure of a language-defined check (see <A HREF="AA-11-6.html">11.6</A>).</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+The object is not scalar, and is passed to an <B>in out</B> or <B>out</B> 
+parameter of an imported procedure, the Read procedure of an instance 
+of Sequential_IO, Direct_IO, or Storage_IO, or the stream attribute T'Read, 
+if after return from the procedure the representation of the parameter 
+does not represent a value of the parameter's subtype.</div>
+<div class="paranum"><a name="p6.1">6.1/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+The object is the return object of a function call of a nonscalar type, 
+and the function is an imported function, an instance of Unchecked_Conversion, 
+or the stream attribute T'Input, if after return from the function the 
+representation of the return object does not represent a value of the 
+function's subtype.</div>
+<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We explicitly list the routines 
+involved in order to avoid future arguments. All possibilities are listed.</div>
+<div class="paranum"><a name="p6.b">6.b/2</a></div>
+<div class="Annotations">We did not include Stream_IO.Read in the list 
+above. A Stream_Element should include all possible bit patterns, and 
+thus it cannot be invalid. Therefore, the parameter will always represent 
+a value of its subtype. By omitting this routine, we make it possible 
+to write arbitrary I/O operations without any possibility of abnormal 
+objects.&nbsp;</div>
+<div class="paranum"><a name="p6.2">6.2/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+[For an imported object, it is the programmer's responsibility to ensure 
+that the object remains in a normal state.]&nbsp;</div>
+<div class="paranum"><a name="p6.c">6.c/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This follows (and echos) the standard 
+rule of interfacing; the programmer must ensure that Ada semantics are 
+followed (see <A HREF="AA-B-1.html">B.1</A>).&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I5601"></A>Whether or not an object actually 
+becomes abnormal in these cases is not specified. An abnormal object 
+becomes normal again upon successful completion of an assignment to the 
+object as a whole.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I5602"></A>It is erroneous to evaluate a 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0126">primary</A></SPAN> that 
+is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+denoting an abnormal object, or to evaluate a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+that denotes an abnormal object.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The <B>in out</B> or <B>out</B> 
+parameter case does not apply to scalars; bad scalars are merely invalid 
+representations, rather than abnormal, in this case.&nbsp;</div>
+<div class="paranum"><a name="p8.c">8.c/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+The reason we allow access objects, and objects containing subcomponents 
+of an access type, to become abnormal is because the correctness of an 
+access value cannot necessarily be determined merely by looking at the 
+bits of the object. The reason we allow scalar objects to become abnormal 
+is that we wish to allow the compiler to optimize assuming that the value 
+of a scalar object belongs to the object's subtype, if the compiler can 
+prove that the object is initialized with a value that belongs to the 
+subtype. The reason we allow composite objects to become abnormal is 
+that such object might be represented with implicit levels of indirection; 
+if those are corrupted, then even assigning into a component of the object, 
+or simply asking for its Address, might have an unpredictable effect. 
+The same is true if the discriminants have been destroyed.&nbsp;</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5603"></A><A NAME="I5604"></A>If 
+the representation of a scalar object does not represent a value of the 
+object's subtype (perhaps because the object was not initialized), the 
+object is said to have an <I>invalid representation</I>. It is a bounded 
+error to evaluate the value of such an object. <A NAME="I5605"></A><A NAME="I5606"></A>If 
+the error is detected, either Constraint_Error or Program_Error is raised. 
+Otherwise, execution continues using the invalid representation. The 
+rules of the language outside this subclause assume that all objects 
+have valid representations. The semantics of operations on invalid representations 
+are as follows:</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The AARM is more explicit 
+about what happens when the value of the case expression is an invalid 
+representation.</div>
+<div class="paranum"><a name="p9.b">9.b/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+This includes the result object of functions, including the result of 
+Unchecked_Conversion, T'Input, and imported functions.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">If the representation of the object represents 
+a value of the object's type, the value of the type is used.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">If the representation of the object does not represent 
+a value of the object's type, the semantics of operations on such representations 
+is implementation-defined, but does not by itself lead to erroneous or 
+unpredictable execution, or to other objects becoming abnormal.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+This means that the implementation must take care not to use an invalid 
+representation in a way that might cause erroneous execution. For instance, 
+the exception mandated for <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>s 
+must be raised. Array indexing must not cause memory outside of the array 
+to be written (and usually, not read either). These cases and similar 
+cases may require explicit checks by the implementation.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0279-1.TXT">AI05-0279-1</A></I>} 
+<A NAME="I5607"></A>A call to an imported function or an instance of 
+Unchecked_Conversion is erroneous if the result is scalar, the result 
+object has an invalid representation, and the result is used other than 
+as the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
+as the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0200">object_renaming_declaration</A></SPAN>, 
+or as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of a Valid attribute. If such a result object is used as the source of 
+an assignment, and the assigned value is an invalid representation for 
+the target of the assignment, then any use of the target object prior 
+to a further assignment to the target object, other than as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of a Valid attribute reference, is erroneous.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+In a typical implementation, every bit pattern that fits in an object 
+of a signed integer subtype will represent a value of the type, if not 
+of the subtype. However, for an enumeration or floating point type, as 
+well as some modular types, there are typically bit patterns that do 
+not represent any value of the type. In such cases, the implementation 
+ought to define the semantics of operations on the invalid representations 
+in the obvious manner (assuming the bounded error is not detected): a 
+given representation should be equal to itself, a representation that 
+is in between the internal codes of two enumeration literals should behave 
+accordingly when passed to comparison operators and membership tests, 
+etc. We considered <I>requiring</I> such sensible behavior, but it resulted 
+in too much arcane verbiage, and since implementations have little incentive 
+to behave irrationally, such verbiage is not important to have.</div>
+<div class="paranum"><a name="p12.b">12.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+If a stand-alone scalar object is initialized to a an in-range value, 
+then the implementation can take advantage of the fact that the use of 
+any out-of-range value has to be erroneous. Such an out-of-range value 
+can be produced only by things like unchecked conversion, imported functions, 
+and abnormal values caused by disruption of an assignment due to abort 
+or to failure of a language-defined check. This depends on out-of-range 
+values being checked before assignment (that is, checks are not optimized 
+away unless they are proven redundant).</div>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Consider the following 
+example:&nbsp;</div>
+<div class="paranum"><a name="p12.d">12.d/2</a></div>
+<div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+<B>type</B>&nbsp;My_Int&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0..99;<BR>
+<B>function</B>&nbsp;Safe_Convert&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Unchecked_Conversion(My_Int,&nbsp;Integer);<BR>
+<B>function</B>&nbsp;Unsafe_Convert&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Unchecked_Conversion(My_Int,&nbsp;Positive);<BR>
+X&nbsp;:&nbsp;Positive&nbsp;:=&nbsp;Safe_Convert(0);&nbsp;--<SPAN Class="roman"><I>&nbsp;Raises&nbsp;Constraint_Error.</I></SPAN><BR>
+Y&nbsp;:&nbsp;Positive&nbsp;:=&nbsp;Unsafe_Convert(0);&nbsp;--<SPAN Class="roman"><I>&nbsp;Bounded&nbsp;Error,&nbsp;may&nbsp;be&nbsp;invalid.</I></SPAN><BR>
+B&nbsp;:&nbsp;Boolean&nbsp;&nbsp;:=&nbsp;Y'Valid;&nbsp;--<SPAN Class="roman"><I>&nbsp;OK,&nbsp;B&nbsp;=&nbsp;False.</I></SPAN><BR>
+Z&nbsp;:&nbsp;Positive&nbsp;:=&nbsp;Y+1;&nbsp;--<SPAN Class="roman"><I>&nbsp;Erroneous&nbsp;to&nbsp;use&nbsp;Y.</I></SPAN></div>
+<div class="paranum"><a name="p12.e">12.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+The call to Unsafe_Convert  is a bounded error, which might raise Constraint_Error, 
+Program_Error, or return an invalid value. Moreover, if an exception 
+is not raised, most uses of that invalid value (including the use of 
+Y) cause erroneous execution. The call to Safe_Convert is not erroneous. 
+The result object is an object of subtype Integer containing the value 
+0. The assignment to X is required to do a constraint check; the fact 
+that the conversion is unchecked does not obviate the need for subsequent 
+checks required by the language rules.</div>
+<div class="paranum"><a name="p12.e.1">12.e.1/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+The reason for delaying erroneous execution until the object is used 
+is so that the invalid representation can be tested for validity using 
+the Valid attribute (see <A HREF="AA-13-9-2.html">13.9.2</A>) without 
+causing execution to become erroneous. Note that this delay does not 
+imply an exception will not be raised; an implementation could treat 
+both conversions in the example in the same way and raise Constraint_Error.</div>
+<div class="paranum"><a name="p12.e.2">12.e.2/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0279-1.TXT">AI05-0279-1</A></I>} 
+The rules are defined in terms of the result object, and thus the name 
+used to reference that object is irrelevant. That is why we don't need 
+any special rules to describe what happens when the function result is 
+renamed.</div>
+<div class="paranum"><a name="p12.f">12.f</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>If an implementation 
+wants to have a &ldquo;friendly&rdquo; mode, it might always assign an 
+uninitialized scalar a default initial value that is outside the object's 
+subtype (if there is one), and check for this value on some or all reads 
+of the object, so as to help detect references to uninitialized scalars. 
+Alternatively, an implementation might want to provide an &ldquo;unsafe&rdquo; 
+mode where it presumed even uninitialized scalars were always within 
+their subtype.&nbsp;</div>
+<div class="paranum"><a name="p12.g">12.g</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The above rules imply that 
+it is a bounded error to apply a predefined operator to an object with 
+a scalar subcomponent having an invalid representation, since this implies 
+reading the value of each subcomponent. Either Program_Error or Constraint_Error 
+is raised, or some result is produced, which if composite, might have 
+a corresponding scalar subcomponent still with an invalid representation.</div>
+<div class="paranum"><a name="p12.h">12.h</a></div>
+<div class="Annotations">Note that it is not an error to assign, convert, 
+or pass as a parameter a composite object with an uninitialized scalar 
+subcomponent. In the other hand, it is a (bounded) error to apply a predefined 
+operator such as =, &lt;, and <B>xor</B> to a composite operand with 
+an invalid scalar subcomponent.&nbsp;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
+<A NAME="I5608"></A>The dereference of an access value is erroneous if 
+it does not designate an object of an appropriate type or a subprogram 
+with an appropriate profile, if it designates a nonexistent object, or 
+if it is an access-to-variable value that designates a constant object 
+and it did not originate from an attribute_reference applied to an aliased 
+variable view of a controlled or immutably limited object. [An access 
+value whose dereference is erroneous can exist, for example, because 
+of Unchecked_Deallocation, Unchecked_Access, or Unchecked_Conversion.]</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The above mentioned Unchecked_... 
+features are not the only causes of such access values. For example, 
+interfacing to other languages can also cause the problem.</div>
+<div class="paranum"><a name="p13.b">13.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
+We permit the use of access-to-variable values that designate constant 
+objects so long as they originate from an aliased variable view of a 
+controlled or immutably limited constant, such as during the initialization 
+of a constant (both via the &ldquo;current instance&rdquo; and during 
+a call to Initialize) or during an assignment (during a call to Adjust). 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">21&nbsp;&nbsp;Objects can become abnormal due to other 
+kinds of actions that directly update the object's representation; such 
+actions are generally considered directly erroneous, however.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations">In order to reduce the amount of erroneousness, 
+we separate the concept of an undefined value into objects with invalid 
+representation (scalars only) and abnormal objects.</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations">Reading an object with an invalid representation 
+is a bounded error rather than erroneous; reading an abnormal object 
+is still erroneous. In fact, the only safe thing to do to an abnormal 
+object is to assign to the object as a whole.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p14.c">14.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
+The description of erroneous execution for Unchecked_Conversion and imported 
+objects was tightened up so that using the Valid attribute to test such 
+a value is not erroneous.</div>
+<div class="paranum"><a name="p14.d">14.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+Clarified the definition of objects that can become abnormal; made sure 
+that all of the possibilities are included.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p14.e">14.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
+<B>Correction:</B> Common programming techniques such as squirreling 
+away<A NAME="I5609"></A> an access to a controlled object during initialization 
+and using a self-referencing discriminant (the so-called &ldquo;Rosen 
+trick&rdquo;<A NAME="I5610"></A>) no longer are immediately erroneous 
+if the object is declared constant, so these techniques can be used portably 
+and safely. Practically, these techniques already worked as compilers 
+did not take much advantage of this rule, so the impact of this change 
+will be slight.&nbsp;</div>
+<div class="paranum"><a name="p14.f">14.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0279-1.TXT">AI05-0279-1</A></I>} 
+<B>Correction:</B> The description of erroneous execution for Unchecked_Conversion 
+and imported objects was adjusted to clarify that renaming such an object 
+is not, by itself, erroneous.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-9-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

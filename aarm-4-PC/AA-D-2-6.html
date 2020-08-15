@@ -1,0 +1,373 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Earliest Deadline First Dispatching</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.6 Earliest Deadline First Dispatching</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The deadline of a task is an indication of the urgency of the task; it 
+represents a point on an ideal physical time line. The deadline might 
+affect how resources are allocated to the task.</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+defines a package for representing the deadline of a task and a dispatching 
+policy that defines Earliest Deadline First (EDF) dispatching. <span class="insert3">An 
+aspect</span><span class="delete3">&nbsp;A pragma</span> is defined to assign 
+an initial deadline to a task.</div>
+<div class="paranum"><a name="p2.a">2.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+This <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
+is the only way of assigning an initial deadline to a task so that its 
+activation can be controlled by EDF scheduling. This is similar to the 
+way <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
+Priority is used to give an initial priority to a task.&nbsp;</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p2.b">2.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+To predict the behavior of a multi-tasking program it is necessary to 
+control access to the processor which is preemptive, and shared objects 
+which are usually non-preemptive and embodied in protected objects. Two 
+common dispatching policies for the processor are fixed priority and 
+EDF. The most effective control over shared objects is via preemption 
+levels. With a pure priority scheme a single notion of priority is used 
+for processor dispatching and preemption levels. With EDF and similar 
+schemes priority is used for preemption levels (only), with another measure 
+used for dispatching. T.P. Baker showed (<I>Real-Time Systems</I>, March 
+1991, vol. 3, num. 1, <I>Stack-Based Scheduling of Realtime Processes</I>) 
+that for EDF a newly released task should only preempt the currently 
+running task if it has an earlier deadline and a higher preemption level 
+than any currently &ldquo;locked&rdquo; protected object. The rules of 
+this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+implement this scheme including the case where the newly released task 
+should execute before some existing tasks but not preempt the currently 
+executing task.&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+3 through 6 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Relative_Deadline is as follows:</span>&nbsp;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
+<A NAME="I8730"></A><A NAME="I8731"></A>Relative_Deadline (<I>relative_deadline_</I><A NAME="I8732"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>);</span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">The expected type for <I>relative_deadline_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is Real_Time.Time_Span.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">A Relative_Deadline pragma is allowed only immediately 
+within a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">task_definition</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN>. 
+At most one such pragma shall appear within a given construct.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+EDF_Across_Priorities is a task dispatching policy.<span class="insert3"><A NAME="I8733"></A><A NAME="I8734"></A></span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The following language-defined library package exists:&nbsp;</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Real_Time;<BR>
+<B>with</B>&nbsp;Ada.Task_Identification;<BR>
+<B>package</B>&nbsp;Ada.Dispatching.EDF&nbsp;<B>is</B><A NAME="I8735"></A><BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8736"></A>Deadline&nbsp;<B>is</B>&nbsp;Ada.Real_Time.Time;<BR>
+&nbsp;&nbsp;<A NAME="I8737"></A>Default_Deadline&nbsp;:&nbsp;<B>constant</B>&nbsp;Deadline&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Last;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8738"></A>Set_Deadline&nbsp;(D&nbsp;:&nbsp;<B>in</B>&nbsp;Deadline;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8739"></A>Delay_Until_And_Set_Deadline&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deadline_Offset&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8740"></A>Get_Deadline&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;<BR>
+<B>end</B>&nbsp;Ada.Dispatching.EDF;</div>
+<div class="paranum"><a name="p9.1">9.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">For a task type (including the anonymous type of 
+a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>) 
+or subprogram, the following language-defined representation aspect may 
+be specified:</span></div>
+<div class="paranum"><a name="p9.2">9.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert3">Relative_Deadline</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">The aspect Relative_Deadline is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+which shall be of type Real_Time.Time_Span.<A NAME="I8741"></A><A NAME="I8742"></A></span></div>
+<div class="paranum"><a name="p9.a">9.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert3"><B>Relative_Deadline:&nbsp;</B></span><span class="insert3">Task 
+parameter used in Earliest Deadline First Dispatching.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p9.3">9.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">The Relative_Deadline aspect shall not be specified 
+on a task interface type.</span>&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+If the EDF_Across_Priorities policy is specified for a partition, then 
+the Ceiling_Locking policy (see <A HREF="AA-D-3.html">D.3</A>) shall 
+also be specified for the partition.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+If the EDF_Across_Priorities policy appears in a Priority_Specific_Dispatching 
+pragma (see <A HREF="AA-D-2-2.html">D.2.2</A>) in a partition, then the 
+Ceiling_Locking policy (see <A HREF="AA-D-3.html">D.3</A>) shall also 
+be specified for the partition.</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Unlike the other language-defined 
+dispatching policies, the semantic description of EDF_Across_Priorities 
+assumes Ceiling_Locking (and a ceiling priority) in order to make the 
+mapping between deadlines and priorities work. Thus, we require both 
+policies to be specified if EDF is used in the partition.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3">The</span><span class="delete3">&nbsp;A</span> Relative_Deadline 
+<span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
+has no effect if it <span class="insert3">is specified for</span><span class="delete3">&nbsp;occurs 
+in the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN> 
+of</span> a subprogram other than the main subprogram.</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The initial absolute deadline of a task <span class="insert3">for which 
+aspect</span><span class="delete3">&nbsp;containing pragma</span> Relative_Deadline<span class="insert3">&nbsp;is specified</span> is the value of Real_Time.Clock + <span class="insert3">the 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+that is the value of the aspect</span><span class="delete3"><I>&nbsp;relative_deadline_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN></span>, 
+where <span class="insert3">this entire expression, including&nbsp;</span>the 
+call of Real_Time.Clock<span class="insert3">, is evaluated</span><span class="delete3">&nbsp;is made</span> between task creation and the start of its activation. 
+If <span class="insert3">the aspect</span><span class="delete3">&nbsp;there 
+is no</span> Relative_Deadline <span class="insert3">is not specified,</span><span class="delete3">&nbsp;pragma</span> 
+then the initial absolute deadline of a task is the value of Default_Deadline. 
+The environment task is also given an initial deadline by this rule<span class="insert3">, 
+using the value of the Relative_Deadline aspect of the main subprogram 
+(if any)</span>.</div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>The environment task is a normal 
+task by <A HREF="AA-10-2.html">10.2</A>, so of course this rule applies 
+to it.&nbsp;</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The procedure Set_Deadline changes the absolute deadline of the task 
+to D. The function Get_Deadline returns the absolute deadline of the 
+task.</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The procedure Delay_Until_And_Set_Deadline delays the calling task until 
+time Delay_Until_Time. When the task becomes runnable again it will have 
+deadline Delay_Until_Time + Deadline_Offset.</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+On a system with a single processor, the setting of the deadline of a 
+task to the new value occurs immediately at the first point that is outside 
+the execution of a protected action. If the task is currently on a ready 
+queue it is removed and re-entered on to the ready queue determined by 
+the rules defined below.</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+When EDF_Across_Priorities is specified for priority range <I>Low</I>..<I>High</I> 
+all ready queues in this range are ordered by deadline. The task at the 
+head of a queue is the one with the earliest deadline.</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+A task dispatching point occurs for the currently running task <I>T</I> 
+to which policy EDF_Across_Priorities applies:</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Bulleted">when a change to the deadline of <I>T</I> occurs;</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Bulleted">there is a task on the ready queue for the active 
+priority of <I>T</I> with a deadline earlier than the deadline of <I>T</I>; 
+or</div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Bulleted">there is a nonempty ready queue for that processor 
+with a higher priority than the active priority of the running task.</div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal">In these cases, the currently running task is said 
+to be preempted and is returned to the ready queue for its active priority.</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+For a task <I>T</I> to which policy EDF_Across_Priorities applies, the 
+base priority is not a source of priority inheritance; the active priority 
+when first activated or while it is blocked is defined as the maximum 
+of the following:</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Bulleted">the lowest priority in the range specified as EDF_Across_Priorities 
+that includes the base priority of <I>T</I>;</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Bulleted">the priorities, if any, currently inherited by 
+<I>T</I>;</div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0055-1.TXT">AI05-0055-1</A></I>} 
+the highest priority <I>P</I>, if any, less than the base priority of 
+<I>T</I> such that one or more tasks are executing within a protected 
+object with ceiling priority <I>P</I> and task <I>T</I> has an earlier 
+deadline than all such tasks<span class="insert3">; and furthermore <I>T</I> 
+has an earlier deadline than all other tasks on ready queues with priorities 
+in the given EDF_Across_Priorities range that are strictly less than 
+<I>P</I></span>.&nbsp;</div>
+<div class="paranum"><a name="p26.a">26.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The active priority of 
+<I>T</I> might be lower than its base priority.&nbsp;</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+When a task <I>T</I> is first activated or becomes unblocked, it is added 
+to the ready queue corresponding to this active priority. Until it becomes 
+blocked again, the active priority of <I>T</I> remains no less than this 
+value; it will exceed this value only while it is inheriting a higher 
+priority.</div>
+<div class="paranum"><a name="p27.a">27.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>These rules ensure that a 
+task executing in a protected object is preempted only by a task with 
+a shorter deadline and a higher base priority. This matches the traditional 
+preemption level description without the need to define a new kind of 
+protected object locking.&nbsp;</div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+When the setting of the base priority of a ready task takes effect and 
+the new priority is in a range specified as EDF_Across_Priorities, the 
+task is added to the ready queue corresponding to its new active priority, 
+as determined above.</div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+For all the operations defined in Dispatching.EDF, Tasking_Error is raised 
+if the task identified by T has terminated. Program_Error is raised if 
+the value of T is Null_Task_Id.</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<A NAME="I8743"></A>If EDF_Across_Priorities is specified for priority 
+range <I>Low</I>..<I>High</I>, it is a bounded error to declare a protected 
+object with ceiling priority <I>Low</I> or to assign the value <I>Low</I> 
+to attribute 'Priority. In either case either Program_Error is raised 
+or the ceiling of the protected object is assigned the value <I>Low</I>+1.</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<A NAME="I8744"></A>If a value of Task_Id is passed as a parameter to 
+any of the subprograms of this package and the corresponding task object 
+no longer exists, the execution of the program is erroneous.</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+On a multiprocessor, the implementation shall document any conditions 
+that cause the completion of the setting of the deadline of a task to 
+be delayed later than what is specified for a single processor.&nbsp;</div>
+<div class="paranum"><a name="p32.a.1">32.a.1/2</a></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>Any conditions 
+that cause the completion of the setting of the deadline of a task to 
+be delayed for a multiprocessor.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Notes">18&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If two adjacent priority ranges, <I>A</I>..<I>B</I> and <I>B</I>+1..<I>C</I> 
+are specified to have policy EDF_Across_Priorities<span class="insert3">,</span> 
+then this is not equivalent to this policy being specified for the single 
+range, <I>A</I>..<I>C</I>.</div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Notes">19&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The above rules implement the preemption-level protocol (also called 
+Stack Resource Policy protocol) for resource sharing under EDF dispatching. 
+The preemption-level for a task is denoted by its base priority. The 
+definition of a ceiling preemption-level for a protected object follows 
+the existing rules for ceiling locking.</div>
+<div class="paranum"><a name="p34.a">34.a/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+An implementation may support additional dispatching policies by replacing 
+absolute deadline with an alternative measure of urgency.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p34.b">34.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<A NAME="I8745"></A>Policy EDF_Across_Priorities and package Dispatching.EDF 
+are new.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p34.c">34.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="insert3"><A NAME="I8746"></A>Aspect Relative_Deadline is 
+new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Relative_Deadline is now obsolescent.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p34.d">34.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0055-1.TXT">AI05-0055-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Corrected definition of active 
+priority to avoid deadline inversion in an unusual case.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Formal Parameter Modes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.2 Formal Parameter Modes</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-6-1.html#S0175">parameter_specification</A></SPAN> 
+declares a formal parameter of mode <B>in</B>, <B>in out</B>, or <B>out</B>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I3426"></A><A NAME="I3427"></A><A NAME="I3428"></A><A NAME="I3429"></A><A NAME="I3430"></A><A NAME="I3431"></A>A 
+parameter is passed either <I>by copy</I> or <I>by reference</I>. When 
+a parameter is passed by copy, the formal parameter denotes a separate 
+object from the actual parameter, and any information transfer between 
+the two occurs only before and after executing the subprogram. When a 
+parameter is passed by reference, the formal parameter denotes (a view 
+of) the object denoted by the actual parameter; reads and updates of 
+the formal parameter directly reference the actual parameter object.</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal"><A NAME="I3432"></A>A type is a <I>by-copy type</I> 
+if it is an elementary type, or if it is a descendant of a private type 
+whose full type is a by-copy type. A parameter of a by-copy type is passed 
+by copy<span class="insert3">, unless the formal parameter is explicitly 
+aliased</span>.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3433"></A>A 
+type is a <I>by-reference type</I> if it is a descendant of one of the 
+following:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">a tagged type;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a task or protected type;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Bulleted"><span class="insert3">an explicitly limited record 
+type</span><span class="delete3">&nbsp;a nonprivate type with the reserved 
+word <B>limited</B> in its declaration</span>;&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">a composite type with a subcomponent of a by-reference 
+type;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">a private type whose full type is a by-reference 
+type.&nbsp;</div>
+<div class="paranum"><a name="p10">10/4</a></div>
+<div class="Normal">A parameter of a by-reference type is passed by reference<span class="insert3">, 
+as is an explicitly aliased parameter of any type</span>. <A NAME="I3434"></A>Each 
+value of a by-reference type has an associated object. For a parenthesized 
+expression, <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN>, 
+or <span class="insert4">view conversion</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-6.html#S0141">&nbsp;type_conversion</A></SPAN></span>, 
+this object is the one associated with the operand.<span class="insert4">&nbsp;For a value conversion, the associated object is the anonymous result 
+object if such an object is created (see <A HREF="RM-4-6.html">4.6</A>); 
+otherwise it is the associated object of the operand.</span><span class="insert3">&nbsp;For a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN>, 
+this object is the one associated with the evaluated <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal"><A NAME="I3435"></A>For <span class="insert3">other 
+</span>parameters<span class="delete3">&nbsp;of other types</span>, it is 
+unspecified whether the parameter is passed by copy or by reference. 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal"><A NAME="I3436"></A><A NAME="I3437"></A><A NAME="I3438"></A><A NAME="I3439"></A>If 
+one <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> denotes 
+a part of a formal parameter, and a second <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+denotes a part of a distinct formal parameter or an object that is not 
+part of a formal parameter, then the two <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+are considered <I>distinct access paths</I>. If an object is of a type 
+for which the parameter passing mechanism is not specified<span class="insert3">&nbsp;and is not an explicitly aliased parameter</span>, then it is a bounded 
+error to assign to the object via one access path, and then read the 
+value of the object via a distinct access path, unless the first access 
+path denotes a part of a formal parameter that no longer exists at the 
+point of the second access (due to leaving the corresponding callable 
+construct). <A NAME="I3440"></A>The possible consequences are that Program_Error 
+is raised, or the newly assigned value is read, or some old value of 
+the object is read.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13/4</a></div>
+<div class="Notes">6&nbsp;&nbsp;<span class="insert4">The mode of a formal 
+parameter describes the direction of information transfer to or from 
+the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN> 
+(see <A HREF="RM-6-1.html">6.1</A>).</span></div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">7&nbsp;&nbsp;A formal parameter of mode <B>in</B> 
+is a constant view (see <A HREF="RM-3-3.html">3.3</A>); it cannot be 
+updated within the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN>.</div>
+<div class="paranum"><a name="p15">15/4</a></div>
+<div class="Notes">8&nbsp;&nbsp;<span class="insert4">A formal parameter 
+of mode <B>out</B> might be uninitialized at the start of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN> 
+(see <A HREF="RM-6-4-1.html">6.4.1</A>).</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Type Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2.1 Type Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+declares a type and its first subtype.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">type_declaration</SPAN><A NAME="I1492"></A><A NAME="S0023"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1493"></A><SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1494"></A><SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1495"></A><SPAN Class="swiss"><A HREF="AA-7-3.html#S0193">private_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1496"></A><SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<SPAN Class="swiss">full_type_declaration</SPAN><A NAME="I1497"></A><A NAME="S0024"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I1498"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I1499"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I1500"></A><SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0025">type_definition</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1501"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>;<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1502"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0205">task_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1503"></A><SPAN Class="swiss"><A HREF="AA-9-4.html#S0210">protected_type_declaration</A></SPAN></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+<SPAN Class="swiss">type_definition</SPAN><A NAME="I1504"></A><A NAME="S0025"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1505"></A><SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0038">enumeration_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1506"></A><SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0041">integer_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1507"></A><SPAN Class="swiss"><A HREF="AA-3-5-6.html#S0044">real_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1508"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1509"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1510"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0079">access_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1511"></A><SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN><span class="insert2">&nbsp;|&nbsp;<A NAME="I1512"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0077">interface_type_definition</A></SPAN></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A given type shall not have a subcomponent whose 
+type is the given type itself.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I1513"></A>The <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+denotes the <I>first subtype</I> of the type. The <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
+if any, defines the discriminants of the type (see <A HREF="AA-3-7.html">3.7</A>, 
+&ldquo;<A HREF="AA-3-7.html">Discriminants</A>&rdquo;). The remainder 
+of the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+defines the remaining characteristics of (the view of) the type.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<A NAME="I1514"></A>A type defined by a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+is a <I>named</I> type; such a type has one or more nameable subtypes. 
+<A NAME="I1515"></A>Certain other forms of declaration also include type 
+definitions as part of the declaration for an object<span class="delete2">&nbsp;(including a parameter or a discriminant)</span>. The type defined by 
+such a declaration is <I>anonymous</I> &mdash; it has no nameable subtypes. 
+<A NAME="I1516"></A>For explanatory purposes, this International Standard 
+sometimes refers to an anonymous type by a pseudo-name, written in italics, 
+and uses such pseudo-names at places where the syntax normally requires 
+an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
+For a named type whose first subtype is T, this International Standard 
+sometimes refers to the type of T as simply &ldquo;the type T&rdquo;. 
+</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+The only user-defined types that can be anonymous in the above sense 
+are array, access, task, and protected types. An anonymous array, task, 
+or protected type can be defined as part of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>. 
+An anonymous access type can be defined as part of <span class="insert2">numerous 
+other constructs</span><span class="delete2">&nbsp;a parameter or discriminant 
+specification</span>.&nbsp;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<A NAME="I1517"></A>A named type that is declared by a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
+or an anonymous type that is defined <span class="insert2">by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+or&nbsp;</span>as part of declaring an object of the type, is called a <I>full 
+type</I>.<A NAME="I1518"></A> <span class="insert2">The declaration of 
+a full type also declares the <I>full view</I> of the type.<A NAME="I1519"></A> 
+</span>The <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0025">type_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">task_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-4.html#S0212">protected_definition</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+that defines a full type is called a <I>full type definition</I>. [Types 
+declared by other forms of <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
+are not separate types; they are partial or incomplete views of some 
+full type.]&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>Class-wide, universal, 
+and root numeric types are full types.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2">We need to mention <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+separately, as it may occur in renames, which do not declare objects.</span> 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1520"></A>The definition of a type implicitly 
+declares certain <I>predefined operators</I> that operate on the type, 
+according to what classes the type belongs, as specified in <A HREF="AA-4-5.html">4.5</A>, 
+&ldquo;<A HREF="AA-4-5.html">Operators and Expression Evaluation</A>&rdquo;. 
+</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We no longer talk about the 
+implicit declaration of basic operations. These are treated like an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN> 
+&mdash; they don't need to be declared, but are still applicable to only 
+certain classes of types.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I1521"></A>The <I>predefined types</I> [(for 
+example the types Boolean, Wide_Character, Integer, <I>root_integer</I>, 
+and <I>universal_integer</I>)] are the types that are defined in [a predefined 
+library package called] Standard[; this package also includes the [(implicit)] 
+declarations of their predefined operators]. [The package Standard is 
+described in <A HREF="AA-A-1.html">A.1</A>.]&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>We use the term &ldquo;predefined&rdquo; 
+to refer to entities declared in the visible part of Standard, to implicitly 
+declared operators of a type whose semantics are defined by the language, 
+to Standard itself, and to the &ldquo;predefined environment&rdquo;. 
+We do not use this term to refer to library packages other than Standard. 
+For example Text_IO is a language-defined package, not a predefined package, 
+and Text_IO.Put_Line is not a predefined operation.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I1522"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+consists of the elaboration of the full type definition. <A NAME="I1523"></A>Each 
+elaboration of a full type definition creates a distinct type and its 
+first subtype.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The creation is associated with 
+the type <I>definition</I>, rather than the type <I>declaration</I>, 
+because there are types that are created by full type definitions that 
+are not immediately contained within a type declaration (e.g. an array 
+object declaration, a singleton task declaration, etc.).&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Any implicit declarations 
+that occur immediately following the full type definition are elaborated 
+where they (implicitly) occur.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of type 
+definitions:</I>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">(White,&nbsp;Red,&nbsp;Yellow,&nbsp;Green,&nbsp;Blue,&nbsp;Brown,&nbsp;Black)<BR>
+<B>range</B>&nbsp;1&nbsp;..&nbsp;72<BR>
+<B>array</B>(1&nbsp;..&nbsp;10)&nbsp;<B>of</B>&nbsp;Integer</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of type 
+declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>type</B>&nbsp;Color&nbsp;&nbsp;<B>is</B>&nbsp;(White,&nbsp;Red,&nbsp;Yellow,&nbsp;Green,&nbsp;Blue,&nbsp;Brown,&nbsp;Black);<BR>
+<B>type</B>&nbsp;Column&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;72;<BR>
+<B>type</B>&nbsp;Table&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(1&nbsp;..&nbsp;10)&nbsp;<B>of</B>&nbsp;Integer;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">3&nbsp;&nbsp;Each of the above examples declares a 
+named type. The identifier given denotes the first subtype of the type. 
+Other named subtypes of the type can be declared with <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>s 
+(see <A HREF="AA-3-2-2.html">3.2.2</A>). Although names do not directly 
+denote types, a phrase like &ldquo;the type Column&rdquo; is sometimes 
+used in this International Standard to refer to the type of Column, where 
+Column denotes the first subtype of the type. For an example of the definition 
+of an anonymous type, see the declaration of the array Color_Table in 
+<A HREF="AA-3-3-1.html">3.3.1</A>; its type is anonymous &mdash; it has 
+no nameable subtypes.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations">The syntactic category <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+now includes task and protected type declarations.</div>
+<div class="paranum"><a name="p16.b">16.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+We have generalized the concept of first-named subtype (now called simply 
+&ldquo;first subtype&rdquo;) to cover all kinds of types, for uniformity 
+of description elsewhere. RM83 defined first-named subtype in Section 
+13. We define first subtype here, because it is now a more fundamental 
+concept. We renamed the term, because in Ada 95 some first subtypes have 
+no name.</div>
+<div class="paranum"><a name="p16.c">16.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+We no longer elaborate <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>s, 
+because there is nothing to do, and it was complex to say that you only 
+wanted to elaborate it once for a private or incomplete type. This is 
+also consistent with the fact that subprogram specifications are not 
+elaborated (neither in Ada 83 nor in Ada 95). Note, however, that an 
+<SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+appearing in a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
+is elaborated<span class="insert2">&nbsp;at the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+(for a nonlimited type) or</span> when an object with such a discriminant 
+is created<span class="insert2">&nbsp;(for a limited type)</span>.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p16.d">16.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<span class="insert2">Added wording so that anonymous access types are 
+always full types, even if they appear in renames.</span></div>
+<div class="paranum"><a name="p16.e">16.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+<span class="insert2">Added interface types (see <A HREF="AA-3-9-4.html">3.9.4</A>) 
+to the syntax.</span></div>
+<div class="paranum"><a name="p16.f">16.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<span class="insert2">Added a definition of full view, so that all types 
+have a well-defined full view.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p16.g">16.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<span class="insert3"><A NAME="I1524"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
+This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,1394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Vectors</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.2 <span class="insert2">The Generic Package Containers.Vectors</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><span class="insert2">The language-defined generic 
+package Containers.Vectors provides private types Vector and Cursor, 
+and a set of operations for each type. A vector container allows insertion 
+and deletion at any position, but it is specifically optimized for insertion 
+and deletion at the high end (the end with the higher index) of the container. 
+A vector container also provides random access to its elements.<A NAME="I6985"></A> 
+<A NAME="I6986"></A></span></div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I6987"></A><A NAME="I6988"></A>A 
+vector container behaves conceptually as an array that expands as necessary 
+as items are inserted. The <I>length</I> of a vector is the number of 
+elements that the vector contains. The <I>capacity</I> of a vector is 
+the maximum number of elements that can be inserted into the vector prior 
+to it being automatically expanded.</span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal"><span class="insert2">Elements in a vector container 
+can be referred to by an index value of a generic formal type. The first 
+element of a vector always has its index value equal to the lower bound 
+of the formal type.</span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I6989"></A>A vector 
+container may contain <I>empty elements</I>. Empty elements do not have 
+a specified value.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
+generic library package Containers.Vectors has the following declaration:</span> 
+</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Examples"><span class="insert2"></span><span class="insert3"><B>with</B>&nbsp;Ada.Iterator_Interfaces;<BR>
+</span><span class="insert2"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index_Type&nbsp;<B>is&nbsp;range</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Ada.Containers.Vectors&nbsp;<B>is</B><A NAME="I6990"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Vectors);</span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Vectors);</span><span class="insert2"></span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6991"></A>Extended_Index&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type'Base&nbsp;<B>range</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type'First-1&nbsp;..<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type'Min&nbsp;(Index_Type'Base'Last&nbsp;-&nbsp;1,&nbsp;Index_Type'Last)&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6992"></A>No_Index&nbsp;:&nbsp;<B>constant</B>&nbsp;Extended_Index&nbsp;:=&nbsp;Extended_Index'First;</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6993"></A>Vector&nbsp;<B>is&nbsp;tagged&nbsp;private</B></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Iterator&nbsp;&nbsp;=&gt;&nbsp;Iterate,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator_Element&nbsp;&nbsp;=&gt;&nbsp;Element_Type</span><span class="insert2">;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Vector);</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6994"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I6995"></A>Empty_Vector&nbsp;:&nbsp;<B>constant</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I6996"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p11.1">11.1/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6997"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p11.2">11.2/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I6998"></A>Vector_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6999"></A>To_Vector&nbsp;(Length&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7000"></A>To_Vector<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(New_Item&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left&nbsp;&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left,&nbsp;Right&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7001"></A>Capacity&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7002"></A>Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type);</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7003"></A>Length&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7004"></A>Set_Length&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type);</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7005"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7006"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7007"></A>To_Cursor&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Extended_Index)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7008"></A>To_Index&nbsp;(Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7009"></A>Element&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7010"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7011"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7012"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7013"></A>Query_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7014"></A>Query_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7015"></A>Update_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7016"></A>Update_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p34.1">34.1/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p34.2">34.2/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7017"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p34.3">34.3/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7018"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p34.4">34.4/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7019"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p34.5">34.5/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7020"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p34.6">34.6/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7021"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p34.7">34.7/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7022"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p34.8">34.8/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7023"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Vector;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p35">35/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7024"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p36">36/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7025"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7026"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p38">38/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7027"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p39">39/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7028"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p40">40/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7029"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p41">41/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7030"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7031"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p43">43/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7032"></A>Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p44">44/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7033"></A>Prepend&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p45">45/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7034"></A>Prepend&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p46">46/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7035"></A>Append&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p47">47/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7036"></A>Append&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p48">48/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7037"></A>Insert_Space&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p49">49/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7038"></A>Insert_Space&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7039"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p51">51/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7040"></A>Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p52">52/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7041"></A>Delete_First&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p53">53/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7042"></A>Delete_Last&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p54">54/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7043"></A>Reverse_Elements&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p55">55/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7044"></A>Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type);</span></div>
+<div class="paranum"><a name="p56">56/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7045"></A>Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p57">57/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7046"></A>First_Index&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Index_Type;</span></div>
+<div class="paranum"><a name="p58">58/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7047"></A>First&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p59">59/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7048"></A>First_Element&nbsp;(Container&nbsp;:&nbsp;Vector)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p60">60/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7049"></A>Last_Index&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p61">61/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7050"></A>Last&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p62">62/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7051"></A>Last_Element&nbsp;(Container&nbsp;:&nbsp;Vector)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p63">63/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7052"></A>Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p64">64/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7053"></A>Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p65">65/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7054"></A>Previous&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p66">66/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7055"></A>Previous&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p67">67/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7056"></A>Find_Index&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index_Type&nbsp;:=&nbsp;Index_Type'First)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p68">68/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7057"></A>Find&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor&nbsp;:=&nbsp;No_Element)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p69">69/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7058"></A>Reverse_Find_Index&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index_Type&nbsp;:=&nbsp;Index_Type'Last)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p70">70/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7059"></A>Reverse_Find&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor&nbsp;:=&nbsp;No_Element)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p71">71/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7060"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p72">72/3</a></div>
+<div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7061"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p73">73/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;&nbsp;<A NAME="I7062"></A>Iterate<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p74">74/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7063"></A>Reverse_Iterate<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p74.1">74.1/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Vector_Iterator_Interfaces.Reversible_Iterator'Class;</span></div>
+<div class="paranum"><a name="p74.2">74.2/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;&nbsp;Start&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Vector_Iterator_Interfaces.Reversible_Iterator'Class;</span></div>
+<div class="paranum"><a name="p75">75/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;is&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7064"></A>Generic_Sorting&nbsp;<B>is</B></span></div>
+<div class="paranum"><a name="p76">76/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7065"></A>Is_Sorted&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p77">77/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7066"></A>Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p78">78/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7067"></A>Merge&nbsp;(Target&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p79">79/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Generic_Sorting;</span></div>
+<div class="paranum"><a name="p80">80/2</a></div>
+<div class="Examples"><span class="insert2"><B>private</B></span></div>
+<div class="paranum"><a name="p81">81/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN></span></div>
+<div class="paranum"><a name="p82">82/2</a></div>
+<div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Containers.Vectors;</span></div>
+<div class="paranum"><a name="p83">83/2</a></div>
+<div class="Normal"><span class="insert2">The actual function for the 
+generic formal function &quot;=&quot; on Element_Type values is expected 
+to define a reflexive and symmetric relationship and return the same 
+result value each time it is called with a particular pair of values. 
+If it behaves in some other manner, the functions defined to use it return 
+an unspecified value. The exact arguments and number of calls of this 
+generic formal function by the functions defined to use it are unspecified.<A NAME="I7068"></A></span></div>
+<div class="paranum"><a name="p84">84/2</a></div>
+<div class="Normal"><span class="insert2">The type Vector is used to 
+represent vectors. The type Vector needs finalization<A NAME="I7069"></A> 
+(see <A HREF="RM-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p85">85/2</a></div>
+<div class="Normal"><span class="insert2">Empty_Vector represents the 
+empty vector object. It has a length of 0. If an object of type Vector 
+is not otherwise initialized, it is initialized to the same value as 
+Empty_Vector.</span></div>
+<div class="paranum"><a name="p86">86/2</a></div>
+<div class="Normal"><span class="insert2">No_Element represents a cursor 
+that designates no element. If an object of type Cursor is not otherwise 
+initialized, it is initialized to the same value as No_Element.</span></div>
+<div class="paranum"><a name="p87">87/2</a></div>
+<div class="Normal"><span class="insert2">The predefined &quot;=&quot; 
+operator for type Cursor returns True if both cursors are No_Element, 
+or designate the same element in the same container.</span></div>
+<div class="paranum"><a name="p88">88/2</a></div>
+<div class="Normal"><span class="insert2">Execution of the default implementation 
+of the Input, Output, Read, or Write attribute of type Cursor raises 
+Program_Error.</span></div>
+<div class="paranum"><a name="p88.1">88.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">Vector'Write for a Vector 
+object <I>V</I> writes Length(<I>V</I>) elements of the vector to the 
+stream. It also may write additional information about the vector.</span></div>
+<div class="paranum"><a name="p88.2">88.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">Vector'Read reads the representation 
+of a vector from the stream, and assigns to <I>Item</I> a vector with 
+the same length and elements as was written by Vector'Write.</span></div>
+<div class="paranum"><a name="p89">89/2</a></div>
+<div class="Normal"><span class="insert2">No_Index represents a position 
+that does not correspond to any element. The subtype Extended_Index includes 
+the indices covered by Index_Type plus the value No_Index and, if it 
+exists, the successor to the Index_Type'Last.</span></div>
+<div class="paranum"><a name="p89.1">89.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If an operation attempts 
+to modify the vector such that the position of the last element would 
+be greater than Index_Type'Last, then the operation propagates Constraint_Error.</span></div>
+<div class="paranum"><a name="p90">90/2</a></div>
+<div class="Normal"><span class="insert2">Some operations of this generic 
+package have access-to-subprogram parameters. To ensure such operations 
+are well-defined, they guard against certain actions by the designated 
+subprogram. In particular, some operations check for &ldquo;tampering 
+with cursors&rdquo; of a container because they depend on the set of 
+elements of the container remaining constant, and others check for &ldquo;tampering 
+with elements&rdquo; of a container because they depend on elements of 
+the container not being replaced.</span></div>
+<div class="paranum"><a name="p91">91/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7070"></A>A 
+subprogram is said to <I>tamper with cursors</I> of a vector object <I>V</I> 
+if:</span></div>
+<div class="paranum"><a name="p92">92/2</a></div>
+<div class="Bulleted"><span class="insert2">it inserts or deletes elements 
+of <I>V</I>, that is, it calls the Insert, Insert_Space, Clear, Delete, 
+or Set_Length procedures with <I>V</I> as a parameter; or</span></div>
+<div class="paranum"><a name="p93">93/2</a></div>
+<div class="Bulleted"><span class="insert2">it finalizes <I>V</I>; or</span></div>
+<div class="paranum"><a name="p93.1">93.1/3</a></div>
+<div class="Bulleted"><span class="insert3">it calls the Assign procedure 
+with <I>V</I> as the Target parameter; or</span></div>
+<div class="paranum"><a name="p94">94/2</a></div>
+<div class="Bulleted"><span class="insert2">it calls the Move procedure 
+with <I>V</I> as a parameter.</span></div>
+<div class="paranum"><a name="p95">95/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7071"></A>A 
+subprogram is said to <I>tamper with elements</I> of a vector object 
+<I>V</I> if:</span></div>
+<div class="paranum"><a name="p96">96/2</a></div>
+<div class="Bulleted"><span class="insert2">it tampers with cursors of 
+<I>V</I>; or</span></div>
+<div class="paranum"><a name="p97">97/2</a></div>
+<div class="Bulleted"><span class="insert2">it replaces one or more elements 
+of <I>V</I>, that is, it calls the Replace_Element, Reverse_Elements, 
+or Swap procedures or the Sort or Merge procedures of an instance of 
+Generic_Sorting with <I>V</I> as a parameter.</span></div>
+<div class="paranum"><a name="p97.1">97.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I7072"></A><A NAME="I7073"></A>When 
+tampering with cursors is <I>prohibited</I> for a particular vector object 
+<I>V</I>, Program_Error is propagated by a call of any language-defined 
+subprogram that is defined to tamper with the cursors of <I>V</I>, leaving 
+<I>V</I> unmodified. Similarly, when tampering with elements is <I>prohibited</I> 
+for a particular vector object <I>V</I>, Program_Error is propagated 
+by a call of any language-defined subprogram that is defined to tamper 
+with the elements of <I>V</I> (or tamper with the cursors of <I>V</I>), 
+leaving <I>V</I> unmodified.</span><span class="insert4">&nbsp;These checks 
+are made before any other defined behavior of the body of the language-defined 
+subprogram.</span><span class="insert3"></span>&nbsp;</div>
+<div class="paranum"><a name="p97.2">97.2/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p97.3">97.3/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+True if Position designates an element, and returns False otherwise.</span></div>
+<div class="paranum"><a name="p98">98/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p99">99/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Left and Right denote the same vector object, then the function returns 
+True. If Left and Right have different lengths, then the function returns 
+False. Otherwise, it compares each element in Left to the corresponding 
+element in Right using the generic formal equality operator. If any such 
+comparison returns False, the function returns False; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns True. Any exception raised during evaluation of element equality 
+is propagated.</span></div>
+<div class="paranum"><a name="p100">100/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;To_Vector&nbsp;(Length&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p101">101/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a vector with a length of Length, filled with empty elements.</span></div>
+<div class="paranum"><a name="p102">102/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;To_Vector<BR>
+&nbsp;&nbsp;(New_Item&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;&nbsp;:&nbsp;Count_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p103">103/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a vector with a length of Length, filled with elements initialized to 
+the value New_Item.</span></div>
+<div class="paranum"><a name="p104">104/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p105">105/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a vector comprising the elements of Left followed by the elements of 
+Right.</span></div>
+<div class="paranum"><a name="p106">106/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left&nbsp;&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p107">107/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a vector comprising the elements of Left followed by the element Right.</span></div>
+<div class="paranum"><a name="p108">108/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p109">109/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a vector comprising the element Left followed by the elements of Right.</span></div>
+<div class="paranum"><a name="p110">110/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left,&nbsp;Right&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p111">111/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+a vector comprising the element Left followed by the element Right.</span></div>
+<div class="paranum"><a name="p112">112/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Capacity&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p113">113/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the capacity of Container.</span></div>
+<div class="paranum"><a name="p114">114/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Reserve_Capacity&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type);</span></div>
+<div class="paranum"><a name="p115">115/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert3">If 
+the capacity of Container is already greater than or equal to Capacity, 
+then Reserve_Capacity has no effect. Otherwise,&nbsp;</span><span class="insert2">Reserve_Capacity 
+allocates&nbsp;</span><span class="insert3">additional storage as necessary 
+to ensure</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;new 
+internal data structures such</span></span><span class="insert2">&nbsp;that 
+the length of the resulting vector can become at least the value Capacity 
+without requiring an additional call to Reserve_Capacity, and is large 
+enough to hold the current length of Container. Reserve_Capacity then</span><span class="insert3">, 
+as necessary, moves</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;copies the</span></span><span class="insert2">&nbsp;elements into the new 
+</span><span class="insert3">storage</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;data 
+structures</span></span><span class="insert2">&nbsp;and deallocates&nbsp;</span><span class="insert3">any 
+storage no longer needed</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;the 
+old data structures</span></span><span class="insert2">. Any exception 
+raised during allocation is propagated and Container is not modified.</span></div>
+<div class="paranum"><a name="p116">116/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Length&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p117">117/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the number of elements in Container.</span></div>
+<div class="paranum"><a name="p118">118/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Set_Length&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type);</span></div>
+<div class="paranum"><a name="p119">119/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Length is larger than the capacity of Container, Set_Length calls Reserve_Capacity 
+(Container, Length), then sets the length of the Container to Length. 
+If Length is greater than the original length of Container, empty elements 
+are added to Container; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;elements are removed from Container.</span></div>
+<div class="paranum"><a name="p120">120/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p121">121/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Length (Container) = 0.</span></div>
+<div class="paranum"><a name="p122">122/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p123">123/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Removes 
+all the elements from Container. The capacity of Container does not change.</span></div>
+<div class="paranum"><a name="p124">124/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;To_Cursor&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Extended_Index)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p125">125/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Index is not in the range First_Index (Container) .. Last_Index (Container), 
+then No_Element is returned. Otherwise, a cursor designating the element 
+at position Index in Container is returned.</span></div>
+<div class="paranum"><a name="p126">126/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;To_Index&nbsp;(Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p127">127/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position is No_Element, No_Index is returned. Otherwise, the index (within 
+its containing vector) of the element designated by Position is returned.</span></div>
+<div class="paranum"><a name="p128">128/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p129">129/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Index is not in the range First_Index (Container) .. Last_Index (Container), 
+then Constraint_Error is propagated. Otherwise, Element returns the element 
+at position Index.</span></div>
+<div class="paranum"><a name="p130">130/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p131">131/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
+Element returns the element designated by Position.</span></div>
+<div class="paranum"><a name="p132">132/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p133">133/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Index is not in the range First_Index (Container) .. Last_Index (Container), 
+then Constraint_Error is propagated. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Replace_Element assigns the value New_Item to the element at position 
+Index. Any exception raised during the assignment is propagated. The 
+element at position Index is not an empty element after successful call 
+to Replace_Element.</span></div>
+<div class="paranum"><a name="p134">134/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p135">135/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated; if Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Replace_Element assigns New_Item to the element designated by Position. 
+Any exception raised during the assignment is propagated. The element 
+at Position is not an empty element after successful call to Replace_Element.</span></div>
+<div class="paranum"><a name="p136">136/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;<B>procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p137">137/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Index is not in the range First_Index (Container) .. Last_Index (Container), 
+then Constraint_Error is propagated. Otherwise, Query_Element calls Process.<B>all</B> 
+with the element at position Index as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of Container</span><span class="insert3">&nbsp;is prohibited 
+during the execution of the call on Process.<B>all</B></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p138">138/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;<B>procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p139">139/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
+Query_Element calls Process.<B>all</B> with the element designated by 
+Position as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of&nbsp;</span><span class="insert3">the vector that contains 
+the element designated by Position is prohibited during the execution 
+of the call on Process.<B>all</B></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Container</span></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p140">140/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;<B>procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p141">141/3</a></div>
+<div class="Indented2"><span class="insert2">If Index is not in the range 
+First_Index (Container) .. Last_Index (Container), then Constraint_Error 
+is propagated. Otherwise, Update_Element calls Process.<B>all</B> with 
+the element at position Index as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of Container</span><span class="insert3">&nbsp;is prohibited 
+during the execution of the call on Process.<B>all</B></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p142">142/2</a></div>
+<div class="Indented2"><span class="insert2">If Element_Type is unconstrained 
+and definite, then the actual Element parameter of Process.<B>all</B> 
+shall be unconstrained.</span></div>
+<div class="paranum"><a name="p143">143/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+element at position Index is not an empty element after successful completion 
+of this operation.</span></div>
+<div class="paranum"><a name="p144">144/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;<B>procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p145">145/3</a></div>
+<div class="Indented2"><span class="insert2">If Position equals No_Element, 
+then Constraint_Error is propagated; if Position does not designate an 
+element in Container, then Program_Error is propagated. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Update_Element calls Process.<B>all</B> with the element designated by 
+Position as the argument.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the elements of Container</span><span class="insert3">&nbsp;is prohibited 
+during the execution of the call on Process.<B>all</B></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p146">146/2</a></div>
+<div class="Indented2"><span class="insert2">If Element_Type is unconstrained 
+and definite, then the actual Element parameter of Process.<B>all</B> 
+shall be unconstrained.</span></div>
+<div class="paranum"><a name="p147">147/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+element designated by Position is not an empty element after successful 
+completion of this operation.</span></div>
+<div class="paranum"><a name="p147.1">147.1/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p147.2">147.2/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p147.3">147.3/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">The 
+types Constant_Reference_Type and Reference_Type need finalization.<A NAME="I7074"></A></span></div>
+<div class="paranum"><a name="p147.4">147.4/3</a></div>
+<div class="Indented2"><span class="insert3">The default initialization 
+of an object of type Constant_Reference_Type or Reference_Type propagates 
+Program_Error.</span></div>
+<div class="paranum"><a name="p147.5">147.5/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p147.6">147.6/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a vector given an index value.</span></div>
+<div class="paranum"><a name="p147.7">147.7/3</a></div>
+<div class="Indented2"><span class="insert3">If Index is not in the range 
+First_Index (Container) .. Last_Index (Container), then Constraint_Error 
+is propagated. Otherwise, Constant_Reference returns an object whose 
+discriminant is an access value that designates the element at position 
+Index. Tampering with the elements of Container is prohibited while the 
+object returned by Constant_Reference exists and has not been finalized.</span></div>
+<div class="paranum"><a name="p147.8">147.8/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Index_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p147.9">147.9/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Variable_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to an 
+individual element of a vector given an index value.</span></div>
+<div class="paranum"><a name="p147.10">147.10/3</a></div>
+<div class="Indented2"><span class="insert3">If Index is not in the range 
+First_Index (Container) .. Last_Index (Container), then Constraint_Error 
+is propagated. Otherwise, Reference returns an object whose discriminant 
+is an access value that designates the element at position Index. Tampering 
+with the elements of Container is prohibited while the object returned 
+by Reference exists and has not been finalized.</span></div>
+<div class="paranum"><a name="p147.11">147.11/3</a></div>
+<div class="Indented2"><span class="insert3">The element at position 
+Index is not an empty element after successful completion of this operation.</span></div>
+<div class="paranum"><a name="p147.12">147.12/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p147.13">147.13/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a vector given a cursor.</span></div>
+<div class="paranum"><a name="p147.14">147.14/3</a></div>
+<div class="Indented2"><span class="insert3">If Position equals No_Element, 
+then Constraint_Error is propagated; if Position does not designate an 
+element in Container, then Program_Error is propagated. Otherwise, Constant_Reference 
+returns an object whose discriminant is an access value that designates 
+the element designated by Position. Tampering with the elements of Container 
+is prohibited while the object returned by Constant_Reference exists 
+and has not been finalized.</span></div>
+<div class="paranum"><a name="p147.15">147.15/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p147.16">147.16/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Variable_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to an 
+individual element of a vector given a cursor.</span></div>
+<div class="paranum"><a name="p147.17">147.17/3</a></div>
+<div class="Indented2"><span class="insert3">If Position equals No_Element, 
+then Constraint_Error is propagated; if Position does not designate an 
+element in Container, then Program_Error is propagated. Otherwise, Reference 
+returns an object whose discriminant is an access value that designates 
+the element designated by Position. Tampering with the elements of Container 
+is prohibited while the object returned by Reference exists and has not 
+been finalized.</span></div>
+<div class="paranum"><a name="p147.18">147.18/3</a></div>
+<div class="Indented2"><span class="insert3">The element designated by 
+Position is not an empty element after successful completion of this 
+operation.</span></div>
+<div class="paranum"><a name="p147.19">147.19/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p147.20">147.20/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Target denotes the same object as Source, the operation has no effect. 
+If the length of Source is greater than the capacity of Target, Reserve_Capacity 
+(Target, Length (Source)) is called. The elements of Source are then 
+copied to Target as for an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+assigning Source to Target (this includes setting the length of Target 
+to be that of Source).</span>&nbsp;</div>
+<div class="paranum"><a name="p147.21">147.21/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Vector;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Vector;</span></div>
+<div class="paranum"><a name="p147.22">147.22/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+a vector whose elements are initialized from the corresponding elements 
+of Source. If Capacity is 0, then the vector capacity is the length of 
+Source; if Capacity is equal to or greater than the length of Source, 
+the vector capacity is at least the specified value. Otherwise, the operation 
+propagates Capacity_Error.</span></div>
+<div class="paranum"><a name="p148">148/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p149">149/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Target denotes the same object as Source, then&nbsp;</span><span class="insert3">the 
+operation</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Move</span></span><span class="insert2">&nbsp;has no effect. Otherwise, Move first calls&nbsp;</span><span class="insert3">Reserve_Capacity 
+(Target, Length (Source)) and then&nbsp;</span><span class="insert2">Clear 
+(Target); then, each element from Source is removed from Source and inserted 
+into Target in the original order. The length of Source is 0 after a 
+successful call to Move.</span></div>
+<div class="paranum"><a name="p150">150/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p151">151/3</a></div>
+<div class="Indented2"><span class="insert2">If Before is not in the 
+range First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error 
+is propagated. If Length(New_Item) is 0, then Insert does nothing. Otherwise, 
+it computes the new length <I>NL</I> as the sum of the current length 
+and Length (New_Item); if the value of Last appropriate for length <I>NL</I> 
+would be greater than Index_Type'Last</span><span class="insert3">,</span><span class="insert2">&nbsp;then Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p152">152/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+the current vector capacity is less than <I>NL</I>, Reserve_Capacity 
+(Container, <I>NL</I>) is called to increase the vector capacity. Then 
+Insert slides the elements in the range Before .. Last_Index (Container) 
+up by Length(New_Item) positions, and then copies the elements of New_Item 
+to the positions starting at Before. Any exception raised during the 
+copying is propagated.</span></div>
+<div class="paranum"><a name="p153">153/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p154">154/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Before is not No_Element, and does not designate an element in Container, 
+then Program_Error is propagated. Otherwise, if Length(New_Item) is 0, 
+then Insert does nothing. If Before is No_Element, then the call is equivalent 
+to Insert (Container, Last_Index (Container) + 1, New_Item); otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;the call is equivalent to Insert (Container, To_Index (Before), New_Item);</span></div>
+<div class="paranum"><a name="p155">155/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p156">156/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Before is not No_Element, and does not designate an element in Container, 
+then Program_Error is propagated. If Before equals No_Element, then let 
+<I>T</I> be Last_Index (Container) + 1; otherwise, let <I>T</I> be To_Index 
+(Before). Insert (Container, <I>T</I>, New_Item) is called, and then 
+Position is set to To_Cursor (Container, <I>T</I>).</span></div>
+<div class="paranum"><a name="p157">157/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p158">158/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, Before, To_Vector (New_Item, Count));</span></div>
+<div class="paranum"><a name="p159">159/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p160">160/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, Before, To_Vector (New_Item, Count));</span></div>
+<div class="paranum"><a name="p161">161/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p162">162/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, Before, To_Vector (New_Item, Count), Position);</span></div>
+<div class="paranum"><a name="p163">163/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p164">164/3</a></div>
+<div class="Indented2"><span class="insert2">If Before is not in the 
+range First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error 
+is propagated. If Count is 0, then Insert does nothing. Otherwise, it 
+computes the new length <I>NL</I> as the sum of the current length and 
+Count; if the value of Last appropriate for length <I>NL</I> would be 
+greater than Index_Type'Last</span><span class="insert3">,</span><span class="insert2">&nbsp;then Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p165">165/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+the current vector capacity is less than <I>NL</I>, Reserve_Capacity 
+(Container, <I>NL</I>) is called to increase the vector capacity. Then 
+Insert slides the elements in the range Before .. Last_Index (Container) 
+up by Count positions, and then inserts elements that are initialized 
+by default (see <A HREF="RM-3-3-1.html">3.3.1</A>) in the positions starting 
+at Before.</span></div>
+<div class="paranum"><a name="p166">166/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p167">167/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Before is not No_Element, and does not designate an element in Container, 
+then Program_Error is propagated. If Before equals No_Element, then let 
+<I>T</I> be Last_Index (Container) + 1; otherwise, let <I>T</I> be To_Index 
+(Before). Insert (Container, <I>T</I>, Count) is called, and then Position 
+is set to To_Cursor (Container, <I>T</I>).</span></div>
+<div class="paranum"><a name="p168">168/4</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Prepend&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector</span><span class="insert2"><span class="delete4">;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1</span></span><span class="insert2">);</span></div>
+<div class="paranum"><a name="p169">169/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, First_Index (Container), New_Item).</span></div>
+<div class="paranum"><a name="p170">170/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Prepend&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p171">171/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, First_Index (Container), New_Item, Count).</span></div>
+<div class="paranum"><a name="p172">172/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Append&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p173">173/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, Last_Index (Container) + 1, New_Item).</span></div>
+<div class="paranum"><a name="p174">174/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Append&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p175">175/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Insert (Container, Last_Index (Container) + 1, New_Item, Count).</span></div>
+<div class="paranum"><a name="p176">176/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert_Space&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p177">177/3</a></div>
+<div class="Indented2"><span class="insert2">If Before is not in the 
+range First_Index (Container) .. Last_Index (Container) + 1, then Constraint_Error 
+is propagated. If Count is 0, then Insert_Space does nothing. Otherwise, 
+it computes the new length <I>NL</I> as the sum of the current length 
+and Count; if the value of Last appropriate for length <I>NL</I> would 
+be greater than Index_Type'Last</span><span class="insert3">,</span><span class="insert2">&nbsp;then Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p178">178/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+the current vector capacity is less than <I>NL</I>, Reserve_Capacity 
+(Container, <I>NL</I>) is called to increase the vector capacity. Then 
+Insert_Space slides the elements in the range Before .. Last_Index (Container) 
+up by Count positions, and then inserts empty elements in the positions 
+starting at Before.</span></div>
+<div class="paranum"><a name="p179">179/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Insert_Space&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p180">180/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Before is not No_Element, and does not designate an element in Container, 
+then Program_Error is propagated. If Before equals No_Element, then let 
+<I>T</I> be Last_Index (Container) + 1; otherwise, let <I>T</I> be To_Index 
+(Before). Insert_Space (Container, <I>T</I>, Count) is called, and then 
+Position is set to To_Cursor (Container, <I>T</I>).</span></div>
+<div class="paranum"><a name="p181">181/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extended_Index;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p182">182/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Index is not in the range First_Index (Container) .. Last_Index (Container) 
++ 1, then Constraint_Error is propagated. If Count is 0, Delete has no 
+effect. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Delete slides the elements (if any) starting at position Index + Count 
+down to Index. Any exception raised during element assignment is propagated.</span></div>
+<div class="paranum"><a name="p183">183/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p184">184/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element, then Constraint_Error is propagated. If Position 
+does not designate an element in Container, then Program_Error is propagated. 
+Otherwise, Delete (Container, To_Index (Position), Count) is called, 
+and then Position is set to No_Element.</span></div>
+<div class="paranum"><a name="p185">185/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete_First&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p186">186/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Delete (Container, First_Index (Container), Count).</span></div>
+<div class="paranum"><a name="p187">187/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete_Last&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p188">188/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Length (Container) &lt;= Count</span><span class="insert3">,</span><span class="insert2">&nbsp;then Delete_Last is equivalent to Clear (Container). Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is equivalent to Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index 
+(Container)) &ndash; Count + 1), Count).</span></div>
+<div class="paranum"><a name="p189">189/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Reverse_Elements&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;</span><span class="insert3">Vector</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;List</span></span><span class="insert2">);</span></div>
+<div class="paranum"><a name="p190">190/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Reorders 
+the elements of Container in reverse order.</span></div>
+<div class="paranum"><a name="p191">191/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index_Type);</span></div>
+<div class="paranum"><a name="p192">192/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+either I or J is not in the range First_Index (Container) .. Last_Index 
+(Container), then Constraint_Error is propagated. Otherwise, Swap exchanges 
+the values of the elements at positions I and J.</span></div>
+<div class="paranum"><a name="p193">193/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p194">194/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+either I or J is No_Element, then Constraint_Error is propagated. If 
+either I or J do not designate an element in Container, then Program_Error 
+is propagated. Otherwise, Swap exchanges the values of the elements designated 
+by I and J.</span></div>
+<div class="paranum"><a name="p195">195/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;First_Index&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Index_Type;</span></div>
+<div class="paranum"><a name="p196">196/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the value Index_Type'First.</span></div>
+<div class="paranum"><a name="p197">197/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;First&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p198">198/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Container is empty, First returns No_Element. Otherwise, it returns a 
+cursor that designates the first element in Container.</span></div>
+<div class="paranum"><a name="p199">199/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;First_Element&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p200">200/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Element (Container, First_Index (Container)).</span></div>
+<div class="paranum"><a name="p201">201/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Last_Index&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p202">202/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Container is empty, Last_Index returns No_Index. Otherwise, it returns 
+the position of the last element in Container.</span></div>
+<div class="paranum"><a name="p203">203/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Last&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p204">204/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Container is empty, Last returns No_Element. Otherwise, it returns a 
+cursor that designates the last element in Container.</span></div>
+<div class="paranum"><a name="p205">205/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Last_Element&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p206">206/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Element (Container, Last_Index (Container)).</span></div>
+<div class="paranum"><a name="p207">207/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Next&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p208">208/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element or designates the last element of the container, 
+then Next returns the value No_Element. Otherwise, it returns a cursor 
+that designates the element with index To_Index (Position) + 1 in the 
+same vector as Position.</span></div>
+<div class="paranum"><a name="p209">209/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Next&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p210">210/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Position := Next (Position).</span></div>
+<div class="paranum"><a name="p211">211/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Previous&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p212">212/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position equals No_Element or designates the first element of the container, 
+then Previous returns the value No_Element. Otherwise, it returns a cursor 
+that designates the element with index To_Index (Position) &ndash; 1 
+in the same vector as Position.</span></div>
+<div class="paranum"><a name="p213">213/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Previous&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p214">214/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Position := Previous (Position).</span></div>
+<div class="paranum"><a name="p215">215/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Find_Index&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index_Type&nbsp;:=&nbsp;Index_Type'First)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p216">216/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Searches 
+the elements of Container for an element equal to Item (using the generic 
+formal equality operator). The search starts at position Index and proceeds 
+towards Last_Index (Container). If no equal element is found, then Find_Index 
+returns No_Index. Otherwise, it returns the index of the first equal 
+element encountered.</span></div>
+<div class="paranum"><a name="p217">217/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Find&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor&nbsp;:=&nbsp;No_Element)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p218">218/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position is not No_Element, and does not designate an element in Container, 
+then Program_Error is propagated. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Find searches the elements of Container for an element equal to Item 
+(using the generic formal equality operator). The search starts at the 
+first element if Position equals No_Element, and at the element designated 
+by Position otherwise. It proceeds towards the last element of Container. 
+If no equal element is found, then Find returns No_Element. Otherwise, 
+it returns a cursor designating the first equal element encountered.</span></div>
+<div class="paranum"><a name="p219">219/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Reverse_Find_Index&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Index_Type&nbsp;:=&nbsp;Index_Type'Last)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Extended_Index;</span></div>
+<div class="paranum"><a name="p220">220/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Searches 
+the elements of Container for an element equal to Item (using the generic 
+formal equality operator). The search starts at position Index or, if 
+Index is greater than Last_Index (Container), at position Last_Index 
+(Container). It proceeds towards First_Index (Container). If no equal 
+element is found, then Reverse_Find_Index returns No_Index. Otherwise, 
+it returns the index of the first equal element encountered.</span></div>
+<div class="paranum"><a name="p221">221/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Reverse_Find&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;Cursor&nbsp;:=&nbsp;No_Element)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p222">222/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">If 
+Position is not No_Element, and does not designate an element in Container, 
+then Program_Error is propagated. Otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;Reverse_Find searches the elements of Container for an element equal 
+to Item (using the generic formal equality operator). The search starts 
+at the last element if Position equals No_Element, and at the element 
+designated by Position otherwise. It proceeds towards the first element 
+of Container. If no equal element is found, then Reverse_Find returns 
+No_Element. Otherwise, it returns a cursor designating the first equal 
+element encountered.</span></div>
+<div class="paranum"><a name="p223">223/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Contains&nbsp;(Container&nbsp;:&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p224">224/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
+to Has_Element (Find (Container, Item)).</span></div>
+<div class="paranum"><a name="p225">225/3</a></div>
+<div class="Examples"><span class="insert2"></span><span class="insert2"><span class="delete3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p226">226/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert2"><span class="delete3">Returns 
+True if Position designates an element, and returns False otherwise.</span></span><span class="insert2"></span> 
+</div>
+<div class="Indented2"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+225 and 226 were moved above.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p227">227/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Iterate<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;<B>procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p228">228/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Invokes 
+Process.<B>all</B> with a cursor that designates each element in Container, 
+in index order.&nbsp;</span><span class="insert3">Tampering</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Program_Error 
+is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&nbsp;with the cursors of Container</span><span class="insert3">&nbsp;is prohibited 
+during the execution of a call on Process.<B>all</B></span><span class="insert2">. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p229">229/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Reverse_Iterate<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;<B>procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p230">230/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Iterates 
+over the elements in Container as per&nbsp;</span><span class="insert3">procedure 
+</span><span class="insert2">Iterate, except that elements are traversed 
+in reverse index order.</span></div>
+<div class="paranum"><a name="p230.1">230.1/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Vector_Iterator_Interfaces.Reversible_Iterator'Class;</span></div>
+<div class="paranum"><a name="p230.2">230.2/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Iterate 
+returns a reversible iterator object (see <A HREF="RM-5-5-1.html">5.5.1</A>) 
+that will generate a value for a loop parameter (see <A HREF="RM-5-5-2.html">5.5.2</A>) 
+designating each node in Container, starting with the first node and 
+moving the cursor as per the Next function when used as a forward iterator, 
+and starting with the last node and moving the cursor as per the Previous 
+function when used as a reverse iterator. Tampering with the cursors 
+of Container is prohibited while the iterator object exists (in particular, 
+in the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</span></div>
+<div class="paranum"><a name="p230.3">230.3/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Vector;&nbsp;Start&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Vector_Iterator_Interfaces.Reversible_Iterator'Class;</span></div>
+<div class="paranum"><a name="p230.4">230.4/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Start is not No_Element and does not designate an item in Container, 
+then Program_Error is propagated. If Start is No_Element, then Constraint_Error 
+is propagated. Otherwise, Iterate returns a reversible iterator object 
+(see <A HREF="RM-5-5-1.html">5.5.1</A>) that will generate a value for 
+a loop parameter (see <A HREF="RM-5-5-2.html">5.5.2</A>) designating 
+each node in Container, starting with the node designated by Start and 
+moving the cursor as per the Next function when used as a forward iterator, 
+or moving the cursor as per the Previous function when used as a reverse 
+iterator. Tampering with the cursors of Container is prohibited while 
+the iterator object exists (in particular, in the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</span></div>
+<div class="paranum"><a name="p231">231/3</a></div>
+<div class="Normal">&nbsp;<span class="insert2">The actual function for the 
+generic formal function &quot;&lt;&quot; of Generic_Sorting is expected 
+to return the same value each time it is called with a particular pair 
+of element values. It should define a strict&nbsp;</span><span class="insert3">weak 
+</span><span class="insert2">ordering relationship</span><span class="insert3">&nbsp;(see <A HREF="RM-A-18.html">A.18</A>)</span><span class="insert2"></span><span class="insert2"><span class="delete3">, 
+that is, be irreflexive, asymmetric, and transitive</span></span><span class="insert2">; 
+it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
+in some other manner, the behavior of the subprograms of Generic_Sorting 
+are unspecified.&nbsp;</span><span class="insert3">The number of</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;How 
+many</span></span><span class="insert2">&nbsp;times the subprograms of Generic_Sorting 
+call &quot;&lt;&quot; is unspecified.<A NAME="I7075"></A></span></div>
+<div class="paranum"><a name="p232">232/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Is_Sorted&nbsp;(Container&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p233">233/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+True if the elements are sorted smallest first as determined by the generic 
+formal &quot;&lt;&quot; operator; otherwise, Is_Sorted returns False. 
+Any exception raised during evaluation of &quot;&lt;&quot; is propagated.</span></div>
+<div class="paranum"><a name="p234">234/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p235">235/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Reorders 
+the elements of Container such that the elements are sorted smallest 
+first as determined by the generic formal &quot;&lt;&quot; operator provided. 
+Any exception raised during evaluation of &quot;&lt;&quot; is propagated.</span></div>
+<div class="paranum"><a name="p236">236/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Merge&nbsp;(Target&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector);</span></div>
+<div class="paranum"><a name="p237">237/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2"></span><span class="insert3">If 
+Source is empty, then Merge does nothing. If Source and Target are the 
+same nonempty container object, then Program_Error is propagated. Otherwise, 
+</span><span class="insert2">Merge removes elements from Source and inserts 
+them into Target; afterwards, Target contains the union of the elements 
+that were initially in Source and Target; Source is left empty. If Target 
+and Source are initially sorted smallest first, then Target is ordered 
+smallest first as determined by the generic formal &quot;&lt;&quot; operator; 
+otherwise, the order of elements in Target is unspecified. Any exception 
+raised during evaluation of &quot;&lt;&quot; is propagated.</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p238">238/3</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I7076"></A>Reading 
+the value of an empty element by calling Element, Query_Element, Update_Element,</span><span class="insert3">&nbsp;Constant_Reference, Reference,</span><span class="insert2">&nbsp;Swap, Is_Sorted, 
+Sort, Merge, &quot;=&quot;, Find, or Reverse_Find is a bounded error. 
+The implementation may treat the element as having any normal value (see 
+<A HREF="RM-13-9-1.html">13.9.1</A>) of the element type, or raise Constraint_Error 
+or Program_Error before modifying the vector.</span></div>
+<div class="paranum"><a name="p239">239/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I7077"></A>Calling 
+Merge in an instance of Generic_Sorting with either Source or Target 
+not ordered smallest first using the provided generic formal &quot;&lt;&quot; 
+operator is a bounded error. Either Program_Error is raised after Target 
+is updated as described for Merge, or the operation works as defined.</span></div>
+<div class="paranum"><a name="p239.1">239.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">It is a bounded error for 
+the actual function associated with a generic formal subprogram, when 
+called as part of an operation of this package, to tamper with elements 
+of any Vector parameter of the operation. Either Program_Error is raised, 
+or the operation works as defined on the value of the Vector either prior 
+to, or subsequent to, some or all of the modifications to the Vector.</span></div>
+<div class="paranum"><a name="p239.2">239.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">It is a bounded error to 
+call any subprogram declared in the visible part of Containers.Vectors 
+when the associated container has been finalized. If the operation takes 
+Container as an <B>in out</B> parameter, then it raises Constraint_Error 
+or Program_Error. Otherwise, the operation either proceeds as it would 
+for an empty container, or it raises Constraint_Error or Program_Error.</span></div>
+<div class="paranum"><a name="p240">240/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><A NAME="I7078"></A><A NAME="I7079"></A>A 
+Cursor value is <I>ambiguous</I> if any of the following have occurred 
+since it was created:</span></div>
+<div class="paranum"><a name="p241">241/2</a></div>
+<div class="Bulleted"><span class="insert2">Insert, Insert_Space, or 
+Delete has been called on the vector that contains the element the cursor 
+designates with an index value (or a cursor designating an element at 
+such an index value) less than or equal to the index value of the element 
+designated by the cursor; or</span></div>
+<div class="paranum"><a name="p242">242/2</a></div>
+<div class="Bulleted"><span class="insert2">The vector that contains 
+the element it designates has been passed to the Sort or Merge procedures 
+of an instance of Generic_Sorting, or to the Reverse_Elements procedure.</span></div>
+<div class="paranum"><a name="p243">243/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><A NAME="I7080"></A>It 
+is a bounded error to call any subprogram other than &quot;=&quot; or 
+Has_Element declared in Containers.Vectors with an ambiguous (but not 
+invalid, see below) cursor parameter. Possible results are:</span></div>
+<div class="paranum"><a name="p244">244/2</a></div>
+<div class="Bulleted"><span class="insert2">The cursor may be treated 
+as if it were No_Element;</span></div>
+<div class="paranum"><a name="p245">245/2</a></div>
+<div class="Bulleted"><span class="insert2">The cursor may designate 
+some element in the vector (but not necessarily the element that it originally 
+designated);</span></div>
+<div class="paranum"><a name="p246">246/2</a></div>
+<div class="Bulleted"><span class="insert2">Constraint_Error may be raised; 
+or</span></div>
+<div class="paranum"><a name="p247">247/2</a></div>
+<div class="Bulleted"><span class="insert2">Program_Error may be raised.</span></div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p248">248/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">A 
+Cursor value is <I>invalid</I> if any of the following have occurred 
+since it was created:<A NAME="I7081"></A> <A NAME="I7082"></A></span></div>
+<div class="paranum"><a name="p249">249/2</a></div>
+<div class="Bulleted"><span class="insert2">The vector that contains 
+the element it designates has been finalized;</span></div>
+<div class="paranum"><a name="p249.1">249.1/3</a></div>
+<div class="Bulleted"><span class="insert3">The vector that contains 
+the element it designates has been used as the Target of a call to Assign, 
+or as the target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>;</span></div>
+<div class="paranum"><a name="p250">250/2</a></div>
+<div class="Bulleted"><span class="insert2">The vector that contains 
+the element it designates has been used as the Source or Target of a 
+call to Move; or</span>&nbsp;</div>
+<div class="paranum"><a name="p251">251/3</a></div>
+<div class="Bulleted"><span class="insert2">The element it designates 
+has been deleted</span><span class="insert3">&nbsp;or removed from the vector 
+that previously contained the element</span><span class="insert2">.</span> 
+</div>
+<div class="paranum"><a name="p252">252/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">The result of &quot;=&quot; 
+or Has_Element is unspecified if it is called with an invalid cursor 
+parameter.<A NAME="I7083"></A> Execution is erroneous if any other subprogram 
+declared in Containers.Vectors is called with an invalid cursor parameter.<A NAME="I7084"></A></span></div>
+<div class="paranum"><a name="p252.1">252.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Execution is erroneous if 
+the vector associated with the result of a call to Reference or Constant_Reference 
+is finalized before the result object returned by the call to Reference 
+or Constant_Reference is finalized.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p253">253/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">No storage associated with 
+a vector object shall be lost upon assignment or scope exit.</span></div>
+<div class="paranum"><a name="p254">254/3</a></div>
+<div class="Normal">&nbsp;<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+for a vector shall have the effect of copying the elements from the source 
+vector object to the target vector object</span><span class="insert3">&nbsp;and changing the length of the target object to that of the source object</span><span class="insert2">.</span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p255">255/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">Containers.Vectors should 
+be implemented similarly to an array. In particular, if the length of 
+a vector is <I>N</I>, then</span></div>
+<div class="paranum"><a name="p256">256/2</a></div>
+<div class="Bulleted"><span class="insert2">the worst-case time complexity 
+of Element should be <I>O</I>(log <I>N</I>);</span>&nbsp;</div>
+<div class="paranum"><a name="p257">257/2</a></div>
+<div class="Bulleted"><span class="insert2">the worst-case time complexity 
+of Append with Count=1 when <I>N</I> is less than the capacity of the 
+vector should be <I>O</I>(log <I>N</I>); and</span>&nbsp;</div>
+<div class="paranum"><a name="p258">258/2</a></div>
+<div class="Bulleted"><span class="insert2">the worst-case time complexity 
+of Prepend with Count=1 and Delete_First with Count=1 should be <I>O</I>(<I>N</I> 
+log <I>N</I>).</span>&nbsp;</div>
+<div class="paranum"><a name="p259">259/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">The worst-case time complexity 
+of a call on procedure Sort of an instance of Containers.Vectors.Generic_Sorting 
+should be <I>O</I>(<I>N</I>**2), and the average time complexity should 
+be better than <I>O</I>(<I>N</I>**2).</span>&nbsp;</div>
+<div class="paranum"><a name="p260">260/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">Containers.Vectors.Generic_Sorting.Sort 
+and Containers.Vectors.Generic_Sorting.Merge should minimize copying 
+of elements.</span>&nbsp;</div>
+<div class="paranum"><a name="p261">261/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">Move should not copy elements, 
+and should minimize copying of internal data structures.</span>&nbsp;</div>
+<div class="paranum"><a name="p262">262/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">If an exception is propagated 
+from a vector operation, no storage should be lost, nor any elements 
+removed from a vector unless specified by the operation.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p263">263/2</a></div>
+<div class="Notes">50&nbsp;&nbsp;<span class="insert2">All elements of 
+a vector occupy locations in the internal array. If a sparse container 
+is required, a Hashed_Map should be used rather than a vector.</span></div>
+<div class="paranum"><a name="p264">264/2</a></div>
+<div class="Notes">51&nbsp;&nbsp;<span class="insert2">If Index_Type'Base'First 
+= Index_Type'First an instance of Ada.Containers.Vectors will raise Constraint_Error. 
+A value below Index_Type'First is required so that an empty vector has 
+a meaningful value of Last_Index.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

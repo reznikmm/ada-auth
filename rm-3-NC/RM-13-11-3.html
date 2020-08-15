@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Default Storage Pools</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11.3 Default Storage Pools</H1>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool is as follows:&nbsp;</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5207"></A><A NAME="I5208"></A>Default_Storage_Pool 
+(<A NAME="I5209"></A><SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0318">storage_pool_indicator</A></SPAN>); 
+</div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="Indented1"><SPAN Class="swiss">storage_pool_indicator</SPAN><A NAME="I5210"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>storage_pool_</I><A NAME="I5211"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B></div>
+<div class="paranum"><a name="p2.2">2.2/3</a></div>
+<div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool is allowed immediately within the visible part of 
+a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
+or as a configuration pragma.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2.3">2.3/3</a></div>
+<div class="Normal">&nbsp;The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+is expected to be of type Root_Storage_Pool'Class.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall denote a variable.</div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal">&nbsp;If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0318">storage_pool_indicator</A></SPAN> 
+shall be <B>null</B>, and it defines the <I>default pool</I><A NAME="I5212"></A><A NAME="I5213"></A><A NAME="I5214"></A> 
+to be <B>null</B> within all applicable compilation units (see <A HREF="RM-10-1-5.html">10.1.5</A>), 
+except within the immediate scope of another <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool. Otherwise, the pragma occurs immediately within 
+a sequence of declarations, and it defines the default pool within the 
+immediate scope of the pragma to be either <B>null</B> or the pool denoted 
+by the <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
+except within the immediate scope of a later pragma Default_Storage_Pool. 
+Thus, an inner pragma overrides an outer one.</div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Default_Storage_Pool shall not be used as a configuration pragma that 
+applies to a compilation unit that is within the immediate scope of another 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Default_Storage_Pool.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">The language-defined aspect Default_Storage_Pool 
+may be specified for a generic instance; it defines the default pool 
+for access types within an instance.<A NAME="I5215"></A><A NAME="I5216"></A> 
+The expected type for the Default_Storage_Pool aspect is Root_Storage_Pool'Class. 
+The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_definition</A></SPAN> 
+must be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a variable. This aspect overrides any Default_Storage_Pool 
+pragma that might apply to the generic unit; if the aspect is not specified, 
+the default pool of the instance is that defined for the generic unit.</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For nonderived access 
+types declared in places where the default pool is defined by the pragma 
+or aspect, their Storage_Pool or Storage_Size attribute is determined 
+as follows, unless Storage_Pool or Storage_Size is specified for the 
+type:</div>
+<div class="paranum"><a name="p5.1">5.1/3</a></div>
+<div class="Bulleted">If the default pool is <B>null</B>, the Storage_Size 
+attribute is defined by the language to be zero. Therefore, an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+for such a type is illegal.</div>
+<div class="paranum"><a name="p5.2">5.2/3</a></div>
+<div class="Bulleted">If the default pool is nonnull, the Storage_Pool 
+attribute is that pool.</div>
+<div class="paranum"><a name="p5.3">5.3/3</a></div>
+<div class="Normal">&nbsp;Otherwise, there is no default pool; the standard 
+storage pool is used for the type as described in <A HREF="RM-13-11.html">13.11</A>.</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN></div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">An object created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+that is passed as the actual parameter to an access parameter may be 
+allocated on the stack, and automatically reclaimed, regardless of the 
+default pool.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Notes">32&nbsp;&nbsp;Default_Storage_Pool may be used with 
+restrictions No_Coextensions and No_Access_Parameter_Allocators (see 
+<A HREF="RM-H-4.html">H.4</A>) to ensure that all <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s 
+use the default pool.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

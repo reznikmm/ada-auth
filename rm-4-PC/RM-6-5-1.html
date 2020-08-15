@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Nonreturning Procedures</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.5.1 <span class="insert3">Nonreturning Procedures</span><span class="delete3">Pragma No_Return</span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><span class="insert3">Specifying aspect</span><span class="delete3">&nbsp;A 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+No_Return <span class="insert3">to have the value True&nbsp;</span>indicates 
+that a procedure cannot return normally; it may propagate an exception 
+or loop forever.&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+2 and 3 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3">The 
+form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+No_Return, which is a representation pragma (see <A HREF="RM-13-1.html">13.1</A>), 
+is as follows:</span>&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
+<A NAME="I3584"></A><A NAME="I3585"></A>No_Return(<I>procedure_</I><A NAME="I3586"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>{, 
+<I>procedure_</I><A NAME="I3587"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>});</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
+a procedure or generic procedure, the following language-defined representation 
+aspect may be specified:</span>&nbsp;</div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert3">No_Return</span></div><div class="WideHanging-Body">
+<span class="insert3">The type of aspect No_Return is Boolean. When aspect 
+No_Return is True for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I3588"></A><A NAME="I3589"></A><A NAME="I3590"></A></span></div>
+<div class="paranum"><a name="p3.3">3.3/3</a></div>
+<div class="WideHanging-Body"><span class="insert3">If directly specified, 
+the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0309">aspect_definition</A></SPAN> 
+shall be a static expression. This aspect is never inherited; if not 
+directly specified, the aspect is False.</span></div>
+<div class="paranum"><a name="p3.4">3.4/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3">If a generic procedure is 
+nonreturning, then so are its instances. If a procedure declared within 
+a generic unit is nonreturning, then so are the corresponding copies 
+of that procedure in instances.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal"><span class="insert3">Aspect No_Return</span><span class="delete3"><A NAME="I3591"></A> Each 
+<I>procedure_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN> 
+shall denote one or more procedures or generic procedures; the denoted 
+entities are <I>nonreturning</I>. The <I>procedure_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN></span> 
+shall not <span class="insert3">be specified for</span><span class="delete3">&nbsp;denote</span> 
+a null procedure nor an instance of a generic unit.</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">A return statement shall not apply to a nonreturning 
+procedure or generic procedure.</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">A procedure shall be nonreturning if it overrides 
+a dispatching nonreturning procedure. <A NAME="I3592"></A>In addition 
+to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+this rule applies also in the private part of an instance of a generic 
+unit.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">If a renaming-as-body completes a nonreturning procedure 
+declaration, then the renamed procedure shall be nonreturning.</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
+8 was deleted.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal"><span class="delete3">If a generic procedure is nonreturning, 
+then so are its instances. If a procedure declared within a generic unit 
+is nonreturning, then so are the corresponding copies of that procedure 
+in instances.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">If the body of a nonreturning procedure completes 
+normally, Program_Error is raised at the point of the call. <A NAME="I3593"></A></div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Fail(Msg&nbsp;:&nbsp;String)<span class="delete3">;</span>&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;raises&nbsp;Fatal_Error&nbsp;exception</I></SPAN><BR>
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>with</B></span><span class="delete3"><B>&nbsp;pragma</B></span>&nbsp;No_Return<span class="delete3">(Fail)</span>;<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Inform&nbsp;compiler&nbsp;and&nbsp;reader&nbsp;that&nbsp;procedure&nbsp;never&nbsp;returns&nbsp;normally</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

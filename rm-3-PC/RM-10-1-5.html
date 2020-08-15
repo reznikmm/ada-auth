@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragmas and Program Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>10.1.5 Pragmas and Program Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">This subclause discusses pragmas related to program 
+units, library units, and <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>s. 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I4568"></A><A NAME="I4569"></A>Certain <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
+are defined to be <I>program unit pragmas</I>. <A NAME="I4570"></A>A 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> given 
+as the argument of a program unit pragma shall resolve to denote the 
+declarations or renamings of one or more program units that occur immediately 
+within the declarative region or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
+in which the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+immediately occurs, or it shall resolve to denote the declaration of 
+the immediately enclosing program unit (if any); the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+applies to the denoted program unit(s). If there are no <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+given as arguments, the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+applies to the immediately enclosing program unit.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A program unit pragma 
+shall appear in one of these places:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">At the place of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN>, 
+in which case the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+shall immediately follow in the same <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
+(except for other <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s) 
+a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0163">subprogram_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-12-1.html#S0271">generic_subprogram_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-12-3.html#S0275">generic_instantiation</A></SPAN>, 
+and the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+shall have an argument that is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+denoting that declaration.&nbsp;</div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Bulleted">Immediately within the visible part of a program 
+unit and before any nested declaration (but not within a generic formal 
+part), in which case the argument, if any, shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+that denotes the immediately enclosing program unit declaration.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">At the place of a declaration other than the first, 
+of a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+or program unit declaration, in which case the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+shall have an argument, which shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+that denotes one or more of the following (and nothing else): a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0163">subprogram_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0271">generic_subprogram_declaration</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0275">generic_instantiation</A></SPAN>, 
+of the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+or program unit declaration.&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal"><A NAME="I4571"></A><A NAME="I4572"></A><A NAME="I4573"></A><A NAME="I4574"></A>Certain 
+program unit pragmas are defined to be <I>library unit pragmas</I>. <span class="insert3">If 
+a library unit pragma applies to a program unit, the program unit shall 
+be</span><span class="delete3">&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
+if any, in a library unit pragma shall denote the declaration of</span> 
+a library unit.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7.1">7.1/1</a></div>
+<div class="Normal">&nbsp;A library unit pragma that applies to a generic 
+unit does not apply to its instances, unless a specific rule for the 
+pragma specifies the contrary.&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I4575"></A><A NAME="I4576"></A>Certain <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
+are defined to be <I>configuration pragmas</I>; they shall appear before 
+the first <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>. 
+They are generally used to select a partition-wide or system-wide option. 
+The <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+applies to all <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN>s 
+appearing in the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>, 
+unless there are none, in which case it applies to all future <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN>s 
+compiled into the same environment.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">An implementation may <span class="insert2">require 
+that configuration pragmas that select partition-wide or system-wide 
+options be compiled</span><span class="delete2">&nbsp;place restrictions on 
+configuration pragmas, so long as it allows them</span> when the environment 
+contains no <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s 
+other than those of the predefined environment. <span class="insert2">In 
+this case, the implementation shall still accept configuration pragmas 
+in individual compilations that confirm the initially selected partition-wide 
+or system-wide options.</span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p10">10/1</a></div>
+<div class="Normal">When applied to a generic unit, a program unit pragma 
+that is not a library unit pragma should apply to each instance of the 
+generic unit for which there is not an overriding pragma applied directly 
+to the instance.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Asynchronous Task Control</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.11 Asynchronous Task Control</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+[This subclause introduces a language-defined package to do asynchronous 
+suspend/resume on tasks. It uses a conceptual <I>held priority</I> value 
+to represent the task's <I>held</I> state.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<B>with</B>&nbsp;Ada.Task_Identification;<BR>
+<B>package</B>&nbsp;Ada.Asynchronous_Task_Control&nbsp;<B>is</B><A NAME="I8794"></A><BR>
+&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Asynchronous_Task_Control);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8795"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8796"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8797"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>end</B>&nbsp;Ada.Asynchronous_Task_Control;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<A NAME="I8798"></A><A NAME="I8799"></A><A NAME="I8800"></A>After the 
+Hold operation has been applied to a task, the task becomes <I>held</I>. 
+For each processor there is a conceptual <I>idle task</I>, which is always 
+ready. The base priority of the idle task is below System.Any_Priority'First. 
+The <I>held priority</I> is a constant of the type Integer whose value 
+is below the base priority of the idle task.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The held state should not 
+be confused with the blocked state as defined in <A HREF="AA-9-2.html">9.2</A>; 
+the task is still ready.&nbsp;</div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+For any priority below System.Any_Priority'First, the task dispatching 
+policy is FIFO_Within_Priorities.&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>This applies even if a 
+Task_Dispatching_Policy specifies the policy for all of the priorities 
+of the partition.&nbsp;</div>
+<div class="paranum"><a name="p4.c">4.c/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A task at the held priority 
+never runs, so it is not necessary to implement FIFO_Within_Priorities 
+for systems that have only one policy (such as EDF_Across_Priorities). 
+</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The Hold operation sets the state of T to held. For a held task, the 
+active priority is reevaluated as if the base priority of the task were 
+the held priority.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, if T is currently 
+inheriting priorities from other sources (e.g. it is executing in a protected 
+action), its active priority does not change, and it continues to execute 
+until it leaves the protected action.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The Continue operation resets the state of T to not-held; its active 
+priority is then reevaluated as determined by the task dispatching policy 
+associated with its base priority.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">The Is_Held function returns True if and only if 
+T is in the held state.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Note that the state of T 
+can be changed immediately after Is_Held returns.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">As part of these operations, a check is made that 
+the task identified by T is not terminated. <A NAME="I8801"></A>Tasking_Error 
+is raised if the check fails. <A NAME="I8802"></A>Program_Error is raised 
+if the value of T is Null_Task_Id.</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I8803"></A>If any operation in this package 
+is called with a parameter T that specifies a task object that no longer 
+exists, the execution of the program is erroneous.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">An implementation need not support Asynchronous_Task_Control 
+if it is infeasible to support it in the target environment.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>A direct implementation of the 
+Asynchronous_Task_Control semantics using priorities is not necessarily 
+efficient enough. Thus, we envision implementations that use some other 
+mechanism to set the &ldquo;held&rdquo; state. If there is no other such 
+mechanism, support for Asynchronous_Task_Control might be infeasible, 
+because an implementation in terms of priority would require one idle 
+task per processor. On some systems, programs are not supposed to know 
+how many processors are available, so creating enough idle tasks would 
+be problematic.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">38&nbsp;&nbsp;It is a consequence of the priority 
+rules that held tasks cannot be dispatched on any processor in a partition 
+(unless they are inheriting priorities) since their priorities are defined 
+to be below the priority of any idle task.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">39&nbsp;&nbsp;The effect of calling Get_Priority and 
+Set_Priority on a Held task is the same as on any other task.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">40&nbsp;&nbsp;Calling Hold on a held task or Continue 
+on a non-held task has no effect.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">41&nbsp;&nbsp;The rules 
+affecting queuing are derived from the above rules, in addition to the 
+normal priority rules:&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented2SmallBulleted">When a held task is on the ready 
+queue, its priority is so low as to never reach the top of the queue 
+as long as there are other tasks on that queue.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Indented2SmallBulleted">If a task is executing in a protected 
+action, inside a rendezvous, or is inheriting priorities from other sources 
+(e.g. when activated), it continues to execute until it is no longer 
+executing the corresponding construct.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented2SmallBulleted">If a task becomes held while waiting 
+(as a caller) for a rendezvous to complete, the active priority of the 
+accepting task is not affected.</div>
+<div class="paranum"><a name="p18">18/1</a></div>
+<div class="Indented2SmallBulleted">{<I><A HREF="defect1.html#8652/0077">8652/0077</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00111.TXT">AI95-00111-01</A></I>} 
+If a task becomes held while waiting in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN>, 
+and an entry call is issued to one of the open entries, the corresponding 
+<SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN> 
+executes. When the rendezvous completes, the active priority of the accepting 
+task is lowered to the held priority (unless it is still inheriting from 
+other sources), and the task does not execute until another Continue.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented2SmallBulleted">The same holds if the held task is 
+the only task on a protected entry queue whose barrier becomes open. 
+The corresponding entry body executes.</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<A NAME="I8804"></A>Asynchronous_Task_Control is now Preelaborated, so 
+it can be used in preelaborated units.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p19.b">19.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0077">8652/0077</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00111.TXT">AI95-00111-01</A></I>} 
+<B>Corrigendum:</B> Corrected to eliminate the use of the undefined term 
+&ldquo;accept body&rdquo;.</div>
+<div class="paranum"><a name="p19.c">19.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+The description of held tasks was changed to reflect that the calculation 
+of active priorities depends on the dispatching policy of the base priority. 
+Thus, the policy of the held priority was specified in order to avoid 
+surprises (especially when using the EDF policy).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

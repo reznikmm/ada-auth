@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Generic Instantiation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>12.3 Generic Instantiation</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I3992"></A>An instance of a generic unit 
+is declared by a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0241">generic_instantiation</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_instantiation</SPAN><A NAME="I3993"></A><A NAME="S0241"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I3994"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0146">defining_program_unit_name</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I3995"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;[<A NAME="I3996"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0242">generic_actual_part</A></SPAN>];<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>procedure</B>&nbsp;<A NAME="I3997"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0146">defining_program_unit_name</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_procedure_</I><A NAME="I3998"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;[<A NAME="I3999"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0242">generic_actual_part</A></SPAN>];<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>function</B>&nbsp;<A NAME="I4000"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0145">defining_designator</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;<I>generic_function_</I><A NAME="I4001"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;[<A NAME="I4002"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0242">generic_actual_part</A></SPAN>];</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_actual_part</SPAN><A NAME="I4003"></A><A NAME="S0242"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I4004"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I4005"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN>})</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_association</SPAN><A NAME="I4006"></A><A NAME="S0243"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>generic_formal_parameter_</I><A NAME="I4007"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0092">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I4008"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0244">explicit_generic_actual_parameter</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_generic_actual_parameter</SPAN><A NAME="I4009"></A><A NAME="S0244"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4010"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I4011"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>subprogram_</I><A NAME="I4012"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;|&nbsp;<I>entry_</I><A NAME="I4013"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I4014"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>package_instance_</I><A NAME="I4015"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><A NAME="I4016"></A><A NAME="I4017"></A>A <SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN> 
+is <I>named</I> or <I>positional</I> according to whether or not the 
+<I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0092">selector_name</A></SPAN> 
+is specified. Any positional associations shall precede any named associations. 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I4018"></A><A NAME="I4019"></A><A NAME="I4020"></A>The 
+<I>generic actual parameter</I> is either the <SPAN Class="swiss"><A HREF="RM-12-3.html#S0244">explicit_generic_actual_parameter</A></SPAN> 
+given in a <SPAN Class="swiss">generic_parameter_association</SPAN> for 
+each formal, or the corresponding <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-12-6.html#S0260">default_name</A></SPAN> 
+if no <SPAN Class="swiss">generic_parameter_association</SPAN> is given 
+for the formal. When the meaning is clear from context, the term &ldquo;generic 
+actual,&rdquo; or simply &ldquo;actual,&rdquo; is used as a synonym for 
+&ldquo;generic actual parameter&rdquo; and also for the view denoted 
+by one, or the value of one.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">In a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0241">generic_instantiation</A></SPAN> 
+for a particular kind of program unit (package, procedure, or function), 
+the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> shall 
+denote a generic unit of the corresponding kind (generic package, generic 
+procedure, or generic function, respectively).</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0092">selector_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN> 
+shall denote a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0240">generic_formal_parameter_declaration</A></SPAN> 
+of the generic unit being instantiated. If two or more formal subprograms 
+have the same defining name, then named associations are not allowed 
+for the corresponding actuals.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-3.html#S0241">generic_instantiation</A></SPAN> 
+shall contain at most one <SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN> 
+for each formal. Each formal without an association shall have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-12-6.html#S0259">subprogram_default</A></SPAN>.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">In a generic unit Legality Rules are enforced at 
+compile time of the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0236">generic_declaration</A></SPAN> 
+and generic body, given the properties of the formals. In the visible 
+part and formal part of an instance, Legality Rules are enforced at compile 
+time of the <SPAN Class="swiss"><A HREF="RM-12-3.html#S0241">generic_instantiation</A></SPAN>, 
+given the properties of the actuals. In other parts of an instance, Legality 
+Rules are not enforced; this rule does not apply when a given rule explicitly 
+specifies otherwise.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-3.html#S0241">generic_instantiation</A></SPAN> 
+declares an instance; it is equivalent to the instance declaration (a 
+<SPAN Class="swiss"><A HREF="RM-7-1.html#S0161">package_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0141">subprogram_declaration</A></SPAN>) 
+immediately followed by the instance body, both at the place of the instantiation. 
+</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The instance is a copy of the text of the template. 
+Each use of a formal parameter becomes (in the copy) a use of the actual, 
+as explained below. <A NAME="I4021"></A><A NAME="I4022"></A><A NAME="I4023"></A><A NAME="I4024"></A><A NAME="I4025"></A><A NAME="I4026"></A><A NAME="I4027"></A><A NAME="I4028"></A>An 
+instance of a generic package is a package, that of a generic procedure 
+is a procedure, and that of a generic function is a function.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">The interpretation of each construct within a generic 
+declaration or body is determined using the overloading rules when that 
+generic declaration or body is compiled. In an instance, the interpretation 
+of each (copied) construct is the same, except in the case of a name 
+that denotes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0236">generic_declaration</A></SPAN> 
+or some declaration within the generic unit; the corresponding name in 
+the instance then denotes the corresponding copy of the denoted declaration. 
+The overloading rules do not apply in the instance.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">In an instance, a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0240">generic_formal_parameter_declaration</A></SPAN> 
+declares a view whose properties are identical to those of the actual, 
+except as specified in <A HREF="RM-12-4.html">12.4</A>, &ldquo;<A HREF="RM-12-4.html">Formal 
+Objects</A>&rdquo; and <A HREF="RM-12-6.html">12.6</A>, &ldquo;<A HREF="RM-12-6.html">Formal 
+Subprograms</A>&rdquo;. Similarly, for a declaration within a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0240">generic_formal_parameter_declaration</A></SPAN>, 
+the corresponding declaration in an instance declares a view whose properties 
+are identical to the corresponding declaration within the declaration 
+of the actual.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">Implicit declarations are also copied, and a name 
+that denotes an implicit declaration in the generic denotes the corresponding 
+copy in the instance. However, for a type declared within the visible 
+part of the generic, a whole new set of primitive subprograms is implicitly 
+declared for use outside the instance, and may differ from the copied 
+set if the properties of the type in some way depend on the properties 
+of some actual type specified in the instantiation. For example, if the 
+type in the generic is derived from a formal private type, then in the 
+instance the type will inherit subprograms from the corresponding actual 
+type.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I4029"></A>These new implicit declarations 
+occur immediately after the type declaration in the instance, and override 
+the copied ones. The copied ones can be called only from within the instance; 
+the new ones can be called only from outside the instance, although for 
+tagged types, the body of a new one can be executed by a call to an old 
+one.&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">In the visible part of an instance, an explicit declaration 
+overrides an implicit declaration if they are homographs, as described 
+in <A HREF="RM-8-3.html">8.3</A>. On the other hand, an explicit declaration 
+in the private part of an instance overrides an implicit declaration 
+in the instance, only if the corresponding explicit declaration in the 
+generic overrides a corresponding implicit declaration in the generic. 
+Corresponding rules apply to the other kinds of overriding described 
+in <A HREF="RM-8-3.html">8.3</A>.&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">Recursive generic instantiation is not allowed in 
+the following sense: if a given generic unit includes an instantiation 
+of a second generic unit, then the instance generated by this instantiation 
+shall not include an instance of the first generic unit (whether this 
+instance is generated directly, or indirectly by intermediate instantiations). 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I4030"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0241">generic_instantiation</A></SPAN>, 
+each <SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN> 
+is first evaluated. If a default is used, an implicit <SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN> 
+is assumed for this rule. These evaluations are done in an arbitrary 
+order, except that the evaluation for a default actual takes place after 
+the evaluation for another actual if the default includes a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+that denotes the other one.<A NAME="I4031"></A> Finally, the instance 
+declaration and body are elaborated.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I4032"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0243">generic_association</A></SPAN> 
+the generic actual parameter is evaluated. Additional actions are performed 
+in the case of a formal object of mode <B>in</B> (see <A HREF="RM-12-4.html">12.4</A>). 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">5&nbsp;&nbsp;If a formal type is not tagged, then 
+the type is treated as an untagged type within the generic body. Deriving 
+from such a type in a generic body is permitted; the new type does not 
+get a new tag value, even if the actual is tagged. Overriding operations 
+for such a derived type cannot be dispatched to from outside the instance. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of generic 
+instantiations (see <A HREF="RM-12-1.html">12.1</A>):</I>&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Swap&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Exchange(Elem&nbsp;=&gt;&nbsp;Integer);<BR>
+<B>procedure</B>&nbsp;Swap&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Exchange(Character);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;Swap&nbsp;is&nbsp;overloaded&nbsp;</I></SPAN><BR>
+<B>function</B>&nbsp;Square&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Squaring(Integer);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&quot;*&quot;&nbsp;of&nbsp;Integer&nbsp;used&nbsp;by&nbsp;default</I></SPAN><BR>
+<B>function</B>&nbsp;Square&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Squaring(Item&nbsp;=&gt;&nbsp;Matrix,&nbsp;&quot;*&quot;&nbsp;=&gt;&nbsp;Matrix_Product);<BR>
+<B>function</B>&nbsp;Square&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Squaring(Matrix,&nbsp;Matrix_Product);&nbsp;--<SPAN Class="roman"><I>&nbsp;same&nbsp;as&nbsp;previous</I></SPAN></div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples"><B>package</B>&nbsp;Int_Vectors&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;On_Vectors(Integer,&nbsp;Table,&nbsp;&quot;+&quot;);</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of uses 
+of instantiated units:</I>&nbsp;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples">Swap(A,&nbsp;B);<BR>
+A&nbsp;:=&nbsp;Square(A);</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples">T&nbsp;:&nbsp;Table(1&nbsp;..&nbsp;5)&nbsp;:=&nbsp;(10,&nbsp;20,&nbsp;30,&nbsp;40,&nbsp;50);<BR>
+N&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;Int_Vectors.Sigma(T);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;150&nbsp;(see&nbsp;<A HREF="RM-12-2.html">12.2</A>, 
+&ldquo;<A HREF="RM-12-2.html">Generic Bodies</A>&rdquo;&nbsp;for&nbsp;the&nbsp;body&nbsp;of&nbsp;Sigma)</I></SPAN></div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples"><B>use</B>&nbsp;Int_Vectors;<BR>
+M&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;Sigma(T);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;150</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

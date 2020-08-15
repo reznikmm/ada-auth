@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragma Controlled</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11.3 Pragma Controlled</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[Pragma Controlled is used to prevent any automatic 
+reclamation of storage (garbage collection) for the objects created by 
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0122">allocator</A></SPAN>s 
+of a given access type.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Controlled is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4671"></A><A NAME="I4672"></A>Controlled(<I>first_subtype_</I><A NAME="I4673"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0265">local_name</A></SPAN>);</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Not to be confused with type 
+Finalization.Controlled.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0265">local_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Controlled shall denote a nonderived access subtype.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I4674"></A><A NAME="I4675"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Controlled is a representation pragma <A NAME="I4676"></A><A NAME="I4677"></A>that 
+specifies the <I>controlled</I> aspect of representation.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I4678"></A><I>Garbage collection</I> is 
+a process that automatically reclaims storage, or moves objects to a 
+different address, while the objects still exist.</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Storage reclamation upon 
+leaving a master is not considered garbage collection.</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations">Note that garbage collection includes compaction 
+of a pool (&ldquo;moved to a different Address&rdquo;), even if storage 
+reclamation is not done.</div>
+<div class="paranum"><a name="p6.c">6.c</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Programs that will be damaged 
+by automatic storage reclamation are just as likely to be damaged by 
+having objects moved to different locations in memory. A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Controlled should turn off both flavors of garbage collection.&nbsp;</div>
+<div class="paranum"><a name="p6.d">6.d</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>If garbage collection 
+reclaims the storage of a controlled object, it should first finalize 
+it. Finalization is not done when moving an object; any self-relative 
+pointers will have to be updated by the garbage collector. If an implementation 
+provides garbage collection for a storage pool containing controlled 
+objects (see <A HREF="AA-7-6.html">7.6</A>), then it should provide a 
+means for deferring garbage collection of those controlled objects.&nbsp;</div>
+<div class="paranum"><a name="p6.e">6.e</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>This 
+allows the manager of a resource released by a Finalize operation to 
+defer garbage collection during its critical regions; it is up to the 
+author of the Finalize operation to do so. Garbage collection, at least 
+in some systems, can happen asynchronously with respect to normal user 
+code. Note that it is not enough to defer garbage collection during Initialize, 
+Adjust, and Finalize, because the resource in question might be used 
+in other situations as well. For example:&nbsp;</div>
+<div class="paranum"><a name="p6.f">6.f</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Ada.Finalization;<BR>
+<B>package</B>&nbsp;P&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p6.g">6.g</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Controlled&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Finalization.Limited_Controlled&nbsp;<B>with</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Finalize(Object&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;My_Controlled);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;My_Controlled_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;My_Controlled;</div>
+<div class="paranum"><a name="p6.h">6.h</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Non_Reentrant;</div>
+<div class="paranum"><a name="p6.i">6.i</a></div>
+<div class="SmallExamples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p6.j">6.j</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;<B>body</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;<B>array</B>(Integer&nbsp;<B>range</B>&nbsp;1..10)&nbsp;<B>of</B>&nbsp;Integer;</div>
+<div class="paranum"><a name="p6.k">6.k</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Non_Reentrant&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:=&nbsp;X&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;If&nbsp;the&nbsp;system&nbsp;decides&nbsp;to&nbsp;do&nbsp;a&nbsp;garbage&nbsp;collection&nbsp;here,</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;then&nbsp;we're&nbsp;in&nbsp;trouble,&nbsp;because&nbsp;it&nbsp;will&nbsp;call&nbsp;Finalize&nbsp;on</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;the&nbsp;collected&nbsp;objects;&nbsp;we&nbsp;essentially&nbsp;have&nbsp;two&nbsp;threads</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;of&nbsp;control&nbsp;erroneously&nbsp;accessing&nbsp;shared&nbsp;variables.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;garbage&nbsp;collector&nbsp;behaves&nbsp;like&nbsp;a&nbsp;separate&nbsp;thread</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;of&nbsp;control,&nbsp;even&nbsp;though&nbsp;the&nbsp;user&nbsp;hasn't&nbsp;declared</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;any&nbsp;tasks.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A(X)&nbsp;:=&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Non_Reentrant;</div>
+<div class="paranum"><a name="p6.l">6.l</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Finalize(Object&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;My_Controlled)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non_Reentrant;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Finalize;<BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p6.m">6.m</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;P;&nbsp;<B>use</B>&nbsp;P;<BR>
+<B>procedure</B>&nbsp;Main&nbsp;<B>is</B><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<B>new</B>&nbsp;My_Controlled&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;allocate&nbsp;some&nbsp;objects</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;<SPAN Class="roman"><I>&nbsp;forget&nbsp;the&nbsp;pointers&nbsp;to&nbsp;some&nbsp;of&nbsp;them,&nbsp;so&nbsp;they&nbsp;become&nbsp;garbage</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Non_Reentrant;<BR>
+<B>end</B>&nbsp;Main;</div>
+<div class="paranum"><a name="p6.n">6.n</a></div>
+<div class="Annotations">It is the user's responsibility to protect against 
+this sort of thing, and the implementation's responsibility to provide 
+the necessary operations.</div>
+<div class="paranum"><a name="p6.o">6.o</a></div>
+<div class="Annotations">We do not give these operations names, nor explain 
+their exact semantics, because different implementations of garbage collection 
+might have different needs, and because garbage collection is not supported 
+by most Ada implementations, so portability is not important here. Another 
+reason not to turn off garbage collection during each entire Finalize 
+operation is that it would create a serial bottleneck; it might be only 
+part of the Finalize operation that conflicts with some other resource. 
+It is the intention that the mechanisms provided be finer-grained than 
+pragma Controlled.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Controlled is specified for an access type with a standard storage pool, 
+then garbage collection is not performed for objects in that pool.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If Controlled is not specified, 
+the implementation may, but need not, perform garbage collection. If 
+Storage_Pool is specified, then a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Controlled for that type is ignored.&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Controlled means that implementation-provided 
+garbage collection is turned off; if the Storage_Pool is specified, the 
+pool controls whether garbage collection is done.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">An implementation need not support garbage collection, 
+in which case, a pragma Controlled has no effect.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations">Ada 83 used the term &ldquo;automatic storage 
+reclamation&rdquo; to refer to what is known traditionally as &ldquo;garbage 
+collection&rdquo;. Because of the existence of storage pools (see <A HREF="AA-13-11.html">13.11</A>), 
+we need to distinguish this from the storage reclamation that might happen 
+upon leaving a master. Therefore, we now use the term &ldquo;garbage 
+collection&rdquo; in its normal computer-science sense. This has the 
+additional advantage of making our terminology more accessible to people 
+outside the Ada world.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I4679"></A></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

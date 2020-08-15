@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragma Restrictions and Pragma Profile</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-12-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.12 Pragma Restrictions and Pragma Profile</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions expresses the user's intent to abide by certain restrictions. 
+A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Profile 
+expresses the user's intent to abide by a set of Restrictions or other 
+specified run-time policies. These may facilitate the construction of 
+simpler run-time environments.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5250"></A><A NAME="I5251"></A>Restrictions(<A NAME="I5252"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0319">restriction</A></SPAN>{, 
+<A NAME="I5253"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0319">restriction</A></SPAN>});</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">restriction</SPAN><A NAME="I5254"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>restriction_</I><A NAME="I5255"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>restriction_parameter_</I><A NAME="I5256"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I5257"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0320">restriction_parameter_argument</A></SPAN></div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">restriction_parameter_argument</SPAN><A NAME="I5258"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5259"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5260"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I5261"></A>Unless otherwise specified for 
+a particular restriction, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is expected to be of any integer type.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">Unless otherwise specified for a particular restriction, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+shall be static, and its value shall be nonnegative.&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 7 was deleted.</I></SPAN> 
+</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5262"></A><A NAME="I5263"></A>A 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Restrictions 
+is a configuration pragma. If a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Restrictions applies to any compilation unit included in the partition, 
+this may impose either (or both) of two kinds of requirements, as specified 
+for the particular restriction:</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Bulleted">A restriction may impose requirements on some or 
+all of the units comprising the partition. Unless otherwise specified 
+for a particular restriction, such a requirement applies to all of the 
+units comprising the partition and is enforced via a post-compilation 
+check.</div>
+<div class="paranum"><a name="p8.2">8.2/3</a></div>
+<div class="Bulleted">A restriction may impose requirements on the run-time 
+behavior of the program, as indicated by the specification of run-time 
+behavior associated with a violation of the requirement.</div>
+<div class="paranum"><a name="p8.3">8.3/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For the purpose of 
+checking whether a partition contains constructs that violate any restriction 
+(unless specified otherwise for a particular restriction):</div>
+<div class="paranum"><a name="p8.4">8.4/1</a></div>
+<div class="Bulleted">Generic instances are logically expanded at the 
+point of instantiation;</div>
+<div class="paranum"><a name="p8.5">8.5/1</a></div>
+<div class="Bulleted">If an object of a type is declared or allocated 
+and not explicitly initialized, then all expressions appearing in the 
+definition for the type and any of its ancestors are presumed to be used;</div>
+<div class="paranum"><a name="p8.6">8.6/1</a></div>
+<div class="Bulleted">A <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+for a formal parameter or a generic formal object is considered to be 
+used if and only if the corresponding actual parameter is not provided 
+in a given call or instantiation.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p8.7">8.7/3</a></div>
+<div class="Normal">&nbsp;An implementation may provide implementation-defined 
+restrictions; the identifier for an implementation-defined restriction 
+shall differ from those of the language-defined restrictions.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">An implementation may place limitations on the values 
+of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+that are supported, and limitations on the supported combinations of 
+restrictions. The consequences of violating such limitations are implementation 
+defined.&nbsp;</div>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Normal">&nbsp;An implementation is permitted to omit restriction 
+checks for code that is recognized at compile time to be unreachable 
+and for which no code is generated.</div>
+<div class="paranum"><a name="p9.2">9.2/1</a></div>
+<div class="Normal">&nbsp;Whenever enforcement of a restriction is not required 
+prior to execution, an implementation may nevertheless enforce the restriction 
+prior to execution of a partition to which the restriction applies, provided 
+that every execution of the partition would violate the restriction. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Profile is as follows:&nbsp;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5264"></A><A NAME="I5265"></A>Profile 
+(<I>profile_</I><A NAME="I5266"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+{, <I>profile_</I><A NAME="I5267"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>});</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal">The <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall be the name of a usage profile. The semantics of any <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
+are defined by the usage profile specified by the <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">A profile is equivalent to the set of configuration 
+pragmas that is defined for each usage profile.&nbsp;</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal"><A NAME="I5268"></A><A NAME="I5269"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Profile is a configuration pragma. There may be more than one <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Profile for a partition.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal">An implementation may provide implementation-defined 
+usage profiles; the identifier for an implementation-defined usage profile 
+shall differ from those of the language-defined usage profiles.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Notes">36&nbsp;&nbsp;Restrictions intended to facilitate 
+the construction of efficient tasking run-time systems are defined in 
+<A HREF="RM-D-7.html">D.7</A>. Restrictions intended for use when constructing 
+high integrity systems are defined in <A HREF="RM-H-4.html">H.4</A>.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Notes">37&nbsp;&nbsp;An implementation has to enforce the 
+restrictions in cases where enforcement is required, even if it chooses 
+not to take advantage of the restrictions in terms of efficiency.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-11-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-12-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

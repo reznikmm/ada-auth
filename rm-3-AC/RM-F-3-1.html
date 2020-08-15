@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Picture String Formation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>F.3.1 Picture String Formation</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><A NAME="I8542"></A><A NAME="I8543"></A>A <I>well-formed 
+picture String</I>, or simply <I>picture String</I>, is a String value 
+that conforms to the syntactic rules, composition constraints, and character 
+replication conventions specified in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2/1</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete1">&nbsp;</span></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">picture_string</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">fixed_$_picture_string</SPAN><BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">fixed_#_picture_string</SPAN><BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">floating_currency_picture_string</SPAN><BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">non_currency_picture_string</SPAN><BR>
+</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_$_picture_string</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">zero_suppression</SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]&nbsp;[<SPAN Class="swiss">zero_suppression</SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;<SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">floating_LHS_sign</SPAN>&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;<SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]&nbsp;<SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">all_sign_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;<SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_#_picture_string</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">single_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<SPAN Class="swiss">zero_suppression</SPAN>]&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">multiple_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">zero_suppression</SPAN>&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]&nbsp;[<SPAN Class="swiss">zero_suppression</SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;<SPAN Class="swiss">fixed_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">floating_LHS_sign</SPAN>&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;<SPAN Class="swiss">fixed_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">single_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">multiple_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]&nbsp;<SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">fixed_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">all_sign_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;<SPAN Class="swiss">fixed_#_currency</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">floating_currency_picture_string</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;<SPAN Class="swiss">floating_$_currency</SPAN>&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;<SPAN Class="swiss">floating_#_currency</SPAN>&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>]&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;<SPAN Class="swiss">all_currency_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">non_currency_picture_string</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]&nbsp;<SPAN Class="swiss">zero_suppression</SPAN>&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">floating_LHS_sign</SPAN>]&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+&nbsp;|&nbsp;[<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]&nbsp;<SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">all_sign_number</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;<SPAN Class="swiss">direct_insertion</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;<SPAN Class="swiss">number</SPAN>&nbsp;[<SPAN Class="swiss">RHS_sign</SPAN>]<BR>
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_LHS_sign</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">LHS_Sign</SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented1"><SPAN Class="swiss">LHS_Sign</SPAN>&nbsp;::=&nbsp;&nbsp;+&nbsp;|&nbsp;&ndash;&nbsp;|&nbsp;&lt;<BR>
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_$_char</SPAN>&nbsp;::=&nbsp;$<BR>
+</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Indented1"><SPAN Class="swiss">direct_insertion</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">simple_insertion</SPAN></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Indented1"><SPAN Class="swiss">simple_insertion</SPAN>&nbsp;::=&nbsp;&nbsp;_&nbsp;|&nbsp;B&nbsp;|&nbsp;0&nbsp;|&nbsp;/<BR>
+</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented1"><SPAN Class="swiss">zero_suppression</SPAN>&nbsp;::=&nbsp;&nbsp;Z&nbsp;{Z&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}&nbsp;|&nbsp;<SPAN Class="swiss">fill_string</SPAN></div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Indented1"><SPAN Class="swiss">context_sensitive_insertion</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">simple_insertion</SPAN><BR>
+</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented1"><SPAN Class="swiss">fill_string</SPAN>&nbsp;::=&nbsp;&nbsp;*&nbsp;{*&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}<BR>
+</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Indented1"><SPAN Class="swiss">number</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">fore_digits</SPAN>&nbsp;[<SPAN Class="swiss">radix</SPAN>&nbsp;[<SPAN Class="swiss">aft_digits</SPAN>]&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}]<BR>
+&nbsp;|&nbsp;<SPAN Class="swiss">radix</SPAN>&nbsp;<SPAN Class="swiss">aft_digits</SPAN>&nbsp;{<SPAN Class="swiss">direct_insertion</SPAN>}</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented1"><SPAN Class="swiss">fore_digits</SPAN>&nbsp;::=&nbsp;9&nbsp;{9&nbsp;|&nbsp;<SPAN Class="swiss">direct_insertion</SPAN>}</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Indented1"><SPAN Class="swiss">aft_digits</SPAN>&nbsp;::=&nbsp;&nbsp;{9&nbsp;|&nbsp;<SPAN Class="swiss">direct_insertion</SPAN>}&nbsp;9</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented1"><SPAN Class="swiss">radix</SPAN>&nbsp;::=&nbsp;.&nbsp;|&nbsp;V<BR>
+</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Indented1"><SPAN Class="swiss">RHS_sign</SPAN>&nbsp;::=&nbsp;+&nbsp;|&nbsp;&ndash;&nbsp;|&nbsp;&gt;&nbsp;|&nbsp;CR&nbsp;|&nbsp;DB<BR>
+</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Indented1"><SPAN Class="swiss">floating_LHS_sign</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">LHS_Sign</SPAN>&nbsp;{<SPAN Class="swiss">context_sensitive_insertion</SPAN>}&nbsp;<SPAN Class="swiss">LHS_Sign</SPAN>&nbsp;{<SPAN Class="swiss">LHS_Sign</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}<BR>
+</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Indented1"><SPAN Class="swiss">single_#_currency</SPAN>&nbsp;::=&nbsp;#</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Indented1"><SPAN Class="swiss">multiple_#_currency</SPAN>&nbsp;::=&nbsp;##&nbsp;{#}<BR>
+</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_#_currency</SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss">single_#_currency</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">multiple_#_currency</SPAN><BR>
+</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Indented1"><SPAN Class="swiss">floating_$_currency</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;$&nbsp;{<SPAN Class="swiss">context_sensitive_insertion</SPAN>}&nbsp;$&nbsp;{$&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}<BR>
+</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented1"><SPAN Class="swiss">floating_#_currency</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;#&nbsp;{<SPAN Class="swiss">context_sensitive_insertion</SPAN>}&nbsp;#&nbsp;{#&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}<BR>
+</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_sign_number</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">all_sign_fore</SPAN>&nbsp;[<SPAN Class="swiss">radix</SPAN>&nbsp;[<SPAN Class="swiss">all_sign_aft</SPAN>]]&nbsp;[&gt;]</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_sign_fore</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">sign_char</SPAN>&nbsp;{<SPAN Class="swiss">context_sensitive_insertion</SPAN>}&nbsp;<SPAN Class="swiss">sign_char</SPAN>&nbsp;{<SPAN Class="swiss">sign_char</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_sign_aft</SPAN>&nbsp;::=&nbsp;{<SPAN Class="swiss">all_sign_aft_char</SPAN>}&nbsp;<SPAN Class="swiss">sign_char</SPAN><BR>
+<BR>
+<SPAN Class="swiss">all_sign_aft_char</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">sign_char</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN></div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Indented1"><SPAN Class="swiss">sign_char</SPAN>&nbsp;::=&nbsp;+&nbsp;|&nbsp;&ndash;&nbsp;|&nbsp;&lt;<BR>
+</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_currency_number</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">all_currency_fore</SPAN>&nbsp;[<SPAN Class="swiss">radix</SPAN>&nbsp;[<SPAN Class="swiss">all_currency_aft</SPAN>]]</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_currency_fore</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">currency_char</SPAN>&nbsp;{<SPAN Class="swiss">context_sensitive_insertion</SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">currency_char</SPAN>&nbsp;{<SPAN Class="swiss">currency_char</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_currency_aft</SPAN>&nbsp;::=&nbsp;{<SPAN Class="swiss">all_currency_aft_char</SPAN>}&nbsp;<SPAN Class="swiss">currency_char</SPAN><BR>
+<BR>
+<SPAN Class="swiss">all_currency_aft_char</SPAN>&nbsp;::=&nbsp;<SPAN Class="swiss">currency_char</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN></div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Indented1"><SPAN Class="swiss">currency_char</SPAN>&nbsp;::=&nbsp;$&nbsp;|&nbsp;#<BR>
+</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_zero_suppression_number</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">all_zero_suppression_fore</SPAN>&nbsp;[&nbsp;<SPAN Class="swiss">radix</SPAN>&nbsp;[<SPAN Class="swiss">all_zero_suppression_aft</SPAN>]]</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_zero_suppression_fore</SPAN>&nbsp;::=<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="swiss">zero_suppression_char</SPAN>&nbsp;{<SPAN Class="swiss">zero_suppression_char</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN>}</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Indented1"><SPAN Class="swiss">all_zero_suppression_aft</SPAN>&nbsp;::=&nbsp;{<SPAN Class="swiss">all_zero_suppression_aft_char</SPAN>}&nbsp;<SPAN Class="swiss">zero_suppression_char</SPAN><BR>
+<BR>
+<SPAN Class="swiss">all_zero_suppression_aft_char</SPAN>&nbsp;::=&nbsp;&nbsp;<SPAN Class="swiss">zero_suppression_char</SPAN>&nbsp;|&nbsp;<SPAN Class="swiss">context_sensitive_insertion</SPAN></div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Indented1" style="margin-bottom: 0.9em"><SPAN Class="swiss">zero_suppression_char</SPAN>&nbsp;::=&nbsp;Z&nbsp;|&nbsp;*</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following composition 
+constraints apply to a picture String:&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Bulleted">A <SPAN Class="swiss">floating_LHS_sign</SPAN> 
+does not have occurrences of different <SPAN Class="swiss">LHS_Sign</SPAN> 
+Character values.</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Bulleted">If a picture String has '&lt;' as <SPAN Class="swiss">fixed_LHS_sign</SPAN>, 
+then it has '&gt;' as <SPAN Class="swiss">RHS_sign</SPAN>.</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Bulleted">If a picture String has '&lt;' in a <SPAN Class="swiss">floating_LHS_sign</SPAN> 
+or in an <SPAN Class="swiss">all_sign_number</SPAN>, then it has an occurrence 
+of '&gt;'.</div>
+<div class="paranum"><a name="p43">43/1</a></div>
+<div class="Bulleted">If a picture String has '+' or '&ndash;' as <SPAN Class="swiss">fixed_LHS_sign</SPAN>, 
+in a <SPAN Class="swiss">floating_LHS_sign</SPAN>, or in an <SPAN Class="swiss">all_sign_number</SPAN>, 
+then it has no <SPAN Class="swiss">RHS_sign</SPAN><span class="insert1">&nbsp;or '&gt;' character</span>.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Bulleted">An instance of <SPAN Class="swiss">all_sign_number</SPAN> 
+does not have occurrences of different <SPAN Class="swiss">sign_char</SPAN> 
+Character values.</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Bulleted">An instance of <SPAN Class="swiss">all_currency_number</SPAN> 
+does not have occurrences of different <SPAN Class="swiss">currency_char</SPAN> 
+Character values.</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Bulleted">An instance of <SPAN Class="swiss">all_zero_suppression_number</SPAN> 
+does not have occurrences of different <SPAN Class="swiss">zero_suppression_char</SPAN> 
+Character values, except for possible case differences between 'Z' and 
+'z'.&nbsp;</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Normal">A <I>replicable Character</I> is a Character that, 
+by the above rules, can occur in two consecutive positions in a picture 
+String.</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A <I>Character replication</I> 
+is a String&nbsp;</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Examples"><SPAN Class="roman"><I>char</I></SPAN>&nbsp;&amp;&nbsp;'('&nbsp;&amp;&nbsp;<SPAN Class="roman"><I>spaces</I></SPAN>&nbsp;&amp;&nbsp;<SPAN Class="roman"><I>count_string</I></SPAN>&nbsp;&amp;&nbsp;')'</div>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Normal">where <I>char</I> is a replicable Character, <I>spaces</I> 
+is a String (possibly empty) comprising only space Character values, 
+and <I>count_string</I> is a String of one or more decimal digit Character 
+values. A Character replication in a picture String has the same effect 
+as (and is said to be <I>equivalent to</I>) a String comprising <I>n</I> 
+consecutive occurrences of <I>char</I>, where <I>n</I>=Integer'Value(<I>count_string</I>).</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Normal">An <I>expanded picture String</I> is a picture String 
+containing no Character replications.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Notes">3&nbsp;&nbsp;Although a sign to the left of the number 
+can float, a sign to the right of the number is in a fixed position. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-F-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

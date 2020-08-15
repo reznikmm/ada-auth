@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Model of Floating Point Arithmetic</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>G.2.1 Model of Floating Point Arithmetic</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In the strict mode, the predefined operations of 
+a floating point type shall satisfy the accuracy requirements specified 
+here and shall avoid or signal overflow in the situations described. 
+This behavior is presented in terms of a model of floating point arithmetic 
+that builds on the concept of the canonical form (see <A HREF="RM-A-5-3.html">A.5.3</A>). 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">Associated with each floating point type is an infinite 
+set of model numbers. The model numbers of a type are used to define 
+the accuracy requirements that have to be satisfied by certain predefined 
+operations of the type; through certain attributes of the model numbers, 
+they are also used to explain the meaning of a user-declared floating 
+point type declaration. The model numbers of a derived type are those 
+of the parent type; the model numbers of a subtype are those of its type.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I8265"></A>The <I>model numbers</I> of a 
+floating point type T are zero and all the values expressible in the 
+canonical form (for the type T), in which <I>mantissa</I> has T'Model_Mantissa 
+digits and <I>exponent</I> has a value greater than or equal to T'Model_Emin. 
+(These attributes are defined in <A HREF="RM-G-2-2.html">G.2.2</A>.) 
+</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I8266"></A>A <I>model interval</I> of a 
+floating point type is any interval whose bounds are model numbers of 
+the type. <A NAME="I8267"></A>The <I>model interval</I> of a type T <I>associated 
+with a value</I> <I>v</I> is the smallest model interval of T that includes 
+<I>v</I>. (The model interval associated with a model number of a type 
+consists of that number only.)&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The accuracy requirements for the evaluation of certain 
+predefined operations of floating point types are as follows.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I8268"></A>An <I>operand interval</I> is 
+the model interval, of the type specified for the operand of an operation, 
+associated with the value of the operand.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For any predefined 
+arithmetic operation that yields a result of a floating point type T, 
+the required bounds on the result are given by a model interval of T 
+(called the <I>result interval</I>) defined in terms of the operand values 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted"><A NAME="I8269"></A>The result interval is the 
+smallest model interval of T that includes the minimum and the maximum 
+of all the values obtained by applying the (exact) mathematical operation 
+to values arbitrarily selected from the respective operand intervals. 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The result interval of an exponentiation is obtained 
+by applying the above rule to the sequence of multiplications defined 
+by the exponent, assuming arbitrary association of the factors, and to 
+the final division in the case of a negative exponent.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The result interval of a conversion of a numeric 
+value to a floating point type T is the model interval of T associated 
+with the operand value, except when the source expression is of a fixed 
+point type with a <I>small</I> that is not a power of T'Machine_Radix 
+or is a fixed point multiplication or division either of whose operands 
+has a <I>small</I> that is not a power of T'Machine_Radix; in these cases, 
+the result interval is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I8270"></A><A NAME="I8271"></A>For any of 
+the foregoing operations, the implementation shall deliver a value that 
+belongs to the result interval when both bounds of the result interval 
+are in the safe range of the result type T, as determined by the values 
+of T'Safe_First and T'Safe_Last; otherwise,&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted"><A NAME="I8272"></A>if T'Machine_Overflows is True, 
+the implementation shall either deliver a value that belongs to the result 
+interval or raise Constraint_Error;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">if T'Machine_Overflows is False, the result is 
+implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">For any predefined relation on operands of a floating 
+point type T, the implementation may deliver any value (i.e., either 
+True or False) obtained by applying the (exact) mathematical comparison 
+to values arbitrarily chosen from the respective operand intervals.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">The result of a membership test is defined in terms 
+of comparisons of the operand value with the lower and upper bounds of 
+the given range or type mark (the usual rules apply to these comparisons). 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">If the underlying floating point hardware implements 
+division as multiplication by a reciprocal, the result interval for division 
+(and exponentiation by a negative exponent) is implementation defined. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-G-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

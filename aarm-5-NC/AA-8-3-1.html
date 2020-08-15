@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Overriding Indicators</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>8.3.1 Overriding Indicators</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
+An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+is used to declare that an operation is intended to override (or not 
+override) an inherited operation.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
+<SPAN Class="swiss">overriding_indicator</SPAN><A NAME="I4132"></A><A NAME="S0198"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>not</B>]&nbsp;<B>overriding</B></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00397.TXT">AI95-00397-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
+If an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-7.html#S0191">null_procedure_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-8.html#S0192">expression_function_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN> 
+of a subprogram, or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+other than a protected subprogram has an <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>, 
+then:</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Bulleted">the operation shall be a primitive operation for 
+some type;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Bulleted">if the <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+is <B>overriding</B>, then the operation shall override a homograph at 
+the place of the declaration or body;</div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+This doesn't require that the overriding happen at precisely the place 
+of the declaration or body; it only requires that the region in  which 
+the overriding is known to have happened includes this place. That is, 
+the overriding can happen at or before the place of the declaration or 
+body.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">if the <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+is <B>not overriding</B>, then the operation shall not override any homograph 
+(at any place).&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><A NAME="I4133"></A>In addition to the places where 
+Legality Rules normally apply, these rules also apply in the private 
+part of an instance of a generic unit.</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The <B>overriding</B> and 
+<B>not overriding</B> rules differ slightly. For <B>overriding</B>, we 
+want the indicator to reflect the overriding state at the place of the 
+declaration; otherwise the indicator would be &ldquo;lying&rdquo;. Whether 
+a homograph is implicitly declared after the declaration (see 7.3.1 to 
+see how this can happen) has no impact on this check. However, <B>not 
+overriding</B> is different; &ldquo;lying&rdquo; would happen if a homograph 
+declared later actually is overriding. So, we require this check to take 
+into account later overridings. That can be implemented either by looking 
+ahead, or by rechecking when additional operations are declared.</div>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations">The &ldquo;no lying&rdquo; rules are needed 
+to prevent a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+from having contradictory <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>s. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Notes">8&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00397.TXT">AI95-00397-01</A></I>} 
+Rules for <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>s 
+of task and protected entries and of protected subprograms are found 
+in <A HREF="AA-9-5-2.html">9.5.2</A> and <A HREF="AA-9-4.html">9.4</A>, 
+respectively.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+The use of <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>s 
+allows the detection of errors at compile-time that otherwise might not 
+be detected at all. For instance, we might declare a security queue derived 
+from the Queue interface of 3.9.4 as:</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><B>type</B>&nbsp;Security_Queue&nbsp;<B>is&nbsp;new</B>&nbsp;Queue&nbsp;<B>with&nbsp;record</B>&nbsp;...;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Examples"><B>overriding</B><BR>
+<B>procedure</B>&nbsp;Append(Q&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Security_Queue;&nbsp;Person&nbsp;:&nbsp;<B>in</B>&nbsp;Person_Name);</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0178-1.TXT">AI12-0178-1</A></I>} 
+<B>overriding</B><BR>
+<B>procedure</B>&nbsp;Remove_First(Q&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Security_Queue;&nbsp;Person&nbsp;:&nbsp;<B>out</B>&nbsp;Person_Name);</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Examples"><B>overriding</B><BR>
+<B>function</B>&nbsp;Cur_Count(Q&nbsp;:&nbsp;<B>in</B>&nbsp;Security_Queue)&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples"><B>overriding</B><BR>
+<B>function</B>&nbsp;Max_Count(Q&nbsp;:&nbsp;<B>in</B>&nbsp;Security_Queue)&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Examples"><B>not&nbsp;overriding</B><BR>
+<B>procedure</B>&nbsp;Arrest(Q&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Security_Queue;&nbsp;Person&nbsp;:&nbsp;<B>in</B>&nbsp;Person_Name);</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">The first four subprogram declarations guarantee 
+that these subprograms will override the four subprograms inherited from 
+the Queue interface. A misspelling in one of these subprograms will be 
+detected by the implementation. Conversely, the declaration of Arrest 
+guarantees that this is a new operation.</div>
+<div class="paranum"><a name="p16.a">16.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In this case, the subprograms 
+are abstract, so misspellings will get detected anyway. But for other 
+subprograms (especially when deriving from concrete types), the error 
+might never be detected, and a body other than the one the programmer 
+intended might be executed without warning. Thus our new motto: &ldquo;Overriding 
+indicators &mdash; don't derive a type without them!&rdquo;&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p16.b">16.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
+<A NAME="I4134"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">Overriding_indicator</A></SPAN>s 
+are new. These let the programmer state her overriding intentions to 
+the compiler; if the compiler disagrees, an error will be produced rather 
+than a hard to find bug.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p16.c">16.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00177.TXT">AI95-0177-1</A></I>} 
+Expression functions can have overriding indicators.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

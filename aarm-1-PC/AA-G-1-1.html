@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Complex Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>G.1.1 Complex Types</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The generic library 
+package Numerics.Generic_Complex_Types has the following declaration: 
+</div>
+<div class="paranum"><a name="p2">2/1</a></div>
+<div class="Examples">{<I><A HREF="defect1.html#8652/0020">8652/0020</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00126.TXT">AI95-00126-01</A></I>} 
+<B>generic</B><A NAME="I6449"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Real&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert1"><B>pragma</B></span><span class="delete1">&nbsp;pragma</span>&nbsp;Pure(Generic_Complex_Types);</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6450"></A>Complex&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re,&nbsp;Im&nbsp;:&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6451"></A>Imaginary&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6452"></A>i&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6453"></A>j&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6454"></A>Re&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6455"></A>Im&nbsp;(X&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6456"></A>Im&nbsp;(X&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6457"></A>Set_Re&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real'Base);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6458"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real'Base);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6459"></A>Set_Im&nbsp;(X&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Im&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real'Base);</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6460"></A>Compose_From_Cartesian&nbsp;(Re,&nbsp;Im&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6461"></A>Compose_From_Cartesian&nbsp;(Re&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6462"></A>Compose_From_Cartesian&nbsp;(Im&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6463"></A>Modulus&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Real'Base&nbsp;<B>renames</B>&nbsp;Modulus;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6464"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6465"></A>Argument&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6466"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real'Base)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6467"></A>Compose_From_Polar&nbsp;(Modulus,&nbsp;Argument,&nbsp;Cycle&nbsp;:&nbsp;Real'Base)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6468"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;Right&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6469"></A>Conjugate&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;&quot;-&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left&nbsp;:&nbsp;Complex;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Complex)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Complex;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left&nbsp;:&nbsp;Imaginary;&nbsp;Right&nbsp;:&nbsp;Real'Base)&nbsp;<B>return</B>&nbsp;Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(Left&nbsp;:&nbsp;Real'Base;&nbsp;Right&nbsp;:&nbsp;Imaginary)&nbsp;<B>return</B>&nbsp;Imaginary;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples"><B>private</B></div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Imaginary&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;i&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary&nbsp;:=&nbsp;1.0;<BR>
+&nbsp;&nbsp;&nbsp;j&nbsp;:&nbsp;<B>constant</B>&nbsp;Imaginary&nbsp;:=&nbsp;1.0;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Complex_Types;</div>
+<div class="paranum"><a name="p25">25/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0020">8652/0020</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00126.TXT">AI95-00126-01</A></I>} 
+<A NAME="I6470"></A>The library package Numerics.Complex_Types <span class="insert1">is 
+declared pure and&nbsp;</span>defines the same types, constants, and subprograms 
+as Numerics.Generic_Complex_Types, except that the predefined type Float 
+is systematically substituted for Real'Base throughout. Nongeneric equivalents 
+of Numerics.Generic_Complex_Types for each of the other predefined floating 
+point types are defined similarly, with the names Numerics.Short_Complex_Types, 
+Numerics.Long_Complex_Types, etc.&nbsp;</div>
+<div class="paranum"><a name="p25.a">25.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The nongeneric equivalents are 
+provided to allow the programmer to construct simple mathematical applications 
+without being required to understand and use generics.&nbsp;</div>
+<div class="paranum"><a name="p25.b">25.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The nongeneric equivalents all 
+export the types Complex and Imaginary and the constants i and j (rather 
+than uniquely named types and constants, such as Short_Complex, Long_Complex, 
+etc.) to preserve their equivalence to actual instantiations of the generic 
+package and to allow the programmer to change the precision of an application 
+globally by changing a single context clause.&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal">[Complex is a visible type with cartesian components.] 
+</div>
+<div class="paranum"><a name="p26.a">26.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The cartesian representation 
+is far more common than the polar representation, in practice. The accuracy 
+of the results of the complex arithmetic operations and of the complex 
+elementary functions is dependent on the representation; thus, implementers 
+need to know that representation. The type is visible so that complex 
+&ldquo;literals&rdquo; can be written in aggregate notation, if desired. 
+</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">[Imaginary is a private type; its full type is derived 
+from Real'Base.]&nbsp;</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>The 
+Imaginary type and the constants i and j are provided for two reasons: 
+</div>
+<div class="paranum"><a name="p27.b">27.b</a></div>
+<div class="SmallBulleted">They allow complex &ldquo;literals&rdquo; 
+to be written in the alternate form of <SPAN Class="roman"><I>a</I></SPAN> 
++ <SPAN Class="roman"><I>b</I></SPAN>*i (or <SPAN Class="roman"><I>a</I></SPAN> 
++ <SPAN Class="roman"><I>b</I></SPAN>*j), if desired. Of course, in some 
+contexts the sum will need to be parenthesized.</div>
+<div class="paranum"><a name="p27.c">27.c</a></div>
+<div class="SmallBulleted">When an Ada binding to IEC 559:1989 that provides 
+(signed) infinities as the result of operations that overflow becomes 
+available, it will be important to allow arithmetic between pure-imaginary 
+and complex operands without requiring the former to be represented as 
+(or promoted to) complex values with a real component of zero. For example, 
+the multiplication of <SPAN Class="roman"><I>a</I></SPAN> + <SPAN Class="roman"><I>b</I></SPAN>*i 
+by <SPAN Class="roman"><I>d</I></SPAN>*i should yield &ndash;<SPAN Class="roman"><I>b</I></SPAN>&middot; 
+<SPAN Class="roman"><I>d</I></SPAN> + <SPAN Class="roman"><I>a</I></SPAN>&middot; 
+<SPAN Class="roman"><I>d</I></SPAN>*i, but if one cannot avoid representing 
+the pure-imaginary value <SPAN Class="roman"><I>d</I></SPAN>*i as the 
+complex value 0.0 + <SPAN Class="roman"><I>d</I></SPAN>*i, then a NaN 
+(&quot;Not-a-Number&quot;) could be produced as the result of multiplying 
+<SPAN Class="roman"><I>a</I></SPAN> by 0.0 (e.g., when <SPAN Class="roman"><I>a</I></SPAN> 
+is infinite); the NaN could later trigger an exception. Providing the 
+Imaginary type and overloadings of the arithmetic operators for mixtures 
+of Imaginary and Complex operands gives the programmer the same control 
+over avoiding premature coercion of pure-imaginary values to complex 
+as is already provided for pure-real values.&nbsp;</div>
+<div class="paranum"><a name="p27.d">27.d</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>The 
+Imaginary type is private, rather than being visibly derived from Real'Base, 
+for two reasons:&nbsp;</div>
+<div class="paranum"><a name="p27.e">27.e</a></div>
+<div class="SmallBulleted">to preclude implicit conversions of real literals 
+to the Imaginary type (such implicit conversions would make many common 
+arithmetic expressions ambiguous); and</div>
+<div class="paranum"><a name="p27.f">27.f</a></div>
+<div class="SmallBulleted">to suppress the implicit derivation of the 
+multiplication, division, and absolute value operators with Imaginary 
+operands and an Imaginary result (the result type would be incorrect). 
+</div>
+<div class="paranum"><a name="p27.g">27.g</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The base subtype Real'Base is 
+used for the component type of Complex, the parent type of Imaginary, 
+and the parameter and result types of some of the subprograms to maximize 
+the chances of being able to pass meaningful values into the subprograms 
+and receive meaningful results back. The generic formal parameter Real 
+therefore plays only one role, that of providing the precision to be 
+maintained in complex arithmetic calculations. Thus, the subprograms 
+in Numerics.Generic_Complex_Types share with those in Numerics.Generic_Elementary_Functions, 
+and indeed even with the predefined arithmetic operations (see <A HREF="AA-4-5.html">4.5</A>), 
+the property of being free of range checks on input and output, i.e., 
+of being able to exploit the base range of the relevant floating point 
+type fully. As a result, the user loses the ability to impose application-oriented 
+bounds on the range of values that the components of a complex variable 
+can acquire; however, it can be argued that few, if any, applications 
+have a naturally square domain (as opposed to a circular domain) anyway. 
+</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The arithmetic operations 
+and the Re, Im, Modulus, Argument, and Conjugate functions have their 
+usual mathematical meanings. When applied to a parameter of pure-imaginary 
+type, the &ldquo;imaginary-part&rdquo; function Im yields the value of 
+its parameter, as the corresponding real value. The remaining subprograms 
+have the following meanings:&nbsp;</div>
+<div class="paranum"><a name="p28.a">28.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The middle case can be understood 
+by considering the parameter of pure-imaginary type to represent a complex 
+value with a zero real part.&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Bulleted">The Set_Re and Set_Im procedures replace the designated 
+component of a complex parameter with the given real value; applied to 
+a parameter of pure-imaginary type, the Set_Im procedure replaces the 
+value of that parameter with the imaginary value corresponding to the 
+given real value.</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Bulleted">The Compose_From_Cartesian function constructs 
+a complex value from the given real and imaginary components. If only 
+one component is given, the other component is implicitly zero.</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Bulleted">The Compose_From_Polar function constructs a complex 
+value from the given modulus (radius) and argument (angle). When the 
+value of the parameter Modulus is positive (resp., negative), the result 
+is the complex value represented by the point in the complex plane lying 
+at a distance from the origin given by the absolute value of Modulus 
+and forming an angle measured counterclockwise from the positive (resp., 
+negative) real axis given by the value of the parameter Argument.&nbsp;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal">When the Cycle parameter is specified, the result 
+of the Argument function and the parameter Argument of the Compose_From_Polar 
+function are measured in units such that a full cycle of revolution has 
+the given value; otherwise, they are measured in radians.</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The computed results 
+of the mathematically multivalued functions are rendered single-valued 
+by the following conventions, which are meant to imply the principal 
+branch:&nbsp;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Bulleted">The result of the Modulus function is nonnegative.</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Bulleted">The result of the Argument function is in the quadrant 
+containing the point in the complex plane represented by the parameter 
+X. This may be any quadrant (I through IV); thus, the range of the Argument 
+function is approximately &ndash;&pi; to &pi; (&ndash;<SPAN Class="roman">Cycle</SPAN>/2.0 
+to <SPAN Class="roman">Cycle</SPAN>/2.0, if the parameter Cycle is specified). 
+When the point represented by the parameter X lies on the negative real 
+axis, the result approximates&nbsp;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Indented2NestedBulleted">&pi; (resp., &ndash;&pi;) when the 
+sign of the imaginary component of X is positive (resp., negative), if 
+Real'Signed_Zeros is True;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Indented2NestedBulleted">&pi;, if Real'Signed_Zeros is False. 
+</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Bulleted">Because a result lying on or near one of the axes 
+may not be exactly representable, the approximation inherent in computing 
+the result may place it in an adjacent quadrant, close to but on the 
+wrong side of the axis.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Normal">The exception Numerics.Argument_Error is raised by 
+the Argument and Compose_From_Polar functions with specified cycle, signaling 
+a parameter value outside the domain of the corresponding mathematical 
+function, when the value of the parameter Cycle is zero or negative.</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Normal"><A NAME="I6471"></A><A NAME="I6472"></A><A NAME="I6473"></A>The 
+exception Constraint_Error is raised by the division operator when the 
+value of the right operand is zero, and by the exponentiation operator 
+when the value of the left operand is zero and the value of the exponent 
+is negative, provided that Real'Machine_Overflows is True; when Real'Machine_Overflows 
+is False, the result is unspecified. <A NAME="I6474"></A>[Constraint_Error 
+can also be raised when a finite result overflows (see <A HREF="AA-G-2-6.html">G.2.6</A>).] 
+</div>
+<div class="paranum"><a name="p40.a">40.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>It is anticipated that an 
+Ada binding to IEC 559:1989 will be developed in the future. As part 
+of such a binding, the Machine_Overflows attribute of a conformant floating 
+point type will be specified to yield False, which will permit implementations 
+of the complex arithmetic operations to deliver results with an infinite 
+component (and set the overflow flag defined by the binding) instead 
+of raising Constraint_Error in overflow situations, when traps are disabled. 
+Similarly, it is appropriate for the complex arithmetic operations to 
+deliver results with infinite components (and set the zero-divide flag 
+defined by the binding) instead of raising Constraint_Error in the situations 
+defined above, when traps are disabled. Finally, such a binding should 
+also specify the behavior of the complex arithmetic operations, when 
+sensible, given operands with infinite components.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Normal">In the implementation of Numerics.Generic_Complex_Types, 
+the range of intermediate values allowed during the calculation of a 
+final result shall not be affected by any range constraint of the subtype 
+Real.&nbsp;</div>
+<div class="paranum"><a name="p41.a">41.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Implementations 
+of Numerics.Generic_Complex_Types written in Ada should therefore avoid 
+declaring local variables of subtype Real; the subtype Real'Base should 
+be used instead.&nbsp;</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6475"></A>In 
+the following cases, evaluation of a complex arithmetic operation shall 
+yield the <I>prescribed result</I>, provided that the preceding rules 
+do not call for an exception to be raised:&nbsp;</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Bulleted">The results of the Re, Im, and Compose_From_Cartesian 
+functions are exact.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Bulleted">The real (resp., imaginary) component of the result 
+of a binary addition operator that yields a result of complex type is 
+exact when either of its operands is of pure-imaginary (resp., real) 
+type.&nbsp;</div>
+<div class="paranum"><a name="p44.a">44.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The result of the addition 
+operator is exact when one of its operands is of real type and the other 
+is of pure-imaginary type. In this particular case, the operator is analogous 
+to the Compose_From_Cartesian function; it performs no arithmetic.&nbsp;</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Bulleted">The real (resp., imaginary) component of the result 
+of a binary subtraction operator that yields a result of complex type 
+is exact when its right operand is of pure-imaginary (resp., real) type.</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Bulleted">The real component of the result of the Conjugate 
+function for the complex type is exact.</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Bulleted">When the point in the complex plane represented 
+by the parameter X lies on the nonnegative real axis, the Argument function 
+yields a result of zero.&nbsp;</div>
+<div class="paranum"><a name="p47.a">47.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Argument(X + i*Y) is analogous 
+to <I>EF</I>.Arctan(Y, X), where <I>EF</I> is an appropriate instance 
+of Numerics.Generic_Elementary_Functions, except when X and Y are both 
+zero, in which case the former yields the value zero while the latter 
+raises Numerics.Argument_Error.&nbsp;</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Bulleted">When the value of the parameter Modulus is zero, 
+the Compose_From_Polar function yields a result of zero.</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Bulleted">When the value of the parameter Argument is equal 
+to a multiple of the quarter cycle, the result of the Compose_From_Polar 
+function with specified cycle lies on one of the axes. In this case, 
+one of its components is zero, and the other has the magnitude of the 
+parameter Modulus.</div>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Bulleted">Exponentiation by a zero exponent yields the value 
+one. Exponentiation by a unit exponent yields the value of the left operand. 
+Exponentiation of the value one yields the value one. Exponentiation 
+of the value zero yields the value zero, provided that the exponent is 
+nonzero. When the left operand is of pure-imaginary type, one component 
+of the result of the exponentiation operator is zero.&nbsp;</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Normal">When the result, or a result component, of any operator 
+of Numerics.Generic_Complex_Types has a mathematical definition in terms 
+of a single arithmetic or relational operation, that result or result 
+component exhibits the accuracy of the corresponding operation of the 
+type Real.</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Normal">Other accuracy requirements for the Modulus, Argument, 
+and Compose_From_Polar functions, and accuracy requirements for the multiplication 
+of a pair of complex operands or for division by a complex operand, all 
+of which apply only in the strict mode, are given in <A HREF="AA-G-2-6.html">G.2.6</A>.</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="Normal">The sign of a zero result or zero result component 
+yielded by a complex arithmetic operation or function is implementation 
+defined when Real'Signed_Zeros is True.&nbsp;</div>
+<div class="paranum"><a name="p53.a">53.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The sign of a 
+zero result (or a component thereof) from any operator or function in 
+Numerics.Generic_Complex_Types, when Real'Signed_Zeros is True.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Normal">The nongeneric equivalent packages may, but need 
+not, be actual instantiations of the generic package for the appropriate 
+predefined type.</div>
+<div class="paranum"><a name="p55">55/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0091">8652/0091</A></I>} 
+Implementations may obtain the result of exponentiation of a complex 
+or pure-imaginary operand by repeated complex multiplication, with arbitrary 
+association of the factors and with a possible final complex reciprocation 
+(when the exponent is negative). Implementations are also permitted to 
+obtain the result of exponentiation of a complex operand, but not of 
+a pure-imaginary operand, by converting the left operand to a polar representation; 
+exponentiating the modulus by the given exponent; multiplying the argument 
+by the given exponent<span class="delete1">, when the exponent is positive, 
+or dividing the argument by the absolute value of the given exponent, 
+when the exponent is negative</span>; and reconverting to a cartesian 
+representation. Because of this implementation freedom, no accuracy requirement 
+is imposed on complex exponentiation (except for the prescribed results 
+given above, which apply regardless of the implementation method chosen). 
+</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Normal">Because the usual mathematical meaning of multiplication 
+of a complex operand and a real operand is that of the scaling of both 
+components of the former by the latter, an implementation should not 
+perform this operation by first promoting the real operand to complex 
+type and then performing a full complex multiplication. In systems that, 
+in the future, support an Ada binding to IEC 559:1989, the latter technique 
+will not generate the required result when one of the components of the 
+complex operand is infinite. (Explicit multiplication of the infinite 
+component by the zero component obtained during promotion yields a NaN 
+that propagates into the final result.) Analogous advice applies in the 
+case of multiplication of a complex operand and a pure-imaginary operand, 
+and in the case of division of a complex operand by a real or pure-imaginary 
+operand.&nbsp;</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Normal">Likewise, because the usual mathematical meaning 
+of addition of a complex operand and a real operand is that the imaginary 
+operand remains unchanged, an implementation should not perform this 
+operation by first promoting the real operand to complex type and then 
+performing a full complex addition. In implementations in which the Signed_Zeros 
+attribute of the component type is True (and which therefore conform 
+to IEC 559:1989 in regard to the handling of the sign of zero in predefined 
+arithmetic operations), the latter technique will not generate the required 
+result when the imaginary component of the complex operand is a negatively 
+signed zero. (Explicit addition of the negative zero to the zero obtained 
+during promotion yields a positive zero.) Analogous advice applies in 
+the case of addition of a complex operand and a pure-imaginary operand, 
+and in the case of subtraction of a complex operand and a real or pure-imaginary 
+operand.</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Normal">Implementations in which Real'Signed_Zeros is True 
+should attempt to provide a rational treatment of the signs of zero results 
+and result components. As one example, the result of the Argument function 
+should have the sign of the imaginary component of the parameter X when 
+the point represented by that parameter lies on the positive real axis; 
+as another, the sign of the imaginary component of the Compose_From_Polar 
+function should be the same as (resp., the opposite of) that of the Argument 
+parameter when that parameter has a value of zero and the Modulus parameter 
+has a nonnegative (resp., negative) value.&nbsp;</div>
+<div class="paranum"><a name="p58.a.1">58.a.1/1</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B></div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p58.a">58.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The semantics 
+of Numerics.Generic_Complex_Types differs from Generic_Complex_Types 
+as defined in ISO/IEC CD 13813 (for Ada 83) in the following ways:&nbsp;</div>
+<div class="paranum"><a name="p58.b">58.b</a></div>
+<div class="SmallBulleted">The generic package is a child of the package 
+defining the Argument_Error exception.</div>
+<div class="paranum"><a name="p58.c">58.c</a></div>
+<div class="SmallBulleted">The nongeneric equivalents export types and 
+constants with the same names as those exported by the generic package, 
+rather than with names unique to the package.</div>
+<div class="paranum"><a name="p58.d">58.d</a></div>
+<div class="SmallBulleted">Implementations are not allowed to impose 
+an optional restriction that the generic actual parameter associated 
+with Real be unconstrained. (In view of the ability to declare variables 
+of subtype Real'Base in implementations of Numerics.Generic_Complex_Types, 
+this flexibility is no longer needed.)</div>
+<div class="paranum"><a name="p58.e">58.e</a></div>
+<div class="SmallBulleted">The dependence of the Argument function on 
+the sign of a zero parameter component is tied to the value of Real'Signed_Zeros.</div>
+<div class="paranum"><a name="p58.f">58.f</a></div>
+<div class="SmallBulleted">Conformance to accuracy requirements is conditional. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-G-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

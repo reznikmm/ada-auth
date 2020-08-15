@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Record Aggregates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.3.1 Record Aggregates</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN>, 
+a value is specified for each component of the record or record extension 
+value, using either a named or a positional association.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">record_aggregate</SPAN><A NAME="I2463"></A><A NAME="S0105"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(<A NAME="I2464"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0106">record_component_association_list</A></SPAN>)</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">record_component_association_list</SPAN><A NAME="I2465"></A><A NAME="S0106"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2466"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2467"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN>}<BR>
+&nbsp;&nbsp;|&nbsp;<B>null&nbsp;record</B></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">record_component_association</SPAN><A NAME="I2468"></A><A NAME="S0107"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2469"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">component_choice_list</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I2470"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2471"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">component_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</span></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">component_choice_list</SPAN><A NAME="I2472"></A><A NAME="S0108"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I2473"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{|&nbsp;<I>component_</I><A NAME="I2474"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>others</B></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><A NAME="I2475"></A>A <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+is a <I>named component association</I> if it has a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">component_choice_list</A></SPAN>; 
+<A NAME="I2476"></A>otherwise, it is a <I>positional component association</I>. 
+Any positional component associations shall precede any named component 
+associations. If there is a named association with a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">component_choice_list</A></SPAN> 
+of <B>others</B>, it shall come last.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1">In the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0106">record_component_association_list</A></SPAN> 
+for a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN>, 
+if there is only one association, it shall be a named association.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal"><A NAME="I2477"></A>The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN> 
+shall be a single <span class="delete2">nonlimited&nbsp;</span>record type 
+or record extension.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I2478"></A>For the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0106">record_component_association_list</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN>, 
+all components of the composite value defined by the aggregate are <I>needed</I>; 
+for the association list of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0109">extension_aggregate</A></SPAN>, 
+only those components not determined by the ancestor expression or subtype 
+are needed (see <A HREF="RM-4-3-2.html">4.3.2</A>). Each <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+shall denote a needed component (including possibly a discriminant). 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2479"></A>The 
+expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+is the type of the <I>associated</I> component(s); <A NAME="I2480"></A>the 
+associated component(s) are as follows:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">For a positional association, the component (including 
+possibly a discriminant) in the corresponding relative position (in the 
+declarative region of the type), counting only the needed components; 
+</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">For a named association with one or more <I>component_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>s, 
+the named component(s);</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">For a named association with the reserved word 
+<B>others</B>, all needed components that are not associated with some 
+previous association.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">If the type of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN> 
+is a record extension, then it shall be a descendant of a record type, 
+through one or more record extensions (and no private extensions).</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">If there are no components needed in a given <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0106">record_component_association_list</A></SPAN>, 
+then the reserved words <B>null record</B> shall appear rather than a 
+list of <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN>s. 
+</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">Each <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN><span class="insert2">&nbsp;other than an <B>others</B> choice with a &lt;&gt;</span> shall have 
+at least one associated component, and each needed component shall be 
+associated with exactly one <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN>. 
+If a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+<span class="insert2">with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+</span>has two or more associated components, all of them shall be of 
+the same type.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">If the components of a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
+are needed, then the value of a discriminant that governs the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
+shall be given by a static expression.&nbsp;</div>
+<div class="paranum"><a name="p17.1">17.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+for a discriminant without a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+shall have an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+rather than &lt;&gt;.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal"><A NAME="I2481"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN> 
+consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0106">record_component_association_list</A></SPAN>.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal"><A NAME="I2482"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0106">record_component_association_list</A></SPAN>, 
+any per-object constraints (see <A HREF="RM-3-8.html">3.8</A>) for components 
+specified in the association list are elaborated and any <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN>s 
+are evaluated and converted to the subtype of the associated component. 
+<A NAME="I2483"></A>Any constraint elaborations and <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+evaluations (and conversions) occur in an arbitrary order, except that 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+for a discriminant is evaluated (and converted) prior to the elaboration 
+of any per-object constraint that depends on it, which in turn occurs 
+prior to the evaluation and conversion of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+for the component with the per-object constraint.<A NAME="I2484"></A></div>
+<div class="paranum"><a name="p19.1">19.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+defines the value for the associated component(s). For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+with &lt;&gt;, if the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
+has a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
+that <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+defines the value for the associated component(s); otherwise, the associated 
+component(s) are initialized by default as for a stand-alone object of 
+the component subtype (see <A HREF="RM-3-3-1.html">3.3.1</A>).</span></div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_component_association</A></SPAN> 
+is evaluated (and converted) once for each associated component.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">7&nbsp;&nbsp;For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0105">record_aggregate</A></SPAN> 
+with positional associations, expressions specifying discriminant values 
+appear first since the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+is given first in the declaration of the type; they have to be in the 
+same order as in the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a record 
+aggregate with positional associations:</I>&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">(4,&nbsp;July,&nbsp;1776)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-8.html">3.8</A>&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of record 
+aggregates with named associations:</I>&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples">(Day&nbsp;=&gt;&nbsp;4,&nbsp;Month&nbsp;=&gt;&nbsp;July,&nbsp;Year&nbsp;=&gt;&nbsp;1776)<BR>
+(Month&nbsp;=&gt;&nbsp;July,&nbsp;Day&nbsp;=&gt;&nbsp;4,&nbsp;Year&nbsp;=&gt;&nbsp;1776)</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples">(Disk,&nbsp;Closed,&nbsp;Track&nbsp;=&gt;&nbsp;5,&nbsp;Cylinder&nbsp;=&gt;&nbsp;12)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-8-1.html">3.8.1</A></I></SPAN><BR>
+(Unit&nbsp;=&gt;&nbsp;Disk,&nbsp;Status&nbsp;=&gt;&nbsp;Closed,&nbsp;Cylinder&nbsp;=&gt;&nbsp;9,&nbsp;Track&nbsp;=&gt;&nbsp;1)</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I></I><span class="insert2"><I>Examples</I></span><I></I><span class="delete2"><I>&nbsp;Example</I></span><I>&nbsp;of component&nbsp;</I><span class="insert2"><I>associations</I></span><I></I><span class="delete2"><I>&nbsp;association</I></span><I>&nbsp;with several choices:</I>&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples">(Value&nbsp;=&gt;&nbsp;0,&nbsp;Succ|Pred&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Cell'(0,&nbsp;<B>null</B>,&nbsp;<B>null</B>))&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN></div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples">&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;The&nbsp;allocator&nbsp;is&nbsp;evaluated&nbsp;twice:&nbsp;Succ&nbsp;and&nbsp;Pred&nbsp;designate&nbsp;different&nbsp;cells</I></SPAN></div>
+<div class="paranum"><a name="p29.1">29.1/2</a></div>
+<div class="Examples"><span class="insert2">(Value&nbsp;=&gt;&nbsp;0,&nbsp;Succ|Pred&nbsp;=&gt;&nbsp;&lt;&gt;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN></span></div>
+<div class="paranum"><a name="p29.2">29.2/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;Succ&nbsp;and&nbsp;Pred&nbsp;will&nbsp;be&nbsp;set&nbsp;to&nbsp;<B>null</B></I></SPAN></span></div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of record 
+aggregates for tagged types (see <A HREF="RM-3-9.html">3.9</A> and <A HREF="RM-3-9-1.html">3.9.1</A>):</I> 
+</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples">Expression'(<B>null&nbsp;record</B>)<BR>
+Literal'(Value&nbsp;=&gt;&nbsp;0.0)<BR>
+Painted_Point'(0.0,&nbsp;Pi/2.0,&nbsp;Paint&nbsp;=&gt;&nbsp;Red)</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Exception Handling</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-4-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>11.4 Exception Handling</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[When an exception occurrence is raised, normal program 
+execution is abandoned and control is transferred to an applicable <SPAN Class="swiss"><A HREF="AA-11-2.html#S0266">exception_handler</A></SPAN>, 
+if any. <A NAME="I5100"></A>To <I>handle</I> an exception occurrence 
+is to respond to the exceptional event. <A NAME="I5101"></A>To <I>propagate</I> 
+an exception occurrence is to raise it again in another context; that 
+is, to fail to respond to the exceptional event in the present context.] 
+</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In other words, if the 
+execution of a given construct raises an exception, but does not handle 
+it, the exception is propagated to an enclosing execution (except in 
+the case of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">task_body</A></SPAN>).</div>
+<div class="paranum"><a name="p1.b">1.b/1</a></div>
+<div class="Annotations">Propagation involves re-raising the same exception 
+occurrence. For example, calling an entry of an uncallable task raises 
+Tasking_Error; this is not propagation.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I5102"></A><A NAME="I5103"></A>Within a 
+given task, if the execution of construct <I>a</I> is defined by this 
+International Standard to consist (in part) of the execution of construct 
+<I>b</I>, then while <I>b</I> is executing, the execution of <I>a</I> 
+is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I5104"></A>The 
+<I>innermost dynamically enclosing</I> execution of a given execution 
+is the dynamically enclosing execution that started most recently.&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5105"></A><A NAME="I5106"></A>If 
+the execution of <I>a</I> dynamically encloses that of <I>b</I>, then 
+we also say that the execution of <I>b</I> is <I>included in</I> the 
+execution of <I>a</I>.&nbsp;</div>
+<div class="paranum"><a name="p2.b">2.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Examples: The execution 
+of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN> 
+dynamically encloses the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
+after the <B>if</B> (during that evaluation). (Recall that &ldquo;execution&rdquo; 
+includes both &ldquo;elaboration&rdquo; and &ldquo;evaluation&rdquo;, 
+as well as other executions.) The evaluation of a function call dynamically 
+encloses the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the function <SPAN Class="swiss"><A HREF="AA-3-11.html#S0089">body</A></SPAN> 
+(during that execution). Note that, due to recursion, several simultaneous 
+executions of the same construct can be occurring at once during the 
+execution of a particular task.</div>
+<div class="paranum"><a name="p2.c">2.c</a></div>
+<div class="Annotations">Dynamically enclosing is not defined across 
+task boundaries; a task's execution does not include the execution of 
+any other tasks.</div>
+<div class="paranum"><a name="p2.d">2.d</a></div>
+<div class="Annotations">Dynamically enclosing is only defined for executions 
+that are occurring at a given moment in time; if an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN> 
+is currently executing the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+after <B>then</B>, then the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
+is no longer dynamically enclosed by the execution of the <SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN> 
+(or anything else).&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5107"></A>When 
+an exception occurrence is raised by the execution of a given construct, 
+the rest of the execution of that construct is <I>abandoned</I>; that 
+is, any portions of the execution that have not yet taken place are not 
+performed. The construct is first completed, and then left, as explained 
+in <A HREF="AA-7-6-1.html">7.6.1</A>. Then:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">If the construct is a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">task_body</A></SPAN>, 
+the exception does not propagate further;&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>When an exception is raised 
+by the execution of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">task_body</A></SPAN>, 
+there is no dynamically enclosing execution, so the exception does not 
+propagate any further. If the exception occurred during the activation 
+of the task, then the activator raises Tasking_Error, as explained in 
+<A HREF="AA-9-2.html">9.2</A>, &ldquo;<A HREF="AA-9-2.html">Task Execution 
+- Task Activation</A>&rdquo;, but we don't define that as propagation; 
+it's a special rule. Otherwise (the exception occurred during the execution 
+of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+of the task), the task silently disappears. Thus, abnormal termination 
+of tasks is not always considered to be an error.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">If the construct is the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+that has a handler with a choice covering the exception, the occurrence 
+is handled by that handler;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted"><A NAME="I5108"></A>Otherwise, the occurrence is 
+<I>propagated</I> to the innermost dynamically enclosing execution, which 
+means that the occurrence is raised again in that context.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5109"></A><A NAME="I5110"></A>As 
+shorthands, we refer to the <I>propagation of an exception</I>, and the 
+<I>propagation by a construct</I>, if the execution of the construct 
+propagates an exception occurrence.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I5111"></A><A NAME="I5112"></A><A NAME="I5113"></A>When 
+an occurrence is <I>handled</I> by a given handler, the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0267">choice_parameter_specification</A></SPAN>, 
+if any, is first elaborated, which creates the choice parameter and initializes 
+it to the occurrence. Then, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the handler is executed; this execution replaces the abandoned portion 
+of the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+This &ldquo;replacement&rdquo; semantics implies that the handler can 
+do pretty much anything the abandoned sequence could do; for example, 
+in a function, the handler can execute a <span class="insert2">return 
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0184">&nbsp;return_statement</A></SPAN></span> 
+that applies to the function.&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The rules for exceptions 
+raised in library units, main subprograms and partitions follow from 
+the normal rules, plus the semantics of the environment task described 
+in <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
+<A HREF="AA-10.html">10</A> (for example, the environment task of a partition 
+elaborates library units and calls the main subprogram). If an exception 
+is propagated by the main subprogram, it is propagated to the environment 
+task, which then terminates abnormally, causing the partition to terminate 
+abnormally. Although abnormal termination of tasks is not necessarily 
+an error, abnormal termination of a partition due to an exception <I>is</I> 
+an error.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">1&nbsp;&nbsp;Note that exceptions raised in a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of a body are not handled by the handlers of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+of that body.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-4-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

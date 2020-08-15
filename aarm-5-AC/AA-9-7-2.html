@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Timed Entry Calls</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-7-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.7.2 Timed Entry Calls</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+[A <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0240">timed_entry_call</A></SPAN> 
+issues an entry call that is cancelled if the call (or a requeue-with-abort 
+of the call) is not selected before the expiration time is reached.<span class="insert2">&nbsp;A procedure call may appear rather than an entry call for cases where 
+the procedure might be implemented by an entry.</span> <A NAME="I4858"></A>]</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">timed_entry_call</SPAN><A NAME="I4859"></A><A NAME="S0240"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>select</B><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4860"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0241">entry_call_alternative</A></SPAN><BR>
+&nbsp;&nbsp;<B>or</B><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4861"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN><BR>
+&nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<SPAN Class="swiss">entry_call_alternative</SPAN><A NAME="I4862"></A><A NAME="S0241"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<span class="insert2"><A NAME="I4863"></A><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0242">procedure_or_entry_call</A></SPAN></span><span class="delete2"><A NAME="I4864"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0228">&nbsp;entry_call_statement</A></SPAN></span>&nbsp;[<A NAME="I4865"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>]</div>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">procedure_or_entry_call</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4866"></A><A NAME="S0242"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><BR>
+&nbsp;&nbsp;<span class="insert2"><A NAME="I4867"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I4868"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0228">entry_call_statement</A></SPAN></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3.2">3.2/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<span class="insert2">If a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN> 
+is used for a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0242">procedure_or_entry_call</A></SPAN>, 
+the <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN> 
+shall statically denote an entry renamed as a procedure or (a view of) 
+a primitive subprogram of a limited interface whose first parameter is 
+a controlling parameter (see <A HREF="AA-3-9-2.html">3.9.2</A>).</span> 
+</div>
+<div class="paranum"><a name="p3.a">3.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>This would 
+be a confusing way to call a procedure, so we only allow it when it is 
+possible that the procedure is actually an entry. We could have allowed 
+formal subprograms here, but we didn't because we'd have to allow all 
+formal subprograms, and it would increase the difficulty of generic code 
+sharing.</span></div>
+<div class="paranum"><a name="p3.b">3.b/2</a></div>
+<div class="Annotations"><span class="insert2">We say &ldquo;statically 
+denotes&rdquo; because an access-to-subprogram cannot be primitive, and 
+we don't have anything like access-to-entry. So only names of entries 
+or procedures are possible.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3.3">3.3/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0291-1.TXT">AI05-0291-1</A></I>} 
+<span class="insert2"></span><span class="insert2"><span class="delete3">If 
+a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN> 
+is used for a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0242">procedure_or_entry_call</A></SPAN>, 
+and the procedure is implemented by an entry, then the <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+or <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+and possibly the first parameter of the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN>, 
+determine the target object of the call and the entry to be called.</span></span><span class="insert2"></span> 
+</div>
+<div class="paranum"><a name="p3.c">3.c/3</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span><span class="insert2"><span class="delete3">The 
+above says &ldquo;possibly the first parameter&rdquo;, because Ada allows 
+entries to be renamed and passed as formal subprograms. In those cases, 
+the task or protected object is implicit in the name of the routine; 
+otherwise the object is an explicit parameter to the call.</span></span><span class="insert2"></span> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<A NAME="I4869"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0240">timed_entry_call</A></SPAN>, 
+the <I>entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert2">, 
+<I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+or <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>,</span> 
+and any actual parameters are evaluated, as for a simple entry call (see 
+<A HREF="AA-9-5-3.html">9.5.3</A>)<span class="insert2">&nbsp;or procedure 
+call (see <A HREF="AA-6-4.html">6.4</A>)</span>. The expiration time 
+(see <A HREF="AA-9-6.html">9.6</A>) for the call is determined by evaluating 
+the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN><span class="insert2">. 
+If the call is an entry call or a call on a procedure implemented by 
+an entry,</span><span class="delete2">;</span> the entry call is then 
+issued.<span class="insert2">&nbsp;Otherwise, the call proceeds as described 
+in <A HREF="AA-6-4.html">6.4</A> for a procedure call, followed by the 
+<SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0241">entry_call_alternative</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
+is ignored.</span></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If the call is queued (including due to a requeue-with-abort), 
+and not selected before the expiration time is reached, an attempt to 
+cancel the call is made. If the call completes due to the cancellation, 
+the optional <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
+is executed; if the entry call completes normally, the optional <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0241">entry_call_alternative</A></SPAN> 
+is executed.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<span class="delete2">The fact that the syntax calls for an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0228">entry_call_statement</A></SPAN> 
+means that this fact is used in overload resolution. For example, if 
+there is a procedure X and an entry X (both with no parameters), then 
+&quot;select X; ...&quot; is legal, because overload resolution knows 
+that the entry is the one that was meant.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a timed 
+entry call:</I>&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>select</B><BR>
+&nbsp;&nbsp;&nbsp;Controller.Request(Medium)(Some_Item);<BR>
+<B>or</B><BR>
+&nbsp;&nbsp;&nbsp;<B>delay</B>&nbsp;45.0;<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;controller&nbsp;too&nbsp;busy,&nbsp;try&nbsp;something&nbsp;else</I></SPAN><BR>
+<B>end</B>&nbsp;<B>select</B>;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p7.a">7.a/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+comes before the one for Conditional Entry Calls, so we can define conditional 
+entry calls in terms of timed entry calls.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p7.b">7.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert2"><A NAME="I4870"></A>A procedure&nbsp;</span><span class="insert3">call 
+</span><span class="insert2">can be used as the&nbsp;</span><span class="insert3"><SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0241">entry_call_alternative</A></SPAN> 
+</span><span class="insert2">in a timed or conditional entry call, if 
+the procedure might actually be an entry. Since the fact that something 
+is an entry could be used in resolving these calls in Ada 95, it is possible 
+for timed or conditional entry calls that resolved in Ada 95 to be ambiguous 
+in Ada 2005. That could happen if both an entry and procedure with the 
+same name and profile exist, which should be rare.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-7-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

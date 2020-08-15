@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Goto Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.8 Goto Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN> 
+specifies an explicit transfer of control from this <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">statement</A></SPAN> 
+to a target statement with a given label.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">goto_statement</SPAN><A NAME="I3530"></A><A NAME="S0162"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>goto</B>&nbsp;<I>label_</I><A NAME="I3531"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3532"></A>The <I>label_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall resolve to denote a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0150">label</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">statement</A></SPAN> 
+with that <SPAN Class="swiss"><A HREF="AA-5-1.html#S0150">label</A></SPAN> 
+is the <I>target statement</I>.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The innermost <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+that encloses the target statement shall also enclose the <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN>. 
+Furthermore, if a <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN> 
+is enclosed by an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN> 
+or a body, then the target statement shall not be outside this enclosing 
+construct.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN> 
+can be a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">statement</A></SPAN> 
+of an inner <SPAN Class="swiss">sequence_</SPAN>.</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations">It follows from the second rule that if the 
+target <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">statement</A></SPAN> 
+is enclosed by such a construct, then the <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN> 
+cannot be outside.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I3533"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN> 
+transfers control to the target statement, completing the execution of 
+any <SPAN Class="swiss"><A HREF="AA-5-1.html#S0148">compound_statement</A></SPAN> 
+that encloses the <SPAN Class="swiss"><A HREF="AA-5-8.html#S0162">goto_statement</A></SPAN> 
+but does not enclose the target.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Notes">9&nbsp;&nbsp;The above rules allow transfer of control 
+to a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">statement</A></SPAN> 
+of an enclosing <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+but not the reverse. Similarly, they prohibit transfers of control such 
+as between alternatives of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-7.html#S0230">select_statement</A></SPAN>; 
+between <SPAN Class="swiss"><A HREF="AA-11-2.html#S0266">exception_handler</A></SPAN>s; 
+or from an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0266">exception_handler</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+back to its <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a loop 
+containing a goto statement:</I>&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&lt;&lt;Sort&gt;&gt;<BR>
+<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;N-1&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;A(I)&nbsp;&gt;&nbsp;A(I+1)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exchange(A(I),&nbsp;A(I+1));<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>goto</B>&nbsp;Sort;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;<BR>
+<B>end</B>&nbsp;<B>loop</B>;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

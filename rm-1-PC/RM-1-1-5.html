@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Classification of Errors</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-1-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>1.1.5 Classification of Errors</H1>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The language definition 
+classifies errors into several different categories:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Bulleted">Errors that are required to be detected prior to 
+run time by every Ada implementation;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted-NoPrefix">These errors correspond to any violation 
+of a rule given in this International Standard, other than those listed 
+below. In particular, violation of any rule that uses the terms shall, 
+allowed, permitted, legal, or illegal belongs to this category. Any program 
+that contains such an error is not a legal Ada program; on the other 
+hand, the fact that a program is legal does not mean, <I>per se</I>, 
+that the program is free from other forms of error.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted-NoPrefix"><A NAME="I1072"></A><A NAME="I1073"></A><A NAME="I1074"></A><A NAME="I1075"></A>The 
+rules are further classified as either compile time rules, or post compilation 
+rules, depending on whether a violation has to be detected at the time 
+a compilation unit is submitted to the compiler, or may be postponed 
+until the time a compilation unit is incorporated into a partition of 
+a program.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">Errors that are required to be detected at run 
+time by the execution of an Ada program;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted-NoPrefix"><A NAME="I1076"></A><A NAME="I1077"></A>The 
+corresponding error situations are associated with the names of the predefined 
+exceptions. Every Ada compiler is required to generate code that raises 
+the corresponding exception if such an error situation arises during 
+program execution. If such an error situation is certain to arise in 
+every execution of a construct, then an implementation is allowed (although 
+not required) to report this fact at compilation time.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">Bounded errors;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted-NoPrefix">The language rules define certain kinds 
+of errors that need not be detected either prior to or during run time, 
+but if not detected, the range of possible effects shall be bounded. 
+<A NAME="I1078"></A>The errors of this category are called <I>bounded 
+errors</I>. <A NAME="I1079"></A>The possible effects of a given bounded 
+error are specified for each such error, but in any case one possible 
+effect of a bounded error is the raising of the exception Program_Error.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">Erroneous execution.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted-NoPrefix"><A NAME="I1080"></A>In addition to bounded 
+errors, the language rules define certain kinds of errors as leading 
+to <I>erroneous execution</I>. Like bounded errors, the implementation 
+need not detect such errors either prior to or during run time. Unlike 
+bounded errors, there is no language-specified bound on the possible 
+effect of erroneous execution; the effect is in general not predictable. 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I1081"></A><A NAME="I1082"></A>An implementation 
+may provide <I>nonstandard modes</I> of operation. Typically these modes 
+would be selected by a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN> 
+or by a command line switch when the compiler is invoked. When operating 
+in a nonstandard mode, the implementation may reject <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0215">compilation_unit</A></SPAN>s 
+that do not conform to additional requirements associated with the mode, 
+such as an excessive number of warnings or violation of coding style 
+guidelines. Similarly, in a nonstandard mode, the implementation may 
+apply special optimizations or alternative algorithms that are only meaningful 
+for programs that satisfy certain criteria specified by the implementation. 
+<A NAME="I1083"></A><A NAME="I1084"></A>In any case, an implementation 
+shall support a <I>standard</I> mode that conforms to the requirements 
+of this International Standard; in particular, in the standard mode, 
+all legal <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0215">compilation_unit</A></SPAN>s 
+shall be accepted.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I1085"></A>If an implementation detects 
+a bounded error or erroneous execution, it should raise Program_Error. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-1-1-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,680 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Language-Defined Objects</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Index {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-Q-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Q.5 <span class="insert2">Language-Defined Objects</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00440.TXT">AI95-00440-01</A></I>} 
+<span class="insert2">This clause lists all language-defined constants, 
+variables, named numbers, and enumeration literals.<A NAME="I9283"></A><A NAME="I9284"></A><A NAME="I9285"></A></span> 
+</div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>To be honest:&nbsp;</B>Formally, 
+named numbers and enumeration literals aren't objects, but it was thought 
+to be too weird to say &ldquo;Language-Defined Objects and Values&rdquo;.</span> 
+</div>
+<div class="Normal">&nbsp;</div>
+<div class="Index">ACK <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5468">A.3.3(5)</A></div>
+<div class="Index">Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5614">A.3.3(22)</A></div>
+<div class="Index">Ada_To_COBOL <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7255">B.4(14)</A></div>
+<div class="Index">Alphanumeric_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5910">A.4.6(4)</A></div>
+<div class="Index">Ampersand <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5500">A.3.3(8)</A></div>
+<div class="Index">APC <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5591">A.3.3(19)</A></div>
+<div class="Index">Apostrophe <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5501">A.3.3(8)</A></div>
+<div class="Index">Asterisk <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5504">A.3.3(8)</A></div>
+<div class="Index">Basic_Map<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5915">A.4.6(5)</A></div>
+<div class="Index">Basic_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5907">A.4.6(4)</A></div>
+<div class="Index">BEL <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5469">A.3.3(5)</A></div>
+<div class="Index">BPH <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5562">A.3.3(17)</A></div>
+<div class="Index">Broken_Bar <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5599">A.3.3(21)</A></div>
+<div class="Index">BS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5470">A.3.3(5)</A></div>
+<div class="Index">Buffer_Size <I>in</I> Ada.Storage_IO&nbsp;&nbsp; <A HREF="AA-A-9.html#I6252">A.9(4)</A></div>
+<div class="Index">CAN <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5486">A.3.3(6)</A></div>
+<div class="Index">CCH <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5580">A.3.3(18)</A></div>
+<div class="Index">Cedilla <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5619">A.3.3(22)</A></div>
+<div class="Index">Cent_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5595">A.3.3(21)</A></div>
+<div class="Index">char16_nul <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7168">B.3(39.3/2)</A></div>
+<div class="Index">char32_nul <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7178">B.3(39.12/2)</A></div>
+<div class="Index">CHAR_BIT <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7129">B.3(6)</A></div>
+<div class="Index">Character_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I5946">A.4.7(46/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps.Wide_Constants&nbsp;&nbsp; 
+<A HREF="AA-A-4-8.html#I5980">A.4.8(48/2)</A></div>
+<div class="Index">Circumflex <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5521">A.3.3(12)</A></div>
+<div class="Index">COBOL_To_Ada <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7256">B.4(15)</A></div>
+<div class="Index">Colon <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5511">A.3.3(10)</A></div>
+<div class="Index">Comma <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5506">A.3.3(8)</A></div>
+<div class="Index">Commercial_At<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5517">A.3.3(10)</A></div>
+<div class="Index">Control_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5902">A.4.6(4)</A></div>
+<div class="Index">Copyright_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5602">A.3.3(21)</A></div>
+<div class="Index">CPU_Tick <I>in</I> Ada.Execution_Time&nbsp;&nbsp; 
+<A HREF="AA-D-14.html#I7696">D.14(4/2)</A></div>
+<div class="Index">CPU_Time_First <I>in</I> Ada.Execution_Time&nbsp;&nbsp; 
+<A HREF="AA-D-14.html#I7693">D.14(4/2)</A></div>
+<div class="Index">CPU_Time_Last <I>in</I> Ada.Execution_Time&nbsp;&nbsp; 
+<A HREF="AA-D-14.html#I7694">D.14(4/2)</A></div>
+<div class="Index">CPU_Time_Unit <I>in</I> Ada.Execution_Time&nbsp;&nbsp; 
+<A HREF="AA-D-14.html#I7695">D.14(4/2)</A></div>
+<div class="Index">CR <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5475">A.3.3(5)</A></div>
+<div class="Index">CSI <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5587">A.3.3(19)</A></div>
+<div class="Index">Currency_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5597">A.3.3(21)</A></div>
+<div class="Index">DC1 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5479">A.3.3(6)</A></div>
+<div class="Index">DC2 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5480">A.3.3(6)</A></div>
+<div class="Index">DC3 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5481">A.3.3(6)</A></div>
+<div class="Index">DC4 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5482">A.3.3(6)</A></div>
+<div class="Index">DCS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5576">A.3.3(18)</A></div>
+<div class="Index">Decimal_Digit_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5908">A.4.6(4)</A></div>
+<div class="Index">Default_Aft<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I6380">A.10.1(64)</A>, 
+<A HREF="AA-A-10-1.html#I6390">A.10.1(69)</A>, <A HREF="AA-A-10-1.html#I6400">A.10.1(74)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Complex_IO&nbsp;&nbsp; <A HREF="AA-G-1-3.html#I7984">G.1.3(5)</A></div>
+<div class="Index">Default_Base <I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I6362">A.10.1(53)</A>, 
+<A HREF="AA-A-10-1.html#I6371">A.10.1(58)</A></div>
+<div class="Index">Default_Bit_Order <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5151">13.7(15/2)</A></div>
+<div class="Index">Default_Currency<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="AA-F-3-3.html#I7907">F.3.3(10)</A></div>
+<div class="Index">Default_Deadline<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Dispatching.EDF&nbsp;&nbsp; <A HREF="AA-D-2-6.html#I7538">D.2.6(9/2)</A></div>
+<div class="Index">Default_Exp<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I6381">A.10.1(64)</A>, 
+<A HREF="AA-A-10-1.html#I6391">A.10.1(69)</A>, <A HREF="AA-A-10-1.html#I6401">A.10.1(74)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Complex_IO&nbsp;&nbsp; <A HREF="AA-G-1-3.html#I7985">G.1.3(5)</A></div>
+<div class="Index">Default_Fill <I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; 
+<A HREF="AA-F-3-3.html#I7908">F.3.3(10)</A></div>
+<div class="Index">Default_Fore<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I6379">A.10.1(64)</A>, 
+<A HREF="AA-A-10-1.html#I6389">A.10.1(69)</A>, <A HREF="AA-A-10-1.html#I6399">A.10.1(74)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Complex_IO&nbsp;&nbsp; <A HREF="AA-G-1-3.html#I7983">G.1.3(5)</A></div>
+<div class="Index">Default_Priority <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5155">13.7(17)</A></div>
+<div class="Index">Default_Quantum<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Dispatching.Round_Robin&nbsp;&nbsp; <A HREF="AA-D-2-5.html#I7527">D.2.5(4/2)</A></div>
+<div class="Index">Default_Radix_Mark<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="AA-F-3-3.html#I7910">F.3.3(10)</A></div>
+<div class="Index">Default_Separator<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="AA-F-3-3.html#I7909">F.3.3(10)</A></div>
+<div class="Index">Default_Setting <I>in</I> Ada.Text_IO&nbsp;&nbsp; 
+<A HREF="AA-A-10-1.html#I6410">A.10.1(80)</A></div>
+<div class="Index">Default_Width <I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I6361">A.10.1(53)</A>, 
+<A HREF="AA-A-10-1.html#I6370">A.10.1(58)</A>, <A HREF="AA-A-10-1.html#I6409">A.10.1(80)</A></div>
+<div class="Index">Degree_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5609">A.3.3(22)</A></div>
+<div class="Index">DEL <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5554">A.3.3(14)</A></div>
+<div class="Index">Diaeresis <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5601">A.3.3(21)</A></div>
+<div class="Index">Division_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5682">A.3.3(26)</A></div>
+<div class="Index">DLE <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5478">A.3.3(6)</A></div>
+<div class="Index">Dollar_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5498">A.3.3(8)</A></div>
+<div class="Index">e <I>in</I> Ada.Numerics&nbsp;&nbsp; <A HREF="AA-A-5.html#I5991">A.5(3/2)</A></div>
+<div class="Index">EM <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5487">A.3.3(6)</A></div>
+<div class="Index">Empty_List<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
+<A HREF="AA-A-18-3.html#I6716">A.18.3(8/2)</A></div>
+<div class="Index">Empty_Map<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I6787">A.18.5(5/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I6833">A.18.6(6/2)</A></div>
+<div class="Index">Empty_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I6898">A.18.8(5/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I6963">A.18.9(6/2)</A></div>
+<div class="Index">Empty_Vector<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I6630">A.18.2(10/2)</A></div>
+<div class="Index">ENQ <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5467">A.3.3(5)</A></div>
+<div class="Index">EOT <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5466">A.3.3(5)</A></div>
+<div class="Index">EPA <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5583">A.3.3(18)</A></div>
+<div class="Index">Equals_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5514">A.3.3(10)</A></div>
+<div class="Index">ESA <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5567">A.3.3(17)</A></div>
+<div class="Index">ESC <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5489">A.3.3(6)</A></div>
+<div class="Index">ETB <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5485">A.3.3(6)</A></div>
+<div class="Index">ETX <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5465">A.3.3(5)</A></div>
+<div class="Index">Exclamation <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5495">A.3.3(8)</A></div>
+<div class="Index">Failure <I>in</I> Ada.Command_Line&nbsp;&nbsp; <A HREF="AA-A-15.html#I6543">A.15(8)</A></div>
+<div class="Index">Feminine_Ordinal_Indicator<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5603">A.3.3(21)</A></div>
+<div class="Index">FF <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5474">A.3.3(5)</A></div>
+<div class="Index">Fine_Delta <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5140">13.7(9)</A></div>
+<div class="Index">Fraction_One_Half<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5624">A.3.3(22)</A></div>
+<div class="Index">Fraction_One_Quarter<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5623">A.3.3(22)</A></div>
+<div class="Index">Fraction_Three_Quarters<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5625">A.3.3(22)</A></div>
+<div class="Index">Friday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4187">9.6.1(17/2)</A></div>
+<div class="Index">FS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5490">A.3.3(6)</A></div>
+<div class="Index">Full_Stop <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5509">A.3.3(8)</A></div>
+<div class="Index">Graphic_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5903">A.4.6(4)</A></div>
+<div class="Index">Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5523">A.3.3(13)</A></div>
+<div class="Index">Greater_Than_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5515">A.3.3(10)</A></div>
+<div class="Index">GS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5491">A.3.3(6)</A></div>
+<div class="Index">Hexadecimal_Digit_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5909">A.4.6(4)</A></div>
+<div class="Index">High_Order_First<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I7270">B.4(25)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5149">13.7(15/2)</A></div>
+<div class="Index">HT <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5471">A.3.3(5)</A></div>
+<div class="Index">HTJ <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5569">A.3.3(17)</A></div>
+<div class="Index">HTS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5568">A.3.3(17)</A></div>
+<div class="Index">Hyphen <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5507">A.3.3(8)</A></div>
+<div class="Index">i<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Complex_Types&nbsp;&nbsp; 
+<A HREF="AA-G-1-1.html#I7928">G.1.1(5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I7307">B.5(10)</A></div>
+<div class="Index">Identity<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I5742">A.4.2(22)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I5941">A.4.7(22)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I5974">A.4.8(22/2)</A></div>
+<div class="Index">Inverted_Exclamation<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5594">A.3.3(21)</A></div>
+<div class="Index">Inverted_Question<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5626">A.3.3(22)</A></div>
+<div class="Index">IS1 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5559">A.3.3(16)</A></div>
+<div class="Index">IS2 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5558">A.3.3(16)</A></div>
+<div class="Index">IS3 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5557">A.3.3(16)</A></div>
+<div class="Index">IS4 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5556">A.3.3(16)</A></div>
+<div class="Index">ISO_646_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5912">A.4.6(4)</A></div>
+<div class="Index">j<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Generic_Complex_Types&nbsp;&nbsp; 
+<A HREF="AA-G-1-1.html#I7929">G.1.1(5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="AA-B-5.html#I7308">B.5(10)</A></div>
+<div class="Index">LC_A <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5524">A.3.3(13)</A></div>
+<div class="Index">LC_A_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5660">A.3.3(25)</A></div>
+<div class="Index">LC_A_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5661">A.3.3(25)</A></div>
+<div class="Index">LC_A_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5663">A.3.3(25)</A></div>
+<div class="Index">LC_A_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5659">A.3.3(25)</A></div>
+<div class="Index">LC_A_Ring <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5664">A.3.3(25)</A></div>
+<div class="Index">LC_A_Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5662">A.3.3(25)</A></div>
+<div class="Index">LC_AE_Diphthong<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5665">A.3.3(25)</A></div>
+<div class="Index">LC_B <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5525">A.3.3(13)</A></div>
+<div class="Index">LC_C <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5526">A.3.3(13)</A></div>
+<div class="Index">LC_C_Cedilla<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5666">A.3.3(25)</A></div>
+<div class="Index">LC_D <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5527">A.3.3(13)</A></div>
+<div class="Index">LC_E <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5528">A.3.3(13)</A></div>
+<div class="Index">LC_E_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5668">A.3.3(25)</A></div>
+<div class="Index">LC_E_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5669">A.3.3(25)</A></div>
+<div class="Index">LC_E_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5670">A.3.3(25)</A></div>
+<div class="Index">LC_E_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5667">A.3.3(25)</A></div>
+<div class="Index">LC_F <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5529">A.3.3(13)</A></div>
+<div class="Index">LC_G <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5530">A.3.3(13)</A></div>
+<div class="Index">LC_German_Sharp_S<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5658">A.3.3(24)</A></div>
+<div class="Index">LC_H <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5531">A.3.3(13)</A></div>
+<div class="Index">LC_I <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5532">A.3.3(13)</A></div>
+<div class="Index">LC_I_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5672">A.3.3(25)</A></div>
+<div class="Index">LC_I_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5673">A.3.3(25)</A></div>
+<div class="Index">LC_I_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5674">A.3.3(25)</A></div>
+<div class="Index">LC_I_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5671">A.3.3(25)</A></div>
+<div class="Index">LC_Icelandic_Eth<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5675">A.3.3(26)</A></div>
+<div class="Index">LC_Icelandic_Thorn<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5689">A.3.3(26)</A></div>
+<div class="Index">LC_J <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5533">A.3.3(13)</A></div>
+<div class="Index">LC_K <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5534">A.3.3(13)</A></div>
+<div class="Index">LC_L <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5535">A.3.3(13)</A></div>
+<div class="Index">LC_M <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5536">A.3.3(13)</A></div>
+<div class="Index">LC_N <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5537">A.3.3(13)</A></div>
+<div class="Index">LC_N_Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5676">A.3.3(26)</A></div>
+<div class="Index">LC_O <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5538">A.3.3(13)</A></div>
+<div class="Index">LC_O_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5678">A.3.3(26)</A></div>
+<div class="Index">LC_O_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5679">A.3.3(26)</A></div>
+<div class="Index">LC_O_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5681">A.3.3(26)</A></div>
+<div class="Index">LC_O_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5677">A.3.3(26)</A></div>
+<div class="Index">LC_O_Oblique_Stroke<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5683">A.3.3(26)</A></div>
+<div class="Index">LC_O_Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5680">A.3.3(26)</A></div>
+<div class="Index">LC_P <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5539">A.3.3(14)</A></div>
+<div class="Index">LC_Q <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5540">A.3.3(14)</A></div>
+<div class="Index">LC_R <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5541">A.3.3(14)</A></div>
+<div class="Index">LC_S <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5542">A.3.3(14)</A></div>
+<div class="Index">LC_T <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5543">A.3.3(14)</A></div>
+<div class="Index">LC_U <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5544">A.3.3(14)</A></div>
+<div class="Index">LC_U_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5685">A.3.3(26)</A></div>
+<div class="Index">LC_U_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5686">A.3.3(26)</A></div>
+<div class="Index">LC_U_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5687">A.3.3(26)</A></div>
+<div class="Index">LC_U_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5684">A.3.3(26)</A></div>
+<div class="Index">LC_V <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5545">A.3.3(14)</A></div>
+<div class="Index">LC_W <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5546">A.3.3(14)</A></div>
+<div class="Index">LC_X <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5547">A.3.3(14)</A></div>
+<div class="Index">LC_Y <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5548">A.3.3(14)</A></div>
+<div class="Index">LC_Y_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5688">A.3.3(26)</A></div>
+<div class="Index">LC_Y_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5690">A.3.3(26)</A></div>
+<div class="Index">LC_Z <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5549">A.3.3(14)</A></div>
+<div class="Index">Leading_Nonseparate<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I7267">B.4(23)</A></div>
+<div class="Index">Leading_Separate <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7265">B.4(23)</A></div>
+<div class="Index">Left_Angle_Quotation<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5604">A.3.3(21)</A></div>
+<div class="Index">Left_Curly_Bracket<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5550">A.3.3(14)</A></div>
+<div class="Index">Left_Parenthesis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5502">A.3.3(8)</A></div>
+<div class="Index">Left_Square_Bracket<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5518">A.3.3(12)</A></div>
+<div class="Index">Less_Than_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5513">A.3.3(10)</A></div>
+<div class="Index">Letter_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5904">A.4.6(4)</A></div>
+<div class="Index">LF <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5472">A.3.3(5)</A></div>
+<div class="Index">Low_Line <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5522">A.3.3(12)</A></div>
+<div class="Index">Low_Order_First<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I7271">B.4(25)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5150">13.7(15/2)</A></div>
+<div class="Index">Lower_Case_Map<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5913">A.4.6(5)</A></div>
+<div class="Index">Lower_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5905">A.4.6(4)</A></div>
+<div class="Index">Macron <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5608">A.3.3(21)</A></div>
+<div class="Index">Masculine_Ordinal_Indicator<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5621">A.3.3(22)</A></div>
+<div class="Index">Max_Base_Digits <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5137">13.7(8)</A></div>
+<div class="Index">Max_Binary_Modulus <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5135">13.7(7)</A></div>
+<div class="Index">Max_Decimal_Digits <I>in</I> Ada.Decimal&nbsp;&nbsp; 
+<A HREF="AA-F-2.html#I7893">F.2(5)</A></div>
+<div class="Index">Max_Delta <I>in</I> Ada.Decimal&nbsp;&nbsp; <A HREF="AA-F-2.html#I7892">F.2(4)</A></div>
+<div class="Index">Max_Digits <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5138">13.7(8)</A></div>
+<div class="Index">Max_Digits_Binary <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7250">B.4(11)</A></div>
+<div class="Index">Max_Digits_Long_Binary<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I7251">B.4(11)</A></div>
+<div class="Index">Max_Image_Width<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Discrete_Random&nbsp;&nbsp; 
+<A HREF="AA-A-5-2.html#I6052">A.5.2(25)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Numerics.Float_Random&nbsp;&nbsp; <A HREF="AA-A-5-2.html#I6040">A.5.2(13)</A></div>
+<div class="Index">Max_Int <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5134">13.7(6)</A></div>
+<div class="Index">Max_Length <I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; 
+<A HREF="AA-A-4-4.html#I5790">A.4.4(5)</A></div>
+<div class="Index">Max_Mantissa <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5139">13.7(9)</A></div>
+<div class="Index">Max_Nonbinary_Modulus <I>in</I> System&nbsp;&nbsp; 
+<A HREF="AA-13-7.html#I5136">13.7(7)</A></div>
+<div class="Index">Max_Picture_Length<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="AA-F-3-3.html#I7905">F.3.3(8)</A></div>
+<div class="Index">Max_Scale <I>in</I> Ada.Decimal&nbsp;&nbsp; <A HREF="AA-F-2.html#I7889">F.2(3)</A></div>
+<div class="Index">Memory_Size <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5146">13.7(13)</A></div>
+<div class="Index">Micro_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5615">A.3.3(22)</A></div>
+<div class="Index">Middle_Dot <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5618">A.3.3(22)</A></div>
+<div class="Index">Min_Delta <I>in</I> Ada.Decimal&nbsp;&nbsp; <A HREF="AA-F-2.html#I7891">F.2(4)</A></div>
+<div class="Index">Min_Handler_Ceiling<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Group_Budgets&nbsp;&nbsp; 
+<A HREF="AA-D-14-2.html#I7725">D.14.2(7/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Execution_Time.Timers&nbsp;&nbsp; <A HREF="AA-D-14-1.html#I7708">D.14.1(6/2)</A></div>
+<div class="Index">Min_Int <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5133">13.7(6)</A></div>
+<div class="Index">Min_Scale <I>in</I> Ada.Decimal&nbsp;&nbsp; <A HREF="AA-F-2.html#I7890">F.2(3)</A></div>
+<div class="Index">Minus_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5508">A.3.3(8)</A></div>
+<div class="Index">Monday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4183">9.6.1(17/2)</A></div>
+<div class="Index">Multiplication_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5650">A.3.3(24)</A></div>
+<div class="Index">MW <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5581">A.3.3(18)</A></div>
+<div class="Index">NAK <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5483">A.3.3(6)</A></div>
+<div class="Index">Native_Binary <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7272">B.4(25)</A></div>
+<div class="Index">NBH <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5563">A.3.3(17)</A></div>
+<div class="Index">NBSP <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5593">A.3.3(21)</A></div>
+<div class="Index">NEL <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5565">A.3.3(17)</A></div>
+<div class="Index">No_Break_Space<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5592">A.3.3(21)</A></div>
+<div class="Index">No_Element<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
+<A HREF="AA-A-18-3.html#I6717">A.18.3(9/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="AA-A-18-5.html#I6788">A.18.5(6/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="AA-A-18-8.html#I6899">A.18.8(6/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="AA-A-18-6.html#I6834">A.18.6(7/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="AA-A-18-9.html#I6964">A.18.9(7/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="AA-A-18-2.html#I6631">A.18.2(11/2)</A></div>
+<div class="Index">No_Index <I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; 
+<A HREF="AA-A-18-2.html#I6627">A.18.2(7/2)</A></div>
+<div class="Index">No_Tag <I>in</I> Ada.Tags&nbsp;&nbsp; <A HREF="AA-3-9.html#I2208">3.9(6.1/2)</A></div>
+<div class="Index">Not_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5605">A.3.3(21)</A></div>
+<div class="Index">NUL<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5462">A.3.3(5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7148">B.3(20/1)</A></div>
+<div class="Index">Null_Address <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5143">13.7(12)</A></div>
+<div class="Index">Null_Bounded_String<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; <A HREF="AA-A-4-4.html#I5792">A.4.4(7)</A></div>
+<div class="Index">Null_Id <I>in</I> Ada.Exceptions&nbsp;&nbsp; <A HREF="AA-11-4-1.html#I4604">11.4.1(2/2)</A></div>
+<div class="Index">Null_Occurrence <I>in</I> Ada.Exceptions&nbsp;&nbsp; 
+<A HREF="AA-11-4-1.html#I4610">11.4.1(3/2)</A></div>
+<div class="Index">Null_Ptr <I>in</I> Interfaces.C.Strings&nbsp;&nbsp; 
+<A HREF="AA-B-3-1.html#I7197">B.3.1(7)</A></div>
+<div class="Index">Null_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="AA-A-4-2.html#I5728">A.4.2(5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-7.html#I5927">A.4.7(5)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; <A HREF="AA-A-4-8.html#I5960">A.4.8(5/2)</A></div>
+<div class="Index">Null_Unbounded_String<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Unbounded&nbsp;&nbsp; <A HREF="AA-A-4-5.html#I5850">A.4.5(5)</A></div>
+<div class="Index">Number_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5497">A.3.3(8)</A></div>
+<div class="Index">OSC <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5589">A.3.3(19)</A></div>
+<div class="Index">Packed_Signed <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7275">B.4(27)</A></div>
+<div class="Index">Packed_Unsigned <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7274">B.4(27)</A></div>
+<div class="Index">Paragraph_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5617">A.3.3(22)</A></div>
+<div class="Index">Percent_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5499">A.3.3(8)</A></div>
+<div class="Index">Pi <I>in</I> Ada.Numerics&nbsp;&nbsp; <A HREF="AA-A-5.html#I5990">A.5(3/2)</A></div>
+<div class="Index">Pilcrow_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5616">A.3.3(22)</A></div>
+<div class="Index">PLD <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5571">A.3.3(17)</A></div>
+<div class="Index">PLU <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5572">A.3.3(17)</A></div>
+<div class="Index">Plus_Minus_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5611">A.3.3(22)</A></div>
+<div class="Index">Plus_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5505">A.3.3(8)</A></div>
+<div class="Index">PM <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5590">A.3.3(19)</A></div>
+<div class="Index">Pound_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5596">A.3.3(21)</A></div>
+<div class="Index">PU1 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5577">A.3.3(18)</A></div>
+<div class="Index">PU2 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5578">A.3.3(18)</A></div>
+<div class="Index">Question <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5516">A.3.3(10)</A></div>
+<div class="Index">Quotation <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5496">A.3.3(8)</A></div>
+<div class="Index">Registered_Trade_Mark_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5607">A.3.3(21)</A></div>
+<div class="Index">Reserved_128<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5560">A.3.3(17)</A></div>
+<div class="Index">Reserved_129<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5561">A.3.3(17)</A></div>
+<div class="Index">Reserved_132<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5564">A.3.3(17)</A></div>
+<div class="Index">Reserved_153<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5585">A.3.3(19)</A></div>
+<div class="Index">Reverse_Solidus<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5519">A.3.3(12)</A></div>
+<div class="Index">RI <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5573">A.3.3(17)</A></div>
+<div class="Index">Right_Angle_Quotation<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5622">A.3.3(22)</A></div>
+<div class="Index">Right_Curly_Bracket<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5552">A.3.3(14)</A></div>
+<div class="Index">Right_Parenthesis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5503">A.3.3(8)</A></div>
+<div class="Index">Right_Square_Bracket<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5520">A.3.3(12)</A></div>
+<div class="Index">Ring_Above <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5610">A.3.3(22)</A></div>
+<div class="Index">RS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5492">A.3.3(6)</A></div>
+<div class="Index">Saturday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4188">9.6.1(17/2)</A></div>
+<div class="Index">SCHAR_MAX <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7131">B.3(6)</A></div>
+<div class="Index">SCHAR_MIN <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7130">B.3(6)</A></div>
+<div class="Index">SCI <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5586">A.3.3(19)</A></div>
+<div class="Index">Section_Sign<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5600">A.3.3(21)</A></div>
+<div class="Index">Semicolon <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5512">A.3.3(10)</A></div>
+<div class="Index">SI <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5477">A.3.3(5)</A></div>
+<div class="Index">SO <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5476">A.3.3(5)</A></div>
+<div class="Index">Soft_Hyphen <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5606">A.3.3(21)</A></div>
+<div class="Index">SOH <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5463">A.3.3(5)</A></div>
+<div class="Index">Solidus <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5510">A.3.3(8)</A></div>
+<div class="Index">SOS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5584">A.3.3(19)</A></div>
+<div class="Index">SPA <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5582">A.3.3(18)</A></div>
+<div class="Index">Space<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5494">A.3.3(8)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I5713">A.4.1(4/2)</A></div>
+<div class="Index">Special_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5911">A.4.6(4)</A></div>
+<div class="Index">SS2 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5574">A.3.3(17)</A></div>
+<div class="Index">SS3 <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5575">A.3.3(17)</A></div>
+<div class="Index">SSA <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5566">A.3.3(17)</A></div>
+<div class="Index">ST <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5588">A.3.3(19)</A></div>
+<div class="Index">Storage_Unit <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5144">13.7(13)</A></div>
+<div class="Index">STS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5579">A.3.3(18)</A></div>
+<div class="Index">STX <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5464">A.3.3(5)</A></div>
+<div class="Index">SUB <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5488">A.3.3(6)</A></div>
+<div class="Index">Success <I>in</I> Ada.Command_Line&nbsp;&nbsp; <A HREF="AA-A-15.html#I6542">A.15(8)</A></div>
+<div class="Index">Sunday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4189">9.6.1(17/2)</A></div>
+<div class="Index">Superscript_One<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5620">A.3.3(22)</A></div>
+<div class="Index">Superscript_Three<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5613">A.3.3(22)</A></div>
+<div class="Index">Superscript_Two<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5612">A.3.3(22)</A></div>
+<div class="Index">SYN <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5484">A.3.3(6)</A></div>
+<div class="Index">System_Name <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5132">13.7(4)</A></div>
+<div class="Index">Thursday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4186">9.6.1(17/2)</A></div>
+<div class="Index">Tick<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I7640">D.8(6)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5141">13.7(10)</A></div>
+<div class="Index">Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5553">A.3.3(14)</A></div>
+<div class="Index">Time_First <I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I7632">D.8(4)</A></div>
+<div class="Index">Time_Last <I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I7633">D.8(4)</A></div>
+<div class="Index">Time_Span_First <I>in</I> Ada.Real_Time&nbsp;&nbsp; 
+<A HREF="AA-D-8.html#I7636">D.8(5)</A></div>
+<div class="Index">Time_Span_Last <I>in</I> Ada.Real_Time&nbsp;&nbsp; 
+<A HREF="AA-D-8.html#I7637">D.8(5)</A></div>
+<div class="Index">Time_Span_Unit <I>in</I> Ada.Real_Time&nbsp;&nbsp; 
+<A HREF="AA-D-8.html#I7639">D.8(5)</A></div>
+<div class="Index">Time_Span_Zero <I>in</I> Ada.Real_Time&nbsp;&nbsp; 
+<A HREF="AA-D-8.html#I7638">D.8(5)</A></div>
+<div class="Index">Time_Unit <I>in</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="AA-D-8.html#I7634">D.8(4)</A></div>
+<div class="Index">Trailing_Nonseparate<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I7268">B.4(23)</A></div>
+<div class="Index">Trailing_Separate <I>in</I> Interfaces.COBOL&nbsp;&nbsp; 
+<A HREF="AA-B-4.html#I7266">B.4(23)</A></div>
+<div class="Index">Tuesday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4184">9.6.1(17/2)</A></div>
+<div class="Index">UC_A_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5628">A.3.3(23)</A></div>
+<div class="Index">UC_A_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5629">A.3.3(23)</A></div>
+<div class="Index">UC_A_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5631">A.3.3(23)</A></div>
+<div class="Index">UC_A_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5627">A.3.3(23)</A></div>
+<div class="Index">UC_A_Ring <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5632">A.3.3(23)</A></div>
+<div class="Index">UC_A_Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5630">A.3.3(23)</A></div>
+<div class="Index">UC_AE_Diphthong<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5633">A.3.3(23)</A></div>
+<div class="Index">UC_C_Cedilla<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5634">A.3.3(23)</A></div>
+<div class="Index">UC_E_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5636">A.3.3(23)</A></div>
+<div class="Index">UC_E_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5637">A.3.3(23)</A></div>
+<div class="Index">UC_E_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5638">A.3.3(23)</A></div>
+<div class="Index">UC_E_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5635">A.3.3(23)</A></div>
+<div class="Index">UC_I_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5640">A.3.3(23)</A></div>
+<div class="Index">UC_I_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5641">A.3.3(23)</A></div>
+<div class="Index">UC_I_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5642">A.3.3(23)</A></div>
+<div class="Index">UC_I_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5639">A.3.3(23)</A></div>
+<div class="Index">UC_Icelandic_Eth<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5643">A.3.3(24)</A></div>
+<div class="Index">UC_Icelandic_Thorn<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5657">A.3.3(24)</A></div>
+<div class="Index">UC_N_Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5644">A.3.3(24)</A></div>
+<div class="Index">UC_O_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5646">A.3.3(24)</A></div>
+<div class="Index">UC_O_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5647">A.3.3(24)</A></div>
+<div class="Index">UC_O_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5649">A.3.3(24)</A></div>
+<div class="Index">UC_O_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5645">A.3.3(24)</A></div>
+<div class="Index">UC_O_Oblique_Stroke<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5651">A.3.3(24)</A></div>
+<div class="Index">UC_O_Tilde <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5648">A.3.3(24)</A></div>
+<div class="Index">UC_U_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5653">A.3.3(24)</A></div>
+<div class="Index">UC_U_Circumflex<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5654">A.3.3(24)</A></div>
+<div class="Index">UC_U_Diaeresis<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5655">A.3.3(24)</A></div>
+<div class="Index">UC_U_Grave <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5652">A.3.3(24)</A></div>
+<div class="Index">UC_Y_Acute <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5656">A.3.3(24)</A></div>
+<div class="Index">UCHAR_MAX <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7132">B.3(6)</A></div>
+<div class="Index">Unbounded <I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="AA-A-10-1.html#I6276">A.10.1(5)</A></div>
+<div class="Index">Unsigned <I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="AA-B-4.html#I7264">B.4(23)</A></div>
+<div class="Index">Upper_Case_Map<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5914">A.4.6(5)</A></div>
+<div class="Index">Upper_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Maps.Constants&nbsp;&nbsp; <A HREF="AA-A-4-6.html#I5906">A.4.6(4)</A></div>
+<div class="Index">US <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5493">A.3.3(6)</A></div>
+<div class="Index">Vertical_Line<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5551">A.3.3(14)</A></div>
+<div class="Index">VT <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5473">A.3.3(5)</A></div>
+<div class="Index">VTS <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; <A HREF="AA-A-3-3.html#I5570">A.3.3(17)</A></div>
+<div class="Index">Wednesday <I>in</I> Ada.Calendar.Formatting&nbsp;&nbsp; 
+<A HREF="AA-9-6-1.html#I4185">9.6.1(17/2)</A></div>
+<div class="Index">Wide_Character_Set<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Wide_Maps.Wide_Constants&nbsp;&nbsp; 
+<A HREF="AA-A-4-8.html#I5981">A.4.8(48/2)</A></div>
+<div class="Index">wide_nul <I>in</I> Interfaces.C&nbsp;&nbsp; <A HREF="AA-B-3.html#I7158">B.3(31/1)</A></div>
+<div class="Index">Wide_Space <I>in</I> Ada.Strings&nbsp;&nbsp; <A HREF="AA-A-4-1.html#I5714">A.4.1(4/2)</A></div>
+<div class="Index">Wide_Wide_Space <I>in</I> Ada.Strings&nbsp;&nbsp; 
+<A HREF="AA-A-4-1.html#I5715">A.4.1(4/2)</A></div>
+<div class="Index">Word_Size <I>in</I> System&nbsp;&nbsp; <A HREF="AA-13-7.html#I5145">13.7(13)</A></div>
+<div class="Index">Yen_Sign <I>in</I> Ada.Characters.Latin_1&nbsp;&nbsp; 
+<A HREF="AA-A-3-3.html#I5598">A.3.3(21)</A></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-Q-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

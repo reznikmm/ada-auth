@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Real-Time Systems</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Annex D</H1>
+<H2>(normative)</H2>
+<H1>Real-Time Systems</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I7696"></A><A NAME="I7697"></A>This Annex 
+specifies additional characteristics of Ada implementations intended 
+for real-time systems software. To conform to this Annex, an implementation 
+shall also conform to the Systems Programming Annex.&nbsp;</div>
+
+<H4 Class="centered">Metrics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The metrics are documentation requirements; an implementation 
+shall document the values of the language-defined metrics for at least 
+one configuration of hardware or an underlying system supported by the 
+implementation, and shall document the details of that configuration. 
+</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The metrics do not necessarily yield a simple number. 
+For some, a range is more suitable, for others a formula dependent on 
+some parameter is appropriate, and for others, it may be more suitable 
+to break the metric into several cases. Unless specified otherwise, the 
+metrics in this annex are expressed in processor clock cycles. For metrics 
+that require documentation of an upper bound, if there is no upper bound, 
+the implementation shall report that the metric is unbounded.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Notes">1&nbsp;&nbsp;The specification of the metrics makes 
+a distinction between upper bounds and simple execution times. Where 
+something is just specified as &ldquo;the execution time of&rdquo; a 
+piece of code, this leaves one the freedom to choose a nonpathological 
+case. This kind of metric is of the form &ldquo;there exists a program 
+such that the value of the metric is V&rdquo;. Conversely, the meaning 
+of upper bounds is &ldquo;there is no program such that the value of 
+the metric is greater than V&rdquo;. This kind of metric can only be 
+partially tested, by finding the value of V for one or more test programs.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Notes">2&nbsp;&nbsp;The metrics do not cover the whole language; 
+they are limited to features that are specified in <A HREF="RM-C.html">Annex 
+C</A>, &ldquo;<A HREF="RM-C.html">Systems Programming</A>&rdquo; and 
+in this Annex. The metrics are intended to provide guidance to potential 
+users as to whether a particular implementation of such a feature is 
+going to be adequate for a particular real-time application. As such, 
+the metrics are aimed at known implementation choices that can result 
+in significant performance differences.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Notes">3&nbsp;&nbsp;The purpose of the metrics is not necessarily 
+to provide fine-grained quantitative results or to serve as a comparison 
+between different implementations on the same or different platforms. 
+Instead, their goal is rather qualitative; to define a standard set of 
+approximate values that can be measured and used to estimate the general 
+suitability of an implementation, or to evaluate the comparative utility 
+of certain features of an implementation for a particular real-time application.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

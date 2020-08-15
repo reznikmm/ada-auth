@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Directories.Hierarchical_File_Names</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-16.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.16.1 <span class="insert3">The Package Directories.Hierarchical_File_Names</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3">The library package Directories.Hierarchical_File_Names 
+is an optional package providing operations for file name construction 
+and decomposition for targets with hierarchical file naming.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3">If provided, the library package Directories.Hierarchical_File_Names 
+has the following declaration:</span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples"><span class="insert3"><B>package</B>&nbsp;Ada.Directories.Hierarchical_File_Names&nbsp;<B>is</B><A NAME="I7567"></A></span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7568"></A>Is_Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7569"></A>Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7570"></A>Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7571"></A>Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7572"></A>Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7573"></A>Is_Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7574"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Directories.Simple_Name;</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7575"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Ada.Directories.Containing_Directory;</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7576"></A>Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7577"></A>Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7578"></A>Compose&nbsp;(Directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relative_Name&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Directories.Hierarchical_File_Names;</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">In addition to the operations provided in package 
+Directories.Hierarchical_File_Names, the operations in package Directories 
+can be used with hierarchical file names. In particular, functions Full_Name, 
+Base_Name, and Extension provide additional capabilities for hierarchical 
+file names.</span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Indented2"><span class="insert3">Returns True if Name is 
+a simple name, and returns False otherwise.</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Root_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Indented2"><span class="insert3">Returns True if Name is 
+syntactically a root (a directory that cannot be decomposed further), 
+and returns False otherwise.</span></div>
+<div class="paranum"><a name="p20.a">20.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>For Unix and Unix-like systems, &quot;/&quot; is the root. For Windows, 
+&quot;C:\&quot; and &quot;\\Computer\Share&quot; are roots.</span>&nbsp;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Parent_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Indented2"><span class="insert3">Returns True if Name can 
+be used to indicate symbolically the parent directory of any directory, 
+and returns False otherwise.</span></div>
+<div class="paranum"><a name="p22.a">22.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>Is_Parent_Directory_Name returns True if and only if Name is &quot;..&quot; 
+for both Unix and Windows.</span>&nbsp;</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Current_Directory_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Indented2"><span class="insert3">Returns True if Name can 
+be used to indicate symbolically the directory itself for any directory, 
+and returns False otherwise.</span></div>
+<div class="paranum"><a name="p24.a">24.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>Is_Current_Directory_Name returns True if and only if Name is &quot;.&quot; 
+for both Unix and Windows.</span>&nbsp;</div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Indented2"><span class="insert3">Returns True if the leftmost 
+directory part of Name is a root, and returns False otherwise.</span></div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">Returns True if Name allows the identification 
+of an external file (including directories and special files) but is 
+not a full name, and returns False otherwise.</span></div>
+<div class="paranum"><a name="p28.a">28.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Relative 
+names include simple names as a special case. This function returns False 
+if the syntax of the name is incorrect.</span>&nbsp;</div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Initial_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">Returns the leftmost directory part in Name. [That 
+is, it returns a root directory name (for a full name), or one of a parent 
+directory name, a current directory name, or a simple name (for a relative 
+name).] The exception Name_Error is propagated if the string given as 
+Name does not allow the identification of an external file (including 
+directories and special files).</span></div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Relative_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Indented2"><span class="insert3">Returns the entire file 
+name except the Initial_Directory portion. The exception Name_Error is 
+propagated if the string given as Name does not allow the identification 
+of an external file (including directories and special files), or if 
+Name has a single part (this includes if any of Is_Simple_Name, Is_Root_Directory_Name, 
+Is_Parent_Directory_Name, or Is_Current_Directory_Name are True).</span></div>
+<div class="paranum"><a name="p32.a">32.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
+result might be a simple name.</span>&nbsp;</div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Compose&nbsp;(Directory&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relative_Name&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Indented2"><span class="insert3">Returns the name of the 
+external file with the specified Directory, Relative_Name, and Extension. 
+The exception Name_Error is propagated if the string given as Directory 
+is not the null string and does not allow the identification of a directory, 
+or if Is_Relative_Name (Relative_Name) is False, or if the string given 
+as Extension is not the null string and is not a possible extension, 
+or if Extension is not the null string and Simple_Name (Relative_Name) 
+is not a base name.</span></div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Indented2"><span class="insert3">The result of Compose is 
+a full name if Is_Full_Name (Directory) is True; result is a relative 
+name otherwise.</span></div>
+<div class="paranum"><a name="p35.a">35.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Name_Error 
+is raised by Compose if Directory is not the null string, and both Is_Full_Name 
+and Is_Relative_Name return False.</span>&nbsp;</div>
+<div class="paranum"><a name="p35.b">35.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>A common 
+security problem is to include a parent directory name in the middle 
+of a file name; this is often used to navigate outside of an intended 
+root directory. We considered attempting to prevent that case by having 
+Compose detect it and raise an exception. But the extra rules necessary 
+were more confusing than helpful.</span></div>
+<div class="paranum"><a name="p35.c">35.c/3</a></div>
+<div class="Annotations"><span class="insert3">We can say more about 
+the details of these operations by adopting the notation of a subscript 
+to specify how many path fragments a particular result has. Then, we 
+can abbreviate &quot;Full Name&quot; as &quot;Full&quot; and &quot;Relative 
+Name&quot; as &quot;Rel&quot;. In this notation, Unix file name &quot;a/b&quot; 
+is a Rel(2), &quot;../c/d&quot; is a Rel(3), and &quot;/a/b&quot; is 
+a Full(2). Rel(1) is equivalent to a simple name; thus we don't have 
+to describe that separately.</span></div>
+<div class="paranum"><a name="p35.d">35.d/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">In 
+this notation,</span>&nbsp;</div>
+<div class="paranum"><a name="p35.e">35.e/3</a></div>
+<div class="SmallExamples"><span class="insert3">For&nbsp;N&gt;1,<BR>
+Containing_Directory(Rel(N))&nbsp;=&nbsp;Leftmost&nbsp;Rel(N-1),<BR>
+Containing_Directory(Full(N))&nbsp;=&nbsp;Leftmost&nbsp;Full(N-1),<BR>
+Else&nbsp;if&nbsp;N&nbsp;=&nbsp;1,&nbsp;raise&nbsp;Name_Error.</span><BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p35.f">35.f/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">Similarly,</span> 
+</div>
+<div class="paranum"><a name="p35.g">35.g/3</a></div>
+<div class="SmallExamples"><span class="insert3">For&nbsp;N&gt;1,<BR>
+Relative_Name(Rel(N))&nbsp;=&nbsp;Rightmost&nbsp;Rel(N-1),<BR>
+Relative_Name(Full(N))&nbsp;=&nbsp;Rightmost&nbsp;Full(N-1),<BR>
+Else&nbsp;if&nbsp;N&nbsp;=&nbsp;1,&nbsp;raise&nbsp;Name_Error.</span><BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p35.h">35.h/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">Finally, 
+for Compose (ignoring the extension here):</span>&nbsp;</div>
+<div class="paranum"><a name="p35.i">35.i/3</a></div>
+<div class="SmallExamples"><span class="insert3">Compose&nbsp;(Directory&nbsp;=&gt;&nbsp;Full(N),&nbsp;Relative_Name&nbsp;=&gt;&nbsp;Rel(M))&nbsp;=&gt;&nbsp;Full(N+M)<BR>
+Compose&nbsp;(Directory&nbsp;=&gt;&nbsp;Rel(N),&nbsp;Relative_Name&nbsp;=&gt;&nbsp;Rel(M))&nbsp;=&gt;&nbsp;Rel(N+M)<BR>
+Name_Error&nbsp;if&nbsp;Relative_Name&nbsp;is&nbsp;a&nbsp;Full(M).</span><BR>
+&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p35.j">35.j/3</a></div>
+<div class="Annotations"><span class="insert3">We didn't try to write 
+wording to reflect these details of these functions.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3">Directories.Hierarchical_File_Names should be provided 
+for systems with hierarchical file naming, and should not be provided 
+on other systems.</span>&nbsp;</div>
+<div class="paranum"><a name="p36.a">36.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">Directories.Hierarchical_File_Names 
+should be provided for systems with hierarchical file naming, and should 
+not be provided on other systems.</span></div>
+<div class="paranum"><a name="p36.b">36.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>This package should be provided when targeting Microsoft&reg; Windows&reg;, 
+Unix, Linux, and most Unix-like systems.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="Notes">48&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3">These operations operate on file names, not external 
+files. The files identified by these operations do not need to exist. 
+Name_Error is raised only as specified or if the file name is malformed 
+and cannot possibly identify a file. The result of these operations depends 
+only on their parameters.</span></div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Notes">49&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3">Containing_Directory raises Use_Error if Name does 
+not have a containing directory, including when any of Is_Simple_Name, 
+Is_Root_Directory_Name, Is_Parent_Directory_Name, or Is_Current_Directory_Name 
+are True.</span></div>
+<div class="paranum"><a name="p38.a">38.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>In 
+particular, the default directory is not used to find the containing 
+directory either when Is_Parent_Directory_Name or Is_Current_Directory_Name 
+is True. As noted above, these functions operate purely on the syntax 
+of the file names and do not attempt to interpret them. If interpretation 
+is needed, Directories.Full_Name can be to expand any shorthands used 
+before calling Containing_Directory.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p38.b">38.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
+<span class="insert3"><A NAME="I7579"></A>Package Ada.Directories.Hierarchical_File_Names 
+is new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-16.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

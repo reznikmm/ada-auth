@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Discriminant Constraints</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.7.1 Discriminant Constraints</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+specifies the values of the discriminants for a given discriminated type. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_constraint</SPAN><A NAME="I2075"></A><A NAME="S0064"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I2076"></A><SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2077"></A><SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN>})</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_association</SPAN><A NAME="I2078"></A><A NAME="S0065"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>discriminant_</I><A NAME="I2079"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{|&nbsp;<I>discriminant_</I><A NAME="I2080"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>}&nbsp;=&gt;]&nbsp;<A NAME="I2081"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><A NAME="I2082"></A>A <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+is said to be <I>named</I> if it has one or more <I>discriminant_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>s; 
+<A NAME="I2083"></A>it is otherwise said to be <I>positional</I>. In 
+a <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
+any positional associations shall precede any named associations.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">Each <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+of a named <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+shall resolve to denote a discriminant of the subtype being constrained; 
+<A NAME="I2084"></A>the discriminants so named are the <I>associated 
+discriminants</I> of the named association. <A NAME="I2085"></A>For a 
+positional association, the <I>associated discriminant</I> is the one 
+whose <SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN> 
+occurred in the corresponding position in the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+that defined the discriminants of the subtype being constrained.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I2086"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+is that of the associated discriminant(s).&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+is only allowed in a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes either an unconstrained discriminated subtype, or an unconstrained 
+access subtype whose designated subtype is an unconstrained discriminated 
+subtype. <span class="insert1">However, in the case of&nbsp;</span><span class="insert2">an</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;a 
+general</span></span><span class="insert1">&nbsp;access subtype, a <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+is&nbsp;</span><span class="insert3">legal only if any dereference of a value 
+of the access type is known to be constrained (see <A HREF="RM-3-3.html">3.3</A>)</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;illegal 
+if&nbsp;</span></span><span class="insert2"><span class="delete3">the designated 
+type has a partial view that is constrained or, for a general access 
+subtype, has <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
+for its discriminants</span></span><span class="insert1"><span class="delete3"></span></span><span class="insert1"></span><span class="delete1">&nbsp;there 
+is a place within the immediate scope of the designated subtype where 
+the designated subtype's view is constrained</span>. <span class="insert2">In 
+addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.<A NAME="I2087"></A></span><span class="delete3"></span><span class="insert2"><span class="delete3">&nbsp;In a generic body, this rule is checked presuming all formal access types 
+of the generic might be general access types, and all untagged discriminated 
+formal types of the generic might have <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>s 
+for their discriminants.</span></span><span class="delete3"></span></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">A named <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+with more than one <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+is allowed only if the named discriminants are all of the same type. 
+A <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+shall provide exactly one value for each discriminant of the subtype 
+being constrained.</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+associated with an access discriminant shall be of a type convertible 
+to the anonymous access type. <A NAME="I2088"></A></span></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I2089"></A>A <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+is <I>compatible</I> with an unconstrained discriminated subtype if each 
+discriminant value belongs to the subtype of the corresponding discriminant. 
+</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2090"></A>A composite value <I>satisfies</I> 
+a discriminant constraint if and only if each discriminant of the composite 
+value has the value imposed by the discriminant constraint.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I2091"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
+in the <SPAN Class="swiss"><A HREF="RM-3-7-1.html#S0065">discriminant_association</A></SPAN>s 
+are evaluated in an arbitrary order and converted to the type of the 
+associated discriminant (which might raise Constraint_Error &mdash; see 
+<A HREF="RM-4-6.html">4.6</A>); the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a named association is evaluated (and converted) once for each associated 
+discriminant. <A NAME="I2092"></A>The result of each evaluation and conversion 
+is the value imposed by the constraint for the associated discriminant. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">62&nbsp;&nbsp;The rules of the language ensure that 
+a discriminant of an object always has a value, either from explicit 
+or implicit initialization.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples (using 
+types declared above in&nbsp;</I><span class="insert3"><I>subclause</I></span><I></I><span class="delete3"><I>&nbsp;clause</I></span><I>&nbsp;<A HREF="RM-3-7.html">3.7</A>):</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">Large&nbsp;&nbsp;&nbsp;:&nbsp;Buffer(200);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;constrained,&nbsp;always&nbsp;200&nbsp;characters</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;(explicit&nbsp;discriminant&nbsp;value)</I></SPAN><BR>
+Message&nbsp;:&nbsp;Buffer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;unconstrained,&nbsp;initially&nbsp;100&nbsp;characters</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;(default&nbsp;discriminant&nbsp;value)</I></SPAN><BR>
+Basis&nbsp;&nbsp;&nbsp;:&nbsp;Square(5);&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;constrained,&nbsp;always&nbsp;5&nbsp;by&nbsp;5</I></SPAN><BR>
+Illegal&nbsp;:&nbsp;Square;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;illegal,&nbsp;a&nbsp;Square&nbsp;has&nbsp;to&nbsp;be&nbsp;constrained</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

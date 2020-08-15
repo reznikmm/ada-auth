@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Relational Operators and Membership Tests</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.2 Relational Operators and Membership Tests</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2502"></A><A NAME="I2503"></A><A NAME="I2504"></A><A NAME="I2505"></A><A NAME="I2506"></A>The 
+<I>equality operators</I> = (equals) and /= (not equals) are predefined 
+for nonlimited types. <A NAME="I2507"></A><A NAME="I2508"></A>The other 
+<SPAN Class="swiss"><A HREF="RM-4-5.html#S0115">relational_operator</A></SPAN>s 
+are the <I>ordering operators</I> &lt; (less than), &lt;= (less than 
+or equal), &gt; (greater than), and &gt;= (greater than or equal). <A NAME="I2509"></A><A NAME="I2510"></A><A NAME="I2511"></A><A NAME="I2512"></A><A NAME="I2513"></A><A NAME="I2514"></A><A NAME="I2515"></A><A NAME="I2516"></A><A NAME="I2517"></A><A NAME="I2518"></A><A NAME="I2519"></A><A NAME="I2520"></A><A NAME="I2521"></A><A NAME="I2522"></A><A NAME="I2523"></A><A NAME="I2524"></A><A NAME="I2525"></A><A NAME="I2526"></A><A NAME="I2527"></A><A NAME="I2528"></A><A NAME="I2529"></A><A NAME="I2530"></A><A NAME="I2531"></A><A NAME="I2532"></A><A NAME="I2533"></A>The 
+ordering operators are predefined for scalar types, and for <I>discrete 
+array types</I>, that is, one-dimensional array types whose components 
+are of a discrete type.&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I2534"></A><A NAME="I2535"></A><A NAME="I2536"></A>A 
+<I>membership test</I>, using <B>in</B> or <B>not in</B>, determines 
+whether or not a value belongs to a given subtype or range, or has a 
+tag that identifies a type that is covered by a given type. Membership 
+tests are allowed for all types.</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I2537"></A><A NAME="I2538"></A>The <I>tested 
+type</I> of a membership test is the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0034">range</A></SPAN> 
+or the type determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>. 
+If the tested type is tagged, then the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+shall resolve to be of a type that covers or is covered by the tested 
+type; if untagged, the expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+is the tested type.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">For a membership test, if the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+is of a tagged class-wide type, then the tested type shall be (visibly) 
+tagged.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The result type of a membership test is the predefined 
+type Boolean.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The equality operators 
+are predefined for every specific type <I>T</I> that is not limited, 
+and not an anonymous access type, with the following specifications: 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<B>function</B>&nbsp;&quot;/=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;Boolean</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The ordering operators 
+are predefined for every specific scalar type <I>T</I>, and for every 
+discrete array type <I>T</I>, with the following specifications:&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<B>function</B>&nbsp;&quot;&lt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+<B>function</B>&nbsp;&quot;&gt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;Boolean</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">For discrete types, the predefined relational operators 
+are defined in terms of corresponding mathematical operations on the 
+position numbers of the values of the operands.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">For real types, the predefined relational operators 
+are defined in terms of the corresponding mathematical operations on 
+the values of the operands, subject to the accuracy of the type.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Two access-to-object values are equal if they designate 
+the same object, or if both are equal to the null value of the access 
+type.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">Two access-to-subprogram values are equal if they 
+are the result of the same evaluation of an Access <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0093">attribute_reference</A></SPAN>, 
+or if both are equal to the null value of the access type. Two access-to-subprogram 
+values are unequal if they designate different subprograms. <A NAME="I2539"></A>It 
+is unspecified whether two access values that designate the same subprogram 
+but are the result of distinct evaluations of Access <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0093">attribute_reference</A></SPAN>s 
+are equal or unequal.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I2540"></A>For a type extension, predefined 
+equality is defined in terms of the primitive (possibly user-defined) 
+equals operator of the parent type and of any tagged components of the 
+extension part, and predefined equality for any other components not 
+inherited from the parent type.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">For a private type, if its full type is tagged, predefined 
+equality is defined in terms of the primitive equals operator of the 
+full type; if the full type is untagged, predefined equality for the 
+private type is that of its full type.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2541"></A>For 
+other composite types, the predefined equality operators (and certain 
+other predefined operations on composite types &mdash; see <A HREF="RM-4-5-1.html">4.5.1</A> 
+and <A HREF="RM-4-6.html">4.6</A>) are defined in terms of the corresponding 
+operation on <I>matching components</I>, defined as follows:&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">For two composite objects or values of the same 
+non-array type, matching components are those that correspond to the 
+same <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">component_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_specification</A></SPAN>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">For two one-dimensional arrays of the same type, 
+matching components are those (if any) whose index values match in the 
+following sense: the lower bounds of the index ranges are defined to 
+match, and the successors of matching indices are defined to match;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">For two multidimensional arrays of the same type, 
+matching components are those whose index values match in successive 
+index positions.&nbsp;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">The analogous definitions apply if the types of the 
+two objects or values are convertible, rather than being the same.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Given the above definition 
+of matching components, the result of the predefined equals operator 
+for composite types (other than for those composite types covered earlier) 
+is defined as follows:&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">If there are no components, the result is defined 
+to be True;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">If there are unmatched components, the result is 
+defined to be False;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">Otherwise, the result is defined in terms of the 
+primitive equals operator for any matching tagged components, and the 
+predefined equals for any matching untagged components.&nbsp;</div>
+<div class="paranum"><a name="p24.1">24.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">For any composite type, the 
+order in which &quot;=&quot; is called for components is unspecified. 
+Furthermore, if the result can be determined before calling &quot;=&quot; 
+on some components, it is unspecified whether &quot;=&quot; is called 
+on those components.<A NAME="I2542"></A></span></div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">The predefined &quot;/=&quot; operator gives the 
+complementary result to the predefined &quot;=&quot; operator.&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal"><A NAME="I2543"></A>For a discrete array type, the 
+predefined ordering operators correspond to <I>lexicographic order</I> 
+using the predefined order relation of the component type: A null array 
+is lexicographically less than any array having at least one component. 
+In the case of nonnull arrays, the left operand is lexicographically 
+less than the right operand if the first component of the left operand 
+is less than that of the right; otherwise the left operand is lexicographically 
+less than the right operand only if their first components are equal 
+and the tail of the left operand is lexicographically less than that 
+of the right (the <I>tail</I> consists of the remaining components beyond 
+the first and can be null).</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal"><A NAME="I2544"></A>For the evaluation of a membership 
+test, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+and the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0034">range</A></SPAN> 
+(if any) are evaluated in an arbitrary order.<A NAME="I2545"></A></div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A membership test using 
+<B>in</B> yields the result True if:&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Bulleted">The tested type is scalar, and the value of the 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+belongs to the given <SPAN Class="swiss"><A HREF="RM-3-5.html#S0034">range</A></SPAN>, 
+or the range of the named subtype; or&nbsp;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Bulleted">The tested type is not scalar, and the value of 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+satisfies any constraints of the named subtype, and, if the type of the 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0110">simple_expression</A></SPAN> 
+is class-wide, the value has a tag that identifies a type covered by 
+the tested type.&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Normal">Otherwise the test yields the result False.</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal">A membership test using <B>not in</B> gives the complementary 
+result to the corresponding membership test using <B>in</B>.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p32.1">32.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">For all nonlimited types 
+declared in language-defined packages, the &quot;=&quot; and &quot;/=&quot; 
+operators of the type shall behave as if they were the predefined equality 
+operators for the purposes of the equality of composite types and generic 
+formal types.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Notes">13&nbsp;&nbsp;No exception is ever raised by a membership 
+test, by a predefined ordering operator, or by a predefined equality 
+operator for an elementary type, but an exception can be raised by the 
+evaluation of the operands. A predefined equality operator for a composite 
+type can only raise an exception if the type has a tagged part whose 
+primitive equals operator propagates an exception.</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Notes">14&nbsp;&nbsp;If a composite type has components that 
+depend on discriminants, two values of this type have matching components 
+if and only if their discriminants are equal. Two nonnull arrays have 
+matching components if and only if the length of each dimension is the 
+same for both.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of expressions 
+involving relational operators and membership tests:</I>&nbsp;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Examples">X&nbsp;/=&nbsp;Y</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Examples">&quot;&quot;&nbsp;&lt;&nbsp;&quot;A&quot;&nbsp;<B>and</B>&nbsp;&quot;A&quot;&nbsp;&lt;&nbsp;&quot;Aa&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;True</I></SPAN><BR>
+&quot;A&quot;&nbsp;&lt;&nbsp;&quot;B&quot;&nbsp;<B>and</B>&nbsp;&quot;A&quot;&nbsp;&lt;&nbsp;&quot;A&nbsp;&nbsp;&quot;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;True</I></SPAN></div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Examples">My_Car&nbsp;=&nbsp;<B>null</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;true&nbsp;if&nbsp;My_Car&nbsp;has&nbsp;been&nbsp;set&nbsp;to&nbsp;null&nbsp;(see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A>)</I></SPAN><BR>
+My_Car&nbsp;=&nbsp;Your_Car&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;true&nbsp;if&nbsp;we&nbsp;both&nbsp;share&nbsp;the&nbsp;same&nbsp;car</I></SPAN><BR>
+My_Car.<B>all</B>&nbsp;=&nbsp;Your_Car.<B>all</B>&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;true&nbsp;if&nbsp;the&nbsp;two&nbsp;cars&nbsp;are&nbsp;identical</I></SPAN></div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Examples">N&nbsp;<B>not</B>&nbsp;<B>in</B>&nbsp;1&nbsp;..&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;range&nbsp;membership&nbsp;test</I></SPAN><BR>
+Today&nbsp;<B>in</B>&nbsp;Mon&nbsp;..&nbsp;Fri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;range&nbsp;membership&nbsp;test</I></SPAN><BR>
+Today&nbsp;<B>in</B>&nbsp;Weekday&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;subtype&nbsp;membership&nbsp;test&nbsp;(see&nbsp;<A HREF="RM-3-5-1.html">3.5.1</A>)</I></SPAN><BR>
+Archive&nbsp;<B>in</B>&nbsp;Disk_Unit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;subtype&nbsp;membership&nbsp;test&nbsp;(see&nbsp;<A HREF="RM-3-8-1.html">3.8.1</A>)</I></SPAN><BR>
+Tree.<B>all</B>&nbsp;<B>in</B>&nbsp;Addition'Class&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;class&nbsp;membership&nbsp;test&nbsp;(see&nbsp;<A HREF="RM-3-9-1.html">3.9.1</A>)</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

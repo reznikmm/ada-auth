@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Unchecked Union Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-B-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-B-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.3.3 <span class="insert3">Unchecked Union Types</span><span class="delete3"><span class="insert2">Pragma Unchecked_Union</span></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I8161"></A></span><span class="insert3">Specifying 
+aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;A 
+pragma</span></span><span class="insert2">&nbsp;Unchecked_Union&nbsp;</span><span class="insert3">to 
+have the value True defines</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;specifies</span></span><span class="insert2">&nbsp;an interface correspondence between a given discriminated type and some 
+C union. The&nbsp;</span><span class="insert3">aspect requires</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragma 
+specifies</span></span><span class="insert2">&nbsp;that the associated type 
+shall be given a representation that&nbsp;</span><span class="insert3">allocates</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;leaves</span></span><span class="insert2">&nbsp;no space for its discriminant(s).</span>&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+2 through 3 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3"></span><span class="insert2"><span class="delete3">The 
+form of a pragma Unchecked_Union is as follows:</span></span><span class="delete3"></span> 
+</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
+<A NAME="I8162"></A><A NAME="I8163"></A>Unchecked_Union (<I>first_subtype_</I><A NAME="I8164"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>);</span></span><span class="delete3"></span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
+a discriminated record type having a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN>, 
+the following language-defined representation aspect may be specified:</span></div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert3">Unchecked_Union</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">The type of aspect Unchecked_Union is Boolean. 
+If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+shall be a static expression. If not specified (including by inheritance), 
+the aspect is False.<A NAME="I8165"></A><A NAME="I8166"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+4 and 5 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal"><span class="insert2"></span><span class="insert2"><span class="delete3">Unchecked_Union 
+is a representation pragma, specifying the unchecked union aspect of 
+representation.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal"><span class="insert2"></span><span class="insert2"><span class="delete3">The 
+<I>first_subtype_</I><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Unchecked_Union shall denote an unconstrained discriminated record subtype 
+having a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><span class="insert2"><A NAME="I8167"></A><A NAME="I8168"></A><A NAME="I8169"></A>A 
+type&nbsp;</span><span class="insert3">for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;to</span></span><span class="insert2">&nbsp;which&nbsp;</span><span class="insert3">aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;a 
+pragma</span></span><span class="insert2">&nbsp;Unchecked_Union&nbsp;</span><span class="insert3">is 
+True</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;applies</span></span><span class="insert2">&nbsp;is called an <I>unchecked union type</I>. A subtype of an unchecked union 
+type is defined to be an <I>unchecked union subtype</I>. An object of 
+an unchecked union type is defined to be an <I>unchecked union object</I>.</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><span class="insert2">All component subtypes of an 
+unchecked union type shall be C-compatible.</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal"><span class="insert2">If a component subtype of an 
+unchecked union type is subject to a per-object constraint, then the 
+component subtype shall be an unchecked union subtype.</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal"><span class="insert2">Any name that denotes a discriminant 
+of an object of an unchecked union type shall occur within the declarative 
+region of the type</span><span class="insert3"></span><span class="insert5">&nbsp;or as the <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN></span><span class="insert3">, 
+and shall not occur within a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN></span><span class="insert2">.</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal"><span class="insert2"></span><span class="insert3">The 
+type of a</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;A</span></span><span class="insert2">&nbsp;component declared in a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
+of an unchecked union type shall not&nbsp;</span><span class="insert3">need 
+finalization. In addition to the places where Legality Rules normally 
+apply (see <A HREF="RM-12-3.html">12.3</A>), this rule also applies in 
+the private part of an instance of a generic unit.<A NAME="I8170"></A> 
+For an unchecked union type declared within the body of a generic unit, 
+or within the body of any of its descendant library units, no part of 
+the type of a component declared in a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
+of the unchecked union type shall be of a formal private type or formal 
+private extension declared within the formal part of the generic unit</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;have 
+a controlled, protected, or task part</span></span><span class="insert2">.</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal"><span class="insert2">The completion of an incomplete 
+or private type declaration having a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+shall not be an unchecked union type.</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal"><span class="insert2">An unchecked union subtype 
+shall only be passed as a generic actual parameter if the corresponding 
+formal type has no known discriminants or is an unchecked union type.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal"><span class="insert2">An unchecked union type is 
+eligible for convention C.</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal"><span class="insert2">All objects of an unchecked 
+union type have the same size.</span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal"><span class="insert2">Discriminants of objects of 
+an unchecked union type are of size zero.</span></div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">Any 
+check which would require reading a discriminant of an unchecked union 
+object is suppressed (see <A HREF="RM-11-5.html">11.5</A>). These checks 
+include:</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted"><span class="insert2">The check performed when 
+addressing a variant component (i.e., a component that was declared in 
+a variant part) of an unchecked union object that the object has this 
+component (see <A HREF="RM-4-1-3.html">4.1.3</A>).</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Bulleted"><span class="insert2">Any checks associated with 
+a type or subtype conversion of a value of an unchecked union type (see 
+<A HREF="RM-4-6.html">4.6</A>). This includes, for example, the check 
+associated with the implicit subtype conversion of an assignment statement.</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Bulleted"><span class="insert2">The subtype membership check 
+associated with the evaluation of a qualified expression (see <A HREF="RM-4-7.html">4.7</A>) 
+or an uninitialized allocator (see <A HREF="RM-4-8.html">4.8</A>).</span> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Normal"><span class="insert2">A view of an unchecked union 
+object (including a type conversion or function call) has <I>inferable 
+discriminants</I> if it has a constrained nominal subtype, unless the 
+object is a component of an enclosing unchecked union object that is 
+subject to a per-object constraint and the enclosing object lacks inferable 
+discriminants.<A NAME="I8171"></A></span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Normal"><span class="insert2">An expression of an unchecked 
+union type has inferable discriminants if it is either a name of an object 
+with inferable discriminants or a qualified expression whose <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a constrained subtype.</span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">Program_Error 
+is raised in the following cases:<A NAME="I8172"></A></span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Bulleted"><span class="insert2">Evaluation of the predefined 
+equality operator for an unchecked union type if either of the operands 
+lacks inferable discriminants.</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Bulleted"><span class="insert2">Evaluation of the predefined 
+equality operator for a type which has a subcomponent of an unchecked 
+union type whose nominal subtype is unconstrained.</span></div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Bulleted"><span class="insert2">Evaluation of&nbsp;</span><span class="insert5">an 
+individual</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;a</span></span><span class="insert2">&nbsp;membership test if the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN></span><span class="insert5">&nbsp;(if any)</span><span class="insert2">&nbsp;denotes a constrained unchecked 
+union subtype and the&nbsp;</span><span class="insert5"><I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;expression</span></span><span class="insert2">&nbsp;lacks inferable discriminants.</span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Bulleted"><span class="insert2">Conversion from a derived 
+unchecked union type to an unconstrained non-unchecked-union type if 
+the operand of the conversion lacks inferable discriminants.</span></div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Bulleted"><span class="insert2">Execution of the default 
+implementation of the Write or Read attribute of an unchecked union type.</span></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Bulleted"><span class="insert2">Execution of the default 
+implementation of the Output or Input attribute of an unchecked union 
+type if the type lacks default discriminant values.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Normal"><span class="insert2"></span><span class="insert2"><span class="delete3">An 
+implementation may require that <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Controlled be specified for the type of an access subcomponent of an 
+unchecked union type.</span></span><span class="insert2"></span>&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
+29 was deleted.</I></SPAN></span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">15&nbsp;&nbsp;<span class="insert2">The 
+use of an unchecked union to obtain the effect of an unchecked conversion 
+results in erroneous execution (see <A HREF="RM-11-5.html">11.5</A>). 
+Execution of the following example is erroneous even if Float'Size = 
+Integer'Size:</span></div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="SmallIndented2Examples"><span class="insert2"><B>type</B>&nbsp;T&nbsp;(Flag&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Flag&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;False&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F1&nbsp;:&nbsp;Float&nbsp;:=&nbsp;0.0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;True&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F2&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;case</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;record</B></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Unchecked_Union</span><span class="insert2"></span><span class="insert2"><span class="delete3">;<BR>
+<B>pragma</B>&nbsp;Unchecked_Union&nbsp;(T)</span></span><span class="insert2">;</span></div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="SmallIndented2Examples"><span class="insert2">X&nbsp;:&nbsp;T;<BR>
+Y&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;X.F2;&nbsp;--&nbsp;<SPAN Class="roman"><I>erroneous</I></SPAN></span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-B-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-B-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Dynamic Priorities for Tasks</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.5.1 <span class="insert2">Dynamic Priorities for Tasks</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[This clause describes how the base priority of a 
+task can be modified or queried at run time.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<B>with</B>&nbsp;System;<BR>
+<B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="AA-C-7-1.html">C.7.1</A></I></SPAN><BR>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities&nbsp;<B>is</B><A NAME="I7577"></A><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dynamic_Priorities);</span></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7578"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7579"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Dynamic_Priorities;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">The procedure Set_Priority sets the base priority 
+of the specified task to the specified Priority value. Set_Priority has 
+no effect if the task is terminated.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The function Get_Priority returns T's current base 
+priority. <A NAME="I7580"></A>Tasking_Error is raised if the task is 
+terminated.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>There is no harm in setting the 
+priority of a terminated task. A previous version of Ada 9X made this 
+a run-time error. However, there is little difference between setting 
+the priority of a terminated task, and setting the priority of a task 
+that is about to terminate very soon; neither case should be an error. 
+Furthermore, the run-time check is not necessarily feasible to implement 
+on all systems, since priority changes might be deferred due to inter-processor 
+communication overhead, so the error might not be detected until after 
+Set_Priority has returned.</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations">However, we wish to allow implementations to 
+avoid storing &ldquo;extra&rdquo; information about terminated tasks. 
+Therefore, we make Get_Priority of a terminated task raise an exception; 
+the implementation need not continue to store the priority of a task 
+that has terminated.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I7581"></A>Program_Error is raised by Set_Priority 
+and Get_Priority if T is equal to Null_Task_Id.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<span class="insert2">On a system with a single processor, the setting 
+of</span><span class="delete2">&nbsp;Setting</span> the <span class="delete2">task's 
+</span>base priority<span class="insert2">&nbsp;of a task <I>T</I></span> 
+to the new value <span class="insert2">occurs immediately at the first 
+point when <I>T</I> is outside the execution of</span><span class="delete2">&nbsp;takes 
+place as soon as is practical but not while the task is performing</span> 
+a protected action<span class="delete2">. This setting occurs no later 
+then the next abort completion point of the task T (see <A HREF="AA-9-8.html">9.8</A>)</span>.</div>
+<div class="paranum"><a name="p10.a">10.a/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<span class="insert2">The priority change is immediate if the target 
+task is on a delay queue or a ready queue outside of a protected action. 
+However, consider when</span><span class="delete2">&nbsp;When</span> Set_Priority 
+is called by a task T1 to set the priority of T2, if T2 is blocked, waiting 
+on an entry call queued on a protected object, the entry queue needs 
+to be reordered. Since T1 might have a priority that is higher than the 
+ceiling of the protected object, T1 cannot, in general, do the reordering. 
+One way to implement this is to wake T2 up and have T2 do the work. This 
+is similar to the disentangling of queues that needs to happen when a 
+high-priority task aborts a lower-priority task, which might have a call 
+queued on a protected object with a low ceiling.<span class="insert2">&nbsp;We have an Implementation Permission in <A HREF="AA-D-4.html">D.4</A> 
+to allow this implementation. We could have required an immediate priority 
+change if on a ready queue during a protected action, but that would 
+have required extra checks for ceiling violations to meet Bounded (Run-Time) 
+Error requirements of <A HREF="AA-D-3.html">D.3</A> and potentially could 
+cause a protected action to be abandoned in the middle (by raising Program_Error). 
+That seems bad.</span>&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>A 
+previous version of Ada 9X made it a run-time error for a high-priority 
+task to set the priority of a lower-priority task that has a queued call 
+on a protected object with a low ceiling. This was changed because:&nbsp;</div>
+<div class="paranum"><a name="p10.c">10.c</a></div>
+<div class="SmallBulleted">The check was not feasible to implement on 
+all systems, since priority changes might be deferred due to inter-processor 
+communication overhead. The calling task would continue to execute without 
+finding out whether the operation succeeded or not.</div>
+<div class="paranum"><a name="p10.d">10.d</a></div>
+<div class="SmallBulleted">The run-time check would tend to cause intermittent 
+system failures &mdash; how is the caller supposed to know whether the 
+other task happens to have a queued call at any given time? Consider 
+for example an interrupt that needs to trigger a priority change in some 
+task. The interrupt handler could not safely call Set_Priority without 
+knowing exactly what the other task is doing, or without severely restricting 
+the ceilings used in the system. If the interrupt handler wants to hand 
+the job off to a third task whose job is to call Set_Priority, this won't 
+help, because one would normally want the third task to have high priority. 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
+<span class="delete2"><A NAME="I7582"></A>If a task is blocked on a protected 
+entry call, and the call is queued, it is a bounded error to raise its 
+base priority above the ceiling priority of the corresponding protected 
+object. When an entry call is cancelled, it is a bounded error if the 
+priority of the calling task is higher than the ceiling priority of the 
+corresponding protected object. <A NAME="I7583"></A>In either of these 
+cases, either Program_Error is raised in the task that called the entry, 
+or its priority is temporarily lowered, or both, or neither.</span>&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><span class="delete2"><B>Ramification:&nbsp;</B>Note 
+that the error is &ldquo;blamed&rdquo; on the task that did the entry 
+call, not the task that called Set_Priority. This seems to make sense 
+for the case of a task blocked on a call, since if the Set_Priority had 
+happened a little bit sooner, before the task queued a call, the entry-calling 
+task would get the error. In the other case, there is no reason not to 
+raise the priority of a task that is executing in an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0226">abortable_part</A></SPAN>, 
+so long as its priority is lowered before it gets to the end and needs 
+to cancel the call. The priority might need to be lowered to allow it 
+to remove the call from the entry queue, in order to avoid violating 
+the ceiling. This seems relatively harmless, since there is an error, 
+and the task is about to start raising an exception anyway.</span>&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I7584"></A>If any subprogram in this package 
+is called with a parameter T that specifies a task object that no longer 
+exists, the execution of the program is erroneous.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that this rule overrides 
+the above rule saying that Program_Error is raised on Get_Priority of 
+a terminated task. If the task object still exists, and the task is terminated, 
+Get_Priority raises Program_Error. However, if the task object no longer 
+exists, calling Get_Priority causes erroneous execution.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<span class="insert2">On a multiprocessor, the implementation shall document 
+any conditions that cause the completion of the setting of the priority 
+of a task to be delayed later than what is specified for a single processor.</span> 
+</div>
+<div class="paranum"><a name="p12.a.1">12.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Documentation Requirement: 
+</B></span><span class="insert2">Any conditions that cause the completion 
+of the setting of the priority of a task to be delayed for a multiprocessor.</span></div>
+
+<H4 Class="centered">Metrics</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The implementation 
+shall document the following metric:&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">The execution time of a call to Set_Priority, for 
+the nonpreempting case, in processor clock cycles. This is measured for 
+a call that modifies the priority of a ready task that is not running 
+(which cannot be the calling one), where the new base priority of the 
+affected task is lower than the active priority of the calling task, 
+and the affected task is not on any entry queue and is not executing 
+a protected operation.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Documentation Requirement: 
+</B></span><span class="insert2">The metrics for Set_Priority.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Notes">29&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+Setting a task's base priority affects task dispatching. First, it can 
+change the task's active priority. Second, under the <span class="insert2">FIFO_Within_Priorities</span><span class="delete2">&nbsp;standard 
+task dispatching</span> policy it always causes the task to move to the 
+tail of the ready queue corresponding to its active priority, even if 
+the new base priority is unchanged.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">30&nbsp;&nbsp;Under the priority queuing policy, setting 
+a task's base priority has an effect on a queued entry call if the task 
+is blocked waiting for the call. That is, setting the base priority of 
+a task causes the priority of a queued entry call from that task to be 
+updated and the call to be removed and then reinserted in the entry queue 
+at the new priority (see <A HREF="AA-D-4.html">D.4</A>), unless the call 
+originated from the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0225">triggering_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0223">asynchronous_select</A></SPAN>.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Notes">31&nbsp;&nbsp;The effect of two or more Set_Priority 
+calls executed in parallel on the same task is defined as executing these 
+calls in some serial order.</div>
+<div class="paranum"><a name="p17.a">17.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This follows from the general 
+reentrancy requirements stated near the beginning of <A HREF="AA-A.html">Annex 
+A</A>, &ldquo;<A HREF="AA-A.html">Predefined Language Environment</A>&rdquo;. 
+</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">32&nbsp;&nbsp;The rule for when Tasking_Error is raised 
+for Set_Priority or Get_Priority is different from the rule for when 
+Tasking_Error is raised on an entry call (see <A HREF="AA-9-5-3.html">9.5.3</A>). 
+In particular, setting or querying the priority of a completed or an 
+abnormal task is allowed, so long as the task is not yet terminated.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Notes">33&nbsp;&nbsp;Changing the priorities of a set of 
+tasks can be performed by a series of calls to Set_Priority for each 
+task separately. For this to work reliably, it should be done within 
+a protected operation that has high enough ceiling priority to guarantee 
+that the operation completes without being preempted by any of the affected 
+tasks.</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p19.a">19.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<span class="insert2"><A NAME="I7585"></A><B>Amendment Correction:</B> 
+Priority changes are now required to be done immediately so long as the 
+target task is not on an entry queue.</span></div>
+<div class="paranum"><a name="p19.b">19.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
+<span class="insert2">Dynamic_Priorities is now Preelaborated, so it 
+can be used in preelaborated units.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p19.c">19.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
+<span class="insert2">This Ada 95 clause was turned into a subclause. 
+The paragraph numbers are the same as those for <A HREF="AA-D-5.html">D.5</A> 
+in Ada 95.</span></div>
+<div class="paranum"><a name="p19.d">19.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<span class="insert2">There is no &ldquo;standard&rdquo; policy anymore, 
+so that phrase was replaced by the name of a specific policy in the notes.</span></div>
+<div class="paranum"><a name="p19.e">19.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
+<span class="insert2">The bounded error for the priority of a task being 
+higher than the ceiling of an object it is currently in was moved to 
+<A HREF="AA-D-3.html">D.3</A>, so that it applies no matter how the situation 
+arises.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

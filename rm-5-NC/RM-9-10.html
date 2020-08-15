@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Shared Variables</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-10-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.10 Shared Variables</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><A NAME="I4479"></A><A NAME="I4480"></A>If two different 
+objects, including nonoverlapping parts of the same object, are <I>independently 
+addressable</I>, they can be manipulated concurrently by two different 
+logical threads of control without synchronization. Any two nonoverlapping 
+objects are independently addressable if either object is specified as 
+independently addressable (see <A HREF="RM-C-6.html">C.6</A>). Otherwise, 
+two nonoverlapping objects are independently addressable except when 
+they are both parts of a composite object for which a nonconfirming value 
+is specified for any of the following representation aspects: (record) 
+Layout, Component_Size, Pack, Atomic, or Convention; in this case it 
+is unspecified whether the parts are independently addressable.<A NAME="I4481"></A> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Separate logical threads 
+of control normally proceed independently and concurrently with one another. 
+However, task interactions can be used to synchronize the actions of 
+two or more logical threads of control to allow, for example, meaningful 
+communication by the direct updating and reading of variables shared 
+between them. The actions of two different logical threads of control 
+are synchronized in this sense when an action of one <I>signals</I> an 
+action of the other; <A NAME="I4482"></A>an action A1 is defined to signal 
+an action A2 under the following circumstances:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">If A1 and A2 are part of the execution of the same 
+task, and the language rules require A1 to be performed before A2;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">If A1 is the action of an activator that initiates 
+the activation of a task, and A2 is part of the execution of the task 
+that is activated;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">If A1 is part of the activation of a task, and 
+A2 is the action of waiting for completion of the activation;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">If A1 is part of the execution of a task, and A2 
+is the action of waiting for the termination of the task;</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">If A1 is the termination of a task T, and A2 is 
+either an evaluation of the expression T'Terminated that results in True, 
+or a call to Ada.Task_Identification.Is_Terminated with an actual parameter 
+that identifies T and a result of True (see <A HREF="RM-C-7-1.html">C.7.1</A>);</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Bulleted">If A1 is the action of issuing an entry call, and 
+A2 is part of the corresponding execution of the appropriate <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">If A1 is part of the execution of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN>, 
+and A2 is the action of returning from the corresponding entry call;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">If A1 is part of the execution of a protected procedure 
+body or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
+for a given protected object, and A2 is part of a later execution of 
+an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
+for the same protected object;&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">If A1 signals some 
+action that in turn signals A2.&nbsp;</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4483"></A><A NAME="I4484"></A>Two 
+actions are defined to be <I>sequential</I> if one of the following is 
+true:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">One action signals the other;</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Bulleted">Both actions occur as part of the execution of 
+the same logical thread of control;&nbsp;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Bulleted">Both actions occur as part of protected actions 
+on the same protected object, and at least one of the actions is part 
+of a call on an exclusive protected operation of the protected object. 
+</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal">Aspect Atomic or aspect Atomic_Components may also 
+be specified to ensure that certain reads and updates are sequential 
+&mdash; see <A HREF="RM-C-6.html">C.6</A>.&nbsp;</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal">Two actions that are not sequential are defined to 
+be <I>concurrent</I> actions.<A NAME="I4485"></A><A NAME="I4486"></A></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal">Two actions are defined to <I>conflict</I> if one 
+action<A NAME="I4487"></A><A NAME="I4488"></A> assigns to an object, 
+and the other action reads or assigns to a part of the same object (or 
+of a neighboring object if the two are not independently addressable). 
+ The action comprising a call on a subprogram or an entry is defined 
+to <I>potentially conflict</I> with another action if the Global aspect 
+(or Global'Class aspect in the case of a dispatching call) of the called 
+subprogram or entry is such that a conflicting action would be possible 
+during the execution of the call. Similarly two calls are considered 
+to potentially conflict if they each have Global (or Global'Class in 
+the case of a dispatching call) aspects such that conflicting actions 
+would be possible during the execution of the calls.<A NAME="I4489"></A><A NAME="I4490"></A><A NAME="I4491"></A></div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Normal">A <I>synchronized</I> object<A NAME="I4492"></A> 
+is an object of a task or protected type, an atomic object (see <A HREF="RM-C-6.html">C.6</A>), 
+a suspension object (see <A HREF="RM-D-10.html">D.10</A>), or a synchronous 
+barrier (see <A HREF="RM-D-10-1.html">D.10.1</A>). Operations on such 
+objects are necessarily sequential with respect to one another, and hence 
+are never considered to conflict.</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Normal">The execution of two concurrent actions is erroneous<A NAME="I4493"></A> 
+if the actions make conflicting uses of a shared variable (or neighboring 
+variables that are not independently addressable).</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-10-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

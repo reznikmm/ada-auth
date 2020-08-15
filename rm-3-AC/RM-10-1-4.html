@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Compilation Process</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>10.1.4 The Compilation Process</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I4567"></A><A NAME="I4568"></A>Each compilation 
+unit submitted to the compiler is compiled in the context of an <I>environment</I> 
+<SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+(or simply, an <I>environment</I>), which is a conceptual <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+that forms the outermost declarative region of the context of any <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>. 
+At run time, an environment forms the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+of the body of the environment task of a partition (see <A HREF="RM-10-2.html">10.2</A>, 
+&ldquo;<A HREF="RM-10-2.html">Program Execution</A>&rdquo;).&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN>s 
+of the environment are <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s 
+appearing in an order such that there are no forward semantic dependences. 
+Each included subunit occurs in place of the corresponding stub. The 
+visibility rules apply as if the environment were the outermost declarative 
+region, except that <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0255">with_clause</A></SPAN>s 
+are needed to make declarations of library units visible (see <A HREF="RM-10-1-2.html">10.1.2</A>).</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">The mechanisms for creating an environment and for 
+adding and replacing compilation units within an environment are implementation 
+defined.<span class="insert2">&nbsp;The mechanisms for adding a compilation 
+unit mentioned in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
+to an environment are implementation defined.</span>&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0251">library_unit_body</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN> 
+is submitted to the compiler, it is interpreted only as a completion 
+if a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN> 
+<span class="delete1">for a subprogram or a generic subprogram&nbsp;</span>with 
+the same <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN> 
+already exists in the environment <span class="insert1">for a subprogram 
+other than an instance of a generic subprogram or for a generic subprogram 
+</span>(even if the profile of the body is not type conformant with that 
+of the declaration); otherwise<span class="insert3">,</span> the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN> 
+is interpreted as both the declaration and body of a library subprogram. 
+<A NAME="I4569"></A></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">When a compilation unit is compiled, all compilation 
+units upon which it depends semantically shall already exist in the environment; 
+<A NAME="I4570"></A>the set of these compilation units shall be <I>consistent</I> 
+in the sense that the new compilation unit shall not semantically depend 
+(directly or indirectly) on two different versions of the same compilation 
+unit, nor on an earlier version of itself.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">The implementation may require that a compilation 
+unit be legal before <span class="insert2">it can be mentioned in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
+or it can be inserted</span><span class="delete2">&nbsp;inserting it</span> 
+into the environment.</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">When a compilation unit that declares or renames 
+a library unit is added to the environment, the implementation may remove 
+from the environment any preexisting <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+<span class="insert2">or <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0263">subunit</A></SPAN> 
+with the same full expanded name</span><span class="delete2">&nbsp;with the 
+same <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN></span>. 
+When a compilation unit that is a subunit or the body of a library unit 
+is added to the environment, the implementation may remove from the environment 
+any preexisting version of the same compilation unit. <span class="insert2">When 
+a compilation unit that contains a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0258">body_stub</A></SPAN> 
+is added to the environment, the implementation may remove any preexisting 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0263">subunit</A></SPAN> 
+with the same full expanded name as the <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0258">body_stub</A></SPAN>.</span> 
+When a given compilation unit is removed from the environment, the implementation 
+may also remove any compilation unit that depends semantically upon the 
+given one. If the given compilation unit contains the body of a subprogram 
+<span class="insert3">for</span><span class="delete3">&nbsp;to</span> which 
+<span class="insert3">aspect</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+Inline <span class="insert3">is True</span><span class="delete3">&nbsp;applies</span>, 
+the implementation may also remove any compilation unit containing a 
+call to that subprogram.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">5&nbsp;&nbsp;The rules of the language are enforced 
+across <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
+and compilation unit boundaries, just as they are enforced within a single 
+compilation unit.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">6&nbsp;&nbsp;<A NAME="I4571"></A>An implementation 
+may support a concept of a <I>library</I>, which contains <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s. 
+If multiple libraries are supported, the implementation has to define 
+how a single environment is constructed when a compilation unit is submitted 
+to the compiler. Naming conflicts between different libraries might be 
+resolved by treating each library as the root of a hierarchy of child 
+library units. <A NAME="I4572"></A></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">7&nbsp;&nbsp;A compilation unit containing an instantiation 
+of a separately compiled generic unit does not semantically depend on 
+the body of the generic unit. Therefore, replacing the generic body in 
+the environment does not result in the removal of the compilation unit 
+containing the instantiation.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Information Systems</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-F-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Annex F</H1>
+<H2>(normative)</H2>
+<H1>Information Systems</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I6396"></A>This Annex provides a set of 
+facilities relevant to Information Systems programming. These fall into 
+several categories:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">an attribute definition 
+clause specifying Machine_Radix for a decimal subtype;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">the package Decimal, which declares a set of constants 
+defining the implementation's capacity for decimal types, and a generic 
+procedure for decimal division; and</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">the child packages Text_IO.Editing and Wide_Text_IO.Editing, 
+which support formatted and localized output of decimal data, based on 
+&ldquo;picture String&rdquo; values.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">See also: <A HREF="AA-3-5-9.html">3.5.9</A>, &ldquo;<A HREF="AA-3-5-9.html">Fixed 
+Point Types</A>&rdquo;; <A HREF="AA-3-5-10.html">3.5.10</A>, &ldquo;<A HREF="AA-3-5-10.html">Operations 
+of Fixed Point Types</A>&rdquo;; <A HREF="AA-4-6.html">4.6</A>, &ldquo;<A HREF="AA-4-6.html">Type 
+Conversions</A>&rdquo;; <A HREF="AA-13-3.html">13.3</A>, &ldquo;<A HREF="AA-13-3.html">Operational 
+and Representation Attributes</A>&rdquo;; <A HREF="AA-A-10-9.html">A.10.9</A>, 
+&ldquo;<A HREF="AA-A-10-9.html">Input-Output for Real Types</A>&rdquo;;<A HREF="AA-B-4.html">B.4</A>, 
+&ldquo;<A HREF="AA-B-4.html">Interfacing with COBOL</A>&rdquo;; <A HREF="AA-B-3.html">B.3</A>, 
+&ldquo;<A HREF="AA-B-3.html">Interfacing with C and C++</A>&rdquo;; <A HREF="AA-G.html">Annex 
+G</A>, &ldquo;<A HREF="AA-G.html">Numerics</A>&rdquo;.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The character and string handling packages in <A HREF="AA-A.html">Annex 
+A</A>, &ldquo;<A HREF="AA-A.html">Predefined Language Environment</A>&rdquo; 
+are also relevant for Information Systems.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">If COBOL (respectively, C) is widely supported in 
+the target environment, implementations supporting the Information Systems 
+Annex should provide the child package Interfaces.COBOL (respectively, 
+Interfaces.C) specified in <A HREF="AA-B.html">Annex B</A> and should 
+support a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+of COBOL (respectively, C) in the interfacing pragmas (see <A HREF="AA-B.html">Annex 
+B</A>), thus allowing Ada programs to interface with programs written 
+in that language.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><A NAME="I6397"></A>This Annex is new to Ada 
+95.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-F-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

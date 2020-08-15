@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Type Invariants</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.3.2 <span class="insert3">Type Invariants</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
+a private type or private extension, the following language-defined aspects 
+may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN> 
+(see <A HREF="RM-13-1-1.html">13.1.1</A>):</span></div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Type_Invariant</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+called an <I>invariant expression</I>.<A NAME="I3773"></A> Type_Invariant 
+may be specified on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN>, 
+on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN>, 
+or on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+that declares the completion of a private type or private extension.<A NAME="I3774"></A><A NAME="I3775"></A></span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Type_Invariant'Class</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+called an <I>invariant expression</I>. Type_Invariant'Class may be specified 
+on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN>.<A NAME="I3776"></A><A NAME="I3777"></A></span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal"><span class="insert3">The expected type for an invariant 
+expression is any boolean type.<A NAME="I3778"></A></span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal"><span class="insert3">Within an invariant expression, 
+the identifier of the first subtype of the associated type denotes the 
+current instance of the type. Within an invariant expression associated 
+with type <I>T</I>, the type of the current instance is <I>T</I>for the 
+Type_Invariant aspect and <I>T</I>'Class for the Type_Invariant'Class 
+aspect.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><span class="insert3">The Type_Invariant'Class aspect 
+shall not be specified for an untagged type. The Type_Invariant aspect 
+shall not be specified for an abstract type.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal"><span class="insert3">If the Type_Invariant aspect 
+is specified for a type <I>T</I>, then the invariant expression applies 
+to <I>T</I>.</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal"><span class="insert3">If the Type_Invariant'Class 
+aspect is specified for a tagged type <I>T</I>, then the invariant expression 
+applies to all descendants of <I>T</I>.</span></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">If 
+one or more invariant expressions apply to a type <I>T</I>, then an invariant 
+check is performed at the following places, on the specified object(s):<A NAME="I3779"></A><A NAME="I3780"></A></span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Bulleted"><span class="insert3">After successful default 
+initialization of an object of type <I>T</I>, the check is performed 
+on the new object;</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Bulleted"><span class="insert3">After successful conversion 
+to type <I>T</I>, the check is performed on the result of the conversion;</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Bulleted"><span class="insert3">For a view conversion, outside 
+the immediate scope of <I>T</I>, that converts from a descendant of <I>T</I> 
+(including <I>T</I> itself) to an ancestor of type <I>T</I> (other than 
+<I>T</I> itself), a check is performed on the part of the object that 
+is of type <I>T</I>:</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Indented2NestedBulleted"><span class="insert3">after assigning 
+to the view conversion; and</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Indented2NestedBulleted"><span class="insert3">after successful 
+return from a call that passes the view conversion as an <B>in out</B> 
+or <B>out</B> parameter.</span>&nbsp;</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Bulleted"><span class="insert3">After a successful call on 
+the Read or Input stream attribute of the type <I>T</I>, the check is 
+performed on the object initialized by the stream attribute;</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">An 
+invariant is checked upon successful return from a call on any subprogram 
+or entry that:</span>&nbsp;</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Indented2Bulleted"><span class="insert3">is declared within 
+the immediate scope of type <I>T</I> (or by an instance of a generic 
+unit, and the generic is declared within the immediate scope of type 
+<I>T</I>), and</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Indented2Bulleted"><span class="insert3">is visible outside 
+the immediate scope of type <I>T</I> or overrides an operation that is 
+visible outside the immediate scope of <I>T</I>, and</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Indented2Bulleted"><span class="insert3">has a result with 
+a part of type <I>T</I>, or one or more parameters with a part of type 
+<I>T</I>, or an access to variable parameter whose designated type has 
+a part of type <I>T</I>.</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Bulleted-NoPrefix"><span class="insert3">The check is performed 
+on each such part of type <I>T</I>.</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Normal"><span class="insert3">If performing checks is required 
+by the Invariant or Invariant'Class assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
+in effect at the point of corresponding aspect specification applicable 
+to a given type, then the respective invariant expression is considered 
+<I>enabled</I>.<A NAME="I3781"></A></span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Normal"><span class="insert3">The invariant check consists 
+of the evaluation of each enabled invariant expression that applies to 
+<I>T</I>, on each of the objects specified above. If any of these evaluate 
+to False, Assertions.Assertion_Error is raised at the point of the object 
+initialization, conversion, or call.<A NAME="I3782"></A> If a given call 
+requires more than one evaluation of an invariant expression, either 
+for multiple objects of a single type or for multiple types with invariants, 
+the evaluations are performed in an arbitrary order, and if one of them 
+evaluates to False, it is not specified whether the others are evaluated. 
+Any invariant check is performed prior to copying back any by-copy <B>in 
+out</B> or <B>out</B> parameters. Invariant checks, any postcondition 
+check, and any constraint or predicate checks associated with <B>in out</B> 
+or <B>out</B> parameters are performed in an arbitrary order.</span></div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Normal"><span class="insert3">The invariant checks performed 
+on a call are determined by the subprogram or entry actually invoked, 
+whether directly, as part of a dispatching call, or as part of a call 
+through an access-to-subprogram value.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Notes">13&nbsp;&nbsp;<span class="insert3">For a call of 
+a primitive subprogram of type <I>NT</I> that is inherited from type 
+<I>T</I>, the specified checks of the specific invariants of both the 
+types <I>NT</I> and <I>T</I> are performed. For a call of a primitive 
+subprogram of type <I>NT</I> that is overridden for type <I>NT</I>, the 
+specified checks of the specific invariants of only type <I>NT</I> are 
+performed.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Scope of Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>8.2 Scope of Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[For each declaration, the language rules define 
+a certain portion of the program text called the <I>scope</I> of the 
+declaration. The scope of a declaration is also called the scope of any 
+view or entity declared by the declaration. Within the scope of an entity, 
+and only there, there are places where it is legal to refer to the declared 
+entity. These places are defined by the rules of visibility and overloading.] 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3342"></A>The 
+<I>immediate scope</I> of a declaration is a portion of the declarative 
+region immediately enclosing the declaration. The immediate scope starts 
+at the beginning of the declaration, except in the case of an overloadable 
+declaration, in which case the immediate scope starts just after the 
+place where the profile of the callable entity is determined (which is 
+at the end of the <SPAN Class="swiss">_specification</SPAN> for the callable 
+entity, or at the end of the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0241">generic_instantiation</A></SPAN> 
+if an instance). The immediate scope extends to the end of the declarative 
+region, with the following exceptions:&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The reason for making overloadable 
+declarations with profiles special is to simplify compilation: until 
+the compiler has determined the profile, it doesn't know which other 
+declarations are homographs of this one, so it doesn't know which ones 
+this one should hide. Without this rule, two passes over the <SPAN Class="swiss">_specification</SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0241">generic_instantiation</A></SPAN> 
+would be required to resolve names that denote things with the same name 
+as this one.&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">The immediate scope of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN> 
+includes only its semantic dependents.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Section 10 defines only a partial 
+ordering of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN>s. 
+Therefore, it is a good idea to restrict the immediate scope (and the 
+scope, defined below) to semantic dependents.</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Consider also 
+examples like this:&nbsp;</div>
+<div class="paranum"><a name="p3.c">3.c</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B>&nbsp;<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p3.d">3.d</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P.Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+<B>end</B>&nbsp;P.Q;</div>
+<div class="paranum"><a name="p3.e">3.e/1</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;P;<BR>
+<B>package</B>&nbsp;R&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;X&nbsp;<B>renames</B>&nbsp;P;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;J&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;X.Q.I;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+<B>end</B>&nbsp;R;</div>
+<div class="paranum"><a name="p3.f">3.f</a></div>
+<div class="Annotations">The scope of P.Q does not contain R. Hence, 
+neither P.Q nor X.Q are visible within R. However, the name R.X.Q would 
+be visible in some other library unit where both R and P.Q are visible 
+(assuming R were made legal by removing the offending declaration).&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">The immediate scope of a declaration in the private 
+part of a library unit does not include the visible part of any public 
+descendant of that library unit. <A NAME="I3343"></A></div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In other words, a declaration 
+in the private part can be visible within the visible part, private part 
+and body of a private child unit. On the other hand, such a declaration 
+can be visible within only the private part and body of a public child 
+unit.&nbsp;</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The purpose of this rule is to 
+prevent children from giving private information to clients.&nbsp;</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For a public child subprogram, 
+this means that the parent's private part is not visible in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0151">formal_part</A></SPAN>s 
+of the declaration and of the body. This is true even for <SPAN Class="swiss">subprogram_bodies</SPAN> 
+that are not completions. For a public child generic unit, it means that 
+the parent's private part is not visible in the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0239">generic_formal_part</A></SPAN>, 
+as well as in the first list of <SPAN Class="swiss"><A HREF="AA-3-11.html#S0081">basic_declarative_item</A></SPAN>s 
+(for a generic package), or the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0151">formal_part</A></SPAN>(s) 
+(for a generic subprogram).&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I3344"></A>[The <I>visible part</I> of (a 
+view of) an entity is a portion of the text of its declaration containing 
+declarations that are visible from outside.] <A NAME="I3345"></A>The 
+<I>private part</I> of (a view of) an entity that has a visible part 
+contains all declarations within the declaration of (the view of) the 
+entity, except those in the visible part; [these are not visible from 
+outside. Visible and private parts are defined only for these kinds of 
+entities: callable entities, other program units, and composite types.] 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted"><A NAME="I3346"></A>The visible part of a view 
+of a callable entity is its profile.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted"><A NAME="I3347"></A>The visible part of a composite 
+type other than a task or protected type consists of the declarations 
+of all components declared [(explicitly or implicitly)] within the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0020">type_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted"><A NAME="I3348"></A>The visible part of a generic 
+unit includes the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0239">generic_formal_part</A></SPAN>. 
+For a generic package, it also includes the first list of <SPAN Class="swiss"><A HREF="AA-3-11.html#S0081">basic_declarative_item</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-7-1.html#S0162">package_specification</A></SPAN>. 
+For a generic subprogram, it also includes the profile.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Although there is no way to reference 
+anything but the formals from outside a generic unit, they are still 
+in the visible part in the sense that the corresponding declarations 
+in an instance can be referenced (at least in some cases). In other words, 
+these declarations have an effect on the outside world. The visible part 
+of a generic unit needs to be defined this way in order to properly support 
+the rule that makes a parent's private part invisible within a public 
+child's visible part.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The visible part of an 
+instance of a generic unit is as defined for packages and subprograms; 
+it is not defined in terms of the visible part of a generic unit.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">[The visible part of a package, task unit, or protected 
+unit consists of declarations in the program unit's declaration other 
+than those following the reserved word <B>private</B>, if any; see <A HREF="AA-7-1.html">7.1</A> 
+and <A HREF="AA-12-7.html">12.7</A> for packages, <A HREF="AA-9-1.html">9.1</A> 
+for task units, and <A HREF="AA-9-4.html">9.4</A> for protected units.] 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I3349"></A>The scope of a declaration always 
+contains the immediate scope of the declaration. In addition, for a given 
+declaration that occurs immediately within the visible part of an outer 
+declaration, or is a public child of an outer declaration, the scope 
+of the given declaration extends to the end of the scope of the outer 
+declaration, except that the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN> 
+includes only its semantic dependents.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note the recursion. If 
+a declaration appears in the visible part of a library unit, its scope 
+extends to the end of the scope of the library unit, but since that only 
+includes dependents of the declaration of the library unit, the scope 
+of the inner declaration also only includes those dependents. If X renames 
+library package P, which has a child Q, a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+mentioning P.Q is necessary to be able to refer to X.Q, even if P.Q is 
+visible at the place where X is declared.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I3350"></A>The immediate scope of a declaration 
+is also the immediate scope of the entity or view declared by the declaration. 
+<A NAME="I3351"></A>Similarly, the scope of a declaration is also the 
+scope of the entity or view declared by the declaration.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>The rule for immediate scope implies the following:&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="SmallBulleted">If the declaration is that of a library unit, 
+then the immediate scope includes the declarative region of the declaration 
+itself, but not other places, unless they are within the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+that mentions the library unit.</div>
+<div class="paranum"><a name="p11.c">11.c</a></div>
+<div class="SmallBulleted-NoPrefix">It is necessary to attach the semantics 
+of <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>s 
+to [immediate] scopes (as opposed to visibility), in order for various 
+rules to work properly. A library unit should hide a homographic implicit 
+declaration that appears in its parent, but only within the scope of 
+a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+that mentions the library unit. Otherwise, we would violate the &quot;legality 
+determinable via semantic dependences&quot; rule of <A HREF="AA-10.html">10</A>, 
+&ldquo;<A HREF="AA-10.html">Program Structure and Compilation Issues</A>&rdquo;. 
+The declaration of a library unit should be allowed to be a homograph 
+of an explicit declaration in its parent's body, so long as that body 
+does not mention the library unit in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>.</div>
+<div class="paranum"><a name="p11.d">11.d</a></div>
+<div class="SmallBulleted-NoPrefix">This means that one cannot denote 
+the declaration of the library unit, but one might still be able to denote 
+the library unit via another view.</div>
+<div class="paranum"><a name="p11.e">11.e</a></div>
+<div class="SmallBulleted-NoPrefix">A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+does not make the declaration of a library unit visible; the lack of 
+a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+prevents it from being visible. Even if a library unit is mentioned in 
+a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>, 
+its declaration can still be hidden.</div>
+<div class="paranum"><a name="p11.f">11.f</a></div>
+<div class="SmallBulleted">The completion of the declaration of a library 
+unit (assuming that's also a declaration) is not visible, neither directly 
+nor by selection, outside that completion.</div>
+<div class="paranum"><a name="p11.g">11.g</a></div>
+<div class="SmallBulleted">The immediate scope of a declaration immediately 
+within the body of a library unit does not include any child of that 
+library unit.</div>
+<div class="paranum"><a name="p11.h">11.h</a></div>
+<div class="SmallBulleted-NoPrefix">This is needed to prevent children 
+from looking inside their parent's body. The children are in the declarative 
+region of the parent, and they might be after the parent's body. Therefore, 
+the scope of a declaration that occurs immediately within the body might 
+include some children.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">4&nbsp;&nbsp;There are notations for denoting visible 
+declarations that are not directly visible. For example, <SPAN Class="swiss"><A HREF="AA-6-1.html#S0152">parameter_specification</A></SPAN>s 
+are in the visible part of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0141">subprogram_declaration</A></SPAN> 
+so that they can be used in named-notation calls appearing outside the 
+called subprogram. For another example, declarations of the visible part 
+of a package can be denoted by expanded names appearing outside the package, 
+and can be made directly visible by a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>There are some obscure 
+involving generics cases in which there is no such notation. See Section 
+<A HREF="AA-12.html">12</A>.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p12.b">12.b</a></div>
+<div class="Annotations"><A NAME="I3352"></A>The fact that the immediate 
+scope of an overloadable declaration does not include its profile is 
+new to Ada 95. It replaces RM83-8.3(16), which said that within a subprogram 
+specification and within the formal part of an entry declaration or accept 
+statement, all declarations with the same designator as the subprogram 
+or entry were hidden from all visibility. The RM83-8.3(16) rule seemed 
+to be overkill, and created both implementation difficulties and unnecessary 
+semantic complexity.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations">We no longer need to talk about the scope of 
+notations, <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-2-5.html#S0012">character_literal</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0147">operator_symbol</A></SPAN>s.</div>
+<div class="paranum"><a name="p12.d">12.d</a></div>
+<div class="Annotations">The notion of &quot;visible part&quot; has been 
+extended in Ada 95. The syntax of task and protected units now allows 
+private parts, thus requiring us to be able to talk about the visible 
+part as well. It was necessary to extend the concept to subprograms and 
+to generic units, in order for the visibility rules related to child 
+library units to work properly. It was necessary to define the concept 
+separately for generic formal packages, since their visible part is slightly 
+different from that of a normal package. Extending the concept to composite 
+types made the definition of scope slightly simpler. We define visible 
+part for some things elsewhere, since it makes a big difference to the 
+user for those things. For composite types and subprograms, however, 
+the concept is used only in arcane visibility rules, so we localize it 
+to this clause.</div>
+<div class="paranum"><a name="p12.e">12.e</a></div>
+<div class="Annotations">In Ada 83, the semantics of <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>s 
+was described in terms of visibility. It is now described in terms of 
+[immediate] scope.</div>
+<div class="paranum"><a name="p12.f">12.f</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">We have clarified 
+that the following is illegal (where Q and R are library units):&nbsp;</div>
+<div class="paranum"><a name="p12.g">12.g</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+<B>end</B>&nbsp;Q;</div>
+<div class="paranum"><a name="p12.h">12.h</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;R&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;X&nbsp;<B>renames</B>&nbsp;Standard;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;X.Q.I&nbsp;:=&nbsp;17;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+<B>end</B>&nbsp;R;</div>
+<div class="paranum"><a name="p12.i">12.i</a></div>
+<div class="Annotations">even though Q is declared in the declarative 
+region of Standard, because R does not mention Q in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

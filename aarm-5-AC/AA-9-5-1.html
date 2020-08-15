@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Protected Subprograms and Protected Actions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.5.1 Protected Subprograms and Protected Actions</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I4623"></A><A NAME="I4624"></A><A NAME="I4625"></A>A 
+<I>protected subprogram</I> is a subprogram declared immediately within 
+a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN>. 
+Protected procedures provide exclusive read-write access to the data 
+of a protected object; protected functions provide concurrent read-only 
+access to the data.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A subprogram declared immediately 
+within a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN> 
+is not a protected subprogram; it is an intrinsic subprogram. See <A HREF="AA-6-3-1.html">6.3.1</A>, 
+&ldquo;<A HREF="AA-6-3-1.html">Conformance Rules</A>&rdquo;.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">[Within the body of a protected function (or a function 
+declared immediately within a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>), 
+the current instance of the enclosing protected unit is defined to be 
+a constant (that is, its subcomponents may be read but not updated). 
+Within the body of a protected procedure (or a procedure declared immediately 
+within a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>), 
+and within an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
+the current instance is defined to be a variable (updating is permitted).] 
+</div>
+<div class="paranum"><a name="p2.a.1">2.a.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0120-1.TXT">AI05-0120-1</A></I>} 
+<span class="insert3">All constant views are defined in <A HREF="AA-3-3.html">3.3</A>, 
+&ldquo;<A HREF="AA-3-3.html">Objects and Named Numbers</A>&rdquo;, anything 
+not named there is a variable view.</span>&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The current instance is 
+like an implicit parameter, of mode <B>in</B> for a protected function, 
+and of mode <B>in out</B> for a protected procedure (or protected entry). 
+</div>
+<div class="paranum"><a name="p2.1">2.1/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+<span class="insert4">For a type declared by a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0213">protected_type_declaration</A></SPAN> 
+or for the anonymous type of an object declared by a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN>, 
+the following language-defined type-related representation aspect may 
+be specified:</span></div>
+<div class="paranum"><a name="p2.2">2.2/4</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert4">Exclusive_Functions</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert4">The type of aspect Exclusive_Functions is Boolean. 
+If not specified (including by inheritance), the aspect is False.<A NAME="I4626"></A><A NAME="I4627"></A></span></div>
+<div class="paranum"><a name="p2.3">2.3/4</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert4"></span></div><div class="WideHanging-Body">
+<span class="insert4">A value of True for this aspect indicates that 
+protected functions behave in the same way as protected procedures with 
+respect to mutual exclusion and queue servicing (see below).</span></div>
+<div class="paranum"><a name="p2.a.1">2.a.1/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert4"><B>Exclusive_Functions:&nbsp;</B></span><span class="insert4">Specifies 
+mutual exclusion behavior of protected functions in a protected type.</span></div>
+<div class="paranum"><a name="p2.4">2.4/4</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+<span class="insert4">A protected procedure or entry is an <I>exclusive</I> 
+protected operation.<A NAME="I4628"></A> A protected function of a protected 
+type <I>P</I> is an exclusive protected operation if the Exclusive_Functions 
+aspect of <I>P</I> is True.</span></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I4629"></A>For the execution of a call on 
+a protected subprogram, the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+and of the parameter associations, and any assigning back of <B>in out</B> 
+or <B>out</B> parameters, proceeds as for a normal subprogram call (see 
+<A HREF="AA-6-4.html">6.4</A>). If the call is an internal call (see 
+<A HREF="AA-9-5.html">9.5</A>), the body of the subprogram is executed 
+as for a normal subprogram call. If the call is an external call, then 
+the body of the subprogram is executed as part of a new <I>protected 
+action</I> on the target protected object; the protected action completes 
+after the body of the subprogram is executed. [A protected action can 
+also be started by an entry call (see <A HREF="AA-9-5-3.html">9.5.3</A>).]</div>
+<div class="paranum"><a name="p4">4/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+<A NAME="I4630"></A>A new protected action is not started on a protected 
+object while another protected action on the same protected object is 
+underway, unless both actions are the result of a call on a <span class="insert4">nonexclusive 
+</span>protected function. This rule is expressible in terms of the execution 
+resource associated with the protected object:&nbsp;</div>
+<div class="paranum"><a name="p5">5/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+<A NAME="I4631"></A><A NAME="I4632"></A><I>Starting</I> a protected action 
+on a protected object corresponds to <I>acquiring</I> the execution resource 
+associated with the protected object, either for <span class="insert4">exclusive 
+read-write</span><span class="delete4">&nbsp;concurrent read-only</span> access 
+if the protected action is for a call on <span class="insert4">an exclusive 
+protected operation</span><span class="delete4">&nbsp;a protected function</span>, 
+or for <span class="insert4">concurrent read-only</span><span class="delete4">&nbsp;exclusive 
+read-write</span> access otherwise;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted"><A NAME="I4633"></A><A NAME="I4634"></A><I>Completing</I> 
+the protected action corresponds to <I>releasing</I> the associated execution 
+resource.&nbsp;</div>
+<div class="paranum"><a name="p7">7/4</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+[After performing an <span class="insert4">exclusive protected&nbsp;</span>operation 
+on a protected object<span class="delete4">&nbsp;other than a call on a protected 
+function</span>, but prior to completing the associated protected action, 
+the entry queues (if any) of the protected object are serviced (see <A HREF="AA-9-5-3.html">9.5.3</A>).] 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4635"></A>During 
+a protected action, it is a bounded error to invoke an operation that 
+is <I>potentially blocking</I>. <A NAME="I4636"></A><A NAME="I4637"></A>The 
+following are defined to be potentially blocking operations:&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Some of these operations are 
+not directly blocking. However, they are still treated as bounded errors 
+during a protected action, because allowing them might impose an undesirable 
+implementation burden.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0228">entry_call_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-8.html#S0248">abort_statement</A></SPAN>;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">task creation or activation;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">an external call on a protected subprogram (or 
+an external requeue) with the same target object as that of the protected 
+action;&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is really a deadlocking 
+call, rather than a blocking call, but we include it in this list for 
+simplicity.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">a call on a subprogram whose body contains a potentially 
+blocking operation.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This allows an implementation 
+to check and raise Program_Error as soon as a subprogram is called, rather 
+than waiting to find out whether it actually reaches the potentially 
+blocking operation. This in turn allows the potentially blocking operation 
+check to be performed prior to run time in some environments.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I4638"></A>If the bounded error is detected, 
+Program_Error is raised. If not detected, the bounded error might result 
+in deadlock or a (nested) protected action on the same target object.</div>
+<div class="paranum"><a name="p17.a">17.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
+<span class="insert2">By &ldquo;nested protected action&rdquo;, we mean 
+that an additional protected action can be started by another task on 
+the same protected object. This means that mutual exclusion may be broken 
+in this bounded error case. A way to ensure that this does not happen 
+is to use pragma Detect_Blocking (see <A HREF="AA-H-5.html">H.5</A>).</span> 
+</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">Certain language-defined subprograms are potentially 
+blocking. In particular, the subprograms of the language-defined input-output 
+packages that manipulate files (implicitly or explicitly) are potentially 
+blocking. Other potentially blocking subprograms are identified where 
+they are defined. When not specified as potentially blocking, a language-defined 
+subprogram is nonblocking.&nbsp;</div>
+<div class="paranum"><a name="p18.a">18.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00178.TXT">AI95-00178-01</A></I>} 
+<span class="insert2">Any subprogram in a language-defined input-output 
+package that has a file parameter or result or operates on a default 
+file is considered to manipulate a file. An instance of a language-defined 
+input-output generic package provides subprograms that are covered by 
+this rule. The only subprograms in language-defined input-output packages 
+not covered by this rule (and thus not potentially blocking) are the 
+Get and Put routines that take string parameters defined in the packages 
+nested in Text_IO.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Notes">19&nbsp;&nbsp;If two tasks both try to start a protected 
+action on a protected object, and at most one is calling a protected 
+function, then only one of the tasks can proceed. Although the other 
+task cannot proceed, it is not considered blocked, and it might be consuming 
+processing resources while it awaits its turn. There is no language-defined 
+ordering or queuing presumed for tasks competing to start a protected 
+action &mdash; on a multiprocessor such tasks might use busy-waiting; 
+for monoprocessor considerations, see <A HREF="AA-D-3.html">D.3</A>, 
+&ldquo;<A HREF="AA-D-3.html">Priority Ceiling Locking</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p19.a">19.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The intended implementation 
+on a multi-processor is in terms of &ldquo;spin locks&rdquo; &mdash; 
+the waiting task will spin.&nbsp;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Notes">20&nbsp;&nbsp;The body of a protected unit may contain 
+declarations and bodies for local subprograms. These are not visible 
+outside the protected unit.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">21&nbsp;&nbsp;The body of a protected function can 
+contain internal calls on other protected functions, but not protected 
+procedures, because the current instance is a constant. On the other 
+hand, the body of a protected procedure can contain internal calls on 
+both protected functions and procedures.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">22&nbsp;&nbsp;From within a protected action, an internal 
+call on a protected subprogram, or an external call on a protected subprogram 
+with a different target object is not considered a potentially blocking 
+operation.&nbsp;</div>
+<div class="paranum"><a name="p22.a">22.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is because a task is not 
+considered blocked while attempting to acquire the execution resource 
+associated with a protected object. The acquisition of such a resource 
+is rather considered part of the normal competition for execution resources 
+between the various tasks that are ready. External calls that turn out 
+to be on the same target object are considered potentially blocking, 
+since they can deadlock the task indefinitely.&nbsp;</div>
+<div class="paranum"><a name="p22.1">22.1/2</a></div>
+<div class="Notes">23&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
+<span class="insert2">The <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Detect_Blocking may be used to ensure that all executions of potentially 
+blocking operations during a protected action raise Program_Error. See 
+<A HREF="AA-H-5.html">H.5</A>.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of protected 
+subprogram calls (see <A HREF="AA-9-4.html">9.4</A>):</I>&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples">Shared_Array.Set_Component(N,&nbsp;E);<BR>
+E&nbsp;:=&nbsp;Shared_Array.Component(M);<BR>
+Control.Release;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p24.a">24.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
+<span class="insert2">Added a note pointing out the existence of <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Detect_Blocking. This pragma can be used to ensure portable (somewhat 
+pessimistic) behavior of protected actions by converting the Bounded 
+Error into a required check.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p24.b">24.b/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+<span class="insert4"><A NAME="I4639"></A><B>Corrigendum:</B> Aspect 
+Exclusive_Functions is new. The term &ldquo;exclusive protected operations&rdquo; 
+is new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

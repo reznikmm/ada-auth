@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Context Clauses - With Clauses</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>10.1.2 Context Clauses - With Clauses</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN> 
+is used to specify the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN>s 
+whose names are needed within a compilation unit.]&nbsp;</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><A NAME="I3902"></A>The reader should be able 
+to understand a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN> 
+without looking ahead. Similarly, when compiling a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN>, 
+the compiler should not have to look ahead at subsequent <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0222">context_item</A></SPAN>s, 
+nor at the compilation unit to which the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN> 
+is attached. (We have not completely achieved this.)</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I3903"></A><A NAME="S0221"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I3904"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0222">context_item</A></SPAN>}</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I3905"></A><A NAME="S0222"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3906"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I3907"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">with_clause</SPAN><A NAME="I3908"></A><A NAME="S0223"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>with</B>&nbsp;<I>library_unit_</I><A NAME="I3909"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I3910"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>};</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I3911"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+that appears on a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0217">library_unit_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0218">library_unit_renaming_declaration</A></SPAN> 
+consists of the entire declarative region of the declaration[, which 
+includes all children and subunits]. The scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+that appears on a body consists of the body[, which includes all subunits]. 
+</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Suppose a  <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+of a public library unit mentions one of its private siblings. (This 
+is only allowed on the body of the public library unit.) We considered 
+making the scope of that <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+not include the visible part of the public library unit. (This would 
+only matter for a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN>, 
+since those are the only kinds of body that have a visible part, and 
+only if the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+completes a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0141">subprogram_declaration</A></SPAN>, 
+since otherwise the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+would be illegal.) We did not put in such a rule for two reasons: (1) 
+It would complicate the wording of the rules, because we would have to 
+split each <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+into pieces, in order to correctly handle &ldquo;<B>with</B> P, Q;&rdquo; 
+where P is public and Q is private. (2) The conformance rules prevent 
+any problems. It doesn't matter if a type name in the spec of the body 
+denotes the completion of a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0164">private_type_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+also affects visibility within subsequent <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+of the same <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN>, 
+even though those are not in the scope of the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I3912"></A><A NAME="I3913"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN> 
+is <I>mentioned</I> in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+if it is denoted by a <I>library_unit_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0086">prefix</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">With_clause</A></SPAN>s 
+control the visibility of declarations or renamings of library units. 
+Mentioning a root library unit in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+makes its declaration directly visible. Mentioning a nonroot library 
+unit makes its declaration visible. See Section <A HREF="AA-8.html">8</A> 
+for details.</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations">Note that this rule implies that &ldquo;<B>with</B> 
+A.B.C;&rdquo; is equivalent to &ldquo;<B>with</B> A, A.B, A.B.C;&rdquo; 
+The reason for making a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+apply to all the ancestor units is to avoid &ldquo;visibility holes&rdquo; 
+&mdash; situations in which an inner program unit is visible while an 
+outer one is not. Visibility holes would cause semantic complexity and 
+implementation difficulty.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">[Outside its own declarative region, the declaration 
+or renaming of a library unit can be visible only within the scope of 
+a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+that mentions it. The visibility of the declaration or renaming of a 
+library unit otherwise follows from its placement in the environment.] 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+of a given <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0215">compilation_unit</A></SPAN> 
+mentions a private child of some library unit, then the given <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0215">compilation_unit</A></SPAN> 
+shall be either the declaration of a private descendant of that library 
+unit or the body or subunit of a [(public or private)] descendant of 
+that library unit.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The purpose of this rule is to 
+prevent a private child from being visible (or even semantically depended-on) 
+from outside the subsystem rooted at its parent.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This rule violates the one-pass 
+<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN>s 
+Language Design Principle. We rationalize this by saying that at least 
+that Language Design Principle works for legal compilation units.</div>
+<div class="paranum"><a name="p8.c">8.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Example:&nbsp;</div>
+<div class="paranum"><a name="p8.d">8.d</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;A&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A;</div>
+<div class="paranum"><a name="p8.e">8.e</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;A.B&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A.B;</div>
+<div class="paranum"><a name="p8.f">8.f</a></div>
+<div class="SmallExamples"><B>private</B>&nbsp;<B>package</B>&nbsp;A.B.C&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A.B.C;</div>
+<div class="paranum"><a name="p8.g">8.g</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;A.B.C.D&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A.B.C.D;</div>
+<div class="paranum"><a name="p8.h">8.h</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;A.B.C;&nbsp;--&nbsp;<SPAN Class="roman"><I>(1)</I></SPAN><BR>
+<B>private</B>&nbsp;<B>package</B>&nbsp;A.B.X&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A.B.X;</div>
+<div class="paranum"><a name="p8.i">8.i</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;A.B.Y&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A.B.Y;</div>
+<div class="paranum"><a name="p8.j">8.j</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;A.B.C;&nbsp;--&nbsp;<SPAN Class="roman"><I>(2)</I></SPAN><BR>
+<B>package</B>&nbsp;<B>body</B>&nbsp;A.B.Y&nbsp;<B>is</B><BR>
+<B>end</B>&nbsp;A.B.Y;</div>
+<div class="paranum"><a name="p8.k">8.k</a></div>
+<div class="Annotations">(1) is OK because it's a private child of A.B 
+&mdash; it would be illegal if we made A.B.X a public child of A.B. (2) 
+is OK because it's the body of a child of A.B. It would be illegal to 
+say &ldquo;<B>with</B> A.B.C;&rdquo; on any <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN> 
+whose name does not start with &ldquo;A.B&rdquo;. Note that mentioning 
+A.B.C.D in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+automatically mentions A.B.C as well, so &ldquo;<B>with</B> A.B.C.D;&rdquo; 
+is illegal in the same places as &ldquo;<B>with</B> A.B.C;&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p8.l">8.l</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>For the purposes of this 
+rule, if a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+has no preceding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0141">subprogram_declaration</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+should be considered a declaration and not a body. Thus, it is illegal 
+for such a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+to mention one of its siblings in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+if the sibling is a private library unit.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">3&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN> 
+mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+of a compilation unit is visible within the compilation unit and hence 
+acts just like an ordinary declaration. Thus, within a compilation unit 
+that mentions its declaration, the name of a library package can be given 
+in <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN>s 
+and can be used to form expanded names, a library subprogram can be called, 
+and instances of a generic library unit can be declared. If a child of 
+a parent generic package is mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>, 
+then the corresponding declaration nested within each visible instance 
+is visible within the compilation unit.</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The rules given for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>s 
+are such that the same effect is obtained whether the name of a library 
+unit is mentioned once or more than once by the applicable <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>s, 
+or even within a given <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>.</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations">If a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+mentions a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0218">library_unit_renaming_declaration</A></SPAN>, 
+it only &ldquo;mentions&rdquo; the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0086">prefix</A></SPAN>es 
+appearing explicitly in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+(and the renamed view itself); the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+is not defined to mention the ancestors of the renamed entity. Thus, 
+if X renames Y.Z, then &ldquo;with X;&rdquo; does not make the declarations 
+of Y or Z visible. Note that this does not cause the dreaded visibility 
+holes mentioned above.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p9.c">9.c</a></div>
+<div class="Annotations"><A NAME="I3914"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+is modified to allow expanded name notation.</div>
+<div class="paranum"><a name="p9.d">9.d</a></div>
+<div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN> 
+may be for a package (or type) nested in a library package.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p9.e">9.e</a></div>
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0221">context_clause</A></SPAN> 
+is modified to more closely reflect the semantics. The Ada 83 syntax 
+rule implies that the <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN>s 
+that appear immediately after a particular <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+are somehow attached to that <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>, 
+which is not true. The new syntax allows a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN> 
+to appear first, but that is prevented by a textual rule that already 
+exists in Ada 83.</div>
+<div class="paranum"><a name="p9.f">9.f</a></div>
+<div class="Annotations">The concept of &ldquo;scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>&rdquo; 
+(which is a region of text) replaces RM83's notion of &ldquo;apply to&rdquo; 
+(a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+applies to a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN>) 
+The visibility rules are interested in a region of text, not in a set 
+of compilation units.</div>
+<div class="paranum"><a name="p9.g">9.g</a></div>
+<div class="Annotations">No need to define &ldquo;apply to&rdquo; for 
+<SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN>s. 
+Their semantics are fully covered by the &ldquo;scope (of a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0166">use_clause</A></SPAN>)&rdquo; 
+definition in <A HREF="AA-8-4.html">8.4</A>.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

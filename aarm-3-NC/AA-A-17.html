@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Environment_Variables</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-16-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.17 The Package Environment_Variables</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+<A NAME="I7208"></A>The package Environment_Variables allows a program 
+to read or modify environment variables. Environment variables are name-value 
+pairs, where both the name and value are strings. The definition of what 
+constitutes an <I>environment variable</I>, and the meaning of the name 
+and value, are implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The definition 
+and meaning of an environment variable.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+The library package Environment_Variables has the following declaration: 
+</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Environment_Variables&nbsp;<B>is</B><A NAME="I7209"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Environment_Variables);</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7210"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p4.1">4.1/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0285-1.TXT">AI05-0285-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7211"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Default&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7212"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7213"></A>Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7214"></A>Clear&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7215"></A>Clear;</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7216"></A>Iterate<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Name,&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String));</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Examples" style="margin-bottom: 0.9em"><B>end</B>&nbsp;Ada.Environment_Variables;</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><B>function</B>&nbsp;Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+If the external execution environment supports environment variables, 
+then Value returns the value of the environment variable with the given 
+name. If no environment variable with the given name exists, then Constraint_Error 
+is propagated. If the execution environment does not support environment 
+variables, then Program_Error is propagated.</div>
+<div class="paranum"><a name="p11.1">11.1/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Default&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p11.2">11.2/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0285-1.TXT">AI05-0285-1</A></I>} 
+If the external execution environment supports environment variables 
+and an environment variable with the given name currently exists, then 
+Value returns its value; otherwise, it returns Default.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Examples"><B>function</B>&nbsp;Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If the external execution environment supports environment variables 
+and an environment variable with the given name currently exists, then 
+Exists returns True; otherwise, it returns False.</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If the external execution environment supports environment variables, 
+then Set first clears any existing environment variable with the given 
+name, and then defines a single new environment variable with the given 
+name and value. Otherwise, Program_Error is propagated.</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Indented2">If implementation-defined circumstances prohibit 
+the definition of an environment variable with the given name and value, 
+then Constraint_Error is propagated.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The circumstances 
+where an environment variable cannot be defined.</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">It is implementation 
+defined whether there exist values for which the call Set(Name, Value) 
+has the same effect as Clear (Name).&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Environment names 
+for which Set has the effect of Clear.</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Clear&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+If the external execution environment supports environment variables, 
+then Clear deletes all existing environment variables with the given 
+name. Otherwise, Program_Error is propagated.</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Clear;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If the external execution environment supports environment variables, 
+then Clear deletes all existing environment variables. Otherwise, Program_Error 
+is propagated.</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<B>procedure</B>&nbsp;Iterate<BR>
+&nbsp;&nbsp;&nbsp;(Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Name,&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String));</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If the external execution environment supports environment variables, 
+then Iterate calls the subprogram designated by Process for each existing 
+environment variable, passing the name and value of that environment 
+variable. Otherwise, Program_Error is propagated.</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Indented2">If several environment variables exist that have 
+the same name, Process is called once for each such variable.</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+<A NAME="I7217"></A>It is a bounded error to call Value if more than 
+one environment variable exists with the given name; the possible outcomes 
+are that:&nbsp;</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Bulleted">one of the values is returned, and that same value 
+is returned in subsequent calls in the absence of changes to the environment; 
+or</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Bulleted">Program_Error is propagated.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+<A NAME="I7218"></A>Making calls to the procedures Set or Clear concurrently 
+with calls to any subprogram of package Environment_Variables, or to 
+any instantiation of Iterate, results in erroneous execution.</div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Normal">Making calls to the procedures Set or Clear in the 
+actual subprogram corresponding to the Process parameter of Iterate results 
+in erroneous execution.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+An implementation shall document how the operations of this package behave 
+if environment variables are changed by external mechanisms (for instance, 
+calling operating system services).&nbsp;</div>
+<div class="paranum"><a name="p30.a">30.a/2</a></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>The behavior 
+of package Environment_Variables when environment variables are changed 
+by external mechanisms.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+An implementation running on a system that does not support environment 
+variables is permitted to define the operations of package Environment_Variables 
+with the semantics corresponding to the case where the external execution 
+environment does support environment variables. In this case, it shall 
+provide a mechanism to initialize a nonempty set of environment variables 
+prior to the execution of a partition.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+If the execution environment supports subprocesses, the currently defined 
+environment variables should be used to initialize the environment variables 
+of a subprocess.&nbsp;</div>
+<div class="paranum"><a name="p32.a">32.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If the execution 
+environment supports subprocesses, the current environment variables 
+should be used to initialize the environment variables of a subprocess.</div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Normal">Changes to the environment variables made outside 
+the control of this package should be reflected immediately in the effect 
+of the operations of this package. Changes to the environment variables 
+made using this package should be reflected immediately in the external 
+execution environment. This package should not perform any buffering 
+of the environment variables.&nbsp;</div>
+<div class="paranum"><a name="p33.a">33.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Changes to the 
+environment variables made outside the control of Environment_Variables 
+should be reflected immediately.</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p33.b">33.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00370.TXT">AI95-00370-01</A></I>} 
+<A NAME="I7219"></A>Package Environment_Variables is new.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p33.c">33.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0285-1.TXT">AI05-0285-1</A></I>} 
+<A NAME="I7220"></A>A new overloaded function Value is added to Environment_Variables. 
+If Environment_Variables is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+and an entity <I>E</I> with the name Value is defined in a package that 
+is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+the entity <I>E</I> may no longer be use-visible, resulting in errors. 
+This should be rare and is easily fixed if it does occur.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-16-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

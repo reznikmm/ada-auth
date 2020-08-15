@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Task Execution - Task Activation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.2 Task Execution - Task Activation</H1>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I4483"></A>The execution of a task of a 
+given task type consists of the execution of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">task_body</A></SPAN>. 
+<A NAME="I4484"></A><A NAME="I4485"></A><A NAME="I4486"></A><A NAME="I4487"></A>The 
+initial part of this execution is called the <I>activation</I> of the 
+task; it consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">task_body</A></SPAN>. 
+<A NAME="I4488"></A>Should an exception be propagated by the elaboration 
+of its <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+the activation of the task is defined to have <I>failed</I>, and it becomes 
+a completed task.</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+A task object (which represents one task) can be <span class="insert2">a 
+part of a stand-alone object, of an object created by</span><span class="delete2">&nbsp;created 
+either as part of the elaboration of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+occurring immediately within some declarative region, or as part of the 
+evaluation of</span> an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN><span class="insert2">, 
+or of an anonymous object of a limited type, or a coextension of one 
+of these</span>. All tasks<span class="insert2">&nbsp;that are part or coextensions 
+of any of the stand-alone objects</span> created by the elaboration of 
+<SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s<span class="insert2">&nbsp;(or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0278">generic_association</A></SPAN>s 
+of formal objects of mode <B>in</B>)</span> of a single declarative region<span class="delete2">&nbsp;(including subcomponents of the declared objects)</span> are activated 
+together. <span class="insert2">All tasks that are part or coextensions 
+of a single object that is not a stand-alone object are activated together.</span><span class="delete2">&nbsp;Similarly, 
+all tasks created by the evaluation of a single <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+are activated together. The activation of a task is associated with the 
+innermost <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+that is responsible for its creation.</span>&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The initialization of an 
+<SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+can indirectly include the creation of other objects that contain tasks. 
+For example, the default expression for a subcomponent of an object created 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+might call a function that evaluates a completely different <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>. 
+Tasks created by the two allocators are <I>not</I> activated together. 
+</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+For <span class="insert2">the&nbsp;</span>tasks<span class="delete2">&nbsp;created 
+by the elaboration of <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s</span> 
+of a given declarative region, the activations are initiated within the 
+context of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+(and its associated <SPAN Class="swiss"><A HREF="AA-11-2.html#S0266">exception_handler</A></SPAN>s 
+if any &mdash; see <A HREF="AA-11-2.html">11.2</A>), just prior to executing 
+the statements of the <span class="insert2"><SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN></span><span class="delete2"><SPAN Class="swiss">&nbsp;_sequence</SPAN></span>. 
+[For a package without an explicit body or an explicit <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>, 
+an implicit body or an implicit <SPAN Class="swiss"><A HREF="AA-5-1.html#S0149">null_statement</A></SPAN> 
+is assumed, as defined in <A HREF="AA-7-2.html">7.2</A>.]&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If Tasking_Error is raised, 
+it can be handled by handlers of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+For tasks <span class="insert2">that are part or coextensions of a single 
+object that is not a stand-alone object, activations are initiated after 
+completing any initialization of the outermost object enclosing these 
+tasks, prior to performing any other operation on the outermost object. 
+In particular, for tasks that are part or coextensions of the object 
+</span>created by the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>, 
+the activations are initiated as the last step of evaluating the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>, 
+<span class="delete2">after completing any initialization for the object 
+created by the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>, 
+and&nbsp;</span>prior to returning the new access value.<span class="insert2">&nbsp;For tasks that are part or coextensions of an object that is the result 
+of a function call, the activations are not initiated until after the 
+function returns.</span></div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">The intent is that &ldquo;temporary&rdquo; objects 
+with task parts (or coextensions) are treated similarly to an object 
+created by an allocator. The &ldquo;whole&rdquo; object is initialized, 
+and then all of the task parts (including the coextensions) are activated 
+together. Each such &ldquo;whole&rdquo; object has its own task activation 
+sequence, involving the activating task being suspended until all the 
+new tasks complete their activation.</span>&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I4489"></A><A NAME="I4490"></A>The task 
+that created the new tasks and initiated their activations (the <I>activator</I>) 
+is blocked until all of these activations complete (successfully or not). 
+<A NAME="I4491"></A>Once all of these activations are complete, if the 
+activation of any of the tasks has failed [(due to the propagation of 
+an exception)], Tasking_Error is raised in the activator, at the place 
+at which it initiated the activations. Otherwise, the activator proceeds 
+with its execution normally. Any tasks that are aborted prior to completing 
+their activation are ignored when determining whether to raise Tasking_Error. 
+</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that a task created 
+by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+does not necessarily depend on its activator; in such a case the activator's 
+termination can precede the termination of the newly created task.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Tasking_Error is raised only 
+once, even if two or more of the tasks being activated fail their activation. 
+</div>
+<div class="paranum"><a name="p5.c">5.c/2</a></div>
+<div class="Annotations"><span class="insert2"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00265.TXT">AI95-00265-01</A></I>} 
+<span class="insert2">The pragma Partition_Elaboration_Policy (see <A HREF="AA-H-6.html">H.6</A>) 
+can be used to defer task activation to a later point, thus changing 
+many of these rules.</span>&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0045-1.TXT">AI05-0045-1</A></I>} 
+<span class="insert3">If the master that directly encloses the point 
+where the activation of a task <I>T</I> would be initiated, completes 
+before the activation of <I>T</I> is initiated, <I>T</I> becomes terminated 
+and is never activated. Furthermore, if a return statement is left such 
+that the return object is not returned to the caller, any task that was 
+created as a part of the return object or one of its coextensions immediately 
+becomes</span><span class="delete3">&nbsp;Should the task that created the 
+new tasks never reach the point where it would initiate the activations 
+(due to an abort or the raising of an exception), the newly created tasks 
+become</span> terminated <span class="insert3">and is</span><span class="delete3">&nbsp;are</span> 
+never activated.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0045-1.TXT">AI05-0045-1</A></I>} 
+<span class="insert3">The first case can only happen if the activation 
+point of T is not reached due to an exception being raised or a task 
+or statement being aborted. Note that this is exclusive; if the master 
+completes normally and starts finalization, we're already past the activation 
+point.</span></div>
+<div class="paranum"><a name="p6.b">6.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0045-1.TXT">AI05-0045-1</A></I>} 
+<span class="insert3">The second case can happen with an exception being 
+raised in a return statement, by an exit or goto from an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">extended_return_statement</A></SPAN>, 
+or by a return statement being aborted. Any tasks created for the return 
+object of such a return statement are never activated.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Notes">5&nbsp;&nbsp;An entry of a task can be called before 
+the task has been activated.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">6&nbsp;&nbsp;If several tasks are activated together, 
+the execution of any of these tasks need not await the end of the activation 
+of the other tasks.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">7&nbsp;&nbsp;A task can become completed during its 
+activation either because of an exception or because it is aborted (see 
+<A HREF="AA-9-8.html">9.8</A>).</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of task 
+activation:</I>&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;A,&nbsp;B&nbsp;:&nbsp;Server;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;elaborate&nbsp;the&nbsp;task&nbsp;objects&nbsp;A,&nbsp;B</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Server;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;elaborate&nbsp;the&nbsp;task&nbsp;object&nbsp;C</I></SPAN><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;the&nbsp;tasks&nbsp;A,&nbsp;B,&nbsp;C&nbsp;are&nbsp;activated&nbsp;together&nbsp;before&nbsp;the&nbsp;first&nbsp;statement</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations">We have replaced the term <I>suspended</I> with 
+<I>blocked</I>, since we didn't want to consider a task blocked when 
+it was simply competing for execution resources. &quot;Suspended&quot; 
+is sometimes used more generally to refer to tasks that are not actually 
+running on some processor, due to the lack of resources.</div>
+<div class="paranum"><a name="p11.b">11.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+has been rewritten in an attempt to improve presentation.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p11.c">11.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">Adjusted the wording for activating tasks to handle 
+the case of anonymous function return objects. This is critical; we don't 
+want to be waiting for the tasks in a return object when we exit the 
+function normally.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p11.d">11.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0045-1.TXT">AI05-0045-1</A></I>} 
+<span class="insert3"><B>Correction:</B> Corrected the wording that handles 
+tasks that are never activated to ensure that no lookahead is implied 
+and to make it clear that tasks created by return statements that never 
+return are never activated.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

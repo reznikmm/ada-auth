@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Language-Defined Pragmas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-K-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-M.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Annex L</H1>
+<H2>(informative)</H2>
+<H1>Language-Defined Pragmas</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I9092"></A>This Annex summarizes the definitions 
+given elsewhere of the language-defined pragmas.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9093"></A><A NAME="I9094"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I9095"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-E-2-3.html">E.2.3</A>.</div>
+<div class="paranum"><a name="p2.1">2.1/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9096"></A><A NAME="I9097"></A>Assert([Check 
+=&gt;] <I>boolean_</I><A NAME="I9098"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>[, 
+[Message =&gt;] <I>string_</I><A NAME="I9099"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]);</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-11-4-2.html">11.4.2</A>.</span></div>
+<div class="paranum"><a name="p2.2">2.2/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9100"></A><A NAME="I9101"></A>Assertion_Policy(<I>policy_</I><A NAME="I9102"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-11-4-2.html">11.4.2</A>.</span></div>
+<div class="paranum"><a name="p2.3">2.3/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9103"></A><A NAME="I9104"></A>Assertion_Policy(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I9105"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I9106"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I9107"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I9108"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>});</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-11-4-2.html">11.4.2</A>.</span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9109"></A><A NAME="I9110"></A>Asynchronous(<A NAME="I9111"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-E-4-1.html">E.4.1</A>.</span></div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9112"></A><A NAME="I9113"></A>Asynchronous 
+(<A NAME="I9114"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-13.html">J.15.13</A>.</span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9115"></A><A NAME="I9116"></A>Atomic(<A NAME="I9117"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-C-6.html">C.6</A>.</span></div>
+<div class="paranum"><a name="p4.1">4.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9118"></A><A NAME="I9119"></A>Atomic 
+(<A NAME="I9120"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-8.html">J.15.8</A>.</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9121"></A><A NAME="I9122"></A>Atomic_Components(<I>array_</I><A NAME="I9123"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-C-6.html">C.6</A>.</span></div>
+<div class="paranum"><a name="p5.1">5.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9124"></A><A NAME="I9125"></A>Atomic_Components 
+(<I>array_</I><A NAME="I9126"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-8.html">J.15.8</A>.</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9127"></A><A NAME="I9128"></A>Attach_Handler(<I>handler_</I><A NAME="I9129"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
+<A NAME="I9130"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-C-3-1.html">C.3.1</A>.</span></div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9131"></A><A NAME="I9132"></A>Attach_Handler 
+(<I>handler_</I><A NAME="I9133"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
+<A NAME="I9134"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-7.html">J.15.7</A>.</span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9135"></A><A NAME="I9136"></A>Controlled(<I>first_subtype_</I><A NAME="I9137"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-13-11-3.html">13.11.3</A>.</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9138"></A><A NAME="I9139"></A>Convention([Convention 
+=&gt;] <I>convention_</I><A NAME="I9140"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>,[Entity 
+=&gt;] <A NAME="I9141"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-B-1.html">B.1</A>.</span></div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9142"></A><A NAME="I9143"></A>Convention([Convention 
+=&gt;] <I>convention_</I><A NAME="I9144"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>,[Entity 
+=&gt;] <A NAME="I9145"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-5.html">J.15.5</A>.</span></div>
+<div class="paranum"><a name="p8.2">8.2/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9146"></A><A NAME="I9147"></A>CPU 
+(<A NAME="I9148"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-9.html">J.15.9</A>.</span></div>
+<div class="paranum"><a name="p8.3">8.3/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9149"></A><A NAME="I9150"></A>Default_Storage_Pool 
+(<A NAME="I9151"></A><SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0319">storage_pool_indicator</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-13-11-3.html">13.11.3</A>.</span></div>
+<div class="paranum"><a name="p8.4">8.4/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9152"></A><A NAME="I9153"></A>Detect_Blocking;</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-H-5.html">H.5</A>.</span></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9154"></A><A NAME="I9155"></A>Discard_Names[([On 
+=&gt; ] <A NAME="I9156"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-C-5.html">C.5</A>.</div>
+<div class="paranum"><a name="p9.1">9.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9157"></A><A NAME="I9158"></A>Dispatching_Domain 
+(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-10.html">J.15.10</A>.</span></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9159"></A><A NAME="I9160"></A>Elaborate(<I>library_unit_</I><A NAME="I9161"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
+<I>library_unit_</I><A NAME="I9162"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>}); 
+&mdash; See <A HREF="RM-10-2-1.html">10.2.1</A>.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9163"></A><A NAME="I9164"></A>Elaborate_All(<I>library_unit_</I><A NAME="I9165"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
+<I>library_unit_</I><A NAME="I9166"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>}); 
+&mdash; See <A HREF="RM-10-2-1.html">10.2.1</A>.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9167"></A><A NAME="I9168"></A>Elaborate_Body[(<I>library_unit_</I><A NAME="I9169"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-10-2-1.html">10.2.1</A>.</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9170"></A><A NAME="I9171"></A>Export(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I9172"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I9173"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I9174"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I9175"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-B-1.html">B.1</A>.</span></div>
+<div class="paranum"><a name="p13.1">13.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9176"></A><A NAME="I9177"></A>Export(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I9178"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I9179"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>external_name_string_</I><A NAME="I9180"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]<BR>
+&nbsp;&nbsp;[, [Link_Name =&gt;] <I>link_name_string_</I><A NAME="I9181"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-5.html">J.15.5</A>.</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9182"></A><A NAME="I9183"></A>Import(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I9184"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I9185"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I9186"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I9187"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-B-1.html">B.1</A>.</span></div>
+<div class="paranum"><a name="p14.1">14.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9188"></A><A NAME="I9189"></A>Import(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I9190"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I9191"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>external_name_string_</I><A NAME="I9192"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]<BR>
+&nbsp;&nbsp;[, [Link_Name =&gt;] <I>link_name_string_</I><A NAME="I9193"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-5.html">J.15.5</A>.</span></div>
+<div class="paranum"><a name="p14.2">14.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9194"></A><A NAME="I9195"></A>Independent 
+(<I>component_</I><A NAME="I9196"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-8.html">J.15.8</A>.</span></div>
+<div class="paranum"><a name="p14.3">14.3/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9197"></A><A NAME="I9198"></A>Independent_Components 
+(<A NAME="I9199"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-8.html">J.15.8</A>.</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9200"></A><A NAME="I9201"></A>Inline(<A NAME="I9202"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+{, <A NAME="I9203"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-6-3-2.html">6.3.2</A>.</span></div>
+<div class="paranum"><a name="p15.1">15.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9204"></A><A NAME="I9205"></A>Inline 
+(<A NAME="I9206"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>{, 
+<A NAME="I9207"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>});</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-1.html">J.15.1</A>.</span></div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9208"></A><A NAME="I9209"></A>Inspection_Point[(<I>object_</I><A NAME="I9210"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+{, <I>object_</I><A NAME="I9211"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>})]; 
+&mdash; See <A HREF="RM-H-3-2.html">H.3.2</A>.</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9212"></A><A NAME="I9213"></A>Interrupt_Handler(<I>handler_</I><A NAME="I9214"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-C-3-1.html">C.3.1</A>.</span></div>
+<div class="paranum"><a name="p17.1">17.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9215"></A><A NAME="I9216"></A>Interrupt_Handler 
+(<I>handler_</I><A NAME="I9217"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-7.html">J.15.7</A>.</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9218"></A><A NAME="I9219"></A>Interrupt_Priority[(<A NAME="I9220"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>)</span>;]<span class="delete3">&nbsp;&mdash; See <A HREF="RM-D-1.html">D.1</A>.</span></div>
+<div class="paranum"><a name="p18.1">18.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9221"></A><A NAME="I9222"></A>Interrupt_Priority 
+[(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>)</span>;]<span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-11.html">J.15.11</A>.</span></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9223"></A><A NAME="I9224"></A>Linker_Options(<I>string_</I><A NAME="I9225"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>); 
+&mdash; See <A HREF="RM-B-1.html">B.1</A>.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9226"></A><A NAME="I9227"></A>List(<A NAME="I9228"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+&mdash; See <A HREF="RM-2-8.html">2.8</A>.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9229"></A><A NAME="I9230"></A>Locking_Policy(<I>policy_</I><A NAME="I9231"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+&mdash; See <A HREF="RM-D-3.html">D.3</A>.</div>
+<div class="paranum"><a name="p21.1">21.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete3"><B>&nbsp;pragma</B> 
+<A NAME="I9232"></A><A NAME="I9233"></A>No_Return(<I>procedure_</I><A NAME="I9234"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>{, 
+<I>procedure_</I><A NAME="I9235"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>});</span></span><span class="insert2"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;&mdash; See <A HREF="RM-6-5-1.html">6.5.1</A>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p21.2">21.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9236"></A><A NAME="I9237"></A>No_Return 
+(<I>procedure_</I><A NAME="I9238"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>{, 
+<I>procedure_</I><A NAME="I9239"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>});</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-2.html">J.15.2</A>.</span></div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9240"></A><A NAME="I9241"></A>Normalize_Scalars; 
+&mdash; See <A HREF="RM-H-1.html">H.1</A>.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9242"></A><A NAME="I9243"></A>Optimize(<A NAME="I9244"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+&mdash; See <A HREF="RM-2-8.html">2.8</A>.</div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9245"></A><A NAME="I9246"></A>Pack(<I>first_subtype_</I><A NAME="I9247"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-13-2.html">13.2</A>.</span></div>
+<div class="paranum"><a name="p24.1">24.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9248"></A><A NAME="I9249"></A>Pack 
+(<I>first_subtype_</I><A NAME="I9250"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-3.html">J.15.3</A>.</span></div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9251"></A><A NAME="I9252"></A>Page; 
+&mdash; See <A HREF="RM-2-8.html">2.8</A>.</div>
+<div class="paranum"><a name="p25.1">25.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9253"></A><A NAME="I9254"></A>Partition_Elaboration_Policy 
+(<I>policy_</I><A NAME="I9255"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-H-6.html">H.6</A>.</span></div>
+<div class="paranum"><a name="p25.2">25.2/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9256"></A><A NAME="I9257"></A>Preelaborable_Initialization(<A NAME="I9258"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>);</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-10-2-1.html">10.2.1</A>.</span></div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9259"></A><A NAME="I9260"></A>Preelaborate[(<I>library_unit_</I><A NAME="I9261"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-10-2-1.html">10.2.1</A>.</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9262"></A><A NAME="I9263"></A>Priority(<A NAME="I9264"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-D-1.html">D.1</A>.</span></div>
+<div class="paranum"><a name="p27.1">27.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9265"></A><A NAME="I9266"></A>Priority 
+(<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-11.html">J.15.11</A>.</span></div>
+<div class="paranum"><a name="p27.2">27.2/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9267"></A><A NAME="I9268"></A>Priority_Specific_Dispatching 
+(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>policy_</I><A NAME="I9269"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
+<I>first_priority_</I><A NAME="I9270"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+<I>last_priority_</I><A NAME="I9271"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-D-2-2.html">D.2.2</A>.</span></div>
+<div class="paranum"><a name="p27.3">27.3/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9272"></A><A NAME="I9273"></A>Profile 
+(<I>profile_</I><A NAME="I9274"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+{, <I>profile_</I><A NAME="I9275"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>});</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-13-12.html">13.12</A>.</span></div>
+<div class="paranum"><a name="p27.4">27.4/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
+<A NAME="I9276"></A><A NAME="I9277"></A>Profile (<I>profile_</I><A NAME="I9278"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+{, <I>profile_</I><A NAME="I9279"></A><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>});</span></span><span class="delete3"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;&mdash; See <A HREF="RM-D-13.html">D.13</A>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9280"></A><A NAME="I9281"></A>Pure[(<I>library_unit_</I><A NAME="I9282"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-10-2-1.html">10.2.1</A>.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9283"></A><A NAME="I9284"></A>Queuing_Policy(<I>policy_</I><A NAME="I9285"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+&mdash; See <A HREF="RM-D-4.html">D.4</A>.</div>
+<div class="paranum"><a name="p29.1">29.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
+<A NAME="I9286"></A><A NAME="I9287"></A>Relative_Deadline (<I>relative_deadline_</I><A NAME="I9288"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span></span><span class="delete3"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;&mdash; See <A HREF="RM-D-2-6.html">D.2.6</A>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p29.2">29.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9289"></A><A NAME="I9290"></A>Relative_Deadline 
+(<I>relative_deadline_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-12.html">J.15.12</A>.</span></div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9291"></A><A NAME="I9292"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I9293"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-E-2-3.html">E.2.3</A>.</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9294"></A><A NAME="I9295"></A>Remote_Types[(<I>library_unit_</I><A NAME="I9296"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-E-2-2.html">E.2.2</A>.</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9297"></A><A NAME="I9298"></A>Restrictions(<A NAME="I9299"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0320">restriction</A></SPAN>{, 
+<A NAME="I9300"></A><SPAN Class="swiss"><A HREF="RM-13-12.html#S0320">restriction</A></SPAN>}); 
+&mdash; See <A HREF="RM-13-12.html">13.12</A>.</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9301"></A><A NAME="I9302"></A>Reviewable; 
+&mdash; See <A HREF="RM-H-3-1.html">H.3.1</A>.</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9303"></A><A NAME="I9304"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I9305"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)]; 
+&mdash; See <A HREF="RM-E-2-1.html">E.2.1</A>.</div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9306"></A><A NAME="I9307"></A>Storage_Size(<A NAME="I9308"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-13-3.html">13.3</A>.</span></div>
+<div class="paranum"><a name="p35.1">35.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9309"></A><A NAME="I9310"></A>Storage_Size 
+(<A NAME="I9311"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-4.html">J.15.4</A>.</span></div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9312"></A><A NAME="I9313"></A>Suppress(<A NAME="I9314"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><span class="delete2">&nbsp;[, [On =&gt;] <A NAME="I9315"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>]</span>); 
+&mdash; See <A HREF="RM-11-5.html">11.5</A>.</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal"><B>pragma</B> <A NAME="I9316"></A><A NAME="I9317"></A>Task_Dispatching_Policy(<I>policy_</I><A NAME="I9318"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+&mdash; See <A HREF="RM-D-2-2.html">D.2.2</A>.</div>
+<div class="paranum"><a name="p37.1">37.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete3"></span><span class="insert2"><span class="delete3"><B>pragma</B> 
+<A NAME="I9319"></A><A NAME="I9320"></A>Unchecked_Union (<I>first_subtype_</I><A NAME="I9321"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span></span><span class="delete3"></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;&mdash; See <A HREF="RM-B-3-3.html">B.3.3</A>.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p37.2">37.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9322"></A><A NAME="I9323"></A>Unchecked_Union 
+(<I>first_subtype_</I><A NAME="I9324"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-6.html">J.15.6</A>.</span></div>
+<div class="paranum"><a name="p37.3">37.3/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> <A NAME="I9325"></A><A NAME="I9326"></A>Unsuppress(<A NAME="I9327"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</span><span class="insert2">&nbsp;&mdash; See <A HREF="RM-11-5.html">11.5</A>.</span></div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9328"></A><A NAME="I9329"></A>Volatile(<A NAME="I9330"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-C-6.html">C.6</A>.</span></div>
+<div class="paranum"><a name="p38.1">38.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9331"></A><A NAME="I9332"></A>Volatile 
+(<A NAME="I9333"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-8.html">J.15.8</A>.</span></div>
+<div class="paranum"><a name="p39">39/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete3"><B>pragma</B> <A NAME="I9334"></A><A NAME="I9335"></A>Volatile_Components(<I>array_</I><A NAME="I9336"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="delete3">&nbsp;&mdash; See <A HREF="RM-C-6.html">C.6</A>.</span></div>
+<div class="paranum"><a name="p39.1">39.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I9337"></A><A NAME="I9338"></A>Volatile_Components 
+(<I>array_</I><A NAME="I9339"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>);</span><span class="insert3">&nbsp;&mdash; See <A HREF="RM-J-15-8.html">J.15.8</A>.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-K-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-M.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

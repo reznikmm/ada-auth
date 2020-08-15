@@ -1,0 +1,494 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Interfacing with C</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert0 {text-decoration: underline; color: black}
+    SPAN.delete0 {text-decoration: line-through; color: black }
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.3 <span class="insert0">Interfacing with C</span><span class="delete0"></span></H1>
+<div class="paranum"><a name="p1">1/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+<A NAME="I5852"></A><A NAME="I5853"></A>The facilities relevant to interfacing 
+with the C language are the package Interfaces.C and its children; <span class="delete1">and 
+</span>support for the Import, Export, and Convention pragmas with <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+C<span class="insert1">; and support for the Convention pragma with <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+C_Pass_By_Copy</span>.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The package Interfaces.C contains the basic types, 
+constants and subprograms that allow an Ada program to pass scalars and 
+strings to C functions.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Interfaces.C has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples"><B>package</B>&nbsp;Interfaces.C&nbsp;<B>is</B><A NAME="I5854"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(C);</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Declarations&nbsp;based&nbsp;on&nbsp;C's&nbsp;&lt;limits.h&gt;</I></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5855"></A>CHAR_BIT&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;8</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5856"></A>SCHAR_MIN&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;&ndash;128</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5857"></A>SCHAR_MAX&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;127</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5858"></A>UCHAR_MAX&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;255</I></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Signed&nbsp;and&nbsp;Unsigned&nbsp;Integers</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5859"></A>int&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5860"></A>short&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5861"></A>long&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5862"></A>signed_char&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;SCHAR_MIN&nbsp;..&nbsp;SCHAR_MAX;<BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;signed_char'Size&nbsp;<B>use</B>&nbsp;CHAR_BIT;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5863"></A>unsigned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5864"></A>unsigned_short&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5865"></A>unsigned_long&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5866"></A>unsigned_char&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;(UCHAR_MAX+1);<BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;unsigned_char'Size&nbsp;<B>use</B>&nbsp;CHAR_BIT;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5867"></A>plain_char&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5868"></A>ptrdiff_t&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5869"></A>size_t&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Floating&nbsp;Point</I></SPAN></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5870"></A>C_float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5871"></A>double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5872"></A>long_double&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Characters&nbsp;and&nbsp;Strings&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5873"></A>char&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
+<div class="paranum"><a name="p20">20/1</a></div>
+<div class="Examples">{<I><A HREF="defect1.html#8652/0060">8652/0060</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00037.TXT">AI95-00037-01</A></I>} 
+&nbsp;&nbsp;&nbsp;<A NAME="I5874"></A>nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char&nbsp;:=&nbsp;<span class="insert1"><SPAN Class="roman"><I>implementation-defined</I></SPAN></span><span class="delete1">&nbsp;char'First</span>;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5875"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;char;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5876"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char)&nbsp;<B>return</B>&nbsp;Character;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5877"></A>char_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;char;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(char_array);<BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;char_array'Component_Size&nbsp;<B>use</B>&nbsp;CHAR_BIT;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5878"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5879"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;char_array;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5880"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5881"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;char_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5882"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Wide&nbsp;Character&nbsp;and&nbsp;Wide&nbsp;String</I></SPAN></div>
+<div class="paranum"><a name="p30">30/1</a></div>
+<div class="Examples">{<I><A HREF="defect1.html#8652/0060">8652/0060</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00037.TXT">AI95-00037-01</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5883"></A>wchar_t&nbsp;<B>is</B>&nbsp;<span class="insert1"><SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN></span><span class="delete1"><SPAN Class="roman"><I>&nbsp;implementation-defined</I></SPAN></span>;</div>
+<div class="paranum"><a name="p31">31/1</a></div>
+<div class="Examples">{<I><A HREF="defect1.html#8652/0060">8652/0060</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00037.TXT">AI95-00037-01</A></I>} 
+&nbsp;&nbsp;&nbsp;<A NAME="I5884"></A>wide_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;wchar_t&nbsp;:=&nbsp;<span class="insert1"><SPAN Class="roman"><I>implementation-defined</I></SPAN></span><span class="delete1">&nbsp;wchar_t'First</span>;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5885"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;wchar_t;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5886"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5887"></A>wchar_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;wchar_t;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(wchar_array);</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5888"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5889"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;wchar_array;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5890"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String;</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5891"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;wchar_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5892"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;wchar_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5893"></A>Terminator_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Examples"><B>end</B>&nbsp;Interfaces.C;</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Normal">Each of the types declared in Interfaces.C is C-compatible.</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Normal">The types int, short, long, unsigned, ptrdiff_t, 
+size_t, double, char, and wchar_t correspond respectively to the C types 
+having the same names. The types signed_char, unsigned_short, unsigned_long, 
+unsigned_char, C_float, and long_double correspond respectively to the 
+C types signed char, unsigned short, unsigned long, unsigned char, float, 
+and long double.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Normal" style="margin-bottom: 0.9em">The type of the subtype 
+plain_char is either signed_char or unsigned_char, depending on the C 
+implementation.&nbsp;</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Examples"><B>function</B>&nbsp;To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;char;<BR>
+<B>function</B>&nbsp;To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;<B>return</B>&nbsp;Character;</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The functions To_C 
+and To_Ada map between the Ada type Character and the C type char.</div>
+<div class="paranum"><a name="p46.a.1">46.a.1/1</a></div>
+<div class="Annotations"><span class="insert1"><B>Implementation Note: 
+</B></span>{<I><A HREF="defect2.html#8652/0114">8652/0114</A></I>} <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00038.TXT">AI95-00038-01</A></I>} 
+<span class="insert1">The To_C and To_Ada functions map between corresponding 
+characters, not necessarily between characters with the same internal 
+representation. Corresponding characters are characters defined by the 
+same enumeration literal, if such exist; otherwise, the correspondence 
+is unspecified.<A NAME="I5894"></A></span></div>
+<div class="paranum"><a name="p46.a.2">46.a.2/1</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert1">The 
+following definition is equivalent to the above summary:</span></div>
+<div class="paranum"><a name="p46.a.3">46.a.3/1</a></div>
+<div class="Annotations"><span class="insert1"><TT>To_C (Latin_1_Char) 
+= char'Value(Character'Image(Latin_1_Char))</TT><BR>
+provided that char'Value does not raise an exception; otherwise the result 
+is unspecified.</span></div>
+<div class="paranum"><a name="p46.a.4">46.a.4/1</a></div>
+<div class="Annotations"><span class="insert1"><TT>To_Ada (Native_C_Char) 
+= Character'Value(char'Image(Native_C_Char))</TT><BR>
+provided that Character'Value does not raise an exception; otherwise 
+the result is unspecified.</span>&nbsp;</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The result of Is_Nul_Terminated 
+is True if Item contains nul, and is False otherwise.</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Examples"><B>function</B>&nbsp;To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;char_array;<BR>
+<BR>
+<B>function</B>&nbsp;To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char_array;&nbsp;Trim_Nul&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Indented2">The result of To_C is a char_array value of length 
+Item'Length (if Append_Nul is False) or Item'Length+1 (if Append_Nul 
+is True). The lower bound is 0. For each component Item(I), the corresponding 
+component in the result is To_C applied to Item(I). The value nul is 
+appended if Append_Nul is True.</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The result of To_Ada 
+is a String whose length is Item'Length (if Trim_Nul is False) or the 
+length of the slice of Item preceding the first nul (if Trim_Nul is True). 
+The lower bound of the result is 1. If Trim_Nul is False, then for each 
+component Item(I) the corresponding component in the result is To_Ada 
+applied to Item(I). If Trim_Nul is True, then for each component Item(I) 
+before the first nul the corresponding component in the result is To_Ada 
+applied to Item(I). The function propagates Terminator_Error if Trim_Nul 
+is True and Item does not contain nul.</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;char_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);<BR>
+<BR>
+<B>procedure</B>&nbsp;To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="Indented2">For procedure To_C, each element of Item is converted 
+(via the To_C function) to a char, which is assigned to the corresponding 
+element of Target. If Append_Nul is True, nul is then assigned to the 
+next element of Target. In either case, Count is set to the number of 
+Target elements assigned. <A NAME="I5895"></A>If Target is not long enough, 
+Constraint_Error is propagated.</div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">For procedure To_Ada, 
+each element of Item (if Trim_Nul is False) or each element of Item preceding 
+the first nul (if Trim_Nul is True) is converted (via the To_Ada function) 
+to a Character, which is assigned to the corresponding element of Target. 
+Count is set to the number of Target elements assigned. <A NAME="I5896"></A>If 
+Target is not long enough, Constraint_Error is propagated. If Trim_Nul 
+is True and Item does not contain nul, then Terminator_Error is propagated.</div>
+<div class="paranum"><a name="p55">55</a></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The result of Is_Nul_Terminated 
+is True if Item contains wide_nul, and is False otherwise.</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Examples"><B>function</B>&nbsp;To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;wchar_t;<BR>
+<B>function</B>&nbsp;To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">To_C and To_Ada 
+provide the mappings between the Ada and C wide character types.</div>
+<div class="paranum"><a name="p59">59</a></div>
+<div class="Examples"><B>function</B>&nbsp;To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;wchar_array;<BR>
+<BR>
+<B>function</B>&nbsp;To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+<BR>
+<B>procedure</B>&nbsp;To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;wchar_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);<BR>
+<BR>
+<B>procedure</B>&nbsp;To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;wchar_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
+<div class="paranum"><a name="p60">60</a></div>
+<div class="Indented2">The To_C and To_Ada subprograms that convert between 
+Wide_String and wchar_array have analogous effects to the To_C and To_Ada 
+subprograms that convert between String and char_array, except that wide_nul 
+is used instead of nul.</div>
+<div class="paranum"><a name="p60.a">60.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The Interfaces.C package 
+provides an implementation-defined character type, char, designed to 
+model the C run-time character set, and mappings between the types char 
+and Character.</div>
+<div class="paranum"><a name="p60.b">60.b</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">One application 
+of the C interface package is to compose a C string and pass it to a 
+C function. One way to do this is for the programmer to declare an object 
+that will hold the C array, and then pass this array to the C function. 
+This is realized via the type char_array:&nbsp;</div>
+<div class="paranum"><a name="p60.c">60.c</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;char_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;of&nbsp;Char;</div>
+<div class="paranum"><a name="p60.d">60.d</a></div>
+<div class="Annotations">The programmer can declare an Ada String, convert 
+it to a char_array, and pass the char_array as actual parameter to the 
+C function that is expecting a char *.</div>
+<div class="paranum"><a name="p60.e">60.e</a></div>
+<div class="Annotations">An alternative approach is for the programmer 
+to obtain a C char pointer from an Ada String (or from a char_array) 
+by invoking an allocation function. The package Interfaces.C.Strings 
+(see below) supplies the needed facilities, including a private type 
+chars_ptr that corresponds to C's char *, and two allocation functions. 
+To avoid storage leakage, a Free procedure releases the storage that 
+was allocated by one of these allocate functions.</div>
+<div class="paranum"><a name="p60.f">60.f</a></div>
+<div class="Annotations">It is typical for a C function that deals with 
+strings to adopt the convention that the string is delimited by a nul 
+char. The C interface packages support this convention. A constant nul 
+of type Char is declared, and the function Value(Chars_Ptr) in Interfaces.C.Strings 
+returns a char_array up to and including the first nul in the array that 
+the chars_ptr points to. The Allocate_Chars function allocates an array 
+that is nul terminated.</div>
+<div class="paranum"><a name="p60.g">60.g</a></div>
+<div class="Annotations">Some C functions that deal with strings take 
+an explicit length as a parameter, thus allowing strings to be passed 
+that contain nul as a data element. Other C functions take an explicit 
+length that is an upper bound: the prefix of the string up to the char 
+before nul, or the prefix of the given length, is used by the function, 
+whichever is shorter. The C Interface packages support calling such functions. 
+</div>
+<div class="paranum"><a name="p60.1">60.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+<span class="insert1">A Convention pragma with <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+C_Pass_By_Copy shall only be applied to a type.</span></div>
+<div class="paranum"><a name="p60.2">60.2/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+<span class="insert1">The eligibility rules in <A HREF="AA-B-1.html">B.1</A> 
+do not apply to convention C_Pass_By_Copy. Instead, a type T is eligible 
+for convention C_Pass_By_Copy if T is a record type that has no discriminants 
+and that only has components with statically constrained subtypes, and 
+each component is C-compatible.</span></div>
+<div class="paranum"><a name="p60.3">60.3/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+<span class="insert1">If a type is C_Pass_By_Copy-compatible then it 
+is also C-compatible.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p61">61/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+An implementation shall support pragma Convention with a C <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+for a C-eligible type (see <A HREF="AA-B-1.html">B.1</A>)<span class="insert1">. 
+An implementation shall support pragma Convention with a C_Pass_By_Copy 
+<I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+for a C_Pass_By_Copy-eligible type.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p62">62</a></div>
+<div class="Normal">An implementation may provide additional declarations 
+in the C interface packages.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p62.1">62.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0060">8652/0060</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00037.TXT">AI95-00037-01</A></I>} 
+<span class="insert1">The constants nul and wide_nul should have a representation 
+of zero.</span>&nbsp;</div>
+<div class="paranum"><a name="p63">63</a></div>
+<div class="Normal">An implementation should support the following interface 
+correspondences between Ada and C.&nbsp;</div>
+<div class="paranum"><a name="p64">64</a></div>
+<div class="Bulleted">An Ada procedure corresponds to a void-returning 
+C function.&nbsp;</div>
+<div class="paranum"><a name="p64.a">64.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The programmer can also choose 
+an Ada procedure when the C function returns an int that is to be discarded.</div>
+<div class="paranum"><a name="p65">65</a></div>
+<div class="Bulleted">An Ada function corresponds to a non-void C function.</div>
+<div class="paranum"><a name="p66">66</a></div>
+<div class="Bulleted">An Ada <B>in</B> scalar parameter is passed as 
+a scalar argument to a C function.</div>
+<div class="paranum"><a name="p67">67</a></div>
+<div class="Bulleted">An Ada <B>in</B> parameter of an access-to-object 
+type with designated type T is passed as a t* argument to a C function, 
+where t is the C type corresponding to the Ada type T.</div>
+<div class="paranum"><a name="p68">68</a></div>
+<div class="Bulleted">An Ada <B>access</B> T parameter, or an Ada <B>out</B> 
+or <B>in out</B> parameter of an elementary type T, is passed as a t* 
+argument to a C function, where t is the C type corresponding to the 
+Ada type T. In the case of an elementary <B>out</B> or <B>in out</B> 
+parameter, a pointer to a temporary copy is used to preserve by-copy 
+semantics.</div>
+<div class="paranum"><a name="p68.1">68.1/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+<span class="insert1">An Ada parameter of a C_Pass_By_Copy-compatible 
+(record) type T, of mode <B>in</B>, is passed as a t argument to a C 
+function, where t is the C struct corresponding to the Ada type T.</span></div>
+<div class="paranum"><a name="p69">69/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0059">8652/0059</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00131.TXT">AI95-00131-01</A></I>} 
+An Ada parameter of a record type T, of any mode, <span class="insert1">other 
+than an <B>in</B> parameter of a C_Pass_By_Copy-compatible type,</span> 
+is passed as a t* argument to a C function, where t is the C struct corresponding 
+to the Ada type T.</div>
+<div class="paranum"><a name="p70">70</a></div>
+<div class="Bulleted">An Ada parameter of an array type with component 
+type T, of any mode, is passed as a t* argument to a C function, where 
+t is the C type corresponding to the Ada type T.</div>
+<div class="paranum"><a name="p71">71</a></div>
+<div class="Bulleted">An Ada parameter of an access-to-subprogram type 
+is passed as a pointer to a C function whose prototype corresponds to 
+the designated subprogram's specification.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p72">72</a></div>
+<div class="Notes">9&nbsp;&nbsp;Values of type char_array are not implicitly 
+terminated with nul. If a char_array is to be passed as a parameter to 
+an imported C function requiring nul termination, it is the programmer's 
+responsibility to obtain this effect.</div>
+<div class="paranum"><a name="p73">73</a></div>
+<div class="Notes">10&nbsp;&nbsp;To obtain the effect of C's sizeof(item_type), 
+where Item_Type is the corresponding Ada type, evaluate the expression: 
+size_t(Item_Type'Size/CHAR_BIT).</div>
+<div class="paranum"><a name="p74">74</a></div>
+<div class="Notes">11&nbsp;&nbsp;There is no explicit support for C's 
+union types. Unchecked conversions can be used to obtain the effect of 
+C unions.</div>
+<div class="paranum"><a name="p75">75</a></div>
+<div class="Notes">12&nbsp;&nbsp;A C function that takes a variable number 
+of arguments can correspond to several Ada subprograms, taking various 
+specific numbers and types of parameters.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p76">76</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of using 
+the Interfaces.C package:</I>&nbsp;</div>
+<div class="paranum"><a name="p77">77</a></div>
+<div class="Examples"><SPAN Class="roman"><I>--Calling&nbsp;the&nbsp;C&nbsp;Library&nbsp;Function&nbsp;strcpy</I></SPAN><BR>
+<B>with</B>&nbsp;Interfaces.C;<BR>
+<B>procedure</B>&nbsp;Test&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;C&nbsp;<B>renames</B>&nbsp;Interfaces.C;<BR>
+&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;<B>type</B>&nbsp;C.char_array;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Call&nbsp;&lt;string.h&gt;strcpy:</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;C&nbsp;definition&nbsp;of&nbsp;strcpy:&nbsp;&nbsp;char&nbsp;*strcpy(char&nbsp;*s1,&nbsp;const&nbsp;char&nbsp;*s2);</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;function&nbsp;copies&nbsp;the&nbsp;string&nbsp;pointed&nbsp;to&nbsp;by&nbsp;s2&nbsp;(including&nbsp;the&nbsp;terminating&nbsp;null&nbsp;character)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;into&nbsp;the&nbsp;array&nbsp;pointed&nbsp;to&nbsp;by&nbsp;s1.&nbsp;If&nbsp;copying&nbsp;takes&nbsp;place&nbsp;between&nbsp;objects&nbsp;that&nbsp;overlap,&nbsp;</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;behavior&nbsp;is&nbsp;undefined.&nbsp;The&nbsp;strcpy&nbsp;function&nbsp;returns&nbsp;the&nbsp;value&nbsp;of&nbsp;s1.</I></SPAN></div>
+<div class="paranum"><a name="p78">78</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Note:&nbsp;since&nbsp;the&nbsp;C&nbsp;function's&nbsp;return&nbsp;value&nbsp;is&nbsp;of&nbsp;no&nbsp;interest,&nbsp;the&nbsp;Ada&nbsp;interface&nbsp;is&nbsp;a&nbsp;procedure</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Strcpy&nbsp;(Target&nbsp;:&nbsp;<B>out</B>&nbsp;C.char_array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;C.char_array);</div>
+<div class="paranum"><a name="p79">79</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Import(C,&nbsp;Strcpy,&nbsp;&quot;strcpy&quot;);</div>
+<div class="paranum"><a name="p80">80</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Chars1&nbsp;:&nbsp;&nbsp;C.char_array(1..20);<BR>
+&nbsp;&nbsp;&nbsp;Chars2&nbsp;:&nbsp;&nbsp;C.char_array(1..20);</div>
+<div class="paranum"><a name="p81">81</a></div>
+<div class="Examples"><B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Chars2(1..6)&nbsp;:=&nbsp;&quot;qwert&quot;&nbsp;&amp;&nbsp;C.nul;</div>
+<div class="paranum"><a name="p82">82</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Strcpy(Chars1,&nbsp;Chars2);</div>
+<div class="paranum"><a name="p83">83</a></div>
+<div class="Examples"><SPAN Class="roman"><I>--&nbsp;Now&nbsp;Chars1(1..6)&nbsp;=&nbsp;&quot;qwert&quot;&nbsp;&amp;&nbsp;C.Nul</I></SPAN></div>
+<div class="paranum"><a name="p84">84</a></div>
+<div class="Examples"><B>end</B>&nbsp;Test;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Qualified Expressions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.7 Qualified Expressions</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+is used to state explicitly the type, and to verify the subtype, of an 
+operand that is either an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN>. 
+<A NAME="I3106"></A>]</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3107"></A><A NAME="S0128"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3108"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3109"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3110"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3111"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3112"></A>The <I>operand</I> (the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN>) 
+shall resolve to be of the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
+or a universal type that covers it.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I3113"></A><A NAME="I3114"></A><A NAME="I3115"></A><A NAME="I3116"></A><A NAME="I3117"></A><A NAME="I3118"></A><A NAME="I3119"></A>The 
+evaluation of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+evaluates the operand (and if of a universal type, converts it to the 
+type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>) 
+and checks that its value belongs to the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+<A NAME="I3120"></A><A NAME="I3121"></A>The exception Constraint_Error 
+is raised if this check fails.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This is one of the few 
+contexts in Ada 95 where implicit subtype conversion is not performed 
+prior to a constraint check, and hence no &ldquo;sliding&rdquo; of array 
+bounds is provided.</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Implicit subtype conversion is 
+not provided because a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+with a constrained target subtype is essentially an assertion about the 
+subtype of the operand, rather than a request for conversion. An explicit 
+<SPAN Class="swiss"><A HREF="AA-4-6.html#S0127">type_conversion</A></SPAN> 
+can be used rather than a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+if subtype conversion is desired.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Notes">23&nbsp;&nbsp;When a given context does not uniquely 
+identify an expected type, a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0128">qualified_expression</A></SPAN> 
+can be used to do so. In particular, if an overloaded <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0104">aggregate</A></SPAN> 
+is passed to an overloaded subprogram, it might be necessary to qualify 
+the operand to resolve its type.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of disambiguating 
+expressions using qualification:</I>&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>type</B>&nbsp;Mask&nbsp;<B>is</B>&nbsp;(Fix,&nbsp;Dec,&nbsp;Exp,&nbsp;Signif);<BR>
+<B>type</B>&nbsp;Code&nbsp;<B>is</B>&nbsp;(Fix,&nbsp;Cla,&nbsp;Dec,&nbsp;Tnz,&nbsp;Sub);</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">Print&nbsp;(Mask'(Dec));&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&nbsp;Dec&nbsp;is&nbsp;of&nbsp;type&nbsp;Mask</I></SPAN><BR>
+Print&nbsp;(Code'(Dec));&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&nbsp;Dec&nbsp;is&nbsp;of&nbsp;type&nbsp;Code&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples"><B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;Code'(Fix)&nbsp;..&nbsp;Code'(Dec)&nbsp;<B>loop</B>&nbsp;...&nbsp;<SPAN Class="roman"><I>--&nbsp;qualification&nbsp;needed&nbsp;for&nbsp;either&nbsp;Fix&nbsp;or&nbsp;Dec</I></SPAN><BR>
+<B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;Code&nbsp;<B>range</B>&nbsp;Fix&nbsp;..&nbsp;Dec&nbsp;<B>loop</B>&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;qualification&nbsp;unnecessary</I></SPAN><BR>
+<B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;Code'(Fix)&nbsp;..&nbsp;Dec&nbsp;<B>loop</B>&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;qualification&nbsp;unnecessary&nbsp;for&nbsp;Dec</I></SPAN></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">Dozen'(1&nbsp;|&nbsp;3&nbsp;|&nbsp;5&nbsp;|&nbsp;7&nbsp;=&gt;&nbsp;2,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;0)&nbsp;<SPAN Class="roman"><I>--&nbsp;see&nbsp;<A HREF="AA-4-6.html">4.6</A>&nbsp;</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

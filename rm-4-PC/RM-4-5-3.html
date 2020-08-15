@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Binary Adding Operators</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.3 Binary Adding Operators</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2835"></A><A NAME="I2836"></A><A NAME="I2837"></A><A NAME="I2838"></A><A NAME="I2839"></A><A NAME="I2840"></A><A NAME="I2841"></A><A NAME="I2842"></A><A NAME="I2843"></A><A NAME="I2844"></A>The 
+binary adding operators + (addition) and &ndash; (subtraction) are predefined 
+for every specific numeric type <I>T</I> with their conventional meaning. 
+They have the following specifications:&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;+&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;-&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2845"></A><A NAME="I2846"></A><A NAME="I2847"></A><A NAME="I2848"></A><A NAME="I2849"></A><A NAME="I2850"></A><A NAME="I2851"></A>The 
+concatenation operators &amp; are predefined for every nonlimited, one-dimensional 
+array type <I>T</I> with component type <I>C</I>. They have the following 
+specifications:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;&amp;&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;&amp;&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>C</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;&amp;&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>C</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
+<B>function</B>&nbsp;&quot;&amp;&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>C</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>C</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2852"></A>For 
+the evaluation of a concatenation with result type <I>T</I>, if both 
+operands are of type <I>T</I>, the result of the concatenation is a one-dimensional 
+array whose length is the sum of the lengths of its operands, and whose 
+components comprise the components of the left operand followed by the 
+components of the right operand. If the left operand is a null array, 
+the result of the concatenation is the right operand. Otherwise, the 
+lower bound of the result is determined as follows:&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">If the ultimate ancestor of the array type was 
+defined by a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0054">constrained_array_definition</A></SPAN>, 
+then the lower bound of the result is that of the index subtype;&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">If the ultimate ancestor of the array type was 
+defined by an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_array_definition</A></SPAN>, 
+then the lower bound of the result is that of the left operand.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The upper bound is determined by the lower bound 
+and the length. <A NAME="I2853"></A><A NAME="I2854"></A>A check is made 
+that the upper bound of the result of the concatenation belongs to the 
+range of the index subtype, unless the result is a null array. <A NAME="I2855"></A>Constraint_Error 
+is raised if this check fails.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">If either operand is of the component type <I>C</I>, 
+the result of the concatenation is given by the above rules, using in 
+place of such an operand an array having this operand as its only component 
+(converted to the component subtype) and having the lower bound of the 
+index subtype of the array type as its lower bound. <A NAME="I2856"></A></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I2857"></A>The result of a concatenation 
+is defined in terms of an assignment to an anonymous object, as for any 
+function call (see <A HREF="RM-6-5.html">6.5</A>).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">15&nbsp;&nbsp;As for all predefined operators on modular 
+types, the binary adding operators + and &ndash; on modular types include 
+a final reduction modulo the modulus if the result is outside the base 
+range of the type.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of expressions 
+involving binary adding operators:</I>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">Z&nbsp;+&nbsp;0.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;Z&nbsp;has&nbsp;to&nbsp;be&nbsp;of&nbsp;a&nbsp;real&nbsp;type&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&quot;A&quot;&nbsp;&amp;&nbsp;&quot;BCD&quot;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;concatenation&nbsp;of&nbsp;two&nbsp;string&nbsp;literals</I></SPAN><BR>
+'A'&nbsp;&amp;&nbsp;&quot;BCD&quot;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;concatenation&nbsp;of&nbsp;a&nbsp;character&nbsp;literal&nbsp;and&nbsp;a&nbsp;string&nbsp;literal</I></SPAN><BR>
+'A'&nbsp;&amp;&nbsp;'A'&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;concatenation&nbsp;of&nbsp;two&nbsp;character&nbsp;literals&nbsp;</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

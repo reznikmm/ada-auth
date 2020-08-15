@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Highest Precedence Operators</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.6 Highest Precedence Operators</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2711"></A><A NAME="I2712"></A><A NAME="I2713"></A><A NAME="I2714"></A><A NAME="I2715"></A>The 
+highest precedence unary operator <B>abs</B> (absolute value) is predefined 
+for every specific numeric type <I>T</I>, with the following specification: 
+</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;<B>abs</B>&quot;(Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2716"></A><A NAME="I2717"></A><A NAME="I2718"></A>The 
+highest precedence unary operator <B>not</B> (logical negation) is predefined 
+for every boolean type <I>T</I>, every modular type <I>T</I>, and for 
+every one-dimensional array type <I>T</I> whose components are of a boolean 
+type, with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;<B>not</B>&quot;(Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The result of the operator <B>not</B> for a modular 
+type is defined as the difference between the high bound of the base 
+range of the type and the value of the operand. [For a binary modulus, 
+this corresponds to a bit-wise complement of the binary representation 
+of the value of the operand.]</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The operator <B>not</B> that applies to a one-dimensional 
+array of boolean components yields a one-dimensional boolean array with 
+the same bounds; each component of the result is obtained by logical 
+negation of the corresponding component of the operand (that is, the 
+component that has the same index value). <A NAME="I2719"></A><A NAME="I2720"></A><A NAME="I2721"></A>A 
+check is made that each component of the result belongs to the component 
+subtype; the exception Constraint_Error is raised if this check fails. 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The check against the component 
+subtype is per AI83-00535.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2722"></A><A NAME="I2723"></A><A NAME="I2724"></A><A NAME="I2725"></A>The 
+highest precedence <I>exponentiation</I> operator ** is predefined for 
+every specific integer type <I>T</I> with the following specification: 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;**&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Natural)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Exponentiation is also 
+predefined for every specific floating point type as well as <I>root_real</I>, 
+with the following specification (where <I>T</I> is <I>root_real</I> 
+or the floating point type):&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples"><B>function</B>&nbsp;&quot;**&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer'Base)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2726"></A>The right operand of an exponentiation 
+is the <I>exponent</I>. The expression X**N with the value of the exponent 
+N positive is equivalent to the expression X*X*...X (with N&ndash;1 multiplications) 
+except that the multiplications are associated in an arbitrary order. 
+With N equal to zero, the result is one. With the value of N negative 
+[(only defined for a floating point operand)], the result is the reciprocal 
+of the result using the absolute value of N as the exponent.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The language does not specify 
+the order of association of the multiplications inherent in an exponentiation. 
+For a floating point type, the accuracy of the result might depend on 
+the particular association order chosen.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I2727"></A>The implementation of exponentiation 
+for the case of a negative exponent is allowed to raise Constraint_Error 
+if the intermediate result of the repeated multiplications is outside 
+the safe range of the type, even though the final result (after taking 
+the reciprocal) would not be. (The best machine approximation to the 
+final result in this case would generally be 0.0.)&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">19&nbsp;&nbsp;<A NAME="I2728"></A><A NAME="I2729"></A>As 
+implied by the specification given above for exponentiation of an integer 
+type, a check is made that the exponent is not negative. <A NAME="I2730"></A>Constraint_Error 
+is raised if this check fails.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 83</H4>
+<div class="paranum"><a name="p13.a.1">13.a.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect2.html#8652/0100">8652/0100</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00018.TXT">AI95-00018-01</A></I>} 
+<span class="insert1"><A NAME="I2731"></A>The definition of &quot;**&quot; 
+allows arbitrary association of the multiplications which make up the 
+result. Ada 83 required left-to-right associations (confirmed by AI83-00137). 
+Thus it is possible that &quot;**&quot; would provide a slightly different 
+(and more potentially accurate) answer in Ada 95 than in the same Ada 
+83 program.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations">We now show the specification for &quot;**&quot; 
+for integer types with a parameter subtype of Natural rather than Integer 
+for the exponent. This reflects the fact that Constraint_Error is raised 
+if a negative value is provided for the exponent.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

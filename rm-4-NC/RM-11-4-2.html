@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragmas Assert and Assertion_Policy</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-11-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-11-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>11.4.2 Pragmas Assert and Assertion_Policy</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">Pragma Assert is used to assert the truth of a boolean 
+expression at a point within a sequence of declarations or statements.</div>
+<div class="paranum"><a name="p1.1">1.1/3</a></div>
+<div class="Normal">&nbsp;Assert pragmas, subtype predicates (see <A HREF="RM-3-2-4.html">3.2.4</A>), 
+preconditions and postconditions (see <A HREF="RM-6-1-1.html">6.1.1</A>), 
+and type invariants (see <A HREF="RM-7-3-2.html">7.3.2</A>) are collectively 
+referred to as <I>assertions</I>; their boolean expressions are referred 
+to as <I>assertion expressions</I>.<A NAME="I4587"></A><A NAME="I4588"></A></div>
+<div class="paranum"><a name="p1.2">1.2/3</a></div>
+<div class="Normal">&nbsp;Pragma Assertion_Policy is used to control whether 
+assertions are to be ignored by the implementation, checked at run time, 
+or handled in some implementation-defined manner.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assert is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4589"></A><A NAME="I4590"></A>Assert([Check 
+=&gt;] <I>boolean_</I><A NAME="I4591"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>[, 
+[Message =&gt;] <I>string_</I><A NAME="I4592"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>]);</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assert is allowed at the place where a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0146">statement</A></SPAN> 
+is allowed.</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy is as follows:&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4593"></A><A NAME="I4594"></A>Assertion_Policy(<I>policy_</I><A NAME="I4595"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4596"></A><A NAME="I4597"></A>Assertion_Policy(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I4598"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I4599"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I4600"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I4601"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>});</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Indented1"><A NAME="I4602"></A><A NAME="I4603"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>, 
+or as a configuration pragma.</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">The expected type for the <I>boolean_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assert is any boolean type. The expected type for the <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assert is type String.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal">The <I>assertion_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy shall be one of Assert, Static_Predicate, Dynamic_Predicate, 
+Pre, Pre'Class, Post, Post'Class, Type_Invariant, Type_Invariant'Class, 
+or some implementation defined <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN>. 
+The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall be either Check, Ignore, or some implementation-defined <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy determines for each assertion aspect named in the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
+whether assertions of the given aspect are to be enforced by a run-time 
+check. The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+Check requires that assertion expressions of the given aspect be checked 
+that they evaluate to True at the points specified for the given aspect; 
+the <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+Ignore requires that the assertion expression not be evaluated at these 
+points, and the run-time checks not be performed. Note that for subtype 
+predicate aspects (see <A HREF="RM-3-2-4.html">3.2.4</A>), even when 
+the applicable Assertion_Policy is Ignore, the predicate will still be 
+evaluated as part of membership tests and Valid <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s, 
+and if static, will still have an effect on loop iteration over the subtype, 
+and the selection of <SPAN Class="swiss"><A HREF="RM-5-4.html#S0155">case_statement_alternative</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0072">variant</A></SPAN>s.</div>
+<div class="paranum"><a name="p10.1">10.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;If no <I>assertion_</I><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0308">aspect_mark</A></SPAN>s 
+are specified in the pragma, the specified policy applies to all assertion 
+aspects.</div>
+<div class="paranum"><a name="p10.2">10.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy applies to the named assertion aspects in a specific 
+region, and applies to all assertion expressions specified in that region. 
+A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Assertion_Policy 
+given in a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+or immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN> 
+applies from the place of the pragma to the end of the innermost enclosing 
+declarative region. The region for a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy given as a configuration pragma is the declarative region 
+for the entire compilation unit (or units) to which it applies.</div>
+<div class="paranum"><a name="p10.3">10.3/3</a></div>
+<div class="Normal">&nbsp;&nbsp;If a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy applies to a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0276">generic_instantiation</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy applies to the entire instance.</div>
+<div class="paranum"><a name="p10.4">10.4/3</a></div>
+<div class="Normal">&nbsp;&nbsp;If multiple Assertion_Policy pragmas apply to a 
+given construct for a given assertion aspect, the assertion policy is 
+determined by the one in the innermost enclosing region of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy specifying a policy for the assertion aspect. If no 
+such Assertion_Policy pragma exists, the policy is implementation defined.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Examples"><A NAME="I4604"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Assertions);</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I4605"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4606"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4607"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Assertions;</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">A compilation unit containing a check for an assertion 
+(including a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assert) has a semantic dependence on the Assertions library unit.</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Normal">If performing checks is required by the Assert assertion 
+policy in effect at the place of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Assert, the elaboration of the pragma consists of evaluating the boolean 
+expression, and if the result is False, evaluating the Message argument, 
+if any, and raising the exception Assertions.Assertion_Error, with a 
+message if the Message argument is provided.<A NAME="I4608"></A><A NAME="I4609"></A></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Calling the procedure 
+Assertions.Assert without a Message parameter is equivalent to:</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><B>if</B>&nbsp;Check&nbsp;=&nbsp;False&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;Ada.Assertions.Assertion_Error;<BR>
+<B>end</B>&nbsp;<B>if</B>;</div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Calling the procedure 
+Assertions.Assert with a Message parameter is equivalent to:</div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Examples"><B>if</B>&nbsp;Check&nbsp;=&nbsp;False&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;Ada.Assertions.Assertion_Error&nbsp;<B>with</B>&nbsp;Message;<BR>
+<B>end</B>&nbsp;<B>if</B>;</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Normal">The procedures Assertions.Assert have these effects 
+independently of the assertion policy in effect.</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p23.1">23.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;It is a bounded error to invoke a potentially blocking 
+operation (see <A HREF="RM-9-5-1.html">9.5.1</A>) during the evaluation 
+of an assertion expression associated with a call on, or return from, 
+a protected operation. If the bounded error is detected, Program_Error 
+is raised. If not detected, execution proceeds normally, but if it is 
+invoked within a protected action, it might result in deadlock or a (nested) 
+protected action.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Normal">Assertion_Error may be declared by renaming an implementation-defined 
+exception from another package.&nbsp;</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Normal">Implementations may define their own assertion policies.</div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Normal">If the result of a function call in an assertion 
+is not needed to determine the value of the assertion expression, an 
+implementation is permitted to omit the function call. This permission 
+applies even if the function has side effects.</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Normal">An implementation need not allow the specification 
+of an assertion expression if the evaluation of the expression has a 
+side effect such that an immediate reevaluation of the expression could 
+produce a different value. Similarly, an implementation need not allow 
+the specification of an assertion expression that is checked as part 
+of a call on or return from a callable entity <I>C</I>, if the evaluation 
+of the expression has a side effect such that the evaluation of some 
+other assertion expression associated with the same call of (or return 
+from) <I>C</I> could produce a different value than it would if the first 
+expression had not been evaluated.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Notes">3&nbsp;&nbsp;Normally, the boolean expression in a 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Assert 
+should not call functions that have significant side effects when the 
+result of the expression is True, so that the particular assertion policy 
+in effect will not affect normal operation of the program.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-11-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-11-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

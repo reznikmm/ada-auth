@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Task_Identification</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>C.7.1 The Package Task_Identification</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Task_Identification&nbsp;<B>is</B><A NAME="I7901"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Task_Identification);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7902"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Task_Id);<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7903"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7904"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7905"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7906"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;</span><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7907"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id);</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7908"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7909"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I7910"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</span><BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Task_Identification;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A value of the type Task_Id identifies an existent 
+task. The constant Null_Task_Id does not identify any task. Each object 
+of the type Task_Id is default initialized to the value of Null_Task_Id.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The function &quot;=&quot; returns True if and only 
+if Left and Right identify the same task or both have the value Null_Task_Id.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">The function Image returns an implementation-defined 
+string that identifies T. If T equals Null_Task_Id, Image returns an 
+empty string.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">The function Current_Task returns a value that identifies 
+the calling task.</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3">The function Environment_Task 
+returns a value that identifies the environment task.</span></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The effect of Abort_Task is the same as the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0245">abort_statement</A></SPAN> 
+for the task identified by T. In addition, if T identifies the environment 
+task, the entire partition is aborted, See <A HREF="RM-E-1.html">E.1</A>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The functions Is_Terminated and Is_Callable return 
+the value of the corresponding attribute of the task identified by T. 
+</div>
+<div class="paranum"><a name="p10.1">10.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The function Activation_Is_Complete 
+returns True if the task identified by T has completed its activation 
+(whether successfully or not). It returns False otherwise. If T identifies 
+the environment task, Activation_Is_Complete returns True after the elaboration 
+of the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s 
+of the partition has completed.</span></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+T that is of a task type (after any implicit dereference), the following 
+attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="WideHanging-Term">T'Identity</div><div class="WideHanging-Body">
+<A NAME="I7911"></A><A NAME="I7912"></A>Yields a value of the type Task_Id 
+that identifies the task denoted by T.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+E that denotes an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>, 
+the following attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="WideHanging-Term">E'Caller</div><div class="WideHanging-Body">
+<A NAME="I7913"></A><A NAME="I7914"></A>Yields a value of the type Task_Id 
+that identifies the task whose call is now being serviced. Use of this 
+attribute is allowed only inside an <span class="delete3"><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+or&nbsp;</span><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN><span class="insert3">, 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+after the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN>, 
+</span>corresponding to the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+denoted by E.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I7915"></A>Program_Error is raised if a 
+value of Null_Task_Id is passed as a parameter to Abort_Task, Is_Terminated, 
+and Is_Callable.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><A NAME="I7916"></A><A NAME="I7917"></A>Abort_Task 
+is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>). 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal"><A NAME="I7918"></A>It is a bounded error to call 
+the Current_Task function from an <span class="insert3"><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN></span><span class="delete3">&nbsp;entry 
+body</span>, interrupt handler, or finalization of a task attribute. 
+<A NAME="I7919"></A>Program_Error is raised, or an implementation-defined 
+value of the type Task_Id is returned.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal"><A NAME="I7920"></A>If a value of Task_Id is passed 
+as a parameter to any of the operations declared in this package (or 
+any language-defined child of this package), and the corresponding task 
+object no longer exists, the execution of the program is erroneous.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">The implementation shall document the effect of calling 
+Current_Task from an entry body or interrupt handler.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Notes">11&nbsp;&nbsp;This package is intended for use in 
+writing user-defined task scheduling packages and constructing server 
+tasks. Current_Task can be used in conjunction with other operations 
+requiring a task as an argument such as Set_Priority (see <A HREF="RM-D-5.html">D.5</A>).</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">12&nbsp;&nbsp;The function Current_Task and the attribute 
+Caller can return a Task_Id value that identifies the environment task.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

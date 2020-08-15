@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Indefinite_Holders</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-19.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.18 <span class="insert3">The Generic Package Containers.Indefinite_Holders</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><span class="insert3">The language-defined generic 
+package Containers.Indefinite_Holders provides a private type Holder 
+and a set of operations for that type. A holder container holds a single 
+element of an indefinite type.</span></div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal"><span class="insert3">A holder container allows the 
+declaration of an object that can be used like an uninitialized variable 
+or component of an indefinite type.</span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal"><span class="insert3">A holder container may be <I>empty</I>. 
+An empty holder does not contain an element.<A NAME="I7856"></A></span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+generic library package Containers.Indefinite_Holders has the following 
+declaration:</span>&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Examples"><span class="insert3"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Ada.Containers.Indefinite_Holders&nbsp;<B>is</B><A NAME="I7857"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Indefinite_Holders);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Indefinite_Holders);</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7858"></A>Holder&nbsp;<B>is&nbsp;tagged&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Holder);</span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I7859"></A>Empty_Holder&nbsp;:&nbsp;<B>constant</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7860"></A>To_Holder&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7861"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7862"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7863"></A>Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7864"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7865"></A>Query_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7866"></A>Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7867"></A>Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7868"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7869"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7870"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7871"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7872"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7873"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Examples"><span class="insert3"><B>private</B></span></div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN></span></div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Containers.Indefinite_Holders;</span></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Normal"><span class="insert3">The actual function for the 
+generic formal function &quot;=&quot; on Element_Type values is expected 
+to define a reflexive and symmetric relationship and return the same 
+result value each time it is called with a particular pair of values. 
+If it behaves in some other manner, the function &quot;=&quot; on holder 
+values returns an unspecified value. The exact arguments and number of 
+calls of this generic formal function by the function &quot;=&quot; on 
+holder values are unspecified.</span></div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Normal"><span class="insert3">The type Holder is used to 
+represent holder containers. The type Holder needs finalization<A NAME="I7874"></A> 
+(see <A HREF="RM-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal"><span class="insert3">Empty_Holder represents an 
+empty holder object. If an object of type Holder is not otherwise initialized, 
+it is initialized to the same value as Empty_Holder.</span></div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Normal"><span class="insert3">Some operations of this generic 
+package have access-to-subprogram parameters. To ensure such operations 
+are well-defined, they guard against certain actions by the designated 
+subprogram. In particular, some operations check for &ldquo;tampering 
+with the element&rdquo; of a container because they depend on the element 
+of the container not being replaced.</span></div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"><A NAME="I7875"></A>A 
+subprogram is said to <I>tamper with the element</I> of a holder object 
+<I>H</I> if:</span></div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Bulleted"><span class="insert3">It clears the element contained 
+by <I>H</I>, that is, it calls the Clear procedure with <I>H</I> as a 
+parameter;</span></div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Bulleted"><span class="insert3">It replaces the element contained 
+by <I>H</I>, that is, it calls the Replace_Element procedure with <I>H</I> 
+as a parameter;</span></div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Bulleted"><span class="insert3">It calls the Move procedure 
+with <I>H</I> as a parameter;</span></div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Bulleted"><span class="insert3">It finalizes <I>H</I>.</span></div>
+<div class="paranum"><a name="p35">35/4</a></div>
+<div class="Normal"><span class="insert3"><A NAME="I7876"></A><A NAME="I7877"></A>When 
+tampering with the element is <I>prohibited</I> for a particular holder 
+object <I>H</I>, Program_Error is propagated by a call of any language-defined 
+subprogram that is defined to tamper with the element of <I>H</I>, leaving 
+<I>H</I> unmodified.</span><span class="insert4">&nbsp;These checks are made 
+before any other defined behavior of the body of the language-defined 
+subprogram.</span><span class="insert3"></span></div>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Left and Right denote the same holder object, then the function returns 
+True. Otherwise, it compares the element contained in Left to the element 
+contained in Right using the generic formal equality operator, returning 
+the result of that operation. Any exception raised during the evaluation 
+of element equality is propagated.</span></div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;To_Holder&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p39">39/4</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+a nonempty holder containing an element initialized to New_Item.</span><span class="insert4">&nbsp;To_Holder performs indefinite insertion (see <A HREF="RM-A-18.html">A.18</A>).</span><span class="insert3"></span></div>
+<div class="paranum"><a name="p40">40/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p41">41/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+True if Container is empty, and False if it contains an element.</span></div>
+<div class="paranum"><a name="p42">42/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Removes 
+the element from Container. Container is empty after a successful Clear 
+operation.</span></div>
+<div class="paranum"><a name="p44">44/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p45">45/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Container is empty, Constraint_Error is propagated. Otherwise, returns 
+the element stored in Container.</span></div>
+<div class="paranum"><a name="p46">46/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p47">47/4</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Replace_Element 
+assigns the value New_Item into Container, replacing any preexisting 
+content of Container</span><span class="insert4">; Replace_Element performs 
+indefinite insertion (see <A HREF="RM-A-18.html">A.18</A>)</span><span class="insert3">. 
+Container is not empty after a successful call to Replace_Element.</span></div>
+<div class="paranum"><a name="p48">48/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p49">49/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Container is empty, Constraint_Error is propagated. Otherwise, Query_Element 
+calls Process.<B>all</B> with the contained element as the argument. 
+Tampering with the element of Container is prohibited during the execution 
+of the call on Process.<B>all</B>. Any exception raised by Process.<B>all</B> 
+is propagated.</span></div>
+<div class="paranum"><a name="p50">50/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p51">51/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Container is empty, Constraint_Error is propagated. Otherwise, Update_Element 
+calls Process.<B>all</B> with the contained element as the argument. 
+Tampering with the element of Container is prohibited during the execution 
+of the call on Process.<B>all</B>. Any exception raised by Process.<B>all</B> 
+is propagated.</span></div>
+<div class="paranum"><a name="p52">52/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p53">53/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p54">54/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">The 
+types Constant_Reference_Type and Reference_Type need finalization.<A NAME="I7878"></A></span></div>
+<div class="paranum"><a name="p55">55/3</a></div>
+<div class="Indented2"><span class="insert3">The default initialization 
+of an object of type Constant_Reference_Type or Reference_Type propagates 
+Program_Error.</span></div>
+<div class="paranum"><a name="p56">56/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p57">57/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Implicit_Dereference aspect) provides a convenient 
+way to gain read access to the contained element of a holder container.</span></div>
+<div class="paranum"><a name="p58">58/3</a></div>
+<div class="Indented2"><span class="insert3">If Container is empty, Constraint_Error 
+is propagated. Otherwise, Constant_Reference returns an object whose 
+discriminant is an access value that designates the contained element. 
+Tampering with the elements of Container is prohibited while the object 
+returned by Constant_Reference exists and has not been finalized.</span></div>
+<div class="paranum"><a name="p59">59/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p60">60/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">This 
+function (combined with the Implicit_Dereference aspects) provides a 
+convenient way to gain read and write access to the contained element 
+of a holder container.</span></div>
+<div class="paranum"><a name="p61">61/3</a></div>
+<div class="Indented2"><span class="insert3">If Container is empty, Constraint_Error 
+is propagated. Otherwise, Reference returns an object whose discriminant 
+is an access value that designates the contained element. Tampering with 
+the elements of Container is prohibited while the object returned by 
+Reference exists and has not been finalized.</span>&nbsp;</div>
+<div class="paranum"><a name="p62">62/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p63">63/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Target denotes the same object as Source, the operation has no effect. 
+If Source is empty, Clear (Target) is called. Otherwise, Replace_Element 
+(Target, Element (Source)) is called.</span>&nbsp;</div>
+<div class="paranum"><a name="p64">64/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p65">65/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Source is empty, returns an empty holder container; otherwise, returns 
+To_Holder (Element (Source)).</span></div>
+<div class="paranum"><a name="p66">66/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p67">67/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+Target denotes the same object as Source, then the operation has no effect. 
+Otherwise, the element contained by Source (if any) is removed from Source 
+and inserted into Target, replacing any preexisting content. Source is 
+empty after a successful call to Move.</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p68">68/3</a></div>
+<div class="Normal"><span class="insert3"><A NAME="I7879"></A>It is a 
+bounded error for the actual function associated with a generic formal 
+subprogram, when called as part of an operation of this package, to tamper 
+with the element of any Holder parameter of the operation. Either Program_Error 
+is raised, or the operation works as defined on the value of the Holder 
+either prior to, or subsequent to, some or all of the modifications to 
+the Holder.</span></div>
+<div class="paranum"><a name="p69">69/3</a></div>
+<div class="Normal"><span class="insert3"><A NAME="I7880"></A>It is a 
+bounded error to call any subprogram declared in the visible part of 
+Containers.Indefinite_Holders when the associated container has been 
+finalized. If the operation takes Container as an <B>in out</B> parameter, 
+then it raises Constraint_Error or Program_Error. Otherwise, the operation 
+either proceeds as it would for an empty container, or it raises Constraint_Error 
+or Program_Error.</span>&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p70">70/3</a></div>
+<div class="Normal"><span class="insert3">Execution is erroneous if the 
+holder container associated with the result of a call to Reference or 
+Constant_Reference is finalized before the result object returned by 
+the call to Reference or Constant_Reference is finalized.<A NAME="I7881"></A></span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p71">71/3</a></div>
+<div class="Normal"><span class="insert3">No storage associated with 
+a holder object shall be lost upon assignment or scope exit.</span></div>
+<div class="paranum"><a name="p72">72/3</a></div>
+<div class="Normal"><span class="insert3">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+for a holder container shall have the effect of copying the element (if 
+any) from the source holder object to the target holder object.</span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Normal"><span class="insert3">Move should not copy the element, 
+and should minimize copying of internal data structures.</span>&nbsp;</div>
+<div class="paranum"><a name="p74">74/3</a></div>
+<div class="Normal"><span class="insert3">If an exception is propagated 
+from a holder operation, no storage should be lost, nor should the element 
+be removed from a holder container unless specified by the operation.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-19.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

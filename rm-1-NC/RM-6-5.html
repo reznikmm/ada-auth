@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Return Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.5 Return Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+is used to complete the execution of the innermost enclosing <SPAN Class="swiss"><A HREF="RM-6-3.html#S0154">subprogram_body</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0190">entry_body</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0188">accept_statement</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">return_statement</SPAN><A NAME="I3051"></A><A NAME="S0160"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>return</B>&nbsp;[<A NAME="I3052"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>];</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3053"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>, 
+if any, of a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+is called the <I>return expression</I>. <A NAME="I3054"></A>The <I>result 
+subtype</I> of a function is the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+after the reserved word <B>return</B> in the profile of the function.<A NAME="I3055"></A> 
+The expected type for a return expression is the result type of the corresponding 
+function.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I3056"></A>A <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+shall be within a callable construct, and it <I>applies to</I> the innermost 
+one. A <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+shall not be within a body that is within the construct to which the 
+<SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+applies.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A function body shall contain at least one <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+that applies to the function body, unless the function contains <SPAN Class="swiss"><A HREF="RM-13-8.html#S0274">code_statement</A></SPAN>s. 
+A <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+shall include a return expression if and only if it applies to a function 
+body.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I3057"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+(if any) is first evaluated and converted to the result subtype. <A NAME="I3058"></A></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">If the result type is class-wide, then the tag of 
+the result is the tag of the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">If the result type 
+is a specific tagged type:</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted"><A NAME="I3059"></A><A NAME="I3060"></A>If it is 
+limited, then a check is made that the tag of the value of the return 
+expression identifies the result type. <A NAME="I3061"></A>Constraint_Error 
+is raised if this check fails.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">If it is nonlimited, then the tag of the result 
+is that of the result type.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3062"></A>A 
+type is a <I>return-by-reference</I> type if it is a descendant of one 
+of the following:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">a tagged limited type;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">a task or protected type;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">a nonprivate type with the reserved word <B>limited</B> 
+in its declaration;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">a composite type with a subcomponent of a return-by-reference 
+type;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">a private type whose full type is a return-by-reference 
+type.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3063"></A><A NAME="I3064"></A>If 
+the result type is a return-by-reference type, then a check is made that 
+the return expression is one of the following:&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+that denotes an object view whose accessibility level is not deeper than 
+that of the master that elaborated the function body; or&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">a parenthesized expression or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0121">qualified_expression</A></SPAN> 
+whose operand is one of these kinds of expressions.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I3065"></A>The exception Program_Error is 
+raised if this check fails.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">For a function with a return-by-reference result 
+type the result is returned by reference; that is, the function call 
+denotes a constant view of the object associated with the value of the 
+return expression. <A NAME="I3066"></A>For any other function, the result 
+is returned by copy; that is, the converted value is assigned into an 
+anonymous constant created at the point of the <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN>, 
+and the function call denotes that object.&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">Finally, a transfer of control is performed which 
+completes the execution of the callable construct to which the <SPAN Class="swiss"><A HREF="RM-6-5.html#S0160">return_statement</A></SPAN> 
+applies, and returns to the caller.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of return 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples"><B>return</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;procedure&nbsp;body,&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0190">entry_body</A></SPAN><SPAN Class="roman"><I>,</I></SPAN><SPAN Class="roman"><I>&nbsp;or&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0188">accept_statement</A></SPAN></div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples"><B>return</B>&nbsp;Key_Value(Last_Index);&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;function&nbsp;body</I></SPAN></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Indented1">&nbsp;&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

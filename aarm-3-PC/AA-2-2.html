@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Lexical Elements, Separators, and Delimiters</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.2 Lexical Elements, Separators, and Delimiters</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1262"></A>The text of a program consists 
+of the texts of one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN>s. 
+<A NAME="I1263"></A><A NAME="I1264"></A>The text of each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN> 
+is a sequence of separate <I>lexical elements</I>. Each lexical element 
+is formed from a sequence of characters, and is either a delimiter, an 
+<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+a reserved word, a <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>, 
+or a comment. The meaning of a program depends only on the particular 
+sequences of lexical elements that form its <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN>s, 
+excluding <SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">comment</A></SPAN>s.</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+The text of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN> 
+is divided into <A NAME="I1265"></A><I>lines</I>. <A NAME="I1266"></A>In 
+general, the representation for an end of line is implementation defined. 
+However, a sequence of one or more <SPAN Class="swiss">format_effector</SPAN>s 
+other than <span class="insert2">the character whose code&nbsp;</span><span class="insert3">point</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;position</span></span><span class="insert2">&nbsp;is 16#09# (CHARACTER TABULATION)</span><span class="delete2">&nbsp;character 
+tabulation (HT)</span> signifies at least one end of line.&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The representation 
+for an end of line.</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1267"></A>[In some cases an explicit <I>separator</I> is required 
+to separate adjacent lexical elements.] A separator is any of a <span class="insert2"><SPAN Class="swiss">separator_space</SPAN></span><span class="delete2">&nbsp;space 
+character</span>, a <span class="insert2"><SPAN Class="swiss">format_effector</SPAN></span><span class="delete2">&nbsp;format 
+effector</span>, or the end of a line, as follows:&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a/2</a></div>
+<div class="Annotations"><span class="delete2"><B>Discussion:&nbsp;</B>It 
+might be useful to define &ldquo;white space&rdquo; and use it here.</span> 
+</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+A <span class="insert2"><SPAN Class="swiss">separator_space</SPAN></span><span class="delete2">&nbsp;space 
+character</span> is a separator except within a <SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">comment</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>.</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert2">The character whose code&nbsp;</span><span class="insert3">point</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;position</span></span><span class="insert2">&nbsp;is 16#09# (CHARACTER TABULATION)</span><span class="delete2">&nbsp;Character 
+tabulation (HT)</span> is a separator except within a <SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">comment</A></SPAN>.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">The end of a line is always a separator.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">One or more separators are allowed between any two 
+adjacent lexical elements, before the first of each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN>, 
+or after the last. At least one separator is required between an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+a reserved word, or a <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN> 
+and an adjacent <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+reserved word, or <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN>.</div>
+<div class="paranum"><a name="p7.1">7.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0079-1.TXT">AI05-0079-1</A></I>} 
+<span class="insert3">One or more <SPAN Class="swiss">other_format</SPAN> 
+characters are allowed anywhere that a separator is[; any such characters 
+have no effect on the meaning of an Ada program].</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1268"></A>A <I>delimiter</I> is either one of the following<span class="delete2">&nbsp;special</span> characters<span class="insert2">:</span>&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented1">&amp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;|</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I1269"></A>or one of the following <I>compound 
+delimiters</I> each composed of two adjacent special characters&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Indented1">=&gt;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;&nbsp;&nbsp;&nbsp;/=&nbsp;&nbsp;&nbsp;&nbsp;&gt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&gt;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Each of the special characters listed for single 
+character delimiters is a single delimiter except if this character is 
+used as a character of a compound delimiter, or as a character of a <SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">comment</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN>.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following names 
+are used when referring to compound delimiters:</div>
+<div class="Indented1"><TABLE frame="void" rules="none" border="0" cellpadding="2"><TR><TH align="left">delimiter&nbsp;<TH align="left">name
+<TR><TD align="left">=&gt;<TD align="left">arrow
+<TR><TD align="left">..<TD align="left">double dot
+<TR><TD align="left">**<TD align="left">double star, exponentiate
+<TR><TD align="left">:=<TD align="left">assignment (pronounced: &ldquo;becomes&rdquo;)
+<TR><TD align="left">/=<TD align="left">inequality (pronounced: &ldquo;not 
+equal&rdquo;)
+<TR><TD align="left">&gt;=<TD align="left">greater than or equal
+<TR><TD align="left">&lt;=<TD align="left">less than or equal
+<TR><TD align="left">&lt;&lt;<TD align="left">left label bracket
+<TR><TD align="left">&gt;&gt;<TD align="left">right label bracket
+<TR><TD align="left">&lt;&gt;<TD align="left">box
+</table></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">An implementation shall support lines of at least 
+200 characters in length, not counting any characters used to signify 
+the end of a line. An implementation shall support lexical elements of 
+at least 200 characters in length. The maximum supported line length 
+and lexical element length are implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Maximum supported 
+line length and lexical element length.</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>From URG recommendation. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p14.c">14.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<span class="insert2">The wording was updated to use the new character 
+categories defined in the preceding&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">.</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p14.d">14.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0079-1.TXT">AI05-0079-1</A></I>} 
+<span class="insert3"><A NAME="I1270"></A><B>Correction:</B> Clarified 
+that <SPAN Class="swiss">other_format</SPAN> characters are allowed anywhere 
+that separators are allowed. This was intended in Ada 2005, but didn't 
+actually make it into the wording.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

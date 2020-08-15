@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Object Renaming Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>8.5.1 Object Renaming Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0170">object_renaming_declaration</A></SPAN> 
+is used to rename an object.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I3419"></A><A NAME="S0170"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3420"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I3421"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I3422"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The type of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+shall resolve to the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN>.</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>A 
+previous version of Ada 9X used the usual &ldquo;expected type&rdquo; 
+wording:<BR>
+&ldquo;The expected type for the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+is that determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN>.&rdquo;<BR>
+We changed it so that this would be illegal:&nbsp;</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="SmallExamples">X:&nbsp;T;<BR>
+Y:&nbsp;T'Class&nbsp;<B>renames</B>&nbsp;X;&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN></div>
+<div class="paranum"><a name="p3.c">3.c</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">When the above 
+was legal, it was unclear whether Y was of type T or T'Class. Note that 
+we still allow this:&nbsp;</div>
+<div class="paranum"><a name="p3.d">3.d</a></div>
+<div class="SmallExamples">Z:&nbsp;T'Class&nbsp;:=&nbsp;...;<BR>
+W:&nbsp;T&nbsp;<B>renames</B>&nbsp;F(Z);</div>
+<div class="paranum"><a name="p3.e">3.e</a></div>
+<div class="Annotations">where F is a function with a controlling parameter 
+and result. This is admittedly a bit odd.</div>
+<div class="paranum"><a name="p3.f">3.f</a></div>
+<div class="Annotations">Note that the matching rule for generic formal 
+parameters of mode <B>in out</B> was changed to keep it consistent with 
+the rule for renaming. That makes the rule different for <B>in</B> vs. 
+<B>in out</B>.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The renamed entity shall be an object.</div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0017">8652/0017</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00184.TXT">AI95-00184-01</A></I>} 
+The renamed entity shall not be a subcomponent that depends on discriminants 
+of a variable whose nominal subtype is unconstrained, unless this subtype 
+is indefinite, or the variable is aliased. A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0090">slice</A></SPAN> 
+of an array shall not be renamed if this restriction disallows renaming 
+of the array. <span class="insert1"><A NAME="I3423"></A>In addition to 
+the places where Legality Rules normally apply, these rules apply also 
+in the private part of an instance of a generic unit. These rules also 
+apply for a renaming that appears in the body of a generic unit, with 
+the additional requirement that even if the nominal subtype of the variable 
+is indefinite, its type shall not be a descendant of an untagged generic 
+formal derived type.</span></div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This prevents renaming of subcomponents 
+that might disappear, which might leave dangling references. Similar 
+restrictions exist for the Access attribute.</div>
+<div class="paranum"><a name="p5.a.1">5.a.1/1</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0017">8652/0017</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00184.TXT">AI95-00184-01</A></I>} 
+<span class="insert1">The &ldquo;recheck on instantiation&rdquo; and 
+&ldquo;assume-the-worst in the body&rdquo; restrictions on generics are 
+necessary to avoid renaming of components which could disappear even 
+when the nominal subtype would prevent the problem:</span></div>
+<div class="paranum"><a name="p5.a.2">5.a.2/1</a></div>
+<div class="SmallExamples"><span class="insert1"><B>type</B>&nbsp;T1&nbsp;(D1&nbsp;:&nbsp;Boolean)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;D1&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;False&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C1&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;True&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</span></div>
+<div class="paranum"><a name="p5.a.3">5.a.3/1</a></div>
+<div class="SmallExamples"><span class="insert1"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;F&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;T1;<BR>
+&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;F;<BR>
+<B>package</B>&nbsp;G&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;C1_Ren&nbsp;:&nbsp;Integer&nbsp;<B>renames</B>&nbsp;X.C1;<BR>
+<B>end</B>&nbsp;G;</span></div>
+<div class="paranum"><a name="p5.a.4">5.a.4/1</a></div>
+<div class="SmallExamples"><span class="insert1"><B>type</B>&nbsp;T2&nbsp;(D2&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False)&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;T1&nbsp;(D1&nbsp;=&gt;&nbsp;D2);<BR>
+<BR>
+Y&nbsp;:&nbsp;T2;<BR>
+<BR>
+<B>package</B>&nbsp;I&nbsp;<B>is&nbsp;new</B>&nbsp;G&nbsp;(T2,&nbsp;Y);<BR>
+<BR>
+Y&nbsp;:=&nbsp;(D1&nbsp;=&gt;&nbsp;True);&nbsp;--&nbsp;<SPAN Class="roman"><I>Oops!&nbsp;&nbsp;What&nbsp;happened&nbsp;to&nbsp;I.C1_Ren?</I></SPAN></span></div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Note that if an 
+implementation chooses to deallocate-then-reallocate on <SPAN Class="swiss"><A HREF="AA-5-2.html#S0130">assignment_statement</A></SPAN>s 
+assigning to unconstrained definite objects, then it cannot represent 
+renamings and access values as simple addresses, because the above rule 
+does not apply to all components of such an object.&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If it is a generic formal 
+object, then the assume-the-best or assume-the-worst rules are applied 
+as appropriate.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0170">object_renaming_declaration</A></SPAN> 
+declares a new view [of the renamed object] whose properties are identical 
+to those of the renamed view. [Thus, the properties of the renamed object 
+are not affected by the <SPAN Class="swiss"><A HREF="AA-8-5.html#S0169">renaming_declaration</A></SPAN>. 
+In particular, its value and whether or not it is a constant are unaffected; 
+similarly, the constraints that apply to an object are not affected by 
+renaming (any constraint implied by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0170">object_renaming_declaration</A></SPAN> 
+is ignored).]&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Because the constraints are 
+ignored, it is a good idea to use the nominal subtype of the renamed 
+object when writing an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0170">object_renaming_declaration</A></SPAN>.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of renaming 
+an object:</I>&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;L&nbsp;:&nbsp;Person&nbsp;<B>renames</B>&nbsp;Leftmost_Person;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A></I></SPAN><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;L.Age&nbsp;:=&nbsp;L.Age&nbsp;+&nbsp;1;<BR>
+<B>end</B>;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations">The phrase &ldquo;subtype ... as defined in 
+a corresponding object declaration, component declaration, or component 
+subtype indication,&rdquo; from RM83-8.5(5), is incorrect in Ada 95; 
+therefore we removed it. It is incorrect in the case of an object with 
+an indefinite unconstrained nominal subtype.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-8-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

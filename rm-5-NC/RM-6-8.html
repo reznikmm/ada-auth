@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Expression Functions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.8 Expression Functions</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+provides a shorthand to declare a function whose body consists of a single 
+return statement.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/4</a></div>
+<div class="Indented1"><SPAN Class="swiss">expression_function_declaration</SPAN><A NAME="I3673"></A><A NAME="S0206"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I3674"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3675"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0183">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3676"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3677"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];<BR>
+&nbsp;|&nbsp;[<A NAME="I3678"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3679"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0183">function_specification</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3680"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3681"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3/4</a></div>
+<div class="Normal">The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+is the result type (see <A HREF="RM-6-5.html">6.5</A>) of the function.<A NAME="I3682"></A> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
+<div class="Normal">&nbsp;An <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+declares an <I>expression function</I>.<A NAME="I3683"></A><A NAME="I3684"></A> 
+The <I>return expression</I><A NAME="I3685"></A> of an expression function 
+is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>. 
+A completion is not allowed for an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>; 
+however, an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+can complete a previous declaration.</div>
+<div class="paranum"><a name="p3.2">3.2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A <I>potentially static 
+expression</I> is defined in the same way as a static expression except 
+that<A NAME="I3686"></A></div>
+<div class="paranum"><a name="p3.3">3.3/5</a></div>
+<div class="Bulleted">a name denoting a formal parameter of an expression 
+function is a potentially static expression; and</div>
+<div class="paranum"><a name="p3.4">3.4/5</a></div>
+<div class="Bulleted">each use of &ldquo;static expression&rdquo; in 
+the definition of &ldquo;static expression&rdquo; is replaced with a 
+corresponding use of &ldquo;potentially static expression&rdquo; in the 
+definition of &ldquo;potentially static expression&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p3.5">3.5/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The following language-defined 
+representation aspect may be specified for an expression function:</div>
+<div class="paranum"><a name="p3.6">3.6/5</a></div>
+<div class="WideHanging-Term">&nbsp;Static</div><div class="WideHanging-Body">
+The type of aspect Static is Boolean. When aspect Static is True for 
+an expression function, the function is a <I>static expression function</I>. 
+If directly specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+shall be a static<A NAME="I3687"></A><A NAME="I3688"></A> expression.<A NAME="I3689"></A><A NAME="I3690"></A></div>
+<div class="paranum"><a name="p3.7">3.7/5</a></div>
+<div class="WideHanging-Term">&nbsp;</div><div class="WideHanging-Body">
+The Static value for an inherited function is True if some corresponding 
+primitive function of the parent or progenitor type is a static expression 
+function; otherwise, if not directly specified, the aspect is False. 
+</div>
+<div class="paranum"><a name="p3.8">3.8/5</a></div>
+<div class="Normal">&nbsp;A static expression function is a static function; 
+see <A HREF="RM-4-9.html">4.9</A>.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">If an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+is a completion, it shall be the completion of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>. 
+The profile of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+that completes a declaration shall conform fully to that of the declaration.<A NAME="I3691"></A></div>
+<div class="paranum"><a name="p5">5/4</a></div>
+<div class="Normal">If the result subtype has one or more unconstrained 
+access discriminants, the accessibility level of the anonymous access 
+type of each access discriminant, as determined by the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>, 
+shall not be statically deeper than that of the master that elaborated 
+the <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p5.1">5.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;Aspect Static shall 
+be specified to have the value True only if the associated <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN>:</div>
+<div class="paranum"><a name="p5.2">5.2/5</a></div>
+<div class="Bulleted">is not a completion;</div>
+<div class="paranum"><a name="p5.3">5.3/5</a></div>
+<div class="Bulleted">has an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+that is a potentially static expression;</div>
+<div class="paranum"><a name="p5.4">5.4/5</a></div>
+<div class="Bulleted">contains no calls to itself;</div>
+<div class="paranum"><a name="p5.5">5.5/5</a></div>
+<div class="Bulleted">each parameter (if any) is of mode <B>in</B> and 
+is of a static subtype;</div>
+<div class="paranum"><a name="p5.6">5.6/5</a></div>
+<div class="Bulleted">has a result subtype that is a static subtype;</div>
+<div class="paranum"><a name="p5.7">5.7/5</a></div>
+<div class="Bulleted">has no applicable precondition or postcondition 
+expression; and</div>
+<div class="paranum"><a name="p5.8">5.8/5</a></div>
+<div class="Bulleted">is not type-invariant preserving for any type (see 
+<A HREF="RM-7-3-2.html">7.3.2</A>).&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 6 was deleted.</I></SPAN> 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7/4</a></div>
+<div class="Normal">The execution of an expression function is invoked 
+by a subprogram call. For the execution of a subprogram call on an expression 
+function, the execution of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN> 
+executes an implicit function body containing only a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0200">simple_return_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+is the return expression of the expression function.</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal"><A NAME="I3692"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+has no other effect than to establish that the expression function can 
+be called without failing the Elaboration_Check.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Origin&nbsp;(P&nbsp;:&nbsp;<B>in</B>&nbsp;Point)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;--&nbsp;<SPAN Class="roman"><I>see&nbsp;<A HREF="RM-3-9.html">3.9</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;(P.X&nbsp;=&nbsp;0.0&nbsp;<B>and</B>&nbsp;P.Y&nbsp;=&nbsp;0.0);</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

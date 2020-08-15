@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Parameter Associations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.4.1 Parameter Associations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I3034"></A>A parameter association defines 
+the association between an actual parameter and a formal parameter.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0092">selector_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0158">parameter_association</A></SPAN> 
+shall resolve to denote a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0152">parameter_specification</A></SPAN> 
+of the view being called.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3035"></A>The <I>actual parameter</I> is 
+either the <SPAN Class="swiss"><A HREF="RM-6-4.html#S0159">explicit_actual_parameter</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0158">parameter_association</A></SPAN> 
+for a given formal parameter, or the corresponding <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+if no <SPAN Class="swiss"><A HREF="RM-6-4.html#S0158">parameter_association</A></SPAN> 
+is given for the formal parameter. <A NAME="I3036"></A>The expected type 
+for an actual parameter is the type of the corresponding formal parameter. 
+</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">If the mode is <B>in</B>, the actual is interpreted 
+as an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>; 
+otherwise, the actual is interpreted only as a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>, 
+if possible.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">If the mode is <B>in out</B> or <B>out</B>, the actual 
+shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+that denotes a variable.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The type of the actual 
+parameter associated with an access parameter shall be convertible (see 
+<A HREF="RM-4-6.html">4.6</A>) to its anonymous access type. <A NAME="I3037"></A></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3038"></A>For 
+the evaluation of a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0158">parameter_association</A></SPAN>: 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">The actual parameter is first evaluated.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">For an access parameter, the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0077">access_definition</A></SPAN> 
+is elaborated, which creates the anonymous access type.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">For a parameter (of any mode) that is passed by 
+reference (see <A HREF="RM-6-2.html">6.2</A>), a view conversion of the 
+actual parameter to the nominal subtype of the formal parameter is evaluated, 
+and the formal parameter denotes that conversion. <A NAME="I3039"></A></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted"><A NAME="I3040"></A>For an <B>in</B> or <B>in out</B> 
+parameter that is passed by copy (see <A HREF="RM-6-2.html">6.2</A>), 
+the formal parameter object is created, and the value of the actual parameter 
+is converted to the nominal subtype of the formal parameter and assigned 
+to the formal. <A NAME="I3041"></A></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">For an <B>out</B> 
+parameter that is passed by copy, the formal parameter object is created, 
+and:&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented2Bulleted">For an access type, the formal parameter 
+is initialized from the value of the actual, without a constraint check; 
+</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Indented2Bulleted">For a composite type with discriminants 
+or that has implicit initial values for any subcomponents (see <A HREF="RM-3-3-1.html">3.3.1</A>), 
+the behavior is as for an <B>in out</B> parameter passed by copy.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented2Bulleted">For any other type, the formal parameter 
+is uninitialized. If composite, a view conversion of the actual parameter 
+to the nominal subtype of the formal is evaluated (which might raise 
+Constraint_Error), and the actual subtype of the formal is that of the 
+view conversion. If elementary, the actual subtype of the formal is given 
+by its nominal subtype.&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><A NAME="I3042"></A><A NAME="I3043"></A>A formal 
+parameter of mode <B>in out</B> or <B>out</B> with discriminants is constrained 
+if either its nominal subtype or the actual parameter is constrained.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I3044"></A><A NAME="I3045"></A><A NAME="I3046"></A><A NAME="I3047"></A><A NAME="I3048"></A>After 
+normal completion and leaving of a subprogram, for each <B>in out</B> 
+or <B>out</B> parameter that is passed by copy, the value of the formal 
+parameter is converted to the subtype of the variable given as the actual 
+parameter and assigned to it. <A NAME="I3049"></A>These conversions and 
+assignments occur in an arbitrary order.<A NAME="I3050"></A>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

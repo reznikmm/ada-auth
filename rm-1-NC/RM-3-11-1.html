@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Completions of Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.11.1 Completions of Declarations</H1>
+<div class="paranum"><a name="p1">1/1</a></div>
+<div class="Normal">Declarations sometimes come in two parts. <A NAME="I2155"></A>A 
+declaration that requires a second part is said to <I>require completion</I>. 
+<A NAME="I2156"></A>The second part is called the <I>completion</I> of 
+the declaration (and of the entity declared), and is either another declaration, 
+a body, or a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN>. 
+A <A NAME="I2157"></A><I>body</I> is a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0082">body</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0190">entry_body</A></SPAN>, 
+or a renaming-as-body (see <A HREF="RM-8-5-4.html">8.5.4</A>).&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A construct that can 
+be a completion is interpreted as the completion of a prior declaration 
+only if:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">The declaration and the completion occur immediately 
+within the same declarative region;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">The defining name or <SPAN Class="swiss"><A HREF="RM-6-1.html#S0146">defining_program_unit_name</A></SPAN> 
+in the completion is the same as in the declaration, or in the case of 
+a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN> 
+applies to the declaration;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">If the declaration is overloadable, then the completion 
+either has a type-conformant profile, or is a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN>. 
+<A NAME="I2158"></A></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An implicit declaration shall not have a completion. 
+<A NAME="I2159"></A>For any explicit declaration that is specified to 
+<I>require completion</I>, there shall be a corresponding explicit completion. 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">At most one completion is allowed for a given declaration. 
+Additional requirements on completions appear where each kind of completion 
+is defined.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I2160"></A>A type is <I>completely defined</I> 
+at a place that is after its full type definition (if it has one) and 
+after all of its subcomponent types are completely defined. A type shall 
+be completely defined before it is frozen (see <A HREF="RM-13-14.html">13.14</A> 
+and <A HREF="RM-7-3.html">7.3</A>).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">88&nbsp;&nbsp;Completions are in principle allowed 
+for any kind of explicit declaration. However, for some kinds of declaration, 
+the only allowed completion is a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN> 
+Import, and implementations are not required to support <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN> 
+Import for every kind of entity.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">89&nbsp;&nbsp;There are rules that prevent premature 
+uses of declarations that have a corresponding completion. The Elaboration_Checks 
+of <A HREF="RM-3-11.html">3.11</A> prevent such uses at run time for 
+subprograms, protected operations, tasks, and generic units. The rules 
+of <A HREF="RM-13-14.html">13.14</A>, &ldquo;<A HREF="RM-13-14.html">Freezing 
+Rules</A>&rdquo; prevent, at compile time, premature uses of other entities 
+such as private types and deferred constants.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

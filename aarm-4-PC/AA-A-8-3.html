@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Sequential Input-Output Operations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-8-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-8-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.8.3 Sequential Input-Output Operations</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The operations available for sequential input and 
+output are described in this subclause. The exception Status_Error is 
+propagated if any of these operations is attempted for a file that is 
+not open.&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Read(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Element_Type);</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented2">Operates on a file of mode In_File. Reads an element 
+from the given file, and returns the value of this element in the Item 
+parameter.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We considered basing Sequential_IO.Read 
+on Element_Type'Read from an implicit stream associated with the sequential 
+file. However, Element_Type'Read is a type-related attribute, whereas 
+Sequential_IO should take advantage of the particular constraints of 
+the actual subtype corresponding to Element_Type to minimize the size 
+of the external file. Furthermore, forcing the implementation of Sequential_IO 
+to be based on Element_Type'Read would create an upward incompatibility 
+since existing data files written by an Ada 83 program using Sequential_IO 
+might not be readable by the identical program built with an Ada 95 implementation 
+of Sequential_IO.</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations">An Ada 95 implementation might still use an 
+implementation-defined attribute analogous to 'Read to implement the 
+procedure Read, but that attribute will likely have to be subtype-specific 
+rather than type-related, and it need not be user-specifiable. Such an 
+attribute will presumably be needed to implement the generic package 
+Storage_IO (see <A HREF="AA-A-9.html">A.9</A>).&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not In_File. The exception End_Error is 
+propagated if no more elements can be read from the given file. The exception 
+Data_Error can be propagated if the element read cannot be interpreted 
+as a value of the subtype Element_Type (see <A HREF="AA-A-13.html">A.13</A>, 
+&ldquo;<A HREF="AA-A-13.html">Exceptions in Input-Output</A>&rdquo;). 
+</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Data_Error need not be propagated 
+if the check is too complex. See <A HREF="AA-A-13.html">A.13</A>, &ldquo;<A HREF="AA-A-13.html">Exceptions 
+in Input-Output</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Write(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type);</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented2">Operates on a file of mode Out_File or Append_File. 
+Writes the value of Item to the given file.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not Out_File or Append_File. The exception 
+Use_Error is propagated if the capacity of the external file is exceeded.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples"><B>function</B>&nbsp;End_Of_File(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+Operates on a file of mode In_File. Returns True if no more elements 
+can be read from the given file; otherwise<span class="insert3">,</span> 
+returns False.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented2">The exception Mode_Error is propagated if the 
+mode is not In_File.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-8-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-8-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

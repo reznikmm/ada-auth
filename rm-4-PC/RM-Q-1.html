@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Language-Defined Packages</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Index {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Q.1 Language-Defined Packages</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+lists all language-defined packages.<A NAME="I10163"></A>&nbsp;</div>
+<div class="Normal">&nbsp;</div>
+<div class="Index">Ada&nbsp;&nbsp; <A HREF="RM-A-2.html#I5565">A.2(2)</A></div>
+<div class="Index">Address_To_Access_Conversions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System&nbsp;&nbsp; <A HREF="RM-13-7-2.html#I5241">13.7.2(2)</A></div>
+<div class="Index">Arithmetic<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Calendar&nbsp;&nbsp; <A HREF="RM-9-6-1.html#I4237">9.6.1(8/2)</A></div>
+<div class="Index">ASCII<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Standard&nbsp;&nbsp; <A HREF="RM-A-1.html#I5554">A.1(36.3/2)</A></div>
+<div class="Index">Assertions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-11-4-2.html#I4670">11.4.2(12/2)</A></div>
+<div class="Index">Asynchronous_Task_Control<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-11.html#I8197">D.11(3/2)</A></div>
+<div class="Index">Bounded<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-4.html#I5953">A.4.4(3)</A></div>
+<div class="Index">Bounded_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-11.html#I6647">A.10.11(3/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-A-11.html#I6671">A.11(4/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-A-11.html#I6672">A.11(4/3)</A></div>
+<div class="Index">Bounded_Priority_Queues<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-31.html#I7480">A.18.31(2/3)</A></div>
+<div class="Index">Bounded_Synchronized_Queues<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-29.html#I7467">A.18.29(2/3)</A></div>
+<div class="Index">C<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Interfaces&nbsp;&nbsp; <A HREF="RM-B-3.html#I7595">B.3(4)</A></div>
+<div class="Index">Calendar<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-9-6.html#I4209">9.6(10)</A></div>
+<div class="Index">Characters<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-3-1.html#I5566">A.3.1(2)</A></div>
+<div class="Index">COBOL<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Interfaces&nbsp;&nbsp; <A HREF="RM-B-4.html#I7711">B.4(7)</A></div>
+<div class="Index">Command_Line<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-15.html#I6736">A.15(3)</A></div>
+<div class="Index">Complex_Arrays<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-3-2.html#I8642">G.3.2(53/2)</A></div>
+<div class="Index">Complex_Elementary_Functions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-1-2.html#I8526">G.1.2(9/1)</A></div>
+<div class="Index">Complex_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-G-1-3.html#I8544">G.1.3(9.1/2)</A></div>
+<div class="Index">Complex_Types<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-1-1.html#I8499">G.1.1(25/1)</A></div>
+<div class="Index">Complex_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-G-1-3.html#I8534">G.1.3(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-G-1-4.html#I8546">G.1.4(1)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-G-1-5.html#I8548">G.1.5(1/2)</A></div>
+<div class="Index">Constants<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.Maps&nbsp;&nbsp; <A HREF="RM-A-4-6.html#I6064">A.4.6(3/2)</A></div>
+<div class="Index">Containers<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-18-1.html#I6825">A.18.1(3/2)</A></div>
+<div class="Index">Conversions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Characters&nbsp;&nbsp; <A HREF="RM-A-3-4.html#I5838">A.3.4(2/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; 
+<A HREF="RM-A-4-11.html#I6185">A.4.11(15/3)</A></div>
+<div class="Index">Decimal<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-F-2.html#I8443">F.2(2)</A></div>
+<div class="Index">Decimal_Conversions<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.COBOL&nbsp;&nbsp; <A HREF="RM-B-4.html#I7745">B.4(31)</A></div>
+<div class="Index">Decimal_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6611">A.10.1(73)</A></div>
+<div class="Index">Decimal_Output<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO.Editing&nbsp;&nbsp; <A HREF="RM-F-3-3.html#I8466">F.3.3(11)</A></div>
+<div class="Index">Direct_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-8-4.html#I6433">A.8.4(2)</A></div>
+<div class="Index">Directories<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-16.html#I6745">A.16(3/2)</A></div>
+<div class="Index">Discrete_Random<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-A-5-2.html#I6270">A.5.2(17)</A></div>
+<div class="Index">Dispatching<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-2-1.html#I7972">D.2.1(1.2/3)</A></div>
+<div class="Index">Dispatching_Domains<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System.Multiprocessors&nbsp;&nbsp; 
+<A HREF="RM-D-16-1.html#I8292">D.16.1(3/3)</A></div>
+<div class="Index">Doubly_Linked_Lists<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-3.html#I6933">A.18.3(5/3)</A></div>
+<div class="Index">Dynamic_Priorities<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-5-1.html#I8074">D.5.1(3/2)</A></div>
+<div class="Index">EDF<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Dispatching&nbsp;&nbsp; <A HREF="RM-D-2-6.html#I8028">D.2.6(9/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Synchronous_Task_Control&nbsp;&nbsp; 
+<A HREF="RM-D-10.html#I8188">D.10(5.2/3)</A></div>
+<div class="Index">Editing<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-F-3-3.html#I8454">F.3.3(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-F-3-4.html#I8474">F.3.4(1)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-F-3-5.html#I8476">F.3.5(1/2)</A></div>
+<div class="Index">Elementary_Functions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-A-5-1.html#I6249">A.5.1(9/1)</A></div>
+<div class="Index">Enumeration_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6621">A.10.1(79)</A></div>
+<div class="Index">Environment_Variables<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-17.html#I6809">A.17(3/2)</A></div>
+<div class="Index">Exceptions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-11-4-1.html#I4629">11.4.1(2/2)</A></div>
+<div class="Index">Execution_Time<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-14.html#I8214">D.14(3/2)</A></div>
+<div class="Index">Finalization<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-7-6.html#I3718">7.6(4/3)</A></div>
+<div class="Index">Fixed<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-3.html#I5916">A.4.3(5)</A></div>
+<div class="Index">Fixed_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6601">A.10.1(68)</A></div>
+<div class="Index">Float_Random<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-A-5-2.html#I6257">A.5.2(5)</A></div>
+<div class="Index">Float_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-10-9.html#I6646">A.10.9(33)</A></div>
+<div class="Index">Float_Wide_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-11.html#I6667">A.11(2/2)</A></div>
+<div class="Index">Float_Wide_Wide_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-11.html#I6670">A.11(3/2)</A></div>
+<div class="Index">Float_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6591">A.10.1(63)</A></div>
+<div class="Index">Formatting<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Calendar&nbsp;&nbsp; <A HREF="RM-9-6-1.html#I4241">9.6.1(15/2)</A></div>
+<div class="Index">Fortran<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Interfaces&nbsp;&nbsp; <A HREF="RM-B-5.html#I7765">B.5(4)</A></div>
+<div class="Index">Generic_Complex_Arrays<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-3-2.html#I8606">G.3.2(2/2)</A></div>
+<div class="Index">Generic_Complex_Elementary_Functions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-1-2.html#I8505">G.1.2(2/2)</A></div>
+<div class="Index">Generic_Complex_Types<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-1-1.html#I8478">G.1.1(2/1)</A></div>
+<div class="Index">Generic_Dispatching_Constructor<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Tags&nbsp;&nbsp; <A HREF="RM-3-9.html#I2146">3.9(18.2/3)</A></div>
+<div class="Index">Generic_Elementary_Functions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-A-5-1.html#I6220">A.5.1(3)</A></div>
+<div class="Index">Generic_Bounded_Length<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Strings.Bounded&nbsp;&nbsp; <A HREF="RM-A-4-4.html#I5954">A.4.4(4)</A></div>
+<div class="Index">Generic_Keys<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="RM-A-18-8.html#I7202">A.18.8(50/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="RM-A-18-9.html#I7281">A.18.9(62/2)</A></div>
+<div class="Index">Generic_Real_Arrays<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-3-1.html#I8590">G.3.1(2/2)</A></div>
+<div class="Index">Generic_Sorting<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
+<A HREF="RM-A-18-3.html#I6981">A.18.3(47/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="RM-A-18-2.html#I6908">A.18.2(75/2)</A></div>
+<div class="Index">Group_Budgets<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Execution_Time&nbsp;&nbsp; <A HREF="RM-D-14-2.html#I8245">D.14.2(3/3)</A></div>
+<div class="Index">Handling<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Characters&nbsp;&nbsp; <A HREF="RM-A-3-2.html#I5569">A.3.2(2/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Characters&nbsp;&nbsp; <A HREF="RM-A-3-5.html#I5857">A.3.5(3/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Wide_Characters&nbsp;&nbsp; 
+<A HREF="RM-A-3-6.html#I5878">A.3.6(1/3)</A></div>
+<div class="Index">Hashed_Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-5.html#I7020">A.18.5(2/3)</A></div>
+<div class="Index">Hashed_Sets<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-8.html#I7154">A.18.8(2/3)</A></div>
+<div class="Index">Hierarchical_File_Names<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Directories&nbsp;&nbsp; <A HREF="RM-A-16-1.html#I6796">A.16.1(3/3)</A></div>
+<div class="Index">Indefinite_Doubly_Linked_Lists<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-12.html#I7395">A.18.12(2/3)</A></div>
+<div class="Index">Indefinite_Hashed_Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-13.html#I7396">A.18.13(2/3)</A></div>
+<div class="Index">Indefinite_Hashed_Sets<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-15.html#I7398">A.18.15(2/3)</A></div>
+<div class="Index">Indefinite_Holders<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-18.html#I7402">A.18.18(5/3)</A></div>
+<div class="Index">Indefinite_Multiway_Trees<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-17.html#I7400">A.18.17(2/3)</A></div>
+<div class="Index">Indefinite_Ordered_Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-14.html#I7397">A.18.14(2/3)</A></div>
+<div class="Index">Indefinite_Ordered_Sets<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-16.html#I7399">A.18.16(2/3)</A></div>
+<div class="Index">Indefinite_Vectors<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-11.html#I7394">A.18.11(2/3)</A></div>
+<div class="Index">Information<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Directories&nbsp;&nbsp; <A HREF="RM-A-16.html#I6795">A.16(124/2)</A></div>
+<div class="Index">Integer_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-10-8.html#I6645">A.10.8(21)</A></div>
+<div class="Index">Integer_Wide_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-11.html#I6666">A.11(2/2)</A></div>
+<div class="Index">Integer_Wide_Wide_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-11.html#I6669">A.11(3/2)</A></div>
+<div class="Index">Integer_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6573">A.10.1(52)</A></div>
+<div class="Index">Interfaces&nbsp;&nbsp; <A HREF="RM-B-2.html#I7583">B.2(3)</A></div>
+<div class="Index">Interrupts<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-C-3-2.html#I7832">C.3.2(2/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Execution_Time&nbsp;&nbsp; <A HREF="RM-D-14-3.html#I8270">D.14.3(3/3)</A></div>
+<div class="Index">IO_Exceptions<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-13.html#I6723">A.13(3)</A></div>
+<div class="Index">Iterator_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-5-5-1.html#I3247">5.5.1(2/3)</A></div>
+<div class="Index">Latin_1<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Characters&nbsp;&nbsp; <A HREF="RM-A-3-3.html#I5607">A.3.3(3)</A></div>
+<div class="Index">List_Iterator_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Doubly_Linked_Lists&nbsp;&nbsp; 
+<A HREF="RM-A-18-3.html#I6939">A.18.3(9.2/3)</A></div>
+<div class="Index">Locales<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-19.html#I7488">A.19(3/3)</A></div>
+<div class="Index">Machine_Code<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System&nbsp;&nbsp; <A HREF="RM-13-8.html#I5250">13.8(7)</A></div>
+<div class="Index">Map_Iterator_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Maps&nbsp;&nbsp; <A HREF="RM-A-18-5.html#I7026">A.18.5(6.2/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Maps&nbsp;&nbsp; <A HREF="RM-A-18-6.html#I7080">A.18.6(7.2/3)</A></div>
+<div class="Index">Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-2.html#I5892">A.4.2(3/2)</A></div>
+<div class="Index">Modular_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6582">A.10.1(57)</A></div>
+<div class="Index">Multiprocessors<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System&nbsp;&nbsp; <A HREF="RM-D-16.html#I8285">D.16(3/3)</A></div>
+<div class="Index">Multiway_Trees<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-10.html#I7319">A.18.10(7/3)</A></div>
+<div class="Index">Names<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Interrupts&nbsp;&nbsp; <A HREF="RM-C-3-2.html#I7843">C.3.2(12)</A></div>
+<div class="Index">Non_Preemptive<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Dispatching&nbsp;&nbsp; <A HREF="RM-D-2-4.html#I8010">D.2.4(2.2/3)</A></div>
+<div class="Index">Numerics<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-5.html#I6216">A.5(3/2)</A></div>
+<div class="Index">Ordered_Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-6.html#I7073">A.18.6(2/3)</A></div>
+<div class="Index">Ordered_Sets<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-9.html#I7227">A.18.9(2/3)</A></div>
+<div class="Index">Pointers<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Interfaces.C&nbsp;&nbsp; <A HREF="RM-B-3-2.html#I7681">B.3.2(4)</A></div>
+<div class="Index">Real_Arrays<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Numerics&nbsp;&nbsp; <A HREF="RM-G-3-1.html#I8602">G.3.1(31/2)</A></div>
+<div class="Index">Real_Time<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-8.html#I8150">D.8(3)</A></div>
+<div class="Index">Round_Robin<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Dispatching&nbsp;&nbsp; <A HREF="RM-D-2-5.html#I8017">D.2.5(4/2)</A></div>
+<div class="Index">RPC<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System&nbsp;&nbsp; <A HREF="RM-E-5.html#I8424">E.5(3)</A></div>
+<div class="Index">Sequential_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-8-1.html#I6408">A.8.1(2)</A></div>
+<div class="Index">Set_Iterator_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Hashed_Sets&nbsp;&nbsp; <A HREF="RM-A-18-8.html#I7160">A.18.8(6.2/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Ordered_Sets&nbsp;&nbsp; <A HREF="RM-A-18-9.html#I7234">A.18.9(7.2/3)</A></div>
+<div class="Index">Single_Precision_Complex_Types<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Interfaces.Fortran&nbsp;&nbsp; <A HREF="RM-B-5.html#I7770">B.5(8)</A></div>
+<div class="Index">Standard&nbsp;&nbsp; <A HREF="RM-A-1.html#I5545">A.1(4)</A></div>
+<div class="Index">Storage_Elements<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System&nbsp;&nbsp; <A HREF="RM-13-7-1.html#I5229">13.7.1(2/2)</A></div>
+<div class="Index">Storage_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-9.html#I6465">A.9(3)</A></div>
+<div class="Index">Storage_Pools<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System&nbsp;&nbsp; <A HREF="RM-13-11.html#I5285">13.11(5)</A></div>
+<div class="Index">Stream_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Streams&nbsp;&nbsp; <A HREF="RM-A-12-1.html#I6678">A.12.1(3/3)</A></div>
+<div class="Index">Streams<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-13-13-1.html#I5441">13.13.1(2)</A></div>
+<div class="Index">Strings<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-4-1.html#I5879">A.4.1(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; 
+<A HREF="RM-A-4-11.html#I6191">A.4.11(22/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Interfaces.C&nbsp;&nbsp; <A HREF="RM-B-3-1.html#I7659">B.3.1(3)</A></div>
+<div class="Index">Subpools<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> System.Storage_Pools&nbsp;&nbsp; <A HREF="RM-13-11-4.html#I5364">13.11.4(3/3)</A></div>
+<div class="Index">Synchronized_Queue_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-27.html#I7454">A.18.27(3/3)</A></div>
+<div class="Index">Synchronous_Barriers<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-10-1.html#I8193">D.10.1(3/3)</A></div>
+<div class="Index">Synchronous_Task_Control<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-D-10.html#I8182">D.10(3/2)</A></div>
+<div class="Index">System&nbsp;&nbsp; <A HREF="RM-13-7.html#I5202">13.7(3/2)</A></div>
+<div class="Index">Tags<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-3-9.html#I2121">3.9(6/2)</A></div>
+<div class="Index">Task_Attributes<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-C-7-2.html#I7921">C.7.2(2)</A></div>
+<div class="Index">Task_Identification<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-C-7-1.html#I7901">C.7.1(2/2)</A></div>
+<div class="Index">Task_Termination<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-C-7-3.html#I7933">C.7.3(2/2)</A></div>
+<div class="Index">Text_Streams<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-12-2.html#I6714">A.12.2(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-A-12-3.html#I6717">A.12.3(3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-A-12-4.html#I6720">A.12.4(3/2)</A></div>
+<div class="Index">Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-10-1.html#I6484">A.10.1(2)</A></div>
+<div class="Index">Time_Zones<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Calendar&nbsp;&nbsp; <A HREF="RM-9-6-1.html#I4233">9.6.1(2/2)</A></div>
+<div class="Index">Timers<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Execution_Time&nbsp;&nbsp; <A HREF="RM-D-14-1.html#I8230">D.14.1(3/2)</A></div>
+<div class="Index">Timing_Events<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Real_Time&nbsp;&nbsp; <A HREF="RM-D-15.html#I8273">D.15(3/2)</A></div>
+<div class="Index">Tree_Iterator_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Multiway_Trees&nbsp;&nbsp; 
+<A HREF="RM-A-18-10.html#I7325">A.18.10(13/3)</A></div>
+<div class="Index">Unbounded<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-5.html#I6012">A.4.5(3)</A></div>
+<div class="Index">Unbounded_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Text_IO&nbsp;&nbsp; <A HREF="RM-A-10-12.html#I6656">A.10.12(3/2)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-A-11.html#I6673">A.11(5/3)</A><BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Wide_Wide_Text_IO&nbsp;&nbsp; <A HREF="RM-A-11.html#I6674">A.11(5/3)</A></div>
+<div class="Index">Unbounded_Priority_Queues<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-30.html#I7473">A.18.30(2/3)</A></div>
+<div class="Index">Unbounded_Synchronized_Queues<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-28.html#I7461">A.18.28(2/3)</A></div>
+<div class="Index">UTF_Encoding<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-11.html#I6174">A.4.11(3/3)</A></div>
+<div class="Index">Vector_Iterator_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;<I>in</I> Ada.Containers.Vectors&nbsp;&nbsp; <A HREF="RM-A-18-2.html#I6842">A.18.2(11.2/3)</A></div>
+<div class="Index">Vectors<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Containers&nbsp;&nbsp; <A HREF="RM-A-18-2.html#I6834">A.18.2(6/3)</A></div>
+<div class="Index">Wide_Bounded<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6080">A.4.7(1/3)</A></div>
+<div class="Index">Wide_Constants<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.Wide_Maps&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6094">A.4.7(1/3)</A>, 
+<A HREF="RM-A-4-8.html#I6155">A.4.8(28/2)</A></div>
+<div class="Index">Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6086">A.4.7(1/3)</A></div>
+<div class="Index">Wide_Fixed<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6079">A.4.7(1/3)</A></div>
+<div class="Index">Wide_Hash<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6082">A.4.7(1/3)</A></div>
+<div class="Index">Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6090">A.4.7(1/3)</A></div>
+<div class="Index">Wide_Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6095">A.4.7(3)</A></div>
+<div class="Index">Wide_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-11.html#I6665">A.11(2/2)</A></div>
+<div class="Index">Wide_Unbounded<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-7.html#I6081">A.4.7(1/3)</A></div>
+<div class="Index">Wide_Characters<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-3-1.html#I5567">A.3.1(4/2)</A></div>
+<div class="Index">Wide_Strings<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; 
+<A HREF="RM-A-4-11.html#I6198">A.4.11(30/3)</A></div>
+<div class="Index">Wide_Wide_Constants<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.Wide_Wide_Maps&nbsp;&nbsp; 
+<A HREF="RM-A-4-8.html#I6133">A.4.8(1/3)</A></div>
+<div class="Index">Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6125">A.4.8(1/3)</A></div>
+<div class="Index">Wide_Wide_Hash<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6121">A.4.8(1/3)</A></div>
+<div class="Index">Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6129">A.4.8(1/3)</A></div>
+<div class="Index">Wide_Wide_Text_IO<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-11.html#I6668">A.11(3/2)</A></div>
+<div class="Index">Wide_Wide_Bounded<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6119">A.4.8(1/3)</A></div>
+<div class="Index">Wide_Wide_Characters<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada&nbsp;&nbsp; <A HREF="RM-A-3-1.html#I5568">A.3.1(6/2)</A></div>
+<div class="Index">Wide_Wide_Fixed<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6118">A.4.8(1/3)</A></div>
+<div class="Index">Wide_Wide_Maps<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6134">A.4.8(3/2)</A></div>
+<div class="Index">Wide_Wide_Strings<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings.UTF_Encoding&nbsp;&nbsp; 
+<A HREF="RM-A-4-11.html#I6205">A.4.11(38/3)</A></div>
+<div class="Index">Wide_Wide_Unbounded<BR>
+&nbsp;&nbsp;&nbsp;<I>child of</I> Ada.Strings&nbsp;&nbsp; <A HREF="RM-A-4-8.html#I6120">A.4.8(1/3)</A></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-Q-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Elementary Functions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.5.1 Elementary Functions</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Implementation-defined approximations to the mathematical 
+functions known as the &ldquo;elementary functions&rdquo; are provided 
+by the subprograms in Numerics.Generic_Elementary_Functions. Nongeneric 
+equivalents of this generic package for each of the predefined floating 
+point types are also provided as children of Numerics.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The accuracy 
+actually achieved by the elementary functions.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The generic library 
+package Numerics.Generic_Elementary_Functions has the following declaration: 
+</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Float_Type&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
+<A NAME="I6839"></A><BR>
+<B>package</B>&nbsp;Ada.Numerics.Generic_Elementary_Functions&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Generic_Elementary_Functions);</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6840"></A>Sqrt&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6841"></A>Log&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6842"></A>Log&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6843"></A>Exp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;&nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6844"></A>Sin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6845"></A>Sin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6846"></A>Cos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6847"></A>Cos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6848"></A>Tan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6849"></A>Tan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6850"></A>Cot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6851"></A>Cot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6852"></A>Arcsin&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6853"></A>Arcsin&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6854"></A>Arccos&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6855"></A>Arccos&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6856"></A>Arctan&nbsp;&nbsp;(Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6857"></A>Arctan&nbsp;&nbsp;(Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6858"></A>Arccot&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6859"></A>Arccot&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6860"></A>Sinh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6861"></A>Cosh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6862"></A>Tanh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6863"></A>Coth&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6864"></A>Arcsinh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6865"></A>Arccosh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6866"></A>Arctanh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6867"></A>Arccoth&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Elementary_Functions;</div>
+<div class="paranum"><a name="p9">9/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0020">8652/0020</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00126.TXT">AI95-00126-01</A></I>} 
+<A NAME="I6868"></A>The library package Numerics.Elementary_Functions 
+is declared pure and defines the same subprograms as Numerics.Generic_Elementary_Functions, 
+except that the predefined type Float is systematically substituted for 
+Float_Type'Base throughout. Nongeneric equivalents of Numerics.Generic_Elementary_Functions 
+for each of the other predefined floating point types are defined similarly, 
+with the names Numerics.Short_Elementary_Functions, Numerics.Long_Elementary_Functions, 
+etc.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The nongeneric equivalents are 
+provided to allow the programmer to construct simple mathematical applications 
+without being required to understand and use generics.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The functions have their usual mathematical meanings. 
+When the Base parameter is specified, the Log function computes the logarithm 
+to the given base; otherwise, it computes the natural logarithm. When 
+the Cycle parameter is specified, the parameter X of the forward trigonometric 
+functions (Sin, Cos, Tan, and Cot) and the results of the inverse trigonometric 
+functions (Arcsin, Arccos, Arctan, and Arccot) are measured in units 
+such that a full cycle of revolution has the given value; otherwise, 
+they are measured in radians.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The computed results 
+of the mathematically multivalued functions are rendered single-valued 
+by the following conventions, which are meant to imply the principal 
+branch:&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The results of the Sqrt and Arccosh functions and 
+that of the exponentiation operator are nonnegative.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">The result of the Arcsin function is in the quadrant 
+containing the point (1.0, <I>x</I>), where <I>x</I> is the value of 
+the parameter X. This quadrant is I or IV; thus, the range of the Arcsin 
+function is approximately &ndash;&pi;/2.0 to &pi;/2.0 (&ndash;<SPAN Class="roman">Cycle</SPAN>/4.0 
+to <SPAN Class="roman">Cycle</SPAN>/4.0, if the parameter Cycle is specified).</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">The result of the Arccos function is in the quadrant 
+containing the point (<I>x</I>, 1.0), where <I>x</I> is the value of 
+the parameter X. This quadrant is I or II; thus, the Arccos function 
+ranges from 0.0 to approximately &pi; (<SPAN Class="roman">Cycle</SPAN>/2.0, 
+if the parameter Cycle is specified).</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">The results of the Arctan and Arccot functions 
+are in the quadrant containing the point (<I>x</I>, <I>y</I>), where 
+<I>x</I> and <I>y</I> are the values of the parameters X and Y, respectively. 
+This may be any quadrant (I through IV) when the parameter X (resp., 
+Y) of Arctan (resp., Arccot) is specified, but it is restricted to quadrants 
+I and IV (resp., I and II) when that parameter is omitted. Thus, the 
+range when that parameter is specified is approximately &ndash;&pi; to 
+&pi; (&ndash;<SPAN Class="roman">Cycle</SPAN>/2.0 to <SPAN Class="roman">Cycle</SPAN>/2.0, 
+if the parameter Cycle is specified); when omitted, the range of Arctan 
+(resp., Arccot) is that of Arcsin (resp., Arccos), as given above. When 
+the point (<I>x</I>, <I>y</I>) lies on the negative x-axis, the result 
+approximates&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Indented2Bulleted">&pi; (resp., &ndash;&pi;) when the sign 
+of the parameter Y is positive (resp., negative), if Float_Type'Signed_Zeros 
+is True;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented2Bulleted">&pi;, if Float_Type'Signed_Zeros is False. 
+</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">(In the case of the inverse trigonometric functions, 
+in which a result lying on or near one of the axes may not be exactly 
+representable, the approximation inherent in computing the result may 
+place it in an adjacent quadrant, close to but on the wrong side of the 
+axis.)&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The exception Numerics.Argument_Error 
+is raised, signaling a parameter value outside the domain of the corresponding 
+mathematical function, in the following cases:&nbsp;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">by any forward or inverse trigonometric function 
+with specified cycle, when the value of the parameter Cycle is zero or 
+negative;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Bulleted">by the Log function with specified base, when the 
+value of the parameter Base is zero, one, or negative;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">by the Sqrt and Log functions, when the value of 
+the parameter X is negative;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">by the exponentiation operator, when the value 
+of the left operand is negative or when both operands have the value 
+zero;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">by the Arcsin, Arccos, and Arctanh functions, when 
+the absolute value of the parameter X exceeds one;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Bulleted">by the Arctan and Arccot functions, when the parameters 
+X and Y both have the value zero;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Bulleted">by the Arccosh function, when the value of the 
+parameter X is less than one; and</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Bulleted">by the Arccoth function, when the absolute value 
+of the parameter X is less than one.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6869"></A><A NAME="I6870"></A><A NAME="I6871"></A>The 
+exception Constraint_Error is raised, signaling a pole of the mathematical 
+function (analogous to dividing by zero), in the following cases, provided 
+that Float_Type'Machine_Overflows is True:&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Bulleted">by the Log, Cot, and Coth functions, when the value 
+of the parameter X is zero;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Bulleted">by the exponentiation operator, when the value 
+of the left operand is zero and the value of the exponent is negative;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Bulleted">by the Tan function with specified cycle, when 
+the value of the parameter X is an odd multiple of the quarter cycle;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Bulleted">by the Cot function with specified cycle, when 
+the value of the parameter X is zero or a multiple of the half cycle; 
+and</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Bulleted">by the Arctanh and Arccoth functions, when the 
+absolute value of the parameter X is one.&nbsp;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Normal"><A NAME="I6872"></A>[Constraint_Error can also be 
+raised when a finite result overflows (see <A HREF="AA-G-2-4.html">G.2.4</A>); 
+this may occur for parameter values sufficiently <I>near</I> poles, and, 
+in the case of some of the functions, for parameter values with sufficiently 
+large magnitudes.]<A NAME="I6873"></A> When Float_Type'Machine_Overflows 
+is False, the result at poles is unspecified.&nbsp;</div>
+<div class="paranum"><a name="p34.a">34.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The purpose of raising Constraint_Error 
+(rather than Numerics.Argument_Error) at the poles of a function, when 
+Float_Type'Machine_Overflows is True, is to provide continuous behavior 
+as the actual parameters of the function approach the pole and finally 
+reach it.&nbsp;</div>
+<div class="paranum"><a name="p34.b">34.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>It is anticipated that an 
+Ada binding to IEC 559:1989 will be developed in the future. As part 
+of such a binding, the Machine_Overflows attribute of a conformant floating 
+point type will be specified to yield False, which will permit both the 
+predefined arithmetic operations and implementations of the elementary 
+functions to deliver signed infinities (and set the overflow flag defined 
+by the binding) instead of raising Constraint_Error in overflow situations, 
+when traps are disabled. Similarly, it is appropriate for the elementary 
+functions to deliver signed infinities (and set the zero-divide flag 
+defined by the binding) instead of raising Constraint_Error at poles, 
+when traps are disabled. Finally, such a binding should also specify 
+the behavior of the elementary functions, when sensible, given parameters 
+with infinite values.&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal">When one parameter of a function with multiple parameters 
+represents a pole and another is outside the function's domain, the latter 
+takes precedence (i.e., Numerics.Argument_Error is raised).&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Normal">In the implementation of Numerics.Generic_Elementary_Functions, 
+the range of intermediate values allowed during the calculation of a 
+final result shall not be affected by any range constraint of the subtype 
+Float_Type.&nbsp;</div>
+<div class="paranum"><a name="p36.a">36.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Implementations 
+of Numerics.Generic_Elementary_Functions written in Ada should therefore 
+avoid declaring local variables of subtype Float_Type; the subtype Float_Type'Base 
+should be used instead.&nbsp;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6874"></A>In 
+the following cases, evaluation of an elementary function shall yield 
+the <I>prescribed result</I>, provided that the preceding rules do not 
+call for an exception to be raised:&nbsp;</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Bulleted">When the parameter X has the value zero, the Sqrt, 
+Sin, Arcsin, Tan, Sinh, Arcsinh, Tanh, and Arctanh functions yield a 
+result of zero, and the Exp, Cos, and Cosh functions yield a result of 
+one.</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Bulleted">When the parameter X has the value one, the Sqrt 
+function yields a result of one, and the Log, Arccos, and Arccosh functions 
+yield a result of zero.</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Bulleted">When the parameter Y has the value zero and the 
+parameter X has a positive value, the Arctan and Arccot functions yield 
+a result of zero.</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Bulleted">The results of the Sin, Cos, Tan, and Cot functions 
+with specified cycle are exact when the mathematical result is zero; 
+those of the first two are also exact when the mathematical result is 
+&plusmn; 1.0.</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Bulleted">Exponentiation by a zero exponent yields the value 
+one. Exponentiation by a unit exponent yields the value of the left operand. 
+Exponentiation of the value one yields the value one. Exponentiation 
+of the value zero yields the value zero.&nbsp;</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Normal">Other accuracy requirements for the elementary functions, 
+which apply only in implementations conforming to the Numerics Annex, 
+and then only in the &ldquo;strict&rdquo; mode defined there (see <A HREF="AA-G-2.html">G.2</A>), 
+are given in <A HREF="AA-G-2-4.html">G.2.4</A>.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">When Float_Type'Signed_Zeros 
+is True, the sign of a zero result shall be as follows:&nbsp;</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Bulleted">A prescribed zero result delivered <I>at the origin</I> 
+by one of the odd functions (Sin, Arcsin, Sinh, Arcsinh, Tan, Arctan 
+or Arccot as a function of Y when X is fixed and positive, Tanh, and 
+Arctanh) has the sign of the parameter X (Y, in the case of Arctan or 
+Arccot).</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Bulleted">A prescribed zero result delivered by one of the 
+odd functions <I>away from the origin</I>, or by some other elementary 
+function, has an implementation-defined sign.&nbsp;</div>
+<div class="paranum"><a name="p46.a">46.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The sign of a 
+zero result from some of the operators or functions in Numerics.Generic_Elementary_Functions, 
+when Float_Type'Signed_Zeros is True.</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Bulleted">[A zero result that is not a prescribed result 
+(i.e., one that results from rounding or underflow) has the correct mathematical 
+sign.]&nbsp;</div>
+<div class="paranum"><a name="p47.a">47.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is a consequence of the 
+rules specified in IEC 559:1989 as they apply to underflow situations 
+with traps disabled.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Normal">The nongeneric equivalent packages may, but need 
+not, be actual instantiations of the generic package for the appropriate 
+predefined type.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p48.a">48.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The semantics 
+of Numerics.Generic_Elementary_Functions differs from Generic_Elementary_Functions 
+as defined in ISO/IEC DIS 11430 (for Ada 83) in the following ways:&nbsp;</div>
+<div class="paranum"><a name="p48.b">48.b</a></div>
+<div class="SmallBulleted">The generic package is a child unit of the 
+package defining the Argument_Error exception.</div>
+<div class="paranum"><a name="p48.c">48.c</a></div>
+<div class="SmallBulleted">DIS 11430 specified names for the nongeneric 
+equivalents, if provided. Here, those nongeneric equivalents are required.</div>
+<div class="paranum"><a name="p48.d">48.d</a></div>
+<div class="SmallBulleted">Implementations are not allowed to impose 
+an optional restriction that the generic actual parameter associated 
+with Float_Type be unconstrained. (In view of the ability to declare 
+variables of subtype Float_Type'Base in implementations of Numerics.Generic_Elementary_Functions, 
+this flexibility is no longer needed.)</div>
+<div class="paranum"><a name="p48.e">48.e</a></div>
+<div class="SmallBulleted">The sign of a prescribed zero result at the 
+origin of the odd functions is specified, when Float_Type'Signed_Zeros 
+is True. This conforms with recommendations of Kahan and other numerical 
+analysts.</div>
+<div class="paranum"><a name="p48.f">48.f</a></div>
+<div class="SmallBulleted">The dependence of Arctan and Arccot on the 
+sign of a parameter value of zero is tied to the value of Float_Type'Signed_Zeros.</div>
+<div class="paranum"><a name="p48.g">48.g</a></div>
+<div class="SmallBulleted">Sqrt is prescribed to yield a result of one 
+when its parameter has the value one. This guarantee makes it easier 
+to achieve certain prescribed results of the complex elementary functions 
+(see <A HREF="AA-G-1-2.html">G.1.2</A>, &ldquo;<A HREF="AA-G-1-2.html">Complex 
+Elementary Functions</A>&rdquo;).</div>
+<div class="paranum"><a name="p48.h">48.h</a></div>
+<div class="SmallBulleted">Conformance to accuracy requirements is conditional. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p48.i">48.i/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0020">8652/0020</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00126.TXT">AI95-00126-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Explicitly stated that the 
+nongeneric equivalents of Generic_Elementary_Functions are pure.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

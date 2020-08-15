@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Aspect Discard_Names</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>C.5 Aspect Discard_Names</H1>
+<div class="paranum"><a name="p1">1/4</a></div>
+<div class="Normal">Specifying the aspect Discard_Names can be used to 
+request a reduction in storage used for the names of entities with runtime 
+name text.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1.1">1.1/4</a></div>
+<div class="Normal">&nbsp;An entity with <I>runtime name text</I> is a nonderived 
+enumeration first subtype, a tagged first subtype, or an exception.<A NAME="I7677"></A><A NAME="I7678"></A></div>
+<div class="paranum"><a name="p1.2">1.2/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For an entity with 
+runtime name text, the following language-defined representation aspect 
+may be specified:</div>
+<div class="paranum"><a name="p1.3">1.3/4</a></div>
+<div class="WideHanging-Term">&nbsp;Discard_Names</div><div class="WideHanging-Body"><br clear="left">
+The type of aspect Discard_Names is Boolean. If directly specified, the 
+<SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0309">aspect_definition</A></SPAN> 
+shall be a static expression. If not specified (including by inheritance), 
+the aspect is False.<A NAME="I7679"></A><A NAME="I7680"></A></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Discard_Names is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7681"></A><A NAME="I7682"></A>Discard_Names[([On 
+=&gt; ] <A NAME="I7683"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>)];</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Discard_Names is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>, 
+or as a configuration pragma. <A NAME="I7684"></A><A NAME="I7685"></A></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5/4</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN> 
+(if present) shall denote an entity with runtime name text. The pragma 
+specifies that the aspect Discard_Names for the type or exception has 
+the value True. Without a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>, 
+the pragma specifies that all entities with runtime name text declared 
+after the pragma, within the same declarative region have the value True 
+for aspect Discard_Names. Alternatively, the pragma can be used as a 
+configuration pragma. If the configuration pragma Discard_Names applies 
+to a compilation unit, all entities with runtime name text declared in 
+the compilation unit have the value True for the aspect Discard_Names..</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I7686"></A><A NAME="I7687"></A>If a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN> 
+is given, then a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Discard_Names is a representation pragma.</div>
+<div class="paranum"><a name="p7">7/4</a></div>
+<div class="Normal">If the aspect Discard_Names is True for an enumeration 
+type, then the semantics of the Wide_Wide_Image and Wide_Wide_Value attributes 
+are implementation defined for that type; the semantics of Image, Wide_Image, 
+Value, and Wide_Value are still defined in terms of Wide_Wide_Image and 
+Wide_Wide_Value. In addition, the semantics of Text_IO.Enumeration_IO 
+are implementation defined. If the aspect Discard_Names is True for a 
+tagged type, then the semantics of the Tags.Wide_Wide_Expanded_Name function 
+are implementation defined for that type; the semantics of Tags.Expanded_Name 
+and Tags.Wide_Expanded_Name are still defined in terms of Tags.Wide_Wide_Expanded_Name. 
+If the aspect Discard_Names is True for an exception, then the semantics 
+of the Exceptions.Wide_Wide_Exception_Name function are implementation 
+defined for that exception; the semantics of Exceptions.Exception_Name 
+and Exceptions.Wide_Exception_Name are still defined in terms of Exceptions.Wide_Wide_Exception_Name.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p8">8/4</a></div>
+<div class="Normal">If the aspect Discard_Names is True for an entity, 
+then the implementation should reduce the amount of storage used for 
+storing names associated with that entity.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

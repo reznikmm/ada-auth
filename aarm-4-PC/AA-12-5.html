@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Formal Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>12.5 Formal Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+[A generic formal subtype can be used to pass to a generic unit a subtype 
+whose type is in a certain category of types.]&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We considered having intermediate 
+syntactic categories <SPAN Class="swiss">formal_integer_type_definition</SPAN>, 
+<SPAN Class="swiss">formal_real_type_definition</SPAN>, and <SPAN Class="swiss">formal_fixed_point_definition</SPAN>, 
+to be more uniform with the syntax rules for non-generic-formal types. 
+However, that would make the rules for formal types slightly more complicated, 
+and it would cause confusion, since <SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0287">formal_discrete_type_definition</A></SPAN> 
+would not fit into the scheme very well.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+<SPAN Class="swiss">formal_type_declaration</SPAN><A NAME="I5293"></A><A NAME="S0281"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3">&nbsp;&nbsp;<A NAME="I5294"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0282">formal_complete_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5295"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0283">formal_incomplete_type_declaration</A></SPAN></span><span class="delete3"><B>&nbsp;type</B>&nbsp;<A NAME="I5296"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5297"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I5298"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_definition</A></SPAN>;</span></div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">formal_complete_type_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5299"></A><A NAME="S0282"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5300"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5301"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I5302"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5303"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>];</span></div>
+<div class="paranum"><a name="p2.2">2.2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">formal_incomplete_type_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I5304"></A><A NAME="S0283"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5305"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>[<A NAME="I5306"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;[<B>is&nbsp;tagged</B>];</span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+<SPAN Class="swiss">formal_type_definition</SPAN><A NAME="I5307"></A><A NAME="S0284"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5308"></A><SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0285">formal_private_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5309"></A><SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0286">formal_derived_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5310"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0287">formal_discrete_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5311"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0288">formal_signed_integer_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5312"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0289">formal_modular_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5313"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0290">formal_floating_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5314"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0291">formal_ordinary_fixed_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5315"></A><SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0292">formal_decimal_fixed_point_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5316"></A><SPAN Class="swiss"><A HREF="AA-12-5-3.html#S0293">formal_array_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5317"></A><SPAN Class="swiss"><A HREF="AA-12-5-4.html#S0294">formal_access_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5318"></A><SPAN Class="swiss"><A HREF="AA-12-5-5.html#S0295">formal_interface_type_definition</A></SPAN></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I5319"></A><A NAME="I5320"></A><A NAME="I5321"></A><A NAME="I5322"></A>For 
+a generic formal subtype, the actual shall be a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>; 
+it denotes the <I>(generic) actual subtype</I>.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>When we say simply &ldquo;formal&rdquo; 
+or &ldquo;actual&rdquo; (for a generic formal that denotes a subtype) 
+we're talking about the subtype, not the type, since a name that denotes 
+a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0281">formal_type_declaration</A></SPAN> 
+denotes a subtype, and the corresponding actual also denotes a subtype. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I5323"></A><A NAME="I5324"></A><A NAME="I5325"></A><A NAME="I5326"></A>A 
+<SPAN Class="swiss"><A HREF="AA-12-5.html#S0281">formal_type_declaration</A></SPAN> 
+declares a <I>(generic) formal type</I>, and its first subtype, the <I>(generic) 
+formal subtype</I>.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A subtype (other than the 
+first subtype) of a generic formal type is not a generic formal subtype. 
+</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+<A NAME="I5327"></A><A NAME="I5328"></A>The form of a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_definition</A></SPAN> 
+<I>determines a category (of types)</I> to which the formal type belongs. 
+For a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0285">formal_private_type_definition</A></SPAN> 
+the reserved words <B>tagged</B> and <B>limited</B> indicate the category 
+of types (see <A HREF="AA-12-5-1.html">12.5.1</A>).<span class="insert3">&nbsp;The reserved word <B>tagged</B> also plays this role in the case of a 
+<SPAN Class="swiss"><A HREF="AA-12-5.html#S0283">formal_incomplete_type_declaration</A></SPAN>.</span> 
+For a <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0286">formal_derived_type_definition</A></SPAN> 
+the category of types is the derivation class rooted at the ancestor 
+type. For other formal types, the name of the syntactic category indicates 
+the category of types; a <SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0287">formal_discrete_type_definition</A></SPAN> 
+defines a discrete type, and so on.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This rule is clearer with the 
+flat syntax rule for <SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_definition</A></SPAN> 
+given above. Adding <SPAN Class="swiss">formal_integer_type_definition</SPAN> 
+and others would make this rule harder to state clearly.</div>
+<div class="paranum"><a name="p6.b">6.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+We use &ldquo;category&rsquo; rather than &ldquo;class&rdquo; above, 
+because the requirement that classes are closed under derivation is not 
+important here. Moreover, there are interesting categories that are not 
+closed under derivation. For instance, limited and interface are categories 
+that do not form classes.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+The actual type shall be in the category determined for the formal.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+For example, if the category determined for the formal is the category 
+of all discrete types, then the actual has to be discrete.</div>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Note that this rule does not require the actual to belong to every category 
+to which the formal belongs. For example, formal private types are in 
+the category of composite types, but the actual need not be composite. 
+Furthermore, one can imagine an infinite number of categories that are 
+just arbitrary sets of types (even though we don't give them names, since 
+they are uninteresting). We don't want this rule to apply to <I>those</I> 
+categories.</div>
+<div class="paranum"><a name="p7.c">7.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+&ldquo;Limited&rdquo; is not an &ldquo;interesting&rdquo; category, but 
+&ldquo;nonlimited&rdquo; is; it is legal to pass a nonlimited type to 
+a limited formal type, but not the other way around. The reserved word 
+<B>limited</B> really represents a category containing both limited and 
+nonlimited types. &ldquo;Private&rdquo; is not a category for this purpose; 
+a generic formal private type accepts both private and nonprivate actual 
+types.</div>
+<div class="paranum"><a name="p7.d">7.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+It is legal to pass a class-wide subtype as the actual if it is in the 
+right category, so long as the formal has unknown discriminants.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0037">8652/0037</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00043.TXT">AI95-00043-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00233.TXT">AI95-00233-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+[The formal type also belongs to each category that contains the determined 
+category.] The primitive subprograms of the type are as for any type 
+in the determined category. For a formal type other than a formal derived 
+type, these are the predefined operators of the type. For an elementary 
+formal type, the predefined operators are implicitly declared immediately 
+after the declaration of the formal type. For a composite formal type, 
+the predefined operators are implicitly declared either immediately after 
+the declaration of the formal type, or later immediately within the declarative 
+region in which the type is declared according to the rules of <A HREF="AA-7-3-1.html">7.3.1</A>. 
+In an instance, the copy of such an implicit declaration declares a view 
+of the predefined operator of the actual type, even if this operator 
+has been overridden for the actual type<span class="insert3">&nbsp;and even 
+if it is never declared for the actual type</span>. [The rules specific 
+to formal derived types are given in <A HREF="AA-12-5-1.html">12.5.1</A>.] 
+</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+All properties of the type are as for any type in the category. Some 
+examples: The primitive operations available are as defined by the language 
+for each category. The form of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
+applicable to a formal type in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+depends on the category of the type as for a nonformal type. The formal 
+type is tagged if and only if it is declared as a tagged private type, 
+or as a type derived from a (visibly) tagged type. (Note that the actual 
+type might be tagged even if the formal type is not.)&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Reason: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+<span class="insert3">The somewhat cryptic phrase &ldquo;even if it is 
+never declared&rdquo; is intended to deal with the following oddity:</span> 
+</div>
+<div class="paranum"><a name="p8.c">8.c/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>package</B>&nbsp;Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;limited&nbsp;private</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;range</B>&nbsp;1&nbsp;..&nbsp;10;<BR>
+<B>end</B>&nbsp;Q;</span></div>
+<div class="paranum"><a name="p8.d">8.d/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;A&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;T;<BR>
+<B>package</B>&nbsp;Q.G&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;A1,&nbsp;A2&nbsp;:&nbsp;A&nbsp;(1&nbsp;..&nbsp;1);<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;A1&nbsp;=&nbsp;A2;<BR>
+<B>end</B>&nbsp;Q.G;</span></div>
+<div class="paranum"><a name="p8.e">8.e/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>with</B>&nbsp;Q.G;<BR>
+<B>package</B>&nbsp;R&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;C&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Q.T;</span></div>
+<div class="paranum"><a name="p8.f">8.f/3</a></div>
+<div class="SmallExamples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;I&nbsp;<B>is&nbsp;new</B>&nbsp;Q.G&nbsp;(C);&nbsp;--<SPAN Class="roman"><I>&nbsp;Where&nbsp;is&nbsp;the&nbsp;predefined&nbsp;&quot;=&quot;&nbsp;for&nbsp;C?</I></SPAN><BR>
+<B>end</B>&nbsp;R;</span></div>
+<div class="paranum"><a name="p8.g">8.g/3</a></div>
+<div class="Annotations"><span class="insert3">An &quot;=&quot; is available 
+for the formal type A in the private part of Q.G. However, no &quot;=&quot; 
+operator is ever declared for type C, because its component type Q.T 
+is limited. Still, in the instance I the name &quot;=&quot; declares 
+a view of the &quot;=&quot; for C which exists-but-is-never-declared.</span> 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">7&nbsp;&nbsp;Generic formal types, like all types, 
+are not named. Instead, a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+can denote a generic formal subtype. Within a generic unit, a generic 
+formal type is considered as being distinct from all other (formal or 
+nonformal) types.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This follows from the fact that 
+each <SPAN Class="swiss"><A HREF="AA-12-5.html#S0281">formal_type_declaration</A></SPAN> 
+declares a type.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">8&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
+is allowed only for certain kinds of types, and therefore only for certain 
+kinds of generic formal types. See <A HREF="AA-3-7.html">3.7</A>.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The term &ldquo;formal 
+floating point type&rdquo; refers to a type defined by a <SPAN Class="swiss"><A HREF="AA-12-5-2.html#S0290">formal_floating_point_definition</A></SPAN>. 
+It does not include a formal derived type whose ancestor is floating 
+point. Similar terminology applies to the other kinds of <SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_definition</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of generic 
+formal types:</I>&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples"><B>type</B>&nbsp;Item&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+<B>type</B>&nbsp;Buffer(Length&nbsp;:&nbsp;Natural)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>type</B>&nbsp;Enum&nbsp;&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
+<B>type</B>&nbsp;Int&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;&lt;&gt;;<BR>
+<B>type</B>&nbsp;Angle&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;;<BR>
+<B>type</B>&nbsp;Mass&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;&lt;&gt;;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>type</B>&nbsp;Table&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Enum)&nbsp;<B>of</B>&nbsp;Item;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+generic formal part declaring a formal integer type:</I>&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Rank&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;&lt;&gt;;<BR>
+&nbsp;&nbsp;&nbsp;First&nbsp;&nbsp;:&nbsp;Rank&nbsp;:=&nbsp;Rank'First;<BR>
+&nbsp;&nbsp;&nbsp;Second&nbsp;:&nbsp;Rank&nbsp;:=&nbsp;First&nbsp;+&nbsp;1;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;the&nbsp;operator&nbsp;&quot;+&quot;&nbsp;of&nbsp;the&nbsp;type&nbsp;Rank&nbsp;&nbsp;</I></SPAN></div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations">RM83 has separate sections &ldquo;Generic Formal 
+Xs&rdquo; and &ldquo;Matching Rules for Formal Xs&rdquo; (for various 
+X's) with most of the text redundant between the two. We have combined 
+the two in order to reduce the redundancy. In RM83, there is no &ldquo;Matching 
+Rules for Formal Types&rdquo; section; nor is there a &ldquo;Generic 
+Formal Y Types&rdquo; section (for Y = Private, Scalar, Array, and Access). 
+This causes, for example, the duplication across all the &ldquo;Matching 
+Rules for Y Types&rdquo; sections of the rule that the actual passed 
+to a formal type shall be a subtype; the new organization avoids that 
+problem.</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations">The matching rules are stated more concisely.</div>
+<div class="paranum"><a name="p16.c">16.c</a></div>
+<div class="Annotations">We no longer consider the multiplying operators 
+that deliver a result of type <I>universal_fixed</I> to be predefined 
+for the various types; there is only one of each in package Standard. 
+Therefore, we need not mention them here as RM83 had to.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p16.d">16.d/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0037">8652/0037</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00043.TXT">AI95-00043-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00233.TXT">AI95-00233-01</A></I>} 
+Corrigendum 1 corrected the wording to properly define the location where 
+operators are defined for formal array types. The wording here was inconsistent 
+with that in <A HREF="AA-7-3-1.html">7.3.1</A>, &ldquo;<A HREF="AA-7-3-1.html">Private 
+Operations</A>&rdquo;. For the Amendment, this wording was corrected 
+again, because it didn't reflect the Corrigendum 1 revisions in <A HREF="AA-7-3-1.html">7.3.1</A>.</div>
+<div class="paranum"><a name="p16.e">16.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+Formal interface types are defined; see <A HREF="AA-12-5-5.html">12.5.5</A>, 
+&ldquo;<A HREF="AA-12-5-5.html">Formal Interface Types</A>&rdquo;.</div>
+<div class="paranum"><a name="p16.f">16.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+We use &ldquo;determines a category&rdquo; rather than class, since not 
+all interesting properties form a class.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p16.g">16.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<span class="insert3"><A NAME="I5329"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-12-5.html#S0281">formal_type_declaration</A></SPAN>. 
+This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p16.h">16.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+<span class="insert3"><B>Correction</B>: Updated the wording to acknowledge 
+the possibility of operations that are never declared for an actual type 
+but still can be used inside of a generic unit.</span></div>
+<div class="paranum"><a name="p16.i">16.i/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<span class="insert3">Formal incomplete types are added; these are documented 
+as an extension in the next subclause.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

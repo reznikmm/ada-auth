@@ -1,0 +1,723 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Operational and Representation Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.3 <span class="insert1">Operational and Representation Attributes</span><span class="delete1">Representation Attributes</span></H1>
+<div class="paranum"><a name="p1">1/1</a></div>
+<div class="Normal"><A NAME="I5162"></A><A NAME="I5163"></A>The values 
+of certain implementation-dependent characteristics can be obtained by 
+interrogating appropriate <span class="insert1">operational or&nbsp;</span>representation 
+attributes. <A NAME="I5164"></A>Some of these attributes are specifiable 
+via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">attribute_definition_clause</SPAN><A NAME="I5165"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<A NAME="I5166"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>'<A NAME="I5167"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5168"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I5169"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>'<A NAME="I5170"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5171"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a value, the form with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+shall be used. Otherwise, the form with a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall be used.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I5172"></A>For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a value or an object, the expected 
+type for the expression or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+is that of the attribute. <A NAME="I5173"></A>For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a subprogram, the expected profile 
+for the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+is the profile required for the attribute. For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes some other kind of entity, the 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> shall 
+resolve to denote an entity of the appropriate kind.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal"><A NAME="I5174"></A><A NAME="I5175"></A>An <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is allowed in an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+only if this International Standard explicitly allows it, or for an implementation-defined 
+attribute if the implementation allows it. <span class="insert3"><A NAME="I5176"></A></span><span class="delete3"><A NAME="I5177"></A></span>Each 
+specifiable attribute constitutes an <span class="insert1"><A NAME="I5178"></A>operational 
+aspect or&nbsp;</span>aspect of representation<span class="insert3">; the 
+name of the aspect is that of the attribute</span>.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+that specifies an attribute that denotes a subprogram, the profile shall 
+be mode conformant with the one required for the attribute, and the convention 
+shall be Ada. Additional requirements are defined for particular attributes. 
+<A NAME="I5179"></A></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><A NAME="I5180"></A><A NAME="I5181"></A><A NAME="I5182"></A><A NAME="I5183"></A><A NAME="I5184"></A><A NAME="I5185"></A><A NAME="I5186"></A><A NAME="I5187"></A><A NAME="I5188"></A><span class="insert2"><A NAME="I5189"></A></span><A NAME="I5190"></A><A NAME="I5191"></A><A NAME="I5192"></A><A NAME="I5193"></A><A NAME="I5194"></A>A 
+<I>Size clause</I> is an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is Size. Similar definitions apply to the other specifiable attributes. 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I5195"></A><A NAME="I5196"></A>A <I>storage 
+element</I> is an addressable element of storage in the machine. <A NAME="I5197"></A>A 
+<I>word</I> is the largest amount of storage that can be conveniently 
+and efficiently manipulated by the hardware, given the implementation's 
+run-time model. A word consists of an integral number of storage elements. 
+</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I5198"></A>A <I>machine 
+scalar</I> is an amount of storage that can be conveniently and efficiently 
+loaded, stored, or operated upon by the hardware. Machine scalars consist 
+of an integral number of storage elements. The set of machine scalars 
+is implementation defined, but&nbsp;</span><span class="insert3">includes</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;must 
+include</span></span><span class="insert2">&nbsp;at least the storage element 
+and the word. Machine scalars are used to interpret <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>s 
+when the nondefault bit ordering applies.</span>&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal"><span class="insert1">The following representation 
+attributes are defined: Address, Alignment, Size,&nbsp;</span><span class="insert3">Object_Size, 
+</span><span class="insert1">Storage_Size,&nbsp;</span><span class="insert1"><span class="delete3">and 
+</span></span><span class="insert1">Component_Size</span><span class="insert3">, 
+Has_Same_Storage, and Overlaps_Storage</span><span class="insert1">.</span><span class="delete1">&nbsp;The 
+following attributes are defined:</span></div>
+<div class="paranum"><a name="p10">10/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <span class="insert1"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+X that denotes an object, program unit, or label:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="WideHanging-Term">X'Address</div><div class="WideHanging-Body">
+<A NAME="I5199"></A><A NAME="I5200"></A>Denotes the address of the first 
+of the storage elements allocated to X. For a program unit or label, 
+this value refers to the machine code associated with the corresponding 
+body or <SPAN Class="swiss"><A HREF="RM-5-1.html#S0146">statement</A></SPAN>. 
+The value of this attribute is of type System.Address.</div>
+<div class="paranum"><a name="p11.1">11.1/3</a></div>
+<div class="WideHanging-Body"><span class="insert3">The prefix of X'Address 
+shall not statically denote a subprogram that has convention Intrinsic. 
+X'Address raises Program_Error if X denotes a subprogram that has convention 
+Intrinsic.</span></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="WideHanging-Body"><A NAME="I5201"></A><A NAME="I5202"></A>Address 
+may be specified for stand-alone objects and for program units via an 
+<SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>.<span class="insert3"><A NAME="I5203"></A><A NAME="I5204"></A></span> 
+</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal"><A NAME="I5205"></A>If an Address is specified, it 
+is the programmer's responsibility to ensure that the address is valid<span class="insert3">&nbsp;and appropriate for the entity and its use</span>; otherwise, program 
+execution is erroneous.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">For an array X, X'Address should point at the first 
+component of the array, and not at the array bounds.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I5206"></A>The recommended level of support 
+for the Address attribute is:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">X'Address should 
+produce a useful result if X is an object that is aliased or of a by-reference 
+type, or is an entity whose Address has been specified.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">An implementation should support Address clauses 
+for imported subprograms.</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2">Objects (including subcomponents) 
+that are aliased or of a by-reference type should be allocated on storage 
+element boundaries.</span>&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">If the Address of an object is specified, or it 
+is imported or exported, then the implementation should not perform optimizations 
+based on assumptions of no aliases.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Notes">2&nbsp;&nbsp;The specification of a link name <span class="insert3">with 
+the Link_Name aspect</span><span class="delete3">&nbsp;in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Export</span> (see <A HREF="RM-B-1.html">B.1</A>) for a subprogram or 
+object is an alternative to explicit specification of its link-time address, 
+allowing a link-time directive to place the subprogram or object within 
+memory.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">3&nbsp;&nbsp;The rules for the Size attribute imply, 
+for an aliased object X, that if X'Size = Storage_Unit, then X'Address 
+points at a storage element containing all of the bits of X, and only 
+the bits of X.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <span class="insert1"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+X that denotes <span class="insert2">an</span><span class="delete2">&nbsp;a 
+subtype or</span> object:&nbsp;</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="WideHanging-Term">X'Alignment</div><div class="WideHanging-Body">
+<A NAME="I5207"></A><A NAME="I5208"></A><span class="insert2">The value 
+of this attribute is of type <I>universal_integer</I>, and nonnegative; 
+zero means that the object is not necessarily aligned on a storage element 
+boundary. If X'Alignment is not zero, then X is aligned on a storage 
+unit boundary and X'Address</span><span class="delete2">&nbsp;The Address 
+of an object that is allocated under control of the implementation</span> 
+is an integral multiple of <span class="insert2">X'Alignment</span><span class="delete2">&nbsp;the 
+Alignment of the object</span> (that is, the Address modulo the Alignment 
+is zero).<span class="delete2">The offset of a record component is a 
+multiple of the Alignment of the component. For an object that is not 
+allocated under control of the implementation (that is, one that is imported, 
+that is allocated by a user-defined allocator, whose Address has been 
+specified, or is designated by an access value returned by an instance 
+of Unchecked_Conversion), the implementation may assume that the Address 
+is an integral multiple of its Alignment. The implementation shall not 
+assume a stricter alignment.</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="WideHanging-Body"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2">The value of this attribute 
+is of type <I>universal_integer</I>, and nonnegative; zero means that 
+the object is not necessarily aligned on a storage element boundary.</span> 
+</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="WideHanging-Body"><span class="insert2"><A NAME="I5209"></A></span><span class="delete2"><A NAME="I5210"></A></span><A NAME="I5211"></A>Alignment 
+may be specified for<span class="delete2">&nbsp;first subtypes and</span> 
+stand-alone objects via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.<span class="delete2">If 
+the Alignment of a subtype is specified, then the Alignment of an object 
+of the subtype is at least as strict, unless the object's Alignment is 
+also specified. The Alignment of an object created by an allocator is 
+that of the designated subtype.</span><span class="insert3"><span class="delete2"><A NAME="I5212"></A><A NAME="I5213"></A></span></span><span class="delete2"></span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="WideHanging-Body"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2">If an Alignment is specified 
+for a composite subtype or object, this Alignment shall be equal to the 
+least common multiple of any specified Alignments of the subcomponent 
+subtypes, or an integer multiple thereof.</span>&nbsp;</div>
+<div class="paranum"><a name="p26.1">26.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">For 
+every subtype S:</span>&nbsp;</div>
+<div class="paranum"><a name="p26.2">26.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2">S'Alignment</span></div><div class="WideHanging-Body">
+<span class="insert2"><A NAME="I5214"></A><A NAME="I5215"></A></span><span class="insert2">The 
+value of this attribute is of type <I>universal_integer</I>, and nonnegative.</span></div>
+<div class="paranum"><a name="p26.3">26.3/2</a></div>
+<div class="WideHanging-Body"><span class="insert2">For an object X of 
+subtype S, if S'Alignment is not zero, then X'Alignment is a nonzero 
+integral multiple of S'Alignment unless specified otherwise by a representation 
+item.</span></div>
+<div class="paranum"><a name="p26.4">26.4/2</a></div>
+<div class="WideHanging-Body"><span class="insert2"><A NAME="I5216"></A><A NAME="I5217"></A>Alignment 
+may be specified for first subtypes via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.</span><span class="insert3"><A NAME="I5218"></A><A NAME="I5219"></A></span><span class="insert2"></span></div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal"><A NAME="I5220"></A>Program execution is erroneous 
+if an Address clause is given that conflicts with the Alignment.&nbsp;</div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Normal"><A NAME="I5221"></A><span class="insert2">For</span><span class="delete2">&nbsp;If 
+the Alignment is specified for</span> an object that is not allocated 
+under control of the implementation, execution is erroneous if the object 
+is not aligned according to <span class="insert2">its</span><span class="delete2">&nbsp;the</span> 
+Alignment.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p28.1">28.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">For any tagged specific subtype 
+<I>S</I>, <I>S</I>'Class'Alignment should equal <I>S</I>'Alignment.</span></div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal"><A NAME="I5222"></A>The recommended level of support 
+for the Alignment attribute for subtypes is:&nbsp;</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">An implementation 
+should support <span class="insert2">an Alignment clause for a discrete 
+type, fixed point type, record type, or array type, specifying an Alignment 
+value that is zero or a power of two</span><span class="delete2">&nbsp;specified 
+Alignments that are factors and multiples of the number of storage elements 
+per word</span>, subject to the following:</div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Bulleted">An implementation need not support <span class="insert2">an 
+Alignment clause for a signed integer type specifying an Alignment greater 
+than the largest Alignment value that is ever chosen by default by the 
+implementation for any signed integer type. A corresponding limitation 
+may be imposed for modular integer types, fixed point types, enumeration 
+types, record types, and array types</span><span class="delete2">&nbsp;specified 
+Alignments for combinations of Sizes and Alignments that cannot be easily 
+loaded and stored by available machine instructions</span>.</div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Bulleted">An implementation need not support <span class="insert2">a 
+nonconfirming Alignment clause which could enable the creation of an 
+object of an elementary type which cannot be easily loaded and stored 
+by available machine instructions.</span><span class="delete2">&nbsp;specified 
+Alignments that are greater than the maximum Alignment the implementation 
+ever returns by default.</span></div>
+<div class="paranum"><a name="p32.1">32.1/2</a></div>
+<div class="Bulleted"><span class="insert2">An implementation need not 
+support an Alignment specified for a derived tagged type which is not 
+a multiple of the Alignment of the parent type. An implementation need 
+not support a nonconfirming Alignment specified for a derived untagged 
+by-reference type.</span>&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5223"></A>The 
+recommended level of support for the Alignment attribute for objects 
+is:&nbsp;</div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2">Same as above, for subtypes, 
+but in addition:</span></div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Bulleted">For stand-alone library-level objects of statically 
+constrained subtypes, the implementation should support all Alignments 
+supported by the target linker. For example, page alignment is likely 
+to be supported for such objects, but not for subtypes.</div>
+<div class="paranum"><a name="p35.1">35.1/2</a></div>
+<div class="Bulleted"><span class="insert2">For other objects, an implementation 
+should at least support the alignments supported for their subtype, subject 
+to the following:</span></div>
+<div class="paranum"><a name="p35.2">35.2/2</a></div>
+<div class="Bulleted"><span class="insert2">An implementation need not 
+support Alignments specified for objects of a by-reference type or for 
+objects of types containing aliased subcomponents if the specified Alignment 
+is not a multiple of the Alignment of the subtype of the object.</span> 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Notes">4&nbsp;&nbsp;Alignment is a subtype-specific attribute.</div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete2">5&nbsp;&nbsp;The Alignment of 
+a composite object is always equal to the least common multiple of the 
+Alignments of its components, or a multiple thereof.</span>&nbsp;</div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Notes">6&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>, 
+Component_Size clause, or <span class="insert3">specifying the</span><span class="delete3">&nbsp;a 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+Pack <span class="insert3">aspect as True&nbsp;</span>can override a specified 
+Alignment.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p39">39/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <span class="insert1"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+X that denotes an object:&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="WideHanging-Term">X'Size</div><div class="WideHanging-Body">
+<A NAME="I5224"></A><A NAME="I5225"></A>Denotes the size in bits of the 
+representation of the object. The value of this attribute is of the type 
+<I>universal_integer</I>.&nbsp;</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="WideHanging-Body"><A NAME="I5226"></A><A NAME="I5227"></A>Size 
+may be specified for stand-alone objects via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static and its value nonnegative.<span class="insert3"><A NAME="I5228"></A><A NAME="I5229"></A></span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p41.1">41.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">The size of an array object 
+should not include its bounds.</span>&nbsp;</div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete2"></span><A NAME="I5230"></A>The 
+recommended level of support for the Size attribute of objects is<span class="insert2">&nbsp;the same as for subtypes (see below), except that only a confirming Size 
+clause need be supported for an aliased elementary object.</span><span class="delete2">:</span> 
+</div>
+<div class="paranum"><a name="p43">43/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete2">A Size clause should be 
+supported for an object if the specified Size is at least as large as 
+its subtype's Size, and corresponds to a size in storage elements that 
+is a multiple of the object's Alignment (if the Alignment is nonzero).</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every subtype S: 
+</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Size</div><div class="WideHanging-Body">
+<A NAME="I5231"></A><A NAME="I5232"></A>If S is definite, denotes the 
+size (in bits) that the implementation would choose for the following 
+objects of subtype S:&nbsp;</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Indented4Bulleted">A record component of subtype S when the 
+record type is packed.</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Indented4Bulleted">The formal parameter of an instance of 
+Unchecked_Conversion that converts from subtype S to some other subtype. 
+</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="WideHanging-Body">If S is indefinite, the meaning is implementation 
+defined. The value of this attribute is of the type <I>universal_integer</I>. 
+<A NAME="I5233"></A><A NAME="I5234"></A>The Size of an object is at least 
+as large as that of its subtype, unless the object's Size is determined 
+by a Size clause, a component_clause, or a Component_Size clause. Size 
+may be specified for first subtypes via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static and its value nonnegative.<span class="insert3"><A NAME="I5235"></A><A NAME="I5236"></A></span> 
+</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Normal">In an implementation, Boolean'Size shall be 1.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">If the Size of a subtype 
+<span class="insert2"></span><span class="delete2">is specified, and 
+</span>allows for efficient independent addressability (see <A HREF="RM-9-10.html">9.10</A>) 
+on the target architecture, then the Size of the following objects of 
+the subtype should equal the Size of the subtype:&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+51 and 52 were moved to the Implementation Advice for attribute Object_Size.</I></SPAN></span> 
+</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Bulleted">Aliased objects (including components).</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Bulleted">Unaliased components, unless the Size of the component 
+is determined by a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN> 
+or Component_Size clause.&nbsp;</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="Normal">A Size clause on a composite subtype should not affect 
+the internal layout of components.&nbsp;</div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5237"></A>The 
+recommended level of support for the Size attribute of subtypes is:&nbsp;</div>
+<div class="paranum"><a name="p55">55</a></div>
+<div class="Bulleted">The Size (if not specified) of a static discrete 
+or fixed point subtype should be the number of bits needed to represent 
+each value belonging to the subtype using an unbiased representation, 
+leaving space for a sign bit only if the subtype contains negative values. 
+If such a subtype is a first subtype, then an implementation should support 
+a specified Size for it that reflects this representation.</div>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Bulleted">For a subtype implemented with levels of indirection, 
+the Size should include the size of the pointers, but not the size of 
+what they point at.&nbsp;</div>
+<div class="paranum"><a name="p56.1">56.1/2</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert2">An 
+implementation should support a Size clause for a discrete type, fixed 
+point type, record type, or array type, subject to the following:</span> 
+</div>
+<div class="paranum"><a name="p56.2">56.2/2</a></div>
+<div class="Indented2NestedBulleted"><span class="insert2">An implementation 
+need not support a Size clause for a signed integer type specifying a 
+Size greater than that of the largest signed integer type supported by 
+the implementation in the absence of a size clause (that is, when the 
+size is chosen by default). A corresponding limitation may be imposed 
+for modular integer types, fixed point types, enumeration types, record 
+types, and array types.</span></div>
+<div class="paranum"><a name="p56.3">56.3/2</a></div>
+<div class="Indented2NestedBulleted"><span class="insert2">A nonconfirming 
+size clause for the first subtype of a derived untagged by-reference 
+type need not be supported.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Notes">7&nbsp;&nbsp;Size is a subtype-specific attribute.</div>
+<div class="paranum"><a name="p58">58/3</a></div>
+<div class="Notes">8&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN> 
+or Component_Size clause can override a specified Size. <span class="insert3">Aspect</span><span class="delete3">&nbsp;A 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+Pack cannot.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p59">59/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <span class="insert1"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+T that denotes a task object (after any implicit dereference):&nbsp;</div>
+<div class="paranum"><a name="p60">60/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">T'Storage_Size</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3"><A NAME="I5238"></A><A NAME="I5239"></A></span>Denotes the number of 
+storage elements reserved for the task. The value of this attribute is 
+of the type <I>universal_integer</I>. The Storage_Size includes the size 
+of the task's stack, if any. The language does not specify whether or 
+not it includes other storage associated with the task (such as the &ldquo;task 
+control block&rdquo; used by some implementations.) If <span class="insert3">the 
+aspect</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+Storage_Size is <span class="insert3">specified for the type of the object</span><span class="delete3">&nbsp;given</span>, 
+the value of the Storage_Size attribute is at least the value <span class="insert3">determined 
+by the aspect</span><span class="delete3">&nbsp;specified in the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span>. 
+</div>
+<div class="paranum"><a name="p61">61/3</a></div>
+<div class="Normal"><span class="insert3">Aspect</span><span class="delete3"><A NAME="I5240"></A> 
+A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
+Storage_Size specifies the amount of storage to be reserved for the execution 
+of a task.&nbsp;</div>
+<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+62 through 65 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p62">62/3</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3">The 
+form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Storage_Size is as follows:</span>&nbsp;</div>
+<div class="paranum"><a name="p63">63/3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
+<A NAME="I5241"></A><A NAME="I5242"></A>Storage_Size(<A NAME="I5243"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span></div>
+<div class="paranum"><a name="p64">64/3</a></div>
+<div class="Indented1"><span class="delete3">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Storage_Size is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN>.</span> 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p65">65/3</a></div>
+<div class="Normal"><span class="delete3"><A NAME="I5244"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Storage_Size is expected to be of any integer type.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p65.1">65.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">For 
+a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0206">single_task_declaration</A></SPAN>), 
+the following language-defined representation aspect may be specified:</span></div>
+<div class="paranum"><a name="p65.2">65.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Storage_Size</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">The Storage_Size aspect is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+which shall be of any integer type.<A NAME="I5245"></A><A NAME="I5246"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p65.3">65.3/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The Storage_Size aspect shall 
+not be specified for a task interface type.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p66">66/3</a></div>
+<div class="Normal"><span class="insert3">When a task object is created, 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+(if any) associated with the Storage_Size aspect of its type</span><span class="delete3">&nbsp;A 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Storage_Size 
+is elaborated when an object of the type defined by the immediately enclosing 
+<SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 
+is created. <A NAME="I5247"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Storage_Size, the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN></span> 
+is evaluated; the Storage_Size attribute of the newly created task object 
+is at least the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</div>
+<div class="paranum"><a name="p67">67</a></div>
+<div class="Normal"><A NAME="I5248"></A><A NAME="I5249"></A><A NAME="I5250"></A>At 
+the point of task object creation, or upon task activation, Storage_Error 
+is raised if there is insufficient free storage to accommodate the requested 
+Storage_Size.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p68">68/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <span class="insert1"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+X that denotes an array subtype or array object (after any implicit dereference): 
+</div>
+<div class="paranum"><a name="p69">69</a></div>
+<div class="WideHanging-Term">X'Component_Size</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5251"></A><A NAME="I5252"></A>Denotes the size in bits of components 
+of the type of X. The value of this attribute is of type <I>universal_integer</I>. 
+</div>
+<div class="paranum"><a name="p70">70</a></div>
+<div class="WideHanging-Body"><A NAME="I5253"></A><A NAME="I5254"></A>Component_Size 
+may be specified for array types via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static, and its value nonnegative.<span class="insert3"><A NAME="I5255"></A><A NAME="I5256"></A></span></div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p71">71</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5257"></A>The 
+recommended level of support for the Component_Size attribute is:&nbsp;</div>
+<div class="paranum"><a name="p72">72</a></div>
+<div class="Bulleted">An implementation need not support specified Component_Sizes 
+that are less than the Size of the component subtype.</div>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Bulleted">An implementation should support specified Component_Sizes 
+that are factors and multiples of the word size. For such Component_Sizes, 
+the array should contain no gaps between components. For other Component_Sizes 
+(if supported), the array should contain no gaps between components when 
+<span class="insert3">Pack</span><span class="delete3">&nbsp;packing</span> 
+is also specified; the implementation should forbid this combination 
+in cases where it cannot support a no-gaps representation.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p73.1">73.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">For 
+a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> X 
+that denotes an object:</span>&nbsp;</div>
+<div class="paranum"><a name="p73.2">73.2/4</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">X'Has_Same_Storage</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3"><A NAME="I5258"></A><A NAME="I5259"></A></span><span class="insert3">X'Has_Same_Storage 
+denotes a function with the following specification:</span></div>
+<div class="paranum"><a name="p73.3">73.3/3</a></div>
+<div class="Indented4Examples"><span class="insert3"><B>function</B>&nbsp;X'Has_Same_Storage&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>any_type</I></SPAN>)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Boolean</span></div>
+<div class="paranum"><a name="p73.4">73.4/4</a></div>
+<div class="WideHanging-Body"><span class="insert3">The actual parameter 
+shall be a name that denotes an object. The object denoted by the actual 
+parameter can be of any type. This function evaluates the names of the 
+objects involved</span><span class="insert4">. It</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;and</span></span><span class="insert3">&nbsp;returns True if the representation 
+of the object denoted by the actual parameter occupies exactly the same 
+bits as the representation of the object denoted by X</span><span class="insert4">&nbsp;and the objects occupy at least one bit</span><span class="insert3">; 
+otherwise, it returns False.</span></div>
+<div class="paranum"><a name="p73.5">73.5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">For 
+a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> X 
+that denotes an object:</span>&nbsp;</div>
+<div class="paranum"><a name="p73.6">73.6/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">X'Overlaps_Storage</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3"><A NAME="I5260"></A><A NAME="I5261"></A></span><span class="insert3">X'Overlaps_Storage 
+denotes a function with the following specification:</span></div>
+<div class="paranum"><a name="p73.7">73.7/3</a></div>
+<div class="Indented4Examples"><span class="insert3"><B>function</B>&nbsp;X'Overlaps_Storage&nbsp;(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>any_type</I></SPAN>)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;Boolean</span></div>
+<div class="paranum"><a name="p73.8">73.8/3</a></div>
+<div class="WideHanging-Body"><span class="insert3">The actual parameter 
+shall be a name that denotes an object. The object denoted by the actual 
+parameter can be of any type. This function evaluates the names of the 
+objects involved and returns True if the representation of the object 
+denoted by the actual parameter shares at least one bit with the representation 
+of the object denoted by X; otherwise, it returns False.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p73.9">73.9/3</a></div>
+<div class="Notes">9&nbsp;&nbsp;<span class="insert3">X'Has_Same_Storage(Y) 
+implies X'Overlaps_Storage(Y).</span></div>
+<div class="paranum"><a name="p73.10">73.10/3</a></div>
+<div class="Notes">10&nbsp;&nbsp;<span class="insert3">X'Has_Same_Storage(Y) 
+and X'Overlaps_Storage(Y) are not considered to be reads of X and Y.</span> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p73.11">73.11/3</a></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">The following&nbsp;</span><span class="insert3">type-related 
+</span><span class="insert1">operational attribute is defined: External_Tag.</span></div>
+<div class="paranum"><a name="p74">74/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every subtype S 
+of a tagged type <I>T</I> (specific or class-wide)<span class="delete1">, 
+the following attribute is defined</span>:</div>
+<div class="paranum"><a name="p75">75/3</a></div>
+<div class="WideHanging-Term">S'External_Tag</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5262"></A><A NAME="I5263"></A><A NAME="I5264"></A><A NAME="I5265"></A>S'External_Tag 
+denotes an external string representation for S'Tag; it is of the predefined 
+type String. External_Tag may be specified for a specific tagged type 
+via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static.<span class="insert3"><A NAME="I5266"></A><A NAME="I5267"></A></span> 
+The default external tag representation is implementation defined. See 
+<span class="delete3"><A HREF="RM-3-9-2.html">3.9.2</A> and&nbsp;</span><A HREF="RM-13-13-2.html">13.13.2</A>. 
+<span class="insert1">The value of External_Tag is never inherited; the 
+default value is always used unless a new value is directly specified 
+for a type.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p75.1">75.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If a user-specified external 
+tag S'External_Tag is the same as T'External_Tag for some other tagged 
+type declared by a different declaration in the partition, Program_Error 
+is raised by the elaboration of the <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p76">76</a></div>
+<div class="Normal">In an implementation, the default external tag for 
+each specific tagged type declared in a partition shall be distinct, 
+so long as the type is declared outside an instance of a generic body. 
+If the compilation unit in which a given tagged type is declared, and 
+all compilation units on which it semantically depends, are the same 
+in two different partitions, then the external tag for the type shall 
+be the same in the two partitions. What it means for a compilation unit 
+to be the same in two different partitions is implementation defined. 
+At a minimum, if the compilation unit is not recompiled between building 
+the two different partitions that include it, the compilation unit is 
+considered the same in the two partitions.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p76.1">76.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If a user-specified external 
+tag S'External_Tag is the same as T'External_Tag for some other tagged 
+type declared by a different declaration in the partition, the partition 
+may be rejected.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p77">77/2</a></div>
+<div class="Notes">11&nbsp;&nbsp;The following language-defined attributes 
+are specifiable, at least for some of the kinds of entities to which 
+they apply: Address, <span class="delete2">Size, Component_Size,&nbsp;</span>Alignment, 
+<span class="insert2">Bit_Order, Component_Size,&nbsp;</span>External_Tag, 
+<span class="insert2">Input, Machine_Radix, Output, Read, Size,&nbsp;</span>Small, 
+<span class="delete2">Bit_Order,&nbsp;</span>Storage_Pool, Storage_Size, <span class="insert2">Stream_Size, 
+and&nbsp;</span>Write<span class="delete2">, Output, Read, Input, and Machine_Radix</span>.</div>
+<div class="paranum"><a name="p78">78</a></div>
+<div class="Notes">12&nbsp;&nbsp;It follows from the general rules in 
+<A HREF="RM-13-1.html">13.1</A> that if one writes &ldquo;<B>for</B> 
+X'Size <B>use</B> Y;&rdquo; then the X'Size <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+will return Y (assuming the implementation allows the Size clause). The 
+same is true for all of the specifiable attributes except Storage_Size. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p79">79</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of attribute 
+definition clauses:</I>&nbsp;</div>
+<div class="paranum"><a name="p80">80</a></div>
+<div class="Examples">Byte&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;8;<BR>
+Page&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;2**12;</div>
+<div class="paranum"><a name="p81">81</a></div>
+<div class="Examples"><B>type</B>&nbsp;Medium&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;65_000;<BR>
+<B>for</B>&nbsp;Medium'Size&nbsp;<B>use</B>&nbsp;2*Byte;<BR>
+<B>for</B>&nbsp;Medium'Alignment&nbsp;<B>use</B>&nbsp;2;<BR>
+Device_Register&nbsp;:&nbsp;Medium;<BR>
+<B>for</B>&nbsp;Device_Register'Size&nbsp;<B>use</B>&nbsp;Medium'Size;<BR>
+<B>for</B>&nbsp;Device_Register'Address&nbsp;<B>use</B>&nbsp;System.Storage_Elements.To_Address(16#FFFF_0020#);</div>
+<div class="paranum"><a name="p82">82</a></div>
+<div class="Examples"><B>type</B>&nbsp;Short&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;0.01&nbsp;<B>range</B>&nbsp;-100.0&nbsp;..&nbsp;100.0;<BR>
+<B>for</B>&nbsp;Short'Size&nbsp;<B>use</B>&nbsp;15;</div>
+<div class="paranum"><a name="p83">83</a></div>
+<div class="Examples"><B>for</B>&nbsp;Car_Name'Storage_Size&nbsp;<B>use</B>&nbsp;--<SPAN Class="roman"><I>&nbsp;specify&nbsp;access&nbsp;type's&nbsp;storage&nbsp;pool&nbsp;size</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2000*((Car'Size/System.Storage_Unit)&nbsp;+1);&nbsp;--<SPAN Class="roman"><I>&nbsp;approximately&nbsp;2000&nbsp;cars</I></SPAN></div>
+<div class="paranum"><a name="p84">84/2</a></div>
+<div class="Examples"><B>function</B>&nbsp;<span class="insert2">My_Input</span><span class="delete2">&nbsp;My_Read</span>(Stream&nbsp;:&nbsp;<B></B><span class="insert2"><B>not&nbsp;null&nbsp;</B></span><B>access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;T;<BR>
+<B>for</B>&nbsp;T'<span class="insert2">Input</span><span class="delete2">&nbsp;Read</span>&nbsp;<B>use</B>&nbsp;<span class="insert2">My_Input</span><span class="delete2">&nbsp;My_Read</span>;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-13-13-2.html">13.13.2</A></I></SPAN></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p85">85</a></div>
+<div class="Notes">13&nbsp;&nbsp;<I>Notes on the examples:</I> In the 
+Size clause for Short, fifteen bits is the minimum necessary, since the 
+type definition requires Short'Small &lt;= 2**(&ndash;7).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

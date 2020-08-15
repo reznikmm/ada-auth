@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Predefined Language Environment</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>Annex A</H1>
+<H2>(normative)</H2>
+<H1>Predefined Language Environment</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5686"></A><A NAME="I5687"></A>This 
+Annex contains the specifications of library units that shall be provided 
+by every implementation. There are three root library units: Ada, Interfaces, 
+and System; other library units are children of these:</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<BR>
+&nbsp;</div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">Standard&nbsp;&mdash;&nbsp;<A HREF="RM-A-1.html">A.1</A><BR>
+&nbsp;&nbsp;Ada&nbsp;&mdash;&nbsp;<A HREF="RM-A-2.html">A.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Assertions&nbsp;&mdash;&nbsp;<A HREF="RM-11-4-2.html">11.4.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Asynchronous_Task_Control&nbsp;&mdash;&nbsp;<A HREF="RM-D-11.html">D.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Calendar&nbsp;&mdash;&nbsp;<A HREF="RM-9-6.html">9.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arithmetic&nbsp;&mdash;&nbsp;<A HREF="RM-9-6-1.html">9.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Formatting&nbsp;&mdash;&nbsp;<A HREF="RM-9-6-1.html">9.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time_Zones&nbsp;&mdash;&nbsp;<A HREF="RM-9-6-1.html">9.6.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Characters&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-1.html">A.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conversions&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-4.html">A.3.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-2.html">A.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latin_1&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-3.html">A.3.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Command_Line&nbsp;&mdash;&nbsp;<A HREF="RM-A-15.html">A.15</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Complex_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-3.html">G.1.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Containers&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-1.html">A.18.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Doubly_Linked_Lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-20.html">A.18.20</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-21.html">A.18.21</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-23.html">A.18.23</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-25.html">A.18.25</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-22.html">A.18.22</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-24.html">A.18.24</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Priority_Queues&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-31.html">A.18.31</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Synchronized_Queues<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-29.html">A.18.29</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_Vectors&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-19.html">A.18.19</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doubly_Linked_Lists&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-3.html">A.18.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Array_Sort&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-26.html">A.18.26</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Constrained_Array_Sort<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-26.html">A.18.26</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Sort&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-26.html">A.18.26</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-5.html">A.18.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-8.html">A.18.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Doubly_Linked_Lists<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-12.html">A.18.12</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Hashed_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-13.html">A.18.13</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Hashed_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-15.html">A.18.15</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Holders&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-18.html">A.18.18</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-17.html">A.18.17</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-14.html">A.18.14</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-16.html">A.18.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indefinite_Vectors&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-11.html">A.18.11</A></SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Containers&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Multiway_Trees&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-10.html">A.18.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-6.html">A.18.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ordered_Sets&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-9.html">A.18.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Synchronized_Queue_Interfaces<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-27.html">A.18.27</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_Priority_Queues<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-30.html">A.18.30</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_Synchronized_Queues<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-28.html">A.18.28</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectors&nbsp;&mdash;&nbsp;<A HREF="RM-A-18-2.html">A.18.2</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Decimal&nbsp;&mdash;&nbsp;<A HREF="RM-F-2.html">F.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Direct_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-8-4.html">A.8.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Directories&nbsp;&mdash;&nbsp;<A HREF="RM-A-16.html">A.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hierarchical_File_Names&nbsp;&mdash;&nbsp;<A HREF="RM-A-16-1.html">A.16.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Information&nbsp;&mdash;&nbsp;<A HREF="RM-A-16.html">A.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Dispatching&nbsp;&mdash;&nbsp;<A HREF="RM-D-2-1.html">D.2.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDF&nbsp;&mdash;&nbsp;<A HREF="RM-D-2-6.html">D.2.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non_Preemptive&nbsp;&mdash;&nbsp;<A HREF="RM-D-2-4.html">D.2.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Round_Robin&nbsp;&mdash;&nbsp;<A HREF="RM-D-2-5.html">D.2.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Dynamic_Priorities&nbsp;&mdash;&nbsp;<A HREF="RM-D-5-1.html">D.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Environment_Variables&nbsp;&mdash;&nbsp;<A HREF="RM-A-17.html">A.17</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Exceptions&nbsp;&mdash;&nbsp;<A HREF="RM-11-4-1.html">11.4.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Execution_Time&nbsp;&mdash;&nbsp;<A HREF="RM-D-14.html">D.14</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group_Budgets&nbsp;&mdash;&nbsp;<A HREF="RM-D-14-2.html">D.14.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interrupts&nbsp;&mdash;&nbsp;<A HREF="RM-D-14-3.html">D.14.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timers&nbsp;&mdash;&nbsp;<A HREF="RM-D-14-1.html">D.14.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Finalization&nbsp;&mdash;&nbsp;<A HREF="RM-7-6.html">7.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Float_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-10-9.html">A.10.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Float_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Float_Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-10-8.html">A.10.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer_Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Interrupts&nbsp;&mdash;&nbsp;<A HREF="RM-C-3-2.html">C.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names&nbsp;&mdash;&nbsp;<A HREF="RM-C-3-2.html">C.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;IO_Exceptions&nbsp;&mdash;&nbsp;<A HREF="RM-A-13.html">A.13</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator_Interfaces&nbsp;&mdash;&nbsp;<A HREF="RM-5-5-1.html">5.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Locales&nbsp;&mdash;&nbsp;<A HREF="RM-A-19.html">A.19</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Numerics&nbsp;&mdash;&nbsp;<A HREF="RM-A-5.html">A.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Arrays&nbsp;&mdash;&nbsp;<A HREF="RM-G-3-2.html">G.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-2.html">G.1.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_Types&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-1.html">G.1.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discrete_Random&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-2.html">A.5.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-1.html">A.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float_Random&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-2.html">A.5.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Complex_Arrays&nbsp;&mdash;&nbsp;<A HREF="RM-G-3-2.html">G.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Complex_Elementary_Functions<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-2.html">G.1.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Complex_Types&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-1.html">G.1.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Elementary_Functions&nbsp;&mdash;&nbsp;<A HREF="RM-A-5-1.html">A.5.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Real_Arrays&nbsp;&mdash;&nbsp;<A HREF="RM-G-3-1.html">G.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real_Arrays&nbsp;&mdash;&nbsp;<A HREF="RM-G-3-1.html">G.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Real_Time&nbsp;&mdash;&nbsp;<A HREF="RM-D-8.html">D.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Timing_Events&nbsp;&mdash;&nbsp;<A HREF="RM-D-15.html">D.15</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Sequential_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-8-1.html">A.8.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Storage_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-9.html">A.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Streams&nbsp;&mdash;&nbsp;<A HREF="RM-13-13-1.html">13.13.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-12-1.html">A.12.1</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-1.html">A.4.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-4.html">A.4.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-3.html">A.4.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-2.html">A.4.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constants&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-6.html">A.4.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-5.html">A.4.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-9.html">A.4.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-10.html">A.4.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTF_Encoding&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conversions&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Strings&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-11.html">A.4.11</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Fixed&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Constants&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Unbounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Hash_Case_Insensitive&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-7.html">A.4.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Bounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Fixed&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Maps&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Constants&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Unbounded&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Equal_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Hash_Case_Insensitive<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&nbsp;<A HREF="RM-A-4-8.html">A.4.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Synchronous_Barriers&nbsp;&mdash;&nbsp;<A HREF="RM-D-10-1.html">D.10.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Synchronous_Task_Control&nbsp;&mdash;&nbsp;<A HREF="RM-D-10.html">D.10</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDF&nbsp;&mdash;&nbsp;<A HREF="RM-D-10.html">D.10</A><BR>
+</SPAN><SPAN STYLE="font-size: 80%">Standard&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;Ada&nbsp;(<I>...continued</I>)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Tags&nbsp;&mdash;&nbsp;<A HREF="RM-3-9.html">3.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generic_Dispatching_Constructor&nbsp;&mdash;&nbsp;<A HREF="RM-3-9.html">3.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Task_Attributes&nbsp;&mdash;&nbsp;<A HREF="RM-C-7-2.html">C.7.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Task_Identification&nbsp;&mdash;&nbsp;<A HREF="RM-C-7-1.html">C.7.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Task_Termination&nbsp;&mdash;&nbsp;<A HREF="RM-C-7-3.html">C.7.3</A></SPAN><BR>
+<SPAN STYLE="font-size: 80%">&nbsp;&nbsp;&nbsp;&nbsp;Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-10-1.html">A.10.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-10-11.html">A.10.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-3.html">G.1.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="RM-F-3-3.html">F.3.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-A-12-2.html">A.12.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-10-12.html">A.10.12</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Conversion&nbsp;&mdash;&nbsp;<A HREF="RM-13-9.html">13.9</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Deallocate_Subpool&nbsp;&mdash;&nbsp;<A HREF="RM-13-11-5.html">13.11.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Unchecked_Deallocation&nbsp;&mdash;&nbsp;<A HREF="RM-13-11-2.html">13.11.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Characters&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-1.html">A.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-5.html">A.3.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-4.html">G.1.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="RM-F-3-4.html">F.3.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-A-12-3.html">A.12.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Characters&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-1.html">A.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling&nbsp;&mdash;&nbsp;<A HREF="RM-A-3-6.html">A.3.6</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Text_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Complex_IO&nbsp;&mdash;&nbsp;<A HREF="RM-G-1-5.html">G.1.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editing&nbsp;&mdash;&nbsp;<A HREF="RM-F-3-5.html">F.3.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text_Streams&nbsp;&mdash;&nbsp;<A HREF="RM-A-12-4.html">A.12.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Bounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide_Wide_Unbounded_IO&nbsp;&mdash;&nbsp;<A HREF="RM-A-11.html">A.11</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;Interfaces&nbsp;&mdash;&nbsp;<A HREF="RM-B-2.html">B.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;&mdash;&nbsp;<A HREF="RM-B-3.html">B.3</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pointers&nbsp;&mdash;&nbsp;<A HREF="RM-B-3-2.html">B.3.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings&nbsp;&mdash;&nbsp;<A HREF="RM-B-3-1.html">B.3.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;COBOL&nbsp;&mdash;&nbsp;<A HREF="RM-B-4.html">B.4</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Fortran&nbsp;&mdash;&nbsp;<A HREF="RM-B-5.html">B.5</A></SPAN></div>
+<div class="Indented1"><SPAN STYLE="font-size: 80%">&nbsp;&nbsp;System&nbsp;&mdash;&nbsp;<A HREF="RM-13-7.html">13.7</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Address_To_Access_Conversions&nbsp;&mdash;&nbsp;<A HREF="RM-13-7-2.html">13.7.2</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Machine_Code&nbsp;&mdash;&nbsp;<A HREF="RM-13-8.html">13.8</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Multiprocessors&nbsp;&mdash;&nbsp;<A HREF="RM-D-16.html">D.16</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dispatching_Domains&nbsp;&mdash;&nbsp;<A HREF="RM-D-16-1.html">D.16.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;RPC&nbsp;&mdash;&nbsp;<A HREF="RM-E-5.html">E.5</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Storage_Elements&nbsp;&mdash;&nbsp;<A HREF="RM-13-7-1.html">13.7.1</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Storage_Pools&nbsp;&mdash;&nbsp;<A HREF="RM-13-11.html">13.11</A><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpools&nbsp;&mdash;&nbsp;<A HREF="RM-13-11-4.html">13.11.4</A></SPAN></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Normal">The implementation shall ensure that<span class="delete5">&nbsp;each language-defined subprogram is reentrant<A NAME="I5688"></A> in 
+the sense that</span> concurrent calls on <span class="insert4">any</span><span class="insert5">&nbsp;two (possibly the same)</span><span class="insert4">&nbsp;language-defined</span><span class="delete4">&nbsp;the 
+same</span> <span class="insert5">subprograms</span><span class="delete5">&nbsp;subprogram</span> 
+perform as specified, so long as all<span class="insert4">&nbsp;</span><span class="insert5">pairs 
+of&nbsp;</span><span class="insert4">objects&nbsp;</span><span class="insert5">(one 
+from each call)</span><span class="insert4">&nbsp;that are</span><span class="insert5">&nbsp;either</span><span class="insert4">&nbsp;denoted by</span> parameters that 
+could be passed by reference<span class="insert5">,</span> <span class="insert4">or 
+</span><span class="insert5">are&nbsp;</span><span class="insert4">designated 
+by parameters of an access type</span><span class="insert5">,</span><span class="insert4">&nbsp;are</span><span class="delete4">&nbsp;denote</span> nonoverlapping<span class="delete4">&nbsp;objects</span>.&nbsp;</div>
+<div class="paranum"><a name="p3.1">3.1/4</a></div>
+<div class="Normal">&nbsp;<span class="insert4">For the purpose of determining 
+whether concurrent calls on text input-output subprograms are required 
+to perform as specified above, when calling a subprogram within Text_IO 
+or its children that implicitly operates on one of the default input-output 
+files, the subprogram is considered to have a parameter of Current_Input 
+or Current_Output (as appropriate).</span></div>
+<div class="paranum"><a name="p3.2">3.2/3</a></div>
+<div class="Normal">&nbsp;If a descendant of a language-defined tagged type 
+is declared, the implementation shall ensure that each inherited language-defined 
+subprogram behaves as described in this International Standard. In particular, 
+overriding a language-defined subprogram shall not alter the effect of 
+any inherited language-defined subprogram.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The implementation may restrict the replacement of 
+language-defined compilation units. The implementation may restrict children 
+of language-defined library units (other than Standard).&nbsp;</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal"><span class="insert5">The implementation may add 
+specifications of synchronized entities of implementation-defined packages 
+to the global specification (see  <A HREF="RM-6-1-2.html">6.1.2</A>) 
+for any language-defined entity that is not declared pure or has a global 
+specification of <B>null</B>.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

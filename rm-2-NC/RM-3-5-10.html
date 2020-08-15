@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Operations of Fixed Point Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-5-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.5.10 Operations of Fixed Point Types</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following attributes 
+are defined for every fixed point subtype S:&nbsp;</div>
+<div class="paranum"><a name="p2">2/1</a></div>
+<div class="WideHanging-Term">S'Small</div><div class="WideHanging-Body">
+<A NAME="I1801"></A><A NAME="I1802"></A>S'Small denotes the <I>small</I> 
+of the type of S. The value of this attribute is of the type <I>universal_real</I>. 
+<A NAME="I1803"></A><A NAME="I1804"></A>Small may be specified for nonderived 
+ordinary fixed point types via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0286">attribute_definition_clause</A></SPAN> 
+(see <A HREF="RM-13-3.html">13.3</A>); the expression of such a clause 
+shall be static.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="WideHanging-Term">S'Delta</div><div class="WideHanging-Body">
+<A NAME="I1805"></A><A NAME="I1806"></A>S'Delta denotes the <I>delta</I> 
+of the fixed point subtype S. The value of this attribute is of the type 
+<I>universal_real</I>.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="WideHanging-Term">S'Fore</div><div class="WideHanging-Body">
+<A NAME="I1807"></A><A NAME="I1808"></A>S'Fore yields the minimum number 
+of characters needed before the decimal point for the decimal representation 
+of any value of the subtype S, assuming that the representation does 
+not include an exponent, but includes a one-character prefix that is 
+either a minus sign or a space. (This minimum number does not include 
+superfluous zeros or underlines, and is at least 2.) The value of this 
+attribute is of the type <I>universal_integer</I>.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="WideHanging-Term">S'Aft</div><div class="WideHanging-Body">
+<A NAME="I1809"></A><A NAME="I1810"></A>S'Aft yields the number of decimal 
+digits needed after the decimal point to accommodate the <I>delta</I> 
+of the subtype S, unless the <I>delta</I> of the subtype S is greater 
+than 0.1, in which case the attribute yields the value one. (S'Aft is 
+the smallest positive integer N for which (10**N)*S'Delta is greater 
+than or equal to one.) The value of this attribute is of the type <I>universal_integer</I>. 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">The following additional 
+attributes are defined for every decimal fixed point subtype S:&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="WideHanging-Term">S'Digits</div><div class="WideHanging-Body">
+<A NAME="I1811"></A><A NAME="I1812"></A>S'Digits denotes the <I>digits</I> 
+of the decimal fixed point subtype S, which corresponds to the number 
+of decimal digits that are representable in objects of the subtype. The 
+value of this attribute is of the type <I>universal_integer</I>. Its 
+value is determined as follows: <A NAME="I1813"></A></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented4Bulleted">For a first subtype or a subtype defined 
+by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>, 
+the digits is the value of the expression given after the reserved word 
+<B>digits</B>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented4Bulleted">For a subtype defined by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+without a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>, 
+the digits of the subtype is the same as that of the subtype denoted 
+by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented4Bulleted">The digits of a base subtype is the largest 
+integer <I>D</I> such that the range &ndash;(10**<I>D</I>&ndash;1)*<I>delta</I> 
+.. +(10**<I>D</I>&ndash;1)*<I>delta</I> is included in the base range 
+of the type.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="WideHanging-Term">S'Scale</div><div class="WideHanging-Body">
+<A NAME="I1814"></A><A NAME="I1815"></A>S'Scale denotes the <I>scale</I> 
+of the subtype S, defined as the value N such that S'Delta = 10.0**(&ndash;N). 
+<A NAME="I1816"></A>The scale indicates the position of the point relative 
+to the rightmost significant digits of values of subtype S. The value 
+of this attribute is of the type <I>universal_integer</I>.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Round</div><div class="WideHanging-Body">
+<A NAME="I1817"></A><A NAME="I1818"></A>S'Round denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Indented4Examples"><B>function</B>&nbsp;S'Round(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_real</I></SPAN>)<BR>
+&nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideHanging-Body">The function returns the value obtained 
+by rounding X (away from 0, if X is midway between two values of the 
+type of S).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Notes">39&nbsp;&nbsp;All subtypes of a fixed point type will 
+have the same value for the Delta attribute, in the absence of <SPAN Class="swiss"><A HREF="RM-J-3.html#S0297">delta_constraint</A></SPAN>s 
+(see <A HREF="RM-J-3.html">J.3</A>).</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">40&nbsp;&nbsp;S'Scale is not always the same as S'Aft 
+for a decimal subtype; for example, if S'Delta = 1.0 then S'Aft is 1 
+while S'Scale is 0.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Notes">41&nbsp;&nbsp;<A NAME="I1819"></A>The predefined operations 
+of a fixed point type include the assignment operation, qualification, 
+the membership tests, and explicit conversion to and from other numeric 
+types. They also include the relational operators and the following predefined 
+arithmetic operators: the binary and unary adding operators &ndash; and 
++, multiplying operators, and the unary operator <B>abs</B>.</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">42&nbsp;&nbsp;As for all types, objects of a fixed 
+point type have Size and Address attributes (see <A HREF="RM-13-3.html">13.3</A>). 
+Other attributes of fixed point types are defined in <A HREF="RM-A-5-4.html">A.5.4</A>. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-5-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

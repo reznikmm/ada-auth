@@ -1,0 +1,518 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Interfacing Pragmas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.1 Interfacing Pragmas</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import is used to import an entity defined in a foreign language into 
+an Ada program, thus allowing a foreign-language subprogram to be called 
+from Ada, or a foreign-language variable to be accessed from Ada. In 
+contrast, a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Export is used to export an Ada entity to a foreign language, thus allowing 
+an Ada subprogram to be called from a foreign language, or an Ada object 
+to be accessed from a foreign language. The <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+Import and Export are intended primarily for objects and subprograms, 
+although implementations are allowed to support other entities.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Convention is used to specify that an Ada entity should use the conventions 
+of another language. It is intended primarily for types and &ldquo;callback&rdquo; 
+subprograms. For example, &ldquo;<B>pragma</B> Convention(Fortran, Matrix);&rdquo; 
+implies that Matrix should be represented according to the conventions 
+of the supported Fortran implementation, namely column-major order.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Linker_Options is used to specify the system linker parameters needed 
+when a given compilation unit is included in a partition.</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I7049"></A><A NAME="I7050"></A><A NAME="I7051"></A><A NAME="I7052"></A><A NAME="I7053"></A><A NAME="I7054"></A><A NAME="I7055"></A><A NAME="I7056"></A>An 
+<I>interfacing pragma</I> is a representation <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+that is one of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+Import, Export, or Convention. Their forms, together with that of the 
+related <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Linker_Options, are as follows:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7057"></A><A NAME="I7058"></A>Import(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I7059"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I7060"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I7061"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I7062"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>]);</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7063"></A><A NAME="I7064"></A>Export(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I7065"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I7066"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I7067"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I7068"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>]);</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7069"></A><A NAME="I7070"></A>Convention([Convention 
+=&gt;] <I>convention_</I><A NAME="I7071"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>,[Entity 
+=&gt;] <A NAME="I7072"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN>);</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7073"></A><A NAME="I7074"></A>Linker_Options(<I>string_</I><A NAME="I7075"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>);</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Linker_Options is allowed only at the place of a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>.</div>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Indented1">{<I><A HREF="defect1.html#8652/0058">8652/0058</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00036.TXT">AI95-00036-01</A></I>} 
+<span class="insert1">For <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+Import and Export, the argument for Link_Name shall not be given without 
+the <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+unless the argument for External_Name is given.</span>&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The expected type for a <I>string_</I><A NAME="I7076"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN><A NAME="I7077"></A> 
+in an interfacing pragma or in pragma Linker_Options is String.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>There is no language-defined 
+support for external or link names of type Wide_String, or of other string 
+types. Implementations may, of course, have additional pragmas for that 
+purpose. Note that allowing both String and Wide_String in the same <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+would cause ambiguities.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I7078"></A>The <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+of an interfacing pragma shall be the name of a <I>convention</I>. The 
+convention names are implementation defined, except for certain language-defined 
+ones, such as Ada and Intrinsic, as explained in <A HREF="AA-6-3-1.html">6.3.1</A>, 
+&ldquo;<A HREF="AA-6-3-1.html">Conformance Rules</A>&rdquo;. [Additional 
+convention names generally represent the calling conventions of foreign 
+languages, language implementations, or specific run-time models.] <A NAME="I7079"></A>The 
+convention of a callable entity is its <I>calling convention</I>.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+convention names.</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We considered representing 
+the convention names using an enumeration type declared in System. Then, 
+<I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+would be changed to <I>convention_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+and we would make its expected type be the enumeration type. We didn't 
+do this because it seems to introduce extra complexity, and because the 
+list of available languages is better represented as the list of children 
+of package Interfaces &mdash; a more open-ended sort of list.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7080"></A>If 
+<I>L</I> is a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+for a language, then a type T is said to be <I>compatible with convention 
+L</I>, (alternatively, is said to be an <I>L-compatible type</I>) if 
+any of the following conditions are met:&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">T is declared in a language interface package corresponding 
+to <I>L</I> and is defined to be <I>L</I>-compatible (see <A HREF="AA-B-3.html">B.3</A>, 
+<A HREF="AA-B-3-1.html">B.3.1</A>, <A HREF="AA-B-3-2.html">B.3.2</A>, 
+<A HREF="AA-B-4.html">B.4</A>, <A HREF="AA-B-5.html">B.5</A>),</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I7081"></A>Convention 
+<I>L</I> has been specified for T in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Convention, and T is <I>eligible for convention L</I>; that is:&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented2NestedBulleted">T is an array type with either an 
+unconstrained or statically-constrained first subtype, and its component 
+type is <I>L</I>-compatible,</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Indented2NestedBulleted">T is a record type that has no discriminants 
+and that only has components with statically-constrained subtypes, and 
+each component type is <I>L</I>-compatible,</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented2NestedBulleted">T is an access-to-object type, and 
+its designated type is <I>L</I>-compatible,</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Indented2NestedBulleted">T is an access-to-subprogram type, 
+and its designated profile's parameter and result types are all <I>L</I>-compatible. 
+</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">T is derived from an <I>L</I>-compatible type,</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">The implementation permits T as an <I>L</I>-compatible 
+type.</div>
+<div class="paranum"><a name="p20.a">20.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, an implementation 
+might permit Integer as a C-compatible type, though the C type to which 
+it corresponds might be different in different environments.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">If <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Convention applies to a type, then the type shall either be compatible 
+with or eligible for the convention specified in the pragma.&nbsp;</div>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If a type is derived from 
+an <I>L</I>-compatible type, the derived type is by default <I>L</I>-compatible, 
+but it is also permitted to specify pragma Convention for the derived 
+type.</div>
+<div class="paranum"><a name="p21.b">21.b</a></div>
+<div class="Annotations">It is permitted to specify pragma Convention 
+for an incomplete type, but in the complete declaration each component 
+must be <I>L</I>-compatible.</div>
+<div class="paranum"><a name="p21.c">21.c</a></div>
+<div class="Annotations">If each component of a record type is <I>L</I>-compatible, 
+then the record type itself is only <I>L</I>-compatible if it has a pragma 
+Convention.&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import shall be the completion of a declaration.<A NAME="I7082"></A> 
+Notwithstanding any rule to the contrary, a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import may serve as the completion of any kind of (explicit) declaration 
+if supported by an implementation for that kind of declaration. If a 
+completion is a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import, then it shall appear in the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-7-1.html#S0174">package_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-1.html#S0190">task_definition</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0195">protected_definition</A></SPAN> 
+as the declaration. For a library unit, it shall appear in the same <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0228">compilation</A></SPAN>, 
+before any subsequent <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0229">compilation_unit</A></SPAN>s 
+other than <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s. 
+If the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN> 
+denotes more than one entity, then the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import is the completion of all of them.&nbsp;</div>
+<div class="paranum"><a name="p22.a">22.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For declarations of deferred 
+constants and subprograms, we mention pragma Import explicitly as a possible 
+completion. For other declarations that require completions, we ignore 
+the possibility of pragma Import. Nevertheless, if an implementation 
+chooses to allow a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import to complete the declaration of a task, protected type, incomplete 
+type, private type, etc., it may do so, and the normal completion is 
+then not allowed for that declaration.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal"><A NAME="I7083"></A> <A NAME="I7084"></A>An entity 
+specified as the Entity argument to a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import (or <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Export) is said to be <I>imported</I> (respectively, <I>exported</I>).</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal">The declaration of an imported object shall not include 
+an explicit initialization expression. [Default initializations are not 
+performed.]&nbsp;</div>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This follows from the &ldquo;Notwithstanding 
+...&rdquo; wording in the Dynamics Semantics paragraphs below.&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">The type of an imported or exported object shall 
+be compatible with the convention specified in the corresponding <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p25.a">25.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This implies, for example, 
+that importing an Integer object might be illegal, whereas importing 
+an object of type Interfaces.C.int would be permitted.&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal">For an imported or exported subprogram, the result 
+and parameter types shall each be compatible with the convention specified 
+in the corresponding pragma.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">The external name and link name <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import or Export, and the <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0115">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Linker_Options, shall be static.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal"><A NAME="I7085"></A><A NAME="I7086"></A><A NAME="I7087"></A><A NAME="I7088"></A><A NAME="I7089"></A><A NAME="I7090"></A><A NAME="I7091"></A><A NAME="I7092"></A>Import, 
+Export, and Convention <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+are representation pragmas that specify the <I>convention</I> aspect 
+of representation. <A NAME="I7093"></A><A NAME="I7094"></A><A NAME="I7095"></A><A NAME="I7096"></A>In 
+addition, Import and Export <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+specify the <I>imported</I> and <I>exported</I> aspects of representation, 
+respectively.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal"><A NAME="I7097"></A><A NAME="I7098"></A><A NAME="I7099"></A><A NAME="I7100"></A><A NAME="I7101"></A><A NAME="I7102"></A>An 
+interfacing pragma is a program unit pragma when applied to a program 
+unit (see <A HREF="AA-10-1-5.html">10.1.5</A>).</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An interfacing pragma 
+defines the convention of the entity denoted by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN>. 
+The convention represents the calling convention or representation convention 
+of the entity. For an access-to-subprogram type, it represents the calling 
+convention of designated subprograms. In addition:&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Bulleted">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import specifies that the entity is defined externally (that is, outside 
+the Ada program).</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Bulleted">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Export specifies that the entity is used externally.</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Bulleted">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import or Export optionally specifies an entity's external name, link 
+name, or both.&nbsp;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Normal"><A NAME="I7103"></A>An <I>external name</I> is a 
+string value for the name used by a foreign language program either for 
+an entity that an Ada program imports, or for referring to an entity 
+that an Ada program exports.</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal"><A NAME="I7104"></A>A <I>link name</I> is a string 
+value for the name of an exported or imported entity, based on the conventions 
+of the foreign language's compiler in interfacing with the system's linker 
+tool.</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Normal">The meaning of link names is implementation defined. 
+If neither a link name nor the Address attribute of an imported or exported 
+entity is specified, then a link name is chosen in an implementation-defined 
+manner, based on the external name if one is specified.&nbsp;</div>
+<div class="paranum"><a name="p36.a">36.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The meaning of 
+link names.</div>
+<div class="paranum"><a name="p36.b">36.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, an implementation 
+might always prepend &quot;_&quot;, and then pass it to the system linker. 
+</div>
+<div class="paranum"><a name="p36.c">36.c</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The manner of 
+choosing link names when neither the link name nor the address of an 
+imported or exported entity is specified.</div>
+<div class="paranum"><a name="p36.d">36.d</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Normally, this will be 
+the entity's defining name, or some simple transformation thereof.&nbsp;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal">Pragma Linker_Options has the effect of passing its 
+string argument as a parameter to the system linker (if one exists), 
+if the immediately enclosing compilation unit is included in the partition 
+being linked. The interpretation of the string argument, and the way 
+in which the string arguments from multiple Linker_Options pragmas are 
+combined, is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p37.a">37.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The effect of 
+pragma Linker_Options.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Normal"><A NAME="I7105"></A><A NAME="I7106"></A>Notwithstanding 
+what this International Standard says elsewhere, the elaboration of a 
+declaration denoted by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import does not create the entity. Such an elaboration has no other effect 
+than to allow the defining name to denote the external entity.&nbsp;</div>
+<div class="paranum"><a name="p38.a">38.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This implies that default 
+initializations are skipped. (Explicit initializations are illegal.) 
+For example, an imported access object is <I>not</I> initialized to <B>null</B>.</div>
+<div class="paranum"><a name="p38.b">38.b</a></div>
+<div class="Annotations">Note that the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import might denote more than one declaration; in that case, the entity 
+of all of those declarations will be the external entity.&nbsp;</div>
+<div class="paranum"><a name="p38.c">38.c</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This &ldquo;notwithstanding&rdquo; 
+wording is better than saying &ldquo;unless named by a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import&rdquo; on every definition of elaboration. It says we recognize 
+the contradiction, and this rule takes precedence.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p38.1">38.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00320.TXT">AI95-00320-01</A></I>} 
+<span class="insert2"><A NAME="I7107"></A>It is the programmer's responsibility 
+to ensure that the use of interfacing pragmas does not violate Ada semantics; 
+otherwise, program execution is erroneous.</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Normal">If an implementation supports pragma Export to a 
+given language, then it should also allow the main subprogram to be written 
+in that language. It should support some mechanism for invoking the elaboration 
+of the Ada library units included in the system, and for invoking the 
+finalization of the environment task. On typical systems, the recommended 
+mechanism is to provide two subprograms whose link names are &quot;adainit&quot; 
+and &quot;adafinal&quot;. Adainit should contain the elaboration code 
+for library units. Adafinal should contain the finalization code. These 
+subprograms should have no effect the second and subsequent time they 
+are called. <span class="insert1"><A NAME="I7108"></A><A NAME="I7109"></A><A NAME="I7110"></A><A NAME="I7111"></A></span></div>
+<div class="paranum"><a name="p39.a.1">39.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B><span class="insert2">If 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>  Export 
+is supported for a language, the main program should be able to be written 
+in that language. Subprograms named &quot;adainit&quot; and &quot;adafinal&quot; 
+should be provided for elaboration and finalization of the environment 
+task.</span></div>
+<div class="paranum"><a name="p39.a">39.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, if the main 
+subprogram is written in C, it can call adainit before the first call 
+to an Ada subprogram, and adafinal after the last.&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Normal">Automatic elaboration of preelaborated packages should 
+be provided when <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Export is supported.&nbsp;</div>
+<div class="paranum"><a name="p40.a.1">40.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B><span class="insert2">Automatic 
+elaboration of preelaborated packages should be provided when <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Export is supported.</span></div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Normal">For each supported convention <I>L</I> other than 
+Intrinsic, an implementation should support Import and Export <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+for objects of <I>L</I>-compatible types and for subprograms, and <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Convention for <I>L</I>-eligible types and for subprograms, presuming 
+the other language has corresponding features. <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+Convention need not be supported for scalar types.&nbsp;</div>
+<div class="paranum"><a name="p41.a.1">41.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B><span class="insert2">For 
+each supported convention <I>L</I> other than Intrinsic, <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+Import and Export should be supported for objects of <I>L</I>-compatible 
+types and for subprograms, and <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Convention should be supported for <I>L</I>-eligible types and for subprograms.</span></div>
+<div class="paranum"><a name="p41.a">41.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Pragma Convention is not necessary 
+for scalar types, since the language interface packages declare scalar 
+types corresponding to those provided by the respective foreign languages. 
+</div>
+<div class="paranum"><a name="p41.b">41.b/2</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+If an implementation supports interfacing to <span class="insert2">the 
+</span>C++<span class="insert2">&nbsp;entities not supported by <A HREF="AA-B-3.html">B.3</A></span>, 
+it should do so via the convention identifier C_Plus_Plus (in additional 
+to any C++-implementation-specific ones).&nbsp;</div>
+<div class="paranum"><a name="p41.c">41.c/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+The reason for giving the advice about C++ is to encourage uniformity 
+among implementations, given that the name of the language is not syntactically 
+legal as an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.<span class="delete2">&nbsp;We place this advice in the AARM, rather than the RM95 proper, because 
+(as of this writing) C++ is not an international standard, and we don't 
+want to refer to a such a language from an international standard.</span> 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Notes">1&nbsp;&nbsp;Implementations may place restrictions 
+on interfacing pragmas; for example, requiring each exported entity to 
+be declared at the library level.&nbsp;</div>
+<div class="paranum"><a name="p42.a">42.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Arbitrary restrictions are allowed 
+by <A HREF="AA-13-1.html">13.1</A>.&nbsp;</div>
+<div class="paranum"><a name="p42.b">42.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Such a restriction might 
+be to disallow them altogether. Alternatively, the implementation might 
+allow them only for certain kinds of entities, or only for certain conventions. 
+</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Notes">2&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import specifies the conventions for accessing external entities. It 
+is possible that the actual entity is written in assembly language, but 
+reflects the conventions of a particular language. For example, <B>pragma</B> 
+Import(Ada, ...) can be used to interface to an assembly language routine 
+that obeys the Ada compiler's calling conventions.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Notes">3&nbsp;&nbsp;To obtain &ldquo;call-back&rdquo; to 
+an Ada subprogram from a foreign language environment, <B>pragma</B> 
+Convention should be specified both for the access-to-subprogram type 
+and the specific subprogram(s) to which 'Access is applied.</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Notes">4&nbsp;&nbsp;It is illegal to specify more than one 
+of Import, Export, or Convention for a given entity.</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Notes">5&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0285">local_name</A></SPAN> 
+in an interfacing pragma can denote more than one entity in the case 
+of overloading. Such a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+applies to all of the denoted entities.</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Notes">6&nbsp;&nbsp;See also <A HREF="AA-13-8.html">13.8</A>, 
+&ldquo;<A HREF="AA-13-8.html">Machine Code Insertions</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p47.a">47.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The Intrinsic convention 
+(see <A HREF="AA-6-3-1.html">6.3.1</A>) implies that the entity is somehow 
+&ldquo;built in&rdquo; to the implementation. Thus, it generally does 
+not make sense for users to specify Intrinsic in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import. The intention is that only implementations will specify Intrinsic 
+in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import. The language also defines certain subprograms to be Intrinsic. 
+</div>
+<div class="paranum"><a name="p47.b">47.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There are many imaginable 
+interfacing pragmas that don't make any sense. For example, setting the 
+Convention of a protected procedure to Ada is probably wrong. Rather 
+than enumerating all such cases, however, we leave it up to implementations 
+to decide what is sensible.&nbsp;</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Notes">7&nbsp;&nbsp;If both External_Name and Link_Name are 
+specified for an Import or Export pragma, then the External_Name is ignored.</div>
+<div class="paranum"><a name="p49">49/2</a></div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN><span class="delete2">8&nbsp;&nbsp;</span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00320.TXT">AI95-00320-01</A></I>} 
+<span class="delete2">An interfacing pragma might result in an effect 
+that violates Ada semantics.</span>&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of interfacing 
+pragmas:</I>&nbsp;</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Examples"><B>package</B>&nbsp;Fortran_Library&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;Sqrt&nbsp;(X&nbsp;:&nbsp;Float)&nbsp;<B>return</B>&nbsp;Float;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;Exp&nbsp;&nbsp;(X&nbsp;:&nbsp;Float)&nbsp;<B>return</B>&nbsp;Float;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;<B>pragma</B>&nbsp;Import(Fortran,&nbsp;Sqrt);<BR>
+&nbsp;&nbsp;<B>pragma</B>&nbsp;Import(Fortran,&nbsp;Exp);<BR>
+<B>end</B>&nbsp;Fortran_Library;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p51.a">51.a</a></div>
+<div class="Annotations"><A NAME="I7112"></A>Interfacing pragmas are 
+new to Ada 95. Pragma Import replaces Ada 83's pragma Interface. Existing 
+implementations can continue to support pragma Interface for upward compatibility. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p51.b">51.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0058">8652/0058</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00036.TXT">AI95-00036-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Clarified that <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+Import and Export work like a subprogram call; parameters cannot be omitted 
+unless named notation is used. (Reordering is still not permitted, however.)</span></div>
+<div class="paranum"><a name="p51.c">51.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00320.TXT">AI95-00320-01</A></I>} 
+<span class="insert2">Added wording to say all bets are off if foreign 
+code doesn't follow the semantics promised by the Ada specifications.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

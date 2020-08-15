@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Streams</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.13.1 The Package Streams</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The abstract type Root_Stream_Type is the root type 
+of the class of stream types. The types in this class represent different 
+kinds of streams. A new stream type is defined by extending the root 
+type (or some other stream type), overriding the Read and Write operations, 
+and optionally defining additional primitive subprograms, according to 
+the requirements of the particular kind of stream. The predefined stream-oriented 
+attributes like T'Read and T'Write make dispatching calls on the Read 
+and Write procedures of the Root_Stream_Type. (User-defined T'Read and 
+T'Write attributes can also make such calls, or can call the Read and 
+Write attributes of other types.)&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><A NAME="I6028"></A><B>package</B>&nbsp;Ada.Streams&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Streams)<A NAME="I6029"></A>;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6030"></A>Root_Stream_Type&nbsp;<B>is</B>&nbsp;<B>abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Root_Stream_Type);</span></div>
+<div class="paranum"><a name="p4">4/1</a></div>
+<div class="Examples">{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00181.TXT">AI95-00181-01</A></I>} 
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6031"></A>Stream_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6032"></A>Stream_Element_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6033"></A>Stream_Element_Count&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_Element_Offset&nbsp;<B>range</B>&nbsp;0..Stream_Element_Offset'Last;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6034"></A>Stream_Element_Array&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>array</B>(Stream_Element_Offset&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B><span class="insert1"><B>&nbsp;aliased</B></span>&nbsp;Stream_Element;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6035"></A>Read(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Root_Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Offset)&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6036"></A>Write(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Root_Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Stream_Element_Array)&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Streams;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00227.TXT">AI95-00227-01</A></I>} 
+The Read operation transfers <span class="delete2">Item'Length&nbsp;</span>stream 
+elements from the specified stream to fill the array Item. <span class="insert2">Elements 
+are transferred until Item'Length elements have been transferred, or 
+until the end of the stream is reached. If any elements are transferred, 
+the</span><span class="delete2">&nbsp;The</span> index of the last stream 
+element transferred is returned in Last. <span class="insert2">Otherwise, 
+Item'First - 1 is returned in Last.&nbsp;</span>Last is less than Item'Last 
+only if the end of the stream is reached.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The Write operation appends Item to the specified 
+stream.</div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+<span class="insert2">The index subtype of Stream_Element_Array is Stream_Element_Offset 
+because we wish to allow maximum flexibility. Most Stream_Element_Arrays 
+will probably have a lower bound of 0 or 1, but other lower bounds, including 
+negative ones, make sense in some situations.</span></div>
+<div class="paranum"><a name="p9.b">9.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert2">Note that there are some language-defined subprograms 
+that fill part of a Stream_Element_Array, and return the index of the 
+last element filled as a Stream_Element_Offset. The Read procedures declared 
+here, Streams.Stream_IO (see <A HREF="AA-A-12-1.html">A.12.1</A>), and 
+System.RPC (see <A HREF="AA-E-5.html">E.5</A>) behave in this manner. 
+These will raise Constraint_Error if the resulting Last value is not 
+in Stream_Element_Offset. This implies that the Stream_Element_Array 
+passed to these subprograms should not have a lower bound of Stream_Element_Offset'First, 
+because then a read of 0 elements would always raise Constraint_Error. 
+A better choice of lower bound is&nbsp;</span><span class="insert3">0 or&nbsp;</span><span class="insert2">1.</span> 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00181.TXT">AI95-00181-01</A></I>} 
+<span class="insert1">If Stream_Element'Size is not a multiple of System.Storage_Unit, 
+then the components of Stream_Element_Array need not be aliased.</span> 
+</div>
+<div class="paranum"><a name="p9.b.1">9.b.1/2</a></div>
+<div class="Annotations"><span class="insert1"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+<span class="insert1">If the Stream_Element'Size is less than the size 
+of System.Storage_Unit, then components of Stream_Element_Array need 
+not be aliased. This is necessary as the components of type Stream_Element 
+size might not be addressable on the target&nbsp;</span><span class="insert2">architecture</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;architechture</span></span><span class="insert1">.</span> 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">39&nbsp;&nbsp;See <A HREF="AA-A-12-1.html">A.12.1</A>, 
+&ldquo;<A HREF="AA-A-12-1.html">The Package Streams.Stream_IO</A>&rdquo; 
+for an example of extending type Root_Stream_Type.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Notes">40&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00227.TXT">AI95-00227-01</A></I>} 
+<span class="insert2">If the end of stream has been reached, and Item'First 
+is Stream_Element_Offset'First, Read will raise Constraint_Error.</span> 
+</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>Thus, 
+Stream_Element_Arrays should start at 0 or 1, not Stream_Element_Offset'First.</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p11.b">11.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
+<span class="insert2"><A NAME="I6037"></A><B>Amendment Correction:</B> 
+Added <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Preelaborable_Initialization to type Root_Stream_Type.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p11.c">11.c/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00181.TXT">AI95-00181-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Stream elements are aliased 
+presuming that makes sense.</span></div>
+<div class="paranum"><a name="p11.d">11.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00227.TXT">AI95-00227-01</A></I>} 
+<span class="insert2">Fixed the wording for Read to properly define the 
+result in Last when no stream elements are transfered.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Representation Items</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.1 Representation Items</H1>
+<div class="paranum"><a name="p0.1">0.1/1</a></div>
+<div class="Normal">&nbsp;Representation and operational items can be used 
+to specify aspects of entities. Two kinds of aspects of entities can 
+be specified: aspects of representation and operational aspects. Representation 
+items specify how the types and other entities of the language are to 
+be mapped onto the underlying machine. Operational items specify other 
+properties of entities.</div>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Either kind of aspect of an entity may be specified 
+by means of an <SPAN Class="swiss">aspect_specification</SPAN> (see ), 
+which is an optional element of most kinds of declarations and applies 
+to the entity or entities being declared. Aspects may also be specified 
+by certain other constructs occurring subsequent to the declaration of 
+the affected entity: a representation aspect value may be specified by 
+means of a representation item and an operational aspect value may be 
+specified by means of an operational item.</div>
+<div class="paranum"><a name="p2">2/1</a></div>
+<div class="Normal"><A NAME="I4115"></A><A NAME="I4116"></A><A NAME="I4117"></A>There 
+are six kinds of <I>representation items</I>: <SPAN Class="swiss"><A HREF="RM-13-3.html#S0266">attribute_definition_clause</A></SPAN>s 
+for representation attributes, <SPAN Class="swiss"><A HREF="RM-13-4.html#S0267">enumeration_representation_clause</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0269">record_representation_clause</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="RM-J-7.html#S0277">at_clause</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0270">component_clause</A></SPAN>s, 
+and <I>representation pragmas</I>. They can be provided to give more 
+efficient representation or to interface with features that are outside 
+the domain of the language (for example, peripheral hardware).&nbsp;</div>
+<div class="paranum"><a name="p2.1">2.1/1</a></div>
+<div class="Normal">&nbsp;An <A NAME="I4118"></A><I>operational item</I> is 
+an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0266">attribute_definition_clause</A></SPAN> 
+for an operational attribute.</div>
+<div class="paranum"><a name="p2.2">2.2/1</a></div>
+<div class="Normal">&nbsp;An operational item or a representation item applies 
+to an entity identified by a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN>, 
+which denotes an entity declared local to the current declarative region, 
+or a library unit declared immediately preceding a representation pragma 
+in a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0214">compilation</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p3">3/1</a></div>
+<div class="Indented1"><SPAN Class="swiss">aspect_clause</SPAN><A NAME="I4119"></A><A NAME="S0263"></A><A NAME="S0264"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4120"></A><SPAN Class="swiss"><A HREF="RM-13-3.html#S0266">attribute_definition_clause</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4121"></A><SPAN Class="swiss"><A HREF="RM-13-4.html#S0267">enumeration_representation_clause</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4122"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0269">record_representation_clause</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4123"></A><SPAN Class="swiss"><A HREF="RM-J-7.html#S0277">at_clause</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">local_name</SPAN><A NAME="I4124"></A><A NAME="S0265"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4125"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0085">direct_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4126"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0085">direct_name</A></SPAN>'<A NAME="I4127"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0094">attribute_designator</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>library_unit_</I><A NAME="I4128"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN></div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Indented1">A representation pragma is allowed only at places 
+where an <SPAN Class="swiss"><A HREF="RM-13-1.html#S0263">aspect_clause</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0215">compilation_unit</A></SPAN> 
+is allowed. <A NAME="I4129"></A></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p6">6/1</a></div>
+<div class="Normal">In an operational item or representation item, if 
+the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0085">direct_name</A></SPAN>, 
+then it shall resolve to denote a declaration (or, in the case of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN>, 
+one or more declarations) that occurs immediately within the same declarative 
+region as the item. If the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+has an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0094">attribute_designator</A></SPAN>, 
+then it shall resolve to denote an implementation-defined component (see 
+<A HREF="RM-13-5-1.html">13.5.1</A>) or a class-wide type implicitly 
+declared immediately within the same declarative region as the item. 
+A <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+that is a <I>library_unit_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+(only permitted in a representation pragma) shall resolve to denote the 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0216">library_item</A></SPAN> 
+that immediately precedes (except for other pragmas) the representation 
+pragma.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/1</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-13-1.html#S0263">aspect_clause</A></SPAN> 
+or representation pragma shall statically denote an entity (or, in the 
+case of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0016">pragma</A></SPAN>, 
+one or more entities) declared immediately preceding it in a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0214">compilation</A></SPAN>, 
+or within the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0079">declarative_part</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-7-1.html#S0162">package_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-1.html#S0177">task_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-4.html#S0182">protected_definition</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-3-8.html#S0064">record_definition</A></SPAN> 
+as the representation or operational item. If a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+denotes a local callable entity, it may do so through a local <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0173">subprogram_renaming_declaration</A></SPAN> 
+(as a way to resolve ambiguity in the presence of overloading); otherwise, 
+the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+shall not denote a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0169">renaming_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I4130"></A><A NAME="I4131"></A>The <I>representation</I> 
+of an object consists of a certain number of bits (the <I>size</I> of 
+the object). These are the bits that are normally read or updated by 
+the machine code when loading, storing, or operating-on the value of 
+the object. This includes some padding bits, when the size of the object 
+is greater than the size of its subtype. <A NAME="I4132"></A><A NAME="I4133"></A>Such 
+padding bits are considered to be part of the representation of the object, 
+rather than being gaps between objects, if these bits are normally read 
+and updated.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I4134"></A><A NAME="I4135"></A><A NAME="I4136"></A>A 
+representation item <I>directly specifies</I> an <I>aspect of representation</I> 
+of the entity denoted by the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN>, 
+except in the case of a type-related representation item, whose <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+shall denote a first subtype, and which directly specifies an aspect 
+of the subtype's type. <A NAME="I4137"></A><A NAME="I4138"></A><A NAME="I4139"></A><A NAME="I4140"></A>A 
+representation item that names a subtype is either <I>subtype-specific</I> 
+(Size and Alignment clauses) or <I>type-related</I> (all others). Subtype-specific 
+aspects may differ for different subtypes of the same type.</div>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Normal">&nbsp;An operational item <I>directly specifies</I> an 
+<I>operational aspect</I> of the type of the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN>. 
+The <SPAN Class="swiss"><A HREF="RM-13-1.html#S0265">local_name</A></SPAN> 
+of an operational item shall denote a first subtype. An operational item 
+that names a subtype is type-related. <A NAME="I4141"></A><A NAME="I4142"></A><A NAME="I4143"></A><A NAME="I4144"></A></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">A representation item that directly specifies an 
+aspect of a subtype or type shall appear after the type is completely 
+defined (see <A HREF="RM-3-11-1.html">3.11.1</A>) and before the subtype 
+or type is frozen (see <A HREF="RM-13-14.html">13.14</A>). If a representation 
+item is given that directly specifies an aspect of an entity, then it 
+is illegal to give another representation item that directly specifies 
+the same aspect of the entity.&nbsp;</div>
+<div class="paranum"><a name="p10.1">10.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;An operational item that directly specifies an 
+aspect of a type shall appear before the type is frozen (see <A HREF="RM-13-14.html">13.14</A>). 
+If an operational item is given that directly specifies an aspect of 
+a type, then it is illegal to give another operational item that directly 
+specifies the same aspect of the type.&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">For an untagged derived type, no type-related representation 
+items are allowed if the parent type is a by-reference type, or has any 
+user-defined primitive subprograms.&nbsp;</div>
+<div class="paranum"><a name="p12">12/1</a></div>
+<div class="Normal">Operational and representation aspects of a generic 
+formal parameter are the same as those of the actual. Operational and 
+representation aspects of a partial view are the same as those of the 
+full view. A type-related representation item is not allowed for a descendant 
+of a generic formal untagged type.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">A representation item that specifies the Size for 
+a given subtype, or the size or storage place for an object (including 
+a component) of a given subtype, shall allow for enough storage space 
+to accommodate any value of the subtype.</div>
+<div class="paranum"><a name="p14">14/1</a></div>
+<div class="Normal">A representation or operational item that is not 
+supported by the implementationis illegal, or raises an exception at 
+run time.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">If two subtypes statically match, then their subtype-specific 
+aspects (Size and Alignment) are the same. <A NAME="I4145"></A></div>
+<div class="paranum"><a name="p16">16/1</a></div>
+<div class="Normal">A derived type inherits each type-related aspect 
+of representation of its parent type that was directly specified before 
+the declaration of the derived type, or (in the case where the parent 
+is derived) that was inherited by the parent type from the grandparent 
+type. A derived subtype inherits each subtype-specific aspect of representation 
+of its parent subtype that was directly specified before the declaration 
+of the derived type, or (in the case where the parent is derived) that 
+was inherited by the parent subtype from the grandparent subtype, but 
+only if the parent subtype statically matches the first subtype of the 
+parent type. An inherited aspect of representation is overridden by a 
+subsequent representation item that specifies the same aspect of the 
+type or subtype.&nbsp;</div>
+<div class="paranum"><a name="p16.1">16.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;In contrast, whether operational aspects are inherited 
+by a derived type depends on each specific aspect. When operational aspects 
+are inherited by a derived type, aspects that were directly specified 
+before the declaration of the derived type, or (in the case where the 
+parent is derived) that were inherited by the parent type from the grandparent 
+type are inherited. An inherited operational aspect is overridden by 
+a subsequent operational item that specifies the same aspect of the type. 
+</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Each aspect of representation 
+of an entity is as follows:&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted"><A NAME="I4146"></A>If the aspect is <I>specified</I> 
+for the entity, meaning that it is either directly specified or inherited, 
+then that aspect of the entity is as specified, except in the case of 
+Storage_Size, which specifies a minimum.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted"><A NAME="I4147"></A>If an aspect of representation 
+of an entity is not specified, it is chosen by default in an unspecified 
+manner.&nbsp;</div>
+<div class="paranum"><a name="p19.1">19.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;<A NAME="I4148"></A>If an operational aspect is 
+<I>specified</I> for an entity (meaning that it is either directly specified 
+or inherited), then that aspect of the entity is as specified. Otherwise, 
+the aspect of the entity has the default value for that aspect.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p20">20/1</a></div>
+<div class="Normal"><A NAME="I4149"></A>For the elaboration of an <SPAN Class="swiss"><A HREF="RM-13-1.html#S0263">aspect_clause</A></SPAN>, 
+any evaluable constructs within it are evaluated.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">An implementation may interpret aspects of representation 
+in an implementation-defined manner. An implementation may place implementation-defined 
+restrictions on representation items. <A NAME="I4150"></A>A <I>recommended 
+level of support</I> is specified for representation items and related 
+features in each subclause. These recommendations are changed to requirements 
+for implementations that support the Systems Programming Annex (see <A HREF="RM-C-2.html">C.2</A>, 
+&ldquo;<A HREF="RM-C-2.html">Required Representation Support</A>&rdquo;).</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4151"></A>The 
+recommended level of support for all representation items is qualified 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">An implementation need not support representation 
+items containing nonstatic expressions, except that an implementation 
+should support a representation item for a given entity if each nonstatic 
+expression in the representation item is a name that statically denotes 
+a constant declared before the entity.&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">An implementation need not support a specification 
+for the Size for a given composite subtype, nor the size or storage place 
+for an object (including a component) of a given composite subtype, unless 
+the constraints on the subtype and its composite subcomponents (if any) 
+are all static constraints.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Bulleted">An aliased component, or a component whose type 
+is by-reference, should always be allocated at an addressable location. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-13-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

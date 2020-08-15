@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Random Number Generation</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.5.2 Random Number Generation</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[Facilities for the generation of pseudo-random floating 
+point numbers are provided in the package Numerics.Float_Random; the 
+generic package Numerics.Discrete_Random provides similar facilities 
+for the generation of pseudo-random integers and pseudo-random values 
+of enumeration types. <A NAME="I5302"></A>For brevity, pseudo-random 
+values of any of these types are called <I>random numbers</I>.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">Some of the facilities provided are basic to all 
+applications of random numbers. These include a limited private type 
+each of whose objects serves as the generator of a (possibly distinct) 
+sequence of random numbers; a function to obtain the &ldquo;next&rdquo; 
+random number from a given sequence of random numbers (that is, from 
+its generator); and subprograms to initialize or reinitialize a given 
+generator to a time-dependent state or a state denoted by a single integer.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">Other facilities are provided specifically for advanced 
+applications. These include subprograms to save and restore the state 
+of a given generator; a private type whose objects can be used to hold 
+the saved state of a generator; and subprograms to obtain a string representation 
+of a given generator state, or, given such a string representation, the 
+corresponding state.]&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>These facilities support 
+a variety of requirements ranging from repeatable sequences (for debugging) 
+to unique sequences in each execution of a program.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Numerics.Float_Random has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Numerics.Float_Random&nbsp;<B>is</B><A NAME="I5303"></A></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Basic&nbsp;facilities</I></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5304"></A>Generator&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5305"></A>Uniformly_Distributed&nbsp;<B>is</B>&nbsp;Float&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;1.0;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5306"></A>Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Uniformly_Distributed;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5307"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5308"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator);</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Advanced&nbsp;facilities</I></SPAN></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5309"></A>State&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5310"></A>Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_State&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;State);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5311"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State);</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5312"></A>Max_Image_Width&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;value</I></SPAN>;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5313"></A>Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5314"></A>Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Numerics.Float_Random;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">The generic library package Numerics.Discrete_Random 
+has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><A NAME="I5315"></A><BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Result_Subtype&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
+<B>package</B>&nbsp;Ada.Numerics.Discrete_Random&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Basic&nbsp;facilities</I></SPAN></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5316"></A>Generator&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5317"></A>Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Result_Subtype;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5318"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5319"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator);</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Advanced&nbsp;facilities</I></SPAN></div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5320"></A>State&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5321"></A>Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_State&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;State);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5322"></A>Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State);</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5323"></A>Max_Image_Width&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;value</I></SPAN>;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5324"></A>Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5325"></A>Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Numerics.Discrete_Random;</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
+Numerics.Float_Random.Max_Image_Width.</div>
+<div class="paranum"><a name="p27.b">27.b</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
+Numerics.Discrete_Random.Max_Image_Width.</div>
+<div class="paranum"><a name="p27.c">27.c/1</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Implementation 
+Note:&nbsp;</B>{<I><A HREF="defect2.html#8652/0097">8652/0097</A></I>} {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00115.TXT">AI95-00115-01</A></I>} 
+The following is a possible implementation of the private part of Numerics.Float_Random 
+(assuming the presence of &ldquo;<B>with</B> Ada.Finalization;&rdquo; 
+as a context clause):&nbsp;</div>
+<div class="paranum"><a name="p27.d">27.d</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;State&nbsp;<B>is</B>&nbsp;...;<BR>
+<B>type</B>&nbsp;Access_State&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;State;<BR>
+<B>type</B>&nbsp;Generator&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Finalization.Limited_Controlled&nbsp;<B>with</B><BR>
+&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S&nbsp;:&nbsp;Access_State&nbsp;:=&nbsp;<B>new</B>&nbsp;State'(...);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>procedure</B>&nbsp;Finalize&nbsp;(G&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Generator);</div>
+<div class="paranum"><a name="p27.d.1">27.d.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect2.html#8652/0097">8652/0097</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00115.TXT">AI95-00115-01</A></I>} 
+Unfortunately, Numerics.Discrete_Random.Generator cannot be implemented 
+this way, as Numerics.Discrete_Random can be instantiated at any nesting 
+depth. However, Generator could have a component of a controlled type, 
+as long as that type is declared in some other (nongeneric) package. 
+One possible solution would be to implement Numerics.Discrete_Random 
+in terms of Numerics.Float_Random, using a component of Numerics.Float_Random.Generator 
+to implement Numerics.Float_Random.Generator.</div>
+<div class="paranum"><a name="p27.e">27.e</a></div>
+<div class="Annotations">Clearly some level of indirection is required 
+in the implementation of a Generator, since the parameter mode is <B>in</B> 
+for all operations on a Generator. For this reason, Numerics.Float_Random 
+and Numerics.Discrete_Random cannot be declared pure.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal">An object of the limited private type Generator is 
+associated with a sequence of random numbers. Each generator has a hidden 
+(internal) state, which the operations on generators use to determine 
+the position in the associated sequence. <A NAME="I5326"></A>All generators 
+are implicitly initialized to an unspecified state that does not vary 
+from one program execution to another; they may also be explicitly initialized, 
+or reinitialized, to a time-dependent state, to a previously saved state, 
+or to a state uniquely denoted by an integer value.&nbsp;</div>
+<div class="paranum"><a name="p28.a">28.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The repeatability provided 
+by the implicit initialization may be exploited for testing or debugging 
+purposes.&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal">An object of the private type State can be used to 
+hold the internal state of a generator. Such objects are only needed 
+if the application is designed to save and restore generator states or 
+to examine or manufacture them.</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Normal" style="margin-bottom: 0.9em">The operations on generators 
+affect the state and therefore the future values of the associated sequence. 
+The semantics of the operations on generators and states are defined 
+below.&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples"><B>function</B>&nbsp;Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Uniformly_Distributed;<BR>
+<B>function</B>&nbsp;Random&nbsp;(Gen&nbsp;:&nbsp;Generator)&nbsp;<B>return</B>&nbsp;Result_Subtype;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Obtains the &ldquo;next&rdquo; 
+random number from the given generator, relative to its current state, 
+according to an implementation-defined algorithm. The result of the function 
+in Numerics.Float_Random is delivered as a value of the subtype Uniformly_Distributed, 
+which is a subtype of the predefined type Float having a range of 0.0 
+.. 1.0. The result of the function in an instantiation of Numerics.Discrete_Random 
+is delivered as a value of the generic formal subtype Result_Subtype. 
+</div>
+<div class="paranum"><a name="p32.a">32.a/1</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><B>Implementation defined:&nbsp;</B>The algorithms 
+for random number generation.</div>
+<div class="paranum"><a name="p32.b">32.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The requirement for a level of 
+indirection in accessing the internal state of a generator arises from 
+the desire to make Random a function, rather than a procedure.&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
+<B>procedure</B>&nbsp;Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Generator);</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><A NAME="I5327"></A>Sets 
+the state of the specified generator to one that is an unspecified function 
+of the value of the parameter Initiator (or to a time-dependent state, 
+if only a generator parameter is specified). <A NAME="I5328"></A>The 
+latter form of the procedure is known as the <I>time-dependent Reset 
+procedure</I>.&nbsp;</div>
+<div class="paranum"><a name="p34.a">34.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The time-dependent 
+Reset procedure can be implemented by mapping the current time and date 
+as determined by the system clock into a state, but other implementations 
+are possible. For example, a white-noise generator or a radioactive source 
+can be used to generate time-dependent states.&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Save&nbsp;&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To_State&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;State);<BR>
+<B>procedure</B>&nbsp;Reset&nbsp;(Gen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From_State&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;State);</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Save obtains the 
+current state of a generator. Reset gives a generator the specified state. 
+A generator that is reset to a state previously obtained by invoking 
+Save is restored to the state it had when Save was invoked.</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Examples"><B>function</B>&nbsp;Image&nbsp;(Of_State&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;State)&nbsp;&nbsp;<B>return</B>&nbsp;String;<BR>
+<B>function</B>&nbsp;Value&nbsp;(Coded_State&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;State;</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Indented2">Image provides a representation of a state coded 
+(in an implementation-defined way) as a string whose length is bounded 
+by the value of Max_Image_Width. Value is the inverse of Image: Value(Image(S)) 
+= S for each state S that can be obtained from a generator by invoking 
+Save.&nbsp;</div>
+<div class="paranum"><a name="p38.a">38.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The string representation 
+of a random number generator's state.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Normal"><A NAME="I5329"></A><A NAME="I5330"></A><A NAME="I5331"></A>Instantiation 
+of Numerics.Discrete_Random with a subtype having a null range raises 
+Constraint_Error.</div>
+<div class="paranum"><a name="p40">40/1</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0050">8652/0050</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00089.TXT">AI95-00089</A></I>} 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p40.1">40.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0050">8652/0050</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00089.TXT">AI95-00089</A></I>} 
+It is a bounded error to invoke Value with a string that is not the image 
+of any generator state. <A NAME="I5332"></A><A NAME="I5333"></A>If the 
+error is detected, Constraint_Error or Program_Error is raised. Otherwise, 
+a call to Reset with the resulting state will produce a generator such 
+that calls to Random with this generator will produce a sequence of values 
+of the appropriate subtype, but which might not be random in character. 
+That is, the sequence of values might not fulfill the implementation 
+requirements of this subclause.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Normal">A sufficiently long sequence of random numbers obtained 
+by successive calls to Random is approximately uniformly distributed 
+over the range of the result subtype.</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Normal">The Random function in an instantiation of Numerics.Discrete_Random 
+is guaranteed to yield each value in its result subtype in a finite number 
+of calls, provided that the number of such values does not exceed 2 <SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">15</SPAN></SPAN></SUP>.</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Normal">Other performance requirements for the random number 
+generator, which apply only in implementations conforming to the Numerics 
+Annex, and then only in the &ldquo;strict&rdquo; mode defined there (see 
+<A HREF="AA-G-2.html">G.2</A>), are given in <A HREF="AA-G-2-5.html">G.2.5</A>. 
+</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Normal">No one algorithm for random number generation is 
+best for all applications. To enable the user to determine the suitability 
+of the random number generators for the intended application, the implementation 
+shall describe the algorithm used and shall give its period, if known 
+exactly, or a lower bound on the period, if the exact period is unknown. 
+Periods that are so long that the periodicity is unobservable in practice 
+can be described in such terms, without giving a numerical bound.&nbsp;</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Normal">The implementation also shall document the minimum 
+time interval between calls to the time-dependent Reset procedure that 
+are guaranteed to initiate different sequences, and it shall document 
+the nature of the strings that Value will accept without raising Constraint_Error. 
+</div>
+<div class="paranum"><a name="p45.a">45.a/1</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><B>Implementation defined:&nbsp;</B>The minimum time 
+interval between calls to the time-dependent Reset procedure that are 
+guaranteed to initiate different random number sequences.</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Normal">Any storage associated with an object of type Generator 
+should be reclaimed on exit from the scope of the object.&nbsp;</div>
+<div class="paranum"><a name="p46.a">46.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A level of indirection 
+is implicit in the semantics of the operations, given that they all take 
+parameters of mode <B>in</B>. This implies that the full type of Generator 
+probably should be a controlled type, with appropriate finalization to 
+reclaim any heap-allocated storage.&nbsp;</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Normal">If the generator period is sufficiently long in relation 
+to the number of distinct initiator values, then each possible value 
+of Initiator passed to Reset should initiate a sequence of random numbers 
+that does not, in a practical sense, overlap the sequence initiated by 
+any other value. If this is not possible, then the mapping between initiator 
+values and generator states should be a rapidly varying function of the 
+initiator value.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Notes">14&nbsp;&nbsp;If two or more tasks are to share the 
+same generator, then the tasks have to synchronize their access to the 
+generator as for any shared variable (see <A HREF="AA-9-10.html">9.10</A>).</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Notes">15&nbsp;&nbsp;Within a given implementation, a repeatable 
+random number sequence can be obtained by relying on the implicit initialization 
+of generators or by explicitly initializing a generator with a repeatable 
+initiator value. Different sequences of random numbers can be obtained 
+from a given generator in different program executions by explicitly 
+initializing the generator to a time-dependent state.</div>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Notes">16&nbsp;&nbsp;A given implementation of the Random 
+function in Numerics.Float_Random may or may not be capable of delivering 
+the values 0.0 or 1.0. Portable applications should assume that these 
+values, or values sufficiently close to them to behave indistinguishably 
+from them, can occur. If a sequence of random integers from some fixed 
+range is needed, the application should use the Random function in an 
+appropriate instantiation of Numerics.Discrete_Random, rather than transforming 
+the result of the Random function in Numerics.Float_Random. However, 
+some applications with unusual requirements, such as for a sequence of 
+random integers each drawn from a different range, will find it more 
+convenient to transform the result of the floating point Random function. 
+For <SPAN Class="roman">M</SPAN> &ge; 1, the expression&nbsp;</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;Integer(Float(M)&nbsp;*&nbsp;Random(G))&nbsp;mod&nbsp;M</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Notes">transforms the result of Random(G) to an integer uniformly 
+distributed over the range 0 .. <SPAN Class="roman">M</SPAN>&ndash;1; 
+it is valid even if Random delivers 0.0 or 1.0. Each value of the result 
+range is possible, provided that M is not too large. Exponentially distributed 
+(floating point) random numbers with mean and standard deviation 1.0 
+can be obtained by the transformation&nbsp;</div>
+<div class="paranum"><a name="p53">53</a></div>
+<div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;-Log(Random(G)&nbsp;+&nbsp;Float'Model_Small))</div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Notes">where Log comes from Numerics.Elementary_Functions 
+(see <A HREF="AA-A-5-1.html">A.5.1</A>); in this expression, the addition 
+of Float'Model_Small avoids the exception that would be raised were Log 
+to be given the value zero, without affecting the result (in most implementations) 
+when Random returns a nonzero value.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p55">55</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a program 
+that plays a simulated dice game:</I>&nbsp;</div>
+<div class="paranum"><a name="p56">56</a></div>
+<div class="Examples" style="margin-bottom: 0.9em"><B>with</B>&nbsp;Ada.Numerics.Discrete_Random;<BR>
+<B>procedure</B>&nbsp;Dice_Game&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Die&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;6;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Dice&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;2*Die'First&nbsp;..&nbsp;2*Die'Last;<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Random_Die&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Numerics.Discrete_Random&nbsp;(Die);<BR>
+&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Random_Die;<BR>
+&nbsp;&nbsp;&nbsp;G&nbsp;:&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;D&nbsp;:&nbsp;Dice;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Reset&nbsp;(G);&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Start&nbsp;the&nbsp;generator&nbsp;in&nbsp;a&nbsp;unique&nbsp;state&nbsp;in&nbsp;each&nbsp;run</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Roll&nbsp;a&nbsp;pair&nbsp;of&nbsp;dice;&nbsp;sum&nbsp;and&nbsp;process&nbsp;the&nbsp;results</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;:=&nbsp;Random(G)&nbsp;+&nbsp;Random(G);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>;<BR>
+<B>end</B>&nbsp;Dice_Game;</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a program 
+that simulates coin tosses:</I>&nbsp;</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Examples" style="margin-bottom: 0.9em"><B>with</B>&nbsp;Ada.Numerics.Discrete_Random;<BR>
+<B>procedure</B>&nbsp;Flip_A_Coin&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Coin&nbsp;<B>is</B>&nbsp;(Heads,&nbsp;Tails);<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Random_Coin&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Numerics.Discrete_Random&nbsp;(Coin);<BR>
+&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Random_Coin;<BR>
+&nbsp;&nbsp;&nbsp;G&nbsp;:&nbsp;Generator;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Reset&nbsp;(G);&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Start&nbsp;the&nbsp;generator&nbsp;in&nbsp;a&nbsp;unique&nbsp;state&nbsp;in&nbsp;each&nbsp;run</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Toss&nbsp;a&nbsp;coin&nbsp;and&nbsp;process&nbsp;the&nbsp;result</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;Random(G)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Heads&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Tails&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>;<BR>
+<B>end</B>&nbsp;Flip_A_Coin;</div>
+<div class="paranum"><a name="p59">59</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a parallel 
+simulation of a physical system, with a separate generator of event probabilities 
+in each task:</I>&nbsp;</div>
+<div class="paranum"><a name="p60">60</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Numerics.Float_Random;<BR>
+<B>procedure</B>&nbsp;Parallel_Simulation&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Ada.Numerics.Float_Random;<BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>type</B>&nbsp;Worker&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;Initialize_Generator&nbsp;(Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Worker;<BR>
+&nbsp;&nbsp;&nbsp;W&nbsp;:&nbsp;<B>array</B>&nbsp;(1&nbsp;..&nbsp;10)&nbsp;<B>of</B>&nbsp;Worker;<BR>
+&nbsp;&nbsp;&nbsp;<B>task</B>&nbsp;<B>body</B>&nbsp;Worker&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G&nbsp;:&nbsp;Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Probability_Of_Event&nbsp;:&nbsp;Uniformly_Distributed;<BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>accept</B>&nbsp;Initialize_Generator&nbsp;(Initiator&nbsp;:&nbsp;<B>in</B>&nbsp;Integer)&nbsp;<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset&nbsp;(G,&nbsp;Initiator);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Initialize_Generator;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Probability_Of_Event&nbsp;:=&nbsp;Random(G);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Worker;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Initialize&nbsp;the&nbsp;generators&nbsp;in&nbsp;the&nbsp;Worker&nbsp;tasks&nbsp;to&nbsp;different&nbsp;states</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;W'Range&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;W(I).Initialize_Generator&nbsp;(I);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>;<BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>Wait&nbsp;for&nbsp;the&nbsp;Worker&nbsp;tasks&nbsp;to&nbsp;terminate</I></SPAN><BR>
+<B>end</B>&nbsp;Parallel_Simulation;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p61">61</a></div>
+<div class="Notes">17&nbsp;&nbsp;<I>Notes on the last example:</I> Although 
+each Worker task initializes its generator to a different state, those 
+states will be the same in every execution of the program. The generator 
+states can be initialized uniquely in each program execution by instantiating 
+Ada.Numerics.Discrete_Random for the type Integer in the main procedure, 
+resetting the generator obtained from that instance to a time-dependent 
+state, and then using random integers obtained from that generator to 
+initialize the generators in each Worker task.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

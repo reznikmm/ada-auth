@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Interfacing with Fortran</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-B-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.5 Interfacing with Fortran</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><A NAME="I7881"></A><A NAME="I7882"></A>The facilities 
+relevant to interfacing with the Fortran language are the package Interfaces.Fortran 
+and support for specifying the Convention aspect with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+Fortran.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The package Interfaces.Fortran defines Ada types 
+whose representations are identical to the default representations of 
+the Fortran intrinsic types Integer, Real, Double Precision, Complex, 
+Logical, and Character in a supported Fortran implementation. These Ada 
+types can therefore be used to pass objects between Ada and Fortran programs. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Interfaces.Fortran has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Numerics.Generic_Complex_Types;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;see&nbsp;<A HREF="RM-G-1-1.html">G.1.1</A></I></SPAN><BR>
+<B>pragma</B>&nbsp;Elaborate_All(Ada.Numerics.Generic_Complex_Types);<BR>
+<B>package</B>&nbsp;Interfaces.Fortran&nbsp;<B>is</B><A NAME="I7883"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Fortran);</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7884"></A>Fortran_Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7885"></A>Real&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7886"></A>Double_Precision&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7887"></A>Logical&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7888"></A>Single_Precision_Complex_Types&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(Real);</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7889"></A>Complex&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Single_Precision_Complex_Types.Complex;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7890"></A>Imaginary&nbsp;<B>is</B>&nbsp;Single_Precision_Complex_Types.Imaginary;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7891"></A>i&nbsp;:&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;Single_Precision_Complex_Types.i;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7892"></A>j&nbsp;:&nbsp;Imaginary&nbsp;<B>renames</B>&nbsp;Single_Precision_Complex_Types.j;</div>
+<div class="paranum"><a name="p10.1">10.1/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7893"></A>Double_Precision_Complex_Types&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(Double_Precision);</div>
+<div class="paranum"><a name="p10.2">10.2/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7894"></A>Double_Complex&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Double_Precision_Complex_Types.Complex;</div>
+<div class="paranum"><a name="p10.3">10.3/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7895"></A>Double_Imaginary&nbsp;<B>is</B>&nbsp;Double_Precision_Complex_Types.Imaginary;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7896"></A>Character_Set&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;character&nbsp;type</I></SPAN>;</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7897"></A>Fortran_Character&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character_Set<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7898"></A>To_Fortran&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character_Set;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7899"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7900"></A>To_Fortran&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Fortran_Character;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7901"></A>To_Ada&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Character)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7902"></A>To_Fortran&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Fortran_Character;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7903"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Character;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural);</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><B>end</B>&nbsp;Interfaces.Fortran;</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Normal">The types Fortran_Integer, Real, Double_Precision, 
+Logical, Complex, Double_Complex, Character_Set, and Fortran_Character 
+are Fortran-compatible.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">The To_Fortran and To_Ada functions map between the 
+Ada type Character and the Fortran type Character_Set, and also between 
+the Ada type String and the Fortran type Fortran_Character. The To_Fortran 
+and To_Ada procedures have analogous effects to the string conversion 
+subprograms found in Interfaces.COBOL.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Normal">An implementation shall support specifying aspect 
+Convention with a Fortran <I>convention</I>_<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+for a Fortran-eligible type (see <A HREF="RM-B-1.html">B.1</A>).&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal">An implementation may add additional declarations 
+to the Fortran interface packages. For example, declarations are permitted 
+for the character types corresponding to Fortran character kinds 'ascii' 
+and 'iso_10646', which in turn correspond to ISO/IEC 646:1991 and to 
+UCS-4 as specified in ISO/IEC 10646:2017.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An Ada implementation 
+should support the following interface correspondences between Ada and 
+Fortran:&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">An Ada procedure corresponds to a Fortran subroutine.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">An Ada function corresponds to a Fortran function.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Bulleted">An Ada parameter of an elementary, array, or record 
+type T is passed as a T<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">F</SPAN></SPAN></SUB> 
+argument to a Fortran procedure, where T<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">F</SPAN></SPAN></SUB> 
+is the Fortran type corresponding to the Ada type T, and where the INTENT 
+attribute of the corresponding dummy argument matches the Ada formal 
+parameter mode; the Fortran implementation's parameter passing conventions 
+are used. For elementary types, a local copy is used if necessary to 
+ensure by-copy semantics.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Bulleted">An Ada parameter of an access-to-subprogram type 
+is passed as a reference to a Fortran procedure whose interface corresponds 
+to the designated subprogram's specification.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes">14&nbsp;&nbsp;An object of a Fortran-compatible record 
+type, declared in a library package or subprogram, can correspond to 
+a Fortran common block; the type also corresponds to a Fortran &ldquo;derived 
+type&rdquo;.</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Notes">15&nbsp;&nbsp;For Fortran facilities not addressed 
+by this subclause, consider using the Fortran to C interoperability features 
+defined in ISO/IEC 1594-1:2018 along with the C interfacing features 
+defined in <A HREF="RM-B-3.html">B.3</A>.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of Interfaces.Fortran:</I> 
+</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Examples"><B>with</B>&nbsp;Interfaces.Fortran;<BR>
+<B>use</B>&nbsp;Interfaces.Fortran;<BR>
+<B>procedure</B>&nbsp;Ada_Application&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Fortran_Matrix&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Fortran_Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fortran_Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Double_Precision<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Fortran;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;stored&nbsp;in&nbsp;Fortran's</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;column-major&nbsp;order</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Invert&nbsp;(Rank&nbsp;:&nbsp;<B>in</B>&nbsp;Fortran_Integer;&nbsp;X&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Fortran_Matrix)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Import&nbsp;=&gt;&nbsp;True,&nbsp;Convention&nbsp;=&gt;&nbsp;Fortran;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;Fortran&nbsp;subroutine</I></SPAN></div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Rank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Fortran_Integer&nbsp;:=&nbsp;100;<BR>
+&nbsp;&nbsp;&nbsp;My_Matrix&nbsp;:&nbsp;Fortran_Matrix&nbsp;(1&nbsp;..&nbsp;Rank,&nbsp;1&nbsp;..&nbsp;Rank);</div>
+<div class="paranum"><a name="p32.1">32.1/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Precision:&nbsp;<B>constant</B>&nbsp;:=&nbsp;6;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Standard_Deviation&nbsp;<B>is&nbsp;digits</B>&nbsp;Precision<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Fortran;<BR>
+&nbsp;&nbsp;&nbsp;Deviation&nbsp;:&nbsp;Standard_Deviation;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Declarations&nbsp;to&nbsp;match&nbsp;the&nbsp;following&nbsp;Fortran&nbsp;declarations:</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;<I>integer,&nbsp;parameter&nbsp;::&nbsp;precision&nbsp;=&nbsp;selected_real_kind(p=6)</I><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;<I>real(precision)&nbsp;::&nbsp;deviation</I></div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>begin</B></div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;My_Matrix&nbsp;:=&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;Invert&nbsp;(Rank,&nbsp;My_Matrix);<BR>
+&nbsp;&nbsp;&nbsp;...</div>
+<div class="paranum"><a name="p34.1">34.1/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Deviation&nbsp;:=&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;...</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada_Application;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-B-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

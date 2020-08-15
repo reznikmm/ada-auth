@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Interfaces</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.2 The Package Interfaces</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Package Interfaces is the parent of several library 
+packages that declare types and other entities useful for interfacing 
+to foreign languages. It also contains some implementation-defined types 
+that are useful across more than one language (in particular for interfacing 
+to assembly language).&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The contents 
+of the visible part of package Interfaces and its language-defined descendants.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Interfaces has the following skeletal declaration:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples"><A NAME="I7984"></A><BR>
+<B>package</B>&nbsp;Interfaces&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Interfaces);</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Integer_<SPAN Class="roman"><I>n</I></SPAN>&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;-2**(<SPAN Class="roman"><I>n</I></SPAN>-1)&nbsp;..&nbsp;2**(<SPAN Class="roman"><I>n</I></SPAN>-1)&nbsp;-&nbsp;1;&nbsp;&nbsp;--<SPAN Class="roman"><I>2's&nbsp;complement</I></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;2**<SPAN Class="roman"><I>n</I></SPAN>;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Shift_Left&nbsp;&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Shift_Right&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Shift_Right_Arithmetic&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Rotate_Left&nbsp;&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Rotate_Right&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;...<A NAME="I7985"></A><A NAME="I7986"></A><A NAME="I7987"></A><A NAME="I7988"></A><A NAME="I7989"></A><BR>
+<B>end</B>&nbsp;Interfaces;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">An implementation shall 
+provide the following declarations in the visible part of package Interfaces: 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">Signed and modular integer types of <I>n</I> bits, 
+if supported by the target architecture, for each <I>n</I> that is at 
+least the size of a storage element and that is a factor of the word 
+size. The names of these types are of the form Integer_<I>n</I> for the 
+signed types, and Unsigned_<I>n</I> for the modular types;<A NAME="I7990"></A><A NAME="I7991"></A> 
+</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, for a typical 
+32-bit machine the corresponding types might be Integer_8, Unsigned_8, 
+Integer_16, Unsigned_16, Integer_32, and Unsigned_32.</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations">The wording above implies, for example, that 
+Integer_16'Size = Unsigned_16'Size = 16. Unchecked conversions between 
+same-Sized types will work as expected.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted"><A NAME="I7992"></A><A NAME="I7993"></A>For each 
+such modular type in Interfaces, shifting and rotating subprograms as 
+specified in the declaration of Interfaces above. These subprograms are 
+Intrinsic. They operate on a bit-by-bit basis, using the binary representation 
+of the value of the operands to yield a binary representation for the 
+result. The Amount parameter gives the number of bits by which to shift 
+or rotate. For shifting, zero bits are shifted in, except in the case 
+of Shift_Right_Arithmetic, where one bits are shifted in if Value is 
+at least half the modulus.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We considered making shifting 
+and rotating be primitive operations of all modular types. However, it 
+is a design principle of Ada that all predefined operations should be 
+operators (not functions named by identifiers). (Note that an early version 
+of Ada had &quot;<B>abs</B>&quot; as an identifier, but it was changed 
+to a reserved word operator before standardization of Ada 83.) This is 
+important because the implicit declarations would hide nonoverloadable 
+declarations with the same name, whereas operators are always overloadable. 
+Therefore, we would have had to make shift and rotate into reserved words, 
+which would have been upward incompatible, or else invent new operator 
+symbols, which seemed like too much mechanism.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">Floating point types corresponding to each floating 
+point format fully supported by the hardware.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The names for these 
+floating point types are not specified. <A NAME="I7994"></A>However, 
+if IEEE arithmetic is supported, then the names should be IEEE_Float_32 
+and IEEE_Float_64 for single and double precision, respectively.<A NAME="I7995"></A><A NAME="I7996"></A></div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">An implementation may provide implementation-defined 
+library units that are children of Interfaces, and may add declarations 
+to the visible part of Interfaces in addition to the ones defined above. 
+</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+children of package Interfaces.</div>
+<div class="paranum"><a name="p11.1">11.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00204.TXT">AI95-00204-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+A child package of package Interfaces with the name of a convention may 
+be provided independently of whether the convention is supported by the 
+Convention aspect and vice versa. Such a child package should contain 
+any declarations that would be useful for interfacing to the language 
+(implementation) represented by the convention. Any declarations useful 
+for interfacing to any language on the given hardware architecture should 
+be provided directly in Interfaces.&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, package Interfaces.XYZ_Pascal 
+might contain declarations of types that match the data types provided 
+by the XYZ implementation of Pascal, so that it will be more convenient 
+to pass parameters to a subprogram whose convention is XYZ_Pascal.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00204.TXT">AI95-00204-01</A></I>} 
+</div>
+<div class="paranum"><a name="p12.a">12.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+An implementation supporting an interface to C, COBOL, or Fortran should 
+provide the corresponding package or packages described in the following 
+subclauses.&nbsp;</div>
+<div class="paranum"><a name="p13.a.1">13.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If an interface 
+to C, COBOL, or Fortran is provided, the corresponding package or packages 
+described in <A HREF="AA-B.html">Annex B</A>, &ldquo;<A HREF="AA-B.html">Interface 
+to Other Languages</A>&rdquo; should also be provided.</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Implementation 
+Note:&nbsp;</B>The intention is that an implementation might support several 
+implementations of the foreign language: Interfaces.This_Fortran and 
+Interfaces.That_Fortran might both exist. The &ldquo;default&rdquo; implementation, 
+overridable by the user, should be declared as a renaming:&nbsp;</div>
+<div class="paranum"><a name="p13.b">13.b</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Interfaces.Fortran&nbsp;<B>renames</B>&nbsp;Interfaces.This_Fortran;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p13.c">13.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00204.TXT">AI95-00204-01</A></I>} 
+Clarified that interfacing to foreign languages is optional and has the 
+same restrictions as a Specialized Needs Annex.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p13.d">13.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+Move the restrictions on implementations of optional features to the 
+start of this Annex.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

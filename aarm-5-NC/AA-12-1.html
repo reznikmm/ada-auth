@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Generic Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>12.1 Generic Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN> 
+declares a generic unit, which is either a generic subprogram or a generic 
+package. A <SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+declaring any generic formal parameters. A generic formal parameter can 
+be an object; alternatively (unlike a parameter of a subprogram), it 
+can be a type, a subprogram, or a package.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_declaration</SPAN><A NAME="I5141"></A><A NAME="S0274"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5142"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0275">generic_subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5143"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0276">generic_package_declaration</A></SPAN></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<SPAN Class="swiss">generic_subprogram_declaration</SPAN><A NAME="I5144"></A><A NAME="S0275"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5145"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5146"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5147"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>];</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_package_declaration</SPAN><A NAME="I5148"></A><A NAME="S0276"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5149"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN>&nbsp;&nbsp;<A NAME="I5150"></A><SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>;</div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+No syntax change is needed here to allow an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>; 
+a generic package can have an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+because a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN> 
+allows an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_part</SPAN><A NAME="I5151"></A><A NAME="S0277"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>generic</B>&nbsp;{<A NAME="I5152"></A><SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I5153"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN>}</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">generic_formal_parameter_declaration</SPAN><A NAME="I5154"></A><A NAME="S0278"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5155"></A><SPAN Class="swiss"><A HREF="AA-12-4.html#S0283">formal_object_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5156"></A><SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5157"></A><SPAN Class="swiss"><A HREF="AA-12-6.html#S0299">formal_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I5158"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1">The only form of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+allowed within a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+[(that is, the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+shall not include an explicit <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>)]. 
+The defining name of a generic subprogram shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+[(not an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>)]. 
+</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The reason for forbidding <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>s 
+in <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>s 
+is that it simplifies the elaboration of <SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN>s 
+(since there is nothing to evaluate), and that it simplifies the matching 
+rules, and makes them more checkable at compile time.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+<A NAME="I5159"></A><A NAME="I5160"></A><A NAME="I5161"></A><A NAME="I5162"></A>A 
+<SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN> 
+declares a generic unit &mdash; a generic package, generic procedure, 
+or generic function, as appropriate.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I5163"></A>An entity is a <I>generic formal</I> 
+entity if it is declared by a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN>. 
+&ldquo;Generic formal,&rdquo; or simply &ldquo;formal,&rdquo; is used 
+as a prefix in referring to objects, subtypes (and types), functions, 
+procedures and packages, that are generic formal entities, as well as 
+to their respective declarations. [Examples: &ldquo;generic formal procedure&rdquo; 
+or a &ldquo;formal integer type declaration.&rdquo;]&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I5164"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN> 
+has no effect.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">1&nbsp;&nbsp;Outside a generic unit a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN> 
+denotes the generic unit. In contrast, within the declarative region 
+of the generic unit, a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN> 
+denotes the current instance.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This is stated officially as part 
+of the &ldquo;current instance&rdquo; rule in <A HREF="AA-8-6.html">8.6</A>, 
+&ldquo;<A HREF="AA-8-6.html">The Context of Overload Resolution</A>&rdquo;. 
+See also <A HREF="AA-12-3.html">12.3</A>, &ldquo;<A HREF="AA-12-3.html">Generic 
+Instantiation</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">2&nbsp;&nbsp;Within a generic <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>, 
+the name of this program unit acts as the name of a subprogram. Hence 
+this name can be overloaded, and it can appear in a recursive call of 
+the current instance. For the same reason, this name cannot appear after 
+the reserved word <B>new</B> in a (recursive) <SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN>.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">3&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0303">default_name</A></SPAN> 
+appearing in a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+is not evaluated during elaboration of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN>; 
+instead, it is evaluated when used. (The usual visibility rules apply 
+to any <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+used in a default: the denoted declaration therefore has to be visible 
+at the place of the expression.)&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of generic 
+formal parts:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>generic</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;parameterless&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;Size&nbsp;:&nbsp;Natural;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;formal&nbsp;object&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;Length&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;200;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;formal&nbsp;object&nbsp;with&nbsp;a&nbsp;default&nbsp;expression</I></SPAN></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;Area&nbsp;&nbsp;&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;Length*Length;&nbsp;--<SPAN Class="roman"><I>&nbsp;formal&nbsp;object&nbsp;with&nbsp;a&nbsp;default&nbsp;expression</I></SPAN></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Item&nbsp;&nbsp;<B>is</B>&nbsp;<B>private</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;formal&nbsp;type</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index&nbsp;<B>is</B>&nbsp;(&lt;&gt;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;formal&nbsp;type</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Row&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(Index&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Item;&nbsp;--<SPAN Class="roman"><I>&nbsp;formal&nbsp;type</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;(X,&nbsp;Y&nbsp;:&nbsp;Item)&nbsp;<B>return</B>&nbsp;Boolean;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;formal&nbsp;subprogram&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of generic 
+declarations declaring generic subprograms Exchange and Squaring:</I> 
+</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Elem&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+<B>procedure</B>&nbsp;Exchange(U,&nbsp;V&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Elem);</div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0178-1.TXT">AI12-0178-1</A></I>} 
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Item&nbsp;(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>function</B>&nbsp;&quot;*&quot;(U,&nbsp;V&nbsp;:&nbsp;Item)&nbsp;<B>return</B>&nbsp;Item&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
+<B>function</B>&nbsp;Squaring(X&nbsp;:&nbsp;Item)&nbsp;<B>return</B>&nbsp;Item;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+generic declaration declaring a generic package:</I>&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Item&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Vector&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Item;<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>function</B>&nbsp;Sum(X,&nbsp;Y&nbsp;:&nbsp;Item)&nbsp;<B>return</B>&nbsp;Item;<BR>
+<B>package</B>&nbsp;On_Vectors&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Sum&nbsp;&nbsp;(A,&nbsp;B&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Sigma(A&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Vector)&nbsp;<B>return</B>&nbsp;Item;<BR>
+&nbsp;&nbsp;&nbsp;Length_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+<B>end</B>&nbsp;On_Vectors;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><A NAME="I5165"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+is modified to allow the reserved words <B>tagged</B> and <B>abstract</B>, 
+to allow formal derived types, and to allow formal packages.</div>
+<div class="paranum"><a name="p24.b">24.b</a></div>
+<div class="Annotations"><SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">Use_clause</A></SPAN>s 
+are allowed in <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN>s. 
+This is necessary in order to allow a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN> 
+within a formal part to provide direct visibility of declarations within 
+a generic formal package.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p24.c">24.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The syntax for <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-12-5.html#S0287">formal_type_definition</A></SPAN> 
+is split up into more named categories. The rules for these categories 
+are moved to the appropriate subclauses. The names of the categories 
+are changed to be more intuitive and uniform. For example, we changed 
+<SPAN Class="swiss">generic_parameter_declaration</SPAN> to <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN>, 
+because the thing it declares is a generic formal, not a generic. In 
+the others, we abbreviate &ldquo;generic_formal&rdquo; to just &ldquo;formal&rdquo;. 
+We can't do that for <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN>, 
+because of confusion with normal formal parameters of subprograms.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p24.d">24.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+<A NAME="I5166"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0275">generic_subprogram_declaration</A></SPAN> 
+(as well as a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0276">generic_package_declaration</A></SPAN>). 
+This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

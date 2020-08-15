@@ -1,0 +1,339 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Conditional Expressions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.7 <span class="insert3">Conditional Expressions</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">A <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+selects for evaluation at most one of the enclosed <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s, 
+depending on a decision among the alternatives. One kind of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>, 
+which selects for evaluation a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+depending on the value of one or more corresponding conditions. The other 
+kind of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>, 
+which selects for evaluation one of a number of alternative <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s; 
+the chosen alternative is determined by the value of a <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>.</span> 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3">As previously noted, there are two kinds of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>s. 
+Whenever possible, we have written the rules in terms of <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>s 
+to avoid duplication.</span></div>
+<div class="paranum"><a name="p1.b">1.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3">The rules for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>s 
+have been designed as much as possible to work similarly to a parenthesized 
+expression. The intent is that as much as possible, wherever a parenthesized 
+expression would be allowed, a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+would be allowed, and it should work the same way.</span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">conditional_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3136"></A><A NAME="S0133"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><A NAME="I3137"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I3138"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN></span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">if_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3139"></A><A NAME="S0134"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert3"><B>if</B>&nbsp;<A NAME="I3140"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN>&nbsp;<B>then</B>&nbsp;<I>dependent_</I><A NAME="I3141"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<B>elsif</B>&nbsp;<A NAME="I3142"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN>&nbsp;<B>then</B>&nbsp;<I>dependent_</I><A NAME="I3143"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;[<B>else</B>&nbsp;<I>dependent_</I><A NAME="I3144"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>]</span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">condition</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3145"></A><A NAME="S0135"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>boolean_</I><A NAME="I3146"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN></span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">case_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3147"></A><A NAME="S0136"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3148"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3149"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0137">case_expression_alternative</A></SPAN>&nbsp;{,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3150"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0137">case_expression_alternative</A></SPAN>}</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">case_expression_alternative</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3151"></A><A NAME="S0137"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3152"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>dependent_</I><A NAME="I3153"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN></span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3">Wherever the Syntax Rules allow an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+may be used in place of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+so long as it is immediately surrounded by parentheses.</span></div>
+<div class="paranum"><a name="p7.a">7.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3">The syntactic category <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+appears only as a primary that is parenthesized. The above rule allows 
+it to additionally be used in other contexts where it would be directly 
+surrounded by parentheses.</span></div>
+<div class="paranum"><a name="p7.b">7.b/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">The 
+grammar makes the following directly legal:</span></div>
+<div class="paranum"><a name="p7.c">7.c/3</a></div>
+<div class="SmallExamples"><span class="insert3">A&nbsp;:=&nbsp;(<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z);&nbsp;--<SPAN Class="roman"><I>&nbsp;parentheses&nbsp;required</I></SPAN><BR>
+A&nbsp;:=&nbsp;B&nbsp;+&nbsp;(<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z)&nbsp;+&nbsp;C;&nbsp;--<SPAN Class="roman"><I>&nbsp;parentheses&nbsp;required</I></SPAN></span></div>
+<div class="paranum"><a name="p7.d">7.d/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">The 
+following procedure calls are syntactically legal; the first uses the 
+above rule to eliminate the redundant parentheses found in the second:</span></div>
+<div class="paranum"><a name="p7.e">7.e/3</a></div>
+<div class="SmallExamples"><span class="insert3">P(<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z);<BR>
+P((<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z));&nbsp;--<SPAN Class="roman"><I>&nbsp;redundant&nbsp;parentheses</I></SPAN></span></div>
+<div class="paranum"><a name="p7.f">7.f/3</a></div>
+<div class="SmallExamples"><span class="insert3">P((<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z),&nbsp;Some_Other_Param);<BR>
+P(Some_Other_Param,&nbsp;(<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z));<BR>
+P(Formal&nbsp;=&gt;&nbsp;(<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z));</span></div>
+<div class="paranum"><a name="p7.g">7.g/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">whereas 
+the following are illegal:</span></div>
+<div class="paranum"><a name="p7.h">7.h/3</a></div>
+<div class="SmallExamples"><span class="insert3">P(<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z,&nbsp;Some_Other_Param);<BR>
+P(Some_Other_Param,&nbsp;<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z);<BR>
+P(Formal&nbsp;=&gt;&nbsp;<B>if</B>&nbsp;X&nbsp;<B>then</B>&nbsp;Y&nbsp;<B>else</B>&nbsp;Z);</span></div>
+<div class="paranum"><a name="p7.i">7.i/3</a></div>
+<div class="Annotations"><span class="insert3">because in these latter 
+cases, the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is not immediately surrounded by parentheses (which means on both sides!).</span></div>
+<div class="paranum"><a name="p7.j">7.j/3</a></div>
+<div class="Annotations"><span class="insert3">The English-language rule 
+applies in all places that could surround an expression with parentheses, 
+including pragma arguments, type conversion and qualified expression 
+operands, and array index expressions.</span></div>
+<div class="paranum"><a name="p7.k">7.k/3</a></div>
+<div class="Annotations"><span class="insert3">This English-language 
+rule could have been implemented instead by adding a nonterminal <SPAN Class="swiss">expression_within_parentheses</SPAN>, 
+which would consist of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>s. 
+Then, that could be used in all of the syntax which could consist of 
+parens directly around an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>. 
+We did not do that because of the large amount of change required. A 
+complete grammar is given in <A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A>.</span> 
+</div>
+<div class="paranum"><a name="p7.l">7.l/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3">Implementers are cautioned to consider error detection 
+when implementing the syntax for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>s. 
+An <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN> 
+and an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN> 
+are very similar syntactically, (as are a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN> 
+and a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN>) 
+and simple mistakes can appear to change one into the other, potentially 
+causing errors to be moved far away from their actual location. The absence 
+of <B>end if</B> to terminate an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN> 
+(and <B>end case</B> for a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>) 
+also may make error handling harder.</span>&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3">If a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is expected to be of a type <I>T</I>, then each <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is expected to be of type <I>T</I>. Similarly, if a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is expected to be of some class of types, then each <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is subject to the same expectation. If a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+shall resolve to be of a type <I>T</I>, then each <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+shall resolve to be of type <I>T</I>.<A NAME="I3154"></A></span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3">The possible types of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+are further determined as follows:</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Bulleted"><span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is the operand of a type conversion, the type of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is the target type of the conversion; otherwise,</span></div>
+<div class="paranum"><a name="p10.a">10.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Reason: 
+</B>This rule distributes an enclosing type conversion to the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s. 
+This means that</span>&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b/3</a></div>
+<div class="SmallExamples"><span class="insert3">T(<B>if</B>&nbsp;C&nbsp;<B>then</B>&nbsp;A&nbsp;<B>else</B>&nbsp;B)</span></div>
+<div class="paranum"><a name="p10.c">10.c/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">has 
+the same semantics as</span>&nbsp;</div>
+<div class="paranum"><a name="p10.d">10.d/3</a></div>
+<div class="SmallExamples"><span class="insert3">(<B>if</B>&nbsp;C&nbsp;<B>then</B>&nbsp;T(A)&nbsp;<B>else</B>&nbsp;T(B))</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Bulleted"><span class="insert3">If all of the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+are of the same type, the type of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is that type; otherwise,</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Bulleted"><span class="insert3">If a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is of an elementary type, the type of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+shall be covered by that type; otherwise,</span></div>
+<div class="paranum"><a name="p12.a">12.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This rule 
+supports the use of numeric literals and universal expressions within 
+a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>.</span> 
+</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted"><span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is expected to be of type <I>T</I> or shall resolve to type <I>T</I>, 
+then the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is of type <I>T</I>.</span></div>
+<div class="paranum"><a name="p13.a">13.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>If 
+the type of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+cannot be determined by one of these rules, then Name Resolution has 
+failed for that expression, even if the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+would resolve individually.</span>&nbsp;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"><A NAME="I3155"></A>A <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
+is expected to be of any boolean type.</span>&nbsp;</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3">The expected type for the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+and the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+are as for case statements (see <A HREF="AA-5-4.html">5.4</A>).<A NAME="I3156"></A> 
+<A NAME="I3157"></A><A NAME="I3158"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3">All of the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+shall be convertible (see <A HREF="AA-4-6.html">4.6</A>) to the type 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN>.</span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If the expected type of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is a specific tagged type, all of the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+shall be dynamically tagged, or none shall be dynamically tagged. In 
+this case, the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+is dynamically tagged if all of the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+are dynamically tagged, is tag-indeterminate if all of the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
+are tag-indeterminate, and is statically tagged otherwise.</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If there is no <B>else</B> <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN> 
+shall be of a boolean type.</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">All Legality Rules that apply to the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-5-4.html#S0154">case_statement</A></SPAN> 
+(see <A HREF="AA-5-4.html">5.4</A>) also apply to the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN> 
+except within an instance of a generic unit.</span>&nbsp;</div>
+<div class="paranum"><a name="p19.a">19.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Reason: 
+</B>The exemption for a case expression that occurs in an instance allows 
+the following example:</span>&nbsp;</div>
+<div class="paranum"><a name="p19.b">19.b/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Int_Func&nbsp;<B>return</B>&nbsp;Integer;<BR>
+<B>package</B>&nbsp;G&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;Float&nbsp;:=&nbsp;(<B>case</B>&nbsp;Int_Func&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Integer'First&nbsp;..&nbsp;-1&nbsp;=&gt;&nbsp;-1.0,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;0&nbsp;=&gt;&nbsp;0.0,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Positive&nbsp;=&gt;&nbsp;1.0);<BR>
+<B>end</B>&nbsp;G;</span></div>
+<div class="paranum"><a name="p19.c">19.c/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>function</B>&nbsp;Nat_Func&nbsp;<B>return</B>&nbsp;Natural&nbsp;<B>is</B>&nbsp;(123);</span></div>
+<div class="paranum"><a name="p19.d">19.d/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>package</B>&nbsp;I&nbsp;<B>is&nbsp;new</B>&nbsp;G&nbsp;(Int_Func&nbsp;=&gt;&nbsp;Nat_Func);&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal</I></SPAN></span></div>
+<div class="paranum"><a name="p19.e">19.e/3</a></div>
+<div class="Annotations"><span class="insert3">Note that the Legality 
+Rules still apply in the generic unit itself; they are just not enforced 
+in an instance of the unit.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3">For the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
+specified after <B>if</B>, and any <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN>s 
+specified after <B>elsif</B>, are evaluated in succession (treating a 
+final <B>else</B> as <B>elsif</B> True <B>then</B>), until one evaluates 
+to True or all <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN>s 
+are evaluated and yield False. If a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
+evaluates to True, the associated <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is evaluated, converted to the type of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>, 
+and the resulting value is the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>. 
+Otherwise (when there is no <B>else</B> clause), the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN> 
+is True.<A NAME="I3159"></A></span></div>
+<div class="paranum"><a name="p20.a">20.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B><B>Else</B> 
+is required unless the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN> 
+has a boolean type, so the last sentence can only apply to <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">if_expression</A></SPAN>s 
+with a boolean type.</span>&nbsp;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+<span class="insert3">For the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>, 
+the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is first evaluated. If the value of the <I>selecting_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is covered by the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+of some <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0137">case_expression_alternative</A></SPAN>, 
+then the <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0137">case_expression_alternative</A></SPAN> 
+is evaluated, converted to the type of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>, 
+and the resulting value is the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">case_expression</A></SPAN>.<A NAME="I3160"></A><A NAME="I3161"></A> 
+<A NAME="I3162"></A>Otherwise (the value is not covered by any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
+perhaps due to being outside the base range), Constraint_Error is raised.<A NAME="I3163"></A></span></div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p21.a">21.a/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+<span class="insert3"><A NAME="I3164"></A>If expressions and case expressions 
+are new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-6.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-5-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

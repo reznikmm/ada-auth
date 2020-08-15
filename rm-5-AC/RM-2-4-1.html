@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Decimal Literals</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2-4-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.4.1 Decimal Literals</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1267"></A>A <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0007">decimal_literal</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN> 
+in the conventional decimal notation (that is, the base is ten).&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">decimal_literal</SPAN><A NAME="I1268"></A><A NAME="S0007"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1269"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0008">numeral</A></SPAN>&nbsp;[.<A NAME="I1270"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0008">numeral</A></SPAN>]&nbsp;[<A NAME="I1271"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN>]</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">numeral</SPAN><A NAME="I1272"></A><A NAME="S0008"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1273"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0010">digit</A></SPAN>&nbsp;{[<A NAME="I1274"></A><SPAN Class="swiss">underline</SPAN>]&nbsp;<A NAME="I1275"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0010">digit</A></SPAN>}</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">exponent</SPAN><A NAME="I1276"></A><A NAME="S0009"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>E&nbsp;[+]&nbsp;<A NAME="I1277"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0008">numeral</A></SPAN>&nbsp;|&nbsp;E&nbsp;&ndash;&nbsp;<A NAME="I1278"></A><SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0008">numeral</A></SPAN></div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">digit</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I1279"></A><A NAME="S0010"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2">0&nbsp;|&nbsp;1&nbsp;|&nbsp;2&nbsp;|&nbsp;3&nbsp;|&nbsp;4&nbsp;|&nbsp;5&nbsp;|&nbsp;6&nbsp;|&nbsp;7&nbsp;|&nbsp;8&nbsp;|&nbsp;9</span></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1">An <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN> 
+for an integer literal shall not have a minus sign.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An underline character in a <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN> 
+does not affect its meaning. The letter E of an <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN> 
+can be written either in lower case or in upper case, with the same meaning. 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN> 
+indicates the power of ten by which the value of the <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0007">decimal_literal</A></SPAN> 
+without the <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN> 
+is to be multiplied to obtain the value of the <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0007">decimal_literal</A></SPAN> 
+with the <SPAN Class="swiss"><A HREF="RM-2-4-1.html#S0009">exponent</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of decimal 
+literals:</I>&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1E6&nbsp;&nbsp;&nbsp;&nbsp;123_456&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;integer&nbsp;literals</I></SPAN><BR>
+<BR>
+12.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0&nbsp;&nbsp;&nbsp;&nbsp;0.456&nbsp;&nbsp;3.14159_26&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;real&nbsp;literals</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-2-4-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

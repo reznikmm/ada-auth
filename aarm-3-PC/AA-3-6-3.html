@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>String Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-6-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.6.3 String Types</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2143"></A>A one-dimensional array type 
+whose component type is a character type is called a <I>string</I> type.</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+[There are <span class="insert2">three</span><span class="delete2">&nbsp;two</span> 
+predefined string types, String<span class="insert2">,</span><span class="delete2">&nbsp;and</span> Wide_String<span class="insert2">, and Wide_Wide_String</span>, 
+each indexed by values of the predefined subtype Positive; these are 
+declared in the visible part of package Standard:]&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples">[<B>subtype</B>&nbsp;Positive&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Integer'Last;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<B>type</B>&nbsp;String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character;<BR>
+<B>type</B>&nbsp;Wide_String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Wide_Character;<BR>
+<span class="insert2"><B>type</B>&nbsp;Wide_Wide_String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Wide_Wide_Character;</span><BR>
+]</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Notes">54&nbsp;&nbsp;String literals (see <A HREF="AA-2-6.html">2.6</A> 
+and <A HREF="AA-4-2.html">4.2</A>) are defined for all string types. 
+The concatenation operator &amp; is predefined for string types, as for 
+all nonlimited one-dimensional array types. The ordering operators &lt;, 
+&lt;=, &gt;, and &gt;= are predefined for string types, as for all one-dimensional 
+discrete array types; these ordering operators correspond to lexicographic 
+order (see <A HREF="AA-4-5-2.html">4.5.2</A>).</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of string 
+objects:</I>&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">Stars&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;String(1&nbsp;..&nbsp;120)&nbsp;:=&nbsp;(1&nbsp;..&nbsp;120&nbsp;=&gt;&nbsp;'*'&nbsp;);<BR>
+Question&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;String&nbsp;&nbsp;:=&nbsp;&quot;How&nbsp;many&nbsp;characters?&quot;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Question'First&nbsp;=&nbsp;1,&nbsp;Question'Last&nbsp;=&nbsp;20</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Question'Length&nbsp;=&nbsp;20&nbsp;(the&nbsp;number&nbsp;of&nbsp;characters)</I></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">Ask_Twice&nbsp;&nbsp;:&nbsp;String&nbsp;&nbsp;:=&nbsp;Question&nbsp;&amp;&nbsp;Question;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;constrained&nbsp;to&nbsp;(1..40)</I></SPAN><BR>
+Ninety_Six&nbsp;:&nbsp;<B>constant</B>&nbsp;Roman&nbsp;&nbsp;&nbsp;:=&nbsp;&quot;XCVI&quot;;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-5-2.html">3.5.2</A>&nbsp;and&nbsp;<A HREF="AA-3-6.html">3.6</A></I></SPAN></div>
+
+<H4 Class="centered">Inconsistencies With Ada 83</H4>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><A NAME="I2144"></A>The declaration of Wide_String 
+in Standard hides a use-visible declaration with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>. 
+In rare cases, this might result in an inconsistency between Ada 83 and 
+Ada 95.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><A NAME="I2145"></A>Because both String and 
+Wide_String are always directly visible, an expression like&nbsp;</div>
+<div class="paranum"><a name="p8.c">8.c</a></div>
+<div class="SmallExamples">&quot;a&quot;&nbsp;&lt;&nbsp;&quot;bc&quot;</div>
+<div class="paranum"><a name="p8.d">8.d</a></div>
+<div class="Annotations">is now ambiguous, whereas in Ada 83 both string 
+literals could be resolved to type String.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p8.e">8.e</a></div>
+<div class="Annotations"><A NAME="I2146"></A>The type Wide_String is 
+new (though it was approved by ARG for Ada 83 compilers as well).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p8.f">8.f</a></div>
+<div class="Annotations">We define the term <I>string type</I> as a natural 
+analogy to the term <I>character type</I>.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 95</H4>
+<div class="paranum"><a name="p8.g">8.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"><A NAME="I2147"></A>The declaration of Wide_Wide_String 
+in Standard hides a use-visible declaration with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>. 
+In the (very) unlikely event that an Ada 95 program had depended on such 
+a use-visible declaration, and the program remains legal after the substitution 
+of Standard.Wide_Wide_String, the meaning of the program will be different.</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p8.h">8.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<span class="insert2"><A NAME="I2148"></A>The type Wide_Wide_String is 
+new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-6-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

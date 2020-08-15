@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Storage Allocation Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.11.1 <span class="insert3">Storage Allocation Attributes</span><span class="delete3">The Max_Size_In_Storage_Elements Attribute</span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+[The Max_Size_In_Storage_Elements <span class="insert3">and Max_Alignment_For_Allocation 
+attributes may be</span><span class="delete3">&nbsp;attribute is</span> useful 
+in writing user-defined pool types.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+For every subtype S, the following <span class="insert3">attributes are</span><span class="delete3">&nbsp;attribute 
+is</span> defined:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="WideHanging-Term">S'Max_Size_In_Storage_Elements</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5893"></A><A NAME="I5894"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+Denotes the maximum value for Size_In_Storage_Elements that <span class="insert2">could</span><span class="delete2">&nbsp;will</span> 
+be requested <span class="insert2">by the implementation&nbsp;</span>via Allocate 
+for an access type whose designated subtype is S.<span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;For a type with access discriminants, if the implementation allocates 
+space for a coextension in the same pool as that of the object having 
+the access discriminant, then this accounts for any calls on Allocate 
+that could be performed to provide space for such coextensions.</span></span><span class="insert2"></span> 
+The value of this attribute is of type <I>universal_integer</I>.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If S is an unconstrained 
+array subtype, or an unconstrained subtype with discriminants, S'Max_Size_In_Storage_Elements 
+might be very large.&nbsp;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">S'Max_Alignment_For_Allocation</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3"><A NAME="I5895"></A><A NAME="I5896"></A></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+<span class="insert3"></span><span class="insert3">Denotes the maximum 
+value for Alignment that could be requested by the implementation via 
+Allocate for an access type whose designated subtype is S. The value 
+of this attribute is of type <I>universal_integer</I>.</span>&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+<span class="insert3">For a type with access discriminants, if the implementation 
+allocates space for a coextension in the same pool as that of the object 
+having the access discriminant, then these attributes account for any 
+calls on Allocate that could be performed to provide space for such coextensions.</span> 
+</div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+<span class="insert3">The values of these attributes should reflect only 
+the calls that might be made to the pool specified for an access type 
+with designated type S. Thus, if the coextensions would normally be allocated 
+from a different pool than the one used for the main object (that is, 
+the Implementation Advice of <A HREF="AA-13-11.html">13.11</A> for determining 
+the pool of an anonymous access discriminant is not followed), then these 
+attributes should not reflect any calls on Allocate used to allocate 
+the coextensions.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+<span class="insert3">Coextensions of coextensions of this type (and 
+so on) are included in the values of these attributes if they are allocated 
+from the same pool.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p5.c">5.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+<span class="insert2">Corrected the wording so that a fortune-telling 
+compiler that can see the future execution of the program is not required.</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p5.d">5.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0193-1.TXT">AI05-0193-1</A></I>} 
+<span class="insert3"><A NAME="I5897"></A>The Max_Alignment_For_Allocation 
+attribute is new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-11-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

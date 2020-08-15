@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Task_Termination</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>C.7.3 The Package Task_Termination</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
+<B>with</B>&nbsp;Ada.Exceptions;<BR>
+<B>package</B>&nbsp;Ada.Task_Termination<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8067"></A><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Task_Termination);</span></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8068"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8069"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Cause&nbsp;:&nbsp;<B>in</B>&nbsp;Cause_Of_Termination;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Exceptions.Exception_Occurrence);</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8070"></A>Set_Dependents_Fallback_Handler<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Handler:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8071"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8072"></A>Set_Specific_Handler<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8073"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Task_Termination;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal"><A NAME="I8074"></A><A NAME="I8075"></A>The type 
+Termination_Handler identifies a protected procedure to be executed by 
+the implementation when a task terminates. Such a protected procedure 
+is called a <I>handler</I>. In all cases T identifies the task that is 
+terminating. If the task terminates due to completing the last statement 
+of its body, or as a result of waiting on a terminate alternative, and 
+the finalization of the task completes normally, then Cause is set to 
+Normal and X is set to Null_Occurrence. If the task terminates because 
+it is being aborted, then Cause is set to Abnormal; X is set to Null_Occurrence 
+if the finalization of the task completes normally. If the task terminates 
+because of an exception raised by the execution of its <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
+then Cause is set to Unhandled_Exception; X is set to the associated 
+exception occurrence if the finalization of the task completes normally. 
+Independent of how the task completes, if finalization of the task propagates 
+an exception, then Cause is either Unhandled_Exception or Abnormal, and 
+X is an exception occurrence that identifies the Program_Error exception.</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal"><A NAME="I8076"></A><A NAME="I8077"></A><A NAME="I8078"></A><A NAME="I8079"></A><A NAME="I8080"></A><A NAME="I8081"></A>Each 
+task has two termination handlers, a <I>fall-back handler</I> and a <I>specific 
+handler</I>. The specific handler applies only to the task itself, while 
+the fall-back handler applies only to the dependent tasks of the task. 
+A handler is said to be <I>set</I> if it is associated with a nonnull 
+value of type Termination_Handler, and <I>cleared</I> otherwise. When 
+a task is created, its specific handler and fall-back handler are cleared.</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal">The procedure Set_Dependents_Fallback_Handler changes 
+the fall-back handler for the calling task: if Handler is <B>null</B>, 
+that fall-back handler is cleared; otherwise, it is set to be Handler.<B>all</B>. 
+If a fall-back handler had previously been set it is replaced.</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal">The function Current_Task_Fallback_Handler returns 
+the fall-back handler that is currently set for the calling task, if 
+one is set; otherwise, it returns <B>null</B>.</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal">The procedure Set_Specific_Handler changes the specific 
+handler for the task identified by T: if Handler is <B>null</B>, that 
+specific handler is cleared; otherwise, it is set to be Handler.<B>all</B>. 
+If a specific handler had previously been set it is replaced.</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal">The function Specific_Handler returns the specific 
+handler that is currently set for the task identified by T, if one is 
+set; otherwise, it returns <B>null</B>.</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">As part of the finalization of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
+after performing the actions specified in <A HREF="RM-7-6.html">7.6</A> 
+for finalization of a master, the specific handler for the task, if one 
+is set, is executed. If the specific handler is cleared, a search for 
+a fall-back handler proceeds by recursively following the master relationship 
+for the task. If a task is found whose fall-back handler is set, that 
+handler is executed; otherwise, no handler is executed.</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">For Set_Specific_Handler or Specific_Handler, Tasking_Error 
+is raised if the task identified by T has already terminated. Program_Error 
+is raised if the value of T is Ada.Task_Identification.Null_Task_Id.</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">An exception propagated from a handler that is invoked 
+as part of the termination of a task has no effect.</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">For a call of Set_Specific_Handler or Specific_Handler, 
+if the task identified by T no longer exists, the execution of the program 
+is erroneous.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-C-7-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

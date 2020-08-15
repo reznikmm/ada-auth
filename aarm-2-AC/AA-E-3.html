@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Consistency of a Distributed System</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.3 Consistency of a Distributed System</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[This clause defines attributes and rules associated 
+with verifying the consistency of a distributed program.]&nbsp;</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">The rules guarantee that remote call interface 
+and shared passive packages are consistent among all partitions prior 
+to the execution of a distributed program, so that the semantics of the 
+distributed program are well defined.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <span class="insert1"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+P that statically denotes a program unit, the following attributes are 
+defined:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="WideHanging-Term">P'Version</div><div class="WideHanging-Body">
+<A NAME="I7829"></A><A NAME="I7830"></A>Yields a value of the predefined 
+type String that identifies the version of the compilation unit that 
+contains the declaration of the program unit.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="WideHanging-Term">P'Body_Version</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I7831"></A><A NAME="I7832"></A>Yields a value of the predefined 
+type String that identifies the version of the compilation unit that 
+contains the body (but not any subunits) of the program unit.&nbsp;</div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0084">8652/0084</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00104.TXT">AI95-00104-01</A></I>} 
+<A NAME="I7833"></A>The <I>version</I> of a compilation unit changes 
+whenever the <span class="delete1">version changes for any&nbsp;</span>compilation 
+unit <span class="insert1">changes in a semantically significant way. 
+This International Standard does not define the exact meaning of &quot;semantically 
+significant&quot;</span><span class="delete1">&nbsp;on which it depends semantically. 
+The version also changes whenever the compilation unit itself changes 
+in a semantically significant way</span>. It is <span class="insert1">unspecified</span><span class="delete1">&nbsp;implementation 
+defined</span> whether there are other events (such as recompilation) 
+that result in the version of a compilation unit changing. <span class="insert1"><A NAME="I7834"></A></span></div>
+<div class="paranum"><a name="p5.a">5.a/1</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete1"><B>Implementation defined: 
+</B></span><span class="delete1">Events that cause the version of a compilation 
+unit to change.</span></div>
+<div class="paranum"><a name="p5.1">5.1/1</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0084">8652/0084</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00104.TXT">AI95-00104-01</A></I>} 
+<span class="insert1">If P is not a library unit, and P has no completion, 
+then P'Body_Version returns the Body_Version of the innermost program 
+unit enclosing the declaration of P. If P is a library unit, and P has 
+no completion, then P'Body_Version returns a value that is different 
+from Body_Version of any version of P that has a completion.</span>&nbsp;</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I7835"></A><A NAME="I7836"></A>In a distributed 
+program, a library unit is <I>consistent</I> if the same version of its 
+declaration is used throughout. It is a bounded error to elaborate a 
+partition of a distributed program that contains a compilation unit that 
+depends on a different version of the declaration of a shared passive 
+or RCI library unit than that included in the partition to which the 
+shared passive or RCI library unit was assigned. <A NAME="I7837"></A>As 
+a result of this error, Program_Error can be raised in one or both partitions 
+during elaboration; in any case, the partitions become inaccessible to 
+one another.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Because a version changes 
+if anything on which it depends undergoes a version change, requiring 
+consistency for shared passive and remote call interface library units 
+is sufficient to ensure consistency for the declared pure and remote 
+types library units that define the types used for the objects and parameters 
+through which interpartition communication takes place.</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations">Note that we do not require matching Body_Versions; 
+it is irrelevant for shared passive and remote call interface packages, 
+since only one copy of their body exists in a distributed program (in 
+the absence of implicit replication), and we allow the bodies to differ 
+for declared pure and remote types packages from partition to partition, 
+presuming that the differences are due to required error corrections 
+that took place during the execution of a long-running distributed program. 
+The Body_Version attribute provides a means for performing stricter consistency 
+checks.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p6.c">6.c/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0084">8652/0084</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00104.TXT">AI95-00104-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Clarified the meaning of 'Version 
+and 'Body_Version.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

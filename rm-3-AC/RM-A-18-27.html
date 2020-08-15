@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Synchronized_Queue_Interfaces</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-26.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-28.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.27 <span class="insert3">The Generic Package Containers.Synchronized_Queue_Interfaces</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal"><span class="insert3">The language-defined generic 
+package Containers.Synchronized_Queue_Interfaces provides interface type 
+Queue, and a set of operations for that type. Interface Queue specifies 
+a first-in, first-out queue.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+generic library package Containers.Synchronized_Queue_Interfaces has 
+the following declaration:</span>&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples"><span class="insert3"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
+<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;<B>is</B><A NAME="I7542"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Synchronized_Queue_Interfaces);</span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7543"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7544"></A>Enqueue<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7545"></A>Dequeue<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7546"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7547"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces;</span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Enqueue<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
+&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">A 
+queue type that implements this interface is allowed to have a bounded 
+<I>capacity</I><A NAME="I7548"></A>. If the queue object has a bounded 
+capacity, and the number of existing elements equals the capacity, then 
+Enqueue blocks until storage becomes available; otherwise, Enqueue does 
+not block. In any case, it then copies New_Item onto the queue.</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Dequeue<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
+&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">If 
+the queue is empty, then Dequeue blocks until an item becomes available. 
+In any case, it then assigns the element at the head of the queue to 
+Element, and removes it from the queue.</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+the number of elements currently in the queue.</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+the maximum number of elements that have been in the queue at any one 
+time.</span></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Notes">53&nbsp;&nbsp;<span class="insert3">Unlike other language-defined 
+containers, there are no queues whose element types are indefinite. Elements 
+of an indefinite type can be handled by defining the element of the queue 
+to be a holder container (see <A HREF="RM-A-18-18.html">A.18.18</A>) 
+of the indefinite type, or to be an explicit access type that designates 
+the indefinite type.</span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-26.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-28.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

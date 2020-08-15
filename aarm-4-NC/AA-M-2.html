@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Implementation-Defined Characteristics</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-M-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-M-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>M.2 Implementation-Defined Characteristics</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><A NAME="I9647"></A>The Ada language allows for certain 
+machine dependences in a controlled manner. <A NAME="I9648"></A>Each 
+Ada implementation must document all implementation-defined characteristics: 
+</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I9649"></A><A NAME="I9650"></A>It 
+need not document unspecified characteristics.</div>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="Annotations">Some of the items in this list require documentation 
+only for implementations that conform to Specialized Needs Annexes.&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Bulleted">Whether or not each recommendation given in Implementation 
+Advice is followed &mdash; see <A HREF="AA-M-3.html">M.3</A>, &ldquo;<A HREF="AA-M-3.html">Implementation 
+Advice</A>&rdquo; for a listing. See <A HREF="AA-1-1-2.html">1.1.2</A>(37).</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">Capacity limitations of the implementation. See 
+<A HREF="AA-1-1-3.html">1.1.3</A>(3).</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">Variations from the standard that are impractical 
+to avoid given the implementation's execution environment. See <A HREF="AA-1-1-3.html">1.1.3</A>(6).</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">Which <SPAN Class="swiss"><A HREF="AA-13-8.html#S0318">code_statement</A></SPAN>s 
+cause external interactions. See <A HREF="AA-1-1-3.html">1.1.3</A>(10).</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">The coded representation for the text of an Ada 
+program. See <A HREF="AA-2-1.html">2.1</A>(4/3).</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">The representation for an end of line. See <A HREF="AA-2-2.html">2.2</A>(2/3).</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">Maximum supported line length and lexical element 
+length. See <A HREF="AA-2-2.html">2.2</A>(14).</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">Implementation-defined pragmas. See <A HREF="AA-2-8.html">2.8</A>(14).</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">Effect of pragma Optimize. See <A HREF="AA-2-8.html">2.8</A>(27).</div>
+<div class="paranum"><a name="p11.1">11.1/4</a></div>
+<div class="Bulleted">The message string associated with the Assertion_Error 
+exception raised by the failure of a predicate check if there is no applicable 
+Predicate_Failure aspect. See <A HREF="AA-3-2-4.html">3.2.4</A>(31).</div>
+<div class="paranum"><a name="p11.2">11.2/2</a></div>
+<div class="Bulleted">The sequence of characters of the value returned 
+by S'Wide_Image when some of the graphic characters of S'Wide_Wide_Image 
+are not defined in Wide_Character. See <A HREF="AA-3-5.html">3.5</A>(30/3).</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Bulleted">The sequence of characters of the value returned 
+by S'Image when some of the graphic characters of S'Wide_Wide_Image are 
+not defined in Character. See <A HREF="AA-3-5.html">3.5</A>(37/3).</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">The predefined integer types declared in Standard. 
+See <A HREF="AA-3-5-4.html">3.5.4</A>(25).</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">Any nonstandard integer types and the operators 
+defined for them. See <A HREF="AA-3-5-4.html">3.5.4</A>(26).</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">Any nonstandard real types and the operators defined 
+for them. See <A HREF="AA-3-5-6.html">3.5.6</A>(8).</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">What combinations of requested decimal precision 
+and range are supported for floating point types. See <A HREF="AA-3-5-7.html">3.5.7</A>(7).</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">The predefined floating point types declared in 
+Standard. See <A HREF="AA-3-5-7.html">3.5.7</A>(16).</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">The <I>small</I> of an ordinary fixed point type. 
+See <A HREF="AA-3-5-9.html">3.5.9</A>(8/2).</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">What combinations of <I>small</I>, range, and <I>digits</I> 
+are supported for fixed point types. See <A HREF="AA-3-5-9.html">3.5.9</A>(10).</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Bulleted">The result of Tags.Wide_Wide_Expanded_Name for 
+types declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0160">block_statement</A></SPAN>. 
+See <A HREF="AA-3-9.html">3.9</A>(10).</div>
+<div class="paranum"><a name="p20.1">20.1/2</a></div>
+<div class="Bulleted">The sequence of characters of the value returned 
+by Tags.Expanded_Name (respectively, Tags.Wide_Expanded_Name) when some 
+of the graphic characters of Tags.Wide_Wide_Expanded_Name are not defined 
+in Character (respectively, Wide_Character). See <A HREF="AA-3-9.html">3.9</A>(10.1/2).</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Bulleted">Implementation-defined attributes. See <A HREF="AA-4-1-4.html">4.1.4</A>(12/1).</div>
+<div class="paranum"><a name="p21.1">21.1/2</a></div>
+<div class="Bulleted">Rounding of real static expressions which are exactly 
+half-way between two machine numbers. See <A HREF="AA-4-9.html">4.9</A>(38/2).</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">Any implementation-defined time types. See <A HREF="AA-9-6.html">9.6</A>(6/3).</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">The time base associated with relative delays. 
+See <A HREF="AA-9-6.html">9.6</A>(20).</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">The time base of the type Calendar.Time. See <A HREF="AA-9-6.html">9.6</A>(23).</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Bulleted">The time zone used for package Calendar operations. 
+See <A HREF="AA-9-6.html">9.6</A>(24/2).</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Bulleted">Any limit on <SPAN Class="swiss"><A HREF="AA-9-6.html#S0228">delay_until_statement</A></SPAN>s 
+of <SPAN Class="swiss"><A HREF="AA-9-7.html#S0230">select_statement</A></SPAN>s. 
+See <A HREF="AA-9-6.html">9.6</A>(29).</div>
+<div class="paranum"><a name="p26.1">26.1/2</a></div>
+<div class="Bulleted">The result of Calendar.Formating.Image if its argument 
+represents more than 100 hours. See <A HREF="AA-9-6-1.html">9.6.1</A>(86/2).</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Bulleted">The representation for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN>. 
+See <A HREF="AA-10-1.html">10.1</A>(2).</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Bulleted">Any restrictions on <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN>s 
+that contain multiple <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN>s. 
+See <A HREF="AA-10-1.html">10.1</A>(4).</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Bulleted">The mechanisms for creating an environment and 
+for adding and replacing compilation units. See <A HREF="AA-10-1-4.html">10.1.4</A>(3/2).</div>
+<div class="paranum"><a name="p30.1">30.1/2</a></div>
+<div class="Bulleted">The mechanisms for adding a compilation unit mentioned 
+in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
+to an environment. See <A HREF="AA-10-1-4.html">10.1.4</A>(3).</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Bulleted">The manner of explicitly assigning library units 
+to a partition. See <A HREF="AA-10-2.html">10.2</A>(2).</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Bulleted">The implementation-defined means, if any, of specifying 
+which compilation units are needed by a given compilation unit. See <A HREF="AA-10-2.html">10.2</A>(2).</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Bulleted">The manner of designating the main subprogram of 
+a partition. See <A HREF="AA-10-2.html">10.2</A>(7).</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Bulleted">The order of elaboration of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN>s. 
+See <A HREF="AA-10-2.html">10.2</A>(18).</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Bulleted">Parameter passing and function return for the main 
+subprogram. See <A HREF="AA-10-2.html">10.2</A>(21).</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Bulleted">The mechanisms for building and running partitions. 
+See <A HREF="AA-10-2.html">10.2</A>(24).</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Bulleted">The details of program execution, including program 
+termination. See <A HREF="AA-10-2.html">10.2</A>(25).</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Bulleted">The semantics of any nonactive partitions supported 
+by the implementation. See <A HREF="AA-10-2.html">10.2</A>(28/3).</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Bulleted">The information returned by Exception_Message. 
+See <A HREF="AA-11-4-1.html">11.4.1</A>(10.1/4).</div>
+<div class="paranum"><a name="p40">40/2</a></div>
+<div class="Bulleted">The result of Exceptions.Wide_Wide_Exception_Name 
+for exceptions declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0160">block_statement</A></SPAN>. 
+See <A HREF="AA-11-4-1.html">11.4.1</A>(12).</div>
+<div class="paranum"><a name="p40.1">40.1/2</a></div>
+<div class="Bulleted">The sequence of characters of the value returned 
+by Exceptions.Exception_Name (respectively, Exceptions.Wide_Exception_Name) 
+when some of the graphic characters of Exceptions.Wide_Wide_Exception_Name 
+are not defined in Character (respectively, Wide_Character). See <A HREF="AA-11-4-1.html">11.4.1</A>(12.1/2).</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Bulleted">The information returned by Exception_Information. 
+See <A HREF="AA-11-4-1.html">11.4.1</A>(13/2).</div>
+<div class="paranum"><a name="p41.1">41.1/3</a></div>
+<div class="Bulleted">Implementation-defined <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+and <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0308">aspect_mark</A></SPAN>s 
+allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Assertion_Policy. See <A HREF="AA-11-4-2.html">11.4.2</A>(9/3).</div>
+<div class="paranum"><a name="p41.2">41.2/2</a></div>
+<div class="Bulleted">The default assertion policy. See <A HREF="AA-11-4-2.html">11.4.2</A>(10).</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Bulleted">Implementation-defined check names. See <A HREF="AA-11-5.html">11.5</A>(27).</div>
+<div class="paranum"><a name="p42.1">42.1/2</a></div>
+<div class="Bulleted">Existence and meaning of second parameter of <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Unsuppress. See <A HREF="AA-11-5.html">11.5</A>(27.1/2).</div>
+<div class="paranum"><a name="p42.2">42.2/2</a></div>
+<div class="Bulleted">The cases that cause conflicts between the representation 
+of the ancestors of a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>. 
+See <A HREF="AA-13-1.html">13.1</A>(13.1/3).</div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Bulleted">The interpretation of each representation aspect. 
+See <A HREF="AA-13-1.html">13.1</A>(20).</div>
+<div class="paranum"><a name="p44">44/3</a></div>
+<div class="Bulleted">Any restrictions placed upon the specification 
+of representation aspects. See <A HREF="AA-13-1.html">13.1</A>(20).</div>
+<div class="paranum"><a name="p44.1">44.1/3</a></div>
+<div class="Bulleted">Implementation-defined aspects, including the syntax 
+for specifying such aspects and the legality rules for such aspects. 
+See <A HREF="AA-13-1-1.html">13.1.1</A>(38).</div>
+<div class="paranum"><a name="p44.2">44.2/2</a></div>
+<div class="Bulleted">The set of machine scalars. See <A HREF="AA-13-3.html">13.3</A>(8.1/3).</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Bulleted">The meaning of Size for indefinite subtypes. See 
+<A HREF="AA-13-3.html">13.3</A>(48).</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Bulleted">The default external representation for a type 
+tag. See <A HREF="AA-13-3.html">13.3</A>(75/3).</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Bulleted">What determines whether a compilation unit is the 
+same in two different partitions. See <A HREF="AA-13-3.html">13.3</A>(76).</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Bulleted">Implementation-defined components. See <A HREF="AA-13-5-1.html">13.5.1</A>(15).</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Bulleted">If Word_Size = Storage_Unit, the default bit ordering. 
+See <A HREF="AA-13-5-3.html">13.5.3</A>(5).</div>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Bulleted">The contents of the visible part of package System. 
+See <A HREF="AA-13-7.html">13.7</A>(2).</div>
+<div class="paranum"><a name="p50.1">50.1/2</a></div>
+<div class="Bulleted">The range of Storage_Elements.Storage_Offset, the 
+modulus of Storage_Elements.Storage_Element, and the declaration of Storage_Elements.Integer_Address.. 
+See <A HREF="AA-13-7-1.html">13.7.1</A>(11).</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Bulleted">The contents of the visible part of package System.Machine_Code, 
+and the meaning of <SPAN Class="swiss"><A HREF="AA-13-8.html#S0318">code_statement</A></SPAN>s. 
+See <A HREF="AA-13-8.html">13.8</A>(7).</div>
+<div class="paranum"><a name="p51.1">51.1/2</a></div>
+<div class="Bulleted">The result of unchecked conversion for instances 
+with scalar result types whose result is not defined by the language. 
+See <A HREF="AA-13-9.html">13.9</A>(11).</div>
+<div class="paranum"><a name="p52">52/2</a></div>
+<div class="Bulleted">The effect of unchecked conversion for instances 
+with nonscalar result types whose effect is not defined by the language. 
+See <A HREF="AA-13-9.html">13.9</A>(11).</div>
+<div class="paranum"><a name="p53">53/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p54">54</a></div>
+<div class="Bulleted">Whether or not the implementation provides user-accessible 
+names for the standard pool type(s). See <A HREF="AA-13-11.html">13.11</A>(17).</div>
+<div class="paranum"><a name="p55">55/2</a></div>
+<div class="Bulleted">The meaning of Storage_Size when neither the Storage_Size 
+nor the Storage_Pool is specified for an access type. See <A HREF="AA-13-11.html">13.11</A>(18).</div>
+<div class="paranum"><a name="p56">56/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p56.1">56.1/4</a></div>
+<div class="Bulleted">The effect of specifying aspect Default_Storage_Pool 
+on an instance of a language-defined generic unit. See <A HREF="AA-13-11-3.html">13.11.3</A>(5).</div>
+<div class="paranum"><a name="p57">57/3</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p57.1">57.1/3</a></div>
+<div class="Bulleted">Implementation-defined restrictions allowed in 
+a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Restrictions. 
+See <A HREF="AA-13-12.html">13.12</A>(8.7/3).</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Bulleted">The consequences of violating limitations on Restrictions 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s. See 
+<A HREF="AA-13-12.html">13.12</A>(9).</div>
+<div class="paranum"><a name="p58.1">58.1/3</a></div>
+<div class="Bulleted">Implementation-defined usage profiles allowed in 
+a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Profile. 
+See <A HREF="AA-13-12.html">13.12</A>(15).</div>
+<div class="paranum"><a name="p59">59/2</a></div>
+<div class="Bulleted">The contents of the stream elements read and written 
+by the Read and Write attributes of elementary types. See <A HREF="AA-13-13-2.html">13.13.2</A>(9).</div>
+<div class="paranum"><a name="p60">60</a></div>
+<div class="Bulleted">The names and characteristics of the numeric subtypes 
+declared in the visible part of package Standard. See <A HREF="AA-A-1.html">A.1</A>(3).</div>
+<div class="paranum"><a name="p60.1">60.1/2</a></div>
+<div class="Bulleted">The values returned by Strings.Hash. See <A HREF="AA-A-4-9.html">A.4.9</A>(3/2).</div>
+<div class="paranum"><a name="p61">61</a></div>
+<div class="Bulleted">The accuracy actually achieved by the elementary 
+functions. See <A HREF="AA-A-5-1.html">A.5.1</A>(1).</div>
+<div class="paranum"><a name="p62">62</a></div>
+<div class="Bulleted">The sign of a zero result from some of the operators 
+or functions in Numerics.Generic_Elementary_Functions, when Float_Type'Signed_Zeros 
+is True. See <A HREF="AA-A-5-1.html">A.5.1</A>(46).</div>
+<div class="paranum"><a name="p63">63</a></div>
+<div class="Bulleted">The value of Numerics.Float_Random.Max_Image_Width. 
+See <A HREF="AA-A-5-2.html">A.5.2</A>(27).</div>
+<div class="paranum"><a name="p64">64</a></div>
+<div class="Bulleted">The value of Numerics.Discrete_Random.Max_Image_Width. 
+See <A HREF="AA-A-5-2.html">A.5.2</A>(27).</div>
+<div class="paranum"><a name="p65">65/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p66">66</a></div>
+<div class="Bulleted">The string representation of a random number generator's 
+state. See <A HREF="AA-A-5-2.html">A.5.2</A>(38).</div>
+<div class="paranum"><a name="p67">67/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p68">68</a></div>
+<div class="Bulleted">The values of the Model_Mantissa, Model_Emin, Model_Epsilon, 
+Model, Safe_First, and Safe_Last attributes, if the Numerics Annex is 
+not supported. See <A HREF="AA-A-5-3.html">A.5.3</A>(72).</div>
+<div class="paranum"><a name="p69">69/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p70">70</a></div>
+<div class="Bulleted">The value of Buffer_Size in Storage_IO. See <A HREF="AA-A-9.html">A.9</A>(10).</div>
+<div class="paranum"><a name="p71">71/2</a></div>
+<div class="Bulleted">The external files associated with the standard 
+input, standard output, and standard error files. See <A HREF="AA-A-10.html">A.10</A>(5).</div>
+<div class="paranum"><a name="p72">72</a></div>
+<div class="Bulleted">The accuracy of the value produced by Put. See 
+<A HREF="AA-A-10-9.html">A.10.9</A>(36).</div>
+<div class="paranum"><a name="p72.1">72.1/1</a></div>
+<div class="Bulleted">Current size for a stream file for which positioning 
+is not supported. See <A HREF="AA-A-12-1.html">A.12.1</A>(1.1/1).</div>
+<div class="paranum"><a name="p73">73/2</a></div>
+<div class="Bulleted">The meaning of Argument_Count, Argument, and Command_Name 
+for package Command_Line. The bounds of type Command_Line.Exit_Status. 
+See <A HREF="AA-A-15.html">A.15</A>(1).</div>
+<div class="paranum"><a name="p73.1">73.1/2</a></div>
+<div class="Bulleted">The interpretation of file names and directory 
+names. See <A HREF="AA-A-16.html">A.16</A>(46/2).</div>
+<div class="paranum"><a name="p73.2">73.2/2</a></div>
+<div class="Bulleted">The maximum value for a file size in Directories. 
+See <A HREF="AA-A-16.html">A.16</A>(87/2).</div>
+<div class="paranum"><a name="p73.3">73.3/2</a></div>
+<div class="Bulleted">The result for Directories.Size for a directory 
+or special file See <A HREF="AA-A-16.html">A.16</A>(93/2).</div>
+<div class="paranum"><a name="p73.4">73.4/2</a></div>
+<div class="Bulleted">The result for Directories.Modification_Time for 
+a directory or special file. See <A HREF="AA-A-16.html">A.16</A>(95/2).</div>
+<div class="paranum"><a name="p73.5">73.5/2</a></div>
+<div class="Bulleted">The interpretation of a nonnull search pattern 
+in Directories. See <A HREF="AA-A-16.html">A.16</A>(104/3).</div>
+<div class="paranum"><a name="p73.6">73.6/2</a></div>
+<div class="Bulleted">The results of a Directories search if the contents 
+of the directory are altered while a search is in progress. See <A HREF="AA-A-16.html">A.16</A>(110/3).</div>
+<div class="paranum"><a name="p73.7">73.7/2</a></div>
+<div class="Bulleted">The definition and meaning of an environment variable. 
+See <A HREF="AA-A-17.html">A.17</A>(1/2).</div>
+<div class="paranum"><a name="p73.8">73.8/2</a></div>
+<div class="Bulleted">The circumstances where an environment variable 
+cannot be defined. See <A HREF="AA-A-17.html">A.17</A>(16/2).</div>
+<div class="paranum"><a name="p73.9">73.9/2</a></div>
+<div class="Bulleted">Environment names for which Set has the effect 
+of Clear. See <A HREF="AA-A-17.html">A.17</A>(17/2).</div>
+<div class="paranum"><a name="p73.10">73.10/2</a></div>
+<div class="Bulleted">The value of Containers.Hash_Type'Modulus. The 
+value of Containers.Count_Type'Last. See <A HREF="AA-A-18-1.html">A.18.1</A>(7/2).</div>
+<div class="paranum"><a name="p74">74</a></div>
+<div class="Bulleted">Implementation-defined convention names. See <A HREF="AA-B-1.html">B.1</A>(11/3).</div>
+<div class="paranum"><a name="p75">75</a></div>
+<div class="Bulleted">The meaning of link names. See <A HREF="AA-B-1.html">B.1</A>(36).</div>
+<div class="paranum"><a name="p76">76</a></div>
+<div class="Bulleted">The manner of choosing link names when neither 
+the link name nor the address of an imported or exported entity is specified. 
+See <A HREF="AA-B-1.html">B.1</A>(36).</div>
+<div class="paranum"><a name="p77">77</a></div>
+<div class="Bulleted">The effect of pragma Linker_Options. See <A HREF="AA-B-1.html">B.1</A>(37).</div>
+<div class="paranum"><a name="p78">78</a></div>
+<div class="Bulleted">The contents of the visible part of package Interfaces 
+and its language-defined descendants. See <A HREF="AA-B-2.html">B.2</A>(1).</div>
+<div class="paranum"><a name="p79">79/2</a></div>
+<div class="Bulleted">Implementation-defined children of package Interfaces. 
+See <A HREF="AA-B-2.html">B.2</A>(11).</div>
+<div class="paranum"><a name="p79.1">79.1/2</a></div>
+<div class="Bulleted">The definitions of certain types and constants 
+in Interfaces.C. See <A HREF="AA-B-3.html">B.3</A>(41).</div>
+<div class="paranum"><a name="p80">80/1</a></div>
+<div class="Bulleted">The types Floating, Long_Floating, Binary, Long_Binary, 
+Decimal_Element, and COBOL_Character; and the initializations of the 
+variables Ada_To_COBOL and COBOL_To_Ada, in Interfaces.COBOL. See <A HREF="AA-B-4.html">B.4</A>(50).</div>
+<div class="paranum"><a name="p80.1">80.1/1</a></div>
+<div class="Bulleted">The types Fortran_Integer, Real, Double_Precision, 
+and Character_Set in Interfaces.Fortran. See <A HREF="AA-B-5.html">B.5</A>(17).</div>
+<div class="paranum"><a name="p81">81/2</a></div>
+<div class="Bulleted">Implementation-defined intrinsic subprograms. See 
+<A HREF="AA-C-1.html">C.1</A>(1/3).</div>
+<div class="paranum"><a name="p82">82/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p83">83/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p83.1">83.1/3</a></div>
+<div class="Bulleted">Any restrictions on a protected procedure or its 
+containing type when an aspect Attach_handler or Interrupt_Handler is 
+specified. See <A HREF="AA-C-3-1.html">C.3.1</A>(17).</div>
+<div class="paranum"><a name="p83.2">83.2/3</a></div>
+<div class="Bulleted">Any other forms of interrupt handler supported 
+by the Attach_Handler and Interrupt_Handler aspects. See <A HREF="AA-C-3-1.html">C.3.1</A>(19).</div>
+<div class="paranum"><a name="p84">84/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p85">85/4</a></div>
+<div class="Bulleted">The semantics of some attributes and functions 
+of an entity for which aspect Discard_Names is True. See <A HREF="AA-C-5.html">C.5</A>(7).</div>
+<div class="paranum"><a name="p86">86</a></div>
+<div class="Bulleted">The result of the Task_Identification.Image attribute. 
+See <A HREF="AA-C-7-1.html">C.7.1</A>(7).</div>
+<div class="paranum"><a name="p87">87/2</a></div>
+<div class="Bulleted">The value of Current_Task when in a protected entry, 
+interrupt handler, or finalization of a task attribute. See <A HREF="AA-C-7-1.html">C.7.1</A>(17/3).</div>
+<div class="paranum"><a name="p88">88/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p88.1">88.1/1</a></div>
+<div class="Bulleted">Granularity of locking for Task_Attributes. See 
+<A HREF="AA-C-7-2.html">C.7.2</A>(16/1).</div>
+<div class="paranum"><a name="p89">89/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p90">90/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p91">91</a></div>
+<div class="Bulleted">The declarations of Any_Priority and Priority. 
+See <A HREF="AA-D-1.html">D.1</A>(11).</div>
+<div class="paranum"><a name="p92">92</a></div>
+<div class="Bulleted">Implementation-defined execution resources. See 
+<A HREF="AA-D-1.html">D.1</A>(15).</div>
+<div class="paranum"><a name="p93">93</a></div>
+<div class="Bulleted">Whether, on a multiprocessor, a task that is waiting 
+for access to a protected object keeps its processor busy. See <A HREF="AA-D-2-1.html">D.2.1</A>(3).</div>
+<div class="paranum"><a name="p94">94/2</a></div>
+<div class="Bulleted">The effect of implementation-defined execution 
+resources on task dispatching. See <A HREF="AA-D-2-1.html">D.2.1</A>(9/2).</div>
+<div class="paranum"><a name="p95">95/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p96">96/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p97">97/2</a></div>
+<div class="Bulleted">Implementation defined task dispatching policies. 
+See <A HREF="AA-D-2-2.html">D.2.2</A>(19).</div>
+<div class="paranum"><a name="p97.1">97.1/2</a></div>
+<div class="Bulleted">The value of Default_Quantum in Dispatching.Round_Robin. 
+See <A HREF="AA-D-2-5.html">D.2.5</A>(4).</div>
+<div class="paranum"><a name="p98">98</a></div>
+<div class="Bulleted">Implementation-defined <I>policy_</I><A NAME="I9651"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Locking_Policy. See <A HREF="AA-D-3.html">D.3</A>(4).</div>
+<div class="paranum"><a name="p98.1">98.1/2</a></div>
+<div class="Bulleted">The locking policy if no Locking_Policy pragma 
+applies to any unit of a partition. See <A HREF="AA-D-3.html">D.3</A>(6).</div>
+<div class="paranum"><a name="p99">99</a></div>
+<div class="Bulleted">Default ceiling priorities. See <A HREF="AA-D-3.html">D.3</A>(10/4).</div>
+<div class="paranum"><a name="p100">100</a></div>
+<div class="Bulleted">The ceiling of any protected object used internally 
+by the implementation. See <A HREF="AA-D-3.html">D.3</A>(16).</div>
+<div class="paranum"><a name="p101">101</a></div>
+<div class="Bulleted">Implementation-defined queuing policies. See <A HREF="AA-D-4.html">D.4</A>(1/3).</div>
+<div class="paranum"><a name="p102">102/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p103">103</a></div>
+<div class="Bulleted">Any operations that implicitly require heap storage 
+allocation. See <A HREF="AA-D-7.html">D.7</A>(8).</div>
+<div class="paranum"><a name="p103.1">103.1/4</a></div>
+<div class="Bulleted">When restriction No_Dynamic_CPU_Assignment applies 
+to a partition, the processor on which a task with a CPU value of a Not_A_Specific_CPU 
+will execute. See <A HREF="AA-D-7.html">D.7</A>(10).</div>
+<div class="paranum"><a name="p103.2">103.2/2</a></div>
+<div class="Bulleted">When restriction No_Task_Termination applies to 
+a partition, what happens when a task terminates. See <A HREF="AA-D-7.html">D.7</A>(15.1/2).</div>
+<div class="paranum"><a name="p103.3">103.3/2</a></div>
+<div class="Bulleted">The behavior when restriction Max_Storage_At_Blocking 
+is violated. See <A HREF="AA-D-7.html">D.7</A>(17/1).</div>
+<div class="paranum"><a name="p103.4">103.4/2</a></div>
+<div class="Bulleted">The behavior when restriction Max_Asynchronous_Select_Nesting 
+is violated. See <A HREF="AA-D-7.html">D.7</A>(18/1).</div>
+<div class="paranum"><a name="p103.5">103.5/2</a></div>
+<div class="Bulleted">The behavior when restriction Max_Tasks is violated. 
+See <A HREF="AA-D-7.html">D.7</A>(19).</div>
+<div class="paranum"><a name="p104">104/2</a></div>
+<div class="Bulleted">Whether the use of pragma Restrictions results 
+in a reduction in program code or data size or execution time. See <A HREF="AA-D-7.html">D.7</A>(20).</div>
+<div class="paranum"><a name="p105">105/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p106">106/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p106.1">106.1/3</a></div>
+<div class="Bulleted">The value of Barrier_Limit'Last in Synchronous_Barriers. 
+See <A HREF="AA-D-10-1.html">D.10.1</A>(4/3).</div>
+<div class="paranum"><a name="p106.2">106.2/3</a></div>
+<div class="Bulleted">When an aborted task that is waiting on a Synchronous_Barrier 
+is aborted. See <A HREF="AA-D-10-1.html">D.10.1</A>(13/3).</div>
+<div class="paranum"><a name="p107">107/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p107.1">107.1/3</a></div>
+<div class="Bulleted">The value of Min_Handler_Ceiling in Execution_Time.Group_Budgets. 
+See <A HREF="AA-D-14-2.html">D.14.2</A>(7/2).</div>
+<div class="paranum"><a name="p107.2">107.2/3</a></div>
+<div class="Bulleted">The value of CPU_Range'Last in System.Multiprocessors. 
+See <A HREF="AA-D-16.html">D.16</A>(4/3).</div>
+<div class="paranum"><a name="p107.3">107.3/3</a></div>
+<div class="Bulleted">The processor on which the environment task executes 
+in the absence of a value for the aspect CPU. See <A HREF="AA-D-16.html">D.16</A>(13/3).</div>
+<div class="paranum"><a name="p108">108</a></div>
+<div class="Bulleted">The means for creating and executing distributed 
+programs. See <A HREF="AA-E.html">E</A>(5).</div>
+<div class="paranum"><a name="p109">109</a></div>
+<div class="Bulleted">Any events that can result in a partition becoming 
+inaccessible. See <A HREF="AA-E-1.html">E.1</A>(7).</div>
+<div class="paranum"><a name="p110">110</a></div>
+<div class="Bulleted">The scheduling policies, treatment of priorities, 
+and management of shared resources between partitions in certain cases. 
+See <A HREF="AA-E-1.html">E.1</A>(11).</div>
+<div class="paranum"><a name="p111">111/1</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p112">112</a></div>
+<div class="Bulleted">Whether the execution of the remote subprogram 
+is immediately aborted as a result of cancellation. See <A HREF="AA-E-4.html">E.4</A>(13).</div>
+<div class="paranum"><a name="p112.1">112.1/2</a></div>
+<div class="Bulleted">The range of type System.RPC.Partition_Id. See 
+<A HREF="AA-E-5.html">E.5</A>(14).</div>
+<div class="paranum"><a name="p113">113/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p114">114</a></div>
+<div class="Bulleted">Implementation-defined interfaces in the PCS. See 
+<A HREF="AA-E-5.html">E.5</A>(26).</div>
+<div class="paranum"><a name="p115">115</a></div>
+<div class="Bulleted">The values of named numbers in the package Decimal. 
+See <A HREF="AA-F-2.html">F.2</A>(7).</div>
+<div class="paranum"><a name="p116">116</a></div>
+<div class="Bulleted">The value of Max_Picture_Length in the package 
+Text_IO.Editing See <A HREF="AA-F-3-3.html">F.3.3</A>(16).</div>
+<div class="paranum"><a name="p117">117</a></div>
+<div class="Bulleted">The value of Max_Picture_Length in the package 
+Wide_Text_IO.Editing See <A HREF="AA-F-3-4.html">F.3.4</A>(5).</div>
+<div class="paranum"><a name="p117.1">117.1/2</a></div>
+<div class="Bulleted">The value of Max_Picture_Length in the package 
+Wide_Wide_Text_IO.Editing See <A HREF="AA-F-3-5.html">F.3.5</A>(5).</div>
+<div class="paranum"><a name="p118">118</a></div>
+<div class="Bulleted">The accuracy actually achieved by the complex elementary 
+functions and by other complex arithmetic operations. See <A HREF="AA-G-1.html">G.1</A>(1).</div>
+<div class="paranum"><a name="p119">119</a></div>
+<div class="Bulleted">The sign of a zero result (or a component thereof) 
+from any operator or function in Numerics.Generic_Complex_Types, when 
+Real'Signed_Zeros is True. See <A HREF="AA-G-1-1.html">G.1.1</A>(53).</div>
+<div class="paranum"><a name="p120">120</a></div>
+<div class="Bulleted">The sign of a zero result (or a component thereof) 
+from any operator or function in Numerics.Generic_Complex_Elementary_Functions, 
+when Complex_Types.Real'Signed_Zeros is True. See <A HREF="AA-G-1-2.html">G.1.2</A>(45).</div>
+<div class="paranum"><a name="p121">121</a></div>
+<div class="Bulleted">Whether the strict mode or the relaxed mode is 
+the default. See <A HREF="AA-G-2.html">G.2</A>(2).</div>
+<div class="paranum"><a name="p122">122</a></div>
+<div class="Bulleted">The result interval in certain cases of fixed-to-float 
+conversion. See <A HREF="AA-G-2-1.html">G.2.1</A>(10).</div>
+<div class="paranum"><a name="p123">123</a></div>
+<div class="Bulleted">The result of a floating point arithmetic operation 
+in overflow situations, when the Machine_Overflows attribute of the result 
+type is False. See <A HREF="AA-G-2-1.html">G.2.1</A>(13).</div>
+<div class="paranum"><a name="p124">124</a></div>
+<div class="Bulleted">The result interval for division (or exponentiation 
+by a negative exponent), when the floating point hardware implements 
+division as multiplication by a reciprocal. See <A HREF="AA-G-2-1.html">G.2.1</A>(16).</div>
+<div class="paranum"><a name="p125">125</a></div>
+<div class="Bulleted">The definition of <I>close result set</I>, which 
+determines the accuracy of certain fixed point multiplications and divisions. 
+See <A HREF="AA-G-2-3.html">G.2.3</A>(5).</div>
+<div class="paranum"><a name="p126">126</a></div>
+<div class="Bulleted">Conditions on a <I>universal_real</I> operand of 
+a fixed point multiplication or division for which the result shall be 
+in the <I>perfect result set</I>. See <A HREF="AA-G-2-3.html">G.2.3</A>(22).</div>
+<div class="paranum"><a name="p127">127</a></div>
+<div class="Bulleted">The result of a fixed point arithmetic operation 
+in overflow situations, when the Machine_Overflows attribute of the result 
+type is False. See <A HREF="AA-G-2-3.html">G.2.3</A>(27).</div>
+<div class="paranum"><a name="p128">128</a></div>
+<div class="Bulleted">The result of an elementary function reference 
+in overflow situations, when the Machine_Overflows attribute of the result 
+type is False. See <A HREF="AA-G-2-4.html">G.2.4</A>(4).</div>
+<div class="paranum"><a name="p129">129</a></div>
+<div class="Bulleted">The value of the <I>angle threshold</I>, within 
+which certain elementary functions, complex arithmetic operations, and 
+complex elementary functions yield results conforming to a maximum relative 
+error bound. See <A HREF="AA-G-2-4.html">G.2.4</A>(10).</div>
+<div class="paranum"><a name="p130">130</a></div>
+<div class="Bulleted">The accuracy of certain elementary functions for 
+parameters beyond the angle threshold. See <A HREF="AA-G-2-4.html">G.2.4</A>(10).</div>
+<div class="paranum"><a name="p131">131</a></div>
+<div class="Bulleted">The result of a complex arithmetic operation or 
+complex elementary function reference in overflow situations, when the 
+Machine_Overflows attribute of the corresponding real type is False. 
+See <A HREF="AA-G-2-6.html">G.2.6</A>(5).</div>
+<div class="paranum"><a name="p132">132</a></div>
+<div class="Bulleted">The accuracy of certain complex arithmetic operations 
+and certain complex elementary functions for parameters (or components 
+thereof) beyond the angle threshold. See <A HREF="AA-G-2-6.html">G.2.6</A>(8).</div>
+<div class="paranum"><a name="p132.1">132.1/2</a></div>
+<div class="Bulleted">The accuracy requirements for the subprograms Solve, 
+Inverse, Determinant, Eigenvalues and Eigensystem for type Real_Matrix. 
+See <A HREF="AA-G-3-1.html">G.3.1</A>(81/2).</div>
+<div class="paranum"><a name="p132.2">132.2/2</a></div>
+<div class="Bulleted">The accuracy requirements for the subprograms Solve, 
+Inverse, Determinant, Eigenvalues and Eigensystem for type Complex_Matrix. 
+See <A HREF="AA-G-3-2.html">G.3.2</A>(149/2).</div>
+<div class="paranum"><a name="p133">133/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p134">134/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p135">135/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p136">136/2</a></div>
+<div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p136.1">136.1/2</a></div>
+<div class="Bulleted">Implementation-defined <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Partition_Elaboration_Policy. See <A HREF="AA-H-6.html">H.6</A>(4/2).</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-M-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-M-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

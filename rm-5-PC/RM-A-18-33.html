@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Example of Container Use</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-32.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-19.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.33 Example of Container Use</H1>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">The following example is an implementation of Dijkstra's 
+shortest path algorithm in a directed graph with positive distances. 
+The graph is represented by a map from nodes to sets of edges.</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Containers.Vectors;<BR>
+<B>with</B>&nbsp;Ada.Containers.Doubly_Linked_Lists;<BR>
+<B>use</B>&nbsp;Ada.Containers;<BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Node&nbsp;<B>is&nbsp;range</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Shortest_Paths&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Distance&nbsp;<B>is&nbsp;new</B>&nbsp;Float&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;Float'Last;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Edge&nbsp;<B>is&nbsp;record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To,&nbsp;From&nbsp;:&nbsp;Node;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;&nbsp;:&nbsp;Distance;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;record</B>;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Node_Maps&nbsp;<B>is&nbsp;new</B>&nbsp;Vectors&nbsp;(Node,&nbsp;Node);<BR>
+&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;algorithm&nbsp;builds&nbsp;a&nbsp;map&nbsp;to&nbsp;indicate&nbsp;the&nbsp;node&nbsp;used&nbsp;to&nbsp;reach&nbsp;a&nbsp;given</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>node&nbsp;in&nbsp;the&nbsp;shortest&nbsp;distance.</I></SPAN></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Adjacency_Lists&nbsp;<B>is&nbsp;new</B>&nbsp;Doubly_Linked_Lists&nbsp;(Edge);<BR>
+&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Adjacency_Lists;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Graphs&nbsp;<B>is&nbsp;new</B>&nbsp;Vectors&nbsp;(Node,&nbsp;Adjacency_Lists.List);</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Paths&nbsp;<B>is&nbsp;new</B>&nbsp;Doubly_Linked_Lists&nbsp;(Node);</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Shortest_Path<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(G&nbsp;:&nbsp;Graphs.Vector;&nbsp;Source&nbsp;:&nbsp;Node;&nbsp;Target&nbsp;:&nbsp;Node)&nbsp;<B>return</B>&nbsp;Paths.List<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;&nbsp;G&nbsp;(Source)&nbsp;/=&nbsp;Adjacency_Lists.Empty_List;</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples"><B>end</B>&nbsp;Shortest_Paths;</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Examples"><B>package&nbsp;body</B>&nbsp;Shortest_Paths&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Shortest_Path<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(G&nbsp;:&nbsp;Graphs.Vector;&nbsp;Source&nbsp;:&nbsp;Node;&nbsp;Target&nbsp;:&nbsp;Node)&nbsp;<B>return</B>&nbsp;Paths.List<BR>
+&nbsp;&nbsp;&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;<span class="delete5">Adjacency_Lists,&nbsp;</span>Node_Maps,&nbsp;Paths,&nbsp;Graphs;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reached&nbsp;&nbsp;:&nbsp;<B>array</B>&nbsp;(Node)&nbsp;<B>of</B>&nbsp;Boolean&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;False);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;set&nbsp;of&nbsp;nodes&nbsp;whose&nbsp;shortest&nbsp;distance&nbsp;to&nbsp;the&nbsp;source&nbsp;is&nbsp;known.</I></SPAN></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reached_From&nbsp;:&nbsp;<B>array</B>&nbsp;(Node)&nbsp;<B>of</B>&nbsp;Node;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So_Far&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>&nbsp;(Node)&nbsp;<B>of</B>&nbsp;Distance&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;Distance'Last);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The_Path&nbsp;:&nbsp;Paths.List&nbsp;:=&nbsp;Paths.Empty_List;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nearest_Distance&nbsp;:&nbsp;Distance;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Node;<BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So_Far(Source)&nbsp;&nbsp;:=&nbsp;0.0;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>while&nbsp;not</B>&nbsp;Reached(Target)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nearest_Distance&nbsp;:=&nbsp;Distance'Last;</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Find&nbsp;closest&nbsp;node&nbsp;not&nbsp;reached&nbsp;yet,&nbsp;by&nbsp;iterating&nbsp;over&nbsp;all&nbsp;nodes.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>A&nbsp;more&nbsp;efficient&nbsp;algorithm&nbsp;uses&nbsp;a&nbsp;priority&nbsp;queue&nbsp;for&nbsp;this&nbsp;step.</I></SPAN></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;:=&nbsp;Source;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;N&nbsp;<B>in</B>&nbsp;Node'First&nbsp;..&nbsp;Node'Last&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(N)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>and&nbsp;then</B>&nbsp;So_Far(N)&nbsp;&lt;&nbsp;Nearest_Distance&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;:=&nbsp;N;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nearest_Distance&nbsp;:=&nbsp;So_Far(N);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Nearest_Distance&nbsp;=&nbsp;Distance'Last&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>No&nbsp;next&nbsp;node&nbsp;found,&nbsp;graph&nbsp;is&nbsp;not&nbsp;connected</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Paths.Empty_List;</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reached(Next)&nbsp;:=&nbsp;True;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Update&nbsp;minimum&nbsp;distance&nbsp;to&nbsp;newly&nbsp;reachable&nbsp;nodes.</I></SPAN></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;E&nbsp;<B>of</B>&nbsp;G&nbsp;(Next)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(E.To)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nearest_Distance&nbsp;:=&nbsp;E.Length&nbsp;+&nbsp;So_Far(Next);</div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Nearest_Distance&nbsp;&lt;&nbsp;So_Far(E.To)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reached_From(E.To)&nbsp;:=&nbsp;Next;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So_Far(E.To)&nbsp;:=&nbsp;Nearest_Distance;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Rebuild&nbsp;path&nbsp;from&nbsp;target&nbsp;to&nbsp;source.</I></SPAN></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;:&nbsp;Node&nbsp;:=&nbsp;Target;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>while</B>&nbsp;N&nbsp;/=&nbsp;Source&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N&nbsp;:=&nbsp;Reached_From(N);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepend&nbsp;(The_Path,&nbsp;N);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;The_Path;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>;<BR>
+<B>end</B>&nbsp;Shortest_Paths;</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Note that the effect 
+of the Constant_Indexing aspect (on type Vector) and the Implicit_Dereference 
+aspect (on type Reference_Type) is that</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Examples">G&nbsp;(Next)</div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">is a convenient short 
+hand for</div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Examples">G.Constant_Reference&nbsp;(Next).Element.<B>all</B></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Similarly, the effect 
+of the loop:</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Examples"><B>for</B>&nbsp;E&nbsp;<B>of</B>&nbsp;G&nbsp;(Next)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(E.To)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">is the same as:</div>
+<div class="paranum"><a name="p29">29/4</a></div>
+<div class="Examples"><B>for</B>&nbsp;C&nbsp;<B>in</B>&nbsp;G&nbsp;(Next).Iterate&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;:&nbsp;Edge&nbsp;<B>renames</B>&nbsp;G&nbsp;(Next)(C)<span class="delete4">.<B>all</B></span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(E.To)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>;<BR>
+<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">which is the same as:</div>
+<div class="paranum"><a name="p31">31/4</a></div>
+<div class="Examples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;L&nbsp;:&nbsp;Adjacency_Lists.List&nbsp;<B>renames</B>&nbsp;G&nbsp;(Next);<BR>
+&nbsp;&nbsp;&nbsp;C&nbsp;:&nbsp;Adjacency_Lists.Cursor&nbsp;:=&nbsp;L.First;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>while</B>&nbsp;Has_Element&nbsp;(C)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;:&nbsp;Edge&nbsp;<B>renames</B>&nbsp;L(C)<span class="delete4">.<B>all</B></span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(E.To)&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;:=&nbsp;L.Next&nbsp;(C);<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;<BR>
+<B>end</B>;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-18-32.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-19.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

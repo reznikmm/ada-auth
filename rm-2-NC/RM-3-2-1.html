@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Type Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2.1 Type Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+declares a type and its first subtype.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">type_declaration</SPAN><A NAME="I1355"></A><A NAME="S0023"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1356"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1357"></A><SPAN Class="swiss"><A HREF="RM-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1358"></A><SPAN Class="swiss"><A HREF="RM-7-3.html#S0176">private_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1359"></A><SPAN Class="swiss"><A HREF="RM-7-3.html#S0177">private_extension_declaration</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">full_type_declaration</SPAN><A NAME="I1360"></A><A NAME="S0024"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I1361"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I1362"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;<A NAME="I1363"></A><SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0025">type_definition</A></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1364"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0188">task_type_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1365"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0193">protected_type_declaration</A></SPAN></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">type_definition</SPAN><A NAME="I1366"></A><A NAME="S0025"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1367"></A><SPAN Class="swiss"><A HREF="RM-3-5-1.html#S0038">enumeration_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1368"></A><SPAN Class="swiss"><A HREF="RM-3-5-4.html#S0041">integer_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1369"></A><SPAN Class="swiss"><A HREF="RM-3-5-6.html#S0044">real_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1370"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1371"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1372"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">access_type_definition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1373"></A><SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1374"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0077">interface_type_definition</A></SPAN></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A given type shall not have a subcomponent whose 
+type is the given type itself.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I1375"></A>The <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+denotes the <I>first subtype</I> of the type. The <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
+if any, defines the discriminants of the type (see <A HREF="RM-3-7.html">3.7</A>, 
+&ldquo;<A HREF="RM-3-7.html">Discriminants</A>&rdquo;). The remainder 
+of the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+defines the remaining characteristics of (the view of) the type.</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal"><A NAME="I1376"></A>A type defined by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+is a <I>named</I> type; such a type has one or more nameable subtypes. 
+<A NAME="I1377"></A>Certain other forms of declaration also include type 
+definitions as part of the declaration for an object. The type defined 
+by such a declaration is <I>anonymous</I> &mdash; it has no nameable 
+subtypes. <A NAME="I1378"></A>For explanatory purposes, this International 
+Standard sometimes refers to an anonymous type by a pseudo-name, written 
+in italics, and uses such pseudo-names at places where the syntax normally 
+requires an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
+For a named type whose first subtype is T, this International Standard 
+sometimes refers to the type of T as simply &ldquo;the type T&rdquo;. 
+</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal"><A NAME="I1379"></A>A named type that is declared 
+by a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
+or an anonymous type that is defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
+or as part of declaring an object of the type, is called a <I>full type</I>.<A NAME="I1380"></A> 
+The declaration of a full type also declares the <I>full view</I> of 
+the type.<A NAME="I1381"></A> The <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0025">type_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-1.html#S0190">task_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-4.html#S0195">protected_definition</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
+that defines a full type is called a <I>full type definition</I>. Types 
+declared by other forms of <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+are not separate types; they are partial or incomplete views of some 
+full type.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1382"></A>The definition of a type implicitly 
+declares certain <I>predefined operators</I> that operate on the type, 
+according to what classes the type belongs, as specified in <A HREF="RM-4-5.html">4.5</A>, 
+&ldquo;<A HREF="RM-4-5.html">Operators and Expression Evaluation</A>&rdquo;. 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I1383"></A>The <I>predefined types</I> (for 
+example the types Boolean, Wide_Character, Integer, <I>root_integer</I>, 
+and <I>universal_integer</I>) are the types that are defined in a predefined 
+library package called Standard; this package also includes the (implicit) 
+declarations of their predefined operators. The package Standard is described 
+in <A HREF="RM-A-1.html">A.1</A>.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I1384"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+consists of the elaboration of the full type definition. <A NAME="I1385"></A>Each 
+elaboration of a full type definition creates a distinct type and its 
+first subtype.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of type 
+definitions:</I>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">(White,&nbsp;Red,&nbsp;Yellow,&nbsp;Green,&nbsp;Blue,&nbsp;Brown,&nbsp;Black)<BR>
+<B>range</B>&nbsp;1&nbsp;..&nbsp;72<BR>
+<B>array</B>(1&nbsp;..&nbsp;10)&nbsp;<B>of</B>&nbsp;Integer</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of type 
+declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>type</B>&nbsp;Color&nbsp;&nbsp;<B>is</B>&nbsp;(White,&nbsp;Red,&nbsp;Yellow,&nbsp;Green,&nbsp;Blue,&nbsp;Brown,&nbsp;Black);<BR>
+<B>type</B>&nbsp;Column&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;72;<BR>
+<B>type</B>&nbsp;Table&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(1&nbsp;..&nbsp;10)&nbsp;<B>of</B>&nbsp;Integer;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">3&nbsp;&nbsp;Each of the above examples declares a 
+named type. The identifier given denotes the first subtype of the type. 
+Other named subtypes of the type can be declared with <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">subtype_declaration</A></SPAN>s 
+(see <A HREF="RM-3-2-2.html">3.2.2</A>). Although names do not directly 
+denote types, a phrase like &ldquo;the type Column&rdquo; is sometimes 
+used in this International Standard to refer to the type of Column, where 
+Column denotes the first subtype of the type. For an example of the definition 
+of an anonymous type, see the declaration of the array Color_Table in 
+<A HREF="RM-3-3-1.html">3.3.1</A>; its type is anonymous &mdash; it has 
+no nameable subtypes.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

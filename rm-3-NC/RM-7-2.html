@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Package Bodies</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.2 Package Bodies</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">In contrast to the entities declared in the visible 
+part of a package, the entities declared in the <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+are visible only within the <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+itself. As a consequence, a package with a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+can be used for the construction of a group of related subprograms in 
+which the logical operations available to clients are clearly isolated 
+from the internal entities.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1"><SPAN Class="swiss">package_body</SPAN><A NAME="I3570"></A><A NAME="S0192"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3571"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3572"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3573"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3574"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3575"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN>.]<A NAME="I3576"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">If an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+appears at the end of a <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN>, 
+then this sequence of lexical elements shall repeat the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+shall be the completion of a previous <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-12-1.html#S0272">generic_package_declaration</A></SPAN>. 
+A library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+or library <SPAN Class="swiss"><A HREF="RM-12-1.html#S0272">generic_package_declaration</A></SPAN> 
+shall not have a body unless it requires a body; <B>pragma</B> Elaborate_Body 
+can be used to require a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN> 
+to have a body (see <A HREF="RM-10-2-1.html">10.2.1</A>) if it would 
+not otherwise require one.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">In any <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+without <SPAN Class="swiss"><A HREF="RM-5-1.html#S0146">statement</A></SPAN>s 
+there is an implicit <SPAN Class="swiss"><A HREF="RM-5-1.html#S0149">null_statement</A></SPAN>. 
+For any <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+without an explicit completion, there is an implicit <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+containing a single <SPAN Class="swiss"><A HREF="RM-5-1.html#S0149">null_statement</A></SPAN>. 
+For a noninstance, nonlibrary package, this body occurs at the end of 
+the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+of the innermost enclosing program unit or <SPAN Class="swiss"><A HREF="RM-5-6.html#S0160">block_statement</A></SPAN>; 
+if there are several such packages, the order of the implicit <SPAN Class="swiss">package_bodies</SPAN> 
+is unspecified. <A NAME="I3577"></A>(For an instance, the implicit <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+occurs at the place of the instantiation (see <A HREF="RM-12-3.html">12.3</A>). 
+For a library package, the place is partially determined by the elaboration 
+dependences (see Clause <A HREF="RM-10.html">10</A>).)&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I3578"></A>For the elaboration of a nongeneric 
+<SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN>, 
+its <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+is first elaborated, and its <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+is then executed.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Notes">3&nbsp;&nbsp;A variable declared in the body of a 
+package is only visible within this body and, consequently, its value 
+can only be changed within the <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN>. 
+In the absence of local tasks, the value of such a variable remains unchanged 
+between calls issued from outside the package to subprograms declared 
+in the visible part. The properties of such a variable are similar to 
+those of a &ldquo;static&rdquo; variable of C.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">4&nbsp;&nbsp;The elaboration of the body of a subprogram 
+explicitly declared in the visible part of a package is caused by the 
+elaboration of the body of the package. Hence a call of such a subprogram 
+by an outside program unit raises the exception Program_Error if the 
+call takes place before the elaboration of the <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN> 
+(see <A HREF="RM-3-11.html">3.11</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a package 
+body (see <A HREF="RM-7-1.html">7.1</A>):</I>&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples"><B>package</B>&nbsp;<B>body</B>&nbsp;Rational_Numbers&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Same_Denominator&nbsp;(X,Y&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Rational)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;reduces&nbsp;X&nbsp;and&nbsp;Y&nbsp;to&nbsp;the&nbsp;same&nbsp;denominator:</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Same_Denominator;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;(X,Y&nbsp;:&nbsp;Rational)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;U&nbsp;:&nbsp;Rational&nbsp;:=&nbsp;X;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V&nbsp;:&nbsp;Rational&nbsp;:=&nbsp;Y;<BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Same_Denominator&nbsp;(U,V);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;U.Numerator&nbsp;=&nbsp;V.Numerator;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;&quot;=&quot;;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(X,Y&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Rational&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Y&nbsp;&gt;&nbsp;0&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;(Numerator&nbsp;=&gt;&nbsp;X,&nbsp;&nbsp;Denominator&nbsp;=&gt;&nbsp;Y);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>else</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;(Numerator&nbsp;=&gt;&nbsp;-X,&nbsp;Denominator&nbsp;=&gt;&nbsp;-Y);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;&quot;/&quot;;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(X,Y&nbsp;:&nbsp;Rational)&nbsp;<B>return</B>&nbsp;Rational&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;&quot;+&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(X,Y&nbsp;:&nbsp;Rational)&nbsp;<B>return</B>&nbsp;Rational&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;&quot;-&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;*&quot;&nbsp;(X,Y&nbsp;:&nbsp;Rational)&nbsp;<B>return</B>&nbsp;Rational&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;&quot;*&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;/&quot;&nbsp;(X,Y&nbsp;:&nbsp;Rational)&nbsp;<B>return</B>&nbsp;Rational&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;&quot;/&quot;;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>end</B>&nbsp;Rational_Numbers;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

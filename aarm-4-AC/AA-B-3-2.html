@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Interfaces.C.Pointers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>B.3.2 The Generic Package Interfaces.C.Pointers</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The generic package Interfaces.C.Pointers allows 
+the Ada programmer to perform C-style operations on pointers. It includes 
+an access type Pointer, Value functions that dereference a Pointer and 
+deliver the designated array, several pointer arithmetic operations, 
+and &ldquo;copy&rdquo; procedures that copy the contents of a source 
+pointer into the array designated by a destination pointer. As in C, 
+it treats an object Ptr of type Pointer as a pointer to the first element 
+of an array, so that for example, adding 1 to Ptr yields a pointer to 
+the second element of the array.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The generic allows two styles of usage: one in which 
+the array is terminated by a special terminator element; and another 
+in which the programmer needs to keep track of the length.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The generic library 
+package Interfaces.C.Pointers has the following declaration:&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Index&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;Element;<BR>
+&nbsp;&nbsp;&nbsp;Default_Terminator&nbsp;:&nbsp;Element;<BR>
+<B>package</B>&nbsp;Interfaces.C.Pointers&nbsp;<B>is</B><A NAME="I8529"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Pointers);</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8530"></A>Pointer&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Element;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8531"></A>Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Array;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8532"></A>Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Array;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8533"></A>Pointer_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;C-style&nbsp;Pointer&nbsp;arithmetic</I></SPAN></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)&nbsp;<B>return</B>&nbsp;Pointer<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Pointer<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)&nbsp;<B>return</B>&nbsp;Pointer<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer)&nbsp;<B>return</B>&nbsp;ptrdiff_t<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8534"></A>Increment&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer)<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8535"></A>Decrement&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer)<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;&quot;+&quot;);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;&quot;-&quot;);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;Increment);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;Decrement);</span></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8536"></A>Virtual_Length&nbsp;(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;ptrdiff_t;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8537"></A>Copy_Terminated_Array<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Limit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t&nbsp;:=&nbsp;ptrdiff_t'Last;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;&nbsp;Default_Terminator);</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8538"></A>Copy_Array&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t);</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>end</B>&nbsp;Interfaces.C.Pointers;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The type Pointer is 
+C-compatible and corresponds to one use of C's &ldquo;Element *&rdquo;. 
+An object of type Pointer is interpreted as a pointer to the initial 
+Element in an Element_Array. Two styles are supported:&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">Explicit termination of an array value with Default_Terminator 
+(a special terminator value);</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted" style="margin-bottom: 0.7em">Programmer-managed 
+length, with Default_Terminator treated simply as a data element.&nbsp;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples"><B>function</B>&nbsp;Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Array;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">This function returns 
+an Element_Array whose value is the array pointed to by Ref, up to and 
+including the first Terminator; the lower bound of the array is Index'First. 
+Interfaces.C.Strings.Dereference_Error is propagated if Ref is <B>null</B>.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples"><B>function</B>&nbsp;Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Array;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">This function returns 
+an Element_Array comprising the first Length elements pointed to by Ref. 
+The exception Interfaces.C.Strings.Dereference_Error is propagated if 
+Ref is <B>null</B>.&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal" style="margin-bottom: 0.9em">The &quot;+&quot; and 
+&quot;&ndash;&quot; functions perform arithmetic on Pointer values, based 
+on the Size of the array elements. In each of these functions, Pointer_Error 
+is propagated if a Pointer parameter is <B>null</B>.&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Increment&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer);</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Ref 
+:= Ref+1.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Decrement&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer);</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Equivalent to Ref 
+:= Ref&ndash;1.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples"><B>function</B>&nbsp;Virtual_Length&nbsp;(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;ptrdiff_t;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the number 
+of Elements, up to the one just before the first Terminator, in Value(Ref, 
+Terminator).</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Copy_Terminated_Array<BR>
+&nbsp;&nbsp;&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Limit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t&nbsp;:=&nbsp;ptrdiff_t'Last;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator);</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">This procedure copies 
+Value(Source, Terminator) into the array pointed to by Target; it stops 
+either after Terminator has been copied, or the number of elements copied 
+is Limit, whichever occurs first. Dereference_Error is propagated if 
+either Source or Target is <B>null</B>.&nbsp;</div>
+<div class="paranum"><a name="p32.a">32.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>It is the programmer's 
+responsibility to ensure that elements are not copied beyond the logical 
+length of the target array.&nbsp;</div>
+<div class="paranum"><a name="p32.b">32.b</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The implementation 
+has to take care to check the Limit first.&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Copy_Array&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t);</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Indented2">This procedure copies the first Length elements 
+from the array pointed to by Source, into the array pointed to by Target. 
+Dereference_Error is propagated if either Source or Target is <B>null</B>. 
+</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal"><A NAME="I8539"></A>It is erroneous to dereference 
+a Pointer that does not designate an aliased Element.&nbsp;</div>
+<div class="paranum"><a name="p35.a">35.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Such a Pointer could arise 
+via &quot;+&quot;, &quot;&ndash;&quot;, Increment, or Decrement.</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Normal"><A NAME="I8540"></A>Execution of Value(Ref, Terminator) 
+is erroneous if Ref does not designate an aliased Element in an Element_Array 
+terminated by Terminator.</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal"><A NAME="I8541"></A>Execution of Value(Ref, Length) 
+is erroneous if Ref does not designate an aliased Element in an Element_Array 
+containing at least Length Elements between the designated Element and 
+the end of the array, inclusive.</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Normal"><A NAME="I8542"></A>Execution of Virtual_Length(Ref, 
+Terminator) is erroneous if Ref does not designate an aliased Element 
+in an Element_Array terminated by Terminator.</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8543"></A>Execution 
+of Copy_Terminated_Array(Source, Target, Limit, Terminator) is erroneous 
+in either of the following situations:&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Bulleted">Execution of both Value(Source, Terminator) and 
+Value(Source, Limit) are erroneous, or</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Bulleted">Copying writes past the end of the array containing 
+the Element designated by Target.&nbsp;</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Normal"><A NAME="I8544"></A>Execution of Copy_Array(Source, 
+Target, Length) is erroneous if either Value(Source, Length) is erroneous, 
+or copying writes past the end of the array containing the Element designated 
+by Target.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">14&nbsp;&nbsp;To compose 
+a Pointer from an Element_Array, use 'Access on the first element. For 
+example (assuming appropriate instantiations):&nbsp;</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="SmallIndented2Examples">Some_Array&nbsp;&nbsp;&nbsp;:&nbsp;Element_Array(0..5)&nbsp;;<BR>
+Some_Pointer&nbsp;:&nbsp;Pointer&nbsp;:=&nbsp;Some_Array(0)'Access;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of Interfaces.C.Pointers:</I> 
+</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Examples"><B>with</B>&nbsp;Interfaces.C.Pointers;<BR>
+<B>with</B>&nbsp;Interfaces.C.Strings;<BR>
+<B>procedure</B>&nbsp;Test_Pointers&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;C&nbsp;<B>renames</B>&nbsp;Interfaces.C;<BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Char_Ptrs&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;C.Pointers&nbsp;(Index&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;C.size_t,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;C.char,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Array&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;C.char_array,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Terminator&nbsp;=&gt;&nbsp;C.nul);</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;<B>type</B>&nbsp;Char_Ptrs.Pointer;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;Char_Star&nbsp;<B>is</B>&nbsp;Char_Ptrs.Pointer;</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Strcpy&nbsp;(Target_Ptr,&nbsp;Source_Ptr&nbsp;:&nbsp;Char_Star)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Temp_Ptr&nbsp;:&nbsp;Char_Star&nbsp;:=&nbsp;Target_Ptr;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Temp_Ptr&nbsp;:&nbsp;Char_Star&nbsp;:=&nbsp;Source_Ptr;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;C.char;<BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Target_Temp_Ptr&nbsp;=&nbsp;<B>null</B>&nbsp;<B>or</B>&nbsp;Source_Temp_Ptr&nbsp;=&nbsp;<B>null</B>&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;C.Strings.Dereference_Error;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;</div>
+<div class="paranum"><a name="p49">49/1</a></div>
+<div class="Examples">{<I><A HREF="defect1.html#8652/0065">8652/0065</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00142.TXT">AI95-00142-01</A></I>} 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Source_Temp_Ptr.<B>all</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Temp_Ptr.<B>all</B>&nbsp;:=&nbsp;Element;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>exit</B>&nbsp;<B>when</B>&nbsp;<span class="insert1">C.&quot;=&quot;(Element,&nbsp;C.nul)</span><span class="delete1">&nbsp;Element&nbsp;=&nbsp;C.nul</span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Char_Ptrs.Increment(Target_Temp_Ptr);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Char_Ptrs.Increment(Source_Temp_Ptr);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Strcpy;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Test_Pointers;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-B-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

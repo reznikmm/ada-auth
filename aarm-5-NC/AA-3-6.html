@@ -1,0 +1,374 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Array Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-6-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.6 Array Types</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2008"></A><A NAME="I2009"></A>An <I>array</I> 
+object is a composite object consisting of components which all have 
+the same subtype. The name for a component of an array uses one or more 
+index values belonging to specified discrete types. The value of an array 
+object is a composite value consisting of the values of the components. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">array_type_definition</SPAN><A NAME="I2010"></A><A NAME="S0051"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I2011"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0052">unconstrained_array_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I2012"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0054">constrained_array_definition</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">unconstrained_array_definition</SPAN><A NAME="I2013"></A><A NAME="S0052"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>array</B>(<A NAME="I2014"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0053">index_subtype_definition</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2015"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0053">index_subtype_definition</A></SPAN>})&nbsp;<B>of</B>&nbsp;<A NAME="I2016"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">index_subtype_definition</SPAN><A NAME="I2017"></A><A NAME="S0053"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2018"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;<B>range</B>&nbsp;&lt;&gt;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">constrained_array_definition</SPAN><A NAME="I2019"></A><A NAME="S0054"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>array</B>&nbsp;(<A NAME="I2020"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2021"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>})&nbsp;<B>of</B>&nbsp;<A NAME="I2022"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">discrete_subtype_definition</SPAN><A NAME="I2023"></A><A NAME="S0055"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>discrete_</I><A NAME="I2024"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I2025"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00406.TXT">AI95-00406-01</A></I>} 
+<SPAN Class="swiss">component_definition</SPAN><A NAME="I2026"></A><A NAME="S0056"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<B>aliased</B>]&nbsp;<A NAME="I2027"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;|&nbsp;[<B>aliased</B>]&nbsp;<A NAME="I2028"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I2029"></A>For a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+shall resolve to be of some specific discrete type[; which discrete type 
+shall be determined without using any context other than the bounds of 
+the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+itself (plus the preference for <I>root_integer</I> &mdash; see <A HREF="AA-8-6.html">8.6</A>).] 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I2030"></A>Each <SPAN Class="swiss"><A HREF="AA-3-6.html#S0053">index_subtype_definition</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+defines an <I>index subtype</I>; <A NAME="I2031"></A>its type (the <I>index 
+type</I>) shall be discrete.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I2032"></A>An <I>index</I> 
+is a discrete quantity used to select along a given dimension of an array. 
+A component is selected by specifying corresponding values for each of 
+the indices.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I2033"></A>The subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+(the <I>component subtype</I>) shall be a definite subtype.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This applies to all uses 
+of <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>, 
+including in <SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN>s.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I2034"></A><A NAME="I2035"></A><A NAME="I2036"></A>An 
+array is characterized by the number of indices (the <I>dimensionality</I> 
+of the array), the type and position of each index, the lower and upper 
+bounds for each index, and the subtype of the components. The order of 
+the indices is significant.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">A one-dimensional array has a distinct component 
+for each possible index value. A multidimensional array has a distinct 
+component for each possible sequence of index values that can be formed 
+by selecting one value for each index position (in the given order). 
+The possible values for a given index are all the values between the 
+lower and upper bounds, inclusive; <A NAME="I2037"></A>this range of 
+values is called the <I>index range</I>. <A NAME="I2038"></A>The <I>bounds</I> 
+of an array are the bounds of its index ranges. <A NAME="I2039"></A>The 
+<I>length</I> of a dimension of an array is the number of values of the 
+index range of the dimension (zero for a null range). <A NAME="I2040"></A>The 
+<I>length</I> of a one-dimensional array is the length of its only dimension.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+defines an array type and its first subtype. For each object of this 
+array type, the number of indices, the type and position of each index, 
+and the subtype of the components are as in the type definition[; the 
+values of the lower and upper bounds for each index belong to the corresponding 
+index subtype of its type, except for null arrays (see <A HREF="AA-3-6-1.html">3.6.1</A>)].</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I2041"></A><A NAME="I2042"></A>An <SPAN Class="swiss"><A HREF="AA-3-6.html#S0052">unconstrained_array_definition</A></SPAN> 
+defines an array type with an unconstrained first subtype. Each <SPAN Class="swiss"><A HREF="AA-3-6.html#S0053">index_subtype_definition</A></SPAN> 
+defines the corresponding index subtype to be the subtype denoted by 
+the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
+[<A NAME="I2043"></A> The compound delimiter &lt;&gt; (called a <I>box</I>) 
+of an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0053">index_subtype_definition</A></SPAN> 
+stands for an undefined range (different objects of the type need not 
+have the same bounds).]</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><A NAME="I2044"></A><A NAME="I2045"></A>A <SPAN Class="swiss"><A HREF="AA-3-6.html#S0054">constrained_array_definition</A></SPAN> 
+defines an array type with a constrained first subtype. Each <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+defines the corresponding index subtype, as well as the corresponding 
+index range for the constrained first subtype. <A NAME="I2046"></A>The 
+<I>constraint</I> of the first subtype consists of the bounds of the 
+index ranges.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+Although there is no nameable unconstrained array subtype in this case, 
+the predefined slicing and concatenation operations can operate on and 
+yield values that do not necessarily belong to the first array subtype. 
+This is also true for Ada 83.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The discrete subtype 
+defined by a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+is either that defined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
+or a subtype determined by the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">If the type of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+resolves to <I>root_integer</I>, then the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+defines a subtype of the predefined type Integer with bounds given by 
+a conversion to Integer of the bounds of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>; 
+<A NAME="I2047"></A></div>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This ensures that indexing over 
+the discrete subtype can be performed with regular Integers, rather than 
+only <I>universal_integer</I>s.&nbsp;</div>
+<div class="paranum"><a name="p18.b">18.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We considered doing this 
+by simply creating a &ldquo;preference&rdquo; for Integer when resolving 
+the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>. 
+<A NAME="I2048"></A>However, this can introduce <I>Beaujolais</I> effects 
+when the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
+involve calls on functions visible due to <B>use</B> clauses.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">Otherwise, the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+defines a subtype of the type of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>, 
+with the bounds given by the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I2049"></A>The <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+defines the nominal subtype of the components. If the reserved word <B>aliased</B> 
+appears in the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>, 
+then each component of the array is aliased (see <A HREF="AA-3-10.html">3.10</A>). 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I2050"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+creates the array type and its first subtype, and consists of the elaboration 
+of any <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+and the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>.</div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0002">8652/0002</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00171.TXT">AI95-00171-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+<A NAME="I2051"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+that does not contain any per-object expressions creates the discrete 
+subtype, and consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+or the evaluation of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>. 
+The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+that contains one or more per-object expressions is defined in <A HREF="AA-3-8.html">3.8</A>. 
+<A NAME="I2052"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
+The elaboration of any <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+and the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+are performed in an arbitrary order.<A NAME="I2053"></A>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p22.1">22.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+For an array type with a scalar component type, the following language-defined 
+representation aspect may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+(see <A HREF="AA-13-1-1.html">13.1.1</A>):&nbsp;</div>
+<div class="paranum"><a name="p22.2">22.2/3</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Default_Component_Value</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a static expression, and that expression 
+shall be explicit, even if the aspect has a boolean type. Default_Component_Value 
+shall be specified only on a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>.<A NAME="I2054"></A><A NAME="I2055"></A> 
+</div>
+<div class="paranum"><a name="p22.a">22.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The part about requiring an explicit 
+expression is to disallow omitting the value for this aspect, which would 
+otherwise be allowed by the rules of <A HREF="AA-13-1-1.html">13.1.1</A>.</div>
+<div class="paranum"><a name="p22.b">22.b/3</a></div>
+<div class="Annotations">This is a representation attribute in order 
+to disallow specifying it on a derived type that has inherited primitive 
+subprograms; that is necessary as the sizes of <B>out</B> parameters 
+could be different whether or not a Default_Value is specified (see <A HREF="AA-6-4-1.html">6.4.1</A>). 
+</div>
+<div class="paranum"><a name="p22.c">22.c/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Default_Component_Value: 
+</B>Default value for the components of an array-of-scalar subtype.</div>
+<div class="paranum"><a name="p22.3">22.3/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+If a derived type with no primitive subprograms inherits a boolean Default_Component_Value 
+aspect, the aspect may be specified to have any value for the derived 
+type.&nbsp;</div>
+<div class="paranum"><a name="p22.d">22.d/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This overrides the <A HREF="AA-13-1-1.html">13.1.1</A> 
+rule that says that a boolean aspect with a value True cannot be changed. 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p22.4">22.4/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+specified for the Default_Component_Value aspect is the component type 
+of the array type defined by the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+on which it appears.<A NAME="I2056"></A>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Notes">49&nbsp;&nbsp;All components of an array have the 
+same subtype. In particular, for an array of components that are one-dimensional 
+arrays, this means that all components have the same bounds and hence 
+the same length.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">50&nbsp;&nbsp;Each elaboration of an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+creates a distinct array type. A consequence of this is that each object 
+whose <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+contains an <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN> 
+is of its own unique type.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of type 
+declarations with unconstrained array definitions:&nbsp;</I></div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples"><B>type</B>&nbsp;Vector&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(Integer&nbsp;&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Real;<BR>
+<B>type</B>&nbsp;Matrix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(Integer&nbsp;&nbsp;<B>range</B>&nbsp;&lt;&gt;,&nbsp;Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Real;<BR>
+<B>type</B>&nbsp;Bit_Vector&nbsp;<B>is</B>&nbsp;<B>array</B>(Integer&nbsp;&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Boolean;<BR>
+<B>type</B>&nbsp;Roman&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Roman_Digit;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-5-2.html">3.5.2</A></I></SPAN></div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of type 
+declarations with constrained array definitions:&nbsp;</I></div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples"><B>type</B>&nbsp;Table&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(1&nbsp;..&nbsp;10)&nbsp;<B>of</B>&nbsp;Integer;<BR>
+<B>type</B>&nbsp;Schedule&nbsp;<B>is</B>&nbsp;<B>array</B>(Day)&nbsp;<B>of</B>&nbsp;Boolean;<BR>
+<B>type</B>&nbsp;Line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>array</B>(1&nbsp;..&nbsp;Max_Line_Size)&nbsp;<B>of</B>&nbsp;Character;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of object 
+declarations with array type definitions:&nbsp;</I></div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+Grid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>(1&nbsp;..&nbsp;80,&nbsp;1&nbsp;..&nbsp;100)&nbsp;<B>of</B>&nbsp;Boolean;<BR>
+Mix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>(Color&nbsp;<B>range</B>&nbsp;Red&nbsp;..&nbsp;Green)&nbsp;<B>of</B>&nbsp;Boolean;<BR>
+Msg_Table&nbsp;:&nbsp;<B>constant&nbsp;array</B>(Error_Code)&nbsp;<B>of&nbsp;access&nbsp;constant</B>&nbsp;String&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Too_Big&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;String'(&quot;Result&nbsp;too&nbsp;big&quot;),&nbsp;Too_Small&nbsp;=&gt;&nbsp;...);<BR>
+Page&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Line&nbsp;:=&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;an&nbsp;array&nbsp;of&nbsp;arrays</I></SPAN><BR>
+&nbsp;&nbsp;(1&nbsp;|&nbsp;50&nbsp;&nbsp;=&gt;&nbsp;Line'(1&nbsp;|&nbsp;Line'Last&nbsp;=&gt;&nbsp;'+',&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;'-'),&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-4-3-3.html">4.3.3</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;2&nbsp;..&nbsp;49&nbsp;=&gt;&nbsp;Line'(1&nbsp;|&nbsp;Line'Last&nbsp;=&gt;&nbsp;'|',&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;'&nbsp;'));<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Page&nbsp;is&nbsp;constrained&nbsp;by&nbsp;its&nbsp;initial&nbsp;value&nbsp;to&nbsp;(1..50)</I></SPAN></div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p30.a">30.a</a></div>
+<div class="Annotations"><A NAME="I2057"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+is modified to allow the reserved word <B>aliased</B>.</div>
+<div class="paranum"><a name="p30.b">30.b</a></div>
+<div class="Annotations">The syntax rules for <SPAN Class="swiss"><A HREF="AA-3-6.html#S0052">unconstrained_array_definition</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-3-6.html#S0054">constrained_array_definition</A></SPAN> 
+are modified to use <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+(instead of <I>component_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>). 
+The effect of this change is to allow the reserved word <B>aliased</B> 
+before the component <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>.</div>
+<div class="paranum"><a name="p30.c">30.c</a></div>
+<div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+may use arbitrary universal expressions for each bound (e.g. &ndash;1 
+.. 3+5), rather than strictly &quot;implicitly convertible&quot; operands. 
+The subtype defined will still be a subtype of Integer.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p30.d">30.d</a></div>
+<div class="Annotations">We introduce a new syntactic category, <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
+as distinct from <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN>. 
+These two constructs have the same syntax, but their semantics are quite 
+different (one defines a subtype, with a preference for Integer subtypes, 
+while the other just selects a subrange of an existing subtype). We use 
+this new syntactic category in <B>for</B> loops and entry families.</div>
+<div class="paranum"><a name="p30.e">30.e</a></div>
+<div class="Annotations">The syntax for <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0057">index_constraint</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0058">discrete_range</A></SPAN> 
+have been moved to their own subclause, since they are no longer used 
+here.</div>
+<div class="paranum"><a name="p30.f">30.f</a></div>
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+(formerly <SPAN Class="swiss">component_subtype_definition</SPAN>) is 
+moved here from RM83-3.7.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p30.g">30.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00406.TXT">AI95-00406-01</A></I>} 
+<A NAME="I2058"></A>Array components can have an anonymous access type.</div>
+<div class="paranum"><a name="p30.h">30.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+The prohibition against unconstrained discriminated aliased components 
+has been lifted. It has been replaced by a prohibition against the actual 
+troublemakers: general access discriminant constraints (see <A HREF="AA-3-7-1.html">3.7.1</A>). 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p30.i">30.i/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0002">8652/0002</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00171.TXT">AI95-00171-01</A></I>} 
+<B>Corrigendum:</B> Added wording to allow the elaboration of per-object 
+constraints for constrained arrays.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p30.j">30.j/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+<A NAME="I2059"></A>The new aspect Default_Component_Value allows defining 
+implicit initial values (see <A HREF="AA-3-3-1.html">3.3.1</A>) for arrays 
+of scalar types.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-10.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-6-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

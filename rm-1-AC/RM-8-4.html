@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Use Clauses</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>8.4 Use Clauses</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-4.html#S0167">use_package_clause</A></SPAN> 
+achieves direct visibility of declarations that appear in the visible 
+part of a package; a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0168">use_type_clause</A></SPAN> 
+achieves direct visibility of the primitive operators of a type.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I3243"></A><A NAME="S0166"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3244"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0167">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I3245"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0168">use_type_clause</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I3246"></A><A NAME="S0167"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I3247"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I3248"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>};</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">use_type_clause</SPAN><A NAME="I3249"></A><A NAME="S0168"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<B>type</B>&nbsp;<A NAME="I3250"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3251"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN>};</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">A <I>package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0167">use_package_clause</A></SPAN> 
+shall denote a package.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I3252"></A>For each <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN>, 
+there is a certain region of text called the <I>scope</I> of the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN>. 
+For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0221">context_clause</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0217">library_unit_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0218">library_unit_renaming_declaration</A></SPAN>, 
+the scope is the entire declarative region of the declaration. For a 
+<SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0221">context_clause</A></SPAN> 
+of a body, the scope is the entire body and any subunits (including multiply 
+nested subunits). The scope does not include <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0221">context_clause</A></SPAN>s 
+themselves.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN> 
+immediately within a declarative region, the scope is the portion of 
+the declarative region starting just after the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN> 
+and extending to the end of the declarative region. However, the scope 
+of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN> 
+in the private part of a library unit does not include the visible part 
+of any public descendant of that library unit.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I3253"></A>For each package denoted by a 
+<I>package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0167">use_package_clause</A></SPAN> 
+whose scope encloses a place, each declaration that occurs immediately 
+within the declarative region of the package is <I>potentially use-visible</I> 
+at this place if the declaration is visible at this place. For each type 
+<I>T</I> or <I>T</I>'Class determined by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0168">use_type_clause</A></SPAN> 
+whose scope encloses a place, the declaration of each primitive operator 
+of type <I>T</I> is potentially use-visible at this place if its declaration 
+is visible at this place.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3254"></A><A NAME="I3255"></A>A 
+declaration is <I>use-visible</I> if it is potentially use-visible, except 
+in these naming-conflict cases:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">A potentially use-visible declaration is not use-visible 
+if the place considered is within the immediate scope of a homograph 
+of the declaration.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">Potentially use-visible declarations that have 
+the same <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+are not use-visible unless each of them is an overloadable declaration. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I3256"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0166">use_clause</A></SPAN> 
+has no effect.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a use 
+clause in a context clause:</I>&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Calendar;&nbsp;<B>use</B>&nbsp;Ada;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+use type clause:</I>&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>use&nbsp;type</B>&nbsp;Rational_Numbers.Rational;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-7-1.html">7.1</A></I></SPAN><BR>
+Two_Thirds:&nbsp;Rational_Numbers.Rational&nbsp;:=&nbsp;2/3;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

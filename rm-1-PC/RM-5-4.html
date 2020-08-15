@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Case Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.4 Case Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+selects for execution one of a number of alternative <SPAN Class="swiss">sequences_of_statements</SPAN>; 
+the chosen alternative is defined by the value of an expression.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">case_statement</SPAN><A NAME="I2846"></A><A NAME="S0133"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<A NAME="I2847"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2848"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0134">case_statement_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I2849"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0134">case_statement_alternative</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">case_statement_alternative</SPAN><A NAME="I2850"></A><A NAME="S0134"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I2851"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0070">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2852"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2853"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is expected to be of any discrete type. <A NAME="I2854"></A>The expected 
+type for each <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN> 
+is the type of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0055">discrete_range</A></SPAN>s 
+given as <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+shall be static. A <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN> 
+<B>others</B>, if present, shall appear alone and in the last <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0070">discrete_choice_list</A></SPAN>.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The possible values of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+shall be covered as follows:&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+(including a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0120">type_conversion</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0156">function_call</A></SPAN>) 
+having a static and constrained nominal subtype, or is a <SPAN Class="swiss"><A HREF="RM-4-7.html#S0121">qualified_expression</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0025">subtype_mark</A></SPAN> 
+denotes a static and constrained scalar subtype, then each non-<B>others</B> 
+<SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN> 
+shall cover only values in that subtype, and each value of that subtype 
+shall be covered by some <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN> 
+(either explicitly or by <B>others</B>).&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">If the type of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is <I>root_integer</I>, <I>universal_integer</I>, or a descendant of 
+a formal scalar type, then the <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+shall have an <B>others</B> <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">Otherwise, each value of the base range of the 
+type of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+shall be covered (either explicitly or by <B>others</B>).&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">Two distinct <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">discrete_choice</A></SPAN>s 
+of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+shall not cover the same value.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2855"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is first evaluated.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">If the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is covered by the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0070">discrete_choice_list</A></SPAN> 
+of some <SPAN Class="swiss"><A HREF="RM-5-4.html#S0134">case_statement_alternative</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss">_alternative</SPAN> is executed.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I2856"></A><A NAME="I2857"></A><A NAME="I2858"></A>Otherwise 
+(the value is not covered by any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0070">discrete_choice_list</A></SPAN>, 
+perhaps due to being outside the base range), Constraint_Error is raised. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">5&nbsp;&nbsp;The execution of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+chooses one and only one alternative. Qualification of the expression 
+of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0133">case_statement</A></SPAN> 
+by a static subtype can often be used to limit the number of choices 
+that need be given explicitly.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of case 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>case</B>&nbsp;Sensor&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Elevation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Record_Elevation(Sensor_Value);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Azimuth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Record_Azimuth&nbsp;&nbsp;(Sensor_Value);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Distance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Record_Distance&nbsp;(Sensor_Value);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<B>others</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>null</B>;<BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><B>case</B>&nbsp;Today&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Mon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Compute_Initial_Balance;<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Fri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Compute_Closing_Balance;<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Tue&nbsp;..&nbsp;Thu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Generate_Report(Today);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Sat&nbsp;..&nbsp;Sun&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>null</B>;<BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples"><B>case</B>&nbsp;Bin_Number(Count)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Update_Bin(1);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Update_Bin(2);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;3&nbsp;|&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty_Bin(1);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty_Bin(2);<BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<B>others</B>&nbsp;&nbsp;&nbsp;=&gt;&nbsp;<B>raise</B>&nbsp;Error;<BR>
+<B>end</B>&nbsp;<B>case</B>;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

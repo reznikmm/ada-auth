@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Task Dispatching Model</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.1 The Task Dispatching Model</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+[The task dispatching model specifies task scheduling, based on conceptual 
+priority-ordered ready queues.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1.1">1.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+The following language-defined library package exists:&nbsp;</div>
+<div class="paranum"><a name="p1.2">1.2/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+<B>package</B>&nbsp;Ada.Dispatching&nbsp;<B>is</B><A NAME="I8352"></A><BR>
+&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dispatching);</div>
+<div class="paranum"><a name="p1.3">1.3/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8353"></A>Yield;</div>
+<div class="paranum"><a name="p1.4">1.4/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+&nbsp;&nbsp;<A NAME="I8354"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+<B>end</B>&nbsp;Ada.Dispatching;</div>
+<div class="paranum"><a name="p1.5">1.5/2</a></div>
+<div class="Normal">&nbsp;Dispatching serves as the parent of other language-defined 
+library units concerned with task dispatching.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+A task can become a <I>running task</I> only if it is ready (see <A HREF="AA-9.html">9</A>) 
+and the execution resources required by that task are available. Processors 
+are allocated to tasks based on each task's active priority.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">It is implementation defined whether, on a multiprocessor, 
+a task that is waiting for access to a protected object keeps its processor 
+busy.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Whether, on a 
+multiprocessor, a task that is waiting for access to a protected object 
+keeps its processor busy.</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<A NAME="I8355"></A><A NAME="I8356"></A><A NAME="I8357"></A><A NAME="I8358"></A><I>Task 
+dispatching</I> is the process by which one ready task is selected for 
+execution on a processor. This selection is done at certain points during 
+the execution of a task called <I>task dispatching points</I>. A task 
+reaches a task dispatching point whenever it becomes blocked, and when 
+it terminates. [Other task dispatching points are defined throughout 
+this Annex for specific policies.]&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>On multiprocessor systems, 
+more than one task can be chosen, at the same time, for execution on 
+more than one processor, as explained below.&nbsp;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<A NAME="I8359"></A><A NAME="I8360"></A><A NAME="I8361"></A><A NAME="I8362"></A><A NAME="I8363"></A><A NAME="I8364"></A><I>Task 
+dispatching policies</I> are specified in terms of conceptual <I>ready 
+queues</I> and task states. A ready queue is an ordered list of ready 
+tasks. The first position in a queue is called the <I>head of the queue</I>, 
+and the last position is called the <I>tail of the queue</I>. A task 
+is <I>ready</I> if it is in a ready queue, or if it is running. Each 
+processor has one ready queue for each priority value. At any instant, 
+each ready queue of a processor contains exactly the set of tasks of 
+that priority that are ready for execution on that processor, but are 
+not running on any processor; that is, those tasks that are ready, are 
+not running on any processor, and can be executed using that processor 
+and other available resources. A task can be on the ready queues of more 
+than one processor.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The core language defines 
+a ready task as one that is not blocked. Here we refine this definition 
+and talk about ready queues.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<A NAME="I8365"></A>Each processor also has one <I>running task</I>, 
+which is the task currently being executed by that processor. Whenever 
+a task running on a processor reaches a task dispatching point it goes 
+back to one or more ready queues; a task (possibly the same task) is 
+then selected to run on that processor. The task selected is the one 
+at the head of the highest priority nonempty ready queue; this task is 
+then removed from all ready queues to which it belongs.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There is always at least 
+one task to run, if we count the idle task.&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+A call of Yield is a task dispatching point. Yield is a potentially blocking 
+operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+An implementation is allowed to define additional resources as execution 
+resources, and to define the corresponding allocation policies for them. 
+Such resources may have an implementation-defined effect on task dispatching. 
+</div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The effect of 
+implementation-defined execution resources on task dispatching.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">An implementation may place implementation-defined 
+restrictions on tasks whose active priority is in the Interrupt_Priority 
+range.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+For example, on some operating systems, it might be necessary to disallow 
+them altogether. This permission applies to tasks whose priority is set 
+to interrupt level for any reason: via an aspect, via a call to Dynamic_Priorities.Set_Priority, 
+or via priority inheritance.&nbsp;</div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+[For optimization purposes,] an implementation may alter the points at 
+which task dispatching occurs, in an implementation-defined manner. However, 
+a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0227">delay_statement</A></SPAN> 
+always corresponds to at least one task dispatching point.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Clause <A HREF="AA-9.html">9</A> specifies under which circumstances 
+a task becomes ready. The ready state is affected by the rules for task 
+activation and termination, delay statements, and entry calls. <A NAME="I8366"></A>When 
+a task is not ready, it is said to be blocked.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">8&nbsp;&nbsp;An example of a possible implementation-defined 
+execution resource is a page of physical memory, which needs to be loaded 
+with a particular page of virtual memory before a task can continue execution.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">9&nbsp;&nbsp;The ready queues are purely conceptual; 
+there is no requirement that such lists physically exist in an implementation.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">10&nbsp;&nbsp;While a task is running, it is not on 
+any ready queue. Any time the task that is running on a processor is 
+added to a ready queue, a new running task is selected for that processor.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Notes">11&nbsp;&nbsp;In a multiprocessor system, a task can 
+be on the ready queues of more than one processor. At the extreme, if 
+several processors share the same set of ready tasks, the contents of 
+their ready queues is identical, and so they can be viewed as sharing 
+one ready queue, and can be implemented that way. [Thus, the dispatching 
+model covers multiprocessors where dispatching is implemented using a 
+single ready queue, as well as those with separate dispatching domains.]</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">12&nbsp;&nbsp;The priority of a task is determined 
+by rules specified in this subclause, and under <A HREF="AA-D-1.html">D.1</A>, 
+&ldquo;<A HREF="AA-D-1.html">Task Priorities</A>&rdquo;, <A HREF="AA-D-3.html">D.3</A>, 
+&ldquo;<A HREF="AA-D-3.html">Priority Ceiling Locking</A>&rdquo;, and 
+<A HREF="AA-D-5.html">D.5</A>, &ldquo;<A HREF="AA-D-5.html">Dynamic Priorities</A>&rdquo;.</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Notes">13&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+The setting of a task's base priority as a result of a call to Set_Priority 
+does not always take effect immediately when Set_Priority is called. 
+The effect of setting the task's base priority is deferred while the 
+affected task performs a protected action.</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p17.a">17.a/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+This description is simplified to describe only the parts of the dispatching 
+model common to all policies. In particular, rules about preemption are 
+moved elsewhere. This makes it easier to add other policies (which might 
+not involve preemption).&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p17.b">17.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+<A NAME="I8367"></A>Procedure Yield is added to Dispatching. If Dispatching 
+is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+of Yield is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+the entity <I>E</I> may no longer be use-visible, resulting in errors. 
+This should be rare and is easily fixed if it does occur.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

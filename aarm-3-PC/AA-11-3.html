@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Raise Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>11.3 Raise Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN> 
+raises an exception.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5091"></A><A NAME="S0269"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><B>raise</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5092"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5093"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>];</span><span class="delete2"><B>&nbsp;raise</B>&nbsp;[<I>exception_</I><A NAME="I5094"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>];</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+if any, in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN> 
+shall denote an exception. <A NAME="I5095"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN> 
+with no <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+(that is, a <I>re-raise statement</I>) shall be within a handler, but 
+not within a body enclosed by that handler.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<span class="insert2">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+if any, in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN>, 
+is expected to be of type String.</span></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<A NAME="I5096"></A>To <I>raise an exception</I> is to raise a new occurrence 
+of that exception[, as explained in <A HREF="AA-11-4.html">11.4</A>]. 
+<A NAME="I5097"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN> 
+with an <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+the named exception is raised. <span class="insert2">[If a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is present, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is evaluated and its value is associated with the exception occurrence.]</span> 
+<A NAME="I5098"></A>For the execution of a re-raise statement, the exception 
+occurrence that caused transfer of control to the innermost enclosing 
+handler is raised [again].&nbsp;</div>
+<div class="paranum"><a name="p4.a.1">4.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Proof:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<span class="insert2">The definition of Exceptions.Exception_Message 
+includes a statement that the string is returned (see <A HREF="AA-11-4-1.html">11.4.1</A>). 
+We describe the use of the string here so that we don't have an unexplained 
+parameter in this subclause.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>For a re-raise statement, 
+the implementation does not create a new Exception_Occurrence, but instead 
+propagates the same Exception_Occurrence value. This allows the original 
+cause of the exception to be determined.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of raise 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<B>raise</B>&nbsp;Ada.IO_Exceptions.Name_Error;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-A-13.html">A.13</A></I></SPAN><span class="insert2"><BR>
+<B>raise</B>&nbsp;Queue_Error&nbsp;<B>with</B>&nbsp;&quot;Buffer&nbsp;Full&quot;;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-9-11.html">9.11</A></I></SPAN></span></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>raise</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;re-raise&nbsp;the&nbsp;current&nbsp;exception</I></SPAN></div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations">The fact that the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN> 
+has to denote an exception is not clear from RM83. Clearly that was the 
+intent, since the italicized part of the syntax rules so indicate, but 
+there was no explicit rule. RM83-1.5(11) doesn't seem to give the italicized 
+parts of the syntax any force.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<span class="insert2"><A NAME="I5099"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN> 
+is extended to include a string message. This is more convenient than 
+calling Exceptions.Exception_Message (<I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>'Identity, 
+<I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>), 
+and should encourage the use of message strings when raising exceptions.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

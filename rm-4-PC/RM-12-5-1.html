@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Formal Private and Derived Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>12.5.1 Formal Private and Derived Types</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">In its most general form, the category determined 
+for a formal private type is all types, but <span class="insert3">the 
+category</span><span class="delete3">&nbsp;it</span> can be restricted to 
+only nonlimited types or to only tagged types.<span class="insert3">&nbsp;Similarly, the category for a formal incomplete type is all types but 
+the category can be restricted to only tagged types; unlike other formal 
+types, the actual type does not need to be able to be frozen (see <A HREF="RM-13-14.html">13.14</A>).</span> 
+The category determined for a formal derived type is the derivation class 
+rooted at the ancestor type.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">formal_private_type_definition</SPAN><A NAME="I4870"></A><A NAME="S0285"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">formal_derived_type_definition</SPAN><A NAME="I4871"></A><A NAME="S0286"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<A NAME="I4872"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[[<B>and</B>&nbsp;<A NAME="I4873"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]<B>with</B>&nbsp;<B>private</B>]</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">If a generic formal type declaration has a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
+then it shall not include a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+for a discriminant.&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal"><A NAME="I4874"></A><A NAME="I4875"></A>The <I>ancestor 
+subtype</I> of a formal derived type is the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0286">formal_derived_type_definition</A></SPAN>. 
+For a formal derived type declaration, the reserved words <B>with private</B> 
+shall appear if and only if the ancestor type is a tagged type; in this 
+case the formal derived type is a private extension of the ancestor type 
+and the ancestor shall not be a class-wide type. Similarly, an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
+or the optional reserved words <B>abstract</B> or <B>synchronized</B> 
+shall appear only if the ancestor type is a tagged type. The reserved 
+word <B>limited</B> or <B>synchronized</B> shall appear only if the ancestor 
+type and any progenitor types are limited types. The reserved word <B>synchronized</B> 
+shall appear (rather than <B>limited</B>) if the ancestor type or any 
+of the progenitor types are synchronized interfaces.<span class="insert3">&nbsp;The ancestor type shall be a limited interface if the reserved word <B>synchronized</B> 
+appears.</span></div>
+<div class="paranum"><a name="p5.1">5.1/4</a></div>
+<div class="Normal">&nbsp;The actual type for a formal derived type shall 
+be a descendant of the ancestor type and every progenitor of the formal 
+type. <span class="insert3">If the formal type is nonlimited, the actual 
+type shall be nonlimited.&nbsp;</span><span class="insert4">The actual type 
+for a formal derived type shall be tagged if and only if the formal derived 
+type is a private extension.&nbsp;</span><span class="insert3"></span>If the 
+reserved word <B>synchronized</B> appears in the declaration of the formal 
+derived type, the actual type shall be a synchronized tagged type.&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal">If <span class="insert3">a</span><span class="delete3">&nbsp;the</span> 
+formal<span class="insert3">&nbsp;private or derived</span> subtype is definite, 
+then the actual subtype shall also be definite.&nbsp;</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3">A <SPAN Class="swiss"><A HREF="RM-12-5.html#S0283">formal_incomplete_type_declaration</A></SPAN> 
+declares a formal incomplete type. The only view of a formal incomplete 
+type is an incomplete view. Thus, a formal incomplete type is subject 
+to the same usage restrictions as any other incomplete type &mdash; see 
+<A HREF="RM-3-10-1.html">3.10.1</A>.</span></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a generic formal 
+derived type with no <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>: 
+</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">If the ancestor subtype is constrained, the actual 
+subtype shall be constrained, and shall be statically compatible with 
+the ancestor;&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">If the ancestor subtype is an unconstrained access 
+or composite subtype, the actual subtype shall be unconstrained.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">If the ancestor subtype is an unconstrained discriminated 
+subtype, then the actual shall have the same number of discriminants, 
+and each discriminant of the actual shall correspond to a discriminant 
+of the ancestor, in the sense of <A HREF="RM-3-7.html">3.7</A>.</div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="Bulleted">If the ancestor subtype is an access subtype, the 
+actual subtype shall exclude null if and only if the ancestor subtype 
+excludes null.&nbsp;</div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The declaration of 
+a formal derived type shall not have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>. 
+For a generic formal private <span class="insert3">or incomplete&nbsp;</span>type 
+with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>: 
+</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The actual type shall be a type with the same number 
+of discriminants.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">The actual subtype shall be unconstrained.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">The subtype of each discriminant of the actual 
+type shall statically match the subtype of the corresponding discriminant 
+of the formal type. <A NAME="I4876"></A></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">For a generic formal type with an <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">unknown_discriminant_part</A></SPAN>, 
+the actual may, but need not, have discriminants, and may be definite 
+or indefinite.</div>
+<div class="paranum"><a name="p15.1">15.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">When enforcing Legality Rules, 
+for the purposes of determining within a generic body whether a type 
+is unconstrained in any partial view, a discriminated subtype is considered 
+to have a constrained partial view if it is a descendant of an untagged 
+generic formal private or derived type.</span></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The category determined 
+for a formal private type is as follows:&nbsp;</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Indented1"><I>Type&nbsp;Definition</I>&nbsp;&nbsp;<I>Determined&nbsp;Category</I><BR>
+<BR>
+<B>limited&nbsp;private</B>&nbsp;&nbsp;the&nbsp;category&nbsp;of&nbsp;all&nbsp;types<BR>
+<B>private</B>&nbsp;&nbsp;the&nbsp;category&nbsp;of&nbsp;all&nbsp;nonlimited&nbsp;types<BR>
+<B>tagged&nbsp;limited&nbsp;private</B>&nbsp;&nbsp;the&nbsp;category&nbsp;of&nbsp;all&nbsp;tagged&nbsp;types<BR>
+<B>tagged&nbsp;private</B>&nbsp;&nbsp;the&nbsp;category&nbsp;of&nbsp;all&nbsp;nonlimited&nbsp;tagged&nbsp;types</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">The presence of the reserved word <B>abstract</B> 
+determines whether the actual type may be abstract.</div>
+<div class="paranum"><a name="p18.1">18.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The category determined for 
+a formal incomplete type is the category of all types, unless the <SPAN Class="swiss"><A HREF="RM-12-5.html#S0281">formal_type_declaration</A></SPAN> 
+includes the reserved word <B>tagged</B>; in this case, it is the category 
+of all tagged types.</span></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">A formal private or derived type is a private or 
+derived type, respectively. A formal derived tagged type is a private 
+extension. A formal private or derived type is abstract if the reserved 
+word <B>abstract</B> appears in its declaration.</div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Normal"><span class="insert3">For a formal derived type, 
+the characteristics</span><span class="delete3">&nbsp;If the ancestor type 
+is a composite type that is not an array type, the formal type inherits 
+components from the ancestor type</span> (including <span class="insert3">components, 
+but excluding&nbsp;</span>discriminants if <span class="insert3">there is 
+</span>a new <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN><span class="delete3">&nbsp;is not specified</span>), <span class="insert3">predefined operators, 
+and inherited user-defined primitive subprograms are determined by its 
+ancestor type and its progenitor types (if any), in the same way that 
+those of</span><span class="delete3">&nbsp;as for</span> a derived type <span class="insert3">are 
+determined by those of its parent type and its progenitor types</span><span class="delete3">&nbsp;defined 
+by a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN></span> 
+(see <A HREF="RM-3-4.html">3.4</A> and <A HREF="RM-7-3-1.html">7.3.1</A>).</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Normal"><span class="delete3">For a formal derived type, 
+the predefined operators and inherited user-defined subprograms are determined 
+by the ancestor type and any progenitor types, and are implicitly declared 
+at the earliest place, if any, immediately within the declarative region 
+in which the formal type is declared, where the corresponding primitive 
+subprogram of the ancestor or progenitor is visible (see <A HREF="RM-7-3-1.html">7.3.1</A>). 
+</span>In an instance, the copy of <span class="delete3">such&nbsp;</span>an 
+implicit declaration <span class="insert3">of a primitive subprogram 
+of a formal derived type&nbsp;</span>declares a view of the corresponding 
+primitive subprogram of the ancestor or progenitor of the formal derived 
+type, even if this primitive has been overridden for the actual type<span class="insert3">&nbsp;and even if it is never declared for the actual type</span>. When the 
+ancestor or progenitor of the formal derived type is itself a formal 
+type, the copy of the implicit declaration declares a view of the corresponding 
+copied operation of the ancestor or progenitor. In the case of a formal 
+private extension, however, the tag of the formal type is that of the 
+actual type, so if the tag in a call is statically determined to be that 
+of the formal type, the body executed will be that corresponding to the 
+actual type.&nbsp;</div>
+<div class="paranum"><a name="p22">22/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+S that denotes a formal indefinite subtype, the following attribute is 
+defined:&nbsp;</div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="WideHanging-Term">S'Definite</div><div class="WideHanging-Body">
+<A NAME="I4877"></A><A NAME="I4878"></A>S'Definite yields True if the 
+actual subtype corresponding to S is definite; otherwise<span class="insert3">,</span> 
+it yields False. The value of this attribute is of the predefined type 
+Boolean.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p23.1">23.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;In the case where 
+a formal type <span class="insert3">has</span><span class="delete3">&nbsp;is 
+tagged with</span> unknown discriminants, and the actual type is a class-wide 
+type <I>T</I>'Class:</div>
+<div class="paranum"><a name="p23.2">23.2/2</a></div>
+<div class="Bulleted">For the purposes of defining the primitive operations 
+of the formal type, each of the primitive operations of the actual type 
+is considered to be a subprogram (with an intrinsic calling convention 
+&mdash; see <A HREF="RM-6-3-1.html">6.3.1</A>) whose body consists of 
+a dispatching call upon the corresponding operation of <I>T</I>, with 
+its formal parameters as the actual parameters. If it is a function, 
+the result of the dispatching call is returned.</div>
+<div class="paranum"><a name="p23.3">23.3/2</a></div>
+<div class="Bulleted">If the corresponding operation of <I>T</I> has 
+no controlling formal parameters, then the controlling tag value is determined 
+by the context of the call, according to the rules for tag-indeterminate 
+calls (see <A HREF="RM-3-9-2.html">3.9.2</A> and <A HREF="RM-5-2.html">5.2</A>). 
+In the case where the tag would be statically determined to be that of 
+the formal type, the call raises Program_Error. If such a function is 
+renamed, any call on the renaming raises Program_Error. <A NAME="I4879"></A></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Notes" style="margin-bottom: 0.4em">9&nbsp;&nbsp;In accordance 
+with the general rule that the actual type shall belong to the category 
+determined for the formal (see <A HREF="RM-12-5.html">12.5</A>, &ldquo;<A HREF="RM-12-5.html">Formal 
+Types</A>&rdquo;):&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Indented2SmallBulleted">If the formal type is nonlimited, 
+then so shall be the actual;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented2SmallBulleted">For a formal derived type, the actual 
+shall be in the class rooted at the ancestor subtype.&nbsp;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes">10&nbsp;&nbsp;The actual type can be abstract only 
+if the formal type is abstract (see <A HREF="RM-3-9-3.html">3.9.3</A>). 
+</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Notes">11&nbsp;&nbsp;If the formal has a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>, 
+the actual can be either definite or indefinite. Otherwise, the actual 
+has to be definite.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-12-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

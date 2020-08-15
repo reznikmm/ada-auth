@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Remote Types Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.2.2 Remote Types Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A remote types library unit supports the definition 
+of types intended for use in communication between active partitions. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8429"></A><A NAME="I8430"></A>The 
+form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Remote_Types is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8431"></A><A NAME="I8432"></A>Remote_Types[(<I>library_unit_</I><A NAME="I8433"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8434"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Types 
+is used to specify that a library unit is a</span> <I>remote types library 
+unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Types <span class="insert3">aspect<A NAME="I8435"></A><A NAME="I8436"></A> 
+of the library unit is True</span><span class="delete3">&nbsp;applies</span>. 
+The following restrictions apply to the declaration of such a library 
+unit:</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">it shall be preelaborable;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Bulleted">it shall depend semantically only on declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s</span>, 
+shared passive<span class="insert3">&nbsp;library units</span>, <span class="delete3">or 
+</span>other remote types library units<span class="insert3">, or preelaborated 
+normal library units that are mentioned only in private with clauses</span>;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">it shall not contain the declaration of any variable 
+within the visible part of the library unit;&nbsp;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted"><span class="delete2">if&nbsp;</span>the full view of 
+<span class="insert2">each</span><span class="delete2">&nbsp;a</span> type 
+declared in the visible part of the library unit <span class="insert2">that 
+has any available stream attributes shall support external streaming 
+(see <A HREF="RM-13-13-2.html">13.13.2</A>)</span><span class="delete2">&nbsp;has 
+a part that is of a nonremote access type, then that access type, or 
+the type of some part that includes the access type subcomponent, shall 
+have user-specified Read and Write attributes</span>.&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8437"></A><span class="insert3">A 
+named</span><span class="delete3">&nbsp;An</span> access type declared in 
+the visible part of a remote types or remote call interface library unit 
+is called a <I>remote access type</I>. <A NAME="I8438"></A><A NAME="I8439"></A>Such 
+a type shall be:</div>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Bulleted">an access-to-subprogram type, or</div>
+<div class="paranum"><a name="p9.2">9.2/3</a></div>
+<div class="Bulleted">a general access type that designates a class-wide 
+limited private type<span class="insert3">, a class-wide limited interface 
+type,</span> or a class-wide private <span class="delete3">type&nbsp;</span>extension 
+all of whose ancestors are either private <span class="delete3">type 
+</span>extensions<span class="insert3">, limited interface types,</span> 
+or limited private types.&nbsp;</div>
+<div class="paranum"><a name="p9.3">9.3/1</a></div>
+<div class="Normal">&nbsp;A type that is derived from a remote access type 
+is also a remote access type.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following restrictions 
+apply to the use of a remote access-to-subprogram type:&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Bulleted">A value of a remote access-to-subprogram type shall 
+be converted only to <span class="insert2">or from&nbsp;</span>another (subtype-conformant) 
+remote access-to-subprogram type;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an Access <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+that yields a value of a remote access-to-subprogram type shall statically 
+denote a (subtype-conformant) remote subprogram.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following restrictions 
+apply to the use of a remote access-to-class-wide type:&nbsp;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted">The primitive subprograms of the corresponding 
+specific <span class="delete3">limited private&nbsp;</span>type shall only 
+have access parameters if they are controlling formal parameters<span class="insert3">. 
+The primitive functions of the corresponding specific type shall only 
+have an access result if it is a controlling access result.</span><span class="delete3">;</span> 
+<span class="insert3">Each</span><span class="delete3">&nbsp;each</span> noncontrolling 
+formal parameter <span class="insert3">and noncontrolling result type 
+</span>shall <span class="insert2">support external streaming (see <A HREF="RM-13-13-2.html">13.13.2</A>);</span><span class="delete2">&nbsp;have 
+either a nonlimited type or a type with Read and Write attributes specified 
+via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0309">attribute_definition_clause</A></SPAN>;</span></div>
+<div class="paranum"><a name="p14.1">14.1/3</a></div>
+<div class="Bulleted"><span class="insert3">The corresponding specific 
+type shall not have a primitive procedure with the Synchronization aspect 
+specified unless the <SPAN Class="swiss"><A HREF="RM-9-5.html#S0217">synchronization_kind</A></SPAN> 
+is Optional (see <A HREF="RM-9-5.html">9.5</A>);</span></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">A value of a remote access-to-class-wide type shall 
+be explicitly converted only to another remote access-to-class-wide type;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">A value of a remote access-to-class-wide type shall 
+be dereferenced (or implicitly converted to an anonymous access type) 
+only as part of a dispatching call where the value designates a controlling 
+operand of the call (see <A HREF="RM-E-4.html">E.4</A>, &ldquo;<A HREF="RM-E-4.html">Remote 
+Subprogram Calls</A>&rdquo;);&nbsp;</div>
+<div class="paranum"><a name="p16.1">16.1/3</a></div>
+<div class="Bulleted"><span class="insert3">A controlling access result 
+value for a primitive function with any controlling operands of the corresponding 
+specific type shall either be explicitly converted to a remote access-to-class-wide 
+type or be part of a dispatching call where the value designates a controlling 
+operand of the call;</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Bulleted">The Storage_Pool <span class="insert2">attribute 
+is</span><span class="delete2">&nbsp;and Storage_Size attributes are</span> 
+not defined for<span class="insert2">&nbsp;a</span> remote access-to-class-wide 
+<span class="insert2">type</span><span class="delete2">&nbsp;types</span>; 
+the expected type for an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+shall not be a remote access-to-class-wide type<span class="insert2">. 
+A</span><span class="delete2">; a</span> remote access-to-class-wide 
+type shall not be an actual parameter for a generic formal access type.<span class="insert2">&nbsp;The Storage_Size attribute of a remote access-to-class-wide type yields 
+0; it is not allowed in an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0309">attribute_definition_clause</A></SPAN>.</span> 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">5&nbsp;&nbsp;A remote types library unit need not 
+be pure, and the types it defines may include levels of indirection implemented 
+by using access types. User-specified Read and Write attributes (see 
+<A HREF="RM-13-13-2.html">13.13.2</A>) provide for sending values of 
+such a type between active partitions, with Write marshalling the representation, 
+and Read unmarshalling any levels of indirection.</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Notes">6&nbsp;&nbsp;<span class="insert3">The value of a 
+remote access-to-class-wide limited interface can designate an object 
+of a nonlimited type derived from the interface.</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Notes">7&nbsp;&nbsp;<span class="insert3">A remote access 
+type may designate a class-wide synchronized, protected, or task interface 
+type.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

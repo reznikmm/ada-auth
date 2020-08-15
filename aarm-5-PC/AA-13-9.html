@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Unchecked Type Conversions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-9-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.9 Unchecked Type Conversions</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[<A NAME="I5720"></A> <A NAME="I5721"></A><A NAME="I5722"></A><A NAME="I5723"></A><A NAME="I5724"></A>An 
+unchecked type conversion can be achieved by a call to an instance of 
+the generic function Unchecked_Conversion.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+generic library function exists:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Source(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Target(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+<A NAME="I5725"></A><B>function</B>&nbsp;Ada.Unchecked_Conversion(S&nbsp;:&nbsp;Source)&nbsp;<B>return</B>&nbsp;Target<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+<B>pragma</B>&nbsp;Pure(Ada.Unchecked_Conversion);</div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The aspect Convention implies that the attribute Access is not allowed 
+for instances of Unchecked_Conversion.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">The size of the formal parameter S in an instance 
+of Unchecked_Conversion is that of its subtype. [This is the actual subtype 
+passed to Source, except when the actual is an unconstrained composite 
+subtype, in which case the subtype is constrained by the bounds or discriminants 
+of the value of the actual expression passed to S.]</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">If all of the following 
+are true, the effect of an unchecked conversion is to return the value 
+of an object of the target subtype whose representation is the same as 
+that of the source object S:&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">S'Size = Target'Size.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that there is no requirement 
+that the Sizes be known at compile time.&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0078-1.TXT">AI05-0078-1</A></I>} 
+S'Alignment is a multiple of Target'Alignment or Target'Alignment is 
+zero.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">The target subtype is not an unconstrained composite 
+subtype.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted"><A NAME="I5726"></A><A NAME="I5727"></A>S and the 
+target subtype both have a contiguous representation.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">The representation of S is a representation of 
+an object of the target subtype.&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+Otherwise, if the result type is scalar, the result of the function is 
+implementation defined, and can have an invalid representation (see <A HREF="AA-13-9-1.html">13.9.1</A>). 
+If the result type is nonscalar, the effect is implementation defined; 
+in particular, the result can be abnormal (see <A HREF="AA-13-9-1.html">13.9.1</A>).</div>
+<div class="paranum"><a name="p11.a.1">11.a.1/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The result of 
+unchecked conversion for instances with scalar result types whose result 
+is not defined by the language.</div>
+<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The effect of 
+unchecked conversion for instances with nonscalar result types whose 
+effect is not defined by the language.</div>
+<div class="paranum"><a name="p11.a.1">11.a.1/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+Note the difference between these sentences; the first only says that 
+the bits returned are implementation defined, while the latter allows 
+any effect. The difference is because scalar objects should never be 
+abnormal unless their assignment was disrupted or if they are a subcomponent 
+of an abnormal composite object. Neither exception applies to instances 
+of Unchecked_Conversion.&nbsp;</div>
+<div class="paranum"><a name="p11.a.2">11.a.2/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+Whenever unchecked conversions are used, it is the programmer's responsibility 
+to ensure that these conversions maintain the properties that are guaranteed 
+by the language for objects of the target type. For nonscalar types, 
+this requires the user to understand the underlying run-time model of 
+ the implementation. The execution of a program that violates these properties 
+by means of unchecked conversions returning a nonscalar type is erroneous. 
+Properties of scalar types can be checked by using the Valid attribute 
+(see <A HREF="AA-13-9-2.html">13.9.2</A>); programs can avoid violating 
+properties of the type (and erroneous execution) by careful use of this 
+attribute.</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations">An instance of Unchecked_Conversion can be applied 
+to an object of a private type, assuming the implementation allows it. 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">An implementation may return the result of an unchecked 
+conversion by reference, if the Source type is not a by-copy type. [In 
+this case, the result of the unchecked conversion represents simply a 
+different (read-only) view of the operand of the conversion.]&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In other words, the result 
+object of a call on an instance of Unchecked_Conversion can occupy the 
+same storage as the formal parameter S.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">An implementation may place restrictions on Unchecked_Conversion. 
+</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, an instantiation 
+of Unchecked_Conversion for types for which unchecked conversion doesn't 
+make sense may be disallowed.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+Since the Size of an array object generally does not include its bounds, 
+the bounds should not be part of the converted data.&nbsp;</div>
+<div class="paranum"><a name="p14.a.1">14.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Since the Size 
+of an array object generally does not include its bounds, the bounds 
+should not be part of the converted data in an instance of Unchecked_Conversion.</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>On the other hand, we have 
+no advice to offer about discriminants and tag fields.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">The implementation should not generate unnecessary 
+run-time checks to ensure that the representation of S is a representation 
+of the target type. It should take advantage of the permission to return 
+by reference when possible. Restrictions on unchecked conversions should 
+be avoided unless required by the target environment.&nbsp;</div>
+<div class="paranum"><a name="p15.a.1">15.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>There should not 
+be unnecessary run-time checks on the result of an Unchecked_Conversion; 
+the result should be returned by reference when possible. Restrictions 
+on Unchecked_Conversions should be avoided.</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>As an example of 
+an unnecessary run-time check, consider a record type with gaps between 
+components. The compiler might assume that such gaps are always zero 
+bits. If a value is produced that does not obey that assumption, then 
+the program might misbehave. The implementation should not generate extra 
+code to check for zero bits (except, perhaps, in a special error-checking 
+mode).&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5728"></A>The 
+recommended level of support for unchecked conversions is:&nbsp;</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Unchecked conversions should be supported and should be reversible in 
+the cases where this subclause defines the result.<A NAME="I5729"></A> 
+<A NAME="I5730"></A>To enable meaningful use of unchecked conversion, 
+a contiguous representation should be used for elementary subtypes, for 
+statically constrained array subtypes whose component subtype is one 
+of the subtypes described in this paragraph, and for record subtypes 
+without discriminants whose component subtypes are described in this 
+paragraph.&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
+level of support for Unchecked_Conversion should be followed.</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p17.b">17.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10051.TXT">AI95-00051-02</A></I>} 
+The implementation advice about the size of array objects was moved to 
+13.3 so that all of the advice about Size is in one place.</div>
+<div class="paranum"><a name="p17.c">17.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
+Clarified that the result of Unchecked_Conversion for scalar types can 
+be invalid, but not abnormal.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p17.d">17.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0078-1.TXT">AI05-0078-1</A></I>} 
+<B>Correction:</B> Relaxed the alignment requirement slightly, giving 
+a defined result in more cases.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-9-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

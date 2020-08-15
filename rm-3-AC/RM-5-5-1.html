@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>User-Defined Iterator Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.5.1 <span class="insert3">User-Defined Iterator Types</span><span class="delete3"></span></H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+following language-defined generic library package exists:</span>&nbsp;</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Examples"><span class="insert3"><A NAME="I3326"></A><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>package</B>&nbsp;Ada.Iterator_Interfaces&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Iterator_Interfaces);</span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3327"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3328"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3329"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3330"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3331"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3332"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Iterator_Interfaces;</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><span class="insert3">An <I>iterator type</I> is 
+a type descended from the Forward_Iterator interface from some instance 
+of Ada.Iterator_Interfaces.<A NAME="I3333"></A> A <I>reversible iterator 
+type</I> is a type descended from the Reversible_Iterator interface from 
+some instance of Ada.Iterator_Interfaces.<A NAME="I3334"></A> An <I>iterator 
+object</I> is an object of an iterator type.<A NAME="I3335"></A> A <I>reversible 
+iterator object</I> is an object of a reversible iterator type.<A NAME="I3336"></A> 
+The formal subtype Cursor from the associated instance of Ada.Iterator_Interfaces 
+is the <I>iteration cursor subtype</I> for the iterator type.<A NAME="I3337"></A></span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+following type-related operational aspects may be specified for an indexable 
+container type <I>T</I> (see <A HREF="RM-4-1-6.html">4.1.6</A>):</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Default_Iterator</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">This aspect is specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes exactly one function declared immediately within the same 
+declaration list in which <I>T</I> is declared, whose first parameter 
+is of type <I>T</I> or <I>T</I>'Class or an access parameter whose designated 
+type is type <I>T</I> or <I>T</I>'Class, whose other parameters, if any, 
+have default expressions, and whose result type is an iterator type. 
+This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3338"></A> 
+Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3339"></A> 
+The iteration cursor subtype for the default iterator subtype is the 
+<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3340"></A><A NAME="I3341"></A><A NAME="I3342"></A></span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Iterator_Element</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert3">This aspect is specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a subtype. This is the <I>default element subtype</I> for 
+<I>T</I>.<A NAME="I3343"></A><A NAME="I3344"></A><A NAME="I3345"></A></span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal"><span class="insert3">These aspects are inherited 
+by descendants of type <I>T</I> (including <I>T</I>'Class).</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Normal"><span class="insert3">An <I>iterable container type</I> 
+is an indexable container type with specified Default_Iterator and Iterator_Element 
+aspects.<A NAME="I3346"></A> A <I>reversible iterable container type</I> 
+is an iterable container type with the default iterator type being a 
+reversible iterator type.<A NAME="I3347"></A> An <I>iterable container 
+object</I> is an object of an iterable container type.<A NAME="I3348"></A> 
+A <I>reversible iterable container object</I> is an object of a reversible 
+iterable container type.<A NAME="I3349"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+Constant_Indexing aspect (if any) of an iterable container type <I>T</I> 
+shall denote exactly one function with the following properties:</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted"><span class="insert3">the result type of the function 
+is covered by the default element type of <I>T</I> or is a reference 
+type (see <A HREF="RM-4-1-5.html">4.1.5</A>) with an access discriminant 
+designating a type covered by the default element type of <I>T</I>;</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted"><span class="insert3">the type of the second parameter 
+of the function covers the default cursor type for <I>T</I>;</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Bulleted"><span class="insert3">if there are more than two 
+parameters, the additional parameters all have default expressions.</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal"><span class="insert3">This function (if any) is the 
+<I>default constant indexing function</I> for <I>T</I>.<A NAME="I3350"></A></span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+Variable_Indexing aspect (if any) of an iterable container type <I>T</I> 
+shall denote exactly one function with the following properties:</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Bulleted"><span class="insert3">the result type of the function 
+is a reference type (see <A HREF="RM-4-1-5.html">4.1.5</A>) with an access 
+discriminant designating a type covered by the default element type of 
+<I>T</I>;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Bulleted"><span class="insert3">the type of the second parameter 
+of the function covers the default cursor type for <I>T</I>;</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Bulleted"><span class="insert3">if there are more than two 
+parameters, the additional parameters all have default expressions.</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Normal"><span class="insert3">This function (if any) is the 
+<I>default variable indexing function</I> for <I>T</I>.<A NAME="I3351"></A></span></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Objects and Named Numbers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.3 Objects and Named Numbers</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Objects are created at run time and contain a value 
+of a given type. <A NAME="I1385"></A>An object can be created and initialized 
+as part of elaborating a declaration, evaluating an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0122">allocator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-4-3.html#S0097">aggregate</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-6-4.html#S0156">function_call</A></SPAN>, 
+or passing a parameter by copy. Prior to reclaiming the storage for an 
+object, it is finalized if necessary (see <A HREF="RM-7-6-1.html">7.6.1</A>). 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1386"></A>All 
+of the following are objects:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">the entity declared by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">a formal parameter of a subprogram, entry, or generic 
+subprogram;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">a generic formal object;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a loop parameter;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">a choice parameter of an <SPAN Class="swiss"><A HREF="RM-11-2.html#S0232">exception_handler</A></SPAN>;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">an entry index of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0190">entry_body</A></SPAN>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">the result of dereferencing an access-to-object 
+value (see <A HREF="RM-4-1.html">4.1</A>);</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">the result of evaluating a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0156">function_call</A></SPAN> 
+(or the equivalent operator invocation &mdash; see <A HREF="RM-6-6.html">6.6</A>);</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">the result of evaluating an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0097">aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">a component, slice, or view conversion of another 
+object.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal"><A NAME="I1387"></A><A NAME="I1388"></A><A NAME="I1389"></A><A NAME="I1390"></A><A NAME="I1391"></A><A NAME="I1392"></A>An 
+object is either a <I>constant</I> object or a <I>variable</I> object. 
+The value of a constant object cannot be changed between its initialization 
+and its finalization, whereas the value of a variable object can be changed. 
+Similarly, a view of an object is either a <I>constant</I> or a <I>variable</I>. 
+All views of a constant object are constant. A constant view of a variable 
+object cannot be used to modify the value of the variable. The terms 
+constant and variable by themselves refer to constant and variable views 
+of objects.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I1393"></A>The value of an object is <I>read</I> 
+when the value of any part of the object is evaluated, or when the value 
+of an enclosing object is evaluated. <A NAME="I1394"></A>The value of 
+a variable is <I>updated</I> when an assignment is performed to any part 
+of the variable, or when an assignment is performed to an enclosing object. 
+</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Whether a view of an 
+object is constant or variable is determined by the definition of the 
+view. The following (and no others) represent constants:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">an object declared by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+with the reserved word <B>constant</B>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">a formal parameter or generic formal object of 
+mode <B>in</B>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">a discriminant;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">a loop parameter, choice parameter, or entry index;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">the dereference of an access-to-constant value;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Bulleted">the result of evaluating a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0156">function_call</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0097">aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0091">selected_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-4-1-1.html#S0089">indexed_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-4-1-2.html#S0090">slice</A></SPAN>, or 
+view conversion of a constant.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal"><A NAME="I1395"></A>At the place where a view of 
+an object is defined, a <I>nominal subtype</I> is associated with the 
+view. <A NAME="I1396"></A><A NAME="I1397"></A>The object's <I>actual 
+subtype</I> (that is, its subtype) can be more restrictive than the nominal 
+subtype of the view; it always is if the nominal subtype is an <I>indefinite 
+subtype</I>. <A NAME="I1398"></A><A NAME="I1399"></A>A subtype is an 
+indefinite subtype if it is an unconstrained array subtype, or if it 
+has unknown discriminants or unconstrained discriminants without defaults 
+(see <A HREF="RM-3-7.html">3.7</A>); otherwise the subtype is a <I>definite</I> 
+subtype (all elementary subtypes are definite subtypes). A class-wide 
+subtype is defined to have unknown discriminants, and is therefore an 
+indefinite subtype. An indefinite subtype does not by itself provide 
+enough information to create an object; an additional <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0026">constraint</A></SPAN> 
+or explicit initialization <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is necessary (see <A HREF="RM-3-3-1.html">3.3.1</A>). A component cannot 
+have an indefinite nominal subtype.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal"><A NAME="I1400"></A>A <I>named number</I> provides 
+a name for a numeric value known at compile time. It is declared by a 
+<SPAN Class="swiss"><A HREF="RM-3-3-2.html#S0031">number_declaration</A></SPAN>. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Notes">5&nbsp;&nbsp;A constant cannot be the target of an 
+assignment operation, nor be passed as an <B>in</B> <B>out</B> or <B>out</B> 
+parameter, between its initialization and finalization, if any.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Notes">6&nbsp;&nbsp;The nominal and actual subtypes of an 
+elementary object are always the same. For a discriminated or array object, 
+if the nominal subtype is constrained then so is the actual subtype. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

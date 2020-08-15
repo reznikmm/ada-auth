@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Anonymous Functions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.5.9 <span class="insert5">Anonymous Functions</span><span class="delete5"></span></H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal"><span class="insert5">Anonymous functions provide 
+a way to define a function at a point where an access-to-function type 
+is the expected type, or in a generic instantiation as an actual parameter 
+corresponding to a formal subprogram parameter.</span>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">anonymous_function</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2992"></A><A NAME="S0146"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">(<B>function</B>&nbsp;[<A NAME="I2993"></A><SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN>]&nbsp;<B>return</B>&nbsp;<A NAME="I2994"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">function_formal_parameter_list</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I2995"></A><A NAME="S0147"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I2996"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>&nbsp;|&nbsp;(<A NAME="I2997"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2998"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>})</span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal"><span class="insert5">In a context where there is 
+an expected type rather than an expected profile for a <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>, 
+the expected type shall be a single access-to-function type, and the 
+profile of this type is considered the expected profile for the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>. 
+The result type of the expected profile of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
+is the expected type for the expression of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>. 
+If there is no <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN>, 
+the expected profile shall have no parameters. If the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>, 
+then it shall be subtype conformant to the expected profile if there 
+is an expected type, or merely mode conformant otherwise. If the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0147">function_formal_parameter_list</A></SPAN> 
+is a sequence of identifiers, the number of identifiers in the sequence 
+shall be the same as the number of formal parameters in the expected 
+profile.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal"><span class="insert5">A <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
+used in a context where there is an expected type is equivalent to a 
+local <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+(see <A HREF="RM-6-8.html">6.8</A>), with the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
+replaced by an Access <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+of this locally defined function; otherwise, the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
+is equivalent to such a local declaration with the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN> 
+replaced by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+denoting this locally defined function. The profile of this locally defined 
+function has a result type determined by the expected profile, and a 
+formal part determined by the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0191">formal_part</A></SPAN>, 
+if provided in the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>, 
+or by the formal part of the expected profile otherwise, but with the 
+name of each formal parameter of the expected profile replaced by the 
+corresponding identifier in the sequence of identifiers.  The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of this locally defined expression function is that of the <SPAN Class="swiss"><A HREF="RM-4-5-9.html#S0146">anonymous_function</A></SPAN>.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-5-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

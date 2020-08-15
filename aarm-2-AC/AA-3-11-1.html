@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Completions of Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.11.1 Completions of Declarations</H1>
+<div class="paranum"><a name="p1">1/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0014">8652/0014</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00064.TXT">AI95-00064-01</A></I>} 
+Declarations sometimes come in two parts. <A NAME="I2481"></A>A declaration 
+that requires a second part is said to <I>require completion</I>. <A NAME="I2482"></A>The 
+second part is called the <I>completion</I> of the declaration (and of 
+the entity declared), and is either another declaration, a body, or a 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>. <span class="insert1">A 
+<A NAME="I2483"></A><I>body</I> is a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0089">body</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0203">entry_body</A></SPAN>, 
+or a renaming-as-body (see <A HREF="AA-8-5-4.html">8.5.4</A>).</span> 
+</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>Throughout the RM95, there are rules about completions that define 
+the following:&nbsp;</div>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="SmallBulleted">Which declarations require a corresponding 
+completion.</div>
+<div class="paranum"><a name="p1.c">1.c</a></div>
+<div class="SmallBulleted">Which constructs can only serve as the completion 
+of a declaration.</div>
+<div class="paranum"><a name="p1.d">1.d</a></div>
+<div class="SmallBulleted">Where the completion of a declaration is allowed 
+to be.</div>
+<div class="paranum"><a name="p1.e">1.e</a></div>
+<div class="SmallBulleted">What kinds of completions are allowed to correspond 
+to each kind of declaration that allows one.&nbsp;</div>
+<div class="paranum"><a name="p1.f">1.f</a></div>
+<div class="Annotations">Don't confuse this compile-time concept with 
+the run-time concept of completion defined in <A HREF="AA-7-6-1.html">7.6.1</A>.</div>
+<div class="paranum"><a name="p1.g">1.g</a></div>
+<div class="Annotations">Note that the declaration of a private type 
+(if limited) can be completed with the declaration of a task type, which 
+is then completed with a body. Thus, a declaration can actually come 
+in <I>three</I> parts.</div>
+<div class="paranum"><a name="p1.h">1.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2">In Ada 2005 the limited view of the package contains 
+an incomplete view of the private type, so we can have <I>four</I> parts 
+now.</span></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A construct that can 
+be a completion is interpreted as the completion of a prior declaration 
+only if:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">The declaration and the completion occur immediately 
+within the same declarative region;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">The defining name or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0154">defining_program_unit_name</A></SPAN> 
+in the completion is the same as in the declaration, or in the case of 
+a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+applies to the declaration;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">If the declaration is overloadable, then the completion 
+either has a type-conformant profile, or is a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>. 
+<A NAME="I2484"></A></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An implicit declaration shall not have a completion. 
+<A NAME="I2485"></A>For any explicit declaration that is specified to 
+<I>require completion</I>, there shall be a corresponding explicit completion. 
+</div>
+<div class="paranum"><a name="p6.a.1">6.a.1/2</a></div>
+<div class="Annotations"><span class="insert2"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<span class="insert2">The implicit declarations occurring in a limited 
+view do have a completion (the explicit declaration occurring in the 
+full view) but that's a special case, since the implicit declarations 
+are actually built from the explicit ones. So they do not <I>require</I> 
+a completion, they have one by <I>fiat</I>.</span>&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The implicit declarations 
+of predefined operators are not allowed to have a completion. Enumeration 
+literals, although they are subprograms, are not allowed to have a corresponding 
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0162">subprogram_body</A></SPAN>. 
+That's because the completion rules are described in terms of constructs 
+(<SPAN Class="swiss"><A HREF="AA-6-1.html#S0148">subprogram_declaration</A></SPAN>s) 
+and not entities (subprograms). When a completion is required, it has 
+to be explicit; the implicit null <SPAN Class="swiss"><A HREF="AA-7-2.html#S0175">package_body</A></SPAN> 
+that Section <A HREF="AA-7.html">7</A> talks about cannot serve as the 
+completion of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0173">package_declaration</A></SPAN> 
+if a completion is required.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">At most one completion is allowed for a given declaration. 
+Additional requirements on completions appear where each kind of completion 
+is defined.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A subunit is not a completion; 
+the stub is.</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="Annotations">If the completion of a declaration is also a 
+declaration, then <I>that</I> declaration might have a completion, too. 
+For example, a limited private type can be completed with a task type, 
+which can then be completed with a task body. This is not a violation 
+of the &ldquo;at most one completion&rdquo; rule.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I2486"></A>A type is <I>completely defined</I> 
+at a place that is after its full type definition (if it has one) and 
+after all of its subcomponent types are completely defined. A type shall 
+be completely defined before it is frozen (see <A HREF="AA-13-14.html">13.14</A> 
+and <A HREF="AA-7-3.html">7.3</A>).&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Index types are always completely 
+defined &mdash; no need to mention them. There is no way for a completely 
+defined type to depend on the value of a (still) deferred constant.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">91&nbsp;&nbsp;Completions are in principle allowed 
+for any kind of explicit declaration. However, for some kinds of declaration, 
+the only allowed completion is a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import, and implementations are not required to support <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import for every kind of entity.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In fact, we expect that implementations 
+will <I>not</I> support pragma Import of things like types &mdash; it's 
+hard to even define the semantics of what it would mean. Therefore, in 
+practice, <I>not</I> every explicit declaration can have a completion. 
+In any case, if an implementation chooses to support pragma Import for, 
+say, types, it can place whatever restrictions on the feature it wants 
+to. For example, it might want the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+to be a freezing point for the type.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">92&nbsp;&nbsp;There are rules that prevent premature 
+uses of declarations that have a corresponding completion. The Elaboration_Checks 
+of <A HREF="AA-3-11.html">3.11</A> prevent such uses at run time for 
+subprograms, protected operations, tasks, and generic units. The rules 
+of <A HREF="AA-13-14.html">13.14</A>, &ldquo;<A HREF="AA-13-14.html">Freezing 
+Rules</A>&rdquo; prevent, at compile time, premature uses of other entities 
+such as private types and deferred constants.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations">This subclause is new. It is intended to cover 
+all kinds of completions of declarations, be they a body for a spec, 
+a full type for an incomplete or private type, a full constant declaration 
+for a deferred constant declaration, or a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Import for any kind of entity.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p10.b">10.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0014">8652/0014</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00064.TXT">AI95-00064-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Added a definition of <I>body</I>, 
+which is different than <SPAN Class="swiss"><A HREF="AA-3-11.html#S0089">body</A></SPAN> 
+or <B>body</B>.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-11.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

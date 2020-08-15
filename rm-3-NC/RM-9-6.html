@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Delay Statements, Duration, and Time</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-6-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.6 Delay Statements, Duration, and Time</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I4107"></A>A <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN> 
+is used to block further execution until a specified <I>expiration time</I> 
+is reached. The expiration time can be specified either as a particular 
+point in time (in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN>), 
+or in seconds from the current time (in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN>). 
+The language-defined package Calendar provides definitions for a type 
+Time and associated operations, including a function Clock that returns 
+the current time. <A NAME="I4108"></A></div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">delay_statement</SPAN><A NAME="I4109"></A><A NAME="S0227"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4110"></A><SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I4111"></A><SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">delay_until_statement</SPAN><A NAME="I4112"></A><A NAME="S0228"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delay&nbsp;until</B>&nbsp;<I>delay_</I><A NAME="I4113"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">delay_relative_statement</SPAN><A NAME="I4114"></A><A NAME="S0229"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delay</B>&nbsp;<I>delay_</I><A NAME="I4115"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I4116"></A>The expected type for the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN> 
+is the predefined type Duration. <A NAME="I4117"></A>The <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN> 
+is expected to be of any nonlimited type.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><A NAME="I4118"></A><A NAME="I4119"></A><A NAME="I4120"></A>There 
+can be multiple time bases, each with a corresponding clock, and a corresponding 
+<I>time type</I>. The type of the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN> 
+shall be a time type &mdash; either the type Time defined in the language-defined 
+package Calendar (see below), the type Time in the package Real_Time 
+(see <A HREF="RM-D-8.html">D.8</A>), or some other implementation-defined 
+time type.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">There is a predefined fixed point type named Duration, 
+declared in the visible part of package Standard; a value of type Duration 
+is used to represent the length of an interval of time, expressed in 
+seconds. The type Duration is not specific to a particular time base, 
+but can be used with any time base.</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">A value of the type Time in package Calendar, or 
+of some other time type, represents a time as reported by a corresponding 
+clock.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples"><A NAME="I4121"></A><BR>
+<B>package</B>&nbsp;Ada.Calendar&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I4122"></A>Time&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4123"></A>Year_Number&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1901&nbsp;..&nbsp;2399;<BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4124"></A>Month_Number&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;12;<BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4125"></A>Day_Number&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;31;<BR>
+&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I4126"></A>Day_Duration&nbsp;<B>is</B>&nbsp;Duration&nbsp;<B>range</B>&nbsp;0.0&nbsp;..&nbsp;86_400.0;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4127"></A>Clock&nbsp;<B>return</B>&nbsp;Time;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4128"></A>Year&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Year_Number;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4129"></A>Month&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Month_Number;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4130"></A>Day&nbsp;&nbsp;&nbsp;&nbsp;(Date&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Day_Number;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4131"></A>Seconds(Date&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Day_Duration;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I4132"></A>Split&nbsp;(Date&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Year&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Year_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Month_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Day_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seconds&nbsp;:&nbsp;<B>out</B>&nbsp;Day_Duration);</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I4133"></A>Time_Of(Year&nbsp;&nbsp;:&nbsp;Year_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Month&nbsp;&nbsp;&nbsp;:&nbsp;Month_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Day_Number;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seconds&nbsp;:&nbsp;Day_Duration&nbsp;:=&nbsp;0.0)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Time;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Time;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Duration)&nbsp;<B>return</B>&nbsp;Time;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Duration;&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Time;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Time;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Duration)&nbsp;<B>return</B>&nbsp;Time;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;Time;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Duration;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I4134"></A>Time_Error&nbsp;:&nbsp;<B>exception;</B></div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Calendar;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I4135"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN>, 
+the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is first evaluated. <A NAME="I4136"></A>For a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN>, 
+the expiration time for the delay is the value of the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+in the time base associated with the type of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>. 
+<A NAME="I4137"></A>For a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN>, 
+the expiration time is defined as the current time, in the time base 
+associated with relative delays, plus the value of the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+converted to the type Duration, and then rounded up to the next clock 
+tick. <A NAME="I4138"></A>The time base associated with relative delays 
+is as defined in <A HREF="RM-D-9.html">D.9</A>, &ldquo;<A HREF="RM-D-9.html">Delay 
+Accuracy</A>&rdquo; or is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I4139"></A>The task executing a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN> 
+is blocked until the expiration time is reached, at which point it becomes 
+ready again. If the expiration time has already passed, the task is not 
+blocked.&nbsp;</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Normal"><A NAME="I4140"></A>If an attempt is made to <I>cancel</I> 
+the <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN> 
+(as part of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN> 
+or abort &mdash; see <A HREF="RM-9-7-4.html">9.7.4</A> and <A HREF="RM-9-8.html">9.8</A>), 
+the statement is cancelled if the expiration time has not yet passed, 
+thereby completing the <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal">The time base associated with the type Time of package 
+Calendar is implementation defined. The function Clock of package Calendar 
+returns a value representing the current time for this time base. The 
+implementation-defined value of the named number System.Tick (see <A HREF="RM-13-7.html">13.7</A>) 
+is an approximation of the length of the real-time interval during which 
+the value of Calendar.Clock remains constant.&nbsp;</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Normal">The functions Year, Month, Day, and Seconds return 
+the corresponding values for a given value of the type Time, as appropriate 
+to an implementation-defined time zone; the procedure Split returns all 
+four corresponding values. Conversely, the function Time_Of combines 
+a year number, a month number, a day number, and a duration, into a value 
+of type Time. The operators &quot;+&quot; and &quot;&ndash;&quot; for 
+addition and subtraction of times and durations, and the relational operators 
+for times, have the conventional meaning.&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">If Time_Of is called with a seconds value of 86_400.0, 
+the value returned is equal to the value of Time_Of for the next day 
+with a seconds value of 0.0. The value returned by the function Seconds 
+or through the Seconds parameter of the procedure Split is always less 
+than 86_400.0.</div>
+<div class="paranum"><a name="p26">26/1</a></div>
+<div class="Normal">The exception Time_Error is raised by the function 
+Time_Of if the actual parameters do not form a proper date. This exception 
+is also raised by the operators &quot;+&quot; and &quot;&ndash;&quot; 
+if the result is not representable in the type Time or Duration, as appropriate. 
+This exception is also raised by the functions Year, Month, Day, and 
+Seconds and the procedure Split if the year number of the given date 
+is outside of the range of the subtype Year_Number.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">The implementation of the type Duration shall allow 
+representation of time intervals (both positive and negative) up to at 
+least 86400 seconds (one day); Duration'Small shall not be greater than 
+twenty milliseconds. The implementation of the type Time shall allow 
+representation of all dates with year numbers in the range of Year_Number; 
+it may allow representation of other dates as well (both earlier and 
+later).&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal">An implementation may define additional time types.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal">An implementation may raise Time_Error if the value 
+of a <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-9-7.html#S0230">select_statement</A></SPAN> 
+represents a time more than 90 days past the current time. The actual 
+limit, if any, is implementation-defined.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Normal">Whenever possible in an implementation, the value 
+of Duration'Small should be no greater than 100 microseconds.&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Normal">The time base for <SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN>s 
+should be monotonic; it need not be the same time base as used for Calendar.Clock. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Notes">33&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN> 
+with a negative value of the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is equivalent to one with a zero value.</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Notes">34&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN> 
+may be executed by the environment task; consequently <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN>s 
+may be executed as part of the elaboration of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+or the execution of the main subprogram. Such statements delay the environment 
+task (see <A HREF="RM-10-2.html">10.2</A>).</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Notes">35&nbsp;&nbsp;<A NAME="I4141"></A><A NAME="I4142"></A>A 
+<SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN> 
+is an abort completion point and a potentially blocking operation, even 
+if the task is not actually blocked.</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Notes">36&nbsp;&nbsp;There is no necessary relationship between 
+System.Tick (the resolution of the clock of package Calendar) and Duration'Small 
+(the <I>small</I> of type Duration).&nbsp;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Notes">37&nbsp;&nbsp;Additional requirements associated with 
+<SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN>s 
+are given in <A HREF="RM-D-9.html">D.9</A>, &ldquo;<A HREF="RM-D-9.html">Delay 
+Accuracy</A>&rdquo;.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a relative 
+delay statement:</I>&nbsp;</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Examples"><B>delay</B>&nbsp;3.0;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;delay&nbsp;3.0&nbsp;seconds</I></SPAN></div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I4143"></A><A NAME="I4144"></A><I>Example 
+of a periodic task:</I>&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Examples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Ada.Calendar;<BR>
+&nbsp;&nbsp;&nbsp;Next_Time&nbsp;:&nbsp;Time&nbsp;:=&nbsp;Clock&nbsp;+&nbsp;Period;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Period&nbsp;is&nbsp;a&nbsp;global&nbsp;constant&nbsp;of&nbsp;type&nbsp;Duration</I></SPAN><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>loop</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;repeated&nbsp;every&nbsp;Period&nbsp;seconds</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>delay</B>&nbsp;<B>until</B>&nbsp;Next_Time;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;perform&nbsp;some&nbsp;actions</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next_Time&nbsp;:=&nbsp;Next_Time&nbsp;+&nbsp;Period;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop;</B><BR>
+<B>end;</B></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-6-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Object Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.3.1 Object Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1401"></A><A NAME="I1402"></A><A NAME="I1403"></A>An 
+<SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+declares a <I>stand-alone</I> object with a given nominal subtype and, 
+optionally, an explicit initial value given by an initialization expression. 
+<A NAME="I1404"></A><A NAME="I1405"></A><A NAME="I1406"></A>For an array, 
+task, or protected object, the <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+may include the definition of the (anonymous) type of the object.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">object_declaration</SPAN><A NAME="I1407"></A><A NAME="S0029"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1408"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0030">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1409"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0024">subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1410"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1411"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0030">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1412"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0048">array_type_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1413"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1414"></A><SPAN Class="swiss"><A HREF="RM-9-1.html#S0176">single_task_declaration</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1415"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0181">single_protected_declaration</A></SPAN></div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">defining_identifier_list</SPAN><A NAME="I1416"></A><A NAME="S0030"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I1417"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1418"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>}</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I1419"></A>For an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+following the compound delimiter :=, the type expected for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is that of the object. <A NAME="I1420"></A>This <SPAN Class="swiss"><A HREF="RM-4-4.html#S0108">expression</A></SPAN> 
+is called the <I>initialization expression</I>. <A NAME="I1421"></A></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+without the reserved word <B>constant</B> declares a variable object. 
+If it has a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0024">subtype_indication</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0048">array_type_definition</A></SPAN> 
+that defines an indefinite subtype, then there shall be an initialization 
+expression. An initialization expression shall not be given if the object 
+is of a limited type.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+with the reserved word <B>constant</B> declares a constant object. <A NAME="I1422"></A>If 
+it has an initialization expression, then it is called a <I>full constant 
+declaration</I>. <A NAME="I1423"></A>Otherwise it is called a <I>deferred 
+constant declaration</I>. The rules for deferred constant declarations 
+are given in clause <A HREF="RM-7-4.html">7.4</A>. The rules for full 
+constant declarations are given in this subclause.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">Any declaration that includes a <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0030">defining_identifier_list</A></SPAN> 
+with more than one <SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN> 
+is equivalent to a series of declarations each containing one <SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN> 
+from the list, with the rest of the text of the declaration copied for 
+each declaration in the series, in the same order as the list. The remainder 
+of this International Standard relies on this equivalence; explanations 
+are given for declarations with a single <SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I1424"></A>The <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0024">subtype_indication</A></SPAN> 
+or full type definition of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+defines the nominal subtype of the object. The <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+declares an object of the type of the nominal subtype.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1425"></A>If a composite object declared 
+by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+has an unconstrained nominal subtype, then if this subtype is indefinite 
+or the object is constant or aliased (see <A HREF="RM-3-10.html">3.10</A>) 
+the actual subtype of this object is constrained. The constraint is determined 
+by the bounds or discriminants (if any) of its initial value; <A NAME="I1426"></A>the 
+object is said to be <I>constrained by its initial value</I>. <A NAME="I1427"></A><A NAME="I1428"></A>In 
+the case of an aliased object, this initial value may be either explicit 
+or implicit; in the other cases, an explicit initial value is required. 
+When not constrained by its initial value, the actual and nominal subtypes 
+of the object are the same. <A NAME="I1429"></A><A NAME="I1430"></A>If 
+its actual subtype is constrained, the object is called a <I>constrained 
+object</I>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1431"></A>For 
+an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+without an initialization expression, any initial values for the object 
+or its subcomponents are determined by the <I>implicit initial values</I> 
+defined for its nominal subtype, as follows:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">The implicit initial value for an access subtype 
+is the null value of the access type.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The implicit initial (and only) value for each 
+discriminant of a constrained discriminated subtype is defined by the 
+subtype.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">For a (definite) composite subtype, the implicit 
+initial value of each component with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+is obtained by evaluation of this expression and conversion to the component's 
+nominal subtype (which might raise Constraint_Error &mdash; see <A HREF="RM-4-6.html">4.6</A>, 
+&ldquo;<A HREF="RM-4-6.html">Type Conversions</A>&rdquo;), unless the 
+component is a discriminant of a constrained subtype (the previous case), 
+or is in an excluded <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0069">variant</A></SPAN> 
+(see <A HREF="RM-3-8-1.html">3.8.1</A>). <A NAME="I1432"></A>For each 
+component that does not have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN>, 
+any implicit initial values are those determined by the component's nominal 
+subtype.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Bulleted">For a protected or task subtype, there is an implicit 
+component (an entry queue) corresponding to each entry, with its implicit 
+initial value being an empty queue.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1433"></A>The 
+elaboration of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+proceeds in the following sequence of steps:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+The <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0024">subtype_indication</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-3-6.html#S0048">array_type_definition</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-1.html#S0176">single_task_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0181">single_protected_declaration</A></SPAN> 
+is first elaborated. This creates the nominal subtype (and the anonymous 
+type in the latter three cases).</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
+If the <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+includes an initialization expression, the (explicit) initial value is 
+obtained by evaluating the expression and converting it to the nominal 
+subtype (which might raise Constraint_Error &mdash; see <A HREF="RM-4-6.html">4.6</A>). 
+<A NAME="I1434"></A></div>
+<div class="paranum"><a name="p18">18/1</a></div>
+<div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
+The object is created, and, if there is not an initialization expression, 
+any per-object <span class="insert1">constraints</span><span class="delete1">&nbsp;expressions</span> 
+(see <A HREF="RM-3-8.html">3.8</A>) are <span class="insert1">elaborated</span><span class="delete1">&nbsp;evaluated</span> 
+and any implicit initial values for the object or for its subcomponents 
+are obtained as determined by the nominal subtype.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Enumerated-Term">4.</div><div class="Enumerated-Body">
+<A NAME="I1435"></A><A NAME="I1436"></A>Any initial values (whether explicit 
+or implicit) are assigned to the object or to the corresponding subcomponents. 
+As described in <A HREF="RM-5-2.html">5.2</A> and <A HREF="RM-7-6.html">7.6</A>, 
+Initialize and Adjust procedures can be called. <A NAME="I1437"></A></div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">For the third step above, the object creation and 
+any elaborations and evaluations are performed in an arbitrary order, 
+except that if the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+for a discriminant is evaluated to obtain its initial value, then this 
+evaluation is performed before that of the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+for any component that depends on the discriminant, and also before that 
+of any <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">default_expression</A></SPAN> 
+that includes the name of the discriminant. The evaluations of the third 
+step and the assignments of the fourth step are performed in an arbitrary 
+order, except that each evaluation is performed before the resulting 
+value is assigned.<A NAME="I1438"></A>&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">There is no implicit initial value defined for a 
+scalar subtype. <A NAME="I1439"></A>In the absence of an explicit initialization, 
+a newly created scalar object might have a value that does not belong 
+to its subtype (see <A HREF="RM-13-9-1.html">13.9.1</A> and <A HREF="RM-H-1.html">H.1</A>). 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">7&nbsp;&nbsp;Implicit initial values are not defined 
+for an indefinite subtype, because if an object's nominal subtype is 
+indefinite, an explicit initial value is required.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Notes">8&nbsp;&nbsp;<A NAME="I1440"></A><A NAME="I1441"></A>As 
+indicated above, a stand-alone object is an object declared by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN>. 
+Similar definitions apply to &ldquo;stand-alone constant&rdquo; and &ldquo;stand-alone 
+variable.&rdquo; A subcomponent of an object is not a stand-alone object, 
+nor is an object that is created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0122">allocator</A></SPAN>. 
+An object declared by a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0137">loop_parameter_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0152">parameter_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0193">entry_index_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-11-2.html#S0233">choice_parameter_specification</A></SPAN>, 
+or a <SPAN Class="swiss"><A HREF="RM-12-4.html#S0245">formal_object_declaration</A></SPAN> 
+is not called a stand-alone object.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">9&nbsp;&nbsp;The type of a stand-alone object cannot 
+be abstract (see <A HREF="RM-3-9-3.html">3.9.3</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a multiple 
+object declaration:</I>&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;the&nbsp;multiple&nbsp;object&nbsp;declaration&nbsp;</I></SPAN></div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples">John,&nbsp;Paul&nbsp;:&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person(Sex&nbsp;=&gt;&nbsp;M);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN></div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;two&nbsp;single&nbsp;object&nbsp;declarations&nbsp;in&nbsp;the&nbsp;order&nbsp;given</I></SPAN></div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples">John&nbsp;:&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person(Sex&nbsp;=&gt;&nbsp;M);<BR>
+Paul&nbsp;:&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person(Sex&nbsp;=&gt;&nbsp;M);</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of variable 
+declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples">Count,&nbsp;Sum&nbsp;&nbsp;:&nbsp;Integer;<BR>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;10_000&nbsp;:=&nbsp;0;<BR>
+Sorted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;False;<BR>
+Color_Table&nbsp;:&nbsp;<B>array</B>(1&nbsp;..&nbsp;Max)&nbsp;<B>of</B>&nbsp;Color;<BR>
+Option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Bit_Vector(1&nbsp;..&nbsp;10)&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True);<BR>
+Hello&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;String&nbsp;:=&nbsp;&quot;Hi,&nbsp;world.&quot;;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of constant 
+declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples">Limit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;Integer&nbsp;:=&nbsp;10_000;<BR>
+Low_Limit&nbsp;:&nbsp;<B>constant</B>&nbsp;Integer&nbsp;:=&nbsp;Limit/10;<BR>
+Tolerance&nbsp;:&nbsp;<B>constant</B>&nbsp;Real&nbsp;:=&nbsp;Dispersion(1.15);</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

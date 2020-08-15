@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Entries and Accept Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.5.2 Entries and Accept Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">Entry_declaration</A></SPAN>s, 
+with the corresponding <SPAN Class="swiss">entry_bodies</SPAN> or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>s, 
+are used to define potentially queued operations on tasks and protected 
+objects.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Indented1"><SPAN Class="swiss">entry_declaration</SPAN><A NAME="I4223"></A><A NAME="S0218"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I4224"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN>]</span><BR>
+&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I4225"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[(<A NAME="I4226"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>)]&nbsp;<A NAME="I4227"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0172">parameter_profile</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4228"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">accept_statement</SPAN><A NAME="I4229"></A><A NAME="S0219"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>accept</B>&nbsp;<I>entry_</I><A NAME="I4230"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>&nbsp;[(<A NAME="I4231"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0220">entry_index</A></SPAN>)]&nbsp;<A NAME="I4232"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0172">parameter_profile</A></SPAN>&nbsp;[<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4233"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[<I>entry_</I><A NAME="I4234"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]];</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">entry_index</SPAN><A NAME="I4235"></A><A NAME="S0220"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4236"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">entry_body</SPAN><A NAME="I4237"></A><A NAME="S0221"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I4238"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;&nbsp;<A NAME="I4239"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0222">entry_body_formal_part</A></SPAN><A NAME="I4240"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4241"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
+&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4242"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>entry_</I><A NAME="I4243"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">entry_body_formal_part</SPAN><A NAME="I4244"></A><A NAME="S0222"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[(<A NAME="I4245"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0224">entry_index_specification</A></SPAN>)]&nbsp;<A NAME="I4246"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0172">parameter_profile</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">entry_barrier</SPAN><A NAME="I4247"></A><A NAME="S0223"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>when</B>&nbsp;<A NAME="I4248"></A><SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1"><SPAN Class="swiss">entry_index_specification</SPAN><A NAME="I4249"></A><A NAME="S0224"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I4250"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I4251"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented1">If an <I>entry_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+appears at the end of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+it shall repeat the <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>. 
+If an <I>entry_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+appears at the end of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>, 
+it shall repeat the <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented1">An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+is allowed only in a protected or task declaration.&nbsp;</div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="Indented1"><span class="insert2">An <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN> 
+is not allowed in an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+that includes a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>.</span> 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I4252"></A>In an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+the expected profile for the <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+is that of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>; 
+<A NAME="I4253"></A>the expected type for an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0220">entry_index</A></SPAN> 
+is that of the subtype defined by the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+of the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">Within the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+if a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
+has a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+that denotes the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>, 
+then the entity denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+is the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+and the <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
+is interpreted as an expanded name (see <A HREF="RM-4-1-3.html">4.1.3</A>); 
+the <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
+has to be the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+for some formal parameter of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+in a task declaration shall not contain a specification for an access 
+parameter (see <A HREF="RM-3-10.html">3.10</A>).&nbsp;</div>
+<div class="paranum"><a name="p13.1">13.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">If 
+an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+has an <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN>, 
+then at the point of the declaration:</span>&nbsp;</div>
+<div class="paranum"><a name="p13.2">13.2/2</a></div>
+<div class="Bulleted"><span class="insert2">if the <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN> 
+is <B>overriding</B>, then the entry shall implement an inherited subprogram;</span></div>
+<div class="paranum"><a name="p13.3">13.3/2</a></div>
+<div class="Bulleted"><span class="insert2">if the <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN> 
+is <B>not overriding</B>, then the entry shall not implement any inherited 
+subprogram.</span></div>
+<div class="paranum"><a name="p13.4">13.4/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I4254"></A>In addition 
+to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules also apply in the private part of an instance of a generic 
+unit.</span></div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">For an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+the innermost enclosing body shall be a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>, 
+and the <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
+shall denote an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+in the corresponding task declaration; the profile of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+shall conform fully to that of the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>. 
+<A NAME="I4255"></A>An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+shall have a parenthesized <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0220">entry_index</A></SPAN> 
+if and only if the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+has a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+shall not be within another <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+that corresponds to the same <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>, 
+nor within an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN> 
+inner to the enclosing <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal"><A NAME="I4256"></A>An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+of a protected unit requires a completion, which shall be an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>, 
+<A NAME="I4257"></A>and every <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+shall be the completion of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+of a protected unit. <A NAME="I4258"></A>The profile of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+shall conform fully to that of the corresponding declaration. <A NAME="I4259"></A></div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0222">entry_body_formal_part</A></SPAN> 
+shall have an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0224">entry_index_specification</A></SPAN> 
+if and only if the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+has a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
+In this case, the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+and the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0224">entry_index_specification</A></SPAN> 
+shall fully conform to one another (see <A HREF="RM-6-3-1.html">6.3.1</A>). 
+<A NAME="I4260"></A></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">A name that denotes a formal parameter of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+is not allowed within the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">The parameter modes defined for parameters in the 
+<SPAN Class="swiss"><A HREF="RM-6-1.html#S0172">parameter_profile</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+are the same as for a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0163">subprogram_declaration</A></SPAN> 
+and have the same meaning (see <A HREF="RM-6-2.html">6.2</A>).&nbsp;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I4261"></A><A NAME="I4262"></A><A NAME="I4263"></A>An 
+<SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+(see <A HREF="RM-3-6.html">3.6</A>) declares a <I>family</I> of distinct 
+entries having the same profile, with one such entry for each value of 
+the <I>entry index subtype</I> defined by the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
+A name for an entry of a family takes the form of an <SPAN Class="swiss"><A HREF="RM-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+where the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+denotes the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+for the family, and the index value identifies the entry within the family. 
+<A NAME="I4264"></A><A NAME="I4265"></A>The term <I>single entry</I> 
+is used to refer to any entry other than an entry of an entry family.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">In the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+for an entry family, the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0224">entry_index_specification</A></SPAN> 
+declares a named constant whose subtype is the entry index subtype defined 
+by the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>; 
+<A NAME="I4266"></A>the value of the <I>named entry index</I> identifies 
+which entry of the family was called.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p22">22/1</a></div>
+<div class="Normal"><A NAME="I4267"></A><span class="insert1">The elaboration 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+for an entry family consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>, 
+as described in <A HREF="RM-3-8.html">3.8</A>.</span><span class="delete1">&nbsp;For 
+the elaboration of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+for an entry family, if the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+contains no per-object expressions (see <A HREF="RM-3-8.html">3.8</A>), 
+then the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+is elaborated. Otherwise, the elaboration of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+consists of the evaluation of any expression of the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
+that is not a per-object expression (or part of one).</span> The elaboration 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+for a single entry has no effect.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal">The actions to be performed when an entry is called 
+are specified by the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>s 
+(if any) for an entry of a task unit, and by the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+for an entry of a protected unit.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal"><A NAME="I4268"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0220">entry_index</A></SPAN>, 
+if any, is first evaluated and converted to the entry index subtype; 
+this index value identifies which entry of the family is to be accepted. 
+<A NAME="I4269"></A><A NAME="I4270"></A><A NAME="I4271"></A>Further execution 
+of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+is then blocked until a caller of the corresponding entry is selected 
+(see <A HREF="RM-9-5-3.html">9.5.3</A>), whereupon the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>, 
+if any, of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+is executed, with the formal parameters associated with the corresponding 
+actual parameters of the selected entry call. of the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+completes and is left. When an exception is propagated from the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
+the same exception is also raised by the execution of the corresponding 
+<SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0225">entry_call_statement</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal"><A NAME="I4272"></A>The above interaction between 
+a calling task and an accepting task is called a <I>rendezvous</I>. After 
+a rendezvous, the two tasks continue their execution independently.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+is executed when the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN> 
+evaluates to True and a caller of the corresponding single entry, or 
+entry of the corresponding entry family, has been selected (see <A HREF="RM-9-5-3.html">9.5.3</A>). 
+<A NAME="I4273"></A>For the execution of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
+is elaborated, and the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+of the body is executed, as for the execution of a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN>. 
+The value of the named entry index, if any, is determined by the value 
+of the entry index specified in the <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+of the selected entry call (or intermediate <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
+&mdash; see <A HREF="RM-9-5-4.html">9.5.4</A>).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes">24&nbsp;&nbsp;A task entry has corresponding accept_statements 
+(zero or more), whereas a protected entry has a corresponding entry_body 
+(exactly one).</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Notes">25&nbsp;&nbsp;A consequence of the rule regarding 
+the allowed placements of <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>s 
+is that a task can execute <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>s 
+only for its own entries.</div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Notes">26&nbsp;&nbsp;A <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="RM-6-5.html#S0184">&nbsp;return_statement</A></SPAN></span> 
+(see <A HREF="RM-6-5.html">6.5</A>) or a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
+(see <A HREF="RM-9-5-4.html">9.5.4</A>) may be used to complete the execution 
+of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Notes">27&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN> 
+may reference anything visible except the formal parameters of the entry. 
+This includes the entry index (if any), the components (including discriminants) 
+of the protected object, the Count attribute of an entry of that protected 
+object, and data global to the protected unit.</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Notes">The restriction against referencing the formal parameters 
+within an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN> 
+ensures that all calls of the same entry see the same barrier value. 
+If it is necessary to look at the parameters of an entry call before 
+deciding whether to handle it, the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0223">entry_barrier</A></SPAN> 
+can be &ldquo;<B>when</B> True&rdquo; and the caller can be requeued 
+(on some private entry) when its parameters indicate that it cannot be 
+handled immediately.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of entry 
+declarations:</I>&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>entry</B>&nbsp;Read(V&nbsp;:&nbsp;<B>out</B>&nbsp;Item);<BR>
+<B>entry</B>&nbsp;Seize;<BR>
+<B>entry</B>&nbsp;Request(Level)(D&nbsp;:&nbsp;Item);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;a&nbsp;family&nbsp;of&nbsp;entries</I></SPAN></div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of accept 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples"><B>accept</B>&nbsp;Shut_Down;</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Examples"><B>accept</B>&nbsp;Read(V&nbsp;:&nbsp;<B>out</B>&nbsp;Item)&nbsp;<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;V&nbsp;:=&nbsp;Local_Item;<BR>
+<B>end</B>&nbsp;Read;</div>
+<div class="paranum"><a name="p37">37</a></div>
+<div class="Examples"><B>accept</B>&nbsp;Request(Low)(D&nbsp;:&nbsp;Item)&nbsp;<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Request;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

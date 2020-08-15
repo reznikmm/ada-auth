@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Type Extensions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-9-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.9.1 Type Extensions</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><A NAME="I2140"></A><A NAME="I2141"></A><A NAME="I2142"></A><A NAME="I2143"></A><A NAME="I2144"></A><A NAME="I2145"></A>Every 
+type extension is a tagged type, and is a <I>record extension</I> or 
+a <I>private extension</I> of some other tagged type, or a noninterface 
+synchronized tagged type.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">record_extension_part</SPAN><A NAME="I2146"></A><A NAME="S0075"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>with</B>&nbsp;<A NAME="I2147"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">The parent type of a record extension shall not be 
+a class-wide type nor shall it be a synchronized tagged type (see <A HREF="RM-3-9-4.html">3.9.4</A>). 
+If the parent type or any progenitor is nonlimited, then each of the 
+components of the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+shall be nonlimited. <A NAME="I2148"></A>In addition to the places where 
+Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">Within the body of a generic unit, or the body of 
+any of its descendant library units, a tagged type shall not be declared 
+as a descendant of a formal type declared within the formal part of the 
+generic unit.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Normal">&nbsp;<A NAME="I2149"></A>A record extension is a <I>null 
+extension</I> if its declaration has no <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+and its <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+includes no <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>s. 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I2150"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN>. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Notes">74&nbsp;&nbsp;The term &ldquo;type extension&rdquo; 
+refers to a type as a whole. The term &ldquo;extension part&rdquo; refers 
+to the piece of text that defines the additional components (if any) 
+the type extension has relative to its specified ancestor type.&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Notes">75&nbsp;&nbsp;When an extension is declared immediately 
+within a body, primitive subprograms are inherited and are overridable, 
+but new primitive subprograms cannot be added.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">76&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a component (including a discriminant) of the parent type 
+is not allowed within the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>. 
+Similarly, a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a component defined within the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+is not allowed within the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN>. 
+It is permissible to use a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes a discriminant of the record extension, providing there 
+is a new <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+in the enclosing type declaration. (The full rule is given in <A HREF="RM-3-8.html">3.8</A>.) 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">77&nbsp;&nbsp;Each visible component of a record extension 
+has to have a unique name, whether the component is (visibly) inherited 
+from the parent type or declared in the <SPAN Class="swiss"><A HREF="RM-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+(see <A HREF="RM-8-3.html">8.3</A>).&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of record 
+extensions (of types defined above in <A HREF="RM-3-9.html">3.9</A>):</I> 
+</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples"><B>type</B>&nbsp;Painted_Point&nbsp;<B>is&nbsp;new</B>&nbsp;Point&nbsp;<B>with</B><BR>
+&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Paint&nbsp;:&nbsp;Color&nbsp;:=&nbsp;White;<BR>
+&nbsp;&nbsp;<B>end&nbsp;record</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Components&nbsp;X&nbsp;and&nbsp;Y&nbsp;are&nbsp;inherited</I></SPAN></div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">Origin&nbsp;:&nbsp;<B>constant</B>&nbsp;Painted_Point&nbsp;:=&nbsp;(X&nbsp;|&nbsp;Y&nbsp;=&gt;&nbsp;0.0,&nbsp;Paint&nbsp;=&gt;&nbsp;Black);</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>type</B>&nbsp;Literal&nbsp;<B>is&nbsp;new</B>&nbsp;Expression&nbsp;<B>with</B><BR>
+&nbsp;&nbsp;<B>record</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;leaf&nbsp;in&nbsp;an&nbsp;Expression&nbsp;tree</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Value&nbsp;:&nbsp;Real;<BR>
+&nbsp;&nbsp;<B>end&nbsp;record</B>;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>type</B>&nbsp;Expr_Ptr&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Expression'Class;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-10.html">3.10</A></I></SPAN></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>type</B>&nbsp;Binary_Operation&nbsp;<B>is&nbsp;new</B>&nbsp;Expression&nbsp;<B>with</B><BR>
+&nbsp;&nbsp;<B>record</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;an&nbsp;internal&nbsp;node&nbsp;in&nbsp;an&nbsp;Expression&nbsp;tree</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Left,&nbsp;Right&nbsp;:&nbsp;Expr_Ptr;<BR>
+&nbsp;&nbsp;<B>end&nbsp;record</B>;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>type</B>&nbsp;Addition&nbsp;<B>is&nbsp;new</B>&nbsp;Binary_Operation&nbsp;<B>with&nbsp;null&nbsp;record</B>;<BR>
+<B>type</B>&nbsp;Subtraction&nbsp;<B>is&nbsp;new</B>&nbsp;Binary_Operation&nbsp;<B>with&nbsp;null&nbsp;record</B>;<BR>
+&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;No&nbsp;additional&nbsp;components&nbsp;needed&nbsp;for&nbsp;these&nbsp;extensions</I></SPAN></div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">Tree&nbsp;:&nbsp;Expr_Ptr&nbsp;:=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;A&nbsp;tree&nbsp;representation&nbsp;of&nbsp;&ldquo;5.0&nbsp;+&nbsp;(13.0&ndash;7.0)&rdquo;</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Addition'(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Literal'(Value&nbsp;=&gt;&nbsp;5.0),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Subtraction'(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Literal'(Value&nbsp;=&gt;&nbsp;13.0),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Literal'(Value&nbsp;=&gt;&nbsp;7.0)));</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-9-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

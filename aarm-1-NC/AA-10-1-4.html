@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Compilation Process</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>10.1.4 The Compilation Process</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I3937"></A><A NAME="I3938"></A>Each compilation 
+unit submitted to the compiler is compiled in the context of an <I>environment</I> 
+<SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+(or simply, an <I>environment</I>), which is a conceptual <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+that forms the outermost declarative region of the context of any <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0214">compilation</A></SPAN>. 
+At run time, an environment forms the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+of the body of the environment task of a partition (see <A HREF="AA-10-2.html">10.2</A>, 
+&ldquo;<A HREF="AA-10-2.html">Program Execution</A>&rdquo;).&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>At compile time, there 
+is no particular construct that the declarative region is considered 
+to be nested within &mdash; the environment is the universe.&nbsp;</div>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The environment is really 
+just a portion of a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN>, 
+since there might, for example, be bodies that do not yet exist.&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="AA-3-11.html#S0080">declarative_item</A></SPAN>s 
+of the environment are <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN>s 
+appearing in an order such that there are no forward semantic dependences. 
+Each included subunit occurs in place of the corresponding stub. The 
+visibility rules apply as if the environment were the outermost declarative 
+region, except that <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>s 
+are needed to make declarations of library units visible (see <A HREF="AA-10-1-2.html">10.1.2</A>).</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">The mechanisms for creating an environment and for 
+adding and replacing compilation units within an environment are implementation 
+defined.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The mechanisms 
+for creating an environment and for adding and replacing compilation 
+units.</div>
+<div class="paranum"><a name="p3.b">3.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The traditional model, 
+used by most Ada 83 implementations, is that one places a compilation 
+unit in the environment by compiling it. Other models are possible. For 
+example, an implementation might define the environment to be a directory; 
+that is, the compilation units in the environment are all the compilation 
+units in the source files contained in the directory. In this model, 
+the mechanism for replacing a compilation unit with a new one is simply 
+to edit the source file containing that compilation unit.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0032">8652/0032</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00192.TXT">AI95-00192-01</A></I>} 
+If a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0219">library_unit_body</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+is submitted to the compiler, it is interpreted only as a completion 
+if a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0217">library_unit_declaration</A></SPAN> 
+with the same <SPAN Class="swiss"><A HREF="AA-6-1.html#S0146">defining_program_unit_name</A></SPAN> 
+already exists in the environment for a subprogram other than an instance 
+of a generic subprogram or for a generic subprogram (even if the profile 
+of the body is not type conformant with that of the declaration); otherwise 
+the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+is interpreted as both the declaration and body of a library subprogram. 
+<A NAME="I3939"></A></div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The principle here is that 
+a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+should be interpreted as only a completion if and only if it &ldquo;might&rdquo; 
+be legal as the completion of some preexisting declaration, where &ldquo;might&rdquo; 
+is defined in a way that does not require overload resolution to determine.</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations">Hence, if the preexisting declaration is a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0141">subprogram_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0237">generic_subprogram_declaration</A></SPAN>, 
+we treat the new <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+as its completion, because it &ldquo;might&rdquo; be legal. If it turns 
+out that the profiles don't fully conform, it's an error. In all other 
+cases (the preexisting declaration is a package or a generic package, 
+or an instance of a generic subprogram, or a renaming, or a &ldquo;spec-less&rdquo; 
+subprogram, or in the case where there is no preexisting thing), the 
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+declares a new subprogram.</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations">See also AI83-00266/09.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">When a compilation unit is compiled, all compilation 
+units upon which it depends semantically shall already exist in the environment; 
+<A NAME="I3940"></A>the set of these compilation units shall be <I>consistent</I> 
+in the sense that the new compilation unit shall not semantically depend 
+(directly or indirectly) on two different versions of the same compilation 
+unit, nor on an earlier version of itself.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, if package declarations 
+A and B both say &ldquo;<B>with</B> X;&rdquo;, and the user compiles 
+a compilation unit that says &ldquo;<B>with</B> A, B;&rdquo;, then the 
+A and B have to be talking about the same version of X.&nbsp;</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>What it means to be a &ldquo;different 
+version&rdquo; is not specified by the language. In some implementations, 
+it means that the compilation unit has been recompiled. In others, it 
+means that the source of the compilation unit has been edited in some 
+significant way.</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="Annotations">Note that an implementation cannot require the 
+existence of compilation units upon which the given one does not semantically 
+depend. For example, an implementation is required to be able to compile 
+a compilation unit that says &quot;<B>with</B> A;&quot; when A's body 
+does not exist. It has to be able to detect errors without looking at 
+A's body.</div>
+<div class="paranum"><a name="p5.d">5.d</a></div>
+<div class="Annotations">Similarly, the implementation has to be able 
+to compile a call to a subprogram for which a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Inline has been specified without seeing the body of that subprogram 
+&mdash; inlining would not be achieved in this case, but the call is 
+still legal.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The implementation may require that a compilation 
+unit be legal before inserting it into the environment.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">When a compilation unit that declares or renames 
+a library unit is added to the environment, the implementation may remove 
+from the environment any preexisting <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN> 
+with the same <SPAN Class="swiss"><A HREF="AA-6-1.html#S0146">defining_program_unit_name</A></SPAN>. 
+When a compilation unit that is a subunit or the body of a library unit 
+is added to the environment, the implementation may remove from the environment 
+any preexisting version of the same compilation unit. When a given compilation 
+unit is removed from the environment, the implementation may also remove 
+any compilation unit that depends semantically upon the given one. If 
+the given compilation unit contains the body of a subprogram to which 
+a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> Inline 
+applies, the implementation may also remove any compilation unit containing 
+a call to that subprogram.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The permissions given in 
+this paragraph correspond to the traditional model, where compilation 
+units enter the environment by being compiled into it, and the compiler 
+checks their legality at that time. A implementation model in which the 
+environment consists of all source files in a given directory might not 
+want to take advantage of these permissions. Compilation units would 
+not be checked for legality as soon as they enter the environment; legality 
+checking would happen later, when compilation units are compiled. In 
+this model, compilation units might never be automatically removed from 
+the environment; they would be removed when the user explicitly deletes 
+a source file.</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="Annotations">Note that the rule is recursive: if the above 
+permission is used to remove a compilation unit containing an inlined 
+subprogram call, then compilation units that depend semantically upon 
+the removed one may also be removed, and so on.</div>
+<div class="paranum"><a name="p7.c">7.c</a></div>
+<div class="Annotations">Note that here we are talking about dependences 
+among existing compilation units in the environment; it doesn't matter 
+what <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN>s 
+are attached to the new compilation unit that triggered all this.</div>
+<div class="paranum"><a name="p7.d">7.d</a></div>
+<div class="Annotations">An implementation may have other modes in which 
+compilation units in addition to the ones mentioned above are removed. 
+For example, an implementation might inline subprogram calls without 
+an explicit <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Inline. If so, it either has to have a mode in which that optimization 
+is turned off, or it has to automatically regenerate code for the inlined 
+calls without requiring the user to resubmit them to the compiler.&nbsp;</div>
+<div class="paranum"><a name="p7.d.1">7.d.1/1</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="defect2.html#8652/0108">8652/0108</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00077.TXT">AI95-00077-01</A></I>} 
+In the standard mode, implementations may only remove units from the 
+environment for one of the reasons listed here, or in response to an 
+explicit user command to modify the environment. It is not intended that 
+the act of compiling a unit is one of the &ldquo;mechansisms&rdquo; for 
+removing units other than those specified by this International Standard.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Notes">5&nbsp;&nbsp;The rules of the language are enforced 
+across <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0214">compilation</A></SPAN> 
+and compilation unit boundaries, just as they are enforced within a single 
+compilation unit.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that Section <A HREF="AA-1.html">1</A> 
+requires an implementation to detect illegal compilation units at compile 
+time.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">6&nbsp;&nbsp;<A NAME="I3941"></A>An implementation 
+may support a concept of a <I>library</I>, which contains <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN>s. 
+If multiple libraries are supported, the implementation has to define 
+how a single environment is constructed when a compilation unit is submitted 
+to the compiler. Naming conflicts between different libraries might be 
+resolved by treating each library as the root of a hierarchy of child 
+library units. <A NAME="I3942"></A></div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Alternatively, naming 
+conflicts could be resolved via some sort of hiding rule.&nbsp;</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, the implementation 
+might support a command to import library Y into library X. If a root 
+library unit called LU (that is, Standard.LU) exists in Y, then from 
+the point of view of library X, it could be called Y.LU. X might contain 
+library units that say, &ldquo;<B>with</B> Y.LU;&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">7&nbsp;&nbsp;A compilation unit containing an instantiation 
+of a separately compiled generic unit does not semantically depend on 
+the body of the generic unit. Therefore, replacing the generic body in 
+the environment does not result in the removal of the compilation unit 
+containing the instantiation.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Therefore, implementations 
+have to be prepared to automatically instantiate generic bodies at link-time, 
+as needed. This might imply a complete automatic recompilation, but it 
+is the intent of the language that generic bodies can be (re)instantiated 
+without forcing all of the compilation units that semantically depend 
+on the compilation unit containing the instantiation to be recompiled. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-10-1-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

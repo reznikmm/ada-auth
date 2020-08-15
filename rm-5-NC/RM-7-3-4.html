@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Stable Properties of a Type</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.3.4 Stable Properties of a Type</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">It is usual that some of the characteristics of a 
+data type are unchanged by most of the primitive operations on the type. 
+Such characteristics are called <I>stable properties</I> of the type.<A NAME="I3776"></A><A NAME="I3777"></A> 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal">A <I>property function</I> of type <I>T</I> is a 
+function with a single parameter of type <I>T</I> or of a class-wide 
+type that covers <I>T</I>.<A NAME="I3778"></A><A NAME="I3779"></A></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Normal">A <I>type property aspect definition</I> is <A NAME="I3780"></A>a 
+list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>. 
+A <I>subprogram property aspect definition</I><A NAME="I3781"></A> is 
+a list of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+preceded by an optional <B>not</B> written in the syntax of a <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>.</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a nonformal private 
+type, nonformal private extension, or full type that does not have a 
+partial view, the following language-defined aspects may be specified 
+with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+(see <A HREF="RM-13-1-1.html">13.1.1</A>):</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="WideHanging-Term">Stable_Properties</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a type property aspect definition; 
+each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall statically denote a single property function of the type. This 
+aspect defines the <I>stable property functions</I> of the associated 
+type.<A NAME="I3782"></A><A NAME="I3783"></A> <A NAME="I3784"></A><A NAME="I3785"></A><A NAME="I3786"></A></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="WideHanging-Term">Stable_Properties'Class</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a type property aspect definition; 
+each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall statically denote a single property function of the type. This 
+aspect defines the <I>class-wide stable property functions</I> of the 
+associated type. Unlike most class-wide aspects, Stable_Properties'Class 
+is not inherited by descendant types and subprograms, but the enhanced 
+class-wide postconditions are inherited in the normal manner.<A NAME="I3787"></A><A NAME="I3788"></A><A NAME="I3789"></A><A NAME="I3790"></A></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a primitive subprogram, 
+the following language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+(see <A HREF="RM-13-1-1.html">13.1.1</A>):</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="WideHanging-Term">Stable_Properties</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a subprogram property aspect definition; 
+each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall statically denote a single property function of a type for which 
+the associated subprogram is primitive.</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="WideHanging-Term">Stable_Properties'Class</div><div class="WideHanging-Body"><br clear="left">
+This aspect shall be specified by a subprogram property aspect definition; 
+each <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall statically denote a single property function of a tagged type for 
+which the associated subprogram is primitive. Unlike most class-wide 
+aspects, Stable_Properties'Class is not inherited by descendant subprograms, 
+but the enhanced class-wide postconditions are inherited in the normal 
+manner.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A stable property function 
+of a type <I>T</I> (including a class-wide stable property function) 
+shall have a nonlimited return type and shall be:</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Bulleted">a primitive function with a single parameter of 
+mode <B>in</B> of type <I>T</I>; or</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Bulleted">a function that is declared immediately within 
+the declarative region in which an ancestor type of <I>T</I> is declared 
+and has a single parameter of mode <B>in</B> of a class-wide type that 
+covers <I>T</I>.&nbsp;</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">In a subprogram property 
+aspect definition for a subprogram <I>S</I>:</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Bulleted">all or none of the items shall be preceded by <B>not</B>;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Bulleted">any property functions mentioned after <B>not</B> 
+shall be a stable property function of a type for which <I>S</I> is primitive. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a primitive subprogram 
+<I>S</I> of a type <I>T</I>, the stable property functions for <I>S</I> 
+for type <I>T</I> are:</div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Bulleted">if <I>S</I> has an aspect Stable_Properties specified 
+that does not include <B>not</B>, those functions denoted in the aspect 
+Stable_Properties for <I>S</I> that have a parameter of <I>T</I> or <I>T</I>'Class;</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Bulleted">if <I>S</I> has an aspect Stable_Properties specified 
+that includes <B>not</B>, those functions denoted in the aspect Stable_Properties 
+for <I>T</I>, excluding those denoted in the aspect Stable_Properties 
+for <I>S</I>;</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Bulleted">if <I>S</I> does not have an aspect Stable_Properties, 
+those functions denoted in the aspect Stable_Properties for <I>T</I>, 
+if any.</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal">A similar definition applies for class-wide stable 
+property functions by replacing aspect Stable_Properties with aspect 
+Stable_Properties'Class in the above definition.</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal">The <I>explicit</I> specific postcondition expression 
+for a subprogram <I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+directly specified for <I>S</I> with the Post aspect. Similarly, the 
+<I>explicit</I> class-wide postcondition expression for a subprogram 
+<I>S</I> is the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+directly specified for <I>S</I> with the Post'Class aspect.<A NAME="I3791"></A><A NAME="I3792"></A><A NAME="I3793"></A></div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal">For every primitive subprogram <I>S</I> of a type 
+<I>T</I> that is not a stable property function of <I>T</I>, the specific 
+postcondition expression of <I>S</I> is modified to include expressions 
+of the form <TT><I>F</I>(<I>P</I>) = <I>F</I>(<I>P</I>)'Old</TT>, all 
+<B>and</B>ed with each other and any explicit specific postcondition 
+expression, where <I>F</I> is each stable property function of <I>S</I> 
+for type <I>T</I> that does not occur in the explicit specific postcondition 
+expression of <I>S</I>, and <I>P</I> is each parameter of <I>S</I> that 
+has type <I>T</I>. The resulting specific postcondition expression of 
+<I>S</I> is used in place of the explicit specific postcondition expression 
+of <I>S</I> when interpreting the meaning of the postcondition as defined 
+in <A HREF="RM-6-1-1.html">6.1.1</A>.</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal">For every primitive subprogram <I>S</I> of a type 
+<I>T</I> that is not a stable property function of <I>T</I>, the class-wide 
+postcondition expression of <I>S</I> is modified to include expressions 
+of the form <TT><I>F</I>(<I>P</I>) = <I>F</I>(<I>P</I>)'Old</TT>, all 
+<B>and</B>ed with each other and any explicit class-wide postcondition 
+expression, where <I>F</I> is each class-wide stable property function 
+of <I>S</I> for type <I>T</I> that does not occur in any class-wide postcondition 
+expression that applies to <I>S</I>, and <I>P</I> is each parameter of 
+<I>S</I> that has type <I>T</I>. The resulting class-wide postcondition 
+expression of <I>S</I> is used in place of the explicit class-wide postcondition 
+expression of <I>S</I> when interpreting the meaning of the postcondition 
+as defined in <A HREF="RM-6-1-1.html">6.1.1</A>.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Notes">14&nbsp;&nbsp;For an example of the use of these aspects, 
+see the Vector container definition in <A HREF="RM-A-18-2.html">A.18.2</A>. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

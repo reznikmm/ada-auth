@@ -1,0 +1,972 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Package Directories</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallIndented1Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 4.6em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.16 <span class="insert2">The Package Directories</span><span class="delete2"></span></H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The package Directories provides operations for 
+manipulating files and directories, and their names.</span>&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
+notes for this clause contain the expected interpretations of some of 
+the operations on various target systems. &ldquo;Unix&rdquo; refers to 
+the UNIX&reg; operating system, and in most cases also covers Unix-like 
+systems such as Linux and POSIX. &ldquo;Windows&reg;&rdquo; refers to 
+the Microsoft&reg; Windows&reg; 2000 operating system and usually also 
+covers most other versions that use the Win32 API.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The library package Directories has the following 
+declaration:</span>&nbsp;</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.IO_Exceptions;<BR>
+<B>with</B>&nbsp;Ada.Calendar;<BR>
+<B>package</B>&nbsp;Ada.Directories&nbsp;<B>is</B><A NAME="I6548"></A></span></div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Directory&nbsp;and&nbsp;file&nbsp;operations:</I></SPAN></span></div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6549"></A>Current_Directory&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6550"></A>Set_Directory&nbsp;(Directory&nbsp;:&nbsp;in&nbsp;String);</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6551"></A>Create_Directory&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6552"></A>Delete_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6553"></A>Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6554"></A>Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6555"></A>Delete_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6556"></A>Rename&nbsp;(Old_Name,&nbsp;New_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6557"></A>Copy_File&nbsp;(Source_Name,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;and&nbsp;directory&nbsp;name&nbsp;operations:</I></SPAN></span></div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6558"></A>Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6559"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6560"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6561"></A>Extension&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6562"></A>Base_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6563"></A>Compose&nbsp;(Containing_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;and&nbsp;directory&nbsp;queries:</I></SPAN></span></div>
+<div class="paranum"><a name="p22">22/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6564"></A>File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</span></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6565"></A>File_Size&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6566"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6567"></A>Kind&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6568"></A>Size&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6569"></A>Modification_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Directory&nbsp;searching:</I></SPAN></span></div>
+<div class="paranum"><a name="p29">29/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6570"></A>Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6571"></A>Filter_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(File_Kind)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6572"></A>Search_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6573"></A>Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Filter_Type&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True));</span></div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6574"></A>End_Search&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type);</span></div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6575"></A>More_Entries&nbsp;(Search&nbsp;:&nbsp;<B>in</B>&nbsp;Search_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p35">35/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6576"></A>Get_Next_Entry&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory_Entry&nbsp;:&nbsp;<B>out</B>&nbsp;Directory_Entry_Type);</span></div>
+<div class="paranum"><a name="p36">36/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Search&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Filter_Type&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type));</span></div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Operations&nbsp;on&nbsp;Directory&nbsp;Entries:</I></SPAN></span></div>
+<div class="paranum"><a name="p38">38/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6577"></A>Simple_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p39">39/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6578"></A>Full_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p40">40/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6579"></A>Kind&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
+<div class="paranum"><a name="p41">41/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6580"></A>Size&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6581"></A>Modification_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p43">43/2</a></div>
+<div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;<A NAME="I6582"></A>Status_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Status_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6583"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Name_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6584"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Use_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6585"></A>Device_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Device_Error;</span></div>
+<div class="paranum"><a name="p44">44/2</a></div>
+<div class="Examples"><span class="insert2"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language.</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Directories;</span></div>
+<div class="paranum"><a name="p45">45/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">External files may be classified as directories, 
+special files, or ordinary files. A <I>directory</I> is an external file 
+that is a container for files on the target system. A <I>special file</I> 
+is an external file that cannot be created or read by a predefined Ada 
+input-output package. External files that are not special files or directories 
+are called <I>ordinary files</I>. <A NAME="I6586"></A><A NAME="I6587"></A><A NAME="I6588"></A></span></div>
+<div class="paranum"><a name="p45.a">45.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>A 
+directory is an external file, although it may not have a name on some 
+targets. A directory is not a special file, as it can be created and 
+read by Directories.</span>&nbsp;</div>
+<div class="paranum"><a name="p45.b">45.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>Devices 
+and soft links are examples of special files on Windows&reg; and Unix.</span></div>
+<div class="paranum"><a name="p45.c">45.c/2</a></div>
+<div class="Annotations"><span class="insert2">Even if an implementation 
+provides a package to create and read soft links, such links are still 
+special files.</span>&nbsp;</div>
+<div class="paranum"><a name="p46">46/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">A <I>file name</I> is a string identifying an external 
+file. Similarly, a <I>directory name</I> is a string identifying a directory. 
+The interpretation of file names and directory names is implementation-defined. 
+<A NAME="I6589"></A><A NAME="I6590"></A></span></div>
+<div class="paranum"><a name="p46.a">46.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The interpretation of file names and 
+directory names.</span></div>
+<div class="paranum"><a name="p47">47/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The <I>full name</I> of an external file is a full 
+specification of the name of the file. If the external environment allows 
+alternative specifications of the name (for example, abbreviations), 
+the full name should not use such alternatives. A full name typically 
+will include the names of all of the directories that contain the item. 
+The <I>simple name</I> of an external file is the name of the item, not 
+including any containing directory names. Unless otherwise specified, 
+a file name or directory name parameter in a call to a predefined Ada 
+input-output subprogram can be a full name, a simple name, or any other 
+form of name supported by the implementation. <A NAME="I6591"></A><A NAME="I6592"></A></span></div>
+<div class="paranum"><a name="p47.a">47.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
+full name on Unix is a complete path to the root. For Windows&reg;, the 
+full name includes a complete path, as well as a disk name (&quot;C:&quot;) 
+or network share name. For both systems, the simple name is the part 
+of the name following the last '/' (or '\' for Windows&reg;). For example, 
+in the name &quot;/usr/randy/ada-directories.ads&quot;, &quot;ada-directories.ads&quot; 
+is the simple name.</span>&nbsp;</div>
+<div class="paranum"><a name="p47.b">47.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>It 
+is possible for a file or directory name to be neither a full name nor 
+a simple name. For instance, the Unix name &quot;../parent/myfile&quot; 
+is neither a full name nor a simple name.</span>&nbsp;</div>
+<div class="paranum"><a name="p48">48/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The <I>default directory</I> is the directory that 
+is used if a directory or file name is not a full name (that is, when 
+the name does not fully identify all of the containing directories). 
+<A NAME="I6593"></A></span></div>
+<div class="paranum"><a name="p48.a">48.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
+default directory is the one maintained by the familiar &ldquo;cd&rdquo; 
+command on Unix and Windows&reg;. Note that Windows&reg; maintains separate 
+default directories for each disk drive; implementations should use the 
+natural implementation.</span>&nbsp;</div>
+<div class="paranum"><a name="p49">49/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">A <I>directory entry</I> is a single item in a 
+directory, identifying a single external file (including directories 
+and special files). <A NAME="I6594"></A></span></div>
+<div class="paranum"><a name="p50">50/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">For each function that returns a string, the lower 
+bound of the returned value is 1.</span></div>
+<div class="paranum"><a name="p51">51/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The following file and directory operations are 
+provided:</span></div>
+<div class="paranum"><a name="p52">52/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Current_Directory&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p53">53/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the full directory name for the current default directory. The name returned 
+shall be suitable for a future call to Set_Directory. The exception Use_Error 
+is propagated if a default directory is not supported by the external 
+environment.</span></div>
+<div class="paranum"><a name="p54">54/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Set_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p55">55/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Sets 
+the current default directory. The exception Name_Error is propagated 
+if the string given as Directory does not identify an existing directory. 
+The exception Use_Error is propagated if the external environment does 
+not support making Directory (in the absence of Name_Error) a default 
+directory.</span></div>
+<div class="paranum"><a name="p56">56/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Create_Directory&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
+<div class="paranum"><a name="p57">57/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Creates 
+a directory with name New_Directory. The Form parameter can be used to 
+give system-dependent characteristics of the directory; the interpretation 
+of the Form parameter is implementation-defined. A null string for Form 
+specifies the use of the default options of the implementation of the 
+new directory. The exception Name_Error is propagated if the string given 
+as New_Directory does not allow the identification of a directory. The 
+exception Use_Error is propagated if the external environment does not 
+support the creation of a directory with the given name (in the absence 
+of Name_Error) and form.</span></div>
+<div class="paranum"><a name="p58">58/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p59">59/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Deletes 
+an existing empty directory with name Directory. The exception Name_Error 
+is propagated if the string given as Directory does not identify an existing 
+directory. The exception Use_Error is propagated if the external environment 
+does not support the deletion of the directory (or some portion of its 
+contents) with the given name (in the absence of Name_Error).</span></div>
+<div class="paranum"><a name="p60">60/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</span></div>
+<div class="paranum"><a name="p61">61/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Creates 
+zero or more directories with name New_Directory. Each nonexistent directory 
+named by New_Directory is created.[ For example, on a typical Unix system, 
+Create_Path (&quot;/usr/me/my&quot;); would create directory &quot;me&quot; 
+in directory &quot;usr&quot;, then create directory &quot;my&quot; in 
+directory &quot;me&quot;.] The Form parameter can be used to give system-dependent 
+characteristics of the directory; the interpretation of the Form parameter 
+is implementation-defined. A null string for Form specifies the use of 
+the default options of the implementation of the new directory. The exception 
+Name_Error is propagated if the string given as New_Directory does not 
+allow the identification of any directory. The exception Use_Error is 
+propagated if the external environment does not support the creation 
+of any directories with the given name (in the absence of Name_Error) 
+and form.</span></div>
+<div class="paranum"><a name="p62">62/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p63">63/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Deletes 
+an existing directory with name Directory. The directory and all of its 
+contents (possibly including other directories) are deleted. The exception 
+Name_Error is propagated if the string given as Directory does not identify 
+an existing directory. The exception Use_Error is propagated if the external 
+environment does not support the deletion of the directory or some portion 
+of its contents with the given name (in the absence of Name_Error). If 
+Use_Error is propagated, it is unspecified whether a portion of the contents 
+of the directory is deleted.</span></div>
+<div class="paranum"><a name="p64">64/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Delete_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p65">65/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Deletes 
+an existing ordinary or special file with name Name. The exception Name_Error 
+is propagated if the string given as Name does not identify an existing 
+ordinary or special external file. The exception Use_Error is propagated 
+if the external environment does not support the deletion of the file 
+with the given name (in the absence of Name_Error).</span></div>
+<div class="paranum"><a name="p66">66/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Rename&nbsp;(Old_Name,&nbsp;New_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p67">67/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Renames 
+an existing external file (including directories) with name Old_Name 
+to New_Name. The exception Name_Error is propagated if the string given 
+as Old_Name does not identify an existing external file. The exception 
+Use_Error is propagated if the external environment does not support 
+the renaming of the file with the given name (in the absence of Name_Error). 
+In particular, Use_Error is propagated if a file or directory already 
+exists with name New_Name.</span></div>
+<div class="paranum"><a name="p67.a">67.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Note: 
+</B>This operation is expected to work within a single directory, and 
+implementers are encouraged to support it across directories on a single 
+device. Copying files from one device to another is discouraged (that's 
+what Copy_File is for). However, there is no requirement to detect file 
+copying by the target system. If the target system has an API that gives 
+that for &ldquo;free&rdquo;, it can be used. For Windows&reg;, for instance, 
+MoveFile can be used to implement Rename.</span>&nbsp;</div>
+<div class="paranum"><a name="p68">68/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Copy_File&nbsp;(Source_Name,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String);</span></div>
+<div class="paranum"><a name="p69">69/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Copies 
+the contents of the existing external file with name Source_Name to an 
+external file with name Target_Name. The resulting external file is a 
+duplicate of the source external file. The Form parameter can be used 
+to give system-dependent characteristics of the resulting external file; 
+the interpretation of the Form parameter is implementation-defined. Exception 
+Name_Error is propagated if the string given as Source_Name does not 
+identify an existing external ordinary or special file, or if the string 
+given as Target_Name does not allow the identification of an external 
+file. The exception Use_Error is propagated if the external environment 
+does not support creating the file with the name given by Target_Name 
+and form given by Form, or copying of the file with the name given by 
+Source_Name (in the absence of Name_Error).</span>&nbsp;</div>
+<div class="paranum"><a name="p69.a">69.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>Name_Error 
+is always raised if Source_Name identifies a directory. It is up to the 
+implementation whether special files can be copied, or if Use_Error will 
+be raised.</span>&nbsp;</div>
+<div class="paranum"><a name="p70">70/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The following file and directory name operations 
+are provided:</span></div>
+<div class="paranum"><a name="p71">71/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p72">72/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the full name corresponding to the file name specified by Name. The exception 
+Name_Error is propagated if the string given as Name does not allow the 
+identification of an external file (including directories and special 
+files).</span>&nbsp;</div>
+<div class="paranum"><a name="p72.a">72.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>Full 
+name means that no abbreviations are used in the returned name, and that 
+it is a full specification of the name. Thus, for Unix and Windows&reg;, 
+the result should be a full path that does not contain any &quot;.&quot; 
+or &quot;..&quot; directories. Typically, the default directory is used 
+to fill in any missing information.</span>&nbsp;</div>
+<div class="paranum"><a name="p73">73/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p74">74/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the simple name portion of the file name specified by Name. The exception 
+Name_Error is propagated if the string given as Name does not allow the 
+identification of an external file (including directories and special 
+files).</span></div>
+<div class="paranum"><a name="p75">75/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p76">76/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the name of the containing directory of the external file (including 
+directories) identified by Name. (If more than one directory can contain 
+Name, the directory name returned is implementation-defined.) The exception 
+Name_Error is propagated if the string given as Name does not allow the 
+identification of an external file. The exception Use_Error is propagated 
+if the external file does not have a containing directory.</span>&nbsp;</div>
+<div class="paranum"><a name="p76.a">76.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>This 
+is purely a string manipulation function. If Name is not given as a full 
+name, the containing directory probably won't be one, either. For example, 
+if Containing_Directory (&quot;..\AARM\RM-A-8&quot;) is called on Windows&reg;, 
+the result should be &quot;..\AARM&quot;. If there is no path at all 
+on the name, the result should be &quot;.&quot; (which represents the 
+current directory). Use Full_Name on the result of Containing_Directory 
+if the full name is needed.</span>&nbsp;</div>
+<div class="paranum"><a name="p77">77/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Extension&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p78">78/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the extension name corresponding to Name. The extension name is a portion 
+of a simple name (not including any separator characters), typically 
+used to identify the file class. If the external environment does not 
+have extension names, then the null string is returned. The exception 
+Name_Error is propagated if the string given as Name does not allow the 
+identification of an external file.</span>&nbsp;</div>
+<div class="paranum"><a name="p78.a">78.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>For 
+Unix and Windows&reg;, the extension is the portion of the simple name 
+following the rightmost period. For example, in the simple name &quot;RM-A-8.html&quot;, 
+the extension is &quot;html&quot;.</span>&nbsp;</div>
+<div class="paranum"><a name="p79">79/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Base_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p80">80/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the base name corresponding to Name. The base name is the remainder of 
+a simple name after removing any extension and extension separators. 
+The exception Name_Error is propagated if the string given as Name does 
+not allow the identification of an external file (including directories 
+and special files).</span>&nbsp;</div>
+<div class="paranum"><a name="p80.a">80.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>For 
+Unix and Windows&reg;, the base name is the portion of the simple name 
+preceding the rightmost period (except for the special directory names 
+&quot;.&quot; and &quot;..&quot;, whose Base_Name is &quot;.&quot; and 
+&quot;..&quot;). For example, in the simple name &quot;RM-A-8.html&quot;, 
+the base name is &quot;RM-A-8&quot;.</span>&nbsp;</div>
+<div class="paranum"><a name="p81">81/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Compose&nbsp;(Containing_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p82">82/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the name of the external file with the specified Containing_Directory, 
+Name, and Extension. If Extension is the null string, then Name is interpreted 
+as a simple name; otherwise Name is interpreted as a base name. The exception 
+Name_Error is propagated if the string given as Containing_Directory 
+is not null and does not allow the identification of a directory, or 
+if the string given as Extension is not null and is not a possible extension, 
+or if the string given as Name is not a possible simple name (if Extension 
+is null) or base name (if Extension is nonnull).</span></div>
+<div class="paranum"><a name="p82.a">82.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>The 
+above definition implies that if the Extension is null, for Unix and 
+Windows&reg; no '.' is added to Name.</span>&nbsp;</div>
+<div class="paranum"><a name="p82.b">82.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>If 
+Name is null, Name_Error should be raised, as nothing is not a possible 
+simple name or base name.</span></div>
+<div class="paranum"><a name="p82.c">82.c/2</a></div>
+<div class="Annotations"><span class="insert2">Generally, Compose(Containing_Directory(F), 
+Base_Name(F),Extension(F)) = F. However, this is not true on Unix or 
+Windows&reg; for file names that end with a '.'; Compose(Base_Name(&quot;Fooey.&quot;),Extension(&quot;Fooey.&quot;)) 
+= &quot;Fooey&quot;. This is not a problem for Windows&reg;, as the names 
+have the same meaning with or without the '.', but these are different 
+names for Unix. Thus, care needs to be taken on Unix; if Extension is 
+null, Base_Name should be avoided. (That's not usually a problem with 
+file names generated by a program.)</span>&nbsp;</div>
+<div class="paranum"><a name="p83">83/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The following file and directory queries and types 
+are provided:</span></div>
+<div class="paranum"><a name="p84">84/2</a></div>
+<div class="Examples"><span class="insert2"><B>type</B>&nbsp;File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</span></div>
+<div class="paranum"><a name="p85">85/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+type File_Kind represents the kind of file represented by an external 
+file or directory.</span></div>
+<div class="paranum"><a name="p86">86/2</a></div>
+<div class="Examples"><span class="insert2"><B>type</B>&nbsp;File_Size&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="paranum"><a name="p87">87/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+type File_Size represents the size of an external file.</span>&nbsp;</div>
+<div class="paranum"><a name="p87.a">87.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The maximum value for a file size in 
+Directories.</span></div>
+<div class="paranum"><a name="p88">88/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p89">89/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+True if an external file represented by Name exists, and False otherwise. 
+The exception Name_Error is propagated if the string given as Name does 
+not allow the identification of an external file (including directories 
+and special files).</span></div>
+<div class="paranum"><a name="p90">90/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Kind&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
+<div class="paranum"><a name="p91">91/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the kind of external file represented by Name. The exception Name_Error 
+is propagated if the string given as Name does not allow the identification 
+of an existing external file.</span></div>
+<div class="paranum"><a name="p92">92/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Size&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
+<div class="paranum"><a name="p93">93/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the size of the external file represented by Name. The size of an external 
+file is the number of stream elements contained in the file. If the external 
+file is not an ordinary file, the result is implementation-defined. The 
+exception Name_Error is propagated if the string given as Name does not 
+allow the identification of an existing external file. The exception 
+Constraint_Error is propagated if the file size is not a value of type 
+File_Size.</span>&nbsp;</div>
+<div class="paranum"><a name="p93.a">93.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The result for Directories.Size for 
+a directory or special file</span></div>
+<div class="paranum"><a name="p93.b">93.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em"><span class="insert2"><B>Discussion: 
+</B>We allow raising Constraint_Error, so that an implementation for 
+a system with 64-bit file sizes does not need to support full numerics 
+on 64-bit integers just to implement this package. Of course, if 64-bit 
+integers are available on such a system, they should be used when defining 
+type File_Size.</span>&nbsp;</div>
+<div class="paranum"><a name="p94">94/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Modification_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p95">95/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the time that the external file represented by Name was most recently 
+modified. If the external file is not an ordinary file, the result is 
+implementation-defined. The exception Name_Error is propagated if the 
+string given as Name does not allow the identification of an existing 
+external file. The exception Use_Error is propagated if the external 
+environment does not support reading the modification time of the file 
+with the name given by Name (in the absence of Name_Error).</span>&nbsp;</div>
+<div class="paranum"><a name="p95.a">95.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The result for Directories.Modification_Time 
+for a directory or special file.</span></div>
+<div class="paranum"><a name="p96">96/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2">The following directory searching operations and 
+types are provided:</span></div>
+<div class="paranum"><a name="p97">97/2</a></div>
+<div class="Examples"><span class="insert2"><B>type</B>&nbsp;Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p98">98/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+type Directory_Entry_Type represents a single item in a directory. These 
+items can only be created by the Get_Next_Entry procedure in this package. 
+Information about the item can be obtained from the functions declared 
+in this package. A default-initialized object of this type is invalid; 
+objects returned from Get_Next_Entry are valid.</span></div>
+<div class="paranum"><a name="p99">99/2</a></div>
+<div class="Examples"><span class="insert2"><B>type</B>&nbsp;Filter_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(File_Kind)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p100">100/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+type Filter_Type specifies which directory entries are provided from 
+a search operation. If the Directory component is True, directory entries 
+representing directories are provided. If the Ordinary_File component 
+is True, directory entries representing ordinary files are provided. 
+If the Special_File component is True, directory entries representing 
+special files are provided.</span></div>
+<div class="paranum"><a name="p101">101/2</a></div>
+<div class="Examples"><span class="insert2"><B>type</B>&nbsp;Search_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="paranum"><a name="p102">102/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">The 
+type Search_Type contains the state of a directory search. A default-initialized 
+Search_Type object has no entries available (function More_Entries returns 
+False). Type Search_Type needs finalization<A NAME="I6595"></A> (see 
+<A HREF="AA-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p103">103/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Filter_Type&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True));</span></div>
+<div class="paranum"><a name="p104">104/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Starts 
+a search in the directory named by Directory for entries matching Pattern. 
+Pattern represents a pattern for matching file names. If Pattern is null, 
+all items in the directory are matched; otherwise, the interpretation 
+of Pattern is implementation-defined. Only items that match Filter will 
+be returned. After a successful call on Start_Search, the object Search 
+may have entries available, but it may have no entries available if no 
+files or directories match Pattern and Filter. The exception Name_Error 
+is propagated if the string given by Directory does not identify an existing 
+directory, or if Pattern does not allow the identification of any possible 
+external file or directory. The exception Use_Error is propagated if 
+the external environment does not support the searching of the directory 
+with the given name (in the absence of Name_Error). When Start_Search 
+propagates Name_Error or Use_Error, the object Search will have no entries 
+available.</span>&nbsp;</div>
+<div class="paranum"><a name="p104.a">104.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The interpretation of a nonnull search 
+pattern in Directories.</span></div>
+<div class="paranum"><a name="p105">105/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;End_Search&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type);</span></div>
+<div class="paranum"><a name="p106">106/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Ends 
+the search represented by Search. After a successful call on End_Search, 
+the object Search will have no entries available.</span></div>
+<div class="paranum"><a name="p106.a">106.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>The 
+only way that a call to End_Search could be unsuccessful if Device_Error 
+(see <A HREF="AA-A-13.html">A.13</A>) is raised because of an underlying 
+failure (or bug).</span>&nbsp;</div>
+<div class="paranum"><a name="p107">107/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;More_Entries&nbsp;(Search&nbsp;:&nbsp;<B>in</B>&nbsp;Search_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p108">108/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+True if more entries are available to be returned by a call to Get_Next_Entry 
+for the specified search object, and False otherwise.</span></div>
+<div class="paranum"><a name="p109">109/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Get_Next_Entry&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory_Entry&nbsp;:&nbsp;<B>out</B>&nbsp;Directory_Entry_Type);</span></div>
+<div class="paranum"><a name="p110">110/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the next Directory_Entry for the search described by Search that matches 
+the pattern and filter. If no further matches are available, Status_Error 
+is raised. It is implementation-defined as to whether the results returned 
+by this routine are altered if the contents of the directory are altered 
+while the Search object is valid (for example, by another program). The 
+exception Use_Error is propagated if the external environment does not 
+support continued searching of the directory represented by Search.</span> 
+</div>
+<div class="paranum"><a name="p110.a">110.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation defined: 
+</B></span><span class="insert2">The results of a Directories search 
+if the contents of the directory are altered while a search is in progress.</span></div>
+<div class="paranum"><a name="p111">111/2</a></div>
+<div class="Examples"><span class="insert2"><B>procedure</B>&nbsp;Search&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Filter_Type&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type));</span></div>
+<div class="paranum"><a name="p112">112/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Searches 
+in the directory named by Directory for entries matching Pattern. The 
+subprogram designated by Process is called with each matching entry in 
+turn. Pattern represents a pattern for matching file names. If Pattern 
+is null, all items in the directory are matched; otherwise, the interpretation 
+of Pattern is implementation-defined. Only items that match Filter will 
+be returned. The exception Name_Error is propagated if the string given 
+by Directory does not identify an existing directory, or if Pattern does 
+not allow the identification of any possible external file or directory. 
+The exception Use_Error is propagated if the external environment does 
+not support the searching of the directory with the given name (in the 
+absence of Name_Error).</span>&nbsp;</div>
+<div class="paranum"><a name="p112.a">112.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>&ldquo;In 
+turn&rdquo; means that the calls to the subprogram designated by Process 
+are not made in parallel; they can be made in any order but must be in 
+sequence.</span>&nbsp;</div>
+<div class="paranum"><a name="p113">113/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Simple_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p114">114/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the simple external name of the external file (including directories) 
+represented by Directory_Entry. The format of the name returned is implementation-defined. 
+The exception Status_Error is propagated if Directory_Entry is invalid.</span></div>
+<div class="paranum"><a name="p115">115/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Full_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="paranum"><a name="p116">116/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the full external name of the external file (including directories) represented 
+by Directory_Entry. The format of the name returned is implementation-defined. 
+The exception Status_Error is propagated if Directory_Entry is invalid.</span></div>
+<div class="paranum"><a name="p117">117/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Kind&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Kind;</span></div>
+<div class="paranum"><a name="p118">118/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the kind of external file represented by Directory_Entry. The exception 
+Status_Error is propagated if Directory_Entry is invalid.</span></div>
+<div class="paranum"><a name="p119">119/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Size&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Size;</span></div>
+<div class="paranum"><a name="p120">120/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the size of the external file represented by Directory_Entry. The size 
+of an external file is the number of stream elements contained in the 
+file. If the external file represented by Directory_Entry is not an ordinary 
+file, the result is implementation-defined. The exception Status_Error 
+is propagated if Directory_Entry is invalid. The exception Constraint_Error 
+is propagated if the file size is not a value of type File_Size.</span></div>
+<div class="paranum"><a name="p121">121/2</a></div>
+<div class="Examples"><span class="insert2"><B>function</B>&nbsp;Modification_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p122">122/2</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Returns 
+the time that the external file represented by Directory_Entry was most 
+recently modified. If the external file represented by Directory_Entry 
+is not an ordinary file, the result is implementation-defined. The exception 
+Status_Error is propagated if Directory_Entry is invalid. The exception 
+Use_Error is propagated if the external environment does not support 
+reading the modification time of the file represented by Directory_Entry.</span></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p123">123/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">For Copy_File, if Source_Name 
+identifies an existing external ordinary file created by a predefined 
+Ada input-output package, and Target_Name and Form can be used in the 
+Create operation of that input-output package with mode Out_File without 
+raising an exception, then Copy_File shall not propagate Use_Error.</span></div>
+<div class="paranum"><a name="p123.a">123.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>This 
+means that Copy_File will copy any file that the Ada programmer could 
+copy (by writing some possibly complicated Ada code).</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p124">124/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">If other information about 
+a file (such as the owner or creation date) is available in a directory 
+entry, the implementation should provide functions in a child package 
+Directories.Information to retrieve it.<A NAME="I6596"></A></span>&nbsp;</div>
+<div class="paranum"><a name="p124.a">124.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">Package Directories.Information should 
+be provided to retrieve other information about a file.</span></div>
+<div class="paranum"><a name="p124.b">124.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>Implementation 
+Note:&nbsp;</B>For Windows&reg;, Directories.Information should contain at 
+least the following routines:</span></div>
+<div class="paranum"><a name="p124.c">124.c/2</a></div>
+<div class="SmallExamples"><span class="insert2"><B>package</B>&nbsp;Ada.Directories.Information&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>System-specific&nbsp;directory&nbsp;information.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Version&nbsp;for&nbsp;the&nbsp;Microsoft&reg;&nbsp;Windows&reg;&nbsp;operating&nbsp;system.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.d">124.d/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Creation_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.e">124.e/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Last_Access_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.f">124.f/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Read_Only&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.g">124.g/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Needs_Archiving&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>This&nbsp;generally&nbsp;means&nbsp;that&nbsp;the&nbsp;file&nbsp;needs&nbsp;to&nbsp;be&nbsp;backed&nbsp;up.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;flag&nbsp;is&nbsp;only&nbsp;cleared&nbsp;by&nbsp;backup&nbsp;programs.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.h">124.h/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Compressed&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.i">124.i/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Encrypted&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.j">124.j/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Hidden&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.k">124.k/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_System&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.l">124.l/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Offline&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.m">124.m/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Temporary&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.n">124.n/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Sparse&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.o">124.o/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Not_Indexed&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.p">124.p/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Creation_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.q">124.q/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Last_Access_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.r">124.r/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Read_Only&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.s">124.s/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Needs_Archiving&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>This&nbsp;generally&nbsp;means&nbsp;that&nbsp;the&nbsp;file&nbsp;needs&nbsp;to&nbsp;be&nbsp;backed&nbsp;up.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;flag&nbsp;is&nbsp;only&nbsp;cleared&nbsp;by&nbsp;backup&nbsp;programs.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.t">124.t/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Compressed&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.u">124.u/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Encrypted&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.v">124.v/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Hidden&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.w">124.w/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_System&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.x">124.x/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Offline&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.y">124.y/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Temporary&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.z">124.z/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Sparse&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.aa">124.aa/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Not_Indexed&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.bb">124.bb/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Additional&nbsp;implementation-defined&nbsp;subprograms&nbsp;allowed&nbsp;here.</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Directories.Information;</span></div>
+<div class="paranum"><a name="p124.cc">124.cc/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2">For 
+Unix-like systems (Unix, POSIX, Linux, etc.), Directories.Information 
+should contain at least the following routines:</span></div>
+<div class="paranum"><a name="p124.dd">124.dd/2</a></div>
+<div class="SmallExamples"><span class="insert2"><B>package</B>&nbsp;Ada.Directories.Information&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>System-specific&nbsp;directory&nbsp;information.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Unix&nbsp;and&nbsp;similar&nbsp;systems&nbsp;version.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.ee">124.ee/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Last_Access_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.ff">124.ff/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Last_Status_Change_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.gg">124.gg/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Permission&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Others_Execute,&nbsp;Others_Write,&nbsp;Others_Read,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Group_Execute,&nbsp;&nbsp;Group_Write,&nbsp;&nbsp;Group_Read,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Owner_Execute,&nbsp;&nbsp;Owner_Write,&nbsp;&nbsp;Owner_Read,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set_Group_ID,&nbsp;&nbsp;&nbsp;Set_User_ID);</span></div>
+<div class="paranum"><a name="p124.hh">124.hh/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Permission_Set_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Permission)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.ii">124.ii/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Permission_Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Permission_Set_Type;</span></div>
+<div class="paranum"><a name="p124.jj">124.jj/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Owner&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Returns&nbsp;the&nbsp;image&nbsp;of&nbsp;the&nbsp;User_Id.&nbsp;If&nbsp;a&nbsp;definition&nbsp;of&nbsp;User_Id</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>is&nbsp;available,&nbsp;an&nbsp;implementation-defined&nbsp;version&nbsp;of&nbsp;Owner</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>returning&nbsp;User_Id&nbsp;should&nbsp;also&nbsp;be&nbsp;defined.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.kk">124.kk/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Group&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Returns&nbsp;the&nbsp;image&nbsp;of&nbsp;the&nbsp;User_Id.&nbsp;If&nbsp;a&nbsp;definition&nbsp;of&nbsp;Group_Id</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>is&nbsp;available,&nbsp;an&nbsp;implementation-defined&nbsp;version&nbsp;of&nbsp;Group</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>returning&nbsp;Group_Id&nbsp;should&nbsp;also&nbsp;be&nbsp;defined.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.ll">124.ll/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Block_Special_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.mm">124.mm/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Character_Special_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.nn">124.nn/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_FIFO&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.oo">124.oo/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Symbolic_Link&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.pp">124.pp/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Socket&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.qq">124.qq/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Last_Access_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.rr">124.rr/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Last_Status_Change_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</span></div>
+<div class="paranum"><a name="p124.ss">124.ss/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Permission_Set&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Permission_Set_Type;</span></div>
+<div class="paranum"><a name="p124.tt">124.tt/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Owner&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>See&nbsp;Owner&nbsp;above.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.uu">124.uu/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Group&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>See&nbsp;Group&nbsp;above.</I></SPAN></span></div>
+<div class="paranum"><a name="p124.vv">124.vv/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Block_Special_File&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.ww">124.ww/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Character_Special_File&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.xx">124.xx/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_FIFO&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.yy">124.yy/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Symbolic_Link&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.zz">124.zz/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Is_Socket&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p124.aaa">124.aaa/2</a></div>
+<div class="SmallExamples"><span class="insert2">&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Additional&nbsp;implementation-defined&nbsp;subprograms&nbsp;allowed&nbsp;here.</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Directories.Information;</span></div>
+<div class="paranum"><a name="p124.bbb">124.bbb/2</a></div>
+<div class="Annotations"><span class="insert2">We give these definitions 
+to give guidance so that every implementation for a given target is not 
+unnecessarily different. Implementers are encouraged to make packages 
+for other targets as similar to these as possible.</span></div>
+<div class="paranum"><a name="p125">125/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">Start_Search and Search should 
+raise Use_Error if Pattern is malformed, but not if it could represent 
+a file in the directory but does not actually do so.</span></div>
+<div class="paranum"><a name="p125.a">125.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B><span class="insert2">Directories.Start_Search 
+and Directories.Search should raise Use_Error for malformed patterns.</span></div>
+<div class="paranum"><a name="p126">126/2</a></div>
+<div class="Normal">&nbsp;<span class="insert2">Rename should be supported 
+at least when both New_Name and Old_Name are simple names and New_Name 
+does not identify an existing external file.</span>&nbsp;</div>
+<div class="paranum"><a name="p126.a">126.a/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Implementation Advice: 
+</B></span><span class="insert2">Directories.Rename should be supported 
+at least when both New_Name and Old_Name are simple names and New_Name 
+does not identify an existing external file.</span></div>
+<div class="paranum"><a name="p126.b">126.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>&ldquo;Supported&rdquo; 
+includes raising an exception if either name is malformed, the file to 
+rename doesn't exist, insufficient permission for the operation exists, 
+or similar problems. But this advice requires implementations to document 
+what they do, and tells implementers that simply raising Use_Error isn't 
+acceptable.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p127">127/2</a></div>
+<div class="Notes">38&nbsp;&nbsp;<span class="insert2">The operations 
+Containing_Directory, Full_Name, Simple_Name, Base_Name, Extension, and 
+Compose operate on file names, not external files. The files identified 
+by these operations do not need to exist. Name_Error is raised only if 
+the file name is malformed and cannot possibly identify a file. Of these 
+operations, only the result of Full_Name depends on the current default 
+directory; the result of the others depends only on their parameters.</span></div>
+<div class="paranum"><a name="p128">128/2</a></div>
+<div class="Notes">39&nbsp;&nbsp;<span class="insert2">Using access types, 
+values of Search_Type and Directory_Entry_Type can be saved and queried 
+later. However, another task or application can modify or delete the 
+file represented by a Directory_Entry_Type value or the directory represented 
+by a Search_Type value; such a value can only give the information valid 
+at the time it is created. Therefore, long-term storage of these values 
+is not recommended.</span></div>
+<div class="paranum"><a name="p129">129/2</a></div>
+<div class="Notes">40&nbsp;&nbsp;<span class="insert2">If the target 
+system does not support directories inside of directories, then Kind 
+will never return Directory and Containing_Directory will always raise 
+Use_Error.</span></div>
+<div class="paranum"><a name="p130">130/2</a></div>
+<div class="Notes">41&nbsp;&nbsp;<span class="insert2">If the target 
+system does not support creation or deletion of directories, then Create_Directory, 
+Create_Path, Delete_Directory, and Delete_Tree will always propagate 
+Use_Error.</span></div>
+<div class="paranum"><a name="p131">131/2</a></div>
+<div class="Notes">42&nbsp;&nbsp;<span class="insert2">To move a file 
+or directory to a different location, use Rename. Most target systems 
+will allow renaming of files from one directory to another. If the target 
+file or directory might already exist, it should be deleted first.</span> 
+</div>
+<div class="paranum"><a name="p131.a">131.a/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>Discussion: 
+</B>While Rename is only guaranteed to work for name changes within a 
+single directory, its unlikely that implementers would purposely prevent 
+functionality present in the underlying system from working. To move 
+a file totally portably, it's necessary to handle failure of the Rename 
+and fall back to Copy_File and Delete:</span>&nbsp;</div>
+<div class="paranum"><a name="p131.b">131.b</a></div>
+<div class="SmallExamples"><span class="insert2"><B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Rename&nbsp;(Source,&nbsp;Target);<BR>
+<B>exception</B><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;Use_Error&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy_File&nbsp;(Source,&nbsp;Target);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;(Source);<BR>
+<B>end</B>;</span></div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p131.c">131.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<span class="insert2"><A NAME="I6597"></A>Package Ada.Directories is 
+new.</span>&nbsp;</div>
+<div class="paranum"><a name="p131.d">131.d</a></div>
+<div class="SmallIndented1Examples"><B>Discussion:&nbsp;</B>&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p131.e">131.e</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;</div>
+<div class="paranum"><a name="p131.f">131.f</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-15.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

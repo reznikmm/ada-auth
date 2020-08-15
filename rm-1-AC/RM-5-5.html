@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Loop Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.5 Loop Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+includes a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+that is to be executed repeatedly, zero or more times.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">loop_statement</SPAN><A NAME="I2859"></A><A NAME="S0135"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>loop_</I><A NAME="I2860"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0129">statement_identifier</A></SPAN>:]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2861"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0136">iteration_scheme</A></SPAN>]&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2862"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;[<I>loop_</I><A NAME="I2863"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">iteration_scheme</SPAN><A NAME="I2864"></A><A NAME="S0136"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>while</B>&nbsp;<A NAME="I2865"></A><SPAN Class="swiss"><A HREF="RM-5-3.html#S0132">condition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I2866"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0137">loop_parameter_specification</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">loop_parameter_specification</SPAN><A NAME="I2867"></A><A NAME="S0137"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I2868"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0019">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<A NAME="I2869"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">discrete_subtype_definition</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1">If a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+has a <I>loop_</I><SPAN Class="swiss"><A HREF="RM-5-1.html#S0129">statement_identifier</A></SPAN>, 
+then the <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall be repeated after the <B>end loop</B>; otherwise, there shall not 
+be an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+after the <B>end loop</B>.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I2870"></A>A <SPAN Class="swiss"><A HREF="RM-5-5.html#S0137">loop_parameter_specification</A></SPAN> 
+declares a <I>loop parameter</I>, which is an object whose subtype is 
+that defined by the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">discrete_subtype_definition</A></SPAN>. 
+<A NAME="I2871"></A></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I2872"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+is executed repeatedly, zero or more times, until the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+is complete. The <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+is complete when a transfer of control occurs that transfers control 
+out of the loop, or, in the case of an <SPAN Class="swiss"><A HREF="RM-5-5.html#S0136">iteration_scheme</A></SPAN>, 
+as specified below.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I2873"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+with a <B>while</B> <SPAN Class="swiss"><A HREF="RM-5-5.html#S0136">iteration_scheme</A></SPAN>, 
+the condition is evaluated before each execution of the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN>; 
+if the value of the <SPAN Class="swiss"><A HREF="RM-5-3.html#S0132">condition</A></SPAN> 
+is True, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+is executed; if False, the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+is complete.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I2874"></A><A NAME="I2875"></A>For the execution 
+of a <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+with a <B>for</B> <SPAN Class="swiss"><A HREF="RM-5-5.html#S0136">iteration_scheme</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0137">loop_parameter_specification</A></SPAN> 
+is first elaborated. This elaboration creates the loop parameter and 
+elaborates the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">discrete_subtype_definition</A></SPAN>. 
+If the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">discrete_subtype_definition</A></SPAN> 
+defines a subtype with a null range, the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN> 
+is complete. Otherwise, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+is executed once for each value of the discrete subtype defined by the 
+<SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">discrete_subtype_definition</A></SPAN> 
+(or until the loop is left as a consequence of a transfer of control). 
+<A NAME="I2876"></A>Prior to each such iteration, the corresponding value 
+of the discrete subtype is assigned to the loop parameter. These values 
+are assigned in increasing order unless the reserved word <B>reverse</B> 
+is present, in which case the values are assigned in decreasing order. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">6&nbsp;&nbsp;A loop parameter is a constant; it cannot 
+be updated within the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of the loop (see <A HREF="RM-3-3.html">3.3</A>).</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">7&nbsp;&nbsp;An <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0029">object_declaration</A></SPAN> 
+should not be given for a loop parameter, since the loop parameter is 
+automatically declared by the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0137">loop_parameter_specification</A></SPAN>. 
+The scope of a loop parameter extends from the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0137">loop_parameter_specification</A></SPAN> 
+to the end of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0135">loop_statement</A></SPAN>, 
+and the visibility rules are such that a loop parameter is only visible 
+within the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of the loop.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">8&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">discrete_subtype_definition</A></SPAN> 
+of a for loop is elaborated just once. Use of the reserved word <B>reverse</B> 
+does not alter the discrete subtype defined, so that the following <SPAN Class="swiss"><A HREF="RM-5-5.html#S0136">iteration_scheme</A></SPAN>s 
+are not equivalent; the first has a null range.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="SmallIndented2Examples"><B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;<B>reverse</B>&nbsp;1&nbsp;..&nbsp;0<BR>
+<B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;0&nbsp;..&nbsp;1</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a loop 
+statement without an iteration scheme:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Get(Current_Character);<BR>
+&nbsp;&nbsp;&nbsp;<B>exit</B>&nbsp;<B>when</B>&nbsp;Current_Character&nbsp;=&nbsp;'*';<BR>
+<B>end</B>&nbsp;<B>loop</B>;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+loop statement with a <B>while</B> iteration scheme:</I>&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples"><B>while</B>&nbsp;Bid(N).Price&nbsp;&lt;&nbsp;Cut_Off.Price&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Record_Bid(Bid(N).Price);<BR>
+&nbsp;&nbsp;&nbsp;N&nbsp;:=&nbsp;N&nbsp;+&nbsp;1;<BR>
+<B>end</B>&nbsp;<B>loop</B>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+loop statement with a <B>for</B> iteration scheme:</I>&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples"><B>for</B>&nbsp;J&nbsp;<B>in</B>&nbsp;Buffer'Range&nbsp;<B>loop</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;works&nbsp;even&nbsp;with&nbsp;a&nbsp;null&nbsp;range</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Buffer(J)&nbsp;/=&nbsp;Space&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put(Buffer(J));<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;<BR>
+<B>end</B>&nbsp;<B>loop</B>;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+loop statement with a name:</I>&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples">Summation:<BR>
+&nbsp;&nbsp;&nbsp;<B>while</B>&nbsp;Next&nbsp;/=&nbsp;Head&nbsp;<B>loop</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum&nbsp;&nbsp;:=&nbsp;Sum&nbsp;+&nbsp;Next.Value;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next&nbsp;:=&nbsp;Next.Succ;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;Summation;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

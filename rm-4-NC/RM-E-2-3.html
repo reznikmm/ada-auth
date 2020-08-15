@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Remote Call Interface Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.2.3 Remote Call Interface Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A remote call interface library unit can be used 
+as an interface for remote procedure calls (RPCs) (or remote function 
+calls) between active partitions.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8147"></A><A NAME="I8148"></A>The 
+form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+Remote_Call_Interface is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8149"></A><A NAME="I8150"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I8151"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+All_Calls_Remote is as follows:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8152"></A><A NAME="I8153"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I8154"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><A NAME="I8155"></A><A NAME="I8156"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+All_Calls_Remote is a library unit pragma.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal"><A NAME="I8157"></A><A NAME="I8158"></A><A NAME="I8159"></A><A NAME="I8160"></A><A NAME="I8161"></A>A 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Call_Interface 
+is used to specify that a library unit is a <I>remote call interface 
+(RCI)</I>, namely that the Remote_Call_Interface aspect<A NAME="I8162"></A><A NAME="I8163"></A> 
+of the library unit is True. A subprogram declared in the visible part 
+of such a library unit, or declared by such a library unit, is called 
+a <I>remote subprogram</I>.</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal">The declaration of an RCI library unit shall be preelaborable 
+(see <A HREF="RM-10-2-1.html">10.2.1</A>), and shall depend semantically 
+only upon declared pure <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s, 
+shared passive library units, remote types library units, other remote 
+call interface library units, or preelaborated normal library units that 
+are mentioned only in private with clauses.</div>
+<div class="paranum"><a name="p9">9/1</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">In addition, the following 
+restrictions apply to an RCI library unit:&nbsp;</div>
+<div class="paranum"><a name="p10">10/1</a></div>
+<div class="Bulleted">its visible part shall not contain the declaration 
+of a variable;&nbsp;</div>
+<div class="paranum"><a name="p11">11/1</a></div>
+<div class="Bulleted">its visible part shall not contain the declaration 
+of a limited type;&nbsp;</div>
+<div class="paranum"><a name="p12">12/1</a></div>
+<div class="Bulleted">its visible part shall not contain a nested <SPAN Class="swiss"><A HREF="RM-12-1.html#S0271">generic_declaration</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted">it shall not be, nor shall its visible part contain, 
+the declaration of a subprogram for which aspect Inline is True;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted">it shall not be, nor shall its visible part contain, 
+a subprogram (or access-to-subprogram) declaration whose profile has 
+a parameter or result of a type that does not support external streaming 
+(see <A HREF="RM-13-13-2.html">13.13.2</A>);</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">any public child of the library unit shall be a 
+remote call interface library unit.&nbsp;</div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">A pragma All_Calls_Remote sets the All_Calls_Remote 
+representation aspect of <A NAME="I8164"></A><A NAME="I8165"></A>the 
+library unit to which the pragma applies to the value True. If the All_Calls_Remote 
+aspect of a library unit is True, the library unit shall be a remote 
+call interface.</div>
+
+<H4 Class="centered">Post-Compilation Rules</H4>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">A remote call interface library unit shall be assigned 
+to at most one partition of a given program. A remote call interface 
+library unit whose parent is also an RCI library unit shall be assigned 
+only to the same partition as its parent.&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal"><A NAME="I8166"></A><A NAME="I8167"></A><A NAME="I8168"></A>Notwithstanding 
+the rule given in <A HREF="RM-10-2.html">10.2</A>, a compilation unit 
+in a given partition that semantically depends on the declaration of 
+an RCI library unit, <I>needs</I> (in the sense of <A HREF="RM-10-2.html">10.2</A>) 
+only the declaration of the RCI library unit, not the body, to be included 
+in that same partition. Therefore, the body of an RCI library unit is 
+included only in the partition to which the RCI library unit is explicitly 
+assigned.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p19">19/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">If aspect All_Calls_Remote 
+is True for a given RCI library unit, then the implementation shall route 
+any of the following calls through the Partition Communication Subsystem 
+(PCS); see <A HREF="RM-E-5.html">E.5</A>:&nbsp;</div>
+<div class="paranum"><a name="p19.1">19.1/4</a></div>
+<div class="Bulleted">A direct call to a subprogram of the RCI unit from 
+outside the declarative region of the unit;</div>
+<div class="paranum"><a name="p19.2">19.2/4</a></div>
+<div class="Bulleted">An indirect call through a remote access-to-subprogram 
+value that designates a subprogram of the RCI unit;</div>
+<div class="paranum"><a name="p19.3">19.3/4</a></div>
+<div class="Bulleted">A dispatching call with a controlling operand designated 
+by a remote access-to-class-wide value whose tag identifies a type declared 
+in the RCI unit.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Normal">An implementation need not support the Remote_Call_Interface 
+pragma or aspect nor the All_Calls_Remote pragma. Explicit message-based 
+communication between active partitions can be supported as an alternative 
+to RPC.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-E-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

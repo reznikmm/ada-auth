@@ -1,0 +1,1104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Stream-Oriented Attributes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-14.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.13.2 Stream-Oriented Attributes</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
+The type-related operational attributes Write, Read, Output, and Input 
+convert values to a stream of elements and reconstruct values from a 
+stream.<A NAME="I5931"></A><A NAME="I5932"></A>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1.1">1.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+For every subtype S of an elementary type <I>T</I>, the following representation 
+attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p1.2">1.2/3</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;S'Stream_Size</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5933"></A><A NAME="I5934"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0194-1.TXT">AI05-0194-1</A></I>} 
+Denotes the number of bits read from or written to a stream by the default 
+implementations of S'Read and S'Write. Hence, the number of stream elements 
+required per item of elementary type <I>T</I> is:</div>
+<div class="paranum"><a name="p1.3">1.3/2</a></div>
+<div class="Indented4Examples"><I>T</I>'Stream_Size&nbsp;/&nbsp;Ada.Streams.Stream_Element'Size</div>
+<div class="paranum"><a name="p1.4">1.4/2</a></div>
+<div class="WideHanging-Body">The value of this attribute is of type 
+<I>universal_integer</I> and is a multiple of Stream_Element'Size.</div>
+<div class="paranum"><a name="p1.5">1.5/2</a></div>
+<div class="WideHanging-Body">Stream_Size may be specified for first 
+subtypes via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>; 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of such a clause shall be static, nonnegative, and a multiple of Stream_Element'Size.<A NAME="I5935"></A><A NAME="I5936"></A></div>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Stream_Size: 
+</B>Size in bits used to represent elementary objects in a stream.</div>
+<div class="paranum"><a name="p1.b">1.b/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Stream_Size is a type-related 
+attribute (see <A HREF="AA-13-1.html">13.1</A>).&nbsp;</div>
+<div class="paranum"><a name="p1.c">1.c/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0194-1.TXT">AI05-0194-1</A></I>} 
+The value of S'Stream_Size is unaffected by the presence or absence of 
+any <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>s 
+or <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
+specifying the Read or Write attributes of any ancestor of S. S'Stream_Size 
+is defined in terms of the behavior of the default implementations of 
+S'Read and S'Write even if those default implementations are overridden. 
+</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p1.6">1.6/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+If not specified, the value of Stream_Size for an elementary type should 
+be the number of bits that corresponds to the minimum number of stream 
+elements required by the first subtype of the type, rounded up to the 
+nearest factor or multiple of the word size that is also a multiple of 
+the stream element size.&nbsp;</div>
+<div class="paranum"><a name="p1.d">1.d/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If not specified, 
+the value of Stream_Size for an elementary type should be the number 
+of bits that corresponds to the minimum number of stream elements required 
+by the first subtype of the type, rounded up to the nearest factor or 
+multiple of the word size that is also a multiple of the stream element 
+size.</div>
+<div class="paranum"><a name="p1.e">1.e/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+This is Implementation Advice because we want to allow implementations 
+to remain compatible with their Ada 95 implementations, which may have 
+a different handling of the number of stream elements. Users can always 
+specify Stream_Size if they need a specific number of stream elements. 
+</div>
+<div class="paranum"><a name="p1.7">1.7/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+<A NAME="I5937"></A>The recommended level of support for the Stream_Size 
+attribute is:&nbsp;</div>
+<div class="paranum"><a name="p1.8">1.8/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+A Stream_Size clause should be supported for a discrete or fixed point 
+type <I>T</I> if the specified Stream_Size is a multiple of Stream_Element'Size 
+and is no less than the size of the first subtype of <I>T</I>, and no 
+greater than the size of the largest type of the same elementary class 
+(signed integer, modular integer, enumeration, ordinary fixed point, 
+or decimal fixed point).&nbsp;</div>
+<div class="paranum"><a name="p1.f">1.f/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
+level of support for the Stream_Size attribute should be followed.</div>
+<div class="paranum"><a name="p1.g">1.g/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>There are no requirements 
+beyond supporting confirming Stream_Size clauses for floating point and 
+access types. Floating point and access types usually only have a handful 
+of defined formats, streaming anything else makes no sense for them.</div>
+<div class="paranum"><a name="p1.h">1.h/2</a></div>
+<div class="Annotations">For discrete and fixed point types, this may 
+require support for sizes other than the &ldquo;natural&rdquo; ones. 
+For instance, on a typical machine with 32-bit integers and a Stream_Element'Size 
+of 8, setting Stream_Size to 24 must be supported. This is required as 
+such formats can be useful for interoperability with unusual machines, 
+and there is no difficulty with the implementation (drop extra bits on 
+output, sign extend on input).&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">For every subtype S of a specific type <I>T</I>, 
+the following attributes are defined.&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Write</div><div class="WideHanging-Body">
+<A NAME="I5938"></A><A NAME="I5939"></A>S'Write denotes a procedure with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;S'Write(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Item</I></SPAN>&nbsp;:&nbsp;<B>in</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="WideHanging-Body">S'Write writes the value of <I>Item</I> 
+to <I>Stream</I>.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Read</div><div class="WideHanging-Body">
+<A NAME="I5940"></A><A NAME="I5941"></A>S'Read denotes a procedure with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;S'Read(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Item</I></SPAN>&nbsp;:&nbsp;<B>out</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="WideHanging-Body">S'Read reads the value of <I>Item</I> from 
+<I>Stream</I>.&nbsp;</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00444.TXT">AI95-00444-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+For an untagged derived type, the Write (resp. Read) attribute is inherited 
+according to the rules given in <A HREF="AA-13-1.html">13.1</A> if the 
+attribute is [specified and] available for the parent type at the point 
+where <I>T</I> is declared. For a tagged derived type, these attributes 
+are not inherited, but rather the default implementations are used.</div>
+<div class="paranum"><a name="p8.a.1">8.a.1/3</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+The inheritance rules of <A HREF="AA-13-1.html">13.1</A> say that only 
+specified or inherited aspects are inherited; we mention it again here 
+as a clarification.&nbsp;</div>
+<div class="paranum"><a name="p8.2">8.2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00444.TXT">AI95-00444-01</A></I>} 
+The default implementations of the Write and Read attributes, where available, 
+execute as follows:</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+For elementary types, Read reads (and Write writes) the number of stream 
+elements implied by the Stream_Size for the type <I>T</I>; the representation 
+of those stream elements is implementation defined. For composite types, 
+the Write or Read attribute for each component is called in canonical 
+order, which is last dimension varying fastest for an array (unless the 
+convention of the array is Fortran, in which case it is first dimension 
+varying fastest), and positional aggregate order for a record. Bounds 
+are not included in the stream if <I>T</I> is an array type. If <I>T</I> 
+is a discriminated type, discriminants are included only if they have 
+defaults. If <I>T</I> is a tagged type, the tag is not included. For 
+type extensions, the Write or Read attribute for the parent type is called, 
+followed by the Write or Read attribute of each component of the extension 
+part, in canonical order. For a limited type extension, if the attribute 
+of the parent type or any progenitor type of <I>T</I> is available anywhere 
+within the immediate scope of <I>T</I>, and the attribute of the parent 
+type or the type of any of the extension components is not available 
+at the freezing point of <I>T</I>, then the attribute of <I>T</I> shall 
+be directly specified.</div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The contents 
+of the stream elements read and written by the Read and Write attributes 
+of elementary types.</div>
+<div class="paranum"><a name="p9.1">9.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0023-1.TXT">AI05-0023-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If <I>T</I> is a discriminated type and its discriminants have defaults, 
+then S'Read first reads the discriminants from the stream without modifying 
+<I>Item</I>. S'Read then creates an object of type <I>T</I> constrained 
+by these discriminants. The value of this object is then converted to 
+the subtype of <I>Item</I> and is assigned to <I>Item</I>. Finally, the 
+Read attribute for each nondiscriminant component of <I>Item</I> is called 
+in canonical order as described above. Normal default initialization 
+and finalization take place for the created object.</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>A discriminant with a default 
+value is treated simply as a component of the object. On the other hand, 
+an array bound or a discriminant without a default value, is treated 
+as &ldquo;descriptor&rdquo; or &ldquo;dope&rdquo; that must be provided 
+in order to create the object and thus is logically separate from the 
+regular components. Such &ldquo;descriptor&rdquo; data are written by 
+'Output and produced as part of the delivered result by the 'Input function, 
+but they are not written by 'Write nor read by 'Read. A tag is like a 
+discriminant without a default.</div>
+<div class="paranum"><a name="p9.b.1">9.b.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+For limited type extensions, we must have a definition of 'Read and 'Write 
+if the parent type has one, as it is possible to make a dispatching call 
+through the attributes. The rule is designed to automatically do the 
+right thing in as many cases as possible.</div>
+<div class="paranum"><a name="p9.b.2">9.b.2/1</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+Similarly, a type that has a progenitor with an available attribute must 
+also have that attribute, for the same reason.</div>
+<div class="paranum"><a name="p9.b.3">9.b.3/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0023-1.TXT">AI05-0023-1</A></I>} 
+The semantics of S'Read for a discriminated type with defaults involves 
+an anonymous object so that the point of required initialization and 
+finalization is well-defined, especially for objects that change shape 
+and have controlled components. The creation of this anonymous object 
+often can be omitted (see the Implementation Permissions below).&nbsp;</div>
+<div class="paranum"><a name="p9.c">9.c/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+For a composite object, the subprogram denoted by the Write or Read attribute 
+of each component is called, whether it is the default or is user-specified. 
+Implementations are allowed to optimize these calls (see below), presuming 
+the properties of the attributes are preserved.&nbsp;</div>
+<div class="paranum"><a name="p9.2">9.2/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+Constraint_Error is raised by the predefined Write attribute if the value 
+of the elementary item is outside the range of values representable using 
+Stream_Size bits. For a signed integer type, an enumeration type, or 
+a fixed point type, the range is unsigned only if the integer code for 
+the lower bound of the first subtype is nonnegative, and a (symmetric) 
+signed range that covers all values of the first subtype would require 
+more than Stream_Size bits; otherwise, the range is signed.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every subtype S'Class 
+of a class-wide type <I>T</I>'Class:&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Write</div><div class="WideHanging-Body">
+<A NAME="I5942"></A><A NAME="I5943"></A>S'Class'Write denotes a procedure 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;S'Class'Write(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Item</I></SPAN>&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>'Class)</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="WideHanging-Body">Dispatches to the subprogram denoted by 
+the Write attribute of the specific type identified by the tag of Item.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Read</div><div class="WideHanging-Body">
+<A NAME="I5944"></A><A NAME="I5945"></A>S'Class'Read denotes a procedure 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;S'Class'Read(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Item</I></SPAN>&nbsp;:&nbsp;<B>out</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>'Class)</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="WideHanging-Body">Dispatches to the subprogram denoted by 
+the Read attribute of the specific type identified by the tag of Item. 
+</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>It is necessary to have class-wide 
+versions of Read and Write in order to avoid generic contract model violations; 
+in a generic, we don't necessarily know at compile time whether a given 
+type is specific or class-wide.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 17 was 
+deleted.</I></SPAN>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">For every subtype S of a specific type <I>T</I>, 
+the following attributes are defined.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Output</div><div class="WideHanging-Body">
+<A NAME="I5946"></A><A NAME="I5947"></A>S'Output denotes a procedure 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;S'Output(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Item</I></SPAN>&nbsp;:&nbsp;<B>in</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="WideHanging-Body">S'Output writes the value of <I>Item</I> 
+to <I>Stream</I>, including any bounds or discriminants.&nbsp;</div>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that the bounds are 
+included even for an array type whose first subtype is constrained.&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Input</div><div class="WideHanging-Body">
+<A NAME="I5948"></A><A NAME="I5949"></A>S'Input denotes a function with 
+the following specification:&nbsp;</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>function</B>&nbsp;S'Input(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="WideHanging-Body">S'Input reads and returns one value from 
+<I>Stream</I>, using any bounds or discriminants written by a corresponding 
+S'Output to determine how much to read.&nbsp;</div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00444.TXT">AI95-00444-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+For an untagged derived type, the Output (resp. Input) attribute is inherited 
+according to the rules given in <A HREF="AA-13-1.html">13.1</A> if the 
+attribute is [specified and] available for the parent type at the point 
+where <I>T</I> is declared. For a tagged derived type, these attributes 
+are not inherited, but rather the default implementations are used.</div>
+<div class="paranum"><a name="p25.a">25.a/3</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+See the note following the inheritance rules for the Write attribute, 
+above.&nbsp;</div>
+<div class="paranum"><a name="p25.1">25.1/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00444.TXT">AI95-00444-01</A></I>} 
+The default implementations of the Output and Input attributes, where 
+available, execute as follows:&nbsp;</div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+If <I>T</I> is an array type, S'Output first writes the bounds, and S'Input 
+first reads the bounds. If <I>T</I> has discriminants without defaults, 
+S'Output first writes the discriminants (using the Write attribute of 
+the discriminant type for each), and S'Input first reads the discriminants 
+(using the Read attribute of the discriminant type for each).</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0023-1.TXT">AI05-0023-1</A></I>} 
+S'Output then calls S'Write to write the value of <I>Item</I> to the 
+stream. S'Input then creates an object of type <I>T</I>, with the bounds 
+or (when without defaults) the discriminants, if any, taken from the 
+stream, passes it to S'Read, and returns the value of the object. If 
+<I>T</I> has discriminants, then this object is unconstrained if and 
+only the discriminants have defaults. Normal default initialization and 
+finalization take place for this object (see <A HREF="AA-3-3-1.html">3.3.1</A>, 
+<A HREF="AA-7-6.html">7.6</A>, and <A HREF="AA-7-6-1.html">7.6.1</A>). 
+</div>
+<div class="paranum"><a name="p27.1">27.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+If <I>T</I> is an abstract type, then S'Input is an abstract function.</div>
+<div class="paranum"><a name="p27.a">27.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For an abstract type <I>T</I>, 
+S'Input can be called in a dispatching call, or passed to an abstract 
+formal subprogram. But it cannot be used in nondispatching contexts, 
+because we don't allow objects of abstract types to exist. The designation 
+of this function as abstract has no impact on descendants of <I>T</I>, 
+as <I>T</I>'Input is not inherited for tagged types, but rather recreated 
+(and the default implementation of <I>T</I>'Input calls <I>T</I>'Read, 
+not the parent type's <I>T</I>'Input). Note that <I>T</I>'Input cannot 
+be specified in this case, as any function with the proper profile is 
+necessarily abstract, and specifying abstract subprograms in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+is illegal.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For every subtype S'Class 
+of a class-wide type <I>T</I>'Class:&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Output</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5950"></A><A NAME="I5951"></A>S'Class'Output denotes a procedure 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;S'Class'Output(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Item</I></SPAN>&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>'Class)</div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+First writes the external tag of <I>Item</I> to <I>Stream</I> (by calling 
+String'Output(<I>Stream</I>, Tags.External_Tag(<I>Item</I>'Tag)) &mdash; 
+see <A HREF="AA-3-9.html">3.9</A>) and then dispatches to the subprogram 
+denoted by the Output attribute of the specific type identified by the 
+tag. Tag_Error is raised if the tag of Item identifies a type declared 
+at an accessibility level deeper than that of S.&nbsp;</div>
+<div class="paranum"><a name="p31.a">31.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+We raise Tag_Error here for nested types as such a type cannot be successfully 
+read with S'Class'Input, and it doesn't make sense to allow writing a 
+value that cannot be read.&nbsp;</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Input</div><div class="WideHanging-Body">
+<A NAME="I5952"></A><A NAME="I5953"></A>S'Class'Input denotes a function 
+with the following specification:&nbsp;</div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Indented4Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>function</B>&nbsp;S'Class'Input(<BR>
+&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Stream</I></SPAN>&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN>'Class</div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0109-1.TXT">AI05-0109-1</A></I>} 
+First reads the external tag from <I>Stream</I> and determines the corresponding 
+internal tag (by calling Tags.Descendant_Tag(String'Input(<I>Stream</I>), 
+S'Tag) which might raise Tag_Error &mdash; see <A HREF="AA-3-9.html">3.9</A>) 
+and then dispatches to the subprogram denoted by the Input attribute 
+of the specific type identified by the internal tag; returns that result. 
+If the specific type identified by the internal tag is abstract, Constraint_Error 
+is raised.</div>
+<div class="paranum"><a name="p34.a">34.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0109-1.TXT">AI05-0109-1</A></I>} 
+Descendant_Tag will ensure that the tag it returns is covered by T'Class; 
+Tag_Error will be raised if it would not cover T'Class.&nbsp;</div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+<A NAME="I5954"></A><A NAME="I5955"></A>In the default implementation 
+of Read and Input for a composite type, for each scalar component that 
+is a discriminant or that has an implicit initial value, a check is made 
+that the value returned by Read for the component belongs to its subtype. 
+<A NAME="I5956"></A>Constraint_Error is raised if this check fails. For 
+other scalar components, no check is made. For each component that is 
+of an access type, if the implementation can detect that the value returned 
+by Read for the component is not a value of its subtype, Constraint_Error 
+is raised. If the value is not a value of its subtype and this error 
+is not detected, the component has an abnormal value, and erroneous execution 
+can result (see <A HREF="AA-13-9-1.html">13.9.1</A>). In the default 
+implementation of Read for a composite type with defaulted discriminants, 
+if the actual parameter of Read is constrained, a check is made that 
+the discriminants read from the stream are equal to those of the actual 
+parameter. Constraint_Error is raised if this check fails.</div>
+<div class="paranum"><a name="p35.a">35.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+The check for scalar components that have an implicit initial value is 
+to preserve our Language Design Principle that all objects that have 
+an implicit initial value do not become &quot;deinitialized&quot;.&nbsp;</div>
+<div class="paranum"><a name="p35.b">35.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+A scalar component can have an implicit initial value if it has a default_expression, 
+if the component's type has the Default_Value aspect specified, or if 
+the component is that of an array type that has the Default_Component_Value 
+aspect specified.&nbsp;</div>
+<div class="paranum"><a name="p35.c">35.c/3</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
+An implementation should always be able to detect the error for a null 
+value read into a component of an access subtype with a null exclusion; 
+the &quot;if the implementation can detect&quot; is intended to cover 
+nonnull access values.&nbsp;</div>
+<div class="paranum"><a name="p36">36/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+<A NAME="I5957"></A>It is unspecified at which point and in which order 
+these checks are performed. In particular, if Constraint_Error is raised 
+due to the failure of one of these checks, it is unspecified how many 
+stream elements have been read from the stream.</div>
+<div class="paranum"><a name="p37">37/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0045">8652/0045</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00132.TXT">AI95-00132-01</A></I>} 
+<A NAME="I5958"></A>In the default implementation of Read and Input for 
+a type, End_Error is raised if the end of the stream is reached before 
+the reading of a value of the type is completed.</div>
+<div class="paranum"><a name="p38">38/4</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0039-1.TXT">AI05-0039-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0121-1.TXT">AI12-0121-1</A></I>} 
+<A NAME="I5959"></A><A NAME="I5960"></A><A NAME="I5961"></A><A NAME="I5962"></A><A NAME="I5963"></A><A NAME="I5964"></A><A NAME="I5965"></A><A NAME="I5966"></A>The 
+stream-oriented attributes may be specified for any type via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>. 
+<span class="insert4">[Alternatively, each of the specific stream-oriented 
+attributes may be specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+on any <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+with the aspect name being the corresponding attribute name.] Each of 
+the class-wide stream-oriented attributes may be specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+for a tagged type <I>T</I> using the name of the stream-oriented attribute 
+followed by 'Class; such class-wide aspects do not apply to other descendants 
+of <I>T</I>.</span><span class="delete4">&nbsp;The subprogram name given in 
+such a clause shall statically denote a subprogram that is not an abstract 
+subprogram. Furthermore, if a stream-oriented attribute is specified 
+for an interface type by an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+the subprogram name given in the clause shall statically denote a null 
+procedure.</span> <A NAME="I5967"></A><A NAME="I5968"></A><A NAME="I5969"></A><A NAME="I5970"></A><A NAME="I5971"></A><A NAME="I5972"></A><A NAME="I5973"></A><A NAME="I5974"></A><span class="insert4"><A NAME="I5975"></A><A NAME="I5976"></A><A NAME="I5977"></A><A NAME="I5978"></A><A NAME="I5979"></A><A NAME="I5980"></A><A NAME="I5981"></A><A NAME="I5982"></A></span></div>
+<div class="paranum"><a name="p38.a">38.a/4</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
+<span class="insert4">We need the last sentence to override the blanket 
+rule given in <A HREF="AA-13-1-1.html">13.1.1</A> that aspect'Class applies 
+to the type and all descendants.</span><span class="delete4"></span> 
+</div>
+<div class="paranum"><a name="p38.a.1">38.a.1/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+</div>
+<div class="paranum"><a name="p38.a.2">38.a.2/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Proof:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0121-1.TXT">AI12-0121-1</A></I>} 
+<span class="insert4"><A HREF="AA-13-1-1.html">13.1.1</A> says that all 
+operational attributes can be specified with an aspect_specification.</span> 
+</div>
+<div class="paranum"><a name="p38.a.3">38.a.3/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert4"><B>Read'Class:&nbsp;</B></span><span class="insert4">Procedure 
+to read a value from a stream for the class-wide type associated with 
+a given type.</span></div>
+<div class="paranum"><a name="p38.a.4">38.a.4/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert4"><B>Write'Class:&nbsp;</B></span><span class="insert4">Procedure 
+to write a value to a stream for a the class-wide type associated with 
+a given type.</span></div>
+<div class="paranum"><a name="p38.a.5">38.a.5/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert4"><B>Input'Class:&nbsp;</B></span><span class="insert4">Function 
+to read a value from a stream for a the class-wide type associated with 
+a given type, including any bounds and discriminants.</span></div>
+<div class="paranum"><a name="p38.a.6">38.a.6/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert4"><B>Output'Class:&nbsp;</B></span><span class="insert4">Procedure 
+to write a value to a stream for a the class-wide type associated with 
+a given type, including any bounds and discriminants.</span></div>
+<div class="paranum"><a name="p38.1">38.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0121-1.TXT">AI12-0121-1</A></I>} 
+<span class="insert4">The subprogram name given in such an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+shall statically denote a subprogram that is not an abstract subprogram. 
+Furthermore, if a specific stream-oriented attribute is specified for 
+an interface type, the subprogram name given in the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+shall statically denote a null procedure.</span></div>
+<div class="paranum"><a name="p38.b">38.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+Stream attributes (other than Input) are always null procedures for interface 
+types (they have no components). We need to allow explicit setting of 
+the Read and Write attributes in order that the class-wide attributes 
+like LI'Class'Input can be made available. (In that case, any descendant 
+of the interface type would require available attributes.) But we don't 
+allow any concrete implementation because these don't participate in 
+extensions (unless the interface is the parent type). If we didn't ban 
+concrete implementations, the order of declaration of a pair of interfaces 
+would become significant. For example, if Int1 and Int2 are interfaces 
+with concrete implementations of 'Read, then the following declarations 
+would have different implementations for 'Read:&nbsp;</div>
+<div class="paranum"><a name="p38.c">38.c/2</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Con1&nbsp;<B>is&nbsp;new</B>&nbsp;Int1&nbsp;<B>and</B>&nbsp;Int2&nbsp;<B>with&nbsp;null&nbsp;record</B>;<BR>
+<B>type</B>&nbsp;Con2&nbsp;<B>is&nbsp;new</B>&nbsp;Int2&nbsp;<B>and</B>&nbsp;Int1&nbsp;<B>with&nbsp;null&nbsp;record</B>;</div>
+<div class="paranum"><a name="p38.d">38.d/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">This would violate 
+our design principle that the order of the specification of the interfaces 
+in a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+doesn't matter.&nbsp;</div>
+<div class="paranum"><a name="p38.e">38.e/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
+</B>The Input attribute cannot be specified for an interface. As it is 
+a function, a null procedure is impossible; a concrete function is not 
+possible anyway as any function returning an abstract type must be abstract. 
+And we don't allow specifying stream attributes to be abstract subprograms. 
+This has no impact, as the availability of Int'Class'Input (where Int 
+is a limited interface) depends on whether Int'Read (not Int'Input) is 
+specified. There is no reason to allow Int'Output to be specified, either, 
+but there is equally no reason to disallow it, so we don't have a special 
+rule for that.&nbsp;</div>
+<div class="paranum"><a name="p38.f">38.f/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+Limited types generally do not have default implementations of the stream-oriented 
+attributes. The rules defining when a stream-oriented attribute is available 
+(see below) determine when an attribute of a limited type is in fact 
+well defined and usable. The rules are designed to maximize the number 
+of cases in which the attributes are usable. For instance, when the language 
+provides a default implementation of an attribute for a limited type 
+based on a specified attribute for the parent type, we want to be able 
+to call that attribute.&nbsp;</div>
+<div class="paranum"><a name="p38.g">38.g/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Read:&nbsp;</B>Procedure 
+to read a value from a stream for a given type.</div>
+<div class="paranum"><a name="p38.h">38.h/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Write:&nbsp;</B>Procedure 
+to write a value to a stream for a given type.</div>
+<div class="paranum"><a name="p38.i">38.i/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Input:&nbsp;</B>Function 
+to read a value from a stream for a given type, including any bounds 
+and discriminants.</div>
+<div class="paranum"><a name="p38.j">38.j/3</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Output:&nbsp;</B>Procedure 
+to write a value to a stream for a given type, including any bounds and 
+discriminants.</div>
+<div class="paranum"><a name="p39">39/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+A stream-oriented attribute for a subtype of a specific type <I>T</I> 
+is <I>available</I> at places where one of the following conditions is 
+true: <A NAME="I5983"></A></div>
+<div class="paranum"><a name="p40">40/2</a></div>
+<div class="Bulleted"><I>T</I> is nonlimited.</div>
+<div class="paranum"><a name="p41">41/2</a></div>
+<div class="Bulleted">The <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is Read (resp. Write) and <I>T</I> is a limited record extension, and 
+the attribute Read (resp. Write) is available for the parent type of 
+<I>T</I> and for the types of all of the extension components.&nbsp;</div>
+<div class="paranum"><a name="p41.a">41.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>In this case, the language provides 
+a well-defined default implementation, which we want to be able to call. 
+</div>
+<div class="paranum"><a name="p42">42/2</a></div>
+<div class="Bulleted"><I>T</I> is a limited untagged derived type, and 
+the attribute was inherited for the type.&nbsp;</div>
+<div class="paranum"><a name="p42.a">42.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Attributes are only inherited 
+for untagged derived types, and surely we want to be able to call inherited 
+attributes.&nbsp;</div>
+<div class="paranum"><a name="p43">43/2</a></div>
+<div class="Bulleted">The <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is Input (resp. Output), and <I>T</I> is a limited type, and the attribute 
+Read (resp. Write) is available for <I>T</I>.&nbsp;</div>
+<div class="paranum"><a name="p43.a">43.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The default implementation of 
+Input and Output are based on Read and Write; so if the implementation 
+of Read or Write is good, so is the matching implementation of Input 
+or Output.&nbsp;</div>
+<div class="paranum"><a name="p44">44/2</a></div>
+<div class="Bulleted">The attribute has been specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+and the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+is visible.&nbsp;</div>
+<div class="paranum"><a name="p44.a">44.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We always want to allow calling 
+a specified attribute. But we don't want availability to break privacy. 
+Therefore, only attributes whose specification can be seen count. Yes, 
+we defined the visibility of an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+(see <A HREF="AA-8-3.html">8.3</A>).&nbsp;</div>
+<div class="paranum"><a name="p45">45/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+A stream-oriented attribute for a subtype of a class-wide type <I>T</I>'Class 
+is available at places where one of the following conditions is true:</div>
+<div class="paranum"><a name="p46">46/2</a></div>
+<div class="Bulleted"><I>T</I> is nonlimited;</div>
+<div class="paranum"><a name="p47">47/2</a></div>
+<div class="Bulleted">the attribute has been specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+and the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+is visible; or</div>
+<div class="paranum"><a name="p48">48/2</a></div>
+<div class="Bulleted">the corresponding attribute of <I>T</I> is available, 
+provided that if <I>T</I> has a partial view, the corresponding attribute 
+is available at the end of the visible part where <I>T</I> is declared.</div>
+<div class="paranum"><a name="p48.a">48.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The rules are stricter for class-wide 
+attributes because (for the default implementation) we must ensure that 
+any specific attribute that might ever be dispatched to is available. 
+Because we require specification of attributes for extensions of limited 
+parent types with available attributes, we can in fact know this. Otherwise, 
+we would not be able to use default class-wide attributes with limited 
+types, a significant limitation.&nbsp;</div>
+<div class="paranum"><a name="p49">49/4</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
+An <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+for one of the stream-oriented attributes is illegal unless the attribute 
+is available at the place of the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>. 
+Furthermore, an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+for <I>T</I>'Input is illegal if <I>T</I> is an abstract type.<span class="insert4"><A NAME="I5984"></A> 
+In addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+these rules also apply in the private part of an instance of a generic 
+unit.</span></div>
+<div class="paranum"><a name="p49.a">49.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Stream attributes always 
+exist. It is illegal to call them in some cases. Having the attributes 
+not be defined for some limited types would seem to be a cleaner solution, 
+but it would lead to contract model problems for limited private types.</div>
+<div class="paranum"><a name="p49.b">49.b/2</a></div>
+<div class="Annotations"><I>T</I>'Input is available for abstract types 
+so that <I>T</I>'Class'Input is available. But we certainly don't want 
+to allow calls that could create an object of an abstract type. Remember 
+that <I>T</I>'Class is never abstract, so the above legality rule doesn't 
+apply to it. We don't have to discuss whether the attribute is specified, 
+as it cannot be: any function returning the type would have to be abstract, 
+and we do not allow specifying an attribute with an abstract subprogram. 
+</div>
+<div class="paranum"><a name="p49.c">49.c/4</a></div>
+<div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
+<span class="insert4">&ldquo;These rules apply&rdquo; refers to just 
+this paragraph and not to the rest of the rules in this section. This 
+rule probably should have been a Legality Rule, but the word &ldquo;illegal&rdquo; 
+should key the reader that this is a Legality Rule, no matter under what 
+text heading it occurs.</span>&nbsp;</div>
+<div class="paranum"><a name="p49.1">49.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
+<span class="insert4">Unless inherited from a parent type, if any, for 
+an untagged type having a task, protected, or explicitly limited record 
+part, the default implementation of each of the Read, Write, Input, and 
+Output attributes raises Program_Error and performs no other action.</span></div>
+<div class="paranum"><a name="p49.d">49.d/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
+<span class="insert4">It might seem that there is no need to specify 
+the behavior of the default implementation of a streaming attribute of, 
+for example, a task type because there is no way that it can be invoked. 
+It is possible, however, to construct an example where such a stream 
+attribute can be invoked. This involves using a formal untagged limited 
+derived type for which some streaming attribute is available (because 
+it was explicitly specified for the ancestor type) and a corresponding 
+actual type for which the attribute is unspecified (because the derivation 
+occurred before the aspect was specified for the ancestor type and the 
+specification was therefore not inherited).</span>&nbsp;</div>
+<div class="paranum"><a name="p50">50/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+In the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0176">parameter_and_result_profile</A></SPAN>s 
+for the default implementations of the stream-oriented attributes, the 
+subtype of the Item parameter is the base subtype of <I>T</I> if <I>T</I> 
+is a scalar type, and the first subtype otherwise. The same rule applies 
+to the result of the Input attribute.</div>
+<div class="paranum"><a name="p50.a">50.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+An inherited stream attribute has a profile as determined by the rules 
+for inheriting primitive subprograms (see <A HREF="AA-13-1.html">13.1</A> 
+and <A HREF="AA-3-4.html">3.4</A>).&nbsp;</div>
+<div class="paranum"><a name="p51">51/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0007-1.TXT">AI05-0007-1</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+specifying one of these attributes, the subtype of the <I>Item</I> parameter 
+shall be the first subtype or the base subtype if scalar, and the first 
+subtype if not scalar. The same rule applies to the result of the Input 
+function.</div>
+<div class="paranum"><a name="p51.a">51.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is to simplify implementation. 
+</div>
+<div class="paranum"><a name="p51.b">51.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The view of the type at 
+the point of the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+determines whether the base subtype is allowed. Thus, for a scalar type 
+with a partial view (which is never scalar), whether the  base subtype 
+is allowed is determined by whether the <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+occurs before or after the full definition of the scalar type.&nbsp;</div>
+<div class="paranum"><a name="p52">52/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0065-1.TXT">AI05-0065-1</A></I>} 
+<A NAME="I5985"></A><A NAME="I5986"></A>[A type is said to <I>support 
+external streaming</I> if Read and Write attributes are provided for 
+sending values of such a type between active partitions, with Write marshalling 
+the representation, and Read unmarshalling the representation.] A limited 
+type supports external streaming only if it has available Read and Write 
+attributes. A type with a part that is of a nonremote access type supports 
+external streaming only if that access type or the type of some part 
+that includes the access type component, has Read and Write attributes 
+that have been specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+and that <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+is visible. [An anonymous access type does not support external streaming. 
+]All other types (including remote access types, see <A HREF="AA-E-2-2.html">E.2.2</A>) 
+support external streaming.</div>
+<div class="paranum"><a name="p52.a">52.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A limited type with a part 
+that is of a nonremote access type needs to satisfy both rules.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p53">53/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+<A NAME="I5987"></A>If the internal tag returned by Descendant_Tag to 
+T'Class'Input identifies a type that is not library-level and whose tag 
+has not been created, or does not exist in the partition at the time 
+of the call, execution is erroneous.&nbsp;</div>
+<div class="paranum"><a name="p53.a">53.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The definition of Descendant_Tag 
+prevents such a tag from being provided to T'Class'Input if T is a library-level 
+type. However, this rule is needed for nested tagged types.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p54">54/1</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+For every subtype <I>S</I> of a language-defined nonlimited specific 
+type <I>T</I>, the output generated by S'Output or S'Write shall be readable 
+by S'Input or S'Read, respectively. This rule applies across partitions 
+if the implementation conforms to the Distributed Systems Annex.</div>
+<div class="paranum"><a name="p55">55/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
+If Constraint_Error is raised during a call to Read because of failure 
+of one the above checks, the implementation shall ensure that the discriminants 
+of the actual parameter of Read are not modified.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p56">56/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
+The number of calls performed by the predefined implementation of the 
+stream-oriented attributes on the Read and Write operations of the stream 
+type is unspecified. An implementation may take advantage of this permission 
+to perform internal buffering. However, all the calls on the Read and 
+Write operations of the stream type needed to implement an explicit invocation 
+of a stream-oriented attribute shall take place before this invocation 
+returns. An explicit invocation is one appearing explicitly in the program 
+text, possibly through a generic instantiation (see <A HREF="AA-12-3.html">12.3</A>).</div>
+<div class="paranum"><a name="p56.1">56.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0023-1.TXT">AI05-0023-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+If <I>T</I> is a discriminated type and its discriminants have defaults, 
+then in two cases an execution of the default implementation of S'Read 
+is not required to create an anonymous object of type <I>T</I>: If the 
+discriminant values that are read in are equal to the corresponding discriminant 
+values of <I>Item</I>, then no object of type <I>T</I> need be created 
+and <I>Item</I> may be used instead. If they are not equal and <I>Item</I> 
+is a constrained variable, then Constraint_Error may be raised at that 
+point, before any further values are read from the stream and before 
+the object of type <I>T</I> is created.</div>
+<div class="paranum"><a name="p56.2">56.2/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0023-1.TXT">AI05-0023-1</A></I>} 
+A default implementation of S'Input that calls the default implementation 
+of S'Read may create a constrained anonymous object with discriminants 
+that match those in the stream.&nbsp;</div>
+<div class="paranum"><a name="p56.a">56.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Implementation 
+Note:&nbsp;</B>This allows the combined executions of S'Input and S'Read to 
+create one object of type <I>T</I> instead of two. If this option is 
+exercised, then:&nbsp;</div>
+<div class="paranum"><a name="p56.b">56.b/3</a></div>
+<div class="SmallBulleted">The discriminants are read from the stream 
+by S'Input, not S'Read.</div>
+<div class="paranum"><a name="p56.c">56.c/3</a></div>
+<div class="SmallBulleted">S'Input declares an object of type <I>T</I> 
+constrained by the discriminants read from the stream, not an unconstrained 
+object.</div>
+<div class="paranum"><a name="p56.d">56.d/3</a></div>
+<div class="SmallBulleted">The discriminant values that S'Read would 
+normally have read from the stream are read from Item instead.</div>
+<div class="paranum"><a name="p56.e">56.e/3</a></div>
+<div class="SmallBulleted">The permissions of the preceding paragraph 
+then apply and no object of type <I>T</I> need be created by the execution 
+of S'Read.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p57">57</a></div>
+<div class="Notes">40&nbsp;&nbsp;For a definite subtype S of a type <I>T</I>, 
+only <I>T</I>'Write and <I>T</I>'Read are needed to pass an arbitrary 
+value of the subtype through a stream. For an indefinite subtype S of 
+a type <I>T</I>, <I>T</I>'Output and <I>T</I>'Input will normally be 
+needed, since <I>T</I>'Write and <I>T</I>'Read do not pass bounds, discriminants, 
+or tags.</div>
+<div class="paranum"><a name="p58">58</a></div>
+<div class="Notes">41&nbsp;&nbsp;User-specified attributes of S'Class 
+are not inherited by other class-wide types descended from S.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p59">59</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of user-defined 
+Write attribute:</I>&nbsp;</div>
+<div class="paranum"><a name="p60">60/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+<B>procedure</B>&nbsp;My_Write(<BR>
+&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Ada.Streams.Root_Stream_Type'Class;<BR>
+&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;My_Integer'Base);<BR>
+<B>for</B>&nbsp;My_Integer'Write&nbsp;<B>use</B>&nbsp;My_Write;</div>
+<div class="paranum"><a name="p60.a">60.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B><I>Example of network input/output using input output attributes:</I> 
+</div>
+<div class="paranum"><a name="p60.b">60.b</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Ada.Streams;&nbsp;<B>use</B>&nbsp;Ada.Streams;<BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Msg_Type(&lt;&gt;)&nbsp;<B>is&nbsp;private</B>;<BR>
+<B>package</B>&nbsp;Network_IO&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Connect/Disconnect&nbsp;are&nbsp;used&nbsp;to&nbsp;establish&nbsp;the&nbsp;stream</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Connect(...);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Disconnect(...);</div>
+<div class="paranum"><a name="p60.c">60.c</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Send/Receive&nbsp;transfer&nbsp;messages&nbsp;across&nbsp;the&nbsp;network</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Send(X&nbsp;:&nbsp;<B>in</B>&nbsp;Msg_Type);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Receive&nbsp;<B>return</B>&nbsp;Msg_Type;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Network_Stream&nbsp;<B>is&nbsp;new</B>&nbsp;Root_Stream_Type&nbsp;<B>with</B>&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Read(...);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;define&nbsp;Read/Write&nbsp;for&nbsp;Network_Stream</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Write(...);<BR>
+<B>end</B>&nbsp;Network_IO;</div>
+<div class="paranum"><a name="p60.d">60.d</a></div>
+<div class="SmallExamples"><B>with</B>&nbsp;Ada.Streams;&nbsp;<B>use</B>&nbsp;Ada.Streams;<BR>
+<B>package&nbsp;body</B>&nbsp;Network_IO&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;Current_Stream&nbsp;:&nbsp;<B>aliased</B>&nbsp;Network_Stream;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Connect(...)&nbsp;<B>is</B>&nbsp;...;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Disconnect(...)&nbsp;<B>is</B>&nbsp;...;</div>
+<div class="paranum"><a name="p60.e">60.e</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Send(X&nbsp;:&nbsp;<B>in</B>&nbsp;Msg_Type)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Msg_Type'Output(Current_Stream'Access,&nbsp;X);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Send;</div>
+<div class="paranum"><a name="p60.f">60.f</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Receive&nbsp;<B>return</B>&nbsp;Msg_Type&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Msg_Type'Input(Current_Stream'Access);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Receive;<BR>
+<B>end</B>&nbsp;Network_IO;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 95</H4>
+<div class="paranum"><a name="p60.g">60.g/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+<A NAME="I5988"></A><B>Corrigendum:</B> Clarified how the default implementation 
+for stream attributes is determined (eliminating conflicting language). 
+The new wording provides that attributes for type extensions are created 
+by composing the parent's attribute with those for the extension components 
+if any. If a program was written assuming that the extension components 
+were not included in the stream (as in original Ada 95), it would fail 
+to work in the language as corrected by the Corrigendum.</div>
+<div class="paranum"><a name="p60.h">60.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+<B>Amendment Correction:</B> Explicitly provided a permission that the 
+number of calls to the underlying stream Read and Write operations may 
+differ from the number determined by the canonical operations. If Ada 
+95 code somehow depended on the number of calls to Read or Write, it 
+could fail with an Ada 2005 implementation. Such code is likely to be 
+very rare; moreover, such code is really wrong, as the permission applies 
+to Ada 95 as well.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p60.i">60.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00270.TXT">AI95-00270-01</A></I>} 
+<A NAME="I5989"></A>The Stream_Size attribute is new. It allows specifying 
+the number of bits that will be streamed for a type. The Implementation 
+Advice involving this also was changed; this is not incompatible because 
+Implementation Advice does not have to be followed.</div>
+<div class="paranum"><a name="p60.j">60.j/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0040">8652/0040</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00108.TXT">AI95-00108-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00444.TXT">AI95-00444-01</A></I>} 
+<B>Corrigendum:</B> Limited types may have default constructed attributes 
+if all of the parent and (for extensions) extension components have available 
+attributes. Ada 2005 adds the notion of availability to patch up some 
+holes in the Corrigendum model.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p60.k">60.k/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+<B>Corrigendum:</B> Added wording to specify that these are operational 
+attributes.</div>
+<div class="paranum"><a name="p60.l">60.l/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0045">8652/0045</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00132.TXT">AI95-00132-01</A></I>} 
+<B>Corrigendum:</B> Clarified that End_Error is raised by the default 
+implementation of Read and Input if the end of the stream is reached. 
+(The result could have been abnormal without this clarification, thus 
+this is not an inconsistency, as the programmer could not have depended 
+on the previous behavior.)</div>
+<div class="paranum"><a name="p60.m">60.m/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+Clarified that the default implementation of S'Input does normal initialization 
+on the object that it passes to S'Read.</div>
+<div class="paranum"><a name="p60.n">60.n/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00195.TXT">AI95-00195-01</A></I>} 
+Explicitly stated that what is read from a stream when a required check 
+fails is unspecified.</div>
+<div class="paranum"><a name="p60.o">60.o/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+Defined availability and default implementations for types with progenitors.</div>
+<div class="paranum"><a name="p60.p">60.p/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
+Specified that Constraint_Error is raised if the internal tag retrieved 
+for S'Class'Input is for some type not covered by S'Class or is abstract. 
+We also explicitly state that the program is erroneous if the tag has 
+not been created or does not currently exist in the partition. (Ada 95 
+did not specify what happened in these cases; it's very unlikely to have 
+provided some useful result, so this is not considered an inconsistency.)</div>
+<div class="paranum"><a name="p60.q">60.q/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+Added wording to support nested type extensions. S'Input and S'Output 
+always raise Tag_Error for such extensions, and such extensions were 
+not permitted in Ada 95, so this is neither an extension nor an incompatibility.</div>
+<div class="paranum"><a name="p60.r">60.r/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+Defined <I>supports external streaming</I> to put all of the rules about 
+&ldquo;good&rdquo; stream attributes in one place. This is used for distribution 
+and for defining pragma Pure.</div>
+<div class="paranum"><a name="p60.s">60.s/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
+Added the <B>not null</B> qualifier to the first parameter of all of 
+the stream attributes, so that the semantics doesn't change between Ada 
+95 and Ada 2005. This change is compatible, because mode conformance 
+is required for subprograms specified as stream attributes, and <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>s 
+are not considered for mode conformance.</div>
+<div class="paranum"><a name="p60.t">60.t/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00444.TXT">AI95-00444-01</A></I>} 
+Improved the wording to make it clear that we don't define the default 
+implementations of attributes that cannot be called (that is, aren't 
+&ldquo;available&rdquo;). Also clarified when inheritance takes place. 
+</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p60.u">60.u/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0039-1.TXT">AI05-0039-1</A></I>} 
+<A NAME="I5990"></A><B>Correction:</B> Added a requirement that stream 
+attributes be specified by a static subprogram name rather than a dynamic 
+expression. Expressions cannot provide any useful functionality because 
+of the freezing rules, and the possibility of them complicates implementations. 
+Only pathological programs should be affected.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p60.v">60.v/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0007-1.TXT">AI05-0007-1</A></I>} 
+<A NAME="I5991"></A><B>Correction:</B> Stream attributes for scalar types 
+can be specified with subprograms that take the first subtype as well 
+as the base type. This eliminates confusion about which subtype is appropriate 
+for attributes specified for partial views whose full type is a scalar 
+type. It also eliminates a common user error (forgetting 'Base).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p60.w">60.w/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0023-1.TXT">AI05-0023-1</A></I>} 
+<B>Correction:</B> Corrected the definition of the default version S'Read 
+and S'Input to be well-defined if S is a discriminated type with defaulted 
+discriminants and some components require initialization and/or finalizations.</div>
+<div class="paranum"><a name="p60.x">60.x/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0065-1.TXT">AI05-0065-1</A></I>} 
+<B>Correction:</B> Defined remote access types to support external streaming, 
+since that is their purpose.</div>
+<div class="paranum"><a name="p60.y">60.y/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0109-1.TXT">AI05-0109-1</A></I>} 
+<B>Correction:</B> Removed a misleading phrase which implies that Constraint_Error 
+is raised for internal tags of the wrong type, when Tag_Error should 
+be raised for such tags.</div>
+<div class="paranum"><a name="p60.z">60.z/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+Clarified that arrays with convention Fortran are written in column-major 
+order, rather then row-major order. This is necessary in order that streaming 
+of Fortran arrays is efficient.</div>
+<div class="paranum"><a name="p60.aa">60.aa/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0192-1.TXT">AI05-0192-1</A></I>} 
+<B>Correction:</B> Clarified that the profile of an inherited stream 
+attribute is as defined for an inherited primitive subprogram, while 
+the default implementation of the same attribute might have a different 
+profile.</div>
+<div class="paranum"><a name="p60.bb">60.bb/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0194-1.TXT">AI05-0194-1</A></I>} 
+<B>Correction:</B> Clarified that Stream_Size has no effect on and is 
+not effected by user-defined stream attributes.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p60.cc">60.cc/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
+<span class="insert4"><A NAME="I5992"></A><B>Corrigendum:</B> Defined 
+how to specify a class-wide stream-oriented attribute using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>. 
+It was always intended that this was possible, but the method was not 
+clear, as a class-wide type never has an explicit declaration.</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p60.dd">60.dd/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Defined the runtime effect 
+of stream attributes for untagged limited types, as there is a weird 
+corner case where they can be called. We don't specify this as an inconsistency, 
+as it doesn't make semantic sense to stream a task, and nothing useful 
+could have been done with that, so it should not exist in any programs.</span></div>
+<div class="paranum"><a name="p60.ee">60.ee/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Clarified that the same Legality 
+Rules apply when a stream-oriented attribute is specified via an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+as applied when it is specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>.</span> 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-13-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-14.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

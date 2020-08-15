@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Operations of Discriminated Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.7.2 Operations of Discriminated Types</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[If a discriminated type has <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>s 
+for its discriminants, then unconstrained variables of the type are permitted, 
+and the discriminants of such a variable can be changed by assignment 
+to the variable. For a formal parameter of such a type, an attribute 
+is provided to determine whether the corresponding actual parameter is 
+constrained or unconstrained.]&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+A that is of a discriminated type [(after any implicit dereference)], 
+the following attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="WideHanging-Term">A'Constrained</div><div class="WideHanging-Body">
+<A NAME="I2236"></A><A NAME="I2237"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
+Yields the value True if A denotes a constant, a value, <span class="insert3">a 
+tagged object,&nbsp;</span>or a constrained variable, and False otherwise. 
+</div>
+<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
+This attribute is primarily used on parameters, to determine whether 
+the discriminants can be changed as part of an assignment. The Constrained 
+attribute is statically True for <B>in</B> parameters. For <B>in out</B> 
+and <B>out</B> parameters of a discriminated type, the value of this 
+attribute needs to be passed as an implicit parameter, in general. However, 
+if the type <span class="insert3">is tagged or&nbsp;</span>does not have defaults 
+for its discriminants, the attribute is statically True, so no implicit 
+parameter is needed. Parameters of a limited <span class="insert3">untagged 
+</span>type with defaulted discriminants need this implicit parameter, 
+unless there are no nonlimited views, because they might be passed to 
+a subprogram whose body has visibility on a nonlimited view of the type, 
+and hence might be able to assign to the object and change its discriminants. 
+</div>
+<div class="paranum"><a name="p3.b">3.b/4</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<span class="insert3">All tagged objects are known to be constrained 
+(as nonlimited tagged types cannot have discriminant defaults, and limited 
+tagged objects are immutably limited), and are always considered constrained 
+by this attribute to avoid distributed overhead for parameters of limited 
+</span><span class="insert4">class-wide</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;classwide</span></span><span class="insert3">&nbsp;types, as limited tagged objects may technically be unconstrained if 
+they use defaulted discriminants. Such objects still cannot have their 
+discriminants changed, as assignment is not supported for them, so there 
+is no use for this attribute that would justify the overhead of passing 
+it with all&nbsp;</span><span class="insert4">class-wide</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;classwide</span></span><span class="insert3">&nbsp;parameters.</span>&nbsp;</div>
+<div class="paranum"><a name="p3.c">3.c/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
+<span class="insert3">If the type of A is a type derived from an untagged 
+partial view of a tagged type such that it is not a tagged type, then 
+A is not considered a tagged object, and A'Constrained can return either 
+True or False depending on the nature of the object.</span>&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2238"></A>The execution of a construct 
+is erroneous if the construct has a constituent that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+denoting a subcomponent that depends on discriminants, and the value 
+of any of these discriminants is changed by this execution between evaluating 
+the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> and 
+the last use (within this execution) of the subcomponent denoted by the 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This rule applies to <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>s, 
+calls (except when the discriminant-dependent subcomponent is an <B>in</B> 
+parameter passed by copy), <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>s. 
+Ada 83 only covered the first two cases. AI83-00585 pointed out the situation 
+with the last two cases. The cases of <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0200">object_renaming_declaration</A></SPAN>s 
+and generic formal <B>in out</B> objects are handled differently, by 
+disallowing the situation at compile time.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p4.b">4.b/1</a></div>
+<div class="Annotations"><A NAME="I2239"></A>For consistency with other 
+attributes, we are allowing the <span class="insert1"><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN></span><span class="delete1">&nbsp;prefix</span> 
+of Constrained to be a value as well as an object of a discriminated 
+type, and also an implicit dereference. These extensions are not important 
+capabilities, but there seems no reason to make this attribute different 
+from other similar attributes. We are curious what most Ada 83 compilers 
+do with F(1).X'Constrained.</div>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations">We now handle in a general way the cases of 
+erroneousness identified by AI83-00585, where the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
+is discriminant-dependent, and the evaluation of the index or discrete 
+range changes the value of a discriminant.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p4.d">4.d</a></div>
+<div class="Annotations">We have moved all discussion of erroneous use 
+of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s that 
+denote discriminant-dependent subcomponents to this subclause. In Ada 
+83, it used to appear separately under <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>s 
+and subprogram calls.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p4.e">4.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
+<span class="insert3">A'Constrained is now defined to return True for 
+any A that is a tagged object. This doesn't change the result for any 
+A allowed by previous versions of Ada; the change is necessary to avoid 
+unnecessary overhead for limited tagged parameters.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

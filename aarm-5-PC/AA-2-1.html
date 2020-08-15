@@ -1,0 +1,526 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Character Set</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.1 Character Set</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+<A NAME="I1177"></A>The character repertoire for the text of an Ada program 
+consists of the entire coding space described by the ISO/IEC 10646:2011 
+Universal Multiple-Octet Coded Character Set. This coding space is organized 
+in <I>planes</I>, each plane comprising 65536 characters.<A NAME="I1178"></A> 
+<A NAME="I1179"></A></div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+</div>
+<div class="paranum"><a name="p1.b">1.b/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+</div>
+<div class="paranum"><a name="p1.c">1.c/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+It is our intent to follow the terminology of ISO/IEC 10646:2011 where 
+appropriate, and to remain compatible with the character classifications 
+defined in <A HREF="AA-A-3.html">A.3</A>, &ldquo;<A HREF="AA-A-3.html">Character 
+Handling</A>&rdquo;.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="Indented1"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 and 
+3 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+</div>
+<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+A <SPAN Class="swiss">character</SPAN> is defined by this International 
+Standard for each cell in the coding space described by ISO/IEC 10646:2011, 
+regardless of whether or not ISO/IEC 10646:2011 allocates a character 
+to that cell.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0079-1.TXT">AI05-0079-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+The coded representation for characters is implementation defined [(it 
+need not be a representation defined within ISO/IEC 10646:2011)]. A character 
+whose relative code point in its plane is 16#FFFE# or 16#FFFF# is not 
+allowed anywhere in the text of a program. The only characters allowed 
+outside of comments are those in categories <SPAN Class="swiss">other_format</SPAN>, 
+<SPAN Class="swiss">format_effector</SPAN>, and <SPAN Class="swiss">graphic_character</SPAN>. 
+</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The coded representation 
+for the text of an Ada program.</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+Note that this rule doesn't really have much force, since the implementation 
+can represent characters in the source in any way it sees fit. For example, 
+an implementation could simply define that what seems to be an <SPAN Class="swiss">other_private_use</SPAN> 
+character is actually a representation of the space character.&nbsp;</div>
+<div class="paranum"><a name="p4.1">4.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
+The semantics of an Ada program whose text is not in Normalization Form 
+<span class="insert5">C</span><span class="delete5">&nbsp;KC</span> (as defined 
+by Clause 21 of ISO/IEC 10646:2011) is implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p4.c">4.c/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation defined: 
+</B></span>The semantics of an Ada program whose text is not in Normalization 
+Form <span class="insert5">C</span><span class="delete5">&nbsp;KC</span>.</div>
+<div class="paranum"><a name="p4.d">4.d/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
+<span class="insert5">In particular, an implementation can reject such 
+program source. It is easy during lexical analysis to reject source that 
+contains any code point not present in Normalization Form C. Portable 
+programs should always be encoded in Normalization Form C.</span>&nbsp;</div>
+<div class="paranum"><a name="p4.e">4.e/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
+<span class="insert5">Normalization Form C ensures that all source is 
+in a unique format; it eliminates ambiguities and security issues potentially 
+caused by source using unusual sequences of characters. Note that WC3 
+recommends that all Internet content be in Normalization Form C. We don't 
+require this as there is a potentially significant cost to checking this 
+(just rejecting unallowed code points is not enough), and some implementations 
+may need to be interoperable with tools that produce unnormalized text.</span> 
+</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The description of the language definition in this International Standard 
+uses the character properties General Category, Simple Uppercase Mapping, 
+Uppercase Mapping, and Special Case Condition of the documents referenced 
+by the note in Clause 1 of ISO/IEC 10646:2011. The actual set of graphic 
+symbols used by an implementation for the visual representation of the 
+text of an Ada program is not specified. <A NAME="I1180"></A></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+Characters are categorized as follows:&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+Our character classification considers that the cells not allocated in 
+ISO/IEC 10646:2011 are graphic characters, except for those whose relative 
+code point in their plane is 16#FFFE# or 16#FFFF#. This seems to provide 
+the best compatibility with future versions of ISO/IEC 10646, as future 
+characters can already be used in Ada character and string literals. 
+</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="WideHanging-Term"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1181"></A><SPAN Class="swiss">letter_uppercase</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Uppercase&rdquo;.</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1182"></A><SPAN Class="swiss">letter_lowercase</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Lowercase&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a/1</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0001">8652/0001</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00124.TXT">AI95-00124-01</A></I>} 
+</div>
+<div class="paranum"><a name="p9.1">9.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1183"></A><SPAN Class="swiss">letter_titlecase</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Titlecase&rdquo;.</div>
+<div class="paranum"><a name="p9.2">9.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1184"></A><SPAN Class="swiss">letter_modifier</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Modifier&rdquo;.</div>
+<div class="paranum"><a name="p9.3">9.3/2</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1185"></A><SPAN Class="swiss">letter_other</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Letter, 
+Other&rdquo;.</div>
+<div class="paranum"><a name="p9.4">9.4/2</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1186"></A><SPAN Class="swiss">mark_non_spacing</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Mark, Non-Spacing&rdquo;.</div>
+<div class="paranum"><a name="p9.5">9.5/2</a></div>
+<div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1187"></A><SPAN Class="swiss">mark_spacing_combining</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Mark, Spacing 
+Combining&rdquo;.</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1188"></A><SPAN Class="swiss">number_decimal</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Number, 
+Decimal&rdquo;.</div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1189"></A><SPAN Class="swiss">number_letter</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Number, 
+Letter&rdquo;.</div>
+<div class="paranum"><a name="p10.2">10.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1190"></A><SPAN Class="swiss">punctuation_connector</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Punctuation, 
+Connector&rdquo;.</div>
+<div class="paranum"><a name="p10.3">10.3/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1191"></A><SPAN Class="swiss">other_format</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Other, Format&rdquo;.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1192"></A><SPAN Class="swiss">separator_space</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Separator, 
+Space&rdquo;.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1193"></A><SPAN Class="swiss">separator_line</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Separator, 
+Line&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p12.a">12.a/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1194"></A><SPAN Class="swiss">separator_paragraph</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Separator, 
+Paragraph&rdquo;.</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<A NAME="I1195"></A><SPAN Class="swiss">format_effector</SPAN></div><div class="WideHanging-Body"><br clear="left">
+The characters whose code points are 16#09# (CHARACTER TABULATION), 16#0A# 
+(LINE FEED), 16#0B# (LINE TABULATION), 16#0C# (FORM FEED), 16#0D# (CARRIAGE 
+RETURN), 16#85# (NEXT LINE), and the characters in categories <SPAN Class="swiss">separator_line</SPAN> 
+and <SPAN Class="swiss">separator_paragraph</SPAN>. <A NAME="I1196"></A></div>
+<div class="paranum"><a name="p13.a">13.a/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>ISO/IEC 10646:2003 does not 
+define the names of control characters, but rather refers to the names 
+defined by ISO/IEC 6429:1992. These are the names that we use here.&nbsp;</div>
+<div class="paranum"><a name="p13.1">13.1/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1197"></A><SPAN Class="swiss">other_control</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Other, Control&rdquo;, 
+and which is not defined to be a <SPAN Class="swiss">format_effector</SPAN>.</div>
+<div class="paranum"><a name="p13.2">13.2/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1198"></A><SPAN Class="swiss">other_private_use</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Other, Private 
+Use&rdquo;.</div>
+<div class="paranum"><a name="p13.3">13.3/2</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1199"></A><SPAN Class="swiss">other_surrogate</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character whose General Category is defined to be &ldquo;Other, Surrogate&rdquo;.</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<A NAME="I1200"></A><SPAN Class="swiss">graphic_character</SPAN></div><div class="WideHanging-Body"><br clear="left">
+Any character that is not in the categories <SPAN Class="swiss">other_control</SPAN>, 
+<SPAN Class="swiss">other_private_use</SPAN>, <SPAN Class="swiss">other_surrogate</SPAN>, 
+<SPAN Class="swiss">format_effector</SPAN>, and whose relative code point 
+in its plane is neither 16#FFFE# nor 16#FFFF#.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p14.b">14.b/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+We considered basing the definition of lexical elements on Annex A of 
+ISO/IEC TR 10176 (4th edition), which lists the characters which should 
+be supported in identifiers for all programming languages, but we finally 
+decided against this option. Note that it is not our intent to diverge 
+from ISO/IEC TR 10176, except to the extent that ISO/IEC TR 10176 itself 
+diverges from ISO/IEC 10646:2003 (which is the case at the time of this 
+writing [January 2005]).</div>
+<div class="paranum"><a name="p14.c">14.c/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">More precisely, 
+we intend to align strictly with ISO/IEC 10646:2003. It must be noted 
+that ISO/IEC TR 10176 is a Technical Report while ISO/IEC 10646:2003 
+is a Standard. If one has to make a choice, one should conform with the 
+Standard rather than with the Technical Report. And, it turns out that 
+one <I>must</I> make a choice because there are important differences 
+between the two:</div>
+<div class="paranum"><a name="p14.d">14.d/2</a></div>
+<div class="SmallBulleted">ISO/IEC TR 10176 is still based on ISO/IEC 
+10646:2000 while ISO/IEC 10646:2003 has already been published for a 
+year. We cannot afford to delay the adoption of our amendment until ISO/IEC 
+TR 10176 has been revised.</div>
+<div class="paranum"><a name="p14.e">14.e/2</a></div>
+<div class="SmallBulleted">There are considerable differences between 
+the two editions of ISO/IEC 10646, notably in supporting characters beyond 
+the BMP (this might be significant for some languages, e.g. Korean).</div>
+<div class="paranum"><a name="p14.f">14.f/2</a></div>
+<div class="SmallBulleted">ISO/IEC TR 10176 does not define case conversion 
+tables, which are essential for a case-insensitive language like Ada. 
+To get case conversion tables, we would have to reference either ISO/IEC 
+10646:2003 or Unicode, or we would have to invent our own.&nbsp;</div>
+<div class="paranum"><a name="p14.g">14.g/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">For the purpose 
+of defining the lexical elements of the language, we need character properties 
+like categorization, as well as case conversion tables. These are mentioned 
+in ISO/IEC 10646:2003 as useful for implementations, with a reference 
+to Unicode. Machine-readable tables are available on the web at URLs: 
+</div>
+<div class="paranum"><a name="p14.h">14.h/2</a></div>
+<div class="SmallExamples"><A HREF="http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt">http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt</A><BR>
+<A HREF="http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt">http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt</A></div>
+<div class="paranum"><a name="p14.i">14.i/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">with an explanatory 
+document found at URL:&nbsp;</div>
+<div class="paranum"><a name="p14.j">14.j/2</a></div>
+<div class="SmallExamples"><A HREF="http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html">http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html</A></div>
+<div class="paranum"><a name="p14.k">14.k/2</a></div>
+<div class="Annotations">The actual text of the standard only makes specific 
+references to the corresponding clauses of ISO/IEC 10646:2003, not to 
+Unicode.</div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+The following names are used when referring to certain characters (the 
+first name is that given in ISO/IEC 10646:2011): <A NAME="I1201"></A><A NAME="I1202"></A><A NAME="I1203"></A><A NAME="I1204"></A><A NAME="I1205"></A><A NAME="I1206"></A><A NAME="I1207"></A><A NAME="I1208"></A><A NAME="I1209"></A><A NAME="I1210"></A><A NAME="I1211"></A><A NAME="I1212"></A><A NAME="I1213"></A><A NAME="I1214"></A><A NAME="I1215"></A><A NAME="I1216"></A><A NAME="I1217"></A><A NAME="I1218"></A><A NAME="I1219"></A><A NAME="I1220"></A><A NAME="I1221"></A><A NAME="I1222"></A><A NAME="I1223"></A><A NAME="I1224"></A><A NAME="I1225"></A><A NAME="I1226"></A><A NAME="I1227"></A><A NAME="I1228"></A></div>
+<div class="paranum"><a name="p15.a">15.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
+<A NAME="I1229"></A><A NAME="I1230"></A>This table serves to show the 
+correspondence between ISO/IEC 10646:2011 names and the graphic symbols 
+(glyphs) used in this International Standard. These are the characters 
+that play a special role in the syntax of Ada.&nbsp;</div>
+<div class="Indented2"><table width="70%">
+<TR><TD align="left">&nbsp;&nbsp;graphic symbol<TD align="left">name<TD align="left">&nbsp;&nbsp;graphic symbol<TD align="left">name<TD align="left">
+<TR><TD align="left">&nbsp;<TD align="left">&nbsp;<TD align="left">&nbsp;<TD align="left">&nbsp;<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;<TD align="left">quotation mark<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<TD align="left">colon<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#<TD align="left">number sign<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;<TD align="left">semicolon<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<TD align="left">ampersand<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<TD align="left">less-than sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<TD align="left">apostrophe, tick<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=<TD align="left">equals sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<TD align="left">left parenthesis<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;<TD align="left">greater-than sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<TD align="left">right parenthesis<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<TD align="left">low line, underline<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<TD align="left">asterisk, multiply<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<TD align="left">vertical line<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+<TD align="left">plus sign<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<TD align="left">solidus, divide<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,<TD align="left">comma<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!<TD align="left">exclamation point<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ndash;<TD align="left">hyphen-minus, minus<TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%<TD align="left">percent sign<TD align="left">
+<TR><TD align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;. <TD align="left">full stop, dot, point<TD align="left"><span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@</span><TD align="left"><span class="insert5">commerical at, at sign</span> <TD align="left">
+</table></div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
+An Ada implementation shall accept Ada source code in UTF-8 encoding, 
+with or without a BOM (see <A HREF="AA-A-4-11.html">A.4.11</A>), where 
+every character is represented by its code point. The character pair 
+CARRIAGE RETURN/LINE FEED (code points 16#0D# 16#0A#) signifies a single 
+end of line (see <A HREF="AA-2-2.html">2.2</A>); every other occurrence 
+of a <SPAN Class="swiss">format_effector</SPAN> other than the character 
+whose code point position is 16#09# (CHARACTER TABULATION) also signifies 
+a single end of line.</div>
+<div class="paranum"><a name="p16.a">16.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0079-1.TXT">AI05-0079-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
+This is simply requiring that an Ada implementation be able to directly 
+process the ACATS, which is provided in the described format. Note that 
+files that only contain characters with code points in the first 128 
+(which is the majority of the ACATS) are represented in the same way 
+in both UTF-8 and in &quot;plain&quot; string format. The ACATS includes 
+a BOM in files that have any characters with code points greater than 
+127. Note that the BOM contains characters not legal in Ada source code, 
+so an implementation can use that to automatically distinguish between 
+files formatted as plain Latin-1 strings and UTF-8 with BOM.</div>
+<div class="paranum"><a name="p16.b">16.b/3</a></div>
+<div class="Annotations">We allow line endings to be both represented 
+as the pair CR LF (as in Windows and the ACATS), and as single <SPAN Class="swiss">format_effector</SPAN> 
+characters (usually LF, as in Linux), in order that files created by 
+standard tools on most operating systems will meet the standard format. 
+We specify how many line endings each represent so that compilers use 
+the same line numbering for standard source files.</div>
+<div class="paranum"><a name="p16.c">16.c/3</a></div>
+<div class="Annotations">This requirement increases portability by having 
+a format that is accepted by all Ada compilers. Note that implementations 
+can support other source representations, including structured representations 
+like a parse tree.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+The categories defined above, as well as case mapping and folding, may 
+be based on an implementation-defined version of ISO/IEC 10646 (2003 
+edition or later).&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p17.b">17.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The exact categories, case 
+mapping, and case folding chosen affects identifiers, the result of '[[Wide_]Wide_]Image, 
+and packages Wide_Characters.Handling and Wide_Wide_Characters.Handling. 
+</div>
+<div class="paranum"><a name="p17.c">17.c/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>This permission allows implementations 
+to upgrade to using a newer character set standard whenever that makes 
+sense, rather than having to wait for the next Ada Standard. But the 
+character set standard used cannot be older than ISO/IEC 10646:2003 (which 
+is essentially similar to Unicode 4.0).&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Notes">1&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+The characters in categories <SPAN Class="swiss">other_control</SPAN>, 
+<SPAN Class="swiss">other_private_use</SPAN>, and <SPAN Class="swiss">other_surrogate</SPAN> 
+are only allowed in comments.</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
+</div>
+<div class="paranum"><a name="p19.a">19.a/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
+</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p19.b">19.b</a></div>
+<div class="Annotations"><A NAME="I1231"></A>Ada 95 allows 8-bit and 
+16-bit characters, as well as implementation-specified character sets. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p19.c">19.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The syntax rules in this subclause are modified to remove the emphasis 
+on basic characters vs. others. (In this day and age, there is no need 
+to point out that you can write programs without using (for example) 
+lower case letters.) In particular, <SPAN Class="swiss">character</SPAN> 
+(representing all characters usable outside comments) is added, and <SPAN Class="swiss">basic_graphic_character</SPAN>, 
+<SPAN Class="swiss">other_special_character</SPAN>, and <SPAN Class="swiss">basic_character</SPAN> 
+are removed. <SPAN Class="swiss">Special_character</SPAN> is expanded 
+to include Ada 83's <SPAN Class="swiss">other_special_character</SPAN>, 
+as well as new 8-bit characters not present in Ada 83. Ada 2005 removes 
+<SPAN Class="swiss">special_character</SPAN> altogether; we want to stick 
+to ISO/IEC 10646:2003 character classifications. Note that the term &ldquo;basic 
+letter&rdquo; is used in <A HREF="AA-A-3.html">A.3</A>, &ldquo;<A HREF="AA-A-3.html">Character 
+Handling</A>&rdquo; to refer to letters without diacritical marks.</div>
+<div class="paranum"><a name="p19.d">19.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+Character names now come from ISO/IEC 10646:2003.</div>
+<div class="paranum"><a name="p19.e">19.e/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p19.f">19.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+<A NAME="I1232"></A>Program text can use most characters defined by ISO-10646:2003. 
+This subclause has been rewritten to use the categories defined in that 
+Standard. This should ease programming in languages other than English. 
+</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2005</H4>
+<div class="paranum"><a name="p19.g">19.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0266-1.TXT">AI05-0266-1</A></I>} 
+<A NAME="I1233"></A>An implementation is allowed (but not required) to 
+use a newer character set standard to determine the categories, case 
+mapping, and case folding. Doing so will change the results of attributes 
+'[[Wide_]Wide_]Image and the packages [Wide_]Wide_Characters.Handling 
+in the case of a few rarely used characters. (This also could make some 
+identifiers illegal, for characters that are no longer classified as 
+letters.) This is unlikely to be a problem in practice. Moreover, truly 
+portable Ada 2012 programs should avoid using in these contexts any characters 
+that would have different classifications in any character set standards 
+issued since 10646:2003 (since the compiler can use any such standard 
+as the basis for its classifications).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p19.h">19.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0079-1.TXT">AI05-0079-1</A></I>} 
+<B>Correction:</B> Clarified that only characters in the categories defined 
+here are allowed in the source of an Ada program. This was clear in Ada 
+95, but Amendment 1 dropped the wording instead of correcting it.</div>
+<div class="paranum"><a name="p19.i">19.i/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
+A standard source representation is defined that all compilers are expected 
+to process. Since this is the same format as the ACATS, it seems unlikely 
+that there are any implementations that don't meet this requirement. 
+Moreover, other representations are still permitted, and the &quot;impossible 
+or impractical&quot; loophole (see <A HREF="AA-1-1-3.html">1.1.3</A>) 
+can be invoked for any implementations that cannot directly process the 
+ACATS.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p19.j">19.j/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0004-1.TXT">AI12-0004-1</A></I>} 
+<span class="insert5"><B>Correction:</B> The interpretation of Ada source 
+that is in Normalization Form C but not in Normalization Form KC is no 
+longer implementation-defined. This change could potentially change the 
+meaning of a program for a compiler that normalized all program source 
+to Normalization Form KC before processing it. We don't document this 
+as an inconsistency as such handling was previously implementation defined 
+(so any such code was already defined to be not portable), and we're 
+not aware of any compiler that normalized source code (so we don't expect 
+to see this problem in the real world).</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

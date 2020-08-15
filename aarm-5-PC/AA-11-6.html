@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Exceptions and Optimization</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>11.6 Exceptions and Optimization</H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+[<A NAME="I5140"></A> <A NAME="I5141"></A><A NAME="I5142"></A><A NAME="I5143"></A><A NAME="I5144"></A><A NAME="I5145"></A>This 
+subclause gives permission to the implementation to perform certain &ldquo;optimizations&rdquo; 
+that do not necessarily preserve the canonical semantics.]&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<A NAME="I5146"></A>The rest of this International Standard (outside 
+this subclause) defines the <I>canonical semantics</I> of the language. 
+[The canonical semantics of a given (legal) program determines a set 
+of possible external effects that can result from the execution of the 
+program with given inputs.]&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that the canonical 
+semantics is a set of possible behaviors, since some reordering, parallelism, 
+and nondeterminism is allowed by the canonical semantics.&nbsp;</div>
+<div class="paranum"><a name="p2.b">2.b/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The following parts of the canonical semantics are of particular interest 
+to the reader of this subclause:&nbsp;</div>
+<div class="paranum"><a name="p2.c">2.c</a></div>
+<div class="SmallBulleted">Behavior in the presence of abnormal objects 
+and objects with invalid representations (see <A HREF="AA-13-9-1.html">13.9.1</A>).</div>
+<div class="paranum"><a name="p2.d">2.d</a></div>
+<div class="SmallBulleted">Various actions that are defined to occur 
+in an arbitrary order.</div>
+<div class="paranum"><a name="p2.e">2.e/3</a></div>
+<div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Behavior in the presence of a misuse of Unchecked_Deallocation, Unchecked_Access, 
+or imported or exported entity (see Clause <A HREF="AA-13.html">13</A>). 
+</div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+[As explained in <A HREF="AA-1-1-3.html">1.1.3</A>, &ldquo;<A HREF="AA-1-1-3.html">Conformity 
+of an Implementation with the Standard</A>&rdquo;, the external effect 
+of a program is defined in terms of its interactions with its external 
+environment. Hence, the implementation can perform any internal actions 
+whatsoever, in any order or in parallel, so long as the external effect 
+of the execution of the program is one that is allowed by the canonical 
+semantics, or by the rules of this subclause.]&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that an optimization 
+can change the external effect of the program, so long as the changed 
+external effect is an external effect that is allowed by the semantics. 
+Note that the canonical semantics of an erroneous execution allows any 
+external effect whatsoever. Hence, if the implementation can prove that 
+program execution will be erroneous in certain circumstances, there need 
+not be any constraints on the machine code executed in those circumstances. 
+</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following additional 
+permissions are granted to the implementation:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted"><A NAME="I5147"></A><A NAME="I5148"></A>An implementation 
+need not always raise an exception when a language-defined check fails. 
+Instead, the operation that failed the check can simply yield an <I>undefined 
+result</I>. The exception need be raised by the implementation only if, 
+in the absence of raising it, the value of this undefined result would 
+have some effect on the external interactions of the program. In determining 
+this, the implementation shall not presume that an undefined result has 
+a value that belongs to its subtype, nor even to the base range of its 
+type, if scalar. [Having removed the raise of the exception, the canonical 
+semantics will in general allow the implementation to omit the code for 
+the check, and some or all of the operation itself.]&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Even without this permission, 
+an implementation can always remove a check if it cannot possibly fail. 
+</div>
+<div class="paranum"><a name="p5.b">5.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We express the permission in 
+terms of removing the raise, rather than the operation or the check, 
+as it minimizes the disturbance to the canonical semantics (thereby simplifying 
+reasoning). By allowing the implementation to omit the raise, it thereby 
+does not need to &quot;look&quot; at what happens in the exception handler 
+to decide whether the optimization is allowed.&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The implementation can also 
+omit checks if they cannot possibly fail, or if they could only fail 
+in erroneous executions. This follows from the canonical semantics.&nbsp;</div>
+<div class="paranum"><a name="p5.d">5.d</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Implementation 
+Note:&nbsp;</B>This permission is intended to allow normal &quot;dead code 
+removal&quot; optimizations, even if some of the removed code might have 
+failed some language-defined check. However, one may not eliminate the 
+raise of an exception if subsequent code presumes in some way that the 
+check succeeded. For example:&nbsp;</div>
+<div class="paranum"><a name="p5.e">5.e</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;<B>if</B>&nbsp;X&nbsp;*&nbsp;Y&nbsp;&gt;&nbsp;Integer'Last&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line(&quot;X&nbsp;*&nbsp;Y&nbsp;overflowed&quot;);<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;<BR>
+<B>exception</B><BR>
+&nbsp;&nbsp;<B>when</B>&nbsp;<B>others</B>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line(&quot;X&nbsp;*&nbsp;Y&nbsp;overflowed&quot;);</div>
+<div class="paranum"><a name="p5.e.1">5.e.1</a></div>
+<div class="Annotations">If X*Y does overflow, you may not remove the 
+raise of the exception if the code that does the comparison against Integer'Last 
+presumes that it is comparing it with an in-range Integer value, and 
+hence always yields False.</div>
+<div class="paranum"><a name="p5.f">5.f</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">As another example 
+where a raise may not be eliminated:&nbsp;</div>
+<div class="paranum"><a name="p5.g">5.g</a></div>
+<div class="SmallExamples">&nbsp;&nbsp;<B>subtype</B>&nbsp;Str10&nbsp;<B>is</B>&nbsp;String(1..10);<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;P10&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;Str10;<BR>
+&nbsp;&nbsp;X&nbsp;:&nbsp;P10&nbsp;:=&nbsp;<B>null</B>;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;<B>if</B>&nbsp;X.all'Last&nbsp;=&nbsp;10&nbsp;<B>then</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line(&quot;Oops&quot;);<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;<B>if</B>;</div>
+<div class="paranum"><a name="p5.g.1">5.g.1</a></div>
+<div class="Annotations">In the above code, it would be wrong to eliminate 
+the raise of Constraint_Error on the &quot;X.all&quot; (since X is null), 
+if the code to evaluate 'Last always yields 10 by presuming that X.all 
+belongs to the subtype Str10, without even &quot;looking.&quot;&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<A NAME="I5149"></A>If an exception is raised due to the failure of a 
+language-defined check, then upon reaching the corresponding <SPAN Class="swiss"><A HREF="AA-11-2.html#S0269">exception_handler</A></SPAN> 
+(or the termination of the task, if none), the external interactions 
+that have occurred need reflect only that the exception was raised somewhere 
+within the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+with the handler (or the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>), 
+possibly earlier (or later if the interactions are independent of the 
+result of the checked operation) than that defined by the canonical semantics, 
+but not within the execution of some abort-deferred operation or <I>independent</I> 
+subprogram that does not dynamically enclose the execution of the construct 
+whose check failed. <A NAME="I5150"></A>An independent subprogram is 
+one that is defined outside the library unit containing the construct 
+whose check failed, and for which the Inline aspect is False. <A NAME="I5151"></A><A NAME="I5152"></A><A NAME="I5153"></A>Any 
+assignment that occurred outside of such abort-deferred operations or 
+independent subprograms can be disrupted by the raising of the exception, 
+causing the object or its parts to become abnormal, and certain subsequent 
+uses of the object to be erroneous, as explained in <A HREF="AA-13-9-1.html">13.9.1</A>. 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We allow such variables to become 
+abnormal so that assignments (other than to atomic variables) can be 
+disrupted due to &ldquo;imprecise&rdquo; exceptions or instruction scheduling, 
+and so that assignments can be reordered so long as the correct results 
+are produced in the end if no language-defined checks fail.&nbsp;</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If a check fails, no result 
+dependent on the check may be incorporated in an external interaction. 
+In other words, there is no permission to output meaningless results 
+due to postponing a check.&nbsp;</div>
+<div class="paranum"><a name="p6.c">6.c</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We believe it is important 
+to state the extra permission to reorder actions in terms of what the 
+programmer can expect at run time, rather than in terms of what the implementation 
+can assume, or what transformations the implementation can perform. Otherwise, 
+how can the programmer write reliable programs?</div>
+<div class="paranum"><a name="p6.d">6.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This subclause has two conflicting goals: to allow as much optimization 
+as possible, and to make program execution as predictable as possible 
+(to ease the writing of reliable programs). The rules given above represent 
+a compromise.</div>
+<div class="paranum"><a name="p6.e">6.e</a></div>
+<div class="Annotations">Consider the two extremes:</div>
+<div class="paranum"><a name="p6.f">6.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The extreme conservative rule would be to delete this subclause entirely. 
+The semantics of Ada would be the canonical semantics. This achieves 
+the best predictability. It sounds like a disaster from the efficiency 
+point of view, but in practice, implementations would provide modes in 
+which less predictability but more efficiency would be achieved. Such 
+a mode could even be the out-of-the-box mode. In practice, implementers 
+would provide a compromise based on their customer's needs. Therefore, 
+we view this as one viable alternative.</div>
+<div class="paranum"><a name="p6.g">6.g</a></div>
+<div class="Annotations">The extreme liberal rule would be &ldquo;the 
+language does not specify the execution of a program once a language-defined 
+check has failed; such execution can be unpredictable.&rdquo; This achieves 
+the best efficiency. It sounds like a disaster from the predictability 
+point of view, but in practice it might not be so bad. A user would have 
+to assume that exception handlers for exceptions raised by language-defined 
+checks are not portable. They would have to isolate such code (like all 
+nonportable code), and would have to find out, for each implementation 
+of interest, what behaviors can be expected. In practice, implementations 
+would tend to avoid going so far as to punish their customers too much 
+in terms of predictability.</div>
+<div class="paranum"><a name="p6.h">6.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The most important thing about this subclause is that users understand 
+what they can expect at run time, and implementers understand what optimizations 
+are allowed. Any solution that makes this subclause contain rules that 
+can interpreted in more than one way is unacceptable.</div>
+<div class="paranum"><a name="p6.i">6.i</a></div>
+<div class="Annotations">We have chosen a compromise between the extreme 
+conservative and extreme liberal rules. The current rule essentially 
+allows arbitrary optimizations within a library unit and inlined subprograms 
+reachable from it, but disallow semantics-disrupting optimizations across 
+library units in the absence of inlined subprograms. This allows a library 
+unit to be debugged, and then reused with some confidence that the abstraction 
+it manages cannot be broken by bugs outside the library unit.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Notes">6&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The permissions granted by this subclause can have an effect on the semantics 
+of a program only if the program fails a language-defined check.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">RM83-11.6 was 
+unclear. It has been completely rewritten here; we hope this version 
+is clearer. Here's what happened to each paragraph of RM83-11.6:&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="SmallBulleted">Paragraphs 1 and 2 contain no semantics; they 
+are merely pointing out that anything goes if the canonical semantics 
+is preserved. We have similar introductory paragraphs, but we have tried 
+to clarify that these are not granting any &ldquo;extra&rdquo; permission 
+beyond what the rest of the document allows.</div>
+<div class="paranum"><a name="p7.c">7.c</a></div>
+<div class="SmallBulleted">Paragraphs 3 and 4 are reflected in the &ldquo;extra 
+permission to reorder actions&rdquo;. Note that this permission now allows 
+the reordering of assignments in many cases.</div>
+<div class="paranum"><a name="p7.d">7.d</a></div>
+<div class="SmallBulleted">Paragraph 5 is moved to <A HREF="AA-4-5.html">4.5</A>, 
+&ldquo;<A HREF="AA-4-5.html">Operators and Expression Evaluation</A>&rdquo;, 
+where operator association is discussed. Hence, this is no longer an 
+&ldquo;extra permission&rdquo; but is part of the canonical semantics.</div>
+<div class="paranum"><a name="p7.e">7.e</a></div>
+<div class="SmallBulleted">Paragraph 6 now follows from the general permission 
+to store out-of-range values for unconstrained subtypes. Note that the 
+parameters and results of all the predefined operators of a type are 
+of the unconstrained subtype of the type.</div>
+<div class="paranum"><a name="p7.f">7.f</a></div>
+<div class="SmallBulleted">Paragraph 7 is reflected in the &ldquo;extra 
+permission to avoid raising exceptions&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p7.g">7.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+We moved subclause <A HREF="AA-11-5.html">11.5</A>, &ldquo;<A HREF="AA-11-5.html">Suppressing 
+Checks</A>&rdquo; from after 11.6 to before 11.6, in order to preserve 
+the famous number &ldquo;11.6&rdquo; (given the changes to earlier subclauses 
+in Clause <A HREF="AA-11.html">11</A>).&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-11-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-12.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

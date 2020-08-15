@@ -1,0 +1,1659 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Multiway_Trees</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.10 <span class="insert3">The Generic Package Containers.Multiway_Trees</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">The language-defined generic package Containers.Multiway_Trees 
+provides private types Tree and Cursor, and a set of operations for each 
+type. A multiway tree container is well-suited to represent nested structures.</span></div>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">This tree just provides a basic structure, and 
+make no promises about balancing or other automatic organization. In 
+this sense, it is different than the indexed (Map, Set) forms. Rather, 
+it provides a building block on which to construct more complex and more 
+specialized tree containers.</span>&nbsp;</div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">A multiway tree container object manages a tree 
+of internal <I>nodes</I>,  each of which contains an element and pointers 
+to the parent, first child, last child, next (successor) sibling, and 
+previous (predecessor) sibling internal nodes.<A NAME="I7997"></A> A 
+cursor designates a particular node within a tree (and by extension the 
+element contained in that node, if any). A cursor keeps designating the 
+same node (and element) as long as the node is part of the container, 
+even if the node is moved within the container.</span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">A <I>subtree</I> is a particular node (which <I>roots 
+the subtree</I>) and all of its child nodes (including all of the children 
+of the child nodes, recursively). <A NAME="I7998"></A><A NAME="I7999"></A><A NAME="I8000"></A>There 
+is a special node, the <I>root</I>, which is always present and has neither 
+an associated element value nor any parent node. The root node provides 
+a place to add nodes to an otherwise empty tree and represents the base 
+of the tree.<A NAME="I8001"></A><A NAME="I8002"></A></span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">A node that has no children is called a <I>leaf 
+node</I>.<A NAME="I8003"></A> The <I>ancestors</I> of a node are the 
+node itself, its parent node, the parent of the parent node, and so on 
+until a node with no parent is reached.<A NAME="I8004"></A> Similarly, 
+the <I>descendants</I> of a node are the node itself, its child nodes, 
+the children of each child node, and so on.<A NAME="I8005"></A></span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">The nodes of a subtree can be visited in several 
+different orders. For a <I>depth-first order</I>, after visiting a node, 
+the nodes of its child list are each visited in depth-first order, with 
+each child node visited in natural order (first child to last child).<A NAME="I8006"></A></span></div>
+<div class="paranum"><a name="p5.a">5.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>For 
+the depth-first order, when each child node is visited, the child list 
+of the child node is visited before the next sibling of the child node 
+is visited.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">The generic library package Containers.Multiway_Trees 
+has the following declaration:</span>&nbsp;</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"><B>with</B>&nbsp;Ada.Iterator_Interfaces;<BR>
+<B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Ada.Containers.Multiway_Trees&nbsp;<B>is</B><A NAME="I8007"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Multiway_Trees);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Multiway_Trees);</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8008"></A>Tree&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Iterator&nbsp;&nbsp;=&gt;&nbsp;Iterate,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator_Element&nbsp;&nbsp;=&gt;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Tree);</span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8009"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I8010"></A>Empty_Tree&nbsp;:&nbsp;<B>constant</B>&nbsp;Tree;</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I8011"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8012"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8013"></A>Tree_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8014"></A>Equal_Subtree&nbsp;(Left_Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right_Position:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8015"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8016"></A>Node_Count&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8017"></A>Subtree_Node_Count&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8018"></A>Depth&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8019"></A>Is_Root&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8020"></A>Is_Leaf&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8021"></A>Root&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8022"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</span></div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8023"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8024"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8025"></A>Query_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8026"></A>Update_Element<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8027"></A>Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8028"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8029"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8030"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8031"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Tree);</span></div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8032"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Tree;</span></div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8033"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</span></div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8034"></A>Delete_Leaf&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8035"></A>Delete_Subtree&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8036"></A>Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8037"></A>Find&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p39">39/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8038"></A>Find_In_Subtree&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p40">40/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8039"></A>Ancestor_Find&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p41">41/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8040"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p42">42/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8041"></A>Iterate<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8042"></A>Iterate_Subtree<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p44">44/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8043"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</span></div>
+<div class="paranum"><a name="p45">45/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8044"></A>Iterate_Subtree&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</span></div>
+<div class="paranum"><a name="p46">46/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8045"></A>Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p47">47/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8046"></A>Child_Depth&nbsp;(Parent,&nbsp;Child&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p48">48/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8047"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p49">49/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8048"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p50">50/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8049"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p51">51/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8050"></A>Prepend_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p52">52/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8051"></A>Append_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p53">53/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8052"></A>Delete_Children&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p54">54/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8053"></A>Copy_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p55">55/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8054"></A>Splice_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p56">56/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8055"></A>Splice_Subtree&nbsp;(Container:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p57">57/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8056"></A>Splice_Children&nbsp;(Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p58">58/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8057"></A>Splice_Children&nbsp;(Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p59">59/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8058"></A>Parent&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p60">60/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8059"></A>First_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p61">61/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8060"></A>First_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p62">62/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8061"></A>Last_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p63">63/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8062"></A>Last_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p64">64/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8063"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p65">65/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8064"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p66">66/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8065"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p67">67/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8066"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p68">68/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8067"></A>Iterate_Children<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p69">69/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8068"></A>Reverse_Iterate_Children<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p70">70/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8069"></A>Iterate_Children&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;&nbsp;Parent&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Reversible_Iterator'Class;</span></div>
+<div class="paranum"><a name="p71">71/3</a></div>
+<div class="Examples"><span class="insert3"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Containers.Multiway_Trees;</span></div>
+<div class="paranum"><a name="p72">72/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">The actual function for the generic formal function 
+&quot;=&quot; on Element_Type values is expected to define a reflexive 
+and symmetric relationship and return the same result value each time 
+it is called with a particular pair of values. If it behaves in some 
+other manner, the functions Find, Reverse_Find, Equal_Subtree, and &quot;=&quot; 
+on tree values return an unspecified value. The exact arguments and number 
+of calls of this generic formal function by the functions Find, Reverse_Find, 
+Equal_Subtree, and &quot;=&quot; on tree values are unspecified.<A NAME="I8070"></A></span></div>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">The type Tree is used to represent trees. The type 
+Tree needs finalization<A NAME="I8071"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p74">74/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">Empty_Tree represents the empty Tree object. It 
+contains only the root node (Node_Count (Empty_Tree) returns 1). If an 
+object of type Tree is not otherwise initialized, it is initialized to 
+the same value as Empty_Tree.</span></div>
+<div class="paranum"><a name="p75">75/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">No_Element represents a cursor that designates 
+no element. If an object of type Cursor is not otherwise initialized, 
+it is initialized to the same value as No_Element.</span></div>
+<div class="paranum"><a name="p76">76/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">The predefined &quot;=&quot; operator for type 
+Cursor returns True if both cursors are No_Element, or designate the 
+same element in the same container.</span></div>
+<div class="paranum"><a name="p77">77/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Execution of the default implementation of the 
+Input, Output, Read, or Write attribute of type Cursor raises Program_Error.</span></div>
+<div class="paranum"><a name="p78">78/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">Tree'Write for a Tree object <I>T</I> writes Node_Count(<I>T</I>) 
+- 1 elements of the tree to the stream. It also may write additional 
+information about the tree.</span></div>
+<div class="paranum"><a name="p79">79/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">Tree'Read reads the representation of a tree from 
+the stream, and assigns to <I>Item</I> a tree with the same elements 
+and structure as was written by Tree'Write.</span></div>
+<div class="paranum"><a name="p79.a">79.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Streaming 
+more elements than the container holds is wrong. For implementation implications 
+of this rule, see the Implementation Note in <A HREF="AA-A-18-2.html">A.18.2</A>.</span> 
+</div>
+<div class="paranum"><a name="p80">80/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">[Some operations of this generic package have access-to-subprogram 
+parameters. To ensure such operations are well-defined, they guard against 
+certain actions by the designated subprogram. In particular, some operations 
+check for &quot;tampering with cursors&quot; of a container because they 
+depend on the set of elements of the container remaining constant, and 
+others check for &quot;tampering with elements&quot; of a container because 
+they depend on elements of the container not being replaced.]</span></div>
+<div class="paranum"><a name="p81">81/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"><A NAME="I8072"></A>A subprogram is said to <I>tamper 
+with cursors</I> of a tree object <I>T</I> if:</span></div>
+<div class="paranum"><a name="p82">82/3</a></div>
+<div class="Bulleted"><span class="insert3">it inserts or deletes elements 
+of <I>T</I>, that is, it calls the Clear, Delete_Leaf, Insert_Child, 
+Delete_Children, Delete_Subtree, or Copy_Subtree procedures with <I>T</I> 
+as a parameter; or</span></div>
+<div class="paranum"><a name="p82.a">82.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>To be honest:&nbsp;</B>Operations 
+which are defined to be equivalent to a call on one of these operations 
+also are included. Similarly, operations which call one of these as part 
+of their definition are included.</span>&nbsp;</div>
+<div class="paranum"><a name="p83">83/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">it reorders the elements of <I>T</I>, that is, 
+it calls the Splice_Subtree or Splice_Children procedures with <I>T</I> 
+as a parameter; or</span></div>
+<div class="paranum"><a name="p84">84/3</a></div>
+<div class="Bulleted"><span class="insert3">it finalizes <I>T</I>; or</span></div>
+<div class="paranum"><a name="p85">85/3</a></div>
+<div class="Bulleted"><span class="insert3">it calls Assign with <I>T</I> 
+as the Target parameter; or</span></div>
+<div class="paranum"><a name="p85.a.1">85.a.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>We 
+don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
+because that finalizes the target object as part of the operation, and 
+finalization of an object is already defined as tampering with cursors.</span> 
+</div>
+<div class="paranum"><a name="p86">86/3</a></div>
+<div class="Bulleted"><span class="insert3">it calls the Move procedure 
+with <I>T</I> as a parameter.</span></div>
+<div class="paranum"><a name="p86.a">86.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>Swap copies 
+elements rather than reordering them, so it doesn't tamper with cursors.</span> 
+</div>
+<div class="paranum"><a name="p87">87/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"><A NAME="I8073"></A>A subprogram is said to <I>tamper 
+with elements</I> of a tree object <I>T</I> if:</span></div>
+<div class="paranum"><a name="p88">88/3</a></div>
+<div class="Bulleted"><span class="insert3">it tampers with cursors of 
+<I>T</I>; or</span></div>
+<div class="paranum"><a name="p89">89/3</a></div>
+<div class="Bulleted"><span class="insert3">it replaces one or more elements 
+of <I>T</I>, that is, it calls the Replace_Element or Swap procedures 
+with <I>T</I> as a parameter.</span></div>
+<div class="paranum"><a name="p89.a">89.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>Complete 
+replacement of an element can cause its memory to be deallocated while 
+another operation is holding onto a reference to it. That can't be allowed. 
+However, a simple modification of (part of) an element is not a problem, 
+so Update_Element does not cause a problem.</span>&nbsp;</div>
+<div class="paranum"><a name="p89.a.1">89.a.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Assign 
+is defined in terms of Clear and Replace_Element, so we don't need to 
+mention it explicitly. Similarly, we don't need to explicitly mention 
+<SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
+because that finalizes the target object as part of the operation, and 
+finalization of an object is already defined as tampering with the element.</span> 
+</div>
+<div class="paranum"><a name="p90">90/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3"><A NAME="I8074"></A><A NAME="I8075"></A>When tampering 
+with cursors is <I>prohibited</I> for a particular tree object <I>T</I>, 
+Program_Error is propagated by a call of any language-defined subprogram 
+that is defined to tamper with the cursors of <I>T</I>, leaving <I>T</I> 
+unmodified. Similarly, when tampering with elements is <I>prohibited</I> 
+for a particular tree object <I>T</I>, Program_Error is propagated by 
+a call of any language-defined subprogram that is defined to tamper with 
+the elements of <I>T</I> [(or tamper with the cursors of <I>T</I>)], 
+leaving <I>T</I> unmodified.</span>&nbsp;</div>
+<div class="paranum"><a name="p90.a">90.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B>Tampering 
+with elements includes tampering with cursors, so we mention it only 
+from completeness in the second sentence.</span>&nbsp;</div>
+<div class="paranum"><a name="p91">91/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p92">92/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
+True if Position designates an element, and returns False otherwise. 
+[In particular, Has_Element returns False if the cursor designates a 
+root node or equals No_Element.]</span></div>
+<div class="paranum"><a name="p92.a">92.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">This function might not detect cursors that designate 
+deleted elements; such cursors are invalid (see below) and the result 
+of calling Has_Element with an invalid cursor is unspecified (but not 
+erroneous).</span>&nbsp;</div>
+<div class="paranum"><a name="p93">93/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Equal_Subtree&nbsp;(Left_Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right_Position:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p94">94/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<span class="insert3">If Left_Position or Right_Position equals No_Element, 
+propagates Constraint_Error. If the number of child nodes of the element 
+designated by Left_Position is different from the number of child nodes 
+of the element designated by Right_Position, the function returns False. 
+If Left_Position designates a root node and Right_Position does not, 
+the function returns False. If Right_Position designates a root node 
+and Left_Position does not, the function returns False. Unless both cursors 
+designate a root node, the elements are compared using the generic formal 
+equality operator. If the result of the element comparison is False, 
+the function returns False. Otherwise, it calls Equal_Subtree on a cursor 
+designating each child element of the element designated by Left_Position 
+and a cursor designating the corresponding child element of the element 
+designated by Right_Position. If any such call returns False, the function 
+returns False; otherwise, it returns True. Any exception raised during 
+the evaluation of element equality is propagated.</span></div>
+<div class="paranum"><a name="p94.a">94.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Left_Position 
+and Right_Position do not need to be from the same tree.</span>&nbsp;</div>
+<div class="paranum"><a name="p94.b">94.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>This wording describes the canonical semantics. However, the order 
+and number of calls on the formal equality function is unspecified for 
+all of the operations that use it in this package, so an implementation 
+can call it as many or as few times as it needs to get the correct answer. 
+Similarly, a global rule (see the introduction of <A HREF="AA-A.html">Annex 
+A</A>) says that language-defined routines are not affected by overriding 
+of other language-defined routines. This means that no reasonable program 
+can tell how many times Equal_Subtree is called, and thus an implementation 
+can call it as many or as few times as it needs to get the correct answer. 
+Specifically, there is no requirement to call the formal equality or 
+Equal_Subtree additional times once the answer has been determined.</span> 
+</div>
+<div class="paranum"><a name="p95">95/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p96">96/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Left and Right denote the same tree object, 
+then the function returns True. Otherwise, it calls Equal_Subtree with 
+cursors designating the root nodes of Left and Right; the result is returned. 
+Any exception raised during the evaluation of Equal_Subtree is propagated.</span></div>
+<div class="paranum"><a name="p96.a">96.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>Similar considerations apply here as apply to Equal_Subtree. The 
+actual number of calls performed is unspecified.</span>&nbsp;</div>
+<div class="paranum"><a name="p97">97/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Node_Count&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p98">98/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Node_Count returns the number of nodes in Container.</span></div>
+<div class="paranum"><a name="p98.a">98.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Since 
+all tree objects have a root node, this can never return a value of 0. 
+Node_Count (Some_Tree) should always equal Subtree_Node_Count (Root (Some_Tree)).</span> 
+</div>
+<div class="paranum"><a name="p99">99/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Subtree_Node_Count&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p100">100/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Position is No_Element, Subtree_Node_Count returns 
+0; otherwise, Subtree_Node_Count returns the number of nodes in the subtree 
+that is rooted by Position.</span></div>
+<div class="paranum"><a name="p101">101/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p102">102/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Node_Count (Container) = 1.</span></div>
+<div class="paranum"><a name="p102.a">102.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>An 
+empty tree contains just the root node.</span>&nbsp;</div>
+<div class="paranum"><a name="p103">103/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Depth&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p104">104/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Position equals No_Element, Depth returns 0; 
+otherwise, Depth returns the number of ancestor nodes of the node designated 
+by Position (including the node itself).</span></div>
+<div class="paranum"><a name="p104.a">104.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Depth 
+(Root (Some_Tree)) = 1.</span>&nbsp;</div>
+<div class="paranum"><a name="p105">105/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Root&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p106">106/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">Is_Root returns True if the Position designates 
+the root node of some tree; and returns False otherwise.</span></div>
+<div class="paranum"><a name="p107">107/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Leaf&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p108">108/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Is_Leaf returns True if Position designates a node 
+that does not have any child nodes; and returns False otherwise.</span></div>
+<div class="paranum"><a name="p108.a">108.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Is_Leaf 
+returns False if passed No_Element, since No_Element does not designate 
+a node. Is_Leaf can be passed a cursor that designates the root node; 
+Is_Leaf will return True if passed the root node of an empty tree.</span> 
+</div>
+<div class="paranum"><a name="p109">109/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Root&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p110">110/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Root returns a cursor that designates the root 
+node of Container.</span></div>
+<div class="paranum"><a name="p110.a">110.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>There 
+is always a root node, even in an empty container, so this function never 
+returns No_Element.</span>&nbsp;</div>
+<div class="paranum"><a name="p111">111/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</span></div>
+<div class="paranum"><a name="p112">112/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Removes all the elements from Container.</span></div>
+<div class="paranum"><a name="p112.a">112.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
+root node is not removed; all trees have a root node.</span>&nbsp;</div>
+<div class="paranum"><a name="p113">113/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p114">114/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position designates the root node of a tree, then Program_Error 
+is propagated. Otherwise, Element returns the element designated by Position.</span></div>
+<div class="paranum"><a name="p114.a">114.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
+root node does not contain an element, so that value cannot be read or 
+written.</span>&nbsp;</div>
+<div class="paranum"><a name="p115">115/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p116">116/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container 
+(including if it designates the root node), then Program_Error is propagated. 
+Otherwise, Replace_Element assigns the value New_Item to the element 
+designated by Position.</span></div>
+<div class="paranum"><a name="p117">117/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p118">118/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position designates the root node of a tree, then Program_Error 
+is propagated. Otherwise, Query_Element calls Process.<B>all</B> with 
+the element designated by Position as the argument. Tampering with the 
+elements of the tree that contains the element designated by Position 
+is prohibited during the execution of the call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p119">119/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p120">120/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container 
+(including if it designates the root node), then Program_Error is propagated. 
+Otherwise, Update_Element calls Process.<B>all</B> with the element designated 
+by Position as the argument. Tampering with the elements of Container 
+is prohibited during the execution of the call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p121">121/3</a></div>
+<div class="Indented2"><span class="insert3">If Element_Type is unconstrained 
+and definite, then the actual Element parameter of Process.<B>all</B> 
+shall be unconstrained.</span></div>
+<div class="paranum"><a name="p121.a">121.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
+means that the elements cannot be directly allocated from the heap; it 
+must be possible to change the discriminants of the element in place.</span> 
+</div>
+<div class="paranum"><a name="p122">122/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p123">123/3</a></div>
+<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p124">124/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">The types Constant_Reference_Type and Reference_Type 
+need finalization.<A NAME="I8076"></A></span></div>
+<div class="paranum"><a name="p125">125/3</a></div>
+<div class="Indented2"><span class="insert3">The default initialization 
+of an object of type Constant_Reference_Type or Reference_Type propagates 
+Program_Error.</span></div>
+<div class="paranum"><a name="p125.a">125.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>It is expected 
+that Reference_Type (and Constant_Reference_Type) will be a controlled 
+type, for which finalization will have some action to terminate the tampering 
+check for the associated container. If the object is created by default, 
+however, there is no associated container. Since this is useless, and 
+supporting this case would take extra work, we define it to raise an 
+exception.</span>&nbsp;</div>
+<div class="paranum"><a name="p126">126/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p127">127/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">This function (combined with the Constant_Indexing 
+and Implicit_Dereference aspects) provides a convenient way to gain read 
+access to an individual element of a tree given a cursor.</span></div>
+<div class="paranum"><a name="p128">128/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container, 
+then Program_Error is propagated. Otherwise, Constant_Reference returns 
+an object whose discriminant is an access value that designates the element 
+designated by Position. Tampering with the elements of Container is prohibited 
+while the object returned by Constant_Reference exists and has not been 
+finalized.</span></div>
+<div class="paranum"><a name="p129">129/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p130">130/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">This function (combined with the Variable_Indexing 
+and Implicit_Dereference aspects) provides a convenient way to gain read 
+and write access to an individual element of a tree given a cursor.</span></div>
+<div class="paranum"><a name="p131">131/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container, 
+then Program_Error is propagated. Otherwise, Reference returns an object 
+whose discriminant is an access value that designates the element designated 
+by Position. Tampering with the elements of Container is prohibited while 
+the object returned by Reference exists and has not been finalized.</span></div>
+<div class="paranum"><a name="p132">132/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Tree);</span></div>
+<div class="paranum"><a name="p133">133/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Target denotes the same object as Source, the 
+operation has no effect. Otherwise, the elements of Source are copied 
+to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
+assigning Source to Target.</span></div>
+<div class="paranum"><a name="p133.a">133.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Each 
+element in Target has a parent element that corresponds to the parent 
+element of the Source element, and has child elements that correspond 
+to the child elements of the Source element.</span>&nbsp;</div>
+<div class="paranum"><a name="p133.b">133.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3">This routine exists for compatibility with the 
+bounded tree container. For an unbounded tree, <TT>Assign(A, B)</TT> 
+and <TT>A := B</TT> behave identically. For a bounded tree, := will raise 
+an exception if the container capacities are different, while Assign 
+will not raise an exception if there is enough room in the target.</span> 
+</div>
+<div class="paranum"><a name="p134">134/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Tree;</span></div>
+<div class="paranum"><a name="p135">135/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Returns a tree with the same structure as Source 
+and whose elements are initialized from the corresponding elements of 
+Source.</span></div>
+<div class="paranum"><a name="p136">136/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</span></div>
+<div class="paranum"><a name="p137">137/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Target denotes the same object as Source, then 
+the operation has no effect. Otherwise, Move first calls Clear (Target). 
+Then, the nodes other than the root node in Source are moved to Target 
+(in the same positions). After Move completes, Node_Count (Target) is 
+the number of nodes originally in Source, and Node_Count (Source) is 
+1.</span></div>
+<div class="paranum"><a name="p138">138/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Delete_Leaf&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p139">139/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated; if Position does not designate an element in Container 
+(including if it designates the root node), then Program_Error is propagated. 
+If the element designated by position has any child elements, then Constraint_Error 
+is propagated. Otherwise, Delete_Leaf removes (from Container) the element 
+designated by Position. Finally, Position is set to No_Element.</span></div>
+<div class="paranum"><a name="p139.a">139.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
+check on Position checks that the cursor does not belong to some other 
+Container. This check implies that a reference to the container is included 
+in the cursor value. This wording is not meant to require detection of 
+dangling cursors; such cursors are defined to be invalid, which means 
+that execution is erroneous, and any result is allowed (including not 
+raising an exception).</span></div>
+<div class="paranum"><a name="p139.b">139.b/3</a></div>
+<div class="Annotations"><span class="insert3">The root node cannot be 
+deleted.</span>&nbsp;</div>
+<div class="paranum"><a name="p140">140/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Delete_Subtree&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p141">141/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated. If Position does not designate an element in Container 
+(including if it designates the root node), then Program_Error is propagated. 
+Otherwise, Delete_Subtree removes (from Container) the subtree designated 
+by Position (that is, all descendants of the node designated by Position 
+including the node itself), and Position is set to No_Element.</span></div>
+<div class="paranum"><a name="p141.a">141.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
+root node cannot be deleted. To delete the entire contents of the tree, 
+call Clear(Container).</span>&nbsp;</div>
+<div class="paranum"><a name="p142">142/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p143">143/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If either I or J equals No_Element, then Constraint_Error 
+is propagated. If either I or J do not designate an element in Container 
+(including if either designates the root node), then Program_Error is 
+propagated. Otherwise, Swap exchanges the values of the elements designated 
+by I and J.</span></div>
+<div class="paranum"><a name="p143.a">143.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>After 
+a call to Swap, I designates the element value previously designated 
+by J, and J designates the element value previously designated by I. 
+The position of the elements do not change; for instance, the parent 
+node and the first child node of I are unchanged by the operation.</span></div>
+<div class="paranum"><a name="p143.b">143.b/3</a></div>
+<div class="Annotations"><span class="insert3">The root nodes do not 
+contain element values, so they cannot be swapped.</span>&nbsp;</div>
+<div class="paranum"><a name="p143.c">143.c/3</a></div>
+<div class="Annotations"><span class="insert3"><B>To be honest:&nbsp;</B>The 
+implementation is not required to actually copy the elements if it can 
+do the swap some other way. But it is allowed to copy the elements if 
+needed.</span>&nbsp;</div>
+<div class="paranum"><a name="p144">144/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Find&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p145">145/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">Find searches the elements of Container for an 
+element equal to Item (using the generic formal equality operator). The 
+search starts at the root node. The search traverses the tree in a depth-first 
+order. If no equal element is found, then Find returns No_Element. Otherwise, 
+it returns a cursor designating the first equal element encountered.</span></div>
+<div class="paranum"><a name="p146">146/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Find_In_Subtree&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p147">147/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated. Find_In_Subtree searches the subtree rooted by Position 
+for an element equal to Item (using the generic formal equality operator). 
+The search starts at the element designated by Position. The search traverses 
+the subtree in a depth-first order. If no equal element is found, then 
+Find returns No_Element. Otherwise, it returns a cursor designating the 
+first equal element encountered.</span></div>
+<div class="paranum"><a name="p147.a">147.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Find_In_Subtree 
+does not check any siblings of the element designated by Position. The 
+root node does not contain an element, and therefore it can never be 
+returned, but it can be explicitly passed to Position.</span>&nbsp;</div>
+<div class="paranum"><a name="p148">148/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Ancestor_Find&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p149">149/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated. Otherwise, Ancestor_Find searches for an element equal 
+to Item (using the generic formal equality operator). The search starts 
+at the node designated by Position, and checks each ancestor proceeding 
+toward the root of the subtree. If no equal element is found, then Ancestor_Find 
+returns No_Element. Otherwise, it returns a cursor designating the first 
+equal element encountered.</span>&nbsp;</div>
+<div class="paranum"><a name="p149.a">149.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">No_Element is returned if Position is the root 
+node.</span>&nbsp;</div>
+<div class="paranum"><a name="p150">150/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Contains&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p151">151/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Find (Container, Item) /= No_Element.</span></div>
+<div class="paranum"><a name="p152">152/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Iterate<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p153">153/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">Iterate calls Process.<B>all</B> with a cursor 
+that designates each element in Container, starting with the root node 
+and proceeding in a depth-first order. Tampering with the cursors of 
+Container is prohibited during the execution of a call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p153.a">153.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Process 
+is not called with the root node, which does not have an associated element.</span> 
+</div>
+<div class="paranum"><a name="p153.b">153.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>The purpose of the tamper with cursors check is to prevent erroneous 
+execution from the Position parameter of Process.<B>all</B> becoming 
+invalid. This check takes place when the operations that tamper with 
+the cursors of the container are called. The check cannot be made later 
+(say in the body of Iterate), because that could cause the Position cursor 
+to be invalid and potentially cause execution to become erroneous &mdash; 
+defeating the purpose of the check.</span></div>
+<div class="paranum"><a name="p153.c">153.c/3</a></div>
+<div class="Annotations"><span class="insert3">See Iterate for vectors 
+(<A HREF="AA-A-18-2.html">A.18.2</A>) for a suggested implementation 
+of the check.</span>&nbsp;</div>
+<div class="paranum"><a name="p154">154/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Iterate_Subtree<BR>
+&nbsp;&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p155">155/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated. Otherwise, Iterate_Subtree calls Process.<B>all</B> with 
+a cursor that designates each element in the subtree rooted by the node 
+designated by Position, starting with the node designated by Position 
+and proceeding in a depth-first order. Tampering with the cursors of 
+the tree that contains the element designated by Position is prohibited 
+during the execution of a call on Process.<B>all</B>. Any exception raised 
+by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p155.a">155.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Position 
+can be passed a cursor designating the root node; in that case, Process 
+is not called with the root node, which does not have an associated element.</span> 
+</div>
+<div class="paranum"><a name="p156">156/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</span></div>
+<div class="paranum"><a name="p157">157/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">Iterate returns an iterator object (see <A HREF="AA-5-5-1.html">5.5.1</A>) 
+that will generate a value for a loop parameter (see <A HREF="AA-5-5-2.html">5.5.2</A>) 
+designating each node in Container, starting with the root node and proceeding 
+in a depth-first order. Tampering with the cursors of Container is prohibited 
+while the iterator object exists (in particular, in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</span></div>
+<div class="paranum"><a name="p157.a">157.a/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Discussion: 
+</B>Exits are allowed from the loops created using the iterator objects. 
+In particular, to stop the iteration at a particular cursor, just add</span> 
+</div>
+<div class="paranum"><a name="p157.b">157.b/3</a></div>
+<div class="SmallExamples"><span class="insert3"><B>exit&nbsp;when</B>&nbsp;Cur&nbsp;=&nbsp;Stop;</span></div>
+<div class="paranum"><a name="p157.c">157.c/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em"><span class="insert3">in 
+the body of the loop (assuming that <TT>Cur</TT> is the loop parameter 
+and <TT>Stop</TT> is the cursor that you want to stop at).</span>&nbsp;</div>
+<div class="paranum"><a name="p158">158/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Iterate_Subtree&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</span></div>
+<div class="paranum"><a name="p159">159/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If Position equals No_Element, then Constraint_Error 
+is propagated. Otherwise, Iterate_Subtree returns an iterator object 
+(see <A HREF="AA-5-5-1.html">5.5.1</A>) that will generate a value for 
+a loop parameter (see <A HREF="AA-5-5-2.html">5.5.2</A>) designating 
+each element in the subtree rooted by the node designated by Position, 
+starting with the node designated by Position and proceeding in a depth-first 
+order. If Position equals No_Element, then Constraint_Error is propagated. 
+Tampering with the cursors of the container that contains the node designated 
+by Position is prohibited while the iterator object exists (in particular, 
+in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</span></div>
+<div class="paranum"><a name="p160">160/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p161">161/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Child_Count returns the number of child nodes of 
+the node designated by Parent.</span></div>
+<div class="paranum"><a name="p162">162/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Child_Depth&nbsp;(Parent,&nbsp;Child&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</span></div>
+<div class="paranum"><a name="p163">163/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Child or Parent is equal to No_Element, then 
+Constraint_Error is propagated. Otherwise, Child_Depth returns the number 
+of ancestor nodes of Child (including Child itself), up to but not including 
+Parent; Program_Error is propagated if Parent is not an ancestor of Child.</span></div>
+<div class="paranum"><a name="p163.a">163.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Program_Error 
+is propagated if Parent and Child are nodes in different containers.</span></div>
+<div class="paranum"><a name="p163.b">163.b/3</a></div>
+<div class="Annotations"><span class="insert3">Child_Depth (Root (Some_Tree), 
+Child) + 1 = Depth (Child) as the root is not counted.</span>&nbsp;</div>
+<div class="paranum"><a name="p164">164/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p165">165/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+does not designate a node in Container, then Program_Error is propagated. 
+If Before is not equal to No_Element, and Parent does not designate the 
+parent node of the node designated by Before, then Constraint_Error is 
+propagated. Otherwise, Insert_Child allocates Count nodes containing 
+copies of New_Item and inserts them as children of Parent. If Parent 
+already has child nodes, then the new nodes are inserted prior to the 
+node designated by Before, or, if Before equals No_Element, the new nodes 
+are inserted after the last existing child node of Parent. Any exception 
+raised during allocation of internal storage is propagated, and Container 
+is not modified.</span></div>
+<div class="paranum"><a name="p166">166/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p167">167/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0257-1.TXT">AI05-0257-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+does not designate a node in Container, then Program_Error is propagated. 
+If Before is not equal to No_Element, and Parent does not designate the 
+parent node of the node designated by Before, then Constraint_Error is 
+propagated. Otherwise, Insert_Child allocates Count nodes containing 
+copies of New_Item and inserts them as children of Parent. If Parent 
+already has child nodes, then the new nodes are inserted prior to the 
+node designated by Before, or, if Before equals No_Element, the new nodes 
+are inserted after the last existing child node of Parent. Position designates 
+the first newly-inserted node, or if Count equals 0, then Position is 
+assigned the value of Before. Any exception raised during allocation 
+of internal storage is propagated, and Container is not modified.</span></div>
+<div class="paranum"><a name="p168">168/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p169">169/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0257-1.TXT">AI05-0257-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+does not designate a node in Container, then Program_Error is propagated. 
+If Before is not equal to No_Element, and Parent does not designate the 
+parent node of the node designated by Before, then Constraint_Error is 
+propagated. Otherwise, Insert_Child allocates Count nodes, the elements 
+contained in the new nodes are initialized by default (see <A HREF="AA-3-3-1.html">3.3.1</A>), 
+and the new nodes are inserted as children of Parent. If Parent already 
+has child nodes, then the new nodes are inserted prior to the node designated 
+by Before, or, if Before equals No_Element, the new nodes are inserted 
+after the last existing child node of Parent. Position designates the 
+first newly-inserted node, or if Count equals 0, then Position is assigned 
+the value of Before. Any exception raised during allocation of internal 
+storage is propagated, and Container is not modified.</span></div>
+<div class="paranum"><a name="p170">170/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Prepend_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p171">171/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Insert_Child (Container, Parent, 
+First_Child (Container, Parent), New_Item, Count).</span></div>
+<div class="paranum"><a name="p172">172/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Append_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</span></div>
+<div class="paranum"><a name="p173">173/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">Equivalent to Insert_Child (Container, Parent, 
+No_Element, New_Item, Count).</span></div>
+<div class="paranum"><a name="p174">174/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Delete_Children&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p175">175/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Container, Program_Error 
+is propagated. Otherwise, Delete_Children removes (from Container) all 
+of the descendants of Parent other than Parent itself.</span></div>
+<div class="paranum"><a name="p175.a">175.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>This 
+routine deletes all of the child subtrees of Parent at once. Use Delete_Subtree 
+to delete an individual subtree.</span>&nbsp;</div>
+<div class="paranum"><a name="p176">176/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Copy_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p177">177/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Target, then Program_Error 
+is propagated. If Before is not equal to No_Element, and does not designate 
+a node in Target, then Program_Error is propagated. If Before is not 
+equal to No_Element, and Parent does not designate the parent node of 
+the node designated by Before, then Constraint_Error is propagated. If 
+Source designates a root node, then Constraint_Error is propagated. If 
+Source is equal to No_Element, then the operation has no effect. Otherwise, 
+the subtree rooted by Source (which can be from any tree; it does not 
+have to be a subtree of Target) is copied (new nodes are allocated to 
+create a new subtree with the same structure as the Source subtree, with 
+each element initialized from the corresponding element of the Source 
+subtree) and inserted into Target as a child of Parent. If Parent already 
+has child nodes, then the new nodes are inserted prior to the node designated 
+by Before, or, if Before equals No_Element, the new nodes are inserted 
+after the last existing child node of Parent. The parent of the newly 
+created subtree is set to Parent, and the overall count of Target is 
+incremented by Subtree_Node_Count (Source). Any exception raised during 
+allocation of internal storage is propagated, and Container is not modified.</span></div>
+<div class="paranum"><a name="p177.a">177.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>We 
+only need one routine here, as the source object is not modified, so 
+we can use the same routine for both copying within and between containers.</span> 
+</div>
+<div class="paranum"><a name="p177.b">177.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>We 
+do not allow copying a subtree that includes a root node, as that would 
+require inserting a node with no value in the middle of the target tree. 
+To copy an entire tree to another tree object, use Copy.</span>&nbsp;</div>
+<div class="paranum"><a name="p178">178/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Splice_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p179">179/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Target, then Program_Error 
+is propagated. If Before is not equal to No_Element, and does not designate 
+a node in Target, then Program_Error is propagated. If Before is not 
+equal to No_Element, and Parent does not designate the parent node of 
+the node designated by Before, then Constraint_Error is propagated. If 
+Position equals No_Element, Constraint_Error is propagated. If Position 
+does not designate a node in Source or designates a root node, then Program_Error 
+is propagated. If Source denotes the same object as Target, then: if 
+Position equals Before there is no effect; if Position designates an 
+ancestor of Parent (including Parent itself), Constraint_Error is propagated; 
+otherwise, the subtree rooted by the element designated by Position is 
+moved to be a child of Parent. If Parent already has child nodes, then 
+the moved nodes are inserted prior to the node designated by Before, 
+or, if Before equals No_Element, the moved nodes are inserted after the 
+last existing child node of Parent. In each of these cases, Position 
+and the count of Target are unchanged, and the parent of the element 
+designated by Position is set to Parent.</span></div>
+<div class="paranum"><a name="p179.a">179.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>We can't 
+allow moving the subtree of Position to a proper descendant node of the 
+subtree, as the descendant node will be part of the subtree being moved. 
+The result would be a circularly linked tree, or one with inaccessible 
+nodes. Thus we have to check Position against Parent, even though such 
+a check is <I>O</I>(Depth(Source)).</span>&nbsp;</div>
+<div class="paranum"><a name="p180">180/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">Otherwise (if Source does not denote the same object 
+as Target), the subtree designated by Position is removed from Source 
+and moved to Target. The subtree is inserted as a child of Parent. If 
+Parent already has child nodes, then the moved nodes are inserted prior 
+to the node designated by Before, or, if Before equals No_Element, the 
+moved nodes are inserted after the last existing child node of Parent. 
+In each of these cases, the count of Target is incremented by Subtree_Node_Count 
+(Position), and the count of Source is decremented by Subtree_Node_Count 
+(Position), Position is updated to represent an element in Target.</span></div>
+<div class="paranum"><a name="p180.a">180.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>If 
+Source is the same as Target, and Position = Before, or Next_Sibling(Position) 
+= Before, Splice_Subtree has no effect, as the subtree does not have 
+to move to meet the postcondition.</span></div>
+<div class="paranum"><a name="p180.b">180.b/3</a></div>
+<div class="Annotations"><span class="insert3">We do not allow splicing 
+a subtree that includes a root node, as that would require inserting 
+a node with no value in the middle of the target tree. Splice the children 
+of the root node instead.</span></div>
+<div class="paranum"><a name="p180.c">180.c/3</a></div>
+<div class="Annotations"><span class="insert3">For this reason there 
+is no operation to splice an entire tree, as that would necessarily involve 
+splicing a root node.</span>&nbsp;</div>
+<div class="paranum"><a name="p181">181/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Splice_Subtree&nbsp;(Container:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p182">182/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Container, then 
+Program_Error is propagated. If Before is not equal to No_Element, and 
+does not designate a node in Container, then Program_Error is propagated. 
+If Before is not equal to No_Element, and Parent does not designate the 
+parent node of the node designated by Before, then Constraint_Error is 
+propagated. If Position equals No_Element, Constraint_Error is propagated. 
+If Position does not designate a node in Container or designates a root 
+node, then Program_Error is propagated. If Position equals Before, there 
+is no effect. If Position designates an ancestor of Parent (including 
+Parent itself), Constraint_Error is propagated. Otherwise, the subtree 
+rooted by the element designated by Position is moved to be a child of 
+Parent. If Parent already has child nodes, then the moved nodes are inserted 
+prior to the node designated by Before, or, if Before equals No_Element, 
+the moved nodes are inserted after the last existing child node of Parent. 
+The parent of the element designated by Position is set to Parent.</span></div>
+<div class="paranum"><a name="p182.a">182.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>We can't 
+allow moving the subtree of Position to a proper descendant node of the 
+subtree, as the descendant node will be part of the subtree being moved.</span> 
+</div>
+<div class="paranum"><a name="p183">183/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Splice_Children&nbsp;(Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p184">184/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">If Target_Parent equals No_Element, then Constraint_Error 
+is propagated. If Target_Parent does not designate a node in Target, 
+then Program_Error is propagated. If Before is not equal to No_Element, 
+and does not designate an element in Target, then Program_Error is propagated. 
+If Source_Parent equals No_Element, then Constraint_Error is propagated. 
+If Source_Parent does not designate a node in Source, then Program_Error 
+is propagated. If Before is not equal to No_Element, and Target_Parent 
+does not designate the parent node of the node designated by Before, 
+then Constraint_Error is propagated.</span></div>
+<div class="paranum"><a name="p185">185/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em"><span class="insert3">If 
+Source denotes the same object as Target, then:</span></div>
+<div class="paranum"><a name="p186">186/3</a></div>
+<div class="Indented3Bulleted"><span class="insert3">if Target_Parent 
+equals Source_Parent there is no effect; else</span></div>
+<div class="paranum"><a name="p187">187/3</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">if Source_Parent is an ancestor of Target_Parent 
+other than Target_Parent itself, then Constraint_Error is propagated; 
+else</span></div>
+<div class="paranum"><a name="p188">188/3</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">the child elements (and the further descendants) 
+of Source_Parent are moved to be child elements of Target_Parent. If 
+Target_Parent already has child elements, then the moved elements are 
+inserted prior to the node designated by Before, or, if Before equals 
+No_Element, the moved elements are inserted after the last existing child 
+node of Target_Parent. The parent of each moved child element is set 
+to Target_Parent.</span>&nbsp;</div>
+<div class="paranum"><a name="p188.a">188.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>We can't 
+allow moving the children of Source_Parent to a proper descendant node, 
+as the descendant node will be part of one of the subtrees being moved.</span> 
+</div>
+<div class="paranum"><a name="p189">189/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">Otherwise (if Source does not denote the same object 
+as Target), the child elements (and the further descendants) of Source_Parent 
+are removed from Source and moved to Target. The child elements are inserted 
+as children of Target_Parent. If Target_Parent already has child elements, 
+then the moved elements are inserted prior to the node designated by 
+Before, or, if Before equals No_Element, the moved elements are inserted 
+after the last existing child node of Target_Parent. In each of these 
+cases, the overall count of Target is incremented by Subtree_Node_Count 
+(Source_Parent)-1, and the overall count of Source is decremented by 
+Subtree_Node_Count (Source_Parent)-1.</span></div>
+<div class="paranum"><a name="p189.a">189.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>The 
+node designated by Source_Parent is not moved, thus we never need to 
+update Source_Parent.</span></div>
+<div class="paranum"><a name="p189.b">189.b/3</a></div>
+<div class="Annotations"><span class="insert3">Move (Target, Source) 
+could be written Splice_Children (Target, Target.Root, No_Element, Source, 
+Source.Root);</span>&nbsp;</div>
+<div class="paranum"><a name="p190">190/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Splice_Children&nbsp;(Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p191">191/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If Target_Parent equals No_Element, then Constraint_Error 
+is propagated. If Target_Parent does not designate a node in Container, 
+then Program_Error is propagated. If Before is not equal to No_Element, 
+and does not designate an element in Container, then Program_Error is 
+propagated. If Source_Parent equals No_Element, then Constraint_Error 
+is propagated. If Source_Parent does not designate a node in Container, 
+then Program_Error is propagated. If Before is not equal to No_Element, 
+and Target_Parent does not designate the parent node of the node designated 
+by Before, then Constraint_Error is propagated. If Target_Parent equals 
+Source_Parent there is no effect. If Source_Parent is an ancestor of 
+Target_Parent other than Target_Parent itself, then Constraint_Error 
+is propagated. Otherwise, the child elements (and the further descendants) 
+of Source_Parent are moved to be child elements of Target_Parent. If 
+Target_Parent already has child elements, then the moved elements are 
+inserted prior to the node designated by Before, or, if Before equals 
+No_Element, the moved elements are inserted after the last existing child 
+node of Target_Parent. The parent of each moved child element is set 
+to Target_Parent.</span></div>
+<div class="paranum"><a name="p192">192/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Parent&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p193">193/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Position is equal to No_Element or designates 
+a root node, No_Element is returned. Otherwise, a cursor designating 
+the parent node of the node designated by Position is returned.</span></div>
+<div class="paranum"><a name="p194">194/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;First_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p195">195/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Parent is equal to No_Element, then Constraint_Error 
+is propagated. Otherwise, First_Child returns a cursor designating the 
+first child node of the node designated by Parent; if there is no such 
+node, No_Element is returned.</span></div>
+<div class="paranum"><a name="p196">196/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;First_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p197">197/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Element (First_Child (Parent)).</span></div>
+<div class="paranum"><a name="p198">198/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Last_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p199">199/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Parent is equal to No_Element, then Constraint_Error 
+is propagated. Otherwise, Last_Child returns a cursor designating the 
+last child node of the node designated by Parent; if there is no such 
+node, No_Element is returned.</span></div>
+<div class="paranum"><a name="p200">200/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Last_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p201">201/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Element (Last_Child (Parent)).</span></div>
+<div class="paranum"><a name="p202">202/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Next_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p203">203/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Position equals No_Element or designates the 
+last child node of its parent, then Next_Sibling returns the value No_Element. 
+Otherwise, it returns a cursor that designates the successor (with the 
+same parent) of the node designated by Position.</span></div>
+<div class="paranum"><a name="p204">204/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</span></div>
+<div class="paranum"><a name="p205">205/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If Position equals No_Element or designates the 
+first child node of its parent, then Previous_Sibling returns the value 
+No_Element. Otherwise, it returns a cursor that designates the predecessor 
+(with the same parent) of the node designated by Position.</span></div>
+<div class="paranum"><a name="p206">206/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Next_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p207">207/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Position := Next_Sibling (Position);</span></div>
+<div class="paranum"><a name="p208">208/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</span></div>
+<div class="paranum"><a name="p209">209/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Equivalent to Position := Previous_Sibling (Position);</span></div>
+<div class="paranum"><a name="p210">210/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Iterate_Children<BR>
+&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p211">211/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated.</span></div>
+<div class="paranum"><a name="p212">212/3</a></div>
+<div class="Indented2"><span class="insert3">Iterate_Children calls Process.<B>all</B> 
+with a cursor that designates each child node of Parent, starting with 
+the first child node and moving the cursor as per the Next_Sibling function.</span></div>
+<div class="paranum"><a name="p213">213/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">Tampering with the cursors of the tree containing 
+Parent is prohibited during the execution of a call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p214">214/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Reverse_Iterate_Children<BR>
+&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</span></div>
+<div class="paranum"><a name="p215">215/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Parent equals No_Element, then Constraint_Error 
+is propagated.</span></div>
+<div class="paranum"><a name="p216">216/3</a></div>
+<div class="Indented2"><span class="insert3">Reverse_Iterate_Children 
+calls Process.<B>all</B> with a cursor that designates each child node 
+of Parent, starting with the last child node and moving the cursor as 
+per the Previous_Sibling function.</span></div>
+<div class="paranum"><a name="p217">217/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">Tampering with the cursors of the tree containing 
+Parent is prohibited during the execution of a call on Process.<B>all</B>. 
+Any exception raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p218">218/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Iterate_Children&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;&nbsp;Parent&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Reversible_Iterator'Class;</span></div>
+<div class="paranum"><a name="p219">219/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">Iterate_Children returns a reversible iterator 
+object (see <A HREF="AA-5-5-1.html">5.5.1</A>) that will generate a value 
+for a loop parameter (see <A HREF="AA-5-5-2.html">5.5.2</A>) designating 
+each child node of Parent. If Parent equals No_Element, then Constraint_Error 
+is propagated. If Parent does not designate a node in Container, then 
+Program_Error is propagated. Otherwise, when used as a forward iterator, 
+the nodes are designated starting with the first child node and moving 
+the cursor as per the function Next_Sibling; when used as a reverse iterator, 
+the nodes are designated starting with the last child node and moving 
+the cursor as per the function Previous_Sibling. Tampering with the cursors 
+of Container is prohibited while the iterator object exists (in particular, 
+in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN> 
+denotes this object). The iterator object needs finalization.</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p220">220/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"><A NAME="I8077"></A>It is a bounded error for the 
+actual function associated with a generic formal subprogram, when called 
+as part of an operation of this package, to tamper with elements of any 
+Tree parameter of the operation. Either Program_Error is raised, or the 
+operation works as defined on the value of the Tree either prior to, 
+or subsequent to, some or all of the modifications to the Tree.</span></div>
+<div class="paranum"><a name="p221">221/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"><A NAME="I8078"></A>It is a bounded error to call 
+any subprogram declared in the visible part of Containers.Multiway_Trees 
+when the associated container has been finalized. If the operation takes 
+Container as an <B>in out</B> parameter, then it raises Constraint_Error 
+or Program_Error. Otherwise, the operation either proceeds as it would 
+for an empty container, or it raises Constraint_Error or Program_Error.</span> 
+</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p222">222/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">A Cursor value is <I>invalid</I> if any of the 
+following have occurred since it was created:<A NAME="I8079"></A> <A NAME="I8080"></A></span></div>
+<div class="paranum"><a name="p223">223/3</a></div>
+<div class="Bulleted"><span class="insert3">The tree that contains the 
+element it designates has been finalized;</span></div>
+<div class="paranum"><a name="p224">224/3</a></div>
+<div class="Bulleted"><span class="insert3">The tree that contains the 
+element it designates has been used as the Source or Target of a call 
+to Move;</span></div>
+<div class="paranum"><a name="p225">225/3</a></div>
+<div class="Bulleted"><span class="insert3">The tree that contains the 
+element it designates has been used as the Target of a call to Assign 
+or the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>;</span></div>
+<div class="paranum"><a name="p226">226/3</a></div>
+<div class="Bulleted"><span class="insert3">The element it designates 
+has been removed from the tree that previously contained the element.</span> 
+</div>
+<div class="paranum"><a name="p226.a">226.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>We talk 
+about which tree the element was removed from in order to handle splicing 
+nodes from one tree to another. The node still exists, but any cursors 
+that designate it in the original tree are now invalid. This bullet covers 
+removals caused by calls to Clear, Delete_Leaf, Delete_Subtree, Delete_Children, 
+Splice_Children, and Splice_Subtree.</span>&nbsp;</div>
+<div class="paranum"><a name="p227">227/3</a></div>
+<div class="Normal">&nbsp;<span class="insert3">The result of &quot;=&quot; 
+or Has_Element is unspecified if it is called with an invalid cursor 
+parameter.<A NAME="I8081"></A> Execution is erroneous if any other subprogram 
+declared in Containers.Multiway_Trees is called with an invalid cursor 
+parameter.</span></div>
+<div class="paranum"><a name="p227.a">227.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B>The 
+list above is intended to be exhaustive. In other cases, a cursor value 
+continues to designate its original element (or the root node). For instance, 
+cursor values survive the insertion and deletion of other nodes.</span></div>
+<div class="paranum"><a name="p227.b">227.b/3</a></div>
+<div class="Annotations"><span class="insert3">While it is possible to 
+check for these cases, in many cases the overhead necessary to make the 
+check is substantial in time or space. Implementations are encouraged 
+to check for as many of these cases as possible and raise Program_Error 
+if detected.</span>&nbsp;</div>
+<div class="paranum"><a name="p228">228/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">Execution is erroneous if the tree associated with 
+the result of a call to Reference or Constant_Reference is finalized 
+before the result object returned by the call to Reference or Constant_Reference 
+is finalized.</span>&nbsp;</div>
+<div class="paranum"><a name="p228.a">228.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>Each object 
+of Reference_Type and Constant_Reference_Type probably contains some 
+reference to the originating container. If that container is prematurely 
+finalized (which is only possible via Unchecked_Deallocation, as accessibility 
+checks prevent passing a container to Reference that will not live as 
+long as the result), the finalization of the object of Reference_Type 
+will try to access a nonexistent object. This is a normal case of a dangling 
+pointer created by Unchecked_Deallocation; we have to explicitly mention 
+it here as the pointer in question is not visible in the specification 
+of the type. (This is the same reason we have to say this for invalid 
+cursors.)</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p229">229/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">No storage associated with a multiway tree object 
+shall be lost upon assignment or scope exit.</span></div>
+<div class="paranum"><a name="p230">230/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
+for a tree shall have the effect of copying the elements from the source 
+tree object to the target tree object and changing the node count of 
+the target object to that of the source object.</span></div>
+<div class="paranum"><a name="p230.a">230.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
+<span class="insert3">An assignment of a Tree is a &ldquo;deep&rdquo; 
+copy; that is the elements are copied as well the data structures. We 
+say &ldquo;effect of&rdquo; in order to allow the implementation to avoid 
+copying elements immediately if it wishes. For instance, an implementation 
+that avoided copying until one of the containers is modified would be 
+allowed. (Note that this implementation would require care, see <A HREF="AA-A-18-2.html">A.18.2</A> 
+for more.)</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p231">231/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Containers.Multiway_Trees should be implemented 
+similarly to a multiway tree. In particular, if <I>N</I> is the overall 
+number of nodes for a particular tree, then the worst-case time complexity 
+of Element, Parent, First_Child, Last_Child, Next_Sibling, Previous_Sibling, 
+Insert_Child with Count=1, and Delete should be <I>O</I>(log <I>N</I>).</span> 
+</div>
+<div class="paranum"><a name="p231.a">231.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">The worst-case time complexity of the 
+Element, Parent, First_Child, Last_Child, Next_Sibling, Previous_Sibling, 
+Insert_Child with Count=1, and Delete operations of Containers.Multiway_Trees 
+should be <I>O</I>(log <I>N</I>).</span></div>
+<div class="paranum"><a name="p231.b">231.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>We do not 
+mean to overly constrain implementation strategies here. However, it 
+is important for portability that the performance of large containers 
+has roughly the same factors on different implementations. If a program 
+is moved to an implementation that takes <I>O</I>(<I>N</I>) time to access 
+elements, that program could be unusable when the trees are large. We 
+allow <I>O</I>(log <I>N</I>) access because the proportionality constant 
+and caching effects are likely to be larger than the log factor, and 
+we don't want to discourage innovative implementations.</span>&nbsp;</div>
+<div class="paranum"><a name="p232">232/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">Move should not copy elements, and should minimize 
+copying of internal data structures.</span>&nbsp;</div>
+<div class="paranum"><a name="p232.a">232.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">Containers.Multiway_Trees.Move should 
+not copy elements, and should minimize copying of internal data structures.</span></div>
+<div class="paranum"><a name="p232.b">232.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>Usually that can be accomplished simply by moving the pointer(s) 
+to the internal data structures from the Source container to the Target 
+container.</span>&nbsp;</div>
+<div class="paranum"><a name="p233">233/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3">If an exception is propagated from a tree operation, 
+no storage should be lost, nor any elements removed from a tree unless 
+specified by the operation.</span>&nbsp;</div>
+<div class="paranum"><a name="p233.a">233.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">If an exception is propagated from a 
+tree operation, no storage should be lost, nor any elements removed from 
+a tree unless specified by the operation.</span></div>
+<div class="paranum"><a name="p233.b">233.b/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This is 
+important so that programs can recover from errors. But we don't want 
+to require heroic efforts, so we just require documentation of cases 
+where this can't be accomplished.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p233.c">233.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0257-1.TXT">AI05-0257-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3"><A NAME="I8082"></A>The generic package Containers.Multiway_Trees 
+is new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Interface Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.9.4 Interface Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+[An interface type is an abstract tagged type that provides a restricted 
+form of multiple inheritance. A tagged type, task type, or protected 
+type may have one or more interface types as ancestors.]&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An interface type is 
+a form of abstract tagged type which has no components or concrete operations 
+except possibly null procedures. Interface types are used for composing 
+other interfaces and tagged types and thereby provide multiple inheritance. 
+Only an interface type can be used as a progenitor of another type.</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.b">1.b/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+The rules are designed so that an interface can be used as either a parent 
+type or a progenitor type without changing the meaning. That's important 
+so that the order that interfaces are specified in a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+is not significant. In particular, we want:&nbsp;</div>
+<div class="paranum"><a name="p1.c">1.c/2</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Con1&nbsp;<B>is&nbsp;new</B>&nbsp;Int1&nbsp;<B>and</B>&nbsp;Int2&nbsp;<B>with&nbsp;null&nbsp;record</B>;<BR>
+<B>type</B>&nbsp;Con2&nbsp;<B>is&nbsp;new</B>&nbsp;Int2&nbsp;<B>and</B>&nbsp;Int1&nbsp;<B>with&nbsp;null&nbsp;record</B>;</div>
+<div class="paranum"><a name="p1.d">1.d/2</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">to mean exactly 
+the same thing.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<SPAN Class="swiss">interface_type_definition</SPAN><A NAME="I2361"></A><A NAME="S0077"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>task</B>&nbsp;|&nbsp;<B>protected</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>interface</B>&nbsp;[<B>and</B>&nbsp;<A NAME="I2362"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]</div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+<SPAN Class="swiss">interface_list</SPAN><A NAME="I2363"></A><A NAME="S0078"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>interface_</I><A NAME="I2364"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{<B>and</B>&nbsp;<I>interface_</I><A NAME="I2365"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>}</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+An interface type (also called an <I>interface</I>) is<A NAME="I2366"></A><A NAME="I2367"></A> 
+a specific abstract tagged type that is defined by an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0077">interface_type_definition</A></SPAN>.</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+An interface with the reserved word <B>limited</B>, <B>task</B>, <B>protected</B>, 
+or <B>synchronized</B> in its definition is termed, respectively, a <I>limited 
+interface</I>, a <I>task interface</I>, a <I>protected interface</I>, 
+or a <I>synchronized interface</I>. In addition,<A NAME="I2368"></A> 
+<A NAME="I2369"></A><A NAME="I2370"></A><A NAME="I2371"></A><A NAME="I2372"></A><A NAME="I2373"></A><A NAME="I2374"></A><A NAME="I2375"></A><A NAME="I2376"></A><A NAME="I2377"></A>all 
+task and protected interfaces are synchronized interfaces, and all synchronized 
+interfaces are limited interfaces.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A synchronized entity 
+is one that will work safely with multiple tasks at one time. A synchronized 
+interface can be an ancestor of a task or a protected type. Such a task 
+or protected type is called a synchronized tagged type.</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
+<A NAME="I2378"></A><A NAME="I2379"></A><A NAME="I2380"></A><A NAME="I2381"></A><A NAME="I2382"></A><A NAME="I2383"></A><A NAME="I2384"></A>[A 
+task or protected type derived from an interface is a tagged type.] Such 
+a tagged type is called a <I>synchronized</I> tagged type, as are synchronized 
+interfaces and private extensions whose declaration includes the reserved 
+word <B>synchronized</B>.</div>
+<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>The full definition of tagged 
+types given in <A HREF="AA-3-9.html">3.9</A> includes task and protected 
+types derived from interfaces.&nbsp;</div>
+<div class="paranum"><a name="p6.b">6.b/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The class-wide type associated 
+with a tagged task type (including a task interface type) is a task type, 
+because &ldquo;task&rdquo; is one of the language-defined classes of 
+types (see <A HREF="AA-3-2.html">3.2</A>). However, the class-wide type 
+associated with an interface is <I>not</I> an interface type, as &ldquo;interface&rdquo; 
+is <I>not</I> one of the language-defined classes (as it is not closed 
+under derivation). In this sense, &ldquo;interface&rdquo; is similar 
+to &ldquo;abstract&rdquo;. The class-wide type associated with an interface 
+is a concrete (nonabstract) indefinite tagged composite type.</div>
+<div class="paranum"><a name="p6.c">6.c/2</a></div>
+<div class="Annotations">&ldquo;Private extension&rdquo; includes generic 
+formal private extensions, as explained in <A HREF="AA-12-5-1.html">12.5.1</A>. 
+</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+A task interface is an [abstract] task type. A protected interface is 
+an [abstract] protected type.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>The &ldquo;abstract&rdquo; follows 
+from the definition of an interface type.&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This ensures that task operations 
+(like abort and the Terminated attribute) can be applied to a task interface 
+type and the associated class-wide type. While there are no protected 
+type operations, we apply the same rule to protected interfaces for consistency. 
+</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+[An interface type has no components.]&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This follows from the syntax and 
+the fact that discriminants are not allowed for interface types.&nbsp;</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+<A NAME="I2385"></A><A NAME="I2386"></A>An <I>interface_</I><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
+names a <I>progenitor subtype</I>; its type is the <I>progenitor type</I>. 
+An interface type inherits user-defined primitive subprograms from each 
+progenitor type in the same way that a derived type inherits user-defined 
+primitive subprograms from its progenitor types (see <A HREF="AA-3-4.html">3.4</A>). 
+</div>
+<div class="paranum"><a name="p9.a.1">9.a.1/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A progenitor of a derived 
+type is one of the types given in the definition of the derived type 
+other than the first. A progenitor is always an interface type. Interfaces, 
+tasks, and protected types may also have progenitors.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+All user-defined primitive subprograms of an interface type shall be 
+abstract subprograms or null procedures.</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+The type of a subtype named in an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
+shall be an interface type.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+A type derived from a nonlimited interface shall be nonlimited.</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+An interface derived from a task interface shall include the reserved 
+word <B>task</B> in its definition; any other type derived from a task 
+interface shall be a private extension or a task type declared by a task 
+declaration (see <A HREF="AA-9-1.html">9.1</A>).</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+An interface derived from a protected interface shall include the reserved 
+word <B>protected</B> in its definition; any other type derived from 
+a protected interface shall be a private extension or a protected type 
+declared by a protected declaration (see <A HREF="AA-9-4.html">9.4</A>).</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+An interface derived from a synchronized interface shall include one 
+of the reserved words <B>task</B>, <B>protected</B>, or <B>synchronized</B> 
+in its definition; any other type derived from a synchronized interface 
+shall be a private extension, a task type declared by a task declaration, 
+or a protected type declared by a protected declaration.</div>
+<div class="paranum"><a name="p15.a">15.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We require that an interface 
+descendant of a task, protected, or synchronized interface repeat the 
+explicit kind of interface it will be, rather than simply inheriting 
+it, so that a reader is always aware of whether the interface provides 
+synchronization and whether it may be implemented only by a task or protected 
+type. The only place where inheritance of the kind of interface might 
+be useful would be in a generic if you didn't know the kind of the actual 
+interface. However, the value of that is low because you cannot implement 
+an interface properly if you don't know whether it is a task, protected, 
+or synchronized interface. Hence, we require the kind of the actual interface 
+to match the kind of the formal interface (see <A HREF="AA-12-5-5.html">12.5.5</A>). 
+</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+No type shall be derived from both a task interface and a protected interface.</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This prevents a single private 
+extension from inheriting from both a task and a protected interface. 
+For a private type, there can be no legal completion. For a generic formal 
+derived type, there can be no possible matching type (so no instantiation 
+could be legal). This rule provides early detection of the errors.&nbsp;</div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+In addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.<A NAME="I2387"></A>&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This paragraph is intended to apply to all of the Legality Rules in this 
+subclause. We cannot allow interface types which do not obey these rules, 
+anywhere. Luckily, deriving from a formal type (which might be an interface) 
+is not allowed for any tagged types in a generic body. So checking in 
+the private part of a generic covers all of the cases.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0070-1.TXT">AI05-0070-1</A></I>} 
+The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0077">interface_type_definition</A></SPAN> 
+creates the interface type and its first subtype.&nbsp;</div>
+<div class="paranum"><a name="p18.a">18.a/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There is no other effect. 
+An <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
+is made up of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>s, 
+which do not need to be elaborated, so the <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN> 
+does not either. This is consistent with the handling of <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>s. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Notes">85&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00411.TXT">AI95-00411-01</A></I>} 
+Nonlimited interface types have predefined nonabstract equality operators. 
+These may be overridden with user-defined abstract equality operators. 
+Such operators will then require an explicit overriding for any nonabstract 
+descendant of the interface.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<I>Example of a limited interface and a synchronized interface extending 
+it:</I></div>
+<div class="paranum"><a name="p21">21/2</a></div>
+<div class="Examples"><B>type</B>&nbsp;Queue&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
+<B>procedure</B>&nbsp;Append(Q&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;&nbsp;Person&nbsp;:&nbsp;<B>in</B>&nbsp;Person_Name)&nbsp;<B>is&nbsp;abstract</B>;<BR>
+<B>procedure</B>&nbsp;Remove_First(Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;:&nbsp;<B>out</B>&nbsp;Person_Name)&nbsp;<B>is&nbsp;abstract</B>;<BR>
+<B>function</B>&nbsp;Cur_Count(Q&nbsp;:&nbsp;<B>in</B>&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Natural&nbsp;<B>is&nbsp;abstract</B>;<BR>
+<B>function</B>&nbsp;Max_Count(Q&nbsp;:&nbsp;<B>in</B>&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Natural&nbsp;<B>is&nbsp;abstract</B>;<BR>
+--&nbsp;<SPAN Class="roman"><I>See&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A>&nbsp;for&nbsp;Person_Name.</I></SPAN></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
+Queue_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+--<SPAN Class="roman"><I>&nbsp;Append&nbsp;raises&nbsp;Queue_Error&nbsp;if&nbsp;Cur_Count(Q)&nbsp;=&nbsp;Max_Count(Q)</I></SPAN><BR>
+--<SPAN Class="roman"><I>&nbsp;Remove_First&nbsp;raises&nbsp;Queue_Error&nbsp;if&nbsp;Cur_Count(Q)&nbsp;=&nbsp;0</I></SPAN></div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Examples"><B>type</B>&nbsp;Synchronized_Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface&nbsp;and</B>&nbsp;Queue;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-9-11.html">9.11</A></I></SPAN><BR>
+<B>procedure</B>&nbsp;Append_Wait(Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronized_Queue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;:&nbsp;<B>in</B>&nbsp;Person_Name)&nbsp;<B>is&nbsp;abstract</B>;<BR>
+<B>procedure</B>&nbsp;Remove_First_Wait(Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronized_Queue;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;:&nbsp;<B>out</B>&nbsp;Person_Name)&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p24">24/2</a></div>
+<div class="Examples">...</div>
+<div class="paranum"><a name="p25">25/2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Transfer(From&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue'Class;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue'Class;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Natural&nbsp;:=&nbsp;1)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Person&nbsp;:&nbsp;Person_Name;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;1..Number&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove_First(From,&nbsp;Person);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append(To,&nbsp;Person);<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;<BR>
+<B>end</B>&nbsp;Transfer;</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Normal">This defines a Queue interface defining a queue of 
+people. (A similar design could be created to define any kind of queue 
+simply by replacing Person_Name by an appropriate type.) The Queue interface 
+has four dispatching operations, Append, Remove_First, Cur_Count, and 
+Max_Count. The body of a class-wide operation, Transfer is also shown. 
+Every nonabstract extension of Queue must provide implementations for 
+at least its four dispatching operations, as they are abstract. Any object 
+of a type derived from Queue may be passed to Transfer as either the 
+From or the To operand. The two operands need not be of the same type 
+in any given call.</div>
+<div class="paranum"><a name="p27">27/2</a></div>
+<div class="Normal">The Synchronized_Queue interface inherits the four 
+dispatching operations from Queue and adds two additional dispatching 
+operations, which wait if necessary rather than raising the Queue_Error 
+exception. This synchronized interface may only be implemented by a task 
+or protected type, and as such ensures safe concurrent access.</div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<I>Example use of the interface:</I></div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
+<B>type</B>&nbsp;Fast_Food_Queue&nbsp;<B>is&nbsp;new</B>&nbsp;Queue&nbsp;<B>with&nbsp;record</B>&nbsp;...;<BR>
+<B>procedure</B>&nbsp;Append(Q&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Fast_Food_Queue;&nbsp;Person&nbsp;:&nbsp;<B>in</B>&nbsp;Person_Name);<BR>
+<B>procedure</B>&nbsp;Remove_First(Q&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Fast_Food_Queue;&nbsp;Person&nbsp;:&nbsp;<B>out</B>&nbsp;Person_Name);<BR>
+<B>function</B>&nbsp;Cur_Count(Q&nbsp;:&nbsp;<B>in</B>&nbsp;Fast_Food_Queue)&nbsp;<B>return</B>&nbsp;Natural;<BR>
+<B>function</B>&nbsp;Max_Count(Q&nbsp;:&nbsp;<B>in</B>&nbsp;Fast_Food_Queue)&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="paranum"><a name="p30">30/2</a></div>
+<div class="Examples">...</div>
+<div class="paranum"><a name="p31">31/2</a></div>
+<div class="Examples">Cashier,&nbsp;Counter&nbsp;:&nbsp;Fast_Food_Queue;</div>
+<div class="paranum"><a name="p32">32/2</a></div>
+<div class="Examples">...<BR>
+--&nbsp;<SPAN Class="roman"><I>Add&nbsp;George&nbsp;(see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A>)&nbsp;to&nbsp;the&nbsp;cashier's&nbsp;queue:</I></SPAN><BR>
+Append&nbsp;(Cashier,&nbsp;George);<BR>
+--&nbsp;<SPAN Class="roman"><I>After&nbsp;payment,&nbsp;move&nbsp;George&nbsp;to&nbsp;the&nbsp;sandwich&nbsp;counter&nbsp;queue:</I></SPAN><BR>
+Transfer&nbsp;(Cashier,&nbsp;Counter);<BR>
+...</div>
+<div class="paranum"><a name="p33">33/2</a></div>
+<div class="Normal">An interface such as Queue can be used directly as 
+the parent of a new type (as shown here), or can be used as a progenitor 
+when a type is derived. In either case, the primitive operations of the 
+interface are inherited. For Queue, the implementation of the four inherited 
+routines must be provided. Inside the call of Transfer, calls will dispatch 
+to the implementations of Append and Remove_First for type Fast_Food_Queue.</div>
+<div class="paranum"><a name="p34">34/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<I>Example of a task interface:</I></div>
+<div class="paranum"><a name="p35">35/2</a></div>
+<div class="Examples"><B>type</B>&nbsp;Serial_Device&nbsp;<B>is&nbsp;task&nbsp;interface</B>;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-9-1.html">9.1</A></I></SPAN><BR>
+<B>procedure</B>&nbsp;Read&nbsp;(Dev&nbsp;:&nbsp;<B>in</B>&nbsp;Serial_Device;&nbsp;C&nbsp;:&nbsp;<B>out</B>&nbsp;Character)&nbsp;<B>is&nbsp;abstract</B>;<BR>
+<B>procedure</B>&nbsp;Write(Dev&nbsp;:&nbsp;<B>in</B>&nbsp;Serial_Device;&nbsp;C&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Character)&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p36">36/2</a></div>
+<div class="Normal">The Serial_Device interface has two dispatching operations 
+which are intended to be implemented by task entries (see 9.1).</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p36.a">36.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<A NAME="I2388"></A>Interface types are new. They provide multiple inheritance 
+of interfaces, similar to the facility provided in Java and other recent 
+language designs.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p36.b">36.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0070-1.TXT">AI05-0070-1</A></I>} 
+<B>Correction:</B> Corrected the definition of elaboration for an <SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0077">interface_type_definition</A></SPAN> 
+to match that of other type definitions.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-9-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-10.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

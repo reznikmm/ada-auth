@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Task Dispatching Model</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.2.1 The Task Dispatching Model</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The task dispatching model specifies preemptive scheduling, 
+based on conceptual priority-ordered ready queues.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">A task runs (that is, it becomes a <I>running task</I>) 
+only when it is ready (see <A HREF="RM-9-2.html">9.2</A>) and the execution 
+resources required by that task are available. Processors are allocated 
+to tasks based on each task's active priority.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">It is implementation defined whether, on a multiprocessor, 
+a task that is waiting for access to a protected object keeps its processor 
+busy.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I5873"></A><A NAME="I5874"></A><A NAME="I5875"></A><A NAME="I5876"></A><I>Task 
+dispatching</I> is the process by which one ready task is selected for 
+execution on a processor. This selection is done at certain points during 
+the execution of a task called <I>task dispatching points</I>. A task 
+reaches a task dispatching point whenever it becomes blocked, and whenever 
+it becomes ready. In addition, the completion of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0188">accept_statement</A></SPAN> 
+(see <A HREF="RM-9-5-2.html">9.5.2</A>), and task termination are task 
+dispatching points for the executing task. Other task dispatching points 
+are defined throughout this Annex.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I5877"></A><A NAME="I5878"></A><A NAME="I5879"></A><A NAME="I5880"></A><A NAME="I5881"></A><A NAME="I5882"></A><I>Task 
+dispatching policies</I> are specified in terms of conceptual <I>ready 
+queues</I>, task states, and task preemption. A ready queue is an ordered 
+list of ready tasks. The first position in a queue is called the <I>head 
+of the queue</I>, and the last position is called the <I>tail of the 
+queue</I>. A task is <I>ready</I> if it is in a ready queue, or if it 
+is running. Each processor has one ready queue for each priority value. 
+At any instant, each ready queue of a processor contains exactly the 
+set of tasks of that priority that are ready for execution on that processor, 
+but are not running on any processor; that is, those tasks that are ready, 
+are not running on any processor, and can be executed using that processor 
+and other available resources. A task can be on the ready queues of more 
+than one processor.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I5883"></A>Each processor also has one <I>running 
+task</I>, which is the task currently being executed by that processor. 
+Whenever a task running on a processor reaches a task dispatching point, 
+one task is selected to run on that processor. The task selected is the 
+one at the head of the highest priority nonempty ready queue; this task 
+is then removed from all ready queues to which it belongs.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I5884"></A>A preemptible resource is a resource 
+that while allocated to one task can be allocated (temporarily) to another 
+instead. Processors are preemptible resources. Access to a protected 
+object (see <A HREF="RM-9-5-1.html">9.5.1</A>) is a nonpreemptible resource. 
+<A NAME="I5885"></A>When a higher-priority task is dispatched to the 
+processor, and the previously running task is placed on the appropriate 
+ready queue, the latter task is said to be <I>preempted</I>.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I5886"></A><A NAME="I5887"></A>A new running 
+task is also selected whenever there is a nonempty ready queue with a 
+higher priority than the priority of the running task, or when the task 
+dispatching policy requires a running task to go back to a ready queue. 
+These are also task dispatching points.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">An implementation is allowed to define additional 
+resources as execution resources, and to define the corresponding allocation 
+policies for them. Such resources may have an implementation defined 
+effect on task dispatching (see <A HREF="RM-D-2-2.html">D.2.2</A>).&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">An implementation may place implementation-defined 
+restrictions on tasks whose active priority is in the Interrupt_Priority 
+range.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">7&nbsp;&nbsp;Section <A HREF="RM-9.html">9</A> specifies 
+under which circumstances a task becomes ready. The ready state is affected 
+by the rules for task activation and termination, delay statements, and 
+entry calls. <A NAME="I5888"></A>When a task is not ready, it is said 
+to be blocked.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Notes">8&nbsp;&nbsp;An example of a possible implementation-defined 
+execution resource is a page of physical memory, which needs to be loaded 
+with a particular page of virtual memory before a task can continue execution.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">9&nbsp;&nbsp;The ready queues are purely conceptual; 
+there is no requirement that such lists physically exist in an implementation.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Notes">10&nbsp;&nbsp;While a task is running, it is not on 
+any ready queue. Any time the task that is running on a processor is 
+added to a ready queue, a new running task is selected for that processor.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Notes">11&nbsp;&nbsp;In a multiprocessor system, a task can 
+be on the ready queues of more than one processor. At the extreme, if 
+several processors share the same set of ready tasks, the contents of 
+their ready queues is identical, and so they can be viewed as sharing 
+one ready queue, and can be implemented that way. Thus, the dispatching 
+model covers multiprocessors where dispatching is implemented using a 
+single ready queue, as well as those with separate dispatching domains.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">12&nbsp;&nbsp;The priority of a task is determined 
+by rules specified in this subclause, and under <A HREF="RM-D-1.html">D.1</A>, 
+&ldquo;<A HREF="RM-D-1.html">Task Priorities</A>&rdquo;, <A HREF="RM-D-3.html">D.3</A>, 
+&ldquo;<A HREF="RM-D-3.html">Priority Ceiling Locking</A>&rdquo;, and 
+<A HREF="RM-D-5.html">D.5</A>, &ldquo;<A HREF="RM-D-5.html">Dynamic Priorities</A>&rdquo;.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-D-2-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

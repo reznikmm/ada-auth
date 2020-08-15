@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Remote Types Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.2.2 Remote Types Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A remote types library unit supports the definition 
+of types intended for use in communication between active partitions.] 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations">The restrictions governing a remote types package 
+are similar to those for a declared pure package. However, the restrictions 
+are relaxed deliberately to allow such a package to contain declarations 
+that violate the stateless property of pure packages, though it is presumed 
+that any state-dependent properties are essentially invisible outside 
+the package.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9270"></A><A NAME="I9271"></A>The 
+form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Remote_Types is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9272"></A><A NAME="I9273"></A>Remote_Types[(<I>library_unit_</I><A NAME="I9274"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+<A NAME="I9275"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Remote_Types is used to specify that a library unit is a</span> <I>remote 
+types library unit</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Types <span class="insert3">aspect<A NAME="I9276"></A><A NAME="I9277"></A> 
+of the library unit is True</span><span class="delete3">&nbsp;applies</span>. 
+The following restrictions apply to the declaration of such a library 
+unit:</div>
+<div class="paranum"><a name="p4.a">4.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert3"><B>Remote_Types:&nbsp;</B></span><span class="insert3">Types 
+in a given package may be used in remote procedure calls.</span></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">[it shall be preelaborable;]</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+it shall depend semantically only on declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN>s</span>, 
+shared passive<span class="insert3">&nbsp;library units</span>, <span class="delete3">or 
+</span>other remote types library units<span class="insert3">, or preelaborated 
+normal library units that are mentioned only in private with clauses</span>;</div>
+<div class="paranum"><a name="p6.a">6.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+<span class="insert3">We say declared pure <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+here, so that (all) limited views are allowed; those are not library 
+units, but they are declared pure <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN>s.</span> 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">it shall not contain the declaration of any variable 
+within the visible part of the library unit;&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is essentially a &ldquo;methodological&rdquo; 
+restriction. A separate copy of a remote types package is included in 
+each partition that references it, just like a normal package. Nevertheless, 
+a remote types package is thought of as an &ldquo;essentially pure&rdquo; 
+package for defining types to be used for interpartition communication, 
+and it could be misleading to declare visible objects when no remote 
+data access is actually being provided.&nbsp;</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00240.TXT">AI95-00240-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+<span class="delete2">if&nbsp;</span>the full view of <span class="insert2">each</span><span class="delete2">&nbsp;a</span> 
+type declared in the visible part of the library unit <span class="insert2">that 
+has any available stream attributes shall support external streaming 
+(see <A HREF="AA-13-13-2.html">13.13.2</A>)</span><span class="delete2">&nbsp;has 
+a part that is of a nonremote access type, then that access type, or 
+the type of some part that includes the access type subcomponent, shall 
+have user-specified Read and Write attributes</span>.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This is to prevent the use of 
+the predefined Read and Write attributes of an access type as part of 
+the Read and Write attributes of a visible type.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+<span class="insert2">Types that do not have available stream attributes 
+are excluded from this rule; that means that attributes do not need to 
+be specified for most limited types. It is only necessary to specify 
+attributes for nonlimited types that have a part that is of any access 
+type, and for extensions of limited types with available stream attributes 
+where the <SPAN Class="swiss"><A HREF="AA-3-9-1.html#S0075">record_extension_part</A></SPAN> 
+includes a subcomponent of an access type, where the access type does 
+not have specified attributes.</span>&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0082">8652/0082</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00164.TXT">AI95-00164-01</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+<span class="insert1"></span><A NAME="I9278"></A><span class="insert3">A 
+named</span><span class="delete3">&nbsp;An</span> access type declared in 
+the visible part of a remote types or remote call interface library unit 
+is called a <I>remote access type</I>. <A NAME="I9279"></A><A NAME="I9280"></A>Such 
+a type shall be<span class="insert1">:</span><span class="delete1">&nbsp;either 
+an access-to-subprogram type or a general access type that designates 
+a class-wide limited private type.</span></div>
+<div class="paranum"><a name="p9.1">9.1/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0082">8652/0082</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00164.TXT">AI95-00164-01</A></I>} 
+<span class="insert1">an access-to-subprogram type, or</span></div>
+<div class="paranum"><a name="p9.2">9.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0082">8652/0082</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00164.TXT">AI95-00164-01</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+<span class="insert1">a general access type that designates a class-wide 
+limited private type</span><span class="insert3">, a class-wide limited 
+interface type,</span><span class="insert1">&nbsp;or a class-wide private 
+</span><span class="insert1"><span class="delete3">type&nbsp;</span></span><span class="insert1">extension 
+all of whose ancestors are either private&nbsp;</span><span class="insert1"><span class="delete3">type 
+</span></span><span class="insert1">extensions</span><span class="insert3">, 
+limited interface types,</span><span class="insert1">&nbsp;or limited private 
+types.</span>&nbsp;</div>
+<div class="paranum"><a name="p9.3">9.3/1</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0081">8652/0081</A></I>} 
+<span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00004.TXT">AI95-00004-01</A></I>} 
+<span class="insert1">A type that is derived from a remote access type 
+is also a remote access type.</span></div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following restrictions 
+apply to the use of a remote access-to-subprogram type:&nbsp;</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00431.TXT">AI95-00431-01</A></I>} 
+A value of a remote access-to-subprogram type shall be converted only 
+to <span class="insert2">or from&nbsp;</span>another (subtype-conformant) 
+remote access-to-subprogram type;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+of an Access <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+that yields a value of a remote access-to-subprogram type shall statically 
+denote a (subtype-conformant) remote subprogram.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following restrictions 
+apply to the use of a remote access-to-class-wide type:&nbsp;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0083">8652/0083</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00047.TXT">AI95-00047-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00240.TXT">AI95-00240-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0101-1.TXT">AI05-0101-1</A></I>} 
+The primitive subprograms of the corresponding specific <span class="delete3">limited 
+private&nbsp;</span>type shall only have access parameters if they are controlling 
+formal parameters<span class="insert3">. The primitive functions of the 
+corresponding specific type shall only have an access result if it is 
+a controlling access result.</span><span class="delete3">;</span> <span class="insert1"></span><span class="insert3">Each</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;each</span></span><span class="insert1">&nbsp;noncontrolling formal parameter</span><span class="delete1">&nbsp;the types 
+of all the noncontrolling formal parameters</span> <span class="insert3">and 
+noncontrolling result type&nbsp;</span>shall <span class="insert2">support 
+external streaming (see <A HREF="AA-13-13-2.html">13.13.2</A>);</span><span class="delete2">&nbsp;have 
+</span><span class="insert1"><span class="delete2">either a nonlimited 
+type or a type with</span></span><span class="delete2">&nbsp;Read and Write 
+attributes</span><span class="insert1"><span class="delete2">&nbsp;specified 
+via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>;</span></span><span class="delete2"></span><span class="delete1">.</span><span class="delete2"></span></div>
+<div class="paranum"><a name="p14.1">14.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">The corresponding specific type shall not have 
+a primitive procedure with the Synchronization aspect specified unless 
+the <SPAN Class="swiss"><A HREF="AA-9-5.html#S0217">synchronization_kind</A></SPAN> 
+is Optional (see <A HREF="AA-9-5.html">9.5</A>);</span></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">A value of a remote access-to-class-wide type shall 
+be explicitly converted only to another remote access-to-class-wide type;</div>
+<div class="paranum"><a name="p16">16/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0034-1.TXT">AI12-0034-1</A></I>} 
+A value of a remote access-to-class-wide type shall be dereferenced (or 
+implicitly converted to an anonymous access type) only as part of a dispatching 
+call <span class="insert4">to a primitive operation of the designated 
+type&nbsp;</span>where the value designates a controlling operand of the call 
+(see <A HREF="AA-E-4.html">E.4</A>, &ldquo;<A HREF="AA-E-4.html">Remote 
+Subprogram Calls</A>&rdquo;);&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0034-1.TXT">AI12-0034-1</A></I>} 
+<span class="insert4">Stream attributes of the designated type are not 
+primitive operations of the designated type, and thus remote calls to 
+them are prohibited by this rule. This is good, as the access parameter 
+of a stream attribute does not have external streaming, and thus cannot 
+be a parameter of a remote call.</span>&nbsp;</div>
+<div class="paranum"><a name="p16.1">16.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0101-1.TXT">AI05-0101-1</A></I>} 
+<span class="insert3">A controlling access result value for a primitive 
+function with any controlling operands of the corresponding specific 
+type shall either be explicitly converted to a remote access-to-class-wide 
+type or be part of a dispatching call where the value designates a controlling 
+operand of the call;</span></div>
+<div class="paranum"><a name="p17">17/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0085-1.TXT">AI12-0085-1</A></I>} 
+The Storage_Pool <span class="insert2">attribute is</span><span class="delete2">&nbsp;and 
+Storage_Size attributes are</span> not defined for<span class="insert2">&nbsp;a</span> remote access-to-class-wide <span class="insert2">type</span><span class="delete2">&nbsp;types</span>; 
+the expected type for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN> 
+shall not be a remote access-to-class-wide type<span class="insert2">. 
+A</span><span class="delete2">; a</span> remote access-to-class-wide 
+type shall not be an actual parameter for a generic formal access type<span class="insert1">.</span><span class="delete1">;</span><span class="insert2">&nbsp;The Storage_Size attribute of a remote access-to-class-wide type yields 
+0</span><span class="insert2"><span class="delete4">; it is not allowed 
+in an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN></span></span><span class="insert2">.</span><span class="insert4">&nbsp; The Storage_Pool and Storage_Size aspects shall not be specified for 
+a remote access-to-class-wide type.</span>&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+All <span class="delete3">three&nbsp;</span>of these restrictions are because 
+there is no storage pool associated with a remote access-to-class-wide 
+type.<span class="insert2">&nbsp;The Storage_Size is defined to be 0 so that 
+there is no conflict with the rules for pure units.</span>&nbsp;</div>
+<div class="paranum"><a name="p17.b">17.b/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0085-1.TXT">AI12-0085-1</A></I>} 
+<span class="insert4">The prohibition against specifying the Storage_Size 
+aspect for an access-to-class-wide type applies to any method of doing 
+that, including via either a <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>.</span> 
+</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p17.1">17.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0076-1.TXT">AI12-0076-1</A></I>} 
+<span class="insert4">Execution is erroneous if some operation (other 
+than the initialization or finalization of the object) modifies the value 
+of a constant object declared in the visible part of a remote types package.</span></div>
+<div class="paranum"><a name="p17.c">17.c/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>This 
+could be accomplished via a self-referencing pointer or via squirrelling 
+a writable pointer to a controlled object.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">5&nbsp;&nbsp;A remote types library unit need not 
+be pure, and the types it defines may include levels of indirection implemented 
+by using access types. User-specified Read and Write attributes (see 
+<A HREF="AA-13-13-2.html">13.13.2</A>) provide for sending values of 
+such a type between active partitions, with Write marshalling the representation, 
+and Read unmarshalling any levels of indirection.</div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Notes">6&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+<span class="insert3">The value of a remote access-to-class-wide limited 
+interface can designate an object of a nonlimited type derived from the 
+interface.</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+<span class="insert3">A remote access type may designate a class-wide 
+synchronized, protected, or task interface type.</span>&nbsp;</div>
+<div class="paranum"><a name="p20.a">20.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B>Synchronized, 
+protected, and task interfaces are all considered limited interfaces, 
+see <A HREF="AA-3-9-4.html">3.9.4</A>.</span>&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p20.b">20.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00240.TXT">AI95-00240-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert2"><A NAME="I9281"></A><B>Amendment Correction:</B> 
+The wording was changed from &ldquo;user-specified&rdquo; to &ldquo;available&rdquo; 
+</span><span class="insert3">read and write&nbsp;</span><span class="insert2">attributes. 
+(This was then further changed, see below.) This means that an access 
+type with the attributes specified in the private part would originally 
+have been sufficient to allow the access type to be used in a remote 
+type, but that is no longer allowed. Similarly, the attributes of a remote 
+type that has access components have to be specified in the visible part. 
+These changes were made so that the rules were consistent with the rules 
+introduced for the Corrigendum for stream attributes; moreover, legality 
+should not depend on the contents of the private part.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p20.c">20.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert2"><A NAME="I9282"></A>Remote types that cannot be 
+streamed (that is, have no available stream attributes) do not require 
+the specification of stream attributes. This is necessary so that most 
+extensions of Limited_Controlled do not need stream attributes defined 
+(otherwise there would be a&nbsp;</span><span class="insert3">significant</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;signficant</span></span><span class="insert2">&nbsp;incompatibility, as Limited_Controlled would need stream attributes, 
+and then all extensions of it also would need stream attributes).</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p20.d">20.d/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0081">8652/0081</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00004.TXT">AI95-00004-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Added missing wording so that 
+a type derived from a remote access type is also a remote access type.</span></div>
+<div class="paranum"><a name="p20.e">20.e/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0083">8652/0083</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00047.TXT">AI95-00047-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Clarified that user-defined 
+Read and Write attributes are required for the primitive subprograms 
+corresponding to a remote access-to-class-wide type.</span></div>
+<div class="paranum"><a name="p20.f">20.f/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0082">8652/0082</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00164.TXT">AI95-00164-01</A></I>} 
+<span class="insert2"><B>Corrigendum:</B> Added missing wording so that 
+a remote access type can designate an appropriate private extension.</span></div>
+<div class="paranum"><a name="p20.g">20.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+<span class="insert2">Changed the wording to use the newly defined term 
+<I>type that supports external streaming</I>, so that various issues 
+with access types in pure units and implicitly declared attributes for 
+type extensions are properly handled.</span></div>
+<div class="paranum"><a name="p20.h">20.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+<span class="insert2">Defined Storage_Size to be 0 for remote access-to-class-wide 
+types, rather than having it undefined. This eliminates issues with pure 
+units requiring a defined storage size.</span></div>
+<div class="paranum"><a name="p20.i">20.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00431.TXT">AI95-00431-01</A></I>} 
+<span class="insert2">Corrected the wording so that a value of a local 
+access-to-subprogram type cannot be converted to a remote access-to-subprogram 
+type, as intended (and required by the ACATS).</span>&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p20.j">20.j/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0101-1.TXT">AI05-0101-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<span class="insert3"><A NAME="I9283"></A><B>Correction:</B> Added rules 
+for returning of remote&nbsp;</span><span class="insert4">access-to-class-wide</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;access-to-classwide</span></span><span class="insert3">&nbsp;types; this had been missed in the past. While programs that returned 
+unstreamable types from RCI functions were legal, it is not clear what 
+they could have done (as the results could not be marshalled). Similarly, 
+RCI functions that return remote controlling access types could try to 
+save those values, but it is unlikely that a compiler would know how 
+to do that usefully. Thus, it seems unlikely that any real programs will 
+be impacted by these changes.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p20.k">20.k/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0060-1.TXT">AI05-0060-1</A></I>} 
+<span class="insert3"><A NAME="I9284"></A><B>Correction:</B> Clarified 
+that anonymous access types are never remote access types (and can be 
+used in remote types units subject to the normal restrictions). Added 
+wording to allow limited class-wide interfaces to be designated by remote 
+access types.</span></div>
+<div class="paranum"><a name="p20.l">20.l/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
+<span class="insert3">Added wording to allow private withs of preelaborated 
+normal units in the specification of a remote types unit.</span></div>
+<div class="paranum"><a name="p20.m">20.m/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
+<span class="insert3"><A NAME="I9285"></A>Remote_Types is now a categorization 
+aspect, so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+&mdash; although the pragma is still preferred by the Standard.</span> 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p20.n">20.n/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0034-1.TXT">AI12-0034-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Clarified that dispatching 
+remote stream attribute calls are prohibited. We don't document this 
+as an incompatibility, as the stream parameter cannot be marshalled for 
+a remote call (it doesn't have external streaming), so it's impossible 
+that any working program depends on this functionality.</span></div>
+<div class="paranum"><a name="p20.o">20.o/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0076-1.TXT">AI12-0076-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Explicitly stated that modifying 
+a visible constant in a remote types package is erroneous. We don't document 
+this as inconsistent as implementations certainly can still do whatever 
+they were previously doing (no change is required); moreover, this case 
+(and many more) were erroneous in Ada 2005 and before, so we're just 
+restoring the previous semantics.</span></div>
+<div class="paranum"><a name="p20.p">20.p/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0085-1.TXT">AI12-0085-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Clarified that specifying the 
+Storage_Pool or Storage_Size aspect for an access-to-class-wide type 
+is not allowed. The intent is clear, and no implementation has ever allowed 
+specifying the aspects (the attributes already cannot be specified), 
+so we don't document this as an incompatibility.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-2-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

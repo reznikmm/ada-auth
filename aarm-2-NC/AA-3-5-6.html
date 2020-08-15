@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Real Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.5.6 Real Types</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1802"></A>Real types provide approximations 
+to the real numbers, with relative bounds on errors for floating point 
+types, and with absolute bounds for fixed point types.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">real_type_definition</SPAN><A NAME="I1803"></A><A NAME="S0044"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I1804"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1805"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I1806"></A>A type defined by a <SPAN Class="swiss"><A HREF="AA-3-5-6.html#S0044">real_type_definition</A></SPAN> 
+is implicitly derived from <I>root_real</I>, an anonymous predefined 
+(specific) real type. [Hence, all real types, whether floating point 
+or fixed point, are in the derivation class rooted at <I>root_real</I>.] 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>It is not specified whether 
+the derivation from <I>root_real</I> is direct or indirect, not that 
+it really matters. All we want is for all real types to be descendants 
+of <I>root_real</I>.</div>
+<div class="paranum"><a name="p3.a.1">3.a.1/1</a></div>
+<div class="Annotations">{<I><A HREF="defect2.html#8652/0099">8652/0099</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00152.TXT">AI95-00152-01</A></I>} 
+Note that this derivation does not imply any inheritance of subprograms. 
+Subprograms are inherited only for types derived by a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
+(see <A HREF="AA-3-4.html">3.4</A>), or a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0177">private_extension_declaration</A></SPAN> 
+(see <A HREF="AA-7-3.html">7.3</A>, <A HREF="AA-7-3-1.html">7.3.1</A>, 
+and <A HREF="AA-12-5-1.html">12.5.1</A>).</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">[<A NAME="I1807"></A> <A NAME="I1808"></A>Real literals 
+are all of the type <I>universal_real</I>, the universal type (see <A HREF="AA-3-4-1.html">3.4.1</A>) 
+for the class rooted at <I>root_real</I>, allowing their use with the 
+operations of any real type. <A NAME="I1809"></A>Certain multiplying 
+operators have a result type of <I>universal_fixed</I> (see <A HREF="AA-4-5-5.html">4.5.5</A>), 
+the universal type for the class of fixed point types, allowing the result 
+of the multiplication or division to be used where any specific fixed 
+point type is expected.]&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I1810"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-6.html#S0044">real_type_definition</A></SPAN> 
+consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">An implementation shall perform the run-time evaluation 
+of a use of a predefined operator of <I>root_real</I> with an accuracy 
+at least as great as that of any floating point type definable by a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Static calculations using 
+the operators of <I>root_real</I> are exact, as for all static calculations. 
+See <A HREF="AA-4-9.html">4.9</A>.&nbsp;</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>The Digits attribute 
+of the type used to represent <I>root_real</I> at run time is at least 
+as great as that of any other floating point type defined by a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN>, 
+and its safe range includes that of any such floating point type with 
+the same Digits attribute. On some machines, there might be real types 
+with less accuracy but a wider range, and hence run-time calculations 
+with <I>root_real</I> might not be able to accommodate all values that 
+can be represented at run time in such floating point or fixed point 
+types.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
+[For the execution of a predefined operation of a real type, the implementation 
+need not raise Constraint_Error if the result is outside the base range 
+of the type, so long as the correct result is produced, or the Machine_Overflows 
+attribute of the type is False (see <A HREF="AA-G-2.html">G.2</A>).]</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I1811"></A>An implementation may provide 
+<I>nonstandard real types</I>, descendants of <I>root_real</I> that are 
+declared outside of the specification of package Standard, which need 
+not have all the standard characteristics of a type defined by a <SPAN Class="swiss"><A HREF="AA-3-5-6.html#S0044">real_type_definition</A></SPAN>. 
+For example, a nonstandard real type might have an asymmetric or unsigned 
+base range, or its predefined operations might wrap around or &ldquo;saturate&rdquo; 
+rather than overflow (modular or saturating arithmetic), or it might 
+not conform to the accuracy model (see <A HREF="AA-G-2.html">G.2</A>). 
+Any type descended from a nonstandard real type is also nonstandard. 
+An implementation may place arbitrary restrictions on the use of such 
+types; it is implementation defined whether operators that are predefined 
+for &ldquo;any real type&rdquo; are defined for a particular nonstandard 
+real type. [In any case, such types are not permitted as <SPAN Class="swiss"><A HREF="AA-12-3.html#S0260">explicit_generic_actual_parameter</A></SPAN>s 
+for formal scalar types &mdash; see <A HREF="AA-12-5-2.html">12.5.2</A>.] 
+</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Any nonstandard 
+real types and the operators defined for them.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Notes">34&nbsp;&nbsp;As stated, real literals are of the 
+anonymous predefined real type <I>universal_real</I>. Other real types 
+have no literals. However, the overload resolution rules (see <A HREF="AA-8-6.html">8.6</A>) 
+allow expressions of the type <I>universal_real</I> whenever a real type 
+is expected.</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-5-6.html#S0044">real_type_definition</A></SPAN> 
+is modified to use the new syntactic categories <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN>, 
+instead of <SPAN Class="swiss">floating_point_constraint</SPAN> and <SPAN Class="swiss">fixed_point_constraint</SPAN>, 
+because the semantics of a type definition are significantly different 
+than the semantics of a constraint.</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations">All discussion of model numbers, safe ranges, 
+and machine numbers is moved to <A HREF="AA-3-5-7.html">3.5.7</A>, <A HREF="AA-3-5-8.html">3.5.8</A>, 
+and <A HREF="AA-G-2.html">G.2</A>. Values of a fixed point type are now 
+described as being multiples of the <I>small</I> of the fixed point type, 
+and we have no need for model numbers, safe ranges, etc. for fixed point 
+types.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

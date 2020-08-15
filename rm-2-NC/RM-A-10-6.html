@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Get and Put Procedures</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.10.6 Get and Put Procedures</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The procedures Get and Put for items of the type 
+Character, String, numeric types, and enumeration types are described 
+in subsequent subclauses. Features of these procedures that are common 
+to most of these types are described in this subclause. The Get and Put 
+procedures for items of type Character and String deal with individual 
+character values; the Get and Put procedures for numeric and enumeration 
+types treat the items as lexical elements.</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">All procedures Get and Put have forms with a file 
+parameter, written first. Where this parameter is omitted, the appropriate 
+(input or output) current default file is understood to be specified. 
+Each procedure Get operates on a file of mode In_File. Each procedure 
+Put operates on a file of mode Out_File or Append_File.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal">All procedures Get and Put maintain the current column, 
+line, and page numbers of the specified file: the effect of each of these 
+procedures upon these numbers is the result of the effects of individual 
+transfers of characters and of individual output or skipping of terminators. 
+Each transfer of a character adds one to the current column number. Each 
+output of a line terminator sets the current column number to one and 
+adds one to the current line number. Each output of a page terminator 
+sets the current column and line numbers to one and adds one to the current 
+page number. For input, each skipping of a line terminator sets the current 
+column number to one and adds one to the current line number; each skipping 
+of a page terminator sets the current column and line numbers to one 
+and adds one to the current page number. Similar considerations apply 
+to the procedures Get_Line, Put_Line, and Set_Col.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal">Several Get and Put procedures, for numeric and enumeration 
+types, have <I>format</I> parameters which specify field lengths; these 
+parameters are of the nonnegative subtype Field of the type Integer.</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal"><A NAME="I5868"></A>Input-output of enumeration values 
+uses the syntax of the corresponding lexical elements. Any Get procedure 
+for an enumeration type begins by skipping any leading blanks, or line 
+or page terminators. A <I>blank</I> is defined as a space or a horizontal 
+tabulation character. Next, characters are input only so long as the 
+sequence input is an initial sequence of an identifier or of a character 
+literal (in particular, input ceases when a line terminator is encountered). 
+The character or line terminator that causes input to cease remains available 
+for subsequent input.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">For a numeric type, the Get procedures have a format 
+parameter called Width. If the value given for this parameter is zero, 
+the Get procedure proceeds in the same manner as for enumeration types, 
+but using the syntax of numeric literals instead of that of enumeration 
+literals. If a nonzero value is given, then exactly Width characters 
+are input, or the characters up to a line terminator, whichever comes 
+first; any skipped leading blanks are included in the count. The syntax 
+used for numeric literals is an extended syntax that allows a leading 
+sign (but no intervening blanks, or line or page terminators) and that 
+also allows (for real types) an integer literal as well as forms that 
+have digits only before the point or only after the point.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">Any Put procedure, for an item of a numeric or an 
+enumeration type, outputs the value of the item as a numeric literal, 
+identifier, or character literal, as appropriate. This is preceded by 
+leading spaces if required by the format parameters Width or Fore (as 
+described in later subclauses), and then a minus sign for a negative 
+value; for an enumeration type, the spaces follow instead of leading. 
+The format given for a Put procedure is overridden if it is insufficiently 
+wide, by using the minimum needed width.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">Two further cases arise for Put procedures for numeric 
+and enumeration types, if the line length of the specified output file 
+is bounded (that is, if it does not have the conventional value zero). 
+If the number of characters to be output does not exceed the maximum 
+line length, but is such that they cannot fit on the current line, starting 
+from the current column, then (in effect) New_Line is called (with a 
+spacing of one) before output of the item. Otherwise, if the number of 
+characters exceeds the maximum line length, then the exception Layout_Error 
+is propagated and nothing is output.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">The exception Status_Error is propagated by any of 
+the procedures Get, Get_Line, Put, and Put_Line if the file to be used 
+is not open. The exception Mode_Error is propagated by the procedures 
+Get and Get_Line if the mode of the file to be used is not In_File; and 
+by the procedures Put and Put_Line, if the mode is not Out_File or Append_File.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal">The exception End_Error is propagated by a Get procedure 
+if an attempt is made to skip a file terminator. The exception Data_Error 
+is propagated by a Get procedure if the sequence finally input is not 
+a lexical element corresponding to the type, in particular if no characters 
+were input; for this test, leading blanks are ignored; for an item of 
+a numeric type, when a sign is input, this rule applies to the succeeding 
+numeric literal. The exception Layout_Error is propagated by a Put procedure 
+that outputs to a parameter of type String, if the length of the actual 
+string is insufficient for the output of the item.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">In the examples, here and in subclauses <A HREF="RM-A-10-8.html">A.10.8</A> 
+and <A HREF="RM-A-10-9.html">A.10.9</A>, the string quotes and the lower 
+case letter b are not transferred: they are shown only to reveal the 
+layout and spaces.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">N&nbsp;:&nbsp;Integer;<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+Get(N);</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Characters&nbsp;at&nbsp;input&nbsp;&nbsp;Sequence&nbsp;input&nbsp;&nbsp;Value&nbsp;of&nbsp;N</I></SPAN><BR>
+<BR>
+<SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bb&ndash;&#8203;12535b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&#8203;12535&nbsp;&nbsp;&ndash;&#8203;12535</I></SPAN><BR>
+<SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bb12_535e1b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12_535e1&nbsp;&nbsp;125350</I></SPAN><BR>
+<SPAN Class="roman"><I>--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bb12_535e;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12_535e&nbsp;&nbsp;(none)&nbsp;Data_Error&nbsp;raised</I></SPAN></div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em">Example of overridden 
+width parameter:&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">Put(Item&nbsp;=&gt;&nbsp;-23,&nbsp;Width&nbsp;=&gt;&nbsp;2);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&quot;&ndash;&#8203;23&quot;</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-5.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-7.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

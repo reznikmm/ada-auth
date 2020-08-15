@@ -1,0 +1,396 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Preconditions and Postconditions</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Indented5Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  12.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented4Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented4Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.1.1 <span class="insert3">Preconditions and Postconditions</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
+a&nbsp;</span><span class="insert4">noninstance&nbsp;</span><span class="insert3">subprogram</span><span class="insert4">, 
+a generic subprogram,</span><span class="insert3">&nbsp;or&nbsp;</span><span class="insert4">an 
+</span><span class="insert3">entry, the following language-defined aspects 
+may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+(see <A HREF="RM-13-1-1.html">13.1.1</A>):</span></div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Pre</span></div><div class="WideHanging-Body">
+<span class="insert3">This aspect specifies a specific precondition for 
+a callable entity; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+called a <I>specific precondition expression</I>.<A NAME="I3485"></A><A NAME="I3486"></A> 
+If not specified for an entity, the specific precondition expression 
+for the entity is the enumeration literal True.<A NAME="I3487"></A><A NAME="I3488"></A></span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Pre'Class</span></div><div class="WideHanging-Body">
+<span class="insert3">This aspect specifies a class-wide precondition 
+for an operation of a tagged type and its descendants; it shall be specified 
+by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+called a <I>class-wide precondition expression</I>.<A NAME="I3489"></A><A NAME="I3490"></A> 
+If not specified for an entity, then if no other class-wide precondition 
+applies to the entity, the class-wide precondition expression for the 
+entity is the enumeration literal True.<A NAME="I3491"></A><A NAME="I3492"></A></span></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Post</span></div><div class="WideHanging-Body">
+<span class="insert3">This aspect specifies a specific postcondition 
+for a callable entity; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+called a <I>specific postcondition expression</I>.<A NAME="I3493"></A><A NAME="I3494"></A> 
+If not specified for an entity, the specific postcondition expression 
+for the entity is the enumeration literal True.<A NAME="I3495"></A><A NAME="I3496"></A></span></div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="WideHanging-Term"><span class="insert3">Post'Class</span></div><div class="WideHanging-Body">
+<span class="insert3">This aspect specifies a class-wide postcondition 
+for an operation of a tagged type and its descendants; it shall be specified 
+by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+called a <I>class-wide postcondition expression</I>.<A NAME="I3497"></A><A NAME="I3498"></A> 
+If not specified for an entity, the class-wide postcondition expression 
+for the entity is the enumeration literal True.<A NAME="I3499"></A><A NAME="I3500"></A></span> 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Normal"><span class="insert3">The expected type for a precondition 
+or postcondition expression is any boolean type.<A NAME="I3501"></A><A NAME="I3502"></A></span></div>
+<div class="paranum"><a name="p7">7/4</a></div>
+<div class="Normal"><span class="insert3">Within the expression for a 
+Pre'Class or Post'Class aspect for a primitive subprogram&nbsp;</span><span class="insert4"><I>S</I> 
+</span><span class="insert3">of a tagged type <I>T</I>, a&nbsp;</span><span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;name</span></span><span class="insert3">&nbsp;that denotes a formal parameter&nbsp;</span><span class="insert4">(or <I>S</I>'Result) 
+</span><span class="insert3">of type <I>T</I> is interpreted as&nbsp;</span><span class="insert4">though 
+it had a (notional) nonabstract  type <I>NT</I> that is a formal derived 
+type whose ancestor type is <I>T</I>, with directly visible primitive 
+operations</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;having 
+type <I>T</I>'Class</span></span><span class="insert3">. Similarly, a 
+</span><span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;name</span></span><span class="insert3">&nbsp;that denotes a formal access parameter&nbsp;</span><span class="insert4">(or 
+<I>S</I>'Result)&nbsp;</span><span class="insert3">of type access-to-<I>T</I> 
+is interpreted as having type&nbsp;</span><span class="insert4">access-to-<I>NT</I></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;access-to-<I>T</I>'Class</span></span><span class="insert3">. 
+</span><span class="insert4">The result of this interpretation is that 
+the only operations that can be applied to such <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
+are those defined for such a formal derived type.</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;This 
+ensures that the expression is well-defined for a primitive subprogram 
+of a type descended from <I>T</I>.</span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Normal"><span class="insert3">For an attribute_reference 
+with attribute_designator Old, if the attribute reference has an expected 
+type or shall resolve to a given type, the same applies to the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>; 
+otherwise, the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+shall be resolved independently of context.</span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal"><span class="insert3">The Pre or Post aspect shall 
+not be specified for an abstract subprogram or a null procedure. Only 
+the Pre'Class and Post'Class aspects may be specified for such a subprogram.</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">If 
+a type <I>T</I> has an implicitly declared subprogram <I>P</I> inherited 
+from a parent type <I>T1</I> and a homograph (see <A HREF="RM-8-3.html">8.3</A>) 
+of <I>P</I> from a progenitor type <I>T2</I>, and</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Bulleted"><span class="insert3">the corresponding primitive 
+subprogram <I>P1</I> of type <I>T1</I> is neither null nor abstract; 
+and</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Bulleted"><span class="insert3">the class-wide precondition 
+expression True does not apply to <I>P1</I> (implicitly or explicitly); 
+and</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Bulleted"><span class="insert3">there is a class-wide precondition 
+expression that applies to the corresponding primitive subprogram <I>P2</I> 
+of <I>T2</I> that does not fully conform to any class-wide precondition 
+expression that applies to <I>P1</I>,</span>&nbsp;</div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">then:</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Bulleted"><span class="insert3">If the type <I>T</I> is abstract, 
+the implicitly declared subprogram <I>P</I> is <I>abstract</I>.</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Bulleted"><span class="insert3">Otherwise, the subprogram 
+<I>P</I> <I>requires overriding</I> and shall be overridden with a nonabstract 
+subprogram.<A NAME="I3503"></A></span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal"><span class="insert3">If a renaming of a subprogram 
+or entry <I>S1</I> overrides an inherited subprogram <I>S2</I>, then 
+the overriding is illegal unless each class-wide precondition expression 
+that applies to <I>S1</I> fully conforms to some class-wide precondition 
+expression that applies to <I>S2</I> and each class-wide precondition 
+expression that applies to <I>S2</I> fully conforms to some class-wide 
+precondition expression that applies to <I>S1</I>.</span></div>
+<div class="paranum"><a name="p17.1">17.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">Pre'Class shall not be specified 
+for an overriding primitive subprogram of a tagged type <I>T</I> unless 
+the Pre'Class aspect is specified for the corresponding primitive subprogram 
+of some ancestor of <I>T</I>.</span></div>
+<div class="paranum"><a name="p17.2">17.2/4</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4"><A NAME="I3504"></A>In addition 
+to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+these rules also apply in the private part of an instance of a generic 
+unit.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p18">18/4</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert4"></span><span class="insert3">If 
+a Pre'Class or Post'Class aspect is specified for a primitive subprogram 
+</span><span class="insert4"><I>S</I>&nbsp;</span><span class="insert3">of 
+a tagged type <I>T</I>,&nbsp;</span><span class="insert4">or such an aspect 
+defaults to True,&nbsp;</span><span class="insert3">then&nbsp;</span><span class="insert4">a 
+corresponding</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;the 
+associated</span></span><span class="insert3">&nbsp;expression also applies 
+to the corresponding primitive subprogram&nbsp;</span><span class="insert4"><I>S</I> 
+</span><span class="insert3">of each descendant of <I>T</I>.</span><span class="insert4">&nbsp;The <I>corresponding expression</I> is constructed from the associated 
+expression as follows:<A NAME="I3505"></A> <A NAME="I3506"></A></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p18.1">18.1/4</a></div>
+<div class="Bulleted"><span class="insert4">References to formal parameters 
+of <I>S</I> (or to <I>S</I> itself) are replaced with references to the 
+corresponding formal parameters of the corresponding inherited or overriding 
+subprogram <I>S</I> (or to the corresponding subprogram <I>S</I> itself).</span></div>
+<div class="paranum"><a name="p18.2">18.2/4</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">The primitive subprogram 
+<I>S</I> is illegal if it is not abstract and the corresponding expression 
+for a Pre'Class or Post'Class aspect would be illegal.</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Normal"><span class="insert3">If performing checks is required 
+by the Pre, Pre'Class, Post, or Post'Class assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
+in effect at the point of a corresponding aspect specification applicable 
+to a given subprogram or entry, then the respective precondition or postcondition 
+expressions are considered <I>enabled</I>.<A NAME="I3507"></A><A NAME="I3508"></A></span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">An 
+<SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+is <I>potentially unevaluated</I> if it occurs within:<A NAME="I3509"></A></span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Bulleted"><span class="insert3">any part of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0134">if_expression</A></SPAN> 
+other than the first <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Bulleted"><span class="insert3">a <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0136">case_expression</A></SPAN>;</span></div>
+<div class="paranum"><a name="p22.1">22.1/4</a></div>
+<div class="Bulleted"><span class="insert4">a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0140">predicate</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0138">quantified_expression</A></SPAN>;</span></div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Bulleted"><span class="insert3">the right operand of a short-circuit 
+control form; or</span></div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Bulleted"><span class="insert3">a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">membership_choice</A></SPAN> 
+other than the first of a membership operation.</span>&nbsp;</div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
+a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> X 
+that denotes an object of a nonlimited type, the following attribute 
+is defined:</span>&nbsp;</div>
+<div class="paranum"><a name="p26">26/4</a></div>
+<div class="WideHanging-Term"><span class="insert3">X'Old</span></div><div class="WideHanging-Body">
+<span class="insert3"><A NAME="I3510"></A><A NAME="I3511"></A></span><span class="insert3"></span><span class="insert4">Each</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;For 
+each</span></span><span class="insert3">&nbsp;X'Old in a postcondition expression 
+that is enabled</span><span class="insert4">&nbsp;denotes</span><span class="insert3"></span><span class="insert3"><span class="delete4">,</span></span><span class="insert3">&nbsp;a constant&nbsp;</span><span class="insert4">that&nbsp;</span><span class="insert3">is 
+implicitly declared at the beginning of the subprogram&nbsp;</span><span class="insert4">body,</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;or</span></span><span class="insert3">&nbsp;entry</span><span class="insert4">&nbsp;body, or accept statement</span><span class="insert3">.</span><span class="insert3"><span class="delete4">&nbsp;The constant is of the type of X and is initialized to the result of 
+evaluating X (as an expression) at the point of the constant declaration. 
+The value of X'Old in the postcondition expression is the value of this 
+constant; the type of X'Old is the type of X. These implicit constant 
+declarations occur in an arbitrary order.<A NAME="I3512"></A></span></span><span class="insert3"></span></div>
+<div class="paranum"><a name="p26.1">26.1/4</a></div>
+<div class="WideHanging-Body" style="margin-bottom: 0.4em"><span class="insert4">The 
+implicitly declared entity denoted by each occurrence of X'Old is declared 
+as follows:</span></div>
+<div class="paranum"><a name="p26.2">26.2/4</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em"><span class="insert4">If 
+X is of an anonymous access type defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
+<I>A</I> then</span>&nbsp;</div>
+<div class="paranum"><a name="p26.3">26.3/4</a></div>
+<div class="Indented5Examples"><span class="insert4"><I>X'Old</I>&nbsp;:&nbsp;<B>constant</B>&nbsp;<I>A</I>&nbsp;:=&nbsp;X;</span></div>
+<div class="paranum"><a name="p26.4">26.4/4</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em"><span class="insert4">If 
+X is of a specific tagged type <I>T</I> then</span>&nbsp;</div>
+<div class="paranum"><a name="p26.5">26.5/4</a></div>
+<div class="Indented5Examples"><span class="insert4"><SPAN Class="roman"><I>anonymous</I></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;<I>T</I>'Class&nbsp;:=&nbsp;<I>T</I>'Class(X);<BR>
+<I>X'Old</I>&nbsp;:&nbsp;<I>T</I>&nbsp;<B>renames</B>&nbsp;<I>T</I>(<SPAN Class="roman"><I>anonymous</I></SPAN>);</span></div>
+<div class="paranum"><a name="p26.6">26.6/4</a></div>
+<div class="Indented4Bulleted-NoPrefix"><span class="insert4">where the 
+name X'Old denotes the object renaming.</span>&nbsp;</div>
+<div class="paranum"><a name="p26.7">26.7/4</a></div>
+<div class="Indented4Bulleted" style="margin-bottom: 0.3em"><span class="insert4">Otherwise</span> 
+</div>
+<div class="paranum"><a name="p26.8">26.8/4</a></div>
+<div class="Indented5Examples"><span class="insert4"><I>X'Old</I>&nbsp;:&nbsp;<B>constant</B>&nbsp;<I>S</I>&nbsp;:=&nbsp;X;</span></div>
+<div class="paranum"><a name="p26.9">26.9/4</a></div>
+<div class="Indented4Bulleted-NoPrefix"><span class="insert4">where <I>S</I> 
+is the nominal subtype of X. This includes the case where the type of 
+<I>S</I> is an anonymous array type or a universal type.</span>&nbsp;</div>
+<div class="paranum"><a name="p26.10">26.10/4</a></div>
+<div class="WideHanging-Body"><span class="insert4">The nominal subtype 
+of X'Old is as implied by the above definitions. The expected type of 
+the prefix of an Old attribute is that of the attribute. Similarly, if 
+an Old attribute shall resolve to be of some type, then the prefix of 
+the attribute shall resolve to be of that type.</span></div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="WideHanging-Body"><span class="insert3">Reference to this 
+attribute is only allowed within a postcondition expression. The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+shall not contain a Result <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>, 
+nor an Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>, 
+nor a use of an entity declared within the postcondition expression but 
+not within <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+itself (for example, the loop parameter of an enclosing <SPAN Class="swiss"><A HREF="RM-4-5-8.html#S0138">quantified_expression</A></SPAN>). 
+The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of an Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+that is potentially unevaluated shall statically denote an entity.</span></div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
+a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> F 
+that denotes a function declaration, the following attribute is defined:</span> 
+</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="WideHanging-Term"><span class="insert3">F'Result</span></div><div class="WideHanging-Body">
+<span class="insert3"><A NAME="I3513"></A><A NAME="I3514"></A></span><span class="insert3">Within 
+a postcondition expression for function F, denotes the result object 
+of the function. The type of this attribute is that of the function result 
+except within a Post'Class postcondition expression for a function with 
+a controlling result or with a controlling access result. For a controlling 
+result, the type of the attribute is <I>T</I>'Class, where <I>T</I> is 
+the function result type. For a controlling access result, the type of 
+the attribute is an anonymous access type whose designated type is <I>T</I>'Class, 
+where <I>T</I> is the designated type of the function result type.</span></div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="WideHanging-Body"><span class="insert3">Use of this attribute 
+is allowed only within a postcondition expression for F.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">Upon 
+a call of the subprogram or entry, after evaluating any actual parameters, 
+precondition checks are performed as follows:</span></div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Bulleted"><span class="insert3">The specific precondition 
+check begins with the evaluation of the specific precondition expression 
+that applies to the subprogram or entry, if it is enabled; if the expression 
+evaluates to False, Assertions.Assertion_Error is raised; if the expression 
+is not enabled, the check succeeds.<A NAME="I3515"></A><A NAME="I3516"></A><A NAME="I3517"></A></span></div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Bulleted"><span class="insert3">The class-wide precondition 
+check begins with the evaluation of any enabled class-wide precondition 
+expressions that apply to the subprogram or entry. If and only if all 
+the class-wide precondition expressions evaluate to False, Assertions.Assertion_Error 
+is raised.<A NAME="I3518"></A><A NAME="I3519"></A><A NAME="I3520"></A></span></div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Normal"><span class="insert3">The precondition checks are 
+performed in an arbitrary order, and if any of the class-wide precondition 
+expressions evaluate to True, it is not specified whether the other class-wide 
+precondition expressions are evaluated. The precondition checks and any 
+check for elaboration of the subprogram body are performed in an arbitrary 
+order. It is not specified whether in a call on a protected operation, 
+the checks are performed before or after starting the protected action. 
+For an entry call, the checks are performed prior to checking whether 
+the entry is open.<A NAME="I3521"></A><A NAME="I3522"></A></span></div>
+<div class="paranum"><a name="p35">35/3</a></div>
+<div class="Normal"><span class="insert3">Upon successful return from 
+a call of the subprogram or entry, prior to copying back any by-copy 
+<B>in out</B> or <B>out</B> parameters, the postcondition check is performed. 
+This consists of the evaluation of any enabled specific and class-wide 
+postcondition expressions that apply to the subprogram or entry. If any 
+of the postcondition expressions evaluate to False, then Assertions.Assertion_Error 
+is raised. The postcondition expressions are evaluated in an arbitrary 
+order, and if any postcondition expression evaluates to False, it is 
+not specified whether any other postcondition expressions are evaluated. 
+The postcondition check, and any constraint or predicate checks associated 
+with <B>in out</B> or <B>out</B> parameters are performed in an arbitrary 
+order.<A NAME="I3523"></A><A NAME="I3524"></A><A NAME="I3525"></A><A NAME="I3526"></A><A NAME="I3527"></A></span></div>
+<div class="paranum"><a name="p35.1">35.1/4</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">For a call to a task entry, 
+the postcondition check is performed before the end of the rendezvous; 
+for a call to a protected operation, the postcondition check is performed 
+before the end of the protected action of the call. The postcondition 
+check for any call is performed before the finalization of any implicitly-declared 
+constants associated (as described above) with Old <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
+but after the finalization of any other entities whose accessibility 
+level is that of the execution of the callable construct.</span>&nbsp;</div>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Normal"><span class="insert3">If a precondition or postcondition 
+check fails, the exception is raised at the point of the call; the exception 
+cannot be handled inside the called subprogram or entry. Similarly, any 
+exception raised by the evaluation of a precondition or postcondition 
+expression is raised at the point of call.</span></div>
+<div class="paranum"><a name="p37">37/4</a></div>
+<div class="Normal"><span class="insert3">For any</span><span class="insert4">&nbsp;call to a</span><span class="insert3">&nbsp;subprogram or entry&nbsp;</span><span class="insert4"><I>S</I></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;call</span></span><span class="insert3">&nbsp;(including dispatching calls), the checks that are performed to verify 
+specific precondition expressions and specific and class-wide postcondition 
+expressions are determined by those for the subprogram or entry actually 
+invoked. Note that the class-wide postcondition expressions verified 
+by the postcondition check that is part of a call on a primitive subprogram 
+of type <I>T</I> includes all class-wide postcondition expressions originating 
+in any progenitor of <I>T</I>, even if the primitive subprogram called 
+is inherited from a type <I>T1</I> and some of the postcondition expressions 
+do not apply to the corresponding primitive subprogram of <I>T1</I>.</span><span class="insert4">&nbsp;Any operations within a class-wide postcondition expression that were 
+resolved as primitive operations of the (notional) formal derived type 
+<I>NT</I>, are in the evaluation of the postcondition bound to the corresponding 
+operations of the type identified by the controlling tag of the call 
+on <I>S</I>. This applies to both dispatching and non-dispatching calls 
+on <I>S</I>.</span><span class="insert3"></span></div>
+<div class="paranum"><a name="p38">38/4</a></div>
+<div class="Normal"><span class="insert3">The class-wide precondition 
+check for a call to a subprogram or entry&nbsp;</span><span class="insert4"><I>S</I> 
+</span><span class="insert3">consists solely of checking the class-wide 
+precondition expressions that apply to the denoted callable entity (not 
+necessarily&nbsp;</span><span class="insert4">to&nbsp;</span><span class="insert3">the 
+one that is invoked).</span><span class="insert4">&nbsp;Any operations within 
+such an expression that were resolved as primitive operations of the 
+(notional) formal derived type <I>NT</I> are in the evaluation of the 
+precondition bound to the corresponding operations of the type identified 
+by the controlling tag of the call on <I>S</I>. This applies to both 
+dispatching and non-dispatching calls on <I>S</I>.</span><span class="insert3"></span></div>
+<div class="paranum"><a name="p39">39/3</a></div>
+<div class="Normal"><span class="insert3">For a call via an access-to-subprogram 
+value, all precondition and postcondition checks performed are determined 
+by the subprogram or entry denoted by the prefix of the Access attribute 
+reference that produced the value.</span>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p40">40/3</a></div>
+<div class="Notes">5&nbsp;&nbsp;<span class="insert3">A precondition 
+is checked just before the call. If another task can change any value 
+that the precondition expression depends on, the precondition need not 
+hold within the subprogram or entry body.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

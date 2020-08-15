@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>The Generic Package Containers.Indefinite_Holders</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-19.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.18.18 <span class="insert3">The Generic Package Containers.Indefinite_Holders</span><span class="delete3"></span></H1>
+<div class="paranum"><a name="p1">1/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">The language-defined generic package Containers.Indefinite_Holders 
+provides a private type Holder and a set of operations for that type. 
+A holder container holds a single element of an indefinite type.</span></div>
+<div class="paranum"><a name="p2">2/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">A holder container allows the declaration of an 
+object that can be used like an uninitialized variable or component of 
+an indefinite type.</span></div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">A holder container may be <I>empty</I>. An empty 
+holder does not contain an element.<A NAME="I8054"></A></span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">The generic library package Containers.Indefinite_Holders 
+has the following declaration:</span>&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0084-1.TXT">AI05-0084-1</A></I>} 
+<span class="insert3"><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
+<B>package</B>&nbsp;Ada.Containers.Indefinite_Holders&nbsp;<B>is</B><A NAME="I8055"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Indefinite_Holders);<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Indefinite_Holders);</span></div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8056"></A>Holder&nbsp;<B>is&nbsp;tagged&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Holder);</span></div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I8057"></A>Empty_Holder&nbsp;:&nbsp;<B>constant</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8058"></A>To_Holder&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8059"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p11">11/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8060"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8061"></A>Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8062"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8063"></A>Query_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p15">15/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8064"></A>Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p16">16/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8065"></A>Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8066"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p18">18/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8067"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8068"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p20">20/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8069"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8070"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8071"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p23">23/3</a></div>
+<div class="Examples"><span class="insert3"><B>private</B></span></div>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN></span></div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Containers.Indefinite_Holders;</span></div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">The actual function for the generic formal function 
+&quot;=&quot; on Element_Type values is expected to define a reflexive 
+and symmetric relationship and return the same result value each time 
+it is called with a particular pair of values. If it behaves in some 
+other manner, the function &quot;=&quot; on holder values returns an 
+unspecified value. The exact arguments and number of calls of this generic 
+formal function by the function &quot;=&quot; on holder values are unspecified.</span></div>
+<div class="paranum"><a name="p26.a">26.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>If 
+the actual function for &quot;=&quot; is not symmetric and consistent, 
+the result returned by any of the functions defined to use &quot;=&quot; 
+cannot be predicted. The implementation is not required to protect against 
+&quot;=&quot; raising an exception, or returning random results, or any 
+other &quot;bad&quot; behavior. And it can call &quot;=&quot; in whatever 
+manner makes sense. But note that only the results of the function &quot;=&quot; 
+is unspecified; other subprograms are not allowed to break if &quot;=&quot; 
+is bad.</span>&nbsp;</div>
+<div class="paranum"><a name="p27">27/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">The type Holder is used to represent holder containers. 
+The type Holder needs finalization<A NAME="I8072"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+<div class="paranum"><a name="p28">28/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">Empty_Holder represents an empty holder object. 
+If an object of type Holder is not otherwise initialized, it is initialized 
+to the same value as Empty_Holder.</span></div>
+<div class="paranum"><a name="p29">29/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3">[Some operations of this generic package have access-to-subprogram 
+parameters. To ensure such operations are well-defined, they guard against 
+certain actions by the designated subprogram. In particular, some operations 
+check for &ldquo;tampering with the element&rdquo; of a container because 
+they depend on the element of the container not being replaced.]</span></div>
+<div class="paranum"><a name="p30">30/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"><A NAME="I8073"></A>A subprogram is said to <I>tamper 
+with the element</I> of a holder object <I>H</I> if:</span></div>
+<div class="paranum"><a name="p31">31/3</a></div>
+<div class="Bulleted"><span class="insert3">It clears the element contained 
+by <I>H</I>, that is, it calls the Clear procedure with <I>H</I> as a 
+parameter;</span></div>
+<div class="paranum"><a name="p32">32/3</a></div>
+<div class="Bulleted"><span class="insert3">It replaces the element contained 
+by <I>H</I>, that is, it calls the Replace_Element procedure with <I>H</I> 
+as a parameter;</span></div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Bulleted"><span class="insert3">It calls the Move procedure 
+with <I>H</I> as a parameter;</span></div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Bulleted"><span class="insert3">It finalizes <I>H</I>.</span></div>
+<div class="paranum"><a name="p34.a">34.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>Complete 
+replacement of an element can cause its memory to be deallocated while 
+another operation is holding onto a reference to it. That can't be allowed. 
+However, a simple modification of (part of) an element is not a problem, 
+so Update_Element does not cause a problem.</span>&nbsp;</div>
+<div class="paranum"><a name="p35">35/4</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
+<span class="insert3"><A NAME="I8074"></A><A NAME="I8075"></A>When tampering 
+with the element is <I>prohibited</I> for a particular holder object 
+<I>H</I>, Program_Error is propagated by a call of any language-defined 
+subprogram that is defined to tamper with the element of <I>H</I>, leaving 
+<I>H</I> unmodified.</span><span class="insert4">&nbsp;These checks are made 
+before any other defined behavior of the body of the language-defined 
+subprogram.</span><span class="insert3"></span></div>
+<div class="paranum"><a name="p36">36/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">If Left and Right denote the same holder object, 
+then the function returns True. Otherwise, it compares the element contained 
+in Left to the element contained in Right using the generic formal equality 
+operator, returning the result of that operation. Any exception raised 
+during the evaluation of element equality is propagated.</span></div>
+<div class="paranum"><a name="p37.a">37.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>This wording describes the canonical semantics. However, the order 
+and number of calls on the formal equality <B>function</B> is unspecified, 
+so an implementation need not call the equality function if the correct 
+answer can be determined without doing so.</span>&nbsp;</div>
+<div class="paranum"><a name="p38">38/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;To_Holder&nbsp;(New_Item&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p39">39/4</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
+<span class="insert3">Returns a nonempty holder containing an element 
+initialized to New_Item.</span><span class="insert4">&nbsp;To_Holder performs 
+indefinite insertion (see <A HREF="AA-A-18.html">A.18</A>).</span><span class="insert3"></span></div>
+<div class="paranum"><a name="p40">40/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Empty&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="paranum"><a name="p41">41/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">Returns True if Container is empty, and False if 
+it contains an element.</span></div>
+<div class="paranum"><a name="p42">42/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p43">43/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">Removes the element from Container. Container is 
+empty after a successful Clear operation.</span></div>
+<div class="paranum"><a name="p44">44/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Element&nbsp;(Container&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Element_Type;</span></div>
+<div class="paranum"><a name="p45">45/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">If Container is empty, Constraint_Error is propagated. 
+Otherwise, returns the element stored in Container.</span></div>
+<div class="paranum"><a name="p46">46/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</span></div>
+<div class="paranum"><a name="p47">47/4</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
+<span class="insert3">Replace_Element assigns the value New_Item into 
+Container, replacing any preexisting content of Container</span><span class="insert4">; 
+Replace_Element performs indefinite insertion (see <A HREF="AA-A-18.html">A.18</A>)</span><span class="insert3">. 
+Container is not empty after a successful call to Replace_Element.</span></div>
+<div class="paranum"><a name="p48">48/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Query_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p49">49/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Container is empty, Constraint_Error is propagated. 
+Otherwise, Query_Element calls Process.<B>all</B> with the contained 
+element as the argument. Tampering with the element of Container is prohibited 
+during the execution of the call on Process.<B>all</B>. Any exception 
+raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p49.a">49.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3">The &ldquo;tamper with the element&rdquo; check 
+is intended to prevent the Element parameter of Process from being replaced 
+or deleted outside of Process. The check prevents data loss (if Element_Type 
+is passed by copy) or erroneous execution (if Element_Type is an unconstrained 
+type).</span>&nbsp;</div>
+<div class="paranum"><a name="p50">50/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"><B>procedure</B>&nbsp;Update_Element<BR>
+&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;<BR>
+&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</span></div>
+<div class="paranum"><a name="p51">51/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Container is empty, Constraint_Error is propagated. 
+Otherwise, Update_Element calls Process.<B>all</B> with the contained 
+element as the argument. Tampering with the element of Container is prohibited 
+during the execution of the call on Process.<B>all</B>. Any exception 
+raised by Process.<B>all</B> is propagated.</span></div>
+<div class="paranum"><a name="p51.a">51.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>The Element parameter of Process.<B>all</B> may be constrained even 
+if Element_Type is unconstrained.</span>&nbsp;</div>
+<div class="paranum"><a name="p52">52/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p53">53/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="paranum"><a name="p54">54/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">The types Constant_Reference_Type and Reference_Type 
+need finalization.<A NAME="I8076"></A></span></div>
+<div class="paranum"><a name="p55">55/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">The default initialization of an object of type 
+Constant_Reference_Type or Reference_Type propagates Program_Error.</span></div>
+<div class="paranum"><a name="p55.a">55.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>It is expected 
+that Reference_Type (and Constant_Reference_Type) will be a controlled 
+type, for which finalization will have some action to terminate the tampering 
+check for the associated container. If the object is created by default, 
+however, there is no associated container. Since this is useless, and 
+supporting this case would take extra work, we define it to raise an 
+exception.</span>&nbsp;</div>
+<div class="paranum"><a name="p56">56/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+<div class="paranum"><a name="p57">57/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">This function (combined with the Implicit_Dereference 
+aspect) provides a convenient way to gain read access to the contained 
+element of a holder container.</span></div>
+<div class="paranum"><a name="p58">58/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Container is empty, Constraint_Error is propagated. 
+Otherwise, Constant_Reference returns an object whose discriminant is 
+an access value that designates the contained element. Tampering with 
+the elements of Container is prohibited while the object returned by 
+Constant_Reference exists and has not been finalized.</span></div>
+<div class="paranum"><a name="p59">59/3</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Holder)<BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+<div class="paranum"><a name="p60">60/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">This function (combined with the Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to the 
+contained element of a holder container.</span></div>
+<div class="paranum"><a name="p61">61/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3">If Container is empty, Constraint_Error is propagated. 
+Otherwise, Reference returns an object whose discriminant is an access 
+value that designates the contained element. Tampering with the elements 
+of Container is prohibited while the object returned by Reference exists 
+and has not been finalized.</span>&nbsp;</div>
+<div class="paranum"><a name="p62">62/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p63">63/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+<span class="insert3">If Target denotes the same object as Source, the 
+operation has no effect. If Source is empty, Clear (Target) is called. 
+Otherwise, Replace_Element (Target, Element (Source)) is called.</span> 
+</div>
+<div class="paranum"><a name="p63.a">63.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+<span class="insert3">This routine exists for compatibility with the 
+other containers. For a holder, <TT>Assign(A, B)</TT> and <TT>A := B</TT> 
+behave effectively the same. (Assign Clears the Target, while := finalizes 
+the Target, but these should have similar effects.)</span>&nbsp;</div>
+<div class="paranum"><a name="p64">64/3</a></div>
+<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Holder)&nbsp;<B>return</B>&nbsp;Holder;</span></div>
+<div class="paranum"><a name="p65">65/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+<span class="insert3">If Source is empty, returns an empty holder container; 
+otherwise, returns To_Holder (Element (Source)).</span></div>
+<div class="paranum"><a name="p66">66/3</a></div>
+<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Holder);</span></div>
+<div class="paranum"><a name="p67">67/3</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3">If Target denotes the same object as Source, then 
+the operation has no effect. Otherwise, the element contained by Source 
+(if any) is removed from Source and inserted into Target, replacing any 
+preexisting content. Source is empty after a successful call to Move.</span></div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p68">68/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<span class="insert3"><A NAME="I8077"></A>It is a bounded error for the 
+actual function associated with a generic formal subprogram, when called 
+as part of an operation of this package, to tamper with the element of 
+any Holder parameter of the operation. Either Program_Error is raised, 
+or the operation works as defined on the value of the Holder either prior 
+to, or subsequent to, some or all of the modifications to the Holder.</span></div>
+<div class="paranum"><a name="p69">69/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"><A NAME="I8078"></A>It is a bounded error to call 
+any subprogram declared in the visible part of Containers.Indefinite_Holders 
+when the associated container has been finalized. If the operation takes 
+Container as an <B>in out</B> parameter, then it raises Constraint_Error 
+or Program_Error. Otherwise, the operation either proceeds as it would 
+for an empty container, or it raises Constraint_Error or Program_Error.</span> 
+</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p70">70/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">Execution is erroneous if the holder container 
+associated with the result of a call to Reference or Constant_Reference 
+is finalized before the result object returned by the call to Reference 
+or Constant_Reference is finalized.<A NAME="I8079"></A></span></div>
+<div class="paranum"><a name="p70.a">70.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+<span class="insert3">Each object of Reference_Type and Constant_Reference_Type 
+probably contains some reference to the originating container. If that 
+container is prematurely finalized (which is only possible via Unchecked_Deallocation, 
+as accessibility checks prevent passing a container to Reference that 
+will not live as long as the result), the finalization of the object 
+of Reference_Type will try to access a nonexistent object. This is a 
+normal case of a dangling pointer created by Unchecked_Deallocation; 
+we have to explicitly mention it here as the pointer in question is not 
+visible in the specification of the type. (This is the same reason we 
+have to say this for invalid cursors.)</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p71">71/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3">No storage associated with a holder object shall 
+be lost upon assignment or scope exit.</span></div>
+<div class="paranum"><a name="p72">72/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
+for a holder container shall have the effect of copying the element (if 
+any) from the source holder object to the target holder object.</span></div>
+<div class="paranum"><a name="p72.a">72.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
+<span class="insert3">An assignment of a holder container is a &ldquo;deep&rdquo; 
+copy; that is the element is copied as well as any data structures. We 
+say &ldquo;effect of&rdquo; in order to allow the implementation to avoid 
+copying the element immediately if it wishes. For instance, an implementation 
+that avoided copying until one of the containers is modified would be 
+allowed. (Note that this implementation would require care, see <A HREF="AA-A-18-2.html">A.18.2</A> 
+for more.)</span>&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p73">73/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">Move should not copy the element, and should minimize 
+copying of internal data structures.</span>&nbsp;</div>
+<div class="paranum"><a name="p73.a.1">73.a.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">Containers.Indefinite_Holders.Move should 
+not copy the element, and should minimize copying of internal data structures.</span></div>
+<div class="paranum"><a name="p73.a">73.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Note: 
+</B>Usually that can be accomplished simply by moving the pointer(s) 
+to the internal data structures from the Source holder to the Target 
+holder.</span>&nbsp;</div>
+<div class="paranum"><a name="p74">74/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+<span class="insert3">If an exception is propagated from a holder operation, 
+no storage should be lost, nor should the element be removed from a holder 
+container unless specified by the operation.</span>&nbsp;</div>
+<div class="paranum"><a name="p74.a.1">74.a.1/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
+</B></span><span class="insert3">If an exception is propagated from a 
+holder operation, no storage should be lost, nor should the element be 
+removed from a holder container unless specified by the operation.</span></div>
+<div class="paranum"><a name="p74.a">74.a/3</a></div>
+<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This is 
+important so that programs can recover from errors. But we don't want 
+to require heroic efforts, so we just require documentation of cases 
+where this can't be accomplished.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p74.b">74.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0084-1.TXT">AI05-0084-1</A></I>} 
+<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+<span class="insert3"><A NAME="I8080"></A> The generic package Containers.Indefinite_Holders 
+is new.</span>&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
+<div class="paranum"><a name="p74.c">74.c/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
+<span class="insert4"><A NAME="I8081"></A><B>Corrigendum:</B> Defined 
+some routines to &ldquo;perform indefinite insertion&rdquo;. This could 
+mean that some calls to those routines would now raise Program_Error 
+where they previously worked. However, this is extremely unlikely; see 
+Inconsistencies With Ada 2012 in <A HREF="AA-A-18-11.html">A.18.11</A> 
+for details.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p74.d">74.d/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Clarified that tampering checks 
+precede all other checks made by a subprogram (but come after those associated 
+with the call).</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-19.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

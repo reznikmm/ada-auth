@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Enumeration Representation Clauses</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>13.4 Enumeration Representation Clauses</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN> 
+specifies the internal codes for enumeration literals.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I4463"></A><A NAME="S0267"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I4464"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0265">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I4465"></A><SPAN Class="swiss"><A HREF="AA-13-4.html#S0268">enumeration_aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I4466"></A><A NAME="S0268"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4467"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0104">array_aggregate</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I4468"></A>The <SPAN Class="swiss"><A HREF="AA-13-4.html#S0268">enumeration_aggregate</A></SPAN> 
+shall be written as a one-dimensional <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0104">array_aggregate</A></SPAN>, 
+for which the index subtype is the unconstrained subtype of the enumeration 
+type, and each component expression is expected to be of any integer 
+type.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The &ldquo;full coverage 
+rules&rdquo; for <SPAN Class="swiss"><A HREF="AA-4-3.html#S0097">aggregate</A></SPAN>s 
+applies. An <B>others</B> is not allowed &mdash; there is no applicable 
+index constraint in this context.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0265">local_name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN> 
+shall denote an enumeration subtype.&nbsp;</div>
+<div class="paranum"><a name="p5.a">5.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>As for all type-related 
+representation items, the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0265">local_name</A></SPAN> 
+is required to denote a first subtype.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal">The expressions given in the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0104">array_aggregate</A></SPAN> 
+shall be static, and shall specify distinct integer codes for each value 
+of the enumeration type; the associated integer codes shall satisfy the 
+predefined ordering relation of the type.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Each value of the enumeration 
+type has to be given an internal code, even if the first subtype of the 
+enumeration type is constrained to only a subrange (this is only possible 
+if the enumeration type is a derived type). This &ldquo;full coverage&rdquo; 
+requirement is important because one may refer to Enum'Base'First and 
+Enum'Base'Last, which need to have defined representations.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I4469"></A><A NAME="I4470"></A>An <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN> 
+specifies the <I>coding</I> aspect of representation. <A NAME="I4471"></A>The 
+coding consists of the <I>internal code</I> for each enumeration literal, 
+that is, the integral value used internally to represent each literal.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">For nonboolean enumeration types, if the coding is 
+not specified for the type, then for each value of the type, the internal 
+code shall be equal to its position number.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This default representation is 
+already used by all known Ada compilers for nonboolean enumeration types. 
+Therefore, we make it a requirement so users can depend on it, rather 
+than feeling obliged to supply for every enumeration type an enumeration 
+representation clause that is equivalent to this default rule.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For boolean types, it is 
+relatively common to use all ones for True, and all zeros for False, 
+since some hardware supports that directly. Of course, for a one-bit 
+Boolean object (like in a packed array), False is presumably zero and 
+True is presumably one (choosing the reverse would be extremely unfriendly!). 
+</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4472"></A>The 
+recommended level of support for <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN>s 
+is:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">An implementation should support at least the internal 
+codes in the range System.Min_Int..System.Max_Int. An implementation 
+need not support <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN>s 
+for boolean types.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The implementation may 
+support numbers outside the above range, such as numbers greater than 
+System.Max_Int. See AI83-00564.&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The benefits of specifying the 
+internal coding of a boolean type do not outweigh the implementation 
+costs. Consider, for example, the implementation of the logical operators 
+on a packed array of booleans with strange internal codes. It's implementable, 
+but not worth it.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p11">11/1</a></div>
+<div class="Notes">11&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+Unchecked_Conversion may be used to query the internal codes used for 
+an enumeration type. The attributes of the type, such as Succ, Pred, 
+and Pos, are unaffected by the <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN>. 
+For example, Pos always returns the position number, <I>not</I> the internal 
+integer code that might have been specified in an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN>}. 
+</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>Suppose the enumeration type in question is derived:&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;T1&nbsp;<B>is</B>&nbsp;(Red,&nbsp;Green,&nbsp;Blue);<BR>
+<B>subtype</B>&nbsp;S1&nbsp;<B>is</B>&nbsp;T1&nbsp;<B>range</B>&nbsp;Red&nbsp;..&nbsp;Green;<BR>
+<B>type</B>&nbsp;S2&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;S1;<BR>
+<B>for</B>&nbsp;S2&nbsp;<B>use</B>&nbsp;(Red&nbsp;=&gt;&nbsp;10,&nbsp;Green&nbsp;=&gt;&nbsp;20,&nbsp;Blue&nbsp;=&gt;&nbsp;30);</div>
+<div class="paranum"><a name="p11.c">11.c/1</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-13-4.html#S0267">enumeration_representation_clause</A></SPAN> 
+has to specify values for all enumerals, even ones that are not in S2 
+(such as Blue). The Base attribute can be used to get at these values. 
+For example:&nbsp;</div>
+<div class="paranum"><a name="p11.d">11.d</a></div>
+<div class="SmallExamples"><B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;S2'Base&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;When&nbsp;I&nbsp;equals&nbsp;Blue,&nbsp;the&nbsp;internal&nbsp;code&nbsp;is&nbsp;30.</I></SPAN><BR>
+<B>end</B>&nbsp;<B>loop</B>;</div>
+<div class="paranum"><a name="p11.e">11.e</a></div>
+<div class="Annotations">We considered allowing or requiring &ldquo;<B>for</B> 
+S2'Base <B>use</B> ...&rdquo; in cases like this, but it didn't seem 
+worth the trouble.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of an enumeration 
+representation clause:</I>&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>type</B>&nbsp;Mix_Code&nbsp;<B>is</B>&nbsp;(ADD,&nbsp;SUB,&nbsp;MUL,&nbsp;LDA,&nbsp;STA,&nbsp;STZ);</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>for</B>&nbsp;Mix_Code&nbsp;<B>use</B><BR>
+&nbsp;&nbsp;&nbsp;(ADD&nbsp;=&gt;&nbsp;1,&nbsp;SUB&nbsp;=&gt;&nbsp;2,&nbsp;MUL&nbsp;=&gt;&nbsp;3,&nbsp;LDA&nbsp;=&gt;&nbsp;8,&nbsp;STA&nbsp;=&gt;&nbsp;24,&nbsp;STZ&nbsp;=&gt;33);</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><A NAME="I4473"></A>As in other similar contexts, 
+Ada 95 allows expressions of any integer type, not just expressions of 
+type <I>universal_integer</I>, for the component expressions in the <SPAN Class="swiss"><A HREF="AA-13-4.html#S0268">enumeration_aggregate</A></SPAN>. 
+The preference rules for the predefined operators of <I>root_integer</I> 
+eliminate any ambiguity.</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations">For portability, we now require that the default 
+coding for an enumeration type be the &ldquo;obvious&rdquo; coding using 
+position numbers. This is satisfied by all known implementations.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-13-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

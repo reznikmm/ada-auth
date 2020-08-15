@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Statically Matching Constraints and Subtypes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.9.1 Statically Matching Constraints and Subtypes</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal"><A NAME="I3188"></A>A constraint <I>statically matches</I> 
+another constraint if:&nbsp;</div>
+<div class="paranum"><a name="p1.1">1.1/2</a></div>
+<div class="Bulleted">both are null constraints;</div>
+<div class="paranum"><a name="p1.2">1.2/2</a></div>
+<div class="Bulleted">both are static and have equal corresponding bounds 
+or discriminant values;</div>
+<div class="paranum"><a name="p1.3">1.3/2</a></div>
+<div class="Bulleted">both are nonstatic and result from the same elaboration 
+of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+or the same evaluation of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN>; 
+or</div>
+<div class="paranum"><a name="p1.4">1.4/2</a></div>
+<div class="Bulleted">both are nonstatic and come from the same <SPAN Class="swiss"><A HREF="RM-12-5.html#S0298">formal_type_declaration</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal"><A NAME="I3189"></A>A subtype <I>statically matches</I> 
+another subtype of the same type if they have statically matching constraints, 
+all predicate specifications that apply to them come from the same declarations, 
+<span class="insert5">Object_Size (see <A HREF="RM-13-3.html">13.3</A>) 
+has been specified to have a nonconfirming value for either both or neither, 
+and the nonconfirming values, if any, are the same,&nbsp;</span>and, for access 
+subtypes, either both or neither exclude null. Two anonymous access-to-object 
+subtypes statically match if their designated subtypes statically match, 
+and either both or neither exclude null, and either both or neither are 
+access-to-constant. Two anonymous access-to-subprogram subtypes statically 
+match if their designated profiles are subtype conformant, and either 
+both or neither exclude null.&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3190"></A>Two ranges of the same type <I>statically 
+match</I> if both result from the same evaluation of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
+or if both are static and have equal corresponding bounds.&nbsp;</div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Normal"><A NAME="I3191"></A>A constraint is <I>statically 
+compatible</I> with a scalar subtype if it statically matches the constraint 
+of the subtype, or if both are static and the constraint is compatible 
+with the subtype. <A NAME="I3192"></A>A constraint is <I>statically compatible</I> 
+with an access or composite subtype if it statically matches the constraint 
+of the subtype, or if the subtype is unconstrained.&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3193"></A>Two 
+statically matching subtypes are statically compatible with each other. 
+In addition, a subtype <I>S1</I> is statically compatible with a subtype 
+<I>S2</I> if:&nbsp;</div>
+<div class="paranum"><a name="p6">6/3</a></div>
+<div class="Bulleted">the constraint of <I>S1</I> is statically compatible 
+with <I>S2</I>, and</div>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Bulleted">if <I>S2</I> excludes null, so does <I>S1</I>, 
+and</div>
+<div class="paranum"><a name="p8">8/3</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em">either:&nbsp;</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Indented2NestedBulleted">all predicate specifications that 
+apply to <I>S2</I> apply also to <I>S1</I>, or</div>
+<div class="paranum"><a name="p10">10/4</a></div>
+<div class="Indented2NestedBulleted">both subtypes are static, every 
+value that satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of <I>S1</I> also satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of <I>S2</I>, and it is not the case that both types each have at least 
+one applicable predicate specification, predicate checks are enabled 
+(see <A HREF="RM-11-4-2.html">11.4.2</A>) for <I>S2</I>, and predicate 
+checks are not enabled for <I>S1</I>.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

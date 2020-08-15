@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Statically Matching Constraints and Subtypes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.9.1 Statically Matching Constraints and Subtypes</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I2895"></A>A constraint <I>statically matches</I> 
+another constraint if both are null constraints, both are static and 
+have equal corresponding bounds or discriminant values, or both are nonstatic 
+and result from the same elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">constraint</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0024">subtype_indication</A></SPAN> 
+or the same evaluation of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0034">range</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0052">discrete_subtype_definition</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal"><A NAME="I2896"></A>A subtype <I>statically matches</I> 
+another subtype of the same type if they have statically matching constraints. 
+Two anonymous access subtypes statically match if their designated subtypes 
+statically match.&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Statically matching constraints 
+and subtypes are the basis for subtype conformance of profiles (see <A HREF="AA-6-3-1.html">6.3.1</A>). 
+</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I2897"></A>Two ranges of the same type <I>statically 
+match</I> if both result from the same evaluation of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0034">range</A></SPAN>, 
+or if both are static and have equal corresponding bounds.&nbsp;</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The notion of static matching 
+of ranges is used in <A HREF="AA-12-5-3.html">12.5.3</A>, &ldquo;<A HREF="AA-12-5-3.html">Formal 
+Array Types</A>&rdquo;; the index ranges of formal and actual constrained 
+array subtypes have to statically match.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I2898"></A>A constraint is <I>statically 
+compatible</I> with a scalar subtype if it statically matches the constraint 
+of the subtype, or if both are static and the constraint is compatible 
+with the subtype. <A NAME="I2899"></A>A constraint is <I>statically compatible</I> 
+with an access or composite subtype if it statically matches the constraint 
+of the subtype, or if the subtype is unconstrained. <A NAME="I2900"></A>One 
+subtype is <I>statically compatible</I> with a second subtype if the 
+constraint of the first is statically compatible with the second subtype. 
+</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Static compatibility is required 
+when constraining a parent subtype with a discriminant from a new <SPAN Class="swiss"><A HREF="AA-3-7.html#S0056">discriminant_part</A></SPAN>. 
+See <A HREF="AA-3-7.html">3.7</A>. Static compatibility is also used 
+in matching generic formal derived types.</div>
+<div class="paranum"><a name="p4.b">4.b</a></div>
+<div class="Annotations">Note that statically compatible with a subtype 
+does not imply compatible with a type. It is OK since the terms are used 
+in different contexts.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p4.c">4.c</a></div>
+<div class="Annotations">This subclause is new to Ada 95.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-9.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

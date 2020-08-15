@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Discriminant Constraints</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.7.1 Discriminant Constraints</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+specifies the values of the discriminants for a given discriminated type. 
+</div>
+
+<H4 Class="centered">Language Design Principles</H4>
+<div class="paranum"><a name="p1.a">1.a/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+The rules in this subclause are intentionally parallel to those given 
+in <A HREF="AA-4-3-1.html">4.3.1</A>, &ldquo;<A HREF="AA-4-3-1.html">Record 
+Aggregates</A>&rdquo;.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_constraint</SPAN><A NAME="I2148"></A><A NAME="S0064"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I2149"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2150"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>})</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_association</SPAN><A NAME="I2151"></A><A NAME="S0065"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>discriminant_</I><A NAME="I2152"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{|&nbsp;<I>discriminant_</I><A NAME="I2153"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>}&nbsp;=&gt;]&nbsp;<A NAME="I2154"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><A NAME="I2155"></A>A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+is said to be <I>named</I> if it has one or more <I>discriminant_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>s; 
+<A NAME="I2156"></A>it is otherwise said to be <I>positional</I>. In 
+a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
+any positional associations shall precede any named associations.&nbsp;</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal">Each <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+of a named <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+shall resolve to denote a discriminant of the subtype being constrained; 
+<A NAME="I2157"></A>the discriminants so named are the <I>associated 
+discriminants</I> of the named association. <A NAME="I2158"></A>For a 
+positional association, the <I>associated discriminant</I> is the one 
+whose <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN> 
+occurred in the corresponding position in the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
+that defined the discriminants of the subtype being constrained.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I2159"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+is that of the associated discriminant(s).&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/3</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0008">8652/0008</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00168.TXT">AI95-00168-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0041-1.TXT">AI05-0041-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+is only allowed in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes either an unconstrained discriminated subtype, or an unconstrained 
+access subtype whose designated subtype is an unconstrained discriminated 
+subtype. However, in the case of an access subtype, a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+is legal only if any dereference of a value of the access type is known 
+to be constrained (see <A HREF="AA-3-3.html">3.3</A>). In addition to 
+the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+these rules apply also in the private part of an instance of a generic 
+unit.<A NAME="I2160"></A></div>
+<div class="paranum"><a name="p7.a.1">7.a.1/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0008">8652/0008</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00168.TXT">AI95-00168-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+The second rule is necessary to prevent objects from changing so that 
+they no longer match their constraint. In Ada 95, we attempted to prevent 
+this by banning every case where an aliased object could be unconstrained 
+or be changed by an enclosing assignment. New ways to cause this problem 
+were being discovered frequently, meaning that new rules had to be dreamed 
+up to cover them. Meanwhile, aliased objects and components were getting 
+more and more limited. In Ada 2005, we sweep away all of that cruft and 
+replace it by a simple rule &ldquo;thou shalt not create an access subtype 
+that can point to an item whose discriminants can be changed by assignment&rdquo;. 
+</div>
+<div class="paranum"><a name="p7.b">7.b/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0041-1.TXT">AI05-0041-1</A></I>} 
+The second rule will only use the indefinite or dereference bullets in 
+the definition of &ldquo;known to be constrained&rdquo;. The rule is 
+worded in terms of &ldquo;known to be constrained&rdquo; in order to 
+capture the special rules that apply in generic bodies (rather than repeating 
+them and getting them subtly wrong).&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">A named <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN> 
+with more than one <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+is allowed only if the named discriminants are all of the same type. 
+A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+shall provide exactly one value for each discriminant of the subtype 
+being constrained.</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0102-1.TXT">AI05-0102-1</A></I>} 
+</div>
+<div class="paranum"><a name="p9.a">9.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In addition, <A HREF="AA-8-6.html">8.6</A> 
+requires that the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+associated with an access discriminant is convertible (see <A HREF="AA-4-6.html">4.6</A>) 
+to the anonymous access type. This implies both convertibility of designated 
+types, and static accessibility. This implies that if an object of type 
+T with an access discriminant is created by an allocator for an access 
+type A, then it requires that the type of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+associated with the access discriminant have an accessibility level that 
+is not statically deeper than that of A. This is to avoid dangling references.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I2161"></A>A <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN> 
+is <I>compatible</I> with an unconstrained discriminated subtype if each 
+discriminant value belongs to the subtype of the corresponding discriminant. 
+</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The &quot;dependent compatibility 
+check&quot; has been eliminated in Ada 95. Any checking on subcomponents 
+is performed when (and if) an object is created.</div>
+<div class="paranum"><a name="p10.b">10.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>There is no need to define 
+compatibility with a constrained discriminated subtype, because one is 
+not allowed to constrain it again.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I2162"></A>A composite value <I>satisfies</I> 
+a discriminant constraint if and only if each discriminant of the composite 
+value has the value imposed by the discriminant constraint.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I2163"></A>For the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+in the <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0065">discriminant_association</A></SPAN>s 
+are evaluated in an arbitrary order and converted to the type of the 
+associated discriminant (which might raise Constraint_Error &mdash; see 
+<A HREF="AA-4-6.html">4.6</A>); the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a named association is evaluated (and converted) once for each associated 
+discriminant. <A NAME="I2164"></A>The result of each evaluation and conversion 
+is the value imposed by the constraint for the associated discriminant. 
+</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We convert to the type, not the 
+subtype, so that the definition of compatibility of discriminant constraints 
+is not vacuous.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">62&nbsp;&nbsp;The rules of the language ensure that 
+a discriminant of an object always has a value, either from explicit 
+or implicit initialization.&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Although it is illegal to 
+constrain a class-wide tagged subtype, it is possible to have a partially 
+constrained class-wide subtype: If the subtype S is defined by T(A =&gt; 
+B), then S'Class is partially constrained in the sense that objects of 
+subtype S'Class have to have discriminants corresponding to A equal to 
+B, but there can be other discriminants defined in extensions that are 
+not constrained to any particular value.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<I>Examples (using types declared above in subclause <A HREF="AA-3-7.html">3.7</A>):</I> 
+</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">Large&nbsp;&nbsp;&nbsp;:&nbsp;Buffer(200);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;constrained,&nbsp;always&nbsp;200&nbsp;characters</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;(explicit&nbsp;discriminant&nbsp;value)</I></SPAN><BR>
+Message&nbsp;:&nbsp;Buffer;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;unconstrained,&nbsp;initially&nbsp;100&nbsp;characters</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&nbsp;(default&nbsp;discriminant&nbsp;value)</I></SPAN><BR>
+Basis&nbsp;&nbsp;&nbsp;:&nbsp;Square(5);&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;constrained,&nbsp;always&nbsp;5&nbsp;by&nbsp;5</I></SPAN><BR>
+Illegal&nbsp;:&nbsp;Square;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;illegal,&nbsp;a&nbsp;Square&nbsp;has&nbsp;to&nbsp;be&nbsp;constrained</I></SPAN></div>
+
+<H4 Class="centered">Inconsistencies With Ada 83</H4>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><A NAME="I2165"></A>Dependent compatibility 
+checks are no longer performed on subtype declaration. Instead they are 
+deferred until object creation (see <A HREF="AA-3-3-1.html">3.3.1</A>). 
+This is upward compatible for a program that does not raise Constraint_Error. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p15.b">15.b</a></div>
+<div class="Annotations">Everything in RM83-3.7.2(7-12), which specifies 
+the initial values for discriminants, is now redundant with 3.3.1, 6.4.1, 
+8.5.1, and 12.4. Therefore, we don't repeat it here. Since the material 
+is largely intuitive, but nevertheless complicated to state formally, 
+it doesn't seem worth putting it in a &quot;NOTE.&quot;&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p15.c">15.c/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0008">8652/0008</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00168.TXT">AI95-00168-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
+<A NAME="I2166"></A>The Corrigendum added a restriction on <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 
+for general access subtypes. Such constraints are prohibited if the designated 
+type can be treated as constrained somewhere in the program. Ada 2005 
+goes further and prohibits such <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 
+if the designated type has (or might have, in the case of a formal type) 
+defaults for its discriminants. The use of general access subtypes is 
+rare, and this eliminates a boatload of problems that required many restrictions 
+on the use of aliased objects and components (now lifted). Similarly, 
+Ada 2005 prohibits <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s 
+on any access type whose designated type has a partial view that is constrained. 
+Such a type will not be constrained in the heap to avoid privacy problems. 
+Again, the use of such subtypes is rare (they can only happen within 
+the package and its child units).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p15.d">15.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0041-1.TXT">AI05-0041-1</A></I>} 
+<B>Correction:</B> Revised the rules on access subtypes having discriminant 
+constraints to depend on the &ldquo;known to be constrained&rdquo; rules. 
+This centralizes the rules so that future fixes need to be made in only 
+one place, as well as fixing bugs in obscure cases.</div>
+<div class="paranum"><a name="p15.e">15.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0102-1.TXT">AI05-0102-1</A></I>} 
+<B>Correction:</B> Moved implicit conversion Legality Rule to <A HREF="AA-8-6.html">8.6</A>. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-7-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

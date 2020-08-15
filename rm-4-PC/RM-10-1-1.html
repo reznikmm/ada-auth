@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Compilation Units - Library Units</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>10.1.1 Compilation Units - Library Units</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+is a compilation unit that is the declaration, body, or renaming of a 
+library unit. Each library unit (except Standard) has a <I>parent unit</I>, 
+which is a library package or generic library package. <A NAME="I4385"></A>A 
+library unit is a <I>child</I> of its parent unit. The <I>root</I> library 
+units are the children of the predefined library package Standard.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">compilation</SPAN><A NAME="I4386"></A><A NAME="S0246"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4387"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN>}</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">compilation_unit</SPAN><A NAME="I4388"></A><A NAME="S0247"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4389"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0253">context_clause</A></SPAN>&nbsp;<A NAME="I4390"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4391"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0253">context_clause</A></SPAN>&nbsp;<A NAME="I4392"></A><SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0263">subunit</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_item</SPAN><A NAME="I4393"></A><A NAME="S0248"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<A NAME="I4394"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4395"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0251">library_unit_body</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;[<B>private</B>]&nbsp;<A NAME="I4396"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0250">library_unit_renaming_declaration</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_declaration</SPAN><A NAME="I4397"></A><A NAME="S0249"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4398"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0163">subprogram_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4399"></A><SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4400"></A><SPAN Class="swiss"><A HREF="RM-12-1.html#S0271">generic_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I4401"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0276">generic_instantiation</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_renaming_declaration</SPAN><A NAME="I4402"></A><A NAME="S0250"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4403"></A><SPAN Class="swiss"><A HREF="RM-8-5-3.html#S0202">package_renaming_declaration</A></SPAN><BR>
+&nbsp;|&nbsp;<A NAME="I4404"></A><SPAN Class="swiss"><A HREF="RM-8-5-5.html#S0204">generic_renaming_declaration</A></SPAN><BR>
+&nbsp;|&nbsp;<A NAME="I4405"></A><SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0203">subprogram_renaming_declaration</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><SPAN Class="swiss">library_unit_body</SPAN><A NAME="I4406"></A><A NAME="S0251"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4407"></A><SPAN Class="swiss"><A HREF="RM-6-3.html#S0177">subprogram_body</A></SPAN>&nbsp;|&nbsp;<A NAME="I4408"></A><SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN></div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1"><SPAN Class="swiss">parent_unit_name</SPAN><A NAME="I4409"></A><A NAME="S0252"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4410"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="paranum"><a name="p8.1">8.1/2</a></div>
+<div class="Indented1">An <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN> 
+is not allowed in a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0163">subprogram_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-12-3.html#S0276">generic_instantiation</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0203">subprogram_renaming_declaration</A></SPAN> 
+that declares a library unit.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I4411"></A><A NAME="I4412"></A><A NAME="I4413"></A><A NAME="I4414"></A><A NAME="I4415"></A>A 
+<I>library unit</I> is a program unit that is declared by a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
+When a program unit is a library unit, the prefix &ldquo;library&rdquo; 
+is used to refer to it (or &ldquo;generic library&rdquo; if generic), 
+as well as to its declaration and body, as in &ldquo;library procedure&rdquo;, 
+&ldquo;library <SPAN Class="swiss"><A HREF="RM-7-2.html#S0192">package_body</A></SPAN>&rdquo;, 
+or &ldquo;generic library package&rdquo;. <A NAME="I4416"></A>The term 
+<I>compilation unit</I> is used to refer to a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN>. 
+When the meaning is clear from context, the term is also used to refer 
+to the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN> 
+or to the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0090">proper_body</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0263">subunit</A></SPAN> 
+(that is, the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN> 
+without the <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0253">context_clause</A></SPAN> 
+and the <B>separate</B> (<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN>)). 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I4417"></A><A NAME="I4418"></A>The <I>parent 
+declaration</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+(and of the library unit) is the declaration denoted by the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN>, 
+if any, of the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
+<A NAME="I4419"></A>If there is no <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN>, 
+the parent declaration is the declaration of Standard, the <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+is a <I>root</I> <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>, 
+and the library unit (renaming) is a <I>root</I> library unit (renaming). 
+The declaration and body of Standard itself have no parent declaration. 
+<A NAME="I4420"></A>The <I>parent unit</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+or library unit is the library unit declared by its parent declaration. 
+</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">The children of a library unit occur immediately 
+within the declarative region of the declaration of the library unit. 
+<A NAME="I4421"></A>The <I>ancestors</I> of a library unit are itself, 
+its parent, its parent's parent, and so on. (Standard is an ancestor 
+of every library unit.) <A NAME="I4422"></A>The <I>descendant</I> relation 
+is the inverse of the ancestor relation.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I4423"></A><A NAME="I4424"></A><A NAME="I4425"></A><A NAME="I4426"></A>A 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0250">library_unit_renaming_declaration</A></SPAN> 
+is <I>private</I> if the declaration is immediately preceded by the reserved 
+word <B>private</B>; it is otherwise <I>public</I>. A library unit is 
+private or public according to its declaration. <A NAME="I4427"></A>The 
+<I>public descendants</I> of a library unit are the library unit itself, 
+and the public descendants of its public children. <A NAME="I4428"></A>Its 
+other descendants are <I>private descendants</I>.&nbsp;</div>
+<div class="paranum"><a name="p12.1">12.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;For each library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+in the environment, there is an implicit declaration of a <I>limited 
+view</I> of that library package.<A NAME="I4429"></A> The limited view 
+of a package contains:</div>
+<div class="paranum"><a name="p12.2">12.2/3</a></div>
+<div class="Bulleted">For each<span class="delete3">&nbsp;nested</span> <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN><span class="insert3">&nbsp;occurring immediately within the visible part</span>, a declaration of 
+the limited view of that package, with the same <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN>.</div>
+<div class="paranum"><a name="p12.3">12.3/3</a></div>
+<div class="Bulleted">For each <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+<span class="insert3">occurring immediately within</span><span class="delete3">&nbsp;in</span> 
+the visible part<span class="insert3">&nbsp;that is not an <SPAN Class="swiss"><A HREF="RM-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN></span>, 
+an incomplete view of the type<span class="insert3">&nbsp;with no <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN></span>; 
+if the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+is tagged, then the view is a tagged incomplete view.&nbsp;</div>
+<div class="paranum"><a name="p12.4">12.4/2</a></div>
+<div class="Normal">&nbsp;&nbsp;The limited view of a library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+is private if that library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+is immediately preceded by the reserved word <B>private</B>.</div>
+<div class="paranum"><a name="p12.5">12.5/2</a></div>
+<div class="Normal">&nbsp;&nbsp;There is no syntax for declaring limited views 
+of packages, because they are always implicit. The implicit declaration 
+of a limited view of a library package is not the declaration of a library 
+unit (the library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+is); nonetheless, it is a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
+The implicit declaration of the limited view of a library package forms 
+an (implicit) compilation unit whose <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0253">context_clause</A></SPAN> 
+is empty.</div>
+<div class="paranum"><a name="p12.6">12.6/2</a></div>
+<div class="Normal">&nbsp;&nbsp;A library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+is the completion of the declaration of its limited view.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The parent unit of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+shall be a library package or generic library package.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN> 
+of a given declaration or body has a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN>, 
+then the given declaration or body shall be a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
+The body of a program unit shall be a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+if and only if the declaration of the program unit is a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
+In a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0250">library_unit_renaming_declaration</A></SPAN>, 
+the (old) <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+shall denote a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN> 
+(which can be used within a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+and in the <B>separate</B> clause of a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0263">subunit</A></SPAN>), 
+and each of its <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>es, 
+shall not denote a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0199">renaming_declaration</A></SPAN>. 
+On the other hand, a name that denotes a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0250">library_unit_renaming_declaration</A></SPAN> 
+is allowed in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN> 
+and other places where the name of a library unit is allowed.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">If a library package is an instance of a generic 
+package, then every child of the library package shall either be itself 
+an instance or be a renaming of a library unit.&nbsp;</div>
+<div class="paranum"><a name="p17">17/3</a></div>
+<div class="Normal">A child of a generic library package shall either 
+be itself a generic unit or be a renaming of some other child of the 
+same generic unit.<span class="delete3">&nbsp;The renaming of a child of a 
+generic package shall occur only within the declarative region of the 
+generic package.</span></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">A child of a parent generic package shall be instantiated 
+or renamed only within the declarative region of the parent generic.</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Normal">For each child <I>C</I> of some parent generic package 
+<I>P</I>, there is a corresponding declaration <I>C</I> nested immediately 
+within each instance of <I>P</I>. For the purposes of this rule, if a 
+child <I>C</I> itself has a child <I>D</I>, each corresponding declaration 
+for <I>C</I> has a corresponding child <I>D</I>. The corresponding declaration 
+for a child within an instance is visible only within the scope of a 
+<SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0255">with_clause</A></SPAN> 
+that mentions the (original) child generic unit.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">A library subprogram shall not override a primitive 
+subprogram.&nbsp;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal">The defining name of a function that is a compilation 
+unit shall not be an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0170">operator_symbol</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0203">subprogram_renaming_declaration</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0250">library_unit_renaming_declaration</A></SPAN> 
+is a renaming-as-declaration, not a renaming-as-body.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">There are two kinds 
+of dependences among compilation units:&nbsp;</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Bulleted">The <I>semantic dependences</I> (see below) are 
+the ones needed to check the compile-time rules across compilation unit 
+boundaries; a compilation unit depends semantically on the other compilation 
+units needed to determine its legality. The visibility rules are based 
+on the semantic dependences.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Bulleted">The <I>elaboration dependences</I> (see <A HREF="RM-10-2.html">10.2</A>) 
+determine the order of elaboration of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s. 
+</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Normal"><A NAME="I4430"></A><A NAME="I4431"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+depends semantically upon its parent declaration. A subunit depends semantically 
+upon its parent body. A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0251">library_unit_body</A></SPAN> 
+depends semantically upon the corresponding <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN>, 
+if any. The declaration of the limited view of a library package depends 
+semantically upon the declaration of the limited view of its parent. 
+The declaration of a library package depends semantically upon the declaration 
+of its limited view. A compilation unit depends semantically upon each 
+<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+mentioned in a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0255">with_clause</A></SPAN> 
+of the compilation unit. In addition, if a given compilation unit contains 
+an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+of a type defined in another compilation unit, then the given compilation 
+unit depends semantically upon the other compilation unit. The semantic 
+dependence relationship is transitive.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p26.1">26.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;The elaboration of the declaration of the limited 
+view of a package has no effect.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes">1&nbsp;&nbsp;A simple program may consist of a single 
+compilation unit. A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
+need not have any compilation units; for example, its text can consist 
+of <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s. 
+</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Notes">2&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="RM-6-1.html#S0167">designator</A></SPAN> 
+of a library function cannot be an <SPAN Class="swiss"><A HREF="RM-6-1.html#S0170">operator_symbol</A></SPAN>, 
+but a nonlibrary <SPAN Class="swiss"><A HREF="RM-8-5.html#S0199">renaming_declaration</A></SPAN> 
+is allowed to rename a library function as an operator. Within a partition, 
+two library subprograms are required to have distinct names and hence 
+cannot overload each other. However, <SPAN Class="swiss"><A HREF="RM-8-5.html#S0199">renaming_declaration</A></SPAN>s 
+are allowed to define overloaded names for such subprograms, and a locally 
+declared subprogram is allowed to overload a library subprogram. The 
+expanded name Standard.L can be used to denote a root library unit L 
+(unless the declaration of Standard is hidden) since root library unit 
+declarations occur immediately within the declarative region of package 
+Standard.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of library 
+units:</I>&nbsp;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Examples"><B>package</B>&nbsp;Rational_Numbers.IO&nbsp;<B>is</B>&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;public&nbsp;child&nbsp;of&nbsp;Rational_Numbers,&nbsp;see&nbsp;<A HREF="RM-7-1.html">7.1</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Put(R&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Rational);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get(R&nbsp;:&nbsp;<B>out</B>&nbsp;Rational);<BR>
+<B>end</B>&nbsp;Rational_Numbers.IO;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples"><B>private&nbsp;procedure</B>&nbsp;Rational_Numbers.Reduce(R&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Rational);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;private&nbsp;child&nbsp;of&nbsp;Rational_Numbers</I></SPAN></div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Examples"><B>with</B>&nbsp;Rational_Numbers.Reduce;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;refer&nbsp;to&nbsp;a&nbsp;private&nbsp;child</I></SPAN><BR>
+<B>package&nbsp;body</B>&nbsp;Rational_Numbers&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;Rational_Numbers;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Examples"><B>with</B>&nbsp;Rational_Numbers.IO;&nbsp;<B>use</B>&nbsp;Rational_Numbers;<BR>
+<B>with</B>&nbsp;Ada.Text_io;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-A-10.html">A.10</A></I></SPAN><BR>
+<B>procedure</B>&nbsp;Main&nbsp;<B>is</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;root&nbsp;library&nbsp;procedure</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;R&nbsp;:&nbsp;Rational;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;R&nbsp;:=&nbsp;5/3;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;construct&nbsp;a&nbsp;rational&nbsp;number,&nbsp;see&nbsp;<A HREF="RM-7-1.html">7.1</A></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;Ada.Text_IO.Put(&quot;The&nbsp;answer&nbsp;is:&nbsp;&quot;);<BR>
+&nbsp;&nbsp;&nbsp;IO.Put(R);<BR>
+&nbsp;&nbsp;&nbsp;Ada.Text_IO.New_Line;<BR>
+<B>end</B>&nbsp;Main;</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Examples"><B>with</B>&nbsp;Rational_Numbers.IO;<BR>
+<B>package</B>&nbsp;Rational_IO&nbsp;<B>renames</B>&nbsp;Rational_Numbers.IO;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;library&nbsp;unit&nbsp;renaming&nbsp;declaration</I></SPAN></div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Normal">Each of the above <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s 
+can be submitted to the compiler separately.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-10-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Task Priorities</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>D.1 Task Priorities</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[This clause specifies the priority model for real-time 
+systems. In addition, the methods for specifying priorities are defined.] 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Priority is as follows:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I6126"></A><A NAME="I6127"></A>Priority(<A NAME="I6128"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN>);</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Interrupt_Priority is as follows:&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I6129"></A><A NAME="I6130"></A>Interrupt_Priority[(<A NAME="I6131"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN>);] 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I6132"></A><A NAME="I6133"></A>The expected 
+type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+in a Priority or Interrupt_Priority pragma is Integer.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">A Priority pragma is allowed only immediately within 
+a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0177">task_definition</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0182">protected_definition</A></SPAN>, 
+or the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN>. 
+An Interrupt_Priority pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0177">task_definition</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0182">protected_definition</A></SPAN>. 
+At most one such pragma shall appear within a given construct.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">For a Priority pragma that appears in the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+shall be static, and its value shall be in the range of System.Priority. 
+</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This value is needed before it 
+gets elaborated, when the environment task starts executing.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following declarations 
+exist in package System:&nbsp;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples"><B>subtype</B>&nbsp;Any_Priority&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+<B>subtype</B>&nbsp;Priority&nbsp;<B>is</B>&nbsp;Any_Priority<BR>
+&nbsp;&nbsp;&nbsp;<B>range</B>&nbsp;Any_Priority'First&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+<B>subtype</B>&nbsp;Interrupt_Priority&nbsp;<B>is</B>&nbsp;Any_Priority<BR>
+&nbsp;&nbsp;&nbsp;<B>range</B>&nbsp;Priority'Last+1&nbsp;..&nbsp;Any_Priority'Last;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">Default_Priority&nbsp;:&nbsp;<B>constant</B>&nbsp;Priority&nbsp;:=&nbsp;(Priority'First&nbsp;+&nbsp;Priority'Last)/2;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The declarations 
+of Any_Priority and Priority.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">The full range of priority values supported by an 
+implementation is specified by the subtype Any_Priority. The subrange 
+of priority values that are high enough to require the blocking of one 
+or more interrupts is specified by the subtype Interrupt_Priority. [The 
+subrange of priority values below System.Interrupt_Priority'First is 
+specified by the subtype System.Priority.]</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The priority specified by a Priority or Interrupt_Priority 
+pragma is the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+in the pragma, if any. If there is no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+in an Interrupt_Priority pragma, the priority value is Interrupt_Priority'Last.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">A Priority pragma has no effect if it it occurs in 
+the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0154">subprogram_body</A></SPAN> 
+of a subprogram other than the main subprogram.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal"><A NAME="I6134"></A><A NAME="I6135"></A><A NAME="I6136"></A><A NAME="I6137"></A><A NAME="I6138"></A>A 
+<I>task priority</I> is an integer value that indicates a degree of urgency 
+and is the basis for resolving competing demands of tasks for resources. 
+Unless otherwise specified, whenever tasks compete for processors or 
+other implementation-defined resources, the resources are allocated to 
+the task with the highest priority value. The <I>base priority</I> of 
+a task is the priority with which it was created, or to which it was 
+later set by Dynamic_Priorities.Set_Priority (see <A HREF="AA-D-5.html">D.5</A>). 
+At all times, a task also has an <I>active priority</I>, which generally 
+reflects its base priority as well as any priority it inherits from other 
+sources. <I>Priority inheritance</I> is the process by which the priority 
+of a task or other entity (e.g. a protected object; see <A HREF="AA-D-3.html">D.3</A>) 
+is used in the evaluation of another task's active priority.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+execution resources.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">The effect of specifying such a pragma in a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0182">protected_definition</A></SPAN> 
+is discussed in <A HREF="AA-D-3.html">D.3</A>.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal"><A NAME="I6139"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+in a Priority or Interrupt_Priority pragma that appears in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0177">task_definition</A></SPAN> 
+is evaluated for each task object (see <A HREF="AA-9-1.html">9.1</A>). 
+For a Priority pragma, the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+is converted to the subtype Priority; for an Interrupt_Priority pragma, 
+this value is converted to the subtype Any_Priority. The priority value 
+is then associated with the task objectwhose <SPAN Class="swiss"><A HREF="AA-9-1.html#S0177">task_definition</A></SPAN> 
+contains the pragma. <A NAME="I6140"></A><A NAME="I6141"></A></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">Likewise, the priority value is associated with the 
+environment task if the pragma appears in the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0079">declarative_part</A></SPAN> 
+of the main subprogram.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">The initial value of a task's base priority is specified 
+by default or by means of a Priority or Interrupt_Priority pragma. [After 
+a task is created, its base priority can be changed only by a call to 
+Dynamic_Priorities.Set_Priority (see <A HREF="AA-D-5.html">D.5</A>).] 
+The initial base priority of a task in the absence of a pragma is the 
+base priority of the task that creates it at the time of creation (see 
+<A HREF="AA-9-1.html">9.1</A>). If a pragma Priority does not apply to 
+the main subprogram, the initial base priority of the environment task 
+is System.Default_Priority. [The task's active priority is used when 
+the task competes for processors. Similarly, the task's active priority 
+is used to determine the task's position in any queue when Priority_Queuing 
+is specified (see <A HREF="AA-D-4.html">D.4</A>).]</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">At any time, the active 
+priority of a task is the maximum of all the priorities the task is inheriting 
+at that instant. For a task that is not held (see <A HREF="AA-D-11.html">D.11</A>), 
+its base priority is always a source of priority inheritance . Other 
+sources of priority inheritance are specified under the following conditions: 
+</div>
+<div class="paranum"><a name="p20.a">20.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Other parts of the annex, 
+e.g. <A HREF="AA-D-11.html">D.11</A>, define other sources of priority 
+inheritance.&nbsp;</div>
+<div class="paranum"><a name="p21">21/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0072">8652/0072</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00092.TXT">AI95-00092-01</A></I>} 
+During activation, a task being activated inherits the active priority 
+that its activator (see <A HREF="AA-9-2.html">9.2</A>) had at the time 
+the activation was initiated.</div>
+<div class="paranum"><a name="p22">22/1</a></div>
+<div class="Bulleted">{<I><A HREF="defect1.html#8652/0072">8652/0072</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00092.TXT">AI95-00092-01</A></I>} 
+During rendezvous, the task accepting the entry call inherits the priority 
+of the entry call (see <A HREF="AA-9-5-3.html">9.5.3</A> and <A HREF="AA-D-4.html">D.4</A>).</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Bulleted">During a protected action on a protected object, 
+a task inherits the ceiling priority of the protected object (see <A HREF="AA-9-5.html">9.5</A> 
+and <A HREF="AA-D-3.html">D.3</A>).</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal">In all of these cases, the priority ceases to be 
+inherited as soon as the condition calling for the inheritance no longer 
+exists.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">The range of System.Interrupt_Priority shall include 
+at least one value.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal">The range of System.Priority shall include at least 
+30 values.</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Notes">4&nbsp;&nbsp;The priority expression can include references 
+to discriminants of the enclosing type.</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Notes">5&nbsp;&nbsp;It is a consequence of the active priority 
+rules that at the point when a task stops inheriting a priority from 
+another source, its active priority is re-evaluated. This is in addition 
+to other instances described in this Annex for such re-evaluation.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Notes">6&nbsp;&nbsp;An implementation may provide a non-standard 
+mode in which tasks inherit priorities under conditions other than those 
+specified above.&nbsp;</div>
+<div class="paranum"><a name="p29.a">29.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The use of a Priority or 
+Interrupt_Priority pragma does not require the package System to be named 
+in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0223">with_clause</A></SPAN> 
+for the enclosing <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0215">compilation_unit</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p29.b">29.b</a></div>
+<div class="Annotations"><A NAME="I6142"></A>The priority of a task is 
+per-object and not per-type.</div>
+<div class="paranum"><a name="p29.c">29.c</a></div>
+<div class="Annotations">Priorities need not be static anymore (except 
+for the main subprogram).</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p29.d">29.d</a></div>
+<div class="Annotations">The description of the Priority pragma has been 
+moved to this annex.</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-D-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

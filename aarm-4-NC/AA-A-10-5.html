@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Operations on Columns, Lines, and Pages</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.10.5 Operations on Columns, Lines, and Pages</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The subprograms described in this subclause provide 
+for explicit control of line and page structure; they operate either 
+on the file given as the first parameter, or, in the absence of such 
+a file parameter, on the appropriate (input or output) current default 
+file. The exception Status_Error is propagated by any of these subprograms 
+if the file to be used is not open.&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;New_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);<BR>
+<B>procedure</B>&nbsp;New_Line(Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented2">Operates on a file of mode Out_File or Append_File.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented2">For a Spacing of one: Outputs a line terminator 
+and sets the current column number to one. Then increments the current 
+line number by one, except in the case that the current line number is 
+already greater than or equal to the maximum page length, for a bounded 
+page length; in that case a page terminator is output, the current page 
+number is incremented by one, and the current line number is set to one.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented2">For a Spacing greater than one, the above actions 
+are performed Spacing times.</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not Out_File or Append_File.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Skip_Line(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);<BR>
+<B>procedure</B>&nbsp;Skip_Line(Spacing&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count&nbsp;:=&nbsp;1);</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented2">Operates on a file of mode In_File.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Indented2">For a Spacing of one: Reads and discards all characters 
+until a line terminator has been read, and then sets the current column 
+number to one. If the line terminator is not immediately followed by 
+a page terminator, the current line number is incremented by one. Otherwise, 
+if the line terminator is immediately followed by a page terminator, 
+then the page terminator is skipped, the current page number is incremented 
+by one, and the current line number is set to one.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented2">For a Spacing greater than one, the above actions 
+are performed Spacing times.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not In_File. The exception End_Error is 
+propagated if an attempt is made to read a file terminator.</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples"><B>function</B>&nbsp;End_Of_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>function</B>&nbsp;End_Of_Line&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+Operates on a file of mode In_File. Returns True if a line terminator 
+or a file terminator is next; otherwise, returns False.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not In_File.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;New_Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
+<B>procedure</B>&nbsp;New_Page;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Indented2">Operates on a file of mode Out_File or Append_File. 
+Outputs a line terminator if the current line is not terminated, or if 
+the current page is empty (that is, if the current column and line numbers 
+are both equal to one). Then outputs a page terminator, which terminates 
+the current page. Adds one to the current page number and sets the current 
+column and line numbers to one.</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not Out_File or Append_File.</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Skip_Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
+<B>procedure</B>&nbsp;Skip_Page;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented2">Operates on a file of mode In_File. Reads and 
+discards all characters and line terminators until a page terminator 
+has been read. Then adds one to the current page number, and sets the 
+current column and line numbers to one.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not In_File. The exception End_Error is 
+propagated if an attempt is made to read a file terminator.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Examples"><B>function</B>&nbsp;End_Of_Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>function</B>&nbsp;End_Of_Page&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+Operates on a file of mode In_File. Returns True if the combination of 
+a line terminator and a page terminator is next, or if a file terminator 
+is next; otherwise, returns False.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not In_File.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Examples"><B>function</B>&nbsp;End_Of_File(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>function</B>&nbsp;End_Of_File&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="paranum"><a name="p25">25/3</a></div>
+<div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+Operates on a file of mode In_File. Returns True if a file terminator 
+is next, or if the combination of a line, a page, and a file terminator 
+is next; otherwise, returns False.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Mode_Error 
+is propagated if the mode is not In_File.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">The following subprograms provide for the control 
+of the current position of reading or writing in a file. In all cases, 
+the default file is the current output file.&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Set_Col(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);<BR>
+<B>procedure</B>&nbsp;Set_Col(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em">If the file mode 
+is Out_File or Append_File:&nbsp;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Indented3Bulleted">If the value specified by To is greater 
+than the current column number, outputs spaces, adding one to the current 
+column number after each space, until the current column number equals 
+the specified value. If the value specified by To is equal to the current 
+column number, there is no effect. If the value specified by To is less 
+than the current column number, has the effect of calling New_Line (with 
+a spacing of one), then outputs (To &ndash; 1) spaces, and sets the current 
+column number to the specified value.</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Indented3Bulleted">The exception Layout_Error is propagated 
+if the value specified by To exceeds Line_Length when the line length 
+is bounded (that is, when it does not have the conventional value zero). 
+</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em">If the file mode 
+is In_File:&nbsp;</div>
+<div class="paranum"><a name="p33">33</a></div>
+<div class="Indented3Bulleted">Reads (and discards) individual characters, 
+line terminators, and page terminators, until the next character to be 
+read has a column number that equals the value specified by To; there 
+is no effect if the current column number already equals this value. 
+Each transfer of a character or terminator maintains the current column, 
+line, and page numbers in the same way as a Get procedure (see <A HREF="AA-A-10-6.html">A.10.6</A>). 
+(Short lines will be skipped until a line is reached that has a character 
+at the specified column position.)</div>
+<div class="paranum"><a name="p34">34</a></div>
+<div class="Indented3Bulleted" style="margin-bottom: 0.7em">The exception 
+End_Error is propagated if an attempt is made to read a file terminator. 
+</div>
+<div class="paranum"><a name="p35">35</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Set_Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);<BR>
+<B>procedure</B>&nbsp;Set_Line(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Positive_Count);</div>
+<div class="paranum"><a name="p36">36</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em">If the file mode 
+is Out_File or Append_File:&nbsp;</div>
+<div class="paranum"><a name="p37">37/3</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
+If the value specified by To is greater than the current line number, 
+has the effect of repeatedly calling New_Line (with a spacing of one), 
+until the current line number equals the specified value. If the value 
+specified by To is equal to the current line number, there is no effect. 
+If the value specified by To is less than the current line number, has 
+the effect of calling New_Page followed, if To is greater than 1, by 
+a call of New_Line with a spacing equal to (To &ndash; 1).</div>
+<div class="paranum"><a name="p38">38</a></div>
+<div class="Indented3Bulleted">The exception Layout_Error is propagated 
+if the value specified by To exceeds Page_Length when the page length 
+is bounded (that is, when it does not have the conventional value zero). 
+</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Indented2" style="margin-bottom: 0.4em">If the mode is In_File: 
+</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Indented3Bulleted">Has the effect of repeatedly calling Skip_Line 
+(with a spacing of one), until the current line number equals the value 
+specified by To; there is no effect if the current line number already 
+equals this value. (Short pages will be skipped until a page is reached 
+that has a line at the specified line position.)</div>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Indented3Bulleted" style="margin-bottom: 0.7em">The exception 
+End_Error is propagated if an attempt is made to read a file terminator. 
+</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Examples"><B>function</B>&nbsp;Col(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
+<B>function</B>&nbsp;Col&nbsp;<B>return</B>&nbsp;Positive_Count;</div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Indented2">Returns the current column number.</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Layout_Error 
+is propagated if this number exceeds Count'Last.</div>
+<div class="paranum"><a name="p45">45</a></div>
+<div class="Examples"><B>function</B>&nbsp;Line(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
+<B>function</B>&nbsp;Line&nbsp;<B>return</B>&nbsp;Positive_Count;</div>
+<div class="paranum"><a name="p46">46</a></div>
+<div class="Indented2">Returns the current line number.</div>
+<div class="paranum"><a name="p47">47</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Layout_Error 
+is propagated if this number exceeds Count'Last.</div>
+<div class="paranum"><a name="p48">48</a></div>
+<div class="Examples"><B>function</B>&nbsp;Page(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type)&nbsp;<B>return</B>&nbsp;Positive_Count;<BR>
+<B>function</B>&nbsp;Page&nbsp;<B>return</B>&nbsp;Positive_Count;</div>
+<div class="paranum"><a name="p49">49</a></div>
+<div class="Indented2">Returns the current page number.</div>
+<div class="paranum"><a name="p50">50</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Layout_Error 
+is propagated if this number exceeds Count'Last.</div>
+<div class="paranum"><a name="p51">51</a></div>
+<div class="Normal">The column number, line number, or page number are 
+allowed to exceed Count'Last (as a consequence of the input or output 
+of sufficiently many characters, lines, or pages). These events do not 
+cause any exception to be propagated. However, a call of Col, Line, or 
+Page propagates the exception Layout_Error if the corresponding number 
+exceeds Count'Last.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p52">52</a></div>
+<div class="Notes">30&nbsp;&nbsp;A page terminator is always skipped 
+whenever the preceding line terminator is skipped. An implementation 
+may represent the combination of these terminators by a single character, 
+provided that it is properly recognized on input.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2005</H4>
+<div class="paranum"><a name="p52.a">52.a/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
+<A NAME="I7117"></A><B>Correction:</B> Fixed a glitch in Set_Line such 
+that we could have called New_Line(0), which would have to raise Constraint_Error. 
+It's now defined to work. The bug occurred in Ada 95 and Ada 2005. It's 
+very unlikely that any real programs depend on this exception being raised. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-10-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

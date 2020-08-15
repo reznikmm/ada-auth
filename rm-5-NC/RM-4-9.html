@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Static Expressions and Static Subtypes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-9-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.9 Static Expressions and Static Subtypes</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Certain expressions of a scalar or string type are 
+defined to be static. Similarly, certain discrete ranges are defined 
+to be static, and certain scalar and string subtypes are defined to be 
+static subtypes. <A NAME="I3148"></A><I>Static</I> means determinable 
+at compile time, using the declared properties or values of the program 
+entities. <A NAME="I3149"></A></div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3150"></A>A 
+static expression is a scalar or string expression that is one of the 
+following:</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN> 
+of a numeric type;&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
+of a static string subtype;&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that denotes the declaration of a named number or a static constant; 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN> 
+whose <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <I>function_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+statically denotes a static function, and whose actual parameters, if 
+any (whether given explicitly or by default), are all static expressions; 
+</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+that denotes a scalar value, and whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+denotes a static scalar subtype;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+statically denotes a statically constrained array object or array subtype, 
+and whose <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is First, Last, or Length, with an optional dimension;</div>
+<div class="paranum"><a name="p8.1">8.1/5</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+denotes a non-generic entity that is not declared in a generic unit, 
+and whose <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
+is Nonblocking;</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-6.html#S0148">type_conversion</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a static (scalar or string) subtype, and whose operand is a static 
+expression;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+denotes a static (scalar or string) subtype, and whose operand is a static 
+expression;&nbsp;</div>
+<div class="paranum"><a name="p11">11/4</a></div>
+<div class="Bulleted">a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
+is a static expression, and whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">membership_choice_list</A></SPAN> 
+consists only of <SPAN Class="swiss"><A HREF="RM-4-4.html#S0127">membership_choice</A></SPAN>s 
+that are either static <I>choice_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN>s, 
+static <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s, 
+or <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
+that denote a static (scalar or string) subtype;&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">a short-circuit control form both of whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0125">relation</A></SPAN>s 
+are static expressions;</div>
+<div class="paranum"><a name="p12.1">12.1/3</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0138">conditional_expression</A></SPAN> 
+all of whose <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN>s, 
+<I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>s, 
+and <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>s 
+are static expressions;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Bulleted">a static expression enclosed in parentheses.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3151"></A>A 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> <I>statically 
+denotes</I> an entity if it denotes the entity and:&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Bulleted">It is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN>, 
+expanded name, or <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>, 
+and it denotes a declaration other than a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0216">renaming_declaration</A></SPAN>; 
+or</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">It is an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+statically denotes some entity; or</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">It denotes a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0216">renaming_declaration</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+that statically denotes the renamed entity.&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3152"></A>A 
+<I>static function</I> is one of the following:&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">a predefined operator whose parameter and result 
+types are all scalar types none of which are descendants of formal scalar 
+types;</div>
+<div class="paranum"><a name="p19.1">19.1/5</a></div>
+<div class="Bulleted">a predefined relational operator whose parameters 
+are of a string type that is not a descendant of a formal array type;</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Bulleted">a predefined concatenation operator whose result 
+type is a string type that is not a descendant of a formal array type;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Bulleted">an enumeration literal;</div>
+<div class="paranum"><a name="p21.1">21.1/5</a></div>
+<div class="Bulleted">a static expression function (see <A HREF="RM-6-8.html">6.8</A>);</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">a language-defined attribute that is a function, 
+if the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+denotes a static scalar subtype, and if the parameter and result types 
+are scalar.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal">In any case, a generic formal subprogram is not a 
+static function.</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Normal"><A NAME="I3153"></A>A <I>static constant</I> is a 
+constant view declared by a full constant declaration or an <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+with a static nominal subtype, having a value defined by a static scalar 
+expression or by a static string expression.&nbsp;</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal"><A NAME="I3154"></A>A <I>static range</I> is a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+whose bounds are static expressions, or a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
+that is equivalent to such a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
+<A NAME="I3155"></A>A <I>static&nbsp;</I><SPAN Class="swiss"><I><A HREF="RM-3-6-1.html#S0058">discrete_range</A></I></SPAN><I></I> 
+is one that is a static range or is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+that defines a static scalar subtype. The base range of a scalar type 
+is a static range, unless the type is a descendant of a formal scalar 
+type.</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Normal"><A NAME="I3156"></A>A <I>static subtype</I> is either 
+a <I>static scalar subtype</I> or a <I>static string subtype</I>. <A NAME="I3157"></A>A 
+static scalar subtype is an unconstrained scalar subtype whose type is 
+not a descendant of a formal type, or a constrained scalar subtype formed 
+by imposing a compatible static constraint on a static scalar subtype. 
+<A NAME="I3158"></A>A static string subtype is a string subtype that 
+does not have a specified String_Literal aspect, and that is an unconstrained 
+array subtype whose index subtype and component subtype are static, or 
+a constrained array subtype formed by imposing a compatible static constraint 
+on a static string subtype. In any case, the subtype of a generic formal 
+object of mode <B>in out</B>, and the result subtype of a generic formal 
+function, are not static. Also, a subtype is not static if any Dynamic_Predicate 
+specifications apply to it.&nbsp;</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3159"></A>The 
+different kinds of <I>static constraint</I> are defined as follows:&nbsp;</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Bulleted">A null constraint is always static;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Bulleted"><A NAME="I3160"></A><A NAME="I3161"></A><A NAME="I3162"></A>A 
+scalar constraint is static if it has no <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
+or one with a static range;</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Bulleted"><A NAME="I3163"></A>An index constraint is static 
+if each <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
+is static, and each index subtype of the corresponding array type is 
+static;</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Bulleted"><A NAME="I3164"></A>A discriminant constraint is 
+static if each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of the constraint is static, and the subtype of each discriminant is 
+static.&nbsp;</div>
+<div class="paranum"><a name="p31.1">31.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;In any case, the constraint of the first subtype 
+of a scalar formal type is neither static nor null.</div>
+<div class="paranum"><a name="p32">32</a></div>
+<div class="Normal"><A NAME="I3165"></A>A subtype is <I>statically constrained</I> 
+if it is constrained, and its constraint is static. An object is <I>statically 
+constrained</I> if its nominal subtype is statically constrained, or 
+if it is a static string constant.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p32.1">32.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;An expression is 
+<I>statically unevaluated</I> if it is part of:<A NAME="I3166"></A></div>
+<div class="paranum"><a name="p32.2">32.2/3</a></div>
+<div class="Bulleted">the right operand of a static short-circuit control 
+form whose value is determined by its left operand; or</div>
+<div class="paranum"><a name="p32.3">32.3/3</a></div>
+<div class="Bulleted">a <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0139">if_expression</A></SPAN> 
+whose associated <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
+is static and equals False; or</div>
+<div class="paranum"><a name="p32.4">32.4/3</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
+or <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0139">if_expression</A></SPAN> 
+where the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0140">condition</A></SPAN> 
+corresponding to at least one preceding <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0139">if_expression</A></SPAN> 
+is static and equals True; or</div>
+<div class="paranum"><a name="p32.5">32.5/3</a></div>
+<div class="Bulleted">a <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0141">case_expression</A></SPAN> 
+whose <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+is static and whose value is not covered by the corresponding <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>; 
+or</div>
+<div class="paranum"><a name="p32.6">32.6/4</a></div>
+<div class="Bulleted">a <I>choice_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
+(or a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+that occurs as a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0127">membership_choice</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">membership_choice_list</A></SPAN>) 
+of a static membership test that is preceded in the enclosing <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">membership_choice_list</A></SPAN> 
+by another item whose individual membership test (see <A HREF="RM-4-5-2.html">4.5.2</A>) 
+statically yields True.&nbsp;</div>
+<div class="paranum"><a name="p33">33/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">A static expression 
+is evaluated at compile time except when it is statically unevaluated. 
+The compile-time evaluation of a static expression is performed exactly, 
+without performing Overflow_Checks. For a static expression that is evaluated: 
+</div>
+<div class="paranum"><a name="p34">34/3</a></div>
+<div class="Bulleted">The expression is illegal if its evaluation fails 
+a language-defined check other than Overflow_Check. For the purposes 
+of this evaluation, the assertion policy is assumed to be Check.</div>
+<div class="paranum"><a name="p35">35/2</a></div>
+<div class="Bulleted">If the expression is not part of a larger static 
+expression and the expression is expected to be of a single specific 
+type, then its value shall be within the base range of its expected type. 
+Otherwise, the value may be arbitrarily large or small.&nbsp;</div>
+<div class="paranum"><a name="p36">36/2</a></div>
+<div class="Bulleted">If the expression is of type <I>universal_real</I> 
+and its expected type is a decimal fixed point type, then its value shall 
+be a multiple of the <I>small</I> of the decimal type. This restriction 
+does not apply if the expected type is a descendant of a formal scalar 
+type (or a corresponding actual type in an instance).&nbsp;</div>
+<div class="paranum"><a name="p37">37/2</a></div>
+<div class="Normal"><A NAME="I3167"></A>In addition to the places where 
+Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+the above restrictions also apply in the private part of an instance 
+of a generic unit.</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p38">38/2</a></div>
+<div class="Normal">For a real static expression that is not part of 
+a larger static expression, and whose expected type is not a descendant 
+of a formal type, the implementation shall round or truncate the value 
+(according to the Machine_Rounds attribute of the expected type) to the 
+nearest machine number of the expected type; if the value is exactly 
+half-way between two machine numbers, the rounding performed is implementation-defined. 
+If the expected type is a descendant of a formal type, or if the static 
+expression appears in the body of an instance of a generic unit and the 
+corresponding expression is nonstatic in the corresponding generic body, 
+then no special rounding or truncating is required &mdash; normal accuracy 
+rules apply (see <A HREF="RM-G.html">Annex G</A>).&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p38.1">38.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;For a real static expression that is not part of 
+a larger static expression, and whose expected type is not a descendant 
+of a formal type, the rounding should be the same as the default rounding 
+for the target system.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p39">39</a></div>
+<div class="Notes">29&nbsp;&nbsp;An expression can be static even if 
+it occurs in a context where staticness is not required.&nbsp;</div>
+<div class="paranum"><a name="p40">40</a></div>
+<div class="Notes">30&nbsp;&nbsp;A static (or run-time) <SPAN Class="swiss"><A HREF="RM-4-6.html#S0148">type_conversion</A></SPAN> 
+from a real type to an integer type performs rounding. If the operand 
+value is exactly half-way between two integers, the rounding is performed 
+away from zero.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p41">41</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of static 
+expressions:</I>&nbsp;</div>
+<div class="paranum"><a name="p42">42</a></div>
+<div class="Examples">1&nbsp;+&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;2</I></SPAN><BR>
+<B>abs</B>(-10)*3&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;30</I></SPAN></div>
+<div class="paranum"><a name="p43">43</a></div>
+<div class="Examples">Kilo&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;1000;<BR>
+Mega&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;Kilo*Kilo;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;1_000_000</I></SPAN><BR>
+Long&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;Float'Digits*2;</div>
+<div class="paranum"><a name="p44">44</a></div>
+<div class="Examples">Half_Pi&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;Pi/2;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;see&nbsp;<A HREF="RM-3-3-2.html">3.3.2</A></I></SPAN><BR>
+Deg_To_Rad&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;Half_Pi/90;<BR>
+Rad_To_Deg&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;1.0/Deg_To_Rad;&nbsp;<SPAN Class="roman"><I>--&nbsp;equivalent&nbsp;to&nbsp;1.0/((3.14159_26536/2)/90)</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-8.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-4-9-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

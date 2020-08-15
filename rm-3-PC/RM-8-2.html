@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Scope of Declarations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>8.2 Scope of Declarations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">For each declaration, the language rules define a 
+certain portion of the program text called the <I>scope</I> of the declaration. 
+The scope of a declaration is also called the scope of any view or entity 
+declared by the declaration. Within the scope of an entity, and only 
+there, there are places where it is legal to refer to the declared entity. 
+These places are defined by the rules of visibility and overloading. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3868"></A>The 
+<I>immediate scope</I> of a declaration is a portion of the declarative 
+region immediately enclosing the declaration. The immediate scope starts 
+at the beginning of the declaration, except in the case of an overloadable 
+declaration, in which case the immediate scope starts just after the 
+place where the profile of the callable entity is determined (which is 
+at the end of the <SPAN Class="swiss">_specification</SPAN> for the callable 
+entity, or at the end of the <SPAN Class="swiss"><A HREF="RM-12-3.html#S0275">generic_instantiation</A></SPAN> 
+if an instance). The immediate scope extends to the end of the declarative 
+region, with the following exceptions:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">The immediate scope of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+includes only its semantic dependents.&nbsp;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">The immediate scope of a declaration in the private 
+part of a library unit does not include the visible part of any public 
+descendant of that library unit. <A NAME="I3869"></A></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal"><A NAME="I3870"></A>The <I>visible part</I> of (a 
+view of) an entity is a portion of the text of its declaration containing 
+declarations that are visible from outside. <A NAME="I3871"></A>The <I>private 
+part</I> of (a view of) an entity that has a visible part contains all 
+declarations within the declaration of (the view of) the entity, except 
+those in the visible part; these are not visible from outside. Visible 
+and private parts are defined only for these kinds of entities: callable 
+entities, other program units, and composite types.&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted"><A NAME="I3872"></A>The visible part of a view 
+of a callable entity is its profile.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted"><A NAME="I3873"></A>The visible part of a composite 
+type other than a task or protected type consists of the declarations 
+of all components declared (explicitly or implicitly) within the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN>.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted"><A NAME="I3874"></A>The visible part of a generic 
+unit includes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0273">generic_formal_part</A></SPAN>. 
+For a generic package, it also includes the first list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>. 
+For a generic subprogram, it also includes the profile.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">The visible part of a package, task unit, or protected 
+unit consists of declarations in the program unit's declaration other 
+than those following the reserved word <B>private</B>, if any; see <A HREF="RM-7-1.html">7.1</A> 
+and <A HREF="RM-12-7.html">12.7</A> for packages, <A HREF="RM-9-1.html">9.1</A> 
+for task units, and <A HREF="RM-9-4.html">9.4</A> for protected units. 
+</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I3875"></A>The scope of a declaration always 
+contains the immediate scope of the declaration. In addition, for a given 
+declaration that occurs immediately within the visible part of an outer 
+declaration, or is a public child of an outer declaration, the scope 
+of the given declaration extends to the end of the scope of the outer 
+declaration, except that the scope of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+includes only its semantic dependents.&nbsp;</div>
+<div class="paranum"><a name="p10.1">10.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3876"></A>The scope 
+of an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0309">attribute_definition_clause</A></SPAN> 
+is identical to the scope of a declaration that would occur at the point 
+of the <SPAN Class="swiss"><A HREF="RM-13-3.html#S0309">attribute_definition_clause</A></SPAN>.</span><span class="insert3">&nbsp;The scope of an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0306">aspect_specification</A></SPAN> 
+is identical to the scope of the associated declaration.<A NAME="I3877"></A></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal"><A NAME="I3878"></A>The immediate scope of a declaration 
+is also the immediate scope of the entity or view declared by the declaration. 
+<A NAME="I3879"></A>Similarly, the scope of a declaration is also the 
+scope of the entity or view declared by the declaration.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p12">12/3</a></div>
+<div class="Notes">4&nbsp;&nbsp;There are notations for denoting visible 
+declarations that are not directly visible. For example, <SPAN Class="swiss"><A HREF="RM-6-1.html#S0175">parameter_specification</A></SPAN>s 
+are in the visible part of a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0163">subprogram_declaration</A></SPAN> 
+so that they can be used in named-notation calls appearing outside the 
+called subprogram. For another example, declarations of the visible part 
+of a package can be denoted by expanded names appearing outside the package, 
+and can be made directly visible by a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0196">use_clause</A></SPAN>. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-8-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

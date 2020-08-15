@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Asynchronous Transfer of Control</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.7.4 Asynchronous Transfer of Control</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[An asynchronous <SPAN Class="swiss"><A HREF="AA-9-7.html#S0199">select_statement</A></SPAN> 
+provides asynchronous transfer of control upon completion of an entry 
+call or the expiration of a delay.]&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I3793"></A><A NAME="S0209"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>select</B><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3794"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0210">triggering_alternative</A></SPAN><BR>
+&nbsp;&nbsp;<B>then&nbsp;abort</B><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3795"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN><BR>
+&nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I3796"></A><A NAME="S0210"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3797"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN>&nbsp;[<A NAME="I3798"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0123">sequence_of_statements</A></SPAN>]</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">triggering_statement</SPAN><A NAME="I3799"></A><A NAME="S0211"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3800"></A><SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0194">entry_call_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3801"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0196">delay_statement</A></SPAN></div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I3802"></A><A NAME="S0212"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3803"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0123">sequence_of_statements</A></SPAN></div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Normal"><A NAME="I3804"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0209">asynchronous_select</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN> 
+is an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0194">entry_call_statement</A></SPAN>, 
+the <I>entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> 
+and actual parameters are evaluated as for a simple entry call (see <A HREF="AA-9-5-3.html">9.5.3</A>), 
+and the entry call is issued. If the entry call is queued (or requeued-with-abort), 
+then the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+is executed. [If the entry call is selected immediately, and never requeued-with-abort, 
+then the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+is never started.]</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I3805"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0209">asynchronous_select</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0196">delay_statement</A></SPAN>, 
+the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+is evaluated and the expiration time is determined, as for a normal <SPAN Class="swiss"><A HREF="AA-9-6.html#S0196">delay_statement</A></SPAN>. 
+If the expiration time has not already passed, the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+is executed.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+completes and is left prior to completion of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN>, 
+an attempt to cancel the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN> 
+is made. If the attempt to cancel succeeds (see <A HREF="AA-9-5-3.html">9.5.3</A> 
+and <A HREF="AA-9-6.html">9.6</A>), the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0209">asynchronous_select</A></SPAN> 
+is complete.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN> 
+completes other than due to cancellation, the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+is aborted (if started but not yet completed &mdash; see <A HREF="AA-9-8.html">9.8</A>). 
+If the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0211">triggering_statement</A></SPAN> 
+completes normally, the optional <SPAN Class="swiss"><A HREF="AA-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0210">triggering_alternative</A></SPAN> 
+is executed after the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+is left.&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We currently don't specify 
+when the by-copy [<B>in</B>] <B>out</B> parameters are assigned back 
+into the actuals. We considered requiring that to happen after the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN> 
+is left. However, that doesn't seem useful enough to justify possibly 
+overspecifying the implementation approach, since some of the parameters 
+are passed by reference anyway.</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations">In an earlier description, we required that 
+the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0210">triggering_alternative</A></SPAN> 
+execute after aborting the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0212">abortable_part</A></SPAN>, 
+but before waiting for it to complete and finalize, to provide more rapid 
+response to the triggering event in case the finalization was unbounded. 
+However, various reviewers felt that this created unnecessary complexity 
+in the description, and a potential for undesirable concurrency (and 
+nondeterminism) within a single task. We have now reverted to simpler, 
+more deterministic semantics, but anticipate that further discussion 
+of this issue might be appropriate during subsequent reviews. One possibility 
+is to leave this area implementation defined, so as to encourage experimentation. 
+The user would then have to assume the worst about what kinds of actions 
+are appropriate for the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0210">triggering_alternative</A></SPAN> 
+to achieve portability.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3806"></A><A NAME="I3807"></A><A NAME="I3808"></A><I>Example 
+of a main command loop for a command interpreter:</I>&nbsp;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples"><B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;<B>select</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminal.Wait_For_Interrupt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line(&quot;Interrupted&quot;);<BR>
+&nbsp;&nbsp;&nbsp;<B>then&nbsp;abort</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>This&nbsp;will&nbsp;be&nbsp;abandoned&nbsp;upon&nbsp;terminal&nbsp;interrupt</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line(&quot;-&gt;&nbsp;&quot;);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get_Line(Command,&nbsp;Last);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process_Command(Command(1..Last));<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>select</B>;<BR>
+<B>end</B>&nbsp;<B>loop</B>;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
+time-limited calculation:</I> <A NAME="I3809"></A><A NAME="I3810"></A><A NAME="I3811"></A><A NAME="I3812"></A><A NAME="I3813"></A></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>select</B><BR>
+&nbsp;&nbsp;&nbsp;<B>delay</B>&nbsp;5.0;<BR>
+&nbsp;&nbsp;&nbsp;Put_Line(&quot;Calculation&nbsp;does&nbsp;not&nbsp;converge&quot;);<BR>
+<B>then&nbsp;abort</B><BR>
+&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>This&nbsp;calculation&nbsp;should&nbsp;finish&nbsp;in&nbsp;5.0&nbsp;seconds;</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>&nbsp;if&nbsp;not,&nbsp;it&nbsp;is&nbsp;assumed&nbsp;to&nbsp;diverge.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;Horribly_Complicated_Recursive_Function(X,&nbsp;Y);<BR>
+<B>end</B>&nbsp;<B>select</B>;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><A NAME="I3814"></A><SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0209">Asynchronous_select</A></SPAN> 
+is new.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-9-8.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

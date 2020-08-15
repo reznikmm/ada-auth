@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Subprogram Calls</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-4-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.4 Subprogram Calls</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I3258"></A>A <I>subprogram call</I> is either 
+a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0163">procedure_call_statement</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0164">function_call</A></SPAN>; 
+it invokes the execution of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0162">subprogram_body</A></SPAN>. 
+The call specifies the association of the actual parameters, if any, 
+with formal parameters of the subprogram.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">procedure_call_statement</SPAN><A NAME="I3259"></A><A NAME="S0163"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3260"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>;<BR>
+&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3261"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3262"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0165">actual_parameter_part</A></SPAN>;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">function_call</SPAN><A NAME="I3263"></A><A NAME="S0164"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>function_</I><A NAME="I3264"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>function_</I><A NAME="I3265"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3266"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0165">actual_parameter_part</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1"><SPAN Class="swiss">actual_parameter_part</SPAN><A NAME="I3267"></A><A NAME="S0165"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3268"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0166">parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3269"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0166">parameter_association</A></SPAN>})</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1"><SPAN Class="swiss">parameter_association</SPAN><A NAME="I3270"></A><A NAME="S0166"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>formal_parameter_</I><A NAME="I3271"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I3272"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0167">explicit_actual_parameter</A></SPAN></div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_actual_parameter</SPAN><A NAME="I3273"></A><A NAME="S0167"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3274"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0115">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I3275"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented1"><A NAME="I3276"></A><A NAME="I3277"></A>A <SPAN Class="swiss"><A HREF="RM-6-4.html#S0166">parameter_association</A></SPAN> 
+is <I>named</I> or <I>positional</I> according to whether or not the 
+<I>formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+is specified. Any positional associations shall precede any named associations. 
+Named associations are not allowed if the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+in a subprogram call is an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0163">procedure_call_statement</A></SPAN> 
+shall resolve to denote a callable entity that is a procedure, or an 
+entry renamed as (viewed as) a procedure. The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0164">function_call</A></SPAN> 
+shall resolve to denote a callable entity that is a function.<span class="insert2">&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> or 
+<SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> shall 
+not resolve to denote an abstract subprogram unless it is also a dispatching 
+subprogram.</span> When there is an <SPAN Class="swiss"><A HREF="RM-6-4.html#S0165">actual_parameter_part</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+can be an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN> 
+of an access-to-subprogram value.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal">A subprogram call shall contain at most one association 
+for each formal parameter. Each formal parameter without an association 
+shall have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+(in the profile of the view denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>). 
+This rule is an overloading rule (see <A HREF="RM-8-6.html">8.6</A>). 
+</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Normal"><A NAME="I3278"></A>For the execution of a subprogram 
+call, the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of the call is evaluated, and each <SPAN Class="swiss"><A HREF="RM-6-4.html#S0166">parameter_association</A></SPAN> 
+is evaluated (see <A HREF="RM-6-4-1.html">6.4.1</A>). If a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+is used, an implicit <SPAN Class="swiss"><A HREF="RM-6-4.html#S0166">parameter_association</A></SPAN> 
+is assumed for this rule. These evaluations are done in an arbitrary 
+order. The <SPAN Class="swiss"><A HREF="RM-6-3.html#S0162">subprogram_body</A></SPAN> 
+is then executed<span class="insert2">, or a call on an entry or protected 
+subprogram is performed (see <A HREF="RM-3-9-2.html">3.9.2</A>)</span>. 
+Finally, if the subprogram completes normally, then after it is left, 
+any necessary assigning back of formal to actual parameters occurs (see 
+<A HREF="RM-6-4-1.html">6.4.1</A>).<A NAME="I3279"></A></div>
+<div class="paranum"><a name="p10.1">10.1/2</a></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of a subprogram call denotes a prefixed view (see <A HREF="RM-4-1-3.html">4.1.3</A>), 
+the subprogram call is equivalent to a call on the underlying subprogram, 
+with the first actual parameter being provided by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+of the prefixed view (or the Access attribute of this <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+if the first formal parameter is an access parameter), and the remaining 
+actual parameters given by the <SPAN Class="swiss"><A HREF="RM-6-4.html#S0165">actual_parameter_part</A></SPAN>, 
+if any.</span></div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal"><A NAME="I3280"></A>The exception Program_Error is 
+raised at the point of a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0164">function_call</A></SPAN> 
+if the function completes normally without executing a <span class="insert2">return 
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="RM-6-5.html#S0169">&nbsp;return_statement</A></SPAN></span>. 
+</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-6-4.html#S0164">function_call</A></SPAN> 
+denotes a constant, as defined in <A HREF="RM-6-5.html">6.5</A>; the 
+nominal subtype of the constant is given by the <span class="insert2">nominal</span><span class="delete2">&nbsp;result</span> 
+subtype of the function<span class="insert2">&nbsp;result</span>. <A NAME="I3281"></A><A NAME="I3282"></A></div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of procedure 
+calls:</I>&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples">Traverse_Tree;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A></I></SPAN><BR>
+Print_Header(128,&nbsp;Title,&nbsp;True);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A></I></SPAN></div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples">Switch(From&nbsp;=&gt;&nbsp;X,&nbsp;To&nbsp;=&gt;&nbsp;Next);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A></I></SPAN><BR>
+Print_Header(128,&nbsp;Header&nbsp;=&gt;&nbsp;Title,&nbsp;Center&nbsp;=&gt;&nbsp;True);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A></I></SPAN><BR>
+Print_Header(Header&nbsp;=&gt;&nbsp;Title,&nbsp;Center&nbsp;=&gt;&nbsp;True,&nbsp;Pages&nbsp;=&gt;&nbsp;128);&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A></I></SPAN></div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of function 
+calls:</I>&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">Dot_Product(U,&nbsp;V)&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-6-1.html">6.1</A>&nbsp;and&nbsp;<A HREF="RM-6-3.html">6.3</A></I></SPAN><BR>
+Clock&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-9-6.html">9.6</A></I></SPAN><BR>
+F.<B>all</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;presuming&nbsp;F&nbsp;is&nbsp;of&nbsp;an&nbsp;access-to-subprogram&nbsp;type&nbsp;&mdash;&nbsp;see&nbsp;<A HREF="RM-3-10.html">3.10</A></I></SPAN></div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of procedures 
+with default expressions:</I>&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Activate(Process&nbsp;:&nbsp;<B>in</B>&nbsp;Process_Name;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Process_Name&nbsp;:=&nbsp;No_Process;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wait&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Duration&nbsp;:=&nbsp;0.0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prior&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;False);</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Pair(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Person_Name&nbsp;:=&nbsp;<B>new</B>&nbsp;Person);&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN></div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of their 
+calls:</I>&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Examples">Activate(X);<BR>
+Activate(X,&nbsp;After&nbsp;=&gt;&nbsp;Y);<BR>
+Activate(X,&nbsp;Wait&nbsp;=&gt;&nbsp;60.0,&nbsp;Prior&nbsp;=&gt;&nbsp;True);<BR>
+Activate(X,&nbsp;Y,&nbsp;10.0,&nbsp;False);</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Examples">Pair;<BR>
+Pair(Left&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Person,&nbsp;Right&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Person);</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">7&nbsp;&nbsp;If a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+is used for two or more parameters in a multiple <SPAN Class="swiss"><A HREF="RM-6-1.html#S0160">parameter_specification</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+is evaluated once for each omitted parameter. Hence in the above examples, 
+the two calls of Pair are equivalent.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of overloaded 
+subprograms:</I>&nbsp;</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Put(X&nbsp;:&nbsp;<B>in</B>&nbsp;Integer);<BR>
+<B>procedure</B>&nbsp;Put(X&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Set(Tint&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Color);<BR>
+<B>procedure</B>&nbsp;Set(Signal&nbsp;:&nbsp;<B>in</B>&nbsp;Light);</div>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="WideAbove" style="margin-bottom: 0.4em"><I>Examples of their 
+calls:</I>&nbsp;</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples">Put(28);<BR>
+Put(&quot;no&nbsp;possible&nbsp;ambiguity&nbsp;here&quot;);</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Examples">Set(Tint&nbsp;&nbsp;&nbsp;=&gt;&nbsp;Red);<BR>
+Set(Signal&nbsp;=&gt;&nbsp;Red);<BR>
+Set(Color'(Red));</div>
+<div class="paranum"><a name="p31">31</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;&nbsp;Set(Red)&nbsp;would&nbsp;be&nbsp;ambiguous&nbsp;since&nbsp;Red&nbsp;may</I></SPAN><BR>
+--<SPAN Class="roman"><I>&nbsp;&nbsp;denote&nbsp;a&nbsp;value&nbsp;either&nbsp;of&nbsp;type&nbsp;Color&nbsp;or&nbsp;of&nbsp;type&nbsp;Light</I></SPAN></div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-6-4-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

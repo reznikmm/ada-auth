@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Partition Communication Subsystem</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-F.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>E.5 Partition Communication Subsystem</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00273.TXT">AI95-00273-01</A></I>} 
+<A NAME="I9017"></A><A NAME="I9018"></A>[The <I>Partition Communication 
+Subsystem</I> (PCS) provides facilities for supporting communication 
+between the active partitions of a distributed program. The package System.RPC 
+is a language-defined interface to the PCS.]&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The prefix RPC is used rather 
+than RSC because the term remote procedure call and its acronym are more 
+familiar.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
+library package exists:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Examples"><B>with</B>&nbsp;Ada.Streams;&nbsp;<SPAN Class="roman"><I>--&nbsp;see&nbsp;<A HREF="AA-13-13-1.html">13.13.1</A></I></SPAN><BR>
+<B>package</B>&nbsp;System.RPC&nbsp;<B>is</B><A NAME="I9019"></A></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9020"></A>Partition_Id&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I9021"></A>Communication_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9022"></A>Params_Stream_Type&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initial_Size&nbsp;:&nbsp;Ada.Streams.Stream_Element_Count)&nbsp;<B>is</B>&nbsp;<B>new</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Streams.Root_Stream_Type&nbsp;<B>with</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9023"></A>Read(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Params_Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Ada.Streams.Stream_Element_Array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Ada.Streams.Stream_Element_Offset);</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9024"></A>Write(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Params_Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Streams.Stream_Element_Array);</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Synchronous&nbsp;call</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9025"></A>Do_RPC(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partition&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Partition_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type);</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Asynchronous&nbsp;call</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9026"></A>Do_APC(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partition&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Partition_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type);</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;The&nbsp;handler&nbsp;for&nbsp;incoming&nbsp;RPCs</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9027"></A>RPC_Receiver&nbsp;<B>is&nbsp;access&nbsp;procedure</B>(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>access</B>&nbsp;Params_Stream_Type);</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9028"></A>Establish_RPC_Receiver(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Partition&nbsp;:&nbsp;<B>in</B>&nbsp;Partition_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Receiver&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;RPC_Receiver);</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;System.RPC;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">A value of the type Partition_Id is used to identify 
+a partition.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a/2</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The range of 
+type System.RPC.Partition_Id.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">An object of the type Params_Stream_Type is used 
+for identifying the particular remote subprogram that is being called, 
+as well as marshalling and unmarshalling the parameters or result of 
+a remote subprogram call, as part of sending them between partitions.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">[The Read and Write procedures override the corresponding 
+abstract operations for the type Params_Stream_Type.]</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal">The Do_RPC and Do_APC procedures send a message to 
+the active partition identified by the Partition parameter.&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>It is assumed that 
+the RPC interface is above the message-passing layer of the network protocol 
+stack and is implemented in terms of it.&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Normal">After sending the message, Do_RPC blocks the calling 
+task until a reply message comes back from the called partition or some 
+error is detected by the underlying communication system in which case 
+Communication_Error is raised at the point of the call to Do_RPC.&nbsp;</div>
+<div class="paranum"><a name="p18.a">18.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Only one exception is defined 
+in System.RPC, although many sources of errors might exist. This is so 
+because it is not always possible to distinguish among these errors. 
+In particular, it is often impossible to tell the difference between 
+a failing communication link and a failing processing node. Additional 
+information might be associated with a particular Exception_Occurrence 
+for a Communication_Error.&nbsp;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Normal">Do_APC operates in the same way as Do_RPC except 
+that it is allowed to return immediately after sending the message.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal">Upon normal return, the stream designated by the 
+Result parameter of Do_RPC contains the reply message.</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I9029"></A>The procedure System.RPC.Establish_RPC_Receiver 
+is called once, immediately after elaborating the library units of an 
+active partition (that is, right after the <I>elaboration of the partition</I>) 
+if the partition includes an RCI library unit, but prior to invoking 
+the main subprogram, if any. The Partition parameter is the Partition_Id 
+of the active partition being elaborated. <A NAME="I9030"></A>The Receiver 
+parameter designates an implementation-provided procedure called the 
+<I>RPC-receiver</I> which will handle all RPCs received by the partition 
+from the PCS. Establish_RPC_Receiver saves a reference to the RPC-receiver; 
+when a message is received at the called partition, the RPC-receiver 
+is called with the Params stream containing the message. When the RPC-receiver 
+returns, the contents of the stream designated by Result is placed in 
+a message and sent back to the calling partition.&nbsp;</div>
+<div class="paranum"><a name="p21.a">21.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>It is defined by 
+the PCS implementation whether one or more threads of control should 
+be available to process incoming messages and to wait for their completion. 
+</div>
+<div class="paranum"><a name="p21.b">21.b</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>At link-time, the 
+linker provides the RPC-receiver and the necessary tables to support 
+it. A call on Establish_RPC_Receiver is inserted just before the call 
+on the main subprogram.&nbsp;</div>
+<div class="paranum"><a name="p21.c">21.c</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The interface between the PCS 
+(the System.RPC package) and the RPC-receiver is defined to be dynamic 
+in order to allow the elaboration sequence to notify the PCS that all 
+packages have been elaborated and that it is safe to call the receiving 
+stubs. It is not guaranteed that the PCS units will be the last to be 
+elaborated, so some other indication that elaboration is complete is 
+needed.&nbsp;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Normal">If a call on Do_RPC is aborted, a cancellation message 
+is sent to the called partition, to request that the execution of the 
+remotely called subprogram be aborted.&nbsp;</div>
+<div class="paranum"><a name="p22.a">22.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The full effects of this 
+message are dependent on the implementation of the PCS.&nbsp;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Normal"><A NAME="I9031"></A><A NAME="I9032"></A>The subprograms 
+declared in System.RPC are potentially blocking operations.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal">The implementation of the RPC-receiver shall be reentrant[, 
+thereby allowing concurrent calls on it from the PCS to service concurrent 
+remote subprogram calls into the partition].&nbsp;</div>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>There seems no reason to allow 
+the implementation of RPC-receiver to be nonreentrant, even though we 
+don't require that every implementation of the PCS actually perform concurrent 
+calls on the RPC-receiver.&nbsp;</div>
+<div class="paranum"><a name="p24.1">24.1/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0087">8652/0087</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00082.TXT">AI95-00082-01</A></I>} 
+An implementation shall not restrict the replacement of the body of System.RPC. 
+An implementation shall not restrict children of System.RPC. [The related 
+implementation permissions in the introduction to Annex A do not apply.] 
+</div>
+<div class="paranum"><a name="p24.a.1">24.a.1/1</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The point of System.RPC is to 
+let the user tailor the communications mechanism without requiring changes 
+to or other cooperation from the compiler. However, implementations can 
+restrict the replacement of language-defined units. This requirement 
+overrides that permission for System.RPC.&nbsp;</div>
+<div class="paranum"><a name="p24.2">24.2/1</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0087">8652/0087</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00082.TXT">AI95-00082-01</A></I>} 
+If the implementation of System.RPC is provided by the user, an implementation 
+shall support remote subprogram calls as specified.&nbsp;</div>
+<div class="paranum"><a name="p24.b">24.b/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00273.TXT">AI95-00273-01</A></I>} 
+If the implementation takes advantage of the implementation permission 
+to use a different specification for System.RPC, it still needs to use 
+it for remote subprogram calls, and allow the user to replace the body 
+of System.RPC. It just isn't guaranteed to be portable to do so in Ada 
+2005 - an advantage which was more theoretical than real anyway.&nbsp;</div>
+
+<H4 Class="centered">Documentation Requirements</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">The implementation of the PCS shall document whether 
+the RPC-receiver is invoked from concurrent tasks. If there is an upper 
+limit on the number of such tasks, this limit shall be documented as 
+well, together with the mechanisms to configure it (if this is supported). 
+</div>
+<div class="paranum"><a name="p25.a">25.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p25.a.1">25.a.1/2</a></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>Whether the 
+RPC-receiver is invoked from concurrent tasks, and if so, the number 
+of such tasks.</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal">The PCS is allowed to contain implementation-defined 
+interfaces for explicit message passing, broadcasting, etc. Similarly, 
+it is allowed to provide additional interfaces to query the state of 
+some remote partition (given its partition ID) or of the PCS itself, 
+to set timeouts and retry parameters, to get more detailed error status, 
+etc. These additional interfaces should be provided in child packages 
+of System.RPC.&nbsp;</div>
+<div class="paranum"><a name="p26.a">26.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+interfaces in the PCS.</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">A body for the package System.RPC need not be supplied 
+by the implementation.&nbsp;</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>It is presumed that a body for 
+the package System.RPC might be extremely environment specific. Therefore, 
+we do not require that a body be provided by the (compiler) implementation. 
+The user will have to write a body, or acquire one, appropriate for the 
+target environment.&nbsp;</div>
+<div class="paranum"><a name="p27.1">27.1/3</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00273.TXT">AI95-00273-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+An alternative declaration is allowed for package System.RPC as long 
+as it provides a set of operations that is substantially equivalent to 
+the specification defined in this subclause.&nbsp;</div>
+<div class="paranum"><a name="p27.b">27.b/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Experience has proved that the 
+definition of System.RPC given here is inadequate for interfacing to 
+existing distribution mechanisms (such as CORBA), especially on heterogeneous 
+systems. Rather than mandate a change in the mechanism (which would break 
+existing systems), require implementations to support multiple mechanisms 
+(which is impractical), or prevent the use of Annex E facilities with 
+existing systems (which would be silly), we simply make this facility 
+optional.</div>
+<div class="paranum"><a name="p27.c">27.c/2</a></div>
+<div class="Annotations">One of the purposes behind System.RPC was that 
+knowledgeable users, rather than compiler vendors, could create this 
+package tailored to their networks. Experience has shown that users get 
+their RPC from vendors anyway; users have not taken advantage of the 
+flexibility provided by this defined interface. Moreover, one could compare 
+this defined interface to requiring Ada compilers to use a defined interface 
+to implement tasking. No one thinks that the latter is a good idea, why 
+should anyone believe that the former is?</div>
+<div class="paranum"><a name="p27.d">27.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Therefore, this subclause is made optional. We considered deleting the 
+subclause outright, but we still require that users may replace the package 
+(whatever its interface). Also, it still provides a useful guide to the 
+implementation of this feature.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal">Whenever possible, the PCS on the called partition 
+should allow for multiple tasks to call the RPC-receiver with different 
+messages and should allow them to block until the corresponding subprogram 
+body returns.&nbsp;</div>
+<div class="paranum"><a name="p28.a">28.a/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The PCS should 
+allow for multiple tasks to call the RPC-receiver.</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Normal">The Write operation on a stream of type Params_Stream_Type 
+should raise Storage_Error if it runs out of space trying to write the 
+Item into the stream.&nbsp;</div>
+<div class="paranum"><a name="p29.a.1">29.a.1/2</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>The System.RPC.Write 
+operation should raise Storage_Error if it runs out of space when writing 
+an item.</div>
+<div class="paranum"><a name="p29.a">29.a</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>An implementation 
+could also dynamically allocate more space as needed, only propagating 
+Storage_Error if the <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+it calls raises Storage_Error. This storage could be managed through 
+a controlled component of the stream object, to ensure that it is reclaimed 
+when the stream object is finalized.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p30">30</a></div>
+<div class="Notes">10&nbsp;&nbsp;The package System.RPC is not designed 
+for direct calls by user programs. It is instead designed for use in 
+the implementation of remote subprograms calls, being called by the calling 
+stubs generated for a remote call interface library unit to initiate 
+a remote call, and in turn calling back to an RPC-receiver that dispatches 
+to the receiving stubs generated for the body of a remote call interface, 
+to handle a remote call received from elsewhere.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p30.a">30.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00273.TXT">AI95-00273-01</A></I>} 
+<A NAME="I9033"></A>The specification of System.RPC can now be tailored 
+for an implementation. If a program replaces the body of System.RPC with 
+a user-defined body, it might not compile in a given implementation of 
+Ada 2005 (if the specification of System.RPC has been changed).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p30.b">30.b/2</a></div>
+<div class="Annotations">{<I><A HREF="defect1.html#8652/0087">8652/0087</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00082.TXT">AI95-00082-01</A></I>} 
+<B>Corrigendum:</B> Clarified that the user can replace System.RPC.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-E-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-F.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

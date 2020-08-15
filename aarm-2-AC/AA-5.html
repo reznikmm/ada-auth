@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5 &nbsp; Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-5-1.html#S0131">statement</A></SPAN> 
+defines an action to be performed upon its execution.]</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+[This section describes the general rules applicable to all <SPAN Class="swiss"><A HREF="AA-5-1.html#S0131">statement</A></SPAN>s. 
+Some <SPAN Class="swiss"><A HREF="AA-5-1.html#S0131">statement</A></SPAN>s 
+are discussed in later sections: <SPAN Class="swiss"><A HREF="AA-6-4.html#S0163">Procedure_call_statement</A></SPAN>s 
+and <span class="insert2">return statements</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0169">&nbsp;return_statement</A></SPAN>s</span> 
+are described in <A HREF="AA-6.html">6</A>, &ldquo;<A HREF="AA-6.html">Subprograms</A>&rdquo;. 
+<SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0207">Entry_call_statement</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0208">requeue_statement</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-9-6.html#S0209">delay_statement</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0201">accept_statement</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-9-7.html#S0212">select_statement</A></SPAN>s, 
+and <SPAN Class="swiss"><A HREF="AA-9-8.html#S0227">abort_statement</A></SPAN>s 
+are described in <A HREF="AA-9.html">9</A>, &ldquo;<A HREF="AA-9.html">Tasks 
+and Synchronization</A>&rdquo;. <SPAN Class="swiss"><A HREF="AA-11-3.html#S0251">Raise_statement</A></SPAN>s 
+are described in <A HREF="AA-11.html">11</A>, &ldquo;<A HREF="AA-11.html">Exceptions</A>&rdquo;, 
+and <SPAN Class="swiss"><A HREF="AA-13-8.html#S0294">code_statement</A></SPAN>s 
+in <A HREF="AA-13.html">13</A>. The remaining forms of <SPAN Class="swiss"><A HREF="AA-5-1.html#S0131">statement</A></SPAN>s 
+are presented in this section.]&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p2.a">2.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+The description of <span class="insert2">return statements</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0169">&nbsp;return_statement</A></SPAN>s</span> 
+has been moved to <A HREF="AA-6-5.html">6.5</A>, &ldquo;<A HREF="AA-6-5.html">Return 
+Statements</A>&rdquo;, so that it is closer to the description of subprograms. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-9-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

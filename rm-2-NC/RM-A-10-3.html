@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Default Input, Output, and Error Files</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>A.10.3 Default Input, Output, and Error Files</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">The following subprograms provide for the control 
+of the particular default files that are used when a file parameter is 
+omitted from a Get, Put, or other operation of text input-output described 
+below, or when application-dependent error-related text is to be output. 
+</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Set_Input(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented2">Operates on a file of mode In_File. Sets the current 
+default input file to File.</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">The exception Status_Error 
+is propagated if the given file is not open. The exception Mode_Error 
+is propagated if the mode of the given file is not In_File.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Set_Output(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
+<B>procedure</B>&nbsp;Set_Error&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Each operates on 
+a file of mode Out_File or Append_File. Set_Output sets the current default 
+output file to File. Set_Error sets the current default error file to 
+File. The exception Status_Error is propagated if the given file is not 
+open. The exception Mode_Error is propagated if the mode of the given 
+file is not Out_File or Append_File.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Examples"><B>function</B>&nbsp;Standard_Input&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+<B>function</B>&nbsp;Standard_Input&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the standard 
+input file (see <A HREF="RM-A-10.html">A.10</A>), or an access value 
+designating the standard input file, respectively.</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples"><B>function</B>&nbsp;Standard_Output&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+<B>function</B>&nbsp;Standard_Output&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the standard 
+output file (see <A HREF="RM-A-10.html">A.10</A>) or an access value 
+designating the standard output file, respectively.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Examples"><B>function</B>&nbsp;Standard_Error&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+<B>function</B>&nbsp;Standard_Error&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p12">12/1</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the standard 
+error file (see <A HREF="RM-A-10.html">A.10</A>), or an access value 
+designating the standard error file, respectively.</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal" style="margin-bottom: 0.9em">The Form strings implicitly 
+associated with the opening of Standard_Input, Standard_Output, and Standard_Error 
+at the start of program execution are implementation defined.&nbsp;</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Examples"><B>function</B>&nbsp;Current_Input&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+<B>function</B>&nbsp;Current_Input&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the current 
+default input file, or an access value designating the current default 
+input file, respectively.</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>function</B>&nbsp;Current_Output&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+<B>function</B>&nbsp;Current_Output&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the current 
+default output file, or an access value designating the current default 
+output file, respectively.</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples"><B>function</B>&nbsp;Current_Error&nbsp;<B>return</B>&nbsp;File_Type;<BR>
+<B>function</B>&nbsp;Current_Error&nbsp;<B>return</B>&nbsp;File_Access;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the current 
+default error file, or an access value designating the current default 
+error file, respectively.</div>
+<div class="paranum"><a name="p20">20/1</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Flush&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type);<BR>
+<B>procedure</B>&nbsp;Flush;</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Indented2">The effect of Flush is the same as the corresponding 
+subprogram in Streams.Stream_IO (see <A HREF="RM-A-12-1.html">A.12.1</A>). 
+If File is not explicitly specified, Current_Output is used.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p22">22/1</a></div>
+<div class="Normal"><A NAME="I5867"></A>The execution of a program is 
+erroneous if it invokes an operation on a current default input, default 
+output, or default error file, and if the corresponding file object is 
+closed or no longer exists.&nbsp;</div>
+<div class="paranum"><a name="p23">23/1</a></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN></div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">23&nbsp;&nbsp;The standard input, standard output, 
+and standard error files cannot be opened, closed, reset, or deleted, 
+because the parameter File of the corresponding procedures has the mode 
+<B>in</B> <B>out</B>.</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Notes">24&nbsp;&nbsp;The standard input, standard output, 
+and standard error files are different file objects, but not necessarily 
+different external files.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-A-10-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

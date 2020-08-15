@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Character Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.5.2 Character Types</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1715"></A>An enumeration type is said to 
+be a <I>character type</I> if at least one of its enumeration literals 
+is a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>.</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1716"></A><A NAME="I1717"></A><A NAME="I1718"></A><A NAME="I1719"></A>The 
+predefined type Character is a character type whose values correspond 
+to the 256 code positions of Row 00 (also known as Latin-1) of the ISO/IEC 
+10646:2003 Basic Multilingual Plane (BMP). Each of the graphic characters 
+of Row 00 of the BMP has a corresponding <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+in Character. Each of the nongraphic positions of Row 00 (0000-001F and 
+007F-009F) has a corresponding language-defined name, which is not usable 
+as an enumeration literal, but which is usable with the attributes Image, 
+Wide_Image, Wide_Wide_Image, Value, Wide_Value, and Wide_Wide_Value; 
+these names are given in the definition of type Character in <A HREF="AA-A-1.html">A.1</A>, 
+&ldquo;<A HREF="AA-A-1.html">The Package Standard</A>&rdquo;, but are 
+set in <I>italics</I>. <A NAME="I1720"></A></div>
+<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1721"></A><A NAME="I1722"></A><A NAME="I1723"></A>The predefined 
+type Wide_Character is a character type whose values correspond to the 
+65536 code positions of the ISO/IEC 10646:2003 Basic Multilingual Plane 
+(BMP). Each of the graphic characters of the BMP has a corresponding 
+<SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+in Wide_Character. The first 256 values of Wide_Character have the same 
+<SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+or language-defined name as defined for Character. Each of the <SPAN Class="swiss">graphic_character</SPAN>s 
+has a corresponding <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>.</div>
+<div class="paranum"><a name="p3.1">3.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1724"></A><A NAME="I1725"></A>The predefined type Wide_Wide_Character 
+is a character type whose values correspond to the 2147483648 code positions 
+of the ISO/IEC 10646:2003 character set. Each of the <SPAN Class="swiss">graphic_character</SPAN>s 
+has a corresponding <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+in Wide_Wide_Character. The first 65536 values of Wide_Wide_Character 
+have the same <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+or language-defined name as defined for Wide_Character.</div>
+<div class="paranum"><a name="p3.2">3.2/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+The characters whose code position is larger than 16#FF# and which are 
+not <SPAN Class="swiss">graphic_character</SPAN>s have language-defined 
+names which are formed by appending to the string &quot;Hex_&quot; the 
+representation of their code position in hexadecimal as eight extended 
+digits. As with other language-defined names, these names are usable 
+only with the attributes (Wide_)Wide_Image and (Wide_)Wide_Value; they 
+are not usable as enumeration literals.</div>
+<div class="paranum"><a name="p3.a">3.a/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+The language-defined names are not usable as enumeration literals to 
+avoid &quot;polluting&quot; the name space. Since Wide_Character and 
+Wide_Wide_Character are defined in Standard, if the language-defined 
+names were usable as enumeration literals, they would hide other nonoverloadable 
+declarations with the same names in <B>use</B>-d packages.]}</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 6 and 
+7 were deleted.</I></SPAN>&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Notes">25&nbsp;&nbsp;The language-defined library package 
+Characters.Latin_1 (see <A HREF="AA-A-3-3.html">A.3.3</A>) includes the 
+declaration of constants denoting control characters, lower case characters, 
+and special characters of the predefined type Character.&nbsp;</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The package ASCII does 
+the same, but only for the first 128 characters of Character. Hence, 
+it is an obsolescent package, and we no longer mention it here.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Notes">26&nbsp;&nbsp;A conventional character set such as 
+<I>EBCDIC</I> can be declared as a character type; the internal codes 
+of the characters can be specified by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0287">enumeration_representation_clause</A></SPAN> 
+as explained in clause <A HREF="AA-13-4.html">13.4</A>.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a character 
+type:&nbsp;</I></div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Examples"><B>type</B>&nbsp;Roman_Digit&nbsp;<B>is</B>&nbsp;('I',&nbsp;'V',&nbsp;'X',&nbsp;'L',&nbsp;'C',&nbsp;'D',&nbsp;'M');</div>
+
+<H4 Class="centered">Inconsistencies With Ada 83</H4>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><A NAME="I1726"></A>The declaration of Wide_Character 
+in package Standard hides use-visible declarations with the same defining 
+identifier. In the unlikely event that an Ada 83 program had depended 
+on such a use-visible declaration, and the program remains legal after 
+the substitution of Standard.Wide_Character, the meaning of the program 
+will be different.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations"><A NAME="I1727"></A>The presence of Wide_Character 
+in package Standard means that an expression such as&nbsp;</div>
+<div class="paranum"><a name="p9.c">9.c</a></div>
+<div class="SmallExamples">'a'&nbsp;=&nbsp;'b'</div>
+<div class="paranum"><a name="p9.d">9.d</a></div>
+<div class="Annotations">is ambiguous in Ada 95, whereas in Ada 83 both 
+literals could be resolved to be of type Character.</div>
+<div class="paranum"><a name="p9.e">9.e</a></div>
+<div class="Annotations">The change in visibility rules (see <A HREF="AA-4-2.html">4.2</A>) 
+for character literals means that additional qualification might be necessary 
+to resolve expressions involving overloaded subprograms and character 
+literals.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p9.f">9.f</a></div>
+<div class="Annotations"><A NAME="I1728"></A>The type Character has been 
+extended to have 256 positions, and the type Wide_Character has been 
+added. Note that this change was already approved by the ARG for Ada 
+83 conforming compilers.</div>
+<div class="paranum"><a name="p9.g">9.g</a></div>
+<div class="Annotations">The rules for referencing character literals 
+are changed (see <A HREF="AA-4-2.html">4.2</A>), so that the declaration 
+of the character type need not be directly visible to use its literals, 
+similar to <B>null</B> and string literals. Context is used to resolve 
+their type.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 95</H4>
+<div class="paranum"><a name="p9.h">9.h/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1729"></A>Ada 95 defined most characters in Wide_Character 
+to be graphic characters, while Ada 2005 uses the categorizations from 
+ISO-10646:2003. It also provides language-defined names for all nongraphic 
+characters. That means that in Ada 2005, Wide_Character'Wide_Value will 
+raise Constraint_Error for a string representing a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
+of a nongraphic character, while Ada 95 would have accepted it. Similarly, 
+the result of Wide_Character'Wide_Image will change for such nongraphic 
+characters.</div>
+<div class="paranum"><a name="p9.i">9.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+The language-defined names FFFE and FFFF were replaced by a consistent 
+set of language-defined names for all nongraphic characters with positions 
+greater than 16#FF#. That means that in Ada 2005, Wide_Character'Wide_Value(&quot;FFFE&quot;) 
+will raise Constraint_Error while Ada 95 would have accepted it. Similarly, 
+the result of Wide_Character'Wide_Image will change for the position 
+numbers 16#FFFE# and 16#FFFF#. It is very unlikely that this will matter 
+in practice, as these names do not represent useable characters.</div>
+<div class="paranum"><a name="p9.j">9.j/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
+Because of the previously mentioned changes to the Wide_Character'Wide_Image 
+of various character values, the value of attribute Wide_Width will change 
+for some subtypes of Wide_Character. However, the new language-defined 
+names were chosen so that the value of Wide_Character'Wide_Width itself 
+does not change.</div>
+<div class="paranum"><a name="p9.k">9.k/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+The declaration of Wide_Wide_Character in package Standard hides use-visible 
+declarations with the same defining identifier. In the (very) unlikely 
+event that an Ada 95 program had depended on such a use-visible declaration, 
+and the program remains legal after the substitution of Standard.Wide_Wide_Character, 
+the meaning of the program will be different.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p9.l">9.l/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1730"></A>The type Wide_Wide_Character is new.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p9.m">9.m/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+Characters are now defined in terms of the entire ISO/IEC 10646:2003 
+character set.</div>
+<div class="paranum"><a name="p9.n">9.n/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+We dropped the Implementation Advice for non-standard interpretation 
+of character sets; an implementation can do what it wants in a non-standard 
+mode, so there isn't much point to any advice.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-5-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

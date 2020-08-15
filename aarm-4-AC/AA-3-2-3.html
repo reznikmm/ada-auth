@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Classification of Operations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
+    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2.3 Classification of Operations</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<A NAME="I1555"></A>An operation <I>operates on a type</I> <I>T</I> if 
+it yields a value of type <I>T</I>, if it has an operand whose expected 
+type (see <A HREF="AA-8-6.html">8.6</A>) is <I>T</I>, or if it has an 
+access parameter<span class="insert2">&nbsp;or access result type</span> (see 
+<A HREF="AA-6-1.html">6.1</A>) designating <I>T</I>. <A NAME="I1556"></A>A 
+predefined operator, or other language-defined operation such as assignment 
+or a membership test, that operates on a type, is called a <I>predefined 
+operation</I> of the type. <A NAME="I1557"></A>The <I>primitive operations</I> 
+of a type are the predefined operations of the type, plus any user-defined 
+primitive subprograms.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>The primitive operations 
+of a type are the operations (such as subprograms) declared together 
+with the type declaration. They are inherited by other types in the same 
+class of types. For a tagged type, the primitive subprograms are dispatching 
+subprograms, providing run-time polymorphism. A dispatching subprogram 
+may be called with statically tagged operands, in which case the subprogram 
+body invoked is determined at compile time. Alternatively, a dispatching 
+subprogram may be called using a dispatching call, in which case the 
+subprogram body invoked is determined at run time.</div>
+<div class="paranum"><a name="p1.b">1.b</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>Protected subprograms are 
+not considered to be &ldquo;primitive subprograms,&rdquo; even though 
+they are subprograms, and they are inherited by derived types.&nbsp;</div>
+<div class="paranum"><a name="p1.c">1.c</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We use the term &ldquo;primitive 
+subprogram&rdquo; in most of the rest of the manual. The term &ldquo;primitive 
+operation&rdquo; is used mostly in conceptual discussions.&nbsp;</div>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1558"></A>The 
+<I>primitive subprograms</I> of a specific type are defined as follows: 
+</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">The predefined operators of the type (see <A HREF="AA-4-5.html">4.5</A>);</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">For a derived type, the inherited (see <A HREF="AA-3-4.html">3.4</A>) 
+user-defined subprograms;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">For an enumeration type, the enumeration literals 
+(which are considered parameterless functions &mdash; see <A HREF="AA-3-5-1.html">3.5.1</A>);</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">For a specific type declared immediately within 
+a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN>, 
+any subprograms (in addition to the enumeration literals) that are explicitly 
+declared immediately within the same <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN> 
+and that operate on the type;</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0128-1.TXT">AI05-0128-1</A></I>} 
+<span class="insert3">For a specific type with an explicitly declared 
+primitive &quot;=&quot; operator whose result type is Boolean, the corresponding 
+&quot;/=&quot; operator (see <A HREF="AA-6-6.html">6.6</A>);</span></div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00200.TXT">AI95-00200-01</A></I>} 
+<A NAME="I1559"></A><span class="insert2">For a nonformal type, any</span><span class="delete2">&nbsp;Any</span> 
+subprograms not covered above [that are explicitly declared immediately 
+within the same declarative region as the type] and that override (see 
+<A HREF="AA-8-3.html">8.3</A>) other implicitly declared primitive subprograms 
+of the type.&nbsp;</div>
+<div class="paranum"><a name="p7.a">7.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In Ada 83, only subprograms 
+declared in the visible part were &ldquo;primitive&rdquo; (i.e. derivable). 
+In Ada 95, mostly because of child library units, we include all operations 
+declared in the private part as well, and all operations that override 
+implicit declarations.&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>It is possible for a subprogram 
+to be primitive for more than one type, though it is illegal for a subprogram 
+to be primitive for more than one tagged type. See <A HREF="AA-3-9.html">3.9</A>. 
+</div>
+<div class="paranum"><a name="p7.c">7.c</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The order of the implicit 
+declarations when there are both predefined operators and inherited subprograms 
+is described in <A HREF="AA-3-4.html">3.4</A>, &ldquo;<A HREF="AA-3-4.html">Derived 
+Types and Classes</A>&rdquo;.&nbsp;</div>
+<div class="paranum"><a name="p7.d">7.d/2</a></div>
+<div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00200.TXT">AI95-00200-01</A></I>} 
+<span class="insert2">Subprograms declared in a generic package specification 
+are never primitive for a formal type, even if they happen to override 
+an operation of the formal type. This includes formal subprograms, which 
+are never primitive operations (that's true even for an abstract formal 
+subprogram).</span>&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal"><A NAME="I1560"></A>A primitive subprogram whose 
+designator is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0170">operator_symbol</A></SPAN> 
+is called a <I>primitive operator</I>.</div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><A NAME="I1561"></A>The attribute S'Base is 
+no longer defined for nonscalar subtypes. Since this was only permitted 
+as the prefix of another attribute, and there are no interesting nonscalar 
+attributes defined for an unconstrained composite or access subtype, 
+this should not affect any existing programs.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><A NAME="I1562"></A>The primitive subprograms 
+(derivable subprograms) include subprograms declared in the private part 
+of a package specification as well, and those that override implicitly 
+declared subprograms, even if declared in a body.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p8.c">8.c</a></div>
+<div class="Annotations">We have dropped the confusing term <I>operation 
+of a type</I> in favor of the more useful <I>primitive operation of a 
+type</I> and the phrase <I>operates on a type</I>.</div>
+<div class="paranum"><a name="p8.d">8.d</a></div>
+<div class="Annotations">The description of S'Base has been moved to 
+<A HREF="AA-3-5.html">3.5</A>, &ldquo;<A HREF="AA-3-5.html">Scalar Types</A>&rdquo; 
+because it is now defined only for scalar types.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p8.e">8.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00200.TXT">AI95-00200-01</A></I>} 
+<span class="insert2">Clarified that a formal subprogram that happens 
+to override a primitive operation of a formal type is not a primitive 
+operation (and thus not a dispatching operation) of the formal type.</span></div>
+<div class="paranum"><a name="p8.f">8.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+<span class="insert2">Added wording to include access result types in 
+the kinds of operations that operate on a type T.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p8.g">8.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0128-1.TXT">AI05-0128-1</A></I>} 
+<span class="insert3"><B>Correction:</B> The implicitly declared &quot;/=&quot; 
+for a primitive &quot;=&quot; operator is also primitive; this makes 
+it eligible to be made visible by a <B>use type</B> clause.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

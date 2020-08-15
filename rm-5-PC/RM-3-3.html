@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Objects and Named Numbers</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.3 Objects and Named Numbers</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">Objects are created at run time and contain a value 
+of a given type. <A NAME="I1467"></A>An object can be created and initialized 
+as part of elaborating a declaration, evaluating an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN>, 
+or passing a parameter by copy. Prior to reclaiming the storage for an 
+object, it is finalized if necessary (see <A HREF="RM-7-6-1.html">7.6.1</A>). 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1468"></A>All 
+of the following are objects:&nbsp;</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Bulleted">the entity declared by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN>;</div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Bulleted">a formal parameter of a subprogram, entry, or generic 
+subprogram;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Bulleted">a generic formal object;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a loop parameter;</div>
+<div class="paranum"><a name="p6.1">6.1/5</a></div>
+<div class="Bulleted"><span class="insert5">the index parameter of an 
+<SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">iterated_component_association</A></SPAN>;</span></div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">a choice parameter of an <SPAN Class="swiss"><A HREF="RM-11-2.html#S0283">exception_handler</A></SPAN>;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">an entry index of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN>;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">the result of dereferencing an access-to-object 
+value (see <A HREF="RM-4-1.html">4.1</A>);</div>
+<div class="paranum"><a name="p10">10/3</a></div>
+<div class="Bulleted">the return object of a function;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">the result of evaluating an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p11.1">11.1/5</a></div>
+<div class="Bulleted">a <span class="insert5">value conversion or&nbsp;</span><SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+whose operand denotes an object;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Bulleted">a component, slice, or view conversion of another 
+object.&nbsp;</div>
+<div class="paranum"><a name="p13">13/3</a></div>
+<div class="Normal"><A NAME="I1469"></A><A NAME="I1470"></A><A NAME="I1471"></A><A NAME="I1472"></A><A NAME="I1473"></A><A NAME="I1474"></A>An 
+object is either a <I>constant</I> object or a <I>variable</I> object. 
+Similarly, a view of an object is either a <I>constant</I> or a <I>variable</I>. 
+All views of a constant elementary object are constant. All views of 
+a constant composite object are constant, except for parts that are of 
+controlled or immutably limited types; variable views of those parts 
+and their subcomponents may exist. In this sense, objects of controlled 
+and immutably limited types are <I>inherently mutable</I><A NAME="I1475"></A>. 
+A constant view of an object cannot be used to modify its value. The 
+terms constant and variable by themselves refer to constant and variable 
+views of objects.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I1476"></A>The value of an object is <I>read</I> 
+when the value of any part of the object is evaluated, or when the value 
+of an enclosing object is evaluated. <A NAME="I1477"></A>The value of 
+a variable is <I>updated</I> when an assignment is performed to any part 
+of the variable, or when an assignment is performed to an enclosing object. 
+</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Whether a view of an 
+object is constant or variable is determined by the definition of the 
+view. The following (and no others) represent constants:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">an object declared by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+with the reserved word <B>constant</B>;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">a formal parameter or generic formal object of 
+mode <B>in</B>;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">a discriminant;</div>
+<div class="paranum"><a name="p18.1">18.1/3</a></div>
+<div class="Bulleted">a loop parameter unless specified to be a variable 
+for a generalized loop (see <A HREF="RM-5-5-2.html">5.5.2</A>);</div>
+<div class="paranum"><a name="p18.2">18.2/5</a></div>
+<div class="Bulleted"><span class="insert5">the index parameter of an 
+<SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0118">iterated_component_association</A></SPAN>;</span></div>
+<div class="paranum"><a name="p19">19/3</a></div>
+<div class="Bulleted">a choice parameter or entry index;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Bulleted">the dereference of an access-to-constant value;</div>
+<div class="paranum"><a name="p20.1">20.1/3</a></div>
+<div class="Bulleted">the return object declared by an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0203">extended_return_statement</A></SPAN> 
+with the reserved word <B>constant</B>;</div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Bulleted">the object denoted by a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>;</div>
+<div class="paranum"><a name="p21.1">21.1/5</a></div>
+<div class="Bulleted">the result of evaluating a <span class="insert5">value 
+conversion or&nbsp;</span><SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN>;</div>
+<div class="paranum"><a name="p21.2">21.2/5</a></div>
+<div class="Bulleted"><span class="insert5">a <SPAN Class="swiss"><A HREF="RM-5-2-1.html#S0160">target_name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN> 
+when used in the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+of the assignment (see <A HREF="RM-5-2-1.html">5.2.1</A>);</span></div>
+<div class="paranum"><a name="p21.3">21.3/5</a></div>
+<div class="Bulleted">within the body of a protected function (or a function 
+declared immediately within a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN>), 
+the current instance of the enclosing protected unit;</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-4-1-1.html#S0096">indexed_component</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-4-1-2.html#S0097">slice</A></SPAN>, or 
+view conversion of a constant.&nbsp;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Normal"><A NAME="I1478"></A>At the place where a view of 
+an object is defined, a <I>nominal subtype</I> is associated with the 
+view. <A NAME="I1479"></A><A NAME="I1480"></A>The object's <I>actual 
+subtype</I> (that is, its subtype) can be more restrictive than the nominal 
+subtype of the view; it always is <span class="insert5">more restrictive 
+</span>if the nominal subtype is an <I>indefinite subtype</I>. <A NAME="I1481"></A><A NAME="I1482"></A>A 
+subtype is an indefinite subtype if it is an unconstrained array subtype, 
+or if it has unknown discriminants or unconstrained discriminants without 
+defaults (see <A HREF="RM-3-7.html">3.7</A>); otherwise, the subtype 
+is a <I>definite</I> subtype (all elementary subtypes are definite subtypes). 
+A class-wide subtype is defined to have unknown discriminants, and is 
+therefore an indefinite subtype. An indefinite subtype does not by itself 
+provide enough information to create an object; an additional <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
+or explicit initialization <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+is necessary (see <A HREF="RM-3-3-1.html">3.3.1</A>). A component cannot 
+have an indefinite nominal subtype.</div>
+<div class="paranum"><a name="p23.1">23.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;A view of a composite 
+object is <I>known to be constrained</I> if:<A NAME="I1483"></A><A NAME="I1484"></A></div>
+<div class="paranum"><a name="p23.2">23.2/3</a></div>
+<div class="Bulleted">its nominal subtype is constrained, and is not 
+an untagged partial view; or</div>
+<div class="paranum"><a name="p23.3">23.3/3</a></div>
+<div class="Bulleted">its nominal subtype is indefinite; or</div>
+<div class="paranum"><a name="p23.4">23.4/3</a></div>
+<div class="Bulleted">its type is immutably limited (see <A HREF="RM-7-5.html">7.5</A>); 
+or</div>
+<div class="paranum"><a name="p23.5">23.5/3</a></div>
+<div class="Bulleted">it is part of a stand-alone constant (including 
+a generic formal object of mode <B>in</B>); or</div>
+<div class="paranum"><a name="p23.6">23.6/3</a></div>
+<div class="Bulleted">it is part of a formal parameter of mode <B>in</B>; 
+or</div>
+<div class="paranum"><a name="p23.7">23.7/3</a></div>
+<div class="Bulleted">it is part of the object denoted by a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>; 
+or</div>
+<div class="paranum"><a name="p23.8">23.8/5</a></div>
+<div class="Bulleted"><span class="insert5">it is a value conversion 
+or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+where the operand denotes a view of a composite object that is known 
+to be constrained; or</span></div>
+<div class="paranum"><a name="p23.9">23.9/5</a></div>
+<div class="Bulleted">it is part of a constant return object of an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0203">extended_return_statement</A></SPAN>; 
+or</div>
+<div class="paranum"><a name="p23.10">23.10/5</a></div>
+<div class="Bulleted">it is a dereference of a pool-specific access type, 
+and there is no ancestor of its type that has a constrained partial view.</div>
+<div class="paranum"><a name="p23.11">23.11/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;For the purposes 
+of determining within a generic body whether an object is known to be 
+constrained:&nbsp;</div>
+<div class="paranum"><a name="p23.12">23.12/5</a></div>
+<div class="Bulleted">if a subtype is a descendant of an untagged generic 
+formal private or derived type, and the subtype is not an unconstrained 
+array subtype, it is not considered indefinite and is considered to have 
+a constrained partial view;</div>
+<div class="paranum"><a name="p23.13">23.13/5</a></div>
+<div class="Bulleted">if a subtype is a descendant of a formal access 
+type, it is not considered pool-specific.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Normal"><A NAME="I1485"></A>A <I>named number</I> provides 
+a name for a numeric value known at compile time. It is declared by a 
+<SPAN Class="swiss"><A HREF="RM-3-3-2.html#S0034">number_declaration</A></SPAN>. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Notes">10&nbsp;&nbsp;A constant cannot be the target of an 
+assignment operation, nor be passed as an <B>in</B> <B>out</B> or <B>out</B> 
+parameter, between its initialization and finalization, if any.</div>
+<div class="paranum"><a name="p25.1">25.1/3</a></div>
+<div class="Notes">11&nbsp;&nbsp;The value of a constant object cannot 
+be changed after its initialization, except in some cases where the object 
+has a controlled or immutably limited part (see <A HREF="RM-7-5.html">7.5</A>, 
+<A HREF="RM-7-6.html">7.6</A>, and <A HREF="RM-13-9-1.html">13.9.1</A>).</div>
+<div class="paranum"><a name="p26">26/3</a></div>
+<div class="Notes">12&nbsp;&nbsp;The nominal and actual subtypes of an 
+elementary object are always the same. For a discriminated or array object, 
+if the nominal subtype is constrained, then so is the actual subtype. 
+</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-2-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-3-3-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

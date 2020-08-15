@@ -1,0 +1,913 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Return Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>6.5 Return Statements</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+(collectively called a <I>return statement</I>) <A NAME="I3821"></A> 
+is used to complete the execution of the innermost enclosing <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<SPAN Class="swiss">simple_return_statement</SPAN><A NAME="I3822"></A><A NAME="S0186"></A><A NAME="S0187"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>return</B>&nbsp;[<A NAME="I3823"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>];</div>
+<div class="paranum"><a name="p2.1">2.1/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
+<SPAN Class="swiss">extended_return_object_declaration</SPAN><A NAME="I3824"></A><A NAME="S0188"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3825"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>][<B>constant</B>]&nbsp;<A NAME="I3826"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3827"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]</div>
+<div class="paranum"><a name="p2.2">2.2/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0053-1.TXT">AI05-0053-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<SPAN Class="swiss">extended_return_statement</SPAN><A NAME="I3828"></A><A NAME="S0189"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;<A NAME="I3829"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN>&nbsp;[<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3830"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>return</B>];</div>
+<div class="paranum"><a name="p2.3">2.3/2</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<SPAN Class="swiss">return_subtype_indication</SPAN><A NAME="I3831"></A><A NAME="S0190"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3832"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I3833"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
+<A NAME="I3834"></A>The <I>result subtype</I> of a function is the subtype 
+denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
+or defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
+after the reserved word <B>return</B> in the profile of the function.<A NAME="I3835"></A> 
+The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+if any, of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+is the result type of the corresponding function. <span class="insert5"><A NAME="I3836"></A></span><span class="delete5"><A NAME="I3837"></A></span>The 
+expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of an <span class="insert5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">&nbsp;extended_return_statement</A></SPAN></span> 
+is that of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p3.a">3.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The same applies to generic 
+functions.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3838"></A>A return statement shall be within a callable construct, 
+and it <I>applies to</I> the innermost callable construct or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+that contains it. A return statement shall not be within a body that 
+is within the construct to which the return statement applies.</div>
+<div class="paranum"><a name="p4.a">4.a/4</a></div>
+<div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0089-1.TXT">AI12-0089-1</A></I>} 
+<span class="insert4">The above also applies to generic subprograms, 
+even though they are not callable constructs. (An instance of a generic 
+subprogram is a callable construct, but not a generic subprogram itself.)</span> 
+</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
+A function body shall contain at least one return statement that applies 
+to the function body, unless the function contains <SPAN Class="swiss"><A HREF="AA-13-8.html#S0321">code_statement</A></SPAN>s. 
+A <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+shall include an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+if and only if it applies to a function body. An <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+shall apply to a function body. An <span class="insert5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">&nbsp;extended_return_statement</A></SPAN></span> 
+with the reserved word <B>constant</B> shall include an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>.</div>
+<div class="paranum"><a name="p5.a">5.a/4</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
+The requirement that a function body has to have at least one return 
+statement is a &ldquo;helpful&rdquo; restriction. There has been some 
+interest in lifting this restriction, or allowing a raise statement to 
+substitute for the return statement. However, there was enough interest 
+in leaving it as is that we decided not to change it.<span class="insert4">&nbsp;Note that for Ada 2012, Corrigendum 1, a return statement whose expression 
+is a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+can be given in <I>any</I> function body (the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+will match any type), so there is much less need to eliminate this rule.</span> 
+</div>
+<div class="paranum"><a name="p5.b">5.b/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+A return statement can apply to an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+so a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+without an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+can be given in one. However, neither <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+nor an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+can be given inside an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+as they must apply (directly) to a function body.</div>
+<div class="paranum"><a name="p5.b.1">5.b.1/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0089-1.TXT">AI12-0089-1</A></I>} 
+<span class="insert4">Since a &quot;function body&quot; includes a generic 
+function body, this rule and all of the following Legality Rules apply 
+to generic function bodies as well as non-generic function bodies. This 
+is true even though a generic function is not a function.</span>&nbsp;</div>
+<div class="paranum"><a name="p5.1">5.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
+<span class="insert5">The <I></I><SPAN Class="swiss"><I><A HREF="AA-4-4.html#S0118">expression</A></I></SPAN><I>&nbsp;of an&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-6-5.html#S0189">extended_return_statement</A></I></SPAN><I></I> 
+is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>.<A NAME="I3839"></A></span></div>
+<div class="paranum"><a name="p5.2">5.2/2</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+that applies to a function body:</div>
+<div class="paranum"><a name="p5.3">5.3/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0103-1.TXT">AI05-0103-1</A></I>} 
+If the result subtype of the function is defined by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+shall be a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
+The type of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+shall be covered by the result type of the function. The subtype defined 
+by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+shall be statically compatible with the result subtype of the function; 
+if the result type of the function is elementary, the two subtypes shall 
+statically match.<A NAME="I3840"></A> If the result subtype of the function 
+is indefinite, then the subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+shall be a definite subtype, or there shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>.</div>
+<div class="paranum"><a name="p5.4">5.4/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+If the result subtype of the function is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+shall be an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
+The subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+shall statically match the result subtype of the function. [The accessibility 
+level of this anonymous access subtype is that of the result subtype.] 
+</div>
+<div class="paranum"><a name="p5.b.2">5.b.2/4</a></div>
+<div class="Annotations"><span class="insert4"><B>Proof:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0070-1.TXT">AI12-0070-1</A></I>} 
+<span class="insert4">The accessibility of such anonymous access types 
+is defined in the Heart of Darkness (aka <A HREF="AA-3-10-2.html">3.10.2</A>).</span> 
+</div>
+<div class="paranum"><a name="p5.5">5.5/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+If the result subtype of the function is class-wide, the accessibility 
+level of the type of the subtype defined by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+shall not be statically deeper than that of the master that elaborated 
+the function body.&nbsp;</div>
+<div class="paranum"><a name="p5.b.3">5.b.3/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>In this case, the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+could be a specific type initialized by default; in that case there is 
+no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+to check.&nbsp;</div>
+<div class="paranum"><a name="p5.6">5.6/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+For any return statement that applies to a function body:</div>
+<div class="paranum"><a name="p5.7">5.7/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+[If the result subtype of the function is limited, then the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the return statement (if any) shall meet the restrictions described 
+in <A HREF="AA-7-5.html">7.5</A>.]&nbsp;</div>
+<div class="paranum"><a name="p5.c">5.c/3</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
+</div>
+<div class="paranum"><a name="p5.8">5.8/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
+If the result subtype of the function is class-wide, the accessibility 
+level of the type of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+(if any) of the return statement shall not be statically deeper than 
+that of the master that elaborated the function body.</div>
+<div class="paranum"><a name="p5.d">5.d/4</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+If the result type is <span class="insert4">class-wide</span><span class="delete4">&nbsp;class 
+wide</span>, then there must be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the return statement unless this is an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+is a specific type. We have a separate rule to cover that case. Note 
+that if an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+has an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+then both this rule and the next one must be satisfied.&nbsp;</div>
+<div class="paranum"><a name="p5.9">5.9/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
+If the subtype determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+or by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+has one or more access discriminants, the accessibility level of the 
+anonymous access type of each access discriminant shall not be statically 
+deeper than that of the master that elaborated the function body.</div>
+<div class="paranum"><a name="p5.d.1">5.d.1/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We use the type used by the 
+return statement rather than from the function return type since we want 
+to check whenever the return object has access discriminants, even if 
+the function return type doesn't have any (mostly for a class-wide type). 
+</div>
+<div class="paranum"><a name="p5.10">5.10/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
+If the keyword <B>aliased</B> is present in an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN>, 
+the type of the extended return object shall be immutably limited.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p5.11">5.11/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+<A NAME="I3841"></A>Within an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+the <I>return object</I> is declared with the given <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>, 
+with the nominal subtype defined by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>. 
+An <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+with the reserved word <B>constant</B> is a full constant declaration 
+that declares the return object to be a constant object.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p5.12">5.12/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+<A NAME="I3842"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+is elaborated. This creates the nominal subtype of the return object. 
+If there is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+it is evaluated and converted to the nominal subtype (which might raise 
+Constraint_Error &mdash; see <A HREF="AA-4-6.html">4.6</A><A NAME="I3843"></A>); 
+the return object is created and the converted value is assigned to the 
+return object. Otherwise, the return object is created and initialized 
+by default as for a stand-alone object of its nominal subtype (see <A HREF="AA-3-3-1.html">3.3.1</A>). 
+If the nominal subtype is indefinite, the return object is constrained 
+by its initial value.<A NAME="I3844"></A><A NAME="I3845"></A> A check 
+is made that the value of the return object belongs to the function result 
+subtype. Constraint_Error is raised if this check fails.<A NAME="I3846"></A> 
+<A NAME="I3847"></A><A NAME="I3848"></A></div>
+<div class="paranum"><a name="p5.e">5.e/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>If the result type is controlled 
+or has a controlled part, appropriate calls on Initialize or Adjust are 
+performed prior to executing the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>, 
+except when the initial expression is an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+(which requires build-in-place with no call on Adjust).</div>
+<div class="paranum"><a name="p5.f">5.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+If the return statement is left without resulting in a return (for example, 
+due to an exception propagated from the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>, 
+or a goto out of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>), 
+if the return object has been created, it is finalized prior to leaving 
+the return statement. If it has not been created when the return statement 
+is left, it is not created or finalized.</div>
+<div class="paranum"><a name="p5.g">5.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+Other rules ensure that the check required by this rule cannot fail unless 
+the function has a class-wide result subtype where the associated specific 
+subtype is constrained. In other cases, either the subtypes have to match 
+or the function's subtype is unconstrained and needs no checking.&nbsp;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3849"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+(if any) is first evaluated, converted to the result subtype, and then 
+is assigned to the anonymous <I>return object</I>. <A NAME="I3850"></A><A NAME="I3851"></A></div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The conversion might raise 
+Constraint_Error &mdash; (see <A HREF="AA-4-6.html">4.6</A>).&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+[If the return object has any parts that are tasks, the activation of 
+those tasks does not occur until after the function returns (see <A HREF="AA-9-2.html">9.2</A>).] 
+</div>
+<div class="paranum"><a name="p7.a">7.a/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This is specified by the rules 
+in <A HREF="AA-9-2.html">9.2</A>.&nbsp;</div>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Only the caller can know when 
+task activations should take place, as it depends on the context of the 
+call. If the function is being used to initialize the component of some 
+larger object, then that entire object must be initialized before any 
+task activations. Even after the outer object is fully initialized, task 
+activations are still postponed until the <B>begin</B> at the end of 
+the declarative part if the function is being used to initialize part 
+of a declared object.&nbsp;</div>
+<div class="paranum"><a name="p8">8/4</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0024-1.TXT">AI05-0024-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0097-1.TXT">AI12-0097-1</A></I>} 
+If the result type of a function is a specific tagged type, the tag of 
+the return object is that of the result type. If the result type is class-wide, 
+the tag of the return object is that of <span class="insert4">the value 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+unless the return object is defined by an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+that is specific, in which case it is that of&nbsp;</span>the type of the 
+<SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="delete4">&nbsp;if it is specific, or otherwise that of the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></span>. 
+A check is made that the master of the type identified by the tag of 
+the result includes the elaboration of the master that elaborated the 
+function body. If this check fails, Program_Error is raised.<A NAME="I3852"></A> 
+<A NAME="I3853"></A><A NAME="I3854"></A></div>
+<div class="paranum"><a name="p8.a">8.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+The first sentence is true even if the tag of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is different, which could happen if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+were a view conversion or a dereference of an access value. Note that 
+for a limited type, because of the restriction to <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
+and function calls (and no conversions), the tag will already match. 
+</div>
+<div class="paranum"><a name="p8.b">8.b/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+The first rule ensures that a function whose result type is a specific 
+tagged type always returns an object whose tag is that of the result 
+type. This is important for dispatching on controlling result, and allows 
+the caller to allocate the appropriate amount of space to hold the value 
+being returned (assuming there are no discriminants).</div>
+<div class="paranum"><a name="p8.c">8.c/3</a></div>
+<div class="Annotations">The master check prevents the returned object 
+from outliving its type. Note that this check cannot fail for a specific 
+tagged type, as the tag represents the function's type, which necessarily 
+must be declared outside of the function.</div>
+<div class="paranum"><a name="p8.d">8.d/3</a></div>
+<div class="Annotations">We can't use the normal accessibility level 
+&ldquo;deeper than&rdquo; check here because we may have &ldquo;incomparable&rdquo; 
+levels if the masters belong to two different tasks. This can happen 
+when an accept statement calls a function declared in the enclosing task 
+body, and the function returns an object passed to it from the accept 
+statement, and this object was itself a parameter to the accept statement. 
+</div>
+<div class="paranum"><a name="p8.d.1">8.d.1/4</a></div>
+<div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0097-1.TXT">AI12-0097-1</A></I>} 
+<span class="insert4">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+here is the return expression if the return statement is a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>, 
+and the initializing expression of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+if the return statement is an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+(ignoring any inner <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>s, 
+which necessarily cannot have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+and any other <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+inside of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>).</span> 
+</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
+<A NAME="I3855"></A><A NAME="I3856"></A>If the result subtype of the 
+function is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+designating a specific tagged type <I>T</I>, a check is made that the 
+result value is null or the tag of the object designated by the result 
+value identifies <I>T</I>. <A NAME="I3857"></A>Constraint_Error is raised 
+if this check fails.&nbsp;</div>
+<div class="paranum"><a name="p8.e">8.e/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>This check is needed so that 
+dispatching on controlling access results works for tag-indeterminate 
+functions. If it was not made, it would be possible for such functions 
+to return an access to a descendant type, meaning the function could 
+return an object with a tag different than the one assumed by the dispatching 
+rules.&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 9 through 
+20 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p9">9/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p10.a">10.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p10.b">10.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p16">16/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p16.a">16.a/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p17">17/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p18">18/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p18.a">18.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00316.TXT">AI95-00316-01</A></I>} 
+</div>
+<div class="paranum"><a name="p19">19/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p20">20/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+</div>
+<div class="paranum"><a name="p20.a">20.a/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p20.b">20.b/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p20.c">20.c/2</a></div>
+<div class="Annotations"></div>
+<div class="paranum"><a name="p21">21/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00402.TXT">AI95-00402-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
+If any part of the specific type of the return object of a function (or 
+coextension thereof) has one or more access discriminants whose value 
+is not constrained by the result subtype of the function, a check is 
+made that the accessibility level of the anonymous access type of each 
+access discriminant, as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+of the return statement, is not deeper than the level of the master of 
+the call (see <A HREF="AA-3-10-2.html">3.10.2</A>). If this check fails, 
+Program_Error is raised. <A NAME="I3858"></A><A NAME="I3859"></A><A NAME="I3860"></A></div>
+<div class="paranum"><a name="p21.a">21.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
+<div class="paranum"><a name="p21.b">21.b/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The check prevents the returned 
+object (for a nonlimited type) from outliving the object designated by 
+one of its discriminants. The check is made on the values of the discriminants, 
+which may come from the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+(if constrained), or the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+but it is never necessary to check both.&nbsp;</div>
+<div class="paranum"><a name="p21.c">21.c/3</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+The reason for saying &ldquo;any part of the specific type&rdquo; is 
+to simplify implementation. In the case of class-wide result objects, 
+this allows the testing of a simple flag in the tagged type descriptor 
+that indicates whether the specific type has any parts with access discriminants. 
+By basing the test on the type of the object rather than the object itself, 
+we avoid concerns about whether subcomponents in variant parts and of 
+arrays (which might be empty) are present.&nbsp;</div>
+<div class="paranum"><a name="p21.d">21.d/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+For a function with a class-wide result type, the access values that 
+need to be checked are determined by the tag of the return object. In 
+order to implement this accessibility check in the case where the tag 
+of the result is not known statically at the point of the return statement, 
+an implementation may need to somehow associate with the tag of a specific 
+tagged type an indication of whether the type has unconstrained access 
+discriminants (explicit or inherited) or has any subcomponents with such 
+discriminants. If an implementation is already maintaining a statically 
+initialized descriptor of some kind for each specific tagged type, then 
+an additional Boolean could be added to this descriptor.</div>
+<div class="paranum"><a name="p21.e">21.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+Note that the flag should only be queried in the case where the result 
+object might have access discriminants that might have subtypes with 
+&quot;bad&quot; accessibility levels (as determined by the rules of <A HREF="AA-3-10-2.html">3.10.2</A> 
+for determining the accessibility level of the type of an access discriminant 
+in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+of a return statement).</div>
+<div class="paranum"><a name="p21.f">21.f/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">Thus, in a case 
+like</div>
+<div class="paranum"><a name="p21.g">21.g/3</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Global&nbsp;<B>is&nbsp;access</B>&nbsp;T'Class;<BR>
+<B>function</B>&nbsp;F&nbsp;(Ptr&nbsp;:&nbsp;Global)&nbsp;<B>return</B>&nbsp;T'Class&nbsp;<B>is</B><BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ptr.<B>all</B>;<BR>
+<B>end</B>&nbsp;F;</div>
+<div class="paranum"><a name="p21.h">21.h/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">there is no need 
+for a run-time accessibility check. While an object of T'Class &quot;might 
+have&quot; access discriminants, the accessibility of those potential 
+discriminants cannot be bad. The setting of the bit doesn't matter and 
+there is no need to query it.</div>
+<div class="paranum"><a name="p21.i">21.i/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">On the other hand, 
+given&nbsp;</div>
+<div class="paranum"><a name="p21.j">21.j/3</a></div>
+<div class="SmallExamples"><B>function</B>&nbsp;F&nbsp;<B>return</B>&nbsp;T'Class&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Local&nbsp;:&nbsp;T'Class&nbsp;:=&nbsp;...&nbsp;;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Local;<BR>
+<B>end</B>&nbsp;F;</div>
+<div class="paranum"><a name="p21.k">21.k/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.9em">In this case, 
+a check would typically be required.</div>
+<div class="paranum"><a name="p21.l">21.l/3</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em">The need for including 
+subcomponents in this check is illustrated by the following example: 
+</div>
+<div class="paranum"><a name="p21.m">21.m/3</a></div>
+<div class="SmallExamples">X&nbsp;:&nbsp;<B>aliased</B>&nbsp;Integer;</div>
+<div class="paranum"><a name="p21.n">21.n/3</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Component_Type&nbsp;(Discrim&nbsp;:&nbsp;<B>access</B>&nbsp;Integer&nbsp;:=&nbsp;X'Access)<BR>
+&nbsp;&nbsp;&nbsp;<B>is&nbsp;limited&nbsp;null&nbsp;record</B>;</div>
+<div class="paranum"><a name="p21.o">21.o/3</a></div>
+<div class="SmallExamples"><B>type</B>&nbsp;Undiscriminated&nbsp;<B>is&nbsp;record</B><BR>
+&nbsp;&nbsp;&nbsp;Fld&nbsp;:&nbsp;Component_Type;<BR>
+<B>end&nbsp;record</B>;</div>
+<div class="paranum"><a name="p21.p">21.p/3</a></div>
+<div class="SmallExamples"><B>function</B>&nbsp;F&nbsp;<B>return</B>&nbsp;Undiscriminated&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Local&nbsp;:&nbsp;<B>aliased</B>&nbsp;Integer;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;X&nbsp;:&nbsp;Undiscriminated&nbsp;:=&nbsp;(Fld&nbsp;=&gt;&nbsp;(Discrim&nbsp;=&gt;&nbsp;Local'Access))&nbsp;<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foo;<BR>
+&nbsp;&nbsp;&nbsp;<B>end&nbsp;return</B>;<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;raises&nbsp;Program_Error&nbsp;after&nbsp;calling&nbsp;Foo.</I></SPAN><BR>
+<B>end</B>&nbsp;F;</div>
+<div class="paranum"><a name="p21.q">21.q/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+In the case where the tag of the result is not known statically at the 
+point of the return statement and the run-time accessibility check is 
+needed, discriminant values and array bounds play no role in performing 
+this check. That is, array components are assumed to have nonzero length 
+and components declared within variant parts are assumed to be present. 
+Thus, the check may be implemented simply by testing the aforementioned 
+descriptor bit and conditionally raising Program_Error.&nbsp;</div>
+<div class="paranum"><a name="p22">22/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0058-1.TXT">AI05-0058-1</A></I>} 
+For the execution of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
+is executed. Within this <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>, 
+the execution of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+that applies to the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+causes a transfer of control that completes the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>. 
+Upon completion of a return statement that applies to a callable construct 
+by the normal completion of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+or by reaching the <B>end return</B> of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+a transfer of control is performed which completes the execution of the 
+callable construct, and returns to the caller.</div>
+<div class="paranum"><a name="p22.a">22.a/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0058-1.TXT">AI05-0058-1</A></I>} 
+A transfer of control that completes an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+(such as an exit or goto) does not cause a return to the caller unless 
+it is caused by <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+(that is, triggers the second sentence of this paragraph). The return 
+to the caller occurs for the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+that applies to an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+because the last sentence says &ldquo;the normal completion of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>&rdquo;, 
+which includes the one nested in the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+In the case of a function, the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+denotes a constant view of the return object.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p24">24/3</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+For a function call used to initialize a composite object with a constrained 
+nominal subtype or used to initialize a return object that is built in 
+place into such an object:</div>
+<div class="paranum"><a name="p24.1">24.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+If the result subtype of the function is constrained, and conversion 
+of an object of this subtype to the subtype of the object being initialized 
+would raise Constraint_Error, then Constraint_Error may be raised before 
+calling the function.</div>
+<div class="paranum"><a name="p24.2">24.2/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+If the result subtype of the function is unconstrained, and a return 
+statement is executed such that the return object is known to be constrained, 
+and conversion of the return object to the subtype of the object being 
+initialized would raise Constraint_Error, then Constraint_Error may be 
+raised at the point of the call (after abandoning the execution of the 
+function body).&nbsp;</div>
+<div class="paranum"><a name="p24.a">24.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+Without such a permission, it would be very difficult to implement &ldquo;built-in-place&rdquo; 
+semantics. The intention is that the exception is raised at the same 
+point that it would have been raised without the permission; it should 
+not change handlers if the implementation switches between return-by-copy 
+and built-in-place. This means that the exception is not handleable within 
+the function, because in the return-by-copy case, the constraint check 
+to verify that the result satisfies the constraints of the object being 
+initialized happens after the function returns. This implies further 
+that upon detecting such a situation, the implementation may need to 
+simulate a goto to a point outside any local exception handlers prior 
+to raising the exception.&nbsp;</div>
+<div class="paranum"><a name="p24.b">24.b/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+These permissions do not apply in the case of an extended return object 
+with mutable discriminants. That's necessary because in that case a return 
+object can be created with the &ldquo;wrong&rdquo; discriminants and 
+then changed to the &ldquo;right&rdquo; discriminants later (but before 
+returning). We don't want this case raising an exception when the canonical 
+semantics will not do so.</div>
+<div class="paranum"><a name="p24.c">24.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+It's still possible to write a program that will raise an exception using 
+this permission that would not in the canonical semantics. That could 
+happen if a return statement with the &ldquo;wrong&rdquo; discriminants 
+or bounds is abandoned (via an exception, or for an extended_return_statement, 
+via an exit or goto statement), and then a return statement with the 
+&ldquo;right&rdquo; discriminants or bounds is executed. The only solution 
+for this problem is to not have the permission at all, but this is too 
+unusual of a case to worry about the effects of the permission, especially 
+given the implementation difficulties for built-in-place objects that 
+this permission is intended to ease.</div>
+<div class="paranum"><a name="p24.d">24.d/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+Note that the mutable-discriminant case only happens when built-in-place 
+initialization is optional. This means that any difficulties associated 
+with implementing built-in-place initialization without these permissions 
+can be sidestepped by not building in place.</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of return 
+statements:</I>&nbsp;</div>
+<div class="paranum"><a name="p26">26/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<B>return</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;procedure&nbsp;body,&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN><SPAN Class="roman"><I>,</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN><SPAN Class="roman"><I>,&nbsp;or&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN></div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Examples"><B>return</B>&nbsp;Key_Value(Last_Index);&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;function&nbsp;body</I></SPAN></div>
+<div class="paranum"><a name="p28">28/2</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<B>return</B>&nbsp;Node&nbsp;:&nbsp;Cell&nbsp;<B>do</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;function&nbsp;body,&nbsp;see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A>&nbsp;for&nbsp;Cell</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;Node.Value&nbsp;:=&nbsp;Result;<BR>
+&nbsp;&nbsp;&nbsp;Node.Succ&nbsp;:=&nbsp;Next_Node;<BR>
+<B>end</B>&nbsp;<B>return</B>;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p28.a">28.a/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3861"></A>In Ada 95, if the result type of a function has a 
+part that is a task, then an attempt to return a local variable will 
+raise Program_Error. This is illegal in Ada 2005, see below. In Ada 83, 
+if a function returns a local variable containing a task, execution is 
+erroneous according to AI83-00867. However, there are other situations 
+where functions that return tasks (or that return a variant record only 
+one of whose variants includes a task) are correct in Ada 83 but will 
+raise Program_Error according to the new rules.</div>
+<div class="paranum"><a name="p28.b">28.b</a></div>
+<div class="Annotations">The rule change was made because there will 
+be more types (protected types, limited controlled types) in Ada 95 for 
+which it will be meaningless to return a local variable, and making all 
+of these erroneous is unacceptable. The current rule was felt to be the 
+simplest that kept upward incompatibilities to situations involving returning 
+tasks, which are quite rare.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p28.c">28.c/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This subclause has been moved here from chapter 5, since it has mainly 
+to do with subprograms.</div>
+<div class="paranum"><a name="p28.d">28.d</a></div>
+<div class="Annotations">A function now creates an anonymous object. 
+This is necessary so that controlled types will work.</div>
+<div class="paranum"><a name="p28.e">28.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+We have clarified that a return statement applies to a callable construct, 
+not to a callable entity.</div>
+<div class="paranum"><a name="p28.f">28.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+There is no need to mention generics in the rules about where a return 
+statement can appear and what it applies to; the phrase &ldquo;body of 
+a subprogram or generic subprogram&rdquo; is syntactic, and refers exactly 
+to &ldquo;<SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>&rdquo;. 
+</div>
+
+<H4 Class="centered">Inconsistencies With Ada 95</H4>
+<div class="paranum"><a name="p28.f.1">28.f.1/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-0416-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+<A NAME="I3862"></A>Added an Implementation Permission allowing early 
+raising of Constraint_Error if the result cannot fit in the ultimate 
+object. This gives implementations more flexibility to do built-in-place 
+returns, and is essential for limited types (which cannot be built in 
+a temporary). However, it allows raising Constraint_Error in some cases 
+where it would not be raised if the permission was not used. See Inconsistencies 
+With Ada 2005 for additional changes. This case is potentially inconsistent 
+with Ada 95, but a compiler does not have to take advantage of these 
+permissions for any Ada 95 code, so there should be little practical 
+impact.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 95</H4>
+<div class="paranum"><a name="p28.g">28.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3863"></A> The entire business about return-by-reference types 
+has been dropped. Instead, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a return statement of a limited type can only be an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+(see <A HREF="AA-7-5.html">7.5</A>). This means that returning a global 
+object or <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN>, 
+legal in Ada 95, is now illegal. Such functions can be converted to use 
+anonymous access return types by adding <B>access</B> in the function 
+definition and return statement, adding .<B>all</B> in uses, and adding 
+<B>aliased</B> in the object declarations. This has the advantage of 
+making the reference return semantics much clearer to the casual reader.</div>
+<div class="paranum"><a name="p28.h">28.h/2</a></div>
+<div class="Annotations">We changed these rules so that functions, combined 
+with the new rules for limited types (<A HREF="AA-7-5.html">7.5</A>), 
+can be used as build-in-place constructors for limited types. This reduces 
+the differences between limited and nonlimited types, which will make 
+limited types useful in more circumstances.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p28.i">28.i/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I3864"></A>The <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+is new. This provides a name for the object being returned, which reduces 
+the copying needed to return complex objects (including no copying at 
+all for limited objects). It also allows component-by-component construction 
+of the return object.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p28.j">28.j/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+The wording was updated to support anonymous access return subtypes.</div>
+<div class="paranum"><a name="p28.k">28.k/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+The term &ldquo;return expression&rdquo; was dropped because reviewers 
+found it confusing when applied to the default <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>.</div>
+<div class="paranum"><a name="p28.l">28.l/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+Added accessibility checks to class-wide return statements. These checks 
+could not fail in Ada 95 (as all of the types had to be declared at the 
+same level, so the tagged type would necessarily have been at the same 
+level as the type of the object).</div>
+<div class="paranum"><a name="p28.m">28.m/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00402.TXT">AI95-00402-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
+Added accessibility checks to return statements for types with access 
+discriminants. Since such types have to be limited in Ada 95, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a return statement would have been illegal in order for this check 
+to fail.&nbsp;</div>
+
+<H4 Class="centered">Inconsistencies With Ada 2005</H4>
+<div class="paranum"><a name="p28.n">28.n/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
+<A NAME="I3865"></A><B>Correction:</B> The Implementation Permission 
+allowing early raising of Constraint_Error was modified to remove the 
+most common of these cases from the permission (returning an object with 
+mutable discriminants, where the return object is created with one set 
+of discriminants and then changed to another). (The permission was also 
+widened to allow the early check for constrained functions when that 
+constraint is wrong.) However, there still is an unlikely case where 
+the permission would allow an exception to be raised when none would 
+be raised by the canonical semantics (when a return statement is abandoned). 
+These changes can only remove the raising of an exception (or change 
+the place where it is raised) compared to Ada 2005, so programs that 
+depend on the previous behavior should be very rare.</div>
+<div class="paranum"><a name="p28.o">28.o/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0234-1.TXT">AI05-0234-1</A></I>} 
+<B>Correction:</B> Accessibility checks for access discriminants now 
+depend on the master of the call rather than the point of declaration 
+of the function. This will result in cases that used to raise Program_Error 
+now running without raising any exception. This is technically inconsistent 
+with Ada 2005 (as defined by Amendment 1), but it is unlikely that any 
+real code depends on the raising of this exception.</div>
+<div class="paranum"><a name="p28.p">28.p/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
+<B>Correction:</B> Added a tag check for functions returning anonymous 
+access-to-tagged types, so that dispatching of tag-indeterminate function 
+works as expected. This is technically inconsistent with Ada 2005 (as 
+defined by Amendment 1), but as the feature in question was newly added 
+to Ada 2005, there should be little code that depends on the behavior 
+that now raises an exception.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2005</H4>
+<div class="paranum"><a name="p28.q">28.q/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0053-1.TXT">AI05-0053-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
+<A NAME="I3866"></A><B>Correction:</B> The <B>aliased</B> keyword can 
+now only appear on extended return objects with an immutably limited 
+type. Other types would provide a way to get an aliased view of an object 
+that is not necessarily aliased, which would be very bad. This is incompatible, 
+but since the feature was added in Ada 2005, the keyword had no defined 
+meaning in Ada 2005 (a significant oversight), and most sensible uses 
+involve immutably limited types, it is unlikely that it appears meaningfully 
+in existing programs.</div>
+<div class="paranum"><a name="p28.r">28.r/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0103-1.TXT">AI05-0103-1</A></I>} 
+<B>Correction:</B> Added wording to require static matching for unconstrained 
+access types in extended return statements. This disallows adding or 
+omitting null exclusions, and adding access constraints, in the declaration 
+of the return object. While this is incompatible, the incompatible cases 
+in question are either useless (access constraints &ndash; the constraint 
+can be given on an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+if necessary, and still must be given there even if given on the return 
+object) or wrong (null exclusions &ndash; null could be returned from 
+a function declared to be null excluding), so we expect them to be extremely 
+rare in practice.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2005</H4>
+<div class="paranum"><a name="p28.s">28.s/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
+<A NAME="I3867"></A>The return object of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+can be declared constant; this works similarly to a constant object declaration.</div>
+<div class="paranum"><a name="p28.t">28.t/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
+Added wording to allow the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+to have a specific type if the return subtype of the function is class-wide. 
+Specifying the (specific) type of the return object is awkward without 
+this change, and this is consistent with the way <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+work.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p28.u">28.u/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0024-1.TXT">AI05-0024-1</A></I>} 
+<B>Correction:</B> Corrected the master check for tags since the masters 
+may be for different tasks and thus incomparable.</div>
+<div class="paranum"><a name="p28.v">28.v/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0058-1.TXT">AI05-0058-1</A></I>} 
+<B>Correction:</B> Corrected the wording defining returns for <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>s, 
+since leaving by an exit or goto is considered &ldquo;normal&rdquo; completion 
+of the statement.</div>
+<div class="paranum"><a name="p28.w">28.w/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0205-1.TXT">AI05-0205-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
+<B>Correction:</B> Added the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+to make other rules easier to write and eliminate the problem described 
+in AI05-0205-1.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p28.x">28.x/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0097-1.TXT">AI05-0097-1</A></I>} 
+<span class="insert4"><B>Corrigendum:</B> Clarified the wording so that 
+it is clear where the tag of the return object comes from. While a literal 
+reading of the original Ada 2012 rule could have caused some weird results 
+(by using some nearby <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+to provide the tag in the case of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>, 
+such a reading would be so unlike the rest of the language that we do 
+not believe anyone would ever have thought it was intended. As such, 
+we do not believe any implementation ever did this wrong (at least because 
+of the old wording), and thus do not document this as a possible inconsistency.</span></div>
+<div class="paranum"><a name="p28.y">28.y/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Added a definition of the term 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>. 
+That wording was commonly used before the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+was split into a separate syntax production, leaving the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+without any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of its own. Moreover, the wording often just uses &ldquo;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+a return statement&rdquo; to cover both kinds of return statement. Changing 
+the wording in more than a dozen places was unappealing, and some of 
+the changes would be awkward to read, so we defined the term and letf 
+the majority of the wording unchanged.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-5-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

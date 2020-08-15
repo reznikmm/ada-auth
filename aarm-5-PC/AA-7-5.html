@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Limited Types</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
+    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.5 Limited Types</H1>
+<div class="paranum"><a name="p1">1/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+[A limited type is (a view of) a type for which copying (such as for 
+an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>) 
+is not allowed. A nonlimited type is a (view of a) type for which copying 
+is allowed.]&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The concept of the <I>value</I> 
+of a limited type is difficult to define, since the abstract value of 
+a limited type often extends beyond its physical representation. In some 
+sense, values of a limited type cannot be divorced from their object. 
+The value <I>is</I> the object.</div>
+<div class="paranum"><a name="p1.b">1.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+In Ada 83, in the two places where limited types were defined by the 
+language, namely tasks and files, an implicit level of indirection was 
+implied by the semantics to avoid the separation of the value from an 
+associated object. In Ada 95, most limited types are passed by reference, 
+and even return-ed by reference. In Ada 2005, most limited types are 
+built-in-place upon return, rather than returned by reference. Thus the 
+object &ldquo;identity&rdquo; is part of the logical value of most limited 
+types.&nbsp;</div>
+<div class="paranum"><a name="p1.c">1.c/2</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+For a limited partial view whose full view is nonlimited, copying is 
+possible on parameter passing and function return. To prevent any copying 
+whatsoever, one should make both the partial <I>and</I> full views limited. 
+</div>
+<div class="paranum"><a name="p1.d">1.d/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A limited type is a type 
+for which copying (such as in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>) 
+is not allowed. A nonlimited type is a type for which copying is allowed.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+If a tagged record type has any limited components, then the reserved 
+word <B>limited</B> shall appear in its <SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN>. 
+[If the reserved word <B>limited</B> appears in the definition of a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+its parent type and any progenitor interfaces shall be limited.]&nbsp;</div>
+<div class="paranum"><a name="p2.a.1">2.a.1/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+The rule about the parent type being required to be limited can be found 
+in <A HREF="AA-3-4.html">3.4</A>. Rules about progenitor interfaces can 
+be found in <A HREF="AA-3-9-4.html">3.9.4</A>, specifically, a nonlimited 
+interface can appear only on a nonlimited type. We repeat these rules 
+here to gather these scattered rules in one obvious place.&nbsp;</div>
+<div class="paranum"><a name="p2.a">2.a</a></div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>This 
+prevents tagged limited types from becoming nonlimited. Otherwise, the 
+following could happen:&nbsp;</div>
+<div class="paranum"><a name="p2.b">2.b</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;R&nbsp;<B>is</B>&nbsp;<B>tagged</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;--<SPAN Class="roman"><I>&nbsp;Illegal!</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;This&nbsp;should&nbsp;say&nbsp;&ldquo;<B>limited&nbsp;record</B>&rdquo;.</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;T;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Integer;&nbsp;--<SPAN Class="roman"><I>&nbsp;R&nbsp;becomes&nbsp;nonlimited&nbsp;here.</I></SPAN><BR>
+<B>end</B>&nbsp;P;</div>
+<div class="paranum"><a name="p2.c">2.c/2</a></div>
+<div class="SmallExamples"><B>package</B>&nbsp;Q&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;R2&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;R&nbsp;<B>with</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;:&nbsp;Some_Task_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>end</B>&nbsp;Q;</div>
+<div class="paranum"><a name="p2.d">2.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
+If the above were legal, then assignment would be defined for R'Class 
+in the body of P, which is bad news, given the task.&nbsp;</div>
+<div class="paranum"><a name="p2.1">2.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0172-1.TXT">AI12-0172-1</A></I>} 
+In the following contexts, an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a limited type is not permitted unless it is an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>, 
+<span class="insert5">a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>, 
+</span>a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+whose operand is permitted by this rule, or a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">conditional_expression</A></SPAN> 
+all of whose <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+are permitted by this rule:&nbsp;</div>
+<div class="paranum"><a name="p2.2">2.2/2</a></div>
+<div class="Bulleted">the initialization <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+(see <A HREF="AA-3-3-1.html">3.3.1</A>)</div>
+<div class="paranum"><a name="p2.3">2.3/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
+(see <A HREF="AA-3-8.html">3.8</A>)</div>
+<div class="paranum"><a name="p2.4">2.4/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
+(see <A HREF="AA-4-3-1.html">4.3.1</A>)</div>
+<div class="paranum"><a name="p2.5">2.5/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+for an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+(see <A HREF="AA-4-3-2.html">4.3.2</A>)</div>
+<div class="paranum"><a name="p2.6">2.6/2</a></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN> 
+(see <A HREF="AA-4-3-3.html">4.3.3</A>)</div>
+<div class="paranum"><a name="p2.7">2.7/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+of an initialized allocator (see <A HREF="AA-4-8.html">4.8</A>)</div>
+<div class="paranum"><a name="p2.8">2.8/2</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of a return statement (see <A HREF="AA-6-5.html">6.5</A>)</div>
+<div class="paranum"><a name="p2.9">2.9/4</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
+the <span class="insert4">return expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">&nbsp;expression</A></SPAN></span> 
+of an <span class="insert4">expression function</span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-6-8.html#S0192">&nbsp;expression_function_declaration</A></SPAN></span> 
+(see <A HREF="AA-6-8.html">6.8</A>)</div>
+<div class="paranum"><a name="p2.10">2.10/3</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+or actual parameter for a formal object of mode <B>in</B> (see <A HREF="AA-12-4.html">12.4</A>)</div>
+<div class="paranum"><a name="p2.e">2.e/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>All of these contexts normally 
+require copying; by restricting the uses as above, we can require the 
+new object to be built-in-place.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0178-1.TXT">AI05-0178-1</A></I>} 
+<A NAME="I4005"></A>A view of a type is <I>limited</I> if it is one of 
+the following:&nbsp;</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00411.TXT">AI95-00411-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+a type with the reserved word <B>limited</B>, <B>synchronized</B>, <B>task</B>, 
+or <B>protected</B> in its definition;&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that there is always 
+a &ldquo;definition,&rdquo; conceptually, even if there is no syntactic 
+category called &ldquo;..._definition&rdquo;.</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+This includes interfaces of the above kinds, derived types with the reserved 
+word <B>limited</B>, as well as task and protected types.&nbsp;</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0087-1.TXT">AI05-0087-1</A></I>} 
+a class-wide type whose specific type is limited;</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+a composite type with a limited component;</div>
+<div class="paranum"><a name="p6.1">6.1/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0178-1.TXT">AI05-0178-1</A></I>} 
+an incomplete view;</div>
+<div class="paranum"><a name="p6.2">6.2/2</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+a derived type whose parent is limited and is not an interface.</div>
+<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+Limitedness is not inherited from interfaces; it must be explicitly specified 
+when the parent is an interface.&nbsp;</div>
+<div class="paranum"><a name="p6.b">6.b/2</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+A derived type can become nonlimited if <B>limited</B> does not appear 
+and the derivation takes place in the visible part of a child package, 
+and the parent type is nonlimited as viewed from the private part or 
+body of the child package.&nbsp;</div>
+<div class="paranum"><a name="p6.c">6.c/2</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+We considered a rule where limitedness was always inherited from the 
+parent for derived types, but in the case of a type whose parent is an 
+interface, this meant that the first interface is treated differently 
+than other interfaces. It also would have forced users to declare dummy 
+nonlimited interfaces just to get the limitedness right. We also considered 
+a syntax like <B>not limited</B> to specify nonlimitedness when the parent 
+was limited, but that was unsavory. The rule given is more uniform and 
+simpler to understand.</div>
+<div class="paranum"><a name="p6.d">6.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+The rules for interfaces are asymmetrical, but the language is not: if 
+the parent interface is limited, the presence of the word <B>limited</B> 
+determines the limitedness, and nonlimited progenitors are illegal by 
+the rules in <A HREF="AA-3-9-4.html">3.9.4</A> if <B>limited</B> is present. 
+If the parent interface is nonlimited, the word <B>limited</B> is illegal 
+by the rules in <A HREF="AA-3-4.html">3.4</A>. The net effect is that 
+the order of the interfaces doesn't matter.&nbsp;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal"><A NAME="I4006"></A>Otherwise, the type is nonlimited.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal">[There are no predefined equality operators for a 
+limited type.]</div>
+<div class="paranum"><a name="p8.1">8.1/3</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
+A type is <I>immutably limited</I> if it is one of the following:<A NAME="I4007"></A><A NAME="I4008"></A></div>
+<div class="paranum"><a name="p8.2">8.2/3</a></div>
+<div class="Bulleted">An explicitly limited record type;</div>
+<div class="paranum"><a name="p8.3">8.3/3</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0217-1.TXT">AI05-0217-1</A></I>} 
+A record extension with the reserved word <B>limited</B>;</div>
+<div class="paranum"><a name="p8.4">8.4/3</a></div>
+<div class="Bulleted">A nonformal limited private type that is tagged 
+or has at least one access discriminant with a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>;</div>
+<div class="paranum"><a name="p8.a">8.a/3</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The full type in both of these 
+cases must necessarily be immutably limited. We need to include private 
+types as much as possible so that we aren't unintentionally discouraging 
+the use of private types.&nbsp;</div>
+<div class="paranum"><a name="p8.5">8.5/3</a></div>
+<div class="Bulleted">A task type, a protected type, or a synchronized 
+interface;</div>
+<div class="paranum"><a name="p8.6">8.6/3</a></div>
+<div class="Bulleted">A type derived from an immutably limited type.</div>
+<div class="paranum"><a name="p8.b">8.b/3</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>An immutably limited type 
+is a type that cannot become nonlimited subsequently in a private part 
+or in a child unit. If a view of the type makes it immutably limited, 
+then no copying (assignment) operations are ever available for objects 
+of the type. This allows other properties; for instance, it is safe for 
+such objects to have access discriminants that have defaults or designate 
+other limited objects.&nbsp;</div>
+<div class="paranum"><a name="p8.c">8.c/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A nonsynchronized limited 
+interface type is not immutably limited; a type derived from it can be 
+nonlimited.&nbsp;</div>
+<div class="paranum"><a name="p8.7">8.7/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
+A descendant of a generic formal limited private type is presumed to 
+be immutably limited except within the body of a generic unit or a body 
+declared within the declarative region of a generic unit, if the formal 
+type is declared within the formal part of the generic unit.</div>
+<div class="paranum"><a name="p8.d">8.d/3</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In an instance, a type 
+is descended from the actual type corresponding to the formal, and all 
+rules are rechecked in the specification. Bodies are excepted so that 
+we assume the worst there; the complex wording is required to handle 
+children of generics and unrelated bodies properly.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p8.8">8.8/3</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+</div>
+<div class="paranum"><a name="p8.e">8.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p9">9/3</a></div>
+<div class="Notes">15&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+While it is allowed to write initializations of limited objects, such 
+initializations never copy a limited object. The source of such an assignment 
+operation must be an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>, 
+and such <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>s 
+must be built directly in the target object (see <A HREF="AA-7-6.html">7.6</A>). 
+</div>
+<div class="paranum"><a name="p9.a">9.a/2</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>This isn't quite true if 
+the type can become nonlimited (see below); <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>s 
+only are required to be build-in-place for &ldquo;really&rdquo; limited 
+types.&nbsp;</div>
+<div class="Notes"><SPAN STYLE="font-size: 80%"><I>Paragraphs 10 through 
+15 were deleted.</I></SPAN>&nbsp;</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Indented2SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+</div>
+<div class="paranum"><a name="p14">14/2</a></div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+</div>
+<div class="paranum"><a name="p15">15/2</a></div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Notes">16&nbsp;&nbsp;<A NAME="I4009"></A><A NAME="I4010"></A><A NAME="I4011"></A>As 
+illustrated in <A HREF="AA-7-3-1.html">7.3.1</A>, an untagged limited 
+type can become nonlimited under certain circumstances.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Limited private types do 
+not become nonlimited; instead, their full view can be nonlimited, which 
+has a similar effect.</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations">It is important to remember that a single nonprivate 
+type can be both limited and nonlimited in different parts of its scope. 
+In other words, &ldquo;limited&rdquo; is a property that depends on where 
+you are in the scope of the type. We don't call this a &ldquo;view property&rdquo; 
+because there is no particular declaration to declare the nonlimited 
+view.</div>
+<div class="paranum"><a name="p16.c">16.c</a></div>
+<div class="Annotations">Tagged types never become nonlimited.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a package 
+with a limited type:</I>&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Examples"><B>package</B>&nbsp;IO_Package&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Name&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Open&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Close(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Read&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Integer);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Write(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Integer);<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Name&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>limited</B>&nbsp;<B>record</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal_Name&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+<B>end</B>&nbsp;IO_Package;</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Examples"><B>package</B>&nbsp;<B>body</B>&nbsp;IO_Package&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Limit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;200;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;File_Descriptor&nbsp;<B>is</B>&nbsp;<B>record</B>&nbsp;&nbsp;...&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
+&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>array</B>&nbsp;(1&nbsp;..&nbsp;Limit)&nbsp;<B>of</B>&nbsp;File_Descriptor;<BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Open&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name)&nbsp;<B>is</B>&nbsp;&nbsp;...&nbsp;&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Close(F&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;File_Name)&nbsp;<B>is</B>&nbsp;&nbsp;...&nbsp;&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Read&nbsp;(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Integer)&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Write(F&nbsp;:&nbsp;<B>in</B>&nbsp;File_Name;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Integer)&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;...<BR>
+<B>end</B>&nbsp;IO_Package;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Notes">17&nbsp;&nbsp;<I>Notes on the example:</I> In the 
+example above, an outside subprogram making use of IO_Package may obtain 
+a file name by calling Open and later use it in calls to Read and Write. 
+Thus, outside the package, a file name obtained from Open acts as a kind 
+of password; its internal properties (such as containing a numeric value) 
+are not known and no other operations (such as addition or comparison 
+of internal names) can be performed on a file name. Most importantly, 
+clients of the package cannot make copies of objects of type File_Name.</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">This example is characteristic of any case where complete 
+control over the operations of a type is desired. Such packages serve 
+a dual purpose. They prevent a user from making use of the internal structure 
+of the type. They also implement the notion of an encapsulated data type 
+where the only operations on the type are those given in the package 
+specification.</div>
+<div class="paranum"><a name="p23">23/2</a></div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+The fact that the full view of File_Name is explicitly declared <B>limited</B> 
+means that parameter passing will always be by reference and function 
+results will always be built directly in the result object (see <A HREF="AA-6-2.html">6.2</A> 
+and <A HREF="AA-6-5.html">6.5</A>).</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p23.a">23.a</a></div>
+<div class="Annotations"><A NAME="I4012"></A>The restrictions in RM83-7.4.4(4), 
+which disallowed <B>out</B> parameters of limited types in certain cases, 
+are removed.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p23.b">23.b/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Since limitedness and privateness are orthogonal in Ada 95 (and to some 
+extent in Ada 83), this is now its own subclause rather than being a 
+subclause of <A HREF="AA-7-3.html">7.3</A>, &ldquo;<A HREF="AA-7-3.html">Private 
+Types and Private Extensions</A>&rdquo;.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 95</H4>
+<div class="paranum"><a name="p23.c">23.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
+<A NAME="I4013"></A>Limited types now have an assignment operation, but 
+its use is restricted such that all uses are build-in-place. This is 
+accomplished by restricting uses to <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>s. 
+<SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">Aggregate</A></SPAN>s 
+were not allowed to have a limited type in Ada 95, which causes a compatibility 
+issue discussed in <A HREF="AA-4-3.html">4.3</A>, &ldquo;<A HREF="AA-4-3.html">Aggregates</A>&rdquo;. 
+Compatibility issues with return statements for limited <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>s 
+are discussed in <A HREF="AA-6-5.html">6.5</A>, &ldquo;<A HREF="AA-6-5.html">Return 
+Statements</A>&rdquo;.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p23.d">23.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00411.TXT">AI95-00411-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
+Rewrote the definition of limited to ensure that interfaces are covered, 
+but that limitedness is not inherited from interfaces. Derived types 
+that explicitly include <B>limited</B> are now also covered.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2005</H4>
+<div class="paranum"><a name="p23.e">23.e/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0052-1.TXT">AI05-0052-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0217-1.TXT">AI05-0217-1</A></I>} 
+<B>Correction:</B> Added a definition for immutably limited types, so 
+that the fairly complex definition does not need to be repeated in rules 
+elsewhere in the Standard.</div>
+<div class="paranum"><a name="p23.f">23.f/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+<B>Correction:</B> The built-in-place rules are consolidated in <A HREF="AA-7-6.html">7.6</A>, 
+and thus they are removed from this subclause.</div>
+<div class="paranum"><a name="p23.g">23.g/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0087-1.TXT">AI05-0087-1</A></I>} 
+<B>Correction:</B> Fixed an oversight: class-wide types were never defined 
+to be limited, even if their associated specific type is. It is thought 
+that this oversight was never implemented incorrectly by any compiler, 
+thus we have not classified it as an incompatibility.</div>
+<div class="paranum"><a name="p23.h">23.h/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
+Allowed <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">conditional_expression</A></SPAN>s 
+in limited constructor contexts &mdash; we want to treat these as closely 
+to parentheses as possible.</div>
+<div class="paranum"><a name="p23.i">23.i/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
+Added wording so that expression functions can return limited entities.</div>
+<div class="paranum"><a name="p23.j">23.j/3</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0178-1.TXT">AI05-0178-1</A></I>} 
+<B>Correction:</B> Added incomplete views to the list of reasons for 
+a view of a type to be limited. This is not a change as the definition 
+already was in <A HREF="AA-3-10-1.html">3.10.1</A>. But it is much better 
+to have all of the reasons for limitedness together.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p23.k">23.k/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0172-1.TXT">AI12-0172-1</A></I>} 
+<span class="insert5"><A NAME="I4014"></A><B>Correction:</B> A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+can be used in an expression used in a limited context. This is harmless 
+(no object will be created if an exception is raised instead), useful, 
+and thus appears to have been an omission when <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>s 
+were added to the language.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

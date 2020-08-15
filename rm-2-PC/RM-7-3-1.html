@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Private Operations</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }
+    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }
+    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>7.3.1 Private Operations</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">For a type declared in the visible part of a package 
+or generic package, certain operations on the type do not become visible 
+until later in the package &mdash; either in the private part or the 
+body. <A NAME="I3412"></A>Such <I>private operations</I> are available 
+only inside the declarative region of the package or generic package. 
+</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Normal">The predefined operators that exist for a given type 
+are determined by the classes to which the type belongs. For example, 
+an integer type has a predefined &quot;+&quot; operator. In most cases, 
+the predefined operators of a type are declared immediately after the 
+definition of the type; the exceptions are explained below. Inherited 
+subprograms are also implicitly declared immediately after the definition 
+of the type, except as stated below.</div>
+<div class="paranum"><a name="p3">3/1</a></div>
+<div class="Normal">For a composite type, the characteristics (see <A HREF="RM-7-3.html">7.3</A>) 
+of the type are determined in part by the characteristics of its component 
+types. At the place where the composite type is declared, the only characteristics 
+of component types used are those characteristics visible at that place. 
+If later <span class="insert1">immediately within the declarative region 
+in which the composite type is declared</span><span class="delete1">&nbsp;within 
+the immediate scope of the composite type</span> additional characteristics 
+become visible for a component type, then any corresponding characteristics 
+become visible for the composite type. Any additional predefined operators 
+are implicitly declared at that place.</div>
+<div class="paranum"><a name="p4">4/1</a></div>
+<div class="Normal">The corresponding rule applies to a type defined 
+by a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+if there is a place <span class="insert1">immediately within the declarative 
+region in which the type is declared</span><span class="delete1">&nbsp;within 
+its immediate scope</span> where additional characteristics of its parent 
+type become visible.</div>
+<div class="paranum"><a name="p5">5/1</a></div>
+<div class="Normal"><A NAME="I3413"></A><A NAME="I3414"></A><A NAME="I3415"></A>For 
+example, an array type whose component type is limited private becomes 
+nonlimited if the full view of the component type is nonlimited and visible 
+at some later place <span class="insert1">immediately within the declarative 
+region in which the array type is declared.</span><span class="delete1">&nbsp;within 
+the immediate scope of the array type.</span> In such a case, the predefined 
+&quot;=&quot; operator is implicitly declared at that place, and assignment 
+is allowed after that place.</div>
+<div class="paranum"><a name="p6">6/1</a></div>
+<div class="Normal">Inherited primitive subprograms follow a different 
+rule. For a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
+each inherited primitive subprogram is implicitly declared at the earliest 
+place, if any, <span class="insert1">immediately within the declarative 
+region in which</span><span class="delete1">&nbsp;within the immediate scope 
+of</span> the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN><span class="insert1">&nbsp;occurs</span>, but after the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN>, 
+where the corresponding declaration from the parent is visible. If there 
+is no such place, then the inherited subprogram is not declared at all. 
+An inherited subprogram that is not declared at allcannot be named in 
+a call and cannot be overridden, but for a tagged type, it is possible 
+to dispatch to it.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Normal">For a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0177">private_extension_declaration</A></SPAN>, 
+each inherited subprogram is declared immediately after the <SPAN Class="swiss"><A HREF="RM-7-3.html#S0177">private_extension_declaration</A></SPAN> 
+if the corresponding declaration from the ancestor is visible at that 
+place. Otherwise, the inherited subprogram is not declared for the private 
+extension, though it might be for the full type.&nbsp;</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">The Class attribute 
+is defined for tagged subtypes in <A HREF="RM-3-9.html">3.9</A>. In addition, 
+for every subtype S of an untagged private type whose full view is tagged, 
+the following attribute is defined:&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
+<A NAME="I3416"></A><A NAME="I3417"></A>Denotes the class-wide subtype 
+corresponding to the full view of S. This attribute is allowed only from 
+the beginning of the private part in which the full view is declared, 
+until the declaration of the full view. After the full view, the Class 
+attribute of the full view can be used.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Notes">9&nbsp;&nbsp;Because a partial view and a full view 
+are two different views of one and the same type, outside of the defining 
+package the characteristics of the type are those defined by the visible 
+part. Within these outside program units the type is just a private type 
+or private extension, and any language rule that applies only to another 
+class of types does not apply. The fact that the full declaration might 
+implement a private type with a type of a particular class (for example, 
+as an array type) is relevant only within the declarative region of the 
+package itself including any child units.</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Notes">The consequences of this actual implementation are, 
+however, valid everywhere. For example: any default initialization of 
+components takes place; the attribute Size provides the size of the full 
+view; finalization is still done for controlled components of the full 
+view; task dependence rules still apply to components that are task objects.</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Notes">10&nbsp;&nbsp;Partial views provide <span class="insert2">initialization</span><span class="delete2">&nbsp;assignment 
+(unless the view is limited)</span>, membership tests, selected components 
+for the selection of discriminants and inherited components, qualification, 
+and explicit conversion.<span class="insert2">&nbsp;Nonlimited partial views 
+also allow use of <SPAN Class="swiss"><A HREF="RM-5-2.html#S0137">assignment_statement</A></SPAN>s.</span></div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Notes">11&nbsp;&nbsp;For a subtype S of a partial view, S'Size 
+is defined (see <A HREF="RM-13-3.html">13.3</A>). For an object A of 
+a partial view, the attributes A'Size and A'Address are defined (see 
+<A HREF="RM-13-3.html">13.3</A>). The Position, First_Bit, and Last_Bit 
+attributes are also defined for discriminants and inherited components. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Example of a type 
+with private operations:</I>&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Examples"><B>package</B>&nbsp;Key_Manager&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Key&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;Null_Key&nbsp;:&nbsp;<B>constant</B>&nbsp;Key;&nbsp;--<SPAN Class="roman"><I>&nbsp;a&nbsp;deferred&nbsp;constant&nbsp;declaration&nbsp;(see&nbsp;<A HREF="RM-7-4.html">7.4</A>)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get_Key(K&nbsp;:&nbsp;<B>out</B>&nbsp;Key);<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(X,&nbsp;Y&nbsp;:&nbsp;Key)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Key&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Natural;<BR>
+&nbsp;&nbsp;&nbsp;Null_Key&nbsp;:&nbsp;<B>constant</B>&nbsp;Key&nbsp;:=&nbsp;Key'First;<BR>
+<B>end</B>&nbsp;Key_Manager;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Examples"><B>package</B>&nbsp;<B>body</B>&nbsp;Key_Manager&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;Last_Key&nbsp;:&nbsp;Key&nbsp;:=&nbsp;Null_Key;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Get_Key(K&nbsp;:&nbsp;<B>out</B>&nbsp;Key)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last_Key&nbsp;:=&nbsp;Last_Key&nbsp;+&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;K&nbsp;:=&nbsp;Last_Key;<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Get_Key;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(X,&nbsp;Y&nbsp;:&nbsp;Key)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Natural(X)&nbsp;&lt;&nbsp;Natural(Y);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;&quot;&lt;&quot;;<BR>
+<B>end</B>&nbsp;Key_Manager;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Notes">12&nbsp;&nbsp;<I>Notes on the example:</I> Outside 
+of the package Key_Manager, the operations available for objects of type 
+Key include assignment, the comparison for equality or inequality, the 
+procedure Get_Key and the operator &quot;&lt;&quot;; they do not include 
+other relational operators such as &quot;&gt;=&quot;, or arithmetic operators.</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Notes">The explicitly declared operator &quot;&lt;&quot; 
+hides the predefined operator &quot;&lt;&quot; implicitly declared by 
+the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
+Within the body of the function, an explicit conversion of X and Y to 
+the subtype Natural is necessary to invoke the &quot;&lt;&quot; operator 
+of the parent type. Alternatively, the result of the function could be 
+written as not (X &gt;= Y), since the operator &quot;&gt;=&quot; is not 
+redefined.</div>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Notes">The value of the variable Last_Key, declared in the 
+package body, remains unchanged between calls of the procedure Get_Key. 
+(See also the NOTES of <A HREF="RM-7-2.html">7.2</A>.)&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

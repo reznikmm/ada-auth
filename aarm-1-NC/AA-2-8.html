@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Pragmas</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-9.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>2.8 Pragmas</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1263"></A>A pragma is a compiler directive. 
+There are language-defined pragmas that give instructions for optimization, 
+listing control, etc. An implementation may support additional (implementation-defined) 
+pragmas.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">pragma</SPAN><A NAME="I1264"></A><A NAME="S0016"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<A NAME="I1265"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;[(<A NAME="I1266"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0017">pragma_argument_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1267"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0017">pragma_argument_association</A></SPAN>})];</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Indented1"><SPAN Class="swiss">pragma_argument_association</SPAN><A NAME="I1268"></A><A NAME="S0017"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<I>pragma_argument_</I><A NAME="I1269"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1270"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;[<I>pragma_argument_</I><A NAME="I1271"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1272"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN></div>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Indented1">In a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>, 
+any <SPAN Class="swiss"><A HREF="AA-2-8.html#S0017">pragma_argument_association</A></SPAN>s 
+without a <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall precede any associations with a <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">Pragma</A></SPAN>s 
+are only allowed at the following places in a program:&nbsp;</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Indented2Bulleted">After a semicolon delimiter, but not within 
+a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0151">formal_part</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-7.html#S0056">discriminant_part</A></SPAN>.</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Indented2Bulleted">At any place where the syntax rules allow 
+a construct defined by a syntactic category whose name ends with &ldquo;<SPAN Class="swiss">declaration</SPAN>&rdquo;, 
+&ldquo;<SPAN Class="swiss">statement</SPAN>&rdquo;, &ldquo;<SPAN Class="swiss">clause</SPAN>&rdquo;, 
+or &ldquo;<SPAN Class="swiss">alternative</SPAN>&rdquo;, or one of the 
+syntactic categories <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0069">variant</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-11-2.html#S0232">exception_handler</A></SPAN>; 
+but not in place of such a construct. Also at any place where a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0215">compilation_unit</A></SPAN> 
+would be allowed.</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Indented1">Additional syntax rules and placement restrictions 
+exist for specific pragmas.&nbsp;</div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The above rule is written 
+in text, rather than in BNF; the syntactic category <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is not used in any BNF syntax rule.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is allowed where a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0240">generic_formal_parameter_declaration</A></SPAN> 
+is allowed.&nbsp;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1273"></A><A NAME="I1274"></A>The <I>name</I> 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is the identifier following the reserved word <B>pragma</B>. <A NAME="I1275"></A><A NAME="I1276"></A>The 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0017">pragma_argument_association</A></SPAN> 
+is a <I>pragma argument</I>.</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Normal"><A NAME="I1277"></A><A NAME="I1278"></A>An <I>identifier 
+specific to a pragma</I> is an identifier that is used in a pragma argument 
+with special meaning for that pragma.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>Whenever the syntax rules 
+for a given pragma allow &quot;<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&quot; 
+as an argument of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>, 
+that <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+is an identifier specific to that pragma.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Normal">If an implementation does not recognize the name 
+of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>, 
+then it has no effect on the semantics of the program. Inside such a 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>, the 
+only rules that apply are the Syntax Rules.&nbsp;</div>
+<div class="paranum"><a name="p11.a">11.a</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>This rule takes precedence 
+over any other rules that imply otherwise.&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note well: this rule applies 
+only to <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+whose name is not recognized. If anything else is wrong with a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+(at compile time), the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is illegal. This is true whether the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is language defined or implementation defined.</div>
+<div class="paranum"><a name="p11.c">11.c</a></div>
+<div class="Annotations">For example, an expression in an unrecognized 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> does 
+not cause freezing, even though the rules in <A HREF="AA-13-14.html">13.14</A>, 
+&ldquo;<A HREF="AA-13-14.html">Freezing Rules</A>&rdquo; say it does; 
+the above rule overrules those other rules. On the other hand, an expression 
+in a recognized <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+causes freezing, even if this makes something illegal.</div>
+<div class="paranum"><a name="p11.d">11.d</a></div>
+<div class="Annotations">For another example, an expression that would 
+be ambiguous is not illegal if it is inside an unrecognized <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>.</div>
+<div class="paranum"><a name="p11.e">11.e</a></div>
+<div class="Annotations">Note, however, that implementations have to 
+recognize <B>pragma</B> Inline(Foo) and freeze things accordingly, even 
+if they choose to never do inlining.</div>
+<div class="paranum"><a name="p11.f">11.f</a></div>
+<div class="Annotations">Obviously, the contradiction needs to be resolved 
+one way or the other. The reasons for resolving it this way are: The 
+implementation is simple &mdash; the compiler can just ignore the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+altogether. The interpretation of constructs appearing inside implementation-defined 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s is 
+implementation defined. For example: &ldquo;<B>pragma</B> Mumble(X);&rdquo;. 
+If the current implementation has never heard of Mumble, then it doesn't 
+know whether X is a name, an expression, or an identifier specific to 
+the pragma Mumble.&nbsp;</div>
+<div class="paranum"><a name="p11.g">11.g</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The syntax of individual 
+pragmas overrides the general syntax for <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p11.h">11.h</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Thus, an identifier specific 
+to a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is not a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN>, 
+syntactically; if it were, the visibility rules would be invoked, which 
+is not what we want.</div>
+<div class="paranum"><a name="p11.i">11.i</a></div>
+<div class="Annotations">This also implies that named associations do 
+not allow one to give the arguments in an arbitrary order &mdash; the 
+order given in the syntax rule for each individual pragma must be obeyed. 
+However, it is generally possible to leave out earlier arguments when 
+later ones are given; for example, this is allowed by the syntax rule 
+for pragma Import (see <A HREF="AA-B-1.html">B.1</A>, &ldquo;<A HREF="AA-B-1.html">Interfacing 
+Aspects</A>&rdquo;). As for subprogram calls, positional notation precedes 
+named notation.</div>
+<div class="paranum"><a name="p11.j">11.j</a></div>
+<div class="Annotations">Note that Ada 83 had no pragmas for which the 
+order of named associations mattered, since there was never more than 
+one argument that allowed named associations.&nbsp;</div>
+<div class="paranum"><a name="p11.k">11.k</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The interpretation of the 
+arguments of implementation-defined pragmas is implementation defined. 
+However, the syntax rules have to be obeyed.&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal"><A NAME="I1279"></A><A NAME="I1280"></A>Any <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+that appears at the place of an executable construct is executed. Unless 
+otherwise specified for a particular pragma, this execution consists 
+of the evaluation of each evaluable pragma argument in an arbitrary order.<A NAME="I1281"></A> 
+</div>
+<div class="paranum"><a name="p12.a">12.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+that appears at the place of an elaborable construct, execution is elaboration.</div>
+<div class="paranum"><a name="p12.b">12.b</a></div>
+<div class="Annotations">An identifier specific to a pragma is neither 
+a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0084">name</A></SPAN> nor 
+an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0108">expression</A></SPAN> 
+&mdash; such identifiers are not evaluated (unless an implementation 
+defines them to be evaluated in the case of an implementation-defined 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>).</div>
+<div class="paranum"><a name="p12.c">12.c</a></div>
+<div class="Annotations">The &ldquo;unless otherwise specified&rdquo; 
+part allows us (and implementations) to make exceptions, so a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+can contain an expression that is not evaluated. Note that <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+in <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0022">type_definition</A></SPAN>s 
+may contain expressions that depend on discriminants.</div>
+<div class="paranum"><a name="p12.d">12.d</a></div>
+<div class="Annotations">When we wish to define a pragma with some run-time 
+effect, we usually make sure that it appears in an executable context; 
+otherwise, special rules are needed to define the run-time effect and 
+when it happens.&nbsp;</div>
+
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">The implementation shall give a warning message for 
+an unrecognized pragma name.&nbsp;</div>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>An implementation is also 
+allowed to have modes in which a warning message is suppressed, or in 
+which the presence of an unrecognized <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is a compile-time error.&nbsp;</div>
+
+<H4 Class="centered">Implementation Permissions</H4>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal">An implementation may provide implementation-defined 
+pragmas; the name of an implementation-defined pragma shall differ from 
+those of the language-defined pragmas.&nbsp;</div>
+<div class="paranum"><a name="p14.a">14.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
+pragmas.</div>
+<div class="paranum"><a name="p14.b">14.b</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The semantics of implementation-defined 
+pragmas, and any associated rules (such as restrictions on their placement 
+or arguments), are, of course, implementation defined. Implementation-defined 
+pragmas may have run-time effects.&nbsp;</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal">An implementation may ignore an unrecognized pragma 
+even if it violates some of the Syntax Rules, if detecting the syntax 
+error is too complex.&nbsp;</div>
+<div class="paranum"><a name="p15.a">15.a</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Many compilers use extra post-parsing 
+checks to enforce the syntax rules, since the Ada syntax rules are not 
+LR(k) (for any k). (The grammar is ambiguous, in fact.) This paragraph 
+allows them to ignore an unrecognized pragma, without having to perform 
+such post-parsing checks.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Normal">Normally, implementation-defined pragmas should have 
+no semantic effect for error-free programs; that is, if the implementation-defined 
+pragmas are removed from a working program, the program should still 
+be legal, and should still have the same semantics.&nbsp;</div>
+<div class="paranum"><a name="p16.a">16.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>Note that &ldquo;semantics&rdquo; 
+is not the same as &ldquo;effect;&rdquo; as explained in <A HREF="AA-1-1-3.html">1.1.3</A>, 
+the semantics defines a set of possible effects.</div>
+<div class="paranum"><a name="p16.b">16.b</a></div>
+<div class="Annotations">Note that adding a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+to a program might cause an error (either at compile time or at run time). 
+On the other hand, if the language-specified semantics for a feature 
+are in part implementation defined, it makes sense to support pragmas 
+that control the feature, and that have real semantics; thus, this paragraph 
+is merely a recommendation.&nbsp;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">Normally, an implementation 
+should not define pragmas that can make an illegal program legal, except 
+as follows:&nbsp;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+used to complete a declaration, such as a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Import;</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+used to configure the environment by adding, removing, or replacing <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0216">library_item</A></SPAN>s. 
+</div>
+<div class="paranum"><a name="p19.a">19.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>For example, it is OK to 
+support Interface, System_Name, Storage_Unit, and Memory_Size <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+for upward compatibility reasons, even though all of these <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+can make an illegal program legal. (The latter three can affect legality 
+in a rather subtle way: They affect the value of named numbers in System, 
+and can therefore affect the legality in cases where static expressions 
+are required.)</div>
+<div class="paranum"><a name="p19.b">19.b</a></div>
+<div class="Annotations">On the other hand, adding implementation-defined 
+pragmas to a legal program can make it illegal. For example, a common 
+kind of implementation-defined pragma is one that promises some property 
+that allows more efficient code to be generated. If the promise is a 
+lie, it is best if the user gets an error message.&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 83</H4>
+<div class="paranum"><a name="p19.c">19.c</a></div>
+<div class="Annotations"><A NAME="I1282"></A>In Ada 83, &ldquo;bad&rdquo; 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s are 
+ignored. In Ada 95, they are illegal, except in the case where the name 
+of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+itself is not recognized by the implementation.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p19.d">19.d</a></div>
+<div class="Annotations"><A NAME="I1283"></A>Implementation-defined <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+may affect the legality of a program.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p19.e">19.e</a></div>
+<div class="Annotations">Implementation-defined <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+may affect the run-time semantics of the program. This was always true 
+in Ada 83 (since it was not explicitly forbidden by RM83), but it was 
+not clear, because there was no definition of &ldquo;executing&rdquo; 
+or &ldquo;elaborating&rdquo; a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Indented1" style="margin-bottom: 0.4em">The forms of List, 
+Page, and Optimize <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN>s 
+are as follows:</div>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1284"></A><A NAME="I1285"></A>List(<A NAME="I1286"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1287"></A><A NAME="I1288"></A>Page;</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1289"></A><A NAME="I1290"></A>Optimize(<A NAME="I1291"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Indented1">[Other pragmas are defined throughout this International 
+Standard, and are summarized in <A HREF="AA-L.html">Annex L</A>.]&nbsp;</div>
+<div class="paranum"><a name="p24.a">24.a</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The language-defined pragmas 
+are supported by every implementation, although &ldquo;supporting&rdquo; 
+some of them (for example, Inline) requires nothing more than checking 
+the arguments, since they act only as advice to the implementation.&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p25">25</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+List takes one of the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+On or Off as the single argument. This pragma is allowed anywhere a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is allowed. It specifies that listing of the compilation is to be continued 
+or suspended until a List <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+with the opposite argument is given within the same compilation. The 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> itself 
+is always listed if the compiler is producing a listing.</div>
+<div class="paranum"><a name="p26">26</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Page is allowed anywhere a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is allowed. It specifies that the program text which follows the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+should start on a new page (if the compiler is currently producing a 
+listing).</div>
+<div class="paranum"><a name="p27">27</a></div>
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+Optimize takes one of the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+Time, Space, or Off as the single argument. This <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is allowed anywhere a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+is allowed, and it applies until the end of the immediately enclosing 
+declarative region, or for a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+at the place of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0215">compilation_unit</A></SPAN>, 
+to the end of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0214">compilation</A></SPAN>. 
+It gives advice to the implementation as to whether time or space is 
+the primary optimization criterion, or that optional optimizations should 
+be turned off. [It is implementation defined how this advice is followed.] 
+</div>
+<div class="paranum"><a name="p27.a">27.a</a></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Effect of pragma 
+Optimize.</div>
+<div class="paranum"><a name="p27.b">27.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>For example, a compiler might 
+use Time vs. Space to control whether generic instantiations are implemented 
+with a macro-expansion model, versus a shared-generic-body model.</div>
+<div class="paranum"><a name="p27.c">27.c</a></div>
+<div class="Annotations">We don't define what constitutes an &ldquo;optimization&rdquo; 
+&mdash; in fact, it cannot be formally defined in the context of Ada. 
+One compiler might call something an optional optimization, whereas another 
+compiler might consider that same thing to be a normal part of code generation. 
+Thus, the programmer cannot rely on this pragma having any particular 
+portable effect on the generated code. Some compilers might even ignore 
+the pragma altogether.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p28">28</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><I>Examples of pragmas:</I> 
+</div>
+<div class="paranum"><a name="p29">29</a></div>
+<div class="Examples"><B>pragma</B>&nbsp;List(Off);&nbsp;--&nbsp;<SPAN Class="roman"><I>turn&nbsp;off&nbsp;listing&nbsp;generation</I></SPAN><BR>
+<B>pragma</B>&nbsp;Optimize(Off);&nbsp;--&nbsp;<SPAN Class="roman"><I>turn&nbsp;off&nbsp;optional&nbsp;optimizations</I></SPAN><BR>
+<B>pragma</B>&nbsp;Inline(Set_Mask);&nbsp;--<SPAN Class="roman"><I>&nbsp;generate&nbsp;code&nbsp;for&nbsp;Set_Mask&nbsp;inline</I></SPAN><BR>
+<B>pragma</B>&nbsp;Suppress(Range_Check,&nbsp;On&nbsp;=&gt;&nbsp;Index);&nbsp;--&nbsp;<SPAN Class="roman"><I>turn&nbsp;off&nbsp;range&nbsp;checking&nbsp;on&nbsp;Index</I></SPAN></div>
+
+<H4 Class="centered">Extensions to Ada 83</H4>
+<div class="paranum"><a name="p29.a">29.a</a></div>
+<div class="Annotations"><A NAME="I1292"></A>The Optimize <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+now allows the identifier Off to request that normal optimization be 
+turned off.</div>
+<div class="paranum"><a name="p29.b">29.b</a></div>
+<div class="Annotations">An Optimize <SPAN Class="swiss"><A HREF="AA-2-8.html#S0016">pragma</A></SPAN> 
+may appear anywhere pragmas are allowed.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p29.c">29.c</a></div>
+<div class="Annotations">We now describe the pragmas Page, List, and 
+Optimize here, to act as examples, and to remove the normative material 
+from <A HREF="AA-L.html">Annex L</A>, &ldquo;<A HREF="AA-L.html">Language-Defined 
+Pragmas</A>&rdquo;, so it can be entirely an informative annex.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-7.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-2-9.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

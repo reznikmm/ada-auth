@@ -1,0 +1,174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Abort of a Task - Abort of a Sequence of Statements</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-7-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-9.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>9.8 Abort of a Task - Abort of a Sequence of Statements</H1>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN> 
+causes one or more tasks to become abnormal, thus preventing any further 
+interaction with such tasks. The completion of the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0211">triggering_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0209">asynchronous_select</A></SPAN> 
+causes a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+to be aborted.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2</a></div>
+<div class="Indented1"><SPAN Class="swiss">abort_statement</SPAN><A NAME="I3640"></A><A NAME="S0213"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>abort</B>&nbsp;<I>task_</I><A NAME="I3641"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>&nbsp;{,&nbsp;<I>task_</I><A NAME="I3642"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>};</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I3643"></A>Each <I>task_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN> 
+is expected to be of any task type; they need not all be of the same 
+task type.</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p4">4</a></div>
+<div class="Normal"><A NAME="I3644"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN>, 
+the given <I>task_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0084">name</A></SPAN>s 
+are evaluated in an arbitrary order.<A NAME="I3645"></A> <A NAME="I3646"></A><A NAME="I3647"></A><A NAME="I3648"></A>Each 
+named task is then <I>aborted</I>, which consists of making the task 
+<I>abnormal</I> and aborting the execution of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0179">task_body</A></SPAN>, 
+unless it is already completed.&nbsp;</div>
+<div class="paranum"><a name="p5">5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3649"></A><A NAME="I3650"></A>When 
+the execution of a construct is <I>aborted</I> (including that of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0179">task_body</A></SPAN> 
+or of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN>), 
+the execution of every construct included within the aborted execution 
+is also aborted, except for executions included within the execution 
+of an <I>abort-deferred</I> operation; the execution of an abort-deferred 
+operation continues to completion without being affected by the abort; 
+<A NAME="I3651"></A>the following are the abort-deferred operations: 
+</div>
+<div class="paranum"><a name="p6">6</a></div>
+<div class="Bulleted">a protected action;</div>
+<div class="paranum"><a name="p7">7</a></div>
+<div class="Bulleted">waiting for an entry call to complete (after having 
+initiated the attempt to cancel it &mdash; see below);</div>
+<div class="paranum"><a name="p8">8</a></div>
+<div class="Bulleted">waiting for the termination of dependent tasks;</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Bulleted">the execution of an Initialize procedure as the 
+last step of the default initialization of a controlled object;</div>
+<div class="paranum"><a name="p10">10</a></div>
+<div class="Bulleted">the execution of a Finalize procedure as part of 
+the finalization of a controlled object;</div>
+<div class="paranum"><a name="p11">11</a></div>
+<div class="Bulleted">an assignment operation to an object with a controlled 
+part.&nbsp;</div>
+<div class="paranum"><a name="p12">12</a></div>
+<div class="Normal">The last three of these are discussed further in 
+<A HREF="RM-7-6.html">7.6</A>.&nbsp;</div>
+<div class="paranum"><a name="p13">13</a></div>
+<div class="Normal">When a master is aborted, all tasks that depend on 
+that master are aborted.</div>
+<div class="paranum"><a name="p14">14</a></div>
+<div class="Normal"><A NAME="I3652"></A>The order in which tasks become 
+abnormal as the result of an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN> 
+or the abort of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+is not specified by the language.</div>
+<div class="paranum"><a name="p15">15</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">If the execution of 
+an entry call is aborted, an immediate attempt is made to cancel the 
+entry call (see <A HREF="RM-9-5-3.html">9.5.3</A>). If the execution 
+of a construct is aborted at a time when the execution is blocked, other 
+than for an entry call, at a point that is outside the execution of an 
+abort-deferred operation, then the execution of the construct completes 
+immediately. For an abort due to an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN>, 
+these immediate effects occur before the execution of the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN> 
+completes. Other than for these immediate cases, the execution of a construct 
+that is aborted does not necessarily complete before the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN> 
+completes. However, the execution of the aborted construct completes 
+no later than its next <I>abort completion point</I> (if any) that occurs 
+outside of an abort-deferred operation; <A NAME="I3653"></A>the following 
+are abort completion points for an execution:&nbsp;</div>
+<div class="paranum"><a name="p16">16</a></div>
+<div class="Bulleted">the point where the execution initiates the activation 
+of another task;</div>
+<div class="paranum"><a name="p17">17</a></div>
+<div class="Bulleted">the end of the activation of a task;</div>
+<div class="paranum"><a name="p18">18</a></div>
+<div class="Bulleted">the start or end of the execution of an entry call, 
+<SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0188">accept_statement</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="RM-9-6.html#S0196">delay_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN>; 
+</div>
+<div class="paranum"><a name="p19">19</a></div>
+<div class="Bulleted">the start of the execution of a <SPAN Class="swiss"><A HREF="RM-9-7.html#S0199">select_statement</A></SPAN>, 
+or of the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0123">sequence_of_statements</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="RM-11-2.html#S0232">exception_handler</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p20">20</a></div>
+<div class="Normal"><A NAME="I3654"></A>An attempt to execute an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0209">asynchronous_select</A></SPAN> 
+as part of the execution of an abort-deferred operation is a bounded 
+error. Similarly, an attempt to create a task that depends on a master 
+that is included entirely within the execution of an abort-deferred operation 
+is a bounded error. <A NAME="I3655"></A>In both cases, Program_Error 
+is raised if the error is detected by the implementation; otherwise the 
+operations proceed as they would outside an abort-deferred operation, 
+except that an abort of the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0212">abortable_part</A></SPAN> 
+or the created task might or might not have an effect.&nbsp;</div>
+
+<H4 Class="centered">Erroneous Execution</H4>
+<div class="paranum"><a name="p21">21</a></div>
+<div class="Normal"><A NAME="I3656"></A><A NAME="I3657"></A><A NAME="I3658"></A><A NAME="I3659"></A>If 
+an assignment operation completes prematurely due to an abort, the assignment 
+is said to be <I>disrupted</I>; the target of the assignment or its parts 
+can become abnormal, and certain subsequent uses of the object can be 
+erroneous, as explained in <A HREF="RM-13-9-1.html">13.9.1</A>.&nbsp;</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p22">22</a></div>
+<div class="Notes">38&nbsp;&nbsp;An <SPAN Class="swiss"><A HREF="RM-9-8.html#S0213">abort_statement</A></SPAN> 
+should be used only in situations requiring unconditional termination.</div>
+<div class="paranum"><a name="p23">23</a></div>
+<div class="Notes">39&nbsp;&nbsp;A task is allowed to abort any task 
+it can name, including itself.</div>
+<div class="paranum"><a name="p24">24</a></div>
+<div class="Notes">40&nbsp;&nbsp;Additional requirements associated with 
+abort are given in <A HREF="RM-D-6.html">D.6</A>, &ldquo;<A HREF="RM-D-6.html">Preemptive 
+Abort</A>&rdquo;.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-7-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="RM-9-9.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

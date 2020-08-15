@@ -1,0 +1,452 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Types and Subtypes</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>3.2 Types and Subtypes</H1>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p1">1</a></div>
+<div class="Normal"><A NAME="I1363"></A><A NAME="I1364"></A>A <I>type</I> 
+is characterized by a set of values, and a set of <I>primitive operations</I> 
+which implement the fundamental aspects of its semantics. <A NAME="I1365"></A>An 
+<I>object</I> of a given type is a run-time entity that contains (has) 
+a value of the type.&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>Each object has a type. 
+A <I>type</I> has an associated set of values, and a set of <I>primitive 
+operations</I> which implement the fundamental aspects of its semantics. 
+Types are grouped into <I>categories</I>. Most language-defined categories 
+of types are also <I>classes</I> of types.</div>
+<div class="paranum"><a name="p1.b">1.b/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A subtype is a type together 
+with a constraint or null exclusion, which constrains the values of the 
+subtype to satisfy a certain condition. The values of a subtype are a 
+subset of the values of its type.</div>
+<div class="paranum"><a name="p2">2/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+<A NAME="I1366"></A><A NAME="I1367"></A>Types are grouped into <I>categories</I> 
+of types. <A NAME="I1368"></A>There exist several <I>language-defined 
+categories</I> of types (see NOTES below), reflecting the similarity 
+of their values and primitive operations.<A NAME="I1369"></A> [Most categories 
+of types form <I>classes</I> of types.] <A NAME="I1370"></A><I>Elementary</I> 
+types are those whose values are logically indivisible; <A NAME="I1371"></A><A NAME="I1372"></A><I>composite</I> 
+types are those whose values are composed of <I>component</I> values. 
+<A NAME="I1373"></A></div>
+<div class="paranum"><a name="p2.a">2.a/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+The formal definition of <I>category</I> and <I>class</I> is found in 
+<A HREF="AA-3-4.html">3.4</A>.&nbsp;</div>
+<div class="paranum"><a name="p2.b">2.b/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B><A NAME="I1374"></A>A 
+class is a set of types that is closed under derivation, which means 
+that if a given type is in the class, then all types derived from that 
+type are also in the class. The set of types of a class share common 
+properties, such as their primitive operations.</div>
+<div class="paranum"><a name="p2.b.1">2.b.1/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A category of types is 
+a set of types with one or more common properties, such as primitive 
+operations. A category of types that is closed under derivation is also 
+known as a <I>class</I>.</div>
+<div class="paranum"><a name="p2.c">2.c</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An elementary type does 
+not have components.</div>
+<div class="paranum"><a name="p2.d">2.d/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A composite type may 
+have components.</div>
+<div class="paranum"><a name="p2.e">2.e</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A scalar type is either 
+a discrete type or a real type.</div>
+<div class="paranum"><a name="p2.f">2.f</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An access type has values 
+that designate aliased objects. Access types correspond to &ldquo;pointer 
+types&rdquo; or &ldquo;reference types&rdquo; in some other languages.</div>
+<div class="paranum"><a name="p2.g">2.g</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A discrete type is either 
+an integer type or an enumeration type. Discrete types may be used, for 
+example, in <SPAN Class="swiss"><A HREF="AA-5-4.html#S0140">case_statement</A></SPAN>s 
+and as array indices.</div>
+<div class="paranum"><a name="p2.h">2.h</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A real type has values 
+that are approximations of the real numbers. Floating point and fixed 
+point types are real types.</div>
+<div class="paranum"><a name="p2.i">2.i</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>Integer types comprise 
+the signed integer types and the modular types. A signed integer type 
+has a base range that includes both positive and negative numbers, and 
+has operations that may raise an exception when the result is outside 
+the base range. A modular type has a base range whose lower bound is 
+zero, and has operations with &ldquo;wraparound&rdquo; semantics. Modular 
+types subsume what are called &ldquo;unsigned types&rdquo; in some other 
+languages.</div>
+<div class="paranum"><a name="p2.j">2.j</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An enumeration type is 
+defined by an enumeration of its values, which may be named by identifiers 
+or character literals.</div>
+<div class="paranum"><a name="p2.k">2.k</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A character type is an 
+enumeration type whose values include characters.</div>
+<div class="paranum"><a name="p2.l">2.l</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A record type is a composite 
+type consisting of zero or more named components, possibly of different 
+types.</div>
+<div class="paranum"><a name="p2.m">2.m</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A record extension is 
+a type that extends another type by adding additional components.</div>
+<div class="paranum"><a name="p2.n">2.n</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An array type is a composite 
+type whose components are all of the same type. Components are selected 
+by indexing.</div>
+<div class="paranum"><a name="p2.o">2.o/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A task type is a composite 
+type used to represent active entities which execute concurrently and 
+which can communicate via queued task entries. The top-level task of 
+a partition is called the environment task.</div>
+<div class="paranum"><a name="p2.p">2.p/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A protected type is a 
+composite type whose components are accessible only through one of its 
+protected operations which synchronize concurrent access by multiple 
+tasks.</div>
+<div class="paranum"><a name="p2.q">2.q/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A private type gives 
+a view of a type that reveals only some of its properties. The remaining 
+properties are provided by the full view given elsewhere. Private types 
+can be used for defining abstractions that hide unnecessary details from 
+their clients.</div>
+<div class="paranum"><a name="p2.r">2.r/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A private extension is 
+a type that extends another type, with the additional properties hidden 
+from its clients.</div>
+<div class="paranum"><a name="p2.s">2.s/2</a></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An incomplete type gives 
+a view of a type that reveals only some of its properties. The remaining 
+properties are provided by the full view given elsewhere. Incomplete 
+types can be used for defining recursive data structures.</div>
+<div class="paranum"><a name="p3">3</a></div>
+<div class="Normal"><A NAME="I1375"></A>The elementary types are the 
+<I>scalar</I> types (<I>discrete</I> and <I>real</I>) and the <I>access</I> 
+types (whose values provide access to objects or subprograms). <A NAME="I1376"></A><A NAME="I1377"></A>Discrete 
+types are either <I>integer</I> types or are defined by enumeration of 
+their values (<I>enumeration</I> types). <A NAME="I1378"></A>Real types 
+are either <I>floating point</I> types or <I>fixed point</I> types.</div>
+<div class="paranum"><a name="p4">4/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+The composite types are the <I>record</I> types, <I>record extensions</I>, 
+<I>array</I> types, <I>interface</I> types, <I>task</I> types, and <I>protected</I> 
+types.&nbsp;</div>
+<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+</div>
+<div class="paranum"><a name="p4.1">4.1/2</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<A NAME="I1379"></A><A NAME="I1380"></A><A NAME="I1381"></A>There can 
+be multiple views of a type with varying sets of operations. [An <I>incomplete</I> 
+type represents an incomplete view (see <A HREF="AA-3-10-1.html">3.10.1</A>) 
+of a type with a very restricted usage, providing support for recursive 
+data structures. A <I>private</I> type or <I>private extension</I> represents 
+a partial view (see <A HREF="AA-7-3.html">7.3</A>) of a type, providing 
+support for data abstraction. The full view (see <A HREF="AA-3-2-1.html">3.2.1</A>) 
+of a type represents its complete definition.] An incomplete or partial 
+view is considered a composite type[, even if the full view is not]. 
+</div>
+<div class="paranum"><a name="p4.b">4.b/2</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>The real definitions of the views 
+are in the referenced clauses.&nbsp;</div>
+<div class="paranum"><a name="p5">5/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<A NAME="I1382"></A>Certain composite types (and views thereof) have 
+special components called <I>discriminants</I> whose values affect the 
+presence, constraints, or initialization of other components. Discriminants 
+can be thought of as parameters of the type.</div>
+<div class="paranum"><a name="p6">6/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+<A NAME="I1383"></A>The term <I>subcomponent</I> is used in this International 
+Standard in place of the term component to indicate either a component, 
+or a component of another subcomponent. Where other subcomponents are 
+excluded, the term component is used instead. <A NAME="I1384"></A>Similarly, 
+a <I>part</I> of an object or value is used to mean the whole object 
+or value, or any set of its subcomponents. The terms component, subcomponent, 
+and part are also applied to a type meaning the component, subcomponent, 
+or part of objects and values of the type.<A NAME="I1385"></A><A NAME="I1386"></A> 
+</div>
+<div class="paranum"><a name="p6.a">6.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The definition of &ldquo;part&rdquo; 
+here is designed to simplify rules elsewhere. By design, the intuitive 
+meaning of &ldquo;part&rdquo; will convey the correct result to the casual 
+reader, while this formalistic definition will answer the concern of 
+the compiler-writer.</div>
+<div class="paranum"><a name="p6.b">6.b</a></div>
+<div class="Annotations">We use the term &ldquo;part&rdquo; when talking 
+about the parent part, ancestor part, or extension part of a type extension. 
+In contexts such as these, the part might represent an empty set of subcomponents 
+(e.g. in a null record extension, or a nonnull extension of a null record). 
+We also use &ldquo;part&rdquo; when specifying rules such as those that 
+apply to an object with a &ldquo;controlled part&rdquo; meaning that 
+it applies if the object as a whole is controlled, or any subcomponent 
+is.&nbsp;</div>
+<div class="paranum"><a name="p7">7/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
+<A NAME="I1387"></A>The set of possible values for an object of a given 
+type can be subjected to a condition that is called a <I>constraint</I> 
+<A NAME="I1388"></A><A NAME="I1389"></A>(the case of a <I>null constraint</I> 
+that specifies no restriction is also included)[; the rules for which 
+values satisfy a given kind of constraint are given in <A HREF="AA-3-5.html">3.5</A> 
+for <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>s, 
+<A HREF="AA-3-6-1.html">3.6.1</A> for <SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0057">index_constraint</A></SPAN>s, 
+and <A HREF="AA-3-7-1.html">3.7.1</A> for <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>s]. 
+The set of possible values for an object of an access type can also be 
+subjected to a condition that excludes the null value (see <A HREF="AA-3-10.html">3.10</A>).</div>
+<div class="paranum"><a name="p8">8/2</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00415.TXT">AI95-00415-01</A></I>} 
+<A NAME="I1390"></A>A <I>subtype</I> of a given type is a combination 
+of the type, a constraint on values of the type, and certain attributes 
+specific to the subtype. The given type is called the <I>type of the 
+subtype</I>.<A NAME="I1391"></A> <A NAME="I1392"></A>Similarly, the associated 
+constraint is called the <I>constraint of the subtype</I>.<A NAME="I1393"></A> 
+<A NAME="I1394"></A> The set of values of a subtype consists of the values 
+of its type that satisfy its constraint and any exclusion of the null 
+value. <A NAME="I1395"></A>Such values <I>belong</I> to the subtype.<A NAME="I1396"></A> 
+<A NAME="I1397"></A></div>
+<div class="paranum"><a name="p8.a">8.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We make a strong distinction 
+between a type and its subtypes. In particular, a type is <I>not</I> 
+a subtype of itself. There is no constraint associated with a type (not 
+even a null one), and type-related attributes are distinct from subtype-specific 
+attributes.&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We no longer use the term 
+&quot;base type.&quot; All types were &quot;base types&quot; anyway in 
+Ada 83, so the term was redundant, and occasionally confusing. In the 
+RM95 we say simply &quot;the type <I>of</I> the subtype&quot; instead 
+of &quot;the base type of the subtype.&quot;&nbsp;</div>
+<div class="paranum"><a name="p8.c">8.c</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The value subset for a 
+subtype might be empty, and need not be a proper subset.&nbsp;</div>
+<div class="paranum"><a name="p8.d">8.d/2</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Any name of a category of types (such as &ldquo;discrete&rdquo;, &ldquo;real&rdquo;, 
+or &ldquo;limited&rdquo;) is also used to qualify its subtypes, as well 
+as its objects, values, declarations, and definitions, such as an &ldquo;integer 
+type declaration&rdquo; or an &ldquo;integer value.&rdquo; In addition, 
+if a term such as &ldquo;parent subtype&rdquo; or &ldquo;index subtype&rdquo; 
+is defined, then the corresponding term for the type of the subtype is 
+&ldquo;parent type&rdquo; or &ldquo;index type.&rdquo;&nbsp;</div>
+<div class="paranum"><a name="p8.e">8.e</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We use these corresponding 
+terms without explicitly defining them, when the meaning is obvious. 
+</div>
+<div class="paranum"><a name="p9">9</a></div>
+<div class="Normal"><A NAME="I1398"></A><A NAME="I1399"></A><A NAME="I1400"></A><A NAME="I1401"></A>A 
+subtype is called an <I>unconstrained</I> subtype if its type has unknown 
+discriminants, or if its type allows range, index, or discriminant constraints, 
+but the subtype does not impose such a constraint; otherwise, the subtype 
+is called a <I>constrained</I> subtype (since it has no unconstrained 
+characteristics).&nbsp;</div>
+<div class="paranum"><a name="p9.a">9.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>In an earlier version of 
+Ada 9X, &quot;constrained&quot; meant &quot;has a nonnull constraint.&quot; 
+However, we changed to this definition since we kept having to special 
+case composite non-array/nondiscriminated types. It also corresponds 
+better to the (now obsolescent) attribute 'Constrained.</div>
+<div class="paranum"><a name="p9.b">9.b</a></div>
+<div class="Annotations">For scalar types, &ldquo;constrained&rdquo; 
+means &ldquo;has a nonnull constraint&rdquo;. For composite types, in 
+implementation terms, &ldquo;constrained&rdquo; means that the size of 
+all objects of the subtype is the same, assuming a typical implementation 
+model.</div>
+<div class="paranum"><a name="p9.c">9.c</a></div>
+<div class="Annotations">Class-wide subtypes are always unconstrained. 
+</div>
+<div class="NotesHeader">NOTES</div>
+<div class="paranum"><a name="p10">10/2</a></div>
+<div class="Notes">2&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Any set of types can be called a &ldquo;category&rdquo; of types, and 
+any set of types that is closed under derivation (see <A HREF="AA-3-4.html">3.4</A>) 
+can be called a &ldquo;class&rdquo; of types. However, only certain categories 
+and classes are used in the description of the rules of the language 
+&mdash; generally those that have their own particular set of primitive 
+operations (see <A HREF="AA-3-2-3.html">3.2.3</A>), or that correspond 
+to a set of types that are matched by a given kind of generic formal 
+type (see <A HREF="AA-12-5.html">12.5</A>). <A NAME="I1402"></A>The following 
+are examples of &ldquo;interesting&rdquo; <I>language-defined classes</I>: 
+elementary, scalar, discrete, enumeration, character, boolean, integer, 
+signed integer, modular, real, floating point, fixed point, ordinary 
+fixed point, decimal fixed point, numeric, access, access-to-object, 
+access-to-subprogram, composite, array, string, (untagged) record, tagged, 
+task, protected, nonlimited. Special syntax is provided to define types 
+in each of these classes. In addition to these classes, the following 
+are examples of &ldquo;interesting&rdquo; <I>language-defined categories</I>: 
+<A NAME="I1403"></A>abstract, incomplete, interface, limited, private, 
+record.&nbsp;</div>
+<div class="paranum"><a name="p10.a">10.a</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1404"></A>A <I>value</I> 
+is a run-time entity with a given type which can be assigned to an object 
+of an appropriate subtype of the type. <A NAME="I1405"></A>An <I>operation</I> 
+is a program entity that operates on zero or more operands to produce 
+an effect, or yield a result, or both.&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b/2</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Note that a type's category (and class) depends on the place of the reference 
+&mdash; a private type is composite outside and possibly elementary inside. 
+It's really the <I>view</I> that is elementary or composite. Note that 
+although private types are composite, there are some properties that 
+depend on the corresponding full view &mdash; for example, parameter 
+passing modes, and the constraint checks that apply in various places.</div>
+<div class="paranum"><a name="p10.c">10.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Every property of types forms a category, but not every property of types 
+represents a class. For example, the set of all abstract types does not 
+form a class, because this set is not closed under derivation. Similarly, 
+the set of all interface types does not form a class.</div>
+<div class="paranum"><a name="p10.d">10.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+The set of limited types does not form a class (since nonlimited types 
+can inherit from limited interfaces), but the set of nonlimited types 
+does. The set of tagged record types and the set of tagged private types 
+do not form a class (because each of them can be extended to create a 
+type of the other category); that implies that the set of record types 
+and the set of private types also do not form a class (even though untagged 
+record types and untagged private types do form a class). In all of these 
+cases, we can talk about the category of the type; for instance, we can 
+talk about the &ldquo;category of limited types&rdquo;..</div>
+<div class="paranum"><a name="p10.e">10.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Normatively, the <I>language-defined classes</I> are those that are defined 
+to be inherited on derivation by <A HREF="AA-3-4.html">3.4</A>; other 
+properties either aren't interesting or form categories, not classes. 
+</div>
+<div class="paranum"><a name="p11">11/2</a></div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+These language-defined categories are organized like this:&nbsp;</div>
+<div class="paranum"><a name="p12">12/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+all&nbsp;types<BR>
+&nbsp;&nbsp;&nbsp;elementary<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scalar<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discrete<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enumeration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;character<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other&nbsp;enumeration<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;signed&nbsp;integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;modular&nbsp;integer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;real<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;floating&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ordinary&nbsp;fixed&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimal&nbsp;fixed&nbsp;point<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access-to-object<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access-to-subprogram<BR>
+&nbsp;&nbsp;&nbsp;composite<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;untagged<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other&nbsp;array<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;record<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;protected<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged&nbsp;(including&nbsp;interfaces)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nonlimited&nbsp;tagged&nbsp;record<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limited&nbsp;tagged<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limited&nbsp;tagged&nbsp;record<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;synchronized&nbsp;tagged<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged&nbsp;task<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tagged&nbsp;protected</div>
+<div class="paranum"><a name="p13">13/2</a></div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+There are other categories, such as &ldquo;numeric&rdquo; and &ldquo;discriminated&rdquo;, 
+which represent other categorization dimensions, but do not fit into 
+the above strictly hierarchical picture.&nbsp;</div>
+<div class="paranum"><a name="p13.a.1">13.a.1/2</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Note that this is also true for some categories mentioned in the chart. 
+The category &ldquo;task&rdquo; includes both untagged tasks and tagged 
+tasks. Similarly for &ldquo;protected&rdquo;, &ldquo;limited&rdquo;, 
+and &ldquo;nonlimited&rdquo; (note that limited and nonlimited are not 
+shown for untagged composite types).&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 83</H4>
+<div class="paranum"><a name="p13.a">13.a</a></div>
+<div class="Annotations">This clause and its subclauses now precede the 
+clause and subclauses on objects and named numbers, to cut down on the 
+number of forward references.</div>
+<div class="paranum"><a name="p13.b">13.b</a></div>
+<div class="Annotations">We have dropped the term &quot;base type&quot; 
+in favor of simply &quot;type&quot; (all types in Ada 83 were &quot;base 
+types&quot; so it wasn't clear when it was appropriate/necessary to say 
+&quot;base type&quot;). Given a subtype S of a type T, we call T the 
+&quot;type of the subtype S.&quot;&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 95</H4>
+<div class="paranum"><a name="p13.c">13.c/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
+Added a mention of null exclusions when we're talking about constraints 
+(these are not constraints, but they are similar).</div>
+<div class="paranum"><a name="p13.d">13.d/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
+Defined an interface type to be a composite type.</div>
+<div class="paranum"><a name="p13.e">13.e/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+Revised the wording so that it is clear that an incomplete view is similar 
+to a partial view in terms of the language.</div>
+<div class="paranum"><a name="p13.f">13.f/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
+Added a definition of component of a type, subcomponent of a type, and 
+part of a type. These are commonly used in the standard, but they were 
+not previously defined.</div>
+<div class="paranum"><a name="p13.g">13.g/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00442.TXT">AI95-00442-01</A></I>} 
+Reworded most of this clause to use category rather than class, since 
+so many interesting properties are not, strictly speaking, classes. Moreover, 
+there was no normative description of exactly which properties formed 
+classes, and which did not. The real definition of class, along with 
+a list of properties, is now in <A HREF="AA-3-4.html">3.4</A>.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-3-2-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>
