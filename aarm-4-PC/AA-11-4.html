@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,8 +37,8 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[When an exception occurrence is raised, normal program 
 execution is abandoned and control is transferred to an applicable <SPAN Class="swiss"><A HREF="AA-11-2.html#S0266">exception_handler</A></SPAN>, 
-if any. <A NAME="I5046"></A>To <I>handle</I> an exception occurrence 
-is to respond to the exceptional event. <A NAME="I5047"></A>To <I>propagate</I> 
+if any. <A NAME="I4988"></A>To <I>handle</I> an exception occurrence 
+is to respond to the exceptional event. <A NAME="I4989"></A>To <I>propagate</I> 
 an exception occurrence is to raise it again in another context; that 
 is, to fail to respond to the exceptional event in the present context.] 
 </div>
@@ -56,15 +54,15 @@ Tasking_Error; this is not propagation.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I5048"></A><A NAME="I5049"></A>Within a 
+<div class="Normal"><A NAME="I4990"></A><A NAME="I4991"></A>Within a 
 given task, if the execution of construct <I>a</I> is defined by this 
 International Standard to consist (in part) of the execution of construct 
 <I>b</I>, then while <I>b</I> is executing, the execution of <I>a</I> 
-is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I5050"></A>The 
+is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I4992"></A>The 
 <I>innermost dynamically enclosing</I> execution of a given execution 
 is the dynamically enclosing execution that started most recently.&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5051"></A><A NAME="I5052"></A>If 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I4993"></A><A NAME="I4994"></A>If 
 the execution of <I>a</I> dynamically encloses that of <I>b</I>, then 
 we also say that the execution of <I>b</I> is <I>included in</I> the 
 execution of <I>a</I>.&nbsp;</div>
@@ -92,7 +90,7 @@ after <B>then</B>, then the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-
 is no longer dynamically enclosed by the execution of the <SPAN Class="swiss"><A HREF="AA-5-3.html#S0153">if_statement</A></SPAN> 
 (or anything else).&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5053"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4995"></A>When 
 an exception occurrence is raised by the execution of a given construct, 
 the rest of the execution of that construct is <I>abandoned</I>; that 
 is, any portions of the execution that have not yet taken place are not 
@@ -119,16 +117,16 @@ of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statem
 that has a handler with a choice covering the exception, the occurrence 
 is handled by that handler;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I5054"></A>Otherwise, the occurrence is 
+<div class="Bulleted"><A NAME="I4996"></A>Otherwise, the occurrence is 
 <I>propagated</I> to the innermost dynamically enclosing execution, which 
 means that the occurrence is raised again in that context.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5055"></A><A NAME="I5056"></A>As 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I4997"></A><A NAME="I4998"></A>As 
 shorthands, we refer to the <I>propagation of an exception</I>, and the 
 <I>propagation by a construct</I>, if the execution of the construct 
 propagates an exception occurrence.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5057"></A><A NAME="I5058"></A><A NAME="I5059"></A>When 
+<div class="Normal"><A NAME="I4999"></A><A NAME="I5000"></A><A NAME="I5001"></A>When 
 an occurrence is <I>handled</I> by a given handler, the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0267">choice_parameter_specification</A></SPAN>, 
 if any, is first elaborated, which creates the choice parameter and initializes 
 it to the occurrence. Then, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
@@ -145,14 +143,13 @@ to the function.&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The rules for exceptions 
 raised in library units, main subprograms and partitions follow from 
 the normal rules, plus the semantics of the environment task described 
-in <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="AA-10.html">10</A> (for example, the environment task of a partition 
-elaborates library units and calls the main subprogram). If an exception 
-is propagated by the main subprogram, it is propagated to the environment 
-task, which then terminates abnormally, causing the partition to terminate 
-abnormally. Although abnormal termination of tasks is not necessarily 
-an error, abnormal termination of a partition due to an exception <I>is</I> 
-an error.&nbsp;</div>
+in Clause <A HREF="AA-10.html">10</A> (for example, the environment task 
+of a partition elaborates library units and calls the main subprogram). 
+If an exception is propagated by the main subprogram, it is propagated 
+to the environment task, which then terminates abnormally, causing the 
+partition to terminate abnormally. Although abnormal termination of tasks 
+is not necessarily an error, abnormal termination of a partition due 
+to an exception <I>is</I> an error.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Notes">2&nbsp;&nbsp;Note that exceptions raised in a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 

@@ -46,7 +46,7 @@ definitions add conditions to those in <A HREF="RM-A-5-3.html">A.5.3</A>.
 <div class="Normal" style="margin-bottom: 0.4em">For every subtype S 
 of a floating point type <I>T</I>:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8684"></A><A NAME="I8685"></A>Model_Mantissa 
+<div class="WideHanging-Term">S'<A NAME="I8669"></A><A NAME="I8670"></A>Model_Mantissa 
 </div><div class="WideHanging-Body"><br clear="left">
 Yields the number of digits in the mantissa of the canonical form of 
 the model numbers of <I>T</I> (see <A HREF="RM-A-5-3.html">A.5.3</A>). 
@@ -61,14 +61,14 @@ In addition, <I>T</I>'Model_Mantissa shall be less than or equal to the
 value of <I>T</I>'Machine_Mantissa. This attribute yields a value of 
 the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8686"></A><A NAME="I8687"></A>Model_Emin 
+<div class="WideHanging-Term">S'<A NAME="I8671"></A><A NAME="I8672"></A>Model_Emin 
 </div><div class="WideHanging-Body">
 Yields the minimum exponent of the canonical form of the model numbers 
 of <I>T</I> (see <A HREF="RM-A-5-3.html">A.5.3</A>). The value of this 
 attribute shall be greater than or equal to the value of <I>T</I>'Machine_Emin. 
 This attribute yields a value of the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8688"></A><A NAME="I8689"></A>Safe_First 
+<div class="WideHanging-Term">S'<A NAME="I8673"></A><A NAME="I8674"></A>Safe_First 
 </div><div class="WideHanging-Body">
 Yields the lower bound of the safe range of <I>T</I>. The value of this 
 attribute shall be a model number of <I>T</I> and greater than or equal 
@@ -83,7 +83,7 @@ otherwise, it shall be less than or equal to &ndash;10.0 <SUP><SPAN STYLE="font-
 where <SPAN Class="roman"><I>d</I></SPAN> is the requested decimal precision 
 of <I>T</I>. This attribute yields a value of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8690"></A><A NAME="I8691"></A>Safe_Last 
+<div class="WideHanging-Term">S'<A NAME="I8675"></A><A NAME="I8676"></A>Safe_Last 
 </div><div class="WideHanging-Body">
 Yields the upper bound of the safe range of <I>T</I>. The value of this 
 attribute shall be a model number of <I>T</I> and less than or equal 
@@ -98,13 +98,13 @@ otherwise, it shall be greater than or equal to 10.0 <SUP><SPAN STYLE="font-size
 where d is the requested decimal precision of <I>T</I>. This attribute 
 yields a value of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I8692"></A>S'<A NAME="I8693"></A><A NAME="I8694"></A>Model 
+<div class="WideHanging-Term"><A NAME="I8677"></A>S'<A NAME="I8678"></A><A NAME="I8679"></A>Model 
 </div><div class="WideHanging-Body">
 Denotes a function (of a parameter <I>X</I>) whose specification is given 
 in <A HREF="RM-A-5-3.html">A.5.3</A>. If <I>X</I> is a model number of 
 <I>T</I>, the function yields <I>X</I>; otherwise, it yields the value 
 obtained by rounding or truncating <I>X</I> to either one of the adjacent 
-model numbers of <I>T</I>. <A NAME="I8695"></A><A NAME="I8696"></A>Constraint_Error 
+model numbers of <I>T</I>. <A NAME="I8680"></A><A NAME="I8681"></A>Constraint_Error 
 is raised if the resulting model number is outside the safe range of 
 S. A zero result has the sign of <I>X</I> when S'Signed_Zeros is True. 
 </div>

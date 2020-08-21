@@ -46,14 +46,14 @@ specifies the internal codes for enumeration literals.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I5266"></A><A NAME="S0328"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5267"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5268"></A><SPAN Class="swiss"><A HREF="RM-13-4.html#S0329">enumeration_aggregate</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_representation_clause</SPAN><A NAME="I5254"></A><A NAME="S0328"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5255"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<A NAME="I5256"></A><SPAN Class="swiss"><A HREF="RM-13-4.html#S0329">enumeration_aggregate</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I5269"></A><A NAME="S0329"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5270"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">enumeration_aggregate</SPAN><A NAME="I5257"></A><A NAME="S0329"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5258"></A><SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5271"></A>The <SPAN Class="swiss"><A HREF="RM-13-4.html#S0329">enumeration_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I5259"></A>The <SPAN Class="swiss"><A HREF="RM-13-4.html#S0329">enumeration_aggregate</A></SPAN> 
 shall be written as a one-dimensional <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 for which the index subtype is the unconstrained subtype of the enumeration 
 type, and each component expression is expected to be of any integer 
@@ -75,10 +75,10 @@ predefined ordering relation of the type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5272"></A>An <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumeration_representation_clause</A></SPAN> 
-specifies the <I>coding</I> aspect of representation. <A NAME="I5273"></A>The 
+<div class="Normal"><A NAME="I5260"></A>An <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumeration_representation_clause</A></SPAN> 
+specifies the <I>coding</I> aspect of representation. <A NAME="I5261"></A>The 
 coding consists of the <I>internal code</I> for each enumeration literal, 
-that is, the integral value used internally to represent each literal.<A NAME="I5274"></A><A NAME="I5275"></A></div>
+that is, the integral value used internally to represent each literal.<A NAME="I5262"></A><A NAME="I5263"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p8">8</a></div>
@@ -88,7 +88,7 @@ code shall be equal to its position number.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5276"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5264"></A>The 
 recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumeration_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -104,20 +104,20 @@ every discrete subtype S, the following attributes are defined:</span>
 </div>
 <div class="paranum"><a name="p10.2">10.2/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">S'Enum_Rep</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I5277"></A><A NAME="I5278"></A></span><span class="insert5">S'Enum_Rep 
+<span class="insert5"><A NAME="I5265"></A><A NAME="I5266"></A></span><span class="insert5">S'Enum_Rep 
 denotes a function with the following specification:</span>&nbsp;</div>
 <div class="paranum"><a name="p10.3">10.3/5</a></div>
 <div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Enum_Rep&nbsp;(Arg&nbsp;:&nbsp;S'Base)&nbsp;<B>return</B>&nbsp;<I>universal_integer</I></span></div>
 <div class="paranum"><a name="p10.4">10.4/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">This function returns 
 the representation value of the value of Arg, as a value of type <I>universal_integer</I>. 
-The <I>representation value</I><A NAME="I5279"></A> is<A NAME="I5280"></A> 
+The <I>representation value</I><A NAME="I5267"></A> is<A NAME="I5268"></A> 
 the internal code specified in an enumeration representation clause, 
 if any, for the type corresponding to the value of Arg, and otherwise 
 is the position number of the value.</span></div>
 <div class="paranum"><a name="p10.5">10.5/5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert5">S'Enum_Val</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I5281"></A><A NAME="I5282"></A></span><span class="insert5">S'Enum_Val 
+<span class="insert5"><A NAME="I5269"></A><A NAME="I5270"></A></span><span class="insert5">S'Enum_Val 
 denotes a function with the following specification:</span>&nbsp;</div>
 <div class="paranum"><a name="p10.6">10.6/5</a></div>
 <div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Enum_Val&nbsp;(Arg&nbsp;:&nbsp;<I>universal_integer</I>)&nbsp;<B>return</B>&nbsp;S'Base</span></div>

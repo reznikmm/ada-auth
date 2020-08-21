@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,30 +45,30 @@ mappings.&nbsp;</div>
 Strings.Maps has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I6445"></A><B>package</B>&nbsp;Ada.Strings.Maps&nbsp;<B>is</B><BR>
+<A NAME="I6344"></A><B>package</B>&nbsp;Ada.Strings.Maps&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Maps);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Representation&nbsp;for&nbsp;a&nbsp;set&nbsp;of&nbsp;character&nbsp;values:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6446"></A>Character_Set&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6345"></A>Character_Set&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Character_Set);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6447"></A>Null_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Character_Set;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6346"></A>Null_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6448"></A>Character_Range&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6347"></A>Character_Range&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;:&nbsp;Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;:&nbsp;Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;<BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Represents&nbsp;Character&nbsp;range&nbsp;Low..High</I></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6449"></A>Character_Ranges&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character_Range;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6348"></A>Character_Ranges&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character_Range;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6450"></A>To_Set&nbsp;&nbsp;&nbsp;&nbsp;(Ranges&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Ranges)<B>return</B>&nbsp;Character_Set;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6349"></A>To_Set&nbsp;&nbsp;&nbsp;&nbsp;(Ranges&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Ranges)<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6451"></A>To_Set&nbsp;&nbsp;&nbsp;&nbsp;(Span&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Range)<B>return</B>&nbsp;Character_Set;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6350"></A>To_Set&nbsp;&nbsp;&nbsp;&nbsp;(Span&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Range)<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6452"></A>To_Ranges&nbsp;(Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;&nbsp;<B>return</B>&nbsp;Character_Ranges;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6351"></A>To_Ranges&nbsp;(Set&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;&nbsp;<B>return</B>&nbsp;Character_Ranges;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -80,11 +78,11 @@ Strings.Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>xor</B>&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6453"></A>Is_In&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Character;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6352"></A>Is_In&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6454"></A>Is_Subset&nbsp;(Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6353"></A>Is_Subset&nbsp;(Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p15">15</a></div>
@@ -93,34 +91,34 @@ Strings.Maps has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>renames</B>&nbsp;Is_Subset;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Alternative&nbsp;representation&nbsp;for&nbsp;a&nbsp;set&nbsp;of&nbsp;character&nbsp;values:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6455"></A>Character_Sequence&nbsp;<B>is</B>&nbsp;String;</div>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6354"></A>Character_Sequence&nbsp;<B>is</B>&nbsp;String;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6456"></A>To_Set&nbsp;(Sequence&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Sequence)<B>return</B>&nbsp;Character_Set;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6355"></A>To_Set&nbsp;(Sequence&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Sequence)<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6457"></A>To_Set&nbsp;(Singleton&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character_Set;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6356"></A>To_Set&nbsp;(Singleton&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6458"></A>To_Sequence&nbsp;(Set&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character_Sequence;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6357"></A>To_Sequence&nbsp;(Set&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character_Sequence;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Representation&nbsp;for&nbsp;a&nbsp;character&nbsp;to&nbsp;character&nbsp;mapping:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6459"></A>Character_Mapping&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6358"></A>Character_Mapping&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Character_Mapping);</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6460"></A>Value&nbsp;(Map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Mapping;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6359"></A>Value&nbsp;(Map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Mapping;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in</B>&nbsp;Character)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6461"></A>Identity&nbsp;:&nbsp;<B>constant</B>&nbsp;Character_Mapping;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6360"></A>Identity&nbsp;:&nbsp;<B>constant</B>&nbsp;Character_Mapping;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6462"></A>To_Mapping&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Sequence)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6361"></A>To_Mapping&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Sequence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character_Mapping;</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6463"></A>To_Domain&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Mapping)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6362"></A>To_Domain&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Mapping)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character_Sequence;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6464"></A>To_Range&nbsp;&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Mapping)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6363"></A>To_Range&nbsp;&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Mapping)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Character_Sequence;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6465"></A>Character_Mapping_Function&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6364"></A>Character_Mapping_Function&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access</B>&nbsp;<B>function</B>&nbsp;(From&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;Character;</div>
 <div class="paranum"><a name="p26">26</a></div>
 <div class="Examples"><B>private</B><BR>
@@ -141,8 +139,8 @@ the union of the sets corresponding to Obj(I) for I in Obj'Range.&nbsp;</div>
 <div class="Examples"><B>function</B>&nbsp;To_Set&nbsp;(Ranges&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Ranges)&nbsp;<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p32">32/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-If Ranges'Length=0 then Null_Set is returned; otherwise<span class="insert3">,</span> 
-the returned value represents the set corresponding to Ranges.</div>
+If Ranges'Length=0 then Null_Set is returned; otherwise, the returned 
+value represents the set corresponding to Ranges.</div>
 <div class="paranum"><a name="p33">33</a></div>
 <div class="Examples"><B>function</B>&nbsp;To_Set&nbsp;(Span&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Range)&nbsp;<B>return</B>&nbsp;Character_Set;</div>
 <div class="paranum"><a name="p34">34</a></div>
@@ -152,10 +150,9 @@ each character in Span.&nbsp;</div>
 <div class="Examples"><B>function</B>&nbsp;To_Ranges&nbsp;(Set&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Character_Ranges;</div>
 <div class="paranum"><a name="p36">36/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-If Set = Null_Set<span class="insert3">,</span> then an empty Character_Ranges 
-array is returned; otherwise<span class="insert3">,</span> the shortest 
-array of contiguous ranges of Character values in Set, in increasing 
-order of Low, is returned.</div>
+If Set = Null_Set, then an empty Character_Ranges array is returned; 
+otherwise, the shortest array of contiguous ranges of Character values 
+in Set, in increasing order of Low, is returned.</div>
 <div class="paranum"><a name="p37">37</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Character_Set)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p38">38</a></div>
@@ -228,9 +225,9 @@ Character_Mapping represents a Character-to-Character mapping.</div>
 returns the Character value to which Element maps with respect to the 
 mapping represented by Map.&nbsp;</div>
 <div class="paranum"><a name="p54">54</a></div>
-<div class="Normal"><A NAME="I6466"></A>A character C <I>matches</I> 
+<div class="Normal"><A NAME="I6365"></A>A character C <I>matches</I> 
 a pattern character P with respect to a given Character_Mapping value 
-Map if Value(Map, C) = P. <A NAME="I6467"></A>A string S <I>matches</I> 
+Map if Value(Map, C) = P. <A NAME="I6366"></A>A string S <I>matches</I> 
 a pattern string P with respect to a given Character_Mapping if their 
 lengths are the same and if each character in S matches its corresponding 
 character in the pattern string P.&nbsp;</div>
@@ -277,7 +274,7 @@ D'Range.&nbsp;</div>
 <div class="paranum"><a name="p64">64</a></div>
 <div class="Normal">An object F of type Character_Mapping_Function maps 
 a Character value C to the Character value F.<B>all</B>(C), which is 
-said to <I>match</I> C with respect to mapping function F. <A NAME="I6468"></A></div>
+said to <I>match</I> C with respect to mapping function F. <A NAME="I6367"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p65">65</a></div>
 <div class="Notes">10&nbsp;&nbsp;Character_Mapping and Character_Mapping_Function 
@@ -300,7 +297,7 @@ a Character_Mapping that maps 'A' and 'B' to 'Z', 'C' to 'A', 'D' to
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p67.a">67.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-<A NAME="I6469"></A><B>Amendment Correction:</B> Added <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I6368"></A><B>Amendment Correction:</B> Added <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborable_Initialization to types Character_Set and Character_Mapping, 
 so that they can be used to declare default-initialized objects in preelaborated 
 units.</div>

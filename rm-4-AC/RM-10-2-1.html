@@ -23,16 +23,16 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -75,8 +75,7 @@ any of the following actions:&nbsp;</div>
 other than a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0149">null_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Bulleted">A call to a subprogram other than a static function. 
-</div>
+<div class="Bulleted">A call to a subprogram other than a static function.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Bulleted">The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">primary</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
@@ -96,7 +95,7 @@ similarly</span> the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html
 with an ancestor <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denoting a subtype of such a type.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"></span>A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"></span>A 
 generic body is preelaborable only if elaboration of a corresponding 
 instance body would not perform any such actions, presuming that<span class="insert2">:</span><span class="delete2">&nbsp;the actual for each formal private type (or extension) is a private type 
 (or extension), and the actual for each formal subprogram is a user-defined 
@@ -118,7 +117,7 @@ object is nonstatic; and</span></div>
 <div class="Bulleted"><span class="insert2">the actual for each formal 
 subprogram is a user-defined subprogram.</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I4663"></A><span class="insert3">A</span><span class="delete3">&nbsp;If 
+<div class="Normal">&nbsp;<A NAME="I4663"></A><span class="insert3">A</span><span class="delete3">&nbsp;If 
 a</span> <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborate (or <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pure &mdash; see below) <span class="insert3">is used to specify that</span><span class="delete3">&nbsp;applies 
@@ -143,8 +142,8 @@ of the partition.</span><span class="delete3">&nbsp;In addition, all compilation
 units of a preelaborated library unit shall depend semantically only 
 on compilation units of other preelaborated library units.</span>&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I4669"></A>The following 
-rules specify which entities have <I>preelaborable initialization</I>:</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I4669"></A>The 
+following rules specify which entities have <I>preelaborable initialization</I>:</span></div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
 <div class="Bulleted"><span class="insert2">The partial view of a private 
 type or private extension, a protected type without <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>s, 
@@ -176,12 +175,12 @@ initialization if it is an elementary type, an array type whose component
 type has preelaborable initialization, a record type whose components 
 all have preelaborable initialization, or an interface type.</span>&nbsp;</div>
 <div class="paranum"><a name="p11.6">11.6/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborable_Initialization specifies that a type has preelaborable 
 initialization. This pragma shall appear in the visible part of a package 
 or generic package.</span></div>
 <div class="paranum"><a name="p11.7">11.7/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the pragma appears in 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">If the pragma appears in 
 the first list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
@@ -201,7 +200,7 @@ where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>),
 these rules apply also in the private part of an instance of a generic 
 unit.</span></div>
 <div class="paranum"><a name="p11.8">11.8/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 appears in a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0274">generic_formal_part</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
 shall denote a generic formal private type or a generic formal derived 
@@ -230,7 +229,7 @@ Pure is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p15.1">15.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2"><A NAME="I4676"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I4676"></A>A 
 <I>pure</I>&nbsp;</span><span class="insert3">compilation unit</span><span class="insert2"></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">&nbsp;library_item</A></SPAN></span></span><span class="insert2">&nbsp;is a preelaborable&nbsp;</span><span class="insert3">compilation unit</span><span class="insert2"></span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">&nbsp;library_item</A></SPAN></span></span><span class="insert2">&nbsp;whose elaboration does not perform any of the following actions:</span></div>
 <div class="paranum"><a name="p15.2">15.2/2</a></div>
 <div class="Bulleted"><span class="insert2">the elaboration of a variable 
@@ -252,26 +251,26 @@ of a&nbsp;</span><span class="insert3">nonderived&nbsp;</span><span class="inser
 access-to-constant type for which the Storage_Size has been specified 
 by an expression other than a static expression with value zero.</span></div>
 <div class="paranum"><a name="p15.6">15.6/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">A generic body is pure only 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">A generic body is pure only 
 if elaboration of a corresponding instance body would not perform any 
 such actions presuming any composite formal types have nonvisible components 
 whose default initialization evaluates an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 of an access-to-variable type.</span></div>
 <div class="paranum"><a name="p15.7">15.7/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The Storage_Size for an anonymous 
-access-to-variable type declared at library level in a library unit that 
-is declared pure is defined to be zero.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The Storage_Size for an 
+anonymous access-to-variable type declared at library level in a library 
+unit that is declared pure is defined to be zero.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN><span class="delete2"><A NAME="I4677"></A>A <I>pure</I> 
 <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
 is a preelaborable <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
 that does not contain the declaration of any variable or named access 
 within a subprogram, generic subprogram, task unit, or protected unit.</span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I4678"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I4678"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Pure is used to <span class="insert3">specify</span><span class="delete3">&nbsp;declare</span> 
 that a library unit is <span class="insert3"><I>declared pure</I>, namely 
 that the Pure aspect<A NAME="I4679"></A><A NAME="I4680"></A> of the library 
@@ -292,14 +291,14 @@ streaming (see <A HREF="RM-13-13-2.html">13.13.2</A>).</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p17.1">17.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">Execution is erroneous if 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Execution is erroneous if 
 some operation (other than the initialization or finalization of the 
 object) modifies the value of a constant object declared at library-level 
 in a pure package.</span></div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">If a library unit is declared pure, then the implementation 
+<div class="Normal">&nbsp;If a library unit is declared pure, then the implementation 
 is permitted to omit a call on a library-level subprogram of the library 
 unit if the results are not needed after the call. <span class="insert2">In 
 addition, the implementation</span><span class="delete2">&nbsp;Similarly, 
@@ -337,21 +336,21 @@ Elaborate_Body is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Normal"><A NAME="I4695"></A>If <span class="insert3">the 
+<div class="Normal">&nbsp;<A NAME="I4695"></A>If <span class="insert3">the 
 aspect</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Elaborate_Body <span class="insert3">is True for</span><span class="delete3">&nbsp;applies 
 to</span> a declaration<span class="insert3">&nbsp;(including when <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate_Body applies)</span>, then the declaration requires a completion 
 (a body).<span class="insert3"><A NAME="I4696"></A></span></div>
 <div class="paranum"><a name="p25.1">25.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The <I>library_unit_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The <I>library_unit_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate or Elaborate_All shall denote a nonlimited view of a library 
 unit.</span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate specifies that the body of the named library unit is elaborated 
 before the current <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
 A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Elaborate_All 
@@ -361,7 +360,7 @@ the current <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A><
 specifies that the body of the library unit is elaborated immediately 
 after its declaration.</span></div>
 <div class="paranum"><a name="p26.1">26.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Elaborate_Body sets the Elaborate_Body representation aspect of the library 
 unit to which it applies to the value True. If the Elaborate_Body aspect 
 of a library unit is True, the body of the library unit is elaborated 

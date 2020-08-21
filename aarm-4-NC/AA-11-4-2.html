@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,7 +40,7 @@
 Pragma Assert is used to assert the truth of a boolean expression at 
 a point within a sequence of declarations or statements.</div>
 <div class="paranum"><a name="p1.1">1.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 Assert pragmas, subtype predicates (see <A HREF="AA-3-2-4.html">3.2.4</A>), 
 preconditions and postconditions (see <A HREF="AA-6-1-1.html">6.1.1</A>), 
 and type invariants (see <A HREF="AA-7-3-2.html">7.3.2</A>) are collectively 
@@ -69,7 +69,7 @@ Assert, a predicate, a precondition, a postcondition, an invariant, a
 constraint, or a null exclusion. An assertion is expected to be True 
 at run time at certain specified places.</div>
 <div class="paranum"><a name="p1.2">1.2/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 Pragma Assertion_Policy is used to control whether assertions are to 
 be ignored by the implementation, checked at run time, or handled in 
 some implementation-defined manner.&nbsp;</div>
@@ -144,7 +144,7 @@ Assertion_Policy.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Assertion_Policy 
 determines for each assertion aspect named in the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
@@ -162,12 +162,12 @@ and if static, will still have an effect on loop iteration over the subtype,
 and the selection of <SPAN Class="swiss"><A HREF="AA-5-4.html#S0155">case_statement_alternative</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s.]</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 If no <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0308">aspect_mark</A></SPAN>s 
 are specified in the pragma, the specified policy applies to all assertion 
 aspects.</div>
 <div class="paranum"><a name="p10.2">10.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Assertion_Policy 
 applies to the named assertion aspects in a specific region, and applies 
 to all assertion expressions specified in that region. A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -178,7 +178,7 @@ declarative region. The region for a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0
 Assertion_Policy given as a configuration pragma is the declarative region 
 for the entire compilation unit (or units) to which it applies.</div>
 <div class="paranum"><a name="p10.3">10.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0276">generic_instantiation</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -190,7 +190,7 @@ unit but not also enclosing the declaration of a given instance of that
 generic unit will not apply to assertion expressions occurring within 
 the given instance.&nbsp;</div>
 <div class="paranum"><a name="p10.4">10.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 If multiple Assertion_Policy pragmas apply to a given construct for a 
 given assertion aspect, the assertion policy is determined by the one 
 in the innermost enclosing region of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -200,7 +200,7 @@ such Assertion_Policy pragma exists, the policy is implementation defined.</div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The default assertion 
 policy.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 The following language-defined library package exists:</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Examples"><A NAME="I5034"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
@@ -213,19 +213,19 @@ The following language-defined library package exists:</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Assertions;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 A compilation unit containing a check for an assertion (including a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert) has a semantic dependence on the Assertions library unit.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 If performing checks is required by the Assert assertion policy in effect 
 at the place of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -234,7 +234,7 @@ expression, and if the result is False, evaluating the Message argument,
 if any, and raising the exception Assertions.Assertion_Error, with a 
 message if the Message argument is provided.<A NAME="I5038"></A><A NAME="I5039"></A></div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 Calling the procedure Assertions.Assert without a Message parameter is 
 equivalent to:</div>
 <div class="paranum"><a name="p20">20/2</a></div>
@@ -242,7 +242,7 @@ equivalent to:</div>
 &nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;Ada.Assertions.Assertion_Error;<BR>
 <B>end</B>&nbsp;<B>if</B>;</div>
 <div class="paranum"><a name="p21">21/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 Calling the procedure Assertions.Assert with a Message parameter is equivalent 
 to:</div>
 <div class="paranum"><a name="p22">22/2</a></div>
@@ -250,13 +250,13 @@ to:</div>
 &nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;Ada.Assertions.Assertion_Error&nbsp;<B>with</B>&nbsp;Message;<BR>
 <B>end</B>&nbsp;<B>if</B>;</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 The procedures Assertions.Assert have these effects independently of 
 the assertion policy in effect.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p23.1">23.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 It is a bounded error to invoke a potentially blocking operation (see 
 <A HREF="AA-9-5-1.html">9.5.1</A>) during the evaluation of an assertion 
 expression associated with a call on, or return from, a protected operation. 
@@ -266,7 +266,7 @@ action, it might result in deadlock or a (nested) protected action.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 Assertion_Error may be declared by renaming an implementation-defined 
 exception from another package.&nbsp;</div>
 <div class="paranum"><a name="p24.a">24.a/2</a></div>
@@ -276,16 +276,16 @@ to continue to use their originally defined exception. Without this permission,
 such an implementation would be incorrect, as Exception_Name would return 
 the wrong name.&nbsp;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 Implementations may define their own assertion policies.</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 If the result of a function call in an assertion is not needed to determine 
 the value of the assertion expression, an implementation is permitted 
 to omit the function call. [This permission applies even if the function 
 has side effects.]</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 An implementation need not allow the specification of an assertion expression 
 if the evaluation of the expression has a side effect such that an immediate 
 reevaluation of the expression could produce a different value. Similarly, 
@@ -319,15 +319,15 @@ the value of a reevaluation of the precondition expression.&nbsp;</div>
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p27.d">27.d/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
-Our intent is that any assertion expression that violates this Implementation 
-Permission is considered pathological. We definitely want compilers to 
-be able to assume that if you evaluate an assertion expression once and 
-it is True, you don't need to evaluate it again if all you are doing 
-in the mean time is evaluating assertion expressions. We were unable 
-to find wording that had this effect that didn't throw out important 
-other cases (logging, memo functions), so we settled for a strong warning 
-that compilers can reject such pathologies. Perhaps in a future version 
-of Ada we'll be able to tighten this up.&nbsp;</div>
+Our intent is that any assertion expression that violates this ImplPerm 
+is considered pathological. We definitely want compilers to be able to 
+assume that if you evaluate an assertion expression once and it is True, 
+you don't need to evaluate it again if all you are doing in the mean 
+time is evaluating assertion expressions. We were unable to find wording 
+that had this effect that didn't throw out important other cases (logging, 
+memo functions), so we settled for a strong warning that compilers can 
+reject such pathologies. Perhaps in a future version of Ada we'll be 
+able to tighten this up.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Notes">3&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 

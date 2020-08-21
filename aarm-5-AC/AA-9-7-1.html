@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,52 +41,52 @@
 <HR>
 <H1>9.7.1 Selective Accept</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[This form of the <SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN> 
+<div class="Normal">[This form of the <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN> 
 allows a combination of waiting for, and selecting from, one or more 
 alternatives. The selection may depend on conditions associated with 
-each alternative of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN>. 
-<A NAME="I4832"></A>]</div>
+each alternative of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN>. 
+<A NAME="I5021"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">selective_accept</SPAN><A NAME="I4833"></A><A NAME="S0234"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">selective_accept</SPAN><A NAME="I5022"></A><A NAME="S0248"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I4834"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0235">guard</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4835"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0236">select_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I5023"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0249">guard</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5024"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0250">select_alternative</A></SPAN><BR>
 {&nbsp;<B>or</B><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I4836"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0235">guard</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4837"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0236">select_alternative</A></SPAN>&nbsp;}<BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I5025"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0249">guard</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5026"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0250">select_alternative</A></SPAN>&nbsp;}<BR>
 [&nbsp;<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4838"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>&nbsp;]<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5027"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>&nbsp;]<BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">guard</SPAN><A NAME="I4839"></A><A NAME="S0235"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>when</B>&nbsp;<A NAME="I4840"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN>&nbsp;=&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">guard</SPAN><A NAME="I5028"></A><A NAME="S0249"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>when</B>&nbsp;<A NAME="I5029"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>&nbsp;=&gt;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">select_alternative</SPAN><A NAME="I4841"></A><A NAME="S0236"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4842"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I4843"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I4844"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">select_alternative</SPAN><A NAME="I5030"></A><A NAME="S0250"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5031"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I5032"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I5033"></A><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">accept_alternative</SPAN><A NAME="I4845"></A><A NAME="S0237"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I4846"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>&nbsp;[<A NAME="I4847"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">accept_alternative</SPAN><A NAME="I5034"></A><A NAME="S0251"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I5035"></A><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>&nbsp;[<A NAME="I5036"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">delay_alternative</SPAN><A NAME="I4848"></A><A NAME="S0238"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I4849"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN>&nbsp;[<A NAME="I4850"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">delay_alternative</SPAN><A NAME="I5037"></A><A NAME="S0252"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I5038"></A><SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN>&nbsp;[<A NAME="I5039"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">terminate_alternative</SPAN><A NAME="I4851"></A><A NAME="S0239"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>terminate</B>;</div>
+<div class="Indented1"><SPAN Class="swiss">terminate_alternative</SPAN><A NAME="I5040"></A><A NAME="S0253"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>terminate</B>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
-shall contain at least one <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN>. 
+<div class="Indented1" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN> 
+shall contain at least one <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN>. 
 In addition, it can contain:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Indented2Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
+<div class="Indented2Bulleted">a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
 (only one); or</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Indented2Bulleted">one or more <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>s; 
+<div class="Indented2Bulleted">one or more <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>s; 
 or</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Indented2Bulleted"><A NAME="I4852"></A>an <I>else part</I> 
-(the reserved word <B>else</B> followed by a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>). 
+<div class="Indented2Bulleted"><A NAME="I5041"></A>an <I>else part</I> 
+(the reserved word <B>else</B> followed by a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>). 
 </div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Indented1">These three possibilities are mutually exclusive. 
@@ -94,10 +94,10 @@ or</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal">If a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
-contains more than one <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>, 
-then all shall be <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN>s, 
-or all shall be <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN>s 
+<div class="Normal">If a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN> 
+contains more than one <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>, 
+then all shall be <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN>s, 
+or all shall be <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN>s 
 for the same time type.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This simplifies the implementation 
@@ -105,79 +105,79 @@ and the description of the semantics.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I4853"></A>A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0236">select_alternative</A></SPAN> 
-is said to be <I>open</I> if it is not immediately preceded by a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0235">guard</A></SPAN>, 
-or if the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN> 
-of its <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0235">guard</A></SPAN> 
+<div class="Normal"><A NAME="I5042"></A>A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0250">select_alternative</A></SPAN> 
+is said to be <I>open</I> if it is not immediately preceded by a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0249">guard</A></SPAN>, 
+or if the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
+of its <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0249">guard</A></SPAN> 
 evaluates to True. It is said to be <I>closed</I> otherwise.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I4854"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN>, 
-any <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0235">guard</A></SPAN> 
-<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN>s 
-are evaluated; open alternatives are thus determined. For an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>, 
-the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is also evaluated. Similarly, for an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN> 
-for an entry of a family, the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0223">entry_index</A></SPAN> 
+<div class="Normal"><A NAME="I5043"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN>, 
+any <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0249">guard</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>s 
+are evaluated; open alternatives are thus determined. For an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>, 
+the <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is also evaluated. Similarly, for an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN> 
+for an entry of a family, the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0237">entry_index</A></SPAN> 
 is also evaluated. These evaluations are performed in an arbitrary order, 
-except that a <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0223">entry_index</A></SPAN> 
-is not evaluated until after evaluating the corresponding <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN>, 
+except that a <I>delay_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0237">entry_index</A></SPAN> 
+is not evaluated until after evaluating the corresponding <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>, 
 if any. Selection and execution of one open alternative, or of the else 
-part, then completes the execution of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN>; 
-the rules for this selection are described below.<A NAME="I4855"></A></div>
+part, then completes the execution of the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN>; 
+the rules for this selection are described below.<A NAME="I5044"></A></div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal">Open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN>s 
+<div class="Normal">Open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN>s 
 are first considered. Selection of one such alternative takes place immediately 
 if the corresponding entry already has queued calls. If several alternatives 
 can thus be selected, one of them is selected according to the entry 
 queuing policy in effect (see <A HREF="AA-9-5-3.html">9.5.3</A> and <A HREF="AA-D-4.html">D.4</A>). 
 When such an alternative is selected, the selected call is removed from 
-its entry queue and the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
-(if any) of the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-is executed; after the rendezvous completes any subsequent <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-of the alternative is executed. <A NAME="I4856"></A>If no selection is 
+its entry queue and the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
+(if any) of the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+is executed; after the rendezvous completes any subsequent <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of the alternative is executed. <A NAME="I5045"></A>If no selection is 
 immediately possible (in the above sense) and there is no else part, 
 the task blocks until an open alternative can be selected.</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">Selection of the other 
 forms of alternative or of an else part is performed as follows:&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Bulleted">An open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
-is selected when its expiration time is reached if no <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN> 
-or other <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
-can be selected prior to the expiration time. If several <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>s 
+<div class="Bulleted">An open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN> 
+is selected when its expiration time is reached if no <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN> 
+or other <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN> 
+can be selected prior to the expiration time. If several <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>s 
 have this same expiration time, one of them is selected according to 
 the queuing policy in effect (see <A HREF="AA-D-4.html">D.4</A>); the 
-default queuing policy chooses arbitrarily among the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>s 
+default queuing policy chooses arbitrarily among the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>s 
 whose expiration time has passed.</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Bulleted">The else part is selected and its <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-is executed if no <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN> 
+<div class="Bulleted">The else part is selected and its <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+is executed if no <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN> 
 can immediately be selected; in particular, if all alternatives are closed.</div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-An open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
+An open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
 is selected if the conditions stated at the end of <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 <A HREF="AA-9-3.html">9.3</A> are satisfied.&nbsp;</div>
 <div class="paranum"><a name="p20.a">20.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>In the absence of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>, 
-the conditions stated are such that a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>In the absence of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>, 
+the conditions stated are such that a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
 cannot be selected while there is a queued entry call for any entry of 
 the task. In the presence of requeues from a task to one of its subtasks, 
-it is possible that when a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
+it is possible that when a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
 of the subtask is selected, requeued calls (for closed entries only) 
 might still be queued on some entry of the subtask. Tasking_Error will 
 be propagated to such callers, as is usual when a task completes while 
 queued callers remain.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal"><A NAME="I4857"></A>The exception Program_Error is 
+<div class="Normal"><A NAME="I5046"></A>The exception Program_Error is 
 raised if all alternatives are closed and there is no else part.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Notes">40&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
-is allowed to have several open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>s. 
-A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
-is allowed to have several open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN>s 
+<div class="Notes">40&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN> 
+is allowed to have several open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>s. 
+A <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN> 
+is allowed to have several open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN>s 
 for the same entry.</div>
 
 <H4 Class="centered">Examples</H4>
@@ -206,10 +206,10 @@ body with a selective accept:</I>&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p24.a">24.a</a></div>
 <div class="Annotations">The name of <SPAN Class="swiss">selective_wait</SPAN> 
-was changed to <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">selective_accept</A></SPAN> 
-to better describe what is being waited for. We kept <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0236">select_alternative</A></SPAN> 
+was changed to <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0248">selective_accept</A></SPAN> 
+to better describe what is being waited for. We kept <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0250">select_alternative</A></SPAN> 
 as is, because <SPAN Class="swiss">selective_accept_alternative</SPAN> 
-was too easily confused with <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0237">accept_alternative</A></SPAN>. 
+was too easily confused with <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0251">accept_alternative</A></SPAN>. 
 </div>
 
 <HR>

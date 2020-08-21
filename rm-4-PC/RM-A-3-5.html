@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,212 +32,210 @@
 &nbsp;<A HREF="RM-A-3-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>A.3.5 <span class="insert3">The Package Wide_Characters.Handling</span><span class="delete3"></span></H1>
+<H1>A.3.5 The Package Wide_Characters.Handling</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><span class="insert3">The package Wide_Characters.Handling 
-provides operations for classifying Wide_Characters and case folding 
-for Wide_Characters.</span>&nbsp;</div>
+<div class="Normal">The package Wide_Characters.Handling provides operations 
+for classifying Wide_Characters and case folding for Wide_Characters. 
+</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
-library package Wide_Characters.Handling has the following declaration:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">The library package 
+Wide_Characters.Handling has the following declaration:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><span class="insert3"><B>package</B>&nbsp;Ada.Wide_Characters.Handling&nbsp;<B>is</B><A NAME="I5857"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Handling);</span></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Wide_Characters.Handling&nbsp;<B>is</B><A NAME="I5761"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Handling);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5858"></A>Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5762"></A>Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5859"></A>Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5763"></A>Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5860"></A>Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5764"></A>Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5861"></A>Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5765"></A>Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5862"></A>Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5766"></A>Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5863"></A>Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5767"></A>Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5864"></A>Is_Decimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Is_Digit;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5768"></A>Is_Decimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>renames</B>&nbsp;Is_Digit;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5865"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5769"></A>Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5866"></A>Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5770"></A>Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5867"></A>Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5771"></A>Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5868"></A>Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5772"></A>Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5869"></A>Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5773"></A>Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5870"></A>Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5774"></A>Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5871"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5775"></A>Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5872"></A>Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5776"></A>Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5873"></A>Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5777"></A>Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5874"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5875"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5778"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5779"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5876"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5877"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5780"></A>To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5781"></A>To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Wide_Characters.Handling;</span></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Wide_Characters.Handling;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Normal"><span class="insert3">The subprograms defined in 
-Wide_Characters.Handling are locale independent.</span></div>
+<div class="Normal">&nbsp;The subprograms defined in Wide_Characters.Handling 
+are locale independent.</div>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Character_Set_Version&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-an implementation-defined identifier that identifies the version of the 
-character set standard that is used for categorizing characters by the 
-implementation.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns an implementation-defined 
+identifier that identifies the version of the character set standard 
+that is used for categorizing characters by the implementation.</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Control&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">other_control</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">other_control</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Letter&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_uppercase</SPAN>, 
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_uppercase</SPAN>, 
 <SPAN Class="swiss">letter_lowercase</SPAN>, <SPAN Class="swiss">letter_titlecase</SPAN>, 
 <SPAN Class="swiss">letter_modifier</SPAN>, <SPAN Class="swiss">letter_other</SPAN>, 
-or <SPAN Class="swiss">number_letter</SPAN>; otherwise returns False.</span></div>
+or <SPAN Class="swiss">number_letter</SPAN>; otherwise returns False.</div>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p31">31/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_lowercase</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_lowercase</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_uppercase</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_uppercase</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p34">34/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p35">35/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">number_decimal</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">number_decimal</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p36">36/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Hexadecimal_Digit&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p37">37/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">number_decimal</SPAN>, 
-or is in the range 'A' .. 'F' or 'a' .. 'f'; otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">number_decimal</SPAN>, 
+or is in the range 'A' .. 'F' or 'a' .. 'f'; otherwise returns False.</div>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Alphanumeric&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p39">39/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_uppercase</SPAN>, 
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">letter_uppercase</SPAN>, 
 <SPAN Class="swiss">letter_lowercase</SPAN>, <SPAN Class="swiss">letter_titlecase</SPAN>, 
 <SPAN Class="swiss">letter_modifier</SPAN>, <SPAN Class="swiss">letter_other</SPAN>, 
 <SPAN Class="swiss">number_letter</SPAN>, or <SPAN Class="swiss">number_decimal</SPAN>; 
-otherwise returns False.</span></div>
+otherwise returns False.</div>
 <div class="paranum"><a name="p40">40/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Special&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p41">41/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">graphic_character</SPAN>, 
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">graphic_character</SPAN>, 
 but not categorized as <SPAN Class="swiss">letter_uppercase</SPAN>, <SPAN Class="swiss">letter_lowercase</SPAN>, 
 <SPAN Class="swiss">letter_titlecase</SPAN>, <SPAN Class="swiss">letter_modifier</SPAN>, 
 <SPAN Class="swiss">letter_other</SPAN>, <SPAN Class="swiss">number_letter</SPAN>, 
-or <SPAN Class="swiss">number_decimal</SPAN>; otherwise returns False.</span></div>
+or <SPAN Class="swiss">number_decimal</SPAN>; otherwise returns False.</div>
 <div class="paranum"><a name="p42">42/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Line_Terminator&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p43">43/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">separator_line</SPAN> 
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">separator_line</SPAN> 
 or <SPAN Class="swiss">separator_paragraph</SPAN>, or if Item is a conventional 
 line terminator character (Line_Feed, Line_Tabulation, Form_Feed, Carriage_Return, 
-Next_Line); otherwise returns False.</span></div>
+Next_Line); otherwise returns False.</div>
 <div class="paranum"><a name="p44">44/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Mark&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p45">45/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">mark_non_spacing</SPAN> 
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">mark_non_spacing</SPAN> 
 or <SPAN Class="swiss">mark_spacing_combining</SPAN>; otherwise returns 
-False.</span></div>
+False.</div>
 <div class="paranum"><a name="p46">46/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Other_Format&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p47">47/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">other_format</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">other_format</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p48">48/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Punctuation_Connector&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p49">49/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">punctuation_connector</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">punctuation_connector</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p50">50/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Space&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p51">51/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">separator_space</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">separator_space</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p52">52/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Is_Graphic&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p53">53/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-True if the Wide_Character designated by Item is categorized as <SPAN Class="swiss">graphic_character</SPAN>; 
-otherwise returns False.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns True if 
+the Wide_Character designated by Item is categorized as <SPAN Class="swiss">graphic_character</SPAN>; 
+otherwise returns False.</div>
 <div class="paranum"><a name="p54">54/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</span></div>
+<div class="Examples"><B>function</B>&nbsp;To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p55">55/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-the Simple Lowercase Mapping as defined by documents referenced in the 
-note in Clause 1 of ISO/IEC 10646:2011 of the Wide_Character designated 
-by Item. If the Simple Lowercase Mapping does not exist for the Wide_Character 
-designated by Item, then the value of Item is returned.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the Simple 
+Lowercase Mapping as defined by documents referenced in the note in Clause 
+1 of ISO/IEC 10646:2011 of the Wide_Character designated by Item. If 
+the Simple Lowercase Mapping does not exist for the Wide_Character designated 
+by Item, then the value of Item is returned.</div>
 <div class="paranum"><a name="p56">56/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
+<div class="Examples"><B>function</B>&nbsp;To_Lower&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p57">57/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-the result of applying the To_Lower conversion to each Wide_Character 
-element of the Wide_String designated by Item. The result is the null 
-Wide_String if the value of the formal parameter is the null Wide_String. 
-The lower bound of the result Wide_String is 1.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the result 
+of applying the To_Lower conversion to each Wide_Character element of 
+the Wide_String designated by Item. The result is the null Wide_String 
+if the value of the formal parameter is the null Wide_String. The lower 
+bound of the result Wide_String is 1.</div>
 <div class="paranum"><a name="p58">58/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</span></div>
+<div class="Examples"><B>function</B>&nbsp;To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p59">59/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-the Simple Uppercase Mapping as defined by documents referenced in the 
-note in Clause 1 of ISO/IEC 10646:2011 of the Wide_Character designated 
-by Item. If the Simple Uppercase Mapping does not exist for the Wide_Character 
-designated by Item, then the value of Item is returned.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the Simple 
+Uppercase Mapping as defined by documents referenced in the note in Clause 
+1 of ISO/IEC 10646:2011 of the Wide_Character designated by Item. If 
+the Simple Uppercase Mapping does not exist for the Wide_Character designated 
+by Item, then the value of Item is returned.</div>
 <div class="paranum"><a name="p60">60/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</span></div>
+<div class="Examples"><B>function</B>&nbsp;To_Upper&nbsp;(Item&nbsp;:&nbsp;Wide_String)&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p61">61/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Returns 
-the result of applying the To_Upper conversion to each Wide_Character 
-element of the Wide_String designated by Item. The result is the null 
-Wide_String if the value of the formal parameter is the null Wide_String. 
-The lower bound of the result Wide_String is 1.</span></div>
+<div class="Indented2" style="margin-bottom: 0.9em">Returns the result 
+of applying the To_Upper conversion to each Wide_Character element of 
+the Wide_String designated by Item. The result is the null Wide_String 
+if the value of the formal parameter is the null Wide_String. The lower 
+bound of the result Wide_String is 1.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p62">62/3</a></div>
-<div class="Normal"><span class="insert3">The string returned by Character_Set_Version 
-should include either &ldquo;10646:&rdquo; or &ldquo;Unicode&rdquo;.</span></div>
+<div class="Normal">&nbsp;The string returned by Character_Set_Version should 
+include either &ldquo;10646:&rdquo; or &ldquo;Unicode&rdquo;.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p63">63/3</a></div>
-<div class="Notes">8&nbsp;&nbsp;<span class="insert3">The results returned 
-by these functions may depend on which particular version of the 10646 
-standard is supported by the implementation (see <A HREF="RM-2-1.html">2.1</A>).</span></div>
+<div class="Notes">8&nbsp;&nbsp;The results returned by these functions 
+may depend on which particular version of the 10646 standard is supported 
+by the implementation (see <A HREF="RM-2-1.html">2.1</A>).</div>
 <div class="paranum"><a name="p64">64/3</a></div>
-<div class="Notes">9&nbsp;&nbsp;<span class="insert3">The case insensitive 
-equality comparison routines provided in <A HREF="RM-A-4-10.html">A.4.10</A>, 
-&ldquo;<A HREF="RM-A-4-10.html">String Comparison</A>&rdquo; are also 
-available for wide strings (see <A HREF="RM-A-4-7.html">A.4.7</A>).</span> 
+<div class="Notes">9&nbsp;&nbsp;The case insensitive equality comparison 
+routines provided in <A HREF="RM-A-4-10.html">A.4.10</A>, &ldquo;<A HREF="RM-A-4-10.html">String 
+Comparison</A>&rdquo; are also available for wide strings (see <A HREF="RM-A-4-7.html">A.4.7</A>). 
 </div>
 
 <HR>

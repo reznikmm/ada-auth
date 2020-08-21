@@ -21,15 +21,15 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -101,7 +101,7 @@ return expression</span> if and only if it applies to a function body.<span clas
 shall apply to a function body.</span><span class="insert3">&nbsp;An <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN> 
 with the reserved word <B>constant</B> shall include an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p5.1">5.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">For 
 an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN> 
 that applies to a function body:</span></div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
@@ -137,7 +137,7 @@ subtype defined by the <SPAN Class="swiss"><A HREF="RM-6-5.html#S0187">return_su
 shall not be statically deeper than that of the master that elaborated 
 the function body.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.5">5.5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">For 
 any return statement that applies to a function body:</span></div>
 <div class="paranum"><a name="p5.6">5.6/3</a></div>
 <div class="Bulleted"><span class="insert2">If the result subtype of 
@@ -170,14 +170,14 @@ has one or more access discriminants, the accessibility level of the
 anonymous access type of each access discriminant shall not be statically 
 deeper than that of the master that elaborated the function body.</span></div>
 <div class="paranum"><a name="p5.9">5.9/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">If the keyword <B>aliased</B> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If the keyword <B>aliased</B> 
 is present in an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0185">extended_return_object_declaration</A></SPAN>, 
 the type of the extended return object shall be immutably limited.</span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5.10">5.10/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3670"></A>Within 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I3670"></A>Within 
 an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN>, 
 the <I>return object</I> is declared with the given <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>, 
 with the nominal subtype defined by the <SPAN Class="swiss"><A HREF="RM-6-5.html#S0187">return_subtype_indication</A></SPAN>.</span><span class="insert3">&nbsp;An <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN> 
@@ -187,8 +187,8 @@ that declares the return object to be a constant object.</span><span class="inse
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5.11">5.11/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3671"></A>For the 
-execution of an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I3671"></A>For 
+the execution of an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 is elaborated. This creates the nominal subtype of the return object. 
@@ -235,7 +235,7 @@ not deeper than that</span></span><span class="insert2">&nbsp;of the master
 that elaborated the function body. If this check fails, Program_Error 
 is raised.<A NAME="I3682"></A> <A NAME="I3683"></A><A NAME="I3684"></A></span><span class="delete2">:</span></div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3"><A NAME="I3685"></A><A NAME="I3686"></A>If 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I3685"></A><A NAME="I3686"></A>If 
 the result subtype of the function is defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN> 
 designating a specific tagged type <I>T</I>, a check is made that the 
 result value is null or the tag of the object designated by the result 
@@ -252,7 +252,7 @@ is raised if this check fails.</span></div>
 <div class="Bulleted"><span class="delete2">If it is nonlimited, then 
 the tag of the result is that of the result type.</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="delete2"><A NAME="I3691"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="delete2"><A NAME="I3691"></A>A 
 type is a <I>return-by-reference</I> type if it is a descendant of one 
 of the following:</span>&nbsp;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
@@ -269,7 +269,7 @@ of a return-by-reference type;</span></div>
 <div class="Bulleted"><span class="delete2">a private type whose full 
 type is a return-by-reference type.</span>&nbsp;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="delete2"><A NAME="I3692"></A><A NAME="I3693"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="delete2"><A NAME="I3692"></A><A NAME="I3693"></A>If 
 the result type is a return-by-reference type, then a check is made that 
 the return expression is one of the following:</span>&nbsp;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
@@ -281,10 +281,10 @@ that of the master that elaborated the function body; or</span>&nbsp;</div>
 or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN> 
 whose operand is one of these kinds of expressions.</span></div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal"><span class="delete2"><A NAME="I3694"></A>The exception 
+<div class="Normal">&nbsp;<span class="delete2"><A NAME="I3694"></A>The exception 
 Program_Error is raised if this check fails.</span>&nbsp;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal"><span class="insert2">If&nbsp;</span><span class="insert3">any 
+<div class="Normal">&nbsp;<span class="insert2">If&nbsp;</span><span class="insert3">any 
 part of the specific type of the return object</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;the 
 result subtype</span></span><span class="insert2">&nbsp;of a function&nbsp;</span><span class="insert3">(or 
 coextension thereof)&nbsp;</span><span class="insert2">has one or more&nbsp;</span><span class="insert2"><span class="delete3">unconstrained 
@@ -305,7 +305,7 @@ value is assigned into an anonymous constant created at the point of
 the <SPAN Class="swiss"><A HREF="RM-6-5.html#S0184">return_statement</A></SPAN>, 
 and the function call denotes that object.</span>&nbsp;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Normal"><span class="insert2">For the execution of an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN>, 
+<div class="Normal">&nbsp;<span class="insert2">For the execution of an <SPAN Class="swiss"><A HREF="RM-6-5.html#S0186">extended_return_statement</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
 is executed. Within this <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>, 
 the execution of a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0183">simple_return_statement</A></SPAN> 
@@ -317,13 +317,13 @@ a transfer of control is performed which completes the execution of the
 callable construct<span class="delete2">&nbsp;to which the <SPAN Class="swiss"><A HREF="RM-6-5.html#S0184">return_statement</A></SPAN> 
 applies</span>, and returns to the caller.</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal"><span class="insert2">In the case of a function, 
+<div class="Normal">&nbsp;<span class="insert2">In the case of a function, 
 the <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN> 
 denotes a constant view of the return object.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><span class="insert2"></span><span class="insert3">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3"></span><span class="insert2"></span><span class="insert3">For 
 a function call used to initialize a composite</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;If 
 the result subtype of a function is unconstrained, and a call on the 
 function is used to provide the initial value of an</span></span><span class="insert2">&nbsp;object with a constrained nominal subtype</span><span class="insert3">&nbsp;or used to initialize a return object that is built in place into such 

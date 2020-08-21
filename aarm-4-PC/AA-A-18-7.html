@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,15 +43,14 @@ The language-defined generic packages Containers.Hashed_Sets and Containers.Orde
 provide private types Set and Cursor, and a set of operations for each 
 type. A set container allows elements of an arbitrary type to be stored 
 without duplication. A hashed set uses a hash function to organize elements, 
-while an ordered set orders its element per a specified relation.<A NAME="I7763"></A> 
-<A NAME="I7764"></A></div>
+while an ordered set orders its element per a specified relation.<A NAME="I7657"></A> 
+<A NAME="I7658"></A></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-This <span class="insert3">subclause</span><span class="delete3">&nbsp;section</span> 
-describes the declarations that are common to both kinds of sets. See 
-<A HREF="AA-A-18-8.html">A.18.8</A> for a description of the semantics 
-specific to Containers.Hashed_Sets and <A HREF="AA-A-18-9.html">A.18.9</A> 
+This subclause describes the declarations that are common to both kinds 
+of sets. See <A HREF="AA-A-18-8.html">A.18.8</A> for a description of 
+the semantics specific to Containers.Hashed_Sets and <A HREF="AA-A-18-9.html">A.18.9</A> 
 for a description of the semantics specific to Containers.Ordered_Sets. 
 </div>
 
@@ -66,7 +63,7 @@ and return the same result value each time it is called with a particular
 pair of values. If it behaves in some other manner, the function &quot;=&quot; 
 on set values returns an unspecified value. The exact arguments and number 
 of calls of this generic formal function by the function &quot;=&quot; 
-on set values are unspecified.<A NAME="I7765"></A></div>
+on set values are unspecified.<A NAME="I7659"></A></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the actual function 
 for &quot;=&quot; is not symmetric and consistent, the result returned 
@@ -79,17 +76,17 @@ other subprograms are not allowed to break if &quot;=&quot; is bad (they
 aren't expected to use &quot;=&quot;).&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-The type Set is used to represent sets. The type Set needs finalization<A NAME="I7766"></A> 
+The type Set is used to represent sets. The type Set needs finalization<A NAME="I7660"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 A set contains elements. Set cursors designate elements. There exists 
 an equivalence relation on elements, whose definition is different for 
 hashed sets and ordered sets. A set never contains two or more equivalent 
-elements. The <I>length</I> of a set is the number of elements it contains.<A NAME="I7767"></A></div>
+elements. The <I>length</I> of a set is the number of elements it contains.<A NAME="I7661"></A></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7768"></A><A NAME="I7769"></A><A NAME="I7770"></A>Each nonempty 
+<A NAME="I7662"></A><A NAME="I7663"></A><A NAME="I7664"></A>Each nonempty 
 set has two particular elements called the <I>first element</I> and the 
 <I>last element</I> (which may be the same). Each element except for 
 the last element has a <I>successor element</I>. If there are no other 
@@ -108,7 +105,7 @@ and others check for &ldquo;tampering with elements&rdquo; of a container
 because they depend on elements of the container not being replaced.]</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7771"></A>A subprogram is said to <I>tamper with cursors</I> 
+<A NAME="I7665"></A>A subprogram is said to <I>tamper with cursors</I> 
 of a set object <I>S</I> if:</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Bulleted">it inserts or deletes elements of <I>S</I>, that 
@@ -129,13 +126,13 @@ in terms of Replace_Element.&nbsp;</div>
 <div class="Bulleted">it finalizes <I>S</I>; or</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">it calls the Assign procedure with <I>S</I> as 
-the Target parameter; or</span></div>
+it calls the Assign procedure with <I>S</I> as the Target parameter; 
+or</div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>We 
-don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
+<div class="Annotations"><B>Ramification:&nbsp;</B>We don't need to explicitly 
+mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
 because that finalizes the target object as part of the operation, and 
-finalization of an object is already defined as tampering with cursors.</span> 
+finalization of an object is already defined as tampering with cursors. 
 </div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Bulleted">it calls the Move procedure with <I>S</I> as a 
@@ -144,8 +141,8 @@ parameter; or</div>
 <div class="Bulleted">it calls one of the operations defined to tamper 
 with cursors of <I>S</I>.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7772"></A>A subprogram is said to <I>tamper with elements</I> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<A NAME="I7666"></A>A subprogram is said to <I>tamper with elements</I> 
 of a set object <I>S</I> if:</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Bulleted">it tampers with cursors of <I>S</I>.</div>
@@ -162,40 +159,38 @@ Set, &ldquo;tamper with cursors&rdquo; and &ldquo;tamper with elements&rdquo;
 are the same. We leave both terms so that the rules for routines like 
 Iterate and Query_Element are consistent across all containers.&nbsp;</div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
-<span class="insert3"><A NAME="I7773"></A><A NAME="I7774"></A>When tampering 
-with cursors is <I>prohibited</I> for a particular set object <I>S</I>, 
-Program_Error is propagated by a call of any language-defined subprogram 
-that is defined to tamper with the cursors of <I>S</I>, leaving <I>S</I> 
-unmodified. Similarly, when tampering with elements is <I>prohibited</I> 
-for a particular set object <I>S</I>, Program_Error is propagated by 
-a call of any language-defined subprogram that is defined to tamper with 
-the elements of <I>S</I> [(or tamper with the cursors of <I>S</I>)], 
-leaving <I>S</I> unmodified.</span><span class="insert4">&nbsp;These checks 
-are made before any other defined behavior of the body of the language-defined 
-subprogram.</span><span class="insert3"></span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
+<A NAME="I7667"></A><A NAME="I7668"></A>When tampering with cursors is 
+<I>prohibited</I> for a particular set object <I>S</I>, Program_Error 
+is propagated by a call of any language-defined subprogram that is defined 
+to tamper with the cursors of <I>S</I>, leaving <I>S</I> unmodified. 
+Similarly, when tampering with elements is <I>prohibited</I> for a particular 
+set object <I>S</I>, Program_Error is propagated by a call of any language-defined 
+subprogram that is defined to tamper with the elements of <I>S</I> [(or 
+tamper with the cursors of <I>S</I>)], leaving <I>S</I> unmodified.<span class="insert4">&nbsp;These checks are made before any other defined behavior of the body of 
+the language-defined subprogram.</span>&nbsp;</div>
 <div class="paranum"><a name="p14.c">14.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B>Tampering 
-with elements includes tampering with cursors, so we mention it only 
-from completeness in the second sentence.</span>&nbsp;</div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Tampering with elements includes 
+tampering with cursors, so we mention it only from completeness in the 
+second sentence.&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Empty_Set represents the empty Set object. It has a length of 0. If an 
 object of type Set is not otherwise initialized, it is initialized to 
 the same value as Empty_Set.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 No_Element represents a cursor that designates no element. If an object 
 of type Cursor is not otherwise initialized, it is initialized to the 
 same value as No_Element.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The predefined &quot;=&quot; operator for type Cursor returns True if 
 both cursors are No_Element, or designate the same element in the same 
 container.</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Execution of the default implementation of the Input, Output, Read, or 
 Write attribute of type Cursor raises Program_Error.</div>
 <div class="paranum"><a name="p18.a">18.a/2</a></div>
@@ -206,35 +201,33 @@ we mandate that streaming of cursors raise Program_Error by default.
 The attributes can always be specified if there is a need to support 
 streaming.&nbsp;</div>
 <div class="paranum"><a name="p18.1">18.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">Set'Write for a Set object <I>S</I> writes Length(<I>S</I>) 
-elements of the set to the stream. It also may write additional information 
-about the set.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+Set'Write for a Set object <I>S</I> writes Length(<I>S</I>) elements 
+of the set to the stream. It also may write additional information about 
+the set.</div>
 <div class="paranum"><a name="p18.2">18.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">Set'Read reads the representation of a set from 
-the stream, and assigns to <I>Item</I> a set with the same length and 
-elements as was written by Set'Write.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+Set'Read reads the representation of a set from the stream, and assigns 
+to <I>Item</I> a set with the same length and elements as was written 
+by Set'Write.</div>
 <div class="paranum"><a name="p18.b">18.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Streaming 
-more elements than the container length is wrong. For implementation 
-implications of this rule, see the Implementation Note in <A HREF="AA-A-18-2.html">A.18.2</A>.</span> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>Streaming more elements 
+than the container length is wrong. For implementation implications of 
+this rule, see the Implementation Note in <A HREF="AA-A-18-2.html">A.18.2</A>. 
 </div>
 <div class="paranum"><a name="p18.3">18.3/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p18.4">18.4/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">Returns True if Position designates an element, 
-and returns False otherwise.</span></div>
+Returns True if Position designates an element, and returns False otherwise.</div>
 <div class="paranum"><a name="p18.c">18.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">This function might not detect cursors that designate 
-deleted elements; such cursors are invalid (see below) and the result 
-of calling Has_Element with an invalid cursor is unspecified (but not 
-erroneous).</span>&nbsp;</div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+This function might not detect cursors that designate deleted elements; 
+such cursors are invalid (see below) and the result of calling Has_Element 
+with an invalid cursor is unspecified (but not erroneous).&nbsp;</div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Set)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
@@ -327,65 +320,61 @@ so this should not pose an implementation hardship.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 If Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
 Query_Element calls Process.<B>all</B> with the element designated by 
-Position as the argument. <span class="insert3">Tampering</span><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span> with the elements 
-of <span class="insert3">the set that contains the element designated 
-by Position is prohibited during the execution of the call on Process.<B>all</B></span><span class="delete3">&nbsp;Container</span>. 
-Any exception raised by Process.<B>all</B> is propagated.</div>
+Position as the argument. Tampering with the elements of the set that 
+contains the element designated by Position is prohibited during the 
+execution of the call on Process.<B>all</B>. Any exception raised by 
+Process.<B>all</B> is propagated.</div>
 <div class="paranum"><a name="p36.1">36.1/3</a></div>
-<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+<div class="Examples"><B>type</B>&nbsp;Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p36.2">36.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The type Constant_Reference_Type needs finalization.<A NAME="I7775"></A></span></div>
+The type Constant_Reference_Type needs finalization.<A NAME="I7669"></A></div>
 <div class="paranum"><a name="p36.3">36.3/3</a></div>
-<div class="Indented2"><span class="insert3">The default initialization 
-of an object of type Constant_Reference_Type propagates Program_Error.</span></div>
+<div class="Indented2">The default initialization of an object of type 
+Constant_Reference_Type propagates Program_Error.</div>
 <div class="paranum"><a name="p36.a">36.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>It is expected 
-that Constant_Reference_Type will be a controlled type, for which finalization 
-will have some action to terminate the tampering check for the associated 
-container. If the object is created by default, however, there is no 
-associated container. Since this is useless, and supporting this case 
-would take extra work, we define it to raise an exception.</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>It is expected that Constant_Reference_Type 
+will be a controlled type, for which finalization will have some action 
+to terminate the tampering check for the associated container. If the 
+object is created by default, however, there is no associated container. 
+Since this is useless, and supporting this case would take extra work, 
+we define it to raise an exception.&nbsp;</div>
 <div class="paranum"><a name="p36.4">36.4/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
+<div class="Examples"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
 <div class="paranum"><a name="p36.5">36.5/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Constant_Indexing 
-and Implicit_Dereference aspects) provides a convenient way to gain read 
-access to an individual element of a set given a cursor.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a set given a cursor.</div>
 <div class="paranum"><a name="p36.6">36.6/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3">If Position equals No_Element, then Constraint_Error 
-is propagated; if Position does not designate an element in Container, 
-then Program_Error is propagated. Otherwise, Constant_Reference returns 
-an object whose discriminant is an access value that designates the element 
-designated by Position. Tampering with the elements of Container is prohibited 
-while the object returned by Constant_Reference exists and has not been 
-finalized.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+If Position equals No_Element, then Constraint_Error is propagated; if 
+Position does not designate an element in Container, then Program_Error 
+is propagated. Otherwise, Constant_Reference returns an object whose 
+discriminant is an access value that designates the element designated 
+by Position. Tampering with the elements of Container is prohibited while 
+the object returned by Constant_Reference exists and has not been finalized.</div>
 <div class="paranum"><a name="p36.7">36.7/3</a></div>
-<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Set);</span></div>
+<div class="Examples"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Set);</div>
 <div class="paranum"><a name="p36.8">36.8/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">If Target denotes the same object as Source, the 
-operation has no effect. Otherwise, the elements of Source are copied 
-to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
-assigning Source to Target.</span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+If Target denotes the same object as Source, the operation has no effect. 
+Otherwise, the elements of Source are copied to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
+assigning Source to Target.&nbsp;</div>
 <div class="paranum"><a name="p36.b">36.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<span class="insert3">This routine exists for compatibility with the 
-bounded set containers. For an unbounded set, <TT>Assign(A, B)</TT> and 
-<TT>A := B</TT> behave identically. For a bounded set, := will raise 
-an exception if the container capacities are different, while Assign 
-will not raise an exception if there is enough room in the target.</span> 
-</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+This routine exists for compatibility with the bounded set containers. 
+For an unbounded set, <TT>Assign(A, B)</TT> and <TT>A := B</TT> behave 
+identically. For a bounded set, := will raise an exception if the container 
+capacities are different, while Assign will not raise an exception if 
+there is enough room in the target.&nbsp;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set);</div>
@@ -394,13 +383,9 @@ will not raise an exception if there is enough room in the target.</span>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-If Target denotes the same object as Source, then <span class="insert3">the 
-operation</span><span class="delete3">&nbsp;Move</span> has no effect. Otherwise, 
-<span class="insert3">the operation is equivalent to Assign (Target, 
-Source) followed by Clear (Source)</span><span class="delete3">&nbsp;Move 
-first clears Target. Then, each element from Source is removed from Source 
-and inserted into Target. The length of Source is 0 after a successful 
-call to Move</span>.</div>
+If Target denotes the same object as Source, then the operation has no 
+effect. Otherwise, the operation is equivalent to Assign (Target, Source) 
+followed by Clear (Source).</div>
 <div class="paranum"><a name="p39">39/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
@@ -509,9 +494,8 @@ of Right that are not equivalent to some element of Left.</div>
 <div class="paranum"><a name="p58">58/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<span class="insert3">Intersection</span><span class="delete3">&nbsp;Union</span> 
-deletes from Target the elements of Target that are not equivalent to 
-some element of Source.</div>
+Intersection deletes from Target the elements of Target that are not 
+equivalent to some element of Source.</div>
 <div class="paranum"><a name="p58.a">58.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>If the objects are 
 the same, the result is the same as the original object. The implementation 
@@ -559,7 +543,7 @@ to some element of Left.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 If an element of Left is equivalent to some element of Right, then Overlap 
-returns True. Otherwise<span class="insert3">,</span> it returns False.</div>
+returns True. Otherwise, it returns False.</div>
 <div class="paranum"><a name="p70.a">70.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This operation is commutative. 
 If Overlap returns False, the two sets are disjoint.&nbsp;</div>
@@ -570,8 +554,7 @@ If Overlap returns False, the two sets are disjoint.&nbsp;</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 If an element of Subset is not equivalent to some element of Of_Set, 
-then Is_Subset returns False. Otherwise<span class="insert3">,</span> 
-it returns True.</div>
+then Is_Subset returns False. Otherwise, it returns True.</div>
 <div class="paranum"><a name="p72.a">72.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This operation is not commutative, 
 so we use parameter names that make it clear in named notation which 
@@ -595,10 +578,10 @@ is returned. If Position equals No_Element, then No_Element is returned.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Equivalent to Position := Next (Position).</div>
 <div class="paranum"><a name="p79">79/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><SPAN STYLE="font-size: 80%"><I>This 
-paragraph was deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<span class="delete3">Equivalent to Find (Container, Item) /= No_Element.</span></div>
+<div class="Indented2"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
+</div>
 <div class="paranum"><a name="p80">80/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Find&nbsp;(Container&nbsp;:&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Cursor;</div>
@@ -613,22 +596,18 @@ otherwise, No_Element is returned.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p82.1">82.1/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<span class="insert3">Equivalent to Find (Container, Item) /= No_Element.</span></div>
+Equivalent to Find (Container, Item) /= No_Element.</div>
 <div class="paranum"><a name="p83">83/3</a></div>
-<div class="Examples"><span class="delete3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"></div>
 <div class="paranum"><a name="p84">84/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="delete3">Returns True if Position designates an element, 
-and returns False otherwise.</span></div>
+</div>
 <div class="paranum"><a name="p84.a">84.a/3</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="delete3">This function may not detect cursors that designate 
-deleted elements; such cursors are invalid (see below) and the result 
-of calling Has_Element with an invalid cursor is unspecified (but not 
-erroneous).</span>&nbsp;</div>
-<div class="Indented2"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-83 and 84 were moved above.</I></SPAN></span>&nbsp;</div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+</div>
+<div class="Indented2"><SPAN STYLE="font-size: 80%"><I>Paragraphs 83 
+and 84 were moved above.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p85">85/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Iterate<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Set;<BR>
@@ -638,11 +617,9 @@ erroneous).</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 Iterate calls Process.<B>all</B> with a cursor that designates each element 
 in Container, starting with the first element and moving the cursor according 
-to the successor relation. <span class="insert3">Tampering</span><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span> with the cursors of 
-Container<span class="insert3">&nbsp;is prohibited during the execution of 
-a call on Process.<B>all</B></span>. Any exception raised by Process.<B>all</B> 
-is propagated.</div>
+to the successor relation. Tampering with the cursors of Container is 
+prohibited during the execution of a call on Process.<B>all</B>. Any 
+exception raised by Process.<B>all</B> is propagated.</div>
 <div class="paranum"><a name="p86.a">86.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The &ldquo;tamper 
 with cursors&rdquo; check takes place when the operations that insert 
@@ -651,26 +628,26 @@ or delete elements, and so on are called.</div>
 <div class="Annotations">See Iterate for vectors (<A HREF="AA-A-18-2.html">A.18.2</A>) 
 for a suggested implementation of the check.&nbsp;</div>
 <div class="paranum"><a name="p87">87/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Both Containers.Hashed_Set and Containers.Ordered_Set declare a nested 
 generic package Generic_Keys, which provides operations that allow set 
 manipulation in terms of a key (typically, a portion of an element) instead 
 of a complete element. The formal function Key of Generic_Keys extracts 
 a key value from an element. It is expected to return the same value 
 each time it is called with a particular element. The behavior of Generic_Keys 
-is unspecified if Key behaves in some other manner.<A NAME="I7776"></A></div>
+is unspecified if Key behaves in some other manner.<A NAME="I7670"></A></div>
 <div class="paranum"><a name="p88">88/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 A key is expected to unambiguously determine a single equivalence class 
 for elements. The behavior of Generic_Keys is unspecified if the formal 
-parameters of this package behave in some other manner.<A NAME="I7777"></A></div>
+parameters of this package behave in some other manner.<A NAME="I7671"></A></div>
 <div class="paranum"><a name="p89">89/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type;</div>
 <div class="paranum"><a name="p90">90/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Equivalent to Key (Element (Position)).&nbsp;</div>
 <div class="paranum"><a name="p91">91/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The subprograms in package Generic_Keys named Contains, Find, Element, 
 Delete, and Exclude, are equivalent to the corresponding subprograms 
 in the parent package, with the difference that the Key parameter is 
@@ -695,10 +672,9 @@ If Position equals No_Element, then Constraint_Error is propagated; if
 Position does not designate an element in Container, then Program_Error 
 is propagated. Otherwise, Update_Element_Preserving_Key uses Key to save 
 the key value <I>K</I> of the element designated by Position. Update_Element_Preserving_Key 
-then calls Process.<B>all</B> with that element as the argument. <span class="insert3">Tampering</span><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span> with the elements 
-of Container<span class="insert3">&nbsp;is prohibited during the execution 
-of the call on Process.<B>all</B></span>. Any exception raised by Process.<B>all</B> 
+then calls Process.<B>all</B> with that element as the argument. Tampering 
+with the elements of Container is prohibited during the execution of 
+the call on Process.<B>all</B>. Any exception raised by Process.<B>all</B> 
 is propagated. After Process.<B>all</B> returns, Update_Element_Preserving_Key 
 checks if <I>K</I> determines the same equivalence class as that for 
 the new element; if not, the element is removed from the set and Program_Error 
@@ -718,118 +694,115 @@ shall be unconstrained.</div>
 cannot be directly allocated from the heap; it must be possible to change 
 the discriminants of the element in place.&nbsp;</div>
 <div class="paranum"><a name="p96.1">96.1/3</a></div>
-<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="Examples"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p96.2">96.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The type Reference_Type needs finalization.<A NAME="I7778"></A></span></div>
+The type Reference_Type needs finalization.<A NAME="I7672"></A></div>
 <div class="paranum"><a name="p96.3">96.3/3</a></div>
-<div class="Indented2"><span class="insert3">The default initialization 
-of an object of type Reference_Type propagates Program_Error.</span></div>
+<div class="Indented2">The default initialization of an object of type 
+Reference_Type propagates Program_Error.</div>
 <div class="paranum"><a name="p96.4">96.4/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
+<div class="Examples"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
 <div class="paranum"><a name="p96.5">96.5/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Implicit_Dereference 
-aspect) provides a convenient way to gain read and write access to an 
-individual element of a set given a cursor.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Implicit_Dereference aspect) provides 
+a convenient way to gain read and write access to an individual element 
+of a set given a cursor.</div>
 <div class="paranum"><a name="p96.6">96.6/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3">If Position equals No_Element, then Constraint_Error 
-is propagated; if Position does not designate an element in Container, 
-then Program_Error is propagated. Otherwise, Reference_Preserving_Key 
-uses Key to save the key value <I>K</I>; then returns an object whose 
-discriminant is an access value that designates the element designated 
-by Position. Tampering with the elements of Container is prohibited while 
-the object returned by Reference_Preserving_Key exists and has not been 
-finalized. When the object returned by Reference_Preserving_Key is finalized, 
-a check is made if <I>K</I> determines the same equivalence class as 
-that for the new element; if not, the element is removed from the set 
-and Program_Error is propagated.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+If Position equals No_Element, then Constraint_Error is propagated; if 
+Position does not designate an element in Container, then Program_Error 
+is propagated. Otherwise, Reference_Preserving_Key uses Key to save the 
+key value <I>K</I>; then returns an object whose discriminant is an access 
+value that designates the element designated by Position. Tampering with 
+the elements of Container is prohibited while the object returned by 
+Reference_Preserving_Key exists and has not been finalized. When the 
+object returned by Reference_Preserving_Key is finalized, a check is 
+made if <I>K</I> determines the same equivalence class as that for the 
+new element; if not, the element is removed from the set and Program_Error 
+is propagated.</div>
 <div class="paranum"><a name="p96.7">96.7/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
+<div class="Examples"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
 <div class="paranum"><a name="p96.8">96.8/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Implicit_Dereference 
-aspect) provides a convenient way to gain read access to an individual 
-element of a set given a key value.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Implicit_Dereference aspect) provides 
+a convenient way to gain read access to an individual element of a set 
+given a key value.</div>
 <div class="paranum"><a name="p96.9">96.9/3</a></div>
-<div class="Indented2"><span class="insert3">Equivalent to Constant_Reference 
-(Container, Find (Container, Key)).</span></div>
+<div class="Indented2">Equivalent to Constant_Reference (Container, Find 
+(Container, Key)).</div>
 <div class="paranum"><a name="p96.10">96.10/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
+<div class="Examples"><B>function</B>&nbsp;Reference_Preserving_Key&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
 <div class="paranum"><a name="p96.11">96.11/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Implicit_Dereference 
-aspect) provides a convenient way to gain read and write access to an 
-individual element of a set given a key value.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Implicit_Dereference aspect) provides 
+a convenient way to gain read and write access to an individual element 
+of a set given a key value.</div>
 <div class="paranum"><a name="p96.12">96.12/3</a></div>
-<div class="Indented2"><span class="insert3">Equivalent to Reference_Preserving_Key 
-(Container, Find (Container, Key)).</span>&nbsp;</div>
+<div class="Indented2">Equivalent to Reference_Preserving_Key (Container, 
+Find (Container, Key)).&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p96.13">96.13/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3"><A NAME="I7779"></A>It is a bounded error for the 
-actual function associated with a generic formal subprogram, when called 
-as part of an operation of a set package, to tamper with elements of 
-any set parameter of the operation. Either Program_Error is raised, or 
-the operation works as defined on the value of the set either prior to, 
-or subsequent to, some or all of the modifications to the set.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<A NAME="I7673"></A>It is a bounded error for the actual function associated 
+with a generic formal subprogram, when called as part of an operation 
+of a set package, to tamper with elements of any set parameter of the 
+operation. Either Program_Error is raised, or the operation works as 
+defined on the value of the set either prior to, or subsequent to, some 
+or all of the modifications to the set.</div>
 <div class="paranum"><a name="p96.14">96.14/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
-<span class="insert3"><A NAME="I7780"></A>It is a bounded error to call 
-any subprogram declared in the visible part of a set package when the 
-associated container has been finalized. If the operation takes Container 
-as an <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
-Otherwise, the operation either proceeds as it would for an empty container, 
-or it raises Constraint_Error or Program_Error.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
+<A NAME="I7674"></A>It is a bounded error to call any subprogram declared 
+in the visible part of a set package when the associated container has 
+been finalized. If the operation takes Container as an <B>in out</B> 
+parameter, then it raises Constraint_Error or Program_Error. Otherwise, 
+the operation either proceeds as it would for an empty container, or 
+it raises Constraint_Error or Program_Error.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p97">97/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 A Cursor value is <I>invalid</I> if any of the following have occurred 
-since it was created:<A NAME="I7781"></A> <A NAME="I7782"></A></div>
+since it was created:<A NAME="I7675"></A> <A NAME="I7676"></A></div>
 <div class="paranum"><a name="p98">98/2</a></div>
 <div class="Bulleted">The set that contains the element it designates 
 has been finalized;</div>
 <div class="paranum"><a name="p98.1">98.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
-<span class="insert3">The set that contains the element it designates 
-has been used as the Target of a call to Assign, or as the target of 
-an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>;</span></div>
+The set that contains the element it designates has been used as the 
+Target of a call to Assign, or as the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p99">99/2</a></div>
 <div class="Bulleted">The set that contains the element it designates 
 has been used as the Source or Target of a call to Move; or</div>
 <div class="paranum"><a name="p100">100/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-The element it designates has been <span class="insert3">removed</span><span class="delete3">&nbsp;deleted</span> 
-from the set<span class="insert3">&nbsp;that previously contained the element</span>. 
-</div>
+The element it designates has been removed from the set that previously 
+contained the element.&nbsp;</div>
 <div class="paranum"><a name="p100.a">100.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
-<span class="insert3">This can happen directly via calls to Clear, Exclude, 
-Delete, and Update_Element_Preserving_Key, and indirectly via calls to 
-procedures Intersection, Difference, and Symmetric_Difference.</span> 
-</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
+This can happen directly via calls to Clear, Exclude, Delete, and Update_Element_Preserving_Key, 
+and indirectly via calls to procedures Intersection, Difference, and 
+Symmetric_Difference.&nbsp;</div>
 <div class="paranum"><a name="p101">101/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The result of &quot;=&quot; or Has_Element is unspecified if these functions 
-are called with an invalid cursor parameter.<A NAME="I7783"></A> Execution 
+are called with an invalid cursor parameter.<A NAME="I7677"></A> Execution 
 is erroneous if any other subprogram declared in Containers.Hashed_Sets 
-or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I7784"></A></div>
+or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I7678"></A></div>
 <div class="paranum"><a name="p101.a">101.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The list above is intended 
 to be exhaustive. In other cases, a cursor value continues to designate 
@@ -841,48 +814,48 @@ in many cases the overhead necessary to make the check is substantial
 in time or space. Implementations are encouraged to check for as many 
 of these cases as possible and raise Program_Error if detected.&nbsp;</div>
 <div class="paranum"><a name="p101.1">101.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">Execution is erroneous if the set associated with 
-the result of a call to Reference or Constant_Reference is finalized 
-before the result object returned by the call to Reference or Constant_Reference 
-is finalized.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+Execution is erroneous if the set associated with the result of a call 
+to Reference or Constant_Reference is finalized before the result object 
+returned by the call to Reference or Constant_Reference is finalized. 
+</div>
 <div class="paranum"><a name="p101.c">101.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>Each object 
-of Reference_Type and Constant_Reference_Type probably contains some 
-reference to the originating container. If that container is prematurely 
-finalized (which is only possible via Unchecked_Deallocation, as accessibility 
-checks prevent passing a container to Reference that will not live as 
-long as the result), the finalization of the object of Reference_Type 
-will try to access a nonexistent object. This is a normal case of a dangling 
-pointer created by Unchecked_Deallocation; we have to explicitly mention 
-it here as the pointer in question is not visible in the specification 
-of the type. (This is the same reason we have to say this for invalid 
-cursors.)</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Each object of Reference_Type 
+and Constant_Reference_Type probably contains some reference to the originating 
+container. If that container is prematurely finalized (which is only 
+possible via Unchecked_Deallocation, as accessibility checks prevent 
+passing a container to Reference that will not live as long as the result), 
+the finalization of the object of Reference_Type will try to access a 
+nonexistent object. This is a normal case of a dangling pointer created 
+by Unchecked_Deallocation; we have to explicitly mention it here as the 
+pointer in question is not visible in the specification of the type. 
+(This is the same reason we have to say this for invalid cursors.)&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p102">102/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 No storage associated with a Set object shall be lost upon assignment 
 or scope exit.</div>
 <div class="paranum"><a name="p103">103/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
 for a set shall have the effect of copying the elements from the source 
-set object to the target set object<span class="insert3">&nbsp;and changing 
-the length of the target object to that of the source object</span>.</div>
+set object to the target set object and changing the length of the target 
+object to that of the source object.</div>
 <div class="paranum"><a name="p103.a">103.a/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 An assignment of a Set is a &ldquo;deep&rdquo; copy; that is the elements 
 are copied as well as the data structures. We say &ldquo;effect of&rdquo; 
 in order to allow the implementation to avoid copying elements immediately 
 if it wishes. For instance, an implementation that avoided copying until 
-one of the containers is modified would be allowed.<span class="insert3">&nbsp;(Note that this implementation would require care, see <A HREF="AA-A-18-2.html">A.18.2</A> 
-for more.)</span>&nbsp;</div>
+one of the containers is modified would be allowed. (Note that this implementation 
+would require care, see <A HREF="AA-A-18-2.html">A.18.2</A> for more.) 
+</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p104">104/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Move should not copy elements, and should minimize copying of internal 
 data structures.&nbsp;</div>
 <div class="paranum"><a name="p104.a">104.a/2</a></div>
@@ -894,7 +867,7 @@ structures.</div>
 be accomplished simply by moving the pointer(s) to the internal data 
 structures from the Source container to the Target container.&nbsp;</div>
 <div class="paranum"><a name="p105">105/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 If an exception is propagated from a set operation, no storage should 
 be lost, nor any elements removed from a set unless specified by the 
 operation.&nbsp;</div>
@@ -917,35 +890,35 @@ specific packages.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p105.d">105.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"><A NAME="I7785"></A>Added reference support to 
-make set containers more convenient to use.</span>&nbsp;</div>
+<A NAME="I7679"></A>Added reference support to make set containers more 
+convenient to use.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p105.e">105.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">Added procedure Assign; the extension and incompatibility 
-is documented with the specific packages.</span></div>
+Added procedure Assign; the extension and incompatibility is documented 
+with the specific packages.</div>
 <div class="paranum"><a name="p105.f">105.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">Generalized the definition of Move. Specified which 
-elements are read/written by stream attributes.</span></div>
+Generalized the definition of Move. Specified which elements are read/written 
+by stream attributes.</div>
 <div class="paranum"><a name="p105.g">105.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added a Bounded (Run-Time) Error 
-to cover tampering by generic actual subprograms.</span></div>
+<B>Correction:</B> Added a Bounded (Run-Time) Error to cover tampering 
+by generic actual subprograms.</div>
 <div class="paranum"><a name="p105.h">105.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added a Bounded (Run-Time) Error 
-to cover access to finalized set containers.</span></div>
+<B>Correction:</B> Added a Bounded (Run-Time) Error to cover access to 
+finalized set containers.</div>
 <div class="paranum"><a name="p105.i">105.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Revised the definition of invalid 
-cursors to cover missing (and new) cases.</span></div>
+<B>Correction:</B> Revised the definition of invalid cursors to cover 
+missing (and new) cases.</div>
 <div class="paranum"><a name="p105.j">105.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Defined when a container prohibits 
-tampering in order to more clearly define where the check is made and 
-the exception raised.</span>&nbsp;</div>
+<B>Correction:</B> Defined when a container prohibits tampering in order 
+to more clearly define where the check is made and the exception raised. 
+</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p105.k">105.k/4</a></div>

@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +41,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I7188"></A><A NAME="I7189"></A><A NAME="I7190"></A>Values 
+<div class="Normal"><A NAME="I7434"></A><A NAME="I7435"></A><A NAME="I7436"></A>Values 
 input from the external environment of the program, or output to the 
 external environment, are considered to occupy <I>external files</I>. 
 An external file can be anything external to the program that can produce 
@@ -52,7 +52,7 @@ with the file, such as the physical organization or access rights. The
 conventions governing the interpretation of such strings shall be documented.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I7191"></A>Input and output operations are expressed as operations 
+<A NAME="I7437"></A>Input and output operations are expressed as operations 
 on objects of some <I>file type</I>, rather than directly in terms of 
 the external files. In the remainder of this <span class="insert3">clause</span><span class="delete3">&nbsp;section</span>, 
 the term <I>file</I> is always used to refer to a file object; the term 
@@ -84,10 +84,10 @@ and otherwise the file is said to be <I>closed</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">The language does not define what happens to external 
 files after the completion of the main program and all the library tasks 
-(in particular, if corresponding files have not been closed). <A NAME="I7192"></A><A NAME="I7193"></A><A NAME="I7194"></A>The 
+(in particular, if corresponding files have not been closed). <A NAME="I7438"></A><A NAME="I7439"></A><A NAME="I7440"></A>The 
 effect of input-output for access types is unspecified.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7195"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7441"></A>An 
 open file has a <I>current mode</I>, which is a value of one of the following 
 enumeration types:&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
@@ -120,7 +120,7 @@ The exceptions that can be propagated by the execution of an input-output
 subprogram are defined in the package IO_Exceptions; the situations in 
 which they can be propagated are described following the description 
 of the subprogram (and in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="AA-A-13.html">A.13</A>). <A NAME="I7196"></A><A NAME="I7197"></A>The 
+<A HREF="AA-A-13.html">A.13</A>). <A NAME="I7442"></A><A NAME="I7443"></A>The 
 exceptions Storage_Error and Program_Error may be propagated. (Program_Error 
 can only be propagated due to errors made by the caller of the subprogram.) 
 Finally, exceptions can be propagated in certain implementation-defined 

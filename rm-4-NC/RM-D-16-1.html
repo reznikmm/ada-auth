@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -92,19 +92,19 @@ library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;System.Multiprocessors.Dispatching_Domains;</div>
 <div class="paranum"><a name="p16">16/4</a></div>
-<div class="Normal">A <I>dispatching domain</I><A NAME="I8092"></A> represents 
-a set of processors on which a task may execute. Each processor is contained 
-within exactly one dispatching domain. An object of type Dispatching_Domain 
-identifies a dispatching domain. System_Dispatching_Domain identifies 
-a domain that contains the processor or processors on which the environment 
-task executes. At program start-up all processors are contained within 
-this domain.</div>
+<div class="Normal">&nbsp;A <I>dispatching domain</I><A NAME="I8092"></A> 
+represents a set of processors on which a task may execute. Each processor 
+is contained within exactly one dispatching domain. An object of type 
+Dispatching_Domain identifies a dispatching domain. System_Dispatching_Domain 
+identifies a domain that contains the processor or processors on which 
+the environment task executes. At program start-up all processors are 
+contained within this domain.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For a task type (including 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a task type (including 
 the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0206">single_task_declaration</A></SPAN>), 
 the following language-defined representation aspect may be specified:</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="WideHanging-Term">Dispatching_Domain</div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;Dispatching_Domain</div><div class="WideHanging-Body"><br clear="left">
 The value of aspect Dispatching_Domain is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Dispatching_Domains.Dispatching_Domain. This aspect 
 is the domain to which the task (or all objects of the task type) are 
@@ -112,29 +112,29 @@ assigned.<A NAME="I8093"></A><A NAME="I8094"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal">The Dispatching_Domain aspect shall not be specified 
+<div class="Normal">&nbsp;The Dispatching_Domain aspect shall not be specified 
 for a task interface.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/4</a></div>
-<div class="Normal">The expression specified for the Dispatching_Domain 
+<div class="Normal">&nbsp;The expression specified for the Dispatching_Domain 
 aspect of a task type is evaluated each time an object of the task type 
 is created (see <A HREF="RM-9-1.html">9.1</A>). If the identified dispatching 
 domain is empty, then Dispatching_Domain_Error is raised; otherwise the 
 newly created task is assigned to the domain identified by the value 
 of the expression.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">If a task is not explicitly assigned to any domain, 
+<div class="Normal">&nbsp;If a task is not explicitly assigned to any domain, 
 it is assigned to that of the activating task. A task always executes 
 on some CPU in its domain.</div>
 <div class="paranum"><a name="p22">22/4</a></div>
-<div class="Normal">If both the dispatching domain and CPU are specified 
+<div class="Normal">&nbsp;If both the dispatching domain and CPU are specified 
 for a task, and the CPU value is not contained within the set of processors 
 for the domain (and is not Not_A_Specific_CPU), the activation of the 
 task is defined to have failed, and it becomes a completed task (see 
 <A HREF="RM-9-2.html">9.2</A>).</div>
 <div class="paranum"><a name="p23">23/4</a></div>
-<div class="Normal">The function Create with First and Last parameters 
+<div class="Normal">&nbsp;The function Create with First and Last parameters 
 creates and returns a dispatching domain containing all the processors 
 in the range First .. Last. The function Create with a Set parameter 
 creates and returns a dispatching domain containing the processors for 
@@ -147,17 +147,17 @@ System_Dispatching_Domain empty. A call of Create will raise Dispatching_Domain_
 if the calling task is not the environment task, or if Create is called 
 after the call to the main subprogram.</div>
 <div class="paranum"><a name="p24">24/4</a></div>
-<div class="Normal">The function Get_First_CPU returns the first CPU 
+<div class="Normal">&nbsp;The function Get_First_CPU returns the first CPU 
 in Domain, or CPU'First if Domain is empty; Get_Last_CPU returns the 
 last CPU in Domain, or CPU_Range'First if Domain is empty. The function 
 Get_CPU_Set(D) returns an array whose low bound is Get_First_CPU(D), 
 whose high bound is Get_Last_CPU(D), with True values in the Set corresponding 
 to the CPUs that are in the given Domain.</div>
 <div class="paranum"><a name="p25">25/4</a></div>
-<div class="Normal">The function Get_Dispatching_Domain returns the dispatching 
-domain on which the task is assigned.</div>
+<div class="Normal">&nbsp;The function Get_Dispatching_Domain returns the 
+dispatching domain on which the task is assigned.</div>
 <div class="paranum"><a name="p26">26/4</a></div>
-<div class="Normal">A call of the procedure Assign_Task assigns task 
+<div class="Normal">&nbsp;A call of the procedure Assign_Task assigns task 
 T to the CPU within the dispatching domain Domain. Task T can now execute 
 only on CPU, unless CPU designates Not_A_Specific_CPU in which case it 
 can execute on any processor within Domain. The exception Dispatching_Domain_Error 
@@ -171,7 +171,7 @@ if T is not inside a protected action, otherwise the effect is as soon
 as practical. Assigning a task already assigned to System_Dispatching_Domain 
 to that domain has no effect.</div>
 <div class="paranum"><a name="p27">27/4</a></div>
-<div class="Normal">A call of procedure Set_CPU assigns task T to the 
+<div class="Normal">&nbsp;A call of procedure Set_CPU assigns task T to the 
 CPU. Task T can now execute only on CPU, unless CPU designates Not_A_Specific_CPU, 
 in which case it can execute on any processor within its dispatching 
 domain. The exception Dispatching_Domain_Error is propagated if CPU is 
@@ -182,10 +182,10 @@ the effect on task T is delayed until its next task dispatching point.
 If T is the Current_Task the effect is immediate if T is not inside a 
 protected action, otherwise the effect is as soon as practical.</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal">The function Get_CPU returns the processor assigned 
+<div class="Normal">&nbsp;The function Get_CPU returns the processor assigned 
 to task T, or Not_A_Specific_CPU if the task is not assigned to a processor.</div>
 <div class="paranum"><a name="p29">29/4</a></div>
-<div class="Normal">A call of Delay_Until_And_Set_CPU delays the calling 
+<div class="Normal">&nbsp;A call of Delay_Until_And_Set_CPU delays the calling 
 task for the designated time and then assigns the task to the specified 
 processor when the delay expires. The exception Dispatching_Domain_Error 
 is propagated if P is not one of the processors of the calling task's 
@@ -193,23 +193,23 @@ dispatching domain (and is not Not_A_Specific_CPU).</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Normal">The implementation shall perform the operations Assign_Task, 
-Set_CPU, Get_CPU and Delay_Until_And_Set_CPU atomically with respect 
-to any of these operations on the same dispatching_domain, processor 
-or task.</div>
+<div class="Normal">&nbsp;The implementation shall perform the operations 
+Assign_Task, Set_CPU, Get_CPU and Delay_Until_And_Set_CPU atomically 
+with respect to any of these operations on the same dispatching_domain, 
+processor or task.</div>
 <div class="paranum"><a name="p30.1">30.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;Any task that belongs to the system dispatching 
+<div class="Normal">&nbsp;&nbsp;&nbsp;Any task that belongs to the system dispatching 
 domain can execute on any CPU within that domain, unless the assignment 
 of the task has been specified.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p31">31/3</a></div>
-<div class="Normal">Each dispatching domain should have separate and 
+<div class="Normal">&nbsp;Each dispatching domain should have separate and 
 disjoint ready queues.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Normal">The implementation shall document the processor(s) 
+<div class="Normal">&nbsp;The implementation shall document the processor(s) 
 on which the clock interrupt is handled and hence where delay queue and 
 ready queue manipulations occur. For any Interrupt_Id whose handler can 
 execute on more than one processor the implementation shall also document 
@@ -217,7 +217,7 @@ this set of processors.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Normal">An implementation may limit the number of dispatching 
+<div class="Normal">&nbsp;An implementation may limit the number of dispatching 
 domains that can be created and raise Dispatching_Domain_Error if an 
 attempt is made to exceed this number.</div>
 

@@ -19,14 +19,14 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -95,7 +95,7 @@ following language-defined library package exists:</span>&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;System.Multiprocessors.Dispatching_Domains;</span></div>
 <div class="paranum"><a name="p16">16/4</a></div>
-<div class="Normal"><span class="insert3"></span><span class="insert4">A 
+<div class="Normal">&nbsp;<span class="insert3"></span><span class="insert4">A 
 <I>dispatching domain</I><A NAME="I8480"></A></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;The 
 type Dispatching_Domain</span></span><span class="insert3">&nbsp;represents 
 a&nbsp;</span><span class="insert4">set</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;series</span></span><span class="insert3">&nbsp;of processors on which a task may execute. Each processor is contained 
@@ -107,11 +107,11 @@ the processor or processors on which the environment task executes. At
 program start-up all processors are contained within&nbsp;</span><span class="insert4">this 
 domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;System_Dispatching_Domain</span></span><span class="insert3">.</span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
 a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0206">single_task_declaration</A></SPAN>), 
 the following language-defined representation aspect may be specified:</span></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="WideHanging-Term"><span class="insert3">Dispatching_Domain</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;<span class="insert3">Dispatching_Domain</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">The value of aspect Dispatching_Domain is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Dispatching_Domains.Dispatching_Domain. This aspect 
 is the domain to which the task (or all objects of the task type) are 
@@ -119,12 +119,12 @@ assigned.<A NAME="I8481"></A><A NAME="I8482"></A></span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal"><span class="insert3">The Dispatching_Domain aspect 
+<div class="Normal">&nbsp;<span class="insert3">The Dispatching_Domain aspect 
 shall not be specified for a task interface.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/4</a></div>
-<div class="Normal"><span class="insert3">The expression specified for 
+<div class="Normal">&nbsp;<span class="insert3">The expression specified for 
 the Dispatching_Domain aspect of a task&nbsp;</span><span class="insert4">type 
 </span><span class="insert3">is evaluated&nbsp;</span><span class="insert4">each 
 time an object of the task type is created</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;for 
@@ -135,17 +135,17 @@ task is assigned to the domain identified by the value of the expression</span><
 Dispatching_Domain value is then associated with the task object whose 
 task declaration specifies the aspect</span></span><span class="insert3">.</span></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal"><span class="insert3">If a task is not explicitly 
+<div class="Normal">&nbsp;<span class="insert3">If a task is not explicitly 
 assigned to any domain, it is assigned to that of the activating task. 
 A task always executes on some CPU in its domain.</span></div>
 <div class="paranum"><a name="p22">22/4</a></div>
-<div class="Normal"><span class="insert3">If both&nbsp;</span><span class="insert4">the 
+<div class="Normal">&nbsp;<span class="insert3">If both&nbsp;</span><span class="insert4">the 
 dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;and CPU are specified for a task, and the CPU value is not contained 
 within the&nbsp;</span><span class="insert4">set</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;range</span></span><span class="insert3">&nbsp;of processors for the domain (and is not Not_A_Specific_CPU), the activation 
 of the task is defined to have failed, and it becomes a completed task 
 (see <A HREF="RM-9-2.html">9.2</A>).</span></div>
 <div class="paranum"><a name="p23">23/4</a></div>
-<div class="Normal"><span class="insert3">The function Create&nbsp;</span><span class="insert4">with 
+<div class="Normal">&nbsp;<span class="insert3">The function Create&nbsp;</span><span class="insert4">with 
 First and Last parameters&nbsp;</span><span class="insert3">creates and returns 
 a&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;containing all the processors in the range First .. Last.&nbsp;</span><span class="insert4">The 
 function Create with a Set parameter creates and returns a dispatching 
@@ -158,7 +158,7 @@ empty. A call of Create will raise Dispatching_Domain_Error if the calling
 task is not the environment task, or if Create is called after the call 
 to the main subprogram.</span></div>
 <div class="paranum"><a name="p24">24/4</a></div>
-<div class="Normal"><span class="insert3">The function Get_First_CPU 
+<div class="Normal">&nbsp;<span class="insert3">The function Get_First_CPU 
 returns the first CPU in Domain</span><span class="insert4">, or CPU'First 
 if Domain is empty</span><span class="insert3">; Get_Last_CPU returns 
 the last&nbsp;</span><span class="insert4">CPU in Domain, or CPU_Range'First 
@@ -167,10 +167,10 @@ low bound is Get_First_CPU(D), whose high bound is Get_Last_CPU(D), with
 True values in the Set corresponding to the CPUs that are in the given 
 Domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;one</span></span><span class="insert3">.</span></div>
 <div class="paranum"><a name="p25">25/4</a></div>
-<div class="Normal"><span class="insert3">The function Get_Dispatching_Domain 
+<div class="Normal">&nbsp;<span class="insert3">The function Get_Dispatching_Domain 
 returns the&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;on which the task is assigned.</span></div>
 <div class="paranum"><a name="p26">26/4</a></div>
-<div class="Normal"><span class="insert3">A call of the procedure Assign_Task 
+<div class="Normal">&nbsp;<span class="insert3">A call of the procedure Assign_Task 
 assigns task T to the CPU within&nbsp;</span><span class="insert4">the dispatching 
 domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;Domain. Task T can now execute only on CPU</span><span class="insert4">,</span><span class="insert3">&nbsp;unless CPU designates Not_A_Specific_CPU</span><span class="insert3"><span class="delete4">,</span></span><span class="insert3">&nbsp;in which case it can execute on any processor within Domain. The exception 
 Dispatching_Domain_Error is propagated if</span><span class="insert4">&nbsp;Domain is empty,</span><span class="insert3">&nbsp;T is already assigned to 
@@ -185,7 +185,7 @@ System_Dispatching_Domain&nbsp;</span><span class="insert3"><span class="delete4
 is already assigned&nbsp;</span></span><span class="insert3">to that domain 
 has no effect.</span></div>
 <div class="paranum"><a name="p27">27/4</a></div>
-<div class="Normal"><span class="insert3">A call of procedure Set_CPU 
+<div class="Normal">&nbsp;<span class="insert3">A call of procedure Set_CPU 
 assigns task T to the CPU. Task T can now execute only on CPU, unless 
 CPU designates Not_A_Specific_CPU, in which case it can execute on any 
 processor within its&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">. 
@@ -197,11 +197,11 @@ task dispatching point. If T is the Current_Task the effect is immediate
 if T is not inside a protected action, otherwise the effect is as soon 
 as practical.</span></div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal"><span class="insert3">The function Get_CPU returns 
+<div class="Normal">&nbsp;<span class="insert3">The function Get_CPU returns 
 the processor assigned to task T, or Not_A_Specific_CPU if the task is 
 not assigned to a processor.</span></div>
 <div class="paranum"><a name="p29">29/4</a></div>
-<div class="Normal"><span class="insert3">A call of Delay_Until_And_Set_CPU 
+<div class="Normal">&nbsp;<span class="insert3">A call of Delay_Until_And_Set_CPU 
 delays the calling task for the designated time and then assigns the 
 task to the specified processor when the delay expires. The exception 
 Dispatching_Domain_Error is propagated if P is not one of the processors 
@@ -209,23 +209,23 @@ of the calling task's&nbsp;</span><span class="insert4">dispatching domain</span
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Normal"><span class="insert3">The implementation shall perform 
+<div class="Normal">&nbsp;<span class="insert3">The implementation shall perform 
 the operations Assign_Task, Set_CPU, Get_CPU and Delay_Until_And_Set_CPU 
 atomically with respect to any of these operations on the same dispatching_domain, 
 processor or task.</span></div>
 <div class="paranum"><a name="p30.1">30.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">Any task that belongs to 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Any task that belongs to 
 the system dispatching domain can execute on any CPU within that domain, 
 unless the assignment of the task has been specified.</span></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p31">31/3</a></div>
-<div class="Normal"><span class="insert3">Each dispatching domain should 
+<div class="Normal">&nbsp;<span class="insert3">Each dispatching domain should 
 have separate and disjoint ready queues.</span></div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Normal"><span class="insert3">The implementation shall document 
+<div class="Normal">&nbsp;<span class="insert3">The implementation shall document 
 the processor(s) on which the clock interrupt is handled and hence where 
 delay queue and ready queue manipulations occur. For any Interrupt_Id 
 whose handler can execute on more than one processor the implementation 
@@ -233,7 +233,7 @@ shall also document this set of processors.</span></div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Normal"><span class="insert3">An implementation may limit 
+<div class="Normal">&nbsp;<span class="insert3">An implementation may limit 
 the number of dispatching domains that can be created and raise Dispatching_Domain_Error 
 if an attempt is made to exceed this number.</span></div>
 

@@ -45,18 +45,18 @@ a real function of an instance <I>CT</I> of Numerics.Generic_Complex_Types
 or <I>CT</I>.Imaginary) belongs to a result interval defined as for a 
 real elementary function (see <A HREF="RM-G-2-4.html">G.2.4</A>).</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I8708"></A>When an exception is not raised, 
+<div class="Normal"><A NAME="I8693"></A>When an exception is not raised, 
 each component of the result of evaluating a complex function of such 
 an instance, or of an instance of Numerics.Generic_Complex_Elementary_Functions 
 obtained by instantiating the latter with <I>CT</I> (i.e., a function 
 that yields a value of subtype <I>CT</I>.Complex), also belongs to a 
 <I>result interval</I>. The result intervals for the components of the 
 result are either defined by a <I>maximum relative error</I> bound or 
-by a <I>maximum box error</I> bound. <A NAME="I8709"></A>When the result 
+by a <I>maximum box error</I> bound. <A NAME="I8694"></A>When the result 
 interval for the real (resp., imaginary) component is defined by maximum 
 relative error, it is defined as for that of a real function, relative 
 to the exact value of the real (resp., imaginary) part of the result 
-of the corresponding mathematical function. <A NAME="I8710"></A>When 
+of the corresponding mathematical function. <A NAME="I8695"></A>When 
 defined by maximum box error, the result interval for a component of 
 the result is the smallest model interval of <I>CT</I>.Real that contains 
 all the values of the corresponding part of <SPAN Class="roman"><I>f</I></SPAN> 
@@ -64,13 +64,13 @@ all the values of the corresponding part of <SPAN Class="roman"><I>f</I></SPAN>
 is the exact complex value of the corresponding mathematical function 
 at the given parameter values, <SPAN Class="roman"><I>d</I></SPAN> is 
 complex, and |<SPAN Class="roman"><I>d</I></SPAN>| is less than or equal 
-to the given maximum box error. <A NAME="I8711"></A><A NAME="I8712"></A>The 
+to the given maximum box error. <A NAME="I8696"></A><A NAME="I8697"></A>The 
 function delivers a value that belongs to the result interval (or a value 
 both of whose components belong to their respective result intervals) 
 when both bounds of the result interval(s) belong to the safe range of 
 <I>CT</I>.Real; otherwise,&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted"><A NAME="I8713"></A>if <I>CT</I>.Real'Machine_Overflows 
+<div class="Bulleted"><A NAME="I8698"></A>if <I>CT</I>.Real'Machine_Overflows 
 is True, the function either delivers a value that belongs to the result 
 interval (or a value both of whose components belong to their respective 
 result intervals) or raises Constraint_Error, signaling overflow;</div>

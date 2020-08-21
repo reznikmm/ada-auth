@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -45,7 +43,7 @@
 subtype S, the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Pos</div><div class="WideHanging-Body">
-<A NAME="I1786"></A><A NAME="I1787"></A>S'Pos denotes a function with 
+<A NAME="I1783"></A><A NAME="I1784"></A>S'Pos denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Pos(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -55,33 +53,32 @@ the following specification:&nbsp;</div>
 of the value of <I>Arg</I>, as a value of type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Val</div><div class="WideHanging-Body">
-<A NAME="I1788"></A><A NAME="I1789"></A>S'Val denotes a function with 
+<A NAME="I1785"></A><A NAME="I1786"></A>S'Val denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Val(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Body"><A NAME="I1790"></A><A NAME="I1791"></A>This 
+<div class="WideHanging-Body"><A NAME="I1787"></A><A NAME="I1788"></A>This 
 function returns a value of the type of S whose position number equals 
-the value of <I>Arg</I>. <A NAME="I1792"></A><A NAME="I1793"></A>For 
+the value of <I>Arg</I>. <A NAME="I1789"></A><A NAME="I1790"></A>For 
 the evaluation of a call on S'Val, if there is no value in the base range 
 of its type with the given position number, Constraint_Error is raised. 
 </div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For every static discrete 
 subtype S for which there exists at least one value belonging to S that 
-satisfies <span class="insert4">the predicates</span><span class="delete4">&nbsp;any 
-predicate</span> of S, the following attributes are defined:</div>
+satisfies the predicates of S, the following attributes are defined:</div>
 <div class="paranum"><a name="p7.2">7.2/4</a></div>
 <div class="WideHanging-Term">&nbsp;S'First_Valid</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I1794"></A><A NAME="I1795"></A>S'First_Valid denotes the smallest 
-value that belongs to S and satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-of S. The value of this attribute is of the type of S.</div>
+<A NAME="I1791"></A><A NAME="I1792"></A>S'First_Valid denotes the smallest 
+value that belongs to S and satisfies the predicates of S. The value 
+of this attribute is of the type of S.</div>
 <div class="paranum"><a name="p7.3">7.3/4</a></div>
 <div class="WideHanging-Term">&nbsp;S'Last_Valid</div><div class="WideHanging-Body">
-<A NAME="I1796"></A><A NAME="I1797"></A>S'Last_Valid denotes the largest 
-value that belongs to S and satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-of S. The value of this attribute is of the type of S.&nbsp;</div>
+<A NAME="I1793"></A><A NAME="I1794"></A>S'Last_Valid denotes the largest 
+value that belongs to S and satisfies the predicates of S. The value 
+of this attribute is of the type of S.&nbsp;</div>
 <div class="paranum"><a name="p7.4">7.4/3</a></div>
 <div class="Normal">&nbsp;First_Valid and Last_Valid <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
 are always static expressions. Any explicit predicate of S can only have 
@@ -92,7 +89,7 @@ been specified by a Static_Predicate aspect.</div>
 <div class="Normal">For the evaluation of a call on S'Pos for an enumeration 
 subtype, if the value of the operand does not correspond to the internal 
 code for any enumeration literal of its type (perhaps due to an uninitialized 
-variable), then the implementation should raise Program_Error. <A NAME="I1798"></A>This 
+variable), then the implementation should raise Program_Error. <A NAME="I1795"></A>This 
 is particularly important for enumeration types with noncontiguous internal 
 codes specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumeration_representation_clause</A></SPAN>. 
 </div>
@@ -101,7 +98,7 @@ codes specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumerati
 <div class="Notes">36&nbsp;&nbsp;Indexing and loop iteration use values 
 of discrete types.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Notes">37&nbsp;&nbsp;<A NAME="I1799"></A>The predefined operations 
+<div class="Notes">37&nbsp;&nbsp;<A NAME="I1796"></A>The predefined operations 
 of a discrete type include the assignment operation, qualification, the 
 membership tests, and the relational operators; for a boolean type they 
 include the short-circuit control forms and the logical operators; for 

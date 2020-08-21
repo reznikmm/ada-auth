@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,10 +37,9 @@
 <H1>D.11 Asynchronous Task Control</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-introduces a language-defined package to do asynchronous suspend/resume 
-on tasks. It uses a conceptual <I>held priority</I> value to represent 
-the task's <I>held</I> state.]&nbsp;</div>
+[This subclause introduces a language-defined package to do asynchronous 
+suspend/resume on tasks. It uses a conceptual <I>held priority</I> value 
+to represent the task's <I>held</I> state.]&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
@@ -51,18 +48,18 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
-<B>package</B>&nbsp;Ada.Asynchronous_Task_Control&nbsp;<B>is</B><A NAME="I8919"></A><BR>
+<B>package</B>&nbsp;Ada.Asynchronous_Task_Control&nbsp;<B>is</B><A NAME="I8720"></A><BR>
 &nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Asynchronous_Task_Control);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8920"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8921"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8922"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8721"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8722"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8723"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Asynchronous_Task_Control;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
-<A NAME="I8923"></A><A NAME="I8924"></A><A NAME="I8925"></A>After the 
+<A NAME="I8724"></A><A NAME="I8725"></A><A NAME="I8726"></A>After the 
 Hold operation has been applied to a task, the task becomes <I>held</I>. 
 For each processor there is a conceptual <I>idle task</I>, which is always 
 ready. The base priority of the idle task is below System.Any_Priority'First. 
@@ -73,7 +70,7 @@ is below the base priority of the idle task.&nbsp;</div>
 be confused with the blocked state as defined in <A HREF="AA-9-2.html">9.2</A>; 
 the task is still ready.&nbsp;</div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
 For any priority below System.Any_Priority'First, the task dispatching 
 policy is FIFO_Within_Priorities.&nbsp;</div>
 <div class="paranum"><a name="p4.b">4.b/2</a></div>
@@ -108,13 +105,13 @@ T is in the held state.&nbsp;</div>
 can be changed immediately after Is_Held returns.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">As part of these operations, a check is made that 
-the task identified by T is not terminated. <A NAME="I8926"></A>Tasking_Error 
-is raised if the check fails. <A NAME="I8927"></A>Program_Error is raised 
+the task identified by T is not terminated. <A NAME="I8727"></A>Tasking_Error 
+is raised if the check fails. <A NAME="I8728"></A>Program_Error is raised 
 if the value of T is Null_Task_Id.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8928"></A>If any operation in this package 
+<div class="Normal"><A NAME="I8729"></A>If any operation in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 
@@ -178,7 +175,7 @@ The corresponding entry body executes.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I8929"></A>Asynchronous_Task_Control is now Preelaborated, so 
+<A NAME="I8730"></A>Asynchronous_Task_Control is now Preelaborated, so 
 it can be used in preelaborated units.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>

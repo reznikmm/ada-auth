@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,65 +44,63 @@ characteristics.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples"><A NAME="I5202"></A><B>package</B>&nbsp;System&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5117"></A><B>package</B>&nbsp;System&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(System);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5203"></A>Name&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined-enumeration-type</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5204"></A>System_Name&nbsp;:&nbsp;<B>constant</B>&nbsp;Name&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5118"></A>Name&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined-enumeration-type</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5119"></A>System_Name&nbsp;:&nbsp;<B>constant</B>&nbsp;Name&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;System-Dependent&nbsp;Named&nbsp;Numbers:</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5205"></A>Min_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'First;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5206"></A>Max_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5120"></A>Min_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'First;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5121"></A>Max_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'Last;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5207"></A>Max_Binary_Modulus&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5208"></A>Max_Nonbinary_Modulus&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5122"></A>Max_Binary_Modulus&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5123"></A>Max_Nonbinary_Modulus&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5209"></A>Max_Base_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>'Digits;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5210"></A>Max_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5124"></A>Max_Base_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>'Digits;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5125"></A>Max_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5211"></A>Max_Mantissa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5212"></A>Fine_Delta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5126"></A>Max_Mantissa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5127"></A>Fine_Delta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5213"></A>Tick&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5128"></A>Tick&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Storage-related&nbsp;Declarations:</I></SPAN></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5214"></A>Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5215"></A>Null_Address&nbsp;:&nbsp;<B>constant</B>&nbsp;Address;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5129"></A>Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5130"></A>Null_Address&nbsp;:&nbsp;<B>constant</B>&nbsp;Address;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5216"></A>Storage_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5217"></A>Word_Size&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;*&nbsp;Storage_Unit;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5218"></A>Memory_Size&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5131"></A>Storage_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5132"></A>Word_Size&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;*&nbsp;Storage_Unit;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5133"></A>Memory_Size&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5219"></A>Address&nbsp;Comparison:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5134"></A>Address&nbsp;Comparison:</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
 --&nbsp;<B>function</B>&nbsp;&quot;/=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&quot;/=&quot;&nbsp;is&nbsp;implicitly&nbsp;defined</I></SPAN><span class="delete3"><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;&quot;&lt;&quot;);<BR>
-&nbsp;&nbsp;&nbsp;...&nbsp;--<SPAN Class="roman"><I>&nbsp;and&nbsp;so&nbsp;on&nbsp;for&nbsp;all&nbsp;language-defined&nbsp;subprograms&nbsp;in&nbsp;this&nbsp;package</I></SPAN></span></div>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&quot;/=&quot;&nbsp;is&nbsp;implicitly&nbsp;defined</I></SPAN></div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Other&nbsp;System-Dependent&nbsp;Declarations:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5220"></A>Bit_Order&nbsp;<B>is</B>&nbsp;(<A NAME="I5221"></A>High_Order_First,&nbsp;<A NAME="I5222"></A>Low_Order_First);<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5223"></A>Default_Bit_Order&nbsp;:&nbsp;<B>constant</B>&nbsp;Bit_Order&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5135"></A>Bit_Order&nbsp;<B>is</B>&nbsp;(<A NAME="I5136"></A>High_Order_First,&nbsp;<A NAME="I5137"></A>Low_Order_First);<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5138"></A>Default_Bit_Order&nbsp;:&nbsp;<B>constant</B>&nbsp;Bit_Order&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Priority-related&nbsp;declarations&nbsp;(see&nbsp;<A HREF="RM-D-1.html">D.1</A>):</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5224"></A>Any_Priority&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5225"></A>Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Any_Priority'First&nbsp;..<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5139"></A>Any_Priority&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5140"></A>Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Any_Priority'First&nbsp;..<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5226"></A>Interrupt_Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Priority'Last+1&nbsp;..<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5141"></A>Interrupt_Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Priority'Last+1&nbsp;..<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any_Priority'Last;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5227"></A>Default_Priority&nbsp;:&nbsp;<B>constant</B>&nbsp;Priority&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5142"></A>Default_Priority&nbsp;:&nbsp;<B>constant</B>&nbsp;Priority&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Priority'First&nbsp;+&nbsp;Priority'Last)/2;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Examples"><B>private</B><BR>
@@ -168,19 +164,19 @@ The number of bits per word.</div>
 An implementation-defined value that is intended to reflect the memory 
 size of the configuration in storage elements.&nbsp;</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Normal">Address is a definite, nonlimited type with preelaborable 
+<div class="Normal">&nbsp;Address is a definite, nonlimited type with preelaborable 
 initialization (see <A HREF="RM-10-2-1.html">10.2.1</A>). Address represents 
 machine addresses capable of addressing individual storage elements. 
 Null_Address is an address that is distinct from the address of any object 
-or program unit. <A NAME="I5228"></A></div>
+or program unit. <A NAME="I5143"></A></div>
 <div class="paranum"><a name="p35">35/2</a></div>
-<div class="Normal">Default_Bit_Order shall be a static constant. See 
+<div class="Normal">&nbsp;Default_Bit_Order shall be a static constant. See 
 <A HREF="RM-13-5-3.html">13.5.3</A> for an explanation of Bit_Order and 
 Default_Bit_Order.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p36">36/2</a></div>
-<div class="Normal">An implementation may add additional implementation-defined 
+<div class="Normal">&nbsp;An implementation may add additional implementation-defined 
 declarations to package System and its children. However, it is usually 
 better for the implementation to provide additional functionality via 
 implementation-defined children of System.&nbsp;</div>

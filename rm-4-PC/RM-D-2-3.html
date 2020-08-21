@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,13 +34,13 @@
 <HR>
 <H1>D.2.3 Preemptive Dispatching</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-defines a preemptive task dispatching policy.&nbsp;</div>
+<div class="Normal">This subclause defines a preemptive task dispatching 
+policy.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-FIFO_Within_Priorities is a task dispatching policy.<span class="insert3"><A NAME="I8002"></A><A NAME="I8003"></A></span></div>
+FIFO_Within_Priorities is a task dispatching policy.<A NAME="I7813"></A><A NAME="I7814"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3/2</a></div>
@@ -68,25 +66,25 @@ its active priority.</div>
 that does not result in blocking, it is added to the tail of the ready 
 queue for its active priority.&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I8004"></A><A NAME="I8005"></A>Each of the 
+<div class="Normal"><A NAME="I7815"></A><A NAME="I7816"></A>Each of the 
 events specified above is a task dispatching point (see <A HREF="RM-D-2-1.html">D.2.1</A>).</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">A task dispatching point occurs for the currently 
 running task of a processor whenever there is a nonempty ready queue 
 for that processor with a higher priority than the priority of the running 
 task. The currently running task is said to be <I>preempted</I> and it 
-is added at the head of the ready queue for its active priority.<A NAME="I8006"></A></div>
+is added at the head of the ready queue for its active priority.<A NAME="I7817"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">An implementation shall allow, for a single partition, 
+<div class="Normal">&nbsp;An implementation shall allow, for a single partition, 
 both the task dispatching policy to be specified as FIFO_Within_Priorities 
 and also the locking policy (see <A HREF="RM-D-3.html">D.3</A>) to be 
 specified as Ceiling_Locking.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8007"></A><I>Priority 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I7818"></A><I>Priority 
 inversion</I> is the duration for which a task remains at the head of 
 the highest priority nonempty ready queue while the processor executes 
 a lower priority task. The implementation shall document:</div>

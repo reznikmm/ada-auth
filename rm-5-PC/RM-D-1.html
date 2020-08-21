@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -73,11 +71,11 @@ may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;Priority</div><div class="WideHanging-Body">
 The aspect Priority is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I8084"></A><A NAME="I8085"></A></div>
+which shall be of type Integer.<A NAME="I8069"></A><A NAME="I8070"></A></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;Interrupt_Priority</div><div class="WideHanging-Body"><br clear="left">
 The aspect Interrupt_Priority is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I8086"></A><A NAME="I8087"></A></div>
+which shall be of type Integer.<A NAME="I8071"></A><A NAME="I8072"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -124,7 +122,7 @@ deleted.</I></SPAN></div>
 for a subprogram other than the main subprogram; the Priority value is 
 not associated with any task.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I8088"></A><A NAME="I8089"></A><A NAME="I8090"></A><A NAME="I8091"></A><A NAME="I8092"></A>A 
+<div class="Normal"><A NAME="I8073"></A><A NAME="I8074"></A><A NAME="I8075"></A><A NAME="I8076"></A><A NAME="I8077"></A>A 
 <I>task priority</I> is an integer value that indicates a degree of urgency 
 and is the basis for resolving competing demands of tasks for resources. 
 Unless otherwise specified, whenever tasks compete for processors or 
@@ -142,14 +140,13 @@ is used in the evaluation of another task's active priority.&nbsp;</div>
 aspect for a protected type or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN> 
 is discussed in <A HREF="RM-D-3.html">D.3</A>.</div>
 <div class="paranum"><a name="p17">17/4</a></div>
-<div class="Normal"><A NAME="I8093"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-specified for the Priority or Interrupt_Priority aspect of a task<span class="insert4">&nbsp;type</span> is evaluated <span class="delete4">for&nbsp;</span>each <span class="insert4">time 
-an</span><span class="delete4">&nbsp;task</span> object<span class="insert4">&nbsp;of the task type is created</span> (see <A HREF="RM-9-1.html">9.1</A>). 
+<div class="Normal"><A NAME="I8078"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+specified for the Priority or Interrupt_Priority aspect of a task type 
+is evaluated each time an object of the task type is created (see <A HREF="RM-9-1.html">9.1</A>). 
 For the Priority aspect, the value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 is converted to the subtype Priority; for the Interrupt_Priority aspect, 
 this value is converted to the subtype Any_Priority. The priority value 
-is then associated with the task object<span class="delete4">whose task 
-declaration specifies the aspect</span>. <A NAME="I8094"></A><A NAME="I8095"></A></div>
+is then associated with the task object. <A NAME="I8079"></A><A NAME="I8080"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">Likewise, the priority value is associated with the 
 environment task if the aspect is specified for the main subprogram.</div>

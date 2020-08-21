@@ -36,20 +36,20 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Examples"><A NAME="I5366"></A><B>package</B>&nbsp;System.Storage_Elements&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5354"></A><B>package</B>&nbsp;System.Storage_Elements&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Storage_Elements);</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5367"></A>Storage_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5355"></A>Storage_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5368"></A>Storage_Count&nbsp;<B>is</B>&nbsp;Storage_Offset&nbsp;<B>range</B>&nbsp;0..Storage_Offset'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5356"></A>Storage_Count&nbsp;<B>is</B>&nbsp;Storage_Offset&nbsp;<B>range</B>&nbsp;0..Storage_Offset'Last;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5369"></A>Storage_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5357"></A>Storage_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Storage_Element'Size&nbsp;<B>use</B>&nbsp;Storage_Unit;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5370"></A>Storage_Array&nbsp;<B>is</B>&nbsp;<B>array</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5358"></A>Storage_Array&nbsp;<B>is</B>&nbsp;<B>array</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Storage_Offset&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;Storage_Element;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Storage_Array'Component_Size&nbsp;<B>use</B>&nbsp;Storage_Unit;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5371"></A>Address&nbsp;Arithmetic:</I></SPAN></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5359"></A>Address&nbsp;Arithmetic:</I></SPAN></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;(Left&nbsp;:&nbsp;Address;&nbsp;Right&nbsp;:&nbsp;Storage_Offset)&nbsp;<B>return</B>&nbsp;Address<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
@@ -66,17 +66,17 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Conversion&nbsp;to/from&nbsp;integers:</I></SPAN></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5372"></A>Integer_Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5373"></A>To_Address(Value&nbsp;:&nbsp;Integer_Address)&nbsp;<B>return</B>&nbsp;Address<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5360"></A>Integer_Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5361"></A>To_Address(Value&nbsp;:&nbsp;Integer_Address)&nbsp;<B>return</B>&nbsp;Address<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5374"></A>To_Integer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Integer_Address<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5362"></A>To_Integer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Integer_Address<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;System.Storage_Elements;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">Storage_Element represents a storage element. Storage_Offset 
 represents an offset in storage elements. Storage_Count represents a 
-number of storage elements. <A NAME="I5375"></A><A NAME="I5376"></A>Storage_Array 
+number of storage elements. <A NAME="I5363"></A><A NAME="I5364"></A>Storage_Array 
 represents a contiguous sequence of storage elements.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">Integer_Address is a (signed or modular) integer 
@@ -101,7 +101,7 @@ deleted.</I></SPAN>&nbsp;</div>
 <div class="Normal">Operations in System and its children should reflect 
 the target environment semantics as closely as is reasonable. For example, 
 on most machines, it makes sense for address arithmetic to &ldquo;wrap 
-around.&rdquo; <A NAME="I5377"></A>Operations that do not make sense 
+around.&rdquo; <A NAME="I5365"></A>Operations that do not make sense 
 should raise Program_Error.&nbsp;</div>
 
 <HR>

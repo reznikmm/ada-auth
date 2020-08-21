@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -56,22 +56,22 @@ and within an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></
 the current instance is defined to be a variable (updating is permitted). 
 </div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a type declared 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For a type declared 
 by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
 or for the anonymous type of an object declared by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0211">single_protected_declaration</A></SPAN>, 
 the following language-defined type-related representation aspect may 
 be specified:</div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
-<div class="WideHanging-Term">&nbsp;Exclusive_Functions</div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;Exclusive_Functions</div><div class="WideHanging-Body"><br clear="left">
 The type of aspect Exclusive_Functions is Boolean. If not specified (including 
 by inheritance), the aspect is False.<A NAME="I4025"></A><A NAME="I4026"></A></div>
 <div class="paranum"><a name="p2.3">2.3/4</a></div>
-<div class="WideHanging-Term">&nbsp;</div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;&nbsp;</div><div class="WideHanging-Body">
 A value of True for this aspect indicates that protected functions behave 
 in the same way as protected procedures with respect to mutual exclusion 
 and queue servicing (see below).</div>
 <div class="paranum"><a name="p2.4">2.4/4</a></div>
-<div class="Normal">&nbsp;A protected procedure or entry is an <I>exclusive</I> 
+<div class="Normal">&nbsp;&nbsp;A protected procedure or entry is an <I>exclusive</I> 
 protected operation.<A NAME="I4027"></A> A protected function of a protected 
 type <I>P</I> is an exclusive protected operation if the Exclusive_Functions 
 aspect of <I>P</I> is True.</div>

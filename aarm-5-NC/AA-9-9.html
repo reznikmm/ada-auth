@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,13 +41,13 @@ T that is of a task type [(after any implicit dereference)], the following
 attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term">T'Callable</div><div class="WideHanging-Body">
-<A NAME="I4715"></A><A NAME="I4716"></A>Yields the value True when the 
-task denoted by T is <I>callable</I>, and False otherwise; <A NAME="I4717"></A><A NAME="I4718"></A>a 
+<A NAME="I4890"></A><A NAME="I4891"></A>Yields the value True when the 
+task denoted by T is <I>callable</I>, and False otherwise; <A NAME="I4892"></A><A NAME="I4893"></A>a 
 task is callable unless it is completed or abnormal. The value of this 
 attribute is of the predefined type Boolean.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">T'Terminated</div><div class="WideHanging-Body">
-<A NAME="I4719"></A><A NAME="I4720"></A>Yields the value True if the 
+<A NAME="I4894"></A><A NAME="I4895"></A>Yields the value True if the 
 task denoted by T is terminated, and False otherwise. The value of this 
 attribute is of the predefined type Boolean.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -59,7 +59,7 @@ within any program unit that is, itself, inner to the body of the task
 unit.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term">E'Count</div><div class="WideHanging-Body">
-<A NAME="I4721"></A><A NAME="I4722"></A>Yields the number of calls presently 
+<A NAME="I4896"></A><A NAME="I4897"></A>Yields the number of calls presently 
 queued on the entry E of the current instance of the unit. The value 
 of this attribute is of the type <I>universal_integer</I>.</div>
 <div class="NotesHeader">NOTES</div>
@@ -72,15 +72,15 @@ or an expanded name.</div>
 <div class="Notes">46&nbsp;&nbsp;Within task units, algorithms interrogating 
 the attribute E'Count should take precautions to allow for the increase 
 of the value of this attribute for incoming entry calls, and its decrease, 
-for example with <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0240">timed_entry_call</A></SPAN>s. 
-Also, a <SPAN Class="swiss"><A HREF="AA-9-7-3.html#S0243">conditional_entry_call</A></SPAN> 
+for example with <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0254">timed_entry_call</A></SPAN>s. 
+Also, a <SPAN Class="swiss"><A HREF="AA-9-7-3.html#S0257">conditional_entry_call</A></SPAN> 
 may briefly increase this value, even if the conditional call is not 
 accepted.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Notes">47&nbsp;&nbsp;Within protected units, algorithms interrogating 
-the attribute E'Count in the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0226">entry_barrier</A></SPAN> 
+the attribute E'Count in the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0240">entry_barrier</A></SPAN> 
 for the entry E should take precautions to allow for the evaluation of 
-the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
 of the barrier both before and after queuing a given caller.&nbsp;</div>
 
 <HR>

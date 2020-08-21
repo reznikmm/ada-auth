@@ -15,19 +15,19 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -126,10 +126,10 @@ the operations of any integer type.&nbsp;</div>
 <div class="Normal"><A NAME="I1748"></A>The <I>position number</I> of 
 an integer value is equal to the value.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="WideAbove" style="margin-bottom: 0.4em">For every modular 
+<div class="WideAbove" style="margin-bottom: 0.4em">&nbsp;For every modular 
 subtype S, the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p16.1">16.1/2</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Mod</div><div class="WideHanging-Body">
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;S'Mod</div><div class="WideHanging-Body">
 <A NAME="I1749"></A><A NAME="I1750"></A>S'Mod denotes a function with 
 the following specification:</div>
 <div class="paranum"><a name="p16.2">16.2/2</a></div>
@@ -215,7 +215,7 @@ less than a power of 2 may be equal to the modulus, rather than one less
 than the modulus. It is implementation defined for which powers of 2, 
 if any, this permission is exercised.</div>
 <div class="paranum"><a name="p27.1">27.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;For a one's complement machine, implementations 
+<div class="Normal">&nbsp;&nbsp;&nbsp;For a one's complement machine, implementations 
 may support nonbinary modulus values greater than System.Max_Nonbinary_Modulus. 
 It is implementation defined which specific values greater than System.Max_Nonbinary_Modulus, 
 if any, are supported.&nbsp;</div>

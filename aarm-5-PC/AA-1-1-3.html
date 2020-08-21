@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -78,8 +78,8 @@ problems are reported is not specified.</div>
 <div class="paranum"><a name="p4.b">4.b</a></div>
 <div class="Annotations">An implementation is allowed to use standard 
 error-recovery techniques. We do not disallow such techniques from being 
-used across <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+used across <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
 boundaries.</div>
 <div class="paranum"><a name="p4.c">4.c</a></div>
 <div class="Annotations">See also the Implementation Requirements of 
@@ -96,10 +96,10 @@ modifications are semantically neutral with respect to the client compilation
 units of the library unit. An implementation defines the contents of 
 the private part and body of language-defined library units.</div>
 <div class="paranum"><a name="p5.b">5.b</a></div>
-<div class="Annotations">An implementation can add <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN>s, 
+<div class="Annotations">An implementation can add <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>s, 
 since these modifications are semantically neutral to clients. (The implementation 
-might need <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s 
+might need <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN>s 
 in order to implement the private part, for example.) Similarly, an implementation 
 can add a private part even in cases where a private part is not shown 
 in the standard. Explicit declarations can be provided implicitly or 
@@ -144,11 +144,11 @@ following are defined as <I>external interactions</I>:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Bulleted">Any interaction with an external file (see <A HREF="AA-A-7.html">A.7</A>);</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted">The execution of certain <SPAN Class="swiss"><A HREF="AA-13-8.html#S0321">code_statement</A></SPAN>s 
-(see <A HREF="AA-13-8.html">13.8</A>); which <SPAN Class="swiss"><A HREF="AA-13-8.html#S0321">code_statement</A></SPAN>s 
+<div class="Bulleted">The execution of certain <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s 
+(see <A HREF="AA-13-8.html">13.8</A>); which <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s 
 cause external interactions is implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
-<div class="Annotations"><B>Implementation defined:&nbsp;</B>Which <SPAN Class="swiss"><A HREF="AA-13-8.html#S0321">code_statement</A></SPAN>s 
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>Which <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s 
 cause external interactions.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Bulleted">Any call on an imported subprogram (see <A HREF="AA-B.html">Annex 
@@ -219,7 +219,7 @@ can be specified. For example, if two external interactions initiated
 by a single task are separated by a &ldquo;<B>delay</B> 1.0;&rdquo; then 
 the language rules imply that the two external interactions have to be 
 separated in time by at least one second, as defined by the clock associated 
-with the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN>. 
+with the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN>. 
 This in turn implies that the time at which an external interaction occurs 
 is part of the characterization of the external interaction, at least 
 in some cases, again making the specification of the required &ldquo;exact 
@@ -285,10 +285,12 @@ and hence, an exception would be raised if a subprogram were called in
 the package Edited_Output with a length greater than 1.&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0179-1.TXT">AI12-0179-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
 <span class="insert5">For an implementation that conforms to this Standard, 
-the implementation of a language-defined unit shall abide by all postconditions 
-and type invariants specified for the unit by this International Standard 
-(see <A HREF="AA-11-4-2.html">11.4.2</A>).</span>&nbsp;</div>
+the implementation of a language-defined unit shall abide by all postconditions, 
+type invariants, and default initial conditions specified for the unit 
+by this International Standard (see <A HREF="AA-11-4-2.html">11.4.2</A>).</span> 
+</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p18">18</a></div>

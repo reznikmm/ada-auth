@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,9 +38,9 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1234"></A>The text of a program consists 
-of the texts of one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>s. 
-<A NAME="I1235"></A><A NAME="I1236"></A>The text of each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+<div class="Normal"><A NAME="I1239"></A>The text of a program consists 
+of the texts of one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>s. 
+<A NAME="I1240"></A><A NAME="I1241"></A>The text of each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
 is a sequence of separate <I>lexical elements</I>. Each lexical element 
 is formed from a sequence of characters, and is either a delimiter, an 
 <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
@@ -48,13 +48,13 @@ a reserved word, a <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_liter
 a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>, 
 or a comment. The meaning of a program depends only on the particular 
-sequences of lexical elements that form its <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>s, 
+sequences of lexical elements that form its <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>s, 
 excluding <SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">comment</A></SPAN>s.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-The text of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
-is divided into <A NAME="I1237"></A><I>lines</I>. <A NAME="I1238"></A>In 
+The text of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
+is divided into <A NAME="I1242"></A><I>lines</I>. <A NAME="I1243"></A>In 
 general, the representation for an end of line is implementation defined. 
 However, a sequence of one or more <SPAN Class="swiss">format_effector</SPAN>s 
 other than the character whose code point is 16#09# (CHARACTER TABULATION) 
@@ -64,7 +64,7 @@ signifies at least one end of line.&nbsp;</div>
 for an end of line.</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I1239"></A>[In some cases an explicit <I>separator</I> is required 
+<A NAME="I1244"></A>[In some cases an explicit <I>separator</I> is required 
 to separate adjacent lexical elements.] A separator is any of a <SPAN Class="swiss">separator_space</SPAN>, 
 a <SPAN Class="swiss">format_effector</SPAN>, or the end of a line, as 
 follows:&nbsp;</div>
@@ -85,7 +85,7 @@ separator except within a <SPAN Class="swiss"><A HREF="AA-2-7.html#S0018">commen
 <div class="Bulleted">The end of a line is always a separator.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">One or more separators are allowed between any two 
-adjacent lexical elements, before the first of each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>, 
+adjacent lexical elements, before the first of each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>, 
 or after the last. At least one separator is required between an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
 a reserved word, or a <SPAN Class="swiss"><A HREF="AA-2-4.html#S0006">numeric_literal</A></SPAN> 
 and an adjacent <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
@@ -97,13 +97,14 @@ anywhere that a separator is[; any such characters have no effect on
 the meaning of an Ada program].</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I1240"></A>A <I>delimiter</I> is either one of the following 
+<A NAME="I1245"></A>A <I>delimiter</I> is either one of the following 
 characters:&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-&amp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&gt;<span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;@</span>&nbsp;&nbsp;&nbsp;&nbsp;|</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+&amp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&gt;<span class="insert5">&nbsp;&nbsp;&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;&nbsp;&nbsp;&nbsp;]</span>&nbsp;&nbsp;&nbsp;&nbsp;|</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1241"></A>or one of the following <I>compound 
+<div class="Normal"><A NAME="I1246"></A>or one of the following <I>compound 
 delimiters</I> each composed of two adjacent special characters&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Indented1">=&gt;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;&nbsp;&nbsp;&nbsp;/=&nbsp;&nbsp;&nbsp;&nbsp;&gt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&gt;</div>
@@ -155,14 +156,15 @@ the preceding subclause.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p14.d">14.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0079-1.TXT">AI05-0079-1</A></I>} 
-<A NAME="I1242"></A><B>Correction:</B> Clarified that <SPAN Class="swiss">other_format</SPAN> 
+<A NAME="I1247"></A><B>Correction:</B> Clarified that <SPAN Class="swiss">other_format</SPAN> 
 characters are allowed anywhere that separators are allowed. This was 
 intended in Ada 2005, but didn't actually make it into the wording.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p14.e">14.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<span class="insert5">Added the <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN> 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+<span class="insert5">Added square brackets and the <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
 symbol to the list of delimiters (see <A HREF="AA-5-2-1.html">5.2.1</A>).</span> 
 </div>
 

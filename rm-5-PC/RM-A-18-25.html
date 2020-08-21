@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -35,7 +33,7 @@
 <HR>
 <H1>A.18.25 The Generic Package Containers.Bounded_Multiway_Trees</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I7648"></A> 
+<div class="Normal">The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I7633"></A> 
 provides a private type Tree and a set of operations. It provides the 
 same operations as the package Containers.Multiway_Trees (see <A HREF="RM-A-18-10.html">A.18.10</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -70,7 +68,7 @@ than Target capacity, then Capacity_Error is propagated.</div>
 declared as follows:&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Tree;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;<span class="insert4">Tree</span><span class="delete4">&nbsp;List</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Bulleted-NoPrefix">If Capacity is 0, then the tree capacity 
 is the count of Source; if Capacity is equal to or greater than Source.Count, 
@@ -89,7 +87,7 @@ then Splice_Children propagates Capacity_Error.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><A NAME="I7649"></A>It is a bounded error to assign 
+<div class="Normal"><A NAME="I7634"></A>It is a bounded error to assign 
 from a bounded tree object while tampering with elements or cursors of 
 that object is prohibited. Either Program_Error is raised by the assignment, 
 execution proceeds with the target object prohibiting tampering with 
@@ -99,7 +97,7 @@ elements or cursors, or execution proceeds normally.&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">When a bounded tree object <I>T</I> is finalized, 
 if tampering with cursors is prohibited for <I>T</I> other than due to 
-an assignment from another tree, then execution is erroneous. <A NAME="I7650"></A></div>
+an assignment from another tree, then execution is erroneous. <A NAME="I7635"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p16">16/3</a></div>

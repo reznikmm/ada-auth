@@ -15,19 +15,19 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,13 +47,13 @@ Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>), 
 protected type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0211">single_protected_declaration</A></SPAN>), 
 or subprogram, the following language-defined representation aspects 
 may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;Priority</div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;&nbsp;Priority</div><div class="WideHanging-Body">
 The aspect Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Integer.<A NAME="I8452"></A><A NAME="I8453"></A></div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
@@ -61,7 +61,7 @@ which shall be of type Integer.<A NAME="I8452"></A><A NAME="I8453"></A></div>
 of a task object or type, or priority of a protected object or type; 
 the priority is not in the interrupt range.</div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;Interrupt_Priority</div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;Interrupt_Priority</div><div class="WideHanging-Body"><br clear="left">
 The aspect Interrupt_Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Integer.<A NAME="I8454"></A><A NAME="I8455"></A></div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
@@ -83,7 +83,7 @@ shall be static, and its value shall be in the range of System.Priority.
 <div class="Annotations"><B>Reason:&nbsp;</B>This value is needed before it 
 gets elaborated, when the environment task starts executing.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 At most one of the Priority and Interrupt_Priority aspects may be specified 
 for a given entity.</div>
 <div class="paranum"><a name="p8.b">8.b/3</a></div>
@@ -92,7 +92,7 @@ via pragmas (see <A HREF="AA-J-15-11.html">J.15.11</A>). Note that <A HREF="AA-1
 prevents multiple specifications of a single representation aspect by 
 any means.&nbsp;</div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Neither of the Priority or Interrupt_Priority aspects shall be specified 
 for a synchronized interface type.</div>
 
@@ -119,13 +119,13 @@ or more interrupts is specified by the subtype Interrupt_Priority. [The
 subrange of priority values below System.Interrupt_Priority'First is 
 specified by the subtype System.Priority.]</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The Priority aspect has no effect if it is specified for a subprogram 
 other than the main subprogram; the Priority value is not associated 
 with any task.</div>
@@ -147,12 +147,12 @@ is used in the evaluation of another task's active priority.&nbsp;</div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
 execution resources.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The effect of specifying a Priority or Interrupt_Priority aspect for 
 a protected type or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0211">single_protected_declaration</A></SPAN> 
 is discussed in <A HREF="AA-D-3.html">D.3</A>.</div>
 <div class="paranum"><a name="p17">17/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0081-1.TXT">AI12-0081-1</A></I>} 
 <A NAME="I8461"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 specified for the Priority or Interrupt_Priority aspect of a task type 
@@ -162,11 +162,11 @@ is converted to the subtype Priority; for the Interrupt_Priority aspect,
 this value is converted to the subtype Any_Priority. The priority value 
 is then associated with the task object. <A NAME="I8462"></A><A NAME="I8463"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Likewise, the priority value is associated with the environment task 
 if the aspect is specified for the main subprogram.</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The initial value of a task's base priority is specified by default or 
 by means of a Priority or Interrupt_Priority aspect. [After a task is 
 created, its base priority can be changed only by a call to Dynamic_Priorities.Set_Priority 
@@ -179,7 +179,7 @@ initial base priority of the environment task is System.Default_Priority.
 Similarly, the task's active priority is used to determine the task's 
 position in any queue when Priority_Queuing is specified (see <A HREF="AA-D-4.html">D.4</A>).]</div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
 At any time, the active priority of a task is the maximum of all the 
 priorities the task is inheriting at that instant. For a task that is 
 not held (see <A HREF="AA-D-11.html">D.11</A>), its base priority is 

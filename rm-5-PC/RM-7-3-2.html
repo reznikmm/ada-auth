@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -46,44 +44,44 @@
 <HR>
 <H1>7.3.2 Type Invariants</H1>
 <div class="paranum"><a name="p1">1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For a private type<span class="insert4">,</span><span class="delete4">&nbsp;or</span> private extension<span class="insert4">, or interface</span>, 
-the following language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">For a private type, 
+private extension, or interface, the following language-defined aspects 
+may be specified with an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term">Type_Invariant</div><div class="WideHanging-Body"><br clear="left">
 This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called an <I>invariant expression</I>.<A NAME="I3782"></A> Type_Invariant 
+called an <I>invariant expression</I>.<A NAME="I3770"></A> Type_Invariant 
 may be specified on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN>, 
 on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
 or on a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-that declares the completion of a private type or private extension.<A NAME="I3783"></A><A NAME="I3784"></A></div>
+that declares the completion of a private type or private extension.<A NAME="I3771"></A><A NAME="I3772"></A></div>
 <div class="paranum"><a name="p3">3/4</a></div>
 <div class="WideHanging-Term">Type_Invariant'Class</div><div class="WideHanging-Body"><br clear="left">
 This aspect shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
 called an <I>invariant expression</I>. Type_Invariant'Class may be specified 
-on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN><span class="insert4">,</span><span class="delete4">&nbsp;or</span> a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN><span class="insert4">, 
+on a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0210">private_type_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-for an interface type</span>.<A NAME="I3785"></A><A NAME="I3786"></A><span class="insert4">&nbsp;Type_Invariant'Class determines a <I>class-wide type invariant</I> for 
-a tagged type.<A NAME="I3787"></A><A NAME="I3788"></A><A NAME="I3789"></A></span></div>
+for an interface type.<A NAME="I3773"></A><A NAME="I3774"></A> Type_Invariant'Class 
+determines a <I>class-wide type invariant</I> for a tagged type.<A NAME="I3775"></A><A NAME="I3776"></A><A NAME="I3777"></A></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">The expected type for an invariant expression is 
-any boolean type.<A NAME="I3790"></A></div>
+any boolean type.<A NAME="I3778"></A></div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">Within an invariant expression, the identifier of 
 the first subtype of the associated type denotes the current instance 
-of the type. Within an invariant expression <span class="insert4">for 
-the Type_Invariant aspect of a</span><span class="delete4">&nbsp;associated 
-with</span> type <I>T</I>, the type of <span class="insert4">this</span><span class="delete4">&nbsp;the</span> 
-current instance is <I>T</I><span class="insert4">. Within an invariant 
-expression</span><span class="delete4">&nbsp;for the Type_Invariant aspect 
-and <I>T</I>'Class</span> for the Type_Invariant'Class aspect<span class="insert4">&nbsp;of a type <I>T</I>, the type of this current instance is interpreted 
-as though it had a (notional)&nbsp;</span><span class="insert5">nonabstract 
-</span><span class="insert4">type <I>NT</I> that is a visible formal 
-derived type whose ancestor type is <I>T</I>. The effect of this interpretation 
-is that the only operations that can be applied to this current instance 
-are those defined for such a formal derived type.</span><span class="delete4">.</span></div>
+of the type. Within an invariant expression for the Type_Invariant aspect 
+of a type <I>T</I>, the type of this current instance is <I>T</I>. Within 
+an invariant expression for the Type_Invariant'Class aspect of a type 
+<I>T</I>, the type of this current instance is interpreted as though 
+it had a (notional) <span class="insert5">nonabstract&nbsp;</span>type <I>NT</I> 
+that is a visible formal derived type whose ancestor type is <I>T</I>. 
+The effect of this interpretation is that the only operations that can 
+be applied to this current instance are those defined for such a formal 
+derived type.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
@@ -91,11 +89,10 @@ are those defined for such a formal derived type.</span><span class="delete4">.<
 for an untagged type. The Type_Invariant aspect shall not be specified 
 for an abstract type.</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">If a type extension occurs 
-at a point where a private operation of some ancestor is visible and 
-inherited, and a Type_Invariant'Class expression applies to that ancestor, 
-then the inherited operation shall be abstract or shall be overridden.</span> 
-</div>
+<div class="Normal">&nbsp;If a type extension occurs at a point where a private 
+operation of some ancestor is visible and inherited, and a Type_Invariant'Class 
+expression applies to that ancestor, then the inherited operation shall 
+be abstract or shall be overridden.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -107,7 +104,7 @@ the Type_Invariant'Class aspect is specified for a tagged type <I>T</I>,
 then <span class="insert5">a <I>corresponding expression</I> also applies 
 to each nonabstract descendant <I>T1</I> of <I>T</I> (including <I>T</I> 
 itself if it is nonabstract). The corresponding expression is constructed 
-from the associated expression as follows:<A NAME="I3791"></A></span><span class="delete5">&nbsp;the 
+from the associated expression as follows:<A NAME="I3779"></A></span><span class="delete5">&nbsp;the 
 invariant expression applies to all descendants of <I>T</I>.</span></div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Bulleted"><span class="insert5">References to non-discriminant 
@@ -124,7 +121,7 @@ for some type that is an ancestor of <I>T1</I> and a descendant of <I>T</I>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">If 
 one or more invariant expressions apply to a nonabstract type <I>T</I>, 
 then a subprogram or entry is said to be <I>type-invariant preserving</I> 
-for <I>T</I> if<A NAME="I3792"></A></span></div>
+for <I>T</I> if<A NAME="I3780"></A></span></div>
 <div class="paranum"><a name="p8.4">8.4/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">it 
 is declared within the immediate scope of <I>T</I> (or by an instance 
@@ -161,26 +158,24 @@ or entry that has an <B>in</B> parameter with a part of type <I>T</I>.</span></d
 <div class="paranum"><a name="p8.12">8.12/5</a></div>
 <div class="Bulleted-NoPrefix"><span class="insert5">Each such part of 
 type <I>T</I> is said to be <I>subject to an invariant check</I> for 
-<I>T</I>.<A NAME="I3793"></A><A NAME="I3794"></A></span></div>
+<I>T</I>.<A NAME="I3781"></A><A NAME="I3782"></A></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">If one or more invariant 
-expressions apply to a <span class="insert4">nonabstract&nbsp;</span>type 
-<I>T</I>, then an invariant check is performed at the following places, 
-on the specified object(s):<A NAME="I3795"></A><A NAME="I3796"></A></div>
+expressions apply to a nonabstract type <I>T</I>, then an invariant check 
+is performed at the following places, on the specified object(s):<A NAME="I3783"></A><A NAME="I3784"></A></div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Bulleted">After successful <span class="delete4">default 
-</span>initialization of an object of type <I>T</I><span class="insert4">&nbsp;by default (see <A HREF="RM-3-3-1.html">3.3.1</A>)</span>, the check 
-is performed on the new object<span class="insert4">&nbsp;unless the partial 
-view of <I>T</I> has unknown discriminants</span>;</div>
+<div class="Bulleted">After successful initialization of an object of 
+type <I>T</I> by default (see <A HREF="RM-3-3-1.html">3.3.1</A>), the 
+check is performed on the new object unless the partial view of <I>T</I> 
+has unknown discriminants;</div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
-<div class="Bulleted"><span class="insert4">After successful explicit 
-initialization of the completion of a deferred constant with a part of 
-type <I>T</I>, if the completion is inside the immediate scope of the 
-full view of <I>T</I>, and the deferred constant is visible outside the 
-immediate scope of <I>T</I>, the check is performed on the part(s) of 
-type <I>T</I>;</span></div>
+<div class="Bulleted">After successful explicit initialization of the 
+completion of a deferred constant with a part of type <I>T</I>, if the 
+completion is inside the immediate scope of the full view of <I>T</I>, 
+and the deferred constant is visible outside the immediate scope of <I>T</I>, 
+the check is performed on the part(s) of type <I>T</I>;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Bulleted">After successful conversion to type <I>T</I>, the 
 check is performed on the result of the conversion;</div>
@@ -201,12 +196,13 @@ that passes the view conversion as an <B>in out</B> or <B>out</B> parameter.
 a</span> successful <span class="insert5">return from a&nbsp;</span>call on 
 <span class="insert5">any subprogram or entry which is type-invariant 
 preserving for <I>T</I>, an invariant</span><span class="delete5">&nbsp;the 
-Read or Input&nbsp;</span><span class="insert4"><span class="delete5">stream-oriented</span></span><span class="delete5"></span><span class="delete4">&nbsp;stream</span><span class="delete5">&nbsp;attribute of the type <I>T</I>, the</span> check is performed on <span class="insert5">each 
-part of type <I>T</I> which is subject to an invariant check for <I>T</I>. 
-In the case of a call to a protected operation, the check is performed 
-before the end of the protected action. In the case of a call to a task 
-entry, the check is performed before the end of the rendezvous</span><span class="delete5">&nbsp;the 
-object initialized by the&nbsp;</span><span class="delete4">stream&nbsp;</span><span class="delete5">attribute</span>;</div>
+Read or Input stream-oriented attribute of the type <I>T</I>, the</span> 
+check is performed on <span class="insert5">each part of type <I>T</I> 
+which is subject to an invariant check for <I>T</I>. In the case of a 
+call to a protected operation, the check is performed before the end 
+of the protected action. In the case of a call to a task entry, the check 
+is performed before the end of the rendezvous</span><span class="delete5">&nbsp;the 
+object initialized by the attribute</span>;</div>
 <div class="Bulleted-NoPrefix"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 16 through 20 were deleted.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
@@ -217,69 +213,59 @@ or entry that:</span>&nbsp;</div>
 <div class="Indented2Bulleted"><span class="delete5">is declared within 
 the immediate scope of type <I>T</I> (or by an instance of a generic 
 unit, and the generic is declared within the immediate scope of type 
-<I>T</I>),</span><span class="delete4">&nbsp;and</span><span class="delete5"></span></div>
+<I>T</I>),</span></div>
 <div class="paranum"><a name="p18">18/4</a></div>
 <div class="Indented2Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete5"></span><span class="delete4">is 
-visible outside the immediate scope of type <I>T</I> or overrides an 
-operation that is visible outside the immediate scope of <I>T</I>, and</span><span class="delete5"></span></div>
+was deleted.</I></SPAN><span class="delete5"></span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
-<div class="Indented2Bulleted" style="margin-bottom: 0.3em"><span class="insert4"></span><span class="delete5"></span><span class="insert4"><span class="delete5">and 
-either:</span></span><span class="delete5"></span><span class="delete4">&nbsp;has 
-a result with a part of type <I>T</I>, or one or more parameters with 
-a part of type <I>T</I>, or an access to variable parameter whose designated 
-type has a part of type <I>T</I>.</span><span class="delete5"></span></div>
+<div class="Indented2Bulleted"><span class="delete5">and either:</span></div>
 <div class="paranum"><a name="p19.1">19.1/5</a></div>
-<div class="Indented3Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5">has 
-a result with a part of type <I>T</I>, or</span></span><span class="insert4"></span></div>
+<div class="Indented3Bulleted"><span class="delete5">has a result with 
+a part of type <I>T</I>, or</span></div>
 <div class="paranum"><a name="p19.2">19.2/5</a></div>
-<div class="Indented3Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5">has 
-one or more <B>out</B> or <B>in out</B> parameters with a part of type 
-<I>T</I>, or</span></span><span class="insert4"></span></div>
+<div class="Indented3Bulleted"><span class="delete5">has one or more 
+<B>out</B> or <B>in out</B> parameters with a part of type <I>T</I>, 
+or</span></div>
 <div class="paranum"><a name="p19.3">19.3/5</a></div>
-<div class="Indented3Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5">has 
-an access-to-object parameter or result whose designated type has a part 
-of type <I>T</I>, or</span></span><span class="insert4"></span></div>
+<div class="Indented3Bulleted"><span class="delete5">has an access-to-object 
+parameter or result whose designated type has a part of type <I>T</I>, 
+or</span></div>
 <div class="paranum"><a name="p19.4">19.4/5</a></div>
-<div class="Indented3Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5">is 
-a procedure or entry that has an <B>in</B> parameter with a part of type 
-<I>T</I>,</span></span><span class="insert4"></span></div>
+<div class="Indented3Bulleted"><span class="delete5">is a procedure or 
+entry that has an <B>in</B> parameter with a part of type <I>T</I>,</span></div>
 <div class="paranum"><a name="p19.5">19.5/5</a></div>
-<div class="Indented2Bulleted" style="margin-bottom: 0.3em"><span class="insert4"></span><span class="insert4"><span class="delete5">and 
-either:</span></span><span class="insert4"></span></div>
+<div class="Indented2Bulleted" style="margin-bottom: 0.3em"><span class="delete5">and 
+either:</span></div>
 <div class="paranum"><a name="p19.6">19.6/5</a></div>
-<div class="Indented3Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5"><I>T</I> 
-is a private type or a private extension and the subprogram or entry 
-is visible outside the immediate scope of type <I>T</I> or overrides 
-an inherited operation that is visible outside the immediate scope of 
-<I>T</I>, or</span></span><span class="insert4"></span></div>
+<div class="Indented3Bulleted"><span class="delete5"><I>T</I> is a private 
+type or a private extension and the subprogram or entry is visible outside 
+the immediate scope of type <I>T</I> or overrides an inherited operation 
+that is visible outside the immediate scope of <I>T</I>, or</span></div>
 <div class="paranum"><a name="p19.7">19.7/5</a></div>
-<div class="Indented3Bulleted"><span class="insert4"></span><span class="insert4"><span class="delete5"><I>T</I> 
-is a record extension, and the subprogram or entry is a primitive operation 
-visible outside the immediate scope of type <I>T</I> or overrides an 
-inherited operation that is visible outside the immediate scope of <I>T</I>.</span></span><span class="insert4"></span> 
+<div class="Indented3Bulleted"><span class="delete5"><I>T</I> is a record 
+extension, and the subprogram or entry is a primitive operation visible 
+outside the immediate scope of type <I>T</I> or overrides an inherited 
+operation that is visible outside the immediate scope of <I>T</I>.</span> 
 </div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Bulleted-NoPrefix"><span class="delete5">The check is performed 
 on each such part of type <I>T</I>.</span></div>
 <div class="paranum"><a name="p20.1">20.1/4</a></div>
-<div class="Bulleted"><span class="insert4">For a view conversion to 
-a class-wide type occurring within the immediate scope of <I>T</I>, from 
-a specific type that is a descendant of <I>T</I> (including <I>T</I> 
-itself), a check is performed on the part of the object that is of type 
-<I>T</I>.</span></div>
+<div class="Bulleted">For a view conversion to a class-wide type occurring 
+within the immediate scope of <I>T</I>, from a specific type that is 
+a descendant of <I>T</I> (including <I>T</I> itself), a check is performed 
+on the part of the object that is of type <I>T</I>.</div>
 <div class="paranum"><a name="p21">21/4</a></div>
-<div class="Normal">If performing checks is required by the <span class="insert4">Type_Invariant</span><span class="delete4">&nbsp;Invariant</span> 
-or <span class="insert4">Type_Invariant'Class</span><span class="delete4">&nbsp;Invariant'Class</span> 
-assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) in effect 
-at the point of <span class="insert4">the&nbsp;</span>corresponding aspect 
-specification applicable to a given type, then the respective invariant 
-expression is considered <I>enabled</I>.<A NAME="I3797"></A></div>
+<div class="Normal">If performing checks is required by the Type_Invariant 
+or Type_Invariant'Class assertion policies (see <A HREF="RM-11-4-2.html">11.4.2</A>) 
+in effect at the point of the corresponding aspect specification applicable 
+to a given type, then the respective invariant expression is considered 
+<I>enabled</I>.<A NAME="I3785"></A></div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">The invariant check consists of the evaluation of 
 each enabled invariant expression that applies to <I>T</I>, on each of 
 the objects specified above. If any of these evaluate to False, Assertions.Assertion_Error 
-is raised at the point of the object initialization, conversion, or call.<A NAME="I3798"></A> 
+is raised at the point of the object initialization, conversion, or call.<A NAME="I3786"></A> 
 If a given call requires more than one evaluation of an invariant expression, 
 either for multiple objects of a single type or for multiple types with 
 invariants, the evaluations are performed in an arbitrary order, and 
@@ -290,13 +276,12 @@ any postcondition check, and any constraint or predicate checks associated
 with <B>in out</B> or <B>out</B> parameters are performed in an arbitrary 
 order.</div>
 <div class="paranum"><a name="p22.1">22.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">For an invariant check on 
-a value of type <I>T1</I> based on a class-wide invariant expression 
-inherited from an ancestor type <I>T</I>, any operations within the invariant 
-expression that were resolved as primitive operations of the (notional) 
-formal derived type <I>NT</I> are bound to the corresponding operations 
-of type <I>T1</I> in the evaluation of the invariant expression for the 
-check on <I>T1</I>.</span></div>
+<div class="Normal">&nbsp;&nbsp;For an invariant check on a value of type <I>T1</I> 
+based on a class-wide invariant expression inherited from an ancestor 
+type <I>T</I>, any operations within the invariant expression that were 
+resolved as primitive operations of the (notional) formal derived type 
+<I>NT</I> are bound to the corresponding operations of type <I>T1</I> 
+in the evaluation of the invariant expression for the check on <I>T1</I>.</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">The invariant checks performed on a call are determined 
 by the subprogram or entry actually invoked, whether directly, as part 

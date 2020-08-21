@@ -19,15 +19,15 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -77,24 +77,24 @@ type;</div>
 <div class="Bulleted">a private type whose full type is a by-reference 
 type.&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Normal">A parameter of a by-reference type is passed by reference<span class="insert3">, 
-as is an explicitly aliased parameter of any type</span>. <A NAME="I3536"></A>Each 
-value of a by-reference type has an associated object. For a parenthesized 
-expression, <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN>, 
+<div class="Normal">&nbsp;A parameter of a by-reference type is passed by 
+reference<span class="insert3">, as is an explicitly aliased parameter 
+of any type</span>. <A NAME="I3536"></A>Each value of a by-reference 
+type has an associated object. For a parenthesized expression, <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN>, 
 or <span class="insert4">view conversion</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-6.html#S0141">&nbsp;type_conversion</A></SPAN></span>, 
 this object is the one associated with the operand.<span class="insert4">&nbsp;For a value conversion, the associated object is the anonymous result 
 object if such an object is created (see <A HREF="RM-4-6.html">4.6</A>); 
 otherwise it is the associated object of the operand.</span><span class="insert3">&nbsp;For a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN>, 
 this object is the one associated with the evaluated <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I3537"></A>For <span class="insert3">other 
+<div class="Normal">&nbsp;<A NAME="I3537"></A>For <span class="insert3">other 
 </span>parameters<span class="delete3">&nbsp;of other types</span>, it is 
 unspecified whether the parameter is passed by copy or by reference. 
 </div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I3538"></A><A NAME="I3539"></A><A NAME="I3540"></A><A NAME="I3541"></A>If 
+<div class="Normal">&nbsp;<A NAME="I3538"></A><A NAME="I3539"></A><A NAME="I3540"></A><A NAME="I3541"></A>If 
 one <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> denotes 
 a part of a formal parameter, and a second <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes a part of a distinct formal parameter or an object that is not 

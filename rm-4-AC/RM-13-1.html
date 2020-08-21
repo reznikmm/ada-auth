@@ -23,16 +23,16 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,7 +43,7 @@
 <HR>
 <H1>13.1 <span class="insert3">Operational and Representation Aspects</span><span class="delete3">Representation Items</span></H1>
 <div class="paranum"><a name="p0.1">0.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert1"></span><span class="insert3"><A NAME="I5074"></A></span><span class="insert1"></span><span class="insert1"><span class="delete3">Representation 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1"></span><span class="insert3"><A NAME="I5074"></A></span><span class="insert1"></span><span class="insert1"><span class="delete3">Representation 
 and operational items can be used to specify aspects of entities.&nbsp;</span></span><span class="insert1">Two 
 kinds of aspects of entities can be specified:&nbsp;</span><span class="insert1"><span class="delete3">aspects 
 of&nbsp;</span></span><span class="insert1">representation</span><span class="insert3">&nbsp;aspects</span><span class="insert1">&nbsp;and operational aspects. Representation 
@@ -53,8 +53,8 @@ of the language are to be mapped onto the underlying machine. Operational
 </span><span class="insert3">aspects determine</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;items 
 specify</span></span><span class="insert1">&nbsp;other properties of entities.</span></div>
 <div class="paranum"><a name="p0.2">0.2/3</a></div>
-<div class="Normal">&nbsp;<span class="insert1">Either kind of aspect of an 
-entity may be specified by means of an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">Either kind of aspect of 
+an entity may be specified by means of an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 (see <A HREF="RM-13-1-1.html">13.1.1</A>), which is an optional element 
 of most kinds of declarations and applies to the entity or entities being 
 declared. Aspects may also be specified by certain other constructs occurring 
@@ -83,12 +83,12 @@ which denotes an entity declared local to the current declarative region,
 or a library unit declared immediately preceding a representation pragma 
 in a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>.</span></div>
 <div class="paranum"><a name="p1.1">1.1/1</a></div>
-<div class="Normal">&nbsp;<span class="insert1">An <A NAME="I5078"></A><I>operational 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">An <A NAME="I5078"></A><I>operational 
 item</I> is an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
 for an operational attribute.</span></div>
 <div class="paranum"><a name="p1.2">1.2/1</a></div>
-<div class="Normal">&nbsp;<span class="insert1">An operational item or a representation 
-item applies to an entity identified by a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">An operational item or a 
+representation item applies to an entity identified by a <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>, 
 which denotes an entity declared local to the current declarative region, 
 or a library unit declared immediately preceding a representation pragma 
 in a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>.</span> 
@@ -182,7 +182,7 @@ representation item that names a subtype is either <I>subtype-specific</I>
 (Size and Alignment clauses) or <I>type-related</I> (all others). Subtype-specific 
 aspects may differ for different subtypes of the same type.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert1">An operational item <I>directly 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">An operational item <I>directly 
 specifies</I> an <I>operational aspect</I> of the&nbsp;</span><span class="insert3">entity</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;type 
 of the subtype</span></span><span class="insert1">&nbsp;denoted by the <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN></span><span class="insert3">, 
 except in the case of a type-related operational item, whose <SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN> 
@@ -195,7 +195,7 @@ that names a subtype is type-related</span></span><span class="insert1">.
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Normal">A representation item that directly specifies an 
 aspect of a subtype or type shall appear after the type is completely 
-defined (see <A HREF="RM-3-11-1.html">3.11.1</A>) and before the subtype 
+defined (see <A HREF="RM-3-11-1.html">3.11.1</A>), and before the subtype 
 or type is frozen (see <A HREF="RM-13-14.html">13.14</A>).<span class="delete4">&nbsp;If a representation item&nbsp;</span><span class="insert3"><span class="delete4">or 
 <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 </span></span><span class="delete4">is given that directly specifies 
@@ -204,8 +204,8 @@ item&nbsp;</span><span class="insert3"><span class="delete4">or <SPAN Class="swi
 </span></span><span class="delete4">that directly specifies the same 
 aspect of the entity.</span>&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert1">An operational item that directly 
-specifies an aspect of&nbsp;</span><span class="insert3">an entity</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;a 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">An operational item that 
+directly specifies an aspect of&nbsp;</span><span class="insert3">an entity</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;a 
 type</span></span><span class="insert1">&nbsp;shall appear before the&nbsp;</span><span class="insert3">entity</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;type</span></span><span class="insert1">&nbsp;is frozen (see <A HREF="RM-13-14.html">13.14</A>).</span><span class="insert1"><span class="delete4">&nbsp;If an operational item&nbsp;</span></span><span class="insert3"><span class="delete4">or 
 <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 </span></span><span class="insert1"><span class="delete4">is given that 
@@ -218,17 +218,17 @@ it is illegal to give another operational item&nbsp;</span></span><span class="i
 specifies the same aspect of the&nbsp;</span></span><span class="insert3"><span class="delete4">entity</span></span><span class="insert1"><span class="delete4"></span></span><span class="insert1"><span class="delete3">&nbsp;type</span></span><span class="insert1"><span class="delete4">.</span></span><span class="insert1"></span> 
 </div>
 <div class="paranum"><a name="p9.2">9.2/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">If a representation item, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">If a representation item, 
 operational item, or <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 is given that directly specifies an aspect of an entity, then it is illegal 
 to give another representation item, operational item, or <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 that directly specifies the same aspect of the entity.</span></div>
 <div class="paranum"><a name="p9.3">9.3/4</a></div>
-<div class="Normal">&nbsp;<span class="insert3">Unless otherwise specified, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">Unless otherwise specified, 
 it is illegal to specify an operational or representation aspect of a 
 generic formal parameter.</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Normal">For an untagged derived type, <span class="insert3">it 
+<div class="Normal">&nbsp;For an untagged derived type, <span class="insert3">it 
 is illegal to specify a</span><span class="delete3">&nbsp;no</span> type-related 
 representation <span class="insert3">aspect</span><span class="delete3">&nbsp;items 
 are allowed</span> if the parent type is a by-reference type, or has 
@@ -237,7 +237,7 @@ it is illegal to specify a nonconfirming type-related representation
 aspect for an untagged by-reference type after one or more types have 
 been derived from it.</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><span class="insert1">Operational and representation</span><span class="delete1">&nbsp;Representation</span> 
+<div class="Normal">&nbsp;<span class="insert1">Operational and representation</span><span class="delete1">&nbsp;Representation</span> 
 aspects of a generic formal parameter are the same as those of the actual. 
 <span class="insert1">Operational and representation aspects&nbsp;</span><span class="insert1"><span class="delete2">of 
 a partial view&nbsp;</span></span><span class="insert1">are the same&nbsp;</span><span class="insert2">for 
@@ -247,18 +247,18 @@ of a</span><span class="delete3">&nbsp;A</span> type-related representation
 <span class="insert3">aspect</span><span class="delete3">&nbsp;item</span> 
 is not allowed for a descendant of a generic formal untagged type.&nbsp;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><span class="insert3">The specification of</span><span class="delete3">&nbsp;A 
+<div class="Normal">&nbsp;<span class="insert3">The specification of</span><span class="delete3">&nbsp;A 
 representation item that specifies</span> the Size<span class="insert3">&nbsp;aspect</span> for a given subtype, or the size or storage place for an 
 object (including a component) of a given subtype, shall allow for enough 
 storage space to accommodate any value of the subtype.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><span class="insert3">If a specification of a</span><span class="delete3">&nbsp;A</span> 
+<div class="Normal">&nbsp;<span class="insert3">If a specification of a</span><span class="delete3">&nbsp;A</span> 
 representation <span class="insert1">or operational&nbsp;</span><span class="insert3">aspect</span><span class="delete3">&nbsp;item 
 that</span> is not supported by the implementation<span class="insert3">, 
 it&nbsp;</span>is illegal<span class="delete3">,</span> or raises an exception 
 at run time.</div>
 <div class="paranum"><a name="p13.1">13.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 is illegal if it has one or more progenitors, and a&nbsp;</span><span class="insert3">nonconfirming 
 value was specified for a&nbsp;</span><span class="insert2">representation 
 </span><span class="insert3">aspect of</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;item 
@@ -271,7 +271,7 @@ are implementation defined.</span>&nbsp;</div>
 <div class="Normal">If two subtypes statically match, then their subtype-specific 
 aspects (Size and Alignment) are the same. <A NAME="I5106"></A></div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal">A derived type inherits each type-related <span class="insert3">representation 
+<div class="Normal">&nbsp;A derived type inherits each type-related <span class="insert3">representation 
 </span>aspect <span class="delete3"></span><span class="insert1"><span class="delete3">of 
 representation&nbsp;</span></span><span class="delete3"></span>of its parent 
 type that was directly specified before the declaration of the derived 
@@ -289,7 +289,7 @@ representation&nbsp;</span>is overridden by a subsequent <span class="insert3"><
 or&nbsp;</span>representation item that specifies <span class="insert3">a 
 different value for&nbsp;</span>the same aspect of the type or subtype.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">In contrast, whether operational 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">In contrast, whether operational 
 aspects are inherited by&nbsp;</span><span class="insert3">a</span><span class="insert1"></span><span class="insert1"><span class="delete3"></span></span><span class="insert2"><span class="delete3">&nbsp;an 
 untagged</span></span><span class="insert1"><span class="delete3"></span></span><span class="insert1"><span class="delete2">&nbsp;a</span></span><span class="insert1"><span class="delete3"></span></span><span class="insert1">&nbsp;derived type depends on each specific aspect</span><span class="insert3">; 
 unless specified, an operational aspect is not inherited</span><span class="insert1">. 
@@ -307,7 +307,7 @@ a subsequent&nbsp;</span><span class="insert3"><SPAN Class="swiss"><A HREF="RM-1
 or&nbsp;</span><span class="insert1">operational item that specifies the same 
 aspect of the type.</span>&nbsp;</div>
 <div class="paranum"><a name="p15.2">15.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">When an aspect that is a 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">When an aspect that is a 
 subprogram is inherited, the derived type inherits the aspect in the 
 same way that a derived type inherits a user-defined primitive subprogram 
 from its parent (see <A HREF="RM-3-4.html">3.4</A>).</span>&nbsp;</div>
@@ -324,13 +324,13 @@ Storage_Size, which specifies a minimum.&nbsp;</div>
 of an entity is not specified, it is chosen by default in an unspecified 
 manner.&nbsp;</div>
 <div class="paranum"><a name="p18.1">18.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1"><A NAME="I5109"></A>If an 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1"><A NAME="I5109"></A>If an 
 operational aspect is <I>specified</I> for an entity (meaning that it 
 is either directly specified or inherited), then that aspect of the entity 
 is as specified. Otherwise, the aspect of the entity has the default 
 value for that aspect.</span></div>
 <div class="paranum"><a name="p18.2">18.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"></span><span class="insert3">An 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"></span><span class="insert3">An 
 <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 or&nbsp;</span><span class="insert2"></span><span class="insert2"><span class="delete3">A</span></span><span class="insert2">&nbsp;representation 
 item that specifies&nbsp;</span><span class="insert3">a</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;an 
@@ -343,14 +343,14 @@ and representation items that specified them.<A NAME="I5111"></A> <A NAME="I5112
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p19">19/1</a></div>
-<div class="Normal"><span class="insert1"><A NAME="I5116"></A></span><span class="delete1"><A NAME="I5117"></A></span>For 
+<div class="Normal">&nbsp;<span class="insert1"><A NAME="I5116"></A></span><span class="delete1"><A NAME="I5117"></A></span>For 
 the elaboration of <span class="insert1">an <SPAN Class="swiss"><A HREF="RM-13-1.html#S0304">aspect_clause</A></SPAN></span><span class="delete1">&nbsp;a 
 <SPAN Class="swiss"><A HREF="RM-13-1.html#S0305">representation_clause</A></SPAN></span>, 
 any evaluable constructs within it are evaluated.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal">An implementation may interpret <span class="delete3">aspects 
+<div class="Normal">&nbsp;An implementation may interpret <span class="delete3">aspects 
 of&nbsp;</span>representation<span class="insert3">&nbsp;aspects</span> in an implementation-defined 
 manner. An implementation may place implementation-defined restrictions 
 on <span class="insert3">the specification of&nbsp;</span>representation <span class="insert3">aspects</span><span class="delete3">&nbsp;items</span>. 
@@ -364,7 +364,7 @@ Representation Support</A>&rdquo;).</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5119"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I5119"></A>The 
 recommended level of support for <span class="insert3">the specification 
 of&nbsp;</span>all representation <span class="insert3">aspects</span><span class="delete3">&nbsp;items</span> 
 is qualified as follows:&nbsp;</div>
@@ -413,7 +413,7 @@ nonconfirming subtype-specific representation&nbsp;</span><span class="insert3">
 value for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;item 
 specifying an aspect of representation of</span></span><span class="insert2">&nbsp;an indefinite or abstract subtype.</span>&nbsp;</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal"><span class="insert2">For purposes of these rules, 
+<div class="Normal">&nbsp;<span class="insert2">For purposes of these rules, 
 the determination of whether&nbsp;</span><span class="insert3">specifying 
 </span><span class="insert2">a representation&nbsp;</span><span class="insert3">aspect 
 value for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;item 

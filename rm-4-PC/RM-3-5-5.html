@@ -13,24 +13,22 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.0em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,7 +45,7 @@
 subtype S, the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Pos</div><div class="WideHanging-Body">
-<A NAME="I1786"></A><A NAME="I1787"></A>S'Pos denotes a function with 
+<A NAME="I1773"></A><A NAME="I1774"></A>S'Pos denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Pos(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -57,44 +55,44 @@ the following specification:&nbsp;</div>
 of the value of <I>Arg</I>, as a value of type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Val</div><div class="WideHanging-Body">
-<A NAME="I1788"></A><A NAME="I1789"></A>S'Val denotes a function with 
+<A NAME="I1775"></A><A NAME="I1776"></A>S'Val denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Val(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Body"><A NAME="I1790"></A><A NAME="I1791"></A>This 
+<div class="WideHanging-Body"><A NAME="I1777"></A><A NAME="I1778"></A>This 
 function returns a value of the type of S whose position number equals 
-the value of <I>Arg</I>. <A NAME="I1792"></A><A NAME="I1793"></A>For 
+the value of <I>Arg</I>. <A NAME="I1779"></A><A NAME="I1780"></A>For 
 the evaluation of a call on S'Val, if there is no value in the base range 
 of its type with the given position number, Constraint_Error is raised. 
 </div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
-every static discrete subtype S for which there exists at least one value 
-belonging to S that satisfies&nbsp;</span><span class="insert4">the predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;any 
-predicate</span></span><span class="insert3">&nbsp;of S, the following attributes 
-are defined:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For every static 
+discrete subtype S for which there exists at least one value belonging 
+to S that satisfies <span class="insert4">the predicates</span><span class="delete4">&nbsp;any 
+predicate</span> of S, the following attributes are defined:</div>
 <div class="paranum"><a name="p7.2">7.2/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">S'First_Valid</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3"><A NAME="I1794"></A><A NAME="I1795"></A></span><span class="insert3">S'First_Valid 
-denotes the smallest value that belongs to S and satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of S. The value of this attribute is of the type of S.</span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;S'First_Valid</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I1781"></A><A NAME="I1782"></A>S'First_Valid denotes the smallest 
+value that belongs to S and satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of S. The value of this attribute is of the type of S.</div>
 <div class="paranum"><a name="p7.3">7.3/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">S'Last_Valid</span></div><div class="WideHanging-Body">
-<span class="insert3"><A NAME="I1796"></A><A NAME="I1797"></A></span><span class="insert3">S'Last_Valid 
-denotes the largest value that belongs to S and satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of S. The value of this attribute is of the type of S.</span>&nbsp;</div>
+<div class="WideHanging-Term">&nbsp;&nbsp;S'Last_Valid</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I1783"></A><A NAME="I1784"></A>S'Last_Valid denotes the largest 
+value that belongs to S and satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of S. The value of this attribute is of the type of S.&nbsp;</div>
 <div class="paranum"><a name="p7.4">7.4/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">First_Valid and Last_Valid 
-<SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
+<div class="Normal">&nbsp;&nbsp;First_Valid and Last_Valid <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
 are always static expressions. Any explicit predicate of S can only have 
-been specified by a Static_Predicate aspect.</span></div>
+been specified by a Static_Predicate aspect.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">For the evaluation of a call on S'Pos for an enumeration 
 subtype, if the value of the operand does not correspond to the internal 
 code for any enumeration literal of its type (perhaps due to an uninitialized 
-variable), then the implementation should raise Program_Error. <A NAME="I1798"></A>This 
+variable), then the implementation should raise Program_Error. <A NAME="I1785"></A>This 
 is particularly important for enumeration types with noncontiguous internal 
 codes specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN>. 
 </div>
@@ -103,7 +101,7 @@ codes specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumerati
 <div class="Notes">36&nbsp;&nbsp;Indexing and loop iteration use values 
 of discrete types.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Notes">37&nbsp;&nbsp;<A NAME="I1799"></A>The predefined operations 
+<div class="Notes">37&nbsp;&nbsp;<A NAME="I1786"></A>The predefined operations 
 of a discrete type include the assignment operation, qualification, the 
 membership tests, and the relational operators; for a boolean type they 
 include the short-circuit control forms and the logical operators; for 
@@ -111,8 +109,7 @@ an integer type they include type conversion to and from other numeric
 types, as well as the binary and unary adding operators &ndash; and +, 
 the multiplying operators, the unary operator <B>abs</B>, and the exponentiation 
 operator. The assignment operation is described in <A HREF="RM-5-2.html">5.2</A>. 
-The other predefined operations are described in <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="RM-4.html">4</A>.</div>
+The other predefined operations are described in Clause <A HREF="RM-4.html">4</A>.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Notes">38&nbsp;&nbsp;As for all types, objects of a discrete 
 type have Size and Address attributes (see <A HREF="RM-13-3.html">13.3</A>).</div>

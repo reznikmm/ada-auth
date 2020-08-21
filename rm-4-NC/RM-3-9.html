@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -54,7 +54,7 @@ may be overridden. <A NAME="I2088"></A><A NAME="I2089"></A>The derived
 type is called an <I>extension</I> of its ancestor types, or simply a 
 <I>type extension</I>.</div>
 <div class="paranum"><a name="p2.1">2.1/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I2090"></A><A NAME="I2091"></A><A NAME="I2092"></A>Every 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I2090"></A><A NAME="I2091"></A><A NAME="I2092"></A>Every 
 type extension is also a tagged type, and is a <I>record extension</I> 
 or a <I>private extension</I> of some other tagged type, or a noninterface 
 synchronized tagged type (see <A HREF="RM-3-9-4.html">3.9.4</A>). A record 
@@ -122,16 +122,16 @@ library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Tags;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
-<div class="Normal">&nbsp;No_Tag is the default initial value of type Tag. 
+<div class="Normal">&nbsp;&nbsp;No_Tag is the default initial value of type Tag. 
 </div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">The function Wide_Wide_Expanded_Name returns the 
+<div class="Normal">&nbsp;The function Wide_Wide_Expanded_Name returns the 
 full expanded name of the first subtype of the specific type identified 
 by the tag, in upper case, starting with a root library unit. The result 
 is implementation defined if the type is declared within an unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0160">block_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Expanded_Name (respectively, Wide_Expanded_Name) 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Expanded_Name (respectively, Wide_Expanded_Name) 
 returns the same sequence of graphic characters as that defined for Wide_Wide_Expanded_Name, 
 if all the graphic characters are defined in Character (respectively, 
 Wide_Character); otherwise, the sequence of characters is implementation 
@@ -143,17 +143,17 @@ used in an external representation for the given tag. The call External_Tag(S'Ta
 is equivalent to the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 S'External_Tag (see <A HREF="RM-13-3.html">13.3</A>).&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The string returned by the functions Expanded_Name, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The string returned by the functions Expanded_Name, 
 Wide_Expanded_Name, Wide_Wide_Expanded_Name, and External_Tag has lower 
 bound 1.</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal">The function Internal_Tag returns a tag that corresponds 
+<div class="Normal">&nbsp;The function Internal_Tag returns a tag that corresponds 
 to the given external tag, or raises Tag_Error if the given string is 
 not the external tag for any specific type of the partition. Tag_Error 
 is also raised if the specific type identified is a library-level type 
 whose tag has not yet been created (see <A HREF="RM-13-14.html">13.14</A>).</div>
 <div class="paranum"><a name="p12.1">12.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Descendant_Tag returns the (internal) 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Descendant_Tag returns the (internal) 
 tag for the type that corresponds to the given external tag and is both 
 a descendant of the type identified by the Ancestor tag and has the same 
 accessibility level as the identified ancestor. Tag_Error is raised if 
@@ -162,31 +162,31 @@ if the specific type identified is a library-level type whose tag has
 not yet been created, or if the given external tag identifies more than 
 one type that has the appropriate Ancestor and accessibility level.</div>
 <div class="paranum"><a name="p12.2">12.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Is_Descendant_At_Same_Level returns 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Is_Descendant_At_Same_Level returns 
 True if the Descendant tag identifies a type that is both a descendant 
 of the type identified by Ancestor and at the same accessibility level. 
 If not, it returns False.</div>
 <div class="paranum"><a name="p12.3">12.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;For the purposes of the dynamic semantics of functions 
+<div class="Normal">&nbsp;&nbsp;&nbsp;For the purposes of the dynamic semantics of functions 
 Descendant_Tag and Is_Descendant_At_Same_Level, a tagged type T2 is a 
 <I>descendant</I> of a type T1 if it is the same as T1, or if its parent 
 type or one of its progenitor types is a descendant of type T1 by this 
 rule, even if at the point of the declaration of T2, one of the derivations 
 in the chain is not visible.<A NAME="I2115"></A></div>
 <div class="paranum"><a name="p12.4">12.4/4</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Parent_Tag returns the tag of the 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Parent_Tag returns the tag of the 
 parent type of the type whose tag is T. If the type does not have a parent 
 type (that is, it was not defined by a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>), 
 then No_Tag is returned.</div>
 <div class="paranum"><a name="p12.5">12.5/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Interface_Ancestor_Tags returns an 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Interface_Ancestor_Tags returns an 
 array containing the tag of each interface ancestor type of the type 
 whose tag is T, other than T itself. The lower bound of the returned 
 array is 1, and the order of the returned tags is unspecified. Each tag 
 appears in the result exactly once. If the type whose tag is T has no 
 interface ancestors, a null array is returned.<A NAME="I2116"></A></div>
 <div class="paranum"><a name="p12.6">12.6/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Is_Abstract returns True if the type 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Is_Abstract returns True if the type 
 whose tag is T is abstract, and False otherwise.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">For every subtype S of a tagged type <I>T</I> (specific 
@@ -217,7 +217,7 @@ the following attribute is defined:&nbsp;</div>
 <A NAME="I2123"></A><A NAME="I2124"></A>X'Tag denotes the tag of X. The 
 value of this attribute is of type Tag.&nbsp;</div>
 <div class="paranum"><a name="p18.1">18.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The following language-defined 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;The following language-defined 
 generic function exists:</div>
 <div class="paranum"><a name="p18.2">18.2/3</a></div>
 <div class="Examples"><A NAME="I2125"></A><B>generic</B><BR>
@@ -231,8 +231,8 @@ generic function exists:</div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
 <B>pragma</B>&nbsp;Preelaborate(Generic_Dispatching_Constructor);</div>
 <div class="paranum"><a name="p18.3">18.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;Tags.Generic_Dispatching_Constructor provides a 
-mechanism to create an object of an appropriate type from just a tag 
+<div class="Normal">&nbsp;&nbsp;&nbsp;Tags.Generic_Dispatching_Constructor provides 
+a mechanism to create an object of an appropriate type from just a tag 
 value. The function Constructor is expected to create the object given 
 a reference to an object of type Parameters.</div>
 
@@ -264,12 +264,12 @@ by a function with a class-wide result type is that of the return object.
 conversion and by parameter passing. The tag of a value is the tag of 
 the associated object (see <A HREF="RM-6-2.html">6.2</A>).</div>
 <div class="paranum"><a name="p25.1">25.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;Tag_Error is raised by a call of Descendant_Tag, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;Tag_Error is raised by a call of Descendant_Tag, 
 Expanded_Name, External_Tag, Interface_Ancestor_Tags, Is_Abstract, Is_Descendant_At_Same_Level, 
 Parent_Tag, Wide_Expanded_Name, or Wide_Wide_Expanded_Name if any tag 
 passed is No_Tag.</div>
 <div class="paranum"><a name="p25.2">25.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;An instance of Tags.Generic_Dispatching_Constructor 
+<div class="Normal">&nbsp;&nbsp;&nbsp;An instance of Tags.Generic_Dispatching_Constructor 
 raises Tag_Error if The_Tag does not represent a concrete descendant 
 of T or if the innermost master (see <A HREF="RM-7-6-1.html">7.6.1</A>) 
 of this descendant is not also a master of the instance. Otherwise, it 
@@ -279,7 +279,7 @@ Any exception raised by the function is propagated.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p25.3">25.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I2132"></A>If an internal tag provided 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I2132"></A>If an internal tag provided 
 to an instance of Tags.Generic_Dispatching_Constructor or to any subprogram 
 declared in package Tags identifies either a type that is not library-level 
 and whose tag has not been created (see <A HREF="RM-13-14.html">13.14</A>), 
@@ -288,7 +288,7 @@ then execution is erroneous.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal">The implementation of Internal_Tag and Descendant_Tag 
+<div class="Normal">&nbsp;The implementation of Internal_Tag and Descendant_Tag 
 may raise Tag_Error if no specific type corresponding to the string External 
 passed as a parameter exists in the partition at the time the function 
 is called, or if there is no such type whose innermost master is a master 
@@ -296,9 +296,9 @@ of the point of the function call.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p26.1">26.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;Internal_Tag should return the tag of a type, if 
-one exists, whose innermost master is a master of the point of the function 
-call.&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;Internal_Tag should return the tag of a type, 
+if one exists, whose innermost master is a master of the point of the 
+function call.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Notes">70&nbsp;&nbsp;A type declared with the reserved word 

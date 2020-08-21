@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -42,31 +40,31 @@ by an <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">iterator_specification</SPAN><A NAME="I3345"></A><A NAME="S0168"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3346"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[:&nbsp;<A NAME="I3347"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>]&nbsp;</span><B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterator_</I><A NAME="I3348"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3349"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[:&nbsp;<span class="insert5"><A NAME="I3350"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><A NAME="I3351"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span>]&nbsp;<B>of</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterable_</I><A NAME="I3352"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">iterator_specification</SPAN><A NAME="I3335"></A><A NAME="S0168"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3336"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[:&nbsp;<A NAME="I3337"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>]&nbsp;</span><B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterator_</I><A NAME="I3338"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3339"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[:&nbsp;<span class="insert5"><A NAME="I3340"></A><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><A NAME="I3341"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span>]&nbsp;<B>of</B>&nbsp;[<B>reverse</B>]&nbsp;<I>iterable_</I><A NAME="I3342"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p2.1">2.1/5</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">loop_parameter_subtype_indication</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3353"></A><A NAME="S0169"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I3354"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I3355"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN></span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">loop_parameter_subtype_indication</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3343"></A><A NAME="S0169"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5"><A NAME="I3344"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I3345"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">For the first form of <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
-called a <I>generalized iterator</I>,<A NAME="I3356"></A><A NAME="I3357"></A> 
+called a <I>generalized iterator</I>,<A NAME="I3346"></A><A NAME="I3347"></A> 
 the expected type for the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is any iterator type.<A NAME="I3358"></A> For the second form of <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
+is any iterator type.<A NAME="I3348"></A> For the second form of <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
 the expected type for the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is any array or iterable container type.<A NAME="I3359"></A> If the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+is any array or iterable container type.<A NAME="I3349"></A> If the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes an array object, the <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-is called an <I>array component iterator</I>;<A NAME="I3360"></A><A NAME="I3361"></A> 
-otherwise it is called a <I>container element iterator</I>.<A NAME="I3362"></A><A NAME="I3363"></A> 
+is called an <I>array component iterator</I>;<A NAME="I3350"></A><A NAME="I3351"></A> 
+otherwise it is called a <I>container element iterator</I>.<A NAME="I3352"></A><A NAME="I3353"></A> 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">If the reserved word <B>reverse</B> appears, the 
 <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-is a <I>reverse iterator</I>;<A NAME="I3364"></A><A NAME="I3365"></A> 
-otherwise it is a <I>forward iterator</I>.<A NAME="I3366"></A><A NAME="I3367"></A> 
+is a <I>reverse iterator</I>;<A NAME="I3354"></A><A NAME="I3355"></A> 
+otherwise it is a <I>forward iterator</I>.<A NAME="I3356"></A><A NAME="I3357"></A> 
 In a reverse generalized iterator, the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 shall be of a reversible iterator type. In a reverse container element 
 iterator, the default iterator type for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
@@ -75,44 +73,40 @@ shall be a reversible iterator type.</div>
 <div class="Normal"><span class="insert5">The subtype defined by the 
 <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN>, 
 if any, of a generalized iterator shall statically match the iteration 
-cursor subtype.&nbsp;</span>The <span class="insert4">subtype defined by</span><span class="delete4">&nbsp;type 
-of</span> the <span class="insert5"><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span>, 
-if any, of an array component iterator shall <span class="insert4">statically 
-match</span><span class="delete4">&nbsp;cover</span> the component <span class="insert4">subtype</span><span class="delete4">&nbsp;type</span> 
-of the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>. 
-The <span class="insert4">subtype defined by</span><span class="delete4">&nbsp;type 
-of</span> the <span class="insert5"><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span>, 
-if any, of a container element iterator shall <span class="insert4">statically 
-match</span><span class="delete4">&nbsp;cover</span> the default element <span class="insert4">subtype</span><span class="delete4">&nbsp;type</span> 
-for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>.</div>
+cursor subtype.&nbsp;</span>The subtype defined by the <span class="insert5"><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span>, 
+if any, of an array component iterator shall statically match the component 
+subtype of the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>. 
+The subtype defined by the <span class="insert5"><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span>, 
+if any, of a container element iterator shall statically match the default 
+element subtype for the type of the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>.</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">In a container element iterator whose <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 has type <I>T</I>, if the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes a constant or the Variable_Indexing aspect is not specified for 
 <I>T</I>, then the Constant_Indexing aspect shall be specified for <I>T</I>.</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">The <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;The <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN> 
 shall not denote a subcomponent that depends on discriminants of an object 
 whose nominal subtype is unconstrained, unless the object is known to 
-be constrained.</span></div>
+be constrained.</div>
 <div class="paranum"><a name="p6.2">6.2/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">A container element iterator 
-is illegal if the call of the default iterator function that creates 
-the loop iterator (see below) is illegal.</span></div>
+<div class="Normal">&nbsp;A container element iterator is illegal if the call 
+of the default iterator function that creates the loop iterator (see 
+below) is illegal.</div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">A generalized iterator is 
-illegal if the iteration cursor subtype of the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;A generalized iterator is illegal if the iteration 
+cursor subtype of the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is a limited type at the point of the generalized iterator. A container 
 element iterator is illegal if the default cursor subtype of the type 
 of the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is a limited type at the point of the container element iterator.</span></div>
+is a limited type at the point of the container element iterator.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">An <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0168">iterator_specification</A></SPAN> 
-declares a <I>loop parameter</I>.<A NAME="I3368"></A> In a generalized 
+declares a <I>loop parameter</I>.<A NAME="I3358"></A> In a generalized 
 iterator, <span class="delete5">the nominal subtype of the loop parameter 
 is the iteration cursor subtype. In&nbsp;</span>an array component iterator<span class="insert5">,</span> 
 or a container element iterator, if a <span class="insert5"><SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0169">loop_parameter_subtype_indication</A></SPAN></span><span class="delete5"><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">&nbsp;subtype_indication</A></SPAN></span> 
@@ -144,7 +138,7 @@ if any.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">For a generalized iterator, the loop parameter is 
 created, the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-is evaluated, and the denoted iterator object becomes the <I>loop iterator</I>.<A NAME="I3369"></A> 
+is evaluated, and the denoted iterator object becomes the <I>loop iterator</I>.<A NAME="I3359"></A> 
 In a forward generalized iterator, the operation First of the iterator 
 type is called on the loop iterator, to produce the initial value for 
 the loop parameter. If the result of calling Has_Element on the initial 
@@ -160,11 +154,11 @@ rather than First and Next.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">For an array component iterator, the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted array object becomes the <I>array for the 
-loop</I>.<A NAME="I3370"></A> If the array for the loop is a null array, 
+loop</I>.<A NAME="I3360"></A> If the array for the loop is a null array, 
 then the execution of the <SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN> 
 is complete. Otherwise, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
 is executed with the loop parameter denoting each component of the array 
-for the loop, using a <I>canonical</I> order of components,<A NAME="I3371"></A> 
+for the loop, using a <I>canonical</I> order of components,<A NAME="I3361"></A> 
 which is last dimension varying fastest (unless the array has convention 
 Fortran, in which case it is first dimension varying fastest). For a 
 forward array component iterator, the iteration starts with the component 
@@ -178,11 +172,11 @@ the loop is left as a consequence of a transfer of control.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">For a container element iterator, the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted iterable container object becomes the <I>iterable 
-container object for the loop</I>.<A NAME="I3372"></A> The default iterator 
+container object for the loop</I>.<A NAME="I3362"></A> The default iterator 
 function for the type of the iterable container object for the loop is 
 called on the iterable container object and the result is the <I>loop 
-iterator</I>.<A NAME="I3373"></A> An object of the default cursor subtype 
-is created (the <I>loop cursor</I>).<A NAME="I3374"></A></div>
+iterator</I>.<A NAME="I3363"></A> An object of the default cursor subtype 
+is created (the <I>loop cursor</I>).<A NAME="I3364"></A></div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">For a forward container element iterator, the operation 
 First of the iterator type is called on the loop iterator, to produce 
@@ -202,9 +196,9 @@ parameter is a constant (see above), then the indexing uses the default
 constant indexing function for the type of the iterable container object 
 for the loop; otherwise it uses the default variable indexing function.</div>
 <div class="paranum"><a name="p14">14/4</a></div>
-<div class="Normal"><span class="insert4">Any exception propagated by 
-the execution of a generalized iterator or container element iterator 
-is propagated by the immediately enclosing loop statement.</span></div>
+<div class="Normal">Any exception propagated by the execution of a generalized 
+iterator or container element iterator is propagated by the immediately 
+enclosing loop statement.</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p15">15/3</a></div>

@@ -15,13 +15,13 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -93,7 +93,7 @@ in some other manner, the behavior of the instance of Generic_Constrained_Array_
 is unspecified. The number of times Generic_Constrained_Array_Sort calls 
 &quot;&lt;&quot; is unspecified.<A NAME="I7333"></A></div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The generic library 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The generic library 
 procedure Containers.Generic_Sort has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p9.2">9.2/4</a></div>
 <div class="Examples"><B>generic</B><BR>
@@ -124,22 +124,22 @@ calls Before or Swap is unspecified.<A NAME="I7335"></A></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">The worst-case time complexity of a call on an instance 
+<div class="Normal">&nbsp;The worst-case time complexity of a call on an instance 
 of Containers.Generic_Array_Sort or Containers.Generic_Constrained_Array_Sort 
 should be <I>O</I>(<I>N</I>**2) or better, and the average time complexity 
 should be better than <I>O</I>(<I>N</I>**2), where <I>N</I> is the length 
 of the Container parameter.&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort 
+<div class="Normal">&nbsp;Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort 
 should minimize copying of elements.&nbsp;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">The worst-case time complexity of a call on an instance 
+<div class="Normal">&nbsp;The worst-case time complexity of a call on an instance 
 of Containers.Generic_Sort should be <I>O</I>(<I>N</I>**2) or better, 
 and the average time complexity should be better than <I>O</I>(<I>N</I>**2), 
 where <I>N</I> is the difference between the Last and First parameters 
 plus 1.&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">Containers.Generic_Sort should minimize calls to 
+<div class="Normal">&nbsp;Containers.Generic_Sort should minimize calls to 
 the generic formal Swap.&nbsp;</div>
 
 <HR>

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -30,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -53,10 +51,8 @@ features in Ada 2012, and explains the rationale behind them. Programmers
 should read this rationale before reading this Standard in depth. Rationales 
 for Ada 83, Ada 95, and Ada 2005 are also available.</div>
 <div class="paranum"><a name="p3.a.1">3.a.1/4</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0245-1.TXT">AI05-0245-1</A></I>} 
-<span class="delete4">As of this writing (December 2012), only five chapters 
-of the Ada 2012 Rationale have been published. Additional chapters are 
-in development and should be published during 2013.</span>&nbsp;</div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0245-1.TXT">AI05-0245-1</A></I>} 
+</div>
 <div class="paranum"><a name="p3.1">3.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00387.TXT">AI95-00387-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0245-1.TXT">AI05-0245-1</A></I>} 
@@ -221,22 +217,26 @@ an exit statement is encountered.</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Normal">A block statement comprises a sequence of statements 
 preceded by the declaration of local entities used by the statements.</div>
-<div class="paranum"><a name="p28">28</a></div>
-<div class="Normal">Certain statements are associated with concurrent 
-execution. A delay statement delays the execution of a task for a specified 
-duration or until a specified time. An entry call statement is written 
-as a procedure call statement; it requests an operation on a task or 
-on a protected object, blocking the caller until the operation can be 
-performed. A called task may accept an entry call by executing a corresponding 
-accept statement, which specifies the actions then to be performed as 
-part of the rendezvous with the calling task. An entry call on a protected 
-object is processed when the corresponding entry barrier evaluates to 
-true, whereupon the body of the entry is executed. The requeue statement 
-permits the provision of a service as a number of related activities 
-with preference control. One form of the select statement allows a selective 
-wait for one of several alternative rendezvous. Other forms of the select 
-statement allow conditional or timed entry calls and the asynchronous 
-transfer of control in response to some triggering event.</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+Certain statements are associated with concurrent execution. A delay 
+statement delays the execution of a task for a specified duration or 
+until a specified time. An entry call statement is written as a procedure 
+call statement; it requests an operation on a task or on a protected 
+object, blocking the caller until the operation can be performed. A called 
+task may accept an entry call by executing a corresponding accept statement, 
+which specifies the actions then to be performed as part of the rendezvous 
+with the calling task. An entry call on a protected object is processed 
+when the corresponding entry barrier evaluates to true, whereupon the 
+body of the entry is executed. The requeue statement permits the provision 
+of a service as a number of related activities with preference control. 
+One form of the select statement allows a selective wait for one of several 
+alternative rendezvous. Other forms of the select statement allow conditional 
+or timed entry calls and the asynchronous transfer of control in response 
+to some triggering event.<span class="insert5">&nbsp;Various parallel constructs, 
+including parallel loops and parallel blocks, support the initiation 
+of multiple logical threads of control designed to execute in parallel 
+when multiple processors are available.</span></div>
 <div class="paranum"><a name="p29">29</a></div>
 <div class="Normal">Execution of a program unit may encounter error situations 
 in which normal program execution cannot continue. For example, an arithmetic 
@@ -489,25 +489,22 @@ manner than through pragmas. See subclause <A HREF="AA-13-1-1.html">13.1.1</A>.<
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0141-1.TXT">AI12-0141-1</A></I>} 
 The concept of assertions introduced in the 2005 edition is extended 
 with the ability to specify preconditions and postconditions for subprograms, 
-and invariants for private types<span class="insert4">&nbsp;and interfaces</span>. 
-The concept of constraints in defining subtypes is supplemented with 
-subtype predicates that enable subsets to be specified other than as 
-simple ranges. These properties are all indicated using aspect specifications. 
-See subclauses <A HREF="AA-3-2-4.html">3.2.4</A>, <A HREF="AA-6-1-1.html">6.1.1</A>, 
-and <A HREF="AA-7-3-2.html">7.3.2</A>.</div>
+and invariants for private types and interfaces. The concept of constraints 
+in defining subtypes is supplemented with subtype predicates that enable 
+subsets to be specified other than as simple ranges. These properties 
+are all indicated using aspect specifications. See subclauses <A HREF="AA-3-2-4.html">3.2.4</A>, 
+<A HREF="AA-6-1-1.html">6.1.1</A>, and <A HREF="AA-7-3-2.html">7.3.2</A>.</div>
 <div class="paranum"><a name="p57.16">57.16/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0141-1.TXT">AI12-0141-1</A></I>} 
 New forms of expressions are introduced. These are if expressions, case 
-expressions, quantified expressions, <span class="delete4">and&nbsp;</span>expression 
-functions<span class="insert4">, and raise expressions</span>. As well 
-as being useful for programming in general by avoiding the introduction 
-of unnecessary assignments, they are especially valuable in conditions 
-and invariants since they avoid the need to introduce auxiliary functions. 
-See subclauses <A HREF="AA-4-5-7.html">4.5.7</A>, <A HREF="AA-4-5-8.html">4.5.8</A>, 
-<span class="delete4">and&nbsp;</span><A HREF="AA-6-8.html">6.8</A><span class="insert4">, 
-and <A HREF="AA-11-3.html">11.3</A></span>. Membership tests are also 
-made more flexible. See subclauses <A HREF="AA-4-4.html">4.4</A> and 
-<A HREF="AA-4-5-2.html">4.5.2</A>.</div>
+expressions, quantified expressions, expression functions, and raise 
+expressions. As well as being useful for programming in general by avoiding 
+the introduction of unnecessary assignments, they are especially valuable 
+in conditions and invariants since they avoid the need to introduce auxiliary 
+functions. See subclauses <A HREF="AA-4-5-7.html">4.5.7</A>, <A HREF="AA-4-5-8.html">4.5.8</A>, 
+<A HREF="AA-6-8.html">6.8</A>, and <A HREF="AA-11-3.html">11.3</A>. Membership 
+tests are also made more flexible. See subclauses <A HREF="AA-4-4.html">4.4</A> 
+and <A HREF="AA-4-5-2.html">4.5.2</A>.</div>
 <div class="paranum"><a name="p57.17">57.17/3</a></div>
 <div class="Bulleted">A number of changes are made to subprogram parameters. 
 Functions may now have parameters of all modes. In order to mitigate 
@@ -788,29 +785,28 @@ wording. M. Heaney (USA) also deserves a mention for his efforts to improve
 the containers packages. Finally, special thanks go to the convenor of 
 ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided the document through 
 the standardization process.&nbsp;</div>
-<div class="WideAbove"><span class="insert4"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
-for the Ada 2012 Corrigendum 1 version</B></SPAN></SPAN></span></div>
+<div class="WideAbove"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
+for the Ada 2012 Corrigendum 1 version</B></SPAN></SPAN></div>
 <div class="paranum"><a name="p71.10">71.10/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The editor [R. Brukardt 
-(USA)] would like to thank the many people whose hard work and assistance 
-has made this update possible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;The editor [R. Brukardt (USA)] would like to thank 
+the many people whose hard work and assistance has made this update possible.</div>
 <div class="paranum"><a name="p71.11">71.11/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Thanks go out to all of 
-the members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose 
-work on creating and editing the wording changes was critical to the 
-entire process. Especially valuable contributions came from the chairman 
-of the ARG, J. Cousins (UK), who guided the work; T. Taft (USA), who 
-seems to have the ability to cut any Gordian knot we encounter in wording; 
-; J. Barnes (UK) who continues to be able to find editorial errors invisible 
-to most; S. Baird (USA), who so frequently finds obscure interactions 
-that we now have named such things for him. Other ARG members who substantially 
-contributed were: A. Burns (UK), R. Dewar (USA), G. Dismukes (USA), R. 
-Duff (USA), B. Moore (Canada), E. Ploedereder (Germany), J.P. Rosen (France), 
-E. Schonberg (USA), and T. Vardanega (Italy).</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;Thanks go out to all of the members of the ISO/IEC 
+JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work on creating and editing 
+the wording changes was critical to the entire process. Especially valuable 
+contributions came from the chairman of the ARG, J. Cousins (UK), who 
+guided the work; T. Taft (USA), who seems to have the ability to cut 
+any Gordian knot we encounter in wording; ; J. Barnes (UK) who continues 
+to be able to find editorial errors invisible to most; S. Baird (USA), 
+who so frequently finds obscure interactions that we now have named such 
+things for him. Other ARG members who substantially contributed were: 
+A. Burns (UK), R. Dewar (USA), G. Dismukes (USA), R. Duff (USA), B. Moore 
+(Canada), E. Ploedereder (Germany), J.P. Rosen (France), E. Schonberg 
+(USA), and T. Vardanega (Italy).</div>
 <div class="paranum"><a name="p71.12">71.12/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Finally, special thanks 
-go to the convenor of ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided 
-the document through the standardization process.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;Finally, special thanks go to the convenor of 
+ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided the document through 
+the standardization process.&nbsp;</div>
 <div class="WideAbove"><span class="insert5"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Ada 202x version</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p71.13">71.13/5</a></div>
@@ -853,39 +849,37 @@ Standard.&nbsp;</div>
 <div class="WideAbove"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Using 
 this version of the Ada Reference Manual</B></SPAN></SPAN></div>
 <div class="paranum"><a name="p78.4">78.4/5</a></div>
-<div class="Normal">&nbsp;&nbsp;This document has been revised with <span class="insert4">the 
-corrections specified in Technical Corrigendum 1 (ISO/IEC 8652:2012/COR.1:2016)</span><span class="insert5">&nbsp;and other changes specifically for Ada 202x</span><span class="insert4"></span><span class="delete4">&nbsp;the 
-corrections specified in Technical Corrigendum 1 (ISO/IEC 8652:1995/COR.1:2001) 
-and Amendment 1 (ISO/IEC 8652/AMD 1:2007), along with changes specifically 
-for this third edition</span>. In addition, more annotations have been 
-added and a variety of editorial errors have been corrected.&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;This document has been revised with the corrections 
+specified in Technical Corrigendum 1 (ISO/IEC 8652:2012/COR.1:2016)<span class="insert5">&nbsp;and other changes specifically for Ada 202x</span>. In addition, more 
+annotations have been added and a variety of editorial errors have been 
+corrected.&nbsp;</div>
 <div class="paranum"><a name="p78.5">78.5/4</a></div>
 <div class="Normal">&nbsp;&nbsp;Changes to the original 8652:1995 can be identified 
 by the version number following the paragraph number. Paragraphs with 
-a version number of /1 were changed by Technical Corrigendum 1 <span class="insert4">for 
-Ada 95&nbsp;</span>or were editorial corrections at that time, while paragraphs 
-with a version number of /2 were changed by Amendment 1 or were more 
-recent editorial corrections, and paragraphs with a version number of 
-/3 were changed by the third (2012) edition of the Standard or were still 
-more recent editorial corrections.<span class="insert4">&nbsp;Paragraphs with 
-a version number of /4 are changed by Technical Corrigendum 1 for Ada 
-2012 or were editorial corrections at that time.</span><span class="insert5">&nbsp;Paragraphs with a version number of /5 are changes or editorial corrections 
-for Ada 202x.</span> Paragraphs not so marked are unchanged by <span class="insert5">Ada 
-202x,&nbsp;</span><span class="insert4">Technical Corrigendum 1 for Ada 2012, 
-</span>the third edition, Amendment 1, Technical Corrigendum 1, or editorial 
-corrections. Paragraph numbers of unchanged paragraphs are the same as 
-in the 1995 edition of the Ada Reference Manual. Inserted text is indicated 
-by underlining, and deleted text is indicated by strikethroughs. Some 
-versions also use color to indicate the version of the change.Where paragraphs 
-are inserted, the paragraph numbers are of the form pp.nn, where pp is 
-the number of the preceding paragraph, and nn is an insertion number. 
-For instance, the first paragraph inserted after paragraph 8 is numbered 
-8.1, the second paragraph inserted is numbered 8.2, and so on. Deleted 
-paragraphs are indicated by the text <I></I><SPAN STYLE="font-size: 80%"><I>This 
-paragraph was deleted.</I></SPAN><I></I> Deleted paragraphs include empty 
-paragraphs that were numbered in the 1995 edition of the Ada Reference 
-Manual. Similar markings and numbering are used for changes to annotations. 
-</div>
+a version number of /1 were changed by Technical Corrigendum 1 for Ada 
+95 or were editorial corrections at that time, while paragraphs with 
+a version number of /2 were changed by Amendment 1 or were more recent 
+editorial corrections, and paragraphs with a version number of /3 were 
+changed by the third (2012) edition of the Standard or were still more 
+recent editorial corrections. Paragraphs with a version number of /4 
+are changed by Technical Corrigendum 1 for Ada 2012 or were editorial 
+corrections at that time.<span class="insert5">&nbsp;Paragraphs with a version 
+number of /5 are changes or editorial corrections for Ada 202x.</span> 
+Paragraphs not so marked are unchanged by <span class="insert5">Ada 202x, 
+</span>Technical Corrigendum 1 for Ada 2012, the third edition, Amendment 
+1, Technical Corrigendum 1, or editorial corrections. Paragraph numbers 
+of unchanged paragraphs are the same as in the 1995 edition of the Ada 
+Reference Manual. Inserted text is indicated by underlining, and deleted 
+text is indicated by strikethroughs. Some versions also use color to 
+indicate the version of the change.Where paragraphs are inserted, the 
+paragraph numbers are of the form pp.nn, where pp is the number of the 
+preceding paragraph, and nn is an insertion number. For instance, the 
+first paragraph inserted after paragraph 8 is numbered 8.1, the second 
+paragraph inserted is numbered 8.2, and so on. Deleted paragraphs are 
+indicated by the text <I></I><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><I></I> Deleted paragraphs include empty paragraphs 
+that were numbered in the 1995 edition of the Ada Reference Manual. Similar 
+markings and numbering are used for changes to annotations.&nbsp;</div>
 <div class="paranum"><a name="p78.a">78.a/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The paragraph number is 
 considered part of the paragraph; when a paragraph is moved to a different 

@@ -13,24 +13,22 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -53,15 +51,15 @@ then the reserved word <B>limited</B> shall appear in its <SPAN Class="swiss"><A
 If the reserved word <B>limited</B> appears in the definition of a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 its parent type and any progenitor interfaces shall be limited.&nbsp;</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;In the following contexts, 
-an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;In the following 
+contexts, an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 of a limited type is not permitted unless it is an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>, 
-<span class="delete3">or&nbsp;</span>a parenthesized <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+a parenthesized <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN> 
-whose operand is permitted by this rule<span class="insert3">, or a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+whose operand is permitted by this rule, or a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
 all of whose <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
-are permitted by this rule</span>:&nbsp;</div>
+are permitted by this rule:&nbsp;</div>
 <div class="paranum"><a name="p2.2">2.2/2</a></div>
 <div class="Bulleted">the initialization <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -92,74 +90,59 @@ of an initialized allocator (see <A HREF="RM-4-8.html">4.8</A>)</div>
 <div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 of a return statement (see <A HREF="RM-6-5.html">6.5</A>)</div>
 <div class="paranum"><a name="p2.9">2.9/4</a></div>
-<div class="Bulleted"><span class="insert3">the&nbsp;</span><span class="insert4">return 
-expression</span><span class="insert3"></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span></span><span class="insert3">&nbsp;of an&nbsp;</span><span class="insert4">expression function</span><span class="insert3"></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="RM-6-8.html#S0189">&nbsp;expression_function_declaration</A></SPAN></span></span><span class="insert3">&nbsp;(see <A HREF="RM-6-8.html">6.8</A>)</span></div>
+<div class="Bulleted">the <span class="insert4">return expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
+of an <span class="insert4">expression function</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-6-8.html#S0189">&nbsp;expression_function_declaration</A></SPAN></span> 
+(see <A HREF="RM-6-8.html">6.8</A>)</div>
 <div class="paranum"><a name="p2.10">2.10/3</a></div>
 <div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 or actual parameter for a formal object of mode <B>in</B> (see <A HREF="RM-12-4.html">12.4</A>)</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3702"></A>A 
-<span class="insert3">view of a&nbsp;</span>type is <I>limited</I> if it is 
-one of the following:&nbsp;</div>
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3657"></A>A 
+view of a type is <I>limited</I> if it is one of the following:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Bulleted">a type with the reserved word <B>limited</B>, <B>synchronized</B>, 
 <B>task</B>, or <B>protected</B> in its definition;&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Bulleted"><span class="insert3">a class-wide type whose specific 
-type is limited;</span><span class="delete3"><SPAN STYLE="font-size: 80%"><I>&nbsp;This 
-paragraph was deleted.</I></SPAN></span></div>
+<div class="Bulleted">a class-wide type whose specific type is limited;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Bulleted">a composite type with a limited component;</div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
-<div class="Bulleted"><span class="insert3">an incomplete view;</span></div>
+<div class="Bulleted">an incomplete view;</div>
 <div class="paranum"><a name="p6.2">6.2/2</a></div>
 <div class="Bulleted">a derived type whose parent is limited and is not 
 an interface.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3703"></A>Otherwise, the type is nonlimited.</div>
+<div class="Normal"><A NAME="I3658"></A>Otherwise, the type is nonlimited.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">There are no predefined equality operators for a 
 limited type.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">A 
-type is <I>immutably limited</I> if it is one of the following:<A NAME="I3704"></A><A NAME="I3705"></A></span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;A type is <I>immutably 
+limited</I> if it is one of the following:<A NAME="I3659"></A><A NAME="I3660"></A></div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
-<div class="Bulleted"><span class="insert3">An explicitly limited record 
-type;</span></div>
+<div class="Bulleted">An explicitly limited record type;</div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
-<div class="Bulleted"><span class="insert3">A record extension with the 
-reserved word <B>limited</B>;</span></div>
+<div class="Bulleted">A record extension with the reserved word <B>limited</B>;</div>
 <div class="paranum"><a name="p8.4">8.4/3</a></div>
-<div class="Bulleted"><span class="insert3">A nonformal limited private 
-type that is tagged or has at least one access discriminant with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>;</span></div>
+<div class="Bulleted">A nonformal limited private type that is tagged 
+or has at least one access discriminant with a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>;</div>
 <div class="paranum"><a name="p8.5">8.5/3</a></div>
-<div class="Bulleted"><span class="insert3">A task type, a protected 
-type, or a synchronized interface;</span></div>
+<div class="Bulleted">A task type, a protected type, or a synchronized 
+interface;</div>
 <div class="paranum"><a name="p8.6">8.6/3</a></div>
-<div class="Bulleted"><span class="insert3">A type derived from an immutably 
-limited type.</span></div>
+<div class="Bulleted">A type derived from an immutably limited type.</div>
 <div class="paranum"><a name="p8.7">8.7/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">A descendant of a generic 
-formal limited private type is presumed to be immutably limited except 
-within the body of a generic unit or a body declared within the declarative 
-region of a generic unit, if the formal type is declared within the formal 
-part of the generic unit.</span></div>
+<div class="Normal">&nbsp;&nbsp;A descendant of a generic formal limited private 
+type is presumed to be immutably limited except within the body of a 
+generic unit or a body declared within the declarative region of a generic 
+unit, if the formal type is declared within the formal part of the generic 
+unit.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p8.8">8.8/3</a></div>
-<div class="Normal">&nbsp;<span class="delete3">For an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-of a limited type used to initialize an object as allowed above, the 
-implementation shall not create a separate anonymous object for the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>. 
-For a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN> 
-of a type with a part that is of a task, protected, or explicitly limited 
-record type that is used to initialize an object as allowed above, the 
-implementation shall not create a separate return object (see 6.5) for 
-the <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>. 
-The <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN> 
-shall be constructed directly in the new object.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Notes">15&nbsp;&nbsp;While it is allowed to write initializations 
@@ -168,8 +151,8 @@ The source of such an assignment operation must be an <SPAN Class="swiss"><A HRE
 or <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>, 
 and such <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN>s 
-must be built directly in the target object<span class="insert3">&nbsp;(see 
-<A HREF="RM-7-6.html">7.6</A>)</span>.&nbsp;</div>
+must be built directly in the target object (see <A HREF="RM-7-6.html">7.6</A>). 
+</div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>Paragraphs 10 through 
 15 were deleted.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
@@ -185,7 +168,7 @@ must be built directly in the target object<span class="insert3">&nbsp;(see
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Notes"></div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Notes">16&nbsp;&nbsp;<A NAME="I3706"></A><A NAME="I3707"></A><A NAME="I3708"></A>As 
+<div class="Notes">16&nbsp;&nbsp;<A NAME="I3661"></A><A NAME="I3662"></A><A NAME="I3663"></A>As 
 illustrated in <A HREF="RM-7-3-1.html">7.3.1</A>, an untagged limited 
 type can become nonlimited under certain circumstances.&nbsp;</div>
 

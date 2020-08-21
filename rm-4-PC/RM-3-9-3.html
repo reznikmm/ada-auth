@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,10 +38,10 @@
 <HR>
 <H1>3.9.3 Abstract Types and Subprograms</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I2200"></A><A NAME="I2201"></A><A NAME="I2202"></A><A NAME="I2203"></A>An 
+<div class="Normal"><A NAME="I2183"></A><A NAME="I2184"></A><A NAME="I2185"></A><A NAME="I2186"></A>An 
 <I>abstract type</I> is a tagged type intended for use as an ancestor 
 of other types, but which is not allowed to have objects of its own. 
-<A NAME="I2204"></A><A NAME="I2205"></A>An <I>abstract subprogram</I> 
+<A NAME="I2187"></A><A NAME="I2188"></A>An <I>abstract subprogram</I> 
 is a subprogram that has no body, but is intended to be overridden at 
 some point when inherited. Because objects of an abstract type cannot 
 be created, a dispatching call to an abstract subprogram always dispatches 
@@ -51,14 +49,14 @@ to some overriding body.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1.1">1.1/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">abstract_subprogram_declaration</SPAN><A NAME="I2206"></A><A NAME="S0076"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2207"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2208"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0164">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2209"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>;</div>
+<div class="Indented1"><SPAN Class="swiss">abstract_subprogram_declaration</SPAN><A NAME="I2189"></A><A NAME="S0076"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2190"></A><SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2191"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0164">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2192"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.2">1.2/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I2210"></A><A NAME="I2211"></A>Interface 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I2193"></A><A NAME="I2194"></A>Interface 
 types (see <A HREF="RM-3-9-4.html">3.9.4</A>) are abstract types. In 
 addition, a tagged type that has the reserved word <B>abstract</B> in 
 its declaration is an abstract type. The class-wide type (see <A HREF="RM-3-4-1.html">3.4.1</A>) 
@@ -69,7 +67,7 @@ rooted at an abstract type is not itself an abstract type.&nbsp;</div>
 <div class="Normal">Only a tagged type shall have the reserved word <B>abstract</B> 
 in its declaration.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Normal"><A NAME="I2212"></A><A NAME="I2213"></A>A subprogram 
+<div class="Normal"><A NAME="I2195"></A><A NAME="I2196"></A>A subprogram 
 declared by an <SPAN Class="swiss"><A HREF="RM-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0298">formal_abstract_subprogram_declaration</A></SPAN> 
 (see <A HREF="RM-12-6.html">12.6</A>) is an <I>abstract subprogram</I>. 
@@ -77,12 +75,11 @@ If it is a primitive subprogram of a tagged type, then the tagged type
 shall be abstract.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">If a type has an implicitly 
-declared primitive subprogram that is inherited or is <span class="insert3">a</span><span class="delete3">&nbsp;the</span> 
-predefined <span class="delete3">equality&nbsp;</span>operator, and the corresponding 
-primitive subprogram of the parent or ancestor type is abstract or is 
-a function with a controlling access result, or if a type other than 
-a <span class="insert3">nonabstract&nbsp;</span>null extension inherits a 
-function with a controlling result, then:&nbsp;</div>
+declared primitive subprogram that is inherited or is a predefined operator, 
+and the corresponding primitive subprogram of the parent or ancestor 
+type is abstract or is a function with a controlling access result, or 
+if a type other than a nonabstract null extension inherits a function 
+with a controlling result, then:&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Bulleted">If the type is abstract or untagged, the implicitly 
 declared subprogram is <I>abstract</I>.&nbsp;</div>
@@ -93,7 +90,7 @@ a <span class="insert4">nonabstract&nbsp;</span>function with a controlling
 result, have a full type that is a null extension; for a type declared 
 in the visible part of a package, the overriding may be either in the 
 visible or the private part. Such a subprogram is said to <I>require 
-overriding</I>.<A NAME="I2214"></A> However, if the type is a generic 
+overriding</I>.<A NAME="I2197"></A> However, if the type is a generic 
 formal type, the subprogram need not be overridden for the formal type 
 itself; a nonabstract version will necessarily be provided by the actual 
 type.&nbsp;</div>
@@ -109,12 +106,11 @@ or a generic formal object of mode <B>in</B>, shall not be abstract.
 The type of the target of an assignment operation (see <A HREF="RM-5-2.html">5.2</A>) 
 shall not be abstract. The type of a component shall not be abstract. 
 If the result type of a function is abstract, then the function shall 
-be abstract.<span class="insert3">&nbsp;If a function has an access result 
-type designating an abstract type, then the function shall be abstract. 
-The type denoted by a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0187">return_subtype_indication</A></SPAN> 
+be abstract. If a function has an access result type designating an abstract 
+type, then the function shall be abstract. The type denoted by a <SPAN Class="swiss"><A HREF="RM-6-5.html#S0187">return_subtype_indication</A></SPAN> 
 (see <A HREF="RM-6-5.html">6.5</A>) shall not be abstract. A generic 
 function shall not have an abstract result type or an access result type 
-designating an abstract type.</span>&nbsp;</div>
+designating an abstract type.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If a partial view is not abstract, the corresponding 
 full view shall not be abstract. If a generic formal type is abstract, 
@@ -122,16 +118,15 @@ then for each primitive subprogram of the formal that is not abstract,
 the corresponding primitive subprogram of the actual shall not be abstract. 
 </div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">For an abstract type declared in a visible part, 
+<div class="Normal">&nbsp;For an abstract type declared in a visible part, 
 an abstract primitive subprogram shall not be declared in the private 
 part, unless it is overriding an abstract subprogram implicitly declared 
 in the visible part. For a tagged type declared in a visible part, a 
-primitive function with a controlling result<span class="insert3">&nbsp;or 
-a controlling access result</span> shall not be declared in the private 
-part, unless it is overriding a function implicitly declared in the visible 
-part.&nbsp;</div>
+primitive function with a controlling result or a controlling access 
+result shall not be declared in the private part, unless it is overriding 
+a function implicitly declared in the visible part.&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">A generic actual subprogram shall not be an abstract 
+<div class="Normal">&nbsp;A generic actual subprogram shall not be an abstract 
 subprogram unless the generic formal subprogram is declared by a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0298">formal_abstract_subprogram_declaration</A></SPAN>. 
 The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
@@ -140,7 +135,7 @@ an abstract subprogram.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I2215"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I2198"></A>The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>

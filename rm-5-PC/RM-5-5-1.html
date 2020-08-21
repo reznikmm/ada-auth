@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -44,33 +42,33 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 generic library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><A NAME="I3319"></A><B>generic</B><BR>
+<div class="Examples"><A NAME="I3309"></A><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>package</B>&nbsp;Ada.Iterator_Interfaces<span class="delete5">&nbsp;<B>is</B></span><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False&nbsp;<B>is</B></span><span class="delete5"><B>&nbsp;pragma</B>&nbsp;Pure&nbsp;(Iterator_Interfaces);</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3320"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3321"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3322"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3310"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3311"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3312"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3323"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3324"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3325"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3313"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3314"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3315"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Iterator_Interfaces;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">An <I>iterator type</I> is a type descended from 
-the Forward_Iterator interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3326"></A> 
+the Forward_Iterator interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3316"></A> 
 A <I>reversible iterator type</I> is a type descended from the Reversible_Iterator 
-interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3327"></A> 
-An <I>iterator object</I> is an object of an iterator type.<A NAME="I3328"></A> 
+interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3317"></A> 
+An <I>iterator object</I> is an object of an iterator type.<A NAME="I3318"></A> 
 A <I>reversible iterator object</I> is an object of a reversible iterator 
-type.<A NAME="I3329"></A> The formal subtype Cursor from the associated 
+type.<A NAME="I3319"></A> The formal subtype Cursor from the associated 
 instance of Ada.Iterator_Interfaces is the <I>iteration cursor subtype</I> 
-for the iterator type.<A NAME="I3330"></A></div>
+for the iterator type.<A NAME="I3320"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following type-related 
 operational aspects may be specified for an indexable container type 
@@ -83,29 +81,29 @@ declaration list in which <I>T</I> is declared, whose first parameter
 is of type <I>T</I> or <I>T</I>'Class or an access parameter whose designated 
 type is type <I>T</I> or <I>T</I>'Class, whose other parameters, if any, 
 have default expressions, and whose result type is an iterator type. 
-This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3331"></A> 
-Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3332"></A> 
+This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3321"></A> 
+Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3322"></A> 
 The iteration cursor subtype for the default iterator subtype is the 
-<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3333"></A><A NAME="I3334"></A><A NAME="I3335"></A></div>
+<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3323"></A><A NAME="I3324"></A><A NAME="I3325"></A></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="WideHanging-Term">Iterator_Element</div><div class="WideHanging-Body"><br clear="left">
 This aspect is specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes a subtype. This is the <I>default element subtype</I> for 
-<I>T</I>.<A NAME="I3336"></A><A NAME="I3337"></A><A NAME="I3338"></A></div>
+<I>T</I>.<A NAME="I3326"></A><A NAME="I3327"></A><A NAME="I3328"></A></div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">These aspects are inherited by descendants of type 
 <I>T</I> (including <I>T</I>'Class).</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">An <I>iterable container type</I> is an indexable 
-container type with specified Default_Iterator and Iterator_Element aspects.<A NAME="I3339"></A> 
+container type with specified Default_Iterator and Iterator_Element aspects.<A NAME="I3329"></A> 
 A <I>reversible iterable container type</I> is an iterable container 
-type with the default iterator type being a reversible iterator type.<A NAME="I3340"></A> 
+type with the default iterator type being a reversible iterator type.<A NAME="I3330"></A> 
 An <I>iterable container object</I> is an object of an iterable container 
-type.<A NAME="I3341"></A> A <I>reversible iterable container object</I> 
-is an object of a reversible iterable container type.<A NAME="I3342"></A></div>
+type.<A NAME="I3331"></A> A <I>reversible iterable container object</I> 
+is an object of a reversible iterable container type.<A NAME="I3332"></A></div>
 <div class="paranum"><a name="p11.1">11.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">The Default_Iterator and 
-Iterator_Element aspects are nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</span></div>
+<div class="Normal">&nbsp;&nbsp;The Default_Iterator and Iterator_Element aspects 
+are nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -125,7 +123,7 @@ covers the default cursor type for <I>T</I>;</div>
 parameters all have default expressions.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">This function (if any) is the <I>default constant 
-indexing function</I> for <I>T</I>.<A NAME="I3343"></A></div>
+indexing function</I> for <I>T</I>.<A NAME="I3333"></A></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The Variable_Indexing 
 aspect (if any) of an iterable container type <I>T</I> shall denote exactly 
@@ -142,7 +140,7 @@ covers the default cursor type for <I>T</I>;</div>
 parameters all have default expressions.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">This function (if any) is the <I>default variable 
-indexing function</I> for <I>T</I>.<A NAME="I3344"></A></div>
+indexing function</I> for <I>T</I>.<A NAME="I3334"></A></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

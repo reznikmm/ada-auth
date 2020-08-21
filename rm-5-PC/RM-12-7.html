@@ -36,7 +36,7 @@
 <HR>
 <H1>12.7 Formal Packages</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I5074"></A><A NAME="I5075"></A>Formal packages 
+<div class="Normal"><A NAME="I5062"></A><A NAME="I5063"></A>Formal packages 
 can be used to pass packages to a generic unit. The <SPAN Class="swiss"><A HREF="RM-12-7.html#S0318">formal_package_declaration</A></SPAN> 
 declares that the formal package is an instance of a given generic package. 
 Upon instantiation, the actual package has to be an instance of that 
@@ -44,18 +44,18 @@ generic package.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_package_declaration</SPAN><A NAME="I5076"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;<A NAME="I5077"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5078"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;&nbsp;<A NAME="I5079"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0319">formal_package_actual_part</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5080"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">formal_package_declaration</SPAN><A NAME="I5064"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;<A NAME="I5065"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5066"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;&nbsp;<A NAME="I5067"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0319">formal_package_actual_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5068"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_package_actual_part</SPAN><A NAME="I5081"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">formal_package_actual_part</SPAN><A NAME="I5069"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;([<B>others</B>&nbsp;=&gt;]&nbsp;&lt;&gt;)<BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I5082"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0294">generic_actual_part</A></SPAN>]<BR>
-&nbsp;&nbsp;|&nbsp;(<A NAME="I5083"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_package_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5084"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_package_association</A></SPAN>}&nbsp;[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;])</div>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I5070"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0294">generic_actual_part</A></SPAN>]<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I5071"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_package_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5072"></A><SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_package_association</A></SPAN>}&nbsp;[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;])</div>
 <div class="paranum"><a name="p3.1">3.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_package_association</SPAN><A NAME="I5085"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5086"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0295">generic_association</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<I>generic_formal_parameter_</I><A NAME="I5087"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">formal_package_association</SPAN><A NAME="I5073"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5074"></A><SPAN Class="swiss"><A HREF="RM-12-3.html#S0295">generic_association</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>generic_formal_parameter_</I><A NAME="I5075"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p3.2">3.2/2</a></div>
 <div class="Indented1">Any positional <SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_package_association</A></SPAN>s 
 shall precede any named <SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_package_association</A></SPAN>s. 
@@ -63,7 +63,7 @@ shall precede any named <SPAN Class="swiss"><A HREF="RM-12-7.html#S0320">formal_
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5088"></A>The <I>generic_package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I5076"></A>The <I>generic_package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 shall denote a generic package (the <I>template</I> for the formal package); 
 the formal package is an instance of the template.</div>
 <div class="paranum"><a name="p4.1">4.1/3</a></div>
@@ -122,7 +122,7 @@ statically denote the same constant, or if they are both the literal
 <B>null</B>.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Bulleted">For a formal subtype, the actuals match if they 
-denote statically matching subtypes. <A NAME="I5089"></A></div>
+denote statically matching subtypes. <A NAME="I5077"></A></div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Bulleted">For other kinds of formals, the actuals match if 
 they statically denote the same entity.&nbsp;</div>
@@ -136,7 +136,7 @@ the formal object's actual expression (recursively).&nbsp;</div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-7.html#S0318">formal_package_declaration</A></SPAN> 
 declares a generic formal package.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><A NAME="I5090"></A>The visible part of a formal 
+<div class="Normal"><A NAME="I5078"></A>The visible part of a formal 
 package includes the first list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>. 
 In addition, for each actual parameter that is not required to match, 

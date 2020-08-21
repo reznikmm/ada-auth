@@ -59,10 +59,10 @@ the attribute T'Round may be used to imply explicit conversion with rounding
 (see <A HREF="RM-3-5-10.html">3.5.10</A>).</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">When the result type is a floating point type, the 
-accuracy is as given in <A HREF="RM-G-2-1.html">G.2.1</A>. <A NAME="I8697"></A>For 
+accuracy is as given in <A HREF="RM-G-2-1.html">G.2.1</A>. <A NAME="I8682"></A>For 
 some combinations of the operand and result types in the remaining cases, 
 the result is required to belong to a small set of values called the 
-<I>perfect result set</I>; <A NAME="I8698"></A>for other combinations, 
+<I>perfect result set</I>; <A NAME="I8683"></A>for other combinations, 
 it is required merely to belong to a generally larger and implementation-defined 
 set of values called the <I>close result set</I>. When the result type 
 is a decimal fixed point type, the perfect result set contains a single 
@@ -185,12 +185,12 @@ operand to a fixed point type shall belong to the perfect result set.</div>
 <div class="Normal">The possibility of overflow in the result of a predefined 
 arithmetic operation or conversion yielding a result of a fixed point 
 type T is analogous to that for floating point types, except for being 
-related to the base range instead of the safe range. <A NAME="I8699"></A><A NAME="I8700"></A>If 
+related to the base range instead of the safe range. <A NAME="I8684"></A><A NAME="I8685"></A>If 
 all of the permitted results belong to the base range of T, then the 
 implementation shall deliver one of the permitted results; otherwise, 
 </div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Bulleted"><A NAME="I8701"></A>if T'Machine_Overflows is True, 
+<div class="Bulleted"><A NAME="I8686"></A>if T'Machine_Overflows is True, 
 the implementation shall either deliver one of the permitted results 
 or raise Constraint_Error;</div>
 <div class="paranum"><a name="p27">27</a></div>

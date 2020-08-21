@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,9 +37,9 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-The language-defined generic procedures Containers.Generic_Array_Sort<span class="insert3">,</span><span class="delete3">&nbsp;and</span> Containers.Generic_Constrained_Array_Sort<span class="insert3">, 
-and Containers.Generic_Sort</span> provide sorting on arbitrary array 
-types.&nbsp;</div>
+The language-defined generic procedures Containers.Generic_Array_Sort, 
+Containers.Generic_Constrained_Array_Sort, and Containers.Generic_Sort 
+provide sorting on arbitrary array types.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -55,7 +53,7 @@ declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Array_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Index_Type&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Array_Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type);<A NAME="I8110"></A><BR>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Array_Sort&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type);<A NAME="I8002"></A><BR>
 <B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Array_Sort);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented2">Reorders the elements of Container such that the 
@@ -68,12 +66,11 @@ of &quot;&lt;&quot; is propagated.</div>
 The actual function for the generic formal function &quot;&lt;&quot; 
 of Generic_Array_Sort is expected to return the same value each time 
 it is called with a particular pair of element values. It should define 
-a strict <span class="insert3">weak&nbsp;</span>ordering relationship<span class="insert3">&nbsp;(see <A HREF="AA-A-18.html">A.18</A>)</span><span class="delete3">, that 
-is, be irreflexive, asymmetric, and transitive</span>; it should not 
-modify Container. If the actual for &quot;&lt;&quot; behaves in some 
-other manner, the behavior of the instance of Generic_Array_Sort is unspecified. 
-<span class="insert3">The number of</span><span class="delete3">&nbsp;How 
-many</span> times Generic_Array_Sort calls &quot;&lt;&quot; is unspecified.<A NAME="I8111"></A></div>
+a strict weak ordering relationship (see <A HREF="AA-A-18.html">A.18</A>); 
+it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
+in some other manner, the behavior of the instance of Generic_Array_Sort 
+is unspecified. The number of times Generic_Array_Sort calls &quot;&lt;&quot; 
+is unspecified.<A NAME="I8003"></A></div>
 <div class="paranum"><a name="p5.a">5.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This implies swapping the 
 elements, usually including an intermediate copy. This of course means 
@@ -99,7 +96,7 @@ has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Array_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(Index_Type)&nbsp;<B>of</B>&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Constrained_Array_Sort<A NAME="I8112"></A><BR>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Constrained_Array_Sort<A NAME="I8004"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Array_Type);<BR>
 <B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Constrained_Array_Sort);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
@@ -113,51 +110,48 @@ of &quot;&lt;&quot; is propagated.</div>
 The actual function for the generic formal function &quot;&lt;&quot; 
 of Generic_Constrained_Array_Sort is expected to return the same value 
 each time it is called with a particular pair of element values. It should 
-define a strict <span class="insert3">weak&nbsp;</span>ordering relationship<span class="insert3">&nbsp;(see <A HREF="AA-A-18.html">A.18</A>)</span><span class="delete3">, that 
-is, be irreflexive, asymmetric, and transitive</span>; it should not 
-modify Container. If the actual for &quot;&lt;&quot; behaves in some 
-other manner, the behavior of the instance of Generic_Constrained_Array_Sort 
-is unspecified. <span class="insert3">The number of</span><span class="delete3">&nbsp;How 
-many</span> times Generic_Constrained_Array_Sort calls &quot;&lt;&quot; 
-is unspecified.<A NAME="I8113"></A></div>
+define a strict weak ordering relationship (see <A HREF="AA-A-18.html">A.18</A>); 
+it should not modify Container. If the actual for &quot;&lt;&quot; behaves 
+in some other manner, the behavior of the instance of Generic_Constrained_Array_Sort 
+is unspecified. The number of times Generic_Constrained_Array_Sort calls 
+&quot;&lt;&quot; is unspecified.<A NAME="I8005"></A></div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">The generic library procedure Containers.Generic_Sort 
-has the following declaration:</span>&nbsp;</div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+The generic library procedure Containers.Generic_Sort has the following 
+declaration:&nbsp;</div>
 <div class="paranum"><a name="p9.2">9.2/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
-<span class="insert3"><B>generic</B><BR>
+<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Index_Type&nbsp;<B>is</B>&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Before&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Index_Type)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>with&nbsp;procedure</B>&nbsp;Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;</span><span class="insert4"><B>in</B>&nbsp;</span><span class="insert3">Index_Type);<BR>
-<B>procedure</B>&nbsp;Ada.Containers.Generic_Sort<A NAME="I8114"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>with&nbsp;procedure</B>&nbsp;Swap&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<span class="insert4"><B>in</B>&nbsp;</span>Index_Type);<BR>
+<B>procedure</B>&nbsp;Ada.Containers.Generic_Sort<A NAME="I8006"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(First,&nbsp;Last&nbsp;:&nbsp;Index_Type'Base);<BR>
-<B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Sort);</span></div>
+<B>pragma</B>&nbsp;Pure(Ada.Containers.Generic_Sort);</div>
 <div class="paranum"><a name="p9.3">9.3/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">Reorders the elements of an indexable structure, 
-over the range First .. Last, such that the elements are sorted in the 
-ordering determined by the generic formal function Before; Before should 
-return True if Left is to be sorted before Right. The generic formal 
-Before compares the elements having the given indices, and the generic 
-formal Swap exchanges the values of the indicated elements. Any exception 
-raised during evaluation of Before or Swap is propagated.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+Reorders the elements of an indexable structure, over the range First 
+.. Last, such that the elements are sorted in the ordering determined 
+by the generic formal function Before; Before should return True if Left 
+is to be sorted before Right. The generic formal Before compares the 
+elements having the given indices, and the generic formal Swap exchanges 
+the values of the indicated elements. Any exception raised during evaluation 
+of Before or Swap is propagated.</div>
 <div class="paranum"><a name="p9.4">9.4/3</a></div>
-<div class="Indented2"><span class="insert3">The actual function for 
-the generic formal function Before of Generic_Sort is expected to return 
-the same value each time it is called with index values that identify 
-a particular pair of element values. It should define a strict weak ordering 
-relationship (see <A HREF="AA-A-18.html">A.18</A>); it should not modify 
-the elements. The actual function for the generic formal Swap should 
-exchange the values of the indicated elements. If the actual for either 
-Before or Swap behaves in some other manner, the behavior of Generic_Sort 
-is unspecified. The number of times the Generic_Sort calls Before or 
-Swap is unspecified.<A NAME="I8115"></A></span></div>
+<div class="Indented2">The actual function for the generic formal function 
+Before of Generic_Sort is expected to return the same value each time 
+it is called with index values that identify a particular pair of element 
+values. It should define a strict weak ordering relationship (see <A HREF="AA-A-18.html">A.18</A>); 
+it should not modify the elements. The actual function for the generic 
+formal Swap should exchange the values of the indicated elements. If 
+the actual for either Before or Swap behaves in some other manner, the 
+behavior of Generic_Sort is unspecified. The number of times the Generic_Sort 
+calls Before or Swap is unspecified.<A NAME="I8007"></A></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The worst-case time complexity of a call on an instance of Containers.Generic_Array_Sort 
 or Containers.Generic_Constrained_Array_Sort should be <I>O</I>(<I>N</I>**2) 
 or better, and the average time complexity should be better than <I>O</I>(<I>N</I>**2), 
@@ -172,7 +166,7 @@ than <I>O</I>(<I>N</I>**2).</div>
 the use of a sorting algorithm better than <I>O</I>(<I>N</I>**2), such 
 as Quicksort. No bubble sorts allowed!&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Containers.Generic_Array_Sort and Containers.Generic_Constrained_Array_Sort 
 should minimize copying of elements.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/2</a></div>
@@ -186,45 +180,42 @@ each element. Rather, we want to suggest that the sorting algorithm chosen
 is one that does not copy items unnecessarily. Bubble sort would not 
 meet this advice, for instance.&nbsp;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">The worst-case time complexity of a call on an 
-instance of Containers.Generic_Sort should be <I>O</I>(<I>N</I>**2) or 
-better, and the average time complexity should be better than <I>O</I>(<I>N</I>**2), 
-where <I>N</I> is the difference between the Last and First parameters 
-plus 1.</span>&nbsp;</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+The worst-case time complexity of a call on an instance of Containers.Generic_Sort 
+should be <I>O</I>(<I>N</I>**2) or better, and the average time complexity 
+should be better than <I>O</I>(<I>N</I>**2), where <I>N</I> is the difference 
+between the Last and First parameters plus 1.&nbsp;</div>
 <div class="paranum"><a name="p12.a.1">12.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
-</B></span><span class="insert3">Containers.Generic_Sort should have 
-an average time complexity better than <I>O</I>(<I>N</I>**2) and worst 
-case no worse than <I>O</I>(<I>N</I>**2).</span></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Containers.Generic_Sort 
+should have an average time complexity better than <I>O</I>(<I>N</I>**2) 
+and worst case no worse than <I>O</I>(<I>N</I>**2).</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">Containers.Generic_Sort should minimize calls to 
-the generic formal Swap.</span>&nbsp;</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+Containers.Generic_Sort should minimize calls to the generic formal Swap. 
+</div>
 <div class="paranum"><a name="p13.a.1">13.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
-</B></span><span class="insert3">Containers.Generic_Sort should minimize 
-calls to the generic formal Swap.</span></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Containers.Generic_Sort 
+should minimize calls to the generic formal Swap.</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I8116"></A>The generic procedures Containers.Generic_Array_Sort 
+<A NAME="I8008"></A>The generic procedures Containers.Generic_Array_Sort 
 and Containers.Generic_Constrained_Array_Sort are new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p13.b">13.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3"><A NAME="I8117"></A> The generic procedure Containers.Generic_Sort 
-is new.</span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<A NAME="I8009"></A> The generic procedure Containers.Generic_Sort is 
+new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p13.c">13.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Redefined &quot;&lt;&quot; actuals 
-to require a strict weak ordering; the old definition allowed indeterminant 
-comparisons that would not have worked in a sort.</span>&nbsp;</div>
+<B>Correction:</B> Redefined &quot;&lt;&quot; actuals to require a strict 
+weak ordering; the old definition allowed indeterminant comparisons that 
+would not have worked in a sort.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -15,17 +15,17 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -210,7 +210,7 @@ the subprogram body, either a &ldquo;link-name&rdquo; or specified address.
 It does not include the code for the subprogram body itself, nor its 
 address if a link-name is used to reference the body.&nbsp;</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0019-1.TXT">AI05-0019-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0019-1.TXT">AI05-0019-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 <A NAME="I5932"></A>This subclause also defines a place in the program 
 text where the profile of each declared callable entity becomes <I>frozen</I>. 
@@ -225,7 +225,7 @@ becomes frozen, the entity itself becomes frozen.</div>
 <A NAME="I5933"></A>The end of a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_body</A></SPAN>, 
 or a declaration of a library package or generic library package, causes 
-<I>freezing</I> of each entity and profile declared within it except 
+<I>freezing</I> of each entity and profile declared within it, except 
 for incomplete types. <A NAME="I5934"></A>A <SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0258">body_stub</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN> 
@@ -402,14 +402,14 @@ or a per-object expression of a component's <SPAN Class="swiss"><A HREF="AA-3-2-
 in which case, the freezing occurs later as part of another construct 
 or at the freezing point of an associated entity.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0046">8652/0046</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0046">8652/0046</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00106.TXT">AI95-00106-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0019-1.TXT">AI05-0019-1</A></I>} 
 <A NAME="I5942"></A>An implicit call freezes the same entities and profiles 
 that would be frozen by an explicit call. This is true even if the implicit 
 call is removed via implementation permissions.</div>
 <div class="paranum"><a name="p8.2">8.2/1</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0046">8652/0046</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0046">8652/0046</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00106.TXT">AI95-00106-01</A></I>} 
 <A NAME="I5943"></A>If an expression is implicitly converted to a type 
 or subtype <I>T</I>, then at the place where the expression causes freezing, 
@@ -616,8 +616,8 @@ of an entry family, the index subtype of the family is frozen.&nbsp;</div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I5956"></A>At the place where a subtype 
-is frozen, its type is frozen. <A NAME="I5957"></A><A NAME="I5958"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5956"></A>At 
+the place where a subtype is frozen, its type is frozen. <A NAME="I5957"></A><A NAME="I5958"></A>At 
 the place where a type is frozen, any expressions or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>s 
 within the full type definition cause freezing; the first subtype, and 
 any component subtypes, index subtypes, and parent subtype of the type 
@@ -699,10 +699,10 @@ a deferred constant declaration shall occur before the constant is frozen
 The above Legality Rules are stated &ldquo;officially&rdquo; in the referenced 
 subclauses.&nbsp;</div>
 <div class="paranum"><a name="p19">19/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-[An operational or representation item that directly specifies an aspect 
-of an entity shall appear before the entity is frozen (see <A HREF="AA-13-1.html">13.1</A>).] 
+An operational or representation item that directly specifies an aspect 
+of an entity shall appear before the entity is frozen (see <A HREF="AA-13-1.html">13.1</A>). 
 </div>
 <div class="paranum"><a name="p19.a">19.a/1</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
@@ -797,7 +797,7 @@ the entity.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
 The tag (see <A HREF="AA-3-9.html">3.9</A>) of a tagged type T is created 
 at the point where T is frozen.<A NAME="I5962"></A>&nbsp;</div>
 
@@ -969,7 +969,7 @@ is not frozen.&nbsp;</div>
 that is a completion or that is the target of a renames-as-body freezes. 
 This is formally an incompatibility, but as all known implementations 
 freeze expression functions more aggressively than allowed by either 
-the old or new wording, practically this will be an extension.</div>
+the old or new wording, practically this will be an extension.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

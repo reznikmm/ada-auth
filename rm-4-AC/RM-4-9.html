@@ -21,16 +21,16 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,8 +47,6 @@ to be static, and certain scalar and string subtypes are defined to be
 static subtypes. <A NAME="I3213"></A><I>Static</I> means determinable 
 at compile time, using the declared properties or values of the program 
 entities. <A NAME="I3214"></A></div>
-
-<H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3215"></A>A 
 static expression is a scalar or string expression that is one of the 
@@ -164,7 +162,7 @@ that defines a static scalar subtype. The base range of a scalar type
 is a static range, unless the type is a descendant of a formal scalar 
 type.</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Normal"><A NAME="I3221"></A>A <I>static subtype</I> is either 
+<div class="Normal">&nbsp;<A NAME="I3221"></A>A <I>static subtype</I> is either 
 a <I>static scalar subtype</I> or a <I>static string subtype</I>. <A NAME="I3222"></A>A 
 static scalar subtype is an unconstrained scalar subtype whose type is 
 not a descendant of a formal <span class="delete2">scalar&nbsp;</span>type, 
@@ -197,7 +195,7 @@ static if each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></S
 of the constraint is static, and the subtype of each discriminant is 
 static.&nbsp;</div>
 <div class="paranum"><a name="p31.1">31.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">In any case, the constraint 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">In any case, the constraint 
 of the first subtype of a scalar formal type is neither static nor null.</span></div>
 <div class="paranum"><a name="p32">32</a></div>
 <div class="Normal"><A NAME="I3230"></A>A subtype is <I>statically constrained</I> 
@@ -207,7 +205,7 @@ if it is a static string constant.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p32.1">32.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">An 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">An 
 expression is <I>statically unevaluated</I> if it is part of:<A NAME="I3231"></A></span></div>
 <div class="paranum"><a name="p32.2">32.2/3</a></div>
 <div class="Bulleted"><span class="insert3">the right operand of a static 
@@ -241,7 +239,7 @@ of a static membership test that is preceded in the enclosing <SPAN Class="swiss
 by another item whose individual membership test (see <A HREF="RM-4-5-2.html">4.5.2</A>) 
 statically yields True.</span>&nbsp;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">A static expression 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A static expression 
 is evaluated at compile time except when it is <span class="insert3">statically 
 unevaluated</span><span class="delete3">&nbsp;part of the right operand of 
 a static short-circuit control form whose value is determined by its 
@@ -266,7 +264,7 @@ be a multiple of the <I>small</I> of the decimal type.<span class="insert2">&nbs
 of a formal scalar type (or a corresponding actual type in an instance).</span> 
 </div>
 <div class="paranum"><a name="p37">37/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I3232"></A>In addition 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I3232"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 the above restrictions also apply in the private part of an instance 
 of a generic unit.</span><span class="delete2">&nbsp;The last two restrictions 
@@ -275,7 +273,7 @@ type (or a corresponding actual type in an instance).</span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p38">38/2</a></div>
-<div class="Normal">For a real static expression that is not part of 
+<div class="Normal">&nbsp;For a real static expression that is not part of 
 a larger static expression, and whose expected type is not a descendant 
 of a formal <span class="delete2">scalar&nbsp;</span>type, the implementation 
 shall round or truncate the value (according to the Machine_Rounds attribute 
@@ -292,7 +290,7 @@ rounding or truncating is required &mdash; normal accuracy rules apply
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p38.1">38.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">For a real static expression 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">For a real static expression 
 that is not part of a larger static expression, and whose expected type 
 is not a descendant of a formal type, the rounding should be the same 
 as the default rounding for the target system.</span>&nbsp;</div>

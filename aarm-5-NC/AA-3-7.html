@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +41,7 @@
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
-[<A NAME="I2098"></A> <A NAME="I2099"></A><A NAME="I2100"></A>A composite 
+[<A NAME="I2105"></A> <A NAME="I2106"></A><A NAME="I2107"></A>A composite 
 type (other than an array or interface type) can have discriminants, 
 which parameterize the type. A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 specifies the discriminants of a composite type. A discriminant of an 
@@ -57,7 +57,7 @@ of the type if the component is an array. A discriminant for a task type
 can be used to pass data to a task of the type upon creation.</div>
 <div class="paranum"><a name="p1.b">1.b/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
-<A NAME="I2101"></A><A NAME="I2102"></A>A view of a type, and all subtypes 
+<A NAME="I2108"></A><A NAME="I2109"></A>A view of a type, and all subtypes 
 of the view, have <I>unknown discriminants</I> when the number or names 
 of the discriminants, if any, are unknown at the point of the type declaration 
 for the view. A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
@@ -83,12 +83,12 @@ and the allocated object does not exist. The allocated object is tied
 in the above sense only to the original object. Other copies have only 
 secondary references to it.</div>
 <div class="paranum"><a name="p1.e">1.e/2</a></div>
-<div class="Annotations">Note that when an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+<div class="Annotations">Note that when an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 appears as a constraint on an access discriminant in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 that is elaborated independently from object creation, no such connection 
 exists. For example, if a named constrained subtype is declared via &quot;<B>subtype</B> 
 Constr <B>is</B> Rec(Acc_Discrim =&gt; <B>new</B> T);&quot; or if such 
-an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 appears in the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 for a component, the allocator is evaluated when the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 is elaborated, and hence its lifetime is typically longer than the objects 
@@ -98,23 +98,23 @@ goes out of scope.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">discriminant_part</SPAN><A NAME="I2103"></A><A NAME="S0059"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2104"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN>&nbsp;|&nbsp;<A NAME="I2105"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">discriminant_part</SPAN><A NAME="I2110"></A><A NAME="S0059"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2111"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN>&nbsp;|&nbsp;<A NAME="I2112"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">unknown_discriminant_part</SPAN><A NAME="I2106"></A><A NAME="S0060"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(&lt;&gt;)</div>
+<div class="Indented1"><SPAN Class="swiss">unknown_discriminant_part</SPAN><A NAME="I2113"></A><A NAME="S0060"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(&lt;&gt;)</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">known_discriminant_part</SPAN><A NAME="I2107"></A><A NAME="S0061"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;(<A NAME="I2108"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>&nbsp;{;&nbsp;<A NAME="I2109"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">known_discriminant_part</SPAN><A NAME="I2114"></A><A NAME="S0061"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I2115"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>&nbsp;{;&nbsp;<A NAME="I2116"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>})</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<SPAN Class="swiss">discriminant_specification</SPAN><A NAME="I2110"></A><A NAME="S0062"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I2111"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<A NAME="I2112"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I2113"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2114"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;|&nbsp;<A NAME="I2115"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I2116"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2117"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]</div>
+<SPAN Class="swiss">discriminant_specification</SPAN><A NAME="I2117"></A><A NAME="S0062"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I2118"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<A NAME="I2119"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I2120"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2121"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;|&nbsp;<A NAME="I2122"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I2123"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2124"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">default_expression</SPAN><A NAME="I2118"></A><A NAME="S0063"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2119"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">default_expression</SPAN><A NAME="I2125"></A><A NAME="S0063"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2126"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2120"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+<div class="Normal"><A NAME="I2127"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN> 
 is that of the corresponding discriminant.&nbsp;</div>
 
@@ -127,7 +127,7 @@ A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>
 is only permitted in a declaration for a composite type that is not an 
 array or interface type [(this includes generic formal types)]. A type 
 declared with a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
-is called a <I>discriminated</I> type,<A NAME="I2121"></A> as is a type 
+is called a <I>discriminated</I> type,<A NAME="I2128"></A> as is a type 
 that inherits (known) discriminants.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>Discriminants on 
@@ -157,7 +157,7 @@ and a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>,
 in which case the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 shall denote a discrete or access subtype, or it may be defined by an 
 <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
-<A NAME="I2122"></A>A discriminant that is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+<A NAME="I2129"></A>A discriminant that is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 is called an <I>access discriminant</I> and is of an anonymous access 
 type.&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a/2</a></div>
@@ -210,7 +210,7 @@ for an access discriminant may have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S
 only in the declaration for an immutably limited type (see <A HREF="AA-7-5.html">7.5</A>). 
 In addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
-unit.<A NAME="I2123"></A>&nbsp;</div>
+unit.<A NAME="I2130"></A>&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This rule implies that a 
 type can have a default for an access discriminant if the type is limited, 
@@ -341,11 +341,11 @@ defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definitio
 <div class="Normal">[For a type defined by a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 each discriminant of the parent type is either inherited, constrained 
 to equal some new discriminant of the derived type, or constrained to 
-the value of an expression.] <A NAME="I2124"></A>When inherited or constrained 
+the value of an expression.] <A NAME="I2131"></A>When inherited or constrained 
 to equal some new discriminant, the parent discriminant and the discriminant 
 of the derived type are said to <I>correspond</I>. Two discriminants 
 also correspond if there is some common discriminant to which they both 
-correspond. A discriminant corresponds to itself as well. <A NAME="I2125"></A>If 
+correspond. A discriminant corresponds to itself as well. <A NAME="I2132"></A>If 
 a discriminant of a parent type is constrained to a specific value by 
 a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then that discriminant is said to be <I>specified</I> by that <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>. 
@@ -356,7 +356,7 @@ is transitive, symmetric, and reflexive. That is, if A corresponds to
 B, and B corresponds to C, then A, B, and C each corresponds to A, B, 
 and C in all combinations.</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I2126"></A>A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
+<div class="Normal"><A NAME="I2133"></A>A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 that appears within the definition of a discriminated type <I>depends 
 on a discriminant</I> of the type if it names the discriminant as a bound 
 or discriminant value. A <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
@@ -365,13 +365,13 @@ depends on the discriminant, or on a discriminant that corresponds to
 it.&nbsp;</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
-in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
 is not considered to <I>depend</I> on a discriminant of the task type, 
 even if it names it. It is only the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>s 
 in the type definition itself that are considered dependents. Similarly 
 for protected types.&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2127"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2134"></A>A 
 component <I>depends on a discriminant</I> if:&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Bulleted">Its <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
@@ -427,16 +427,16 @@ in an intervening <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_d
 That's why we say &quot;values of discriminants&quot; instead of &quot;values 
 of <I>the</I> discriminants&quot; &mdash; a subtle point.</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Normal"><A NAME="I2128"></A><A NAME="I2129"></A><A NAME="I2130"></A><A NAME="I2131"></A>A 
+<div class="Normal"><A NAME="I2135"></A><A NAME="I2136"></A><A NAME="I2137"></A><A NAME="I2138"></A>A 
 type declared with a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 is said to have <I>known discriminants</I>; its first subtype is unconstrained. 
-<A NAME="I2132"></A><A NAME="I2133"></A>A type declared with an <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN> 
+<A NAME="I2139"></A><A NAME="I2140"></A>A type declared with an <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN> 
 is said to have <I>unknown discriminants</I>. A type declared without 
 a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
 has no discriminants, unless it is a derived type; if derived, such a 
 type has the same sort of discriminants (known, unknown, or none) as 
 its parent (or ancestor) type. A tagged class-wide type also has unknown 
-discriminants. <A NAME="I2134"></A><A NAME="I2135"></A>[Any subtype of 
+discriminants. <A NAME="I2141"></A><A NAME="I2142"></A>[Any subtype of 
 a type with unknown discriminants is an unconstrained and indefinite 
 subtype (see <A HREF="AA-3-2.html">3.2</A> and <A HREF="AA-3-3.html">3.3</A>).] 
 </div>
@@ -478,11 +478,11 @@ For an access discriminant, its <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084"
 is elaborated when the value of the access discriminant is defined: by 
 evaluation of its <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
 by elaboration of a <SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN>, 
-or by an assignment that initializes the enclosing object. <A NAME="I2136"></A></div>
+or by an assignment that initializes the enclosing object. <A NAME="I2143"></A></div>
 <div class="paranum"><a name="p27.a">27.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
-The conversion of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+The conversion of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 defining the access discriminant to the anonymous access type raises 
 Program_Error for an object created by an allocator of an access type 
 T, if the initial value is an access parameter that designates a view 
@@ -503,7 +503,7 @@ Ada 95, we considered various ways to break the connection between defaults
 and unconstrainedness, but ultimately gave up for lack of a sufficiently 
 simple and intuitive alternative.</div>
 <div class="paranum"><a name="p28.b">28.b</a></div>
-<div class="Annotations"><A NAME="I2137"></A>An unconstrained discriminated 
+<div class="Annotations"><A NAME="I2144"></A>An unconstrained discriminated 
 subtype with defaults is called a <I>mutable</I> subtype, and a variable 
 of such a subtype is called a mutable variable, because the discriminants 
 of such a variable can change. There are no mutable arrays (that is, 
@@ -523,7 +523,7 @@ subtype of the type is created.</div>
 <div class="paranum"><a name="p30">30</a></div>
 <div class="Notes">60&nbsp;&nbsp;Assignment to a discriminant of an object 
 (after its initialization) is not allowed, since the name of a discriminant 
-is a constant; neither <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>s 
+is a constant; neither <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s 
 nor assignments inherent in passing as an <B>in out</B> or <B>out</B> 
 parameter are allowed. Note however that the value of a discriminant 
 can be changed by assigning to the enclosing object, presuming it is 
@@ -593,7 +593,7 @@ types:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p37.a">37.a</a></div>
-<div class="Annotations"><A NAME="I2138"></A>The syntax for a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN> 
+<div class="Annotations"><A NAME="I2145"></A>The syntax for a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN> 
 is modified to allow an <I>access discriminant</I>, with a type specified 
 by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 (see <A HREF="AA-3-10.html">3.10</A>).</div>
@@ -654,7 +654,7 @@ types that happen to contain the reserved word <B>limited</B>).&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p37.l">37.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0063-1.TXT">AI05-0063-1</A></I>} 
-<A NAME="I2139"></A><B>Correction:</B> Changed the rules for when access 
+<A NAME="I2146"></A><B>Correction:</B> Changed the rules for when access 
 discriminants can have defaults to depend on the new definition for immutably 
 limited types; this will help ensure that unusual corner cases are properly 
 handled. Note that the Ada 2005 rule was unintentionally incompatible 
@@ -665,7 +665,7 @@ incompatibility.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p37.m">37.m/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0214-1.TXT">AI05-0214-1</A></I>} 
-<A NAME="I2140"></A>A limited tagged type may now have defaults for its 
+<A NAME="I2147"></A>A limited tagged type may now have defaults for its 
 discriminants.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>

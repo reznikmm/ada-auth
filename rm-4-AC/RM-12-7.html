@@ -21,15 +21,15 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -71,21 +71,21 @@ shall precede any named <SPAN Class="swiss"><A HREF="RM-12-7.html#S0303">formal_
 shall denote a generic package (the <I>template</I> for the formal package); 
 the formal package is an instance of the template.</div>
 <div class="paranum"><a name="p4.1">4.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">The <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-12-7.html#S0303">formal_package_association</A></SPAN> 
 shall denote a <SPAN Class="swiss"><A HREF="RM-12-1.html#S0275">generic_formal_parameter_declaration</A></SPAN> 
 of the template. If two or more formal subprograms of the template have 
 the same defining name, then named associations are not allowed for the 
 corresponding actuals.</span></div>
 <div class="paranum"><a name="p4.2">4.2/3</a></div>
-<div class="Normal">&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-12-7.html#S0302">formal_package_actual_part</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-12-7.html#S0302">formal_package_actual_part</A></SPAN> 
 shall contain at most one <SPAN Class="swiss"><A HREF="RM-12-7.html#S0303">formal_package_association</A></SPAN> 
 for each formal parameter. If the <SPAN Class="swiss"><A HREF="RM-12-7.html#S0302">formal_package_actual_part</A></SPAN> 
 does not include &ldquo;<B>others</B> =&gt; &lt;&gt;&rdquo;, each formal 
 parameter without an association shall have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-12-6.html#S0299">subprogram_default</A></SPAN>.</span></div>
 <div class="paranum"><a name="p4.3">4.3/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">The rules for matching between 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">The rules for matching between 
 <SPAN Class="swiss"><A HREF="RM-12-7.html#S0303">formal_package_association</A></SPAN>s 
 and the generic formals of the template are as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p4.4">4.4/3</a></div>
@@ -120,7 +120,7 @@ are required to match;</span></div>
 shall match, whether any actual parameter is given explicitly or by default.</span> 
 </div>
 <div class="paranum"><a name="p5.3">5.3/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">The 
 rules for matching of actual parameters between the actual instance and 
 the formal package are as follows:</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
@@ -135,7 +135,7 @@ denote statically matching subtypes. <A NAME="I5072"></A></div>
 <div class="Bulleted">For other kinds of formals, the actuals match if 
 they statically denote the same entity.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/1</a></div>
-<div class="Normal">&nbsp;<span class="insert1">For the purposes of matching, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">For the purposes of matching, 
 any actual parameter that is the name of a formal object of mode <B>in</B> 
 is replaced by the formal object's actual expression (recursively).</span> 
 </div>
@@ -145,7 +145,7 @@ is replaced by the formal object's actual expression (recursively).</span>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-12-7.html#S0301">formal_package_declaration</A></SPAN> 
 declares a generic formal package.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><A NAME="I5073"></A>The visible part of a formal 
+<div class="Normal">&nbsp;<A NAME="I5073"></A>The visible part of a formal 
 package includes the first list of <SPAN Class="swiss"><A HREF="RM-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="RM-7-1.html#S0191">package_specification</A></SPAN>. 
 In addition, <span class="insert2">for each actual parameter that is 
@@ -158,7 +158,7 @@ the <SPAN Class="swiss"><A HREF="RM-12-7.html#S0302">formal_package_actual_part<
 is (&lt;&gt;), it also includes the <SPAN Class="swiss"><A HREF="RM-12-1.html#S0274">generic_formal_part</A></SPAN> 
 of the template for</span> the formal package.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal"><span class="insert2">For the purposes of matching, 
+<div class="Normal">&nbsp;<span class="insert2">For the purposes of matching, 
 if the actual instance <I>A</I> is itself a formal package, then the 
 actual parameters of <I>A</I> are those specified explicitly or implicitly 
 in the <SPAN Class="swiss"><A HREF="RM-12-7.html#S0302">formal_package_actual_part</A></SPAN> 
@@ -167,7 +167,7 @@ parameters of the template included in the visible part of <I>A</I>.</span></div
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><I>Example 
 of a generic package with formal package parameters:</I></span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Containers.Ordered_Maps;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-A-18-6.html">A.18.6</A></I></SPAN><BR>
@@ -187,7 +187,7 @@ of a generic package with formal package parameters:</I></span></div>
 <div class="Examples"><span class="insert2">&nbsp;&nbsp;&nbsp;...<BR>
 <B>end</B>&nbsp;Ordered_Join;</span></div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><I>Example 
 of an instantiation of a package with formal packages:</I></span></div>
 <div class="paranum"><a name="p18">18/2</a></div>
 <div class="Examples"><span class="insert2"><B>with</B>&nbsp;Ada.Containers.Ordered_Maps;<BR>

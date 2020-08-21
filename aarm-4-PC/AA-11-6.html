@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,20 +39,18 @@
 <H1>11.6 Exceptions and Optimization</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[<A NAME="I5156"></A> <A NAME="I5157"></A><A NAME="I5158"></A><A NAME="I5159"></A><A NAME="I5160"></A><A NAME="I5161"></A>This 
-<span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-gives permission to the implementation to perform certain &ldquo;optimizations&rdquo; 
+[<A NAME="I5096"></A> <A NAME="I5097"></A><A NAME="I5098"></A><A NAME="I5099"></A><A NAME="I5100"></A><A NAME="I5101"></A>This 
+subclause gives permission to the implementation to perform certain &ldquo;optimizations&rdquo; 
 that do not necessarily preserve the canonical semantics.]&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I5162"></A>The rest of this International Standard (outside 
-this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>) 
-defines the <I>canonical semantics</I> of the language. [The canonical 
-semantics of a given (legal) program determines a set of possible external 
-effects that can result from the execution of the program with given 
-inputs.]&nbsp;</div>
+<A NAME="I5102"></A>The rest of this International Standard (outside 
+this subclause) defines the <I>canonical semantics</I> of the language. 
+[The canonical semantics of a given (legal) program determines a set 
+of possible external effects that can result from the execution of the 
+program with given inputs.]&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that the canonical 
 semantics is a set of possible behaviors, since some reordering, parallelism, 
@@ -63,8 +59,7 @@ and nondeterminism is allowed by the canonical semantics.&nbsp;</div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
 </B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 The following parts of the canonical semantics are of particular interest 
-to the reader of this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>: 
-</div>
+to the reader of this subclause:&nbsp;</div>
 <div class="paranum"><a name="p2.c">2.c</a></div>
 <div class="SmallBulleted">Behavior in the presence of abnormal objects 
 and objects with invalid representations (see <A HREF="AA-13-9-1.html">13.9.1</A>).</div>
@@ -74,8 +69,8 @@ in an arbitrary order.</div>
 <div class="paranum"><a name="p2.e">2.e/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 Behavior in the presence of a misuse of Unchecked_Deallocation, Unchecked_Access, 
-or imported or exported entity (see <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="AA-13.html">13</A>).&nbsp;</div>
+or imported or exported entity (see Clause <A HREF="AA-13.html">13</A>). 
+</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 [As explained in <A HREF="AA-1-1-3.html">1.1.3</A>, &ldquo;<A HREF="AA-1-1-3.html">Conformity 
@@ -84,8 +79,7 @@ of a program is defined in terms of its interactions with its external
 environment. Hence, the implementation can perform any internal actions 
 whatsoever, in any order or in parallel, so long as the external effect 
 of the execution of the program is one that is allowed by the canonical 
-semantics, or by the rules of this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>.] 
-</div>
+semantics, or by the rules of this subclause.]&nbsp;</div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that an optimization 
 can change the external effect of the program, so long as the changed 
@@ -101,7 +95,7 @@ not be any constraints on the machine code executed in those circumstances.
 <div class="Normal" style="margin-bottom: 0.4em">The following additional 
 permissions are granted to the implementation:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted"><A NAME="I5163"></A><A NAME="I5164"></A>An implementation 
+<div class="Bulleted"><A NAME="I5103"></A><A NAME="I5104"></A>An implementation 
 need not always raise an exception when a language-defined check fails. 
 Instead, the operation that failed the check can simply yield an <I>undefined 
 result</I>. The exception need be raised by the implementation only if, 
@@ -164,7 +158,7 @@ if the code to evaluate 'Last always yields 10 by presuming that X.all
 belongs to the subtype Str10, without even &quot;looking.&quot;&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I5165"></A>If an exception is raised due to the failure of a 
+<A NAME="I5105"></A>If an exception is raised due to the failure of a 
 language-defined check, then upon reaching the corresponding <SPAN Class="swiss"><A HREF="AA-11-2.html#S0266">exception_handler</A></SPAN> 
 (or the termination of the task, if none), the external interactions 
 that have occurred need reflect only that the exception was raised somewhere 
@@ -174,11 +168,9 @@ possibly earlier (or later if the interactions are independent of the
 result of the checked operation) than that defined by the canonical semantics, 
 but not within the execution of some abort-deferred operation or <I>independent</I> 
 subprogram that does not dynamically enclose the execution of the construct 
-whose check failed. <A NAME="I5166"></A>An independent subprogram is 
+whose check failed. <A NAME="I5106"></A>An independent subprogram is 
 one that is defined outside the library unit containing the construct 
-whose check failed, and <span class="insert3">for which the</span><span class="delete3">&nbsp;has 
-no</span> Inline <span class="insert3">aspect is False</span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN> 
-applied to it</span>. <A NAME="I5167"></A><A NAME="I5168"></A><A NAME="I5169"></A>Any 
+whose check failed, and for which the Inline aspect is False. <A NAME="I5107"></A><A NAME="I5108"></A><A NAME="I5109"></A>Any 
 assignment that occurred outside of such abort-deferred operations or 
 independent subprograms can be disrupted by the raising of the exception, 
 causing the object or its parts to become abnormal, and certain subsequent 
@@ -203,20 +195,20 @@ can assume, or what transformations the implementation can perform. Otherwise,
 how can the programmer write reliable programs?</div>
 <div class="paranum"><a name="p6.d">6.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-has two conflicting goals: to allow as much optimization as possible, 
-and to make program execution as predictable as possible (to ease the 
-writing of reliable programs). The rules given above represent a compromise.</div>
+This subclause has two conflicting goals: to allow as much optimization 
+as possible, and to make program execution as predictable as possible 
+(to ease the writing of reliable programs). The rules given above represent 
+a compromise.</div>
 <div class="paranum"><a name="p6.e">6.e</a></div>
 <div class="Annotations">Consider the two extremes:</div>
 <div class="paranum"><a name="p6.f">6.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-The extreme conservative rule would be to delete this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-entirely. The semantics of Ada would be the canonical semantics. This 
-achieves the best predictability. It sounds like a disaster from the 
-efficiency point of view, but in practice, implementations would provide 
-modes in which less predictability but more efficiency would be achieved. 
-Such a mode could even be the out-of-the-box mode. In practice, implementers 
+The extreme conservative rule would be to delete this subclause entirely. 
+The semantics of Ada would be the canonical semantics. This achieves 
+the best predictability. It sounds like a disaster from the efficiency 
+point of view, but in practice, implementations would provide modes in 
+which less predictability but more efficiency would be achieved. Such 
+a mode could even be the out-of-the-box mode. In practice, implementers 
 would provide a compromise based on their customer's needs. Therefore, 
 we view this as one viable alternative.</div>
 <div class="paranum"><a name="p6.g">6.g</a></div>
@@ -233,11 +225,10 @@ would tend to avoid going so far as to punish their customers too much
 in terms of predictability.</div>
 <div class="paranum"><a name="p6.h">6.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-The most important thing about this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-is that users understand what they can expect at run time, and implementers 
-understand what optimizations are allowed. Any solution that makes this 
-<span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-contain rules that can interpreted in more than one way is unacceptable.</div>
+The most important thing about this subclause is that users understand 
+what they can expect at run time, and implementers understand what optimizations 
+are allowed. Any solution that makes this subclause contain rules that 
+can interpreted in more than one way is unacceptable.</div>
 <div class="paranum"><a name="p6.i">6.i</a></div>
 <div class="Annotations">We have chosen a compromise between the extreme 
 conservative and extreme liberal rules. The current rule essentially 
@@ -249,9 +240,8 @@ it manages cannot be broken by bugs outside the library unit.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Notes">6&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-The permissions granted by this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-can have an effect on the semantics of a program only if the program 
-fails a language-defined check.&nbsp;</div>
+The permissions granted by this subclause can have an effect on the semantics 
+of a program only if the program fails a language-defined check.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p7.a">7.a</a></div>
@@ -283,12 +273,10 @@ of the unconstrained subtype of the type.</div>
 permission to avoid raising exceptions&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p7.g">7.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-We moved <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="AA-11-5.html">11.5</A>, &ldquo;<A HREF="AA-11-5.html">Suppressing 
+We moved subclause <A HREF="AA-11-5.html">11.5</A>, &ldquo;<A HREF="AA-11-5.html">Suppressing 
 Checks</A>&rdquo; from after 11.6 to before 11.6, in order to preserve 
-the famous number &ldquo;11.6&rdquo; (given the changes to earlier <span class="insert3">subclauses</span><span class="delete3">&nbsp;clauses</span> 
-in <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="AA-11.html">11</A>).&nbsp;</div>
+the famous number &ldquo;11.6&rdquo; (given the changes to earlier subclauses 
+in Clause <A HREF="AA-11.html">11</A>).&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,37 +36,37 @@
 <HR>
 <H1>6.4 Subprogram Calls</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3765"></A>A <I>subprogram call</I> is either 
-a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>; 
-[it invokes the execution of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>. 
+<div class="Normal"><A NAME="I3878"></A>A <I>subprogram call</I> is either 
+a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0195">procedure_call_statement</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>; 
+[it invokes the execution of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>. 
 The call specifies the association of the actual parameters, if any, 
 with formal parameters of the subprogram.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">procedure_call_statement</SPAN><A NAME="I3766"></A><A NAME="S0181"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3767"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>;<BR>
-&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3768"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3769"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">procedure_call_statement</SPAN><A NAME="I3879"></A><A NAME="S0195"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3880"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>;<BR>
+&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3881"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3882"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">function_call</SPAN><A NAME="I3770"></A><A NAME="S0182"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>function_</I><A NAME="I3771"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<I>function_</I><A NAME="I3772"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3773"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">function_call</SPAN><A NAME="I3883"></A><A NAME="S0196"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>function_</I><A NAME="I3884"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>function_</I><A NAME="I3885"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3886"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 For the purpose of non-syntax rules, infix operator calls are considered 
-<SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>s. 
+<SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>s. 
 See <A HREF="AA-6-6.html">6.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">actual_parameter_part</SPAN><A NAME="I3774"></A><A NAME="S0183"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3775"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3776"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">actual_parameter_part</SPAN><A NAME="I3887"></A><A NAME="S0197"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3888"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0198">parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3889"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0198">parameter_association</A></SPAN>})</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">parameter_association</SPAN><A NAME="I3777"></A><A NAME="S0184"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<I>formal_parameter_</I><A NAME="I3778"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I3779"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0185">explicit_actual_parameter</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">parameter_association</SPAN><A NAME="I3890"></A><A NAME="S0198"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>formal_parameter_</I><A NAME="I3891"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I3892"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0199">explicit_actual_parameter</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">explicit_actual_parameter</SPAN><A NAME="I3780"></A><A NAME="S0185"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3781"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I3782"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_actual_parameter</SPAN><A NAME="I3893"></A><A NAME="S0199"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3894"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I3895"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><A NAME="I3783"></A><A NAME="I3784"></A>A <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+<div class="Indented1"><A NAME="I3896"></A><A NAME="I3897"></A>A <SPAN Class="swiss"><A HREF="AA-6-4.html#S0198">parameter_association</A></SPAN> 
 is <I>named</I> or <I>positional</I> according to whether or not the 
 <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 is specified. Any positional associations shall precede any named associations. 
@@ -83,15 +83,15 @@ of their semantics, but are not intended for use in actual calls.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00310.TXT">AI95-00310-01</A></I>} 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> or 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> given 
-in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0181">procedure_call_statement</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0195">procedure_call_statement</A></SPAN> 
 shall resolve to denote a callable entity that is a procedure, or an 
 entry renamed as (viewed as) a procedure. The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-given in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+given in a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 shall resolve to denote a callable entity that is a function. The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 shall not resolve to denote an abstract subprogram unless it is also 
-a dispatching subprogram. [When there is an <SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN>, 
+a dispatching subprogram. [When there is an <SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 can be an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN> 
 of an access-to-subprogram value.]&nbsp;</div>
@@ -119,17 +119,17 @@ All Name Resolution Rules are overloading rules, see <A HREF="AA-8-6.html">8.6</
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I3785"></A>For the execution of a subprogram call, the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<A NAME="I3898"></A>For the execution of a subprogram call, the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-of the call is evaluated, and each <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+of the call is evaluated, and each <SPAN Class="swiss"><A HREF="AA-6-4.html#S0198">parameter_association</A></SPAN> 
 is evaluated (see <A HREF="AA-6-4-1.html">6.4.1</A>). If a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-is used, an implicit <SPAN Class="swiss"><A HREF="AA-6-4.html#S0184">parameter_association</A></SPAN> 
+is used, an implicit <SPAN Class="swiss"><A HREF="AA-6-4.html#S0198">parameter_association</A></SPAN> 
 is assumed for this rule. These evaluations are done in an arbitrary 
-order. The <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+order. The <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 is then executed, or a call on an entry or protected subprogram is performed 
 (see <A HREF="AA-3-9-2.html">3.9.2</A>). Finally, if the subprogram completes 
 normally, then after it is left, any necessary assigning back of formal 
-to actual parameters occurs (see <A HREF="AA-6-4-1.html">6.4.1</A>).<A NAME="I3786"></A></div>
+to actual parameters occurs (see <A HREF="AA-6-4-1.html">6.4.1</A>).<A NAME="I3899"></A></div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The implicit association 
 for a default is only for this run-time rule. At compile time, the visibility 
@@ -155,13 +155,13 @@ Calls</A>&rdquo;) or protected subprogram (see <A HREF="AA-9-5-1.html">9.5.1</A>
 &ldquo;<A HREF="AA-9-5-1.html">Protected Subprograms and Protected Actions</A>&rdquo;).</div>
 <div class="paranum"><a name="p10.e">10.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-Normally, the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+Normally, the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 that is executed by the above rule is the one for the subprogram being 
 called. For an enumeration literal, implicitly declared (but noninherited) 
 subprogram, null procedure, or an attribute that is a subprogram, an 
 implicit body is assumed. For a dispatching call, <A HREF="AA-3-9-2.html">3.9.2</A>, 
 &ldquo;<A HREF="AA-3-9-2.html">Dispatching Operations of Tagged Types</A>&rdquo; 
-defines which <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+defines which <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 is executed.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00407.TXT">AI95-00407-01</A></I>} 
@@ -172,12 +172,12 @@ the subprogram call is equivalent to a call on the underlying subprogram,
 with the first actual parameter being provided by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of the prefixed view (or the Access attribute of this <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 if the first formal parameter is an access parameter), and the remaining 
-actual parameters given by the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN>, 
+actual parameters given by the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN>, 
 if any.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I3787"></A>The exception Program_Error is raised at the point 
-of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+<A NAME="I3900"></A>The exception Program_Error is raised at the point 
+of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 if the function completes normally without executing a return statement. 
 </div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
@@ -190,10 +190,10 @@ check, since the check imposes no time overhead and minimal space overhead
 (since it can usually be statically eliminated as dead code).&nbsp;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 denotes a constant, as defined in <A HREF="AA-6-5.html">6.5</A>; the 
 nominal subtype of the constant is given by the nominal subtype of the 
-function result. <A NAME="I3788"></A><A NAME="I3789"></A></div>
+function result. <A NAME="I3901"></A><A NAME="I3902"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p13">13</a></div>
@@ -239,7 +239,7 @@ Pair(Left&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Person(F),&nbsp;Right&nbsp;=&gt;&nbsp;
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p24">24</a></div>
 <div class="Notes">9&nbsp;&nbsp;If a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-is used for two or more parameters in a multiple <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>, 
+is used for two or more parameters in a multiple <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
 is evaluated once for each omitted parameter. Hence in the above examples, 
 the two calls of Pair are equivalent.&nbsp;</div>
@@ -272,8 +272,8 @@ Set(Color'(Red));</div>
 <div class="paranum"><a name="p31.a">31.a</a></div>
 <div class="Annotations">We have gotten rid of parameters &ldquo;of the 
 form of a type conversion&rdquo; (see RM83-6.4.1(3)). The new view semantics 
-of <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN>s 
-allows us to use normal <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN>s 
+of <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>s 
+allows us to use normal <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>s 
 instead.</div>
 <div class="paranum"><a name="p31.b">31.b</a></div>
 <div class="Annotations">We have moved wording about run-time semantics 
@@ -285,7 +285,7 @@ for a function that falls off the end to here from RM83-6.5.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.d">31.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00310.TXT">AI95-00310-01</A></I>} 
-<A NAME="I3790"></A>Nondispatching abstract operations are no longer 
+<A NAME="I3903"></A>Nondispatching abstract operations are no longer 
 considered when resolving a subprogram call. That makes it possible to 
 use <B>abstract</B> to &ldquo;undefine&rdquo; a predefined operation 
 for an untagged type. That's especially helpful when defining custom 
@@ -294,7 +294,7 @@ arithmetic packages.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 95</H4>
 <div class="paranum"><a name="p31.e">31.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-Changed the definition of the nominal subtype of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+Changed the definition of the nominal subtype of a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 to use the nominal subtype wording of <A HREF="AA-6-1.html">6.1</A>, 
 to take into account <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>s 
 and access result types.</div>

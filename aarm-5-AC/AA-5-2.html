@@ -34,7 +34,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,25 +45,25 @@
 <HR>
 <H1>5.2 Assignment Statements</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 replaces the current value of a variable with the result of evaluating 
-an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>.] 
+an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.] 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">assignment_statement</SPAN><A NAME="I3557"></A><A NAME="S0153"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<I>variable_</I><A NAME="I3558"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;:=&nbsp;<A NAME="I3559"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">assignment_statement</SPAN><A NAME="I3634"></A><A NAME="S0159"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<I>variable_</I><A NAME="I3635"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;:=&nbsp;<A NAME="I3636"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
-includes the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-and the <I>assignment</I> of the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-into the <I>target</I>. <A NAME="I3560"></A><A NAME="I3561"></A>[An assignment 
-operation (as opposed to an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>) 
+<div class="Normal">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
+includes the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+and the <I>assignment</I> of the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+into the <I>target</I>. <A NAME="I3637"></A><A NAME="I3638"></A>[An assignment 
+operation (as opposed to an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>) 
 is performed in other contexts as well, including object initialization 
-and by-copy parameter passing.] <A NAME="I3562"></A><A NAME="I3563"></A>The 
+and by-copy parameter passing.] <A NAME="I3639"></A><A NAME="I3640"></A>The 
 <I>target</I> of an assignment operation is the view of the object to 
-which a value is being assigned; the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+which a value is being assigned; the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 is the variable denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
@@ -72,8 +72,8 @@ of the &ldquo;target&rdquo; of an assignment with the notion of the &ldquo;targe
 object&rdquo; of an entry call or requeue.</div>
 <div class="paranum"><a name="p3.b">3.b</a></div>
 <div class="Annotations">Don't confuse the term &ldquo;assignment operation&rdquo; 
-with the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>. 
-The assignment operation is just one part of the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>. 
+with the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>. 
+The assignment operation is just one part of the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>. 
 The assignment operation is also a part of the execution of various other 
 constructs; see <A HREF="AA-7-6-1.html">7.6.1</A>, &ldquo;<A HREF="AA-7-6-1.html">Completion 
 and Finalization</A>&rdquo; for a complete list. Note that when we say, 
@@ -84,17 +84,17 @@ of the assignment operation.&nbsp;</div>
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I3564"></A>The <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+<A NAME="I3641"></A>The <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 is expected to be of any <span class="delete2">nonlimited&nbsp;</span>type. 
-<A NAME="I3565"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<A NAME="I3642"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is the type of the target.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Implementation 
-Note:&nbsp;</B>An <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+Note:&nbsp;</B>An <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 as a whole is a &quot;complete context,&quot; so if the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
-is overloaded, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
+is overloaded, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 can be used to help disambiguate it. For example:&nbsp;</div>
 <div class="paranum"><a name="p4.b">4.b</a></div>
 <div class="SmallExamples">&nbsp;&nbsp;<B>type</B>&nbsp;P1&nbsp;<B>is&nbsp;access</B>&nbsp;R1;<BR>
@@ -111,60 +111,60 @@ can be used to help disambiguate it. For example:&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 The target [denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>] 
-shall be a variable<span class="insert2">&nbsp;of a nonlimited type</span>.</div>
+shall be a variable<span class="insert2">&nbsp;of a nonlimited type</span>.<A NAME="I3643"></A><A NAME="I3644"></A></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">If the target is of a tagged class-wide type <I>T</I>'Class, 
-then the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+then the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 shall either be dynamically tagged, or of type <I>T</I> and tag-indeterminate 
 (see <A HREF="AA-3-9-2.html">3.9.2</A>).&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is consistent with the general 
 rule that a single dispatching operation shall not have both dynamically 
 tagged and statically tagged operands. Note that for an object initialization 
-(as opposed to the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>), 
+(as opposed to the <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>), 
 a statically tagged initialization expression is permitted, since there 
 is no chance for confusion (or Tag_Check failure). Also, in an object 
 initialization, tag-indeterminate expressions of any type covered by 
-<I>T</I>'Class would be allowed, but with an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>, 
+<I>T</I>'Class would be allowed, but with an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
 that might not work if the tag of the target was for a type that didn't 
 have one of the dispatching operations in the tag-indeterminate expression. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3566"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I3645"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
 the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-are first evaluated in an arbitrary order.<A NAME="I3567"></A>&nbsp;</div>
+and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+are first evaluated in an arbitrary order.<A NAME="I3646"></A>&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Other rules of the language 
 may require that the bounds of the variable be determined prior to evaluating 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 but that does not necessarily require evaluation of the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 as pointed out by the ACID.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">When the type of the 
 target is class-wide:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I3568"></A>If the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Bulleted"><A NAME="I3647"></A>If the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is tag-indeterminate (see <A HREF="AA-3-9-2.html">3.9.2</A>), then the 
-controlling tag value for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+controlling tag value for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is the tag of the target;&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>See <A HREF="AA-3-9-2.html">3.9.2</A>, 
 &ldquo;<A HREF="AA-3-9-2.html">Dispatching Operations of Tagged Types</A>&rdquo;. 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted"><A NAME="I3569"></A><A NAME="I3570"></A><A NAME="I3571"></A>Otherwise 
-[(the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Bulleted"><A NAME="I3648"></A><A NAME="I3649"></A><A NAME="I3650"></A>Otherwise 
+[(the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is dynamically tagged)], a check is made that the tag of the value of 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is the same as that of the target; if this check fails, Constraint_Error 
 is raised.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal">The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Normal">The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is converted to the subtype of the target. [The conversion might raise 
-an exception (see <A HREF="AA-4-6.html">4.6</A>).] <A NAME="I3572"></A></div>
+an exception (see <A HREF="AA-4-6.html">4.6</A>).] <A NAME="I3651"></A></div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B><A HREF="AA-4-6.html">4.6</A>, 
 &ldquo;<A HREF="AA-4-6.html">Type Conversions</A>&rdquo; defines what 
@@ -177,14 +177,14 @@ so long as it is the same length.&nbsp;</div>
 <div class="Normal">In cases involving controlled types, the target is 
 finalized, and an anonymous object might be used as an intermediate in 
 the assignment, as described in <A HREF="AA-7-6-1.html">7.6.1</A>, &ldquo;<A HREF="AA-7-6-1.html">Completion 
-and Finalization</A>&rdquo;. <A NAME="I3573"></A><A NAME="I3574"></A>In 
-any case, the converted value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+and Finalization</A>&rdquo;. <A NAME="I3652"></A><A NAME="I3653"></A>In 
+any case, the converted value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is then <I>assigned</I> to the target, which consists of the following 
 two steps:&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B><A HREF="AA-7-6-1.html">7.6.1</A> 
 actually says that finalization happens always, but unless controlled 
-types are involved, this finalization during an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+types are involved, this finalization during an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 does nothing.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Bulleted">The value of the target becomes the converted value.</div>
@@ -192,16 +192,16 @@ does nothing.&nbsp;</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 If any part of the target is controlled, its value is adjusted as explained 
 in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="AA-7-6.html">7.6</A>. <A NAME="I3575"></A></div>
+<A HREF="AA-7-6.html">7.6</A>. <A NAME="I3654"></A></div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If any parts of the object 
 are controlled, abort is deferred during the assignment operation itself, 
-but not during the rest of the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>. 
+but not during the rest of the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>. 
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Notes">2&nbsp;&nbsp;The tag of an object never changes; in 
-particular, an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+particular, an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 does not change the tag of the target.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
@@ -212,12 +212,12 @@ value to the object itself) since such objects are always constrained;
 however, subcomponents of such objects may be unconstrained.</span>&nbsp;</div>
 <div class="paranum"><a name="p16.a">16.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The implicit subtype conversion 
-described above for <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>s 
+described above for <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s 
 is performed only for the value of the right-hand side expression as 
 a whole; it is not performed for subcomponents of the value.</div>
 <div class="paranum"><a name="p16.b">16.b</a></div>
 <div class="Annotations">The determination of the type of the variable 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 may require consideration of the expression if the variable name can 
 be interpreted as the name of a variable designated by the access value 
 returned by a function call, and similarly, as a component or slice of 
@@ -263,18 +263,18 @@ B&nbsp;:&nbsp;String(3&nbsp;..&nbsp;33);<BR>
 A(4&nbsp;..&nbsp;12)&nbsp;:=&nbsp;A(1&nbsp;..&nbsp;9);&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;A(1&nbsp;..&nbsp;12)&nbsp;=&nbsp;&quot;tartar&nbsp;sauce&quot;</I></SPAN></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Notes">4&nbsp;&nbsp;<I>Notes on the examples:</I> <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">Assignment_statement</A></SPAN>s 
+<div class="Notes">4&nbsp;&nbsp;<I>Notes on the examples:</I> <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">Assignment_statement</A></SPAN>s 
 are allowed even in the case of overlapping slices of the same array, 
 because the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 are both evaluated before copying the value into the variable. In the 
 above example, an implementation yielding A(1 .. 12) = &quot;tartartartar&quot; 
 would be incorrect.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p28.a">28.a</a></div>
-<div class="Annotations"><A NAME="I3576"></A>We now allow user-defined 
-finalization and value adjustment actions as part of <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>s 
+<div class="Annotations"><A NAME="I3655"></A>We now allow user-defined 
+finalization and value adjustment actions as part of <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s 
 (see <A HREF="AA-7-6.html">7.6</A>, &ldquo;<A HREF="AA-7-6.html">Assignment 
 and Finalization</A>&rdquo;).&nbsp;</div>
 
@@ -289,13 +289,13 @@ no run-time effect, other than a constraint check.</div>
 <div class="paranum"><a name="p28.c">28.c</a></div>
 <div class="Annotations">We now cover in a general way in <A HREF="AA-3-7-2.html">3.7.2</A> 
 the erroneous execution possible due to changing the value of a discriminant 
-when the variable in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+when the variable in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 is a subcomponent that depends on discriminants.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p28.d">28.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<span class="insert2"><A NAME="I3577"></A>The change of the limited check 
+<span class="insert2"><A NAME="I3656"></A>The change of the limited check 
 from a resolution rule to a legality rule is not quite upward compatible. 
 For example</span>&nbsp;</div>
 <div class="paranum"><a name="p28.e">28.e/2</a></div>

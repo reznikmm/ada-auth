@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,13 +41,12 @@ The package Directories provides operations for manipulating files and
 directories, and their names.&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-The notes for this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-contain the expected interpretations of some of the operations on various 
-target systems. &ldquo;Unix&rdquo; refers to the UNIX&reg; operating 
-system, and in most cases also covers Unix-like systems such as Linux 
-and POSIX. &ldquo;Windows&reg;&rdquo; refers to the Microsoft&reg; Windows&reg; 
-2000 operating system and usually also covers most other versions that 
-use the Win32 API.&nbsp;</div>
+The notes for this subclause contain the expected interpretations of 
+some of the operations on various target systems. &ldquo;Unix&rdquo; 
+refers to the UNIX&reg; operating system, and in most cases also covers 
+Unix-like systems such as Linux and POSIX. &ldquo;Windows&reg;&rdquo; 
+refers to the Microsoft&reg; Windows&reg; 2000 operating system and usually 
+also covers most other versions that use the Win32 API.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -58,87 +55,87 @@ The library package Directories has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.IO_Exceptions;<BR>
 <B>with</B>&nbsp;Ada.Calendar;<BR>
-<B>package</B>&nbsp;Ada.Directories&nbsp;<B>is</B><A NAME="I7351"></A></div>
+<B>package</B>&nbsp;Ada.Directories&nbsp;<B>is</B><A NAME="I7249"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Directory&nbsp;and&nbsp;file&nbsp;operations:</I></SPAN></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7352"></A>Current_Directory&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7250"></A>Current_Directory&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7353"></A>Set_Directory&nbsp;(Directory&nbsp;:&nbsp;in&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7251"></A>Set_Directory&nbsp;(Directory&nbsp;:&nbsp;in&nbsp;String);</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7354"></A>Create_Directory&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7252"></A>Create_Directory&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7355"></A>Delete_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7253"></A>Delete_Directory&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7356"></A>Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7254"></A>Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7357"></A>Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7255"></A>Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7358"></A>Delete_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7256"></A>Delete_File&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7359"></A>Rename&nbsp;(Old_Name,&nbsp;New_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7257"></A>Rename&nbsp;(Old_Name,&nbsp;New_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7360"></A>Copy_File&nbsp;(Source_Name,<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7258"></A>Copy_File&nbsp;(Source_Name,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;and&nbsp;directory&nbsp;name&nbsp;operations:</I></SPAN></div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7361"></A>Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7259"></A>Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7362"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7260"></A>Simple_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7363"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7261"></A>Containing_Directory&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7364"></A>Extension&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7262"></A>Extension&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7365"></A>Base_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7263"></A>Base_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7366"></A>Compose&nbsp;(Containing_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7264"></A>Compose&nbsp;(Containing_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p20.1">20.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7367"></A>Name_Case_Kind&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Unknown,&nbsp;Case_Sensitive,&nbsp;Case_Insensitive,&nbsp;Case_Preserving);</span></div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7265"></A>Name_Case_Kind&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Unknown,&nbsp;Case_Sensitive,&nbsp;Case_Insensitive,&nbsp;Case_Preserving);</div>
 <div class="paranum"><a name="p20.2">20.2/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7368"></A>Name_Case_Equivalence&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Name_Case_Kind;</span></div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7266"></A>Name_Case_Equivalence&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Name_Case_Kind;</div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>File&nbsp;and&nbsp;directory&nbsp;queries:</I></SPAN></div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7369"></A>File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7267"></A>File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7370"></A>File_Size&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7268"></A>File_Size&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7371"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7269"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7372"></A>Kind&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Kind;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7270"></A>Kind&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Kind;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7373"></A>Size&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Size;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7271"></A>Size&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;File_Size;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7374"></A>Modification_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7272"></A>Modification_Time&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</div>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Directory&nbsp;searching:</I></SPAN></div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7375"></A>Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7273"></A>Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7376"></A>Filter_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(File_Kind)&nbsp;<B>of</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7274"></A>Filter_Type&nbsp;<B>is&nbsp;array</B>&nbsp;(File_Kind)&nbsp;<B>of</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7377"></A>Search_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7275"></A>Search_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7378"></A>Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7276"></A>Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pattern&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Filter&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Filter_Type&nbsp;:=&nbsp;(<B>others</B>&nbsp;=&gt;&nbsp;True));</div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7379"></A>End_Search&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7277"></A>End_Search&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type);</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7380"></A>More_Entries&nbsp;(Search&nbsp;:&nbsp;<B>in</B>&nbsp;Search_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7278"></A>More_Entries&nbsp;(Search&nbsp;:&nbsp;<B>in</B>&nbsp;Search_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p35">35/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7381"></A>Get_Next_Entry&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7279"></A>Get_Next_Entry&nbsp;(Search&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory_Entry&nbsp;:&nbsp;<B>out</B>&nbsp;Directory_Entry_Type);</div>
 <div class="paranum"><a name="p36">36/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Search&nbsp;(<BR>
@@ -150,38 +147,38 @@ The library package Directories has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Operations&nbsp;on&nbsp;Directory&nbsp;Entries:</I></SPAN></div>
 <div class="paranum"><a name="p38">38/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7382"></A>Simple_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7280"></A>Simple_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p39">39/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7383"></A>Full_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7281"></A>Full_Name&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p40">40/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7384"></A>Kind&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7282"></A>Kind&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Kind;</div>
 <div class="paranum"><a name="p41">41/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7385"></A>Size&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7283"></A>Size&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;File_Size;</div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7386"></A>Modification_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7284"></A>Modification_Time&nbsp;(Directory_Entry&nbsp;:&nbsp;<B>in</B>&nbsp;Directory_Entry_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Calendar.Time;</div>
 <div class="paranum"><a name="p43">43/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7387"></A>Status_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Status_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7388"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Name_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7389"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Use_Error;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7390"></A>Device_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Device_Error;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7285"></A>Status_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Status_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7286"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Name_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7287"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Use_Error;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7288"></A>Device_Error&nbsp;:&nbsp;<B>exception&nbsp;renames</B>&nbsp;Ada.IO_Exceptions.Device_Error;</div>
 <div class="paranum"><a name="p44">44/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 <B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3">...&nbsp;</span>--&nbsp;<SPAN Class="roman"><I></I></SPAN><span class="insert3"><SPAN Class="roman"><I>not</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete3"><SPAN Class="roman"><I>&nbsp;Not</I></SPAN></span><SPAN Class="roman"><I>&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><span class="delete3"><SPAN Class="roman"><I>.</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Directories;</div>
 <div class="paranum"><a name="p45">45/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 External files may be classified as directories, special files, or ordinary 
 files. A <I>directory</I> is an external file that is a container for 
 files on the target system. A <I>special file</I> is an external file 
 that cannot be created or read by a predefined Ada input-output package. 
 External files that are not special files or directories are called <I>ordinary 
-files</I>. <A NAME="I7391"></A><A NAME="I7392"></A><A NAME="I7393"></A></div>
+files</I>. <A NAME="I7289"></A><A NAME="I7290"></A><A NAME="I7291"></A></div>
 <div class="paranum"><a name="p45.a">45.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A directory is an external 
 file, although it may not have a name on some targets. A directory is 
@@ -193,15 +190,15 @@ examples of special files on Windows&reg; and Unix.</div>
 <div class="Annotations">Even if an implementation provides a package 
 to create and read soft links, such links are still special files.&nbsp;</div>
 <div class="paranum"><a name="p46">46/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 A <I>file name</I> is a string identifying an external file. Similarly, 
 a <I>directory name</I> is a string identifying a directory. The interpretation 
-of file names and directory names is implementation-defined. <A NAME="I7394"></A><A NAME="I7395"></A></div>
+of file names and directory names is implementation-defined. <A NAME="I7292"></A><A NAME="I7293"></A></div>
 <div class="paranum"><a name="p46.a">46.a/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The interpretation 
 of file names and directory names.</div>
 <div class="paranum"><a name="p47">47/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 The <I>full name</I> of an external file is a full specification of the 
 name of the file. If the external environment allows alternative specifications 
 of the name (for example, abbreviations), the full name should not use 
@@ -211,7 +208,7 @@ external file is the name of the item, not including any containing directory
 names. Unless otherwise specified, a file name or directory name parameter 
 in a call to a predefined Ada input-output subprogram can be a full name, 
 a simple name, or any other form of name supported by the implementation. 
-<A NAME="I7396"></A><A NAME="I7397"></A></div>
+<A NAME="I7294"></A><A NAME="I7295"></A></div>
 <div class="paranum"><a name="p47.a">47.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The full name on Unix is 
 a complete path to the root. For Windows&reg;, the full name includes 
@@ -225,10 +222,10 @@ or directory name to be neither a full name nor a simple name. For instance,
 the Unix name &quot;../parent/myfile&quot; is neither a full name nor 
 a simple name.&nbsp;</div>
 <div class="paranum"><a name="p48">48/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 The <I>default directory</I> is the directory that is used if a directory 
 or file name is not a full name (that is, when the name does not fully 
-identify all of the containing directories). <A NAME="I7398"></A></div>
+identify all of the containing directories). <A NAME="I7296"></A></div>
 <div class="paranum"><a name="p48.a">48.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The default directory is 
 the one maintained by the familiar &ldquo;cd&rdquo; command on Unix and 
@@ -236,15 +233,15 @@ Windows&reg;. Note that Windows&reg; maintains separate default directories
 for each disk drive; implementations should use the natural implementation. 
 </div>
 <div class="paranum"><a name="p49">49/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 A <I>directory entry</I> is a single item in a directory, identifying 
-a single external file (including directories and special files). <A NAME="I7399"></A></div>
+a single external file (including directories and special files). <A NAME="I7297"></A></div>
 <div class="paranum"><a name="p50">50/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 For each function that returns a string, the lower bound of the returned 
 value is 1.</div>
 <div class="paranum"><a name="p51">51/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 The following file and directory operations are provided:</div>
 <div class="paranum"><a name="p52">52/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Current_Directory&nbsp;<B>return</B>&nbsp;String;</div>
@@ -281,10 +278,9 @@ with the given name (in the absence of Name_Error) and form.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0231-1.TXT">AI05-0231-1</A></I>} 
 Deletes an existing empty directory with name Directory. The exception 
 Name_Error is propagated if the string given as Directory does not identify 
-an existing directory. The exception Use_Error is propagated if the <span class="insert3">directory 
-is not empty or the&nbsp;</span>external environment does not support the 
-deletion of the directory <span class="delete3">(or some portion of its 
-contents)&nbsp;</span>with the given name (in the absence of Name_Error).</div>
+an existing directory. The exception Use_Error is propagated if the directory 
+is not empty or the external environment does not support the deletion 
+of the directory with the given name (in the absence of Name_Error).</div>
 <div class="paranum"><a name="p60">60/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Create_Path&nbsp;(New_Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</div>
@@ -302,9 +298,8 @@ new directory. The exception Name_Error is propagated if the string given
 as New_Directory does not allow the identification of any directory. 
 The exception Use_Error is propagated if the external environment does 
 not support the creation of any directories with the given name (in the 
-absence of Name_Error) and form.<span class="insert3">&nbsp;If Use_Error is 
-propagated, it is unspecified whether a portion of the directory path 
-is created.</span></div>
+absence of Name_Error) and form. If Use_Error is propagated, it is unspecified 
+whether a portion of the directory path is created.</div>
 <div class="paranum"><a name="p62">62/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Delete_Tree&nbsp;(Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p63">63/2</a></div>
@@ -332,11 +327,12 @@ with the given name (in the absence of Name_Error).</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0231-1.TXT">AI05-0231-1</A></I>} 
 Renames an existing external file (including directories) with name Old_Name 
 to New_Name. The exception Name_Error is propagated if the string given 
-as Old_Name does not identify an existing external file<span class="insert3">&nbsp;or if the string given as New_Name does not allow the identification 
-of an external file</span>. The exception Use_Error is propagated if 
-the external environment does not support the renaming of the file with 
-the given name (in the absence of Name_Error). In particular, Use_Error 
-is propagated if a file or directory already exists with name New_Name.</div>
+as Old_Name does not identify an existing external file or if the string 
+given as New_Name does not allow the identification of an external file. 
+The exception Use_Error is propagated if the external environment does 
+not support the renaming of the file with the given name (in the absence 
+of Name_Error). In particular, Use_Error is propagated if a file or directory 
+already exists with name New_Name.</div>
 <div class="paranum"><a name="p67.a">67.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>This operation is 
 expected to work within a single directory, and implementers are encouraged 
@@ -350,7 +346,7 @@ to implement Rename.&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 <B>procedure</B>&nbsp;Copy_File&nbsp;(Source_Name,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String<span class="insert3">&nbsp;:=&nbsp;&quot;&quot;</span>);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Form&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;);</div>
 <div class="paranum"><a name="p69">69/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0271-1.TXT">AI05-0271-1</A></I>} 
 Copies the contents of the existing external file with name Source_Name 
@@ -364,15 +360,16 @@ the string given as Target_Name does not allow the identification of
 an external file. The exception Use_Error is propagated if the external 
 environment does not support creating the file with the name given by 
 Target_Name and form given by Form, or copying of the file with the name 
-given by Source_Name (in the absence of Name_Error).<span class="insert3">&nbsp;If Use_Error is propagated, it is unspecified whether a portion of the 
-file is copied.</span>&nbsp;</div>
+given by Source_Name (in the absence of Name_Error). If Use_Error is 
+propagated, it is unspecified whether a portion of the file is copied. 
+</div>
 <div class="paranum"><a name="p69.a">69.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Name_Error is always raised 
 if Source_Name identifies a directory. It is up to the implementation 
 whether special files can be copied, or if Use_Error will be raised. 
 </div>
 <div class="paranum"><a name="p70">70/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 The following file and directory name operations are provided:</div>
 <div class="paranum"><a name="p71">71/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Full_Name&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
@@ -453,12 +450,12 @@ the simple name &quot;RM-A-8.html&quot;, the base name is &quot;RM-A-8&quot;.
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 Returns the name of the external file with the specified Containing_Directory, 
 Name, and Extension. If Extension is the null string, then Name is interpreted 
-as a simple name; otherwise<span class="insert3">,</span> Name is interpreted 
-as a base name. The exception Name_Error is propagated if the string 
-given as Containing_Directory is not null and does not allow the identification 
-of a directory, or if the string given as Extension is not null and is 
-not a possible extension, or if the string given as Name is not a possible 
-simple name (if Extension is null) or base name (if Extension is nonnull).</div>
+as a simple name; otherwise, Name is interpreted as a base name. The 
+exception Name_Error is propagated if the string given as Containing_Directory 
+is not null and does not allow the identification of a directory, or 
+if the string given as Extension is not null and is not a possible extension, 
+or if the string given as Name is not a possible simple name (if Extension 
+is null) or base name (if Extension is nonnull).</div>
 <div class="paranum"><a name="p82.a">82.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The above definition implies 
 that if the Extension is null, for Unix and Windows&reg; no '.' is added 
@@ -477,28 +474,28 @@ null, Base_Name should be avoided. (That's not usually a problem with
 file names generated by a program.)&nbsp;</div>
 <div class="paranum"><a name="p82.1">82.1/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3"><B>function</B>&nbsp;Name_Case_Equivalence&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Name_Case_Kind;</span></div>
+<B>function</B>&nbsp;Name_Case_Equivalence&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Name_Case_Kind;</div>
 <div class="paranum"><a name="p82.2">82.2/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">Returns the file name equivalence rule for the 
-directory containing Name. Raises Name_Error if Name is not a full name. 
-Returns Case_Sensitive if file names that differ only in the case of 
-letters are considered different names. If file names that differ only 
-in the case of letters are considered the same name, then Case_Preserving 
-is returned if names have the case of the file name used when a file 
-is created; and Case_Insensitive is returned otherwise. Returns Unknown 
-if the file name equivalence is not known.</span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+Returns the file name equivalence rule for the directory containing Name. 
+Raises Name_Error if Name is not a full name. Returns Case_Sensitive 
+if file names that differ only in the case of letters are considered 
+different names. If file names that differ only in the case of letters 
+are considered the same name, then Case_Preserving is returned if names 
+have the case of the file name used when a file is created; and Case_Insensitive 
+is returned otherwise. Returns Unknown if the file name equivalence is 
+not known.&nbsp;</div>
 <div class="paranum"><a name="p82.c.1">82.c.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Note: 
-</B>Unix, Linux, and their relatives are Case_Sensitive systems. Microsoft&reg; 
-Windows&reg; is a Case_Preserving system (unless the rarely used POSIX 
-mode is used). Ancient systems like CP/M and early MS-DOS were Case_Insensitive 
-systems (file names were always in UPPER CASE). Unknown is provided in 
-case it is impossible to tell (such as could be the case for network 
-files).</span>&nbsp;</div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>Unix, Linux, and 
+their relatives are Case_Sensitive systems. Microsoft&reg; Windows&reg; 
+is a Case_Preserving system (unless the rarely used POSIX mode is used). 
+Ancient systems like CP/M and early MS-DOS were Case_Insensitive systems 
+(file names were always in UPPER CASE). Unknown is provided in case it 
+is impossible to tell (such as could be the case for network files). 
+</div>
 <div class="paranum"><a name="p83">83/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 The following file and directory queries and types are provided:</div>
 <div class="paranum"><a name="p84">84/2</a></div>
 <div class="Examples"><B>type</B>&nbsp;File_Kind&nbsp;<B>is</B>&nbsp;(Directory,&nbsp;Ordinary_File,&nbsp;Special_File);</div>
@@ -564,7 +561,7 @@ reading the modification time of the file with the name given by Name
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The result for 
 Directories.Modification_Time for a directory or special file.</div>
 <div class="paranum"><a name="p96">96/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
 The following directory searching operations and types are provided:</div>
 <div class="paranum"><a name="p97">97/2</a></div>
 <div class="Examples"><B>type</B>&nbsp;Directory_Entry_Type&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
@@ -590,7 +587,7 @@ is True, directory entries representing special files are provided.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">The type Search_Type 
 contains the state of a directory search. A default-initialized Search_Type 
 object has no entries available (function More_Entries returns False). 
-Type Search_Type needs finalization<A NAME="I7400"></A> (see <A HREF="AA-7-6.html">7.6</A>).</div>
+Type Search_Type needs finalization<A NAME="I7298"></A> (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p103">103/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Start_Search&nbsp;(Search&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Search_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Directory&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
@@ -600,15 +597,14 @@ Type Search_Type needs finalization<A NAME="I7400"></A> (see <A HREF="AA-7-6.htm
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 Starts a search in the directory named by Directory for entries matching 
-Pattern<span class="insert3">&nbsp;and Filter</span>. Pattern represents a 
-pattern for matching file names. If Pattern is <span class="insert3">the 
-</span>null<span class="insert3">&nbsp;string</span>, all items in the directory 
-are matched; otherwise, the interpretation of Pattern is implementation-defined. 
-Only items that match Filter will be returned. After a successful call 
-on Start_Search, the object Search may have entries available, but it 
-may have no entries available if no files or directories match Pattern 
-and Filter. The exception Name_Error is propagated if the string given 
-by Directory does not identify an existing directory, or if Pattern does 
+Pattern and Filter. Pattern represents a pattern for matching file names. 
+If Pattern is the null string, all items in the directory are matched; 
+otherwise, the interpretation of Pattern is implementation-defined. Only 
+items that match Filter will be returned. After a successful call on 
+Start_Search, the object Search may have entries available, but it may 
+have no entries available if no files or directories match Pattern and 
+Filter. The exception Name_Error is propagated if the string given by 
+Directory does not identify an existing directory, or if Pattern does 
 not allow the identification of any possible external file or directory. 
 The exception Use_Error is propagated if the external environment does 
 not support the searching of the directory with the given name (in the 
@@ -641,11 +637,11 @@ for the specified search object, and False otherwise.</div>
 Returns the next Directory_Entry for the search described by Search that 
 matches the pattern and filter. If no further matches are available, 
 Status_Error is raised. It is implementation-defined as to whether the 
-results returned by this <span class="insert3">subprogram</span><span class="delete3">&nbsp;routine</span> 
-are altered if the contents of the directory are altered while the Search 
-object is valid (for example, by another program). The exception Use_Error 
-is propagated if the external environment does not support continued 
-searching of the directory represented by Search.&nbsp;</div>
+results returned by this subprogram are altered if the contents of the 
+directory are altered while the Search object is valid (for example, 
+by another program). The exception Use_Error is propagated if the external 
+environment does not support continued searching of the directory represented 
+by Search.&nbsp;</div>
 <div class="paranum"><a name="p110.a">110.a/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The results of 
 a Directories search if the contents of the directory are altered while 
@@ -660,16 +656,17 @@ a search is in progress.</div>
 <div class="paranum"><a name="p112">112/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-Searches in the directory named by Directory for entries matching Pattern<span class="insert3">&nbsp;and Filter</span>. The subprogram designated by Process is called with 
-each matching entry in turn. Pattern represents a pattern for matching 
-file names. If Pattern is <span class="insert3">the&nbsp;</span>null<span class="insert3">&nbsp;string</span>, all items in the directory are matched; otherwise, the 
-interpretation of Pattern is implementation-defined. Only items that 
-match Filter will be returned. The exception Name_Error is propagated 
-if the string given by Directory does not identify an existing directory, 
-or if Pattern does not allow the identification of any possible external 
-file or directory. The exception Use_Error is propagated if the external 
-environment does not support the searching of the directory with the 
-given name (in the absence of Name_Error).&nbsp;</div>
+Searches in the directory named by Directory for entries matching Pattern 
+and Filter. The subprogram designated by Process is called with each 
+matching entry in turn. Pattern represents a pattern for matching file 
+names. If Pattern is the null string, all items in the directory are 
+matched; otherwise, the interpretation of Pattern is implementation-defined. 
+Only items that match Filter will be returned. The exception Name_Error 
+is propagated if the string given by Directory does not identify an existing 
+directory, or if Pattern does not allow the identification of any possible 
+external file or directory. The exception Use_Error is propagated if 
+the external environment does not support the searching of the directory 
+with the given name (in the absence of Name_Error).&nbsp;</div>
 <div class="paranum"><a name="p112.a">112.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>&ldquo;In turn&rdquo; means 
 that the calls to the subprogram designated by Process are not made in 
@@ -722,7 +719,7 @@ reading the modification time of the file represented by Directory_Entry.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p123">123/2</a></div>
-<div class="Normal">&nbsp;For Copy_File, if Source_Name identifies an existing 
+<div class="Normal">&nbsp;&nbsp;For Copy_File, if Source_Name identifies an existing 
 external ordinary file created by a predefined Ada input-output package, 
 and Target_Name and Form can be used in the Create operation of that 
 input-output package with mode Out_File without raising an exception, 
@@ -734,10 +731,10 @@ possibly complicated Ada code).&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p124">124/2</a></div>
-<div class="Normal">&nbsp;If other information about a file (such as the owner 
-or creation date) is available in a directory entry, the implementation 
+<div class="Normal">&nbsp;&nbsp;If other information about a file (such as the 
+owner or creation date) is available in a directory entry, the implementation 
 should provide functions in a child package Directories.Information to 
-retrieve it.<A NAME="I7401"></A>&nbsp;</div>
+retrieve it.<A NAME="I7299"></A>&nbsp;</div>
 <div class="paranum"><a name="p124.a">124.a/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Package Directories.Information 
 should be provided to retrieve other information about a file.</div>
@@ -836,7 +833,7 @@ at least the following routines:</div>
 <div class="paranum"><a name="p124.kk">124.kk/3</a></div>
 <div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 &nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Group&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Returns&nbsp;the&nbsp;image&nbsp;of&nbsp;the&nbsp;</I></SPAN><span class="insert3"><SPAN Class="roman"><I>Group_Id</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete3"><SPAN Class="roman"><I>&nbsp;User_Id</I></SPAN></span><SPAN Class="roman"><I>.&nbsp;If&nbsp;a&nbsp;definition&nbsp;of&nbsp;Group_Id</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Returns&nbsp;the&nbsp;image&nbsp;of&nbsp;the&nbsp;Group_Id.&nbsp;If&nbsp;a&nbsp;definition&nbsp;of&nbsp;Group_Id</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>is&nbsp;available,&nbsp;an&nbsp;implementation-defined&nbsp;version&nbsp;of&nbsp;Group</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>returning&nbsp;Group_Id&nbsp;should&nbsp;also&nbsp;be&nbsp;defined.</I></SPAN></div>
 <div class="paranum"><a name="p124.ll">124.ll/2</a></div>
@@ -886,16 +883,15 @@ that every implementation for a given target is not unnecessarily different.
 Implementers are encouraged to make packages for other targets as similar 
 to these as possible.</div>
 <div class="paranum"><a name="p125">125/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0231-1.TXT">AI05-0231-1</A></I>} 
-Start_Search and Search should raise <span class="insert3">Name_Error</span><span class="delete3">&nbsp;Use_Error</span> 
-if Pattern is malformed, but not if it could represent a file in the 
-directory but does not actually do so.</div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0231-1.TXT">AI05-0231-1</A></I>} 
+Start_Search and Search should raise Name_Error if Pattern is malformed, 
+but not if it could represent a file in the directory but does not actually 
+do so.</div>
 <div class="paranum"><a name="p125.a">125.a/3</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Directories.Start_Search 
-and Directories.Search should raise <span class="insert3">Name_Error</span><span class="delete3">&nbsp;Use_Error</span> 
-for malformed patterns.</div>
+and Directories.Search should raise Name_Error for malformed patterns.</div>
 <div class="paranum"><a name="p126">126/2</a></div>
-<div class="Normal">&nbsp;Rename should be supported at least when both New_Name 
+<div class="Normal">&nbsp;&nbsp;Rename should be supported at least when both New_Name 
 and Old_Name are simple names and New_Name does not identify an existing 
 external file.&nbsp;</div>
 <div class="paranum"><a name="p126.a">126.a/2</a></div>
@@ -911,7 +907,7 @@ do, and tells implementers that simply raising Use_Error isn't acceptable.
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p127">127/2</a></div>
-<div class="Notes">42&nbsp;&nbsp;The operations Containing_Directory, 
+<div class="Notes">41&nbsp;&nbsp;The operations Containing_Directory, 
 Full_Name, Simple_Name, Base_Name, Extension, and Compose operate on 
 file names, not external files. The files identified by these operations 
 do not need to exist. Name_Error is raised only if the file name is malformed 
@@ -919,22 +915,22 @@ and cannot possibly identify a file. Of these operations, only the result
 of Full_Name depends on the current default directory; the result of 
 the others depends only on their parameters.</div>
 <div class="paranum"><a name="p128">128/2</a></div>
-<div class="Notes">43&nbsp;&nbsp;Using access types, values of Search_Type 
+<div class="Notes">42&nbsp;&nbsp;Using access types, values of Search_Type 
 and Directory_Entry_Type can be saved and queried later. However, another 
 task or application can modify or delete the file represented by a Directory_Entry_Type 
 value or the directory represented by a Search_Type value; such a value 
 can only give the information valid at the time it is created. Therefore, 
 long-term storage of these values is not recommended.</div>
 <div class="paranum"><a name="p129">129/2</a></div>
-<div class="Notes">44&nbsp;&nbsp;If the target system does not support 
+<div class="Notes">43&nbsp;&nbsp;If the target system does not support 
 directories inside of directories, then Kind will never return Directory 
 and Containing_Directory will always raise Use_Error.</div>
 <div class="paranum"><a name="p130">130/2</a></div>
-<div class="Notes">45&nbsp;&nbsp;If the target system does not support 
+<div class="Notes">44&nbsp;&nbsp;If the target system does not support 
 creation or deletion of directories, then Create_Directory, Create_Path, 
 Delete_Directory, and Delete_Tree will always propagate Use_Error.</div>
 <div class="paranum"><a name="p131">131/2</a></div>
-<div class="Notes">46&nbsp;&nbsp;To move a file or directory to a different 
+<div class="Notes">45&nbsp;&nbsp;To move a file or directory to a different 
 location, use Rename. Most target systems will allow renaming of files 
 from one directory to another. If the target file or directory might 
 already exist, it should be deleted first.&nbsp;</div>
@@ -957,41 +953,41 @@ and fall back to Copy_File and Delete:&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p131.c">131.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00248.TXT">AI95-00248-01</A></I>} 
-<A NAME="I7402"></A>Package Ada.Directories is new.&nbsp;</div>
+<A NAME="I7300"></A>Package Ada.Directories is new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p131.d">131.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0231-1.TXT">AI05-0231-1</A></I>} 
-<span class="insert3"><A NAME="I7403"></A><B>Correction</B>: Clarified 
-when and which exceptions are raised for Start_Search, Search, Delete_Directory, 
-and Rename. If an implementation followed the original incorrect wording, 
-it might raise Use_Error instead of Name_Error for Start_Search and Search, 
-Name_Error instead of Use_Error for Rename, and might have deleted a 
-nonempty directory instead of raising Use_Error for Delete_Directory. 
-The first two cases are very unlikely to matter in practice, and it unlikely 
-that an implementation would have followed the latter implementation 
-strategy, as it would be more work and would make Delete_Directory identical 
-to Delete_Tree (which is obvious nonsense).</span>&nbsp;</div>
+<A NAME="I7301"></A><B>Correction</B>: Clarified when and which exceptions 
+are raised for Start_Search, Search, Delete_Directory, and Rename. If 
+an implementation followed the original incorrect wording, it might raise 
+Use_Error instead of Name_Error for Start_Search and Search, Name_Error 
+instead of Use_Error for Rename, and might have deleted a nonempty directory 
+instead of raising Use_Error for Delete_Directory. The first two cases 
+are very unlikely to matter in practice, and it unlikely that an implementation 
+would have followed the latter implementation strategy, as it would be 
+more work and would make Delete_Directory identical to Delete_Tree (which 
+is obvious nonsense).&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p131.e">131.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0049-1.TXT">AI05-0049-1</A></I>} 
-<span class="insert3"><A NAME="I7404"></A>A new enumeration type Name_Case_Kind 
-and a new function Name_Case_Equivalence is added to Directories. If 
-Directories is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+<A NAME="I7302"></A>A new enumeration type Name_Case_Kind and a new function 
+Name_Case_Equivalence is added to Directories. If Directories is referenced 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 of one of the new entities is defined in a package that is also referenced 
 in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
-This should be rare and is easily fixed if it does occur.</span>&nbsp;</div>
+This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p131.f">131.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0271-1.TXT">AI05-0271-1</A></I>} 
-<span class="insert3"><B>Correction:</B> We now explicitly say that the 
-behavior of Create_Path and Copy_File is unspecified when Use_Error is 
-raised. Nothing has changed here, as the behavior was (implicitly) unspecified 
-in the 2007 Amendment.</span>&nbsp;</div>
+<B>Correction:</B> We now explicitly say that the behavior of Create_Path 
+and Copy_File is unspecified when Use_Error is raised. Nothing has changed 
+here, as the behavior was (implicitly) unspecified in the 2007 Amendment. 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

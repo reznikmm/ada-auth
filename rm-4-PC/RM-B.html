@@ -13,15 +13,13 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,7 +32,7 @@
 <H2>(normative)</H2>
 <H1>Interface to Other Languages</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I7497"></A><A NAME="I7498"></A><A NAME="I7499"></A>This 
+<div class="Normal"><A NAME="I7394"></A><A NAME="I7395"></A><A NAME="I7396"></A>This 
 Annex describes features for writing mixed-language programs. General 
 interface support is presented first; then specific support for C, COBOL, 
 and Fortran is defined, in terms of language interface packages for each 
@@ -42,16 +40,15 @@ of these languages.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><span class="insert3">Support for interfacing to 
-any foreign language is optional. However, an implementation shall not 
-provide any optional aspect, attribute, library unit, or pragma having 
-the same name as an aspect, attribute, library unit, or pragma (respectively) 
-specified in the subclauses of this Annex unless the provided construct 
-is either as specified in those subclauses or is more limited in capability 
-than that required by those subclauses. A program that attempts to use 
-an unsupported capability of this Annex shall either be identified by 
-the implementation before run time or shall raise an exception at run 
-time.</span>&nbsp;</div>
+<div class="Normal">Support for interfacing to any foreign language is 
+optional. However, an implementation shall not provide any optional aspect, 
+attribute, library unit, or pragma having the same name as an aspect, 
+attribute, library unit, or pragma (respectively) specified in the subclauses 
+of this Annex unless the provided construct is either as specified in 
+those subclauses or is more limited in capability than that required 
+by those subclauses. A program that attempts to use an unsupported capability 
+of this Annex shall either be identified by the implementation before 
+run time or shall raise an exception at run time.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

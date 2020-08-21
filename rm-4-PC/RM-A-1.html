@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,14 +33,14 @@
 <HR>
 <H1>A.1 The Package Standard</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-outlines the specification of the package Standard containing all predefined 
-identifiers in the language. <A NAME="I5543"></A>The corresponding package 
-body is not specified by the language.</div>
+<div class="Normal">This subclause outlines the specification of the 
+package Standard containing all predefined identifiers in the language. 
+<A NAME="I5447"></A>The corresponding package body is not specified by 
+the language.</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">The operators that are predefined for the types declared 
 in the package Standard are given in comments since they are implicitly 
-declared. <A NAME="I5544"></A>Italics are used for pseudo-names of anonymous 
+declared. <A NAME="I5448"></A>Italics are used for pseudo-names of anonymous 
 types (such as <I>root_real</I>) and for undefined information (such 
 as <I>implementation-defined</I>).&nbsp;</div>
 
@@ -51,10 +49,10 @@ as <I>implementation-defined</I>).&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Standard has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples"><A NAME="I5545"></A><B>package</B>&nbsp;Standard&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5449"></A><B>package</B>&nbsp;Standard&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Standard);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5546"></A>Boolean&nbsp;<B>is</B>&nbsp;(False,&nbsp;True);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5450"></A>Boolean&nbsp;<B>is</B>&nbsp;(False,&nbsp;True);</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;relational&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p7">7/1</a></div>
@@ -77,10 +75,10 @@ Standard has the following declaration:&nbsp;</div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;integer&nbsp;type&nbsp;root_integer&nbsp;and&nbsp;the</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;corresponding&nbsp;universal&nbsp;type&nbsp;universal_integer&nbsp;are&nbsp;predefined.</I></SPAN></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5547"></A>Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5451"></A>Integer&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5548"></A>Natural&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;Integer'Last;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5549"></A>Positive&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Integer'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5452"></A>Natural&nbsp;&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;Integer'Last;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5453"></A>Positive&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Integer'Last;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;type&nbsp;Integer&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p15">15</a></div>
@@ -115,7 +113,7 @@ Standard has the following declaration:&nbsp;</div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;floating&nbsp;point&nbsp;type&nbsp;root_real&nbsp;and&nbsp;the</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;corresponding&nbsp;universal&nbsp;type&nbsp;universal_real&nbsp;are&nbsp;predefined.</I></SPAN></div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5550"></A>Float&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5454"></A>Float&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p23">23</a></div>
@@ -175,7 +173,7 @@ Standard has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;There&nbsp;are&nbsp;no&nbsp;character&nbsp;literals&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;positions&nbsp;for&nbsp;control&nbsp;characters.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;They&nbsp;are&nbsp;indicated&nbsp;in&nbsp;italics&nbsp;in&nbsp;this&nbsp;definition.&nbsp;See&nbsp;<A HREF="RM-3-5-2.html">3.5.2</A>.</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5551"></A>Character&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5455"></A>Character&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>stx</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>etx</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>eot</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>enq</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>ack</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>bel</I></SPAN>,&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>0&nbsp;(16#00#)&nbsp;..&nbsp;7&nbsp;(16#07#)</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>bs</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>ht</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>lf</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>vt</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>ff</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>cr</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>so</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>si</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>8&nbsp;(16#08#)&nbsp;..&nbsp;15&nbsp;(16#0F#)</I></SPAN><BR>
 <BR>
@@ -209,8 +207,8 @@ Standard has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>st</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>osc</I></SPAN>,&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>pm</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>apc</I></SPAN>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>156&nbsp;(16#9C#)&nbsp;..&nbsp;159&nbsp;(16#9F#)</I></SPAN><BR>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&iexcl;',&nbsp;&nbsp;&nbsp;'&cent;',&nbsp;&nbsp;&nbsp;&nbsp;'&pound;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&curren;',&nbsp;&nbsp;&nbsp;'&yen;',&nbsp;&nbsp;&nbsp;&nbsp;'&brvbar;',&nbsp;&nbsp;&nbsp;'&sect;',&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>160&nbsp;(16#A0#)&nbsp;..&nbsp;167&nbsp;(16#A7#)</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&uml;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&copy;',&nbsp;&nbsp;&nbsp;'&ordf;',&nbsp;&nbsp;&nbsp;&nbsp;'&laquo;',<span class="insert3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>168&nbsp;(16#A8#)&nbsp;..&nbsp;171&nbsp;(16#AB#)</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&not;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>soft_hyphen</I></SPAN>,&nbsp;&nbsp;&nbsp;'&reg;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&macr;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>172&nbsp;(16#AC#)&nbsp;..&nbsp;175&nbsp;(16#AF#)</I></SPAN></span><span class="delete3">&nbsp;'&not;',&nbsp;'&shy;',&nbsp;'&reg;',&nbsp;'&macr;',&nbsp;--<SPAN Class="roman"><I>168&nbsp;(16#A8#)&nbsp;..&nbsp;175&nbsp;(16#AF#)</I></SPAN></span><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&uml;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&copy;',&nbsp;&nbsp;&nbsp;'&ordf;',&nbsp;&nbsp;&nbsp;&nbsp;'&laquo;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>168&nbsp;(16#A8#)&nbsp;..&nbsp;171&nbsp;(16#AB#)</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&not;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>soft_hyphen</I></SPAN>,&nbsp;&nbsp;&nbsp;'&reg;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&macr;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>172&nbsp;(16#AC#)&nbsp;..&nbsp;175&nbsp;(16#AF#)</I></SPAN><BR>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&deg;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&plusmn;',&nbsp;&nbsp;&nbsp;'&sup2;',&nbsp;&nbsp;&nbsp;&nbsp;'&sup3;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&acute;',&nbsp;&nbsp;&nbsp;'&micro;',&nbsp;&nbsp;&nbsp;&nbsp;'&para;',&nbsp;&nbsp;&nbsp;'&middot;',&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>176&nbsp;(16#B0#)&nbsp;..&nbsp;183&nbsp;(16#B7#)</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&cedil;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&sup1;',&nbsp;&nbsp;&nbsp;'&ordm;',&nbsp;&nbsp;&nbsp;&nbsp;'&raquo;',&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'&frac14;',&nbsp;&nbsp;&nbsp;'&frac12;',&nbsp;&nbsp;&nbsp;&nbsp;'&frac34;',&nbsp;&nbsp;&nbsp;'&iquest;',&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>184&nbsp;(16#B8#)&nbsp;..&nbsp;191&nbsp;(16#BF#)</I></SPAN><BR>
@@ -231,27 +229,26 @@ Standard has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;any&nbsp;enumeration&nbsp;type.</I></SPAN><BR>
 </div>
 <div class="paranum"><a name="p36.1">36.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Wide_Character&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;standard&nbsp;ISO/IEC&nbsp;10646:</I></SPAN><span class="insert3"><SPAN Class="roman"><I>2011</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete3"><SPAN Class="roman"><I>&nbsp;2003</I></SPAN></span><SPAN Class="roman"><I>&nbsp;BMP&nbsp;character</I></SPAN><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Wide_Character&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;standard&nbsp;ISO/IEC&nbsp;10646:2011&nbsp;BMP&nbsp;character</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;set.&nbsp;The&nbsp;first&nbsp;256&nbsp;positions&nbsp;have&nbsp;the&nbsp;same&nbsp;contents&nbsp;as&nbsp;type&nbsp;Character.&nbsp;See&nbsp;<A HREF="RM-3-5-2.html">3.5.2</A>.</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5552"></A>Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_0000FFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_0000FFFF</I></SPAN>);</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5456"></A>Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_0000FFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_0000FFFF</I></SPAN>);</div>
 <div class="paranum"><a name="p36.2">36.2/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Wide_Wide_Character&nbsp;is&nbsp;based&nbsp;on&nbsp;the&nbsp;full</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;ISO/IEC&nbsp;10646:</I></SPAN><span class="insert3"><SPAN Class="roman"><I>2011</I></SPAN></span><SPAN Class="roman"><I></I></SPAN><span class="delete3"><SPAN Class="roman"><I>&nbsp;2003</I></SPAN></span><SPAN Class="roman"><I>&nbsp;character&nbsp;set.&nbsp;The&nbsp;first&nbsp;65536&nbsp;positions&nbsp;have&nbsp;the</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;ISO/IEC&nbsp;10646:2011&nbsp;character&nbsp;set.&nbsp;The&nbsp;first&nbsp;65536&nbsp;positions&nbsp;have&nbsp;the</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;same&nbsp;contents&nbsp;as&nbsp;type&nbsp;Wide_Character.&nbsp;See&nbsp;<A HREF="RM-3-5-2.html">3.5.2</A>.</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5553"></A>Wide_Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFF</I></SPAN>);<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5457"></A>Wide_Wide_Character&nbsp;<B>is</B>&nbsp;(<SPAN Class="roman"><I>nul</I></SPAN>,&nbsp;<SPAN Class="roman"><I>soh</I></SPAN>&nbsp;...&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFE</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Hex_7FFFFFFF</I></SPAN>);<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Wide_Wide_Character'Size&nbsp;<B>use</B>&nbsp;32;</div>
 <div class="paranum"><a name="p36.3">36.3/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I5554"></A>ASCII&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;ASCII;&nbsp;&nbsp;--<SPAN Class="roman"><I>Obsolescent;&nbsp;see&nbsp;<A HREF="RM-J-5.html">J.5</A></I></SPAN><BR>
-<A NAME="I5555"></A><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I5458"></A>ASCII&nbsp;<B>is</B>&nbsp;...&nbsp;<B>end</B>&nbsp;ASCII;&nbsp;&nbsp;--<SPAN Class="roman"><I>Obsolescent;&nbsp;see&nbsp;<A HREF="RM-J-5.html">J.5</A></I></SPAN><BR>
+<A NAME="I5459"></A><BR>
 </div>
 <div class="paranum"><a name="p37">37/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Predefined&nbsp;string&nbsp;types:</I></SPAN><BR>
 <BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5556"></A>String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span><span class="delete3">;<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(String)</span>;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5460"></A>String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Character<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p38">38</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;are&nbsp;as&nbsp;follows:</I></SPAN></div>
 <div class="paranum"><a name="p39">39</a></div>
@@ -267,39 +264,37 @@ Standard has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left:&nbsp;String;&nbsp;&nbsp;&nbsp;&nbsp;Right:&nbsp;Character)&nbsp;<B>return</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&amp;&quot;&nbsp;(Left:&nbsp;Character;&nbsp;Right:&nbsp;Character)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p41">41/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5557"></A>Wide_String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Wide_Character<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span><span class="delete3">;<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(Wide_String)</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5461"></A>Wide_String&nbsp;<B>is</B>&nbsp;<B>array</B>(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Wide_Character<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p42">42</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;correspond&nbsp;to&nbsp;those&nbsp;for&nbsp;String.</I></SPAN></div>
 <div class="paranum"><a name="p42.1">42.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5558"></A>Wide_Wide_String&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>of</B>&nbsp;Wide_Wide_Character<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span><span class="delete3">;<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack&nbsp;(Wide_Wide_String)</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5462"></A>Wide_Wide_String&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>of</B>&nbsp;Wide_Wide_Character<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p42.2">42.2/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;this&nbsp;type&nbsp;correspond&nbsp;to&nbsp;those&nbsp;for&nbsp;String.</I></SPAN></div>
 <div class="paranum"><a name="p43">43</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5559"></A>Duration&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5463"></A>Duration&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p44">44</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;operators&nbsp;for&nbsp;the&nbsp;type&nbsp;Duration&nbsp;are&nbsp;the&nbsp;same&nbsp;as&nbsp;for</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;any&nbsp;fixed&nbsp;point&nbsp;type.</I></SPAN></div>
 <div class="paranum"><a name="p45">45</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;The&nbsp;predefined&nbsp;exceptions:</I></SPAN></div>
 <div class="paranum"><a name="p46">46</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5560"></A>Constraint_Error:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5561"></A>Program_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5562"></A>Storage_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5563"></A>Tasking_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5464"></A>Constraint_Error:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5465"></A>Program_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5466"></A>Storage_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I5467"></A>Tasking_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p47">47</a></div>
 <div class="Examples"><B>end</B>&nbsp;Standard;</div>
 <div class="paranum"><a name="p48">48</a></div>
 <div class="Normal">Standard has no private part.&nbsp;</div>
 <div class="paranum"><a name="p49">49/2</a></div>
-<div class="Normal">In each of the types Character, Wide_Character, and 
-Wide_Wide_Character, the character literals for the space character (position 
-32) and the non-breaking space character (position 160) correspond to 
-different values. Unless indicated otherwise, each occurrence of the 
+<div class="Normal">&nbsp;In each of the types Character, Wide_Character, 
+and Wide_Wide_Character, the character literals for the space character 
+(position 32) and the non-breaking space character (position 160) correspond 
+to different values. Unless indicated otherwise, each occurrence of the 
 character literal ' ' in this International Standard refers to the space 
 character. Similarly, the character literals for hyphen (position 45) 
 and soft hyphen (position 173) correspond to different values. Unless 
@@ -308,7 +303,7 @@ in this International Standard refers to the hyphen character.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p50">50</a></div>
-<div class="Normal"><A NAME="I5564"></A>Elaboration of the body of Standard 
+<div class="Normal"><A NAME="I5468"></A>Elaboration of the body of Standard 
 has no effect.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>

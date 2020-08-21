@@ -47,17 +47,17 @@ priority</I> value to represent the task's <I>held</I> state.&nbsp;</div>
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
-<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8330"></A><BR>
+<B>package</B>&nbsp;Ada.Asynchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8315"></A><BR>
 &nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Asynchronous_Task_Control);</span><BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8331"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8332"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8333"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8316"></A>Hold(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8317"></A>Continue(T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8318"></A>Is_Held(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Asynchronous_Task_Control;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I8334"></A><A NAME="I8335"></A><A NAME="I8336"></A>After 
+<div class="Normal"><A NAME="I8319"></A><A NAME="I8320"></A><A NAME="I8321"></A>After 
 the Hold operation has been applied to a task, the task becomes <I>held</I>. 
 For each processor there is a conceptual <I>idle task</I>, which is always 
 ready. The base priority of the idle task is below System.Any_Priority'First. 
@@ -79,13 +79,13 @@ policy associated with its base priority.</div>
 T is in the held state.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">As part of these operations, a check is made that 
-the task identified by T is not terminated. <A NAME="I8337"></A>Tasking_Error 
-is raised if the check fails. <A NAME="I8338"></A>Program_Error is raised 
+the task identified by T is not terminated. <A NAME="I8322"></A>Tasking_Error 
+is raised if the check fails. <A NAME="I8323"></A>Program_Error is raised 
 if the value of T is Null_Task_Id.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8339"></A>If any operation in this package 
+<div class="Normal"><A NAME="I8324"></A>If any operation in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 

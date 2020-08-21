@@ -36,7 +36,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,7 +49,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4263"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4426"></A>For 
 each of the following constructs, there is a portion of the program text 
 called its <I>declarative region</I>, [within which nested declarations 
 can occur]:&nbsp;</div>
@@ -60,22 +60,22 @@ type, that is not a completion [of a previous declaration];</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0094-1.TXT">AI12-0094-1</A></I>} 
 <span class="insert4">an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>;</span></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>;</div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN>;</div>
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p4.1">4.1/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-<span class="insert5">an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>;</span></div>
+<span class="insert5">an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN>;</span></div>
 <div class="paranum"><a name="p4.2">4.2/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0255-1.TXT">AI05-0255-1</A></I>} 
-<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0139">quantified_expression</A></SPAN>;</span></div>
+<span class="insert3">a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>;</span></div>
 <div class="paranum"><a name="p4.3">4.3/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2">an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>;</span></div>
+<span class="insert2">an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>;</span></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>;</div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0269">exception_handler</A></SPAN>. 
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="WideAbove" style="margin-bottom: 0.4em">The declarative 
@@ -90,15 +90,15 @@ Standard &mdash; see <A HREF="AA-10-1-1.html">10.1.1</A>)] is included,
 so are the declarations of any child units [(and their completions, by 
 the previous rule)]. The child declarations occur after the declaration.</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted">If a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
-is included, so is the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN>.</div>
+<div class="Bulleted">If a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
+is included, so is the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0280">subunit</A></SPAN>.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Bulleted">If a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
-is included, then so is a corresponding <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>, 
+is included, then so is a corresponding <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>, 
 if any.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is so that the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>s 
-can be directly visible in the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>. 
+can be directly visible in the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">The declarative region of a declaration is also called 
@@ -113,14 +113,14 @@ an enumeration type declaration, they behave as if they were declared
 at the same level as the type.&nbsp;</div>
 <div class="paranum"><a name="p12.b">12.b</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>A declarative region does 
-not include <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>s. 
+not include <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p12.c">12.c</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A declarative region does 
-not include <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN>s. 
+not include <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0270">context_clause</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I4264"></A><A NAME="I4265"></A><A NAME="I4266"></A><A NAME="I4267"></A><A NAME="I4268"></A>A 
+<div class="Normal"><A NAME="I4427"></A><A NAME="I4428"></A><A NAME="I4429"></A><A NAME="I4430"></A><A NAME="I4431"></A>A 
 declaration occurs <I>immediately within</I> a declarative region if 
 this region is the innermost declarative region that encloses the declaration 
 (the <I>immediately enclosing</I> declarative region), not counting the 
@@ -130,7 +130,7 @@ declarative region (if any) associated with the declaration itself.&nbsp;</div>
 region of a declaration with the declarative region in which it immediately 
 occurs.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal">[<A NAME="I4269"></A> A declaration is <I>local</I> 
+<div class="Normal">[<A NAME="I4432"></A> A declaration is <I>local</I> 
 to a declarative region if the declaration occurs immediately within 
 the declarative region.] [An entity is <I>local</I> to a declarative 
 region if the entity is declared by a declaration that is local to the 
@@ -146,7 +146,7 @@ only applies to declarations. We use this term only informally; for cases
 where precision is required, we use the term &quot;occurs immediately 
 within&quot;, since it is less likely to cause confusion.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I4270"></A>A declaration is <I>global</I> 
+<div class="Normal"><A NAME="I4433"></A>A declaration is <I>global</I> 
 to a declarative region if the declaration occurs immediately within 
 another declarative region that encloses the declarative region. An entity 
 is <I>global</I> to a declarative region if the entity is declared by 
@@ -176,11 +176,11 @@ the parts of the declarative region.&nbsp;</div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>It is necessary for the things 
 that have a declarative region to include anything that contains declarations 
 (except for enumeration type declarations). This includes any declaration 
-that has a profile (that is, <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-12-6.html#S0299">formal_subprogram_declaration</A></SPAN>, 
+that has a profile (that is, <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-12-6.html#S0313">formal_subprogram_declaration</A></SPAN>, 
 access-to-subprogram <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>), 
 anything that has a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN> 
 (that is, various kinds of <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>), 
@@ -208,8 +208,8 @@ a declarative region for inherited components and also for new components.</div>
 <div class="SmallBulleted">Entries that have bodies instead of accept 
 statements.</div>
 <div class="paranum"><a name="p18.h">18.h</a></div>
-<div class="SmallBulleted">The <SPAN Class="swiss"><A HREF="AA-11-2.html#S0270">choice_parameter_specification</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0269">exception_handler</A></SPAN>.</div>
+<div class="SmallBulleted">The <SPAN Class="swiss"><A HREF="AA-11-2.html#S0284">choice_parameter_specification</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>.</div>
 <div class="paranum"><a name="p18.i">18.i</a></div>
 <div class="SmallBulleted">The formal parameters of access-to-subprogram 
 types.</div>
@@ -224,35 +224,35 @@ doesn't really matter whether or not there is an associated declarative
 region, so for simplicity, we give one to all types except enumeration 
 types.</div>
 <div class="paranum"><a name="p18.l">18.l</a></div>
-<div class="Annotations">We now say that an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
+<div class="Annotations">We now say that an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
 has its own declarative region, rather than being part of the declarative 
-region of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>, 
+region of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>, 
 so that declarative regions are properly nested regions of text, so that 
 it makes sense to talk about &quot;inner declarative regions,&quot; and 
 &quot;...extends to the end of a declarative region.&quot; Inside an 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> of 
-one of the parameters denotes the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
-not that of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>. 
-If the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-is nested within a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>, 
-these <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>s 
-can hide declarations of the <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>. 
+one of the parameters denotes the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
+not that of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>. 
+If the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+is nested within a <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN>, 
+these <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>s 
+can hide declarations of the <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN>. 
 The semantics of such cases was unclear in RM83.&nbsp;</div>
 <div class="paranum"><a name="p18.m">18.m</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>Unfortunately, we have 
 the same problem for the entry name itself &mdash; it should denote the 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
-but <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
+but <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>s 
 are not declarations. They should be, and they should hide the entry 
 from all visibility within themselves.&nbsp;</div>
 <div class="paranum"><a name="p18.n">18.n</a></div>
 <div class="Annotations">Note that we can't generalize this to <SPAN Class="swiss">entry_bodies</SPAN>, 
 or other bodies, because the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 of a body is not supposed to contain (explicit) homographs of things 
-in the declaration. It works for <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>s 
-only because an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
+in the declaration. It works for <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>s 
+only because an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
 does not have a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>.</div>
 <div class="paranum"><a name="p18.o">18.o</a></div>
 <div class="Annotations">To avoid confusion, we use the term &ldquo;local 
@@ -268,14 +268,14 @@ or the body. (See RM83-8.6(2) and RM83-10.1.1(5).)&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 95</H4>
 <div class="paranum"><a name="p18.q">18.q/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">Extended_return_statement</A></SPAN> 
+<span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">Extended_return_statement</A></SPAN> 
 (see <A HREF="AA-6-5.html">6.5</A>) is added to the list of constructs 
 that have a declarative region.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p18.r">18.r/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0094-1.TXT">AI12-0094-1</A></I>} 
-<span class="insert4"><A NAME="I4271"></A><B>Corrigendum:</B> <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+<span class="insert4"><A NAME="I4434"></A><B>Corrigendum:</B> <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 is added to the list of constructs that have a declarative region. This 
 allows parameter names declared in anonymous access type subprogram types 
 to be the same as other names declared outside. For instance:</span> 

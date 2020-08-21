@@ -15,12 +15,12 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -31,14 +31,14 @@
 <HR>
 <H1>10.1 Separate Compilation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I4769"></A> <A NAME="I4770"></A><A NAME="I4771"></A>A 
+<div class="Normal">[<A NAME="I4712"></A> <A NAME="I4713"></A><A NAME="I4714"></A>A 
 <I>program unit</I> is either a package, a task unit, a protected unit, 
 a protected entry, a generic unit, or an explicitly declared subprogram 
 other than an enumeration literal. Certain kinds of program units can 
 be separately compiled. Alternatively, they can appear physically nested 
 within other program units.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4772"></A>The text of a program can be 
+<div class="Normal"><A NAME="I4715"></A>The text of a program can be 
 submitted to the compiler in one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN>s. 
 Each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0246">compilation</A></SPAN> 
 is a succession of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN>s. 
@@ -65,11 +65,11 @@ unit.</div>
 <div class="Annotations">A protected entry is a program unit, but protected 
 entries cannot be separately compiled.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4773"></A>A library unit is a separately 
+<div class="Normal"><A NAME="I4716"></A>A library unit is a separately 
 compiled program unit, and is always a package, subprogram, or generic 
 unit. Library units may have other (logically nested) library units as 
 children, and may have other program units physically nested within them. 
-<A NAME="I4774"></A>A root library unit, together with its children and 
+<A NAME="I4717"></A>A root library unit, together with its children and 
 grandchildren and so on, form a <I>subsystem</I>.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>

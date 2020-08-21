@@ -31,7 +31,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -56,39 +56,39 @@ of the visible part of package System<span class="delete2">and its language-defi
 children</span>.</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I5904"></A><B>package</B>&nbsp;System&nbsp;<B>is</B><BR>
+<A NAME="I6125"></A><B>package</B>&nbsp;System&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<span class="insert2">Pure</span><span class="delete2">&nbsp;Preelaborate</span>(System);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5905"></A>Name&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined-enumeration-type</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5906"></A>System_Name&nbsp;:&nbsp;<B>constant</B>&nbsp;Name&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6126"></A>Name&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined-enumeration-type</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6127"></A>System_Name&nbsp;:&nbsp;<B>constant</B>&nbsp;Name&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;System-Dependent&nbsp;Named&nbsp;Numbers:</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5907"></A>Min_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'First;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5908"></A>Max_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6128"></A>Min_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'First;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6129"></A>Max_Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_integer</I></SPAN>'Last;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5909"></A>Max_Binary_Modulus&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5910"></A>Max_Nonbinary_Modulus&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6130"></A>Max_Binary_Modulus&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6131"></A>Max_Nonbinary_Modulus&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5911"></A>Max_Base_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>'Digits;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5912"></A>Max_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6132"></A>Max_Base_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>root_real</I></SPAN>'Digits;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6133"></A>Max_Digits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5913"></A>Max_Mantissa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5914"></A>Fine_Delta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6134"></A>Max_Mantissa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6135"></A>Fine_Delta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5915"></A>Tick&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6136"></A>Tick&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Storage-related&nbsp;Declarations:</I></SPAN></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5916"></A>Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5917"></A>Null_Address&nbsp;:&nbsp;<B>constant</B>&nbsp;Address;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6137"></A>Address&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6138"></A>Null_Address&nbsp;:&nbsp;<B>constant</B>&nbsp;Address;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5918"></A>Storage_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5919"></A>Word_Size&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;*&nbsp;Storage_Unit;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5920"></A>Memory_Size&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6139"></A>Storage_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6140"></A>Word_Size&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>&nbsp;*&nbsp;Storage_Unit;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6141"></A>Memory_Size&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I5921"></A>Address&nbsp;Comparison:</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;<A NAME="I6142"></A>Address&nbsp;Comparison:</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&lt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Boolean<span class="insert3"><BR>
@@ -106,17 +106,17 @@ children</span>.</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00221.TXT">AI95-00221-01</A></I>} 
 &nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Other&nbsp;System-Dependent&nbsp;Declarations:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5922"></A>Bit_Order&nbsp;<B>is</B>&nbsp;(<A NAME="I5923"></A>High_Order_First,&nbsp;<A NAME="I5924"></A>Low_Order_First);<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I5925"></A>Default_Bit_Order&nbsp;:&nbsp;<B>constant</B>&nbsp;Bit_Order<span class="insert2">&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN></span>;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6143"></A>Bit_Order&nbsp;<B>is</B>&nbsp;(<A NAME="I6144"></A>High_Order_First,&nbsp;<A NAME="I6145"></A>Low_Order_First);<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I6146"></A>Default_Bit_Order&nbsp;:&nbsp;<B>constant</B>&nbsp;Bit_Order<span class="insert2">&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN></span>;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Priority-related&nbsp;declarations&nbsp;(see&nbsp;<A HREF="AA-D-1.html">D.1</A>):</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5926"></A>Any_Priority&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5927"></A>Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Any_Priority'First&nbsp;..<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6147"></A>Any_Priority&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6148"></A>Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Any_Priority'First&nbsp;..<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5928"></A>Interrupt_Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Priority'Last+1&nbsp;..<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6149"></A>Interrupt_Priority&nbsp;<B>is</B>&nbsp;Any_Priority&nbsp;<B>range</B>&nbsp;Priority'Last+1&nbsp;..<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any_Priority'Last;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5929"></A>Default_Priority&nbsp;:&nbsp;<B>constant</B>&nbsp;Priority&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6150"></A>Default_Priority&nbsp;:&nbsp;<B>constant</B>&nbsp;Priority&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Priority'First&nbsp;+&nbsp;Priority'Last)/2;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Examples"><B>private</B><BR>
@@ -181,9 +181,9 @@ the value of Calendar.Clock remains constant.&nbsp;</div>
 between System.Tick and Duration'Small, other than the one described 
 here.</div>
 <div class="paranum"><a name="p30.b">30.b</a></div>
-<div class="Annotations">The inaccuracy of the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
+<div class="Annotations">The inaccuracy of the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
 has no relation to Tick. In particular, it is possible that the clock 
-used for the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
+used for the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
 is less accurate than Calendar.Clock.</div>
 <div class="paranum"><a name="p30.c">30.c</a></div>
 <div class="Annotations">We considered making Tick a run-time-determined 
@@ -213,7 +213,7 @@ quantity in several ways. Thus, Memory_Size is not very useful.&nbsp;</div>
 Address is <span class="delete2">of&nbsp;</span>a definite, nonlimited type<span class="insert2">&nbsp;with preelaborable initialization (see <A HREF="AA-10-2-1.html">10.2.1</A>)</span>. 
 Address represents machine addresses capable of addressing individual 
 storage elements. Null_Address is an address that is distinct from the 
-address of any object or program unit. <A NAME="I5930"></A></div>
+address of any object or program unit. <A NAME="I6151"></A></div>
 <div class="paranum"><a name="p34.a">34.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The implementation has 
 to ensure that there is at least one address that nothing will be allocated 
@@ -289,7 +289,7 @@ child packages of System defined elsewhere.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p38.a.1">38.a.1/1</a></div>
-<div class="Annotations"><span class="insert1"><A NAME="I5931"></A>The 
+<div class="Annotations"><span class="insert1"><A NAME="I6152"></A>The 
 declarations Max_Binary_Modulus, Max_Nonbinary_Modulus, Max_Base_Digits, 
 Null_Address, Word_Size, Bit_Order, Default_Bit_Order, Any_Priority, 
 Interrupt_Priority, and Default_Priority are added to System in Ada 95. 
@@ -323,7 +323,7 @@ have been moved to the Real Time Annex.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p38.e">38.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-<span class="insert2"><A NAME="I5932"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I6153"></A><B>Amendment Correction:</B> 
 Type Address is defined to have preelaborable initialization, so that 
 it can be used without restriction in preelaborated units. (If Address 
 is defined to be a private type, as suggested by the Implementation Advice, 

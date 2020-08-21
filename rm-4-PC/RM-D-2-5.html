@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,30 +35,29 @@
 <HR>
 <H1>D.2.5 Round Robin Dispatching</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-defines the task dispatching policy Round_Robin_Within_Priorities and 
-the package Round_Robin.&nbsp;</div>
+<div class="Normal">This subclause defines the task dispatching policy 
+Round_Robin_Within_Priorities and the package Round_Robin.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">The <I>policy</I>_<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-Round_Robin_Within_Priorities is a task dispatching policy.<span class="insert3"><A NAME="I8015"></A><A NAME="I8016"></A></span></div>
+Round_Robin_Within_Priorities is a task dispatching policy.<A NAME="I7826"></A><A NAME="I7827"></A></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Examples"><B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Real_Time;<BR>
-<B>package</B>&nbsp;Ada.Dispatching.Round_Robin&nbsp;<B>is</B><A NAME="I8017"></A><BR>
-&nbsp;&nbsp;<A NAME="I8018"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
+<B>package</B>&nbsp;Ada.Dispatching.Round_Robin&nbsp;<B>is</B><A NAME="I7828"></A><BR>
+&nbsp;&nbsp;<A NAME="I7829"></A>Default_Quantum&nbsp;:&nbsp;<B>constant</B>&nbsp;Ada.Real_Time.Time_Span&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8019"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7830"></A>Set_Quantum&nbsp;(Pri&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8020"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7831"></A>Set_Quantum&nbsp;(Low,&nbsp;High&nbsp;:&nbsp;<B>in</B>&nbsp;System.Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantum&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time_Span);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8021"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7832"></A>Actual_Quantum&nbsp;(Pri&nbsp;:&nbsp;System.Priority)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Ada.Real_Time.Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8022"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7833"></A>Is_Round_Robin&nbsp;(Pri&nbsp;:&nbsp;System.Priority)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Dispatching.Round_Robin;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">When task dispatching policy Round_Robin_Within_Priorities 
@@ -80,14 +77,14 @@ used by the implementation for the priority level Pri.</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">The function Is_Round_Robin returns True if priority 
 Pri is covered by task dispatching policy Round_Robin_Within_Priorities; 
-otherwise<span class="insert3">,</span> it returns False.</div>
+otherwise, it returns False.</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">A call of Actual_Quantum or Set_Quantum raises exception 
 Dispatching.Dispatching_Policy_Error if a predefined policy other than 
 Round_Robin_Within_Priorities applies to the specified priority or any 
 of the priorities in the specified range.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For Round_Robin_Within_Priorities, 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For Round_Robin_Within_Priorities, 
 the dispatching rules for FIFO_Within_Priorities apply with the following 
 additional rules:</div>
 <div class="paranum"><a name="p11">11/2</a></div>
@@ -112,17 +109,17 @@ is a task dispatching point.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">An implementation shall allow, for a single partition, 
+<div class="Normal">&nbsp;An implementation shall allow, for a single partition, 
 both the task dispatching policy to be specified as Round_Robin_Within_Priorities 
 and also the locking policy (see <A HREF="RM-D-3.html">D.3</A>) to be 
 specified as Ceiling_Locking.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">An implementation shall document the quantum values 
+<div class="Normal">&nbsp;An implementation shall document the quantum values 
 supported.&nbsp;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">An implementation shall document the accuracy with 
+<div class="Normal">&nbsp;An implementation shall document the accuracy with 
 which it detects the exhaustion of the budget of a task.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p18">18/2</a></div>

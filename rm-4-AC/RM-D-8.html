@@ -21,17 +21,17 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -155,7 +155,7 @@ is a real time interval during which the clock value (as observed by
 calling the Clock function) remains constant. Tick is the average length 
 of such intervals.</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Normal">The function To_Duration converts the value TS to 
+<div class="Normal">&nbsp;The function To_Duration converts the value TS to 
 a value of type Duration. Similarly, the function To_Time_Span converts 
 the value D to a value of type Time_Span. For <span class="insert2">To_Duration</span><span class="delete2">&nbsp;both 
 operations</span>, the result is rounded to the nearest <span class="insert2">value 
@@ -171,7 +171,7 @@ Otherwise, the value is converted to the type Time_Span.</span></div>
 <div class="Normal">To_Duration(Time_Span_Zero) returns 0.0, and To_Time_Span(0.0) 
 returns Time_Span_Zero.</div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal">The functions Nanoseconds, Microseconds, <span class="delete2">and 
+<div class="Normal">&nbsp;The functions Nanoseconds, Microseconds, <span class="delete2">and 
 </span>Milliseconds<span class="insert2">, Seconds, and Minutes</span> 
 convert the input parameter to a value of the type Time_Span. NS, US,<span class="delete2">&nbsp;and</span> MS<span class="insert2">, S, and M</span> are interpreted 
 as a number of nanoseconds, microseconds,<span class="delete2">&nbsp;and</span> 
@@ -227,14 +227,14 @@ synchronization exists, the sources of synchronization information, the
 frequency of synchronization, and the synchronization method applied. 
 </div>
 <div class="paranum"><a name="p36">36/3</a></div>
-<div class="Normal">The implementation shall document any aspects of 
+<div class="Normal">&nbsp;The implementation shall document any aspects of 
 the <span class="delete1">the</span> external environment that could 
 interfere with the clock behavior as defined in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>. 
 </div>
 
 <H4 Class="centered">Metrics</H4>
 <div class="paranum"><a name="p37">37/3</a></div>
-<div class="Normal">For the purpose of the metrics defined in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>, 
+<div class="Normal">&nbsp;For the purpose of the metrics defined in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>, 
 real time is defined to be the International Atomic Time (TAI).</div>
 <div class="paranum"><a name="p38">38</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The implementation 

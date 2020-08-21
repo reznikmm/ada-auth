@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -24,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -58,45 +60,48 @@ of Text_IO, the declarations of the visible part of Text_IO are directly
 visible within it.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Numerics.Generic_Complex_Types;<BR>
-<B>generic</B><A NAME="I9156"></A><BR>
+<B>generic</B><A NAME="I9468"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;Complex_Types&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Ada.Numerics.Generic_Complex_Types&nbsp;(&lt;&gt;);<BR>
 <B>package</B>&nbsp;Ada.Text_IO.Complex_IO&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>use</B>&nbsp;Complex_Types;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I9157"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;2;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9158"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Real'Digits&nbsp;-&nbsp;1;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I9159"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;3;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I9469"></A>Default_Fore&nbsp;:&nbsp;Field&nbsp;:=&nbsp;2;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9470"></A>Default_Aft&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;Real'Digits&nbsp;-&nbsp;1;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I9471"></A>Default_Exp&nbsp;&nbsp;:&nbsp;Field&nbsp;:=&nbsp;3;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9160"></A>Get&nbsp;(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9472"></A>Get&nbsp;(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9161"></A>Get&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9473"></A>Get&nbsp;(Item&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;0);</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9162"></A>Put&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9474"></A>Put&nbsp;(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9163"></A>Put&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Complex;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9475"></A>Put&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fore&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Fore;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
-<div class="paranum"><a name="p8">8</a></div>
-<div class="Examples" style="margin-bottom: 0.9em">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9164"></A>Get&nbsp;(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9476"></A>Get&nbsp;(From&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Complex;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9165"></A>Put&nbsp;(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9477"></A>Put&nbsp;(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Complex;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aft&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;Default_Aft;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;Default_Exp);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exp&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Field&nbsp;:=&nbsp;Default_Exp)<span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Text_IO.Complex_IO;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00328.TXT">AI95-00328-01</A></I>} 
-<A NAME="I9166"></A>The library package Complex_Text_IO defines the same 
+<A NAME="I9478"></A>The library package Complex_Text_IO defines the same 
 subprograms as Text_IO.Complex_IO, except that the predefined type Float 
 is systematically substituted for Real, and the type Numerics.Complex_Types.Complex 
 is systematically substituted for Complex throughout. Nongeneric equivalents 
@@ -279,7 +284,7 @@ as for the corresponding procedures of Text_IO.Float_IO.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p35.a">35.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00328.TXT">AI95-00328-01</A></I>} 
-<A NAME="I9167"></A>Nongeneric equivalents for Text_IO.Complex_IO are 
+<A NAME="I9479"></A>Nongeneric equivalents for Text_IO.Complex_IO are 
 added, to be consistent with all other language-defined Numerics generic 
 packages.&nbsp;</div>
 

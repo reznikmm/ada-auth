@@ -37,20 +37,20 @@
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2811"></A><A NAME="I2812"></A><A NAME="I2813"></A>An 
+<div class="Normal"><A NAME="I2804"></A><A NAME="I2805"></A><A NAME="I2806"></A>An 
 <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 consisting of two <SPAN Class="swiss"><A HREF="RM-4-4.html#S0125">relation</A></SPAN>s 
 connected by <B>and then</B> or <B>or else</B> (a <I>short-circuit control 
-form</I>) shall resolve to be of some boolean type; <A NAME="I2814"></A>the 
+form</I>) shall resolve to be of some boolean type; <A NAME="I2807"></A>the 
 expected type for both <SPAN Class="swiss"><A HREF="RM-4-4.html#S0125">relation</A></SPAN>s 
 is that same boolean type.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2815"></A><A NAME="I2816"></A><A NAME="I2817"></A><A NAME="I2818"></A><A NAME="I2819"></A><A NAME="I2820"></A><A NAME="I2821"></A><A NAME="I2822"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2808"></A><A NAME="I2809"></A><A NAME="I2810"></A><A NAME="I2811"></A><A NAME="I2812"></A><A NAME="I2813"></A><A NAME="I2814"></A><A NAME="I2815"></A>The 
 following logical operators are predefined for every boolean type <I>T</I>, 
 for every modular type <I>T</I>, and for every one-dimensional array 
-type <I>T</I> whose component type is a boolean type: <A NAME="I2823"></A></div>
+type <I>T</I> whose component type is a boolean type: <A NAME="I2816"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>and</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;<B>or</B>&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
@@ -75,17 +75,17 @@ array are those of the left operand.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2824"></A>The short-circuit control forms 
+<div class="Normal"><A NAME="I2817"></A>The short-circuit control forms 
 <B>and then</B> and <B>or else</B> deliver the same result as the corresponding 
 predefined <B>and</B> and <B>or</B> operators for boolean types, except 
 that the left operand is always evaluated first, and the right operand 
 is not evaluated if the value of the left operand determines the result.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2825"></A><A NAME="I2826"></A>For the logical 
+<div class="Normal"><A NAME="I2818"></A><A NAME="I2819"></A>For the logical 
 operators on arrays, a check is made that for each component of the left 
 operand there is a matching component of the right operand, and vice 
-versa. <A NAME="I2827"></A><A NAME="I2828"></A>Also, a check is made 
-that each component of the result belongs to the component subtype. <A NAME="I2829"></A>The 
+versa. <A NAME="I2820"></A><A NAME="I2821"></A>Also, a check is made 
+that each component of the result belongs to the component subtype. <A NAME="I2822"></A>The 
 exception Constraint_Error is raised if either of the above checks fails. 
 </div>
 <div class="NotesHeader">NOTES</div>

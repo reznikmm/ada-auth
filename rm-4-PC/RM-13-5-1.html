@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,28 +39,28 @@
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0313">record_representation_clause</A></SPAN> 
 specifies the storage representation of records and record extensions, 
 that is, the order, position, and size of components (including discriminants, 
-if any). <A NAME="I5155"></A></div>
+if any). <A NAME="I5070"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I5156"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5157"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>&nbsp;<B>use</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I5158"></A><SPAN Class="swiss"><A HREF="RM-J-8.html#S0324">mod_clause</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I5159"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I5071"></A><A NAME="S0313"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5072"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>&nbsp;<B>use</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I5073"></A><SPAN Class="swiss"><A HREF="RM-J-8.html#S0324">mod_clause</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I5074"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I5160"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I5161"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I5162"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0315">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I5163"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0316">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I5164"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I5075"></A><A NAME="S0314"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I5076"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0306">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I5077"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0315">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I5078"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0316">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I5079"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I5165"></A><A NAME="S0315"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5166"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I5080"></A><A NAME="S0315"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5081"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I5167"></A><A NAME="S0316"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5168"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I5082"></A><A NAME="S0316"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5083"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I5169"></A><A NAME="S0317"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5170"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I5084"></A><A NAME="S0317"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5085"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5171"></A><A NAME="I5172"></A><A NAME="I5173"></A><A NAME="I5174"></A>Each 
+<div class="Normal"><A NAME="I5086"></A><A NAME="I5087"></A><A NAME="I5088"></A><A NAME="I5089"></A>Each 
 <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0315">position</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0316">first_bit</A></SPAN>, 
 and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN> 
@@ -96,7 +94,7 @@ shall be nonnegative. The value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S
 shall be no less than <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0316">first_bit</A></SPAN> 
 &ndash; 1.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;If the nondefault 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;If the nondefault 
 bit ordering applies to the type, then either:&nbsp;</div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
 <div class="Bulleted">the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN> 
@@ -122,20 +120,20 @@ of a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SP
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0313">record_representation_clause</A></SPAN> 
+<div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0313">record_representation_clause</A></SPAN> 
 (without the <SPAN Class="swiss"><A HREF="RM-J-8.html#S0324">mod_clause</A></SPAN>) 
 specifies the layout.</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If the default bit ordering applies to the type, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;If the default bit ordering applies to the type, 
 the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0315">position</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0316">first_bit</A></SPAN>, 
 and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN> 
 of each <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN> 
 directly specify the position and size of the corresponding component.</div>
 <div class="paranum"><a name="p13.2">13.2/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;If the nondefault 
-bit ordering applies to the type<span class="insert3">,</span> then the 
-layout is determined as follows:&nbsp;</div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;If the nondefault 
+bit ordering applies to the type, then the layout is determined as follows: 
+</div>
 <div class="paranum"><a name="p13.3">13.3/2</a></div>
 <div class="Bulleted">the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>s 
 for which the value of <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN> 
@@ -180,7 +178,7 @@ storage place is not specified explicitly in the <SPAN Class="swiss"><A HREF="RM
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5175"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5090"></A>The 
 recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0313">record_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/2</a></div>

@@ -41,40 +41,40 @@ is either simple or compound. A <SPAN Class="swiss"><A HREF="RM-5-1.html#S0154">
 encloses no other <SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN>. 
 A <SPAN Class="swiss"><A HREF="RM-5-1.html#S0155">compound_statement</A></SPAN> 
 can enclose <SPAN Class="swiss"><A HREF="RM-5-1.html#S0154">simple_statement</A></SPAN>s 
-and other <SPAN Class="swiss"><A HREF="RM-5-1.html#S0155">compound_statement</A></SPAN>s.<span class="insert5">&nbsp;A <I>parallel construct</I><A NAME="I3194"></A><A NAME="I3195"></A> is 
+and other <SPAN Class="swiss"><A HREF="RM-5-1.html#S0155">compound_statement</A></SPAN>s.<span class="insert5">&nbsp;A <I>parallel construct</I><A NAME="I3184"></A><A NAME="I3185"></A> is 
 a construct that introduces additional logical threads of control (see 
 clause <A HREF="RM-9.html">9</A>) without creating a new task. Parallel 
 loops (see <A HREF="RM-5-5.html">5.5</A>) and <SPAN Class="swiss"><A HREF="RM-5-6-1.html#S0177">parallel_block_statement</A></SPAN>s 
-(see <A HREF="RM-5-6-1.html">5.6.1</A>) are parallel constructs.<A NAME="I3196"></A> 
-<A NAME="I3197"></A></span></div>
+(see <A HREF="RM-5-6-1.html">5.6.1</A>) are parallel constructs.<A NAME="I3186"></A> 
+<A NAME="I3187"></A></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">sequence_of_statements</SPAN><A NAME="I3198"></A><A NAME="S0152"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3199"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN>&nbsp;{<A NAME="I3200"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN>}&nbsp;{<A NAME="I3201"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0157">label</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">sequence_of_statements</SPAN><A NAME="I3188"></A><A NAME="S0152"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3189"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN>&nbsp;{<A NAME="I3190"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN>}&nbsp;{<A NAME="I3191"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0157">label</A></SPAN>}</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">statement</SPAN><A NAME="I3202"></A><A NAME="S0153"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;{<A NAME="I3203"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0157">label</A></SPAN>}&nbsp;<A NAME="I3204"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0154">simple_statement</A></SPAN>&nbsp;|&nbsp;{<A NAME="I3205"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0157">label</A></SPAN>}&nbsp;<A NAME="I3206"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0155">compound_statement</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">statement</SPAN><A NAME="I3192"></A><A NAME="S0153"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;{<A NAME="I3193"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0157">label</A></SPAN>}&nbsp;<A NAME="I3194"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0154">simple_statement</A></SPAN>&nbsp;|&nbsp;{<A NAME="I3195"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0157">label</A></SPAN>}&nbsp;<A NAME="I3196"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0155">compound_statement</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">simple_statement</SPAN><A NAME="I3207"></A><A NAME="S0154"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3208"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0156">null_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3209"></A><SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3210"></A><SPAN Class="swiss"><A HREF="RM-5-7.html#S0178">exit_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3211"></A><SPAN Class="swiss"><A HREF="RM-5-8.html#S0179">goto_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3212"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0195">procedure_call_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3213"></A><SPAN Class="swiss"><A HREF="RM-6-5.html#S0200">simple_return_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3214"></A><SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0242">entry_call_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3215"></A><SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0243">requeue_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3216"></A><SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3217"></A><SPAN Class="swiss"><A HREF="RM-9-8.html#S0262">abort_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3218"></A><SPAN Class="swiss"><A HREF="RM-11-3.html#S0286">raise_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3219"></A><SPAN Class="swiss"><A HREF="RM-13-8.html#S0335">code_statement</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">simple_statement</SPAN><A NAME="I3197"></A><A NAME="S0154"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3198"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0156">null_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3199"></A><SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3200"></A><SPAN Class="swiss"><A HREF="RM-5-7.html#S0178">exit_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3201"></A><SPAN Class="swiss"><A HREF="RM-5-8.html#S0179">goto_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3202"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0195">procedure_call_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3203"></A><SPAN Class="swiss"><A HREF="RM-6-5.html#S0200">simple_return_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3204"></A><SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0242">entry_call_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3205"></A><SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0243">requeue_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3206"></A><SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3207"></A><SPAN Class="swiss"><A HREF="RM-9-8.html#S0262">abort_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3208"></A><SPAN Class="swiss"><A HREF="RM-11-3.html#S0286">raise_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3209"></A><SPAN Class="swiss"><A HREF="RM-13-8.html#S0335">code_statement</A></SPAN></div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">compound_statement</SPAN><A NAME="I3220"></A><A NAME="S0155"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3221"></A><SPAN Class="swiss"><A HREF="RM-5-3.html#S0161">if_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3222"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0162">case_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3223"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3224"></A><SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3225"></A><SPAN Class="swiss"><A HREF="RM-6-5.html#S0203">extended_return_statement</A></SPAN><span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3226"></A><SPAN Class="swiss"><A HREF="RM-5-6-1.html#S0177">parallel_block_statement</A></SPAN></span><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3227"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3228"></A><SPAN Class="swiss"><A HREF="RM-9-7.html#S0247">select_statement</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">compound_statement</SPAN><A NAME="I3210"></A><A NAME="S0155"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3211"></A><SPAN Class="swiss"><A HREF="RM-5-3.html#S0161">if_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3212"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0162">case_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3213"></A><SPAN Class="swiss"><A HREF="RM-5-5.html#S0164">loop_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3214"></A><SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3215"></A><SPAN Class="swiss"><A HREF="RM-6-5.html#S0203">extended_return_statement</A></SPAN><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3216"></A><SPAN Class="swiss"><A HREF="RM-5-6-1.html#S0177">parallel_block_statement</A></SPAN></span><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3217"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN>&nbsp;|&nbsp;<A NAME="I3218"></A><SPAN Class="swiss"><A HREF="RM-9-7.html#S0247">select_statement</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">null_statement</SPAN><A NAME="I3229"></A><A NAME="S0156"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>;</div>
+<div class="Indented1"><SPAN Class="swiss">null_statement</SPAN><A NAME="I3219"></A><A NAME="S0156"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>null</B>;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">label</SPAN><A NAME="I3230"></A><A NAME="S0157"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&lt;&lt;<I>label_</I><A NAME="I3231"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0158">statement_identifier</A></SPAN>&gt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">label</SPAN><A NAME="I3220"></A><A NAME="S0157"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&lt;&lt;<I>label_</I><A NAME="I3221"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0158">statement_identifier</A></SPAN>&gt;&gt;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1"><SPAN Class="swiss">statement_identifier</SPAN><A NAME="I3232"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3233"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">statement_identifier</SPAN><A NAME="I3222"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3223"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0158">statement_identifier</A></SPAN> 
@@ -119,10 +119,10 @@ before any following constructs.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I3234"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0156">null_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3224"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0156">null_statement</A></SPAN> 
 has no effect.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><A NAME="I3235"></A>A <I>transfer of control</I> 
+<div class="Normal"><A NAME="I3225"></A>A <I>transfer of control</I> 
 is the run-time action of an <SPAN Class="swiss"><A HREF="RM-5-7.html#S0178">exit_statement</A></SPAN>, 
 return statement, <SPAN Class="swiss"><A HREF="RM-5-8.html#S0179">goto_statement</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0243">requeue_statement</A></SPAN>, 
@@ -133,14 +133,14 @@ of the language. As explained in <A HREF="RM-7-6-1.html">7.6.1</A>, a
 transfer of control can cause the execution of constructs to be completed 
 and then left, which may trigger finalization.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I3236"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+<div class="Normal"><A NAME="I3226"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
 consists of the execution of the individual <SPAN Class="swiss"><A HREF="RM-5-1.html#S0153">statement</A></SPAN>s 
 in succession until the <SPAN Class="swiss">sequence_</SPAN> is completed. 
 </div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><span class="insert5">Within a parallel construct, 
 if a transfer of control out of the construct is initiated by one of 
-the logical threads of control, an attempt is made to <I>cancel</I><A NAME="I3237"></A><A NAME="I3238"></A> 
+the logical threads of control, an attempt is made to <I>cancel</I><A NAME="I3227"></A><A NAME="I3228"></A> 
 all other logical threads of control initiated by the parallel construct. 
 Once all other logical threads of control of the construct either complete 
 or are canceled, the transfer of control occurs. If two or more logical 
@@ -148,7 +148,7 @@ threads of control of the same construct initiate such a transfer of
 control concurrently, one of them is chosen arbitrarily and the others 
 are canceled.</span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Normal"><span class="insert5"><A NAME="I3239"></A>When a 
+<div class="Normal"><span class="insert5"><A NAME="I3229"></A>When a 
 logical thread of control is canceled, the cancellation causes it to 
 complete as though it had performed a transfer of control to the point 
 where it would have finished its execution. Such a cancellation is deferred 

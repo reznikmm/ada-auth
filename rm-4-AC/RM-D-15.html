@@ -19,16 +19,16 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -80,34 +80,34 @@ is said to be <I>set</I> if it is associated with a nonnull value of
 type Timing_Event_Handler and <I>cleared</I> otherwise. All Timing_Event 
 objects are initially cleared. <A NAME="I8455"></A><A NAME="I8456"></A></span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><span class="insert2">The type Timing_Event_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The type Timing_Event_Handler 
 identifies a protected procedure to be executed by the implementation 
 when the timing event occurs. Such a protected procedure is called a 
 <I>handler</I>. <A NAME="I8457"></A></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><span class="insert2">The procedures Set_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The procedures Set_Handler 
 associate the handler Handler with the event Event</span><span class="insert3">:</span><span class="insert2"></span><span class="insert2"><span class="delete3">;</span></span><span class="insert2">&nbsp;if Handler is <B>null</B>, the event is cleared</span><span class="insert3">;</span><span class="insert2"></span><span class="insert2"><span class="delete3">,</span></span><span class="insert2">&nbsp;otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is set. The first procedure Set_Handler sets the execution time for 
 the event to be At_Time. The second procedure Set_Handler sets the execution 
 time for the event to be Real_Time.Clock + In_Time.</span></div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><span class="insert2">A call of a procedure Set_Handler 
+<div class="Normal">&nbsp;<span class="insert2">A call of a procedure Set_Handler 
 for an event that is already set replaces the handler and the time of 
 execution; if Handler is not <B>null</B>, the event remains set.</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"><span class="insert2">As soon as possible after the 
-time set for the event, the handler is executed, passing the event as 
-parameter. The handler is only executed if the timing event is in the 
-set state at the time of execution. The initial action of the execution 
+<div class="Normal">&nbsp;<span class="insert2">As soon as possible after 
+the time set for the event, the handler is executed, passing the event 
+as parameter. The handler is only executed if the timing event is in 
+the set state at the time of execution. The initial action of the execution 
 of the handler is to clear the event.</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="insert2">If the Ceiling_Locking policy 
+<div class="Normal">&nbsp;<span class="insert2">If the Ceiling_Locking policy 
 (see <A HREF="RM-D-3.html">D.3</A>) is in effect when a procedure Set_Handler 
 is called, a check is made that the ceiling priority of Handler.<B>all</B> 
 is Interrupt_Priority'Last. If the check fails, Program_Error is raised.</span></div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal"><span class="insert2">If a procedure Set_Handler 
+<div class="Normal">&nbsp;<span class="insert2">If a procedure Set_Handler 
 is called with zero or negative In_Time or with At_Time indicating a 
 time in the past</span><span class="insert3">,</span><span class="insert2">&nbsp;then the handler is executed&nbsp;</span><span class="insert3">as soon as 
 possible after the completion of</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;immediately 
@@ -115,29 +115,29 @@ by the task executing</span></span><span class="insert2">&nbsp;the call of
 Set_Handler.</span><span class="insert2"><span class="delete3">&nbsp;The timing 
 event Event is cleared.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert2">The function Current_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The function Current_Handler 
 returns the handler associated with the event Event if that event is 
 set; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns <B>null</B>.</span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><span class="insert2">The procedure Cancel_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Cancel_Handler 
 clears the event if it is set. Cancelled is assigned True if the event 
 was set prior to it being cleared; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is assigned False.</span></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal"><span class="insert2">The function Time_Of_Event 
+<div class="Normal">&nbsp;<span class="insert2">The function Time_Of_Event 
 returns the time of the event if the event is set; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns Real_Time.Time_First.</span></div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal"><span class="insert2">As part of the finalization 
+<div class="Normal">&nbsp;<span class="insert2">As part of the finalization 
 of an object of type Timing_Event, the Timing_Event is cleared.</span></div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal"><span class="insert2">If several timing events are 
+<div class="Normal">&nbsp;<span class="insert2">If several timing events are 
 set for the same time, they are executed in FIFO order of being set.</span></div>
 <div class="paranum"><a name="p21">21/2</a></div>
-<div class="Normal"><span class="insert2">An exception propagated from 
+<div class="Normal">&nbsp;<span class="insert2">An exception propagated from 
 a handler invoked by a timing event has no effect.</span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal"><span class="insert2">For a given Timing_Event object, 
+<div class="Normal">&nbsp;<span class="insert2">For a given Timing_Event object, 
 the implementation shall perform the operations declared in this package 
 atomically with respect to any of these operations on the same Timing_Event 
 object. The replacement of a handler by a call of Set_Handler shall be 
@@ -145,7 +145,7 @@ performed atomically with respect to the execution of the handler.</span></div>
 
 <H4 Class="centered">Metrics</H4>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">The 
 implementation shall document the following metric:</span>&nbsp;</div>
 <div class="paranum"><a name="p24">24/3</a></div>
 <div class="Bulleted"><span class="insert2">An upper bound on the lateness 
@@ -157,7 +157,7 @@ and the time specified when the event was set</span></span><span class="insert2"
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Normal"><span class="insert2">The protected handler procedure 
+<div class="Normal">&nbsp;<span class="insert2">The protected handler procedure 
 should be executed directly by the real-time clock interrupt mechanism.</span></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p26">26/2</a></div>

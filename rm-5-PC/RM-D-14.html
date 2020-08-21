@@ -46,15 +46,15 @@ library package exists:&nbsp;</div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>with</B>&nbsp;Ada.Real_Time;&nbsp;<B>use</B>&nbsp;Ada.Real_Time;<BR>
 <B>package</B>&nbsp;Ada.Execution_Time<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8342"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8327"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8343"></A>CPU_Time&nbsp;<B>is&nbsp;private</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8344"></A>CPU_Time_First&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8345"></A>CPU_Time_Last&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8346"></A>CPU_Time_Unit&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined-real-number</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8347"></A>CPU_Tick&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8328"></A>CPU_Time&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8329"></A>CPU_Time_First&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8330"></A>CPU_Time_Last&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Time;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8331"></A>CPU_Time_Unit&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined-real-number</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8332"></A>CPU_Tick&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8348"></A>Clock<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8333"></A>Clock<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
@@ -69,24 +69,24 @@ library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;CPU_Time)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;CPU_Time)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8349"></A>Split<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8334"></A>Split<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Time;&nbsp;SC&nbsp;:&nbsp;<B>out</B>&nbsp;Seconds_Count;&nbsp;TS&nbsp;:&nbsp;<B>out</B>&nbsp;Time_Span);</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8350"></A>Time_Of&nbsp;(SC&nbsp;:&nbsp;Seconds_Count;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8335"></A>Time_Of&nbsp;(SC&nbsp;:&nbsp;Seconds_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;:&nbsp;Time_Span&nbsp;:=&nbsp;Time_Span_Zero)&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8351"></A>Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8336"></A>Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8352"></A>Separate_Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8337"></A>Separate_Interrupt_Clocks_Supported&nbsp;:&nbsp;<B>constant</B>&nbsp;Boolean&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p9.3">9.3/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8353"></A>Clock_For_Interrupts&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8338"></A>Clock_For_Interrupts&nbsp;<B>return</B>&nbsp;CPU_Time;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Execution_Time;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I8354"></A><A NAME="I8355"></A>The <I>execution 
+<div class="Normal"><A NAME="I8339"></A><A NAME="I8340"></A>The <I>execution 
 time</I> or CPU time of a given task is defined as the time spent by 
 the system executing that task, including the time spent executing run-time 
 or system services on its behalf. The mechanism used to measure execution 
@@ -117,7 +117,7 @@ is initialized to zero.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><A NAME="I8356"></A>CPU_Time_Unit is the smallest 
+<div class="Normal"><A NAME="I8341"></A>CPU_Time_Unit is the smallest 
 amount of execution time representable by the CPU_Time type; it is expressed 
 in seconds. A <I>CPU clock tick</I> is an execution time interval during 
 which the clock value (as observed by calling the Clock function) remains 
@@ -144,7 +144,7 @@ is set to False the function raises Program_Error.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal"><A NAME="I8357"></A>For a call of Clock, if the task 
+<div class="Normal"><A NAME="I8342"></A>For a call of Clock, if the task 
 identified by T no longer exists, the execution of the program is erroneous. 
 </div>
 

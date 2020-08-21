@@ -13,17 +13,15 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,17 +40,17 @@ needed by the predefined input-output packages.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 IO_Exceptions has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.IO_Exceptions&nbsp;<B>is</B><A NAME="I7328"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.IO_Exceptions&nbsp;<B>is</B><A NAME="I7226"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(IO_Exceptions);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7329"></A>Status_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7330"></A>Mode_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7331"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7332"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7333"></A>Device_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7334"></A>End_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7335"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7336"></A>Layout_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7227"></A>Status_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7228"></A>Mode_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7229"></A>Name_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7230"></A>Use_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7231"></A>Device_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7232"></A>End_Error&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7233"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7234"></A>Layout_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.IO_Exceptions;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -109,20 +107,21 @@ to set column or line numbers in excess of specified maximum line or
 page lengths, respectively (excluding the unbounded cases). It is also 
 propagated by an attempt to Put too many characters to a string.</div>
 <div class="paranum"><a name="p14.1">14.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">These exceptions are also propagated by various 
-other language-defined packages and operations, see the definition of 
-those entities for other reasons that these exceptions are propagated.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+These exceptions are also propagated by various other language-defined 
+packages and operations, see the definition of those entities for other 
+reasons that these exceptions are propagated.</div>
 <div class="paranum"><a name="p14.a">14.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3">This subclause</span><span class="insert3"><span class="delete3">&nbsp;clause</span></span><span class="insert3">&nbsp;is based in Ada 95. Later versions of Ada (starting with Technical Corrigendum 
-1) have added a number of additional places and reasons that cause these 
-exceptions. In particular, TC1 says that stream attributes need to raise 
-End_Error in some circumstances; Amendment 1 adds Ada.Directories and 
-a number of new places and reasons that Name_Error and Use_Error are 
-raised. There are more. We don't want to try to update this text (or 
-even this note!) for every possible reason and place that might raise 
-one of these exceptions, so we add this blanket statement.</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This subclause is based in Ada 95. Later versions of Ada (starting with 
+Technical Corrigendum 1) have added a number of additional places and 
+reasons that cause these exceptions. In particular, TC1 says that stream 
+attributes need to raise End_Error in some circumstances; Amendment 1 
+adds Ada.Directories and a number of new places and reasons that Name_Error 
+and Use_Error are raised. There are more. We don't want to try to update 
+this text (or even this note!) for every possible reason and place that 
+might raise one of these exceptions, so we add this blanket statement. 
+</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p15">15</a></div>
@@ -146,12 +145,12 @@ clause with &ldquo;holes&rdquo; in the range of internal codes.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I7337"></A>[If the element read by the procedure 
+<div class="Normal"><A NAME="I7235"></A>[If the element read by the procedure 
 Read (or by the Read attribute) cannot be interpreted as a value of the 
 required subtype, but this is not detected and Data_Error is not propagated, 
 then the resulting value can be abnormal, and subsequent references to 
 the value can lead to erroneous execution, as explained in <A HREF="AA-13-9-1.html">13.9.1</A>. 
-<A NAME="I7338"></A><A NAME="I7339"></A>]</div>
+<A NAME="I7236"></A><A NAME="I7237"></A>]</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

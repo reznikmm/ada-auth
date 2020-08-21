@@ -19,15 +19,15 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -88,46 +88,46 @@ primitive subprograms from its progenitor types (see <A HREF="RM-3-4.html">3.4</
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><span class="insert2">All user-defined primitive 
+<div class="Normal">&nbsp;<span class="insert2">All user-defined primitive 
 subprograms of an interface type shall be abstract subprograms or null 
 procedures.</span></div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal"><span class="insert2">The type of a subtype named 
+<div class="Normal">&nbsp;<span class="insert2">The type of a subtype named 
 in an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
 shall be an interface type.</span></div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><span class="insert2">A type derived from a nonlimited 
+<div class="Normal">&nbsp;<span class="insert2">A type derived from a nonlimited 
 interface shall be nonlimited.</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"><span class="insert2">An interface derived from a 
-task interface shall include the reserved word <B>task</B> in its definition; 
+<div class="Normal">&nbsp;<span class="insert2">An interface derived from 
+a task interface shall include the reserved word <B>task</B> in its definition; 
 any other type derived from a task interface shall be a private extension 
 or a task type declared by a task declaration (see <A HREF="RM-9-1.html">9.1</A>).</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="insert2">An interface derived from a 
-protected interface shall include the reserved word <B>protected</B> 
+<div class="Normal">&nbsp;<span class="insert2">An interface derived from 
+a protected interface shall include the reserved word <B>protected</B> 
 in its definition; any other type derived from a protected interface 
 shall be a private extension or a protected type declared by a protected 
 declaration (see <A HREF="RM-9-4.html">9.4</A>).</span></div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><span class="insert2">An interface derived from a 
-synchronized interface shall include one of the reserved words <B>task</B>, 
+<div class="Normal">&nbsp;<span class="insert2">An interface derived from 
+a synchronized interface shall include one of the reserved words <B>task</B>, 
 <B>protected</B>, or <B>synchronized</B> in its definition; any other 
 type derived from a synchronized interface shall be a private extension, 
 a task type declared by a task declaration, or a protected type declared 
 by a protected declaration.</span></div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal"><span class="insert2">No type shall be derived from 
+<div class="Normal">&nbsp;<span class="insert2">No type shall be derived from 
 both a task interface and a protected interface.</span></div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"><span class="insert2">In addition to the places where 
-Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
+<div class="Normal">&nbsp;<span class="insert2">In addition to the places 
+where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.<A NAME="I2305"></A></span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal"><span class="insert2">The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0077">interface_type_definition</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert2">The elaboration of an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0077">interface_type_definition</A></SPAN> 
 </span><span class="insert3">creates the interface type and its first 
 subtype</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;has 
 no effect</span></span><span class="insert2">.</span>&nbsp;</div>
@@ -141,7 +141,7 @@ interface.</span>&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><I>Example 
 of a limited interface and a synchronized interface extending it:</I></span></div>
 <div class="paranum"><a name="p21">21/2</a></div>
 <div class="Examples"><span class="insert2"><B>type</B>&nbsp;Queue&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
@@ -175,7 +175,7 @@ of a limited interface and a synchronized interface extending it:</I></span></di
 &nbsp;&nbsp;&nbsp;<B>end&nbsp;loop</B>;<BR>
 <B>end</B>&nbsp;Transfer;</span></div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal"><span class="insert2">This defines a Queue interface 
+<div class="Normal">&nbsp;<span class="insert2">This defines a Queue interface 
 defining a queue of people. (A similar design could be created to define 
 any kind of queue simply by replacing Person_Name by an appropriate type.) 
 The Queue interface has four dispatching operations, Append, Remove_First, 
@@ -186,13 +186,13 @@ object of a type derived from Queue may be passed to Transfer as either
 the From or the To operand. The two operands need not be of the same 
 type in any given call.</span></div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Normal"><span class="insert2">The Synchronized_Queue interface 
+<div class="Normal">&nbsp;<span class="insert2">The Synchronized_Queue interface 
 inherits the four dispatching operations from Queue and adds two additional 
 dispatching operations, which wait if necessary rather than raising the 
 Queue_Error exception. This synchronized interface may only be implemented 
 by a task or protected type, and as such ensures safe concurrent access.</span></div>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><I>Example 
 use of the interface:</I></span></div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Examples"><span class="insert2"><B>type</B>&nbsp;Fast_Food_Queue&nbsp;<B>is&nbsp;new</B>&nbsp;Queue&nbsp;<B>with&nbsp;record</B>&nbsp;...;<BR>
@@ -212,7 +212,7 @@ Append&nbsp;(Cashier,&nbsp;George);<BR>
 Transfer&nbsp;(Cashier,&nbsp;Counter);<BR>
 ...</span></div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Normal"><span class="insert2">An interface such as Queue 
+<div class="Normal">&nbsp;<span class="insert2">An interface such as Queue 
 can be used directly as the parent of a new type (as shown here), or 
 can be used as a progenitor when a type is derived. In either case, the 
 primitive operations of the interface are inherited. For Queue, the implementation 
@@ -220,14 +220,14 @@ of the four inherited routines must be provided. Inside the call of Transfer,
 calls will dispatch to the implementations of Append and Remove_First 
 for type Fast_Food_Queue.</span></div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><I>Example 
 of a task interface:</I></span></div>
 <div class="paranum"><a name="p35">35/2</a></div>
 <div class="Examples"><span class="insert2"><B>type</B>&nbsp;Serial_Device&nbsp;<B>is&nbsp;task&nbsp;interface</B>;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="RM-9-1.html">9.1</A></I></SPAN><BR>
 <B>procedure</B>&nbsp;Read&nbsp;(Dev&nbsp;:&nbsp;<B>in</B>&nbsp;Serial_Device;&nbsp;C&nbsp;:&nbsp;<B>out</B>&nbsp;Character)&nbsp;<B>is&nbsp;abstract</B>;<BR>
 <B>procedure</B>&nbsp;Write(Dev&nbsp;:&nbsp;<B>in</B>&nbsp;Serial_Device;&nbsp;C&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Character)&nbsp;<B>is&nbsp;abstract</B>;</span></div>
 <div class="paranum"><a name="p36">36/2</a></div>
-<div class="Normal"><span class="insert2">The Serial_Device interface 
+<div class="Normal">&nbsp;<span class="insert2">The Serial_Device interface 
 has two dispatching operations which are intended to be implemented by 
 task entries (see 9.1).</span></div>
 

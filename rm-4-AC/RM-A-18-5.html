@@ -19,13 +19,13 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -214,17 +214,17 @@ was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span 
 <div class="paranum"><a name="p40">40/2</a></div>
 <div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Containers.Hashed_Maps;</span></div>
 <div class="paranum"><a name="p41">41/2</a></div>
-<div class="Normal"><span class="insert2">An object of type Map contains 
+<div class="Normal">&nbsp;<span class="insert2">An object of type Map contains 
 an expandable hash table, which is used to provide direct access to nodes. 
 The <I>capacity</I> of an object of type Map is the maximum number of 
 nodes that can be inserted into the hash table prior to it being automatically 
 expanded.<A NAME="I7220"></A></span></div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7221"></A>Two keys 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I7221"></A>Two keys 
 <I>K1</I> and <I>K2</I> are defined to be <I>equivalent</I> if Equivalent_Keys 
 (<I>K1</I>, <I>K2</I>) returns True.</span></div>
 <div class="paranum"><a name="p43">43/2</a></div>
-<div class="Normal"><span class="insert2">The actual function for the 
+<div class="Normal">&nbsp;<span class="insert2">The actual function for the 
 generic formal function Hash is expected to return the same value each 
 time it is called with a particular key value. For any two equivalent 
 key values, the actual for Hash is expected to return the same value. 
@@ -232,7 +232,7 @@ If the actual for Hash behaves in some other manner, the behavior of
 this package is unspecified. Which subprograms of this package call Hash, 
 and how many times they call it, is unspecified.<A NAME="I7222"></A></span></div>
 <div class="paranum"><a name="p44">44/2</a></div>
-<div class="Normal"><span class="insert2">The actual function for the 
+<div class="Normal">&nbsp;<span class="insert2">The actual function for the 
 generic formal function Equivalent_Keys on Key_Type values is expected 
 to return the same value each time it is called with a particular pair 
 of key values. It should define an equivalence relationship, that is, 
@@ -241,12 +241,12 @@ behaves in some other manner, the behavior of this package is unspecified.
 Which subprograms of this package call Equivalent_Keys, and how many 
 times they call it, is unspecified.<A NAME="I7223"></A></span></div>
 <div class="paranum"><a name="p45">45/2</a></div>
-<div class="Normal"><span class="insert2">If the value of a key stored 
+<div class="Normal">&nbsp;<span class="insert2">If the value of a key stored 
 in a node of a map is changed other than by an operation in this package 
 such that at least one of Hash or Equivalent_Keys give different results, 
 the behavior of this package is unspecified.<A NAME="I7224"></A></span></div>
 <div class="paranum"><a name="p46">46/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7225"></A><A NAME="I7226"></A><A NAME="I7227"></A>Which 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I7225"></A><A NAME="I7226"></A><A NAME="I7227"></A>Which 
 nodes are the first node and the last node of a map, and which node is 
 the successor of a given node, are unspecified, other than the general 
 semantics described in <A HREF="RM-A-18-4.html">A.18.4</A>.<A NAME="I7228"></A></span></div>
@@ -339,8 +339,8 @@ denotes this object). The iterator object needs finalization.</span></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p62">62/2</a></div>
-<div class="Normal"><span class="insert2">If <I>N</I> is the length of 
-a map, the average time complexity of the subprograms Element, Insert, 
+<div class="Normal">&nbsp;<span class="insert2">If <I>N</I> is the length 
+of a map, the average time complexity of the subprograms Element, Insert, 
 Include, Replace, Delete, Exclude and Find that take a key parameter 
 should be <I>O</I>(log <I>N</I>). The average time complexity of the 
 subprograms that take a cursor parameter should be <I>O</I>(1). The average 

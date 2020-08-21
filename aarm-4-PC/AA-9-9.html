@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,13 +41,13 @@ T that is of a task type [(after any implicit dereference)], the following
 attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term">T'Callable</div><div class="WideHanging-Body">
-<A NAME="I4747"></A><A NAME="I4748"></A>Yields the value True when the 
-task denoted by T is <I>callable</I>, and False otherwise; <A NAME="I4749"></A><A NAME="I4750"></A>a 
+<A NAME="I4690"></A><A NAME="I4691"></A>Yields the value True when the 
+task denoted by T is <I>callable</I>, and False otherwise; <A NAME="I4692"></A><A NAME="I4693"></A>a 
 task is callable unless it is completed or abnormal. The value of this 
 attribute is of the predefined type Boolean.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">T'Terminated</div><div class="WideHanging-Body">
-<A NAME="I4751"></A><A NAME="I4752"></A>Yields the value True if the 
+<A NAME="I4694"></A><A NAME="I4695"></A>Yields the value True if the 
 task denoted by T is terminated, and False otherwise. The value of this 
 attribute is of the predefined type Boolean.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -59,7 +59,7 @@ within any program unit that is, itself, inner to the body of the task
 unit.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term">E'Count</div><div class="WideHanging-Body">
-<A NAME="I4753"></A><A NAME="I4754"></A>Yields the number of calls presently 
+<A NAME="I4696"></A><A NAME="I4697"></A>Yields the number of calls presently 
 queued on the entry E of the current instance of the unit. The value 
 of this attribute is of the type <I>universal_integer</I>.</div>
 <div class="NotesHeader">NOTES</div>

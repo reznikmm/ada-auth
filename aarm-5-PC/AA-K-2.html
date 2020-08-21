@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -28,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +39,7 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I9515"></A>This subclause summarizes the definitions given elsewhere 
+<A NAME="I9831"></A>This subclause summarizes the definitions given elsewhere 
 of the language-defined attributes. Attributes are properties of entities 
 that can be queried by an Ada program.</div>
 <div class="paranum"><a name="p2">2</a></div>
@@ -69,7 +67,7 @@ X that denotes an object, program unit, or label:</div>
 <div class="WideHanging-Body">Denotes the address of the first of the 
 storage elements allocated to X. For a program unit or label, this value 
 refers to the machine code associated with the corresponding body or 
-<SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>. 
+<SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>. 
 The value of this attribute is of type System.Address. See <A HREF="AA-13-3.html">13.3</A>.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="WideHanging-Term">S'Adjacent</div><div class="WideHanging-Body">
@@ -81,11 +79,11 @@ denotes a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Adjacent&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Towards</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="WideHanging-Body"><A NAME="I9516"></A>If <SPAN Class="roman"><I>Towards</I></SPAN> 
+<div class="WideHanging-Body"><A NAME="I9832"></A>If <SPAN Class="roman"><I>Towards</I></SPAN> 
 = <SPAN Class="roman"><I>X</I></SPAN>, the function yields <I>X</I>; 
 otherwise, it yields the machine number of the type <I>T</I> adjacent 
 to <I>X</I> in the direction of <I>Towards</I>, if that machine number 
-exists. <A NAME="I9517"></A><A NAME="I9518"></A>If the result would be 
+exists. <A NAME="I9833"></A><A NAME="I9834"></A>If the result would be 
 outside the base range of S, Constraint_Error is raised. When <I>T</I>'Signed_Zeros 
 is True, a zero result has the sign of <I>X</I>. When <I>Towards</I> 
 is zero, its sign has no bearing on the result. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
@@ -155,14 +153,14 @@ by T is <I>callable</I>, and False otherwise; See <A HREF="AA-9-9.html">9.9</A>.
 <div class="paranum"><a name="p25">25</a></div>
 <div class="WideHanging-Term">E'Caller</div><div class="WideHanging-Body">
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-E that denotes an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>:</div>
+E that denotes an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>:</div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="WideHanging-Body">Yields a value of the type Task_Id that 
 identifies the task whose call is now being serviced. Use of this attribute 
-is allowed only inside an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
-after the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0226">entry_barrier</A></SPAN>, 
-corresponding to the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN> 
+is allowed only inside an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
+after the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0240">entry_barrier</A></SPAN>, 
+corresponding to the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
 denoted by E. See <A HREF="AA-C-7-1.html">C.7.1</A>.</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="WideHanging-Term">S'Ceiling</div><div class="WideHanging-Body">
@@ -188,7 +186,7 @@ type (called <I>T</I>'Class in this International Standard) for the class
 rooted at <I>T</I> (or if S already denotes a class-wide subtype, then 
 S'Class is the same as S).</div>
 <div class="paranum"><a name="p33">33</a></div>
-<div class="WideHanging-Body"><A NAME="I9519"></A><A NAME="I9520"></A>S'Class 
+<div class="WideHanging-Body"><A NAME="I9835"></A><A NAME="I9836"></A>S'Class 
 is unconstrained. However, if S is constrained, then the values of S'Class 
 are only those that when converted to the type <I>T</I> belong to S. 
 See <A HREF="AA-3-9.html">3.9</A>.</div>
@@ -220,7 +218,7 @@ denotes a function with the following specification:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Exponent</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p41">41</a></div>
-<div class="WideHanging-Body"><A NAME="I9521"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
+<div class="WideHanging-Body"><A NAME="I9837"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
 be the value <SPAN Class="roman"><I>Fraction</I></SPAN> &middot; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>Exponent</I></SPAN></SPAN><SPAN STYLE="font-size: 64%">&ndash;</SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>k</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP>, 
 where <SPAN Class="roman"><I>k</I></SPAN> is the normalized exponent 
 of <I>Fraction</I>. If <SPAN Class="roman"><I>v</I></SPAN> is a machine 
@@ -228,7 +226,7 @@ number of the type <I>T</I>, or if |<SPAN Class="roman"><I>v</I></SPAN>|
 &ge; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Model_Small</SPAN>, 
 the function yields <SPAN Class="roman"><I>v</I></SPAN>; otherwise, it 
 yields either one of the machine numbers of the type <I>T</I> adjacent 
-to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I9522"></A><A NAME="I9523"></A>Constraint_Error 
+to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I9838"></A><A NAME="I9839"></A>Constraint_Error 
 is optionally raised if <SPAN Class="roman"><I>v</I></SPAN> is outside 
 the base range of S. A zero result has the sign of <I>Fraction</I> when 
 S'Signed_Zeros is True. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
@@ -236,9 +234,9 @@ S'Signed_Zeros is True. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
 <div class="WideHanging-Term">A'Constrained</div><div class="WideHanging-Body">
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 A that is of a discriminated type (after any implicit dereference):</div>
-<div class="paranum"><a name="p43">43/3</a></div>
+<div class="paranum"><a name="p43">43/5</a></div>
 <div class="WideHanging-Body">Yields the value True if A denotes a constant, 
-a value, a tagged object, or a constrained variable, and False otherwise. 
+a value, a tagged object, or a constrained variable, and False otherwise.<span class="insert5">&nbsp;The value of this attribute is of the predefined type Boolean.</span> 
 See <A HREF="AA-3-7-2.html">3.7.2</A>.</div>
 <div class="paranum"><a name="p44">44</a></div>
 <div class="WideHanging-Term">S'Copy_Sign</div><div class="WideHanging-Body">
@@ -250,10 +248,10 @@ denotes a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Copy_Sign&nbsp;(<SPAN Class="roman"><I>Value</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Sign</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p47">47</a></div>
-<div class="WideHanging-Body"><A NAME="I9524"></A>If the value of <I>Value</I> 
+<div class="WideHanging-Body"><A NAME="I9840"></A>If the value of <I>Value</I> 
 is nonzero, the function yields a result whose magnitude is that of <I>Value</I> 
 and whose sign is that of <I>Sign</I>; otherwise, it yields the value 
-zero. <A NAME="I9525"></A><A NAME="I9526"></A>Constraint_Error is optionally 
+zero. <A NAME="I9841"></A><A NAME="I9842"></A>Constraint_Error is optionally 
 raised if the result is outside the base range of S. A zero result has 
 the sign of <I>Sign</I> when S'Signed_Zeros is True. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
 <div class="paranum"><a name="p48">48</a></div>
@@ -307,6 +305,35 @@ For every decimal fixed point subtype S:</div>
 decimal fixed point subtype S, which corresponds to the number of decimal 
 digits that are representable in objects of the subtype. The value of 
 this attribute is of the type <I>universal_integer</I>. See <A HREF="AA-3-5-10.html">3.5.10</A>.</div>
+<div class="paranum"><a name="p59.1">59.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">S'Enum_Rep</span></div><div class="WideHanging-Body">
+<span class="insert5">For every discrete subtype S:</span></div>
+<div class="paranum"><a name="p59.2">59.2/5</a></div>
+<div class="WideHanging-Body" style="margin-bottom: 0.4em"><span class="insert5">S'Enum_Rep 
+denotes a function with the following specification:</span>&nbsp;</div>
+<div class="paranum"><a name="p59.3">59.3/5</a></div>
+<div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Enum_Rep&nbsp;(Arg&nbsp;:&nbsp;S'Base)&nbsp;<B>return</B>&nbsp;<I>universal_integer</I></span></div>
+<div class="paranum"><a name="p59.4">59.4/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">This function returns 
+the representation value of the value of Arg, as a value of type <I>universal_integer</I>. 
+The <I>representation value</I><A NAME="I9843"></A> is<A NAME="I9844"></A> 
+the internal code specified in an enumeration representation clause, 
+if any, for the type corresponding to the value of Arg, and otherwise 
+is the position number of the value.</span> See <A HREF="AA-13-4.html">13.4</A>.</div>
+<div class="paranum"><a name="p59.5">59.5/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">S'Enum_Val</span></div><div class="WideHanging-Body">
+<span class="insert5">For every discrete subtype S:</span></div>
+<div class="paranum"><a name="p59.6">59.6/5</a></div>
+<div class="WideHanging-Body" style="margin-bottom: 0.4em"><span class="insert5">S'Enum_Val 
+denotes a function with the following specification:</span>&nbsp;</div>
+<div class="paranum"><a name="p59.7">59.7/5</a></div>
+<div class="Indented4Examples"><span class="insert5"><B>function</B>&nbsp;S'Enum_Val&nbsp;(Arg&nbsp;:&nbsp;<I>universal_integer</I>)&nbsp;<B>return</B>&nbsp;S'Base</span></div>
+<div class="paranum"><a name="p59.8">59.8/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">This function returns 
+a value of the type of S whose representation value equals the value 
+of Arg. For the evaluation of a call on S'Enum_Val, if there is no value 
+in the base range of its type with the given representation value, Constraint_Error 
+is raised.</span> See <A HREF="AA-13-4.html">13.4</A>.</div>
 <div class="paranum"><a name="p60">60</a></div>
 <div class="WideHanging-Term">S'Exponent</div><div class="WideHanging-Body">
 For every subtype S of a floating point type <I>T</I>:</div>
@@ -323,11 +350,11 @@ of <I>X</I>. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
 <div class="WideHanging-Term">S'External_Tag</div><div class="WideHanging-Body"><br clear="left">
 For every subtype S of a tagged type <I>T</I> (specific or class-wide):</div>
 <div class="paranum"><a name="p65">65</a></div>
-<div class="WideHanging-Body"><A NAME="I9527"></A><A NAME="I9528"></A>S'External_Tag 
+<div class="WideHanging-Body"><A NAME="I9845"></A><A NAME="I9846"></A>S'External_Tag 
 denotes an external string representation for S'Tag; it is of the predefined 
 type String. External_Tag may be specified for a specific tagged type 
-via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static.<A NAME="I9529"></A><A NAME="I9530"></A> 
+via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
+the expression of such a clause shall be static.<A NAME="I9847"></A><A NAME="I9848"></A> 
 The default external tag representation is implementation defined. See 
 <A HREF="AA-13-13-2.html">13.13.2</A>. See <A HREF="AA-13-3.html">13.3</A>.</div>
 <div class="paranum"><a name="p66">66/1</a></div>
@@ -357,9 +384,9 @@ N-th index range; its type is the corresponding index type. See <A HREF="AA-3-6-
 For a component C of a composite, non-array object R:</div>
 <div class="paranum"><a name="p73">73/2</a></div>
 <div class="WideHanging-Body">If the nondefault bit ordering applies 
-to the composite type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
-specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0319">first_bit</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN>; 
+to the composite type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0333">first_bit</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>; 
 otherwise, denotes the offset, from the start of the first of the storage 
 elements occupied by C, of the first bit occupied by C. This offset is 
 measured in bits. The first bit of a storage element is numbered zero. 
@@ -368,12 +395,11 @@ See <A HREF="AA-13-5-2.html">13.5.2</A>.</div>
 <div class="paranum"><a name="p73.1">73.1/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;S'First_Valid</div><div class="WideHanging-Body"><br clear="left">
 For every static discrete subtype S for which there exists at least one 
-value belonging to S that satisfies <span class="insert4">the predicates</span><span class="delete4">&nbsp;any 
-predicate</span> of S:</div>
+value belonging to S that satisfies the predicates of S:</div>
 <div class="paranum"><a name="p73.2">73.2/4</a></div>
 <div class="WideHanging-Body">S'First_Valid denotes the smallest value 
-that belongs to S and satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-of S. The value of this attribute is of the type of S. See <A HREF="AA-3-5-5.html">3.5.5</A>.</div>
+that belongs to S and satisfies the predicates of S. The value of this 
+attribute is of the type of S. See <A HREF="AA-3-5-5.html">3.5.5</A>.</div>
 <div class="paranum"><a name="p74">74</a></div>
 <div class="WideHanging-Term">S'Floor</div><div class="WideHanging-Body">
 For every subtype S of a floating point type <I>T</I>:</div>
@@ -427,11 +453,11 @@ the following specification:</div>
 <div class="paranum"><a name="p83.4">83.4/4</a></div>
 <div class="WideHanging-Body">The actual parameter shall be a name that 
 denotes an object. The object denoted by the actual parameter can be 
-of any type. This function evaluates the names of the objects involved<span class="insert4">. 
-It</span><span class="delete4">&nbsp;and</span> returns True if the representation 
-of the object denoted by the actual parameter occupies exactly the same 
-bits as the representation of the object denoted by X<span class="insert4">&nbsp;and the objects occupy at least one bit</span>; otherwise, it returns 
-False. See <A HREF="AA-13-3.html">13.3</A>.</div>
+of any type. This function evaluates the names of the objects involved. 
+It returns True if the representation of the object denoted by the actual 
+parameter occupies exactly the same bits as the representation of the 
+object denoted by X and the objects occupy at least one bit; otherwise, 
+it returns False. See <A HREF="AA-13-3.html">13.3</A>.</div>
 <div class="paranum"><a name="p84">84/1</a></div>
 <div class="WideHanging-Term">E'Identity</div><div class="WideHanging-Body">
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -459,13 +485,14 @@ a function with the following specification:&nbsp;</div>
 <div class="WideHanging-Body">The function returns an image of the value 
 of <I>Arg</I> as a String. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p91.1">91.1/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4">X'Image</span></div><div class="WideHanging-Body">
-<span class="insert4">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-X that denotes an object of a scalar type (after any implicit dereference):</span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;X'Image</div><div class="WideHanging-Body">
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X <span class="delete5">that denotes an object&nbsp;</span>of a scalar type<span class="insert5">&nbsp;other than <I>universal_real</I> or <I>universal_fixed</I></span> (after 
+any implicit dereference):</div>
 <div class="paranum"><a name="p91.2">91.2/4</a></div>
-<div class="WideHanging-Body"><span class="insert4">X'Image denotes the 
-result of calling function S'Image with <I>Arg</I> being X, where S is 
-the nominal subtype of X.</span> See <A HREF="AA-3-5.html">3.5</A>.</div>
+<div class="WideHanging-Body">X'Image denotes the result of calling function 
+S'Image with <I>Arg</I> being X, where S is the nominal subtype of X. 
+See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p91.3">91.3/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">E'Index</span></div><div class="WideHanging-Body">
 <span class="insert5">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -534,9 +561,9 @@ N-th index range; its type is the corresponding index type. See <A HREF="AA-3-6-
 For a component C of a composite, non-array object R:</div>
 <div class="paranum"><a name="p107">107/2</a></div>
 <div class="WideHanging-Body">If the nondefault bit ordering applies 
-to the composite type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
-specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0320">last_bit</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN>; 
+to the composite type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0334">last_bit</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>; 
 otherwise, denotes the offset, from the start of the first of the storage 
 elements occupied by C, of the last bit occupied by C. This offset is 
 measured in bits. The value of this attribute is of the type <I>universal_integer</I>. 
@@ -544,12 +571,11 @@ See <A HREF="AA-13-5-2.html">13.5.2</A>.</div>
 <div class="paranum"><a name="p107.1">107.1/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;S'Last_Valid</div><div class="WideHanging-Body"><br clear="left">
 For every static discrete subtype S for which there exists at least one 
-value belonging to S that satisfies <span class="insert4">the predicates</span><span class="delete4">&nbsp;any 
-predicate</span> of S:</div>
+value belonging to S that satisfies the predicates of S:</div>
 <div class="paranum"><a name="p107.2">107.2/4</a></div>
 <div class="WideHanging-Body">S'Last_Valid denotes the largest value 
-that belongs to S and satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-of S. The value of this attribute is of the type of S. See <A HREF="AA-3-5-5.html">3.5.5</A>.</div>
+that belongs to S and satisfies the predicates of S. The value of this 
+attribute is of the type of S. See <A HREF="AA-3-5-5.html">3.5.5</A>.</div>
 <div class="paranum"><a name="p108">108</a></div>
 <div class="WideHanging-Term">S'Leading_Part</div><div class="WideHanging-Body"><br clear="left">
 For every subtype S of a floating point type <I>T</I>:</div>
@@ -574,7 +600,7 @@ and <I>Radix_Digits</I> is positive;</div>
 &middot; <SPAN Class="roman"><I>v</I></SPAN>, when <I>X</I> is negative 
 and <I>Radix_Digits</I> is positive.&nbsp;</div>
 <div class="paranum"><a name="p114">114</a></div>
-<div class="WideHanging-Body"><A NAME="I9531"></A><A NAME="I9532"></A><A NAME="I9533"></A>Constraint_Error 
+<div class="WideHanging-Body"><A NAME="I9849"></A><A NAME="I9850"></A><A NAME="I9851"></A>Constraint_Error 
 is raised when <I>Radix_Digits</I> is zero or negative. A zero result, 
 which can only occur when <I>X</I> is zero, has the sign of <I>X</I>. 
 See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
@@ -606,10 +632,10 @@ denotes a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Machine&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p122">122</a></div>
-<div class="WideHanging-Body"><A NAME="I9534"></A>If <I>X</I> is a machine 
+<div class="WideHanging-Body"><A NAME="I9852"></A>If <I>X</I> is a machine 
 number of the type <I>T</I>, the function yields <I>X</I>; otherwise, 
 it yields the value obtained by rounding or truncating <I>X</I> to either 
-one of the adjacent machine numbers of the type <I>T</I>. <A NAME="I9535"></A><A NAME="I9536"></A>Constraint_Error 
+one of the adjacent machine numbers of the type <I>T</I>. <A NAME="I9853"></A><A NAME="I9854"></A>Constraint_Error 
 is raised if rounding or truncating <I>X</I> to the precision of the 
 machine numbers results in a value outside the base range of S. A zero 
 result has the sign of <I>X</I> when S'Signed_Zeros is True. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
@@ -691,7 +717,7 @@ nearest to <I>X</I>. If <I>X</I> lies exactly halfway between two integers,
 one of those integers is returned, but which of them is returned is unspecified. 
 A zero result has the sign of <I>X</I> when S'Signed_Zeros is True. This 
 function provides access to the rounding behavior which is most efficient 
-on the target processor.<A NAME="I9537"></A> See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
+on the target processor.<A NAME="I9855"></A> See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
 <div class="paranum"><a name="p137">137</a></div>
 <div class="WideHanging-Term">S'Machine_Rounds</div><div class="WideHanging-Body"><br clear="left">
 For every subtype S of a floating point type <I>T</I>:</div>
@@ -818,30 +844,50 @@ For every modular subtype S:</div>
 <div class="WideHanging-Body">S'Modulus yields the modulus of the type 
 of S, as a value of the type <I>universal_integer</I>. See <A HREF="AA-3-5-4.html">3.5.4</A>.</div>
 <div class="paranum"><a name="p164.1">164.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert5">P'Nonblocking</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+P that denotes a package (including a formal package):</span></div>
+<div class="paranum"><a name="p164.2">164.2/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">Denotes whether package 
+P is considered nonblocking; the type of this attribute is the predefined 
+type Boolean.</span> See <A HREF="AA-9-5.html">9.5</A>.</div>
+<div class="paranum"><a name="p164.3">164.3/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert5">S'Nonblocking</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+S that denotes a subprogram (including a formal subprogram):</span></div>
+<div class="paranum"><a name="p164.4">164.4/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">Denotes whether subprogram 
+S is considered nonblocking; the type of this attribute is the predefined 
+type Boolean.</span> See <A HREF="AA-9-5.html">9.5</A>.</div>
+<div class="paranum"><a name="p164.5">164.5/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert5">S'Nonblocking</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+S that denotes a subtype (including formal subtypes):</span></div>
+<div class="paranum"><a name="p164.6">164.6/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">Denotes whether predefined 
+operators (and in the case of access-to-subprogram subtypes) a subprogram 
+designated by a value of type S are considered nonblocking; the type 
+of this attribute is the predefined type Boolean.</span> See <A HREF="AA-9-5.html">9.5</A>.</div>
+<div class="paranum"><a name="p164.7">164.7/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert5">S'Object_Size</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">For every subtype S:</span></div>
-<div class="paranum"><a name="p164.2">164.2/5</a></div>
+<div class="paranum"><a name="p164.8">164.8/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">If S is definite, 
 denotes the size (in bits) of a stand-alone aliased object, or a component 
-of subtype S in the absence of an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+of subtype S in the absence of an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 or representation item that specifies the size of the object or component. 
 If S is indefinite, the meaning is implementation-defined. The value 
 of this attribute is of the type <I>universal_integer</I>.</span> See 
 <A HREF="AA-13-3.html">13.3</A>.</div>
-<div class="paranum"><a name="p164.3">164.3/3</a></div>
+<div class="paranum"><a name="p164.9">164.9/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;X'Old</div><div class="WideHanging-Body">
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 X that denotes an object of a nonlimited type:</div>
-<div class="paranum"><a name="p164.4">164.4/4</a></div>
-<div class="WideHanging-Body"><span class="insert4">Each</span><span class="delete4">&nbsp;For 
-each</span> X'Old in a postcondition expression that is enabled<span class="insert4">&nbsp;denotes</span><span class="delete4">,</span> a constant <span class="insert4">that 
-</span>is implicitly declared at the beginning of the subprogram <span class="insert4">body,</span><span class="delete4">&nbsp;or</span> 
-entry<span class="insert4">&nbsp;body, or accept statement</span>.<span class="delete4">&nbsp;The constant is of the type of X and is initialized to the result of 
-evaluating X (as an expression) at the point of the constant declaration. 
-The value of X'Old in the postcondition expression is the value of this 
-constant; the type of X'Old is the type of X. These implicit constant 
-declarations occur in an arbitrary order.<A NAME="I9538"></A></span> 
-See <A HREF="AA-6-1-1.html">6.1.1</A>.</div>
+<div class="paranum"><a name="p164.10">164.10/4</a></div>
+<div class="WideHanging-Body">Each X'Old in a postcondition expression 
+that is enabled denotes a constant that is implicitly declared at the 
+beginning of the subprogram body, entry body, or accept statement. See 
+<A HREF="AA-6-1-1.html">6.1.1</A>.</div>
 <div class="paranum"><a name="p165">165</a></div>
 <div class="WideHanging-Term">S'Class'Output</div><div class="WideHanging-Body"><br clear="left">
 For every subtype S'Class of a class-wide type <I>T</I>'Class:</div>
@@ -918,9 +964,9 @@ See <A HREF="AA-3-5-5.html">3.5.5</A>.</div>
 For a component C of a composite, non-array object R:</div>
 <div class="paranum"><a name="p180">180/2</a></div>
 <div class="WideHanging-Body">If the nondefault bit ordering applies 
-to the composite type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN> 
-specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0318">position</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0317">component_clause</A></SPAN>; 
+to the composite type, and if a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN> 
+specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0332">position</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0331">component_clause</A></SPAN>; 
 otherwise, denotes the same value as R.C'Address &ndash; R'Address. The 
 value of this attribute is of the type <I>universal_integer</I>. See 
 <A HREF="AA-13-5-2.html">13.5.2</A>.</div>
@@ -934,15 +980,15 @@ a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Pred(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p184">184</a></div>
-<div class="WideHanging-Body"><A NAME="I9539"></A>For an enumeration 
+<div class="WideHanging-Body"><A NAME="I9856"></A>For an enumeration 
 type, the function returns the value whose position number is one less 
-than that of the value of <I>Arg</I>; <A NAME="I9540"></A><A NAME="I9541"></A>Constraint_Error 
+than that of the value of <I>Arg</I>; <A NAME="I9857"></A><A NAME="I9858"></A>Constraint_Error 
 is raised if there is no such value of the type. For an integer type, 
 the function returns the result of subtracting one from the value of 
 <I>Arg</I>. For a fixed point type, the function returns the result of 
 subtracting <I>small</I> from the value of <I>Arg</I>. For a floating 
 point type, the function returns the machine number (as defined in <A HREF="AA-3-5-7.html">3.5.7</A>) 
-immediately below the value of <I>Arg</I>; <A NAME="I9542"></A><A NAME="I9543"></A>Constraint_Error 
+immediately below the value of <I>Arg</I>; <A NAME="I9859"></A><A NAME="I9860"></A>Constraint_Error 
 is raised if there is no such machine number. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p184.1">184.1/2</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;P'Priority</div><div class="WideHanging-Body">
@@ -1015,7 +1061,7 @@ denotes a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Remainder&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Y</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p202">202</a></div>
-<div class="WideHanging-Body"><A NAME="I9544"></A>For nonzero <I>Y</I>, 
+<div class="WideHanging-Body"><A NAME="I9861"></A>For nonzero <I>Y</I>, 
 let <SPAN Class="roman"><I>v</I></SPAN> be the value <SPAN Class="roman"><I>X</I></SPAN> 
 &ndash; <SPAN Class="roman"><I>n</I></SPAN> &middot; <SPAN Class="roman"><I>Y</I></SPAN>, 
 where <SPAN Class="roman"><I>n</I></SPAN> is the integer nearest to the 
@@ -1024,25 +1070,29 @@ if |<SPAN Class="roman"><I>n</I></SPAN> &ndash; <SPAN Class="roman"><I>X</I></SP
 = 1/2, then <SPAN Class="roman"><I>n</I></SPAN> is chosen to be even. 
 If <SPAN Class="roman"><I>v</I></SPAN> is a machine number of the type 
 <I>T</I>, the function yields <SPAN Class="roman"><I>v</I></SPAN>; otherwise, 
-it yields zero. <A NAME="I9545"></A><A NAME="I9546"></A>Constraint_Error 
+it yields zero. <A NAME="I9862"></A><A NAME="I9863"></A>Constraint_Error 
 is raised if <I>Y</I> is zero. A zero result has the sign of <I>X</I> 
 when S'Signed_Zeros is True. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
 <div class="paranum"><a name="p202.1">202.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;F'Result</div><div class="WideHanging-Body">
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-F that denotes a function declaration:</div>
+F that denotes a function declaration<span class="insert5">&nbsp;or an access-to-function 
+type</span>:</div>
 <div class="paranum"><a name="p202.2">202.2/5</a></div>
-<div class="WideHanging-Body">Within a postcondition expression for function 
-F, denotes the result object of the function. The type of this attribute 
-is that of the function result except within a Post'Class postcondition 
-expression for a function with a controlling result or with a controlling 
-access result<span class="insert5">; in those cases the type of the attribute 
-was described previously.</span><span class="delete5">. For a controlling 
-result, the type of the attribute is <I>T</I>'Class, where <I>T</I> is 
-the function result type. For a controlling access result, the type of 
-the attribute is an anonymous access type whose designated type is <I>T</I>'Class, 
-where <I>T</I> is the designated type of the function result type.</span> 
-See <A HREF="AA-6-1-1.html">6.1.1</A>.</div>
+<div class="WideHanging-Body">Within a postcondition expression for <span class="delete5">function 
+</span>F, denotes the <span class="insert5">return</span><span class="delete5">&nbsp;result</span> 
+object of the function<span class="insert5">&nbsp;call for which the postcondition 
+expression is evaluated</span>. The type of this attribute is that of 
+the <span class="insert5">result subtype of the&nbsp;</span>function <span class="insert5">or 
+access-to-function type&nbsp;</span><span class="delete5">result</span> except 
+within a Post'Class postcondition expression for a function with a controlling 
+result or with a controlling access result<span class="insert5">; in 
+those cases the type of the attribute was described previously</span><span class="delete5">. 
+For a controlling result, the type of the attribute is <I>T</I>'Class, 
+where <I>T</I> is the function result type. For a controlling access 
+result, the type of the attribute is an anonymous access type whose designated 
+type is <I>T</I>'Class, where <I>T</I> is the designated type of the 
+function result type</span>. See <A HREF="AA-6-1-1.html">6.1.1</A>.</div>
 <div class="paranum"><a name="p203">203</a></div>
 <div class="WideHanging-Term">S'Round</div><div class="WideHanging-Body">
 For every decimal fixed point subtype S:</div>
@@ -1096,7 +1146,7 @@ For every decimal fixed point subtype S:</div>
 <div class="paranum"><a name="p216">216</a></div>
 <div class="WideHanging-Body">S'Scale denotes the <I>scale</I> of the 
 subtype S, defined as the value N such that S'Delta = 10.0**(&ndash;N). 
-<A NAME="I9547"></A>The scale indicates the position of the point relative 
+<A NAME="I9864"></A>The scale indicates the position of the point relative 
 to the rightmost significant digits of values of subtype S. The value 
 of this attribute is of the type <I>universal_integer</I>. See <A HREF="AA-3-5-10.html">3.5.10</A>.</div>
 <div class="paranum"><a name="p217">217</a></div>
@@ -1110,13 +1160,13 @@ denotes a function with the following specification:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Adjustment</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p220">220</a></div>
-<div class="WideHanging-Body"><A NAME="I9548"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
+<div class="WideHanging-Body"><A NAME="I9865"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
 be the value <SPAN Class="roman"><I>X</I></SPAN> &middot; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>Adjustment</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP>. 
 If <SPAN Class="roman"><I>v</I></SPAN> is a machine number of the type 
 <I>T</I>, or if |<SPAN Class="roman"><I>v</I></SPAN>| &ge; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Model_Small</SPAN>, 
 the function yields <SPAN Class="roman"><I>v</I></SPAN>; otherwise, it 
 yields either one of the machine numbers of the type <I>T</I> adjacent 
-to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I9549"></A><A NAME="I9550"></A>Constraint_Error 
+to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I9866"></A><A NAME="I9867"></A>Constraint_Error 
 is optionally raised if <SPAN Class="roman"><I>v</I></SPAN> is outside 
 the base range of S. A zero result has the sign of <I>X</I> when S'Signed_Zeros 
 is True. See <A HREF="AA-A-5-3.html">A.5.3</A>.</div>
@@ -1212,15 +1262,15 @@ a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Succ(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p241">241</a></div>
-<div class="WideHanging-Body"><A NAME="I9551"></A>For an enumeration 
+<div class="WideHanging-Body"><A NAME="I9868"></A>For an enumeration 
 type, the function returns the value whose position number is one more 
-than that of the value of <I>Arg</I>; <A NAME="I9552"></A><A NAME="I9553"></A>Constraint_Error 
+than that of the value of <I>Arg</I>; <A NAME="I9869"></A><A NAME="I9870"></A>Constraint_Error 
 is raised if there is no such value of the type. For an integer type, 
 the function returns the result of adding one to the value of <I>Arg</I>. 
 For a fixed point type, the function returns the result of adding <I>small</I> 
 to the value of <I>Arg</I>. For a floating point type, the function returns 
 the machine number (as defined in <A HREF="AA-3-5-7.html">3.5.7</A>) 
-immediately above the value of <I>Arg</I>; <A NAME="I9554"></A><A NAME="I9555"></A>Constraint_Error 
+immediately above the value of <I>Arg</I>; <A NAME="I9871"></A><A NAME="I9872"></A>Constraint_Error 
 is raised if there is no such machine number. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p242">242</a></div>
 <div class="WideHanging-Term">S'Tag</div><div class="WideHanging-Body">
@@ -1291,7 +1341,7 @@ a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Val(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p261">261</a></div>
-<div class="WideHanging-Body"><A NAME="I9556"></A><A NAME="I9557"></A>This 
+<div class="WideHanging-Body"><A NAME="I9873"></A><A NAME="I9874"></A>This 
 function returns a value of the type of S whose position number equals 
 the value of <I>Arg</I>. See <A HREF="AA-3-5-5.html">3.5.5</A>.</div>
 <div class="paranum"><a name="p262">262</a></div>
@@ -1300,9 +1350,9 @@ For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>
 X that denotes a scalar object (after any implicit dereference):</div>
 <div class="paranum"><a name="p263">263/4</a></div>
 <div class="WideHanging-Body">Yields True if and only if the object denoted 
-by X is normal, has a valid representation, and <span class="insert4">then, 
-if the preceding conditions hold, the value of X also satisfies the predicates<A NAME="I9558"></A></span><span class="delete4">&nbsp;the 
-predicate<A NAME="I9559"></A></span> of the nominal subtype of X<span class="delete4">&nbsp;evaluates to True</span>. The value of this attribute is of the predefined 
+by X is normal, has a valid representation, and then, if the preceding 
+conditions hold, the value of X also satisfies the predicates<A NAME="I9875"></A> 
+of the nominal subtype of X. The value of this attribute is of the predefined 
 type Boolean. See <A HREF="AA-13-9-2.html">13.9.2</A>.</div>
 <div class="paranum"><a name="p264">264</a></div>
 <div class="WideHanging-Term">S'Value</div><div class="WideHanging-Body">
@@ -1335,16 +1385,17 @@ denotes a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;Wide_String</div>
 <div class="paranum"><a name="p273">273/3</a></div>
-<div class="WideHanging-Body"><A NAME="I9560"></A>The function returns 
+<div class="WideHanging-Body"><A NAME="I9876"></A>The function returns 
 an image of the value of <I>Arg</I> as a Wide_String. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p273.1">273.1/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert4">X'Wide_Image</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert4">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-X that denotes an object of a scalar type (after any implicit dereference):</span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;X'Wide_Image</div><div class="WideHanging-Body"><br clear="left">
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X <span class="delete5">that denotes an object&nbsp;</span>of a scalar type<span class="insert5">&nbsp;other than <I>universal_real</I> or <I>universal_fixed</I></span> (after 
+any implicit dereference):</div>
 <div class="paranum"><a name="p273.2">273.2/4</a></div>
-<div class="WideHanging-Body"><span class="insert4">X'Wide_Image denotes 
-the result of calling function S'Wide_Image with <I>Arg</I> being X, 
-where S is the nominal subtype of X.</span> See <A HREF="AA-3-5.html">3.5</A>.</div>
+<div class="WideHanging-Body">X'Wide_Image denotes the result of calling 
+function S'Wide_Image with <I>Arg</I> being X, where S is the nominal 
+subtype of X. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p274">274</a></div>
 <div class="WideHanging-Term">S'Wide_Value</div><div class="WideHanging-Body">
 For every scalar subtype S:</div>
@@ -1368,17 +1419,18 @@ denotes a function with the following specification:&nbsp;</div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String</div>
 <div class="paranum"><a name="p277.4">277.4/2</a></div>
-<div class="WideHanging-Body"><A NAME="I9561"></A>The function returns 
+<div class="WideHanging-Body"><A NAME="I9877"></A>The function returns 
 an <I>image</I> of the value of <I>Arg</I>, that is, a sequence of characters 
 representing the value in display form. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p277.5">277.5/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert4">X'Wide_Wide_Image</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert4">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-X that denotes an object of a scalar type (after any implicit dereference):</span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;X'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
+For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+X <span class="delete5">that denotes an object&nbsp;</span>of a scalar type<span class="insert5">&nbsp;other than <I>universal_real</I> or <I>universal_fixed</I></span> (after 
+any implicit dereference):</div>
 <div class="paranum"><a name="p277.6">277.6/4</a></div>
-<div class="WideHanging-Body"><span class="insert4">X'Wide_Wide_Image 
-denotes the result of calling function S'Wide_Wide_Image with <I>Arg</I> 
-being X, where S is the nominal subtype of X.</span> See <A HREF="AA-3-5.html">3.5</A>.</div>
+<div class="WideHanging-Body">X'Wide_Wide_Image denotes the result of 
+calling function S'Wide_Wide_Image with <I>Arg</I> being X, where S is 
+the nominal subtype of X. See <A HREF="AA-3-5.html">3.5</A>.</div>
 <div class="paranum"><a name="p277.7">277.7/2</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;S'Wide_Wide_Value</div><div class="WideHanging-Body"><br clear="left">
 For every scalar subtype S:</div>

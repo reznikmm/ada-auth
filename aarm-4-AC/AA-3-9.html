@@ -21,19 +21,19 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -166,7 +166,7 @@ A private extension, which is a partial view of a record extension, can
 be declared in the visible part of a package (see <A HREF="AA-7-3.html">7.3</A>) 
 or in a generic formal part (see <A HREF="AA-12-5-1.html">12.5.1</A>).</span></div>
 <div class="paranum"><a name="p2.1">2.1/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 <span class="insert2"><A NAME="I2323"></A><A NAME="I2324"></A><A NAME="I2325"></A>Every 
 type extension is also a tagged type, and is a <I>record extension</I> 
 or a <I>private extension</I> of some other tagged type, or a noninterface 
@@ -330,7 +330,7 @@ T'Tag&rdquo; is not needed, because a membership test can be used. However,
 comparing the tags of two objects cannot be done via membership. This 
 is one reason to allow equality for type Tag.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2">No_Tag is the default initial value of type Tag.</span> 
 </div>
 <div class="paranum"><a name="p9.c">9.c/2</a></div>
@@ -338,7 +338,7 @@ is one reason to allow equality for type Tag.&nbsp;</div>
 <span class="insert2">This is similar to the requirement that all access 
 values be initialized to <B>null</B>.</span>&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 The function <span class="insert2">Wide_Wide_Expanded_Name</span><span class="delete2">&nbsp;Expanded_Name</span> 
 returns the full expanded name of the first subtype of the specific type 
 identified by the tag, in upper case, starting with a root library unit. 
@@ -355,7 +355,7 @@ it, does not denote a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0199">renaming_d
 <span class="insert2">Tags.Wide_Wide_Expanded_Name</span><span class="delete2">&nbsp;Tags.Expanded_Name</span> 
 for types declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0160">block_statement</A></SPAN>.</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 <span class="insert2">The function Expanded_Name (respectively, Wide_Expanded_Name) 
 returns the same sequence of graphic characters as that defined for Wide_Wide_Expanded_Name, 
 if all the graphic characters are defined in Character (respectively, 
@@ -381,12 +381,12 @@ The attribute is needed so that it can be <span class="insert2">specified</span>
 via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00417.TXT">AI95-00417-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00417.TXT">AI95-00417-01</A></I>} 
 <span class="insert2">The string returned by the functions Expanded_Name, 
 Wide_Expanded_Name, Wide_Wide_Expanded_Name, and External_Tag has lower 
 bound 1.</span></div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
 The function Internal_Tag returns <span class="insert2">a</span><span class="delete2">&nbsp;the</span> 
 tag that corresponds to the given external tag, or raises Tag_Error if 
 the given string is not the external tag for any specific type of the 
@@ -405,7 +405,7 @@ for non-library-level types as the tag can be created multiple times
 and possibly multiple copies can exist at the same time, making the check 
 complex.</span>&nbsp;</div>
 <div class="paranum"><a name="p12.1">12.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0113-1.TXT">AI05-0113-1</A></I>} 
 <span class="insert2">The function Descendant_Tag returns the (internal) 
 tag for the type that corresponds to the given external tag and is both 
@@ -435,7 +435,7 @@ are multiple instances at the same accessibility level as the type. (The
 Standard allows default external tags to not be unique in this case.)</span> 
 </div>
 <div class="paranum"><a name="p12.2">12.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 <span class="insert2">The function Is_Descendant_At_Same_Level returns 
 True if the Descendant tag identifies a type that is both a descendant 
 of the type identified by Ancestor and at the same accessibility level. 
@@ -448,7 +448,7 @@ be used to determine prior to using T'Class'Output whether Tag_Error
 will be raised, and also can be used in constructing a user-defined replacement 
 for T'Class'Output.</span>&nbsp;</div>
 <div class="paranum"><a name="p12.3">12.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
 <span class="insert3">For the purposes of the dynamic semantics of functions 
 Descendant_Tag and Is_Descendant_At_Same_Level, a tagged type T2 is a 
 <I>descendant</I> of a type T1 if it is the same as T1, or if its parent 
@@ -461,7 +461,7 @@ other contexts, &ldquo;descendant&rdquo; is dependent on visibility,
 and the particular view a derived type has of its parent type. See <A HREF="AA-7-3-1.html">7.3.1</A>.</span> 
 </div>
 <div class="paranum"><a name="p12.4">12.4/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
 <span class="insert2">The function Parent_Tag returns the tag of the 
 parent type of the type whose tag is T. If the type does not have a parent 
@@ -474,7 +474,7 @@ type; a private extension appears to define a parent type, but it does
 not (only the various forms of derivation do that). As this is a run-time 
 operation, ignoring&nbsp;</span><span class="insert4">privacy</span><span class="insert2"></span><span class="insert2"><span class="delete4">&nbsp;privateness</span></span><span class="insert2">&nbsp;is OK.</span>&nbsp;</div>
 <div class="paranum"><a name="p12.5">12.5/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
 <span class="insert2">The function Interface_Ancestor_Tags returns an 
 array containing the tag of each interface ancestor type of the type 
 whose tag is T, other than T itself. The lower bound of the returned 
@@ -492,7 +492,7 @@ where an interface appears in the derivation tree has no effect on the
 semantics of the type; the only interesting property is whether the type 
 has an interface as an ancestor.</span>&nbsp;</div>
 <div class="paranum"><a name="p12.6">12.6/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0173-1.TXT">AI05-0173-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0173-1.TXT">AI05-0173-1</A></I>} 
 <span class="insert3">The function Is_Abstract returns True if the type 
 whose tag is T is abstract, and False otherwise.</span></div>
 <div class="paranum"><a name="p13">13</a></div>
@@ -551,7 +551,7 @@ about whether the Tag attribute should reflect the tag of the type of
 X, or the tag of X. No such confusion is possible if X is of a class-wide 
 type.&nbsp;</div>
 <div class="paranum"><a name="p18.1">18.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
 <span class="insert2">The following language-defined generic function 
 exists:</span></div>
@@ -569,7 +569,7 @@ exists:</span></div>
 <B>pragma</B>&nbsp;Preelaborate(Generic_Dispatching_Constructor);</span><span class="insert2"><span class="delete3"><BR>
 <B>pragma</B>&nbsp;Convention(Intrinsic,&nbsp;Generic_Dispatching_Constructor);</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p18.3">18.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2">Tags.Generic_Dispatching_Constructor provides a 
 mechanism to create an object of an appropriate type from just a tag 
 value. The function Constructor is expected to create the object given 
@@ -637,7 +637,7 @@ a class-wide result type is that of the return <span class="insert2">object</spa
 conversion and by parameter passing. The tag of a value is the tag of 
 the associated object (see <A HREF="AA-6-2.html">6.2</A>).</div>
 <div class="paranum"><a name="p25.1">25.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
@@ -647,7 +647,7 @@ Expanded_Name, External_Tag,&nbsp;</span><span class="insert3">Interface_Ancesto
 </span><span class="insert2"><span class="delete3">or&nbsp;</span></span><span class="insert2">Parent_Tag</span><span class="insert3">, 
 Wide_Expanded_Name, or Wide_Wide_Expanded_Name</span><span class="insert2">&nbsp;if any tag passed is No_Tag.</span></div>
 <div class="paranum"><a name="p25.2">25.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2">An instance of Tags.Generic_Dispatching_Constructor 
 raises Tag_Error if The_Tag does not represent a concrete descendant 
 of T or if the innermost master (see <A HREF="AA-7-6-1.html">7.6.1</A>) 
@@ -668,7 +668,7 @@ attributes are declared at the same dynamic level as the type used.</span>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p25.3">25.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2"><A NAME="I2365"></A>If an internal tag provided 
 to an instance of Tags.Generic_Dispatching_Constructor or to any subprogram 
 declared in package Tags identifies either a type that is not library-level 
@@ -722,7 +722,7 @@ be raised.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
 The implementation of <span class="insert2">Internal_Tag and Descendant_Tag</span><span class="delete2">&nbsp;the 
 functions in Ada.Tags</span> may raise Tag_Error if no specific type 
@@ -753,7 +753,7 @@ in this rule.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p26.1">26.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0113-1.TXT">AI05-0113-1</A></I>} 
 <span class="insert2">Internal_Tag should return the tag of a type</span><span class="insert3">, 
 if one exists,</span><span class="insert2">&nbsp;whose innermost master is 

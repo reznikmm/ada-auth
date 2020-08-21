@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,7 +51,7 @@ they are also used to explain the meaning of a user-declared floating
 point type declaration. The model numbers of a derived type are those 
 of the parent type; the model numbers of a subtype are those of its type.</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I9155"></A>The <I>model numbers</I> of a 
+<div class="Normal"><A NAME="I9458"></A>The <I>model numbers</I> of a 
 floating point type T are zero and all the values expressible in the 
 canonical form (for the type T), in which <I>mantissa</I> has T'Model_Mantissa 
 digits and <I>exponent</I> has a value greater than or equal to T'Model_Emin. 
@@ -83,9 +83,9 @@ The implementation will then be able to conform to the requirements of
 the weaker model defined by the sparser set of model numbers and the 
 smaller safe range.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I9156"></A>A <I>model interval</I> of a 
+<div class="Normal"><A NAME="I9459"></A>A <I>model interval</I> of a 
 floating point type is any interval whose bounds are model numbers of 
-the type. <A NAME="I9157"></A>The <I>model interval</I> of a type T <I>associated 
+the type. <A NAME="I9460"></A>The <I>model interval</I> of a type T <I>associated 
 with a value</I> <I>v</I> is the smallest model interval of T that includes 
 <I>v</I>. (The model interval associated with a model number of a type 
 consists of that number only.)&nbsp;</div>
@@ -103,7 +103,7 @@ point subtype that yield a value of the type; such operations also yield
 exact results (see <A HREF="AA-3-5-8.html">3.5.8</A> and <A HREF="AA-A-5-3.html">A.5.3</A>). 
 </div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I9158"></A>An <I>operand interval</I> is 
+<div class="Normal"><A NAME="I9461"></A>An <I>operand interval</I> is 
 the model interval, of the type specified for the operand of an operation, 
 associated with the value of the operand.</div>
 <div class="paranum"><a name="p7">7</a></div>
@@ -113,7 +113,7 @@ the required bounds on the result are given by a model interval of T
 (called the <I>result interval</I>) defined in terms of the operand values 
 as follows:&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Bulleted"><A NAME="I9159"></A>The result interval is the 
+<div class="Bulleted"><A NAME="I9462"></A>The result interval is the 
 smallest model interval of T that includes the minimum and the maximum 
 of all the values obtained by applying the (exact) mathematical operation 
 to values arbitrarily selected from the respective operand intervals. 
@@ -135,13 +135,13 @@ the result interval is implementation defined.&nbsp;</div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The result interval 
 in certain cases of fixed-to-float conversion.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9160"></A><A NAME="I9161"></A>For any of 
+<div class="Normal"><A NAME="I9463"></A><A NAME="I9464"></A>For any of 
 the foregoing operations, the implementation shall deliver a value that 
 belongs to the result interval when both bounds of the result interval 
 are in the safe range of the result type T, as determined by the values 
 of T'Safe_First and T'Safe_Last; otherwise,&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted"><A NAME="I9162"></A>if T'Machine_Overflows is True, 
+<div class="Bulleted"><A NAME="I9465"></A>if T'Machine_Overflows is True, 
 the implementation shall either deliver a value that belongs to the result 
 interval or raise Constraint_Error;</div>
 <div class="paranum"><a name="p13">13</a></div>
@@ -183,7 +183,7 @@ an infinite set.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p16.c">16.c</a></div>
-<div class="Annotations"><A NAME="I9163"></A>Giving the model numbers 
+<div class="Annotations"><A NAME="I9466"></A>Giving the model numbers 
 the hardware radix, instead of always a radix of two, allows (in conjunction 
 with other changes) some borderline declared types to be represented 
 with less precision than in Ada 83 (i.e., with single precision, whereas 
@@ -215,7 +215,7 @@ eligible for the representation of T.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p16.g">16.g</a></div>
-<div class="Annotations"><A NAME="I9164"></A>Giving the model numbers 
+<div class="Annotations"><A NAME="I9467"></A>Giving the model numbers 
 the hardware radix allows for practical implementations on decimal hardware. 
 </div>
 

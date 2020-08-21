@@ -19,14 +19,14 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -95,7 +95,7 @@ at least half the modulus.&nbsp;</div>
 <div class="Bulleted">Floating point types corresponding to each floating 
 point format fully supported by the hardware.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"></span><span class="insert2"><span class="delete3">Support 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"></span><span class="insert2"><span class="delete3">Support 
 for interfacing to any foreign language is optional. However, an implementation 
 shall not provide any attribute, library unit, or pragma having the same 
 name as an attribute, library unit, or pragma (respectively) specified 
@@ -113,7 +113,7 @@ library units that are children of Interfaces, and may add declarations
 to the visible part of Interfaces in addition to the ones defined above. 
 </div>
 <div class="paranum"><a name="p11.1">11.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">A child package of package 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">A child package of package 
 Interfaces with the name of a convention may be provided independently 
 of whether the convention is supported by the&nbsp;</span><span class="insert2"><span class="delete3">pragma 
 </span></span><span class="insert2">Convention&nbsp;</span><span class="insert3">aspect 
@@ -125,7 +125,7 @@ should be provided directly in Interfaces.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN><span class="delete2">For each implementation-defined 
 convention identifier, there should be a child package of package Interfaces 
 with the corresponding name. This package should contain any declarations 
@@ -134,9 +134,9 @@ represented by the convention. Any declarations useful for interfacing
 to any language on the given hardware architecture should be provided 
 directly in Interfaces.</span>&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">An implementation supporting an interface to C, COBOL, 
-or Fortran should provide the corresponding package or packages described 
-in the following <span class="insert3">subclauses</span><span class="delete3">&nbsp;clauses</span>. 
+<div class="Normal">&nbsp;An implementation supporting an interface to C, 
+COBOL, or Fortran should provide the corresponding package or packages 
+described in the following <span class="insert3">subclauses</span><span class="delete3">&nbsp;clauses</span>. 
 </div>
 
 <HR>

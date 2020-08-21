@@ -36,8 +36,8 @@
 <HR>
 <H1>9 &nbsp; Tasks and Synchronization</H1>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I4058"></A>The execution of an Ada program 
-consists of the execution of one or more <I>tasks</I>. <A NAME="I4059"></A><A NAME="I4060"></A>Each 
+<div class="Normal"><A NAME="I4046"></A>The execution of an Ada program 
+consists of the execution of one or more <I>tasks</I>. <A NAME="I4047"></A><A NAME="I4048"></A>Each 
 task represents a <span class="insert5">separable activity</span><span class="delete5">&nbsp;separate 
 thread of control</span> that proceeds independently and concurrently 
 between the points where it <I>interacts</I> with other tasks. <span class="insert5">A 
@@ -45,14 +45,14 @@ single task, when within the context of a parallel construct, can represent
 multiple logical threads of control which can proceed in parallel; in 
 other contexts, each task represents one logical thread of control.</span><span class="delete5">&nbsp;The 
 various forms of task interaction are described in this clause, and include:</span> 
-<A NAME="I4061"></A><A NAME="I4062"></A><A NAME="I4063"></A><A NAME="I4064"></A></div>
+<A NAME="I4049"></A><A NAME="I4050"></A><A NAME="I4051"></A><A NAME="I4052"></A></div>
 <div class="paranum"><a name="p1.1">1.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert5">The 
 various forms of task interaction are described in this clause, and include:</span></div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Bulleted">the activation and termination of a task;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Bulleted"><A NAME="I4065"></A>a call on a protected subprogram 
+<div class="Bulleted"><A NAME="I4053"></A>a call on a protected subprogram 
 of a <I>protected object</I>, providing exclusive read-write access, 
 or concurrent read-only access to shared data;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -79,17 +79,17 @@ is properly synchronized through some other kind of task interaction.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4066"></A>The properties of a task are 
+<div class="Normal"><A NAME="I4054"></A>The properties of a task are 
 defined by a corresponding task declaration and <SPAN Class="swiss"><A HREF="RM-9-1.html#S0226">task_body</A></SPAN>, 
 which together define a program unit called a <I>task unit</I>.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/5</a></div>
 <div class="Normal">Over time, tasks proceed through various <I>states</I>. 
-<A NAME="I4067"></A><A NAME="I4068"></A><A NAME="I4069"></A><A NAME="I4070"></A><A NAME="I4071"></A><A NAME="I4072"></A><A NAME="I4073"></A><A NAME="I4074"></A>A 
+<A NAME="I4055"></A><A NAME="I4056"></A><A NAME="I4057"></A><A NAME="I4058"></A><A NAME="I4059"></A><A NAME="I4060"></A><A NAME="I4061"></A><A NAME="I4062"></A>A 
 task is initially <I>inactive</I>; upon activation, and prior to its 
 <I>termination</I> it is either <I>blocked</I> (as part of some task 
-interaction) or <I>ready</I> to run. <A NAME="I4075"></A>While ready, 
+interaction) or <I>ready</I> to run. <A NAME="I4063"></A>While ready, 
 a task competes for the available <I>execution resources</I> that it 
 requires to run.<span class="insert5">&nbsp;In the context of a parallel construct, 
 a single task can utilize multiple processing resources simultaneously.</span> 

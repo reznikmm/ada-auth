@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,113 +32,96 @@
 &nbsp;<A HREF="AA-C-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>C.5 <span class="insert4">Aspect Discard_Names</span><span class="delete4">Pragma Discard_Names</span></H1>
+<H1>C.5 Aspect Discard_Names</H1>
 <div class="paranum"><a name="p1">1/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-[<span class="insert4">Specifying the aspect</span><span class="delete4">&nbsp;A 
-<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
-Discard_Names <span class="insert4">can</span><span class="delete4">&nbsp;may</span> 
-be used to request a reduction in storage used for the names of <span class="delete4">certain 
-</span>entities<span class="insert4">&nbsp;with runtime name text</span>.] 
-</div>
+[Specifying the aspect Discard_Names can be used to request a reduction 
+in storage used for the names of entities with runtime name text.]&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-<span class="insert4">An entity with <I>runtime name text</I> is a nonderived 
-enumeration first subtype, a tagged first subtype, or an exception.<A NAME="I8447"></A><A NAME="I8448"></A></span></div>
+An entity with <I>runtime name text</I> is a nonderived enumeration first 
+subtype, a tagged first subtype, or an exception.<A NAME="I8746"></A><A NAME="I8747"></A></div>
 <div class="paranum"><a name="p1.2">1.2/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-<span class="insert4">For an entity with runtime name text, the following 
-language-defined representation aspect may be specified:</span></div>
+For an entity with runtime name text, the following language-defined 
+representation aspect may be specified:</div>
 <div class="paranum"><a name="p1.3">1.3/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert4">Discard_Names</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert4">The type of aspect Discard_Names is Boolean. If 
-directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+<div class="WideHanging-Term">&nbsp;Discard_Names</div><div class="WideHanging-Body"><br clear="left">
+The type of aspect Discard_Names is Boolean. If directly specified, the 
+<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
-the aspect is False.<A NAME="I8449"></A><A NAME="I8450"></A></span></div>
+the aspect is False.<A NAME="I8748"></A><A NAME="I8749"></A></div>
 <div class="paranum"><a name="p1.a.1">1.a.1/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert4"><B>Discard_Names:&nbsp;</B></span><span class="insert4">Requests 
-a reduction in storage for names associated with an entity.</span></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Discard_Names: 
+</B>Requests a reduction in storage for names associated with an entity.</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8451"></A><A NAME="I8452"></A>Discard_Names[([On 
-=&gt; ] <A NAME="I8453"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8750"></A><A NAME="I8751"></A>Discard_Names[([On 
+=&gt; ] <A NAME="I8752"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
-immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
-or as a configuration pragma. <A NAME="I8454"></A><A NAME="I8455"></A></div>
+immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
+or as a configuration pragma. <A NAME="I8753"></A><A NAME="I8754"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
-(if present) shall denote <span class="insert4">an entity with runtime 
-name text</span><span class="delete4">&nbsp;a nonderived enumeration [first] 
-subtype, a tagged [first] subtype, or an exception</span>. The pragma 
-<span class="insert4">specifies that the aspect Discard_Names for</span><span class="delete4">&nbsp;applies 
-to</span> the type or exception<span class="insert4">&nbsp;has the value True</span>. 
-Without a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>, 
-the pragma <span class="insert4">specifies that</span><span class="delete4">&nbsp;applies 
-to</span> all <span class="delete4">such&nbsp;</span>entities<span class="insert4">&nbsp;with runtime name text</span> declared after the pragma, within the same 
-declarative region<span class="insert4">&nbsp;have the value True for aspect 
-Discard_Names</span>. Alternatively, the pragma can be used as a configuration 
-pragma. <span class="insert4">If the configuration pragma Discard_Names 
-applies to a compilation unit, all entities with runtime name text declared 
-in the compilation unit have the value True for the aspect Discard_Names.</span><span class="delete4">&nbsp;If 
-the pragma applies to a type, then it applies also to all descendants 
-of the type</span>.</div>
+The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
+(if present) shall denote an entity with runtime name text. The pragma 
+specifies that the aspect Discard_Names for the type or exception has 
+the value True. Without a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>, 
+the pragma specifies that all entities with runtime name text declared 
+after the pragma, within the same declarative region have the value True 
+for aspect Discard_Names. Alternatively, the pragma can be used as a 
+configuration pragma. If the configuration pragma Discard_Names applies 
+to a compilation unit, all entities with runtime name text declared in 
+the compilation unit have the value True for the aspect Discard_Names..</div>
 <div class="paranum"><a name="p5.a">5.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-<span class="insert4">If the aspect is specified for a type, then it 
-is inherited by all descendants of the type. The aspect cannot be specified 
-as False on a derived type (because specifying the aspect is not allowed 
-on derived enumeration types, and by rule applying to all aspects for 
-other types (see <A HREF="AA-13-1-1.html">13.1.1</A>)).</span>&nbsp;</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
+If the aspect is specified for a type, then it is inherited by all descendants 
+of the type. The aspect cannot be specified as False on a derived type 
+(because specifying the aspect is not allowed on derived enumeration 
+types, and by rule applying to all aspects for other types (see <A HREF="AA-13-1-1.html">13.1.1</A>)). 
+</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8456"></A><A NAME="I8457"></A>If a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+<div class="Normal"><A NAME="I8755"></A><A NAME="I8756"></A>If a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 is given, then a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is a representation pragma.</div>
 <div class="paranum"><a name="p6.a">6.a/4</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-<span class="delete4">Representation pragmas automatically specify aspects 
-of the same name, so Discard_Names can be used as an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-in an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-instead of using the pragma on individual entities.</span>&nbsp;</div>
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
+</div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-If the <span class="insert4">aspect Discard_Names is True for</span><span class="delete4">&nbsp;pragma 
-applies to</span> an enumeration type, then the semantics of the Wide_Wide_Image 
-and Wide_Wide_Value attributes are implementation defined for that type[; 
-the semantics of Image, Wide_Image, Value, and Wide_Value are still defined 
-in terms of Wide_Wide_Image and Wide_Wide_Value]. In addition, the semantics 
-of Text_IO.Enumeration_IO are implementation defined. If the <span class="insert4">aspect 
-Discard_Names is True for</span><span class="delete4">&nbsp;pragma applies 
-to</span> a tagged type, then the semantics of the Tags.Wide_Wide_Expanded_Name 
-function are implementation defined for that type[; the semantics of 
-Tags.Expanded_Name and Tags.Wide_Expanded_Name are still defined in terms 
-of Tags.Wide_Wide_Expanded_Name]. If the <span class="insert4">aspect 
-Discard_Names is True for</span><span class="delete4">&nbsp;pragma applies 
-to</span> an exception, then the semantics of the Exceptions.Wide_Wide_Exception_Name 
+If the aspect Discard_Names is True for an enumeration type, then the 
+semantics of the Wide_Wide_Image and Wide_Wide_Value attributes are implementation 
+defined for that type[; the semantics of Image, Wide_Image, Value, and 
+Wide_Value are still defined in terms of Wide_Wide_Image and Wide_Wide_Value]. 
+In addition, the semantics of Text_IO.Enumeration_IO are implementation 
+defined. If the aspect Discard_Names is True for a tagged type, then 
+the semantics of the Tags.Wide_Wide_Expanded_Name function are implementation 
+defined for that type[; the semantics of Tags.Expanded_Name and Tags.Wide_Expanded_Name 
+are still defined in terms of Tags.Wide_Wide_Expanded_Name]. If the aspect 
+Discard_Names is True for an exception, then the semantics of the Exceptions.Wide_Wide_Exception_Name 
 function are implementation defined for that exception[; the semantics 
 of Exceptions.Exception_Name and Exceptions.Wide_Exception_Name are still 
 defined in terms of Exceptions.Wide_Wide_Exception_Name].</div>
 <div class="paranum"><a name="p7.a">7.a/4</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The semantics 
-of <span class="insert4">some attributes and functions of an entity for 
-which aspect</span><span class="delete4">&nbsp;pragma</span> Discard_Names<span class="insert4">&nbsp;is True</span>.</div>
+of some attributes and functions of an entity for which aspect Discard_Names 
+is True.</div>
 <div class="paranum"><a name="p7.b">7.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The Width attribute is 
 still defined in terms of Image.</div>
@@ -148,43 +129,38 @@ still defined in terms of Image.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
 The semantics of S'Wide_Wide_Image and S'Wide_Wide_Value are implementation 
-defined for any subtype of an enumeration type <span class="insert4">for</span><span class="delete4">&nbsp;to</span> 
-which the <span class="insert4">aspect is True</span><span class="delete4">&nbsp;pragma 
-applies</span>. (The pragma<span class="insert4">, if used,</span> actually 
-names the first subtype, of course.)&nbsp;</div>
+defined for any subtype of an enumeration type for which the aspect is 
+True. (The pragma, if used, actually names the first subtype, of course.) 
+</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p8">8/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-If the <span class="insert4">aspect Discard_Names is True for</span><span class="delete4">&nbsp;pragma 
-applies to</span> an entity, then the implementation should reduce the 
-amount of storage used for storing names associated with that entity. 
-</div>
+If the aspect Discard_Names is True for an entity, then the implementation 
+should reduce the amount of storage used for storing names associated 
+with that entity.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a/4</a></div>
-<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If <span class="insert4">aspect</span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
-Discard_Names <span class="insert4">is True for</span><span class="delete4">&nbsp;applies 
-to</span> an entity, then the amount of storage used for storing names 
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>If aspect Discard_Names 
+is True for an entity, then the amount of storage used for storing names 
 associated with that entity should be reduced.</div>
 <div class="paranum"><a name="p8.b">8.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>A typical implementation of the 
 Image attribute for enumeration types is to store a table containing 
-the names of all the enumeration literals. <span class="insert4">Aspect</span><span class="delete4">&nbsp;Pragma</span> 
-Discard_Names allows the implementation to avoid storing such a table 
-without having to prove that the Image attribute is never used (which 
-can be difficult in the presence of separate compilation).</div>
+the names of all the enumeration literals. Aspect Discard_Names allows 
+the implementation to avoid storing such a table without having to prove 
+that the Image attribute is never used (which can be difficult in the 
+presence of separate compilation).</div>
 <div class="paranum"><a name="p8.c">8.c</a></div>
 <div class="Annotations">We did not specify the semantics of the Image 
-attribute <span class="insert4">when aspect Discard_Names is True</span><span class="delete4">&nbsp;in 
-the presence of this pragma</span> because different semantics might 
-be desirable in different situations. In some cases, it might make sense 
-to use the Image attribute to print out a useful value that can be used 
-to identify the entity given information in compiler-generated listings. 
-In other cases, it might make sense to get an error at compile time or 
-at run time. In cases where memory is plentiful, the simplest implementation 
-makes sense: ignore the <span class="insert4">aspect</span><span class="delete4">&nbsp;pragma</span>. 
-Implementations that are capable of avoiding the extra storage in cases 
-where the Image attribute is never used might also wish to ignore the 
-<span class="insert4">aspect</span><span class="delete4">&nbsp;pragma</span>.</div>
+attribute when aspect Discard_Names is True because different semantics 
+might be desirable in different situations. In some cases, it might make 
+sense to use the Image attribute to print out a useful value that can 
+be used to identify the entity given information in compiler-generated 
+listings. In other cases, it might make sense to get an error at compile 
+time or at run time. In cases where memory is plentiful, the simplest 
+implementation makes sense: ignore the aspect. Implementations that are 
+capable of avoiding the extra storage in cases where the Image attribute 
+is never used might also wish to ignore the aspect.</div>
 <div class="paranum"><a name="p8.d">8.d</a></div>
 <div class="Annotations">The same applies to the Tags.Expanded_Name and 
 Exceptions.Exception_Name functions.&nbsp;</div>
@@ -199,12 +175,12 @@ are now the master versions that the others are defined from.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p8.f">8.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Defined the pragma in terms 
-of the aspect Discard_Names, and added a missing definition of the meaning 
-of the configuration pragma. This is not intended to make any semantic 
-change (Ada 2012 has an aspect Discard_Names defined via blanket rules 
-for representation pragmas in <A HREF="AA-13-1.html">13.1</A> and <A HREF="AA-13-1-1.html">13.1.1</A>), 
-just to clarify the meaning.</span>&nbsp;</div>
+<B>Corrigendum:</B> Defined the pragma in terms of the aspect Discard_Names, 
+and added a missing definition of the meaning of the configuration pragma. 
+This is not intended to make any semantic change (Ada 2012 has an aspect 
+Discard_Names defined via blanket rules for representation pragmas in 
+<A HREF="AA-13-1.html">13.1</A> and <A HREF="AA-13-1-1.html">13.1.1</A>), 
+just to clarify the meaning.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

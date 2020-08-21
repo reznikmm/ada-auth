@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,50 +44,50 @@
 <HR>
 <H1>6.1 Subprogram Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
 declares a procedure or function.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">subprogram_declaration</SPAN><A NAME="I3709"></A><A NAME="S0166"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3710"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I3711"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3712"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">subprogram_declaration</SPAN><A NAME="I3830"></A><A NAME="S0180"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3831"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I3832"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3833"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="delete2"><SPAN Class="swiss">abstract_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3713"></A><span class="delete2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="delete2"><A NAME="I3714"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B>;</span></div>
+<SPAN Class="swiss"></SPAN><span class="delete2"><SPAN Class="swiss">abstract_subprogram_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3834"></A><span class="delete2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="delete2"><A NAME="I3835"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B>;</span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<SPAN Class="swiss">subprogram_specification</SPAN><A NAME="I3715"></A><A NAME="S0167"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3716"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0168">procedure_specification</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3717"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0169">function_specification</A></SPAN></span><span class="delete2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3718"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN>&nbsp;<A NAME="I3719"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0175">parameter_profile</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<B>function</B>&nbsp;<A NAME="I3720"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0171">defining_designator</A></SPAN>&nbsp;<A NAME="I3721"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0176">parameter_and_result_profile</A></SPAN></span></div>
+<SPAN Class="swiss">subprogram_specification</SPAN><A NAME="I3836"></A><A NAME="S0181"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3837"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0182">procedure_specification</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3838"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0183">function_specification</A></SPAN></span><span class="delete2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3839"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN>&nbsp;<A NAME="I3840"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0189">parameter_profile</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<B>function</B>&nbsp;<A NAME="I3841"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0185">defining_designator</A></SPAN>&nbsp;<A NAME="I3842"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0190">parameter_and_result_profile</A></SPAN></span></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">procedure_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3722"></A><A NAME="S0168"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>procedure</B>&nbsp;<A NAME="I3723"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN>&nbsp;<A NAME="I3724"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0175">parameter_profile</A></SPAN></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">procedure_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3843"></A><A NAME="S0182"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>procedure</B>&nbsp;<A NAME="I3844"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN>&nbsp;<A NAME="I3845"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0189">parameter_profile</A></SPAN></span></div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">function_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3725"></A><A NAME="S0169"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>function</B>&nbsp;<A NAME="I3726"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0171">defining_designator</A></SPAN>&nbsp;<A NAME="I3727"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0176">parameter_and_result_profile</A></SPAN></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">function_specification</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3846"></A><A NAME="S0183"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><B>function</B>&nbsp;<A NAME="I3847"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0185">defining_designator</A></SPAN>&nbsp;<A NAME="I3848"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0190">parameter_and_result_profile</A></SPAN></span></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">designator</SPAN><A NAME="I3728"></A><A NAME="S0170"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3729"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>&nbsp;.&nbsp;]<A NAME="I3730"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I3731"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">designator</SPAN><A NAME="I3849"></A><A NAME="S0184"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3850"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>&nbsp;.&nbsp;]<A NAME="I3851"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I3852"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">defining_designator</SPAN><A NAME="I3732"></A><A NAME="S0171"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3733"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN>&nbsp;|&nbsp;<A NAME="I3734"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0174">defining_operator_symbol</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">defining_designator</SPAN><A NAME="I3853"></A><A NAME="S0185"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3854"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN>&nbsp;|&nbsp;<A NAME="I3855"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0188">defining_operator_symbol</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">defining_program_unit_name</SPAN><A NAME="I3735"></A><A NAME="S0172"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3736"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>&nbsp;.&nbsp;]<A NAME="I3737"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">defining_program_unit_name</SPAN><A NAME="I3856"></A><A NAME="S0186"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3857"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>&nbsp;.&nbsp;]<A NAME="I3858"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1">[The optional <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN> 
+<div class="Indented1">[The optional <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN> 
 is only allowed for library units (see <A HREF="AA-10-1-1.html">10.1.1</A>).] 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Indented1"><SPAN Class="swiss">operator_symbol</SPAN><A NAME="I3738"></A><A NAME="S0173"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3739"></A><SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">operator_symbol</SPAN><A NAME="I3859"></A><A NAME="S0187"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3860"></A><SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN></div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-The sequence of characters in an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN> 
+The sequence of characters in an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
 shall <span class="insert2">form a reserved word, a delimiter, or compound 
 delimiter that corresponds</span><span class="delete2">&nbsp;correspond</span> 
 to an operator belonging to one of the six <span class="insert2">categories</span><span class="delete2">&nbsp;classes</span> 
@@ -107,41 +107,41 @@ rules related to the use of <SPAN Class="swiss">other_format</SPAN> characters
 in delimiters and reserved words.</span></span><span class="insert2"></span> 
 </div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Indented1"><SPAN Class="swiss">defining_operator_symbol</SPAN><A NAME="I3740"></A><A NAME="S0174"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3741"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">defining_operator_symbol</SPAN><A NAME="I3861"></A><A NAME="S0188"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3862"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Indented1"><SPAN Class="swiss">parameter_profile</SPAN><A NAME="I3742"></A><A NAME="S0175"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3743"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0177">formal_part</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">parameter_profile</SPAN><A NAME="I3863"></A><A NAME="S0189"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<A NAME="I3864"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN>]</div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<SPAN Class="swiss">parameter_and_result_profile</SPAN><A NAME="I3744"></A><A NAME="S0176"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span>[<A NAME="I3745"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0177">formal_part</A></SPAN>]&nbsp;<B>return</B><span class="insert2">&nbsp;[<A NAME="I3746"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]</span>&nbsp;<A NAME="I3747"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I3748"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0177">formal_part</A></SPAN>]&nbsp;<B>return</B>&nbsp;<A NAME="I3749"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span></div>
+<SPAN Class="swiss">parameter_and_result_profile</SPAN><A NAME="I3865"></A><A NAME="S0190"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span>[<A NAME="I3866"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN>]&nbsp;<B>return</B><span class="insert2">&nbsp;[<A NAME="I3867"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]</span>&nbsp;<A NAME="I3868"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I3869"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN>]&nbsp;<B>return</B>&nbsp;<A NAME="I3870"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span></div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_part</SPAN><A NAME="I3750"></A><A NAME="S0177"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;(<A NAME="I3751"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>&nbsp;{;&nbsp;<A NAME="I3752"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">formal_part</SPAN><A NAME="I3871"></A><A NAME="S0191"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;(<A NAME="I3872"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>&nbsp;{;&nbsp;<A NAME="I3873"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>})</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
-<SPAN Class="swiss">parameter_specification</SPAN><A NAME="I3753"></A><A NAME="S0178"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3754"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<span class="insert3">[<B>aliased</B>]&nbsp;</span><A NAME="I3755"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0179">mode</A></SPAN>&nbsp;<span class="insert2">[<A NAME="I3756"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]</span>&nbsp;<A NAME="I3757"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3758"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3759"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I3760"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3761"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]</div>
+<SPAN Class="swiss">parameter_specification</SPAN><A NAME="I3874"></A><A NAME="S0192"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3875"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<span class="insert3">[<B>aliased</B>]&nbsp;</span><A NAME="I3876"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0193">mode</A></SPAN>&nbsp;<span class="insert2">[<A NAME="I3877"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]</span>&nbsp;<A NAME="I3878"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3879"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3880"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I3881"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3882"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Indented1"><SPAN Class="swiss">mode</SPAN><A NAME="I3762"></A><A NAME="S0179"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>in</B>]&nbsp;|&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;|&nbsp;<B>out</B></div>
+<div class="Indented1"><SPAN Class="swiss">mode</SPAN><A NAME="I3883"></A><A NAME="S0193"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>in</B>]&nbsp;|&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;|&nbsp;<B>out</B></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I3763"></A>A <I>formal parameter</I> is 
-an object [directly visible within a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>] 
+<div class="Normal"><A NAME="I3884"></A>A <I>formal parameter</I> is 
+an object [directly visible within a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>] 
 that represents the actual parameter passed to the subprogram in a call; 
-it is declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>. 
-<A NAME="I3764"></A>For a formal parameter, the expected type for its 
+it is declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>. 
+<A NAME="I3885"></A>For a formal parameter, the expected type for its 
 <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
-if any, is that of the formal parameter. <A NAME="I3765"></A></div>
+if any, is that of the formal parameter. <A NAME="I3886"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0143-1.TXT">AI05-0143-1</A></I>} 
-<A NAME="I3766"></A>The <I>parameter mode</I> of a formal parameter conveys 
+<A NAME="I3887"></A>The <I>parameter mode</I> of a formal parameter conveys 
 the direction of information transfer with the actual parameter: <B>in</B>, 
 <B>in out</B>, or <B>out</B>. Mode <B>in</B> is the default, and is the 
 mode of a parameter defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>.<span class="delete3">&nbsp;The formal parameters of a function, if any, shall have the mode <B>in</B>.</span> 
@@ -155,30 +155,30 @@ it also simplifies implementation for some compiler technologies.</span>
 </div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-is only allowed in a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN> 
+is only allowed in a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN> 
 for a formal parameter of mode <B>in</B>.</div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I3767"></A><A NAME="I3768"></A>A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0275">generic_subprogram_declaration</A></SPAN> 
+<A NAME="I3888"></A><A NAME="I3889"></A>A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN> 
 requires a completion<span class="delete3">:</span> [<span class="insert3">unless 
 the Import aspect (see <A HREF="AA-B-1.html">B.1</A>) is True for the 
-declaration; the completion shall be&nbsp;</span>a body<span class="insert3">&nbsp;or</span><span class="delete3">,</span> a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN> 
+declaration; the completion shall be&nbsp;</span>a body<span class="insert3">&nbsp;or</span><span class="delete3">,</span> a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
 (see <A HREF="AA-8-5.html">8.5</A>)<span class="delete3">, or a&nbsp;</span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span></span><span class="delete3"></span><span class="delete2"><B>&nbsp;pragma</B></span><span class="delete3">&nbsp;Import (see <A HREF="AA-B-1.html">B.1</A>)</span>]. [A completion is 
-not allowed for an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN><span class="insert2">&nbsp;(see <A HREF="AA-3-9-3.html">3.9.3</A>)</span><span class="insert3">,</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;or</span></span><span class="insert2">&nbsp;a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0191">null_procedure_declaration</A></SPAN> 
+not allowed for an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN><span class="insert2">&nbsp;(see <A HREF="AA-3-9-3.html">3.9.3</A>)</span><span class="insert3">,</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;or</span></span><span class="insert2">&nbsp;a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
 (see <A HREF="AA-6-7.html">6.7</A>)</span><span class="insert3">, or 
-an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0192">expression_function_declaration</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
 (see <A HREF="AA-6-8.html">6.8</A>)</span><span class="insert2"></span>.] 
 </div>
 <div class="paranum"><a name="p20.a">20.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-Abstract subprograms <span class="insert2"></span><span class="insert3">,</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;and</span></span><span class="insert2">&nbsp;null procedures</span><span class="insert3">, and expression functions</span><span class="insert2">&nbsp;</span>are not declared by <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>s, 
+Abstract subprograms <span class="insert2"></span><span class="insert3">,</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;and</span></span><span class="insert2">&nbsp;null procedures</span><span class="insert3">, and expression functions</span><span class="insert2">&nbsp;</span>are not declared by <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>s, 
 and so do not require completion<span class="insert3">&nbsp;(although the 
 latter two can <I>be</I> completions)</span>. Protected subprograms are 
-declared by <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>s, 
+declared by <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>s, 
 and so require completion. Note that an abstract subprogram is a subprogram, 
 <span class="insert3">a null procedure is a subprogram, an expression 
 function is a subprogram,&nbsp;</span>and a protected subprogram is a subprogram, 
@@ -190,54 +190,54 @@ no completion is allowed (see <A HREF="AA-B-1.html">B.1</A>).</span>
 </div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes a formal parameter is not allowed within the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0177">formal_part</A></SPAN> 
-in which it is declared, nor within the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0177">formal_part</A></SPAN> 
-of a corresponding body or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>. 
+that denotes a formal parameter is not allowed within the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
+in which it is declared, nor within the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
+of a corresponding body or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>By contrast, <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN>s 
-are visible to subsequent declarations in the same <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN>. 
+<div class="Annotations"><B>Ramification:&nbsp;</B>By contrast, <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>s 
+are visible to subsequent declarations in the same <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Normal"><A NAME="I3769"></A>The <I>profile</I> of (a view 
-of) a callable entity is either a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0175">parameter_profile</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0176">parameter_and_result_profile</A></SPAN>[; 
+<div class="Normal"><A NAME="I3890"></A>The <I>profile</I> of (a view 
+of) a callable entity is either a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0189">parameter_profile</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0190">parameter_and_result_profile</A></SPAN>[; 
 it embodies information about the interface to that entity &mdash; for 
 example, the profile includes information about parameters passed to 
 the callable entity. All callable entities have a profile &mdash; enumeration 
 literals, other subprograms, and entries. An access-to-subprogram type 
 has a designated profile.] Associated with a profile is a calling convention. 
-A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
 declares a procedure or a function, as indicated by the initial reserved 
 word, with name and profile as given by its specification.</div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I3770"></A>The nominal subtype of a formal parameter is the 
+<A NAME="I3891"></A>The nominal subtype of a formal parameter is the 
 subtype <span class="insert2">determined</span><span class="delete2">&nbsp;denoted</span> 
 by <span class="insert2">the optional <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 and&nbsp;</span>the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 or defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
-in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>.<span class="insert2">&nbsp;The nominal subtype of a function result is the subtype determined by 
+in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>.<span class="insert2">&nbsp;The nominal subtype of a function result is the subtype determined by 
 the optional <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 or defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
-in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0176">parameter_and_result_profile</A></SPAN>. 
-<A NAME="I3771"></A></span></div>
+in the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0190">parameter_and_result_profile</A></SPAN>. 
+<A NAME="I3892"></A></span></div>
 <div class="paranum"><a name="p23.1">23.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
-<span class="insert3"><A NAME="I3772"></A><A NAME="I3773"></A>An <I>explicitly 
-aliased parameter</I> is a formal parameter whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN> 
+<span class="insert3"><A NAME="I3893"></A><A NAME="I3894"></A>An <I>explicitly 
+aliased parameter</I> is a formal parameter whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN> 
 includes the reserved word <B>aliased</B>.</span></div>
 <div class="paranum"><a name="p24">24/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I3774"></A>An <I>access parameter</I> is a formal <B>in</B> 
+<A NAME="I3895"></A>An <I>access parameter</I> is a formal <B>in</B> 
 parameter specified by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
-<A NAME="I3775"></A><span class="insert2">An <I>access result type</I> 
+<A NAME="I3896"></A><span class="insert2">An <I>access result type</I> 
 is a function result type specified by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>.</span> 
 An access parameter <span class="insert2">or result type&nbsp;</span>is of 
 an anonymous <span class="insert2">access</span><span class="delete2">&nbsp;general 
@@ -250,7 +250,7 @@ passed as parameters irrespective of their accessibility level.</span> ]</div>
 <span class="insert2">Access result types have normal accessibility and 
 thus don't have any special properties worth noting here.</span>&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3776"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3897"></A>The 
 <I>subtypes of a profile</I> are:&nbsp;</div>
 <div class="paranum"><a name="p26">26</a></div>
 <div class="Bulleted">For any non-access parameters, the nominal subtype 
@@ -282,26 +282,26 @@ type, the designated subtype of the result type.</span></div>
 type, the subtypes of the&nbsp;</span><span class="insert3">designated&nbsp;</span><span class="insert2">profile 
 of the result type.</span></div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Normal">[<A NAME="I3777"></A> The <I>types of a profile</I> 
+<div class="Normal">[<A NAME="I3898"></A> The <I>types of a profile</I> 
 are the types of those subtypes.]</div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
 [A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
-is abstract; a subprogram declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+is abstract; a subprogram declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
 is not. See <A HREF="AA-3-9-3.html">3.9.3</A>, &ldquo;<A HREF="AA-3-9-3.html">Abstract 
 Types and Subprograms</A>&rdquo;.<span class="insert2">&nbsp;Similarly, a 
-procedure&nbsp;</span><span class="insert3">declared</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;defined</span></span><span class="insert2">&nbsp;by a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0191">null_procedure_declaration</A></SPAN> 
-is a null procedure; a procedure declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+procedure&nbsp;</span><span class="insert3">declared</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;defined</span></span><span class="insert2">&nbsp;by a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
+is a null procedure; a procedure declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
 is not. See <A HREF="AA-6-7.html">6.7</A>, &ldquo;<A HREF="AA-6-7.html">Null 
 Procedures</A>&rdquo;.</span><span class="insert3">&nbsp;Finally, a function 
-declared by an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0192">expression_function_declaration</A></SPAN> 
-is an expression function; a function declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
+declared by an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+is an expression function; a function declared by a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
 is not. See <A HREF="AA-6-8.html">6.8</A>, &ldquo;<A HREF="AA-6-8.html">Expression 
 Functions</A>&rdquo;.</span><span class="insert2"></span> ]</div>
 <div class="paranum"><a name="p30.1">30.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
-<span class="insert2">[An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+<span class="insert2">[An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN> 
 is used to indicate whether overriding is intended. See <A HREF="AA-8-3-1.html">8.3.1</A>, 
 &ldquo;<A HREF="AA-8-3-1.html">Overriding Indicators</A>&rdquo;.]</span> 
 </div>
@@ -309,13 +309,13 @@ is used to indicate whether overriding is intended. See <A HREF="AA-8-3-1.html">
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p31">31/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I3778"></A><span class="delete2"><A NAME="I3779"></A></span>The 
-elaboration of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN><span class="delete2">&nbsp;or an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN></span> 
+<A NAME="I3899"></A><span class="delete2"><A NAME="I3900"></A></span>The 
+elaboration of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN><span class="delete2">&nbsp;or an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN></span> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Notes">1&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN> 
-with several identifiers is equivalent to a sequence of single <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>s, 
+<div class="Notes">1&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN> 
+with several identifiers is equivalent to a sequence of single <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>s, 
 as explained in <A HREF="AA-3-3.html">3.3</A>.</div>
 <div class="paranum"><a name="p33">33</a></div>
 <div class="Notes">2&nbsp;&nbsp;Abstract subprograms do not have bodies, 
@@ -359,12 +359,12 @@ parameters with default expressions:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p42.a">42.a</a></div>
-<div class="Annotations"><A NAME="I3780"></A>The syntax for <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
-is added. The syntax for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN> 
+<div class="Annotations"><A NAME="I3901"></A>The syntax for <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+is added. The syntax for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN> 
 is revised to allow for access parameters (see <A HREF="AA-3-10.html">3.10</A>)</div>
 <div class="paranum"><a name="p42.b">42.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-Program units that are library units may have a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN> 
+Program units that are library units may have a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN> 
 to indicate the parent of a child (see <span class="insert3"><A HREF="AA-10-1-1.html">10.1.1</A></span><span class="delete3">&nbsp;Section 
 10</span>).&nbsp;</div>
 
@@ -378,19 +378,19 @@ to indicate the parent of a child (see <span class="insert3"><A HREF="AA-10-1-1.
 &ldquo;Parameter and Result Type Profile - Overloading of Subprograms&rdquo; 
 here.</div>
 <div class="paranum"><a name="p42.e">42.e</a></div>
-<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0174">defining_operator_symbol</A></SPAN> 
-is new. It is used for the defining occurrence of an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>, 
+<div class="Annotations">The syntax rule for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0188">defining_operator_symbol</A></SPAN> 
+is new. It is used for the defining occurrence of an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>, 
 analogously to <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>. 
 Usage occurrences use the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
-syntactic categories. The syntax rules for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0171">defining_designator</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN> 
+syntactic categories. The syntax rules for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0185">defining_designator</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN> 
 are new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p42.f">42.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
-<span class="insert2"><A NAME="I3781"></A>Subprograms now allow <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>s 
+<span class="insert2"><A NAME="I3902"></A>Subprograms now allow <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>s 
 for better error checking of overriding.</span></div>
 <div class="paranum"><a name="p42.g">42.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
@@ -411,7 +411,7 @@ parameters and the definition of the profile of subprograms containing
 them was added.</span></div>
 <div class="paranum"><a name="p42.j">42.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<span class="insert2">Split the production for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN> 
+<span class="insert2">Split the production for <SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN> 
 in order to make the declaration of null procedures (see <A HREF="AA-6-7.html">6.7</A>) 
 easier.</span></div>
 <div class="paranum"><a name="p42.k">42.k/2</a></div>
@@ -422,13 +422,13 @@ are together. This also keeps abstract and null subprograms similar.</span></div
 <div class="paranum"><a name="p42.l">42.l/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
 <span class="insert2">Revised to allow <SPAN Class="swiss">other_format</SPAN> 
-characters in <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>s 
+characters in <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>s 
 in the same way as the underlying constructs.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p42.m">42.m/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
-<span class="insert3"><A NAME="I3782"></A>Parameters can now be explicitly 
+<span class="insert3"><A NAME="I3903"></A>Parameters can now be explicitly 
 aliased, allowing parts of function results to designate parameters and 
 forcing by-reference parameter passing.</span></div>
 <div class="paranum"><a name="p42.n">42.n/3</a></div>
@@ -436,8 +436,8 @@ forcing by-reference parameter passing.</span></div>
 <span class="insert3">The parameters of a function can now have any mode.</span></div>
 <div class="paranum"><a name="p42.o">42.o/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3">An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>. 
+<span class="insert3">An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>

@@ -15,20 +15,20 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.7em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -103,7 +103,7 @@ or full type definition of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">
 defines the nominal subtype of the object. The <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
 declares an object of the type of the nominal subtype.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I1503"></A>A component of an object is 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I1503"></A>A component of an object is 
 said to <I>require late initialization</I> if it has an access discriminant 
 value constrained by a per-object expression, or if it has an initialization 
 expression that includes a name denoting the current instance of the 
@@ -163,7 +163,7 @@ initial value being an empty queue.&nbsp;</div>
 elaboration of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
 proceeds in the following sequence of steps:&nbsp;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
+<div class="Enumerated-Term">&nbsp;1.</div><div class="Enumerated-Body">
 The <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-3-6.html#S0051">array_type_definition</A></SPAN>, 
@@ -179,7 +179,7 @@ obtained by evaluating the expression and converting it to the nominal
 subtype (which might raise Constraint_Error &mdash; see <A HREF="RM-4-6.html">4.6</A>). 
 <A NAME="I1514"></A></div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
+<div class="Enumerated-Term">&nbsp;3.</div><div class="Enumerated-Body">
 The object is created, and, if there is not an initialization expression, 
 the object is <I>initialized by default</I>. <A NAME="I1515"></A>When 
 an object is initialized by default, any per-object constraints (see 
@@ -191,10 +191,10 @@ the corresponding subcomponents. As described in <A HREF="RM-5-2.html">5.2</A>
 and <A HREF="RM-7-6.html">7.6</A>, Initialize and Adjust procedures can 
 be called. <A NAME="I1518"></A></div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Enumerated-Term"></div><div class="Enumerated-Body">
+<div class="Enumerated-Term">&nbsp;</div><div class="Enumerated-Body">
 <SPAN STYLE="font-size: 80%"><I>This paragraph was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For the third step 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For the third step 
 above, evaluations and assignments are performed in an arbitrary order 
 subject to the following restrictions:<A NAME="I1519"></A>&nbsp;</div>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
@@ -217,7 +217,7 @@ of the component occurring earlier in the order of the component declarations
 precede the initial value evaluations of the component occurring later. 
 </div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">There is no implicit initial value defined for a 
+<div class="Normal">&nbsp;There is no implicit initial value defined for a 
 scalar subtype unless the Default_Value aspect has been specified for 
 the type. <A NAME="I1520"></A>In the absence of an explicit initialization 
 or the specification of the Default_Value aspect, a newly created scalar 

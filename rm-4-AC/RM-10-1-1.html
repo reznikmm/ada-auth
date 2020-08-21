@@ -19,17 +19,17 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -127,7 +127,7 @@ private or public according to its declaration. <A NAME="I4551"></A>The
 and the public descendants of its public children. <A NAME="I4552"></A>Its 
 other descendants are <I>private descendants</I>.&nbsp;</div>
 <div class="paranum"><a name="p12.1">12.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">For each library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">For each library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
 in the environment, there is an implicit declaration of a <I>limited 
 view</I> of that library package.<A NAME="I4553"></A> The limited view 
 of a package contains:</span></div>
@@ -141,12 +141,12 @@ an incomplete view of the type</span><span class="insert3">&nbsp;with no <SPAN C
 if the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0023">type_declaration</A></SPAN> 
 is tagged, then the view is a tagged incomplete view.</span>&nbsp;</div>
 <div class="paranum"><a name="p12.4">12.4/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The limited view of a library 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The limited view of a library 
 <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
 is private if that library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
 is immediately preceded by the reserved word <B>private</B>.</span></div>
 <div class="paranum"><a name="p12.5">12.5/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">There is no syntax for declaring 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">There is no syntax for declaring 
 limited views of packages, because they are always implicit. The implicit 
 declaration of a limited view of a library package is not the declaration 
 of a library unit (the library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
@@ -155,7 +155,7 @@ The implicit declaration of the limited view of a library package forms
 an (implicit) compilation unit whose <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0253">context_clause</A></SPAN> 
 is empty.</span></div>
 <div class="paranum"><a name="p12.6">12.6/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">A library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">A library <SPAN Class="swiss"><A HREF="RM-7-1.html#S0190">package_declaration</A></SPAN> 
 is the completion of the declaration of its limited view.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -173,7 +173,7 @@ the (old) <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>
 shall denote a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN> 
+<div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0252">parent_unit_name</A></SPAN> 
 (which can be used within a <SPAN Class="swiss"><A HREF="RM-6-1.html#S0169">defining_program_unit_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
 and in the <B>separate</B> clause of a <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0263">subunit</A></SPAN>), 
@@ -187,7 +187,7 @@ and other places where the name of a library unit is allowed.</div>
 package, then every child of the library package shall either be itself 
 an instance or be a renaming of a library unit.&nbsp;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal">A child of a generic library package shall either 
+<div class="Normal">&nbsp;A child of a generic library package shall either 
 be itself a generic unit or be a renaming of some other child of the 
 same generic unit.<span class="delete3">&nbsp;The renaming of a child of a 
 generic package shall occur only within the declarative region of the 
@@ -196,7 +196,7 @@ generic package.</span></div>
 <div class="Normal">A child of a parent generic package shall be instantiated 
 or renamed only within the declarative region of the parent generic.</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal">For each <span class="insert2">child <I>C</I></span><span class="delete2">&nbsp;declaration 
+<div class="Normal">&nbsp;For each <span class="insert2">child <I>C</I></span><span class="delete2">&nbsp;declaration 
 or renaming of a generic unit as a child</span> of some parent generic 
 package<span class="insert2">&nbsp;<I>P</I></span>, there is a corresponding 
 declaration <span class="insert2"><I>C</I></span> nested immediately 
@@ -235,7 +235,7 @@ on the semantic dependences.</div>
 determine the order of elaboration of <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal"><A NAME="I4554"></A><A NAME="I4555"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I4554"></A><A NAME="I4555"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN> 
 depends semantically upon its parent declaration. A subunit depends semantically 
 upon its parent body. A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0251">library_unit_body</A></SPAN> 
 depends semantically upon the corresponding <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0249">library_unit_declaration</A></SPAN>, 
@@ -253,7 +253,7 @@ dependence relationship is transitive.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p26.1">26.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The elaboration of the declaration 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The elaboration of the declaration 
 of the limited view of a package has no effect.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p27">27</a></div>

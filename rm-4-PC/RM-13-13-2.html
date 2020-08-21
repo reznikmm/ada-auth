@@ -13,25 +13,23 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.6em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Indented4Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left:  10.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,23 +40,21 @@
 <HR>
 <H1>13.13.2 Stream-Oriented Attributes</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">The <span class="insert3">type-related&nbsp;</span>operational 
-attributes Write, Read, Output, and Input convert values to a stream 
-of elements and reconstruct values from a stream.<A NAME="I5450"></A><A NAME="I5451"></A> 
-</div>
+<div class="Normal">The type-related operational attributes Write, Read, 
+Output, and Input convert values to a stream of elements and reconstruct 
+values from a stream.<A NAME="I5355"></A><A NAME="I5356"></A>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For every subtype 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For every subtype 
 S of an elementary type <I>T</I>, the following representation attribute 
 is defined:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/3</a></div>
-<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;S'Stream_Size</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5452"></A><A NAME="I5453"></A>Denotes the number of bits <span class="insert3">read 
+<div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Stream_Size</div><div class="WideHanging-Body"><br clear="left">
+<A NAME="I5357"></A><A NAME="I5358"></A>Denotes the number of bits read 
 from or written to a stream by the default implementations of S'Read 
-and S'Write</span><span class="delete3">&nbsp;occupied in a stream by items 
-of subtype S</span>. Hence, the number of stream elements required per 
-item of elementary type <I>T</I> is:</div>
+and S'Write. Hence, the number of stream elements required per item of 
+elementary type <I>T</I> is:</div>
 <div class="paranum"><a name="p1.3">1.3/2</a></div>
 <div class="Indented4Examples"><I>T</I>'Stream_Size&nbsp;/&nbsp;Ada.Streams.Stream_Element'Size</div>
 <div class="paranum"><a name="p1.4">1.4/2</a></div>
@@ -68,17 +64,17 @@ item of elementary type <I>T</I> is:</div>
 <div class="WideHanging-Body">Stream_Size may be specified for first 
 subtypes via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
 the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
-of such a clause shall be static, nonnegative, and a multiple of Stream_Element'Size.<span class="insert3"><A NAME="I5454"></A><A NAME="I5455"></A></span></div>
+of such a clause shall be static, nonnegative, and a multiple of Stream_Element'Size.<A NAME="I5359"></A><A NAME="I5360"></A></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p1.6">1.6/2</a></div>
-<div class="Normal">&nbsp;If not specified, the value of Stream_Size for an 
-elementary type should be the number of bits that corresponds to the 
+<div class="Normal">&nbsp;&nbsp;If not specified, the value of Stream_Size for 
+an elementary type should be the number of bits that corresponds to the 
 minimum number of stream elements required by the first subtype of the 
 type, rounded up to the nearest factor or multiple of the word size that 
 is also a multiple of the stream element size.&nbsp;</div>
 <div class="paranum"><a name="p1.7">1.7/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I5456"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<A NAME="I5361"></A>The 
 recommended level of support for the Stream_Size attribute is:&nbsp;</div>
 <div class="paranum"><a name="p1.8">1.8/2</a></div>
 <div class="Bulleted">A Stream_Size clause should be supported for a 
@@ -94,7 +90,7 @@ ordinary fixed point, or decimal fixed point).&nbsp;</div>
 the following attributes are defined.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Write</div><div class="WideHanging-Body">
-<A NAME="I5457"></A><A NAME="I5458"></A>S'Write denotes a procedure with 
+<A NAME="I5362"></A><A NAME="I5363"></A>S'Write denotes a procedure with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Write(<BR>
@@ -105,7 +101,7 @@ the following specification:&nbsp;</div>
 to <I>Stream</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Read</div><div class="WideHanging-Body">
-<A NAME="I5459"></A><A NAME="I5460"></A>S'Read denotes a procedure with 
+<A NAME="I5364"></A><A NAME="I5365"></A>S'Read denotes a procedure with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Read(<BR>
@@ -115,14 +111,13 @@ the following specification:&nbsp;</div>
 <div class="WideHanging-Body">S'Read reads the value of <I>Item</I> from 
 <I>Stream</I>.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;For an untagged derived type, the Write (resp. Read) 
-attribute is inherited according to the rules given in <A HREF="RM-13-1.html">13.1</A> 
-if the attribute is <span class="insert3">specified and&nbsp;</span>available 
-for the parent type at the point where <I>T</I> is declared. For a tagged 
-derived type, these attributes are not inherited, but rather the default 
-implementations are used.</div>
+<div class="Normal">&nbsp;&nbsp;For an untagged derived type, the Write (resp. 
+Read) attribute is inherited according to the rules given in <A HREF="RM-13-1.html">13.1</A> 
+if the attribute is specified and available for the parent type at the 
+point where <I>T</I> is declared. For a tagged derived type, these attributes 
+are not inherited, but rather the default implementations are used.</div>
 <div class="paranum"><a name="p8.2">8.2/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The default implementations 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The default implementations 
 of the Write and Read attributes, where available, execute as follows:</div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">For elementary types, Read reads (and Write writes) 
@@ -130,44 +125,42 @@ the number of stream elements implied by the Stream_Size for the type
 <I>T</I>; the representation of those stream elements is implementation 
 defined. For composite types, the Write or Read attribute for each component 
 is called in canonical order, which is last dimension varying fastest 
-for an array<span class="insert3">&nbsp;(unless the convention of the array 
-is Fortran, in which case it is first dimension varying fastest)</span>, 
-and positional aggregate order for a record. Bounds are not included 
-in the stream if <I>T</I> is an array type. If <I>T</I> is a discriminated 
-type, discriminants are included only if they have defaults. If <I>T</I> 
-is a tagged type, the tag is not included. For type extensions, the Write 
-or Read attribute for the parent type is called, followed by the Write 
-or Read attribute of each component of the extension part, in canonical 
-order. For a limited type extension, if the attribute of the parent type 
-or any progenitor type of <I>T</I> is available anywhere within the immediate 
-scope of <I>T</I>, and the attribute of the parent type or the type of 
-any of the extension components is not available at the freezing point 
-of <I>T</I>, then the attribute of <I>T</I> shall be directly specified.</div>
+for an array (unless the convention of the array is Fortran, in which 
+case it is first dimension varying fastest), and positional aggregate 
+order for a record. Bounds are not included in the stream if <I>T</I> 
+is an array type. If <I>T</I> is a discriminated type, discriminants 
+are included only if they have defaults. If <I>T</I> is a tagged type, 
+the tag is not included. For type extensions, the Write or Read attribute 
+for the parent type is called, followed by the Write or Read attribute 
+of each component of the extension part, in canonical order. For a limited 
+type extension, if the attribute of the parent type or any progenitor 
+type of <I>T</I> is available anywhere within the immediate scope of 
+<I>T</I>, and the attribute of the parent type or the type of any of 
+the extension components is not available at the freezing point of <I>T</I>, 
+then the attribute of <I>T</I> shall be directly specified.</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">If <I>T</I> is a discriminated 
-type and its discriminants have defaults, then S'Read first reads the 
-discriminants from the stream without modifying <I>Item</I>. S'Read then 
-creates an object of type <I>T</I> constrained by these discriminants. 
-The value of this object is then converted to the subtype of <I>Item</I> 
-and is assigned to <I>Item</I>. Finally, the Read attribute for each 
-nondiscriminant component of <I>Item</I> is called in canonical order 
-as described above. Normal default initialization and finalization take 
-place for the created object.</span></div>
+<div class="Normal">&nbsp;&nbsp;If <I>T</I> is a discriminated type and its discriminants 
+have defaults, then S'Read first reads the discriminants from the stream 
+without modifying <I>Item</I>. S'Read then creates an object of type 
+<I>T</I> constrained by these discriminants. The value of this object 
+is then converted to the subtype of <I>Item</I> and is assigned to <I>Item</I>. 
+Finally, the Read attribute for each nondiscriminant component of <I>Item</I> 
+is called in canonical order as described above. Normal default initialization 
+and finalization take place for the created object.</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
-<div class="Normal">&nbsp;Constraint_Error is raised by the predefined Write 
+<div class="Normal">&nbsp;&nbsp;Constraint_Error is raised by the predefined Write 
 attribute if the value of the elementary item is outside the range of 
 values representable using Stream_Size bits. For a signed integer type, 
 an enumeration type, or a fixed point type, the range is unsigned only 
 if the integer code for the lower bound of the first subtype is nonnegative, 
 and a (symmetric) signed range that covers all values of the first subtype 
-would require more than Stream_Size bits; otherwise<span class="insert3">,</span> 
-the range is signed.</div>
+would require more than Stream_Size bits; otherwise, the range is signed.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For every subtype S'Class 
 of a class-wide type <I>T</I>'Class:&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Write</div><div class="WideHanging-Body">
-<A NAME="I5461"></A><A NAME="I5462"></A>S'Class'Write denotes a procedure 
+<A NAME="I5366"></A><A NAME="I5367"></A>S'Class'Write denotes a procedure 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Class'Write(<BR>
@@ -178,7 +171,7 @@ with the following specification:&nbsp;</div>
 the Write attribute of the specific type identified by the tag of Item.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Read</div><div class="WideHanging-Body">
-<A NAME="I5463"></A><A NAME="I5464"></A>S'Class'Read denotes a procedure 
+<A NAME="I5368"></A><A NAME="I5369"></A>S'Class'Read denotes a procedure 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Class'Read(<BR>
@@ -191,7 +184,7 @@ the Read attribute of the specific type identified by the tag of Item.
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"></div>
+<div class="Normal">&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 17 was 
 deleted.</I></SPAN>&nbsp;</div>
 
@@ -201,7 +194,7 @@ deleted.</I></SPAN>&nbsp;</div>
 the following attributes are defined.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Output</div><div class="WideHanging-Body">
-<A NAME="I5465"></A><A NAME="I5466"></A>S'Output denotes a procedure 
+<A NAME="I5370"></A><A NAME="I5371"></A>S'Output denotes a procedure 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Output(<BR>
@@ -212,7 +205,7 @@ with the following specification:&nbsp;</div>
 to <I>Stream</I>, including any bounds or discriminants.&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Input</div><div class="WideHanging-Body">
-<A NAME="I5467"></A><A NAME="I5468"></A>S'Input denotes a function with 
+<A NAME="I5372"></A><A NAME="I5373"></A>S'Input denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Input(<BR>
@@ -223,44 +216,41 @@ the following specification:&nbsp;</div>
 <I>Stream</I>, using any bounds or discriminants written by a corresponding 
 S'Output to determine how much to read.&nbsp;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Normal">For an untagged derived type, the Output (resp. Input) 
-attribute is inherited according to the rules given in <A HREF="RM-13-1.html">13.1</A> 
-if the attribute is <span class="insert3">specified and&nbsp;</span>available 
-for the parent type at the point where <I>T</I> is declared. For a tagged 
-derived type, these attributes are not inherited, but rather the default 
-implementations are used.</div>
+<div class="Normal">&nbsp;For an untagged derived type, the Output (resp. 
+Input) attribute is inherited according to the rules given in <A HREF="RM-13-1.html">13.1</A> 
+if the attribute is specified and available for the parent type at the 
+point where <I>T</I> is declared. For a tagged derived type, these attributes 
+are not inherited, but rather the default implementations are used.</div>
 <div class="paranum"><a name="p25.1">25.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The default implementations 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;The default implementations 
 of the Output and Input attributes, where available, execute as follows: 
 </div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="Bulleted">If <I>T</I> is an array type, S'Output first writes 
 the bounds, and S'Input first reads the bounds. If <I>T</I> has discriminants 
-without defaults, S'Output first writes the discriminants (using <span class="insert3">the 
-Write attribute of the discriminant type</span><span class="delete3">&nbsp;S'Write</span> 
-for each), and S'Input first reads the discriminants (using <span class="insert3">the 
-Read attribute of the discriminant type</span><span class="delete3">&nbsp;S'Read</span> 
-for each).</div>
+without defaults, S'Output first writes the discriminants (using the 
+Write attribute of the discriminant type for each), and S'Input first 
+reads the discriminants (using the Read attribute of the discriminant 
+type for each).</div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Bulleted">S'Output then calls S'Write to write the value 
-of <I>Item</I> to the stream. S'Input then creates an object <span class="insert3">of 
-type <I>T</I>,&nbsp;</span><span class="delete3">(</span>with the bounds or 
-<span class="insert3">(when without defaults) the&nbsp;</span>discriminants, 
-if any, taken from the stream<span class="delete3">)</span>, passes it 
-to S'Read, and returns the value of the object.<span class="insert3">&nbsp;If <I>T</I> has discriminants, then this object is unconstrained if and 
-only the discriminants have defaults.</span> Normal default initialization 
+of <I>Item</I> to the stream. S'Input then creates an object of type 
+<I>T</I>, with the bounds or (when without defaults) the discriminants, 
+if any, taken from the stream, passes it to S'Read, and returns the value 
+of the object. If <I>T</I> has discriminants, then this object is unconstrained 
+if and only the discriminants have defaults. Normal default initialization 
 and finalization take place for this object (see <A HREF="RM-3-3-1.html">3.3.1</A>, 
 <A HREF="RM-7-6.html">7.6</A>, and <A HREF="RM-7-6-1.html">7.6.1</A>). 
 </div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If <I>T</I> is an abstract type, then S'Input is 
-an abstract function.</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;If <I>T</I> is an abstract type, then S'Input 
+is an abstract function.</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For every subtype S'Class 
 of a class-wide type <I>T</I>'Class:&nbsp;</div>
 <div class="paranum"><a name="p29">29</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Output</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5469"></A><A NAME="I5470"></A>S'Class'Output denotes a procedure 
+<A NAME="I5374"></A><A NAME="I5375"></A>S'Class'Output denotes a procedure 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Indented4Examples"><B>procedure</B>&nbsp;S'Class'Output(<BR>
@@ -275,7 +265,7 @@ by the tag. Tag_Error is raised if the tag of Item identifies a type
 declared at an accessibility level deeper than that of S.&nbsp;</div>
 <div class="paranum"><a name="p32">32</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Class'Input</div><div class="WideHanging-Body">
-<A NAME="I5471"></A><A NAME="I5472"></A>S'Class'Input denotes a function 
+<A NAME="I5376"></A><A NAME="I5377"></A>S'Class'Input denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p33">33/2</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Class'Input(<BR>
@@ -287,17 +277,14 @@ and determines the corresponding internal tag (by calling Tags.Descendant_Tag(St
 S'Tag) which might raise Tag_Error &mdash; see <A HREF="RM-3-9.html">3.9</A>) 
 and then dispatches to the subprogram denoted by the Input attribute 
 of the specific type identified by the internal tag; returns that result. 
-If the specific type identified by the internal tag <span class="delete3">is 
-not covered by <I>T</I>'Class or&nbsp;</span>is abstract, Constraint_Error 
+If the specific type identified by the internal tag is abstract, Constraint_Error 
 is raised.</div>
 <div class="paranum"><a name="p35">35/3</a></div>
-<div class="Normal"><A NAME="I5473"></A><A NAME="I5474"></A>In the default 
+<div class="Normal">&nbsp;<A NAME="I5378"></A><A NAME="I5379"></A>In the default 
 implementation of Read and Input for a composite type, for each scalar 
-component that is a discriminant or <span class="insert3">that has an 
-implicit initial value</span><span class="delete3">&nbsp;whose <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
-includes a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN></span>, 
+component that is a discriminant or that has an implicit initial value, 
 a check is made that the value returned by Read for the component belongs 
-to its subtype. <A NAME="I5475"></A>Constraint_Error is raised if this 
+to its subtype. <A NAME="I5380"></A>Constraint_Error is raised if this 
 check fails. For other scalar components, no check is made. For each 
 component that is of an access type, if the implementation can detect 
 that the value returned by Read for the component is not a value of its 
@@ -309,16 +296,16 @@ discriminants, if the actual parameter of Read is constrained, a check
 is made that the discriminants read from the stream are equal to those 
 of the actual parameter. Constraint_Error is raised if this check fails.</div>
 <div class="paranum"><a name="p36">36/2</a></div>
-<div class="Normal"><A NAME="I5476"></A>It is unspecified at which point 
+<div class="Normal">&nbsp;<A NAME="I5381"></A>It is unspecified at which point 
 and in which order these checks are performed. In particular, if Constraint_Error 
 is raised due to the failure of one of these checks, it is unspecified 
 how many stream elements have been read from the stream.</div>
 <div class="paranum"><a name="p37">37/1</a></div>
-<div class="Normal"><A NAME="I5477"></A>In the default implementation 
+<div class="Normal">&nbsp;<A NAME="I5382"></A>In the default implementation 
 of Read and Input for a type, End_Error is raised if the end of the stream 
 is reached before the reading of a value of the type is completed.</div>
 <div class="paranum"><a name="p38">38/4</a></div>
-<div class="Normal"><A NAME="I5478"></A><A NAME="I5479"></A><A NAME="I5480"></A><A NAME="I5481"></A><A NAME="I5482"></A><A NAME="I5483"></A><A NAME="I5484"></A><A NAME="I5485"></A>The 
+<div class="Normal">&nbsp;<A NAME="I5383"></A><A NAME="I5384"></A><A NAME="I5385"></A><A NAME="I5386"></A><A NAME="I5387"></A><A NAME="I5388"></A><A NAME="I5389"></A><A NAME="I5390"></A>The 
 stream-oriented attributes may be specified for any type via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>. 
 <span class="insert4">Alternatively, each of the specific stream-oriented 
 attributes may be specified using an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
@@ -328,15 +315,13 @@ the class-wide stream-oriented attributes may be specified using an <SPAN Class=
 for a tagged type <I>T</I> using the name of the stream-oriented attribute 
 followed by 'Class; such class-wide aspects do not apply to other descendants 
 of <I>T</I>.</span><span class="delete4">&nbsp;The subprogram name given in 
-such a clause shall&nbsp;</span><span class="insert3"><span class="delete4">statically 
-denote a subprogram that is not</span></span><span class="delete4"></span><span class="delete3">&nbsp;not 
-denote</span><span class="delete4">&nbsp;an abstract subprogram. Furthermore, 
-if a stream-oriented attribute is specified for an interface type by 
-an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>, 
+such a clause shall statically denote a subprogram that is not an abstract 
+subprogram. Furthermore, if a stream-oriented attribute is specified 
+for an interface type by an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>, 
 the subprogram name given in the clause shall statically denote a null 
-procedure.</span> <span class="insert3"><A NAME="I5486"></A><A NAME="I5487"></A><A NAME="I5488"></A><A NAME="I5489"></A><A NAME="I5490"></A><A NAME="I5491"></A><A NAME="I5492"></A><A NAME="I5493"></A></span><span class="insert4"><A NAME="I5494"></A><A NAME="I5495"></A><A NAME="I5496"></A><A NAME="I5497"></A><A NAME="I5498"></A><A NAME="I5499"></A><A NAME="I5500"></A><A NAME="I5501"></A></span></div>
+procedure.</span> <A NAME="I5391"></A><A NAME="I5392"></A><A NAME="I5393"></A><A NAME="I5394"></A><A NAME="I5395"></A><A NAME="I5396"></A><A NAME="I5397"></A><A NAME="I5398"></A><span class="insert4"><A NAME="I5399"></A><A NAME="I5400"></A><A NAME="I5401"></A><A NAME="I5402"></A><A NAME="I5403"></A><A NAME="I5404"></A><A NAME="I5405"></A><A NAME="I5406"></A></span></div>
 <div class="paranum"><a name="p38.1">38.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">The subprogram name given 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The subprogram name given 
 in such an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 shall statically denote a subprogram that is not an abstract subprogram. 
@@ -345,9 +330,9 @@ an interface type, the subprogram name given in the <SPAN Class="swiss"><A HREF=
 or <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 shall statically denote a null procedure.</span></div>
 <div class="paranum"><a name="p39">39/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">A stream-oriented attribute 
-for a subtype of a specific type <I>T</I> is <I>available</I> at places 
-where one of the following conditions is true: <A NAME="I5502"></A></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A stream-oriented 
+attribute for a subtype of a specific type <I>T</I> is <I>available</I> 
+at places where one of the following conditions is true: <A NAME="I5407"></A></div>
 <div class="paranum"><a name="p40">40/2</a></div>
 <div class="Bulleted"><I>T</I> is nonlimited.</div>
 <div class="paranum"><a name="p41">41/2</a></div>
@@ -367,9 +352,9 @@ Read (resp. Write) is available for <I>T</I>.&nbsp;</div>
 and the <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
 is visible.&nbsp;</div>
 <div class="paranum"><a name="p45">45/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">A stream-oriented attribute 
-for a subtype of a class-wide type <I>T</I>'Class is available at places 
-where one of the following conditions is true:</div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A stream-oriented 
+attribute for a subtype of a class-wide type <I>T</I>'Class is available 
+at places where one of the following conditions is true:</div>
 <div class="paranum"><a name="p46">46/2</a></div>
 <div class="Bulleted"><I>T</I> is nonlimited;</div>
 <div class="paranum"><a name="p47">47/2</a></div>
@@ -381,96 +366,92 @@ is visible; or</div>
 provided that if <I>T</I> has a partial view, the corresponding attribute 
 is available at the end of the visible part where <I>T</I> is declared.</div>
 <div class="paranum"><a name="p49">49/4</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+<div class="Normal">&nbsp;An <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 for one of the stream-oriented attributes is illegal unless the attribute 
 is available at the place of the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>. 
 Furthermore, an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-for <I>T</I>'Input is illegal if <I>T</I> is an abstract type.<span class="insert4"><A NAME="I5503"></A> 
+for <I>T</I>'Input is illegal if <I>T</I> is an abstract type.<span class="insert4"><A NAME="I5408"></A> 
 In addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span></div>
 <div class="paranum"><a name="p49.1">49.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">Unless inherited from a parent 
-type, if any, for an untagged type having a task, protected, or explicitly 
-limited record part, the default implementation of each of the Read, 
-Write, Input, and Output attributes raises Program_Error and performs 
-no other action.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Unless inherited from a 
+parent type, if any, for an untagged type having a task, protected, or 
+explicitly limited record part, the default implementation of each of 
+the Read, Write, Input, and Output attributes raises Program_Error and 
+performs no other action.</span></div>
 <div class="paranum"><a name="p50">50/3</a></div>
-<div class="Normal">In the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0173">parameter_and_result_profile</A></SPAN>s 
-for <span class="insert3">the default implementations of&nbsp;</span>the stream-oriented 
-attributes, the subtype of the Item parameter is the base subtype of 
-<I>T</I> if <I>T</I> is a scalar type, and the first subtype otherwise. 
-The same rule applies to the result of the Input attribute.</div>
+<div class="Normal">&nbsp;In the <SPAN Class="swiss"><A HREF="RM-6-1.html#S0173">parameter_and_result_profile</A></SPAN>s 
+for the default implementations of the stream-oriented attributes, the 
+subtype of the Item parameter is the base subtype of <I>T</I> if <I>T</I> 
+is a scalar type, and the first subtype otherwise. The same rule applies 
+to the result of the Input attribute.</div>
 <div class="paranum"><a name="p51">51/3</a></div>
-<div class="Normal">For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
-specifying one of these attributes, the subtype of the <span class="insert3"><I>Item</I></span><span class="delete3">&nbsp;Item</span> 
-parameter shall be the <span class="insert3">first subtype or the&nbsp;</span>base 
-subtype if scalar, and the first subtype <span class="insert3">if not 
-scalar</span><span class="delete3">&nbsp;otherwise</span>. The same rule applies 
-to the result of the Input function.</div>
+<div class="Normal">&nbsp;For an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
+specifying one of these attributes, the subtype of the <I>Item</I> parameter 
+shall be the first subtype or the base subtype if scalar, and the first 
+subtype if not scalar. The same rule applies to the result of the Input 
+function.</div>
 <div class="paranum"><a name="p52">52/3</a></div>
-<div class="Normal"><A NAME="I5504"></A><A NAME="I5505"></A>A type is 
+<div class="Normal">&nbsp;<A NAME="I5409"></A><A NAME="I5410"></A>A type is 
 said to <I>support external streaming</I> if Read and Write attributes 
 are provided for sending values of such a type between active partitions, 
 with Write marshalling the representation, and Read unmarshalling the 
 representation. A limited type supports external streaming only if it 
 has available Read and Write attributes. A type with a part that is of 
-<span class="insert3">a nonremote</span><span class="delete3">&nbsp;an</span> 
-access type supports external streaming only if that access type or the 
-type of some part that includes the access type component, has Read and 
-Write attributes that have been specified via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>, 
+a nonremote access type supports external streaming only if that access 
+type or the type of some part that includes the access type component, 
+has Read and Write attributes that have been specified via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>, 
 and that <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
 is visible. An anonymous access type does not support external streaming. 
-All other types <span class="insert3">(including remote access types, 
-see <A HREF="RM-E-2-2.html">E.2.2</A>)&nbsp;</span>support external streaming.</div>
+All other types (including remote access types, see <A HREF="RM-E-2-2.html">E.2.2</A>) 
+support external streaming.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p53">53/2</a></div>
-<div class="Normal"><A NAME="I5506"></A>If the internal tag returned 
+<div class="Normal">&nbsp;<A NAME="I5411"></A>If the internal tag returned 
 by Descendant_Tag to T'Class'Input identifies a type that is not library-level 
 and whose tag has not been created, or does not exist in the partition 
 at the time of the call, execution is erroneous.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p54">54/1</a></div>
-<div class="Normal">For every subtype <I>S</I> of a language-defined 
+<div class="Normal">&nbsp;For every subtype <I>S</I> of a language-defined 
 nonlimited specific type <I>T</I>, the output generated by S'Output or 
 S'Write shall be readable by S'Input or S'Read, respectively. This rule 
 applies across partitions if the implementation conforms to the Distributed 
 Systems Annex.</div>
 <div class="paranum"><a name="p55">55/3</a></div>
-<div class="Normal">If Constraint_Error is raised during a call to Read 
-because of failure of one the above checks, the implementation <span class="insert3">shall</span><span class="delete3">&nbsp;must</span> 
+<div class="Normal">&nbsp;If Constraint_Error is raised during a call to Read 
+because of failure of one the above checks, the implementation shall 
 ensure that the discriminants of the actual parameter of Read are not 
 modified.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p56">56/3</a></div>
-<div class="Normal">The number of calls performed by the predefined implementation 
-of the stream-oriented attributes on the Read and Write operations of 
-the stream type is unspecified. An implementation may take advantage 
-of this permission to perform internal buffering. However, all the calls 
-on the Read and Write operations of the stream type needed to implement 
-an explicit invocation of a stream-oriented attribute <span class="insert3">shall</span><span class="delete3">&nbsp;must</span> 
+<div class="Normal">&nbsp;The number of calls performed by the predefined 
+implementation of the stream-oriented attributes on the Read and Write 
+operations of the stream type is unspecified. An implementation may take 
+advantage of this permission to perform internal buffering. However, 
+all the calls on the Read and Write operations of the stream type needed 
+to implement an explicit invocation of a stream-oriented attribute shall 
 take place before this invocation returns. An explicit invocation is 
 one appearing explicitly in the program text, possibly through a generic 
 instantiation (see <A HREF="RM-12-3.html">12.3</A>).</div>
 <div class="paranum"><a name="p56.1">56.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">If <I>T</I> is a discriminated 
-type and its discriminants have defaults, then in two cases an execution 
-of the default implementation of S'Read is not required to create an 
-anonymous object of type <I>T</I>: If the discriminant values that are 
-read in are equal to the corresponding discriminant values of <I>Item</I>, 
-then no object of type <I>T</I> need be created and <I>Item</I> may be 
-used instead. If they are not equal and <I>Item</I> is a constrained 
-variable, then Constraint_Error may be raised at that point, before any 
-further values are read from the stream and before the object of type 
-<I>T</I> is created.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;If <I>T</I> is a discriminated type and its discriminants 
+have defaults, then in two cases an execution of the default implementation 
+of S'Read is not required to create an anonymous object of type <I>T</I>: 
+If the discriminant values that are read in are equal to the corresponding 
+discriminant values of <I>Item</I>, then no object of type <I>T</I> need 
+be created and <I>Item</I> may be used instead. If they are not equal 
+and <I>Item</I> is a constrained variable, then Constraint_Error may 
+be raised at that point, before any further values are read from the 
+stream and before the object of type <I>T</I> is created.</div>
 <div class="paranum"><a name="p56.2">56.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">A default implementation 
-of S'Input that calls the default implementation of S'Read may create 
-a constrained anonymous object with discriminants that match those in 
-the stream.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;A default implementation of S'Input that calls 
+the default implementation of S'Read may create a constrained anonymous 
+object with discriminants that match those in the stream.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p57">57</a></div>
 <div class="Notes">40&nbsp;&nbsp;For a definite subtype S of a type <I>T</I>, 

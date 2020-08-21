@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -27,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,26 +47,26 @@ Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
-<span class="insert4">If the default representation already uses minimal 
-storage for a particular type, aspect Pack might not cause any representation 
-change. It follows that aspect Pack should always be allowed, even when 
-it has no effect on representation.</span></div>
+If the default representation already uses minimal storage for a particular 
+type, aspect Pack might not cause any representation change. It follows 
+that aspect Pack should always be allowed, even when it has no effect 
+on representation.</div>
 <div class="paranum"><a name="p1.b">1.b/4</a></div>
-<div class="Annotations"><span class="insert4">As a consequence, the 
-chosen representation for a packed type may change during program maintenance 
-even if the type is unchanged (in particular, if other representation 
-aspects change on a part of the type). This is different than the behavior 
-of most other representation aspects, whose properties remain guaranteed 
-no matter what changes are made to other aspects.</span></div>
+<div class="Annotations">As a consequence, the chosen representation 
+for a packed type may change during program maintenance even if the type 
+is unchanged (in particular, if other representation aspects change on 
+a part of the type). This is different than the behavior of most other 
+representation aspects, whose properties remain guaranteed no matter 
+what changes are made to other aspects.</div>
 <div class="paranum"><a name="p1.c">1.c/4</a></div>
-<div class="Annotations"><span class="insert4">Therefore, aspect Pack 
-should not be used to achieve a representation required by external criteria. 
-For instance, setting Component_Size to 1 should be preferred over using 
-aspect Pack to ensure an array of bits. If future maintenance would make 
-the array components aliased, independent, or atomic, the program would 
-become illegal if Component_Size is used (immediately identifying a problem) 
+<div class="Annotations">Therefore, aspect Pack should not be used to 
+achieve a representation required by external criteria. For instance, 
+setting Component_Size to 1 should be preferred over using aspect Pack 
+to ensure an array of bits. If future maintenance would make the array 
+components aliased, independent, or atomic, the program would become 
+illegal if Component_Size is used (immediately identifying a problem) 
 while the aspect Pack version would simply change representations (probably 
-causing a hard-to-find bug).</span>&nbsp;</div>
+causing a hard-to-find bug).&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
@@ -92,12 +90,12 @@ representation aspect may be specified:</div>
 The type of aspect Pack is Boolean. When aspect Pack is True for a type, 
 the type (or the extension part) is said to be <I>packed</I>. For a type 
 extension, the parent part is packed as for the parent type, and specifying 
-Pack causes packing only of the extension part. <A NAME="I5479"></A><A NAME="I5480"></A><A NAME="I5481"></A></div>
+Pack causes packing only of the extension part. <A NAME="I5681"></A><A NAME="I5682"></A><A NAME="I5683"></A></div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Pack:&nbsp;</B>Minimize 
 storage when laying out records and arrays.</div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
-<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 the aspect is False.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/3</a></div>
@@ -119,42 +117,36 @@ to objects of a packed type should be minimized.</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Specifying the Pack aspect is for gaining space efficiency, possibly 
 at the expense of time. If more explicit control over representation 
-is desired, then a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>, 
+is desired, then a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>, 
 a Component_Size clause, or a Size clause should be used instead of, 
 or in addition to, the Pack aspect.&nbsp;</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
 <div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
-<span class="delete4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
-<span class="delete4">If a packed type has a component that is not of 
-a by-reference type and has no aliased part, then such a component need 
-not be aligned according to the Alignment of its subtype; in particular 
-it need not be allocated on a storage element boundary.</span></div>
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10291.TXT">AI95-00291-02</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
+</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I5482"></A>The recommended level of support for the Pack aspect 
+<A NAME="I5684"></A>The recommended level of support for the Pack aspect 
 is:&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
-<span class="insert4">Any component of a packed type that is of a by-reference 
-type, that is specified as independently addressable, or that contains 
-an aliased part, shall be aligned according to the alignment of its subtype.</span></div>
+Any component of a packed type that is of a by-reference type, that is 
+specified as independently addressable, or that contains an aliased part, 
+shall be aligned according to the alignment of its subtype.</div>
 <div class="paranum"><a name="p7.a">7.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Ramification:&nbsp;</B>This 
-also applies to atomic components. &quot;Atomic&quot; implies &quot;specified 
-as independently addressable&quot;, so we don't need to mention atomic 
-here.</span></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This also applies to atomic 
+components. &quot;Atomic&quot; implies &quot;specified as independently 
+addressable&quot;, so we don't need to mention atomic here.</div>
 <div class="paranum"><a name="p7.b">7.b/4</a></div>
-<div class="Annotations"><span class="insert4">Other components do not 
-have to respect the alignment of the subtype when packed; in many cases, 
-the Recommended Level of Support will require the alignment to be ignored.</span> 
-</div>
+<div class="Annotations">Other components do not have to respect the 
+alignment of the subtype when packed; in many cases, the Recommended 
+Level of Support will require the alignment to be ignored.&nbsp;</div>
 <div class="paranum"><a name="p8">8/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
 For a packed record type, the components should be packed as tightly 
-as possible subject to <span class="insert4">the above alignment requirements, 
-</span>the Sizes of the component subtypes, and <span class="delete4">subject 
-to&nbsp;</span>any <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN> 
+as possible subject to the above alignment requirements, the Sizes of 
+the component subtypes, and any <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
 that applies to the type; the implementation may, but need not, reorder 
 components or cross aligned word boundaries to improve the packing. A 
 component whose Size is greater than the word size may be allocated an 
@@ -172,14 +164,12 @@ of size 7 plus a 1-bit gap (assuming the gap is needed anyway).&nbsp;</div>
 For a packed array type, if the Size of the component subtype is less 
 than or equal to the word size, Component_Size should be less than or 
 equal to the Size of the component subtype, rounded up to the nearest 
-factor of the word size<span class="insert4">, unless this would violate 
-the above alignment requirements</span>.</div>
+factor of the word size, unless this would violate the above alignment 
+requirements.</div>
 <div class="paranum"><a name="p9.a">9.a/4</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
-<span class="delete4">If a component subtype is aliased, its Size will 
-generally be a multiple of Storage_Unit, so it probably won't get packed 
-very tightly.</span>&nbsp;</div>
+was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
+</div>
 <div class="paranum"><a name="p9.b">9.b/3</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>The recommended 
 level of support for the Pack aspect should be followed.</div>
@@ -195,7 +185,7 @@ intended, but there was no wording to that effect.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p9.d">9.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I5483"></A>Aspect Pack is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I5685"></A>Aspect Pack is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Pack is now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -208,13 +198,13 @@ Pack aspect.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p9.f">9.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0001-1.TXT">AI12-0001-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Fixed so that the Recommended 
-Level of Support does not require packing of components for which such 
-packing would violate other representation items or aspects. This is 
-not incompatible, as either such Pack aspects were treated as illegal 
-or the Recommended Level of Support was ignored as impractical, neither 
-of which would change the behavior of any working programs. (Other behavior 
-cannot be justifed from the Standard.)</span>&nbsp;</div>
+<B>Corrigendum:</B> Fixed so that the Recommended Level of Support does 
+not require packing of components for which such packing would violate 
+other representation items or aspects. This is not incompatible, as either 
+such Pack aspects were treated as illegal or the Recommended Level of 
+Support was ignored as impractical, neither of which would change the 
+behavior of any working programs. (Other behavior cannot be justifed 
+from the Standard.)&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

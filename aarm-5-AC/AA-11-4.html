@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,9 +42,9 @@
 <H1>11.4 Exception Handling</H1>
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[When an exception occurrence is raised, normal program 
-execution is abandoned and control is transferred to an applicable <SPAN Class="swiss"><A HREF="AA-11-2.html#S0269">exception_handler</A></SPAN>, 
-if any. <A NAME="I5225"></A>To <I>handle</I> an exception occurrence 
-is to respond to the exceptional event. <A NAME="I5226"></A>To <I>propagate</I> 
+execution is abandoned and control is transferred to an applicable <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>, 
+if any. <A NAME="I5429"></A>To <I>handle</I> an exception occurrence 
+is to respond to the exceptional event. <A NAME="I5430"></A>To <I>propagate</I> 
 an exception occurrence is to raise it again in another context; that 
 is, to fail to respond to the exceptional event in the present context.] 
 </div>
@@ -52,7 +52,7 @@ is, to fail to respond to the exceptional event in the present context.]
 <div class="Annotations"><B>Ramification:&nbsp;</B>In other words, if the 
 execution of a given construct raises an exception, but does not handle 
 it, the exception is propagated to an enclosing execution (except in 
-the case of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>).</div>
+the case of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>).</div>
 <div class="paranum"><a name="p1.b">1.b/1</a></div>
 <div class="Annotations">Propagation involves re-raising the same exception 
 occurrence<span class="delete1">(assuming the implementation has not 
@@ -62,26 +62,26 @@ this is not propagation.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I5227"></A><A NAME="I5228"></A>Within a 
+<div class="Normal"><A NAME="I5431"></A><A NAME="I5432"></A>Within a 
 given task, if the execution of construct <I>a</I> is defined by this 
 International Standard to consist (in part) of the execution of construct 
 <I>b</I>, then while <I>b</I> is executing, the execution of <I>a</I> 
-is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I5229"></A>The 
+is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I5433"></A>The 
 <I>innermost dynamically enclosing</I> execution of a given execution 
 is the dynamically enclosing execution that started most recently.&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5230"></A><A NAME="I5231"></A>If 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5434"></A><A NAME="I5435"></A>If 
 the execution of <I>a</I> dynamically encloses that of <I>b</I>, then 
 we also say that the execution of <I>b</I> is <I>included in</I> the 
 execution of <I>a</I>.&nbsp;</div>
 <div class="paranum"><a name="p2.b">2.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Examples: The execution 
-of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0155">if_statement</A></SPAN> 
-dynamically encloses the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN> 
+dynamically encloses the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
 after the <B>if</B> (during that evaluation). (Recall that &ldquo;execution&rdquo; 
 includes both &ldquo;elaboration&rdquo; and &ldquo;evaluation&rdquo;, 
 as well as other executions.) The evaluation of a function call dynamically 
-encloses the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+encloses the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
 of the function <SPAN Class="swiss"><A HREF="AA-3-11.html#S0089">body</A></SPAN> 
 (during that execution). Note that, due to recursion, several simultaneous 
 executions of the same construct can be occurring at once during the 
@@ -92,61 +92,61 @@ task boundaries; a task's execution does not include the execution of
 any other tasks.</div>
 <div class="paranum"><a name="p2.d">2.d</a></div>
 <div class="Annotations">Dynamically enclosing is only defined for executions 
-that are occurring at a given moment in time; if an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0155">if_statement</A></SPAN> 
-is currently executing the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-after <B>then</B>, then the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN> 
-is no longer dynamically enclosed by the execution of the <SPAN Class="swiss"><A HREF="AA-5-3.html#S0155">if_statement</A></SPAN> 
+that are occurring at a given moment in time; if an <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN> 
+is currently executing the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+after <B>then</B>, then the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN> 
+is no longer dynamically enclosed by the execution of the <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN> 
 (or anything else).&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5232"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5436"></A>When 
 an exception occurrence is raised by the execution of a given construct, 
 the rest of the execution of that construct is <I>abandoned</I>; that 
 is, any portions of the execution that have not yet taken place are not 
 performed. The construct is first completed, and then left, as explained 
 in <A HREF="AA-7-6-1.html">7.6.1</A>. Then:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted">If the construct is a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>, 
+<div class="Bulleted">If the construct is a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>, 
 the exception does not propagate further;&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>When an exception is raised 
-by the execution of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>, 
+by the execution of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>, 
 there is no dynamically enclosing execution, so the exception does not 
 propagate any further. If the exception occurred during the activation 
 of the task, then the activator raises Tasking_Error, as explained in 
 <A HREF="AA-9-2.html">9.2</A>, &ldquo;<A HREF="AA-9-2.html">Task Execution 
 - Task Activation</A>&rdquo;, but we don't define that as propagation; 
 it's a special rule. Otherwise (the exception occurred during the execution 
-of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
 of the task), the task silently disappears. Thus, abnormal termination 
 of tasks is not always considered to be an error.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted">If the construct is the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
+<div class="Bulleted">If the construct is the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
 that has a handler with a choice covering the exception, the occurrence 
 is handled by that handler;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I5233"></A>Otherwise, the occurrence is 
+<div class="Bulleted"><A NAME="I5437"></A>Otherwise, the occurrence is 
 <I>propagated</I> to the innermost dynamically enclosing execution, which 
 means that the occurrence is raised again in that context.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5234"></A><A NAME="I5235"></A>As 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I5438"></A><A NAME="I5439"></A>As 
 shorthands, we refer to the <I>propagation of an exception</I>, and the 
 <I>propagation by a construct</I>, if the execution of the construct 
 propagates an exception occurrence.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5236"></A><A NAME="I5237"></A><A NAME="I5238"></A>When 
-an occurrence is <I>handled</I> by a given handler, the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0270">choice_parameter_specification</A></SPAN>, 
+<div class="Normal"><A NAME="I5440"></A><A NAME="I5441"></A><A NAME="I5442"></A>When 
+an occurrence is <I>handled</I> by a given handler, the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0284">choice_parameter_specification</A></SPAN>, 
 if any, is first elaborated, which creates the choice parameter and initializes 
-it to the occurrence. Then, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
+it to the occurrence. Then, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
 of the handler is executed; this execution replaces the abandoned portion 
-of the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>. 
+of the execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 This &ldquo;replacement&rdquo; semantics implies that the handler can 
 do pretty much anything the abandoned sequence could do; for example, 
 in a function, the handler can execute a <span class="insert2">return 
-statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 that applies to the function.&nbsp;</div>
 <div class="paranum"><a name="p7.b">7.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The rules for exceptions 
@@ -163,7 +163,7 @@ an error.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Notes">2&nbsp;&nbsp;Note that exceptions raised in a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of a body are not handled by the handlers of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
+of a body are not handled by the handlers of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
 of that body.&nbsp;</div>
 
 <HR>

@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
 <HEAD>
-    <TITLE>Nonreturning Procedures</TITLE>
+    <TITLE>Nonreturning Subprograms</TITLE>
     <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
     <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -32,42 +32,45 @@
 &nbsp;<A HREF="AA-6-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>6.5.1 Nonreturning Procedures</H1>
-<div class="paranum"><a name="p1">1/3</a></div>
+<H1>6.5.1 Nonreturning Subprograms</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-Specifying aspect No_Return to have the value True indicates that a procedure 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+Specifying aspect No_Return to have the value True indicates that a subprogram 
 cannot return normally[; it may propagate an exception or loop forever]. 
 </div>
-<div class="paranum"><a name="p1.a">1.a/3</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>Aspect No_Deposit<A NAME="I3852"></A> 
-will have to wait for Ada 2020. :-)&nbsp;</div>
+<div class="paranum"><a name="p1.a">1.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Aspect No_Deposit<A NAME="I3970"></A> 
+will have to wait for Ada 2028. :-)&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 and 
 3 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p3.1">3.1/3</a></div>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-For a procedure or generic procedure, the following language-defined 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+For a subprogram or generic subprogram, the following language-defined 
 representation aspect may be specified:&nbsp;</div>
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;No_Return</div><div class="WideHanging-Body">
 The type of aspect No_Return is Boolean. When aspect No_Return is True 
-for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I3853"></A><A NAME="I3854"></A><A NAME="I3855"></A></div>
+for an entity, the entity is said to be <I>nonreturning</I>.<A NAME="I3971"></A><A NAME="I3972"></A><A NAME="I3973"></A></div>
 <div class="paranum"><a name="p3.3">3.3/3</a></div>
-<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+<div class="WideHanging-Body">If directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a static expression. [This aspect is never inherited;] if not 
 directly specified, the aspect is False.</div>
-<div class="paranum"><a name="p3.a">3.a/3</a></div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>No_Return: 
-</B>A procedure will not return normally.</div>
-<div class="paranum"><a name="p3.4">3.4/3</a></div>
+</B>A subprogram will not return normally.</div>
+<div class="paranum"><a name="p3.4">3.4/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-If a generic procedure is nonreturning, then so are its instances. If 
-a procedure declared within a generic unit is nonreturning, then so are 
-the corresponding copies of that procedure in instances.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+If a generic subprogram is nonreturning, then so are its instances. If 
+a subprogram declared within a generic unit is nonreturning, then so 
+are the corresponding copies of that subprogram in instances.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
@@ -80,9 +83,10 @@ of a generic unit.</div>
 <div class="Annotations"><B>Reason:&nbsp;</B>A null procedure cannot have 
 the appropriate nonreturning semantics, as it does not raise an exception 
 or loop forever.&nbsp;</div>
-<div class="paranum"><a name="p4.b">4.b/3</a></div>
+<div class="paranum"><a name="p4.b">4.b/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-The procedure can be abstract. If a nonreturning procedure is renamed 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+The procedure can be abstract. If a nonreturning subprogram is renamed 
 (anywhere) calls through the new name still have the nonreturning semantics. 
 </div>
 <div class="paranum"><a name="p5">5/2</a></div>
@@ -90,19 +94,33 @@ The procedure can be abstract. If a nonreturning procedure is renamed
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 A return statement shall not apply to a nonreturning procedure or generic 
 procedure.</div>
-<div class="paranum"><a name="p6">6/2</a></div>
+<div class="paranum"><a name="p5.1">5.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+Any return statement that applies to a nonreturning function or generic 
+function shall be a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>, 
+a call on a nonreturning function, or a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of one of these.</div>
+<div class="paranum"><a name="p5.a">5.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>We still require at least 
+one return statement in a function; we just require that all such return 
+statements don't actually return a value.&nbsp;</div>
+<div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-A procedure shall be nonreturning if it overrides a dispatching nonreturning 
-procedure. <A NAME="I3856"></A>In addition to the places where Legality 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+A subprogram shall be nonreturning if it overrides a dispatching nonreturning 
+subprogram. <A NAME="I3974"></A>In addition to the places where Legality 
 Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), this rule 
 applies also in the private part of an instance of a generic unit.</div>
-<div class="paranum"><a name="p6.a">6.a/2</a></div>
+<div class="paranum"><a name="p6.a">6.a/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This ensures that dispatching 
-calls to nonreturning procedures will, in fact, not return.&nbsp;</div>
-<div class="paranum"><a name="p7">7/2</a></div>
+calls to nonreturning subprograms will, in fact, not return.&nbsp;</div>
+<div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-If a renaming-as-body completes a nonreturning procedure declaration, 
-then the renamed procedure shall be nonreturning.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+If a renaming-as-body completes a nonreturning subprogram declaration, 
+then the renamed subprogram shall be nonreturning.</div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This ensures that no extra code 
 is needed to implement the renames (that is, no wrapper is needed) as 
@@ -115,12 +133,15 @@ the body has the same property.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
 If the body of a nonreturning procedure completes normally, Program_Error 
-is raised at the point of the call. <A NAME="I3857"></A></div>
-<div class="paranum"><a name="p9.a">9.a/2</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>Note that there is no name 
-for suppressing this check, since the check represents a bug, imposes 
-no time overhead, and minimal space overhead (since it can usually be 
-statically eliminated as dead code).&nbsp;</div>
+is raised at the point of the call. <A NAME="I3975"></A></div>
+<div class="paranum"><a name="p9.a">9.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+Note that there is no name for suppressing this check, since the check 
+represents a bug, imposes no time overhead, and minimal space overhead 
+(since it can usually be statically eliminated as dead code). We don't 
+need a similar rule for nonreturning functions as this is standard semantics 
+for all functions that normally complete without a transfer of control 
+(such as a return statement).&nbsp;</div>
 <div class="paranum"><a name="p9.b">9.b/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>If a nonreturning 
 procedure tries to return, we raise Program_Error. This is stated as 
@@ -152,14 +173,20 @@ with this neatly.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00414.TXT">AI95-00414-01</A></I>} 
-<A NAME="I3858"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+<A NAME="I3976"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
 No_Return is new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.b">10.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I3859"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I3977"></A>Aspect No_Return is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 No_Return is now obsolescent.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p10.c">10.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+<A NAME="I3978"></A>Aspect No_Return can now be applied to functions 
+as well as procedures.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

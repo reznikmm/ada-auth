@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -40,7 +38,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I3188"></A>A constraint <I>statically matches</I> 
+<div class="Normal"><A NAME="I3178"></A>A constraint <I>statically matches</I> 
 another constraint if:&nbsp;</div>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
 <div class="Bulleted">both are null constraints;</div>
@@ -58,7 +56,7 @@ or</div>
 <div class="Bulleted">both are nonstatic and come from the same <SPAN Class="swiss"><A HREF="RM-12-5.html#S0298">formal_type_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Normal"><A NAME="I3189"></A>A subtype <I>statically matches</I> 
+<div class="Normal"><A NAME="I3179"></A>A subtype <I>statically matches</I> 
 another subtype of the same type if they have statically matching constraints, 
 all predicate specifications that apply to them come from the same declarations, 
 <span class="insert5">Object_Size (see <A HREF="RM-13-3.html">13.3</A>) 
@@ -71,18 +69,18 @@ access-to-constant. Two anonymous access-to-subprogram subtypes statically
 match if their designated profiles are subtype conformant, and either 
 both or neither exclude null.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3190"></A>Two ranges of the same type <I>statically 
+<div class="Normal"><A NAME="I3180"></A>Two ranges of the same type <I>statically 
 match</I> if both result from the same evaluation of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
 or if both are static and have equal corresponding bounds.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I3191"></A>A constraint is <I>statically 
+<div class="Normal"><A NAME="I3181"></A>A constraint is <I>statically 
 compatible</I> with a scalar subtype if it statically matches the constraint 
 of the subtype, or if both are static and the constraint is compatible 
-with the subtype. <A NAME="I3192"></A>A constraint is <I>statically compatible</I> 
+with the subtype. <A NAME="I3182"></A>A constraint is <I>statically compatible</I> 
 with an access or composite subtype if it statically matches the constraint 
 of the subtype, or if the subtype is unconstrained.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3193"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3183"></A>Two 
 statically matching subtypes are statically compatible with each other. 
 In addition, a subtype <I>S1</I> is statically compatible with a subtype 
 <I>S2</I> if:&nbsp;</div>
@@ -99,8 +97,7 @@ and</div>
 apply to <I>S2</I> apply also to <I>S1</I>, or</div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Indented2NestedBulleted">both subtypes are static, every 
-value that satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-of <I>S1</I> also satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+value that satisfies the predicates of <I>S1</I> also satisfies the predicates 
 of <I>S2</I>, and it is not the case that both types each have at least 
 one applicable predicate specification, predicate checks are enabled 
 (see <A HREF="RM-11-4-2.html">11.4.2</A>) for <I>S2</I>, and predicate 

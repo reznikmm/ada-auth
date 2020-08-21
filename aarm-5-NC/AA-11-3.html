@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,24 +38,24 @@
 <HR>
 <H1>11.3 Raise Statements and Raise Expressions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
 raises an exception.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
-<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5002"></A><A NAME="S0272"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5003"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5004"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>];</div>
+<SPAN Class="swiss">raise_statement</SPAN><A NAME="I5191"></A><A NAME="S0286"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I5192"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5193"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>];</div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<SPAN Class="swiss">raise_expression</SPAN><A NAME="I5005"></A><A NAME="S0273"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>&nbsp;<I>exception_</I><A NAME="I5006"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5007"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>]</div>
+<SPAN Class="swiss">raise_expression</SPAN><A NAME="I5194"></A><A NAME="S0287"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>&nbsp;<I>exception_</I><A NAME="I5195"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I5196"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>]</div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-If a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
-appears within the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of one of the following contexts, the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
-shall appear within a pair of parentheses within the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>: 
+If a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
+appears within the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of one of the following contexts, the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
+shall appear within a pair of parentheses within the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>: 
 </div>
 <div class="paranum"><a name="p2.3">2.3/4</a></div>
 <div class="Indented2Bulleted"><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>;</div>
@@ -76,14 +76,14 @@ shall appear within a pair of parentheses within the <SPAN Class="swiss"><A HREF
 <div class="Annotations"><B>Reason:&nbsp;</B>Unlike conditional expressions, 
 this doesn't say &quot;immediately surrounded&quot;; the only requirement 
 is that it is somehow within a pair of parentheses that is part of the 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>. 
-We need this restriction in order that <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
+We need this restriction in order that <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>s 
 cannot be syntactically confused with immediately following constructs 
-(such as <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s). 
+(such as <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s). 
 </div>
 <div class="paranum"><a name="p2.a.2">2.a.2/4</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We only need to require that 
-a right parenthesis appear somewhere between the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+a right parenthesis appear somewhere between the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 and the surrounding context; that's all we need to specify in order to 
 eliminate the ambiguities. Moreover, we don't care at all where the left 
 parenthesis is (so long as it is legal, of course).</div>
@@ -101,19 +101,19 @@ the object declaration. Both of the following are legal:&nbsp;</div>
 Obj&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;(Func_Call&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;TBD_Error)&nbsp;<B>with</B>&nbsp;Atomic;</div>
 <div class="paranum"><a name="p2.a.7">2.a.7/4</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">and if the <B>with</B> 
-belongs to the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>, 
+belongs to the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>, 
 then both of the following are legal:&nbsp;</div>
 <div class="paranum"><a name="p2.a.8">2.a.8/4</a></div>
 <div class="SmallExamples">Obj&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;Func_Call&nbsp;<B>or&nbsp;else</B>&nbsp;(<B>raise</B>&nbsp;TBD_Error&nbsp;<B>with</B>&nbsp;Atomic);<BR>
 Obj&nbsp;:&nbsp;Boolean&nbsp;:=&nbsp;(Func_Call&nbsp;<B>or&nbsp;else&nbsp;raise</B>&nbsp;TBD_Error&nbsp;<B>with</B>&nbsp;Atomic);</div>
 <div class="paranum"><a name="p2.a.9">2.a.9/4</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">This rule only 
-requires parentheses for <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>s 
-that are part of the &quot;top-level&quot; of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-in one of the named contexts; the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
-is either the entire <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-or part of a chain of logical operations. In practice, the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
-will almost always be last in interesting top-level <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s; 
+requires parentheses for <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>s 
+that are part of the &quot;top-level&quot; of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+in one of the named contexts; the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
+is either the entire <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+or part of a chain of logical operations. In practice, the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
+will almost always be last in interesting top-level <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s; 
 anything that follows it could never be executed, so that should be rare. 
 Other contexts such as conditional expressions, qualified expressions, 
 aggregates, and even function calls, provide the needed parentheses. 
@@ -125,8 +125,8 @@ B&nbsp;:&nbsp;Some_Array&nbsp;:=&nbsp;(1,&nbsp;2,&nbsp;3,&nbsp;<B>others</B>&nbs
 C&nbsp;:&nbsp;Natural&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;Func&nbsp;(Val&nbsp;=&gt;&nbsp;<B>raise</B>&nbsp;TBD_Error);</div>
 <div class="paranum"><a name="p2.a.11">2.a.11/4</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">Parentheses that 
-are part of the context of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-don't count. For instance, the parentheses around the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+are part of the context of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+don't count. For instance, the parentheses around the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 are required in the following:&nbsp;</div>
 <div class="paranum"><a name="p2.a.12">2.a.12/4</a></div>
 <div class="SmallExamples">D&nbsp;:&nbsp;A_Tagged&nbsp;&nbsp;&nbsp;:=&nbsp;((<B>raise</B>&nbsp;TBD_Error)&nbsp;<B>with</B>&nbsp;Comp&nbsp;=&gt;&nbsp;'A');</div>
@@ -137,21 +137,21 @@ is one of the contexts that triggers the rule.</div>
 <div class="Annotations">This English-language rule could have been implemented 
 instead by adding nonterminals <SPAN Class="swiss">initial_expression</SPAN> 
 and <SPAN Class="swiss">initial_relation</SPAN>, which are the same as 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0119">choice_expression</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0120">choice_relation</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">choice_expression</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">choice_relation</A></SPAN> 
 except for the inclusion of membership in <SPAN Class="swiss">initial_relation</SPAN>. 
 Then, <SPAN Class="swiss">initial_expresion</SPAN> could be used in place 
-of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 in all of the contexts noted. We did not do that because of the large 
 amount of change required, both to the grammar and to language rules 
 that refer to the grammar. A complete grammar is given in <A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A>.</div>
 <div class="paranum"><a name="p2.a.15">2.a.15/4</a></div>
-<div class="Annotations">The use of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+<div class="Annotations">The use of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 is illegal in each of <SPAN Class="swiss"><A HREF="AA-3-5-4.html#S0043">modular_type_definition</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN>, 
 and <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
-as these uses are required to be static and a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+as these uses are required to be static and a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 is never static. We include these in this rule so that Ada text has an 
 unambiguous syntax in these cases.&nbsp;</div>
 
@@ -160,9 +160,9 @@ unambiguous syntax in these cases.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
 The <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-if any, of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
-shall denote an exception. <A NAME="I5008"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
+if any, of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
+shall denote an exception. <A NAME="I5197"></A>A <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
 with no <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (that is, a <I>re-raise statement</I>) shall be within a handler, but 
 not within a body enclosed by that handler.&nbsp;</div>
@@ -172,15 +172,15 @@ not within a body enclosed by that handler.&nbsp;</div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-The <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>, 
-if any, of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+The <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>, 
+if any, of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 is expected to be of type String.</div>
 <div class="paranum"><a name="p3.2">3.2/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-The expected type for a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+The expected type for a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 shall be any single type.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -188,15 +188,15 @@ shall be any single type.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<A NAME="I5009"></A>To <I>raise an exception</I> is to raise a new occurrence 
+<A NAME="I5198"></A>To <I>raise an exception</I> is to raise a new occurrence 
 of that exception[, as explained in <A HREF="AA-11-4.html">11.4</A>]. 
-<A NAME="I5010"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
+<A NAME="I5199"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
 with an <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-the named exception is raised. Similarly, for the evaluation of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>, 
-the named exception is raised. [In both of these cases, if a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN> 
+the named exception is raised. Similarly, for the evaluation of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>, 
+the named exception is raised. [In both of these cases, if a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
 is present, the expression is evaluated and its value is associated with 
-the exception occurrence.] <A NAME="I5011"></A>For the execution of a 
+the exception occurrence.] <A NAME="I5200"></A>For the execution of a 
 re-raise statement, the exception occurrence that caused transfer of 
 control to the innermost enclosing handler is raised [again].&nbsp;</div>
 <div class="paranum"><a name="p4.a.1">4.a.1/2</a></div>
@@ -215,12 +215,12 @@ cause of the exception to be determined.&nbsp;</div>
 <div class="Notes">1&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0062-1.TXT">AI12-0062-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-If the evaluation of a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN> 
+If the evaluation of a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
 raises an exception, that exception is propagated instead of the one 
 denoted by the <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN>. 
+of the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Examples</H4>
@@ -237,7 +237,7 @@ statements:</I>&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations">The fact that the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
 has to denote an exception is not clear from RM83. Clearly that was the 
 intent, since the italicized part of the syntax rules so indicate, but 
 there was no explicit rule. RM83-1.5(11) doesn't seem to give the italicized 
@@ -246,10 +246,10 @@ parts of the syntax any force.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p7.b">7.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
-<A NAME="I5012"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
+<A NAME="I5201"></A>The syntax of a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
 is extended to include a string message. This is more convenient than 
 calling Exceptions.Exception_Message (<I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>'Identity, 
-<I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>), 
+<I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>), 
 and should encourage the use of message strings when raising exceptions. 
 </div>
 
@@ -258,7 +258,7 @@ and should encourage the use of message strings when raising exceptions.
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<A NAME="I5013"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+<A NAME="I5202"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 is new. This construct is necessary to allow conversion of existing specifications 
 to use preconditions and predicates without changing the exceptions raised. 
 It is considered important enough to be added to Ada 2012 rather than 

@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,11 +39,11 @@
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2983"></A><A NAME="I2984"></A><A NAME="I2985"></A>An 
+<div class="Normal"><A NAME="I2961"></A><A NAME="I2962"></A><A NAME="I2963"></A>An 
 <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 consisting of two <SPAN Class="swiss"><A HREF="AA-4-4.html#S0120">relation</A></SPAN>s 
 connected by <B>and then</B> or <B>or else</B> (a <I>short-circuit control 
-form</I>) shall resolve to be of some boolean type; <A NAME="I2986"></A>the 
+form</I>) shall resolve to be of some boolean type; <A NAME="I2964"></A>the 
 expected type for both <SPAN Class="swiss"><A HREF="AA-4-4.html#S0120">relation</A></SPAN>s 
 is that same boolean type.&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
@@ -55,10 +55,10 @@ help.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2987"></A><A NAME="I2988"></A><A NAME="I2989"></A><A NAME="I2990"></A><A NAME="I2991"></A><A NAME="I2992"></A><A NAME="I2993"></A><A NAME="I2994"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2965"></A><A NAME="I2966"></A><A NAME="I2967"></A><A NAME="I2968"></A><A NAME="I2969"></A><A NAME="I2970"></A><A NAME="I2971"></A><A NAME="I2972"></A>The 
 following logical operators are predefined for every boolean type <I>T</I>, 
 for every modular type <I>T</I>, and for every one-dimensional array 
-type <I>T</I> whose component type is a boolean type: <A NAME="I2995"></A></div>
+type <I>T</I> whose component type is a boolean type: <A NAME="I2973"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>and</B>&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;<B>or</B>&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
@@ -73,7 +73,7 @@ For these operators, we are talking about the type without any (interesting)
 subtype, and not some subtype with a constraint or exclusion. Since it's 
 possible that there is no name for the &ldquo;uninteresting&rdquo; subtype, 
 we denote the type with an italicized <I>T</I>. This applies to the italicized 
-<I>T</I> in many other predefined operators and attributes as well.<A NAME="I2996"></A></div>
+<I>T</I> in many other predefined operators and attributes as well.<A NAME="I2974"></A></div>
 <div class="paranum"><a name="p3.c">3.c/2</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00145.TXT">AI95-00145-01</A></I>} 
 In many cases, there is a subtype with the correct properties available. 
@@ -121,17 +121,17 @@ array are those of the left operand.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2997"></A>The short-circuit control forms 
+<div class="Normal"><A NAME="I2975"></A>The short-circuit control forms 
 <B>and then</B> and <B>or else</B> deliver the same result as the corresponding 
 predefined <B>and</B> and <B>or</B> operators for boolean types, except 
 that the left operand is always evaluated first, and the right operand 
 is not evaluated if the value of the left operand determines the result.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2998"></A><A NAME="I2999"></A>For the logical 
+<div class="Normal"><A NAME="I2976"></A><A NAME="I2977"></A>For the logical 
 operators on arrays, a check is made that for each component of the left 
 operand there is a matching component of the right operand, and vice 
-versa. <A NAME="I3000"></A><A NAME="I3001"></A>Also, a check is made 
-that each component of the result belongs to the component subtype. <A NAME="I3002"></A>The 
+versa. <A NAME="I2978"></A><A NAME="I2979"></A>Also, a check is made 
+that each component of the result belongs to the component subtype. <A NAME="I2980"></A>The 
 exception Constraint_Error is raised if either of the above checks fails. 
 </div>
 <div class="paranum"><a name="p8.a">8.a</a></div>

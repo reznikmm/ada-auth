@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,9 +35,8 @@
 <HR>
 <H1>D.5.1 Dynamic Priorities for Tasks</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-describes how the base priority of a task can be modified or queried 
-at run time.&nbsp;</div>
+<div class="Normal">This subclause describes how the base priority of 
+a task can be modified or queried at run time.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
@@ -48,14 +45,14 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples"><B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="RM-C-7-1.html">C.7.1</A></I></SPAN><BR>
-<B>package</B>&nbsp;Ada.Dynamic_Priorities&nbsp;<B>is</B><A NAME="I8074"></A><BR>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities&nbsp;<B>is</B><A NAME="I7880"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dynamic_Priorities);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8075"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7881"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8076"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7882"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -68,35 +65,35 @@ of the specified task to the specified Priority value. Set_Priority has
 no effect if the task is terminated.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The function Get_Priority returns T's current base 
-priority. <A NAME="I8077"></A>Tasking_Error is raised if the task is 
+priority. <A NAME="I7883"></A>Tasking_Error is raised if the task is 
 terminated.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8078"></A>Program_Error is raised by Set_Priority 
+<div class="Normal"><A NAME="I7884"></A>Program_Error is raised by Set_Priority 
 and Get_Priority if T is equal to Null_Task_Id.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">On a system with a single processor, the setting 
+<div class="Normal">&nbsp;On a system with a single processor, the setting 
 of the base priority of a task <I>T</I> to the new value occurs immediately 
 at the first point when <I>T</I> is outside the execution of a protected 
 action.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal"></div>
-<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
-11 was deleted.</I></SPAN></span>&nbsp;</div>
+<div class="Normal">&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 11 was 
+deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I8079"></A>If any subprogram in this package 
+<div class="Normal"><A NAME="I7885"></A>If any subprogram in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p12.1">12.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;On a multiprocessor, the implementation shall document 
-any conditions that cause the completion of the setting of the priority 
-of a task to be delayed later than what is specified for a single processor. 
-</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;On a multiprocessor, the implementation shall 
+document any conditions that cause the completion of the setting of the 
+priority of a task to be delayed later than what is specified for a single 
+processor.&nbsp;</div>
 
 <H4 Class="centered">Metrics</H4>
 <div class="paranum"><a name="p13">13</a></div>
@@ -134,10 +131,10 @@ calls in some serial order.</div>
 <div class="Notes">29&nbsp;&nbsp;The rule for when Tasking_Error is raised 
 for Set_Priority or Get_Priority is different from the rule for when 
 Tasking_Error is raised on an entry call (see <A HREF="RM-9-5-3.html">9.5.3</A>). 
-In particular, <span class="delete3">setting or&nbsp;</span>querying the priority 
-of a completed or an abnormal task is allowed, so long as the task is 
-not yet terminated<span class="insert3">, and setting the priority of 
-a task is allowed for any task state (including for terminated tasks)</span>.</div>
+In particular, querying the priority of a completed or an abnormal task 
+is allowed, so long as the task is not yet terminated, and setting the 
+priority of a task is allowed for any task state (including for terminated 
+tasks).</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Notes">30&nbsp;&nbsp;Changing the priorities of a set of 
 tasks can be performed by a series of calls to Set_Priority for each 

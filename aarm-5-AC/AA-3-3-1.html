@@ -38,7 +38,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,10 +50,10 @@
 <H1>3.3.1 Object Declarations</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<A NAME="I1616"></A><A NAME="I1617"></A><A NAME="I1618"></A>An <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+<A NAME="I1625"></A><A NAME="I1626"></A><A NAME="I1627"></A>An <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 declares a <I>stand-alone</I> object with a given nominal subtype and, 
 optionally, an explicit initial value given by an initialization expression. 
-<A NAME="I1619"></A><A NAME="I1620"></A><A NAME="I1621"></A>For an array, 
+<A NAME="I1628"></A><A NAME="I1629"></A><A NAME="I1630"></A>For an array, 
 <span class="insert3">access,&nbsp;</span>task, or protected object, the <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 may include the definition of the (anonymous) type of the object.&nbsp;</div>
 
@@ -62,26 +62,26 @@ may include the definition of the (anonymous) type of the object.&nbsp;</div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00406.TXT">AI95-00406-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">object_declaration</SPAN><A NAME="I1622"></A><A NAME="S0032"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1623"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1624"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1625"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1626"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;<span class="insert2"><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I1627"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1628"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1629"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]</span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1630"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span><span class="insert2">;</span><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I1631"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1632"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1633"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1634"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;<BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I1635"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">single_task_declaration</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I1636"></A><SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN></div>
+<SPAN Class="swiss">object_declaration</SPAN><A NAME="I1631"></A><A NAME="S0032"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1632"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1633"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1634"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1635"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;<span class="insert2"><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1636"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1637"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1638"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]</span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1639"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span><span class="insert2">;</span><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1640"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>]&nbsp;[<B>constant</B>]&nbsp;<A NAME="I1641"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I1642"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]<span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1643"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1644"></A><SPAN Class="swiss"><A HREF="AA-9-1.html#S0223">single_task_declaration</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I1645"></A><SPAN Class="swiss"><A HREF="AA-9-4.html#S0228">single_protected_declaration</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">defining_identifier_list</SPAN><A NAME="I1637"></A><A NAME="S0033"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I1638"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1639"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">defining_identifier_list</SPAN><A NAME="I1646"></A><A NAME="S0033"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I1647"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1648"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>}</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I1640"></A>For an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-following the compound delimiter :=, the type expected for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is that of the object. <A NAME="I1641"></A>This <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is called the <I>initialization expression</I>. <A NAME="I1642"></A></div>
+<div class="Normal"><A NAME="I1649"></A>For an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+following the compound delimiter :=, the type expected for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is that of the object. <A NAME="I1650"></A>This <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is called the <I>initialization expression</I>. <A NAME="I1651"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
@@ -99,9 +99,9 @@ not be given if the object is of a limited type.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 An <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-with the reserved word <B>constant</B> declares a constant object. <A NAME="I1643"></A>If 
+with the reserved word <B>constant</B> declares a constant object. <A NAME="I1652"></A>If 
 it has an initialization expression, then it is called a <I>full constant 
-declaration</I>. <A NAME="I1644"></A>Otherwise<span class="insert3">,</span> 
+declaration</I>. <A NAME="I1653"></A>Otherwise<span class="insert3">,</span> 
 it is called a <I>deferred constant declaration</I>. The rules for deferred 
 constant declarations are given in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 <A HREF="AA-7-4.html">7.4</A>. The rules for full constant declarations 
@@ -116,7 +116,7 @@ of this International Standard relies on this equivalence; explanations
 are given for declarations with a single <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
-<A NAME="I1645"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert2">, 
+<A NAME="I1654"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><span class="insert2">, 
 <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>,</span> 
 or full type definition of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 defines the nominal subtype of the object. The <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -129,7 +129,7 @@ protected type.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
 <span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0192-1.TXT">AI12-0192-1</A></I>} 
-<span class="insert5"></span><span class="insert2"><A NAME="I1646"></A>A 
+<span class="insert5"></span><span class="insert2"><A NAME="I1655"></A>A 
 component of an object is said to <I>require late initialization</I> 
 if</span><span class="insert5">:</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;it has an access discriminant value constrained by a per-object expression, 
 or if it has an initialization expression that includes a name denoting 
@@ -156,21 +156,21 @@ initialize them as late and as reproducibly as possible.</span>&nbsp;</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
-<A NAME="I1647"></A>If a composite object declared by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+<A NAME="I1656"></A>If a composite object declared by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 has an unconstrained nominal subtype, then if this subtype is indefinite 
 or the object is constant <span class="delete2">or aliased (see <A HREF="AA-3-10.html">3.10</A>) 
 </span>the actual subtype of this object is constrained. The constraint 
 is determined by the bounds or discriminants (if any) of its initial 
-value; <A NAME="I1648"></A>the object is said to be <I>constrained by 
-its initial value</I>. <A NAME="I1649"></A><A NAME="I1650"></A><span class="delete2">[In 
+value; <A NAME="I1657"></A>the object is said to be <I>constrained by 
+its initial value</I>. <A NAME="I1658"></A><A NAME="I1659"></A><span class="delete2">[In 
 the case of an aliased object, this initial value may be either explicit 
 or implicit; in the other cases, an explicit initial value is required.] 
 </span>When not constrained by its initial value, the actual and nominal 
-subtypes of the object are the same. <A NAME="I1651"></A><A NAME="I1652"></A>If 
+subtypes of the object are the same. <A NAME="I1660"></A><A NAME="I1661"></A>If 
 its actual subtype is constrained, the object is called a <I>constrained 
 object</I>.</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1653"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1662"></A>For 
 an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 without an initialization expression, any initial values for the object 
 or its subcomponents are determined by the <I>implicit initial values</I> 
@@ -184,10 +184,10 @@ is the null value of the access type.</div>
 that has the Default_Value aspect specified is the value of that aspect 
 converted to the nominal subtype (which might raise Constraint_Error 
 &mdash; see <A HREF="AA-4-6.html">4.6</A>, &ldquo;<A HREF="AA-4-6.html">Type 
-Conversions</A>&rdquo;);<A NAME="I1654"></A></span></div>
+Conversions</A>&rdquo;);<A NAME="I1663"></A></span></div>
 <div class="paranum"><a name="p11.a.1">11.a.1/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-is a Dynamic Semantics rule, so the visibility of the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+is a Dynamic Semantics rule, so the visibility of the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 is not relevant &mdash; if the full type for a private type has the Default_Value 
 aspect specified, partial views of the type also have this implicit initial 
 value.</span>&nbsp;</div>
@@ -203,7 +203,7 @@ is obtained by evaluation of this expression and conversion to the component's
 nominal subtype (which might raise Constraint_Error<span class="delete3">&nbsp;&mdash; see <A HREF="AA-4-6.html">4.6</A>, &ldquo;<A HREF="AA-4-6.html">Type 
 Conversions</A>&rdquo;</span>), unless the component is a discriminant 
 of a constrained subtype (the previous case), or is in an excluded <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
-(see <A HREF="AA-3-8-1.html">3.8.1</A>). <A NAME="I1655"></A>For each 
+(see <A HREF="AA-3-8-1.html">3.8.1</A>). <A NAME="I1664"></A>For each 
 component that does not have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
 <span class="insert3">if the composite subtype has the Default_Component_Value 
 aspect specified, the implicit initial value is the value of that aspect 
@@ -221,7 +221,7 @@ state of the associated thread of control. For a type with dynamic-sized
 components, such implicit components might be used to hold the offset 
 to some explicit component.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1656"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1665"></A>The 
 elaboration of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 proceeds in the following sequence of steps:&nbsp;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
@@ -229,8 +229,8 @@ proceeds in the following sequence of steps:&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
 The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>,<span class="insert2">&nbsp;<SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>,</span> 
 <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">single_task_declaration</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-9-1.html#S0223">single_task_declaration</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0228">single_protected_declaration</A></SPAN> 
 is first elaborated. This creates the nominal subtype (and the anonymous 
 type in the <span class="insert2">last four</span><span class="delete2">&nbsp;latter 
 three</span> cases).</div>
@@ -240,20 +240,20 @@ If the <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A><
 includes an initialization expression, the (explicit) initial value is 
 obtained by evaluating the expression and converting it to the nominal 
 subtype (which might raise Constraint_Error &mdash; see <A HREF="AA-4-6.html">4.6</A>). 
-<A NAME="I1657"></A></div>
+<A NAME="I1666"></A></div>
 <div class="paranum"><a name="p18">18/2</a></div>
 <div class="Enumerated-Term">3.</div><div class="Enumerated-Body">
 {<I><A HREF="defect1.html#8652/0002">8652/0002</A></I>} {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00171.TXT">AI95-00171-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
 The object is created, and, if there is not an initialization expression, 
-<span class="insert2">the object is <I>initialized by default</I>. <A NAME="I1658"></A>When 
+<span class="insert2">the object is <I>initialized by default</I>. <A NAME="I1667"></A>When 
 an object is initialized by default,&nbsp;</span>any per-object <span class="insert1">constraints</span><span class="delete1">&nbsp;expressions</span> 
 (see <A HREF="AA-3-8.html">3.8</A>) are <span class="insert1">elaborated</span><span class="delete1">&nbsp;evaluated</span> 
 and any implicit initial values for the object or for its subcomponents 
-are obtained as determined by the nominal subtype.<span class="insert2">&nbsp;<A NAME="I1659"></A><A NAME="I1660"></A>Any initial values (whether explicit 
+are obtained as determined by the nominal subtype.<span class="insert2">&nbsp;<A NAME="I1668"></A><A NAME="I1669"></A>Any initial values (whether explicit 
 or implicit) are assigned to the object or to the corresponding subcomponents. 
 As described in <A HREF="AA-5-2.html">5.2</A> and <A HREF="AA-7-6.html">7.6</A>, 
-Initialize and Adjust procedures can be called. <A NAME="I1661"></A></span></div>
+Initialize and Adjust procedures can be called. <A NAME="I1670"></A></span></div>
 <div class="paranum"><a name="p18.a">18.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For a per-object constraint 
 that contains some per-object expressions and some non-per-object expressions, 
@@ -279,11 +279,11 @@ is semantically neutral.&nbsp;</div>
 <div class="Enumerated-Term"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete2">4.</span></div><div class="Enumerated-Body"><br clear="left">
 <span class="delete2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
-<span class="delete2"><A NAME="I1662"></A><A NAME="I1663"></A>Any initial 
+<span class="delete2"><A NAME="I1671"></A><A NAME="I1672"></A>Any initial 
 values (whether explicit or implicit) are assigned to the object or to 
 the corresponding subcomponents. As described in <A HREF="AA-5-2.html">5.2</A> 
 and <A HREF="AA-7-6.html">7.6</A>, Initialize and Adjust procedures can 
-be called. <A NAME="I1664"></A></span></div>
+be called. <A NAME="I1673"></A></span></div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Since the initial values 
 have already been converted to the appropriate nominal subtype, the only 
@@ -303,7 +303,7 @@ of any <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></S
 that includes the name of the discriminant. The evaluations of the third 
 step and the assignments of the fourth step are performed in an arbitrary 
 order, except that each evaluation is performed before the resulting 
-value is assigned.</span><A NAME="I1665"></A>&nbsp;</div>
+value is assigned.</span><A NAME="I1674"></A>&nbsp;</div>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
 <span class="insert2">Assignment to any part of the object is preceded 
@@ -386,7 +386,7 @@ defines the execution to be erroneous.</span>&nbsp;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
 [There is no implicit initial value defined for a scalar subtype<span class="insert3">&nbsp;unless the Default_Value aspect has been specified for the type</span>.] 
-<A NAME="I1666"></A>In the absence of an explicit initialization<span class="insert3">&nbsp;or the specification of the Default_Value aspect</span>, a newly created 
+<A NAME="I1675"></A>In the absence of an explicit initialization<span class="insert3">&nbsp;or the specification of the Default_Value aspect</span>, a newly created 
 scalar object might have a value that does not belong to its subtype 
 (see <A HREF="AA-13-9-1.html">13.9.1</A> and <A HREF="AA-H-1.html">H.1</A>). 
 </div>
@@ -417,19 +417,19 @@ indefinite, an explicit initial value is required.</div>
 <div class="Notes">14&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0255-1.TXT">AI05-0255-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-<A NAME="I1667"></A><A NAME="I1668"></A>As indicated above, a stand-alone 
+<A NAME="I1676"></A><A NAME="I1677"></A>As indicated above, a stand-alone 
 object is an object declared by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>. 
 Similar definitions apply to &ldquo;stand-alone constant&rdquo; and &ldquo;stand-alone 
 variable.&rdquo; A subcomponent of an object is not a stand-alone object, 
-nor is an object that is created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>. 
-An object declared by a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0160">loop_parameter_specification</A></SPAN>, 
-<span class="insert3"><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN>, 
-</span><span class="insert5"><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>, 
-</span><SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0227">entry_index_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-11-2.html#S0270">choice_parameter_specification</A></SPAN>, 
-<span class="insert3"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
-</span>or a <SPAN Class="swiss"><A HREF="AA-12-4.html#S0283">formal_object_declaration</A></SPAN> 
+nor is an object that is created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>. 
+An object declared by a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN>, 
+<span class="insert3"><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>, 
+</span><span class="insert5"><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN>, 
+</span><SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0241">entry_index_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-11-2.html#S0284">choice_parameter_specification</A></SPAN>, 
+<span class="insert3"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
+</span>or a <SPAN Class="swiss"><A HREF="AA-12-4.html#S0297">formal_object_declaration</A></SPAN> 
 <span class="insert3">of mode <B>in out</B>&nbsp;</span>is not <span class="insert3">considered</span><span class="delete3">&nbsp;called</span> 
 a stand-alone object.</div>
 <div class="paranum"><a name="p24">24</a></div>
@@ -475,7 +475,7 @@ Hello_Msg&nbsp;:&nbsp;<B>constant&nbsp;access</B>&nbsp;String&nbsp;:=&nbsp;Hello
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p33.a">33.a</a></div>
-<div class="Annotations"><A NAME="I1669"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+<div class="Annotations"><A NAME="I1678"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 is modified to allow the <B>aliased</B> reserved word.</div>
 <div class="paranum"><a name="p33.b">33.b</a></div>
 <div class="Annotations">A variable declared by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -513,7 +513,7 @@ as constants declared without an initialization expression.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p33.f">33.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
-<span class="insert2"><A NAME="I1670"></A>Unconstrained aliased objects 
+<span class="insert2"><A NAME="I1679"></A>Unconstrained aliased objects 
 of types with discriminants with defaults are no longer constrained by 
 their initial values. This means that a program that raised Constraint_Error 
 from an attempt to change the discriminants will no longer do so. The 
@@ -527,13 +527,13 @@ to be worse than the differences caused by any major compiler upgrade.</span>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p33.g">33.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<span class="insert2"><A NAME="I1671"></A>A constant may have a limited 
-type; the initialization <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<span class="insert2"><A NAME="I1680"></A>A constant may have a limited 
+type; the initialization <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 has to be built-in-place (see <A HREF="AA-7-5.html">7.5</A>).</span></div>
 <div class="paranum"><a name="p33.h">33.h/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00406.TXT">AI95-00406-01</A></I>} 
-<span class="insert2"><A NAME="I1672"></A>A stand-alone object may have 
+<span class="insert2"><A NAME="I1681"></A>A stand-alone object may have 
 an anonymous access type.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -555,7 +555,7 @@ can refer to the rest of the object are required to be initialized last.</span><
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p33.l">33.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I1673"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+<span class="insert3"><A NAME="I1682"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 can be used in an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 
@@ -570,7 +570,7 @@ the extension is documented there.</span>&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p33.n">33.n/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0192-1.TXT">AI12-0192-1</A></I>} 
-<span class="insert5"><A NAME="I1674"></A><B>Correction:</B> Components 
+<span class="insert5"><A NAME="I1683"></A><B>Correction:</B> Components 
 of a protected type require late initialization if their initialization 
 includes (implicitly) the current instance of the type. This means that 
 the components could end up being initialized in a different order. In 

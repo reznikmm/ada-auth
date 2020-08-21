@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -101,13 +101,13 @@ if the specified interrupt is reserved.</div>
 <div class="Normal">The Is_Attached function returns True if and only 
 if a user-specified interrupt handler is attached to the interrupt.</div>
 <div class="paranum"><a name="p16">16/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0069">8652/0069</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0069">8652/0069</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00166.TXT">AI95-00166-01</A></I>} 
 The Current_Handler function returns a value that represents the attached 
 handler of the interrupt. If no user-defined handler is attached to the 
 interrupt, Current_Handler returns <B>null</B>.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The Attach_Handler procedure attaches the specified handler to the interrupt, 
 overriding any existing treatment (including a user handler) in effect 
 for that interrupt. If New_Handler is <B>null</B>, the default treatment 
@@ -116,7 +116,7 @@ procedure for which the aspect Interrupt_Handler is False, Program_Error
 is raised. In this case, the operation does not modify the existing interrupt 
 treatment.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0069">8652/0069</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0069">8652/0069</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00166.TXT">AI95-00166-01</A></I>} 
 The Exchange_Handler procedure operates in the same manner as Attach_Handler 
 with the addition that the value returned in Old_Handler designates the 
@@ -145,20 +145,20 @@ a parameter of type Interrupt_Id, with the exception of Is_Reserved and
 Reference, a check is made that the specified interrupt is not reserved. 
 <A NAME="I8360"></A>Program_Error is raised if this check fails.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 If, by using the Attach_Handler, Detach_Handler, or Exchange_Handler 
 procedures, an attempt is made to detach a handler that was attached 
 statically (using the aspect Attach_Handler), the handler is not detached 
 and Program_Error is raised. <A NAME="I8361"></A></div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 The Reference function returns a value of type System.Address that can 
 be used to attach a task entry via an address clause (see <A HREF="AA-J-7-1.html">J.7.1</A>) 
 to the interrupt specified by Interrupt. This function raises Program_Error 
 if attaching task entries to interrupts (or to this particular interrupt) 
 is not supported. <A NAME="I8362"></A></div>
 <div class="paranum"><a name="p22.1">22.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
 The function Get_CPU returns the processor on which the handler for Interrupt 
 is executed. If the handler can execute on more than one processor the 
 value System.Multiprocessors.Not_A_Specific_CPU is returned.</div>
@@ -170,7 +170,7 @@ shall the current handler of the corresponding interrupt be undefined.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 If the Ceiling_Locking policy (see <A HREF="AA-D-3.html">D.3</A>) is 
 in effect, the implementation shall document the default ceiling priority 

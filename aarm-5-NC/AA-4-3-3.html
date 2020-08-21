@@ -30,13 +30,13 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>4.3.3 Array Aggregates</H1>
@@ -58,36 +58,47 @@ that <B>others</B> come last and stand alone are found there.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">array_aggregate</SPAN><A NAME="I2759"></A><A NAME="S0113"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<A NAME="I2760"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2761"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN></div>
-<div class="paranum"><a name="p3">3/2</a></div>
+<div class="Indented1"><SPAN Class="swiss">array_aggregate</SPAN><A NAME="I2777"></A><A NAME="S0113"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<A NAME="I2778"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2779"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN></div>
+<div class="paranum"><a name="p3">3/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<SPAN Class="swiss">positional_array_aggregate</SPAN><A NAME="I2762"></A><A NAME="S0114"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2763"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>,&nbsp;<A NAME="I2764"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2765"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>})<BR>
-&nbsp;&nbsp;|&nbsp;(<A NAME="I2766"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2767"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2768"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>)<BR>
-&nbsp;&nbsp;|&nbsp;(<A NAME="I2769"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2770"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;)</div>
-<div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">named_array_aggregate</SPAN><A NAME="I2771"></A><A NAME="S0115"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2772"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2773"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN>})</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+<SPAN Class="swiss">positional_array_aggregate</SPAN><A NAME="I2780"></A><A NAME="S0114"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2781"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>,&nbsp;<A NAME="I2782"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2783"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>})<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I2784"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2785"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2786"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I2787"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2788"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;)<BR>
+&nbsp;&nbsp;|&nbsp;'['<A NAME="I2789"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>,&nbsp;<A NAME="I2790"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2791"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>}']'<BR>
+&nbsp;&nbsp;|&nbsp;'['<A NAME="I2792"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2793"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;<A NAME="I2794"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>']'<BR>
+&nbsp;&nbsp;|&nbsp;'['<A NAME="I2795"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2796"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>},&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;']'</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+<SPAN Class="swiss">named_array_aggregate</SPAN><A NAME="I2797"></A><A NAME="S0115"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2798"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association_list</A></SPAN>)<BR>
+&nbsp;&nbsp;|&nbsp;'['<A NAME="I2799"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association_list</A></SPAN>']'</div>
+<div class="paranum"><a name="p4.1">4.1/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+<SPAN Class="swiss">array_component_association_list</SPAN><A NAME="I2800"></A><A NAME="S0116"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2801"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2802"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN>}</div>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-<SPAN Class="swiss">array_component_association</SPAN><A NAME="I2774"></A><A NAME="S0116"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2775"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2776"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I2777"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;<BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I2778"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN></div>
+<SPAN Class="swiss">array_component_association</SPAN><A NAME="I2803"></A><A NAME="S0117"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2804"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2805"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2806"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I2807"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN></div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-<SPAN Class="swiss">iterated_component_association</SPAN><A NAME="I2779"></A><A NAME="S0117"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I2780"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I2781"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2782"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></div>
+<SPAN Class="swiss">iterated_component_association</SPAN><A NAME="I2808"></A><A NAME="S0118"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I2809"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;<A NAME="I2810"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;<A NAME="I2811"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I2783"></A>An <I>n-dimensional</I> <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I2812"></A>An <I>n-dimensional</I> <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 is one that is written as n levels of nested <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>s 
 (or at the bottom level, equivalent <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>s). 
-<A NAME="I2784"></A>For the multidimensional case (n &gt;= 2) the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>s 
+<A NAME="I2813"></A>For the multidimensional case (n &gt;= 2) the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>s 
 (or equivalent <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>s) 
 at the n&ndash;1 lower levels are called <I>subaggregate</I>s of the 
 enclosing n-dimensional <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
-<A NAME="I2785"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+<A NAME="I2814"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
 of the bottom level subaggregates (or of the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 itself if one-dimensional) are called the <I>array component expressions</I> 
 of the enclosing n-dimensional <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
@@ -100,25 +111,25 @@ of &quot;n-dimensional&quot; <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">a
 applies to subaggregates as well as <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 that have a type.&nbsp;</div>
 <div class="paranum"><a name="p6.b">6.b</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I2786"></A>An 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I2815"></A>An 
 <I><B>others</B> choice</I> is the reserved word <B>others</B> as it 
 appears in a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN> 
 or as the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
-in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN>. 
+in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p6.1">6.1/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
 The <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN> 
 declares an <I>index parameter</I>, an object of the corresponding index 
-type.<A NAME="I2787"></A><A NAME="I2788"></A></div>
+type.<A NAME="I2816"></A><A NAME="I2817"></A></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I2789"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
-(that is not a subaggregate) shall be a single array type. <A NAME="I2790"></A>The 
+<A NAME="I2818"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+(that is not a subaggregate) shall be a single array type. <A NAME="I2819"></A>The 
 component type of this array type is the expected type for each array 
 component expression of the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
 </div>
@@ -130,10 +141,10 @@ The above rule requiring a single array type (and similar ones for record
 and extension aggregates) resolves which kind of aggregate you have. 
 </div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2791"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+<div class="Normal"><A NAME="I2820"></A>The expected type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 in any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN> 
-is the type of the <I>corresponding index</I>; <A NAME="I2792"></A>the 
+is the type of the <I>corresponding index</I>; <A NAME="I2821"></A>the 
 corresponding index for an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 that is not a subaggregate is the first index of its type; for an (n&ndash;m)-dimensional 
 subaggregate within an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
@@ -147,13 +158,13 @@ of an n-dimensional array type shall be written as an n-dimensional <SPAN Class=
 </div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>In an m-dimensional <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
-[(including a subaggregate)], where m &gt;= 2, each of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+[(including a subaggregate)], where m &gt;= 2, each of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
 has to be an (m&ndash;1)-dimensional subaggregate.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">An <B>others</B> choice 
 is allowed for an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 only if an <I>applicable index constraint</I> applies to the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
-<A NAME="I2793"></A>[An applicable index constraint is a constraint provided 
+<A NAME="I2822"></A>[An applicable index constraint is a constraint provided 
 by certain contexts where an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 is permitted that can be used to determine the bounds of the array value 
 specified by the aggregate.] Each of the following contexts (and none 
@@ -161,9 +172,9 @@ other) defines an applicable index constraint:&nbsp;</div>
 <div class="paranum"><a name="p11">11/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0157-1.TXT">AI12-0157-1</A></I>} 
-For an <SPAN Class="swiss"><A HREF="AA-6-4.html#S0185">explicit_actual_parameter</A></SPAN>, 
-an <SPAN Class="swiss"><A HREF="AA-12-3.html#S0282">explicit_generic_actual_parameter</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+For an <SPAN Class="swiss"><A HREF="AA-6-4.html#S0199">explicit_actual_parameter</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a return statement, the return expression of an expression function, 
 the initialization expression in an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
@@ -172,8 +183,8 @@ formal parameter, generic formal parameter, function return object, expression
 function return object, object, or component is a constrained array subtype, 
 the applicable index constraint is the constraint of the subtype;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted">For the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+<div class="Bulleted">For the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 where the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denotes an array variable, the applicable index constraint is the constraint 
 of the array variable;&nbsp;</div>
@@ -183,38 +194,45 @@ the constraint comes from the actual subtype of the variable (which is
 always constrained) rather than its nominal subtype (which might be unconstrained). 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted">For the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<div class="Bulleted">For the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denotes a constrained array subtype, the applicable index constraint 
 is the constraint of the subtype;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Bulleted">For a component <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Bulleted">For a component <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
 if the component's nominal subtype is a constrained array subtype, the 
 applicable index constraint is the constraint of the subtype;&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Here, the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 with <B>others</B> is being used within a larger aggregate.&nbsp;</div>
+<div class="paranum"><a name="p14.1">14.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+For the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>, 
+if the nominal subtype of the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+is a constrained array subtype, the applicable index constraint is the 
+constraint of the subtype;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
-For a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-the applicable index constraint is that, if any, defined for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>; 
+For a parenthesized <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+the applicable index constraint is that, if any, defined for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>; 
 </div>
 <div class="paranum"><a name="p15.a">15.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>RM83 omitted this case, presumably 
-as an oversight. We want to minimize situations where an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+as an oversight. We want to minimize situations where an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 becomes illegal if parenthesized.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
-For a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">conditional_expression</A></SPAN>, 
-the applicable index constraint for each <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is that, if any, defined for the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">conditional_expression</A></SPAN>. 
+For a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>, 
+the applicable index constraint for each <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is that, if any, defined for the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Normal">The applicable index constraint <I>applies</I> to 
 an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 that appears in such a context, as well as to any subaggregates thereof. 
-In the case of an <SPAN Class="swiss"><A HREF="AA-6-4.html#S0185">explicit_actual_parameter</A></SPAN> 
+In the case of an <SPAN Class="swiss"><A HREF="AA-6-4.html#S0199">explicit_actual_parameter</A></SPAN> 
 (or <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>) 
 for a call on a generic formal subprogram, no applicable index constraint 
 is defined.&nbsp;</div>
@@ -225,22 +243,29 @@ actual subprograms with generic formal subprograms.&nbsp;</div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
 The <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN> 
-(including an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>) 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+(including an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN>) 
 is allowed to have a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
-that is a nonstatic <SPAN Class="swiss"><A HREF="AA-4-4.html#S0119">choice_expression</A></SPAN> 
+that is a nonstatic <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">choice_expression</A></SPAN> 
 or that is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> that 
 defines a nonstatic or null range, only if it is the single <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 of its <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
-and there is only one <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN> 
-in the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>. 
-</div>
+and either there is only one <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+in the enclosing <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association_list</A></SPAN> 
+or the enclosing <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+is an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>[, 
+not an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>].</div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We now allow a nonstatic 
 <B>others</B> choice even if there are other array component expressions 
 as well.&nbsp;</div>
+<div class="paranum"><a name="p17.b">17.b/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+We allow multiple dynamic choices in <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>s, 
+but only one dynamic choice per association even in that case.&nbsp;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 In a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN> 
@@ -274,7 +299,7 @@ of the component type.&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Normal">A subaggregate that is a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
 is equivalent to one that is a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0114">positional_array_aggregate</A></SPAN> 
-of the same length, with each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the same length, with each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 being the <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
 for the corresponding character of the <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p20.1">20.1/5</a></div>
@@ -284,21 +309,21 @@ index subtype.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2794"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2823"></A>The 
 evaluation of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 of a given array type proceeds in two steps:&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Enumerated-Term">1.</div><div class="Enumerated-Body">
 Any <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 of this aggregate and of its subaggregates are evaluated in an arbitrary 
-order, and converted to the corresponding index type;<A NAME="I2795"></A> 
-<A NAME="I2796"></A></div>
+order, and converted to the corresponding index type;<A NAME="I2824"></A> 
+<A NAME="I2825"></A></div>
 <div class="paranum"><a name="p23">23</a></div>
 <div class="Enumerated-Term">2.</div><div class="Enumerated-Body">
 The array component expressions of the aggregate are evaluated in an 
 arbitrary order and their values are converted to the component subtype 
 of the array type; an array component expression is evaluated once for 
-each associated component. <A NAME="I2797"></A><A NAME="I2798"></A></div>
+each associated component. <A NAME="I2826"></A><A NAME="I2827"></A></div>
 <div class="paranum"><a name="p23.a">23.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Subaggregates are not separately 
 evaluated. The conversion of the value of the component expressions to 
@@ -315,17 +340,17 @@ to be constant).&nbsp;</div>
 <div class="paranum"><a name="p23.1">23.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0084-1.TXT">AI12-0084-1</A></I>} 
-Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN> 
-defines the value for the associated component(s). For an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN> 
+Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+defines the value for the associated component(s). For an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
 with &lt;&gt;, the associated component(s) are initialized to the Default_Component_Value 
 of the array type if this aspect has been specified for the array type; 
 otherwise, they are initialized by default as for a stand-alone object 
 of the component subtype (see <A HREF="AA-3-3-1.html">3.3.1</A>).</div>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-During an evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>, 
+During an evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN>, 
 the value of the corresponding index parameter is that of the corresponding 
 index of the corresponding array component.</div>
 <div class="paranum"><a name="p23.c">23.c/5</a></div>
@@ -335,7 +360,7 @@ are evaluated in an arbitrary order&rdquo;, this implies that an index
 parameter can take on its values in an arbitrary order. This is different 
 than, for example, a loop parameter.&nbsp;</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2799"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2828"></A>The 
 bounds of the index range of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
 [(including a subaggregate)] are determined as follows:&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
@@ -348,7 +373,7 @@ index range from the applicable index constraint;</div>
 without an <B>others</B> choice, the lower bound is that of the corresponding 
 index range in the applicable index constraint, if defined, or that of 
 the corresponding index subtype, if not; in either case, the upper bound 
-is determined from the lower bound and the number of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+is determined from the lower bound and the number of <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
 [(or the length of the <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN>)];</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Bulleted">For a <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN> 
@@ -361,7 +386,7 @@ index value has to be covered exactly once, since that is a ramification
 of the general rule on <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 that each component's value has to be specified exactly once.&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Normal"><A NAME="I2800"></A><A NAME="I2801"></A>For an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
+<div class="Normal"><A NAME="I2829"></A><A NAME="I2830"></A>For an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 a check is made that the index range defined by its bounds is compatible 
 with the corresponding index subtype.&nbsp;</div>
 <div class="paranum"><a name="p28.a">28.a</a></div>
@@ -375,8 +400,8 @@ handles the special case of a null range, which is always compatible
 with a subtype. See AI83-00313.&nbsp;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0037-1.TXT">AI05-0037-1</A></I>} 
-<A NAME="I2802"></A><A NAME="I2803"></A>For an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
-with an <B>others</B> choice, a check is made that no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<A NAME="I2831"></A><A NAME="I2832"></A>For an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+with an <B>others</B> choice, a check is made that no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 or &lt;&gt; is specified for an index value outside the bounds determined 
 by the applicable index constraint.&nbsp;</div>
 <div class="paranum"><a name="p29.a">29.a</a></div>
@@ -388,7 +413,7 @@ if it is not the only choice, so this check now needs to be dynamic,
 in some cases. Also, within a generic unit, this would be a nonstatic 
 check in some cases.&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Normal"><A NAME="I2804"></A><A NAME="I2805"></A>For a multidimensional 
+<div class="Normal"><A NAME="I2833"></A><A NAME="I2834"></A>For a multidimensional 
 <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 a check is made that all subaggregates that correspond to the same index 
 have the same bounds.&nbsp;</div>
@@ -400,14 +425,14 @@ is performed on subaggregates.&nbsp;</div>
 would not be obvious which subaggregate would determine the bounds of 
 the corresponding index.&nbsp;</div>
 <div class="paranum"><a name="p31">31</a></div>
-<div class="Normal"><A NAME="I2806"></A>The exception Constraint_Error 
+<div class="Normal"><A NAME="I2835"></A>The exception Constraint_Error 
 is raised if any of the above checks fail.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p32">32/3</a></div>
 <div class="Notes">11&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
 In an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
-positional notation may only be used with two or more <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s; 
-a single <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+positional notation may only be used with two or more <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s; 
+a single <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 in parentheses is interpreted as a parenthesized expression. A <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0115">named_array_aggregate</A></SPAN>, 
 such as (1 =&gt; X), may be used to specify an array with a single component.</div>
 <div class="paranum"><a name="p33">33/5</a></div>
@@ -469,7 +494,7 @@ Buffer'(Size&nbsp;=&gt;&nbsp;50,&nbsp;Pos&nbsp;=&gt;&nbsp;1,&nbsp;Value&nbsp;=&g
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p47.a.1">47.a.1/1</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><A NAME="I2807"></A>In 
+<div class="Annotations" style="margin-bottom: 0.4em"><A NAME="I2836"></A>In 
 Ada 95, no applicable index constraint is defined for a parameter in 
 a call to a generic formal subprogram; thus, some aggregates that are 
 legal in Ada 83 are illegal in Ada 95. For example:&nbsp;</div>
@@ -488,7 +513,7 @@ problems.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p47.a">47.a</a></div>
-<div class="Annotations"><A NAME="I2808"></A>We now allow &quot;named 
+<div class="Annotations"><A NAME="I2837"></A>We now allow &quot;named 
 with others&quot; aggregates in all contexts where there is an applicable 
 index constraint, effectively eliminating what was RM83-4.3.2(6). Sliding 
 never occurs on an aggregate with others, because its bounds come from 
@@ -520,7 +545,7 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p47.f">47.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I2809"></A>&lt;&gt; can be used in place of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<A NAME="I2838"></A>&lt;&gt; can be used in place of an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN>, 
 default-initializing the component.&nbsp;</div>
 
@@ -533,16 +558,16 @@ are allowed (since all kinds of aggregates can now be limited, see <A HREF="AA-4
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 Fixed <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 to use the subtype of the return object of a function, rather than the 
-result subtype, because they can be different for an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+result subtype, because they can be different for an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
 and we want to use the subtype that's explicitly in the code at the point 
-of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>. 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p47.i">47.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0037-1.TXT">AI05-0037-1</A></I>} 
-<A NAME="I2810"></A><B>Correction:</B> Fixed so the check for components 
-outside of the array applies to both <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+<A NAME="I2839"></A><B>Correction:</B> Fixed so the check for components 
+outside of the array applies to both <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
 and &lt;&gt;s. As &lt;&gt; was a new feature in Ada 2005, there should 
 be little existing code that depends on a &lt;&gt; component that is 
 specified outside of the array (and that is nonsense anyway, that a compiler 
@@ -552,13 +577,13 @@ it).&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p47.j">47.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0147-1.TXT">AI05-0147-1</A></I>} 
-Added a definition of the applicable index constraint for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">conditional_expression</A></SPAN>s 
+Added a definition of the applicable index constraint for <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN>s 
 (which are new).&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p47.k">47.k/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0084-1.TXT">AI05-0084-1</A></I>} 
-<A NAME="I2811"></A><B>Corrigendum:</B> Fixed so that the Default_Component_Value 
+<A NAME="I2840"></A><B>Corrigendum:</B> Fixed so that the Default_Component_Value 
 (if any) is used to initialize components specified with &lt;&gt;. This 
 is what users would expect, and all Ada 2012 implementation known at 
 the time of this writing initialize with the Default_Component_Value, 
@@ -568,7 +593,7 @@ so it is unlikely that anyone will be affected by this inconsistency.
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p47.l">47.l/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0061-1.TXT">AI12-0061-1</A></I>} 
-<A NAME="I2812"></A>The <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN> 
+<A NAME="I2841"></A>The <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN> 
 is new (more than 25 years after it was originally proposed).&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
@@ -576,7 +601,11 @@ is new (more than 25 years after it was originally proposed).&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0157-1.TXT">AI05-0157-1</A></I>} 
 <B>Corrigendum:</B> Added expression functions to the contexts that provide 
 an applicable index constraint, because expression functions are handled 
-separately in static semantics and legality rules.&nbsp;</div>
+separately in static semantics and legality rules.</div>
+<div class="paranum"><a name="p47.n">47.n/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+Made syntax and wording changes for <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>s. 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
@@ -584,7 +613,7 @@ separately in static semantics and legality rules.&nbsp;</div>
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-4-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

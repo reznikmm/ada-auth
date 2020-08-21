@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,7 +36,7 @@
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00283.TXT">AI95-00283-01</A></I>} 
-<A NAME="I7198"></A><A NAME="I7199"></A><span class="insert2"><A NAME="I7200"></A></span>Two 
+<A NAME="I7444"></A><A NAME="I7445"></A><span class="insert2"><A NAME="I7446"></A></span>Two 
 kinds of access to external files are defined in this subclause: <I>sequential 
 access</I> and <I>direct access</I>. The corresponding file types and 
 the associated operations are provided by the generic packages Sequential_IO 
@@ -45,7 +45,7 @@ a <I>sequential file</I>, and one to be used for direct access is called
 a <I>direct file</I>. Access to <span class="insert2"><I>stream file</I>s</span><span class="delete2">&nbsp;stream 
 files</span> is described in <A HREF="AA-A-12-1.html">A.12.1</A>.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I7201"></A>For sequential access, the file 
+<div class="Normal"><A NAME="I7447"></A>For sequential access, the file 
 is viewed as a sequence of values that are transferred in the order of 
 their appearance (as produced by the program or by the external environment). 
 When the file is opened with mode In_File or Out_File, transfer starts 
@@ -74,7 +74,7 @@ third category, informally called `access to streams'. (We decided against
 the term `stream access' because of possible confusion with the Stream_Access 
 type declared in one of the stream packages.)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I7202"></A><A NAME="I7203"></A><A NAME="I7204"></A>For 
+<div class="Normal"><A NAME="I7448"></A><A NAME="I7449"></A><A NAME="I7450"></A>For 
 direct access, the file is viewed as a set of elements occupying consecutive 
 positions in linear order; a value can be transferred to or from an element 
 of the file at any selected position. The position of an element is specified 
@@ -84,7 +84,7 @@ of the last element, if any, is called the <I>current size</I>; the current
 size is zero if there are no elements. The current size is a property 
 of the external file.</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I7205"></A>An open direct file has a <I>current 
+<div class="Normal"><A NAME="I7451"></A>An open direct file has a <I>current 
 index</I>, which is the index that will be used by the next read or write 
 operation. When a direct file is opened, the current index is set to 
 one. The current index of a direct file is a property of a file object, 

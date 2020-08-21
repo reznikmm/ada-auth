@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -44,20 +42,20 @@ the chosen alternative is defined by the value of an expression.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">case_statement</SPAN><A NAME="I3270"></A><A NAME="S0162"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3271"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3272"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0163">case_statement_alternative</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3273"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0163">case_statement_alternative</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">case_statement</SPAN><A NAME="I3260"></A><A NAME="S0162"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>case</B>&nbsp;<I>selecting_</I><A NAME="I3261"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3262"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0163">case_statement_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I3263"></A><SPAN Class="swiss"><A HREF="RM-5-4.html#S0163">case_statement_alternative</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>case</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">case_statement_alternative</SPAN><A NAME="I3274"></A><A NAME="S0163"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3275"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3276"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">case_statement_alternative</SPAN><A NAME="I3264"></A><A NAME="S0163"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>when</B>&nbsp;<A NAME="I3265"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3266"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I3277"></A><A NAME="I3278"></A>The <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is expected to be of any discrete type. <A NAME="I3279"></A>The expected 
+<div class="Normal"><A NAME="I3267"></A><A NAME="I3268"></A>The <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+is expected to be of any discrete type. <A NAME="I3269"></A>The expected 
 type for each <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 is the type of the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>. 
 </div>
@@ -83,10 +81,9 @@ is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>
 or <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN>) 
 having a static and constrained nominal subtype, then each non-<B>others</B> 
 <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
-shall cover only values in that subtype that satisfy its <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-(see <A HREF="RM-3-2-4.html">3.2.4</A>), and each value of that subtype 
-that satisfies its <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
-shall be covered by some <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+shall cover only values in that subtype that satisfy its predicates (see 
+<A HREF="RM-3-2-4.html">3.2.4</A>), and each value of that subtype that 
+satisfies its predicates shall be covered by some <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
 (either explicitly or by <B>others</B>).&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Bulleted">If the type of the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
@@ -105,7 +102,7 @@ shall not cover the same value.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I3280"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0162">case_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3270"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0162">case_statement</A></SPAN> 
 the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 is first evaluated.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -115,7 +112,7 @@ of some <SPAN Class="swiss"><A HREF="RM-5-4.html#S0163">case_statement_alternati
 then the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 
 of the <SPAN Class="swiss">_alternative</SPAN> is executed.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I3281"></A><A NAME="I3282"></A><A NAME="I3283"></A>Otherwise 
+<div class="Normal"><A NAME="I3271"></A><A NAME="I3272"></A><A NAME="I3273"></A>Otherwise 
 (the value is not covered by any <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>, 
 perhaps due to being outside the base range), Constraint_Error is raised. 
 </div>

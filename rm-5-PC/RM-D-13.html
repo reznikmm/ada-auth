@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -41,7 +39,7 @@
 <div class="Normal">}&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal">This subclause defines the Ravenscar <span class="insert5">and 
-Jorvik<A NAME="I8340"></A> profiles</span><span class="delete5">&nbsp;profile</span>.<A NAME="I8341"></A> 
+Jorvik<A NAME="I8325"></A> profiles</span><span class="delete5">&nbsp;profile</span>.<A NAME="I8326"></A> 
 </div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 and 
 3 were moved to <A HREF="RM-13-12.html">13.12</A>, &ldquo;<A HREF="RM-13-12.html">Pragma 
@@ -73,8 +71,8 @@ is equivalent to the following set of pragmas:</div>
 <B>pragma</B>&nbsp;Detect_Blocking;<BR>
 <B>pragma</B>&nbsp;Restrictions&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Abort_Statements,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dynamic_Attachment<span class="insert4">,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dynamic_CPU_Assignment</span>,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dynamic_Attachment,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dynamic_CPU_Assignment,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dynamic_Priorities,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Implicit_Heap_Allocations,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Local_Protected_Objects,<BR>
@@ -94,8 +92,8 @@ is equivalent to the following set of pragmas:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Asynchronous_Task_Control,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Calendar,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Execution_Time.Group_Budgets,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Execution_Time.Timers,<span class="insert4"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Synchronous_Barriers,</span><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Execution_Time.Timers,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Synchronous_Barriers,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;Ada.Task_Attributes,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No_Dependence&nbsp;=&gt;&nbsp;System.Multiprocessors.Dispatching_Domains);</div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
@@ -137,14 +135,7 @@ usage profile Jorvik is equivalent to the following set of pragmas:</span></div>
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete4">A task shall only be on the 
-ready queues of one processor, and the processor to which a task belongs 
-shall be defined statically. Whenever a task running on a processor reaches 
-a task dispatching point, it goes back to the ready queues of the same 
-processor. A task with a CPU value of Not_A_Specific_CPU will execute 
-on an implementation defined processor. A task without a CPU aspect will 
-activate and execute on the same processor as its activating task.</span> 
-</div>
+deleted.</I></SPAN></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p10">10/5</a></div>
@@ -160,19 +151,17 @@ profile, the</span><span class="delete5">&nbsp;The</span> effect of the <span cl
 </span>applies only to protected entry queues due to the accompanying 
 restriction <span class="delete5">of&nbsp;</span>Max_Task_Entries =&gt; 0.<span class="insert5">&nbsp;The restriction Max_Entry_Queue_Length is not applied by the Jorvik profile.</span></div>
 <div class="paranum"><a name="p12">12/5</a></div>
-<div class="Notes">43&nbsp;&nbsp;<span class="insert4">When the Ravenscar 
-</span><span class="insert5">or Jorvik&nbsp;</span><span class="insert4">profile 
-is in effect (via the effect of the No_Dynamic_CPU_Assignment restriction), 
-all of the tasks in the partition will execute on a single CPU unless 
-the programmer explicitly uses aspect CPU to specify the CPU assignments 
-for tasks. The use of multiple CPUs requires care, as many guarantees 
-of single CPU scheduling no longer apply.</span></div>
+<div class="Notes">43&nbsp;&nbsp;When the Ravenscar <span class="insert5">or 
+Jorvik&nbsp;</span>profile is in effect (via the effect of the No_Dynamic_CPU_Assignment 
+restriction), all of the tasks in the partition will execute on a single 
+CPU unless the programmer explicitly uses aspect CPU to specify the CPU 
+assignments for tasks. The use of multiple CPUs requires care, as many 
+guarantees of single CPU scheduling no longer apply.</div>
 <div class="paranum"><a name="p13">13/5</a></div>
-<div class="Notes">44&nbsp;&nbsp;<span class="insert4">It is not recommended 
-to specify the CPU of a task to be Not_A_Specific_CPU when the Ravenscar 
-</span><span class="insert5">or Jorvik&nbsp;</span><span class="insert4">profile 
-is in effect. How a partition executes strongly depends on the assignment 
-of tasks to CPUs.</span></div>
+<div class="Notes">44&nbsp;&nbsp;It is not recommended to specify the 
+CPU of a task to be Not_A_Specific_CPU when the Ravenscar <span class="insert5">or 
+Jorvik&nbsp;</span>profile is in effect. How a partition executes strongly 
+depends on the assignment of tasks to CPUs.</div>
 <div class="paranum"><a name="p14">14/5</a></div>
 <div class="Notes">45&nbsp;&nbsp;<span class="insert5">Any unit that 
 meets the requirements of the Ravenscar profile also meets the requirements 

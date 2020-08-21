@@ -45,14 +45,14 @@ queues.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8315"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Task_Control<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8300"></A><BR>
 &nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Synchronous_Task_Control);</span></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8316"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8317"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8318"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8319"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8320"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<span class="insert5"><BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8301"></A>Suspension_Object&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8302"></A>Set_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8303"></A>Set_False(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8304"></A>Current_State(S&nbsp;:&nbsp;Suspension_Object)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8305"></A>Suspend_Until_True(S&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Suspension_Object)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -65,8 +65,8 @@ package exists:&nbsp;</div>
 <div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples"><span class="insert5"><B>with</B>&nbsp;Ada.Real_Time;<BR>
 </span><B>package</B>&nbsp;Ada.Synchronous_Task_Control.EDF<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8321"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8322"></A>Suspend_Until_True_And_Set_Deadline<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8306"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8307"></A>Suspend_Until_True_And_Set_Deadline<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(S&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Suspension_Object;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Real_Time.Time_Span)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;<BR>
@@ -89,7 +89,7 @@ set the state to True and False respectively.</div>
 task until the state of the object S is True; at that point the task 
 becomes ready and the state of the object becomes False.</div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal"><span class="delete5"><A NAME="I8323"></A><A NAME="I8324"></A><A NAME="I8325"></A></span>Program_Error 
+<div class="Normal"><span class="delete5"><A NAME="I8308"></A><A NAME="I8309"></A><A NAME="I8310"></A></span>Program_Error 
 is raised upon calling Suspend_Until_True if another task is already 
 waiting on that suspension object.<span class="delete5">&nbsp;Suspend_Until_True 
 is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>).</span></div>

@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,16 +42,16 @@ the procedure might be implemented by an entry.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">conditional_entry_call</SPAN><A NAME="I4315"></A><A NAME="S0240"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">conditional_entry_call</SPAN><A NAME="I4263"></A><A NAME="S0240"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4316"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0238">entry_call_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4264"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0238">entry_call_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>else</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4317"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4265"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4318"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0240">conditional_entry_call</A></SPAN> 
+<div class="Normal"><A NAME="I4266"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-9-7-3.html#S0240">conditional_entry_call</A></SPAN> 
 is defined to be equivalent to the execution of a <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0237">timed_entry_call</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="RM-9-7-1.html#S0235">delay_alternative</A></SPAN> 
 specifying an immediate expiration time and the same <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 

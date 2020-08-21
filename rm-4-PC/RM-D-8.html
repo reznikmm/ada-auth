@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,29 +36,29 @@
 <HR>
 <H1>D.8 Monotonic Time</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-specifies a high-resolution, monotonic clock package.&nbsp;</div>
+<div class="Normal">This subclause specifies a high-resolution, monotonic 
+clock package.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Real_Time&nbsp;<B>is</B><A NAME="I8150"></A></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Real_Time&nbsp;<B>is</B><A NAME="I7956"></A></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8151"></A>Time&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
-&nbsp;&nbsp;<A NAME="I8152"></A>Time_First&nbsp;:&nbsp;<B>constant</B>&nbsp;Time;<BR>
-&nbsp;&nbsp;<A NAME="I8153"></A>Time_Last&nbsp;:&nbsp;<B>constant</B>&nbsp;Time;<BR>
-&nbsp;&nbsp;<A NAME="I8154"></A>Time_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined-real-number</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7957"></A>Time&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;<A NAME="I7958"></A>Time_First&nbsp;:&nbsp;<B>constant</B>&nbsp;Time;<BR>
+&nbsp;&nbsp;<A NAME="I7959"></A>Time_Last&nbsp;:&nbsp;<B>constant</B>&nbsp;Time;<BR>
+&nbsp;&nbsp;<A NAME="I7960"></A>Time_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined-real-number</I></SPAN>;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8155"></A>Time_Span&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
-&nbsp;&nbsp;<A NAME="I8156"></A>Time_Span_First&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<A NAME="I8157"></A>Time_Span_Last&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<A NAME="I8158"></A>Time_Span_Zero&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<A NAME="I8159"></A>Time_Span_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7961"></A>Time_Span&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;<A NAME="I7962"></A>Time_Span_First&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<A NAME="I7963"></A>Time_Span_Last&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<A NAME="I7964"></A>Time_Span_Zero&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<A NAME="I7965"></A>Time_Span_Unit&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I8160"></A>Tick&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8161"></A>Clock&nbsp;<B>return</B>&nbsp;Time;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I7966"></A>Tick&nbsp;:&nbsp;<B>constant</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7967"></A>Clock&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Time;&nbsp;Right&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;Time_Span;&nbsp;Right&nbsp;:&nbsp;Time)&nbsp;<B>return</B>&nbsp;Time;<BR>
@@ -90,25 +88,25 @@ was deleted.</I></SPAN></div>
 &nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 &nbsp;&nbsp;<B>function</B>&nbsp;&quot;&gt;=&quot;(Left,&nbsp;Right&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8162"></A>To_Duration&nbsp;(TS&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Duration;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8163"></A>To_Time_Span&nbsp;(D&nbsp;:&nbsp;Duration)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7968"></A>To_Duration&nbsp;(TS&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Duration;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7969"></A>To_Time_Span&nbsp;(D&nbsp;:&nbsp;Duration)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8164"></A>Nanoseconds&nbsp;&nbsp;(NS&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8165"></A>Microseconds&nbsp;(US&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8166"></A>Milliseconds&nbsp;(MS&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8167"></A>Seconds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(S&nbsp;&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8168"></A>Minutes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(M&nbsp;&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7970"></A>Nanoseconds&nbsp;&nbsp;(NS&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7971"></A>Microseconds&nbsp;(US&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7972"></A>Milliseconds&nbsp;(MS&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7973"></A>Seconds&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(S&nbsp;&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7974"></A>Minutes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(M&nbsp;&nbsp;:&nbsp;Integer)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8169"></A>Seconds_Count&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7975"></A>Seconds_Count&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8170"></A>Split(T&nbsp;:&nbsp;<B>in</B>&nbsp;Time;&nbsp;SC&nbsp;:&nbsp;<B>out</B>&nbsp;Seconds_Count;&nbsp;TS&nbsp;:&nbsp;<B>out</B>&nbsp;Time_Span);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8171"></A>Time_Of(SC&nbsp;:&nbsp;Seconds_Count;&nbsp;TS&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Time;</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7976"></A>Split(T&nbsp;:&nbsp;<B>in</B>&nbsp;Time;&nbsp;SC&nbsp;:&nbsp;<B>out</B>&nbsp;Seconds_Count;&nbsp;TS&nbsp;:&nbsp;<B>out</B>&nbsp;Time_Span);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7977"></A>Time_Of(SC&nbsp;:&nbsp;Seconds_Count;&nbsp;TS&nbsp;:&nbsp;Time_Span)&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Real_Time;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8172"></A>In this Annex, <I>real time</I> 
+<div class="Normal"><A NAME="I7978"></A>In this Annex, <I>real time</I> 
 is defined to be the physical time as observed in the external environment. 
 The type Time is a <I>time type</I> as defined by <A HREF="RM-9-6.html">9.6</A>; 
 values of this type may be used in a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0228">delay_until_statement</A></SPAN>. 
@@ -116,7 +114,7 @@ Values of this type represent segments of an ideal time line. The set
 of values of the type Time corresponds one-to-one with an implementation-defined 
 range of mathematical integers.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I8173"></A><A NAME="I8174"></A>The Time 
+<div class="Normal"><A NAME="I7979"></A><A NAME="I7980"></A>The Time 
 value I represents the half-open real time interval that starts with 
 E+I*Time_Unit and is limited by E+(I+1)*Time_Unit, where Time_Unit is 
 an implementation-defined real number and E is an unspecified origin 
@@ -146,12 +144,12 @@ time, measured in seconds, since the epoch.</div>
 by the Time type; it is expressed in seconds. Time_Span_Unit is the difference 
 between two successive values of the Time type. It is also the smallest 
 positive value of type Time_Span. Time_Unit and Time_Span_Unit represent 
-the same real time duration. <A NAME="I8175"></A>A <I>clock tick</I> 
+the same real time duration. <A NAME="I7981"></A>A <I>clock tick</I> 
 is a real time interval during which the clock value (as observed by 
 calling the Clock function) remains constant. Tick is the average length 
 of such intervals.</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Normal">The function To_Duration converts the value TS to 
+<div class="Normal">&nbsp;The function To_Duration converts the value TS to 
 a value of type Duration. Similarly, the function To_Time_Span converts 
 the value D to a value of type Time_Span. For To_Duration, the result 
 is rounded to the nearest value of type Duration (away from zero if exactly 
@@ -165,7 +163,7 @@ is converted to the type Time_Span.</div>
 <div class="Normal">To_Duration(Time_Span_Zero) returns 0.0, and To_Time_Span(0.0) 
 returns Time_Span_Zero.</div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal">The functions Nanoseconds, Microseconds, Milliseconds, 
+<div class="Normal">&nbsp;The functions Nanoseconds, Microseconds, Milliseconds, 
 Seconds, and Minutes convert the input parameter to a value of the type 
 Time_Span. NS, US, MS, S, and M are interpreted as a number of nanoseconds, 
 microseconds, milliseconds, seconds, and minutes respectively. The input 
@@ -198,7 +196,7 @@ than or equal to 20 microseconds.&nbsp;</div>
 <div class="Normal">Time_Span_First shall be no greater than &ndash;3600 
 seconds, and Time_Span_Last shall be no less than 3600 seconds.&nbsp;</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Normal"><A NAME="I8176"></A>A <I>clock jump</I> is the difference 
+<div class="Normal"><A NAME="I7982"></A>A <I>clock jump</I> is the difference 
 between two successive distinct values of the clock (as observed by calling 
 the Clock function). There shall be no backward clock jumps.</div>
 
@@ -219,14 +217,13 @@ synchronization exists, the sources of synchronization information, the
 frequency of synchronization, and the synchronization method applied. 
 </div>
 <div class="paranum"><a name="p36">36/3</a></div>
-<div class="Normal">The implementation shall document any aspects of 
+<div class="Normal">&nbsp;The implementation shall document any aspects of 
 the external environment that could interfere with the clock behavior 
-as defined in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>. 
-</div>
+as defined in this subclause.&nbsp;</div>
 
 <H4 Class="centered">Metrics</H4>
 <div class="paranum"><a name="p37">37/3</a></div>
-<div class="Normal">For the purpose of the metrics defined in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span>, 
+<div class="Normal">&nbsp;For the purpose of the metrics defined in this subclause, 
 real time is defined to be the International Atomic Time (TAI).</div>
 <div class="paranum"><a name="p38">38</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The implementation 
@@ -240,7 +237,7 @@ then t2 &ndash; t1 &lt;= D.</div>
 <div class="paranum"><a name="p40">40</a></div>
 <div class="Bulleted">An upper bound on the size of a clock jump.</div>
 <div class="paranum"><a name="p41">41</a></div>
-<div class="Bulleted"><A NAME="I8177"></A>An upper bound on the <I>drift 
+<div class="Bulleted"><A NAME="I7983"></A>An upper bound on the <I>drift 
 rate</I> of Clock with respect to real time. This is a real number D 
 such that&nbsp;</div>
 <div class="paranum"><a name="p42">42</a></div>
@@ -278,9 +275,9 @@ through Clock. &ldquo;Best&rdquo; may mean highest accuracy or largest
 range.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p50">50/3</a></div>
-<div class="Notes">35&nbsp;&nbsp;The rules in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-do not imply that the implementation can protect the user from operator 
-or installation errors which could result in the clock being set incorrectly.</div>
+<div class="Notes">35&nbsp;&nbsp;The rules in this subclause do not imply 
+that the implementation can protect the user from operator or installation 
+errors which could result in the clock being set incorrectly.</div>
 <div class="paranum"><a name="p51">51</a></div>
 <div class="Notes">36&nbsp;&nbsp;Time_Unit is the granularity of the 
 Time type. In contrast, Tick represents the granularity of Real_Time.Clock. 

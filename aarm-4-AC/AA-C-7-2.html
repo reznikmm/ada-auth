@@ -19,17 +19,17 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -99,7 +99,7 @@ in this package, Tasking_Error is raised if the task identified by T
 is terminated. <A NAME="I8788"></A>Program_Error is raised if the value 
 of T is Null_Task_Id.</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
 <span class="insert2">After a task has terminated, all of its attributes 
 are finalized, unless they have been finalized earlier. When the master 
 of an instantiation of Ada.Task_Attributes is finalized, the corresponding 
@@ -119,7 +119,7 @@ the task may never even have been activated.</span>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p13.2">13.2/1</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00165.TXT">AI95-00165-01</A></I>} 
 <span class="insert1"><A NAME="I8789"></A>If the package Ada.Task_Attributes 
 is instantiated with a controlled type and the controlled type has user-defined 
@@ -145,7 +145,7 @@ as a parameter to any of the operations declared in this package and
 the corresponding task object no longer exists, the execution of the 
 program is erroneous.</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00165.TXT">AI95-00165-01</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
 <span class="insert1"><A NAME="I8792"></A></span><span class="insert2">An 
@@ -175,7 +175,7 @@ is raised for any attempt to call a task attribute operation).</span>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p16">16/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0071">8652/0071</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00165.TXT">AI95-00165-01</A></I>} 
 <span class="insert1">For a given attribute of a given task, the</span><span class="delete1">&nbsp;The</span> 
 implementation shall perform <span class="insert1">the operations declared 
@@ -193,7 +193,7 @@ to achieve such atomicity is implementation defined.</span>&nbsp;</div>
 an access value returned by Reference, an attribute of a given task can 
 be safely read and updated concurrently by multiple tasks.&nbsp;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
 <span class="insert2">After</span><span class="delete2">&nbsp;When a</span> 
 task <span class="insert2">attributes are finalized</span><span class="delete2">&nbsp;terminates</span>, 
 the implementation shall <span class="delete2">finalize all attributes 
@@ -221,7 +221,7 @@ on the number and size of task attributes, and how to configure any limits.</spa
 
 <H4 Class="centered">Metrics</H4>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 The implementation shall document the following metrics: A task calling 
 the following subprograms shall execute <span class="insert2">at</span><span class="delete2">&nbsp;in</span> 
 a sufficiently high priority as to not be preempted during the measurement 
@@ -292,7 +292,7 @@ of a task.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 Some implementations are targeted to domains in which memory use at run 
 time must be completely deterministic. For such implementations, it is 
 recommended that the storage for task attributes will be pre-allocated 
@@ -314,7 +314,7 @@ Requirement above, and we try not to repeat requirements in the Annex
 (they're enough work to meet without having to do things twice).</span> 
 </div>
 <div class="paranum"><a name="p30.1">30.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
 <span class="insert2">Finalization of task attributes and reclamation 
 of associated storage should be performed as soon as possible after task 
 termination.</span>&nbsp;</div>

@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -57,18 +57,18 @@ in a remote call can be meaningfully sent between two active partitions.
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9360"></A><A NAME="I9361"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I9687"></A><A NAME="I9688"></A>The 
 form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Remote_Call_Interface is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9362"></A><A NAME="I9363"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I9364"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9689"></A><A NAME="I9690"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I9691"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 All_Calls_Remote is as follows:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9365"></A><A NAME="I9366"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I9367"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9692"></A><A NAME="I9693"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I9694"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><A NAME="I9368"></A><A NAME="I9369"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I9695"></A><A NAME="I9696"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 All_Calls_Remote is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -76,9 +76,9 @@ All_Calls_Remote is a library unit pragma.&nbsp;</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<A NAME="I9370"></A><A NAME="I9371"></A><A NAME="I9372"></A><A NAME="I9373"></A><A NAME="I9374"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Remote_Call_Interface 
+<A NAME="I9697"></A><A NAME="I9698"></A><A NAME="I9699"></A><A NAME="I9700"></A><A NAME="I9701"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Remote_Call_Interface 
 is used to specify that a library unit is a</span> <I>remote call interface 
-(RCI)</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Call_Interface <span class="insert3">aspect<A NAME="I9375"></A><A NAME="I9376"></A> 
+(RCI)</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Call_Interface <span class="insert3">aspect<A NAME="I9702"></A><A NAME="I9703"></A> 
 of the library unit is True</span><span class="delete3">&nbsp;applies</span>. 
 A subprogram declared in the visible part of such a library unit<span class="insert1">, 
 or declared by such a library unit,</span> is called a <I>remote subprogram</I>.</div>
@@ -90,15 +90,15 @@ in a given package may be used in remote procedure calls.</span></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
 The declaration of an RCI library unit shall be preelaborable (see <A HREF="AA-10-2-1.html">10.2.1</A>), 
-and shall depend semantically only upon declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s</span>, 
+and shall depend semantically only upon declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s</span>, 
 shared passive<span class="insert3">&nbsp;library units</span>, remote types<span class="insert3">&nbsp;library units</span>, <span class="delete3">or&nbsp;</span>other remote call 
 interface library units<span class="insert3">, or preelaborated normal 
 library units that are mentioned only in private with clauses</span>.</div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
-<span class="insert3">We say declared pure <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+<span class="insert3">We say declared pure <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN> 
 here, so that (all) limited views are allowed; those are not library 
-units, but they are declared pure <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s.</span> 
+units, but they are declared pure <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s.</span> 
 </div>
 <div class="paranum"><a name="p9">9/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
@@ -135,7 +135,7 @@ purpose of marshalling the value for remote calls).&nbsp;</div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
 it<span class="insert1">s visible part</span> shall not contain a nested 
-<SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN>; 
+<SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN>; 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is disallowed because the 
@@ -151,6 +151,20 @@ contain<span class="insert1">,</span> the declaration of a subprogram
 <span class="insert3">for</span><span class="delete3">&nbsp;to</span> which 
 <span class="insert3">aspect</span><span class="delete3">&nbsp;a pragma</span> 
 Inline <span class="insert3">is True</span><span class="delete3">&nbsp;applies</span>;</div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0283-1.TXT">AI12-0283-1</A></I>} 
+<span class="insert5">it shall not be, nor shall its visible part contain, 
+the declaration of a subprogram that is nonblocking (see <A HREF="AA-9-5.html">9.5</A>);</span></div>
+<div class="paranum"><a name="p13.a">13.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>All such 
+subprograms are remote subprograms, and all calls on remote subprograms 
+are considered potentially blocking, so they cannot statically be allowed 
+in nonblocking code.</span>&nbsp;</div>
+<div class="paranum"><a name="p13.b">13.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>The 
+type declaration of a remote subprogram is illegal if the Nonblocking 
+aspect is True, either implicitly by inheritance or by explicit specification.</span> 
+</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0078">8652/0078</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00048.TXT">AI95-00048-01</A></I>} 
@@ -193,11 +207,11 @@ partition.&nbsp;</div>
 illegal in the specification of a remote call interface library unit. 
 In addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
-unit.<A NAME="I9377"></A></span></div>
+unit.<A NAME="I9704"></A></span></div>
 <div class="paranum"><a name="p15.d">15.d/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>This 
-applies whether the stream-oriented attribute is specified with an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
-or with a <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>.</span> 
+applies whether the stream-oriented attribute is specified with an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+or with a <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p15.e">15.e/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>Stream-oriented 
@@ -210,7 +224,7 @@ interface package.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3">A</span><span class="delete3">&nbsp;If a</span> pragma 
 All_Calls_Remote <span class="insert3">sets the All_Calls_Remote representation 
-aspect of <A NAME="I9378"></A><A NAME="I9379"></A>the</span><span class="delete3">&nbsp;applies 
+aspect of <A NAME="I9705"></A><A NAME="I9706"></A>the</span><span class="delete3">&nbsp;applies 
 to a</span> library unit<span class="insert3">&nbsp;to which the pragma applies 
 to the value True. If the All_Calls_Remote aspect of a library unit is 
 True</span>, the library unit shall be a remote call interface.</div>
@@ -235,7 +249,7 @@ with compilation units that depend on it. However the whole RCI library
 unit, including its (non-stub) body, will only be in one of the active 
 partitions.&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I9380"></A><A NAME="I9381"></A><A NAME="I9382"></A>Notwithstanding 
+<div class="Normal"><A NAME="I9707"></A><A NAME="I9708"></A><A NAME="I9709"></A>Notwithstanding 
 the rule given in <A HREF="AA-10-2.html">10.2</A>, a compilation unit 
 in a given partition that semantically depends on the declaration of 
 an RCI library unit, <I>needs</I> (in the sense of <A HREF="AA-10-2.html">10.2</A>) 
@@ -310,7 +324,7 @@ to support the All_Calls_Remote pragma if the Remote_Call_Interface pragma
 <div class="paranum"><a name="p20.b">20.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00240.TXT">AI95-00240-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert2"><A NAME="I9383"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I9710"></A><B>Amendment Correction:</B> 
 The wording was changed from &ldquo;user-specified&rdquo; to &ldquo;available&rdquo; 
 </span><span class="insert3">read and write&nbsp;</span><span class="insert2">attributes. 
 (This was then further changed, see below.) This means that a type with 
@@ -337,7 +351,7 @@ type extensions are properly handled.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p20.e">20.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0101-1.TXT">AI05-0101-1</A></I>} 
-<span class="insert3"><A NAME="I9384"></A><B>Correction:</B> Added a 
+<span class="insert3"><A NAME="I9711"></A><B>Correction:</B> Added a 
 rule to ensure that function results are streamable; this was missing 
 in previous versions of Ada. While programs that returned unstreamable 
 types from RCI functions were legal, it is not clear what they could 
@@ -347,25 +361,25 @@ that any real programs will be impacted by this change.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p20.f">20.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0206-1.TXT">AI05-0206-1</A></I>} 
-<span class="insert3"><A NAME="I9385"></A>Added wording to allow private 
+<span class="insert3"><A NAME="I9712"></A>Added wording to allow private 
 withs of preelaborated normal units in the specification of a remote 
 call interface unit.</span></div>
 <div class="paranum"><a name="p20.g">20.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3">All_Calls_Remote is now a representation aspect, 
-so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 &mdash; although the pragma is still preferred by the Standard.</span></div>
 <div class="paranum"><a name="p20.h">20.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0243-1.TXT">AI05-0243-1</A></I>} 
 <span class="insert3">Remote_Call_Interface is now a categorization aspect, 
-so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+so it can be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 &mdash; although the pragma is still preferred by the Standard.</span> 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p20.i">20.i/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0031-1.TXT">AI12-0031-1</A></I>} 
-<span class="insert4"><A NAME="I9386"></A><B>Corrigendum:</B> Redefined 
+<span class="insert4"><A NAME="I9713"></A><B>Corrigendum:</B> Redefined 
 when indirect and dispatching remote calls have to be remote for a unit 
 for which the aspect All_Calls_Remote is True. With the new rules, a 
 local target called indirectly or via dispatching will be routed through 
@@ -379,11 +393,17 @@ partition.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p20.j">20.j/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0002-1.TXT">AI12-0002-1</A></I>} 
-<span class="insert5"><A NAME="I9387"></A><B>Correction:</B> Specifying 
+<span class="insert5"><A NAME="I9714"></A><B>Correction:</B> Specifying 
 user-defined stream-oriented attributes is now illegal in an RCI unit. 
 If a program contains such attributes, they and their associated type 
 will need to be moved to a remote types package (which is then imported 
 intot he RCI unit).</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p20.k">20.k/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0283-1.TXT">AI12-0283-1</A></I>} 
+<span class="insert5">Added a rule to ensure that potentially blocking 
+remote calls are not considered nonblocking.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

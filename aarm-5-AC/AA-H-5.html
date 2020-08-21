@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,21 +27,23 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-H-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-H-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>H.5 <span class="insert2">Pragma Detect_Blocking</span><span class="delete2"></span></H1>
-<div class="paranum"><a name="p1">1/2</a></div>
+<div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 <span class="insert2">The following <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-forces an implementation to detect potentially blocking operations within 
-a protected operation.</span>&nbsp;</div>
+</span><span class="insert5">requires</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;forces</span></span><span class="insert2">&nbsp;an implementation to detect potentially blocking operations&nbsp;</span><span class="insert5">during 
+the execution of</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;within</span></span><span class="insert2">&nbsp;a protected operation</span><span class="insert5">&nbsp;or a parallel construct</span><span class="insert2">.</span> 
+</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -48,27 +52,36 @@ a protected operation.</span>&nbsp;</div>
 Detect_Blocking is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert2"><B>pragma</B> 
-<A NAME="I9732"></A><A NAME="I9733"></A>Detect_Blocking;</span>&nbsp;</div>
+<A NAME="I10061"></A><A NAME="I10062"></A>Detect_Blocking;</span>&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<span class="insert2"><A NAME="I9734"></A><A NAME="I9735"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<span class="insert2"><A NAME="I10063"></A><A NAME="I10064"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Detect_Blocking is a configuration pragma.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p5">5/2</a></div>
+<div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0247-1.TXT">AI12-0247-1</A></I>} 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
 <span class="insert2">An implementation is required to detect a potentially 
-blocking operation within a protected operation, and to raise Program_Error 
-(see <A HREF="AA-9-5-1.html">9.5.1</A>).</span>&nbsp;</div>
+blocking operation&nbsp;</span><span class="insert5">that occurs during the 
+execution of</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;within</span></span><span class="insert2">&nbsp;a protected operation</span><span class="insert5">&nbsp;or a parallel construct 
+defined within a compilation unit to which the pragma applies</span><span class="insert2">, 
+and to raise Program_Error (see&nbsp;</span><span class="insert5"><A HREF="AA-9-5.html">9.5</A></span><span class="insert2"></span><span class="insert2"><span class="delete5"><A HREF="AA-9-5-1.html">&nbsp;9.5.1</A></span></span><span class="insert2">).</span> 
+</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p6">6/2</a></div>
+<div class="paranum"><a name="p6">6/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<span class="insert2">An implementation is allowed to reject a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
-if a potentially blocking operation is present directly within an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
-or the body of a protected subprogram.</span>&nbsp;</div>
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
+<span class="insert2">An implementation is allowed to reject a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN> 
+</span><span class="insert5">to which a pragma Detect_Blocking applies 
+</span><span class="insert2">if a potentially blocking operation is present 
+directly within an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN></span><span class="insert5">,</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;or</span></span><span class="insert2">&nbsp;the body of a protected subprogram</span><span class="insert5">, 
+or a parallel construct occurring within the compilation unit</span><span class="insert2">.</span> 
+</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Notes">11&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
@@ -79,15 +92,21 @@ and need not be detected.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00305.TXT">AI95-00305-01</A></I>} 
-<span class="insert2"><A NAME="I9736"></A>Pragma Detect_Blocking is new.</span> 
-</div>
+<span class="insert2"><A NAME="I10065"></A>Pragma Detect_Blocking is 
+new.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p7.b">7.b/2</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0267-1.TXT">AI12-0267-1</A></I>} 
+<span class="insert2"><A NAME="I10066"></A>Pragma Detect_Blocking now 
+applies to parallel constructs as well as protected actions.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-H-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-H-4-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-H-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

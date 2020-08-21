@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -118,15 +118,15 @@ to an object created by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">alloc
 the object will still exist when the corresponding master completes, 
 and it will be finalized then.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">The finalization of a master performs finalization 
+<div class="Normal">&nbsp;The finalization of a master performs finalization 
 of objects created by declarations in the master in the reverse order 
 of their creation. After the finalization of a master is complete, the 
 objects finalized as part of its finalization cease to <I>exist</I>, 
 as do any types and subtypes defined and created within the master.<A NAME="I3700"></A> 
 <A NAME="I3701"></A><A NAME="I3702"></A></div>
 <div class="paranum"><a name="p11.1">11.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;Each nonderived access 
-type <I>T</I> has an associated <I>collection</I>,<A NAME="I3703"></A> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;Each nonderived 
+access type <I>T</I> has an associated <I>collection</I>,<A NAME="I3703"></A> 
 which is the set of objects created by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s 
 of <I>T</I>, or of types derived from <I>T</I>. Unchecked_Deallocation 
 removes an object from its collection. Finalization of a collection consists 
@@ -146,11 +146,11 @@ of the call (see <A HREF="RM-3-10-2.html">3.10.2</A>).&nbsp;</div>
 <div class="Bulleted">For any other anonymous access type, the first 
 freezing point of the innermost enclosing declaration.&nbsp;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><A NAME="I3705"></A>The target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I3705"></A>The target of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
 is finalized before copying in the new value, as explained in <A HREF="RM-7-6.html">7.6</A>.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">The master of an object is the master enclosing its 
-creation whose accessibility level (see <A HREF="RM-3-10-2.html">3.10.2</A>) 
+<div class="Normal">&nbsp;The master of an object is the master enclosing 
+its creation whose accessibility level (see <A HREF="RM-3-10-2.html">3.10.2</A>) 
 is equal to that of the object, except in the case of an anonymous object 
 representing the result of an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 or function call. If such an anonymous object is part of the result of 
@@ -163,7 +163,7 @@ is the innermost master enclosing the evaluation of the <SPAN Class="swiss"><A H
 or function call, which may be the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 or function call itself.&nbsp;</div>
 <div class="paranum"><a name="p13.1">13.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;In the case of an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;In the case of an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 that is a master, finalization of any (anonymous) objects occurs after 
 completing evaluation of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 and all use of the objects, prior to starting the execution of any subsequent 
@@ -171,7 +171,7 @@ construct.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p14">14/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3706"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I3706"></A>It 
 is a bounded error for a call on Finalize or Adjust that occurs as part 
 of object finalization or assignment to propagate an exception. The possible 
 consequences depend on what action invoked the Finalize or Adjust operation: 
@@ -225,12 +225,12 @@ is ignored; any other finalizations due to be performed are performed.
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p20.1">20.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;If the execution of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;If the execution of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 propagates an exception, any parts of the allocated object that were 
 successfully initialized may be finalized as part of the finalization 
 of the innermost master enclosing the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>.</div>
 <div class="paranum"><a name="p20.2">20.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The implementation may finalize objects created 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The implementation may finalize objects created 
 by <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s 
 for an access type whose storage pool supports subpools (see <A HREF="RM-13-11-4.html">13.11.4</A>) 
 as if the objects were created (in an arbitrary order) at the point where 

@@ -21,17 +21,17 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -139,7 +139,7 @@ dynamically tagged unless it is</span><span class="delete1">&nbsp;expression
 shall not be of an access-to-class-wide type unless it designates</span> 
 a controlling operand in a call on a dispatching operation.&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">In the declaration of a dispatching operation of 
+<div class="Normal">&nbsp;In the declaration of a dispatching operation of 
 a tagged type, everywhere a subtype of the tagged type appears as a subtype 
 of the profile (see <A HREF="RM-6-1.html">6.1</A>), it shall statically 
 match the first subtype of the tagged type. <A NAME="I2252"></A>If the 
@@ -158,13 +158,13 @@ operation shall not be of convention Intrinsic.<span class="delete1">&nbsp;If a 
 then it shall be of convention Ada (either explicitly or by default &mdash; 
 see <A HREF="RM-6-3-1.html">6.3.1</A>).</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 for a controlling formal parameter of a dispatching operation shall be 
 tag indeterminate.<span class="delete2">&nbsp;A controlling formal parameter 
 that is an access parameter shall not have a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">If a dispatching operation 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">If a dispatching operation 
 is defined by a <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0203">subprogram_renaming_declaration</A></SPAN> 
 or the instantiation of a generic subprogram, any access parameter of 
 the renamed subprogram or the generic subprogram that corresponds to 
@@ -224,7 +224,7 @@ is determined by the target;</span></div>
 controlling tag value is statically determined to be the tag of type 
 <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"></span>For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"></span>For 
 the execution of a call on a dispatching operation, the <span class="insert2">action 
 performed is determined by the properties of the corresponding dispatching 
 operation</span><span class="delete2">&nbsp;body executed is the one for the 

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -37,7 +35,7 @@
 <H2>(normative)</H2>
 <H1>Predefined Language Environment</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5686"></A><A NAME="I5687"></A>This 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5673"></A><A NAME="I5674"></A>This 
 Annex contains the specifications of library units that shall be provided 
 by every implementation. There are three root library units: Ada, Interfaces, 
 and System; other library units are children of these:</div>
@@ -276,22 +274,20 @@ and System; other library units are children of these:</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Normal">The implementation shall ensure that<span class="delete5">&nbsp;each language-defined subprogram is reentrant<A NAME="I5688"></A> in 
-the sense that</span> concurrent calls on <span class="insert4">any</span><span class="insert5">&nbsp;two (possibly the same)</span><span class="insert4">&nbsp;language-defined</span><span class="delete4">&nbsp;the 
-same</span> <span class="insert5">subprograms</span><span class="delete5">&nbsp;subprogram</span> 
-perform as specified, so long as all<span class="insert4">&nbsp;</span><span class="insert5">pairs 
-of&nbsp;</span><span class="insert4">objects&nbsp;</span><span class="insert5">(one 
-from each call)</span><span class="insert4">&nbsp;that are</span><span class="insert5">&nbsp;either</span><span class="insert4">&nbsp;denoted by</span> parameters that 
-could be passed by reference<span class="insert5">,</span> <span class="insert4">or 
-</span><span class="insert5">are&nbsp;</span><span class="insert4">designated 
-by parameters of an access type</span><span class="insert5">,</span><span class="insert4">&nbsp;are</span><span class="delete4">&nbsp;denote</span> nonoverlapping<span class="delete4">&nbsp;objects</span>.&nbsp;</div>
+<div class="Normal">The implementation shall ensure that<span class="delete5">&nbsp;each language-defined subprogram is reentrant<A NAME="I5675"></A> in 
+the sense that</span> concurrent calls on any<span class="insert5">&nbsp;two 
+(possibly the same)</span> language-defined <span class="insert5">subprograms</span><span class="delete5">&nbsp;subprogram</span> 
+perform as specified, so long as all <span class="insert5">pairs of&nbsp;</span>objects 
+<span class="insert5">(one from each call)</span> that are<span class="insert5">&nbsp;either</span> denoted by parameters that could be passed by reference<span class="insert5">,</span> 
+or <span class="insert5">are&nbsp;</span>designated by parameters of an access 
+type<span class="insert5">,</span> are nonoverlapping.&nbsp;</div>
 <div class="paranum"><a name="p3.1">3.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">For the purpose of determining 
-whether concurrent calls on text input-output subprograms are required 
-to perform as specified above, when calling a subprogram within Text_IO 
-or its children that implicitly operates on one of the default input-output 
-files, the subprogram is considered to have a parameter of Current_Input 
-or Current_Output (as appropriate).</span></div>
+<div class="Normal">&nbsp;For the purpose of determining whether concurrent 
+calls on text input-output subprograms are required to perform as specified 
+above, when calling a subprogram within Text_IO or its children that 
+implicitly operates on one of the default input-output files, the subprogram 
+is considered to have a parameter of Current_Input or Current_Output 
+(as appropriate).</div>
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="Normal">&nbsp;If a descendant of a language-defined tagged type 
 is declared, the implementation shall ensure that each inherited language-defined 

@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -109,7 +109,7 @@ package Containers.Indefinite_Holders has the following declaration:
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers.Indefinite_Holders;</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Normal">The actual function for the generic formal function 
+<div class="Normal">&nbsp;The actual function for the generic formal function 
 &quot;=&quot; on Element_Type values is expected to define a reflexive 
 and symmetric relationship and return the same result value each time 
 it is called with a particular pair of values. If it behaves in some 
@@ -117,20 +117,20 @@ other manner, the function &quot;=&quot; on holder values returns an
 unspecified value. The exact arguments and number of calls of this generic 
 formal function by the function &quot;=&quot; on holder values are unspecified.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Normal">The type Holder is used to represent holder containers. 
+<div class="Normal">&nbsp;The type Holder is used to represent holder containers. 
 The type Holder needs finalization<A NAME="I7301"></A> (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal">Empty_Holder represents an empty holder object. If 
-an object of type Holder is not otherwise initialized, it is initialized 
+<div class="Normal">&nbsp;Empty_Holder represents an empty holder object. 
+If an object of type Holder is not otherwise initialized, it is initialized 
 to the same value as Empty_Holder.</div>
 <div class="paranum"><a name="p29">29/3</a></div>
-<div class="Normal">Some operations of this generic package have access-to-subprogram 
+<div class="Normal">&nbsp;Some operations of this generic package have access-to-subprogram 
 parameters. To ensure such operations are well-defined, they guard against 
 certain actions by the designated subprogram. In particular, some operations 
 check for &ldquo;tampering with the element&rdquo; of a container because 
 they depend on the element of the container not being replaced.</div>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7302"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<A NAME="I7302"></A>A 
 subprogram is said to <I>tamper with the element</I> of a holder object 
 <I>H</I> if:</div>
 <div class="paranum"><a name="p31">31/3</a></div>
@@ -145,7 +145,7 @@ parameter;</div>
 <div class="paranum"><a name="p34">34/3</a></div>
 <div class="Bulleted">It finalizes <I>H</I>.</div>
 <div class="paranum"><a name="p35">35/4</a></div>
-<div class="Normal"><A NAME="I7303"></A><A NAME="I7304"></A>When tampering 
+<div class="Normal">&nbsp;<A NAME="I7303"></A><A NAME="I7304"></A>When tampering 
 with the element is <I>prohibited</I> for a particular holder object 
 <I>H</I>, Program_Error is propagated by a call of any language-defined 
 subprogram that is defined to tamper with the element of <I>H</I>, leaving 
@@ -276,14 +276,14 @@ a successful call to Move.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p68">68/3</a></div>
-<div class="Normal"><A NAME="I7306"></A>It is a bounded error for the 
+<div class="Normal">&nbsp;<A NAME="I7306"></A>It is a bounded error for the 
 actual function associated with a generic formal subprogram, when called 
 as part of an operation of this package, to tamper with the element of 
 any Holder parameter of the operation. Either Program_Error is raised, 
 or the operation works as defined on the value of the Holder either prior 
 to, or subsequent to, some or all of the modifications to the Holder.</div>
 <div class="paranum"><a name="p69">69/3</a></div>
-<div class="Normal"><A NAME="I7307"></A>It is a bounded error to call 
+<div class="Normal">&nbsp;<A NAME="I7307"></A>It is a bounded error to call 
 any subprogram declared in the visible part of Containers.Indefinite_Holders 
 when the associated container has been finalized. If the operation takes 
 Container as an <B>in out</B> parameter, then it raises Constraint_Error 
@@ -293,26 +293,26 @@ for an empty container, or it raises Constraint_Error or Program_Error.
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p70">70/3</a></div>
-<div class="Normal">Execution is erroneous if the holder container associated 
+<div class="Normal">&nbsp;Execution is erroneous if the holder container associated 
 with the result of a call to Reference or Constant_Reference is finalized 
 before the result object returned by the call to Reference or Constant_Reference 
 is finalized.<A NAME="I7308"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p71">71/3</a></div>
-<div class="Normal">No storage associated with a holder object shall 
+<div class="Normal">&nbsp;No storage associated with a holder object shall 
 be lost upon assignment or scope exit.</div>
 <div class="paranum"><a name="p72">72/3</a></div>
-<div class="Normal">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+<div class="Normal">&nbsp;The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
 for a holder container shall have the effect of copying the element (if 
 any) from the source holder object to the target holder object.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p73">73/3</a></div>
-<div class="Normal">Move should not copy the element, and should minimize 
+<div class="Normal">&nbsp;Move should not copy the element, and should minimize 
 copying of internal data structures.&nbsp;</div>
 <div class="paranum"><a name="p74">74/3</a></div>
-<div class="Normal">If an exception is propagated from a holder operation, 
+<div class="Normal">&nbsp;If an exception is propagated from a holder operation, 
 no storage should be lost, nor should the element be removed from a holder 
 container unless specified by the operation.&nbsp;</div>
 

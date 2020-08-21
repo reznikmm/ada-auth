@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,11 +35,11 @@
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Indented1"><SPAN Class="swiss">mod_clause</SPAN><A NAME="I9353"></A><A NAME="S0327"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>at</B>&nbsp;<B>mod</B>&nbsp;<I>static_</I><A NAME="I9354"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">mod_clause</SPAN><A NAME="I9659"></A><A NAME="S0341"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>at</B>&nbsp;<B>mod</B>&nbsp;<I>static_</I><A NAME="I9660"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
 of the form:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
@@ -57,21 +57,21 @@ of the form:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The preferred syntax for specifying 
-the alignment of an entity is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
-specifying the Alignment attribute. Therefore, the special-purpose <SPAN Class="swiss"><A HREF="AA-J-8.html#S0327">mod_clause</A></SPAN> 
+the alignment of an entity is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+specifying the Alignment attribute. Therefore, the special-purpose <SPAN Class="swiss"><A HREF="AA-J-8.html#S0341">mod_clause</A></SPAN> 
 syntax is now obsolete.</div>
 <div class="paranum"><a name="p5.b">5.b</a></div>
 <div class="Annotations">The above equivalence implies, for example, 
-that it is illegal to give both a <SPAN Class="swiss"><A HREF="AA-J-8.html#S0327">mod_clause</A></SPAN> 
-and an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+that it is illegal to give both a <SPAN Class="swiss"><A HREF="AA-J-8.html#S0341">mod_clause</A></SPAN> 
+and an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 specifying the Alignment attribute for the same type.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p5.c">5.c</a></div>
 <div class="Annotations">Ada 83's <SPAN Class="swiss">alignment_clause</SPAN> 
-is now called a <SPAN Class="swiss"><A HREF="AA-J-8.html#S0327">mod_clause</A></SPAN> 
+is now called a <SPAN Class="swiss"><A HREF="AA-J-8.html#S0341">mod_clause</A></SPAN> 
 to avoid confusion with the new term &ldquo;Alignment clause&rdquo; (that 
-is, an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+is, an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 for the Alignment attribute).&nbsp;</div>
 
 <HR>

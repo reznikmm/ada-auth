@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -26,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,23 +38,32 @@
 </div>
 <HR>
 <H1>9 &nbsp; Tasks and Synchronization</H1>
-<div class="paranum"><a name="p1">1/3</a></div>
+<div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I4457"></A>The execution of an Ada program consists of the execution 
-of one or more <I>tasks</I>. <A NAME="I4458"></A><A NAME="I4459"></A>Each 
-task represents a separate thread of control that proceeds independently 
-and concurrently between the points where it <I>interacts</I> with other 
-tasks. The various forms of task interaction are described in this <span class="insert3">clause</span><span class="delete3">&nbsp;section</span>, 
-and include: <A NAME="I4460"></A><A NAME="I4461"></A><A NAME="I4462"></A><A NAME="I4463"></A></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+<A NAME="I4624"></A>The execution of an Ada program consists of the execution 
+of one or more <I>tasks</I>. <A NAME="I4625"></A><A NAME="I4626"></A>Each 
+task represents a <span class="insert5">separable activity</span><span class="delete5">&nbsp;separate 
+thread of control</span> that proceeds independently and concurrently 
+between the points where it <I>interacts</I> with other tasks. <span class="insert5">A 
+single task, when within the context of a parallel construct, can represent 
+multiple logical threads of control which can proceed in parallel; in 
+other contexts, each task represents one logical thread of control.</span><span class="delete5">&nbsp;The 
+various forms of task interaction are described in this&nbsp;</span><span class="insert3"><span class="delete5">clause</span></span><span class="delete5"></span><span class="delete3">&nbsp;section</span><span class="delete5">, 
+and include:</span> <A NAME="I4627"></A><A NAME="I4628"></A><A NAME="I4629"></A><A NAME="I4630"></A></div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The execution of an Ada 
 program consists of the execution of one or more partitions (see <A HREF="AA-10-2.html">10.2</A>), 
 each of which in turn consists of the execution of an environment task 
 and zero or more subtasks.&nbsp;</div>
+<div class="paranum"><a name="p1.1">1.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+<span class="insert5">The various forms of task interaction are described 
+in this clause, and include:</span></div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Bulleted">the activation and termination of a task;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Bulleted"><A NAME="I4464"></A>a call on a protected subprogram 
+<div class="Bulleted"><A NAME="I4631"></A>a call on a protected subprogram 
 of a <I>protected object</I>, providing exclusive read-write access, 
 or concurrent read-only access to shared data;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -79,22 +90,24 @@ is properly synchronized through some other kind of task interaction.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4465"></A>The properties of a task are 
-defined by a corresponding task declaration and <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>, 
+<div class="Normal"><A NAME="I4632"></A>The properties of a task are 
+defined by a corresponding task declaration and <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>, 
 which together define a program unit called a <I>task unit</I>.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
-<div class="paranum"><a name="p10">10</a></div>
-<div class="Normal">Over time, tasks proceed through various <I>states</I>. 
-<A NAME="I4466"></A><A NAME="I4467"></A><A NAME="I4468"></A><A NAME="I4469"></A><A NAME="I4470"></A><A NAME="I4471"></A><A NAME="I4472"></A><A NAME="I4473"></A>A 
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+Over time, tasks proceed through various <I>states</I>. <A NAME="I4633"></A><A NAME="I4634"></A><A NAME="I4635"></A><A NAME="I4636"></A><A NAME="I4637"></A><A NAME="I4638"></A><A NAME="I4639"></A><A NAME="I4640"></A>A 
 task is initially <I>inactive</I>; upon activation, and prior to its 
 <I>termination</I> it is either <I>blocked</I> (as part of some task 
-interaction) or <I>ready</I> to run. <A NAME="I4474"></A>While ready, 
+interaction) or <I>ready</I> to run. <A NAME="I4641"></A>While ready, 
 a task competes for the available <I>execution resources</I> that it 
-requires to run.&nbsp;</div>
+requires to run.<span class="insert5">&nbsp;In the context of a parallel construct, 
+a single task can utilize multiple processing resources simultaneously.</span> 
+</div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I4475"></A><A NAME="I4476"></A>The means for selecting which 
+<A NAME="I4642"></A><A NAME="I4643"></A>The means for selecting which 
 of the ready tasks to run, given the currently available execution resources, 
 is determined by the <I>task dispatching policy</I> in effect, which 
 is generally implementation defined, but may be controlled by <span class="insert3">aspects, 
@@ -102,14 +115,15 @@ is generally implementation defined, but may be controlled by <span class="inser
 the Real-Time Annex (see <A HREF="AA-D-2.html">D.2</A> and <A HREF="AA-D-5.html">D.5</A>). 
 </div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p11">11</a></div>
-<div class="Notes">1&nbsp;&nbsp;Concurrent task execution may be implemented 
-on multicomputers, multiprocessors, or with interleaved execution on 
-a single physical processor. On the other hand, whenever an implementation 
-can determine that the required semantic effects can be achieved when 
-parts of the execution of a given task are performed by different physical 
-processors acting in parallel, it may choose to perform them in this 
-way.</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Notes">1&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+Concurrent task execution may be implemented on multicomputers, multiprocessors, 
+or with interleaved execution on a single physical processor. On the 
+other hand, whenever an implementation can determine that the required 
+semantic effects can be achieved when parts of the execution of a <span class="insert5">single 
+logical thread of control</span><span class="delete5">&nbsp;given task</span> 
+are performed by different physical processors acting in parallel, it 
+may choose to perform them in this way.</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p11.a">11.a</a></div>
@@ -119,6 +133,13 @@ way.</div>
 than &quot;parallel&quot; when talking about logically independent execution 
 of threads of control. The term &quot;parallel&quot; is reserved for 
 referring to the situation where multiple physical processors run simultaneously. 
+</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p11.c">11.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+<span class="insert5">Rewrote the introduction to emphasize that threads 
+of control can be generated by parallel constructs as well as tasks.</span> 
 </div>
 
 <HR>

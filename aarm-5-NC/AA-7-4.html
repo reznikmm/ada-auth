@@ -25,12 +25,12 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-7-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
@@ -46,14 +46,14 @@ B</A>).]&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-[<A NAME="I3981"></A> A <I>deferred constant declaration</I> is an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
+[<A NAME="I4133"></A> A <I>deferred constant declaration</I> is an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 with the reserved word <B>constant</B> but no initialization expression.] 
-<A NAME="I3982"></A>The constant declared by a deferred constant declaration 
-is called a <I>deferred constant</I>. <A NAME="I3983"></A>[Unless the 
+<A NAME="I4134"></A>The constant declared by a deferred constant declaration 
+is called a <I>deferred constant</I>. <A NAME="I4135"></A>[Unless the 
 Import aspect (see <A HREF="AA-B-1.html">B.1</A>) is True for a deferred 
 constant declaration, the ] deferred constant declaration requires a 
 completion, which shall be a full constant declaration (called the <I>full 
-declaration</I> of the deferred constant). <A NAME="I3984"></A></div>
+declaration</I> of the deferred constant). <A NAME="I4136"></A></div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>The first sentence is redundant, 
 as it is stated officially in <A HREF="AA-3-3-1.html">3.3.1</A>.</div>
@@ -65,7 +65,7 @@ may have a completion, as stated in <A HREF="AA-B-1.html">B.1</A>.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A deferred constant 
 declaration that is completed by a full constant declaration shall occur 
-immediately within the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>. 
+immediately within the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>. 
 For this case, the following additional rules apply to the corresponding 
 full declaration:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -115,7 +115,7 @@ any <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>).
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 [A deferred constant declaration for which the Import aspect is True 
-need not appear in the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+need not appear in the visible part of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
 and has no full constant declaration.]</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
@@ -125,7 +125,7 @@ the constant is frozen (see <A HREF="AA-13-14.html">13.14</A>).</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<A NAME="I3985"></A>The elaboration of a deferred constant declaration 
+<A NAME="I4137"></A>The elaboration of a deferred constant declaration 
 elaborates the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
 or (only allowed in the case of an imported constant) the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0051">array_type_definition</A></SPAN>. 
@@ -147,7 +147,7 @@ although there is no visible effect of these types being different as
 neither can be named.)&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Notes">14&nbsp;&nbsp;The full constant declaration for a 
+<div class="Notes">15&nbsp;&nbsp;The full constant declaration for a 
 deferred constant that is of a given private type or private extension 
 is not allowed before the corresponding <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>. 
 This is a consequence of the freezing rules for types (see <A HREF="AA-13-14.html">13.14</A>). 
@@ -176,7 +176,7 @@ CPU_Identifier&nbsp;:&nbsp;<B>constant</B>&nbsp;String(1..8)<BR>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I3986"></A>In Ada 83, a deferred constant 
+<div class="Annotations"><A NAME="I4138"></A>In Ada 83, a deferred constant 
 is required to be of a private type declared in the same visible part. 
 This restriction is removed for Ada 95; deferred constants can be of 
 any type.</div>
@@ -190,7 +190,7 @@ constant is constrained.</div>
 <div class="paranum"><a name="p14.d">14.d</a></div>
 <div class="Annotations">A deferred constant declaration can be completed 
 with a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Import. Such a deferred constant declaration need not be within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>.</div>
+Import. Such a deferred constant declaration need not be within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>.</div>
 <div class="paranum"><a name="p14.e">14.e</a></div>
 <div class="Annotations">The rules for too-early uses of deferred constants 
 are modified in Ada 95 to allow more cases, and catch all errors at compile 
@@ -230,7 +230,7 @@ their own syntax, but now they are simply a special case of <SPAN Class="swiss">
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p14.j">14.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00385.TXT">AI95-00385-01</A></I>} 
-<A NAME="I3987"></A>Deferred constants were enhanced to allow the use 
+<A NAME="I4139"></A>Deferred constants were enhanced to allow the use 
 of anonymous access types in them.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -250,7 +250,7 @@ met.&nbsp;</div>
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-7-3-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3-4.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-5.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

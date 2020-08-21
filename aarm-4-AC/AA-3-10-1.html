@@ -23,19 +23,19 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -61,7 +61,7 @@ deferring its full definition to a subsequent <SPAN Class="swiss"><A HREF="AA-3-
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0137-1.TXT">AI12-0137-1</A></I>} 
 <span class="insert2"><A NAME="I2538"></A><A NAME="I2539"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 declares an <I>incomplete view</I> of a type and its first subtype; the 
@@ -73,7 +73,7 @@ view</I>.<A NAME="I2540"></A><A NAME="I2541"></A>&nbsp;</span><span class="inser
 a tagged incomplete view.&nbsp;</span><span class="insert2">[An incomplete 
 view of a type is a limited view of the type (see <A HREF="AA-7-5.html">7.5</A>).]</span></div>
 <div class="paranum"><a name="p2.2">2.2/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="insert2">Given an access type <I>A</I> whose designated 
 type <I>T</I> is an incomplete view, a dereference of a value of type 
 <I>A</I> also has this incomplete view except when:</span>&nbsp;</div>
@@ -97,7 +97,7 @@ of <I>T</I> is declared</span><span class="insert3">, or</span><span class="inse
 <I>T</I> and <I>T</I> is an incomplete view declared by an <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p2.6">2.6/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
 <span class="insert2">In these cases, the dereference has the&nbsp;</span><span class="insert2"><span class="delete3">full 
 </span></span><span class="insert2">view of <I>T</I></span><span class="insert3">&nbsp;visible at the point of the dereference</span><span class="insert2">.</span> 
 </div>
@@ -126,7 +126,7 @@ of a child unit:</span>&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>Ptr.all'Size&nbsp;is&nbsp;legal&nbsp;here.</I></SPAN><BR>
 <B>end</B>&nbsp;P;</span></div>
 <div class="paranum"><a name="p2.7">2.7/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00412.TXT">AI95-00412-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00412.TXT">AI95-00412-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0162-1.TXT">AI05-0162-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0208-1.TXT">AI05-0208-1</A></I>} 
 <span class="insert2">Similarly, if a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
@@ -259,7 +259,7 @@ not in the profile for a body or entry.</span>&nbsp;</div>
 generic formal parameter is a formal incomplete type (see <A HREF="AA-12-5-1.html">12.5.1</A>).</span> 
 </div>
 <div class="paranum"><a name="p8.3">8.3/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="insert2">If such a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denotes a tagged incomplete view, it may also be used:</span></div>
 <div class="paranum"><a name="p8.4">8.4/3</a></div>
@@ -290,7 +290,7 @@ was deleted.</I></SPAN><span class="delete2"><B>Reason:&nbsp;</B></span>{<I><A H
 on their ancestor library units for deferred incomplete types.</span> 
 </div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<SPAN STYLE="font-size: 80%"><I>This 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This 
 paragraph was deleted.</I></SPAN><span class="insert2"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
 <span class="insert2"></span><span class="insert2"><span class="delete3">If 
@@ -313,7 +313,7 @@ allows, for example, a record to have a component designating a subprogram
 that takes that same record type as a parameter.</span></span><span class="insert2"></span> 
 </div>
 <div class="paranum"><a name="p9.3">9.3/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="insert2">If any of the above uses occurs as part of the 
 declaration of a primitive subprogram of the incomplete view, and the 
 declaration occurs immediately within the private part of a package, 
@@ -328,11 +328,11 @@ occur in a child even though there is no visibility on the full type,
 requiring access to the controlling tag without access to the representation 
 of the type.</span>&nbsp;</div>
 <div class="paranum"><a name="p9.4">9.4/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="insert2">No other uses of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes an incomplete view of a type are allowed.</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0151-1.TXT">AI05-0151-1</A></I>} 
 <span class="insert2">A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 that denotes an object</span><span class="delete2">&nbsp;A dereference (whether 
@@ -371,7 +371,7 @@ objects (since we don't know how big they are).</span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 <span class="delete2"><A NAME="I2544"></A>An <SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN> 
 declares an incomplete type and its first subtype; the first subtype 
 is unconstrained if a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN> 

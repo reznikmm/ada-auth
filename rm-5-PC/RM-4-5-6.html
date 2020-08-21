@@ -35,14 +35,14 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2931"></A><A NAME="I2932"></A><A NAME="I2933"></A><A NAME="I2934"></A><A NAME="I2935"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2923"></A><A NAME="I2924"></A><A NAME="I2925"></A><A NAME="I2926"></A><A NAME="I2927"></A>The 
 highest precedence unary operator <B>abs</B> (absolute value) is predefined 
 for every specific numeric type <I>T</I>, with the following specification: 
 </div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>abs</B>&quot;(Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2936"></A><A NAME="I2937"></A><A NAME="I2938"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2928"></A><A NAME="I2929"></A><A NAME="I2930"></A>The 
 highest precedence unary operator <B>not</B> (logical negation) is predefined 
 for every boolean type <I>T</I>, every modular type <I>T</I>, and for 
 every one-dimensional array type <I>T</I> whose components are of a boolean 
@@ -60,12 +60,12 @@ of the value of the operand.</div>
 array of boolean components yields a one-dimensional boolean array with 
 the same bounds; each component of the result is obtained by logical 
 negation of the corresponding component of the operand (that is, the 
-component that has the same index value). <A NAME="I2939"></A><A NAME="I2940"></A><A NAME="I2941"></A>A 
+component that has the same index value). <A NAME="I2931"></A><A NAME="I2932"></A><A NAME="I2933"></A>A 
 check is made that each component of the result belongs to the component 
 subtype; the exception Constraint_Error is raised if this check fails. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2942"></A><A NAME="I2943"></A><A NAME="I2944"></A><A NAME="I2945"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2934"></A><A NAME="I2935"></A><A NAME="I2936"></A><A NAME="I2937"></A>The 
 highest precedence <I>exponentiation</I> operator ** is predefined for 
 every specific integer type <I>T</I> with the following specification: 
 </div>
@@ -79,7 +79,7 @@ or the floating point type):&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;**&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer'Base)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I2946"></A>The right operand of an exponentiation 
+<div class="Normal"><A NAME="I2938"></A>The right operand of an exponentiation 
 is the <I>exponent</I>. The value of X**N with the value of the exponent 
 N positive is the same as the value of X*X*...X (with N&ndash;1 multiplications) 
 except that the multiplications are associated in an arbitrary order. 
@@ -89,7 +89,7 @@ of the result using the absolute value of N as the exponent.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2947"></A>The implementation of exponentiation 
+<div class="Normal"><A NAME="I2939"></A>The implementation of exponentiation 
 for the case of a negative exponent is allowed to raise Constraint_Error 
 if the intermediate result of the repeated multiplications is outside 
 the safe range of the type, even though the final result (after taking 
@@ -97,9 +97,9 @@ the reciprocal) would not be. (The best machine approximation to the
 final result in this case would generally be 0.0.)&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Notes">20&nbsp;&nbsp;<A NAME="I2948"></A><A NAME="I2949"></A>As 
+<div class="Notes">20&nbsp;&nbsp;<A NAME="I2940"></A><A NAME="I2941"></A>As 
 implied by the specification given above for exponentiation of an integer 
-type, a check is made that the exponent is not negative. <A NAME="I2950"></A>Constraint_Error 
+type, a check is made that the exponent is not negative. <A NAME="I2942"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 
 <HR>

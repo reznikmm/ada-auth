@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,23 +46,23 @@ package Storage_IO has the following declaration:&nbsp;</div>
 <B>with</B>&nbsp;System.Storage_Elements;<BR>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
-<B>package</B>&nbsp;Ada.Storage_IO&nbsp;<B>is</B><A NAME="I6465"></A><BR>
+<B>package</B>&nbsp;Ada.Storage_IO&nbsp;<B>is</B><A NAME="I6368"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Storage_IO);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6466"></A>Buffer_Size&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Storage_Elements.Storage_Count&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6369"></A>Buffer_Size&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Storage_Elements.Storage_Count&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6467"></A>Buffer_Type&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6370"></A>Buffer_Type&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.Storage_Elements.Storage_Array(1..Buffer_Size);</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Input&nbsp;and&nbsp;output&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6468"></A>Read&nbsp;(Buffer&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Element_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6371"></A>Read&nbsp;(Buffer&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Element_Type);</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6469"></A>Write(Buffer&nbsp;:&nbsp;<B>out</B>&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Element_Type);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6372"></A>Write(Buffer&nbsp;:&nbsp;<B>out</B>&nbsp;Buffer_Type;&nbsp;Item&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Element_Type);</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Exceptions</I></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6470"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Data_Error;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6373"></A>Data_Error&nbsp;&nbsp;&nbsp;:&nbsp;<B>exception</B>&nbsp;<B>renames</B>&nbsp;IO_Exceptions.Data_Error;<BR>
 <B>end</B>&nbsp;Ada.Storage_IO;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">In each instance, the constant Buffer_Size has a 

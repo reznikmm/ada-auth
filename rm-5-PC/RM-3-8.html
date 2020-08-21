@@ -37,35 +37,35 @@
 <HR>
 <H1>3.8 Record Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2038"></A><A NAME="I2039"></A>A record 
+<div class="Normal"><A NAME="I2034"></A><A NAME="I2035"></A>A record 
 object is a composite object consisting of named components. The value 
 of a record object is a composite value consisting of the values of the 
-components. <A NAME="I2040"></A></div>
+components. <A NAME="I2036"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_type_definition</SPAN><A NAME="I2041"></A><A NAME="S0066"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<A NAME="I2042"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">record_type_definition</SPAN><A NAME="I2037"></A><A NAME="S0066"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<A NAME="I2038"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_definition</SPAN><A NAME="I2043"></A><A NAME="S0067"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">record_definition</SPAN><A NAME="I2039"></A><A NAME="S0067"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2044"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2040"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B><BR>
 &nbsp;&nbsp;|&nbsp;<B>null&nbsp;record</B></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_list</SPAN><A NAME="I2045"></A><A NAME="S0068"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2046"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>&nbsp;{<A NAME="I2047"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;{<A NAME="I2048"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>}&nbsp;<A NAME="I2049"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">component_list</SPAN><A NAME="I2041"></A><A NAME="S0068"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2042"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>&nbsp;{<A NAME="I2043"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;{<A NAME="I2044"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>}&nbsp;<A NAME="I2045"></A><SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p5">5/1</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_item</SPAN><A NAME="I2050"></A><A NAME="S0069"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2051"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I2052"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">component_item</SPAN><A NAME="I2046"></A><A NAME="S0069"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2047"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I2048"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_declaration</SPAN><A NAME="I2053"></A><A NAME="S0070"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I2054"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I2055"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2056"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2057"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">component_declaration</SPAN><A NAME="I2049"></A><A NAME="S0070"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I2050"></A><SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I2051"></A><SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2052"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2053"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2058"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
+<div class="Normal"><A NAME="I2054"></A>The expected type for the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
 if any, in a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
 is the type of the component.&nbsp;</div>
 
@@ -74,7 +74,7 @@ is the type of the component.&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"><A NAME="I2059"></A>Each <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I2055"></A>Each <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
 declares a component of the record type. Besides components declared 
 by <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>s, 
 the components of a record type include any components declared by <SPAN Class="swiss"><A HREF="RM-3-7.html#S0062">discriminant_specification</A></SPAN>s 
@@ -100,7 +100,7 @@ the bounds of an entry family, or the constraint of the parent subtype
 in a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then its name shall appear alone as a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
 (not as part of a larger expression or expanded name). A discriminant 
-shall not be used to define the constraint of a scalar component.<A NAME="I2060"></A> 
+shall not be used to define the constraint of a scalar component.<A NAME="I2056"></A> 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">If the name of the current instance of a type (see 
@@ -113,18 +113,18 @@ shall appear alone.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p13.1">13.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I2061"></A><A NAME="I2062"></A>If a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I2057"></A><A NAME="I2058"></A>If a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN> 
 includes the reserved word <B>limited</B>, the type is called an <I>explicitly 
 limited record</I> type.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I2063"></A>The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2059"></A>The <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
 defines the (nominal) subtype of the component. If the reserved word 
 <B>aliased</B> appears in the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN>, 
 then the component is aliased (see <A HREF="RM-3-10.html">3.10</A>). 
 </div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I2064"></A>If the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN> 
+<div class="Normal"><A NAME="I2060"></A>If the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN> 
 of a record type is defined by the reserved word <B>null</B> and there 
 are no discriminants, then the record type has no components and all 
 records of the type are <I>null records</I>. A <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN> 
@@ -133,22 +133,22 @@ of <B>null record</B> is equivalent to <B>record null; end record</B>.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I2065"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2061"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0066">record_type_definition</A></SPAN> 
 creates the record type and its first subtype, and consists of the elaboration 
 of the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN>. 
-<A NAME="I2066"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN> 
+<A NAME="I2062"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0067">record_definition</A></SPAN> 
 consists of the elaboration of its <SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN>, 
 if any.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I2067"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN> 
+<div class="Normal"><A NAME="I2063"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0068">component_list</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0069">component_item</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN>, 
-if any, in the order in which they appear. <A NAME="I2068"></A>The elaboration 
+if any, in the order in which they appear. <A NAME="I2064"></A>The elaboration 
 of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal"><A NAME="I2069"></A><A NAME="I2070"></A><A NAME="I2071"></A>Within 
+<div class="Normal"><A NAME="I2065"></A><A NAME="I2066"></A><A NAME="I2067"></A>Within 
 the definition of a composite type, if a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 (see <A HREF="RM-9-5-2.html">9.5.2</A>) includes a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
@@ -158,7 +158,7 @@ denotes the current instance of the type, the expression containing the
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> is called 
 a <I>per-object expression</I>, and the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> being 
-defined is called a <I>per-object constraint</I>. <A NAME="I2072"></A>For 
+defined is called a <I>per-object constraint</I>. <A NAME="I2068"></A>For 
 the elaboration of a <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
@@ -180,7 +180,7 @@ Each such expression is evaluated once unless it is part of a named association
 in a discriminant constraint, in which case it is evaluated once for 
 each associated discriminant.</div>
 <div class="paranum"><a name="p18.1">18.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I2073"></A>When a per-object constraint 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I2069"></A>When a per-object constraint 
 is elaborated (as part of creating an object), each per-object expression 
 of the constraint is evaluated. For other expressions, the values determined 
 during the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-6.html#S0056">component_definition</A></SPAN> 
@@ -211,7 +211,7 @@ then the same components are present in all values of the type.</div>
 reserved word <B>limited</B> in its definition, or if any of its components 
 are limited (see <A HREF="RM-7-5.html">7.5</A>).</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Notes">68&nbsp;&nbsp;<A NAME="I2074"></A>The predefined operations 
+<div class="Notes">68&nbsp;&nbsp;<A NAME="I2070"></A>The predefined operations 
 of a record type include membership tests, qualification, and explicit 
 conversion. If the record type is nonlimited, they also include assignment 
 and the predefined equality operators.</div>

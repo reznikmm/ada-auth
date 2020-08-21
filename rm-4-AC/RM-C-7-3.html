@@ -19,12 +19,12 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -91,23 +91,23 @@ A handler is said to be <I>set</I> if it is associated with a nonnull
 value of type Termination_Handler, and <I>cleared</I> otherwise. When 
 a task is created, its specific handler and fall-back handler are cleared.</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><span class="insert2">The procedure Set_Dependents_Fallback_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Set_Dependents_Fallback_Handler 
 changes the fall-back handler for the calling task</span><span class="insert3">:</span><span class="insert2"></span><span class="insert2"><span class="delete3">;</span></span><span class="insert2">&nbsp;if Handler is <B>null</B>, that fall-back handler is cleared</span><span class="insert3">;</span><span class="insert2"></span><span class="insert2"><span class="delete3">,</span></span><span class="insert2">&nbsp;otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is set to be Handler.<B>all</B>. If a fall-back handler had previously 
 been set it is replaced.</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><span class="insert2">The function Current_Task_Fallback_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The function Current_Task_Fallback_Handler 
 returns the fall-back handler that is currently set for the calling task, 
 if one is set; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns <B>null</B>.</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><span class="insert2">The procedure Set_Specific_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Set_Specific_Handler 
 changes the specific handler for the task identified by T</span><span class="insert3">:</span><span class="insert2"></span><span class="insert2"><span class="delete3">;</span></span><span class="insert2">&nbsp;if Handler is <B>null</B>, that specific handler is cleared</span><span class="insert3">;</span><span class="insert2"></span><span class="insert2"><span class="delete3">,</span></span><span class="insert2">&nbsp;otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is set to be Handler.<B>all</B>. If a specific handler had previously 
 been set it is replaced.</span></div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><span class="insert2">The function Specific_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The function Specific_Handler 
 returns the specific handler that is currently set for the task identified 
 by T, if one is set; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns <B>null</B>.</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="insert2">As part of the finalization 
+<div class="Normal">&nbsp;<span class="insert2">As part of the finalization 
 of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>, 
 after performing the actions specified in <A HREF="RM-7-6.html">7.6</A> 
 for finalization of a master, the specific handler for the task, if one 
@@ -116,18 +116,18 @@ a fall-back handler proceeds by recursively following the master relationship
 for the task. If a task is found whose fall-back handler is set, that 
 handler is executed; otherwise, no handler is executed.</span></div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><span class="insert2">For Set_Specific_Handler or 
+<div class="Normal">&nbsp;<span class="insert2">For Set_Specific_Handler or 
 Specific_Handler, Tasking_Error is raised if the task identified by T 
 has already terminated. Program_Error is raised if the value of T is 
 Ada.Task_Identification.Null_Task_Id.</span></div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal"><span class="insert2">An exception propagated from 
+<div class="Normal">&nbsp;<span class="insert2">An exception propagated from 
 a handler that is invoked as part of the termination of a task has no 
 effect.</span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"><span class="insert2">For a call of Set_Specific_Handler 
+<div class="Normal">&nbsp;<span class="insert2">For a call of Set_Specific_Handler 
 or Specific_Handler, if the task identified by T no longer exists, the 
 execution of the program is erroneous.</span>&nbsp;</div>
 

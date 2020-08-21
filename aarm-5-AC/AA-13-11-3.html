@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,7 +48,7 @@ Default_Storage_Pool specify the storage pool that will be used in the
 absence of an explicit specification of a storage pool or storage size 
 for an access type.]</span><span class="insert3"></span><span class="delete3">&nbsp;[Pragma 
 Controlled is used to prevent any automatic reclamation of storage (garbage 
-collection) for the objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+collection) for the objects created by <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
 of a given access type.]</span>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
@@ -61,9 +61,9 @@ is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I6065"></A><A NAME="I6066"></A>Default_Storage_Pool 
-(<A NAME="I6067"></A><SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN>);</span> 
-&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I6068"></A><A NAME="I6069"></A>Controlled(<I>first_subtype_</I><A NAME="I6070"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>);</span></div>
+&nbsp;&nbsp;<span class="insert3"><B>pragma</B> <A NAME="I6289"></A><A NAME="I6290"></A>Default_Storage_Pool 
+(<A NAME="I6291"></A><SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN>);</span> 
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I6292"></A><A NAME="I6293"></A>Controlled(<I>first_subtype_</I><A NAME="I6294"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><span class="delete3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="delete3">Not to be confused with type Finalization.Controlled.</span> 
@@ -71,12 +71,12 @@ is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3.1">3.1/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">storage_pool_indicator</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I6071"></A><A NAME="S0322"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>storage_pool_</I><A NAME="I6072"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B></span><span class="insert4">&nbsp;|&nbsp;Standard</span><span class="insert3"></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">storage_pool_indicator</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I6295"></A><A NAME="S0336"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><I>storage_pool_</I><A NAME="I6296"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>null</B></span><span class="insert4">&nbsp;|&nbsp;Standard</span><span class="insert3"></span></div>
 <div class="paranum"><a name="p3.2">3.2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Default_Storage_Pool is allowed immediately within the visible part of 
-a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
 immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 or as a configuration pragma.</span>&nbsp;</div>
 
@@ -91,20 +91,21 @@ is expected to be of type Root_Storage_Pool'Class.</span>&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3">The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall denote a variable.</span><span class="delete3">&nbsp;The <I>first_subtype_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+shall denote a variable.<A NAME="I6297"></A><A NAME="I6298"></A></span><span class="delete3">&nbsp;The 
+<I>first_subtype_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Controlled shall denote a nonderived access subtype.</span></div>
 <div class="paranum"><a name="p4.1">4.1/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
-<span class="insert4">The Standard <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+<span class="insert4">The Standard <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN> 
 is an identifier specific to a pragma (see <A HREF="AA-2-8.html">2.8</A>) 
-and does not denote any declaration. If the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+and does not denote any declaration. If the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN> 
 is Standard, then there shall not be a declaration with <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 Standard that is immediately visible at the point of the pragma, other 
 than package Standard itself.</span></div>
 <div class="paranum"><a name="p4.a.1">4.a.1/4</a></div>
 <div class="Annotations"><span class="insert4"><B>Reason:&nbsp;</B>We considered 
-having the Standard <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+having the Standard <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN> 
 resolve to package Standard rather than being an identifier specific 
 to a pragma. That would eliminate the need for a special check. But it 
 would be bizarre to have something that could resolve to either an object 
@@ -125,15 +126,15 @@ Standard.</span>&nbsp;</div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
 <span class="insert3">If the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN> 
 shall be</span><span class="insert4">&nbsp;either</span><span class="insert3">&nbsp;<B>null</B></span><span class="insert4">&nbsp;or Standard</span><span class="insert3">, 
-and it defines the <I>default pool</I><A NAME="I6073"></A><A NAME="I6074"></A><A NAME="I6075"></A> 
-to be&nbsp;</span><span class="insert4">the given <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4"><B>&nbsp;null</B></span></span><span class="insert3">&nbsp;within all applicable compilation units (see <A HREF="AA-10-1-5.html">10.1.5</A>), 
+and it defines the <I>default pool</I><A NAME="I6299"></A><A NAME="I6300"></A><A NAME="I6301"></A> 
+to be&nbsp;</span><span class="insert4">the given <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4"><B>&nbsp;null</B></span></span><span class="insert3">&nbsp;within all applicable compilation units (see <A HREF="AA-10-1-5.html">10.1.5</A>), 
 except within the immediate scope of another <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Default_Storage_Pool. Otherwise, [the pragma occurs immediately within 
 a sequence of declarations, and] it defines the default pool within the 
 immediate scope of the pragma to be&nbsp;</span><span class="insert4">the 
-given <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;either 
+given <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;either 
 <B>null</B> or the pool denoted by the <I>storage_pool_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span></span><span class="insert3">, 
 except within the immediate scope of a later pragma Default_Storage_Pool. 
 [Thus, an inner pragma overrides an outer one.]</span></div>
@@ -169,15 +170,15 @@ override the one in Parent.</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
 <span class="insert3">The language-defined aspect Default_Storage_Pool 
 may be specified for a generic instance; it defines the default pool 
-for access types within an instance.<A NAME="I6076"></A><A NAME="I6077"></A> 
+for access types within an instance.<A NAME="I6302"></A><A NAME="I6303"></A> 
 </span><span class="insert3"><span class="delete4">The expected type 
-for the Default_Storage_Pool aspect is Root_Storage_Pool'Class. The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+for the Default_Storage_Pool aspect is Root_Storage_Pool'Class. The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 must be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes a variable. This aspect overrides any Default_Storage_Pool 
 pragma that might apply to the generic unit; if the aspect is not specified, 
-the default pool of the instance is that defined for the generic unit</span></span><span class="insert3"></span><span class="delete3"><A NAME="I6078"></A> 
-<A NAME="I6079"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Controlled is a representation pragma <A NAME="I6080"></A><A NAME="I6081"></A>that 
+the default pool of the instance is that defined for the generic unit</span></span><span class="insert3"></span><span class="delete3"><A NAME="I6304"></A> 
+<A NAME="I6305"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Controlled is a representation pragma <A NAME="I6306"></A><A NAME="I6307"></A>that 
 specifies the <I>controlled</I> aspect of representation</span>.</div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
@@ -190,7 +191,7 @@ other than package Standard itself.</span></div>
 <div class="paranum"><a name="p5.2">5.2/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0003-1.TXT">AI12-0003-1</A></I>} 
 <span class="insert4">Otherwise, the expected type for the Default_Storage_Pool 
-aspect is Root_Storage_Pool'Class and the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+aspect is Root_Storage_Pool'Class and the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes a variable. This aspect overrides any Default_Storage_Pool 
 pragma that might apply to the generic unit; if the aspect is not specified, 
@@ -214,13 +215,13 @@ on an instance of a language-defined generic unit.</span></div>
 types declared in places where the default pool is defined by the pragma 
 or aspect, their Storage_Pool or Storage_Size attribute is determined 
 as follows, unless Storage_Pool or Storage_Size is specified for the 
-type:</span><span class="delete3"><A NAME="I6082"></A> <I>Garbage collection</I> 
+type:</span><span class="delete3"><A NAME="I6308"></A> <I>Garbage collection</I> 
 is a process that automatically reclaims storage, or moves objects to 
 a different address, while the objects still exist.</span></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3">If the default pool is <B>null</B>, the Storage_Size 
-attribute is defined by the language to be zero. [Therefore, an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+attribute is defined by the language to be zero. [Therefore, an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 for such a type is illegal.]</span></div>
 <div class="paranum"><a name="p6.2">6.2/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
@@ -381,7 +382,7 @@ controls whether garbage collection is done.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">An object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+<span class="insert3">An object created by an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 that is passed as the actual parameter to an access parameter may be 
 allocated on the stack, and automatically reclaimed, regardless of the 
 default pool</span><span class="delete3">&nbsp;An implementation need not 
@@ -396,7 +397,7 @@ such an allocated object.</span>&nbsp;</div>
 <div class="Notes">33&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3">Default_Storage_Pool may be used with restrictions 
 No_Coextensions and No_Access_Parameter_Allocators (see <A HREF="AA-H-4.html">H.4</A>) 
-to ensure that all <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+to ensure that all <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
 use the default pool.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -415,7 +416,7 @@ outside the Ada world.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p9.b">9.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I6083"></A>Pragma Controlled has been 
+<span class="insert3"><A NAME="I6309"></A>Pragma Controlled has been 
 dropped from Ada, as it has no effect in any known Ada implementations 
 and it seems to promise capabilities not expected in Ada implementations. 
 This is usually not an incompatibility, as the pragma merely becomes 
@@ -431,7 +432,7 @@ a significant issue.</span>&nbsp;</div>
 <div class="paranum"><a name="p9.c">9.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0190-1.TXT">AI05-0190-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
-<span class="insert3"><A NAME="I6084"></A>The pragma Default_Storage_Pool 
+<span class="insert3"><A NAME="I6310"></A>The pragma Default_Storage_Pool 
 </span><span class="insert4">and aspect Default_Storage_Pool are</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;is</span></span><span class="insert3">&nbsp;new.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -449,7 +450,7 @@ objects would be ineffective in the standard mode anyway.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p9.e">9.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
-<span class="insert4"><A NAME="I6085"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0322">storage_pool_indicator</A></SPAN> 
+<span class="insert4"><A NAME="I6311"></A><B>Corrigendum:</B> The <SPAN Class="swiss"><A HREF="AA-13-11-3.html#S0336">storage_pool_indicator</A></SPAN> 
 Standard is new.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>

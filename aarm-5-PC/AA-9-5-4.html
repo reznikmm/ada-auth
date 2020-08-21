@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -30,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,37 +39,37 @@
 <HR>
 <H1>9.5.4 Requeue Statements</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
-can be used to complete an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
+can be used to complete an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
 while redirecting the corresponding entry call to a new (or the same) 
-entry queue. <A NAME="I4540"></A>Such a <I>requeue</I> can be performed 
+entry queue. <A NAME="I4717"></A>Such a <I>requeue</I> can be performed 
 with or without allowing an intermediate cancellation of the call, due 
-to an abort or the expiration of a delay. <A NAME="I4541"></A><A NAME="I4542"></A>]</div>
+to an abort or the expiration of a delay. <A NAME="I4718"></A><A NAME="I4719"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
-<SPAN Class="swiss">requeue_statement</SPAN><A NAME="I4543"></A><A NAME="S0229"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>requeue</B>&nbsp;<I>procedure_or_entry_</I><A NAME="I4544"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<B>abort</B>];</div>
+<SPAN Class="swiss">requeue_statement</SPAN><A NAME="I4720"></A><A NAME="S0243"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>requeue</B>&nbsp;<I>procedure_or_entry_</I><A NAME="I4721"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<B>abort</B>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
-<A NAME="I4545"></A>The <I>procedure_or_entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
+<A NAME="I4722"></A>The <I>procedure_or_entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
 shall resolve to denote a procedure or an entry (the <I>requeue&nbsp;</I><I>target</I>). 
 The profile of the entry, or the profile or prefixed profile of the procedure, 
 shall either have no parameters, or be type conformant (see <A HREF="AA-6-3-1.html">6.3.1</A>) 
-with the profile of the innermost enclosing <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>. 
-<A NAME="I4546"></A></div>
+with the profile of the innermost enclosing <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>. 
+<A NAME="I4723"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
-shall be within a callable construct that is either an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
+shall be within a callable construct that is either an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
 and this construct shall be the innermost enclosing body or callable 
 construct.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
@@ -79,45 +77,45 @@ construct.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
 If the requeue target has parameters, then its (prefixed) profile shall 
 be subtype conformant with the profile of the innermost enclosing callable 
-construct. <A NAME="I4547"></A></div>
+construct. <A NAME="I4724"></A></div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
-<span class="insert4">Given a requeue_statement where the innermost enclosing 
-callable construct is for an entry <I>E1</I>, for every [specific or 
-class-wide ]postcondition expression <I>P1</I> that applies to <I>E1</I>, 
-there shall exist a postcondition expression <I>P2</I> that applies to 
-the requeue target <I>E2</I> such that</span>&nbsp;</div>
+Given a requeue_statement where the innermost enclosing callable construct 
+is for an entry <I>E1</I>, for every [specific or class-wide ]postcondition 
+expression <I>P1</I> that applies to <I>E1</I>, there shall exist a postcondition 
+expression <I>P2</I> that applies to the requeue target <I>E2</I> such 
+that&nbsp;</div>
 <div class="paranum"><a name="p5.2">5.2/4</a></div>
-<div class="Bulleted"><span class="insert4"><I>P1</I> is fully conformant 
-with the expression produced by replacing each reference in <I>P2</I> 
-to a formal parameter of <I>E2</I> with a reference to the corresponding 
-formal paramter of <I>E1</I>; and</span></div>
+<div class="Bulleted"><I>P1</I> is fully conformant with the expression 
+produced by replacing each reference in <I>P2</I> to a formal parameter 
+of <I>E2</I> with a reference to the corresponding formal paramter of 
+<I>E1</I>; and</div>
 <div class="paranum"><a name="p5.3">5.3/4</a></div>
-<div class="Bulleted"><span class="insert4">if <I>P1</I> is enabled, 
-then <I>P2</I> is also enabled.</span>&nbsp;</div>
+<div class="Bulleted">if <I>P1</I> is enabled, then <I>P2</I> is also 
+enabled.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>Roughly 
-speaking, the postcondition of the requeue target is required to imply 
-that of the enclosing callable construct.</span>&nbsp;</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Roughly speaking, the postcondition 
+of the requeue target is required to imply that of the enclosing callable 
+construct.&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0143-1.TXT">AI12-0143-1</A></I>} 
-<span class="insert4">The requeue target shall not have an applicable 
-specific or class-wide postcondition&nbsp;</span><span class="insert5">that</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;which</span></span><span class="insert4">&nbsp;includes an Old</span><span class="insert5">&nbsp;or Index <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN></span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;attribute_reference</span></span><span class="insert4">.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0143-1.TXT">AI12-0143-1</A></I>} 
+The requeue target shall not have an applicable specific or class-wide 
+postcondition <span class="insert5">that</span><span class="delete5">&nbsp;which</span> 
+includes an Old<span class="insert5">&nbsp;or Index <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN></span><span class="delete5">&nbsp;attribute_reference</span>.</div>
 <div class="paranum"><a name="p5.5">5.5/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
-<span class="insert4">If the requeue target is declared immediately within 
-the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0210">task_definition</A></SPAN> 
-of a named task type or the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN> 
+If the requeue target is declared immediately within the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0224">task_definition</A></SPAN> 
+of a named task type or the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN> 
 of a named protected type, and if the requeue statement occurs within 
 the body of that type, and if the requeue is an external requeue, then 
 the requeue target shall not have a specific or class-wide postcondition 
 which includes a name denoting either the current instance of that type 
-or any entity declared within the declaration of that type.</span></div>
+or any entity declared within the declaration of that type.</div>
 <div class="paranum"><a name="p5.b">5.b/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>The 
-above pair of rules always apply; they don't depend on whether or not 
-any of the postconditions are enabled.</span>&nbsp;</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>The above pair of rules always 
+apply; they don't depend on whether or not any of the postconditions 
+are enabled.&nbsp;</div>
 <div class="paranum"><a name="p5.6">5.6/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
@@ -126,55 +124,55 @@ If the target is a procedure, the name shall denote a renaming of an
 entry, or shall denote a view or a prefixed view of a primitive subprogram 
 of a synchronized interface, where the first parameter of the unprefixed 
 view of the primitive subprogram shall be a controlling parameter, and 
-the Synchronization aspect shall be specified with <SPAN Class="swiss"><A HREF="AA-9-5.html#S0220">synchronization_kind</A></SPAN> 
+the Synchronization aspect shall be specified with <SPAN Class="swiss"><A HREF="AA-9-5.html#S0234">synchronization_kind</A></SPAN> 
 By_Entry for the primitive subprogram.</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
-<A NAME="I4548"></A>In a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
+<A NAME="I4725"></A>In a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
 of some task unit, either the target object shall be a part of a formal 
-parameter of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
+parameter of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
 or the accessibility level of the target object shall not be equal to 
-or statically deeper than any enclosing <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-of the task unit. In a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
+or statically deeper than any enclosing <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+of the task unit. In a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
 of some protected unit, either the target object shall be a part of a 
-formal parameter of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
+formal parameter of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
 or the accessibility level of the target object shall not be statically 
-deeper than that of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN> 
-for the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>.</div>
+deeper than that of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
+for the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>.</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>In the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>In the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
 case, the intent is that the target object can be global, or can be a 
 component of the protected unit, but cannot be a local variable of the 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>. 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p6.b">6.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>These restrictions ensure that 
 the target object of the requeue outlives the completion and finalization 
 of the enclosing callable construct. They also prevent requeuing from 
-a nested <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-on a parameter of an outer <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
+a nested <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+on a parameter of an outer <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
 which could create some strange &quot;long-distance&quot; connections 
 between an entry caller and its server.</div>
 <div class="paranum"><a name="p6.c">6.c</a></div>
-<div class="Annotations">Note that in the strange case where a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
-is nested inside an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
-it is permissible to requeue from an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-of the inner <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
-on parameters of the outer <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>. 
+<div class="Annotations">Note that in the strange case where a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
+is nested inside an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
+it is permissible to requeue from an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+of the inner <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
+on parameters of the outer <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>. 
 This is not a problem because all calls on the inner task have to complete 
-before returning from the outer <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>, 
+before returning from the outer <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>, 
 meaning no &quot;dangling calls&quot; will be created.&nbsp;</div>
 <div class="paranum"><a name="p6.d">6.d</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>By disallowing certain 
-requeues, we ensure that the normal <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
+requeues, we ensure that the normal <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
 rules remain sensible, and that explicit clearing of the entry queues 
 of a protected object during finalization is rarely necessary. In particular, 
 such clearing of the entry queues is necessary only (ignoring premature 
-Unchecked_Deallocation) for protected objects declared in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
+Unchecked_Deallocation) for protected objects declared in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
 (or created by an allocator for an access type declared in such a body) 
-containing one or more <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>s. 
+containing one or more <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>s. 
 Protected objects declared in subprograms, or at the library level, will 
 never need to have their entry queues explicitly cleared during finalization. 
 </div>
@@ -183,24 +181,24 @@ never need to have their entry queues explicitly cleared during finalization.
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
-<A NAME="I4549"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
+<A NAME="I4726"></A>The execution of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
 proceeds by first evaluating the <I>procedure_or_entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>[, 
 including the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-identifying the target task or protected object and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-identifying the entry within an entry family, if any]. <span class="insert4">Precondition 
-checks are then performed as for a call to the requeue target entry or 
-subprogram.&nbsp;</span>The <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-enclosing the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
+identifying the target task or protected object and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+identifying the entry within an entry family, if any]. Precondition checks 
+are then performed as for a call to the requeue target entry or subprogram. 
+The <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+enclosing the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
 is then completed[, finalized, and left (see <A HREF="AA-7-6-1.html">7.6.1</A>)].</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4550"></A>For the execution of a requeue 
+<div class="Normal"><A NAME="I4727"></A>For the execution of a requeue 
 on an entry of a target task, after leaving the enclosing callable construct, 
 the named entry is checked to see if it is open and the requeued call 
 is either selected immediately or queued, as for a normal entry call 
 (see <A HREF="AA-9-5-3.html">9.5.3</A>).</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4551"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4728"></A>For 
 the execution of a requeue on an entry of a target protected object, 
 after leaving the enclosing callable construct:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -225,18 +223,17 @@ is started on the target object and proceeds as for a normal entry call
 <div class="paranum"><a name="p12">12/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0090-1.TXT">AI05-0090-1</A></I>} 
-If the requeue target named in the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
-has formal parameters, then during the execution of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
-corresponding to the new entry<span class="insert4">&nbsp;and during the checking 
-of any preconditions of the new entry</span>, the formal parameters denote 
-the same objects as did the corresponding formal parameters of the callable 
-construct completed by the requeue. [In any case, no parameters are specified 
-in a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>; 
+If the requeue target named in the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
+has formal parameters, then during the execution of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
+corresponding to the new entry and during the checking of any preconditions 
+of the new entry, the formal parameters denote the same objects as did 
+the corresponding formal parameters of the callable construct completed 
+by the requeue. [In any case, no parameters are specified in a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>; 
 any parameter passing is implicit.]</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4552"></A>If 
-the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4729"></A>If 
+the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
 includes the reserved words <B>with abort</B> (it is a <I>requeue-with-abort</I>), 
 then:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
@@ -250,7 +247,7 @@ call.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Normal">If the reserved words <B>with abort</B> do not appear, 
 then the call remains protected against cancellation while queued as 
-the result of the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>. 
+the result of the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p16.a">16.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This protection against 
@@ -270,7 +267,7 @@ it completes.&nbsp;</div>
 entry to an entry of an entry family, or vice-versa. The entry index, 
 if any, plays no part in the subtype conformance check between the profiles 
 of the two entries; an entry index is part of the <I>entry_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-for an entry of a family. <A NAME="I4553"></A></div>
+for an entry of a family. <A NAME="I4730"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p18">18</a></div>
@@ -285,40 +282,38 @@ statements:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p20.a">20.a</a></div>
-<div class="Annotations"><A NAME="I4554"></A>The <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN> 
+<div class="Annotations"><A NAME="I4731"></A>The <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
 is new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p20.b">20.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
-<A NAME="I4555"></A>Added the ability to requeue on operations of synchronized 
+<A NAME="I4732"></A>Added the ability to requeue on operations of synchronized 
 interfaces that are declared to be an entry.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p20.c">20.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
-<span class="insert4"><A NAME="I4556"></A><B>Corrigendum:</B> We now 
-define that any preconditions of the requeue target are evaluated as 
-part of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0229">requeue_statement</A></SPAN>. 
+<A NAME="I4733"></A><B>Corrigendum:</B> We now define that any preconditions 
+of the requeue target are evaluated as part of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN>. 
 Original Ada 2012 did not specify this, so a program that requeues when 
 the preconditions fail will raise an exception when none would happen 
 in original Ada 2012. We don't expect this to be a problem, as in that 
 case, the entry body would be called with some of its preconditions evaluating 
 as False; the body is likely to assume that they are true and probably 
-will have failed in some other way anyway.</span>&nbsp;</div>
+will have failed in some other way anyway.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p20.d">20.d/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
-<span class="insert4"><A NAME="I4557"></A><B>Corrigendum:</B> If a requeue 
-target has a different postcondition than the original entry, the requeue 
-is now illegal. In such a case, the original postcondition would never 
-have been evaluated, and assumptions that the caller relied upon might 
-not be true. A requeue should be invisible to the caller with respect 
-to any postconditions; thus we only allow it when the original entry 
-has no postconditions or the requeue target has (at least) the same postconditions.</span> 
-</div>
+<A NAME="I4734"></A><B>Corrigendum:</B> If a requeue target has a different 
+postcondition than the original entry, the requeue is now illegal. In 
+such a case, the original postcondition would never have been evaluated, 
+and assumptions that the caller relied upon might not be true. A requeue 
+should be invisible to the caller with respect to any postconditions; 
+thus we only allow it when the original entry has no postconditions or 
+the requeue target has (at least) the same postconditions.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p20.e">20.e/5</a></div>

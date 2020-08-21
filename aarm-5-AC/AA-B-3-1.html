@@ -19,6 +19,8 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -38,7 +40,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -64,56 +66,57 @@ C function.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Interfaces.C.Strings has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Interfaces.C.Strings&nbsp;<B>is</B><A NAME="I8568"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Strings);</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<B>package</B>&nbsp;Interfaces.C.Strings&nbsp;<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8880"></A><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Strings);</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8569"></A>char_array_access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;char_array;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8881"></A>char_array_access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;char_array;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8570"></A>chars_ptr&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8882"></A>chars_ptr&nbsp;<B>is</B>&nbsp;<B>private</B>;<span class="insert2"><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(chars_ptr);</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00276.TXT">AI95-00276-01</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8571"></A>chars_ptr_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<span class="insert2"><B>aliased</B>&nbsp;</span>chars_ptr;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8883"></A>chars_ptr_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<span class="insert2"><B>aliased</B>&nbsp;</span>chars_ptr;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8572"></A>Null_Ptr&nbsp;:&nbsp;<B>constant</B>&nbsp;chars_ptr;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8884"></A>Null_Ptr&nbsp;:&nbsp;<B>constant</B>&nbsp;chars_ptr;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8573"></A>To_Chars_Ptr&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array_access;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8885"></A>To_Chars_Ptr&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array_access;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nul_Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;False)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;chars_ptr;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8574"></A>New_Char_Array&nbsp;(Chars&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array)&nbsp;<B>return</B>&nbsp;chars_ptr;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8886"></A>New_Char_Array&nbsp;(Chars&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array)&nbsp;<B>return</B>&nbsp;chars_ptr;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8575"></A>New_String&nbsp;(Str&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;chars_ptr;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8887"></A>New_String&nbsp;(Str&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;chars_ptr;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8576"></A>Free&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;chars_ptr);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8888"></A>Free&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;chars_ptr);</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8577"></A>Dereference_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8889"></A>Dereference_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8578"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr)&nbsp;<B>return</B>&nbsp;char_array;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8890"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr)&nbsp;<B>return</B>&nbsp;char_array;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8579"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;size_t)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8891"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;size_t)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;char_array;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8580"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8892"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8581"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;size_t)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8893"></A>Value&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;size_t)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8582"></A>Strlen&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr)&nbsp;<B>return</B>&nbsp;size_t;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8894"></A>Strlen&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr)&nbsp;<B>return</B>&nbsp;size_t;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8583"></A>Update&nbsp;(Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8895"></A>Update&nbsp;(Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Offset&nbsp;:&nbsp;<B>in</B>&nbsp;size_t;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chars&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8584"></A>Update&nbsp;(Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8896"></A>Update&nbsp;(Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;chars_ptr;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Offset&nbsp;:&nbsp;<B>in</B>&nbsp;size_t;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Str&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8585"></A>Update_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8897"></A>Update_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -281,7 +284,7 @@ Str.</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p51">51</a></div>
-<div class="Normal"><A NAME="I8586"></A>Execution of any of the following 
+<div class="Normal"><A NAME="I8898"></A>Execution of any of the following 
 is erroneous if the Item parameter is not null_ptr and Item does not 
 point to a nul-terminated array of chars.&nbsp;</div>
 <div class="paranum"><a name="p52">52</a></div>
@@ -291,13 +294,13 @@ point to a nul-terminated array of chars.&nbsp;</div>
 <div class="paranum"><a name="p54">54</a></div>
 <div class="Bulleted">the Strlen function.&nbsp;</div>
 <div class="paranum"><a name="p55">55</a></div>
-<div class="Normal"><A NAME="I8587"></A>Execution of Free(X) is also 
+<div class="Normal"><A NAME="I8899"></A>Execution of Free(X) is also 
 erroneous if the chars_ptr X was not returned by New_Char_Array or New_String.</div>
 <div class="paranum"><a name="p56">56</a></div>
-<div class="Normal"><A NAME="I8588"></A>Reading or updating a freed char_array 
+<div class="Normal"><A NAME="I8900"></A>Reading or updating a freed char_array 
 is erroneous.</div>
 <div class="paranum"><a name="p57">57</a></div>
-<div class="Normal"><A NAME="I8589"></A>Execution of Update is erroneous 
+<div class="Normal"><A NAME="I8901"></A>Execution of Update is erroneous 
 if Check is False and a call with Check equal to True would have propagated 
 Update_Error.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -317,7 +320,7 @@ by the programmer via a call of Free, not by a called C function.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p60.a">60.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00242.TXT">AI95-00242-01</A></I>} 
-<span class="insert2"><A NAME="I8590"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I8902"></A><B>Amendment Correction:</B> 
 Update for a String parameter is now defined to not add a nul character. 
 It did add a nul in Ada 95. This means that programs that used this behavior 
 of Update to truncate a string will no longer work (the string will not 
@@ -328,7 +331,7 @@ Update for a char_array (no implicit nul is added to the end of a char_array).</
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p60.b">60.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-<span class="insert2"><A NAME="I8591"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I8903"></A><B>Amendment Correction:</B> 
 Added <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborable_Initialization to type chars_ptr, so that it can be used 
 in preelaborated units.</span></div>

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -43,18 +41,18 @@ implicit in objects declared in the shared passive library unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8465"></A><A NAME="I8466"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8450"></A><A NAME="I8451"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Shared_Passive is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8467"></A><A NAME="I8468"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I8469"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8452"></A><A NAME="I8453"></A>Shared_Passive[(<I>library_unit_</I><A NAME="I8454"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8470"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8455"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Shared_Passive 
 is used to specify that a library unit is a <I>shared passive library 
-unit</I>, namely that the Shared_Passive aspect<A NAME="I8471"></A><A NAME="I8472"></A> 
+unit</I>, namely that the Shared_Passive aspect<A NAME="I8456"></A><A NAME="I8457"></A> 
 of the library unit is True. The following restrictions apply to such 
 a library unit:</div>
 <div class="paranum"><a name="p5">5</a></div>
@@ -66,17 +64,17 @@ pure or shared passive <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">librar
 </div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Bulleted">it shall not contain a library-level declaration 
-of an access type that designates a class-wide type,<span class="insert4">&nbsp;nor a type with a part that is of a</span> task type<span class="delete4">,</span> 
-or protected type with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN>s<span class="insert4">;</span><span class="delete4">.</span> 
+of an access type that designates a class-wide type, nor a type with 
+a part that is of a task type or protected type with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN>s; 
 </div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
-<div class="Bulleted"><span class="insert4">it shall not contain a library-level 
-declaration that contains a name that denotes a type declared within 
-a declared-pure package, if that type has a part that is of an access 
-type; for the purposes of this rule, the parts considered include those 
-of the full views of any private types or private extensions.</span></div>
+<div class="Bulleted">it shall not contain a library-level declaration 
+that contains a name that denotes a type declared within a declared-pure 
+package, if that type has a part that is of an access type; for the purposes 
+of this rule, the parts considered include those of the full views of 
+any private types or private extensions.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I8473"></A><A NAME="I8474"></A>Notwithstanding 
+<div class="Normal"><A NAME="I8458"></A><A NAME="I8459"></A>Notwithstanding 
 the definition of accessibility given in <A HREF="RM-3-10-2.html">3.10.2</A>, 
 the declaration of a library unit P1 is not accessible from within the 
 declarative region of a shared passive library unit P2, unless the shared 
@@ -84,7 +82,7 @@ passive library unit P2 depends semantically on P1.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8475"></A>A shared passive library unit 
+<div class="Normal"><A NAME="I8460"></A>A shared passive library unit 
 is preelaborated.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
@@ -92,7 +90,7 @@ is preelaborated.</div>
 <div class="Normal">A shared passive library unit shall be assigned to 
 at most one partition within a given program.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8476"></A><A NAME="I8477"></A><A NAME="I8478"></A>Notwithstanding 
+<div class="Normal"><A NAME="I8461"></A><A NAME="I8462"></A><A NAME="I8463"></A>Notwithstanding 
 the rule given in <A HREF="RM-10-2.html">10.2</A>, a compilation unit 
 in a given partition does not <I>need</I> (in the sense of <A HREF="RM-10-2.html">10.2</A>) 
 the shared passive library units on which it depends semantically to 

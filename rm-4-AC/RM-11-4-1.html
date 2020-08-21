@@ -23,14 +23,14 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -117,7 +117,7 @@ E that denotes an exception, the following attribute is defined:&nbsp;</div>
 identity of the exception. The type of this attribute is Exception_Id. 
 </div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">Raise_Exception raises a new occurrence of the identified 
+<div class="Normal">&nbsp;Raise_Exception raises a new occurrence of the identified 
 exception.<span class="delete2">&nbsp;In this case Exception_Message returns 
 the Message parameter of Raise_Exception. For a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
 with an <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
@@ -125,7 +125,7 @@ Exception_Message returns implementation-defined information about the
 exception occurrence. Reraise_Occurrence reraises the specified exception 
 occurrence.</span></div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">Exception_Message returns 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">Exception_Message returns 
 the message associated with the given Exception_Occurrence. For an occurrence 
 raised by a call to Raise_Exception, the message is the Message parameter 
 passed to Raise_Exception. For the occurrence raised by a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
@@ -144,13 +144,13 @@ language-defined check), the message is an unspecified string.<A NAME="I4779"></
 </span><span class="insert2">In all cases, Exception_Message returns 
 a string with lower bound 1.</span>&nbsp;</div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">Reraise_Occurrence reraises 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">Reraise_Occurrence reraises 
 the specified exception occurrence.</span></div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">Exception_Identity returns the identity of the exception 
 of the occurrence.</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal">The <span class="insert2">Wide_Wide_Exception_Name</span><span class="delete2">&nbsp;Exception_Name</span> 
+<div class="Normal">&nbsp;The <span class="insert2">Wide_Wide_Exception_Name</span><span class="delete2">&nbsp;Exception_Name</span> 
 functions return the full expanded name of the exception, in upper case, 
 starting with a root library unit. For an exception declared immediately 
 within package Standard, the <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
@@ -158,7 +158,7 @@ is returned. The result is implementation defined if the exception is
 declared within an unnamed <SPAN Class="swiss"><A HREF="RM-5-6.html#S0160">block_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p12.1">12.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The Exception_Name functions 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The Exception_Name functions 
 (respectively, Wide_Exception_Name) return the same sequence of graphic 
 characters as that defined for Wide_Wide_Exception_Name, if all the graphic 
 characters are defined in Character (respectively, Wide_Character); otherwise, 
@@ -166,15 +166,15 @@ the sequence of characters is implementation defined, but no shorter
 than that returned by Wide_Wide_Exception_Name for the same value of 
 the argument.</span>&nbsp;</div>
 <div class="paranum"><a name="p12.2">12.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The string returned by the 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The string returned by the 
 Exception_Name, Wide_Exception_Name, and Wide_Wide_Exception_Name functions 
 has lower bound 1.</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal">Exception_Information returns implementation-defined 
+<div class="Normal">&nbsp;Exception_Information returns implementation-defined 
 information about the exception occurrence. <span class="insert2">The 
 returned string has lower bound 1.</span>&nbsp;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="delete2">Raise_Exception and&nbsp;</span>Reraise_Occurrence 
+<div class="Normal">&nbsp;<span class="delete2">Raise_Exception and&nbsp;</span>Reraise_Occurrence 
 <span class="insert2">has</span><span class="delete2">&nbsp;have</span> no 
 effect in the case of <span class="delete2">Null_Id or&nbsp;</span>Null_Occurrence. 
 <A NAME="I4780"></A><span class="insert2">Raise_Exception and Exception_Name 
@@ -191,15 +191,15 @@ Source to this new object, and returns an access value designating this
 new object; the result may be deallocated using an instance of Unchecked_Deallocation. 
 </div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">Write_Exception_Occurrence 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">Write_Exception_Occurrence 
 writes a representation of an exception occurrence to a stream; Read_Exception_Occurrence 
 reconstructs an exception occurrence from a stream (including one written 
 in a different partition).</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal"><span class="delete2">The implementation of the Write 
-attribute (see <A HREF="RM-13-13-2.html">13.13.2</A>) of Exception_Occurrence 
+<div class="Normal">&nbsp;<span class="delete2">The implementation of the 
+Write attribute (see <A HREF="RM-13-13-2.html">13.13.2</A>) of Exception_Occurrence 
 shall support writing a representation of an exception occurrence to 
 a stream; the implementation of the Read attribute of Exception_Occurrence 
 shall support reconstructing an exception occurrence from a stream (including 

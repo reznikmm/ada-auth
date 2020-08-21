@@ -23,15 +23,15 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -116,20 +116,20 @@ operation of a tagged type is that of the corresponding subprogram of
 the parent type. The default calling convention for a new dispatching 
 operation of a tagged type is the convention of the type.</span>&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal">Of these four conventions, only Ada and Intrinsic 
+<div class="Normal">&nbsp;Of these four conventions, only Ada and Intrinsic 
 are allowed as a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 in <span class="insert3">the specification of a</span><span class="delete3">&nbsp;a 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
 Convention<span class="insert3">&nbsp;aspect</span><span class="delete3">, 
 Import, or Export</span>.&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><A NAME="I3568"></A><A NAME="I3569"></A>Two profiles 
+<div class="Normal">&nbsp;<A NAME="I3568"></A><A NAME="I3569"></A>Two profiles 
 are <I>type conformant</I> if they have the same number of parameters, 
 and both have a result if either does, and corresponding parameter and 
 result types are the same, or, for access parameters<span class="insert2">&nbsp;or access results</span>, corresponding designated types are the same<span class="insert2">, 
 or corresponding designated profiles are type conformant</span>. <A NAME="I3570"></A></div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><A NAME="I3571"></A><A NAME="I3572"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3"></span><A NAME="I3571"></A><A NAME="I3572"></A>Two 
 profiles are <I>mode conformant</I> if<span class="insert3">:</span><span class="delete3">&nbsp;they are type-conformant, and corresponding parameters have identical 
 modes, and, for access parameters</span><span class="insert2"><span class="delete3">&nbsp;or access result types</span></span><span class="delete3">, the designated 
 subtypes statically match</span><span class="insert2"><span class="delete3">, 
@@ -147,7 +147,7 @@ parameters and any access result type, the designated subtypes statically
 match and either both or neither are access-to-constant, or the designated 
 profiles are subtype conformant. <A NAME="I3574"></A></span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I3575"></A><A NAME="I3576"></A>Two profiles 
+<div class="Normal">&nbsp;<A NAME="I3575"></A><A NAME="I3576"></A>Two profiles 
 are <I>subtype conformant</I> if they are <span class="insert3">mode 
 conformant</span><span class="delete3">&nbsp;mode-conformant</span>, corresponding 
 subtypes of the profile statically match, and the associated calling 
@@ -155,7 +155,7 @@ conventions are the same. The profile of a generic formal subprogram
 is not <span class="insert3">subtype conformant</span><span class="delete3">&nbsp;subtype-conformant</span> 
 with any other profile. <A NAME="I3577"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"></span><A NAME="I3578"></A><A NAME="I3579"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3"></span><A NAME="I3578"></A><A NAME="I3579"></A>Two 
 profiles are <I>fully conformant</I> if they are <span class="insert3">subtype 
 conformant</span><span class="delete3">&nbsp;subtype-conformant</span>, <span class="insert3">if 
 they have access-to-subprogram results whose designated profiles are 
@@ -226,12 +226,12 @@ the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s
 of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s 
 (if any) fully conform.&nbsp;</div>
 <div class="paranum"><a name="p24.1">24.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3584"></A>The <I>prefixed 
-view profile</I> of a subprogram is the profile obtained by omitting 
-the first parameter of that subprogram. There is no prefixed view profile 
-for a parameterless subprogram. For the purposes of defining subtype 
-and mode conformance, the convention of a prefixed view profile is considered 
-to match that of either an entry or a protected operation.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I3584"></A>The 
+<I>prefixed view profile</I> of a subprogram is the profile obtained 
+by omitting the first parameter of that subprogram. There is no prefixed 
+view profile for a parameterless subprogram. For the purposes of defining 
+subtype and mode conformance, the convention of a prefixed view profile 
+is considered to match that of either an entry or a protected operation.</span></div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p25">25</a></div>

@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,17 +34,17 @@
 <HR>
 <H1>6.6 Overloading of Operators</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3860"></A><A NAME="I3861"></A><A NAME="I3862"></A>An 
-<I>operator</I> is a function whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0170">designator</A></SPAN> 
-is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>. 
+<div class="Normal"><A NAME="I3979"></A><A NAME="I3980"></A><A NAME="I3981"></A>An 
+<I>operator</I> is a function whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0184">designator</A></SPAN> 
+is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>. 
 [Operators, like other functions, may be overloaded.]&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">Each use of a unary or binary operator is equivalent 
-to a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+to a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 with <I>function_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-being the corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN>, 
+being the corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN>, 
 and with (respectively) one or two positional actual parameters being 
 the operand(s) of the operator (in order).&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a/3</a></div>
@@ -52,19 +52,19 @@ the operand(s) of the operator (in order).&nbsp;</div>
 We also use the term operator (in Clause 4 and in <A HREF="AA-6-1.html">6.1</A>) 
 to refer to one of the syntactic categories defined in <A HREF="AA-4-5.html">4.5</A>, 
 &ldquo;<A HREF="AA-4-5.html">Operators and Expression Evaluation</A>&rdquo; 
-whose names end with &ldquo;_operator:&rdquo; <SPAN Class="swiss"><A HREF="AA-4-5.html#S0128">logical_operator</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-5.html#S0129">relational_operator</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-5.html#S0130">binary_adding_operator</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-5.html#S0131">unary_adding_operator</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-4-5.html#S0132">multiplying_operator</A></SPAN>, 
-and <SPAN Class="swiss"><A HREF="AA-4-5.html#S0133">highest_precedence_operator</A></SPAN>. 
+whose names end with &ldquo;_operator:&rdquo; <SPAN Class="swiss"><A HREF="AA-4-5.html#S0132">logical_operator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-5.html#S0133">relational_operator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-5.html#S0134">binary_adding_operator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-5.html#S0135">unary_adding_operator</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-4-5.html#S0136">multiplying_operator</A></SPAN>, 
+and <SPAN Class="swiss"><A HREF="AA-4-5.html#S0137">highest_precedence_operator</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p2.b">2.b/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-This equivalence extends to uses of <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+This equivalence extends to uses of <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 in most other language rules. However, as often happens, the equivalence 
 is not perfect, as operator calls are not a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-while a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+while a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 Thus, operator calls cannot be used in contexts that require a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (such as a rename of an object). A direct fix for this problem would 
@@ -75,18 +75,18 @@ a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0143-1.TXT">AI05-0143-1</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN> 
+The <SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN> 
 of a unary or binary operator shall have one or two parameters, respectively. 
 The parameters shall be of mode <B>in</B>. A generic function instantiation 
-whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0170">designator</A></SPAN> 
-is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-6-1.html#S0184">designator</A></SPAN> 
+is an <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
 is only allowed if the specification of the generic function has the 
 corresponding number of parameters, and they are all of mode <B>in</B>.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Normal"><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">Default_expression</A></SPAN>s 
 are not allowed for the parameters of an operator (whether the operator 
-is declared with an explicit <SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN> 
-or by a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN>).</div>
+is declared with an explicit <SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN> 
+or by a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>).</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">An explicit declaration of &quot;/=&quot; shall not 
 have a result type of the predefined type Boolean.&nbsp;</div>
@@ -96,13 +96,13 @@ have a result type of the predefined type Boolean.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0128-1.TXT">AI05-0128-1</A></I>} 
 An explicit declaration of &quot;=&quot; whose result type is Boolean 
 implicitly declares an operator &quot;/=&quot; that gives the complementary 
-result.<A NAME="I3863"></A>&nbsp;</div>
+result.<A NAME="I3982"></A>&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0128-1.TXT">AI05-0128-1</A></I>} 
 A &quot;/=&quot; defined by this rule is considered user-defined, which 
 means that it will be inherited by a derived type. &ldquo;User-defined&rdquo; 
 means &ldquo;not language-defined&rdquo; for the purposes of inheritance, 
-that is anything other than predefined operators. <A NAME="I3864"></A></div>
+that is anything other than predefined operators. <A NAME="I3983"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Notes">10&nbsp;&nbsp;The operators &quot;+&quot; and &quot;&ndash;&quot; 
@@ -125,7 +125,7 @@ A&nbsp;:=&nbsp;&quot;+&quot;(B,&nbsp;C);</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p9.a">9.a</a></div>
-<div class="Annotations"><A NAME="I3865"></A>Explicit declarations of 
+<div class="Annotations"><A NAME="I3984"></A>Explicit declarations of 
 &quot;=&quot; are now permitted for any combination of parameter and 
 result types.</div>
 <div class="paranum"><a name="p9.b">9.b</a></div>

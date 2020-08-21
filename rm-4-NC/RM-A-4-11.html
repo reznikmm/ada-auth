@@ -15,17 +15,17 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -181,13 +181,13 @@ packages have the following declarations:</div>
 <div class="paranum"><a name="p45">45/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Strings.UTF_Encoding.Wide_Wide_Strings;</div>
 <div class="paranum"><a name="p46">46/3</a></div>
-<div class="Normal">The type Encoding_Scheme defines encoding schemes. 
+<div class="Normal">&nbsp;The type Encoding_Scheme defines encoding schemes. 
 UTF_8 corresponds to the UTF-8 encoding scheme defined by Annex D of 
 ISO/IEC 10646. UTF_16BE corresponds to the UTF-16 encoding scheme defined 
 by Annex C of ISO/IEC 10646 in 8 bit, big-endian order; and UTF_16LE 
 corresponds to the UTF-16 encoding scheme in 8 bit, little-endian order.<A NAME="I6102"></A><A NAME="I6103"></A><A NAME="I6104"></A><A NAME="I6105"></A></div>
 <div class="paranum"><a name="p47">47/3</a></div>
-<div class="Normal">The subtype UTF_String is used to represent a String 
+<div class="Normal">&nbsp;The subtype UTF_String is used to represent a String 
 of 8-bit values containing a sequence of values encoded in one of three 
 ways (UTF-8, UTF-16BE, or UTF-16LE). The subtype UTF_8_String is used 
 to represent a String of 8-bit values containing a sequence of values 
@@ -195,10 +195,10 @@ encoded in UTF-8. The subtype UTF_16_Wide_String is used to represent
 a Wide_String of 16-bit values containing a sequence of values encoded 
 in UTF-16.</div>
 <div class="paranum"><a name="p48">48/3</a></div>
-<div class="Normal">The BOM_8, BOM_16BE, BOM_16LE, and BOM_16 constants 
+<div class="Normal">&nbsp;The BOM_8, BOM_16BE, BOM_16LE, and BOM_16 constants 
 correspond to values used at the start of a string to indicate the encoding.</div>
 <div class="paranum"><a name="p49">49/3</a></div>
-<div class="Normal">Each of the Encode functions takes a String, Wide_String, 
+<div class="Normal">&nbsp;Each of the Encode functions takes a String, Wide_String, 
 or Wide_Wide_String Item parameter that is assumed to be an array of 
 unencoded characters. Each of the Convert functions takes a UTF_String, 
 UTF_8_String, or UTF_16_String Item parameter that is assumed to contain 
@@ -206,7 +206,7 @@ characters whose position values correspond to a valid encoding sequence
 according to the encoding scheme required by the function or specified 
 by its Input_Scheme parameter.</div>
 <div class="paranum"><a name="p50">50/3</a></div>
-<div class="Normal">Each of the Convert and Encode functions returns 
+<div class="Normal">&nbsp;Each of the Convert and Encode functions returns 
 a UTF_String, UTF_8_String, or UTF_16_String value whose characters have 
 position values that correspond to the encoding of the Item parameter 
 according to the encoding scheme required by the function or specified 
@@ -214,7 +214,7 @@ by its Output_Scheme parameter. For UTF_8, no overlong encoding is returned.
 A BOM is included at the start of the returned string if the Output_BOM 
 parameter is set to True. The lower bound of the returned string is 1.</div>
 <div class="paranum"><a name="p51">51/3</a></div>
-<div class="Normal">Each of the Decode functions takes a UTF_String, 
+<div class="Normal">&nbsp;Each of the Decode functions takes a UTF_String, 
 UTF_8_String, or UTF_16_String Item parameter which is assumed to contain 
 characters whose position values correspond to a valid encoding sequence 
 according to the encoding scheme required by the function or specified 
@@ -222,11 +222,11 @@ by its Input_Scheme parameter, and returns the corresponding String,
 Wide_String, or Wide_Wide_String value. The lower bound of the returned 
 string is 1.</div>
 <div class="paranum"><a name="p52">52/3</a></div>
-<div class="Normal">For each of the Convert and Decode functions, an 
+<div class="Normal">&nbsp;For each of the Convert and Decode functions, an 
 initial BOM in the input that matches the expected encoding scheme is 
 ignored, and a different initial BOM causes Encoding_Error to be propagated.</div>
 <div class="paranum"><a name="p53">53/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The exception Encoding_Error 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The exception Encoding_Error 
 is also propagated in the following situations:&nbsp;</div>
 <div class="paranum"><a name="p54">54/4</a></div>
 <div class="Bulleted">By a Convert or Decode function when a UTF encoded 
@@ -408,7 +408,7 @@ of decoding Item, which is encoded in UTF-16.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p107">107/3</a></div>
-<div class="Normal">&nbsp;If an implementation supports other encoding schemes, 
+<div class="Normal">&nbsp;&nbsp;If an implementation supports other encoding schemes, 
 another similar child of Ada.Strings should be defined.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p108">108/3</a></div>

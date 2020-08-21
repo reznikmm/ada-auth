@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Delta Aggregates</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.3.4 Delta Aggregates</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+A (record or array) delta aggregate yields a composite value resulting 
+from starting with a copy of another value of the same type and then 
+subsequently assigning to some (but typically not all) components of 
+the copy.<A NAME="I2842"></A>&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+<SPAN Class="swiss">delta_aggregate</SPAN><A NAME="I2843"></A><A NAME="S0119"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2844"></A><SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>&nbsp;|&nbsp;<A NAME="I2845"></A><SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+<SPAN Class="swiss">record_delta_aggregate</SPAN><A NAME="I2846"></A><A NAME="S0120"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<I>base_</I><A NAME="I2847"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2848"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+<SPAN Class="swiss">array_delta_aggregate</SPAN><A NAME="I2849"></A><A NAME="S0121"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<I>base_</I><A NAME="I2850"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;<B>with</B>&nbsp;<B>delta</B>&nbsp;<A NAME="I2851"></A><SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association_list</A></SPAN>)</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The expected type for a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+shall be a single descendant of a record type or record extension.<A NAME="I2852"></A></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The expected type for an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
+shall be a single array type.<A NAME="I2853"></A></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The expected type for the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of any <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+is the type of the enclosing <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>.<A NAME="I2854"></A> 
+<A NAME="I2855"></A></div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+[The Name Resolution Rules and Legality Rules for each <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+are as defined in <A HREF="AA-4-3-1.html">4.3.1</A>.]</div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+the expected type for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+is the index type of the type of the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>.</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The expected type of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+in an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+is defined as for an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+occurring within an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0113">array_aggregate</A></SPAN> 
+of the type of the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>.</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+shall not use the box symbol &lt;&gt;, and the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+shall not be <B>others</B>.</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+the dimensionality of the type of the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+shall be 1.</div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+and each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+in every <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+shall be of a nonlimited type.</div>
+<div class="paranum"><a name="p13.a">13.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>The <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+may be of a limited type (for example a record with limited components), 
+as it is not restricted. A rule in <A HREF="AA-4-3-1.html">4.3.1</A> 
+ensures that we do not assign to a limited component. We do not allow 
+any part of an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
+to be of a limited type, even the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+as this is a useless construct (you would not be able to update anything 
+as the components necessarily are also limited except in pathological 
+cases).&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+begins with the evaluation of the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+and using that value to create and initialize the anonymous object of 
+the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>. 
+The bounds of the anonymous object of an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
+and the discriminants and tag (if any) of the anonymous object of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN> 
+are those of the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.</div>
+<div class="paranum"><a name="p14.a">14.a/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This is the same anonymous 
+object as described in <A HREF="AA-7-6.html">7.6</A>, &ldquo;<A HREF="AA-7-6.html">Assignment 
+and Finalization</A>&rdquo;; in particular, it might be required to be 
+built in place.</div>
+<div class="paranum"><a name="p14.b">14.b/5</a></div>
+<div class="Annotations">This requires that the underlying tag (if any) 
+associated with the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+is that of the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+and not that of the nominal type of the <I>base_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p14.c">14.c/5</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>The anonymous object associated 
+with the evaluation of a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+begins its life as a variable, not a constant (<A HREF="AA-3-3.html">3.3</A> 
+notwithstanding). This must be the case because the object is initialized 
+and then subsequently modified. After evaluation of the <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0119">delta_aggregate</A></SPAN> 
+is complete, the object is a constant object. This is similar to the 
+way that an extended return statement can provide a variable view of 
+an object that will eventually be a constant object after the function 
+returns its result.&nbsp;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+For a <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>, 
+for each component associated with each <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
+(in an unspecified order):&nbsp;</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Bulleted">if the associated component belongs to a <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>, 
+a check is made that the values of the discriminants are such that the 
+anonymous object has this component. <A NAME="I2856"></A>The exception 
+Constraint_Error is raised if this check fails.<A NAME="I2857"></A><A NAME="I2858"></A></div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0109">record_component_association</A></SPAN> 
+is evaluated, converted to the nominal subtype of the associated component, 
+and assigned to the component of the anonymous object.</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+For an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN>, 
+for each <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+of each <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN> 
+(in the order given in the enclosing <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association_list</A></SPAN>, 
+respectively) the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+is evaluated; for each represented index value (in ascending order, if 
+the <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0074">discrete_choice</A></SPAN> 
+represents a range):&nbsp;</div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Bulleted">the index value is converted to the index type 
+of the array type.</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Bulleted">a check is made that the index value belongs to 
+the index range of the anonymous object of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>; 
+<A NAME="I2859"></A>Constraint_Error is raised if this check fails.<A NAME="I2860"></A><A NAME="I2861"></A></div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Bulleted">the component <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is evaluated, converted to the array component subtype, and assigned 
+to the component of the anonymous object identified by the index value. 
+</div>
+<div class="paranum"><a name="p21.a">21.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Unlike other <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s, 
+an <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
+is evaluated in the order that it is written. This is necessary to get 
+deterministic behavior, as (unlike other <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s, 
+including <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0120">record_delta_aggregate</A></SPAN>s) 
+there is no requirement that the specified components be distinct. As 
+such, the order requirement ensures that every <SPAN Class="swiss"><A HREF="AA-4-3-4.html#S0121">array_delta_aggregate</A></SPAN> 
+has a well-defined result, even if the same component is specified multiple 
+times.&nbsp;</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+Simple use in a postcondition:</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;Twelfth&nbsp;(D&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Date)&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-8.html">3.8</A>&nbsp;for&nbsp;type&nbsp;Date</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;D&nbsp;=&nbsp;(D'Old&nbsp;<B>with&nbsp;delta</B>&nbsp;Day&nbsp;=&gt;&nbsp;12);</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Examples"><B>procedure</B>&nbsp;The_Answer&nbsp;(V&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Vector;&nbsp;A,&nbsp;B&nbsp;:&nbsp;<B>in</B>&nbsp;Integer)&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-6.html">3.6</A>&nbsp;for&nbsp;type&nbsp;Vector</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;V&nbsp;=&nbsp;(V'Old&nbsp;<B>with&nbsp;delta</B>&nbsp;A&nbsp;..&nbsp;B&nbsp;=&gt;&nbsp;42.0,&nbsp;V'First&nbsp;=&gt;&nbsp;0.0);</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The base expression can be nontrivial:</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Examples">New_Cell&nbsp;:&nbsp;Cell&nbsp;:=&nbsp;(Min_Cell&nbsp;(Link)&nbsp;<B>with&nbsp;delta</B>&nbsp;Value&nbsp;=&gt;&nbsp;42);<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-10-1.html">3.10.1</A>&nbsp;for&nbsp;Cell&nbsp;and&nbsp;Link;&nbsp;<A HREF="AA-6-1.html">6.1</A>&nbsp;for&nbsp;Min_Cell</I></SPAN></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Examples">A1&nbsp;:&nbsp;Vector&nbsp;:=&nbsp;((1.0,&nbsp;2.0,&nbsp;3.0)&nbsp;<B>with&nbsp;delta</B>&nbsp;Integer&nbsp;(Random&nbsp;*&nbsp;3.0)&nbsp;=&gt;&nbsp;14.2);<BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-6.html">3.6</A>&nbsp;for&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Vector</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-6-1.html">6.1</A>&nbsp;for&nbsp;declaration&nbsp;of&nbsp;Random</I></SPAN></div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Examples">Tomorrow&nbsp;:=&nbsp;((Yesterday&nbsp;<B>with&nbsp;delta</B>&nbsp;Day&nbsp;=&gt;&nbsp;12)&nbsp;<B>with&nbsp;delta</B>&nbsp;Month&nbsp;=&gt;&nbsp;Apr);&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-8.html">3.8</A></I></SPAN></div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-1.TXT">AI05-0127-1</A></I>} 
+The base expression may also be class-wide:</div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Examples"><B>function</B>&nbsp;Translate&nbsp;(P&nbsp;:&nbsp;Point'Class;&nbsp;X,&nbsp;Y&nbsp;:&nbsp;Float)&nbsp;<B>return</B>&nbsp;Point'Class&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;(P&nbsp;<B>with&nbsp;delta</B>&nbsp;X&nbsp;=&gt;&nbsp;P.X&nbsp;+&nbsp;X,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;=&gt;&nbsp;P.Y&nbsp;+&nbsp;Y);&nbsp;--<SPAN Class="roman"><I>&nbsp;see&nbsp;<A HREF="AA-3-9.html">3.9</A>&nbsp;for&nbsp;declaration&nbsp;of&nbsp;type&nbsp;Point</I></SPAN></div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p30.a">30.a/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0127-1.TXT">AI12-0127-1</A></I>} 
+<A NAME="I2862"></A>Delta aggregates are new.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3-3.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

@@ -36,7 +36,7 @@
 <HR>
 <H1>A.17 The Package Environment_Variables</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I7008"></A>The package Environment_Variables 
+<div class="Normal"><A NAME="I6995"></A>The package Environment_Variables 
 allows a program to read or modify environment variables. Environment 
 variables are name-value pairs, where both the name and value are strings. 
 The definition of what constitutes an <I>environment variable</I>, and 
@@ -47,21 +47,21 @@ the meaning of the name and value, are implementation defined.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Environment_Variables has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Environment_Variables<span class="delete5">&nbsp;<B>is</B></span><A NAME="I7009"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Environment_Variables<span class="delete5">&nbsp;<B>is</B></span><A NAME="I6996"></A><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Environment_Variables);</span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7010"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6997"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p4.1">4.1/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7011"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Default&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6998"></A>Value&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Default&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7012"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6999"></A>Exists&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7013"></A>Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7000"></A>Set&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7014"></A>Clear&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7015"></A>Clear;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7001"></A>Clear&nbsp;(Name&nbsp;:&nbsp;<B>in</B>&nbsp;String);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7002"></A>Clear;</div>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7016"></A>Iterate<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7003"></A>Iterate<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Name,&nbsp;Value&nbsp;:&nbsp;<B>in</B>&nbsp;String))<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Allows_Exit</span>;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
@@ -132,7 +132,7 @@ the same name, Process is called once for each such variable.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7017"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7004"></A>It 
 is a bounded error to call Value if more than one environment variable 
 exists with the given name; the possible outcomes are that:&nbsp;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
@@ -144,7 +144,7 @@ or</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal"><A NAME="I7018"></A>Making calls to the procedures 
+<div class="Normal"><A NAME="I7005"></A>Making calls to the procedures 
 Set or Clear concurrently with calls to any subprogram of package Environment_Variables, 
 or to any instantiation of Iterate, results in erroneous execution.</div>
 <div class="paranum"><a name="p29">29/2</a></div>

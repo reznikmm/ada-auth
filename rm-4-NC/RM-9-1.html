@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -95,12 +95,12 @@ optional list of <SPAN Class="swiss"><A HREF="RM-9-1.html#S0208">task_item</A></
 after the reserved word <B>private</B> is called the private part of 
 the task unit.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/1</a></div>
-<div class="Normal">&nbsp;For a task declaration without a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;For a task declaration without a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 
 without <SPAN Class="swiss"><A HREF="RM-9-1.html#S0208">task_item</A></SPAN>s 
 is assumed.</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
-<div class="Normal">&nbsp;For a task declaration with an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;For a task declaration with an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>, 
 the task type inherits user-defined primitive subprograms from each progenitor 
 type (see <A HREF="RM-3-9-4.html">3.9.4</A>), in the same way that a 
 derived type inherits user-defined primitive subprograms from its progenitor 
@@ -117,24 +117,24 @@ which overrides it<A NAME="I3919"></A>.<A NAME="I3920"></A><A NAME="I3921"></A>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9.3">9.3/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I3922"></A>A task declaration requires 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I3922"></A>A task declaration requires 
 a completion, which shall be a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>, 
 and every <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN> 
 shall be the completion of some task declaration.&nbsp;</div>
 <div class="paranum"><a name="p9.4">9.4/2</a></div>
-<div class="Normal">&nbsp;Each <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;Each <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
 appearing within a task declaration shall denote a limited interface 
 type that is not a protected interface.&nbsp;</div>
 <div class="paranum"><a name="p9.5">9.5/3</a></div>
-<div class="Normal">&nbsp;The prefixed view profile of an explicitly declared 
+<div class="Normal">&nbsp;&nbsp;The prefixed view profile of an explicitly declared 
 primitive subprogram of a tagged task type shall not be type conformant 
 with any entry of the task type, if the subprogram has the same defining 
 name as the entry and the first parameter of the subprogram is of the 
 task type or is an access parameter designating the task type.<A NAME="I3923"></A> 
 </div>
 <div class="paranum"><a name="p9.6">9.6/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For each primitive 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For each primitive 
 subprogram inherited by the type declared by a task declaration, at most 
 one of the following shall apply:</div>
 <div class="paranum"><a name="p9.7">9.7/2</a></div>
@@ -147,7 +147,7 @@ or<A NAME="I3924"></A></div>
 entry of the task type; in which case its prefixed view profile shall 
 be subtype conformant with that of the task entry. <A NAME="I3925"></A></div>
 <div class="paranum"><a name="p9.9">9.9/2</a></div>
-<div class="Normal">&nbsp;If neither applies, the inherited subprogram shall 
+<div class="Normal">&nbsp;&nbsp;If neither applies, the inherited subprogram shall 
 be a null procedure. <A NAME="I3926"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
@@ -165,7 +165,7 @@ creates the task type and its first subtype; it also includes the elaboration
 of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>s 
 in the given order.</div>
 <div class="paranum"><a name="p12">12/1</a></div>
-<div class="Normal"><A NAME="I3930"></A>As part of the initialization 
+<div class="Normal">&nbsp;<A NAME="I3930"></A>As part of the initialization 
 of a task object, any <SPAN Class="swiss"><A HREF="RM-13-1.html#S0304">aspect_clause</A></SPAN>s 
 and any per-object constraints associated with <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN>s 
 of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 

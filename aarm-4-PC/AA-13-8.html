@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,14 +35,14 @@
 <HR>
 <H1>13.8 Machine Code Insertions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5751"></A> A machine code insertion can 
+<div class="Normal">[<A NAME="I5661"></A> A machine code insertion can 
 be achieved by a call to a subprogram whose <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
 contains <SPAN Class="swiss"><A HREF="AA-13-8.html#S0318">code_statement</A></SPAN>s.] 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">code_statement</SPAN><A NAME="I5752"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5753"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">code_statement</SPAN><A NAME="I5662"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5663"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-13-8.html#S0318">code_statement</A></SPAN> 
 is only allowed in the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
@@ -63,7 +61,7 @@ are allowed as usual).&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5754"></A>The <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
+<div class="Normal"><A NAME="I5664"></A>The <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
 is expected to be of any type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -85,7 +83,7 @@ compilation units which depend on System.Machine_Code only indirectly.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5755"></A><A NAME="I5756"></A>The contents 
+<div class="Normal"><A NAME="I5665"></A><A NAME="I5666"></A>The contents 
 of the library package System.Machine_Code (if provided) are implementation 
 defined. The meaning of <SPAN Class="swiss"><A HREF="AA-13-8.html#S0318">code_statement</A></SPAN>s 
 is implementation defined. [Typically, each <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
@@ -133,8 +131,8 @@ statement:</I>&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 M&nbsp;:&nbsp;Mask;<BR>
-<B>procedure</B>&nbsp;Set_Mask<span class="insert3"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Inline</span>;<span class="delete3">&nbsp;<B>pragma</B>&nbsp;Inline(Set_Mask);</span></div>
+<B>procedure</B>&nbsp;Set_Mask<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Inline;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Set_Mask&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;<B>use</B>&nbsp;System.Machine_Code;&nbsp;--<SPAN Class="roman"><I>&nbsp;assume&nbsp;&ldquo;<B>with</B>&nbsp;System.Machine_Code;&rdquo;&nbsp;appears&nbsp;somewhere&nbsp;above</I></SPAN><BR>
@@ -145,14 +143,14 @@ M&nbsp;:&nbsp;Mask;<BR>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations"><A NAME="I5757"></A>Machine code functions are 
+<div class="Annotations"><A NAME="I5667"></A>Machine code functions are 
 allowed in Ada 95; in Ada 83, only procedures were allowed.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p14.b">14.b</a></div>
 <div class="Annotations">The syntax for <SPAN Class="swiss"><A HREF="AA-13-8.html#S0318">code_statement</A></SPAN> 
 is changed to say &ldquo;<SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN>&rdquo; 
-instead of &ldquo;<A NAME="I5758"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I5759"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN>&rdquo;. 
+instead of &ldquo;<A NAME="I5668"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I5669"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0107">record_aggregate</A></SPAN>&rdquo;. 
 Requiring the type of each instruction to be a record type is overspecification. 
 </div>
 

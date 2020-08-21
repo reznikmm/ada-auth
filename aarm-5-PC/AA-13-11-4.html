@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -29,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +42,7 @@
 This subclause defines a package to support the partitioning of a storage 
 pool into subpools. A subpool may be specified as the default to be used 
 for allocation from the associated storage pool, or a particular subpool 
-may be specified as part of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+may be specified as part of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 (see <A HREF="AA-4-8.html">4.8</A>).&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -52,31 +50,31 @@ may be specified as part of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">a
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 The following language-defined library package exists:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><A NAME="I5837"></A><B>package</B>&nbsp;System.Storage_Pools.Subpools&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6050"></A><B>package</B>&nbsp;System.Storage_Pools.Subpools&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate&nbsp;(Subpools);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5838"></A>Root_Storage_Pool_With_Subpools&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6051"></A>Root_Storage_Pool_With_Subpools&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>abstract&nbsp;new</B>&nbsp;Root_Storage_Pool&nbsp;<B>with&nbsp;private</B>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5839"></A>Root_Subpool&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6052"></A>Root_Subpool&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5840"></A>Subpool_Handle&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Root_Subpool'Class;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6053"></A>Subpool_Handle&nbsp;<B>is&nbsp;access&nbsp;all</B>&nbsp;Root_Subpool'Class;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;Subpool_Handle'Storage_Size&nbsp;<B>use</B>&nbsp;0;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5841"></A>Create_Subpool&nbsp;(Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6054"></A>Create_Subpool&nbsp;(Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0252-1.TXT">AI05-0252-1</A></I>} 
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>The&nbsp;following&nbsp;operations&nbsp;are&nbsp;intended&nbsp;for&nbsp;pool&nbsp;implementers:</I></SPAN></div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5842"></A>Pool_of_Subpool&nbsp;(Subpool&nbsp;:&nbsp;<B>not&nbsp;null</B>&nbsp;Subpool_Handle)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6055"></A>Pool_of_Subpool&nbsp;(Subpool&nbsp;:&nbsp;<B>not&nbsp;null</B>&nbsp;Subpool_Handle)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;access</B>&nbsp;Root_Storage_Pool_With_Subpools'Class;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5843"></A>Set_Pool_of_Subpool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6056"></A>Set_Pool_of_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools'Class);</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5844"></A>Allocate_From_Subpool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6057"></A>Allocate_From_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
@@ -84,25 +82,25 @@ The following language-defined library package exists:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5845"></A>Deallocate_Subpool&nbsp;(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6058"></A>Deallocate_Subpool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Subpool_Handle)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre'Class&nbsp;=&gt;&nbsp;Pool_of_Subpool(Subpool)&nbsp;=&nbsp;Pool'Access;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5846"></A>Default_Subpool_for_Pool&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6059"></A>Default_Subpool_for_Pool&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return&nbsp;not&nbsp;null</B>&nbsp;Subpool_Handle;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5847"></A>Allocate&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6060"></A>Allocate&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>out</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alignment&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count);</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5848"></A>Deallocate&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6061"></A>Deallocate&nbsp;(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Root_Storage_Pool_With_Subpools;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage_Address&nbsp;:&nbsp;<B>in</B>&nbsp;Address;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size_In_Storage_Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Storage_Elements.Storage_Count;<BR>
@@ -110,7 +108,7 @@ The following language-defined library package exists:</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 &nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5849"></A>Storage_Size&nbsp;(Pool&nbsp;:&nbsp;Root_Storage_Pool_With_Subpools)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6062"></A>Storage_Size&nbsp;(Pool&nbsp;:&nbsp;Root_Storage_Pool_With_Subpools)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Storage_Elements.Storage_Count<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;(Storage_Elements.Storage_Count'Last);</div>
 <div class="paranum"><a name="p17">17/3</a></div>
@@ -119,7 +117,7 @@ The following language-defined library package exists:</div>
 end&nbsp;System.Storage_Pools.Subpools;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<A NAME="I5850"></A><A NAME="I5851"></A><A NAME="I5852"></A><A NAME="I5853"></A><A NAME="I5854"></A>A 
+<A NAME="I6063"></A><A NAME="I6064"></A><A NAME="I6065"></A><A NAME="I6066"></A><A NAME="I6067"></A>A 
 <I>subpool</I> is a separately reclaimable portion of a storage pool, 
 identified by an object of type Subpool_Handle (a <I>subpool handle</I>). 
 A subpool handle also identifies the enclosing storage pool, a <I>storage 
@@ -141,26 +139,26 @@ subpool objects because the declaration of Subpool_Handle says so.&nbsp;</div>
 <div class="paranum"><a name="p20">20/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-1.TXT">AI05-0145-1</A></I>} 
-Each subpool <I>belongs</I><A NAME="I5855"></A> to a single storage pool 
+Each subpool <I>belongs</I><A NAME="I6068"></A> to a single storage pool 
 [(which will always be a pool that supports subpools)]. An access to 
 the pool that a subpool belongs to can be obtained by calling Pool_of_Subpool 
 with the subpool handle. Set_Pool_of_Subpool causes the subpool of the 
 subpool handle to belong to the given pool[; this is intended to be called 
 from subpool constructors like Create_Subpool.] Set_Pool_of_Subpool propagates 
-Program_Error if the subpool already belongs to a pool.<span class="insert4">&nbsp;If Set_Pool_of_Subpool has not yet been called for a subpool, Pool_of_Subpool 
-returns <B>null</B>.</span></div>
+Program_Error if the subpool already belongs to a pool. If Set_Pool_of_Subpool 
+has not yet been called for a subpool, Pool_of_Subpool returns <B>null</B>.</div>
 <div class="paranum"><a name="p20.a">20.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Pool_of_Subpool and Set_Pool_of_Subpool 
 are provided by the Ada implementation and typically will not be overridden 
 by the pool implementer.&nbsp;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-When an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+When an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 for a type whose storage pool supports subpools is evaluated, a call 
 is made on Allocate_From_Subpool passing in a Subpool_Handle, in addition 
 to the parameters as defined for calls on Allocate (see <A HREF="AA-13-11.html">13.11</A>). 
 The subpool designated by the <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is used, if specified in an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>. 
+is used, if specified in an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>. 
 Otherwise, Default_Subpool_for_Pool of the Pool is used to provide a 
 subpool handle. All requirements on the Allocate procedure also apply 
 to Allocate_from_Subpool.</div>
@@ -179,7 +177,7 @@ Permission below that allows it to be called in certain rare cases).
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 If a storage pool that supports subpools is specified as the Storage_Pool 
-for an access type, the access type is called a <I>subpool access type</I>.<A NAME="I5856"></A><A NAME="I5857"></A> 
+for an access type, the access type is called a <I>subpool access type</I>.<A NAME="I6069"></A><A NAME="I6070"></A> 
 A subpool access type shall be a pool-specific access type.</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
@@ -189,7 +187,7 @@ deeper than that of the storage pool object. If the specified storage
 pool object is a storage pool that supports subpools, then the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes the object shall not denote part of a formal parameter, 
 nor shall it denote part of a dereference of a value of a non-library-level 
-general access type. <A NAME="I5858"></A>In addition to the places where 
+general access type. <A NAME="I6071"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -205,14 +203,14 @@ supports subpools, the following checks are made:</div>
 <div class="Bulleted">the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 used to specify the storage pool object does not denote part of a formal 
 parameter nor part of a dereference of a value of a non-library-level 
-general access type; and<A NAME="I5859"></A><A NAME="I5860"></A></div>
+general access type; and<A NAME="I6072"></A><A NAME="I6073"></A></div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="Bulleted">the accessibility level of the access type is not 
-deeper than that of the storage pool object.<A NAME="I5861"></A><A NAME="I5862"></A> 
+deeper than that of the storage pool object.<A NAME="I6074"></A><A NAME="I6075"></A> 
 </div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0252-1.TXT">AI05-0252-1</A></I>} 
-Program_Error is raised if either of these checks fail.<A NAME="I5863"></A></div>
+Program_Error is raised if either of these checks fail.<A NAME="I6076"></A></div>
 <div class="paranum"><a name="p27.a">27.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This check (and its static counterpart) 
 ensures that the type of the allocated objects exists at least as long 
@@ -237,9 +235,9 @@ A call to Subpools.Allocate(P, Addr, Size, Align) does the following:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Root_Storage_Pool_With_Subpools'Class(P)));</div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+An <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 that allocates in a subpool raises Program_Error if the allocated object 
-has task parts.<A NAME="I5864"></A><A NAME="I5865"></A><A NAME="I5866"></A></div>
+has task parts.<A NAME="I6077"></A><A NAME="I6078"></A><A NAME="I6079"></A></div>
 <div class="paranum"><a name="p30.a">30.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is to ease implementation. 
 We envision relaxing this restriction in a future version of Ada, once 
@@ -253,10 +251,10 @@ Unless overridden, Default_Subpool_for_Pool propagates Program_Error.</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31.1">31.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0142-1.TXT">AI12-0142-1</A></I>} 
-<A NAME="I5867"></A><span class="insert4">If Allocate_From_Subpool does 
-not meet one or more of the requirements on the Allocate procedure as 
-given in the Erroneous Execution rules of <A HREF="AA-13-11.html">13.11</A>, 
-then the program execution is erroneous.</span>&nbsp;</div>
+<A NAME="I6080"></A>If Allocate_From_Subpool does not meet one or more 
+of the requirements on the Allocate procedure as given in the Erroneous 
+Execution rules of <A HREF="AA-13-11.html">13.11</A>, then the program 
+execution is erroneous.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p32">32/3</a></div>
@@ -267,8 +265,8 @@ rather than Allocate_From_Subpool. [This will have the same effect, so
 long as Allocate has not been overridden.]</div>
 <div class="paranum"><a name="p32.a">32.a/3</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>This 
-ensures either of two implementation models are possible for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
-with no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0145">subpool_specification</A></SPAN>. 
+ensures either of two implementation models are possible for an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
+with no <SPAN Class="swiss"><A HREF="AA-4-8.html#S0151">subpool_specification</A></SPAN>. 
 Note that the &quot;supports subpools&quot; property is not known at 
 compile time for a pool of the class-wide type.</div>
 <div class="paranum"><a name="p32.b">32.b/3</a></div>
@@ -316,24 +314,23 @@ to carry additional information with each subpool provided by Create_Subpool.</d
 <div class="paranum"><a name="p35.a">35.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0252-1.TXT">AI05-0252-1</A></I>} 
-<A NAME="I5868"></A>Subpools and the package System.Storage_Pools.Subpools 
+<A NAME="I6081"></A>Subpools and the package System.Storage_Pools.Subpools 
 are new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p35.b">35.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0142-1.TXT">AI12-0142-1</A></I>} 
-<span class="insert4"><B>Corrigendum</B>: Clarified that an incorrect 
-implementation of Allocate_From_Subpool causes execution to become erroneous. 
-The wording already said that the requirements of Allocate apply to Allocate_From_Subpool, 
-so we're just confirming the consequences of violating those requirements 
-also apply.</span></div>
+<B>Corrigendum</B>: Clarified that an incorrect implementation of Allocate_From_Subpool 
+causes execution to become erroneous. The wording already said that the 
+requirements of Allocate apply to Allocate_From_Subpool, so we're just 
+confirming the consequences of violating those requirements also apply.</div>
 <div class="paranum"><a name="p35.c">35.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0145-1.TXT">AI12-0145-1</A></I>} 
-<span class="insert4"><B>Corrigendum</B>: Clarified that Pool_of_Subpool 
-returns <B>null</B> if Set_Pool_of_Subpool has not been called. As that 
-can be inferred from the definition, and all known existing implementations 
-return <B>null</B> in this case, we document this as a wording change 
-rather than a possible inconsistency.</span>&nbsp;</div>
+<B>Corrigendum</B>: Clarified that Pool_of_Subpool returns <B>null</B> 
+if Set_Pool_of_Subpool has not been called. As that can be inferred from 
+the definition, and all known existing implementations return <B>null</B> 
+in this case, we document this as a wording change rather than a possible 
+inconsistency.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

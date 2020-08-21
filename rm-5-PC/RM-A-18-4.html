@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -45,7 +43,7 @@ and Containers.Ordered_Maps provide private types Map and Cursor, and
 a set of operations for each type. A map container allows an arbitrary 
 type to be used as a key to find the element associated with that key. 
 A hashed map uses a hash function to organize the keys, while an ordered 
-map orders the keys per a specified relation. <A NAME="I7200"></A><A NAME="I7201"></A></div>
+map orders the keys per a specified relation. <A NAME="I7187"></A><A NAME="I7188"></A></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">This subclause describes the declarations that are 
 common to both kinds of maps. See <A HREF="RM-A-18-5.html">A.18.5</A> 
@@ -61,20 +59,20 @@ and symmetric relationship and return the same result value each time
 it is called with a particular pair of values. If it behaves in some 
 other manner, the function &quot;=&quot; on map values returns an unspecified 
 value. The exact arguments and number of calls of this generic formal 
-function by the function &quot;=&quot; on map values are unspecified.<A NAME="I7202"></A></div>
+function by the function &quot;=&quot; on map values are unspecified.<A NAME="I7189"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">The type Map is used to represent maps. The type 
-Map needs finalization<A NAME="I7203"></A> (see <A HREF="RM-7-6.html">7.6</A>).</div>
+Map needs finalization<A NAME="I7190"></A> (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal"><A NAME="I7204"></A>A map contains pairs of keys 
+<div class="Normal"><A NAME="I7191"></A>A map contains pairs of keys 
 and elements, called <I>nodes</I>. Map cursors designate nodes, but also 
 can be thought of as designating an element (the element contained in 
 the node) for consistency with the other containers. There exists an 
 equivalence relation on keys, whose definition is different for hashed 
 maps and ordered maps. A map never contains two or more nodes with equivalent 
-keys. The <I>length</I> of a map is the number of nodes it contains.<A NAME="I7205"></A></div>
+keys. The <I>length</I> of a map is the number of nodes it contains.<A NAME="I7192"></A></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I7206"></A><A NAME="I7207"></A><A NAME="I7208"></A>Each 
+<div class="Normal"><A NAME="I7193"></A><A NAME="I7194"></A><A NAME="I7195"></A>Each 
 nonempty map has two particular nodes called the <I>first node</I> and 
 the <I>last node</I> (which may be the same). Each node except for the 
 last node has a <I>successor node</I>. If there are no other intervening 
@@ -91,7 +89,7 @@ they depend on the set of elements of the container remaining constant,
 and others check for &ldquo;tampering with elements&rdquo; of a container 
 because they depend on elements of the container not being replaced.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7209"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7196"></A>A 
 subprogram is said to <I>tamper with cursors</I> of a map object <I>M</I> 
 if:</div>
 <div class="paranum"><a name="p9">9/2</a></div>
@@ -110,7 +108,7 @@ parameter; or</div>
 <div class="Bulleted">it calls one of the operations defined to tamper 
 with the cursors of <I>M</I>.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7210"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7197"></A>A 
 subprogram is said to <I>tamper with elements</I> of a map object <I>M</I> 
 if:</div>
 <div class="paranum"><a name="p14">14/2</a></div>
@@ -120,7 +118,7 @@ if:</div>
 is, it calls the Replace or Replace_Element procedures with <I>M</I> 
 as a parameter.</div>
 <div class="paranum"><a name="p15.1">15.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7211"></A><A NAME="I7212"></A>When tampering 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I7198"></A><A NAME="I7199"></A>When tampering 
 with cursors is <I>prohibited</I> for a particular map object <I>M</I>, 
 Program_Error is propagated by a call of any language-defined subprogram 
 that is defined to tamper with the cursors of <I>M</I>, leaving <I>M</I> 
@@ -128,9 +126,8 @@ unmodified. Similarly, when tampering with elements is <I>prohibited</I>
 for a particular map object <I>M</I>, Program_Error is propagated by 
 a call of any language-defined subprogram that is defined to tamper with 
 the elements of <I>M</I> (or tamper with the cursors of <I>M</I>), leaving 
-<I>M</I> unmodified.<span class="insert4">&nbsp;These checks are made before 
-any other defined behavior of the body of the language-defined subprogram.</span> 
-</div>
+<I>M</I> unmodified. These checks are made before any other defined behavior 
+of the body of the language-defined subprogram.&nbsp;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Normal">Empty_Map represents the empty Map object. It has 
 a length of 0. If an object of type Map is not otherwise initialized, 
@@ -257,7 +254,7 @@ shall be unconstrained.</div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p41.3">41.3/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">The types Constant_Reference_Type 
-and Reference_Type need finalization.<A NAME="I7213"></A></div>
+and Reference_Type need finalization.<A NAME="I7200"></A></div>
 <div class="paranum"><a name="p41.4">41.4/3</a></div>
 <div class="Indented2">The default initialization of an object of type 
 Constant_Reference_Type or Reference_Type propagates Program_Error.</div>
@@ -468,14 +465,14 @@ is propagated.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p75.1">75.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7214"></A>It is a bounded error for the 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I7201"></A>It is a bounded error for the 
 actual function associated with a generic formal subprogram, when called 
 as part of an operation of a map package, to tamper with elements of 
 any map parameter of the operation. Either Program_Error is raised, or 
 the operation works as defined on the value of the map either prior to, 
 or subsequent to, some or all of the modifications to the map.</div>
 <div class="paranum"><a name="p75.2">75.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7215"></A>It is a bounded error to call 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I7202"></A>It is a bounded error to call 
 any subprogram declared in the visible part of a map package when the 
 associated container has been finalized. If the operation takes Container 
 as an <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
@@ -485,8 +482,8 @@ or it raises Constraint_Error or Program_Error.&nbsp;</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p76">76/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A Cursor value is <I>invalid</I> 
-if any of the following have occurred since it was created:<A NAME="I7216"></A> 
-<A NAME="I7217"></A></div>
+if any of the following have occurred since it was created:<A NAME="I7203"></A> 
+<A NAME="I7204"></A></div>
 <div class="paranum"><a name="p77">77/2</a></div>
 <div class="Bulleted">The map that contains the node it designates has 
 been finalized;</div>
@@ -501,9 +498,9 @@ been used as the Source or Target of a call to Move; or</div>
 map that previously contained the node.&nbsp;</div>
 <div class="paranum"><a name="p80">80/2</a></div>
 <div class="Normal">The result of &quot;=&quot; or Has_Element is unspecified 
-if these functions are called with an invalid cursor parameter.<A NAME="I7218"></A> 
+if these functions are called with an invalid cursor parameter.<A NAME="I7205"></A> 
 Execution is erroneous if any other subprogram declared in Containers.Hashed_Maps 
-or Containers.Ordered_Maps is called with an invalid cursor parameter.<A NAME="I7219"></A></div>
+or Containers.Ordered_Maps is called with an invalid cursor parameter.<A NAME="I7206"></A></div>
 <div class="paranum"><a name="p80.1">80.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;Execution is erroneous if the map associated with 
 the result of a call to Reference or Constant_Reference is finalized 

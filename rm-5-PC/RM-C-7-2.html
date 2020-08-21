@@ -47,19 +47,19 @@ generic library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Attribute&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;Initial_Value&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
 <B>package</B>&nbsp;Ada.Task_Attributes<span class="insert5"><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8055"></A></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8040"></A></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8056"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8041"></A>Attribute_Handle&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Attribute;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8057"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8042"></A>Value(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8058"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8043"></A>Reference(T&nbsp;:&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Attribute_Handle;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8059"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8044"></A>Set_Value(Val&nbsp;:&nbsp;<B>in</B>&nbsp;Attribute;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8060"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8045"></A>Reinitialize(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id&nbsp;:=&nbsp;Current_Task);</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Task_Attributes;</div>
 
@@ -89,9 +89,9 @@ on the old value of the attribute of T and assigns Val to that attribute
 as Set_Value where the Val parameter is replaced with Initial_Value. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I8061"></A>For all the operations declared 
+<div class="Normal"><A NAME="I8046"></A>For all the operations declared 
 in this package, Tasking_Error is raised if the task identified by T 
-is terminated. <A NAME="I8062"></A>Program_Error is raised if the value 
+is terminated. <A NAME="I8047"></A>Program_Error is raised if the value 
 of T is Null_Task_Id.</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;After a task has terminated, all of its attributes 
@@ -102,7 +102,7 @@ attribute of each task is finalized, unless it has been finalized earlier.
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p13.2">13.2/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I8063"></A>If the package Ada.Task_Attributes 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I8048"></A>If the package Ada.Task_Attributes 
 is instantiated with a controlled type and the controlled type has user-defined 
 Adjust or Finalize operations that in turn access task attributes by 
 any of the above operations, then a call of Set_Value of the instantiated 
@@ -112,17 +112,17 @@ or all tasks of the partition.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I8064"></A>It is erroneous to dereference 
+<div class="Normal"><A NAME="I8049"></A>It is erroneous to dereference 
 the access value returned by a given call on Reference after a subsequent 
 call on Reinitialize for the same task attribute, or after the associated 
 task terminates.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I8065"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I8050"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package and 
 the corresponding task object no longer exists, the execution of the 
 program is erroneous.</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I8066"></A>An access to a task attribute 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I8051"></A>An access to a task attribute 
 via a value of type Attribute_Handle is erroneous if executed concurrently 
 with another such access or a call of any of the operations declared 
 in package Task_Attributes. An access to a task attribute is erroneous 

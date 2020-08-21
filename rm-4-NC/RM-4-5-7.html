@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -103,21 +103,21 @@ is expected to be of type <I>T</I> or shall resolve to type <I>T</I>,
 then the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
 is of type <I>T</I>.</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><A NAME="I2897"></A>A <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I2897"></A>A <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN> 
 is expected to be of any boolean type.&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal">The expected type for the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal">&nbsp;The expected type for the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 are as for case statements (see <A HREF="RM-5-4.html">5.4</A>).<A NAME="I2898"></A> 
 <A NAME="I2899"></A><A NAME="I2900"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">All of the <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
+<div class="Normal">&nbsp;All of the <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
 shall be convertible (see <A HREF="RM-4-6.html">4.6</A>) to the type 
 of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN>.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal">If the expected type of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
+<div class="Normal">&nbsp;If the expected type of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
 is a specific tagged type, all of the <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0133">conditional_expression</A></SPAN> 
 shall be dynamically tagged, or none shall be dynamically tagged. In 
@@ -126,11 +126,11 @@ is dynamically tagged if all of the <I>dependent_</I><SPAN Class="swiss"><A HREF
 are dynamically tagged, is tag-indeterminate if all of the <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
 are tag-indeterminate, and is statically tagged otherwise.</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">If there is no <B>else</B> <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+<div class="Normal">&nbsp;If there is no <B>else</B> <I>dependent_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0134">if_expression</A></SPAN> 
 shall be of a boolean type.</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal">All Legality Rules that apply to the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
+<div class="Normal">&nbsp;All Legality Rules that apply to the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-5-4.html#S0154">case_statement</A></SPAN> 
 (see <A HREF="RM-5-4.html">5.4</A>) also apply to the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0136">case_expression</A></SPAN> 
@@ -138,7 +138,7 @@ except within an instance of a generic unit.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal">For the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0134">if_expression</A></SPAN>, 
+<div class="Normal">&nbsp;For the evaluation of an <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0134">if_expression</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN> 
 specified after <B>if</B>, and any <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0135">condition</A></SPAN>s 
 specified after <B>elsif</B>, are evaluated in succession (treating a 
@@ -151,7 +151,7 @@ and the resulting value is the value of the <SPAN Class="swiss"><A HREF="RM-4-5-
 Otherwise (when there is no <B>else</B> clause), the value of the <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0134">if_expression</A></SPAN> 
 is True.<A NAME="I2901"></A></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0136">case_expression</A></SPAN>, 
+<div class="Normal">&nbsp;For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-5-7.html#S0136">case_expression</A></SPAN>, 
 the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 is first evaluated. If the value of the <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 is covered by the <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN> 

@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.AnnotationsWideAbove {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.AnnotationsWideAbove {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,48 +46,48 @@ library package exists:&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
-<A NAME="I5060"></A><B>with</B>&nbsp;Ada.Streams;<BR>
+<A NAME="I5002"></A><B>with</B>&nbsp;Ada.Streams;<BR>
 <B>package</B>&nbsp;Ada.Exceptions&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Exceptions);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5061"></A>Exception_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5003"></A>Exception_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Exception_Id);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5062"></A>Null_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Id;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5063"></A>Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5064"></A>Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5065"></A>Wide_Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5004"></A>Null_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5005"></A>Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5006"></A>Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5007"></A>Wide_Wide_Exception_Name(Id&nbsp;:&nbsp;Exception_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5066"></A>Exception_Occurrence&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5008"></A>Exception_Occurrence&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Exception_Occurrence);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5067"></A>Exception_Occurrence_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Exception_Occurrence;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5068"></A>Null_Occurrence&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Occurrence;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5009"></A>Exception_Occurrence_Access&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Exception_Occurrence;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5010"></A>Null_Occurrence&nbsp;:&nbsp;<B>constant</B>&nbsp;Exception_Occurrence;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00329.TXT">AI95-00329-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5069"></A>Raise_Exception(E&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Id;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)<span class="delete3">;</span><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3"><B>with</B></span><span class="delete3"><B>&nbsp;pragma</B></span>&nbsp;No_Return<span class="delete3">(Raise_Exception)</span>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5070"></A>Exception_Message(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5071"></A>Reraise_Occurrence(X&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Occurrence);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5011"></A>Raise_Exception(E&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Id;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String&nbsp;:=&nbsp;&quot;&quot;)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;No_Return;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5012"></A>Exception_Message(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5013"></A>Reraise_Occurrence(X&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Occurrence);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5072"></A>Exception_Identity(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5014"></A>Exception_Identity(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Exception_Id;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5073"></A>Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5015"></A>Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Same&nbsp;as&nbsp;Exception_Name(Exception_Identity(X)).</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5074"></A>Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5016"></A>Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Same&nbsp;as&nbsp;Wide_Exception_Name(Exception_Identity(X)).</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5075"></A>Wide_Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5017"></A>Wide_Wide_Exception_Name(X&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;Same&nbsp;as&nbsp;Wide_Wide_Exception_Name(Exception_Identity(X)).</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5076"></A>Exception_Information(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5018"></A>Exception_Information(X&nbsp;:&nbsp;Exception_Occurrence)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5077"></A>Save_Occurrence(Target&nbsp;:&nbsp;<B>out</B>&nbsp;Exception_Occurrence;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5019"></A>Save_Occurrence(Target&nbsp;:&nbsp;<B>out</B>&nbsp;Exception_Occurrence;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Exception_Occurrence);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5078"></A>Save_Occurrence(Source&nbsp;:&nbsp;Exception_Occurrence)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5020"></A>Save_Occurrence(Source&nbsp;:&nbsp;Exception_Occurrence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Exception_Occurrence_Access;</div>
 <div class="paranum"><a name="p6.1">6.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
@@ -120,7 +118,7 @@ default initial value of type Exception_Occurrence.</div>
 E that denotes an exception, the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">E'Identity</div><div class="WideHanging-Body">
-<A NAME="I5079"></A><A NAME="I5080"></A>E'Identity returns the unique 
+<A NAME="I5021"></A><A NAME="I5022"></A>E'Identity returns the unique 
 identity of the exception. The type of this attribute is Exception_Id. 
 </div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
@@ -130,10 +128,10 @@ partition. Exception propagation works properly across RPC's. An exception
 can be propagated from one partition to another, and then back to the 
 first, where its identity is known.&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 Raise_Exception raises a new occurrence of the identified exception.</div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00378.TXT">AI95-00378-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0043-1.TXT">AI05-0043-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
@@ -152,17 +150,17 @@ For the occurrence raised by a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">
 </span>with an <I>exception_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 but without a <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN><span class="insert4">&nbsp;or <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></span>, 
 the message is a string giving implementation-defined information about 
-the exception occurrence. <span class="insert3">For an occurrence originally 
-raised in some other manner (including by the failure of a language-defined 
-check), the message is an unspecified string.<A NAME="I5081"></A>&nbsp;</span>In 
-all cases, Exception_Message returns a string with lower bound 1.&nbsp;</div>
+the exception occurrence. For an occurrence originally raised in some 
+other manner (including by the failure of a language-defined check), 
+the message is an unspecified string.<A NAME="I5023"></A> In all cases, 
+Exception_Message returns a string with lower bound 1.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The information 
 returned by Exception_Message.</div>
 <div class="paranum"><a name="p10.a.1">10.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0043-1.TXT">AI05-0043-1</A></I>} 
-<span class="insert3">There is Implementation Advice about the contents 
-of this string for language-defined checks.</span>&nbsp;</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0043-1.TXT">AI05-0043-1</A></I>} 
+There is Implementation Advice about the contents of this string for 
+language-defined checks.&nbsp;</div>
 <div class="paranum"><a name="p10.b">10.b</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
 </B>Given an exception E, the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0269">raise_statement</A></SPAN>: 
@@ -186,7 +184,7 @@ to this call to Raise_Exception:&nbsp;</div>
 <div class="paranum"><a name="p10.e.4">10.e.4/2</a></div>
 <div class="SmallExamples">Raise_Exception(E'Identity,&nbsp;Message&nbsp;=&gt;&nbsp;&quot;some&nbsp;information&quot;);</div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00361.TXT">AI95-00361-01</A></I>} 
 Reraise_Occurrence reraises the specified exception occurrence.</div>
 <div class="paranum"><a name="p10.f">10.f</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Ramification: 
@@ -206,7 +204,7 @@ to this one:&nbsp;</div>
 <div class="Normal">Exception_Identity returns the identity of the exception 
 of the occurrence.</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 The Wide_Wide_Exception_Name functions return the full expanded name 
 of the exception, in upper case, starting with a root library unit. For 
 an exception declared immediately within package Standard, the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
@@ -229,7 +227,7 @@ unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0160">block_statement</A></SPA
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that we're talking 
 about the name of the exception, not the name of the occurrence.&nbsp;</div>
 <div class="paranum"><a name="p12.1">12.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 The Exception_Name functions (respectively, Wide_Exception_Name) return 
 the same sequence of graphic characters as that defined for Wide_Wide_Exception_Name, 
 if all the graphic characters are defined in Character (respectively, 
@@ -243,21 +241,21 @@ Exceptions.Wide_Exception_Name) when some of the graphic characters of
 Exceptions.Wide_Wide_Exception_Name are not defined in Character (respectively, 
 Wide_Character).</div>
 <div class="paranum"><a name="p12.2">12.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00378.TXT">AI95-00378-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00378.TXT">AI95-00378-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00417.TXT">AI95-00417-01</A></I>} 
 The string returned by the Exception_Name, Wide_Exception_Name, and Wide_Wide_Exception_Name 
 functions has lower bound 1.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00378.TXT">AI95-00378-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00378.TXT">AI95-00378-01</A></I>} 
 Exception_Information returns implementation-defined information about 
 the exception occurrence. The returned string has lower bound 1.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The information 
 returned by Exception_Information.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00241.TXT">AI95-00241-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00241.TXT">AI95-00241-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00446.TXT">AI95-00446-01</A></I>} 
-Reraise_Occurrence has no effect in the case of Null_Occurrence. <A NAME="I5082"></A>Raise_Exception 
+Reraise_Occurrence has no effect in the case of Null_Occurrence. <A NAME="I5024"></A>Raise_Exception 
 and Exception_Name raise Constraint_Error for a Null_Id. Exception_Message, 
 Exception_Name, and Exception_Information raise Constraint_Error for 
 a Null_Occurrence. Exception_Identity applied to Null_Occurrence returns 
@@ -288,7 +286,7 @@ new object; [the result may be deallocated using an instance of Unchecked_Deallo
 to the Save_Occurrence subprograms; they don't raise an exception, but 
 simply save the Null_Occurrence.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
 Write_Exception_Occurrence writes a representation of an exception occurrence 
 to a stream; Read_Exception_Occurrence reconstructs an exception occurrence 
 from a stream (including one written in a different partition).&nbsp;</div>
@@ -314,7 +312,7 @@ distributed system (see <A HREF="AA-E-4.html">E.4</A>).&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
 </div>
 <div class="paranum"><a name="p16.a">16.a/2</a></div>
 <div class="Annotations"></div>
@@ -496,13 +494,13 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p19.x">19.x</a></div>
-<div class="Annotations"><A NAME="I5083"></A>The Identity attribute of 
+<div class="Annotations"><A NAME="I5025"></A>The Identity attribute of 
 exceptions is new, as is the package Exceptions.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p19.y">19.y/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00241.TXT">AI95-00241-01</A></I>} 
-<A NAME="I5084"></A><B>Amendment Correction:</B> Exception_Identity of 
+<A NAME="I5026"></A><B>Amendment Correction:</B> Exception_Identity of 
 an Exception_Occurrence now is defined to return Null_Id for Null_Occurrence, 
 rather than raising Constraint_Error. This provides a simple way to test 
 for Null_Occurrence. We expect that programs that need Constraint_Error 
@@ -534,10 +532,9 @@ Raise_Exception.&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00438.TXT">AI95-00438-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<A NAME="I5085"></A>Functions Wide_Exception_Name and Wide_Wide_Exception_Name, 
+<A NAME="I5027"></A>Functions Wide_Exception_Name and Wide_Wide_Exception_Name, 
 and procedures Read_Exception_Occurrence and Write_Exception_Occurrence 
-are <span class="delete3">newly&nbsp;</span>added to Exceptions. If Exceptions 
-is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+are added to Exceptions. If Exceptions is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 and an entity <I>E</I> with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 as a new entity in Exceptions is defined in a package that is also referenced 
 in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
@@ -547,7 +544,7 @@ This should be rare and is easily fixed if it does occur.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.cc">19.cc/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I5086"></A>The package Exceptions is preelaborated, and types 
+<A NAME="I5028"></A>The package Exceptions is preelaborated, and types 
 Exception_Id and Exception_Occurrence have preelaborable initialization, 
 allowing this package to be used in preelaborated units.&nbsp;</div>
 
@@ -565,9 +562,9 @@ can now contain characters outside of Latin-1.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p19.ff">19.ff/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0043-1.TXT">AI05-0043-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added explicit wording that 
-the exception message for language-defined checks is unspecified. The 
-old wording appeared inclusive, but it was not.</span>&nbsp;</div>
+<B>Correction:</B> Added explicit wording that the exception message 
+for language-defined checks is unspecified. The old wording appeared 
+inclusive, but it was not.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

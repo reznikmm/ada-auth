@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,31 +44,31 @@ to be aborted.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">abort_statement</SPAN><A NAME="I4341"></A><A NAME="S0245"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>abort</B>&nbsp;<I>task_</I><A NAME="I4342"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>task_</I><A NAME="I4343"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">abort_statement</SPAN><A NAME="I4289"></A><A NAME="S0245"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>abort</B>&nbsp;<I>task_</I><A NAME="I4290"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>task_</I><A NAME="I4291"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4344"></A>Each <I>task_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I4292"></A>Each <I>task_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is expected to be of any task type; they need not all be of the same 
 task type.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4345"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0245">abort_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I4293"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0245">abort_statement</A></SPAN>, 
 the given <I>task_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
-are evaluated in an arbitrary order.<A NAME="I4346"></A> <A NAME="I4347"></A><A NAME="I4348"></A><A NAME="I4349"></A>Each 
+are evaluated in an arbitrary order.<A NAME="I4294"></A> <A NAME="I4295"></A><A NAME="I4296"></A><A NAME="I4297"></A>Each 
 named task is then <I>aborted</I>, which consists of making the task 
 <I>abnormal</I> and aborting the execution of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>, 
 unless it is already completed.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4350"></A><A NAME="I4351"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4298"></A><A NAME="I4299"></A>When 
 the execution of a construct is <I>aborted</I> (including that of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN> 
 or of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN>), 
 the execution of every construct included within the aborted execution 
 is also aborted, except for executions included within the execution 
 of an <I>abort-deferred</I> operation; the execution of an abort-deferred 
 operation continues to completion without being affected by the abort; 
-<A NAME="I4352"></A>the following are the abort-deferred operations: 
+<A NAME="I4300"></A>the following are the abort-deferred operations: 
 </div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Bulleted">a protected action;</div>
@@ -95,7 +93,7 @@ part.&nbsp;</div>
 <div class="Normal">When a master is aborted, all tasks that depend on 
 that master are aborted.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I4353"></A>The order in which tasks become 
+<div class="Normal"><A NAME="I4301"></A>The order in which tasks become 
 abnormal as the result of an <SPAN Class="swiss"><A HREF="RM-9-8.html#S0245">abort_statement</A></SPAN> 
 or the abort of a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN> 
 is not specified by the language.</div>
@@ -112,7 +110,7 @@ completes. Other than for these immediate cases, the execution of a construct
 that is aborted does not necessarily complete before the <SPAN Class="swiss"><A HREF="RM-9-8.html#S0245">abort_statement</A></SPAN> 
 completes. However, the execution of the aborted construct completes 
 no later than its next <I>abort completion point</I> (if any) that occurs 
-outside of an abort-deferred operation; <A NAME="I4354"></A>the following 
+outside of an abort-deferred operation; <A NAME="I4302"></A>the following 
 are abort completion points for an execution:&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Bulleted">the point where the execution initiates the activation 
@@ -133,19 +131,19 @@ of an <SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SP
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal"><A NAME="I4355"></A>An attempt to execute an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I4303"></A>An attempt to execute an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN> 
 as part of the execution of an abort-deferred operation is a bounded 
 error. Similarly, an attempt to create a task that depends on a master 
 that is included entirely within the execution of an abort-deferred operation 
-is a bounded error. <A NAME="I4356"></A>In both cases, Program_Error 
-is raised if the error is detected by the implementation; otherwise<span class="insert3">,</span> 
+is a bounded error. <A NAME="I4304"></A>In both cases, Program_Error 
+is raised if the error is detected by the implementation; otherwise, 
 the operations proceed as they would outside an abort-deferred operation, 
 except that an abort of the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0244">abortable_part</A></SPAN> 
 or the created task might or might not have an effect.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal"><A NAME="I4357"></A><A NAME="I4358"></A><A NAME="I4359"></A><A NAME="I4360"></A>If 
+<div class="Normal"><A NAME="I4305"></A><A NAME="I4306"></A><A NAME="I4307"></A><A NAME="I4308"></A>If 
 an assignment operation completes prematurely due to an abort, the assignment 
 is said to be <I>disrupted</I>; the target of the assignment or its parts 
 can become abnormal, and certain subsequent uses of the object can be 

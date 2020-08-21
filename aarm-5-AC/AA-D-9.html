@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,76 +41,76 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 [This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-specifies performance requirements for the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN>. 
-The rules apply both to <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN> 
-and to <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN>. 
-Similarly, they apply equally to a simple <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
-and to one which appears in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN>.] 
+specifies performance requirements for the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN>. 
+The rules apply both to <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN> 
+and to <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN>. 
+Similarly, they apply equally to a simple <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
+and to one which appears in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN>.] 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The effect of the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">The effect of the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
 for Real_Time.Time is defined in terms of Real_Time.Clock:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Bulleted">If C<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1</SPAN></SPAN></SUB> 
-is a value of Clock read before a task executes a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN> 
+is a value of Clock read before a task executes a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN> 
 with duration D, and C<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">2</SPAN></SPAN></SUB> 
 is a value of Clock read after the task resumes execution following that 
-<SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN>, 
 then C<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">2</SPAN></SPAN></SUB> 
 &ndash; C<SUB><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1</SPAN></SPAN></SUB> 
 &gt;= D.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Bulleted">If C is a value of Clock read after a task resumes 
-execution following a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN> 
+execution following a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN> 
 with Real_Time.Time value T, then C &gt;= T.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I9151"></A><A NAME="I9152"></A>A simple 
-<SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
+<div class="Normal"><A NAME="I9476"></A><A NAME="I9477"></A>A simple 
+<SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
 with a negative or zero value for the expiration time does not cause 
 the calling task to be blocked; it is nevertheless a potentially blocking 
 operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-When a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
-appears in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0238">delay_alternative</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0240">timed_entry_call</A></SPAN> 
+When a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
+appears in a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0252">delay_alternative</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0254">timed_entry_call</A></SPAN> 
 the selection of the entry call is attempted, regardless of the specified 
-expiration time. When a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
-appears in a <span class="insert3"><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0236">select_alternative</A></SPAN></span><span class="delete3"><SPAN Class="swiss">&nbsp;selective_accept_alternative</SPAN></span>, 
+expiration time. When a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
+appears in a <span class="insert3"><SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0250">select_alternative</A></SPAN></span><span class="delete3"><SPAN Class="swiss">&nbsp;selective_accept_alternative</SPAN></span>, 
 and a call is queued on one of the open entries, the selection of that 
 entry call proceeds, regardless of the value of the delay expression. 
 </div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The effect of these requirements 
 is that one has to always attempt a rendezvous, regardless of the value 
-of the delay expression. This can be tested by issuing a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0240">timed_entry_call</A></SPAN> 
+of the delay expression. This can be tested by issuing a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0254">timed_entry_call</A></SPAN> 
 with an expiration time of zero, to an open entry.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">The implementation shall document the minimum value 
-of the delay expression of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN> 
+of the delay expression of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN> 
 that causes the task to actually be blocked.&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Documentation Requirement: 
 </B></span><span class="insert2">The minimum value of the delay expression 
-of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN> 
 that causes a task to actually be blocked.</span></div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The implementation shall document the minimum difference 
-between the value of the delay expression of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN> 
+between the value of the delay expression of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN> 
 and the value of Real_Time.Clock, that causes the task to actually be 
 blocked.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete2"><B>Implementation defined: 
-</B></span><span class="delete2">Implementation-defined aspects of <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN>s.</span></div>
+</B></span><span class="delete2">Implementation-defined aspects of <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN>s.</span></div>
 <div class="paranum"><a name="p8.b">8.b/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Documentation Requirement: 
 </B></span><span class="insert2">The minimum difference between the value 
-of the delay expression of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN> 
+of the delay expression of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN> 
 and the value of Real_Time.Clock, that causes the task to actually be 
 blocked.</span></div>
 
@@ -120,36 +120,36 @@ blocked.</span></div>
 shall document the following metrics:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Bulleted">An upper bound on the execution time, in processor 
-clock cycles, of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN> 
+clock cycles, of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN> 
 whose requested value of the delay expression is less than or equal to 
 zero.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Bulleted">An upper bound on the execution time, in processor 
-clock cycles, of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN> 
+clock cycles, of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN> 
 whose requested value of the delay expression is less than or equal to 
 the value of Real_Time.Clock at the time of executing the statement. 
 Similarly, for Calendar.Clock.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted"><A NAME="I9153"></A><A NAME="I9154"></A>An upper 
-bound on the <I>lateness</I> of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN>, 
+<div class="Bulleted"><A NAME="I9478"></A><A NAME="I9479"></A>An upper 
+bound on the <I>lateness</I> of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN>, 
 for a positive value of the delay expression, in a situation where the 
 task has sufficient priority to preempt the processor as soon as it becomes 
 ready, and does not need to wait for any other execution resources. The 
 upper bound is expressed as a function of the value of the delay expression. 
 The lateness is obtained by subtracting the value of the delay expression 
 from the <I>actual duration</I>. The actual duration is measured from 
-a point immediately before a task executes the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
+a point immediately before a task executes the <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
 to a point immediately after the task resumes execution following this 
 statement.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted">An upper bound on the lateness of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN>, 
+<div class="Bulleted">An upper bound on the lateness of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN>, 
 in a situation where the value of the requested expiration time is after 
 the time the task begins executing the statement, the task has sufficient 
 priority to preempt the processor as soon as it becomes ready, and it 
 does not need to wait for any other execution resources. The upper bound 
 is expressed as a function of the difference between the requested expiration 
 time and the clock value at the time the statement begins execution. 
-The lateness of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0231">delay_until_statement</A></SPAN> 
+The lateness of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0245">delay_until_statement</A></SPAN> 
 is obtained by subtracting the requested expiration time from the real 
 time that the task resumes execution following this statement.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
@@ -158,14 +158,14 @@ time that the task resumes execution following this statement.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Notes">40&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
-<span class="delete2">The execution time of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0230">delay_statement</A></SPAN> 
+<span class="delete2">The execution time of a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0244">delay_statement</A></SPAN> 
 that does not cause the task to be blocked (e.g. &ldquo;<B>delay</B> 
 0.0;&rdquo; ) is of interest in situations where delays are used to achieve 
 voluntary round-robin task dispatching among equal-priority tasks.</span></div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p14.a">14.a</a></div>
-<div class="Annotations">The rules regarding a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0240">timed_entry_call</A></SPAN> 
+<div class="Annotations">The rules regarding a <SPAN Class="swiss"><A HREF="AA-9-7-2.html#S0254">timed_entry_call</A></SPAN> 
 with a very small positive Duration value, have been tightened to always 
 require the check whether the rendezvous is immediately possible.</div>
 

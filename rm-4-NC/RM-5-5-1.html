@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -89,10 +89,10 @@ This aspect is specified by a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">na
 that denotes a subtype. This is the <I>default element subtype</I> for 
 <I>T</I>.<A NAME="I3226"></A><A NAME="I3227"></A><A NAME="I3228"></A></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">These aspects are inherited by descendants of type 
+<div class="Normal">&nbsp;These aspects are inherited by descendants of type 
 <I>T</I> (including <I>T</I>'Class).</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">An <I>iterable container type</I> is an indexable 
+<div class="Normal">&nbsp;An <I>iterable container type</I> is an indexable 
 container type with specified Default_Iterator and Iterator_Element aspects.<A NAME="I3229"></A> 
 A <I>reversible iterable container type</I> is an iterable container 
 type with the default iterator type being a reversible iterator type.<A NAME="I3230"></A> 
@@ -100,12 +100,12 @@ An <I>iterable container object</I> is an object of an iterable container
 type.<A NAME="I3231"></A> A <I>reversible iterable container object</I> 
 is an object of a reversible iterable container type.<A NAME="I3232"></A></div>
 <div class="paranum"><a name="p11.1">11.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;The Default_Iterator and Iterator_Element aspects 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The Default_Iterator and Iterator_Element aspects 
 are nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The Constant_Indexing 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The Constant_Indexing 
 aspect (if any) of an iterable container type <I>T</I> shall denote exactly 
 one function with the following properties:</div>
 <div class="paranum"><a name="p13">13/3</a></div>
@@ -120,10 +120,10 @@ covers the default cursor type for <I>T</I>;</div>
 <div class="Bulleted">if there are more than two parameters, the additional 
 parameters all have default expressions.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">This function (if any) is the <I>default constant 
+<div class="Normal">&nbsp;This function (if any) is the <I>default constant 
 indexing function</I> for <I>T</I>.<A NAME="I3233"></A></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The Variable_Indexing 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The Variable_Indexing 
 aspect (if any) of an iterable container type <I>T</I> shall denote exactly 
 one function with the following properties:</div>
 <div class="paranum"><a name="p18">18/3</a></div>
@@ -137,7 +137,7 @@ covers the default cursor type for <I>T</I>;</div>
 <div class="Bulleted">if there are more than two parameters, the additional 
 parameters all have default expressions.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">This function (if any) is the <I>default variable 
+<div class="Normal">&nbsp;This function (if any) is the <I>default variable 
 indexing function</I> for <I>T</I>.<A NAME="I3234"></A></div>
 
 <HR>

@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -77,7 +77,7 @@ If the requeue target has parameters, then its (prefixed) profile shall
 be subtype conformant with the profile of the innermost enclosing callable 
 construct. <A NAME="I4492"></A></div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
 Given a requeue_statement where the innermost enclosing callable construct 
 is for an entry <I>E1</I>, for every [specific or class-wide ]postcondition 
 expression <I>P1</I> that applies to <I>E1</I>, there shall exist a postcondition 
@@ -96,11 +96,11 @@ enabled.&nbsp;</div>
 of the requeue target is required to imply that of the enclosing callable 
 construct.&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
 The requeue target shall not have an applicable specific or class-wide 
-postcondition which includes an Oldattribute_reference.</div>
+postcondition which includes an Old attribute_reference.</div>
 <div class="paranum"><a name="p5.5">5.5/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
 If the requeue target is declared immediately within the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">task_definition</A></SPAN> 
 of a named task type or the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0212">protected_definition</A></SPAN> 
 of a named protected type, and if the requeue statement occurs within 
@@ -113,7 +113,7 @@ or any entity declared within the declaration of that type.</div>
 apply; they don't depend on whether or not any of the postconditions 
 are enabled.&nbsp;</div>
 <div class="paranum"><a name="p5.6">5.6/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0215-1.TXT">AI05-0215-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
 If the target is a procedure, the name shall denote a renaming of an 
@@ -217,7 +217,7 @@ object &mdash; see <A HREF="AA-9-5.html">9.5</A>), a protected action
 is started on the target object and proceeds as for a normal entry call 
 (see <A HREF="AA-9-5-3.html">9.5.3</A>).&nbsp;</div>
 <div class="paranum"><a name="p12">12/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0030-2.TXT">AI05-0030-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0090-1.TXT">AI05-0090-1</A></I>} 
 If the requeue target named in the <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0226">requeue_statement</A></SPAN> 
 has formal parameters, then during the execution of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN> 
@@ -290,7 +290,7 @@ interfaces that are declared to be an entry.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p20.c">20.c/4</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0090-1.TXT">AI05-0090-1</A></I>} 
 <A NAME="I4501"></A><B>Corrigendum:</B> We now define that any preconditions 
 of the requeue target are evaluated as part of a <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0226">requeue_statement</A></SPAN>. 
 Original Ada 2012 did not specify this, so a program that requeues when 
@@ -302,7 +302,7 @@ will have failed in some other way anyway.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p20.d">20.d/4</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0090-1.TXT">AI12-0090-1</A></I>} 
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0090-1.TXT">AI05-0090-1</A></I>} 
 <A NAME="I4502"></A><B>Corrigendum:</B> If a requeue target has a different 
 postcondition than the original entry, the requeue is now illegal. In 
 such a case, the original postcondition would never have been evaluated, 

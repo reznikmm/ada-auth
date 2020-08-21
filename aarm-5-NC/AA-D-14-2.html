@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,53 +43,57 @@ time budgets to groups of tasks.&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
 The following language-defined library package exists:&nbsp;</div>
-<div class="paranum"><a name="p3">3/3</a></div>
+<div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0169-1.TXT">AI05-0169-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
 <B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;System.Multiprocessors;<BR>
-<B>package</B>&nbsp;Ada.Execution_Time.Group_Budgets&nbsp;<B>is</B><A NAME="I8820"></A></div>
+<B>package</B>&nbsp;Ada.Execution_Time.Group_Budgets<BR>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;<B>is</B><A NAME="I9125"></A></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0169-1.TXT">AI05-0169-1</A></I>} 
-&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8821"></A>Group_Budget(CPU&nbsp;:&nbsp;System.Multiprocessors.CPU&nbsp;:=<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9126"></A>Group_Budget(CPU&nbsp;:&nbsp;System.Multiprocessors.CPU&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.Multiprocessors.CPU'First)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;</div>
-<div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8822"></A>Group_Budget_Handler&nbsp;<B>is&nbsp;access</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>protected&nbsp;procedure</B>&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget);</div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9127"></A>Group_Budget_Handler&nbsp;<B>is&nbsp;access</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>protected&nbsp;procedure</B>&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8823"></A>Task_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B><BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9128"></A>Task_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Task_Id;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I8824"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I9129"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p7.a.1">7.a.1/3</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
 Min_Handler_Ceiling in Execution_Time.Group_Budgets.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8825"></A>Add_Task&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9130"></A>Add_Task&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8826"></A>Remove_Task&nbsp;(GB:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9131"></A>Remove_Task&nbsp;(GB:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8827"></A>Is_Member&nbsp;(GB&nbsp;:&nbsp;Group_Budget;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9132"></A>Is_Member&nbsp;(GB&nbsp;:&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8828"></A>Is_A_Group_Member<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9133"></A>Is_A_Group_Member<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8829"></A>Members&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Task_Array;</div>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9134"></A>Members&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Task_Array;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8830"></A>Replenish&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8831"></A>Add&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;Interval&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8832"></A>Budget_Has_Expired&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8833"></A>Budget_Remaining&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9135"></A>Replenish&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9136"></A>Add&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;Interval&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9137"></A>Budget_Has_Expired&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9138"></A>Budget_Remaining&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8834"></A>Set_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9139"></A>Set_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Group_Budget_Handler);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8835"></A>Current_Handler&nbsp;(GB&nbsp;:&nbsp;Group_Budget)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9140"></A>Current_Handler&nbsp;(GB&nbsp;:&nbsp;Group_Budget)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Group_Budget_Handler;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8836"></A>Cancel_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9141"></A>Cancel_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I8837"></A>Group_Budget_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I9142"></A>Group_Budget_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -97,7 +101,7 @@ Min_Handler_Ceiling in Execution_Time.Group_Budgets.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
 The type Group_Budget represents an execution time budget to be used 
-by a group of tasks. The type Group_Budget needs finalization<A NAME="I8838"></A> 
+by a group of tasks. The type Group_Budget needs finalization<A NAME="I9143"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>). A task can belong to at most one 
 group. Tasks of any priority can be added to a group.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
@@ -106,14 +110,14 @@ An object of type Group_Budget has an associated nonnegative value of
 type Time_Span known as its <I>budget</I>, which is initially Time_Span_Zero. 
 The type Group_Budget_Handler identifies a protected procedure to be 
 executed by the implementation when the budget is <I>exhausted</I>, that 
-is, reaches zero. Such a protected procedure is called a <I>handler</I>.<A NAME="I8839"></A><A NAME="I8840"></A> 
-<A NAME="I8841"></A></div>
+is, reaches zero. Such a protected procedure is called a <I>handler</I>.<A NAME="I9144"></A><A NAME="I9145"></A> 
+<A NAME="I9146"></A></div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
 An object of type Group_Budget also includes a handler, which is a value 
 of type Group_Budget_Handler. The handler of the object is said to be 
 <I>set</I> if it is not null and <I>cleared</I> otherwise. The handler 
-of all Group_Budget objects is initially cleared. <A NAME="I8842"></A><A NAME="I8843"></A></div>
+of all Group_Budget objects is initially cleared. <A NAME="I9147"></A><A NAME="I9148"></A></div>
 <div class="paranum"><a name="p15.a">15.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Type Group_Budget is tagged. 
 This makes it possible to share a handler between several events. In 
@@ -235,7 +239,7 @@ of tasks becomes exhausted has no effect.</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p35">35/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
-<A NAME="I8844"></A>For a call of any of the subprograms defined in this 
+<A NAME="I9149"></A>For a call of any of the subprograms defined in this 
 package, if the task identified by T no longer exists, the execution 
 of the program is erroneous.&nbsp;</div>
 
@@ -254,25 +258,25 @@ is changing the handler then either the new or old handler is executed
 and the exhausting event is not lost.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p37">37/2</a></div>
-<div class="Notes">46&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
+<div class="Notes">47&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
 Clearing or setting of the handler of a group budget does not change 
 the current value of the budget. Exhaustion or loading of a budget does 
 not change whether the handler of the group budget is set or cleared.</div>
 <div class="paranum"><a name="p38">38/2</a></div>
-<div class="Notes">47&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
+<div class="Notes">48&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
 A Group_Budget_Handler can be associated with several Group_Budget objects. 
 </div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p38.a">38.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00354.TXT">AI95-00354-01</A></I>} 
-<A NAME="I8845"></A>The package Execution_Time.Group_Budgets is new. 
+<A NAME="I9150"></A>The package Execution_Time.Group_Budgets is new. 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p38.b">38.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0169-1.TXT">AI05-0169-1</A></I>} 
-<A NAME="I8846"></A>A Group_Budget is now defined to work on a single 
+<A NAME="I9151"></A>A Group_Budget is now defined to work on a single 
 processor. If an implementation managed to make this package work for 
 programs running on a multiprocessor system, and a program depends on 
 that fact, it could fail when ported to Ada 2012. We believe it is unlikely 

@@ -21,16 +21,16 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -101,7 +101,7 @@ requirements on the run-time behavior of the program, as indicated by
 the specification of run-time behavior associated with a violation of 
 the requirement.</span></div>
 <div class="paranum"><a name="p8.3">8.3/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert1">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert1">For 
 the purpose of checking whether a partition contains constructs that 
 violate any restriction (unless specified otherwise for a particular 
 restriction):</span></div>
@@ -121,7 +121,7 @@ in a given call or instantiation.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p8.7">8.7/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">An implementation may provide 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">An implementation may provide 
 implementation-defined restrictions; the identifier for an implementation-defined 
 restriction shall differ from those of the language-defined restrictions.</span> 
 </div>
@@ -132,11 +132,11 @@ that are supported, and limitations on the supported combinations of
 restrictions. The consequences of violating such limitations are implementation 
 defined.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/1</a></div>
-<div class="Normal">&nbsp;<span class="insert1">An implementation is permitted 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">An implementation is permitted 
 to omit restriction checks for code that is recognized at compile time 
 to be unreachable and for which no code is generated.</span></div>
 <div class="paranum"><a name="p9.2">9.2/1</a></div>
-<div class="Normal">&nbsp;<span class="insert1">Whenever enforcement of a 
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">Whenever enforcement of a 
 restriction is not required prior to execution, an implementation may 
 nevertheless enforce the restriction prior to execution of a partition 
 to which the restriction applies, provided that every execution of the 
@@ -154,27 +154,27 @@ Profile is as follows:</span>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><span class="insert3">The <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert3">The <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 shall be the name of a usage profile. The semantics of any <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
 are defined by the usage profile specified by the <I>profile_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>.</span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><span class="insert3">A profile is equivalent to 
+<div class="Normal">&nbsp;<span class="insert3">A profile is equivalent to 
 the set of configuration pragmas that is defined for each usage profile.</span> 
 </div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I5560"></A><A NAME="I5561"></A>A 
+<div class="Normal">&nbsp;<span class="insert3"><A NAME="I5560"></A><A NAME="I5561"></A>A 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Profile 
 is a configuration pragma. There may be more than one <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Profile for a partition.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal"><span class="insert3">An implementation may provide 
+<div class="Normal">&nbsp;<span class="insert3">An implementation may provide 
 implementation-defined usage profiles; the identifier for an implementation-defined 
 usage profile shall differ from those of the language-defined usage profiles.</span></div>
 <div class="NotesHeader">NOTES</div>

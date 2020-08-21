@@ -46,52 +46,52 @@ library package exists:&nbsp;</div>
 <div class="Examples"><B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;System.Multiprocessors;<BR>
 <B>package</B>&nbsp;Ada.Execution_Time.Group_Budgets<span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8373"></A></div>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8358"></A></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8374"></A>Group_Budget(CPU&nbsp;:&nbsp;System.Multiprocessors.CPU&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8359"></A>Group_Budget(CPU&nbsp;:&nbsp;System.Multiprocessors.CPU&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.Multiprocessors.CPU'First)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8375"></A>Group_Budget_Handler&nbsp;<B>is&nbsp;access</B><BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8360"></A>Group_Budget_Handler&nbsp;<B>is&nbsp;access</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>protected&nbsp;procedure</B>&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8376"></A>Task_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B><BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8361"></A>Task_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Task_Id;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I8377"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I8362"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8378"></A>Add_Task&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8363"></A>Add_Task&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8379"></A>Remove_Task&nbsp;(GB:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8364"></A>Remove_Task&nbsp;(GB:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8380"></A>Is_Member&nbsp;(GB&nbsp;:&nbsp;Group_Budget;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8365"></A>Is_Member&nbsp;(GB&nbsp;:&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8381"></A>Is_A_Group_Member<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8366"></A>Is_A_Group_Member<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8382"></A>Members&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Task_Array;</div>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8367"></A>Members&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Task_Array;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8383"></A>Replenish&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8384"></A>Add&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;Interval&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8385"></A>Budget_Has_Expired&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8386"></A>Budget_Remaining&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8368"></A>Replenish&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8369"></A>Add&nbsp;(GB&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;&nbsp;Interval&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span);<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8370"></A>Budget_Has_Expired&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8371"></A>Budget_Remaining&nbsp;(GB&nbsp;:&nbsp;Group_Budget)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8387"></A>Set_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8372"></A>Set_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Group_Budget_Handler);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8388"></A>Current_Handler&nbsp;(GB&nbsp;:&nbsp;Group_Budget)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8373"></A>Current_Handler&nbsp;(GB&nbsp;:&nbsp;Group_Budget)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Group_Budget_Handler;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8389"></A>Cancel_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8374"></A>Cancel_Handler&nbsp;(GB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Group_Budget;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I8390"></A>Group_Budget_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I8375"></A>Group_Budget_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Execution_Time.Group_Budgets;</div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Normal">The type Group_Budget represents an execution time 
-budget to be used by a group of tasks. The type Group_Budget needs finalization<A NAME="I8391"></A> 
+budget to be used by a group of tasks. The type Group_Budget needs finalization<A NAME="I8376"></A> 
 (see <A HREF="RM-7-6.html">7.6</A>). A task can belong to at most one 
 group. Tasks of any priority can be added to a group.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
@@ -100,12 +100,12 @@ nonnegative value of type Time_Span known as its <I>budget</I>, which
 is initially Time_Span_Zero. The type Group_Budget_Handler identifies 
 a protected procedure to be executed by the implementation when the budget 
 is <I>exhausted</I>, that is, reaches zero. Such a protected procedure 
-is called a <I>handler</I>.<A NAME="I8392"></A><A NAME="I8393"></A> <A NAME="I8394"></A></div>
+is called a <I>handler</I>.<A NAME="I8377"></A><A NAME="I8378"></A> <A NAME="I8379"></A></div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal">An object of type Group_Budget also includes a handler, 
 which is a value of type Group_Budget_Handler. The handler of the object 
 is said to be <I>set</I> if it is not null and <I>cleared</I> otherwise. 
-The handler of all Group_Budget objects is initially cleared. <A NAME="I8395"></A><A NAME="I8396"></A></div>
+The handler of all Group_Budget objects is initially cleared. <A NAME="I8380"></A><A NAME="I8381"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
@@ -193,7 +193,7 @@ the budget of a group of tasks becomes exhausted has no effect.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p35">35/2</a></div>
-<div class="Normal"><A NAME="I8397"></A>For a call of any of the subprograms 
+<div class="Normal"><A NAME="I8382"></A>For a call of any of the subprograms 
 defined in this package, if the task identified by T no longer exists, 
 the execution of the program is erroneous.&nbsp;</div>
 

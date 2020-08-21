@@ -19,19 +19,19 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -80,7 +80,7 @@ is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>
 that denotes the result of calling a function named by a Constant_Indexing 
 or Variable_Indexing aspect.</span></div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">The Constant_Indexing and 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">The Constant_Indexing and 
 Variable_Indexing aspects are nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</span></div>
 <div class="Normal"><span class="insert4"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 6 through 9 were deleted.</I></SPAN></span>&nbsp;</div>
@@ -103,7 +103,7 @@ if the type has a tagged partial view.</span></span><span class="delete4"></span
 <div class="Normal"><span class="delete4"></span><span class="insert3"><span class="delete4"><A NAME="I2561"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
-unit.</span></span><span class="delete4"></span>&nbsp;</div>
+unit.</span></span><span class="delete4"></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
@@ -111,11 +111,12 @@ unit.</span></span><span class="delete4"></span>&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><span class="insert3">The expected type for the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert3">The expected type for the 
+<I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is any indexable container type.<A NAME="I2565"></A></span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">If 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">If 
 the Constant_Indexing aspect is specified for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
@@ -132,10 +133,10 @@ is used within a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">primary</A></SP
 where a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denoting a constant is permitted.</span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert3">Otherwise, the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert3">Otherwise, the <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is interpreted as a <I>variable indexing</I>.<A NAME="I2568"></A><A NAME="I2569"></A></span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><span class="insert3">When a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+<div class="Normal">&nbsp;<span class="insert3">When a <SPAN Class="swiss"><A HREF="RM-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is interpreted as a constant (or variable) indexing, it is equivalent 
 to a call on a prefixed view of one of the functions named by the Constant_Indexing 
 (or Variable_Indexing) aspect of the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 

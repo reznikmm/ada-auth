@@ -32,7 +32,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,10 +51,10 @@ are language defined (additional restrictions are defined in the Specialized
 Needs Annexes):</span></div>
 <div class="paranum"><a name="p1.1">1.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
-<span class="insert3"><A NAME="I6145"></A><A NAME="I6146"></A>No_Implementation_Aspect_Specifications 
+<span class="insert3"><A NAME="I6371"></A><A NAME="I6372"></A>No_Implementation_Aspect_Specifications 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">There are no implementation-defined aspects specified 
-by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>. 
+by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>. 
 This restriction applies only to the current compilation or environment, 
 not the entire partition.</span>&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a/3</a></div>
@@ -66,7 +66,7 @@ aspects. But a partition-wide restriction applies everywhere, including
 the runtime.</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
-<span class="insert2"><A NAME="I6147"></A></span><span class="insert3"><A NAME="I6148"></A></span><span class="insert2">No_Implementation_Attributes 
+<span class="insert2"><A NAME="I6373"></A></span><span class="insert3"><A NAME="I6374"></A></span><span class="insert2">No_Implementation_Attributes 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There are no implementation-defined attributes. 
 This restriction applies only to the current compilation or environment, 
@@ -82,7 +82,7 @@ the runtime.</span></span><span class="delete3"></span>&nbsp;</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3"><A NAME="I6149"></A><A NAME="I6150"></A>No_Implementation_Identifiers 
+<span class="insert3"><A NAME="I6375"></A><A NAME="I6376"></A>No_Implementation_Identifiers 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">There are no usage names that denote declarations 
 with implementation-defined identifiers that occur within language-defined 
@@ -146,23 +146,23 @@ applies only to the current compilation or environment, not the entire
 partition.</span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
-<span class="insert2"><A NAME="I6151"></A></span><span class="insert3"><A NAME="I6152"></A></span><span class="insert2">No_Implementation_Pragmas 
+<span class="insert2"><A NAME="I6377"></A></span><span class="insert3"><A NAME="I6378"></A></span><span class="insert2">No_Implementation_Pragmas 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There are no implementation-defined pragmas or 
 pragma arguments. This restriction applies only to the current compilation 
 or environment, not the entire partition.</span></div>
 <div class="paranum"><a name="p3.1">3.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0242-1.TXT">AI05-0242-1</A></I>} 
-<span class="insert3"><A NAME="I6153"></A><A NAME="I6154"></A>No_Implementation_Units 
+<span class="insert3"><A NAME="I6379"></A><A NAME="I6380"></A>No_Implementation_Units 
 </span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">There is no mention in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN> 
+<span class="insert3">There is no mention in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0270">context_clause</A></SPAN> 
 of any implementation-defined descendants of packages Ada, Interfaces, 
 or System. This restriction applies only to the current compilation or 
 environment, not the entire partition.</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00368.TXT">AI95-00368-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert2"><A NAME="I6155"></A></span><span class="insert3"><A NAME="I6156"></A></span><span class="insert2">No_Obsolescent_Features 
+<span class="insert2"><A NAME="I6381"></A></span><span class="insert3"><A NAME="I6382"></A></span><span class="insert2">No_Obsolescent_Features 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There is no use of language features defined in 
 Annex J. It is&nbsp;</span><span class="insert3">implementation defined whether</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;implementation-defined 
@@ -197,28 +197,28 @@ them could be a significant portability problem for existing code.</span>
 are</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;is</span></span><span class="insert2">&nbsp;language defined:</span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
-<span class="insert2"><A NAME="I6157"></A><A NAME="I6158"></A>No_Dependence 
+<span class="insert2"><A NAME="I6383"></A><A NAME="I6384"></A>No_Dependence 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">Specifies a library unit on which there are no 
 semantic dependences.</span></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
-<span class="insert3"><A NAME="I6159"></A><A NAME="I6160"></A>No_Specification_of_Aspect 
+<span class="insert3"><A NAME="I6385"></A><A NAME="I6386"></A>No_Specification_of_Aspect 
 </span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">Identifies an aspect for which no <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+<span class="insert3">Identifies an aspect for which no <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 is given.</span></div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
-<span class="insert3"><A NAME="I6161"></A><A NAME="I6162"></A>No_Use_Of_Attribute 
+<span class="insert3"><A NAME="I6387"></A><A NAME="I6388"></A>No_Use_Of_Attribute 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Identifies an attribute for which no <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 is given.</span></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
-<span class="insert3"><A NAME="I6163"></A><A NAME="I6164"></A>No_Use_Of_Pragma 
+<span class="insert3"><A NAME="I6389"></A><A NAME="I6390"></A>No_Use_Of_Pragma 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Identifies a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 which is not to be used.</span></div>
@@ -226,7 +226,7 @@ which is not to be used.</span></div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
-<span class="insert2">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<span class="insert2">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 of a No_Dependence restriction shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
 the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> shall 
 have the form of a full expanded name of a library unit, but need not 
@@ -237,13 +237,13 @@ denote a unit present in the environment.</span></div>
 resolved.</span>&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0241-1.TXT">AI05-0241-1</A></I>} 
-<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 of a No_Specification_of_Aspect restriction shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>; 
 this is an identifier specific to a pragma (see <A HREF="AA-2-8.html">2.8</A>) 
 and does not denote any declaration.</span></div>
 <div class="paranum"><a name="p7.b">7.b/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-<SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 is not resolved as it is an identifier specific to a pragma. As for No_Dependence, 
 there is no check that the aspect <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 is meaningful; it might refer to an implementation-defined aspect on 
@@ -251,25 +251,25 @@ one implementation, but nothing at all on another implementation.</span>
 </div>
 <div class="paranum"><a name="p7.2">7.2/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
-<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 of a No_Use_Of_Attribute restriction shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 or one of the reserved words Access, Delta, Digits, Mod, or Range; this 
 is an identifier specific to a pragma.</span></div>
 <div class="paranum"><a name="p7.c">7.c/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-<SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 is not resolved as it is an identifier specific to a pragma. There is 
 no check that the attribute identifier refers to a known <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN>; 
 it might refer to an implementation-defined attribute on one implementation, 
 but nothing at all on another implementation.</span>&nbsp;</div>
 <div class="paranum"><a name="p7.3">7.3/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
-<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 of a No_Use_Of_Pragma restriction shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 or the reserved word Interface; this is an identifier specific to a pragma.</span></div>
 <div class="paranum"><a name="p7.d">7.d/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-<SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 is not resolved as it is an identifier specific to a pragma. There is 
 no check that the pragma identifier refers to a known <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>; 
 it might refer to an implementation-defined pragma on one implementation, 
@@ -295,7 +295,7 @@ that no unit with the name exist.</span>&nbsp;</div>
 is language defined:</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
-<span class="insert3"><A NAME="I6165"></A>No_Implementation_Extensions 
+<span class="insert3"><A NAME="I6391"></A>No_Implementation_Extensions 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3"></span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -317,7 +317,7 @@ No_Implementation_Units.</span></div>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00257.TXT">AI95-00257-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00368.TXT">AI95-00368-01</A></I>} 
-<span class="insert2"><A NAME="I6166"></A>Restrictions No_Implementation_Attributes, 
+<span class="insert2"><A NAME="I6392"></A>Restrictions No_Implementation_Attributes, 
 No_Implementation_Pragmas, and No_Obsolescent_Features are new.</span></div>
 <div class="paranum"><a name="p13.b">13.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
@@ -329,7 +329,7 @@ No_Implementation_Pragmas, and No_Obsolescent_Features are new.</span></div>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0242-1.TXT">AI05-0242-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
-<span class="insert3"><A NAME="I6167"></A>Restrictions No_Implementation_Aspect_Specifications, 
+<span class="insert3"><A NAME="I6393"></A>Restrictions No_Implementation_Aspect_Specifications, 
 No_Implementation_Identifiers, No_Implementation_Units, No_Specification_of_Aspect, 
 No_Use_of_Attribute, and No_Use_of_Pragma are new.</span></div>
 <div class="paranum"><a name="p13.d">13.d/3</a></div>

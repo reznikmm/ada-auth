@@ -19,17 +19,17 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -174,24 +174,24 @@ is a character that is either a letter or a decimal digit.</div>
 True if Item is a special graphic character. A <I>special graphic character</I> 
 is a graphic character that is not alphanumeric.</div>
 <div class="paranum"><a name="p32.1">32.1/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Is_Line_Terminator</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert3">Is_Line_Terminator</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">True if Item is a character with position 10 .. 
 13 (Line_Feed, Line_Tabulation, Form_Feed, Carriage_Return) or 133 (Next_Line).</span></div>
 <div class="paranum"><a name="p32.2">32.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Is_Mark</span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert3">Is_Mark</span></div><div class="WideHanging-Body">
 <span class="insert3">Never True (no value of type Character has categories 
 Mark, Non-Spacing or Mark, Spacing Combining).</span></div>
 <div class="paranum"><a name="p32.3">32.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Is_Other_Format</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert3">Is_Other_Format</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">True if Item is a character with position 173 (Soft_Hyphen).</span></div>
 <div class="paranum"><a name="p32.4">32.4/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Is_Punctuation_Connector</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert3">Is_Punctuation_Connector</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">True if Item is a character with position 95 ('_', 
 known as Low_Line or Underscore).</span></div>
 <div class="paranum"><a name="p32.5">32.5/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3">Is_Space</span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert3">Is_Space</span></div><div class="WideHanging-Body">
 <span class="insert3">True if Item is a character with position 32 (' 
-') or 160 (No_Break_Space).</span></div>
+') or 160 (No_Break_Space).</span>&nbsp;</div>
 <div class="paranum"><a name="p33">33</a></div>
 <div class="Normal">Each of the names To_Lower, To_Upper, and To_Basic 
 refers to two functions: one that converts from Character to Character, 
@@ -241,39 +241,39 @@ given by To_ISO_646 of the corresponding element in Item.&nbsp;</div>
 <div class="Normal"><span class="insert2"><SPAN Class="roman"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 42 through 49 were deleted.</I></SPAN></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Normal"><span class="delete2">The following set of functions 
+<div class="Normal">&nbsp;<span class="delete2">The following set of functions 
 test Wide_Character values for membership in Character, or convert between 
 corresponding characters of Wide_Character and Character.</span>&nbsp;</div>
 <div class="paranum"><a name="p43">43/2</a></div>
-<div class="WideHanging-Term"><span class="delete2">Is_Character</span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;<span class="delete2">Is_Character</span></div><div class="WideHanging-Body">
 <span class="delete2">Returns True if Wide_Character'Pos(Item) &lt;= 
 Character'Pos(Character'Last).</span></div>
 <div class="paranum"><a name="p44">44/2</a></div>
-<div class="WideHanging-Term"><span class="delete2">Is_String</span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;<span class="delete2">Is_String</span></div><div class="WideHanging-Body">
 <span class="delete2">Returns True if Is_Character(Item(I)) is True for 
 each I in Item'Range.</span></div>
 <div class="paranum"><a name="p45">45/2</a></div>
-<div class="WideHanging-Term"><span class="delete2">To_Character</span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;<span class="delete2">To_Character</span></div><div class="WideHanging-Body">
 <span class="delete2">Returns the Character corresponding to Item if 
 Is_Character(Item), and returns the Substitute Character otherwise.</span></div>
 <div class="paranum"><a name="p46">46/2</a></div>
-<div class="WideHanging-Term"><span class="delete2">To_String</span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;<span class="delete2">To_String</span></div><div class="WideHanging-Body">
 <span class="delete2">Returns the String whose range is 1..Item'Length 
 and each of whose elements is given by To_Character of the corresponding 
 element in Item.</span></div>
 <div class="paranum"><a name="p47">47/2</a></div>
-<div class="WideHanging-Term"><span class="delete2">To_Wide_Character</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;<span class="delete2">To_Wide_Character</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="delete2">Returns the Wide_Character X such that Character'Pos(Item) 
 = Wide_Character'Pos(X).</span></div>
 <div class="paranum"><a name="p48">48/2</a></div>
-<div class="WideHanging-Term"><span class="delete2">To_Wide_String</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;<span class="delete2">To_Wide_String</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="delete2">Returns the Wide_String whose range is 1..Item'Length 
 and each of whose elements is given by To_Wide_Character of the corresponding 
 element in Item.</span></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p49">49/2</a></div>
-<div class="Normal"><span class="delete2">If an implementation provides 
+<div class="Normal">&nbsp;<span class="delete2">If an implementation provides 
 a localized definition of Character or Wide_Character, then the effects 
 of the subprograms in Characters.Handling should reflect the localizations. 
 See also <A HREF="RM-3-5-2.html">3.5.2</A>.</span>&nbsp;</div>

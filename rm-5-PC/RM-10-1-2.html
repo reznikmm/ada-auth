@@ -44,19 +44,19 @@ whose names are needed within a compilation unit.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I4587"></A><A NAME="S0270"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4588"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0271">context_item</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I4575"></A><A NAME="S0270"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4576"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0271">context_item</A></SPAN>}</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I4589"></A><A NAME="S0271"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4590"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4591"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I4577"></A><A NAME="S0271"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4578"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4579"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">with_clause</SPAN><A NAME="I4592"></A><A NAME="S0272"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4593"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0273">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4594"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0274">nonlimited_with_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">with_clause</SPAN><A NAME="I4580"></A><A NAME="S0272"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4581"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0273">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4582"></A><SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0274">nonlimited_with_clause</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I4595"></A><A NAME="S0273"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4596"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4597"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I4583"></A><A NAME="S0273"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4584"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4585"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I4598"></A><A NAME="S0274"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4599"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4600"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I4586"></A><A NAME="S0274"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4587"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4588"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4601"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN> 
+<div class="Normal"><A NAME="I4589"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN> 
 that appears on a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0266">library_unit_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0267">library_unit_renaming_declaration</A></SPAN> 
 consists of the entire declarative region of the declaration, which includes 
@@ -64,8 +64,8 @@ all children and subunits. The scope of a <SPAN Class="swiss"><A HREF="RM-10-1-2
 that appears on a body consists of the body, which includes all subunits. 
 </div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I4602"></A><A NAME="I4603"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN> 
-(and the corresponding library unit) is <I>named</I> <A NAME="I4604"></A><A NAME="I4605"></A>in 
+<div class="Normal"><A NAME="I4590"></A><A NAME="I4591"></A>A <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0265">library_item</A></SPAN> 
+(and the corresponding library unit) is <I>named</I> <A NAME="I4592"></A><A NAME="I4593"></A>in 
 a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN> 
 if it is denoted by a <I>library_unit_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 in the <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0272">with_clause</A></SPAN>. 

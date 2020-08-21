@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,21 +43,21 @@ on normal termination.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Ada.Command_Line has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Command_Line&nbsp;<B>is</B><A NAME="I6736"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Command_Line&nbsp;<B>is</B><A NAME="I6639"></A><BR>
 &nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Command_Line);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6737"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6640"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6738"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6641"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6739"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6642"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6740"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6643"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I6741"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
-&nbsp;&nbsp;<A NAME="I6742"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I6644"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
+&nbsp;&nbsp;<A NAME="I6645"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6743"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6646"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -71,15 +69,15 @@ Ada.Command_Line has the following declaration:&nbsp;</div>
 <div class="Indented2" style="margin-bottom: 0.9em">If the external 
 execution environment supports passing arguments to a program, then Argument_Count 
 returns the number of arguments passed to the program invoking the function. 
-Otherwise<span class="insert3">,</span> it returns 0. The meaning of 
-&ldquo;number of arguments&rdquo; is implementation defined.</div>
+Otherwise, it returns 0. The meaning of &ldquo;number of arguments&rdquo; 
+is implementation defined.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Examples"><B>function</B>&nbsp;Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">If the external 
 execution environment supports passing arguments to a program, then Argument 
 returns an implementation-defined value corresponding to the argument 
-at relative position Number. <A NAME="I6744"></A>If Number is outside 
+at relative position Number. <A NAME="I6647"></A>If Number is outside 
 the range 1..Argument_Count, then Constraint_Error is propagated.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples"><B>function</B>&nbsp;Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
@@ -87,8 +85,8 @@ the range 1..Argument_Count, then Constraint_Error is propagated.&nbsp;</div>
 <div class="Indented2" style="margin-bottom: 0.9em">If the external 
 execution environment supports passing arguments to a program, then Command_Name 
 returns an implementation-defined value corresponding to the name of 
-the command invoking the program; otherwise<span class="insert3">,</span> 
-Command_Name returns the null string.</div>
+the command invoking the program; otherwise, Command_Name returns the 
+null string.</div>
 <div class="paranum"><a name="p16.1">16.1/1</a></div>
 <div class="Examples"><B>type</B>&nbsp;Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
 <div class="paranum"><a name="p17">17</a></div>
@@ -118,7 +116,7 @@ Command_Line if different functionality is appropriate for the external
 execution environment.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Notes">41&nbsp;&nbsp;Argument_Count, Argument, and Command_Name 
+<div class="Notes">40&nbsp;&nbsp;Argument_Count, Argument, and Command_Name 
 correspond to the C language's argc, argv[n] (for n&gt;0) and argv[0], 
 respectively.&nbsp;</div>
 

@@ -41,11 +41,11 @@ is used to rename an object.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I3980"></A><A NAME="S0217"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3981"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[</span>:&nbsp;[<A NAME="I3982"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I3983"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert5">]</span>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I3984"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3985"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];<BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I3986"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I3987"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I3988"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3989"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I3968"></A><A NAME="S0217"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3969"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[</span>:&nbsp;[<A NAME="I3970"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I3971"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert5">]</span>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I3972"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3973"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];<BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I3974"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I3975"></A><SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I3976"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3977"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
@@ -77,7 +77,7 @@ the <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The renamed entity shall be an object.<A NAME="I3990"></A></div>
+<div class="Normal">The renamed entity shall be an object.<A NAME="I3978"></A></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;In the case where 
 the type is defined by an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>, 
@@ -86,10 +86,10 @@ the type of the renamed object and the type defined by the <SPAN Class="swiss"><
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
 <div class="Bulleted">shall both be access-to-object types with statically 
 matching designated subtypes and with both or neither being access-to-constant 
-types; or <A NAME="I3991"></A></div>
+types; or <A NAME="I3979"></A></div>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
 <div class="Bulleted">shall both be access-to-subprogram types with subtype 
-conformant designated profiles. <A NAME="I3992"></A></div>
+conformant designated profiles. <A NAME="I3980"></A></div>
 <div class="paranum"><a name="p4.4">4.4/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For an <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN> 
@@ -115,12 +115,12 @@ the subtype of</span> the <I>object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html
 <span class="insert5">statically denotes a call of a generic formal function 
 of <I>G</I>, then the declaration of the result of that function shall 
 have a <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN></span><span class="delete5">&nbsp;shall 
-exclude null. <A NAME="I3993"></A>In addition to the places where Legality 
+exclude null. <A NAME="I3981"></A>In addition to the places where Legality 
 Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), this rule 
 applies also in the private part of an instance of a generic unit</span>. 
 </div>
 <div class="paranum"><a name="p4.7">4.7/5</a></div>
-<div class="Normal">&nbsp;<span class="insert5"><A NAME="I3994"></A>In addition 
+<div class="Normal">&nbsp;<span class="insert5"><A NAME="I3982"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span></div>
@@ -129,7 +129,7 @@ unit.</span></div>
 depends on discriminants of an object whose nominal subtype is unconstrained 
 unless the object is known to be constrained. A <SPAN Class="swiss"><A HREF="RM-4-1-2.html#S0097">slice</A></SPAN> 
 of an array shall not be renamed if this restriction disallows renaming 
-of the array. <A NAME="I3995"></A>In addition to the places where Legality 
+of the array. <A NAME="I3983"></A>In addition to the places where Legality 
 Rules normally apply, these rules apply also in the private part of an 
 instance of a generic unit.</div>
 

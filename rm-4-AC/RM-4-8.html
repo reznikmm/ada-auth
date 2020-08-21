@@ -21,17 +21,17 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -92,11 +92,11 @@ shall be an initialized allocator. <span class="delete2">If the designated
 type is limited, the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 shall be an uninitialized allocator.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.1">5.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">If a <SPAN Class="swiss"><A HREF="RM-4-8.html#S0144">subpool_specification</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If a <SPAN Class="swiss"><A HREF="RM-4-8.html#S0144">subpool_specification</A></SPAN> 
 is given, the type of the storage pool of the access type shall be a 
 descendant of Root_Storage_Pool_With_Subpools.</span></div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
-<div class="Normal">&nbsp;<span class="insert2">If the designated type of 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the designated type of 
 the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 is class-wide, the accessibility level of the type determined by the 
 <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
@@ -104,7 +104,7 @@ or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPA
 shall not be statically deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p5.3">5.3/3</a></div>
-<div class="Normal">&nbsp;<span class="insert2">If the&nbsp;</span><span class="insert3">subtype 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the&nbsp;</span><span class="insert3">subtype 
 determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;designated 
 subtype of the type</span></span><span class="insert2">&nbsp;of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
@@ -116,7 +116,7 @@ or <SPAN Class="swiss"><A HREF="RM-4-7.html#S0142">qualified_expression</A></SPA
 of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>,</span></span><span class="insert2">&nbsp;shall not be statically deeper than that of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 (see <A HREF="RM-3-10-2.html">3.10.2</A>).</span>&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/3</a></div>
-<div class="Normal">&nbsp;<span class="insert2">An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">An <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 shall not be of an access type for which the Storage_Size has been specified 
 by a static expression with value zero or is defined by the language 
 to be zero.&nbsp;</span><span class="insert2"><span class="delete3"><A NAME="I3180"></A>In 
@@ -127,13 +127,13 @@ a body declared within the declarative region of a generic unit, if the
 type of the allocator is a descendant of a formal access type declared 
 within the formal part of the generic unit.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p5.5">5.5/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">If the designated type of 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If the designated type of 
 the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 is limited, then the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 shall not be used to define the value of an access discriminant, unless 
 the discriminated type is immutably limited (see <A HREF="RM-7-5.html">7.5</A>).</span></div>
 <div class="paranum"><a name="p5.6">5.6/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3"><A NAME="I3181"></A>In addition 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I3181"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules apply also in the private part of an instance of a generic 
 unit.</span>&nbsp;</div>
@@ -189,7 +189,7 @@ subtype. <A NAME="I3194"></A>Constraint_Error is raised if this check
 fails. This check and the initialization of the object are performed 
 in an arbitrary order.<A NAME="I3195"></A></div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">For any <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">For any <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>, 
 if the designated type of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 is class-wide, then a check is made that the&nbsp;</span><span class="insert3">master</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;accessibility 
 level</span></span><span class="insert2">&nbsp;of the type determined by the 
@@ -211,21 +211,21 @@ each access discriminant is not deeper than that of the type of the <SPAN Class=
 Program_Error is raised if either such check fails.<A NAME="I3196"></A><A NAME="I3197"></A> 
 <A NAME="I3198"></A></span></div>
 <div class="paranum"><a name="p10.2">10.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the object to be created 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">If the object to be created 
 by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 has a controlled or protected part, and the finalization of the collection 
 of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 (see <A HREF="RM-7-6-1.html">7.6.1</A>) has started, Program_Error is 
 raised.<A NAME="I3199"></A><A NAME="I3200"></A> <A NAME="I3201"></A></span></div>
 <div class="paranum"><a name="p10.3">10.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">If the object to be created 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">If the object to be created 
 by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 contains any tasks, and the master of the type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 is completed, and all of the dependent tasks of the master are terminated 
 (see <A HREF="RM-9-3.html">9.3</A>), then Program_Error is raised.<A NAME="I3202"></A><A NAME="I3203"></A> 
 <A NAME="I3204"></A></span></div>
 <div class="paranum"><a name="p10.4">10.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">If the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 includes a <I>subpool_handle_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 Constraint_Error is raised if the subpool handle is <B>null</B>. Program_Error 
 is raised if the subpool does not <I>belong</I> (see <A HREF="RM-13-11-4.html">13.11.4</A>) 
@@ -238,9 +238,9 @@ that designates the created object is returned.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"><A NAME="I3211"></A> It is 
-a bounded error if the finalization of the collection of the type (see 
-<A HREF="RM-7-6-1.html">7.6.1</A>) of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I3211"></A> It 
+is a bounded error if the finalization of the collection of the type 
+(see <A HREF="RM-7-6-1.html">7.6.1</A>) of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 has started. If the error is detected, Program_Error is raised. Otherwise, 
 the allocation proceeds normally.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>

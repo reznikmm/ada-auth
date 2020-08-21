@@ -13,17 +13,15 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,21 +34,19 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I9192"></A><A NAME="I9193"></A>Machine_Radix 
+<div class="Normal"><A NAME="I8982"></A><A NAME="I8983"></A>Machine_Radix 
 may be specified for a decimal first subtype (see <A HREF="AA-3-5-9.html">3.5.9</A>) 
 via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>; 
 the expression of such a clause shall be static, and its value shall 
 be 2 or 10. A value of 2 implies a binary base range; a value of 10 implies 
-a decimal base range.<span class="insert3"><A NAME="I9194"></A><A NAME="I9195"></A></span> 
-</div>
+a decimal base range.<A NAME="I8984"></A><A NAME="I8985"></A>&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>In the absence of a Machine_Radix 
 clause, the choice of 2 versus 10 for S'Machine_Radix is not specified. 
 </div>
 <div class="paranum"><a name="p1.b">1.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>Machine_Radix:&nbsp;</B></span><span class="insert3">Radix 
-(2 or 10) that is used to represent a decimal fixed point type.</span></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Machine_Radix: 
+</B>Radix (2 or 10) that is used to represent a decimal fixed point type.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p2">2</a></div>
@@ -67,9 +63,8 @@ to allow the programmer to declare an Ada decimal data object whose representati
 matches a particular COBOL implementation's representation of packed 
 decimal items. The Ada object may then be passed to an interfaced COBOL 
 program that takes a packed decimal data item as a parameter, assuming 
-that convention COBOL has been specified for the Ada object's type <span class="insert3">with 
-an aspect</span><span class="delete3">&nbsp;in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
-Convention.</div>
+that convention COBOL has been specified for the Ada object's type with 
+an aspect Convention.</div>
 <div class="paranum"><a name="p2.c">2.c</a></div>
 <div class="Annotations">Additionally, the Ada compiler may choose to 
 generate arithmetic instructions that exploit the packed decimal representation.</div>

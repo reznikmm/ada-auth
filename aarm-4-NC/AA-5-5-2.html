@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -91,7 +91,7 @@ has type <I>T</I>, if the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.ht
 denotes a constant or the Variable_Indexing aspect is not specified for 
 <I>T</I>, then the Constant_Indexing aspect shall be specified for <I>T</I>.</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0047-1.TXT">AI12-0047-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0047-1.TXT">AI12-0047-1</A></I>} 
 The <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN> 
@@ -103,7 +103,7 @@ be constrained.</div>
 to renames; it serves the same purpose of preventing the object from 
 disappearing while the iterator is still using it.&nbsp;</div>
 <div class="paranum"><a name="p6.2">6.2/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
 A container element iterator is illegal if the call of the default iterator 
 function that creates the loop iterator (see below) is illegal.</div>
 <div class="paranum"><a name="p6.b">6.b/4</a></div>
@@ -113,7 +113,7 @@ is a constant. The wording applies to any reason that the call would
 be illegal, as it's possible that one of the default parameters would 
 be illegal, or that some accessibility check would fail.&nbsp;</div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
 A generalized iterator is illegal if the iteration cursor subtype of 
 the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is a limited type at the point of the generalized iterator. A container 
@@ -159,10 +159,10 @@ otherwise it is a variable.</div>
 The loop parameter of a generalized iterator has the same accessibility 
 as the loop statement. This means that the loop parameter object is finalized 
 when the loop statement is left. (It also may be finalized as part of 
-assigning a new value to the loop parameter.) For array component iteratorsand 
-container element iterators, the loop parameter directly denotes an element 
-of the array or container and has the accessibility of the associated 
-array or container.&nbsp;</div>
+assigning a new value to the loop parameter.) For array component iterators 
+and container element iterators, the loop parameter directly denotes 
+an element of the array or container and has the accessibility of the 
+associated array or container.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
@@ -173,7 +173,7 @@ the <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A>
 is first elaborated. This elaboration elaborates the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 if any.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 For a generalized iterator, the loop parameter is created, the <I>iterator_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is evaluated, and the denoted iterator object becomes the <I>loop iterator</I>.<A NAME="I3511"></A> 
 In a forward generalized iterator, the operation First of the iterator 
@@ -199,7 +199,7 @@ of the initial value. Constraint_Error may be raised by a subsequent
 iteration if Next or Previous return an object with a different tag or 
 constraint.&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 For an array component iterator, the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted array object becomes the <I>array for the 
@@ -219,7 +219,7 @@ loop iteration proceeds until the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145
 has been executed for each component of the array for the loop, or until 
 the loop is left as a consequence of a transfer of control.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 For a container element iterator, the <I>iterable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted iterable container object becomes the <I>iterable 
@@ -229,7 +229,7 @@ called on the iterable container object and the result is the <I>loop
 iterator</I>.<A NAME="I3515"></A> An object of the default cursor subtype 
 is created (the <I>loop cursor</I>).<A NAME="I3516"></A></div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 For a forward container element iterator, the operation First of the 
 iterator type is called on the loop iterator, to produce the initial 
@@ -249,7 +249,7 @@ parameter is a constant (see above), then the indexing uses the default
 constant indexing function for the type of the iterable container object 
 for the loop; otherwise it uses the default variable indexing function.</div>
 <div class="paranum"><a name="p14">14/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0120-1.TXT">AI12-0120-1</A></I>} 
 Any exception propagated by the execution of a generalized iterator or 
 container element iterator is propagated by the immediately enclosing 
 loop statement.</div>
@@ -267,7 +267,7 @@ or cursor.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;Element&nbsp;:=&nbsp;Element&nbsp;*&nbsp;2.0;&nbsp;--&nbsp;<SPAN Class="roman"><I>Double&nbsp;each&nbsp;element&nbsp;of&nbsp;Board,&nbsp;a&nbsp;two-dimensional&nbsp;array.</I></SPAN><BR>
 <B>end&nbsp;loop</B>;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0268-1.TXT">AI05-0268-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0268-1.TXT">AI05-0268-1</A></I>} 
 For examples of use of generalized iterators, see <A HREF="AA-A-18-32.html">A.18.32</A> 
 and the corresponding container packages in <A HREF="AA-A-18-2.html">A.18.2</A> 
 and <A HREF="AA-A-18-3.html">A.18.3</A>.&nbsp;</div>

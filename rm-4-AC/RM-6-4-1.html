@@ -19,19 +19,19 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -76,7 +76,7 @@ if possible.&nbsp;</div>
 shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes a variable.&nbsp;</div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">If the mode is <B>out</B>, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">If the mode is <B>out</B>, 
 the actual parameter is a view conversion, and the type of the formal 
 parameter is an access type or a scalar type that has the Default_Value 
 aspect specified, then</span>&nbsp;</div>
@@ -89,7 +89,7 @@ type and the operand type; and</span></div>
 the type of the operand of the conversion shall have the Default_Value 
 aspect specified.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4"><A NAME="I3625"></A>In addition 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4"><A NAME="I3625"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span></div>
@@ -109,17 +109,17 @@ statically match the nominal subtype of the actual object; or</span></div>
 be unconstrained, discriminated in its full view, and unconstrained in 
 any partial view.</span>&nbsp;</div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4"><A NAME="I3627"></A>In addition 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4"><A NAME="I3627"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</span></div>
 <div class="paranum"><a name="p6.4">6.4/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">In a function call, the accessibility 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">In a function call, the accessibility 
 level of the actual object for each explicitly aliased parameter shall 
 not be statically deeper than the accessibility level of the master of 
 the call (see <A HREF="RM-3-10-2.html">3.10.2</A>).</span></div>
 <div class="paranum"><a name="p6.5">6.5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">Two 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">Two 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s are 
 <I>known to denote the same object</I> if:<A NAME="I3628"></A></span></div>
 <div class="paranum"><a name="p6.6">6.6/3</a></div>
@@ -159,7 +159,7 @@ within the renamed <I>object_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091"
 contains no references to variables nor calls on nonstatic functions.</span> 
 </div>
 <div class="paranum"><a name="p6.12">6.12/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">Two 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">Two 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s are 
 <I>known to refer to the same object</I> if <A NAME="I3629"></A></span></div>
 <div class="paranum"><a name="p6.13">6.13/3</a></div>
@@ -179,7 +179,7 @@ statically denotes a renaming declaration whose renamed <I>object_</I><SPAN Clas
 is known to refer to the same object as the other <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p6.16">6.16/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">If 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">If 
 a call <I>C</I> has two or more parameters of mode <B>in out</B> or <B>out</B> 
 that are of an elementary type, then the call is legal only if:</span></div>
 <div class="paranum"><a name="p6.17">6.17/3</a></div>
@@ -189,7 +189,7 @@ to the call <I>C</I>, there is no other <SPAN Class="swiss"><A HREF="RM-4-1.html
 among the other parameters of mode <B>in out</B> or <B>out</B> to <I>C</I> 
 that is known to denote the same object.</span></div>
 <div class="paranum"><a name="p6.18">6.18/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">If 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">If 
 a construct <I>C</I> has two or more direct constituents that are <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 or <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>s 
 whose evaluation may occur in an arbitrary order, at least one of which 
@@ -204,7 +204,7 @@ anywhere within a direct constituent of the construct <I>C</I> other
 than the one containing <I>C2</I>, that is known to refer to the same 
 object.</span>&nbsp;</div>
 <div class="paranum"><a name="p6.20">6.20/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">For 
 the purposes of checking this rule:</span></div>
 <div class="paranum"><a name="p6.21">6.21/3</a></div>
 <div class="Bulleted"><span class="insert3">For an array <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
@@ -309,7 +309,7 @@ assignments occur in an arbitrary order.<A NAME="I3643"></A>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I3644"></A>If the 
+<div class="Normal">&nbsp;<span class="insert3"><A NAME="I3644"></A>If the 
 nominal subtype of a formal parameter with discriminants is constrained 
 or indefinite, and the parameter is passed by reference, then the execution 
 of the call is erroneous if the value of any discriminant of the actual 

@@ -47,42 +47,42 @@ time without the need for a task or a delay statement.&nbsp;</div>
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Examples"><B>package</B>&nbsp;Ada.Real_Time.Timing_Events<span class="insert5"><BR>
-&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8401"></A></div>
+&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span>&nbsp;<B>is</B><A NAME="I8386"></A></div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8402"></A>Timing_Event&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
-&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8403"></A>Timing_Event_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8387"></A>Timing_Event&nbsp;<B>is&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8388"></A>Timing_Event_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B>&nbsp;(Event&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8404"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8389"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timing_Event_Handler);<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8405"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8390"></A>Set_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timing_Event_Handler);<BR>
-&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8406"></A>Current_Handler&nbsp;(Event&nbsp;:&nbsp;Timing_Event)<BR>
+&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8391"></A>Current_Handler&nbsp;(Event&nbsp;:&nbsp;Timing_Event)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Timing_Event_Handler;<BR>
-&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8407"></A>Cancel_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8392"></A>Cancel_Handler&nbsp;(Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timing_Event;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8408"></A>Time_Of_Event&nbsp;(Event&nbsp;:&nbsp;Timing_Event)&nbsp;<B>return</B>&nbsp;Time;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8393"></A>Time_Of_Event&nbsp;(Event&nbsp;:&nbsp;Timing_Event)&nbsp;<B>return</B>&nbsp;Time;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Real_Time.Timing_Events;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">The type Timing_Event represents a time in the future 
-when an event is to occur. The type Timing_Event needs finalization<A NAME="I8409"></A> 
+when an event is to occur. The type Timing_Event needs finalization<A NAME="I8394"></A> 
 (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">An object of type Timing_Event is said to be <I>set</I> 
 if it is associated with a nonnull value of type Timing_Event_Handler 
 and <I>cleared</I> otherwise. All Timing_Event objects are initially 
-cleared. <A NAME="I8410"></A><A NAME="I8411"></A></div>
+cleared. <A NAME="I8395"></A><A NAME="I8396"></A></div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">The type Timing_Event_Handler identifies a protected 
 procedure to be executed by the implementation when the timing event 
-occurs. Such a protected procedure is called a <I>handler</I>. <A NAME="I8412"></A></div>
+occurs. Such a protected procedure is called a <I>handler</I>. <A NAME="I8397"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>

@@ -19,6 +19,8 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -33,7 +35,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -54,15 +56,15 @@ Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
 Interrupt_Handler is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8725"></A><A NAME="I8726"></A>Interrupt_Handler(<I>handler_</I><A NAME="I8727"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>);</span></div>
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I9037"></A><A NAME="I9038"></A>Interrupt_Handler(<I>handler_</I><A NAME="I9039"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="delete3">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Attach_Handler is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8728"></A><A NAME="I8729"></A>Attach_Handler(<I>handler_</I><A NAME="I8730"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-<A NAME="I8731"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>);</span> 
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I9040"></A><A NAME="I9041"></A>Attach_Handler(<I>handler_</I><A NAME="I9042"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
+<A NAME="I9043"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>);</span> 
 </div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
@@ -74,7 +76,7 @@ shall resolve to denote a protected procedure with a parameterless profile.</spa
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="delete3">For the Attach_Handler pragma, the expected type 
-for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is Interrupts.Interrupt_Id (see <A HREF="AA-C-3-2.html">C.3.2</A>).</span> 
 </div>
 
@@ -88,16 +90,16 @@ language-defined representation aspects may be specified:</span>&nbsp;</div>
 <span class="insert3">&nbsp;The type of aspect Interrupt_Handler is Boolean. 
 If directly specified, the aspect_definition shall be a static expression. 
 [This aspect is never inherited;] if not directly specified, the aspect 
-is False.<A NAME="I8732"></A><A NAME="I8733"></A></span></div>
+is False.<A NAME="I9044"></A><A NAME="I9045"></A></span></div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert3"><B>Interrupt_Handler:&nbsp;</B></span><span class="insert3">Protected 
 procedure may be attached to interrupts.</span></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Attach_Handler</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">&nbsp;The aspect Attach_Handler is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+<span class="insert3">&nbsp;The aspect Attach_Handler is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 which shall be of type Interrupts.Interrupt_Id. [This aspect is never 
-inherited.]<A NAME="I8734"></A><A NAME="I8735"></A></span></div>
+inherited.]<A NAME="I9046"></A><A NAME="I9047"></A></span></div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert3"><B>Attach_Handler:&nbsp;</B></span><span class="insert3">Protected 
@@ -111,16 +113,16 @@ procedure is attached to an interrupt.</span></div>
 <span class="insert3">If either the</span><span class="delete3">&nbsp;The</span> 
 Attach_Handler <span class="insert3">or Interrupt_Handler aspect are 
 specified for a protected procedure, the</span><span class="delete3">&nbsp;pragma 
-is only allowed immediately within the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN> 
+is only allowed immediately within the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN> 
 where the corresponding subprogram is declared. The</span> corresponding 
-<SPAN Class="swiss"><A HREF="AA-9-4.html#S0213">protected_type_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN> 
-shall be a library<span class="insert2">-</span> level declaration<span class="insert3">&nbsp;and shall not be declared within a generic body. <A NAME="I8736"></A>In 
+<SPAN Class="swiss"><A HREF="AA-9-4.html#S0227">protected_type_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0228">single_protected_declaration</A></SPAN> 
+shall be a library<span class="insert2">-</span> level declaration<span class="insert3">&nbsp;and shall not be declared within a generic body. <A NAME="I9048"></A>In 
 addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule also applies in the private part of an instance of a generic 
 unit</span>.</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>In the case of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0213">protected_type_declaration</A></SPAN>, 
+<div class="Annotations"><B>Discussion:&nbsp;</B>In the case of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0227">protected_type_declaration</A></SPAN>, 
 an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 of an object of that type need not be at library level.</div>
 <div class="paranum"><a name="p7.b">7.b/3</a></div>
@@ -140,9 +142,9 @@ deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00303.TXT">AI95-00303-01</A></I>} 
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
 <span class="delete3">The Interrupt_Handler pragma is only allowed immediately 
-within&nbsp;</span><span class="insert2"><span class="delete3">the</span></span><span class="delete3"></span><span class="delete2">&nbsp;a</span><span class="delete3">&nbsp;<SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN></span><span class="insert2"><span class="delete3">&nbsp;where the corresponding subprogram is declared</span></span><span class="delete3">. 
-The corresponding <SPAN Class="swiss"><A HREF="AA-9-4.html#S0213">protected_type_declaration</A></SPAN> 
-</span><span class="insert2"><span class="delete3">or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN> 
+within&nbsp;</span><span class="insert2"><span class="delete3">the</span></span><span class="delete3"></span><span class="delete2">&nbsp;a</span><span class="delete3">&nbsp;<SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN></span><span class="insert2"><span class="delete3">&nbsp;where the corresponding subprogram is declared</span></span><span class="delete3">. 
+The corresponding <SPAN Class="swiss"><A HREF="AA-9-4.html#S0227">protected_type_declaration</A></SPAN> 
+</span><span class="insert2"><span class="delete3">or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0228">single_protected_declaration</A></SPAN> 
 </span></span><span class="delete3">shall be a library</span><span class="insert2"><span class="delete3">-</span></span><span class="delete3">&nbsp;level 
 declaration.</span><span class="delete2">&nbsp;In addition, any <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
 of such a type shall be a library level declaration.</span><span class="delete3"></span> 
@@ -153,30 +155,30 @@ of such a type shall be a library level declaration.</span><span class="delete3"
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 If the <span class="delete3">pragma&nbsp;</span>Interrupt_Handler <span class="insert3">aspect 
 of a protected procedure is True</span><span class="delete3">&nbsp;appears 
-in a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN></span>, 
+in a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN></span>, 
 then the <span class="delete3">corresponding&nbsp;</span>procedure <span class="insert3">may</span><span class="delete3">&nbsp;can</span> 
 be attached dynamically, as a handler, to interrupts (see <A HREF="AA-C-3-2.html">C.3.2</A>). 
 [Such procedures are allowed to be attached to multiple interrupts.]</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8737"></A><A NAME="I8738"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<A NAME="I9049"></A><A NAME="I9050"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 <span class="insert3">specified for</span><span class="delete3">&nbsp;in</span> 
 the Attach_Handler <span class="insert3">aspect of a protected procedure 
 <I>P</I> is evaluated as part of the creation of the protected object 
-that contains <I>P</I>. The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+that contains <I>P</I>. The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 identifies</span><span class="delete3">&nbsp;pragma [as evaluated at object 
 creation time] specifies</span> an interrupt. As part of the initialization 
 of that object, <span class="insert3"><I>P</I> (</span><span class="delete3">&nbsp;if 
 the Attach_Handler pragma is specified,&nbsp;</span>the <I>handler</I> procedure<span class="insert3">)</span> 
 is attached to the <span class="insert3">identified</span><span class="delete3">&nbsp;specified</span> 
-interrupt. <A NAME="I8739"></A><A NAME="I8740"></A>A check is made that 
-the corresponding interrupt is not reserved. <A NAME="I8741"></A>Program_Error 
+interrupt. <A NAME="I9051"></A><A NAME="I9052"></A>A check is made that 
+the corresponding interrupt is not reserved. <A NAME="I9053"></A>Program_Error 
 is raised if the check fails, and the existing treatment for the interrupt 
 is not affected.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00434.TXT">AI95-00434-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8742"></A><A NAME="I8743"></A><A NAME="I8744"></A>If the Ceiling_Locking 
+<A NAME="I9054"></A><A NAME="I9055"></A><A NAME="I9056"></A>If the Ceiling_Locking 
 policy (see <A HREF="AA-D-3.html">D.3</A>) is in effect<span class="insert2">,</span> 
 then upon the initialization of a protected object <span class="insert3">that 
 contains a protected procedure&nbsp;</span><span class="insert2">for which</span><span class="delete2">&nbsp;that</span> 
@@ -185,14 +187,14 @@ Attach_Handler<span class="insert3">&nbsp;aspect is specified</span> or <span cl
 </span> Interrupt_Handler <span class="insert3">aspect is True</span><span class="delete3">&nbsp;pragma 
 applies to one of its procedures</span>, a check is made that the <span class="insert3">initial 
 </span>ceiling priority <span class="insert3">of the object</span><span class="delete3">&nbsp;defined 
-in the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN></span> 
-is in the range of System.Interrupt_Priority. <A NAME="I8745"></A>If 
+in the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN></span> 
+is in the range of System.Interrupt_Priority. <A NAME="I9057"></A>If 
 the check fails, Program_Error is raised.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0068">8652/0068</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00121.TXT">AI95-00121-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8746"></A>When a protected object is finalized, for any of 
+<A NAME="I9058"></A>When a protected object is finalized, for any of 
 its procedures that are attached to interrupts, the handler is detached. 
 If the handler was attached by a procedure in the Interrupts package 
 or if no user handler was previously attached to the interrupt, the default 
@@ -221,10 +223,22 @@ to an interrupt using the Interrupts package.)</span><span class="insert1"></spa
 is blocked [(subject to the Implementation Permission in <A HREF="AA-C-3.html">C.3</A>)] 
 during the execution of every protected action on the protected object 
 containing the handler.</div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0252-1.TXT">AI12-0252-1</A></I>} 
+<span class="insert5">If restriction No_Dynamic_Attachment is in effect, 
+then a check is made that the interrupt identified by an Attach_Handler 
+aspect does not appear in any previously elaborated Attach_Handler aspect; 
+<A NAME="I9059"></A>Program_Error is raised if this check fails.</span></div>
+<div class="paranum"><a name="p13.a">13.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>When No_Dynamic_Attachment 
+is in effect, it is not possible to call any previous handler. Therefore, 
+the only possibility is to replace the original handler, rendering it 
+ineffective. Having an unused handler in a program is likely a bug, so 
+we require an exception to be raised.</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I8747"></A>If the Ceiling_Locking policy 
+<div class="Normal"><A NAME="I9060"></A>If the Ceiling_Locking policy 
 (see <A HREF="AA-D-3.html">D.3</A>) is in effect and an interrupt is 
 delivered to a handler, and the interrupt hardware priority is higher 
 than the ceiling priority of the corresponding protected object, the 
@@ -233,7 +247,7 @@ execution of the program is erroneous.</div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0068">8652/0068</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00121.TXT">AI95-00121-01</A></I>} 
 <span class="insert1"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert1"><A NAME="I8748"></A>If the handlers for a given 
+<span class="insert1"><A NAME="I9061"></A>If the handlers for a given 
 interrupt attached via&nbsp;</span><span class="insert3">aspect</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;pragma</span></span><span class="insert1">&nbsp;Attach_Handler are not attached and detached in a stack-like (LIFO) order, 
 program execution is erroneous. In particular, when a protected object 
 is finalized, the execution is erroneous if any of the procedures of 
@@ -283,8 +297,8 @@ When the <span class="insert3">aspects</span><span class="delete3">&nbsp;pragmas
 Attach_Handler or Interrupt_Handler <span class="insert3">are specified 
 for</span><span class="delete3">&nbsp;apply to</span> a protected procedure, 
 the implementation is allowed to impose implementation-defined restrictions 
-on the corresponding <SPAN Class="swiss"><A HREF="AA-9-4.html#S0213">protected_type_declaration</A></SPAN> 
-and <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>. 
+on the corresponding <SPAN Class="swiss"><A HREF="AA-9-4.html#S0227">protected_type_declaration</A></SPAN> 
+and <SPAN Class="swiss"><A HREF="AA-9-4.html#S0232">protected_body</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The restrictions may be 
@@ -306,7 +320,7 @@ that the priority of an interrupt handler (see <A HREF="AA-D-1.html">D.1</A>)
 is modeled after a hardware task calling the handler.&nbsp;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8749"></A>Notwithstanding what this subclause says elsewhere, 
+<A NAME="I9062"></A>Notwithstanding what this subclause says elsewhere, 
 the Attach_Handler and Interrupt_Handler <span class="insert3">aspects</span><span class="delete3">&nbsp;pragmas</span> 
 are allowed to be used for other, implementation defined, forms of interrupt 
 handlers.&nbsp;</div>
@@ -363,7 +377,7 @@ the body of a protected procedure that is an interrupt handler.</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p25.a">25.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00253.TXT">AI95-00253-01</A></I>} 
-<span class="insert2"><A NAME="I8750"></A><B>Amendment Correction:</B> 
+<span class="insert2"><A NAME="I9063"></A><B>Amendment Correction:</B> 
 Corrected the wording so that the rules for the use of Attach_Handler 
 and Interrupt_Handler are identical. This means that uses of pragma Interrupt_Handler 
 outside of the target protected type or single protected object are now 
@@ -390,16 +404,25 @@ above.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p25.d">25.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I8751"></A>Aspects Interrupt_Handler and 
+<span class="insert3"><A NAME="I9064"></A>Aspects Interrupt_Handler and 
 Attach_Handler are new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 Interrupt_Handler and Attach_Handler are now obsolescent.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p25.e">25.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
-<span class="insert3"><A NAME="I8752"></A><B>Correction:</B> Added missing 
+<span class="insert3"><A NAME="I9065"></A><B>Correction:</B> Added missing 
 generic contract wording for the aspects Attach_Handler and Interrupt_Handler.</span> 
 </div>
+
+<H4 Class="centered">Inconsistencies With Ada 2012</H4>
+<div class="paranum"><a name="p25.f">25.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0252-1.TXT">AI12-0252-1</A></I>} 
+<span class="insert5"><A NAME="I9066"></A><B>Correction:</B> Program_Error 
+might be raised if two handlers are attached when restriction No_Dynamic_Attachment 
+is in effect (including as part of the Ravenscar profile). Original Ada 
+2012 would have just ignored the first handler. This is almost certainly 
+a bug rather than an intended result.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

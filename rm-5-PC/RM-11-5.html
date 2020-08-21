@@ -40,18 +40,18 @@
 <HR>
 <H1>11.5 Suppressing Checks</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><I>Checking pragmas</I><A NAME="I4829"></A> give 
+<div class="Normal"><I>Checking pragmas</I><A NAME="I4817"></A> give 
 instructions to an implementation on handling language-defined checks. 
 A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Suppress 
 gives permission to an implementation to omit certain language-defined 
 checks, while a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Unsuppress revokes the permission to omit checks..</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I4830"></A><A NAME="I4831"></A><A NAME="I4832"></A><A NAME="I4833"></A><A NAME="I4834"></A>A 
+<div class="Normal"><A NAME="I4818"></A><A NAME="I4819"></A><A NAME="I4820"></A><A NAME="I4821"></A><A NAME="I4822"></A>A 
 <I>language-defined check</I> (or simply, a &ldquo;check&rdquo;) is one 
 of the situations defined by this International Standard that requires 
 a check to be made at run time to determine whether some condition is 
-true. <A NAME="I4835"></A>A check <I>fails</I> when the condition being 
+true. <A NAME="I4823"></A>A check <I>fails</I> when the condition being 
 checked is False, causing an exception to be raised.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
@@ -59,11 +59,11 @@ checked is False, causing an exception to be raised.&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The forms of checking 
 pragmas are as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4836"></A><A NAME="I4837"></A>Suppress(<A NAME="I4838"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4824"></A><A NAME="I4825"></A>Suppress(<A NAME="I4826"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4839"></A><A NAME="I4840"></A>Unsuppress(<A NAME="I4841"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I4827"></A><A NAME="I4828"></A>Unsuppress(<A NAME="I4829"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Indented1"><A NAME="I4842"></A><A NAME="I4843"></A><A NAME="I4844"></A><A NAME="I4845"></A>A 
+<div class="Indented1"><A NAME="I4830"></A><A NAME="I4831"></A><A NAME="I4832"></A><A NAME="I4833"></A>A 
 checking pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
 immediately within a <SPAN Class="swiss"><A HREF="RM-7-1.html#S0208">package_specification</A></SPAN>, 
 or as a configuration pragma.&nbsp;</div>
@@ -93,7 +93,7 @@ then the checking pragma also applies to the entire instance.&nbsp;</div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Suppress gives permission to an implementation to omit the named check 
 (or every check in the case of All_Checks) for any entities to which 
-it applies. <A NAME="I4846"></A>If permission has been given to suppress 
+it applies. <A NAME="I4834"></A>If permission has been given to suppress 
 a given check, the check is said to be <I>suppressed</I>.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
 <div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
@@ -110,29 +110,29 @@ Suppress can renew the permission.</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following are the 
 language-defined checks:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted"><A NAME="I4847"></A>The following checks correspond 
+<div class="Bulleted"><A NAME="I4835"></A>The following checks correspond 
 to situations in which the exception Constraint_Error is raised upon 
 failure.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Hanging_in_Bulleted-Term" style="margin-bottom: 0.3em"><A NAME="I4848"></A>Access_Check 
+<div class="Hanging_in_Bulleted-Term" style="margin-bottom: 0.3em"><A NAME="I4836"></A>Access_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 When evaluating a dereference (explicit or implicit), check that the 
 value of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is not <B>null</B>. When converting to a subtype that excludes null, 
 check that the converted value is not <B>null</B>.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4849"></A>Discriminant_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4837"></A>Discriminant_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that the discriminants of a composite value have the values imposed 
 by a discriminant constraint. Also, when accessing a record component, 
 check that it exists for the current discriminant values.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4850"></A>Division_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4838"></A>Division_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that the second operand is not zero for the operations /, <B>rem</B> 
 and <B>mod</B>.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4851"></A>Index_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4839"></A>Index_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that the bounds of an array value are equal to the corresponding 
 bounds of an index constraint. Also, when accessing a component of an 
@@ -141,18 +141,18 @@ to the range defined by the bounds of the array object. Also, when accessing
 a slice of an array object, check that the given discrete range is compatible 
 with the range defined by the bounds of the array object.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4852"></A>Length_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4840"></A>Length_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that two arrays have matching components, in the case of array 
 subtype conversions, and logical operators for arrays of boolean components.</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4853"></A>Overflow_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4841"></A>Overflow_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that a scalar value is within the base range of its type, in cases 
 where the implementation chooses to raise an exception instead of returning 
 the correct mathematical result.</div>
 <div class="paranum"><a name="p17">17/5</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4854"></A>Range_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4842"></A>Range_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that a scalar value satisfies a range constraint. Also, for the 
 elaboration of a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
@@ -166,27 +166,27 @@ that the given string has the appropriate syntax and value for the base
 subtype of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN>.</span></div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4855"></A>Tag_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4843"></A>Tag_Check&nbsp;</div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that operand tags in a dispatching call are all equal. Check for 
 the correct tag on tagged type conversions, for an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>, 
 and when returning a tagged limited object from a function.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Bulleted"><A NAME="I4856"></A>The following checks correspond 
+<div class="Bulleted"><A NAME="I4844"></A>The following checks correspond 
 to situations in which the exception Program_Error is raised upon failure. 
 </div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4857"></A>Accessibility_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4845"></A>Accessibility_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check the accessibility level of an entity or view.</div>
 <div class="paranum"><a name="p19.2">19.2/2</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4858"></A>Allocation_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4846"></A>Allocation_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 For an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>, 
 check that the master of any tasks to be created by the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
 is not yet completed or some dependents have not yet terminated, and 
 that the finalization of the collection has not started.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4859"></A>Elaboration_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4847"></A>Elaboration_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 When a subprogram or protected entry is called, a task activation is 
 accomplished, or a generic instantiation is elaborated, check that the 
@@ -199,7 +199,7 @@ paragraph was deleted.</I></SPAN></div>
 corresponds to situations in which the exception Storage_Error is raised 
 upon failure.&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4860"></A><A NAME="I4861"></A>Storage_Check 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4848"></A><A NAME="I4849"></A>Storage_Check 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Check that evaluation of an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
 does not require more space than is available for a storage pool. Check 
@@ -210,7 +210,7 @@ that the space available for a task or subprogram has not been exceeded.
 following check corresponds to situations in which the exception Assertion_Error 
 is raised upon failure.</span></div>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>
-<div class="Hanging_in_Bulleted-Term"><span class="insert5"><A NAME="I4862"></A><A NAME="I4863"></A>Container_Check</span></div><div class="Hanging_in_Bulleted-Body"><br clear="left">
+<div class="Hanging_in_Bulleted-Term"><span class="insert5"><A NAME="I4850"></A><A NAME="I4851"></A>Container_Check</span></div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 <span class="insert5">Check the precondition of a routine declared in 
 a descendant unit of Containers or in an instance of a generic unit that 
 is declared in, or is, a descendant unit of Containers.</span>&nbsp;</div>
@@ -219,7 +219,7 @@ is declared in, or is, a descendant unit of Containers.</span>&nbsp;</div>
 corresponds to all situations in which any predefined exception is raised. 
 </div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Hanging_in_Bulleted-Term"><A NAME="I4864"></A>All_Checks 
+<div class="Hanging_in_Bulleted-Term"><A NAME="I4852"></A>All_Checks 
 </div><div class="Hanging_in_Bulleted-Body"><br clear="left">
 Represents the union of all checks; suppressing All_Checks suppresses 
 all checks other than those associated with assertions. In addition, 
@@ -229,7 +229,7 @@ applies.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p26">26/5</a></div>
-<div class="Normal"><A NAME="I4865"></A>If a given check has been suppressed, 
+<div class="Normal"><A NAME="I4853"></A>If a given check has been suppressed, 
 and the corresponding error situation occurs, the execution of the program 
 is erroneous.<span class="insert5">&nbsp;Similarly, if a precondition check 
 has been suppressed and the evaluation of the precondition would have 
@@ -241,7 +241,7 @@ raised an exception, execution is erroneous.</span></div>
 on checking pragmas, subject only to the requirement that <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Unsuppress shall allow any check names supported by <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Suppress. An implementation is allowed to add additional check names, 
-with implementation-defined semantics. <A NAME="I4866"></A>When Overflow_Check 
+with implementation-defined semantics. <A NAME="I4854"></A>When Overflow_Check 
 has been suppressed, an implementation may also suppress an unspecified 
 subset of the Range_Checks.&nbsp;</div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
@@ -257,7 +257,7 @@ parameter is implementation-defined.&nbsp;</div>
 for checks that have been suppressed.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Notes">5&nbsp;&nbsp;<A NAME="I4867"></A><A NAME="I4868"></A>There 
+<div class="Notes">5&nbsp;&nbsp;<A NAME="I4855"></A><A NAME="I4856"></A>There 
 is no guarantee that a suppressed check is actually removed; hence a 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Suppress 
 should be used only for efficiency reasons.</div>

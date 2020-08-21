@@ -20,7 +20,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,13 +48,13 @@ Each partition may run in a separate address space, possibly on a separate
 computer. A program may contain just one partition. A distributed program 
 typically contains multiple partitions, which can execute concurrently.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4747"></A><A NAME="I4748"></A><A NAME="I4749"></A>As 
+<div class="Normal"><A NAME="I4938"></A><A NAME="I4939"></A><A NAME="I4940"></A>As 
 explained below, a partition is constructed from <I>library units</I>. 
-Syntactically, the declaration of a library unit is a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>, 
+Syntactically, the declaration of a library unit is a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>, 
 as is the body of a library unit. An implementation may support a concept 
 of a <I>program library</I> (or simply, a &ldquo;library&rdquo;), which 
-contains <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s 
-and their subunits. <A NAME="I4750"></A>Library units may be organized 
+contains <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
+and their subunits. <A NAME="I4941"></A>Library units may be organized 
 into a hierarchy of children, grandchildren, and so on.]</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
@@ -67,7 +67,7 @@ and executing partitions.</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p3.a">3.a</a></div>
-<div class="Annotations"><A NAME="I4751"></A>We should avoid specifying 
+<div class="Annotations"><A NAME="I4942"></A>We should avoid specifying 
 details that are outside the domain of the language itself. The standard 
 is intended (at least in part) to promote portability of Ada programs 
 at the source level. It is not intended to standardize extra-language 
@@ -75,12 +75,12 @@ issues such as how one invokes the compiler (or other tools), how one's
 source is represented and organized, version management, the format of 
 error messages, etc.</div>
 <div class="paranum"><a name="p3.b">3.b</a></div>
-<div class="Annotations"><A NAME="I4752"></A><A NAME="I4753"></A>The 
+<div class="Annotations"><A NAME="I4943"></A><A NAME="I4944"></A>The 
 rules of the language should be enforced even in the presence of separate 
 compilation. Using separate compilation should not make a program less 
 safe.</div>
 <div class="paranum"><a name="p3.c">3.c</a></div>
-<div class="Annotations"><A NAME="I4754"></A>It should be possible to 
+<div class="Annotations"><A NAME="I4945"></A>It should be possible to 
 determine the legality of a compilation unit by looking only at the compilation 
 unit itself and the compilation units upon which it depends semantically. 
 As an example, it should be possible to analyze the legality of two compilation 

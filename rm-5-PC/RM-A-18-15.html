@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -42,7 +40,7 @@ generic formal type Element_Type is indefinite.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The declaration of 
-the generic library package Containers.Indefinite_Hashed_Sets<A NAME="I7594"></A> 
+the generic library package Containers.Indefinite_Hashed_Sets<A NAME="I7579"></A> 
 has the same contents and semantics as Containers.Hashed_Sets except:</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Bulleted">The generic formal Element_Type is indefinite.</div>
@@ -51,10 +49,9 @@ has the same contents and semantics as Containers.Hashed_Sets except:</div>
 Process of Update_Element_Preserving_Key may be constrained even if Element_Type 
 is unconstrained.</div>
 <div class="paranum"><a name="p5">5/4</a></div>
-<div class="Bulleted"><span class="insert4">The operations Include, Insert, 
-Replace, Replace_Element, and To_Set that have a formal parameter of 
-type Element_Type perform indefinite insertion (see <A HREF="RM-A-18.html">A.18</A>).</span> 
-</div>
+<div class="Bulleted">The operations Include, Insert, Replace, Replace_Element, 
+and To_Set that have a formal parameter of type Element_Type perform 
+indefinite insertion (see <A HREF="RM-A-18.html">A.18</A>).&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

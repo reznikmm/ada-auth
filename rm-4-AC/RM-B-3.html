@@ -23,17 +23,17 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -248,7 +248,7 @@ was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span 
 <div class="paranum"><a name="p42">42</a></div>
 <div class="Normal">Each of the types declared in Interfaces.C is C-compatible.</div>
 <div class="paranum"><a name="p43">43/2</a></div>
-<div class="Normal">The types int, short, long, unsigned, ptrdiff_t, 
+<div class="Normal">&nbsp;The types int, short, long, unsigned, ptrdiff_t, 
 size_t, double, char, <span class="delete2">and&nbsp;</span>wchar_t<span class="insert2">, 
 char16_t, and char32_t</span> correspond respectively to the C types 
 having the same names. The types signed_char, unsigned_short, unsigned_long, 
@@ -425,20 +425,20 @@ char32_array have analogous effects to the To_C and To_Ada subprograms
 that convert between String and char_array, except that char32_nul is 
 used instead of nul.</span></div>
 <div class="paranum"><a name="p60.13">60.13/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1"></span><span class="insert3">The</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;A</span></span><span class="insert1">&nbsp;Convention&nbsp;</span><span class="insert3">aspect</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;pragma</span></span><span class="insert1">&nbsp;with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert1"></span><span class="insert3">The</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;A</span></span><span class="insert1">&nbsp;Convention&nbsp;</span><span class="insert3">aspect</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;pragma</span></span><span class="insert1">&nbsp;with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 C_Pass_By_Copy shall only be&nbsp;</span><span class="insert3">specified for</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;applied 
 to</span></span><span class="insert1">&nbsp;a type.</span></div>
 <div class="paranum"><a name="p60.14">60.14/2</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">The eligibility rules in 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert1">The eligibility rules in 
 <A HREF="RM-B-1.html">B.1</A> do not apply to convention C_Pass_By_Copy. 
 Instead, a type T is eligible for convention C_Pass_By_Copy&nbsp;</span><span class="insert2">if 
 T is an unchecked union type or&nbsp;</span><span class="insert1">if T is 
 a record type that has no discriminants and that only has components 
 with statically constrained subtypes, and each component is C-compatible.</span></div>
 <div class="paranum"><a name="p60.15">60.15/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">If a type is C_Pass_By_Copy-compatible</span><span class="insert3">,</span><span class="insert1">&nbsp;then it is also C-compatible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert1">If a type is C_Pass_By_Copy-compatible</span><span class="insert3">,</span><span class="insert1">&nbsp;then it is also C-compatible.</span></div>
 <div class="paranum"><a name="p60.16">60.16/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The identifiers C_Variadic_0, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4">The identifiers C_Variadic_0, 
 C_Variadic_1, C_Variadic_2, and so on are <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s. 
 These conventions are said to be <I>C_Variadic</I>. The convention C_Variadic_<I>n</I> 
 is the calling convention for a variadic C function taking <I>n</I> fixed 
@@ -450,7 +450,7 @@ type is C-compatible.<A NAME="I7813"></A><A NAME="I7814"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p61">61/3</a></div>
-<div class="Normal">An implementation shall support <span class="insert3">specifying 
+<div class="Normal">&nbsp;An implementation shall support <span class="insert3">specifying 
 aspect</span><span class="delete3">&nbsp;pragma</span> Convention with a C 
 <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 for a C-eligible type (see <A HREF="RM-B-1.html">B.1</A>)<span class="insert1">. 
@@ -463,7 +463,7 @@ for a C_Pass_By_Copy-eligible type.</span>&nbsp;</div>
 <div class="Normal">An implementation may provide additional declarations 
 in the C interface packages.</div>
 <div class="paranum"><a name="p62.1">62.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">An 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">An 
 implementation need not support specifying the Convention aspect with 
 <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 C in the following cases:</span></div>
@@ -480,7 +480,7 @@ subtype is an unconstrained array subtype.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p62.5">62.5/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">The constants nul</span><span class="insert2">,</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;and</span></span><span class="insert1">&nbsp;wide_nul</span><span class="insert2">, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">The constants nul</span><span class="insert2">,</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;and</span></span><span class="insert1">&nbsp;wide_nul</span><span class="insert2">, 
 char16_nul, and char32_nul</span><span class="insert1">&nbsp;should have a 
 representation of zero.</span>&nbsp;</div>
 <div class="paranum"><a name="p63">63</a></div>
@@ -539,10 +539,10 @@ type is passed as specified for the full view of the type.</span></div>
 given above for parameters of mode <B>in</B> also apply to the return 
 object of a function.</span></div>
 <div class="paranum"><a name="p71.3">71.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;An 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="delete3"></span><span class="insert2"><span class="delete3">An 
 Ada parameter of a private type is passed as specified for the full view 
-of the type.</span></span><span class="insert2"></span></div>
+of the type.</span></span><span class="delete3"></span></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p72">72</a></div>
 <div class="Notes">9&nbsp;&nbsp;Values of type char_array are not implicitly 

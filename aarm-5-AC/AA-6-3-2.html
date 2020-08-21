@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,14 +50,14 @@ Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3"><A NAME="I3898"></A><A NAME="I3899"></A>The form 
+<span class="delete3"><A NAME="I4022"></A><A NAME="I4023"></A>The form 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Inline, which is a program unit pragma (see <A HREF="AA-10-1-5.html">10.1.5</A>), 
 is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I3900"></A><A NAME="I3901"></A>Inline(<A NAME="I3902"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-{, <A NAME="I3903"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>});</span> 
+<A NAME="I4024"></A><A NAME="I4025"></A>Inline(<A NAME="I4026"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+{, <A NAME="I4027"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>});</span> 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -85,10 +85,10 @@ of that generic subprogram.</span></div>
 Inline is True for a callable entity, inline expansion is desired for 
 all calls to that entity. When aspect Inline is True for a generic subprogram, 
 inline expansion is desired for all calls to all instances of that generic 
-subprogram.<A NAME="I3904"></A><A NAME="I3905"></A></span></div>
+subprogram.<A NAME="I4028"></A><A NAME="I4029"></A></span></div>
 <div class="paranum"><a name="p5.2">5.2/3</a></div>
 <div class="WideHanging-Body"><span class="insert3">If directly specified, 
-the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a static expression. [This aspect is never inherited;] if not 
 directly specified, the aspect is False.</span></div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
@@ -150,7 +150,7 @@ long as the semantics of the program remains unchanged.&nbsp;</div>
 <span class="delete3"></span><span class="insert2"><span class="delete3">An 
 implementation may allow a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Inline that has an argument which is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
-denoting a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+denoting a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 of the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>.</span></span><span class="delete3"></span> 
 </div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
@@ -177,8 +177,8 @@ to all of the denoted entities.</span>&nbsp;</div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="insert2"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00309.TXT">AI95-00309-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I3906"></A>A 
-pragma Inline cannot refer to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+<span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4030"></A>A 
+pragma Inline cannot refer to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 outside of that body. The pragma can be given inside of the subprogram 
 body. Ada 2005 adds an Implementation Permission to allow this usage 
 for compatibility (and Ada 95 implementations also can use this permission), 
@@ -189,9 +189,9 @@ but implementations do not have to allow such <SPAN Class="swiss"><A HREF="AA-2-
 <div class="paranum"><a name="p7.b">7.b/3</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3"><A NAME="I3907"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Inline is allowed inside a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
-if there is no corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>. 
+<span class="delete3"><A NAME="I4031"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+Inline is allowed inside a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+if there is no corresponding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>. 
 This is for uniformity with other program unit pragmas.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
@@ -199,15 +199,15 @@ This is for uniformity with other program unit pragmas.</span>&nbsp;</div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="insert2"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00309.TXT">AI95-00309-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I3908"></A><B>Amendment 
+<span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4032"></A><B>Amendment 
 Correction:</B> Implementations are allowed to let <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
-Inline apply to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>.</span></span><span class="insert2"></span> 
+Inline apply to a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>.</span></span><span class="insert2"></span> 
 </div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p7.d">7.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I3909"></A>Aspect Inline is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<span class="insert3"><A NAME="I4033"></A>Aspect Inline is new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Inline is now obsolescent.</span>&nbsp;</div>
 
 <HR>

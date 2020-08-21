@@ -41,12 +41,12 @@ of the storage place attributes.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I5322"></A>A bit ordering is a method of 
-interpreting the meaning of the storage place attributes. <A NAME="I5323"></A><A NAME="I5324"></A><A NAME="I5325"></A>High_Order_First 
+<div class="Normal"><A NAME="I5310"></A>A bit ordering is a method of 
+interpreting the meaning of the storage place attributes. <A NAME="I5311"></A><A NAME="I5312"></A><A NAME="I5313"></A>High_Order_First 
 (known in the vernacular as &ldquo;big endian&rdquo;) means that the 
 first bit of a storage element (bit 0) is the most significant bit (interpreting 
 the sequence of bits that represent a component as an unsigned integer 
-value). <A NAME="I5326"></A><A NAME="I5327"></A><A NAME="I5328"></A>Low_Order_First 
+value). <A NAME="I5314"></A><A NAME="I5315"></A><A NAME="I5316"></A>Low_Order_First 
 (known in the vernacular as &ldquo;little endian&rdquo;) means the opposite: 
 the first bit is the least significant.</div>
 <div class="paranum"><a name="p3">3</a></div>
@@ -54,23 +54,23 @@ the first bit is the least significant.</div>
 record subtype S, the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">S'Bit_Order</div><div class="WideHanging-Body">
-<A NAME="I5329"></A><A NAME="I5330"></A>Denotes the bit ordering for 
+<A NAME="I5317"></A><A NAME="I5318"></A>Denotes the bit ordering for 
 the type of S. The value of this attribute is of type System.Bit_Order. 
-<A NAME="I5331"></A><A NAME="I5332"></A>Bit_Order may be specified for 
+<A NAME="I5319"></A><A NAME="I5320"></A>Bit_Order may be specified for 
 specific record types via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
-the expression of such a clause shall be static.<A NAME="I5333"></A><A NAME="I5334"></A></div>
+the expression of such a clause shall be static.<A NAME="I5321"></A><A NAME="I5322"></A></div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">If Word_Size = Storage_Unit, the default bit ordering 
 is implementation defined. If Word_Size &gt; Storage_Unit, the default 
 bit ordering is the same as the ordering of storage elements in a word, 
-when interpreted as an integer. <A NAME="I5335"></A></div>
+when interpreted as an integer. <A NAME="I5323"></A></div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">The storage place attributes of a component of a 
 type are interpreted according to the bit ordering of the type.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5336"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5324"></A>The 
 recommended level of support for the nondefault bit ordering is:&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Bulleted">The implementation should support the nondefault 

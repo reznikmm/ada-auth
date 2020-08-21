@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -56,18 +56,18 @@ determines the value of the ancestor/prefix.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">extension_aggregate</SPAN><A NAME="I2748"></A><A NAME="S0111"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2749"></A><SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN>&nbsp;<B>with</B>&nbsp;<A NAME="I2750"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">extension_aggregate</SPAN><A NAME="I2766"></A><A NAME="S0111"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I2767"></A><SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN>&nbsp;<B>with</B>&nbsp;<A NAME="I2768"></A><SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">ancestor_part</SPAN><A NAME="I2751"></A><A NAME="S0112"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2752"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2753"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">ancestor_part</SPAN><A NAME="I2769"></A><A NAME="S0112"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2770"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I2771"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I2754"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
-shall be a single type that is a record extension. <A NAME="I2755"></A>If 
+<A NAME="I2772"></A>The expected type for an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+shall be a single type that is a record extension. <A NAME="I2773"></A>If 
 the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
-is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 it is expected to be of any tagged type.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We could have made the expected 
@@ -94,10 +94,10 @@ more like a Legality Rule than a Name Resolution Rule.&nbsp;</div>
 If the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 it shall denote a specific tagged subtype. If the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
-is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 it shall not be dynamically tagged. The type of the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
 shall be a descendant of the type of the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
-(the <I>ancestor</I> type)<A NAME="I2756"></A>, through one or more record 
+(the <I>ancestor</I> type)<A NAME="I2774"></A>, through one or more record 
 extensions (and no private extensions). If the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 the view of the ancestor type from which the type is descended (see <A HREF="AA-7-3-1.html">7.3.1</A>) 
@@ -121,8 +121,8 @@ subtype; nor</div>
 <div class="Bulleted">a parenthesized or qualified expression whose operand 
 would violate this rule; nor</div>
 <div class="paranum"><a name="p5.4">5.4/3</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0134">conditional_expression</A></SPAN> 
-having at least one <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0138">conditional_expression</A></SPAN> 
+having at least one <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 that would violate this rule.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
@@ -141,7 +141,7 @@ result can simply use the space returned by the function call.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I2757"></A>For the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
+<div class="Normal"><A NAME="I2775"></A>For the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
 the only components <I>needed</I> are those of the composite value defined 
 by the aggregate that are not inherited from the type of the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN>, 
@@ -151,21 +151,21 @@ that denotes an unconstrained subtype.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2758"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
+<div class="Normal"><A NAME="I2776"></A>For the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
 is evaluated. If the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
-is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 it is also evaluated; if the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 the components of the value of the aggregate not given by the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
 are initialized by default as for an object of the ancestor type. Any 
 implicit initializations or evaluations are performed in an arbitrary 
-order, except that the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+order, except that the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 for a discriminant is evaluated prior to any other evaluation or initialization 
-that depends on it.<A NAME="I2759"></A></div>
+that depends on it.<A NAME="I2777"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0282-1.TXT">AI05-0282-1</A></I>} 
-<A NAME="I2760"></A><A NAME="I2761"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
+<A NAME="I2778"></A><A NAME="I2779"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 has discriminants and the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is not a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 that denotes an unconstrained subtype, then a check is made that each 
@@ -174,7 +174,7 @@ has the value specified for a corresponding discriminant, if any, either
 in the <SPAN Class="swiss"><A HREF="AA-4-3-1.html#S0108">record_component_association_list</A></SPAN>, 
 or in the <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN> 
 for some ancestor of the type of the <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN>. 
-<A NAME="I2762"></A>Constraint_Error is raised if this check fails.&nbsp;</div>
+<A NAME="I2780"></A>Constraint_Error is raised if this check fails.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Corresponding and specified 
 discriminants are defined in <A HREF="AA-3-7.html">3.7</A>. The rules 
@@ -217,17 +217,17 @@ Addition'(Binop&nbsp;<B>with&nbsp;null&nbsp;record</B>)<BR>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p13.a">13.a</a></div>
-<div class="Annotations"><A NAME="I2763"></A>The extension aggregate 
+<div class="Annotations"><A NAME="I2781"></A>The extension aggregate 
 syntax is new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p13.b">13.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00306.TXT">AI95-00306-01</A></I>} 
-<A NAME="I2764"></A><B>Amendment Correction:</B> Eliminated implicit 
+<A NAME="I2782"></A><B>Amendment Correction:</B> Eliminated implicit 
 &ldquo;truncation&rdquo; of a dynamically tagged value when it is used 
-as an ancestor <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>. 
+as an ancestor <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
 If an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-includes such an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+includes such an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 it is illegal in Ada 2005. Such <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 are thought to be rare; the problem can be fixed with a type conversion 
 to the appropriate specific type if it occurs.&nbsp;</div>
@@ -242,7 +242,7 @@ are allowed (since all kinds of aggregates can now be limited, see <A HREF="AA-4
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p13.d">13.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0282-1.TXT">AI05-0282-1</A></I>} 
-<A NAME="I2765"></A><B>Correction:</B> An <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+<A NAME="I2783"></A><B>Correction:</B> An <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
 with an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 whose discriminants are constrained and inherited might now raise Constraint_Error 
 if the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>'s 
@@ -259,7 +259,7 @@ constrained and no such objects can be created any other way.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p13.e">13.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
-<A NAME="I2766"></A><B>Correction:</B> A limited unconstrained ancestor 
+<A NAME="I2784"></A><B>Correction:</B> A limited unconstrained ancestor 
 expression that is a function call is now illegal unless the extension 
 part is null. Such <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 were first introduced in Ada 2005 and are very complex to implement as 

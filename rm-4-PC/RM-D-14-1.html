@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,9 +33,9 @@
 <HR>
 <H1>D.14.1 Execution Time Timers</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-describes a language-defined package that provides a facility for calling 
-a handler when a task has used a defined amount of CPU time.&nbsp;</div>
+<div class="Normal">This subclause describes a language-defined package 
+that provides a facility for calling a handler when a task has used a 
+defined amount of CPU time.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -45,129 +43,127 @@ a handler when a task has used a defined amount of CPU time.&nbsp;</div>
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples"><B>with</B>&nbsp;System;<BR>
-<B>package</B>&nbsp;Ada.Execution_Time.Timers&nbsp;<B>is</B><A NAME="I8230"></A></div>
+<B>package</B>&nbsp;Ada.Execution_Time.Timers&nbsp;<B>is</B><A NAME="I8030"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8231"></A>Timer&nbsp;(T&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8031"></A>Timer&nbsp;(T&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Task_Id)&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>tagged&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8232"></A>Timer_Handler&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8032"></A>Timer_Handler&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access&nbsp;protected&nbsp;procedure</B>&nbsp;(TM&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8233"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8033"></A>Min_Handler_Ceiling&nbsp;:&nbsp;<B>constant</B>&nbsp;System.Any_Priority&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8234"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8034"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Time_Span;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timer_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8235"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8035"></A>Set_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At_Time&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Time;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Timer_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8236"></A>Current_Handler&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Timer_Handler;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8237"></A>Cancel_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8036"></A>Current_Handler&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Timer_Handler;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8037"></A>Cancel_Handler&nbsp;(TM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Timer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancelled&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8238"></A>Time_Remaining&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8038"></A>Time_Remaining&nbsp;(TM&nbsp;:&nbsp;Timer)&nbsp;<B>return</B>&nbsp;Time_Span;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8239"></A>Timer_Resource_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8039"></A>Timer_Resource_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Execution_Time.Timers;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">The type Timer represents an execution-time event 
+<div class="Normal">&nbsp;The type Timer represents an execution-time event 
 for a single task and is capable of detecting execution-time overruns. 
 The access discriminant T identifies the task concerned. The type Timer 
 needs finalization (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal">An object of type Timer is said to be <I>set</I> 
+<div class="Normal">&nbsp;An object of type Timer is said to be <I>set</I> 
 if it is associated with a nonnull value of type Timer_Handler and <I>cleared</I> 
-otherwise. All Timer objects are initially cleared. <A NAME="I8240"></A><A NAME="I8241"></A></div>
+otherwise. All Timer objects are initially cleared. <A NAME="I8040"></A><A NAME="I8041"></A></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal">The type Timer_Handler identifies a protected procedure 
+<div class="Normal">&nbsp;The type Timer_Handler identifies a protected procedure 
 to be executed by the implementation when the timer expires. Such a protected 
-procedure is called a <I>handler</I>. <A NAME="I8242"></A></div>
+procedure is called a <I>handler</I>. <A NAME="I8042"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal">When a Timer object is created, or upon the first 
+<div class="Normal">&nbsp;When a Timer object is created, or upon the first 
 call of a Set_Handler procedure with the timer as parameter, the resources 
 required to operate an execution-time timer based on the associated execution-time 
 clock are allocated and initialized. If this operation would exceed the 
 available resources, Timer_Resource_Error is raised.</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal">The procedures Set_Handler associate the handler 
-Handler with the timer TM<span class="insert3">:</span><span class="delete3">;</span> 
-if Handler is <B>null</B>, the timer is cleared<span class="insert3">;</span><span class="delete3">,</span> 
-otherwise<span class="insert3">,</span> it is set. The first procedure 
-Set_Handler loads the timer TM with an interval specified by the Time_Span 
-parameter. In this mode, the timer TM <I>expires</I> when the execution 
-time of the task identified by TM.T.<B>all</B> has increased by In_Time; 
-if In_Time is less than or equal to zero, the timer expires immediately. 
-The second procedure Set_Handler loads the timer TM with the absolute 
-value specified by At_Time. In this mode, the timer TM expires when the 
-execution time of the task identified by TM.T.<B>all</B> reaches At_Time; 
-if the value of At_Time has already been reached when Set_Handler is 
-called, the timer expires immediately.<A NAME="I8243"></A></div>
+<div class="Normal">&nbsp;The procedures Set_Handler associate the handler 
+Handler with the timer TM: if Handler is <B>null</B>, the timer is cleared; 
+otherwise, it is set. The first procedure Set_Handler loads the timer 
+TM with an interval specified by the Time_Span parameter. In this mode, 
+the timer TM <I>expires</I> when the execution time of the task identified 
+by TM.T.<B>all</B> has increased by In_Time; if In_Time is less than 
+or equal to zero, the timer expires immediately. The second procedure 
+Set_Handler loads the timer TM with the absolute value specified by At_Time. 
+In this mode, the timer TM expires when the execution time of the task 
+identified by TM.T.<B>all</B> reaches At_Time; if the value of At_Time 
+has already been reached when Set_Handler is called, the timer expires 
+immediately.<A NAME="I8043"></A></div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">A call of a procedure Set_Handler for a timer that 
+<div class="Normal">&nbsp;A call of a procedure Set_Handler for a timer that 
 is already set replaces the handler and the (absolute or relative) execution 
 time; if Handler is not <B>null</B>, the timer remains set.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">When a timer expires, the associated handler is executed, 
-passing the timer as parameter. The initial action of the execution of 
-the handler is to clear the event.</div>
+<div class="Normal">&nbsp;When a timer expires, the associated handler is 
+executed, passing the timer as parameter. The initial action of the execution 
+of the handler is to clear the event.</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">The function Current_Handler returns the handler 
-associated with the timer TM if that timer is set; otherwise<span class="insert3">,</span> 
-it returns <B>null</B>.</div>
+<div class="Normal">&nbsp;The function Current_Handler returns the handler 
+associated with the timer TM if that timer is set; otherwise, it returns 
+<B>null</B>.</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal">The procedure Cancel_Handler clears the timer if 
+<div class="Normal">&nbsp;The procedure Cancel_Handler clears the timer if 
 it is set. Cancelled is assigned True if the timer was set prior to it 
-being cleared; otherwise<span class="insert3">,</span> it is assigned 
-False.</div>
+being cleared; otherwise, it is assigned False.</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal">The function Time_Remaining returns the execution 
+<div class="Normal">&nbsp;The function Time_Remaining returns the execution 
 time interval that remains until the timer TM would expire, if that timer 
-is set; otherwise<span class="insert3">,</span> it returns Time_Span_Zero.</div>
+is set; otherwise, it returns Time_Span_Zero.</div>
 <div class="paranum"><a name="p21">21/2</a></div>
-<div class="Normal">The constant Min_Handler_Ceiling is the minimum ceiling 
-priority required for a protected object with a handler to ensure that 
-no ceiling violation will occur when that handler is invoked.</div>
+<div class="Normal">&nbsp;The constant Min_Handler_Ceiling is the minimum 
+ceiling priority required for a protected object with a handler to ensure 
+that no ceiling violation will occur when that handler is invoked.</div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal">As part of the finalization of an object of type 
+<div class="Normal">&nbsp;As part of the finalization of an object of type 
 Timer, the timer is cleared.</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal">For all the subprograms defined in this package, 
+<div class="Normal">&nbsp;For all the subprograms defined in this package, 
 Tasking_Error is raised if the task identified by TM.T.<B>all</B> has 
 terminated, and Program_Error is raised if the value of TM.T.<B>all</B> 
 is Task_Identification.Null_Task_Id.</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Normal">An exception propagated from a handler invoked as 
+<div class="Normal">&nbsp;An exception propagated from a handler invoked as 
 part of the expiration of a timer has no effect.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Normal"><A NAME="I8244"></A>For a call of any of the subprograms 
+<div class="Normal">&nbsp;<A NAME="I8044"></A>For a call of any of the subprograms 
 defined in this package, if the task identified by TM.T.<B>all</B> no 
 longer exists, the execution of the program is erroneous.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal">For a given Timer object, the implementation shall 
+<div class="Normal">&nbsp;For a given Timer object, the implementation shall 
 perform the operations declared in this package atomically with respect 
 to any of these operations on the same Timer object. The replacement 
 of a handler by a call of Set_Handler shall be performed atomically with 
 respect to the execution of the handler.</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Normal">When an object of type Timer is finalized, the system 
+<div class="Normal">&nbsp;When an object of type Timer is finalized, the system 
 resources used by the timer shall be deallocated.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal">Implementations may limit the number of timers that 
-can be defined for each task. If this limit is exceeded<span class="insert3">,</span> 
-then Timer_Resource_Error is raised.</div>
+<div class="Normal">&nbsp;Implementations may limit the number of timers that 
+can be defined for each task. If this limit is exceeded, then Timer_Resource_Error 
+is raised.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p29">29/2</a></div>
 <div class="Notes">45&nbsp;&nbsp;A Timer_Handler can be associated with 

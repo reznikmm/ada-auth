@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -96,14 +94,14 @@ produced is as for Enum'Image(Item), as modified by the Width and Set
 parameters.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-For a character type, the literal might be a <span class="insert3">Wide_Wide_Character, 
-</span>Wide_Character<span class="insert3">,</span> or a control character. 
-Whatever Image does for these things is appropriate here, too.</div>
+For a character type, the literal might be a Wide_Wide_Character, Wide_Character, 
+or a control character. Whatever Image does for these things is appropriate 
+here, too.</div>
 <div class="paranum"><a name="p11.b">11.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0036-1.TXT">AI05-0036-1</A></I>} 
-<span class="insert3">The &ldquo;characters produced&rdquo; defines the 
-&ldquo;characters to be output&rdquo; in the sense of <A HREF="AA-A-10-6.html">A.10.6</A>, 
-so a result that cannot fit on any bounded line will raise Layout_Error.</span> 
+The &ldquo;characters produced&rdquo; defines the &ldquo;characters to 
+be output&rdquo; in the sense of <A HREF="AA-A-10-6.html">A.10.6</A>, 
+so a result that cannot fit on any bounded line will raise Layout_Error. 
 </div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Get(From&nbsp;:&nbsp;<B>in</B>&nbsp;String;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Enum;&nbsp;Last&nbsp;:&nbsp;<B>out</B>&nbsp;Positive);</div>
@@ -122,7 +120,8 @@ of the subtype Enum.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 For a character type, it is permissible for the implementation to make 
-Get do the inverse of what Put does, in the case of wide<span class="insert3">&nbsp;and wide_wide</span> <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>s 
+Get do the inverse of what Put does, in the case of wide and wide_wide 
+<SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>s 
 and control characters.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Put(To&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
@@ -134,7 +133,7 @@ of the parameter Item to the given string, following the same rule as
 for output to a file, using the length of the given string as the value 
 for Width.&nbsp;</div>
 <div class="paranum"><a name="p17">17/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0054">8652/0054</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0054">8652/0054</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00007.TXT">AI95-00007-01</A></I>} 
 Although the specification of the generic package Enumeration_IO would 
 allow instantiation for an integer type, this is not the intended purpose 
@@ -142,7 +141,7 @@ of this generic package, and the effect of such instantiations is not
 defined by the language.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Notes">37&nbsp;&nbsp;There is a difference between Put defined 
+<div class="Notes">36&nbsp;&nbsp;There is a difference between Put defined 
 for characters, and for enumeration values. Thus&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;Ada.Text_IO.Put('A');&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;outputs&nbsp;the&nbsp;character&nbsp;A</I></SPAN></div>
@@ -150,7 +149,7 @@ for characters, and for enumeration values. Thus&nbsp;</div>
 <div class="SmallIndented2Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Char_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Text_IO.Enumeration_IO(Character);<BR>
 &nbsp;&nbsp;&nbsp;Char_IO.Put('A');&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;outputs&nbsp;the&nbsp;character&nbsp;'A',&nbsp;between&nbsp;apostrophes</I></SPAN></div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Notes">38&nbsp;&nbsp;The type Boolean is an enumeration type, 
+<div class="Notes">37&nbsp;&nbsp;The type Boolean is an enumeration type, 
 hence Enumeration_IO can be instantiated for this type.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>

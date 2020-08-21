@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@ for a general discussion of streams.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/1</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00026.TXT">AI95-00026-01</A></I>} 
 The elements of a stream file are stream elements. If positioning is 
 supported for the specified external file, a current index and current 
@@ -156,16 +156,16 @@ was deleted.</I></SPAN></div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Streams.Stream_IO;</div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
 The type File_Type needs finalization<A NAME="I7197"></A> (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p28">28/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00283.TXT">AI95-00283-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00283.TXT">AI95-00283-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0130-1.TXT">AI12-0130-1</A></I>} 
 The subprograms given in subclause <A HREF="AA-A-8-2.html">A.8.2</A> 
 for the control of external files (Create, Open, Close, Delete, Reset, 
 Mode, Name, Form, Is_Open, and Flush) are available for stream files.</div>
 <div class="paranum"><a name="p28.1">28.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00283.TXT">AI95-00283-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00283.TXT">AI95-00283-01</A></I>} 
 The End_Of_File function:&nbsp;</div>
 <div class="paranum"><a name="p28.2">28.2/2</a></div>
 <div class="Bulleted">Propagates Mode_Error if the mode of the file is 
@@ -181,27 +181,27 @@ If positioning is not supported for the given external file, the function
 returns True if no more elements can be read from the given file; otherwise, 
 it returns False.&nbsp;</div>
 <div class="paranum"><a name="p28.5">28.5/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00026.TXT">AI95-00026-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00085.TXT">AI95-00085-01</A></I>} 
 The Set_Mode procedure sets the mode of the file. If the new mode is 
 Append_File, the file is positioned to its end; otherwise, the position 
 in the file is unchanged.</div>
 <div class="paranum"><a name="p28.6">28.6/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN>{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00026.TXT">AI95-00026-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0130-1.TXT">AI12-0130-1</A></I>} 
 </div>
 <div class="paranum"><a name="p29">29/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0056">8652/0056</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0056">8652/0056</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00001.TXT">AI95-00001-01</A></I>} 
 The Stream function returns a Stream_Access result from a File_Type object, 
 thus allowing the stream-oriented attributes Read, Write, Input, and 
 Output to be used on the same file for multiple types. Stream propagates 
 Status_Error if File is not open.</div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
 The procedures Read and Write are equivalent to the corresponding operations 
 in the package Streams. Read propagates Mode_Error if the mode of File 
 is not In_File. Write propagates Mode_Error if the mode of File is not 
@@ -212,11 +212,11 @@ positioning, Read without a Positive_Count parameter starts reading at
 the current index, and Write without a Positive_Count parameter starts 
 writing at the current index.</div>
 <div class="paranum"><a name="p30.1">30.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00026.TXT">AI95-00026-01</A></I>} 
 The Size function returns the current size of the file.</div>
 <div class="paranum"><a name="p31">31/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00026.TXT">AI95-00026-01</A></I>} 
 The Index function returns the current index.&nbsp;</div>
 <div class="paranum"><a name="p31.a">31.a/1</a></div>
@@ -226,7 +226,7 @@ was deleted.</I></SPAN></div>
 <div class="Normal">The Set_Index procedure sets the current index to 
 the specified value.</div>
 <div class="paranum"><a name="p32.1">32.1/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0055">8652/0055</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00026.TXT">AI95-00026-01</A></I>} 
 If positioning is supported for the external file, the current index 
 is maintained as follows:</div>
@@ -281,7 +281,7 @@ explicitly commanded to write somewhere else).&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p36.1">36.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0056">8652/0056</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0056">8652/0056</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00001.TXT">AI95-00001-01</A></I>} 
 <A NAME="I7198"></A>If the File_Type object passed to the Stream function 
 is later closed or finalized, and the stream-oriented attributes are 

@@ -19,15 +19,15 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 2.3em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Enumerated-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Enumerated-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.7em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -161,7 +161,7 @@ to a particular processor.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal">If the underlying system or hardware does not allow 
+<div class="Normal">&nbsp;If the underlying system or hardware does not allow 
 interrupts to be blocked, then no blocking is required as part of the 
 execution of subprograms of a protected object <span class="insert2">for 
 which</span><span class="delete2">&nbsp;whose</span> one of its subprograms 
@@ -176,7 +176,7 @@ be applicable to one processor only.&nbsp;</div>
 <div class="Normal">Implementations are allowed to impose timing or other 
 limitations on the execution of interrupt handlers.&nbsp;</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Normal">Other forms of handlers are allowed to be supported, 
+<div class="Normal">&nbsp;Other forms of handlers are allowed to be supported, 
 in which case<span class="delete2">,</span> the rules of this <span class="insert3">subclause</span><span class="delete3"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="delete3"></span><span class="delete2">&nbsp;subclause</span><span class="delete3"></span> 
 should be adhered to.</div>
 <div class="paranum"><a name="p27">27</a></div>
@@ -186,9 +186,9 @@ to another.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal">If the Ceiling_Locking policy is not in effect, the 
-implementation should provide means for the application to specify which 
-interrupts are to be blocked during protected actions, if the underlying 
+<div class="Normal">&nbsp;If the Ceiling_Locking policy is not in effect, 
+the implementation should provide means for the application to specify 
+which interrupts are to be blocked during protected actions, if the underlying 
 system allows for <span class="insert2">finer-grained</span><span class="delete2">&nbsp;a 
 finer-grain</span> control of interrupt blocking.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>

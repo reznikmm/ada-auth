@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -55,23 +55,23 @@ priority</I> of a protected object.]&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8986"></A><A NAME="I8987"></A>Locking_Policy(<I>policy_</I><A NAME="I8988"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9304"></A><A NAME="I9305"></A>Locking_Policy(<I>policy_</I><A NAME="I9306"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The <I>policy_</I><A NAME="I8989"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-shall either be Ceiling_Locking or an implementation-defined <A NAME="I8990"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
+<div class="Normal">The <I>policy_</I><A NAME="I9307"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+shall either be Ceiling_Locking or an implementation-defined <A NAME="I9308"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
-<I>policy_</I><A NAME="I8991"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+<I>policy_</I><A NAME="I9309"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
 allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8992"></A><A NAME="I8993"></A>A Locking_Policy 
+<div class="Normal"><A NAME="I9310"></A><A NAME="I9311"></A>A Locking_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -79,7 +79,7 @@ pragma is a configuration pragma.</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0073">8652/0073</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00091.TXT">AI95-00091-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
-<A NAME="I8994"></A>[A locking policy specifies the details of protected 
+<A NAME="I9312"></A>[A locking policy specifies the details of protected 
 object locking. <span class="insert2">All protected objects have a priority. 
 The locking policy specifies the meaning of the priority of a</span><span class="delete2">&nbsp;These 
 rules specify whether or not</span> protected <span class="insert2">object</span><span class="delete2">&nbsp;objects 
@@ -95,7 +95,7 @@ to</span><span class="delete1">&nbsp;appears in</span> any of the program
 units comprising a partition, the locking policy for that partition, 
 as well as the <span class="insert2">meaning of the priority of</span><span class="delete2">&nbsp;effect 
 of specifying either a Priority or Interrupt_Priority pragma for</span> 
-a protected object, are implementation defined. <span class="insert2"><A NAME="I8995"></A></span></div>
+a protected object, are implementation defined. <span class="insert2"><A NAME="I9313"></A></span></div>
 <div class="paranum"><a name="p6.a">6.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation defined: 
 </B></span><span class="insert2">The locking policy if no Locking_Policy 
@@ -103,7 +103,7 @@ pragma applies to any unit of a partition.</span></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert2">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<span class="insert2">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 </span><span class="insert3">specified for the</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;of 
 a</span></span><span class="insert2">&nbsp;Priority or Interrupt_Priority 
 </span><span class="insert3">aspect</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragma</span></span><span class="insert2">&nbsp;(see <A HREF="AA-D-1.html">D.1</A>) is evaluated as part of the creation 
@@ -113,15 +113,15 @@ is the initial priority of the corresponding protected object. If no
 Priority or Interrupt_Priority&nbsp;</span><span class="insert3">aspect is 
 specified for</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragma 
 applies to</span></span><span class="insert2">&nbsp;a protected object, the 
-initial priority is specified by the locking policy.&nbsp;</span><span class="insert3"><A NAME="I8996"></A><A NAME="I8997"></A></span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I8998"></A><A NAME="I8999"></A></span></span><span class="insert2"></span></div>
+initial priority is specified by the locking policy.&nbsp;</span><span class="insert3"><A NAME="I9314"></A><A NAME="I9315"></A></span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I9316"></A><A NAME="I9317"></A></span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">There is one predefined 
-locking policy, Ceiling_Locking; this policy is defined as follows:<span class="insert3"><A NAME="I9000"></A><A NAME="I9001"></A></span> 
+locking policy, Ceiling_Locking; this policy is defined as follows:<span class="insert3"><A NAME="I9318"></A><A NAME="I9319"></A></span> 
 </div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9002"></A>Every protected object has a <I>ceiling priority</I>, 
+<A NAME="I9320"></A>Every protected object has a <I>ceiling priority</I>, 
 which is determined by either a Priority or Interrupt_Priority <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
 as defined in <A HREF="AA-D-1.html">D.1</A><span class="insert2">, or 
 by assignment to the Priority attribute as described in <A HREF="AA-D-5-2.html">D.5.2</A></span>. 
@@ -130,13 +130,13 @@ an upper bound on the active priority a task can have when it calls protected
 operations of that protected object.</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
-The <span class="insert2">initial ceiling priority of a</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">&nbsp;expression</A></SPAN> 
+The <span class="insert2">initial ceiling priority of a</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">&nbsp;expression</A></SPAN> 
 of a Priority or Interrupt_Priority pragma is evaluated as part of the 
 creation of the corresponding</span> protected object <span class="insert2">is 
 equal to the initial priority for that object.</span><span class="delete2">&nbsp;and 
 converted to the subtype System.Any_Priority or System.Interrupt_Priority, 
-respectively. The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is the ceiling priority of the corresponding protected object. <A NAME="I9003"></A><A NAME="I9004"></A></span></div>
+respectively. The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is the ceiling priority of the corresponding protected object. <A NAME="I9321"></A><A NAME="I9322"></A></span></div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -145,7 +145,7 @@ If an Interrupt_Handler or Attach_Handler <span class="insert3">aspect</span><sp
 (see <A HREF="AA-C-3-1.html">C.3.1</A>) <span class="insert3">is specified 
 for a protected subprogram of a protected type that does not have&nbsp;</span><span class="insert4">either 
 </span><span class="insert3">the&nbsp;</span><span class="delete3">appears 
-in a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN> 
 without an</span> <span class="insert4">Priority or&nbsp;</span>Interrupt_Priority 
 <span class="insert3">aspect specified</span><span class="delete3">&nbsp;pragma</span>, 
 the <span class="insert2">initial</span><span class="delete2">&nbsp;ceiling</span> 
@@ -163,14 +163,14 @@ Priority<span class="insert3">&nbsp;nor</span><span class="delete3">,</span>
 Interrupt_Priority<span class="delete3">, Interrupt_Handler, or Attach_Handler</span> 
 is specified <span class="insert3">for a protected type, and no protected 
 subprogram of the type has aspect Interrupt_Handler or Attach_Handler 
-specified</span><span class="delete3">&nbsp;in the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN></span>, 
+specified</span><span class="delete3">&nbsp;in the <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN></span>, 
 then the <span class="insert2">initial</span><span class="delete2">&nbsp;ceiling</span> 
 priority of the corresponding protected object is System.Priority'Last.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Bulleted">While a task executes a protected action, it inherits 
 the ceiling priority of the corresponding protected object.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted"><A NAME="I9005"></A><A NAME="I9006"></A><A NAME="I9007"></A>When 
+<div class="Bulleted"><A NAME="I9323"></A><A NAME="I9324"></A><A NAME="I9325"></A>When 
 a task calls a protected operation, a check is made that its active priority 
 is not higher than the ceiling of the corresponding protected object; 
 Program_Error is raised if this check fails.</div>
@@ -181,17 +181,17 @@ Program_Error is raised if this check fails.</div>
 <span class="insert2">Following any change of priority, it is a bounded 
 error for the active priority of any task with a call queued on an entry 
 of a protected object to be higher than the ceiling priority of the protected 
-object. <A NAME="I9008"></A>In this case one of the following applies:</span></div>
+object. <A NAME="I9326"></A>In this case one of the following applies:</span></div>
 <div class="paranum"><a name="p13.2">13.2/2</a></div>
 <div class="Bulleted"><span class="insert2">at any time prior to executing 
-the entry body Program_Error is raised in the calling task; <A NAME="I9009"></A></span></div>
+the entry body Program_Error is raised in the calling task; <A NAME="I9327"></A></span></div>
 <div class="paranum"><a name="p13.3">13.3/2</a></div>
 <div class="Bulleted"><span class="insert2">when the entry is open the 
 entry body is executed at the ceiling priority of the protected object;</span></div>
 <div class="paranum"><a name="p13.4">13.4/2</a></div>
 <div class="Bulleted"><span class="insert2">when the entry is open the 
 entry body is executed at the ceiling priority of the protected object 
-and then Program_Error is raised in the calling task; or <A NAME="I9010"></A></span></div>
+and then Program_Error is raised in the calling task; or <A NAME="I9328"></A></span></div>
 <div class="paranum"><a name="p13.5">13.5/2</a></div>
 <div class="Bulleted"><span class="insert2">when the entry is open the 
 entry body is executed at the ceiling priority of the protected object 
@@ -204,7 +204,7 @@ object. This seems to make sense for the case of changing the priority
 of a task blocked on a call, since if the Set_Priority had happened a 
 little bit sooner, before the task queued a call, the entry-calling task 
 would get the error. Similarly, there is no reason not to raise the priority 
-of a task that is executing in an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0247">abortable_part</A></SPAN>, 
+of a task that is executing in an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0261">abortable_part</A></SPAN>, 
 so long as its priority is lowered before it gets to the end and needs 
 to cancel the call. The priority might need to be lowered to allow it 
 to remove the call from the entry queue, in order to avoid violating 
@@ -247,10 +247,10 @@ and on any other code that runs at an interrupt-level active priority.</div>
 <div class="paranum"><a name="p16.c">16.c</a></div>
 <div class="Annotations">The implementation might protect a storage pool 
 with a protected object whose ceiling is Priority'Last, which would cause 
-<SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
 to fail when evaluated at interrupt priority. Note that the ceiling of 
 such an object has to be at least Priority'Last, since there is no permission 
-for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+for <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
 to fail when evaluated at a noninterrupt priority.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
@@ -298,7 +298,7 @@ object).</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p23.a">23.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
-<span class="insert2"><A NAME="I9011"></A>All protected objects now have 
+<span class="insert2"><A NAME="I9329"></A>All protected objects now have 
 a priority, which is the value of the Priority attribute of <A HREF="AA-D-5-2.html">D.5.2</A>. 
 How this value is interpreted depends on the locking policy; for instance, 
 the ceiling priority is derived from this value when the locking policy 

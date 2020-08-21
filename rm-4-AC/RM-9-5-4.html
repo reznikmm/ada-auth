@@ -19,17 +19,17 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -79,7 +79,7 @@ construct.</div>
 </span>profile shall be subtype conformant with the profile of the innermost 
 enclosing callable construct. <A NAME="I4310"></A></div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4">Given 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert4">Given 
 a requeue_statement where the innermost enclosing callable construct 
 is for an entry <I>E1</I>, for every specific or class-wide postcondition 
 expression <I>P1</I> that applies to <I>E1</I>, there shall exist a postcondition 
@@ -94,12 +94,12 @@ formal paramter of <I>E1</I>; and</span></div>
 <div class="Bulleted"><span class="insert4">if <I>P1</I> is enabled, 
 then <I>P2</I> is also enabled.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">The requeue target shall not 
-have an applicable specific or class-wide postcondition which includes 
-an Oldattribute_reference.</span></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">The requeue target shall 
+not have an applicable specific or class-wide postcondition which includes 
+an Old attribute_reference.</span></div>
 <div class="paranum"><a name="p5.5">5.5/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">If the requeue target is declared 
-immediately within the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">If the requeue target is 
+declared immediately within the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 
 of a named task type or the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
 of a named protected type, and if the requeue statement occurs within 
 the body of that type, and if the requeue is an external requeue, then 
@@ -107,7 +107,7 @@ the requeue target shall not have a specific or class-wide postcondition
 which includes a name denoting either the current instance of that type 
 or any entity declared within the declaration of that type.</span></div>
 <div class="paranum"><a name="p5.6">5.6/4</a></div>
-<div class="Normal">&nbsp;<span class="insert3">If the target is a procedure, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert3">If the target is a procedure, 
 the name shall denote a renaming of an entry, or shall denote a view 
 or a prefixed view of a primitive subprogram of a synchronized interface, 
 where the first parameter of the unprefixed view of the primitive subprogram 
@@ -163,7 +163,7 @@ object &mdash; see <A HREF="RM-9-5.html">9.5</A>), a protected action
 is started on the target object and proceeds as for a normal entry call 
 (see <A HREF="RM-9-5-3.html">9.5.3</A>).&nbsp;</div>
 <div class="paranum"><a name="p12">12/4</a></div>
-<div class="Normal">If the <span class="insert3">requeue target</span><span class="delete3">&nbsp;new 
+<div class="Normal">&nbsp;If the <span class="insert3">requeue target</span><span class="delete3">&nbsp;new 
 entry</span> named in the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
 has formal parameters, then during the execution of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 

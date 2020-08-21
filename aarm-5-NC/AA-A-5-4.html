@@ -22,7 +22,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,23 +35,23 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6894"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7123"></A>The 
 following <I>representation-oriented</I> attributes are defined for every 
 subtype S of a fixed point type <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term">S'Machine_Radix</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6895"></A><A NAME="I6896"></A>Yields the radix of the hardware 
+<A NAME="I7124"></A><A NAME="I7125"></A>Yields the radix of the hardware 
 representation of the type <I>T</I>. The value of this attribute is of 
 the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">S'Machine_Rounds</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6897"></A><A NAME="I6898"></A>Yields the value True if rounding 
+<A NAME="I7126"></A><A NAME="I7127"></A>Yields the value True if rounding 
 is performed on inexact results of every predefined operation that yields 
 a result of the type <I>T</I>; yields the value False otherwise. The 
 value of this attribute is of the predefined type Boolean.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">S'Machine_Overflows</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6899"></A><A NAME="I6900"></A>Yields the value True if overflow 
+<A NAME="I7128"></A><A NAME="I7129"></A>Yields the value True if overflow 
 and divide-by-zero are detected and reported by raising Constraint_Error 
 for every predefined operation that yields a result of the type <I>T</I>; 
 yields the value False otherwise. The value of this attribute is of the 
@@ -59,7 +59,7 @@ predefined type Boolean.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p4.a">4.a</a></div>
-<div class="Annotations"><A NAME="I6901"></A>The Mantissa, Large, Safe_Small, 
+<div class="Annotations"><A NAME="I7130"></A>The Mantissa, Large, Safe_Small, 
 and Safe_Large attributes of fixed point types are removed from the language.</div>
 <div class="paranum"><a name="p4.b">4.b</a></div>
 <div class="Annotations">Implementations are encouraged to eliminate 
@@ -69,7 +69,7 @@ their former values.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p4.c">4.c</a></div>
-<div class="Annotations"><A NAME="I6902"></A>The Machine_Radix attribute 
+<div class="Annotations"><A NAME="I7131"></A>The Machine_Radix attribute 
 is now allowed for fixed point types. It is also specifiable in an attribute 
 definition clause (see <A HREF="AA-F-1.html">F.1</A>).&nbsp;</div>
 

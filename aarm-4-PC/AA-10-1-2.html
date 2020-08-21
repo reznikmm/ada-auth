@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +44,7 @@ whose names are needed within a compilation unit.]&nbsp;</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a</a></div>
-<div class="Annotations"><A NAME="I4824"></A>The reader should be able 
+<div class="Annotations"><A NAME="I4767"></A>The reader should be able 
 to understand a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
 without looking ahead. Similarly, when compiling a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN>, 
 the compiler should not have to look ahead at subsequent <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0254">context_item</A></SPAN>s, 
@@ -54,7 +52,7 @@ nor at the compilation unit to which the <SPAN Class="swiss"><A HREF="AA-10-1-2.
 is attached. (We have not completely achieved this.)</div>
 <div class="paranum"><a name="p1.b">1.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
-<A NAME="I4825"></A>A <I>ripple effect</I> occurs when the legality of 
+<A NAME="I4768"></A>A <I>ripple effect</I> occurs when the legality of 
 a compilation unit could be affected by adding or removing an otherwise 
 unneeded <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 on some compilation unit on which the unit depends, directly or indirectly. 
@@ -68,24 +66,24 @@ which we also try to avoid.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I4826"></A><A NAME="S0253"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4827"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0254">context_item</A></SPAN>}</div>
+<div class="Indented1"><SPAN Class="swiss">context_clause</SPAN><A NAME="I4769"></A><A NAME="S0253"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>{<A NAME="I4770"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0254">context_item</A></SPAN>}</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I4828"></A><A NAME="S0254"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4829"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4830"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">context_item</SPAN><A NAME="I4771"></A><A NAME="S0254"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4772"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4773"></A><SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
-<SPAN Class="swiss">with_clause</SPAN><A NAME="I4831"></A><A NAME="S0255"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4832"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4833"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN></div>
+<SPAN Class="swiss">with_clause</SPAN><A NAME="I4774"></A><A NAME="S0255"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4775"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I4776"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I4834"></A><A NAME="S0256"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4835"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4836"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">limited_with_clause</SPAN><A NAME="I4777"></A><A NAME="S0256"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>limited</B>&nbsp;[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4778"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4779"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I4837"></A><A NAME="S0257"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4838"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4839"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">nonlimited_with_clause</SPAN><A NAME="I4780"></A><A NAME="S0257"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[<B>private</B>]&nbsp;<B>with</B>&nbsp;<I>library_unit_</I><A NAME="I4781"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>library_unit_</I><A NAME="I4782"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4.a">4.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
 makes a limited view of a unit visible.</div>
 <div class="paranum"><a name="p4.b">4.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
-<A NAME="I4840"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
+<A NAME="I4783"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 containing the reserved word <B>private</B> is called a <I>private with_clause</I>. 
 It can be thought of as making items visible only in the private part, 
 although it really makes items visible everywhere except the visible 
@@ -95,7 +93,7 @@ that otherwise would be prohibited.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4841"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
+<div class="Normal"><A NAME="I4784"></A>The <I>scope</I> of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 that appears on a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">library_unit_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">library_unit_renaming_declaration</A></SPAN> 
 consists of the entire declarative region of the declaration[, which 
@@ -130,8 +128,8 @@ even though those are not in the scope of the <SPAN Class="swiss"><A HREF="AA-10
 </div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
-<A NAME="I4842"></A><A NAME="I4843"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
-(and the corresponding library unit) is <I>named</I> <A NAME="I4844"></A><A NAME="I4845"></A>in 
+<A NAME="I4785"></A><A NAME="I4786"></A>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+(and the corresponding library unit) is <I>named</I> <A NAME="I4787"></A><A NAME="I4788"></A>in 
 a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 if it is denoted by a <I>library_unit_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>. 
@@ -146,8 +144,8 @@ in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>
 control the visibility of declarations or renamings of library units. 
 Mentioning a root library unit in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 makes its declaration directly visible. Mentioning a nonroot library 
-unit makes its declaration visible. See <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="AA-8.html">8</A> for details.</div>
+unit makes its declaration visible. See Clause <A HREF="AA-8.html">8</A> 
+for details.</div>
 <div class="paranum"><a name="p6.b">6.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
 Note that this rule implies that &ldquo;<B>with</B> A.B.C;&rdquo; is 
@@ -243,28 +241,19 @@ whose name does not start with &ldquo;A.B&rdquo;. Note that mentioning
 A.B.C.D in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 automatically mentions A.B.C as well, so &ldquo;<B>with</B> A.B.C.D;&rdquo; 
 is illegal in the same places as &ldquo;<B>with</B> A.B.C;&rdquo;.&nbsp;</div>
-<div class="paranum"><a name="p11.l">11.l/2</a></div>
-<div class="Annotations"><span class="delete3"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
-<span class="delete3">For the purposes of this rule, if a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN> 
-has no preceding <SPAN Class="swiss"><A HREF="AA-6-1.html#S0163">subprogram_declaration</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN> 
-should be considered a declaration and not a body. Thus, it is illegal 
-for such a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN> 
-to mention one of its siblings in a nonprivate <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
-if the sibling is a private library unit.</span>&nbsp;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0122-1.TXT">AI05-0122-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> denoting 
-a <span class="insert3"><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
 (or the corresponding declaration for a child of a generic within an 
-instance &mdash; see <A HREF="AA-10-1-1.html">10.1.1</A>), if it</span><span class="delete3">&nbsp;library 
-item that</span> is visible only due to being mentioned in one or more 
-<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>s 
-that include the reserved word <B>private</B><span class="insert3">,</span> 
-shall appear only within:&nbsp;</div>
+instance &mdash; see <A HREF="AA-10-1-1.html">10.1.1</A>), if it is visible 
+only due to being mentioned in one or more <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>s 
+that include the reserved word <B>private</B>, shall appear only within: 
+</div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Bulleted">a private part;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
@@ -284,9 +273,9 @@ do not apply if the name is mentioned in any <SPAN Class="swiss"><A HREF="AA-10-
 that does not include <B>private</B>.&nbsp;</div>
 <div class="paranum"><a name="p16.b">16.b/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
-These rules make the <span class="insert3"><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN></span><span class="delete3">&nbsp;library 
-item</span> visible anywhere that is not visible outside the subsystem 
-rooted at the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN> 
+These rules make the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+visible anywhere that is not visible outside the subsystem rooted at 
+the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN> 
 having the private <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>, 
 including private parts of packages nested in the visible part, private 
 parts of child packages, the visible part of private children, and context 
@@ -320,7 +309,7 @@ scope in the visible part of C, then the B at (1) resolves to A.B, while
 change its meaning. With the legality rule defined above, the B at (1) 
 is illegal. If the user really meant A.B, they still can say that.&nbsp;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 [A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
 mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
 shall be the implicit declaration of the limited view of a library package, 
@@ -331,7 +320,7 @@ or a renaming.]</div>
 such implicit declarations are visible in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN>. 
 See <A HREF="AA-10-1-6.html">10.1.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00412.TXT">AI95-00412-01</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
 shall not appear on a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_unit_body</A></SPAN>, 
@@ -351,14 +340,15 @@ it be the parent of another unit. That doesn't leave anywhere that the
 name of such a renaming <B>could</B> appear, so we simply make writing 
 it illegal.&nbsp;</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
 that names a library package shall not appear:</div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0040-1.TXT">AI05-0040-1</A></I>} 
 in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
-for the explicit declaration of the named library package<span class="insert3">&nbsp;or any of its descendants</span>;</div>
+for the explicit declaration of the named library package or any of its 
+descendants;</div>
 <div class="paranum"><a name="p20.a">20.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We have to explicitly disallow 
 </div>
@@ -379,51 +369,47 @@ interfacing and other problems. Since the child always semantically depends
 on the parent, this is the only way such a dependence can be broken.</div>
 <div class="paranum"><a name="p20.f">20.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0040-1.TXT">AI05-0040-1</A></I>} 
-<span class="insert3">The part about descendants catches examples like</span> 
-</div>
+The part about descendants catches examples like&nbsp;</div>
 <div class="paranum"><a name="p20.g">20.g/3</a></div>
-<div class="SmallExamples"><span class="insert3"><B>limited</B>&nbsp;<B>with</B>&nbsp;P;<BR>
-<B>package</B>&nbsp;P.Child&nbsp;<B>is</B>&nbsp;...</span></div>
+<div class="SmallExamples"><B>limited</B>&nbsp;<B>with</B>&nbsp;P;<BR>
+<B>package</B>&nbsp;P.Child&nbsp;<B>is</B>&nbsp;...</div>
 <div class="paranum"><a name="p21">21/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">within a</span><span class="delete3">&nbsp;in the same</span> 
-<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
-<span class="insert3">for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
-that is</span><span class="delete3">&nbsp;as, or</span> within the scope of<span class="delete3">,</span> 
-a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
+for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+that is within the scope of a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN> 
 that mentions the same library package; or</div>
 <div class="paranum"><a name="p21.a.1">21.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
-<span class="insert3">This applies to <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN>s 
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
+This applies to <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN>s 
 found in the same <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN>, 
 as well as <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN>s 
-found on parent units.</span>&nbsp;</div>
+found on parent units.&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
 Such a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
-could have no effect, and would be confusing. If<span class="delete3">&nbsp;it is within the scope of</span> a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN><span class="insert3">&nbsp;for the same package is inherited from a parent unit or given</span><span class="delete3">, 
-or if such a clause is</span> in the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN>, 
+could have no effect, and would be confusing. If a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0257">nonlimited_with_clause</A></SPAN> 
+for the same package is inherited from a parent unit or given in the 
+<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN>, 
 the full view is available, which strictly provides more information 
 than the limited view.&nbsp;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">within a</span><span class="delete3">&nbsp;in the same</span> 
-<SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
-<span class="insert3">for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
-that is</span><span class="delete3">&nbsp;as, or</span> within the scope of<span class="delete3">,</span> 
-a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN> 
+within a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
+for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+that is within the scope of a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN> 
 that names an entity declared within the declarative region of the library 
 package.</div>
 <div class="paranum"><a name="p22.a.1">22.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
-<span class="insert3">This applies to <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>s 
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
+This applies to <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>s 
 found in the same <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN>, 
 as well as <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>s 
-found in (or on) parent units.</span>&nbsp;</div>
+found in (or on) parent units.&nbsp;</div>
 <div class="paranum"><a name="p22.a">22.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This prevents visibility issues, 
 where whether an entity is an incomplete or full view depends on how 
@@ -498,7 +484,7 @@ holes mentioned above.&nbsp;</div>
 <div class="paranum"><a name="p29">29/2</a></div>
 <div class="Examples"><B>limited&nbsp;with</B>&nbsp;Office.Employees;<BR>
 <B>package</B>&nbsp;Office.Departments&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Department&nbsp;<B>is</B>&nbsp;<B>private</B>;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Department&nbsp;<B>is&nbsp;private</B>;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Manager_Of(Dept&nbsp;:&nbsp;Department)&nbsp;<B>return&nbsp;access</B>&nbsp;Employees.Employee;<BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Assign_Manager(Dept&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Department;<BR>
@@ -506,7 +492,7 @@ holes mentioned above.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...<BR>
 <B>end</B>&nbsp;Office.Departments;</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00433.TXT">AI95-00433-01</A></I>} 
 The <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN> 
 may be used to support mutually dependent abstractions that are split 
 across multiple packages. In this case, an employee is assigned to a 
@@ -519,7 +505,7 @@ unit in the visible part of the first unit.</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p31.a">31.a</a></div>
-<div class="Annotations"><A NAME="I4846"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
+<div class="Annotations"><A NAME="I4789"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 is modified to allow expanded name notation.</div>
 <div class="paranum"><a name="p31.b">31.b</a></div>
 <div class="Annotations">A <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN> 
@@ -552,7 +538,7 @@ definition in <A HREF="AA-8-4.html">8.4</A>.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p31.f">31.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00220.TXT">AI95-00220-01</A></I>} 
-<A NAME="I4847"></A><B>Amendment Correction:</B> A subprogram body acting 
+<A NAME="I4790"></A><B>Amendment Correction:</B> A subprogram body acting 
 as a declaration cannot <B>with</B> a private child unit. This would 
 allow public export of types declared in private child packages, and 
 thus cannot be allowed. This was allowed by mistake in Ada 95; a subprogram 
@@ -561,42 +547,41 @@ that does this will now be illegal.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.g">31.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-50217.TXT">AI95-00217-06</A></I>} 
-<A NAME="I4848"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN>s 
+<A NAME="I4791"></A><SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">limited_with_clause</A></SPAN>s 
 are new. They make a limited view of a package visible, where all of 
 the types in the package are incomplete. They facilitate construction 
 of mutually recursive types in multiple packages.</div>
 <div class="paranum"><a name="p31.h">31.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00262.TXT">AI95-00262-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
-<A NAME="I4849"></A>The syntax rules for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
+<A NAME="I4792"></A>The syntax rules for <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 are modified to allow the reserved word <B>private</B>. Private <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN>s 
-do not allow the use of their <span class="insert3"><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN></span><span class="delete3">&nbsp;library 
-item</span> in the visible part of their <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN>. 
+do not allow the use of their <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN> 
+in the visible part of their <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN>. 
 They also allow using private units in more locations than in Ada 95. 
 </div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p31.i">31.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0040-1.TXT">AI05-0040-1</A></I>} 
-<span class="insert3"><A NAME="I4850"></A><B>Correction:</B> Added missing 
-rule that a limited with clause cannot name an ancestor unit. This is 
-incompatible if an Ada 2005 program does this, but as this is a new Ada 
-2005 feature and the unintentionally allowed capability is not useful, 
-the incompatibility is very unlikely to occur in practice.</span>&nbsp;</div>
+<A NAME="I4793"></A><B>Correction:</B> Added missing rule that a limited 
+with clause cannot name an ancestor unit. This is incompatible if an 
+Ada 2005 program does this, but as this is a new Ada 2005 feature and 
+the unintentionally allowed capability is not useful, the incompatibility 
+is very unlikely to occur in practice.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p31.j">31.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0077-1.TXT">AI05-0077-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Fixed wording so that we are 
-not checking whether something in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
+<B>Correction:</B> Fixed wording so that we are not checking whether 
+something in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN> 
 is &ldquo;within the scope of&rdquo; something, as <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0253">context_clause</A></SPAN>s 
 are never included in anything's scope. The intended meaning is unchanged, 
-however.</span></div>
+however.</div>
 <div class="paranum"><a name="p31.k">31.k/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0122-1.TXT">AI05-0122-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Fixed wording so the rules for 
-private with clauses also apply to &quot;sprouted&quot; generic child 
-units.</span>&nbsp;</div>
+<B>Correction:</B> Fixed wording so the rules for private with clauses 
+also apply to &quot;sprouted&quot; generic child units.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -348,7 +348,7 @@ Strings.Unbounded has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Strings.Unbounded;</div>
 <div class="paranum"><a name="p72.1">72.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The type Unbounded_String needs finalization<A NAME="I5953"></A> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The type Unbounded_String needs finalization<A NAME="I5953"></A> 
 (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p73">73</a></div>
 <div class="Normal">Null_Unbounded_String represents the null String. 
@@ -377,7 +377,7 @@ and To_Unbounded_String are related as follows:&nbsp;</div>
 <div class="Bulleted">If U is an Unbounded_String, then To_Unbounded_String(To_String(U)) 
 = U.&nbsp;</div>
 <div class="paranum"><a name="p79.1">79.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The procedure Set_Unbounded_String sets Target 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The procedure Set_Unbounded_String sets Target 
 to an Unbounded_String that represents Source.</div>
 <div class="paranum"><a name="p80">80</a></div>
 <div class="Normal">For each of the Append procedures, the resulting 
@@ -393,7 +393,7 @@ to the concatenation result string.</div>
 <div class="Normal">The Element, Replace_Element, and Slice subprograms 
 have the same effect as the corresponding bounded-length string subprograms.</div>
 <div class="paranum"><a name="p82.1">82.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Unbounded_Slice returns the slice 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Unbounded_Slice returns the slice 
 at positions Low through High in the string represented by Source as 
 an Unbounded_String. The procedure Unbounded_Slice sets Target to the 
 Unbounded_String representing the slice at positions Low through High 

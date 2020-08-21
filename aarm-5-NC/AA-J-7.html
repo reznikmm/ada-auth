@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,41 +34,41 @@
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Indented1"><SPAN Class="swiss">at_clause</SPAN><A NAME="I9341"></A><A NAME="S0326"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I9342"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<B>at</B>&nbsp;<A NAME="I9343"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">at_clause</SPAN><A NAME="I9647"></A><A NAME="S0340"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>for</B>&nbsp;<A NAME="I9648"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;<B>use</B>&nbsp;<B>at</B>&nbsp;<A NAME="I9649"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal">An <SPAN Class="swiss"><A HREF="AA-J-7.html#S0326">at_clause</A></SPAN> 
+<div class="Normal">An <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
 of the form &ldquo;for <I>x</I> use at <I>y</I>;&rdquo; is equivalent 
-to an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+to an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 of the form &ldquo;for <I>x</I>'Address use <I>y</I>;&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The preferred syntax for specifying 
-the address of an entity is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
-specifying the Address attribute. Therefore, the special-purpose <SPAN Class="swiss"><A HREF="AA-J-7.html#S0326">at_clause</A></SPAN> 
+the address of an entity is an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+specifying the Address attribute. Therefore, the special-purpose <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
 syntax is now obsolete.</div>
 <div class="paranum"><a name="p2.b">2.b</a></div>
 <div class="Annotations">The above equivalence implies, for example, 
-that only one <SPAN Class="swiss"><A HREF="AA-J-7.html#S0326">at_clause</A></SPAN> 
+that only one <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
 is allowed for a given entity. Similarly, it is illegal to give both 
-an <SPAN Class="swiss"><A HREF="AA-J-7.html#S0326">at_clause</A></SPAN> 
-and an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
+and an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 specifying the Address attribute.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p2.c">2.c</a></div>
-<div class="Annotations"><A NAME="I9344"></A>We now allow to define the 
-address of an entity using an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>. 
-This is because Ada 83's <SPAN Class="swiss"><A HREF="AA-J-7.html#S0326">at_clause</A></SPAN> 
+<div class="Annotations"><A NAME="I9650"></A>We now allow to define the 
+address of an entity using an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>. 
+This is because Ada 83's <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
 is so hard to remember: programmers often tend to write &ldquo;for X'Address 
 use...;&rdquo;.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p2.d">2.d</a></div>
 <div class="Annotations">Ada 83's <SPAN Class="swiss">address_clause</SPAN> 
-is now called an <SPAN Class="swiss"><A HREF="AA-J-7.html#S0326">at_clause</A></SPAN> 
+is now called an <SPAN Class="swiss"><A HREF="AA-J-7.html#S0340">at_clause</A></SPAN> 
 to avoid confusion with the new term &ldquo;Address clause&rdquo; (that 
-is, an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+is, an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 for the Address attribute).&nbsp;</div>
 
 <HR>

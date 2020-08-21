@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -70,7 +70,7 @@ a file parameter. Each such Get procedure operates on an input file,
 and each such Put procedure operates on an output file. If no file is 
 specified, a default input file or a default output file is used.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I7014"></A><A NAME="I7015"></A>At the beginning 
+<div class="Normal"><A NAME="I7267"></A><A NAME="I7268"></A>At the beginning 
 of program execution the default input and output files are the so-called 
 standard input file and standard output file. These files are open, have 
 respectively the current modes In_File and Out_File, and are associated 
@@ -90,13 +90,13 @@ file object(s). Thus, they generally will be implemented as accesses
 to another file object. An implementation that implements them by copying 
 them is incorrect.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I7016"></A>At the beginning of program execution 
+<div class="Normal"><A NAME="I7269"></A>At the beginning of program execution 
 a default file for program-dependent error-related text output is the 
 so-called standard error file. This file is open, has the current mode 
 Out_File, and is associated with an implementation-defined external file. 
 A procedure is provided to change the current default error file.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I7017"></A><A NAME="I7018"></A><A NAME="I7019"></A>From 
+<div class="Normal"><A NAME="I7270"></A><A NAME="I7271"></A><A NAME="I7272"></A>From 
 a logical point of view, a text file is a sequence of pages, a page is 
 a sequence of lines, and a line is a sequence of characters; the end 
 of a line is marked by a <I>line terminator</I>; the end of a page is 
@@ -116,9 +116,9 @@ characters. Whether they are characters (and if so which ones) in any
 particular implementation need not concern a user who neither explicitly 
 outputs nor explicitly inputs control characters. The effect of input 
 (Get) or output (Put) of control characters (other than horizontal tabulation) 
-is not specified by the language. <A NAME="I7020"></A></div>
+is not specified by the language. <A NAME="I7273"></A></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I7021"></A><A NAME="I7022"></A><A NAME="I7023"></A><A NAME="I7024"></A>The 
+<div class="Normal"><A NAME="I7274"></A><A NAME="I7275"></A><A NAME="I7276"></A><A NAME="I7277"></A>The 
 characters of a line are numbered, starting from one; the number of a 
 character is called its <I>column number</I>. For a line terminator, 
 a column number is also defined: it is one more than the number of characters 
@@ -133,7 +133,7 @@ used to indicate special conditions).&nbsp;</div>
 <div class="Examples" style="margin-bottom: 0.9em"><B>type</B>&nbsp;Count&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 <B>subtype</B>&nbsp;Positive_Count&nbsp;<B>is</B>&nbsp;Count&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Count'Last;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I7025"></A><A NAME="I7026"></A>For an output 
+<div class="Normal"><A NAME="I7278"></A><A NAME="I7279"></A>For an output 
 file or an append file, a <I>maximum line length</I> can be specified 
 and a <I>maximum page length</I> can be specified. If a value to be output 
 cannot fit on the current line, for a specified maximum line length, 
@@ -150,7 +150,7 @@ for this purpose.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p11.a">11.a</a></div>
-<div class="Annotations"><A NAME="I7027"></A>Append_File is new in Ada 
+<div class="Annotations"><A NAME="I7280"></A>Append_File is new in Ada 
 95.&nbsp;</div>
 
 <HR>

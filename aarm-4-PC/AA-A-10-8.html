@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -82,8 +80,7 @@ Num that corresponds to the sequence input.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
 The exception Data_Error is propagated if the sequence of characters 
 read does not form a legal integer literal or if the value obtained is 
-not of the subtype Num<span class="delete3">&nbsp;(for Integer_IO) or is not 
-in the base range of Num (for Modular_IO)</span>.</div>
+not of the subtype Num.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
@@ -134,7 +131,7 @@ for Width.&nbsp;</div>
 a library package that is a nongeneric equivalent to Text_IO.Integer_IO 
 for the predefined type Integer:&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I7240"></A><BR>
+<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I7138"></A><BR>
 <B>package</B>&nbsp;Ada.Integer_Text_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Text_IO.Integer_IO(Integer);</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Normal">For each predefined signed integer type, a nongeneric 
@@ -147,20 +144,18 @@ not, be actual instantiations of the generic package for the appropriate
 predefined type.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Notes">34&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
-<span class="delete3">For Modular_IO, execution of Get propagates Data_Error 
-if the sequence of characters read forms an integer literal outside the 
-range 0..Num'Last.</span>&nbsp;</div>
-<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-24 and 25 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="Notes">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
+</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 24 and 
+25 were deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p25">25/1</a></div>
 <div class="Examples"></div>
 <div class="paranum"><a name="p26">26/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
-<span class="insert3"><B>subtype</B>&nbsp;Byte_Int&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-127&nbsp;..&nbsp;127;<BR>
-</span><B>package</B>&nbsp;Int_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Integer_IO(<span class="insert3">Byte_Int</span><span class="delete3">&nbsp;Small_Int</span>);&nbsp;<B>use</B>&nbsp;Int_IO;<BR>
+<B>subtype</B>&nbsp;Byte_Int&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-127&nbsp;..&nbsp;127;<BR>
+<B>package</B>&nbsp;Int_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Integer_IO(Byte_Int);&nbsp;<B>use</B>&nbsp;Int_IO;<BR>
 --<SPAN Class="roman"><I>&nbsp;default&nbsp;format&nbsp;used&nbsp;at&nbsp;instantiation,</I></SPAN><BR>
 --<SPAN Class="roman"><I>&nbsp;Default_Width&nbsp;=&nbsp;4,&nbsp;Default_Base&nbsp;=&nbsp;10</I></SPAN></div>
 <div class="paranum"><a name="p27">27</a></div>
@@ -171,15 +166,15 @@ Put(126,&nbsp;Width&nbsp;=&gt;&nbsp;13,&nbsp;Base&nbsp;=&gt;&nbsp;2);&nbsp;&nbsp
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p27.a">27.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0038-1.TXT">AI05-0038-1</A></I>} 
-<span class="insert3"><A NAME="I7241"></A><B>Correction:</B> Changed 
-wording to make Integer_IO and Modular_IO raise Data_Error in the same 
-way when the bounds of the subtype are exceeded. There is no value to 
-different behavior, and all surveyed compilers already treat integer 
-and modular values the same way. This could only cause a problem if a 
-program was compiled with some unsurveyed compiler, and the Ada 95-defined 
-behavior is expected for Modular_IO. But note that such code is not portable 
-anyway, as most widely used compilers behave consistently with the new 
-wording, so it is unlikely that such code exists.</span>&nbsp;</div>
+<A NAME="I7139"></A><B>Correction:</B> Changed wording to make Integer_IO 
+and Modular_IO raise Data_Error in the same way when the bounds of the 
+subtype are exceeded. There is no value to different behavior, and all 
+surveyed compilers already treat integer and modular values the same 
+way. This could only cause a problem if a program was compiled with some 
+unsurveyed compiler, and the Ada 95-defined behavior is expected for 
+Modular_IO. But note that such code is not portable anyway, as most widely 
+used compilers behave consistently with the new wording, so it is unlikely 
+that such code exists.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

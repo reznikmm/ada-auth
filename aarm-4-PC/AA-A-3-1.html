@@ -13,17 +13,15 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,14 +37,14 @@
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Characters has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Examples"><A NAME="I6111"></A><B>package</B>&nbsp;Ada.Characters&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6010"></A><B>package</B>&nbsp;Ada.Characters&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Characters);<BR>
 <B>end</B>&nbsp;Ada.Characters;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
 The library package Wide_Characters has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples"><A NAME="I6112"></A><B>package</B>&nbsp;Ada.Wide_Characters&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6011"></A><B>package</B>&nbsp;Ada.Wide_Characters&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Wide_Characters);<BR>
 <B>end</B>&nbsp;Ada.Wide_Characters;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
@@ -54,7 +52,7 @@ The library package Wide_Characters has the following declaration:&nbsp;</div>
 The library package Wide_Wide_Characters has the following declaration: 
 </div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples"><A NAME="I6113"></A><B>package</B>&nbsp;Ada.Wide_Wide_Characters&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I6012"></A><B>package</B>&nbsp;Ada.Wide_Wide_Characters&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Wide_Wide_Characters);<BR>
 <B>end</B>&nbsp;Ada.Wide_Wide_Characters;</div>
 
@@ -63,11 +61,10 @@ The library package Wide_Wide_Characters has the following declaration:
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0185-1.TXT">AI05-0185-1</A></I>} 
 If an implementation chooses to provide implementation-defined operations 
-on Wide_Character or Wide_String (such as <span class="delete3">case 
-mapping, classification,&nbsp;</span>collating and sorting, etc.) it should 
-do so by providing child units of Wide_Characters. Similarly if it chooses 
-to provide implementation-defined operations on Wide_Wide_Character or 
-Wide_Wide_String it should do so by providing child units of Wide_Wide_Characters. 
+on Wide_Character or Wide_String (such as collating and sorting, etc.) 
+it should do so by providing child units of Wide_Characters. Similarly 
+if it chooses to provide implementation-defined operations on Wide_Wide_Character 
+or Wide_Wide_String it should do so by providing child units of Wide_Wide_Characters. 
 </div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Implementation-defined 
@@ -77,7 +74,7 @@ should be child units of Wide_Characters or Wide_Wide_Characters.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p7.b">7.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-<A NAME="I6114"></A>The packages Wide_Characters and Wide_Wide_Characters 
+<A NAME="I6013"></A>The packages Wide_Characters and Wide_Wide_Characters 
 are new.&nbsp;</div>
 
 <HR>

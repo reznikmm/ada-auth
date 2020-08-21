@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -66,13 +64,13 @@ the given character to the file.</div>
 <B>procedure</B>&nbsp;Look_Ahead&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End_Of_Line&nbsp;:&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Status_Error 
-is propagated if the file is not open.&nbsp;</span>Mode_Error is propagated 
-if the mode of the file is not In_File. Sets End_Of_Line to True if at 
-end of line, including if at end of page or at end of file; in each of 
-these cases the value of Item is not specified. <A NAME="I6641"></A>Otherwise<span class="insert3">,</span> 
-End_Of_Line is set to False and Item is set to the next character (without 
-consuming it) from the file.</div>
+<div class="Indented2" style="margin-bottom: 0.9em">Status_Error is 
+propagated if the file is not open. Mode_Error is propagated if the mode 
+of the file is not In_File. Sets End_Of_Line to True if at end of line, 
+including if at end of page or at end of file; in each of these cases 
+the value of Item is not specified. <A NAME="I6544"></A>Otherwise, End_Of_Line 
+is set to False and Item is set to the next character (without consuming 
+it) from the file.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Get_Immediate(File&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;Character);<BR>
@@ -80,10 +78,10 @@ consuming it) from the file.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">Reads the next character, 
 either control or graphic, from the specified File or the default input 
-file. <span class="insert3">Status_Error is propagated if the file is 
-not open.&nbsp;</span>Mode_Error is propagated if the mode of the file is 
-not In_File. End_Error is propagated if at the end of the file. The current 
-column, line and page numbers for the file are not affected.</div>
+file. Status_Error is propagated if the file is not open. Mode_Error 
+is propagated if the mode of the file is not In_File. End_Error is propagated 
+if at the end of the file. The current column, line and page numbers 
+for the file are not affected.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Get_Immediate(File&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Character;<BR>
@@ -95,13 +93,13 @@ column, line and page numbers for the file are not affected.</div>
 either control or graphic, is available from the specified File or the 
 default input file, then the character is read; Available is True and 
 Item contains the value of this character. If a character is not available, 
-then Available is False and the value of Item is not specified. <A NAME="I6642"></A><span class="insert3">Status_Error 
-is propagated if the file is not open.&nbsp;</span>Mode_Error is propagated 
-if the mode of the file is not In_File. End_Error is propagated if at 
-the end of the file. The current column, line and page numbers for the 
-file are not affected.</div>
+then Available is False and the value of Item is not specified. <A NAME="I6545"></A>Status_Error 
+is propagated if the file is not open. Mode_Error is propagated if the 
+mode of the file is not In_File. End_Error is propagated if at the end 
+of the file. The current column, line and page numbers for the file are 
+not affected.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For an item of type 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For an item of type 
 String the following subprograms are provided:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Get(File&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;&nbsp;Item&nbsp;:&nbsp;<B>out</B>&nbsp;String);<BR>
@@ -133,7 +131,7 @@ is met; Skip_Line is then (in effect) called with a spacing of 1.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">Constraint_Error 
 is raised if the length of the line exceeds Positive'Last; in this case, 
 the line number and page number are unchanged, and the column number 
-is unspecified but no less than it was before the call.<A NAME="I6643"></A> 
+is unspecified but no less than it was before the call.<A NAME="I6546"></A> 
 The exception End_Error is propagated if an attempt is made to skip a 
 file terminator.</div>
 <div class="paranum"><a name="p18">18</a></div>
@@ -147,7 +145,7 @@ file terminator.</div>
 input file and assigns them to successive characters of the specified 
 string. Reading stops if the end of the string is met. Reading also stops 
 if the end of the line is met before meeting the end of the string; in 
-this case Skip_Line is (in effect) called with a spacing of 1. <A NAME="I6644"></A>The 
+this case Skip_Line is (in effect) called with a spacing of 1. <A NAME="I6547"></A>The 
 values of characters not assigned are not specified.</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">If characters are 

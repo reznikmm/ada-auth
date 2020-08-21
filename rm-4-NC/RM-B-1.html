@@ -15,19 +15,19 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <HR>
 <H1>B.1 Interfacing Aspects</H1>
 <div class="paranum"><a name="p0.1">0.1/3</a></div>
-<div class="Normal">&nbsp;An <I>interfacing</I> aspect is a representation 
+<div class="Normal">&nbsp;&nbsp;An <I>interfacing</I> aspect is a representation 
 aspect that is one of the aspects Import, Export, Link_Name, External_Name, 
 or Convention.<A NAME="I7382"></A><A NAME="I7383"></A></div>
 <div class="paranum"><a name="p1">1/3</a></div>
@@ -87,18 +87,19 @@ was deleted.</I></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
-<div class="Normal">&nbsp;The Import and Export aspects are of type Boolean.</div>
+<div class="Normal">&nbsp;&nbsp;The Import and Export aspects are of type Boolean.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">The Link_Name and External_Name aspects are of type 
+<div class="Normal">&nbsp;The Link_Name and External_Name aspects are of type 
 String.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7402"></A>The expected type for the <I>string_</I><A NAME="I7403"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7402"></A>The expected type for the 
+<I>string_</I><A NAME="I7403"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 in pragma Linker_Options is String.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I7404"></A>The aspect Convention shall be 
-specified by a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I7404"></A>The aspect Convention shall 
+be specified by a <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 which shall be the name of a <I>convention</I>. The convention names 
 are implementation defined, except for certain language-defined ones, 
 such as Ada and Intrinsic, as explained in <A HREF="RM-6-3-1.html">6.3.1</A>, 
@@ -148,15 +149,15 @@ and its designated profile's parameter and result types are all <I>L</I>-compati
 <div class="Bulleted">The implementation permits T as an <I>L</I>-compatible 
 type.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">If the Convention aspect is specified for a type, 
+<div class="Normal">&nbsp;If the Convention aspect is specified for a type, 
 then the type shall either be compatible with or eligible for the specified 
 convention.&nbsp;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Normal"><A NAME="I7408"></A>Notwithstanding any rule to the 
-contrary, a declaration with a True Import aspect shall not have a completion. 
-</div>
+<div class="Normal">&nbsp;<A NAME="I7408"></A>Notwithstanding any rule to 
+the contrary, a declaration with a True Import aspect shall not have 
+a completion.&nbsp;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Normal"><A NAME="I7409"></A> <A NAME="I7410"></A>An entity 
+<div class="Normal">&nbsp;<A NAME="I7409"></A> <A NAME="I7410"></A>An entity 
 with a True Import aspect (or Export aspect) is said to be <I>imported</I> 
 (respectively, <I>exported</I>). An entity shall not be both imported 
 and exported.</div>
@@ -165,14 +166,14 @@ and exported.</div>
 an explicit initialization expression. Default initializations are not 
 performed.&nbsp;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Normal">The type of an imported or exported object shall 
+<div class="Normal">&nbsp;The type of an imported or exported object shall 
 be compatible with the specified Convention aspect, if any.&nbsp;</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Normal">For an imported or exported subprogram, the result 
+<div class="Normal">&nbsp;For an imported or exported subprogram, the result 
 and parameter types shall each be compatible with the specified Convention 
 aspect, if any.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0309">aspect_definition</A></SPAN> 
+<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0309">aspect_definition</A></SPAN> 
 (if any) used to directly specify an Import, Export, External_Name, or 
 Link_Name aspect shall be a static expression. The <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
@@ -183,7 +184,7 @@ shall be specified only for an entity that is either imported or exported.</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 28 and 
 29 were deleted.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">The Convention aspect 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The Convention aspect 
 represents the calling convention or representation convention of the 
 entity. For an access-to-subprogram type, it represents the calling convention 
 of designated subprograms. In addition:&nbsp;</div>
@@ -223,7 +224,7 @@ combined, is implementation defined.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Normal"><A NAME="I7413"></A><A NAME="I7414"></A>Notwithstanding 
+<div class="Normal">&nbsp;<A NAME="I7413"></A><A NAME="I7414"></A>Notwithstanding 
 what this International Standard says elsewhere, the elaboration of a 
 declaration with a True Import aspect does not create the entity. Such 
 an elaboration has no other effect than to allow the defining name to 
@@ -231,13 +232,13 @@ denote the external entity.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p38.1">38.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7415"></A>It is the programmer's responsibility 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7415"></A>It is the programmer's responsibility 
 to ensure that the use of interfacing aspects does not violate Ada semantics; 
 otherwise, program execution is erroneous.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p39">39/3</a></div>
-<div class="Normal">If an implementation supports Export for a given 
+<div class="Normal">&nbsp;If an implementation supports Export for a given 
 language, then it should also allow the main subprogram to be written 
 in that language. It should support some mechanism for invoking the elaboration 
 of the Ada library units included in the system, and for invoking the 
@@ -248,10 +249,11 @@ for library units. Adafinal should contain the finalization code. These
 subprograms should have no effect the second and subsequent time they 
 are called. <A NAME="I7416"></A><A NAME="I7417"></A><A NAME="I7418"></A><A NAME="I7419"></A></div>
 <div class="paranum"><a name="p40">40/3</a></div>
-<div class="Normal">Automatic elaboration of preelaborated packages should 
-be provided when specifying the Export aspect as True is supported.&nbsp;</div>
+<div class="Normal">&nbsp;Automatic elaboration of preelaborated packages 
+should be provided when specifying the Export aspect as True is supported. 
+</div>
 <div class="paranum"><a name="p41">41/4</a></div>
-<div class="Normal">For each supported convention <I>L</I> other than 
+<div class="Normal">&nbsp;For each supported convention <I>L</I> other than 
 Intrinsic, an implementation should support specifying the Import and 
 Export aspects for objects of <I>L</I>-compatible types and for subprograms, 
 and the Convention aspect for <I>L</I>-eligible types and for subprograms, 
@@ -291,7 +293,7 @@ deleted.</I></SPAN></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p50">50/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><I>Example of interfacing 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<I>Example of interfacing 
 aspects:</I>&nbsp;</div>
 <div class="paranum"><a name="p51">51/3</a></div>
 <div class="Examples"><B>package</B>&nbsp;Fortran_Library&nbsp;<B>is</B><BR>

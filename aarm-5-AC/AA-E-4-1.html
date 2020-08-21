@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -53,13 +53,13 @@ of the corresponding remote subprogram body.]&nbsp;</div>
 Asynchronous is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I9419"></A><A NAME="I9420"></A>Asynchronous(<A NAME="I9421"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>);</span> 
+<A NAME="I9746"></A><A NAME="I9747"></A>Asynchronous(<A NAME="I9748"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>);</span> 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+<span class="delete3">The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 of a pragma Asynchronous shall denote either:</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Bulleted"><span class="delete3">One or more remote procedures; 
@@ -76,15 +76,15 @@ access-to-class-wide type.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3"></span><span class="insert3">For a remote procedure, 
-the following language-defined representation aspect may be specified:</span><span class="delete3"><A NAME="I9422"></A> 
-<A NAME="I9423"></A>A pragma Asynchronous is a representation pragma. 
+the following language-defined representation aspect may be specified:</span><span class="delete3"><A NAME="I9749"></A> 
+<A NAME="I9750"></A>A pragma Asynchronous is a representation pragma. 
 When applied to a type, it specifies the type-related <I>asynchronous</I> 
 aspect of the type.</span>&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Asynchronous</span></div><div class="WideHanging-Body">
 <span class="insert3">The type of aspect Asynchronous is Boolean. If 
-directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
-shall be a static expression. If not specified, the aspect is False.<A NAME="I9424"></A><A NAME="I9425"></A></span></div>
+directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+shall be a static expression. If not specified, the aspect is False.<A NAME="I9751"></A><A NAME="I9752"></A></span></div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert3"><B>Asynchronous:&nbsp;</B></span><span class="insert3">Remote 
@@ -97,7 +97,7 @@ representation aspect may be specified:</span>&nbsp;</div>
 <div class="paranum"><a name="p8.3">8.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;<span class="insert3">Asynchronous</span></div><div class="WideHanging-Body">
 <span class="insert3">The type of aspect Asynchronous is Boolean. If 
-directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 the aspect is False.</span>&nbsp;</div>
 
@@ -117,7 +117,7 @@ of the designated profile of the type all of mode <B>in</B>.</span>&nbsp;</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I9426"></A><A NAME="I9427"></A>A remote call is <I>asynchronous</I> 
+<A NAME="I9753"></A><A NAME="I9754"></A>A remote call is <I>asynchronous</I> 
 if it is a call to a procedure, or a call through a value of an access-to-procedure 
 type, <span class="insert3">for</span><span class="delete3">&nbsp;to</span> 
 which <span class="insert3">aspect</span><span class="delete3">&nbsp;a pragma</span> 
@@ -141,7 +141,7 @@ rule can be tested or even defined formally.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.b">10.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I9428"></A>Aspect Asynchronous is new; 
+<span class="insert3"><A NAME="I9755"></A>Aspect Asynchronous is new; 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Asynchronous 
 is now obsolescent.</span>&nbsp;</div>
 

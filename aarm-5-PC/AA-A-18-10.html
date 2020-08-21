@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -31,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -57,12 +55,11 @@ on which to construct more complex and more specialized tree containers.
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0078-1.TXT">AI12-0078-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-A multiway tree container object manages a tree of <span class="delete4">internal 
-</span><I>nodes</I>, <span class="insert4">consisting of a <I>root node</I><A NAME="I7898"></A><A NAME="I7899"></A> 
-and a set of<A NAME="I7900"></A> <I>internal nodes</I>;</span> each <span class="insert4">internal 
-node</span><span class="delete4">&nbsp;of which</span> contains an element 
-and pointers to the parent, first child, last child, next (successor) 
-sibling, and previous (predecessor) sibling internal nodes.<A NAME="I7901"></A> 
+A multiway tree container object manages a tree of <I>nodes</I>, consisting 
+of a <I>root node</I><A NAME="I8186"></A><A NAME="I8187"></A> and a set 
+of<A NAME="I8188"></A> <I>internal nodes</I>; each internal node contains 
+an element and pointers to the parent, first child, last child, next 
+(successor) sibling, and previous (predecessor) sibling internal nodes.<A NAME="I8189"></A> 
 A cursor designates a particular node within a tree (and by extension 
 the element contained in that node, if any). A cursor keeps designating 
 the same node (and element) as long as the node is part of the container, 
@@ -73,22 +70,20 @@ even if the node is moved within the container.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0078-1.TXT">AI12-0078-1</A></I>} 
 A <I>subtree</I> is a particular node (which <I>roots the subtree</I>) 
 and all of its child nodes (including all of the children of the child 
-nodes, recursively). <A NAME="I7902"></A><A NAME="I7903"></A><A NAME="I7904"></A><span class="insert4">The 
-root node</span><span class="delete4">&nbsp;There is a special node, the <I>root</I>, 
-which</span> is always present and has neither an associated element 
-value nor any parent node<span class="insert4">; it has pointers to its 
-first child and its last child, if any</span>. The root node provides 
-a place to add nodes to an otherwise empty tree and represents the base 
-of the tree.<span class="delete4"><A NAME="I7905"></A><A NAME="I7906"></A></span></div>
+nodes, recursively). <A NAME="I8190"></A><A NAME="I8191"></A><A NAME="I8192"></A>The 
+root node is always present and has neither an associated element value 
+nor any parent node; it has pointers to its first child and its last 
+child, if any. The root node provides a place to add nodes to an otherwise 
+empty tree and represents the base of the tree.</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-A node that has no children is called a <I>leaf node</I>.<A NAME="I7907"></A> 
+A node that has no children is called a <I>leaf node</I>.<A NAME="I8193"></A> 
 The <I>ancestors</I> of a node are the node itself, its parent node, 
 the parent of the parent node, and so on until a node with no parent 
-is reached.<A NAME="I7908"></A> Similarly, the <I>descendants</I> of 
+is reached.<A NAME="I8194"></A> Similarly, the <I>descendants</I> of 
 a node are the node itself, its child nodes, the children of each child 
-node, and so on.<A NAME="I7909"></A></div>
+node, and so on.<A NAME="I8195"></A></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
@@ -96,7 +91,7 @@ node, and so on.<A NAME="I7909"></A></div>
 The nodes of a subtree can be visited in several different orders. For 
 a <I>depth-first order</I>, after visiting a node, the nodes of its child 
 list are each visited in depth-first order, with each child node visited 
-in natural order (first child to last child).<A NAME="I7910"></A></div>
+in natural order (first child to last child).<A NAME="I8196"></A></div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For the depth-first order, 
 when each child node is visited, the child list of the child node is 
@@ -114,234 +109,234 @@ declaration:&nbsp;</div>
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>is</B>&nbsp;&lt;&gt;;<BR>
-<B>package</B>&nbsp;Ada.Containers.Multiway_Trees&nbsp;<B>is</B><A NAME="I7911"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Multiway_Trees&nbsp;<B>is</B><A NAME="I8197"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Multiway_Trees);<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Multiway_Trees);</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7912"></A>Tree&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8198"></A>Tree&nbsp;<B>is&nbsp;tagged&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Constant_Indexing&nbsp;=&gt;&nbsp;Constant_Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Variable_Indexing&nbsp;=&gt;&nbsp;Reference,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default_Iterator&nbsp;&nbsp;=&gt;&nbsp;Iterate,<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator_Element&nbsp;&nbsp;=&gt;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Tree);</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7913"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8199"></A>Cursor&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Cursor);</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7914"></A>Empty_Tree&nbsp;:&nbsp;<B>constant</B>&nbsp;Tree;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8200"></A>Empty_Tree&nbsp;:&nbsp;<B>constant</B>&nbsp;Tree;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7915"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8201"></A>No_Element&nbsp;:&nbsp;<B>constant</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7916"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8202"></A>Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I7917"></A>Tree_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
+&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<A NAME="I8203"></A>Tree_Iterator_Interfaces&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Iterator_Interfaces&nbsp;(Cursor,&nbsp;Has_Element);</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7918"></A>Equal_Subtree&nbsp;(Left_Position&nbsp;:&nbsp;Cursor;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8204"></A>Equal_Subtree&nbsp;(Left_Position&nbsp;:&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right_Position:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7919"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8205"></A>Is_Empty&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7920"></A>Node_Count&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8206"></A>Node_Count&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7921"></A>Subtree_Node_Count&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8207"></A>Subtree_Node_Count&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7922"></A>Depth&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8208"></A>Depth&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7923"></A>Is_Root&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8209"></A>Is_Root&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7924"></A>Is_Leaf&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8210"></A>Is_Leaf&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7925"></A>Root&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8211"></A>Root&nbsp;(Container&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7926"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8212"></A>Clear&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7927"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8213"></A>Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7928"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8214"></A>Replace_Element&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type);</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7929"></A>Query_Element<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8215"></A>Query_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Element_Type));</div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7930"></A>Update_Element<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8216"></A>Update_Element<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Element_Type));</div>
 <div class="paranum"><a name="p28">28/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7931"></A>Constant_Reference_Type<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8217"></A>Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7932"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8218"></A>Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7933"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8219"></A>Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
 <div class="paranum"><a name="p31">31/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7934"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Tree;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8220"></A>Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7935"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Tree);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8221"></A>Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Tree);</div>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7936"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Tree;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8222"></A>Copy&nbsp;(Source&nbsp;:&nbsp;Tree)&nbsp;<B>return</B>&nbsp;Tree;</div>
 <div class="paranum"><a name="p34">34/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7937"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8223"></A>Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree);</div>
 <div class="paranum"><a name="p35">35/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7938"></A>Delete_Leaf&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8224"></A>Delete_Leaf&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
 <div class="paranum"><a name="p36">36/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7939"></A>Delete_Subtree&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8225"></A>Delete_Subtree&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
 <div class="paranum"><a name="p37">37/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7940"></A>Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8226"></A>Swap&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I,&nbsp;J&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7941"></A>Find&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8227"></A>Find&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p39">39/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7942"></A>Find_In_Subtree&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8228"></A>Find_In_Subtree&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p40">40/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7943"></A>Ancestor_Find&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8229"></A>Ancestor_Find&nbsp;(Position&nbsp;:&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p41">41/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7944"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8230"></A>Contains&nbsp;(Container&nbsp;:&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Element_Type)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p42">42/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7945"></A>Iterate<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8231"></A>Iterate<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
 <div class="paranum"><a name="p43">43/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7946"></A>Iterate_Subtree<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8232"></A>Iterate_Subtree<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
 <div class="paranum"><a name="p44">44/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7947"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8233"></A>Iterate&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</div>
 <div class="paranum"><a name="p45">45/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7948"></A>Iterate_Subtree&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8234"></A>Iterate_Subtree&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Forward_Iterator'Class;</div>
 <div class="paranum"><a name="p46">46/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7949"></A>Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8235"></A>Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p47">47/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7950"></A>Child_Depth&nbsp;(Parent,&nbsp;Child&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8236"></A>Child_Depth&nbsp;(Parent,&nbsp;Child&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p48">48/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7951"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8237"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
 <div class="paranum"><a name="p49">49/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7952"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8238"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
 <div class="paranum"><a name="p50">50/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7953"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8239"></A>Insert_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
 <div class="paranum"><a name="p51">51/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7954"></A>Prepend_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8240"></A>Prepend_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
 <div class="paranum"><a name="p52">52/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7955"></A>Append_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8241"></A>Append_Child&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count_Type&nbsp;:=&nbsp;1);</div>
 <div class="paranum"><a name="p53">53/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7956"></A>Delete_Children&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8242"></A>Delete_Children&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
 <div class="paranum"><a name="p54">54/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7957"></A>Copy_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8243"></A>Copy_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
 <div class="paranum"><a name="p55">55/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7958"></A>Splice_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8244"></A>Splice_Subtree&nbsp;(Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
 <div class="paranum"><a name="p56">56/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7959"></A>Splice_Subtree&nbsp;(Container:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8245"></A>Splice_Subtree&nbsp;(Container:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
 <div class="paranum"><a name="p57">57/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7960"></A>Splice_Children&nbsp;(Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8246"></A>Splice_Children&nbsp;(Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
 <div class="paranum"><a name="p58">58/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7961"></A>Splice_Children&nbsp;(Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8247"></A>Splice_Children&nbsp;(Container&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Tree;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source_Parent&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cursor);</div>
 <div class="paranum"><a name="p59">59/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7962"></A>Parent&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8248"></A>Parent&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p60">60/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7963"></A>First_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8249"></A>First_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p61">61/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7964"></A>First_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8250"></A>First_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p62">62/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7965"></A>Last_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8251"></A>Last_Child&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p63">63/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7966"></A>Last_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8252"></A>Last_Child_Element&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Element_Type;</div>
 <div class="paranum"><a name="p64">64/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7967"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8253"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p65">65/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7968"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8254"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Cursor;</div>
 <div class="paranum"><a name="p66">66/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7969"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8255"></A>Next_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
 <div class="paranum"><a name="p67">67/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7970"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8256"></A>Previous_Sibling&nbsp;(Position&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Cursor);</div>
 <div class="paranum"><a name="p68">68/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7971"></A>Iterate_Children<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8257"></A>Iterate_Children<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
 <div class="paranum"><a name="p69">69/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7972"></A>Reverse_Iterate_Children<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8258"></A>Reverse_Iterate_Children<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Parent&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Process&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;procedure</B>&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor));</div>
 <div class="paranum"><a name="p70">70/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7973"></A>Iterate_Children&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;&nbsp;Parent&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8259"></A>Iterate_Children&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Tree;&nbsp;Parent&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree_Iterator_Interfaces.Reversible_Iterator'Class;</div>
 <div class="paranum"><a name="p71">71/3</a></div>
 <div class="Examples"><B>private</B><BR>
@@ -356,10 +351,10 @@ pair of values. If it behaves in some other manner, the functions Find,
 Reverse_Find, Equal_Subtree, and &quot;=&quot; on tree values return 
 an unspecified value. The exact arguments and number of calls of this 
 generic formal function by the functions Find, Reverse_Find, Equal_Subtree, 
-and &quot;=&quot; on tree values are unspecified.<A NAME="I7974"></A></div>
+and &quot;=&quot; on tree values are unspecified.<A NAME="I8260"></A></div>
 <div class="paranum"><a name="p73">73/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-The type Tree is used to represent trees. The type Tree needs finalization<A NAME="I7975"></A> 
+The type Tree is used to represent trees. The type Tree needs finalization<A NAME="I8261"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p74">74/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
@@ -411,7 +406,7 @@ others check for &quot;tampering with elements&quot; of a container because
 they depend on elements of the container not being replaced.]</div>
 <div class="paranum"><a name="p81">81/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<A NAME="I7976"></A>A subprogram is said to <I>tamper with cursors</I> 
+<A NAME="I8262"></A>A subprogram is said to <I>tamper with cursors</I> 
 of a tree object <I>T</I> if:</div>
 <div class="paranum"><a name="p82">82/3</a></div>
 <div class="Bulleted">it inserts or deletes elements of <I>T</I>, that 
@@ -434,7 +429,7 @@ or Splice_Children procedures with <I>T</I> as a parameter; or</div>
 or</div>
 <div class="paranum"><a name="p85.a.1">85.a.1/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>We don't need to explicitly 
-mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>, 
+mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
 because that finalizes the target object as part of the operation, and 
 finalization of an object is already defined as tampering with cursors. 
 </div>
@@ -446,7 +441,7 @@ parameter.</div>
 reordering them, so it doesn't tamper with cursors.&nbsp;</div>
 <div class="paranum"><a name="p87">87/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<A NAME="I7977"></A>A subprogram is said to <I>tamper with elements</I> 
+<A NAME="I8263"></A>A subprogram is said to <I>tamper with elements</I> 
 of a tree object <I>T</I> if:</div>
 <div class="paranum"><a name="p88">88/3</a></div>
 <div class="Bulleted">it tampers with cursors of <I>T</I>; or</div>
@@ -463,22 +458,23 @@ cause a problem.&nbsp;</div>
 <div class="paranum"><a name="p89.a.1">89.a.1/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Assign is defined in terms 
 of Clear and Replace_Element, so we don't need to mention it explicitly. 
-Similarly, we don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>, 
+Similarly, we don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
 because that finalizes the target object as part of the operation, and 
 finalization of an object is already defined as tampering with the element. 
 </div>
 <div class="paranum"><a name="p90">90/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
-<A NAME="I7978"></A><A NAME="I7979"></A>When tampering with cursors is 
+<A NAME="I8264"></A><A NAME="I8265"></A>When tampering with cursors is 
 <I>prohibited</I> for a particular tree object <I>T</I>, Program_Error 
 is propagated by a call of any language-defined subprogram that is defined 
 to tamper with the cursors of <I>T</I>, leaving <I>T</I> unmodified. 
 Similarly, when tampering with elements is <I>prohibited</I> for a particular 
 tree object <I>T</I>, Program_Error is propagated by a call of any language-defined 
 subprogram that is defined to tamper with the elements of <I>T</I> [(or 
-tamper with the cursors of <I>T</I>)], leaving <I>T</I> unmodified.<span class="insert4">&nbsp;These checks are made before any other defined behavior of the body of 
-the language-defined subprogram.</span>&nbsp;</div>
+tamper with the cursors of <I>T</I>)], leaving <I>T</I> unmodified. These 
+checks are made before any other defined behavior of the body of the 
+language-defined subprogram.&nbsp;</div>
 <div class="paranum"><a name="p90.a">90.a/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Tampering with elements includes 
 tampering with cursors, so we mention it only from completeness in the 
@@ -690,7 +686,7 @@ the discriminants of the element in place.&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p124">124/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-The types Constant_Reference_Type and Reference_Type need finalization.<A NAME="I7980"></A></div>
+The types Constant_Reference_Type and Reference_Type need finalization.<A NAME="I8266"></A></div>
 <div class="paranum"><a name="p125">125/3</a></div>
 <div class="Indented2">The default initialization of an object of type 
 Constant_Reference_Type or Reference_Type propagates Program_Error.</div>
@@ -745,7 +741,7 @@ returned by Reference exists and has not been finalized.</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 If Target denotes the same object as Source, the operation has no effect. 
-Otherwise, the elements of Source are copied to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+Otherwise, the elements of Source are copied to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 assigning Source to Target.</div>
 <div class="paranum"><a name="p133.a">133.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Each element in Target 
@@ -900,10 +896,10 @@ Equivalent to Find (Container, Item) /= No_Element.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0069-1.TXT">AI12-0069-1</A></I>} 
 Iterate calls Process.<B>all</B> with a cursor that designates each element 
-in Container, starting <span class="insert4">from</span><span class="delete4">&nbsp;with</span> 
-the root node and proceeding in a depth-first order. Tampering with the 
-cursors of Container is prohibited during the execution of a call on 
-Process.<B>all</B>. Any exception raised by Process.<B>all</B> is propagated.</div>
+in Container, starting from the root node and proceeding in a depth-first 
+order. Tampering with the cursors of Container is prohibited during the 
+execution of a call on Process.<B>all</B>. Any exception raised by Process.<B>all</B> 
+is propagated.</div>
 <div class="paranum"><a name="p153.a">153.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Process is not called with 
 the root node, which does not have an associated element.&nbsp;</div>
@@ -930,11 +926,10 @@ for a suggested implementation of the check.&nbsp;</div>
 If Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
 Iterate_Subtree calls Process.<B>all</B> with a cursor that designates 
 each element in the subtree rooted by the node designated by Position, 
-starting <span class="insert4">from</span><span class="delete4">&nbsp;with</span> 
-the node designated by Position and proceeding in a depth-first order. 
-Tampering with the cursors of the tree that contains the element designated 
-by Position is prohibited during the execution of a call on Process.<B>all</B>. 
-Any exception raised by Process.<B>all</B> is propagated.</div>
+starting from the node designated by Position and proceeding in a depth-first 
+order. Tampering with the cursors of the tree that contains the element 
+designated by Position is prohibited during the execution of a call on 
+Process.<B>all</B>. Any exception raised by Process.<B>all</B> is propagated.</div>
 <div class="paranum"><a name="p155.a">155.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Position can be passed 
 a cursor designating the root node; in that case, Process is not called 
@@ -949,13 +944,12 @@ with the root node, which does not have an associated element.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0069-1.TXT">AI12-0069-1</A></I>} 
 Iterate returns an iterator object (see <A HREF="AA-5-5-1.html">5.5.1</A>) 
 that will generate a value for a loop parameter (see <A HREF="AA-5-5-2.html">5.5.2</A>) 
-designating each <span class="insert4">element</span><span class="delete4">&nbsp;node</span> 
-in Container, starting <span class="insert4">from</span><span class="delete4">&nbsp;with</span> 
-the root node and proceeding in a depth-first order. Tampering with the 
-cursors of Container is prohibited while the iterator object exists (in 
-particular, in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN> 
+designating each element in Container, starting from the root node and 
+proceeding in a depth-first order. Tampering with the cursors of Container 
+is prohibited while the iterator object exists (in particular, in the 
+<SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
 denotes this object). The iterator object needs finalization.</div>
 <div class="paranum"><a name="p157.a">157.a/3</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
@@ -980,14 +974,13 @@ If Position equals No_Element, then Constraint_Error is propagated. Otherwise,
 Iterate_Subtree returns an iterator object (see <A HREF="AA-5-5-1.html">5.5.1</A>) 
 that will generate a value for a loop parameter (see <A HREF="AA-5-5-2.html">5.5.2</A>) 
 designating each element in the subtree rooted by the node designated 
-by Position, starting <span class="insert4">from</span><span class="delete4">&nbsp;with</span> 
-the node designated by Position and proceeding in a depth-first order. 
-If Position equals No_Element, then Constraint_Error is propagated. Tampering 
-with the cursors of the container that contains the node designated by 
-Position is prohibited while the iterator object exists (in particular, 
-in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN> 
+by Position, starting from the node designated by Position and proceeding 
+in a depth-first order. If Position equals No_Element, then Constraint_Error 
+is propagated. Tampering with the cursors of the container that contains 
+the node designated by Position is prohibited while the iterator object 
+exists (in particular, in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
 denotes this object). The iterator object needs finalization.</div>
 <div class="paranum"><a name="p160">160/3</a></div>
 <div class="Examples"><B>function</B>&nbsp;Child_Count&nbsp;(Parent&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Count_Type;</div>
@@ -1444,16 +1437,16 @@ child node and moving the cursor as per the function Next_Sibling; when
 used as a reverse iterator, the nodes are designated starting with the 
 last child node and moving the cursor as per the function Previous_Sibling. 
 Tampering with the cursors of Container is prohibited while the iterator 
-object exists (in particular, in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN> 
+object exists (in particular, in the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
 denotes this object). The iterator object needs finalization.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p220">220/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<A NAME="I7981"></A>It is a bounded error for the actual function associated 
+<A NAME="I8267"></A>It is a bounded error for the actual function associated 
 with a generic formal subprogram, when called as part of an operation 
 of this package, to tamper with elements of any Tree parameter of the 
 operation. Either Program_Error is raised, or the operation works as 
@@ -1461,7 +1454,7 @@ defined on the value of the Tree either prior to, or subsequent to, some
 or all of the modifications to the Tree.</div>
 <div class="paranum"><a name="p221">221/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<A NAME="I7982"></A>It is a bounded error to call any subprogram declared 
+<A NAME="I8268"></A>It is a bounded error to call any subprogram declared 
 in the visible part of Containers.Multiway_Trees when the associated 
 container has been finalized. If the operation takes Container as an 
 <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
@@ -1472,7 +1465,7 @@ or it raises Constraint_Error or Program_Error.&nbsp;</div>
 <div class="paranum"><a name="p222">222/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 A Cursor value is <I>invalid</I> if any of the following have occurred 
-since it was created:<A NAME="I7983"></A> <A NAME="I7984"></A></div>
+since it was created:<A NAME="I8269"></A> <A NAME="I8270"></A></div>
 <div class="paranum"><a name="p223">223/3</a></div>
 <div class="Bulleted">The tree that contains the element it designates 
 has been finalized;</div>
@@ -1481,7 +1474,7 @@ has been finalized;</div>
 has been used as the Source or Target of a call to Move;</div>
 <div class="paranum"><a name="p225">225/3</a></div>
 <div class="Bulleted">The tree that contains the element it designates 
-has been used as the Target of a call to Assign or the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>;</div>
+has been used as the Target of a call to Assign or the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p226">226/3</a></div>
 <div class="Bulleted">The element it designates has been removed from 
 the tree that previously contained the element.&nbsp;</div>
@@ -1494,7 +1487,7 @@ by calls to Clear, Delete_Leaf, Delete_Subtree, Delete_Children, Splice_Children
 and Splice_Subtree.&nbsp;</div>
 <div class="paranum"><a name="p227">227/3</a></div>
 <div class="Normal">&nbsp;The result of &quot;=&quot; or Has_Element is unspecified 
-if it is called with an invalid cursor parameter.<A NAME="I7985"></A> 
+if it is called with an invalid cursor parameter.<A NAME="I8271"></A> 
 Execution is erroneous if any other subprogram declared in Containers.Multiway_Trees 
 is called with an invalid cursor parameter.</div>
 <div class="paranum"><a name="p227.a">227.a/3</a></div>
@@ -1533,7 +1526,7 @@ assignment or scope exit.</div>
 <div class="paranum"><a name="p230">230/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 for a tree shall have the effect of copying the elements from the source 
 tree object to the target tree object and changing the node count of 
 the target object to that of the source object.</div>
@@ -1603,13 +1596,13 @@ so we just require documentation of cases where this can't be accomplished.
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0257-1.TXT">AI05-0257-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<A NAME="I7986"></A>The generic package Containers.Multiway_Trees is 
+<A NAME="I8272"></A>The generic package Containers.Multiway_Trees is 
 new.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p233.d">233.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
-<span class="insert5"><A NAME="I7987"></A><B>Correction:</B> Replace_Element 
+<span class="insert5"><A NAME="I8273"></A><B>Correction:</B> Replace_Element 
 is now defined such that it can be used concurrently so long as it operates 
 on different elements. This allows some container operations to be used 
 in parallel without separate synchronization.</span>&nbsp;</div>
@@ -1617,17 +1610,17 @@ in parallel without separate synchronization.</span>&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p233.e">233.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0069-1.TXT">AI12-0069-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Fixed the function Iterate 
-so it is clear that the root node is never visited.</span></div>
+<B>Corrigendum:</B> Fixed the function Iterate so it is clear that the 
+root node is never visited.</div>
 <div class="paranum"><a name="p233.f">233.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0078-1.TXT">AI12-0078-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> The definition of <I>node</I> 
-is clarified so that it it doesn't appear to say all nodes have an element.</span></div>
+<B>Corrigendum:</B> The definition of <I>node</I> is clarified so that 
+it it doesn't appear to say all nodes have an element.</div>
 <div class="paranum"><a name="p233.g">233.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Clarified that tampering checks 
-precede all other checks made by a subprogram (but come after those associated 
-with the call).</span>&nbsp;</div>
+<B>Corrigendum:</B> Clarified that tampering checks precede all other 
+checks made by a subprogram (but come after those associated with the 
+call).&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

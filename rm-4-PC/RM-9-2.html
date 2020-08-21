@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,13 +35,13 @@
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3994"></A>The execution of a task of a 
+<div class="Normal"><A NAME="I3944"></A>The execution of a task of a 
 given task type consists of the execution of the corresponding <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>. 
-<A NAME="I3995"></A><A NAME="I3996"></A><A NAME="I3997"></A><A NAME="I3998"></A>The 
+<A NAME="I3945"></A><A NAME="I3946"></A><A NAME="I3947"></A><A NAME="I3948"></A>The 
 initial part of this execution is called the <I>activation</I> of the 
 task; it consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0209">task_body</A></SPAN>. 
-<A NAME="I3999"></A>Should an exception be propagated by the elaboration 
+<A NAME="I3949"></A>Should an exception be propagated by the elaboration 
 of its <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
 the activation of the task is defined to have <I>failed</I>, and it becomes 
 a completed task.</div>
@@ -78,10 +76,10 @@ prior to returning the new access value. For tasks that are part or coextensions
 of an object that is the result of a function call, the activations are 
 not initiated until after the function returns.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I4000"></A><A NAME="I4001"></A>The task 
+<div class="Normal"><A NAME="I3950"></A><A NAME="I3951"></A>The task 
 that created the new tasks and initiated their activations (the <I>activator</I>) 
 is blocked until all of these activations complete (successfully or not). 
-<A NAME="I4002"></A>Once all of these activations are complete, if the 
+<A NAME="I3952"></A>Once all of these activations are complete, if the 
 activation of any of the tasks has failed (due to the propagation of 
 an exception), Tasking_Error is raised in the activator, at the place 
 at which it initiated the activations. Otherwise, the activator proceeds 
@@ -89,17 +87,13 @@ with its execution normally. Any tasks that are aborted prior to completing
 their activation are ignored when determining whether to raise Tasking_Error. 
 </div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal"><span class="insert3">If the master that directly 
-encloses the point where the activation of a task <I>T</I> would be initiated, 
-completes before the activation of <I>T</I> is initiated, <I>T</I> becomes 
-terminated and is never activated. Furthermore, if a return statement 
-is left such that the return object is not returned to the caller, any 
-task that was created as a part of the return object or one of its coextensions 
-immediately becomes</span><span class="delete3">&nbsp;Should the task that 
-created the new tasks never reach the point where it would initiate the 
-activations (due to an abort or the raising of an exception), the newly 
-created tasks become</span> terminated <span class="insert3">and is</span><span class="delete3">&nbsp;are</span> 
-never activated.&nbsp;</div>
+<div class="Normal">If the master that directly encloses the point where 
+the activation of a task <I>T</I> would be initiated, completes before 
+the activation of <I>T</I> is initiated, <I>T</I> becomes terminated 
+and is never activated. Furthermore, if a return statement is left such 
+that the return object is not returned to the caller, any task that was 
+created as a part of the return object or one of its coextensions immediately 
+becomes terminated and is never activated.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Notes">5&nbsp;&nbsp;An entry of a task can be called before 

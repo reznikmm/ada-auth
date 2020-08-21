@@ -32,12 +32,12 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-A-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
@@ -61,8 +61,8 @@ is a reference to an element within a container. Many operations on cursors
 are common to all of the containers. A cursor referencing an element 
 in a container is considered to be overlapping&nbsp;</span><span class="insert5">only 
 </span><span class="insert2">with the&nbsp;</span><span class="insert5">element</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;container 
-object</span></span><span class="insert2">&nbsp;itself.<A NAME="I7650"></A> 
-<A NAME="I7651"></A></span></div>
+object</span></span><span class="insert2">&nbsp;itself.<A NAME="I7951"></A> 
+<A NAME="I7952"></A></span></div>
 <div class="paranum"><a name="p2.a">2.a/5</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
 <span class="insert2">The last sentence is intended to clarify that operations 
@@ -83,7 +83,7 @@ on a container. This advice is expressed using the Landau symbol <I>O</I>(X).
 Presuming f is some function of a length parameter N and t(N) is the 
 time the operation takes (on average or worst case, as specified) for 
 the length N, a complexity of <I>O</I>(f(N)) means that there exists 
-a finite A such that for any N, t(N)/f(N) &lt; A. <A NAME="I7652"></A><A NAME="I7653"></A></span></div>
+a finite A such that for any N, t(N)/f(N) &lt; A. <A NAME="I7953"></A><A NAME="I7954"></A></span></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>Of 
 course, an implementation can do better than a specified <I>O</I>(f(N)): 
@@ -92,7 +92,7 @@ for example, <I>O</I>(1) meets the requirements for <I>O</I>(log N).</span></div
 <div class="Annotations"><span class="insert2">This concept seems to 
 have as many names as there are authors. We used &ldquo;Landau symbol&rdquo; 
 because that's what our reference does. But we'd also seen this referred 
-as big-O notation<A NAME="I7654"></A> (sometimes written as <I>big-oh</I>), 
+as big-O notation<A NAME="I7955"></A> (sometimes written as <I>big-oh</I>), 
 and as Bachmann notation. Whatever the name, it always has the above 
 definition.</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
@@ -105,7 +105,7 @@ for all N &gt; M, t(N)/f(N) &lt; D.</span></div>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
 <span class="insert3">When a formal function is used to provide an ordering 
 for a container, it is generally required to define a strict weak ordering. 
-A function &quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7655"></A> 
+A function &quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7956"></A> 
 if it is irreflexive, asymmetric, transitive, and in addition, if <I>x</I> 
 &lt; <I>y</I> for any values <I>x</I> and <I>y</I>, then for all other 
 values <I>z</I>, (<I>x</I> &lt; <I>z</I>) or (<I>z</I> &lt; <I>y</I>).</span></div>
@@ -219,23 +219,29 @@ breaking unexpectedly.</span></div>
 That means that overriding a container operation will not change the 
 behavior of any other predefined container operation. This provides a 
 stable base for extensions.</span>&nbsp;</div>
-<div class="paranum"><a name="p5.r">5.r/2</a></div>
-<div class="Annotations"><span class="insert2">If a container's element 
-type is controlled, the point at which the element is finalized will 
-depend on the implementation of the container. We do not specify precisely 
-where this will happen (it will happen no later than the finalization 
-of the container, of course) in order to give implementation's flexibility 
-to cache, block, or split the nodes of the container. In particular, 
-Delete does not necessarily finalize the element; the implementation 
-may (or may not) hold the space for reuse.</span></div>
-<div class="paranum"><a name="p5.s">5.s/2</a></div>
-<div class="Annotations"><span class="insert2">This is not likely to 
-be a hardship, as the element type has to be nonlimited. Types used to 
-manage scarce resources generally need to be limited. Otherwise, the 
-amount of resources needed is hard to control, as the language allows 
+<div class="paranum"><a name="p5.r">5.r/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0258-1.TXT">AI12-0258-1</A></I>} 
+<span class="insert2">If a container's element type is controlled, the 
+point at which the element is finalized will depend on the implementation 
+of the container.&nbsp;</span><span class="insert5">For certain kinds of containers, 
+we require finalization behavior based on the canonical implementation 
+of the container (see the Implementation Requirements below). For the 
+&quot;normal&quot; containers, we</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;We</span></span><span class="insert2">&nbsp;do not specify precisely where this will happen (it will happen no later 
+than the finalization of the container, of course) in order to give implementations 
+flexibility to cache, block,&nbsp;</span><span class="insert2"><span class="delete5">or 
+</span></span><span class="insert2">split&nbsp;</span><span class="insert5">, 
+or reuse</span><span class="insert2">&nbsp;the nodes of the container.</span><span class="insert2"><span class="delete5">&nbsp;In particular, Delete does not necessarily finalize the element; the 
+implementation may (or may not) hold the space for reuse.</span></span><span class="insert2"></span></div>
+<div class="paranum"><a name="p5.s">5.s/5</a></div>
+<div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN><span class="insert2"></span> {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0258-1.TXT">AI12-0258-1</A></I>} 
+<span class="insert2"></span><span class="insert2"><span class="delete5">This 
+is not likely to be a hardship, as the element type has to be nonlimited. 
+Types used to manage scarce resources generally need to be limited. Otherwise, 
+the amount of resources needed is hard to control, as the language allows 
 a lot of variation in the number or order of adjusts/finalizations. For 
 common uses of nonlimited controlled types such as managing storage, 
-the types already have to manage arbitrary copies.</span></div>
+the types already have to manage arbitrary copies.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p5.t">5.t/2</a></div>
 <div class="Annotations"><span class="insert2">The use of controlled 
 types also brings up the possibility of failure of finalization (and 
@@ -254,7 +260,7 @@ it is hard to define precisely what is and is not allowed behavior.</span>
 </div>
 <div class="paranum"><a name="p5.v">5.v/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Implementation Note: 
-</B>When this clause says that the behavior of something is unspecified<A NAME="I7656"></A>, 
+</B>When this clause says that the behavior of something is unspecified<A NAME="I7957"></A>, 
 we really mean that any result of executing Ada code short of erroneous 
 execution is allowed. We do not mean that memory not belonging to the 
 parameters of the operation can be trashed. When we mean to allow erroneous 
@@ -276,7 +282,7 @@ indefinite insertion</I>. These subprograms are those corresponding (in
 the sense of the copying described in subclause <A HREF="AA-12-3.html">12.3</A>) 
 to subprograms that have formal parameters of a generic formal indefinite 
 type and that are identified as performing indefinite insertion in the 
-subclause defining the generic package.<A NAME="I7657"></A></span></div>
+subclause defining the generic package.<A NAME="I7958"></A></span></div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
 <span class="insert4">If a subprogram performs indefinite insertion, 
@@ -291,7 +297,7 @@ for a given parameter are those checks explicitly specified in subclause
 evaluation of an initialized allocator whose access type is declared 
 immediately within the instance, where:</span></div>
 <div class="paranum"><a name="p8">8/4</a></div>
-<div class="Bulleted"><span class="insert4">the value of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<div class="Bulleted"><span class="insert4">the value of the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 is that of the parameter; and</span></div>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Bulleted"><span class="insert4">the designated subtype of 
@@ -324,41 +330,79 @@ propagated in this case (as specified in <A HREF="AA-4-8.html">4.8</A>);
 this is necessary to allow an all-Ada implementation of these packages.</span> 
 </div>
 
+<H4 Class="centered">Implementation Requirements</H4>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0258-1.TXT">AI12-0258-1</A></I>} 
+<span class="insert5">For an indefinite container (one whose type is 
+defined in an instance of a child package of Containers whose <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+contains &quot;Indefinite&quot;), each element of the container shall 
+be created when it is inserted into the container and finalized when 
+it is deleted from the container (or when the container object is finalized 
+if the element has not been deleted). For a bounded container (one whose 
+type is defined in an instance of a child package of Containers whose 
+<SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
+starts with &quot;Bounded&quot;) that is not an indefinite container, 
+all of the elements of the capacity of the container shall be created 
+and default initialized when the container object is created; the elements 
+shall be finalized when the container object is finalized. [For other 
+kinds of containers, when elements are created and finalized is unspecified.]</span></div>
+<div class="paranum"><a name="p11.a">11.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>This 
+allows a user to be able to reason about the behavior of elements that 
+have controlled parts. In most cases, such elements need to be stored 
+in an indefinite container.</span>&nbsp;</div>
+<div class="paranum"><a name="p11.b">11.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B>If the containers are implemented in Ada, this implies that elements 
+for an indefinite container are allocated individually, and that a bounded 
+container contains an array of elements or other data structure that 
+is initialized for the entire capacity of the container when it is created. 
+There is no such restriction on the implementation of the &quot;normal&quot; 
+containers; these can be handled in any way convenient to the implementation 
+&mdash; in particular, node reuse is allowed.</span>&nbsp;</div>
+
 <H4 Class="centered">Extensions to Ada 95</H4>
-<div class="paranum"><a name="p10.c">10.c/3</a></div>
+<div class="paranum"><a name="p11.c">11.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert2"><A NAME="I7658"></A>This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;is new. It just provides an introduction to the following subclauses.</span> 
+<span class="insert2"><A NAME="I7959"></A>This&nbsp;</span><span class="insert3">subclause</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clause</span></span><span class="insert2">&nbsp;is new. It just provides an introduction to the following subclauses.</span> 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
-<div class="paranum"><a name="p10.d">10.d/3</a></div>
+<div class="paranum"><a name="p11.d">11.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Added a definition of strict 
 weak ordering.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p10.e">10.e/5</a></div>
+<div class="paranum"><a name="p11.e">11.e/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
-<span class="insert5"><A NAME="I7659"></A><B>Correction:</B> We now say 
+<span class="insert5"><A NAME="I7960"></A><B>Correction:</B> We now say 
 that a cursor only overlaps with the element it designates, rather than 
 with the whole container. This allows some reading operations to operate 
 on the container in parallel without separate synchronization.</span> 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p10.f">10.f/4</a></div>
+<div class="paranum"><a name="p11.f">11.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0035-1.TXT">AI05-0035-1</A></I>} 
 <span class="insert4"><B>Corrigendum:</B> Added a definition of &ldquo;performs 
 indefinite insertion&rdquo;. This is used in other subclauses and any 
-resulting inconsistencies are documented there.</span>&nbsp;</div>
+resulting inconsistencies are documented there.</span></div>
+<div class="paranum"><a name="p11.g">11.g/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0258-1.TXT">AI12-0258-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Defined when objects are created 
+and finalized for Bounded and Indefinite containers, so that these can 
+be used reliably with controlled element types. This is not incompatible 
+as this behavior was previously unspecified; code depending on specific 
+behavior was wrong.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-A-17.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-17-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-18-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

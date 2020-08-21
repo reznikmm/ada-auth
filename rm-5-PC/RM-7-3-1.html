@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -42,7 +40,7 @@
 <div class="Normal">For a type declared in the visible part of a package 
 or generic package, certain operations on the type do not become visible 
 until later in the package &mdash; either in the private part or the 
-body. <A NAME="I3774"></A>Such <I>private operations</I> are available 
+body. <A NAME="I3763"></A>Such <I>private operations</I> are available 
 only inside the declarative region of the package or generic package. 
 </div>
 
@@ -73,7 +71,7 @@ if there is a place immediately within the declarative region in which
 the type is declared where additional characteristics of its parent type 
 become visible.</div>
 <div class="paranum"><a name="p5">5/1</a></div>
-<div class="Normal"><A NAME="I3775"></A><A NAME="I3776"></A><A NAME="I3777"></A>For 
+<div class="Normal"><A NAME="I3764"></A><A NAME="I3765"></A><A NAME="I3766"></A>For 
 example, an array type whose component type is limited private becomes 
 nonlimited if the full view of the component type is nonlimited and visible 
 at some later place immediately within the declarative region in which 
@@ -88,7 +86,7 @@ at a given place is determined by the view of the designated subtype
 that is visible at that place, rather than the view at the place where 
 the access type is declared.</span></div>
 <div class="paranum"><a name="p5.2">5.2/5</a></div>
-<div class="Normal">&nbsp;A type is a <I>descendant</I><A NAME="I3778"></A> 
+<div class="Normal">&nbsp;A type is a <I>descendant</I><A NAME="I3767"></A> 
 of the full view of some ancestor of its parent type only if the current 
 view it has of its parent is a descendant of the full view of that ancestor. 
 More generally, at any given place, a type is descended from the same 
@@ -98,18 +96,16 @@ from the ancestor, and, for example, whether the type is considered to
 be a descendant of a record type, or a descendant only through record 
 extensions of a more distant ancestor.</div>
 <div class="paranum"><a name="p5.3">5.3/5</a></div>
-<div class="Normal">&nbsp;<span class="insert4">Furthermore, it</span><span class="delete4">&nbsp;It</span> 
-is possible for there to be places where a derived type is <span class="insert4">known 
-to be derived indirectly from</span><span class="delete4">&nbsp;visibly a 
-descendant of</span> an ancestor type, but <span class="insert4">is&nbsp;</span>not 
-a descendant of even a partial view of the ancestor type, because the 
-parent of the derived type is not visibly a descendant of the ancestor. 
- In this case, the derived type inherits no characteristics from that 
-ancestor, but nevertheless is within the derivation class of the ancestor 
-for the purposes of type conversion, the &quot;covers&quot; relationship, 
-and matching against a formal derived type. In this case the derived 
-type is <span class="insert4">effectively</span><span class="delete4">&nbsp;considered 
-to be</span> a <I>descendant</I> of an incomplete view of the ancestor.<span class="delete4"><A NAME="I3779"></A></span></div>
+<div class="Normal">&nbsp;Furthermore, it is possible for there to be places 
+where a derived type is known to be derived indirectly from an ancestor 
+type, but is not a descendant of even a partial view of the ancestor 
+type, because the parent of the derived type is not visibly a descendant 
+of the ancestor.  In this case, the derived type inherits no characteristics 
+from that ancestor, but nevertheless is within the derivation class of 
+the ancestor for the purposes of type conversion, the &quot;covers&quot; 
+relationship, and matching against a formal derived type. In this case 
+the derived type is effectively a <I>descendant</I> of an incomplete 
+view of the ancestor.</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">Inherited primitive subprograms follow a different 
 rule. For a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
@@ -134,7 +130,7 @@ for every subtype S of an untagged private type whose full view is tagged,
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
-<A NAME="I3780"></A><A NAME="I3781"></A>Denotes the class-wide subtype 
+<A NAME="I3768"></A><A NAME="I3769"></A>Denotes the class-wide subtype 
 corresponding to the full view of S. This attribute is allowed only from 
 the beginning of the private part in which the full view is declared, 
 until the declaration of the full view. After the full view, the Class 

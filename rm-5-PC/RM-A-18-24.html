@@ -34,7 +34,7 @@
 <HR>
 <H1>A.18.24 The Generic Package Containers.Bounded_Ordered_Sets</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">The language-defined generic package Containers.Bounded_Ordered_Sets<A NAME="I7644"></A> 
+<div class="Normal">The language-defined generic package Containers.Bounded_Ordered_Sets<A NAME="I7629"></A> 
 provides a private type Set and a set of operations. It provides the 
 same operations as the package Containers.Ordered_Sets (see <A HREF="RM-A-18-9.html">A.18.9</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -68,7 +68,7 @@ than Target capacity, then Capacity_Error is propagated.</div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The function Copy 
 is replaced with:&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7645"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Set;<BR>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7630"></A>Copy&nbsp;(Source&nbsp;&nbsp;&nbsp;:&nbsp;Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)&nbsp;<B>return</B>&nbsp;Set;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Indented2">Returns a set whose elements are initialized from 
@@ -79,7 +79,7 @@ propagates Capacity_Error.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I7646"></A>It is a bounded error to assign 
+<div class="Normal"><A NAME="I7631"></A>It is a bounded error to assign 
 from a bounded set object while tampering with elements or cursors of 
 that object is prohibited. Either Program_Error is raised by the assignment, 
 execution proceeds with the target object prohibiting tampering with 
@@ -89,7 +89,7 @@ elements or cursors, or execution proceeds normally.&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">When a bounded set object <I>S</I> is finalized, 
 if tampering with cursors is prohibited for <I>S</I> other than due to 
-an assignment from another set, then execution is erroneous. <A NAME="I7647"></A></div>
+an assignment from another set, then execution is erroneous. <A NAME="I7632"></A></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p14">14/3</a></div>

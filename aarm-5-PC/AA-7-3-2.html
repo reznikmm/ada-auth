@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -36,32 +34,32 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>7.3.2 Type Invariants</H1>
 <div class="paranum"><a name="p1">1/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0041-1.TXT">AI12-0041-1</A></I>} 
-For a private type<span class="insert4">,</span><span class="delete4">&nbsp;or</span> private extension<span class="insert4">, or interface</span>, 
-the following language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+For a private type, private extension, or interface, the following language-defined 
+aspects may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0250-1.TXT">AI05-0250-1</A></I>} 
 Type_Invariant</div><div class="WideHanging-Body"><br clear="left">
-This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-called an <I>invariant expression</I>.<A NAME="I3980"></A> Type_Invariant 
-may be specified on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0196">private_type_declaration</A></SPAN>, 
-on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0197">private_extension_declaration</A></SPAN>, 
+This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+called an <I>invariant expression</I>.<A NAME="I4103"></A> Type_Invariant 
+may be specified on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN>, 
+on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
 or on a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-that declares the completion of a private type or private extension.<A NAME="I3981"></A><A NAME="I3982"></A></div>
+that declares the completion of a private type or private extension.<A NAME="I4104"></A><A NAME="I4105"></A></div>
 <div class="paranum"><a name="p2.a">2.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Type_Invariant: 
 </B>A condition that must hold true for all objects of a type.</div>
@@ -70,12 +68,13 @@ that declares the completion of a private type or private extension.<A NAME="I39
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0041-1.TXT">AI12-0041-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0150-1.TXT">AI12-0150-1</A></I>} 
 Type_Invariant'Class</div><div class="WideHanging-Body"><br clear="left">
-This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+This aspect shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 called an <I>invariant expression</I>. Type_Invariant'Class may be specified 
-on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0196">private_type_declaration</A></SPAN><span class="insert4">,</span><span class="delete4">&nbsp;or</span> a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0197">private_extension_declaration</A></SPAN><span class="insert4">, 
+on a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-for an interface type</span>.<A NAME="I3983"></A><A NAME="I3984"></A><span class="insert4">&nbsp;Type_Invariant'Class determines a <I>class-wide type invariant</I> for 
-a tagged type.<A NAME="I3985"></A><A NAME="I3986"></A><A NAME="I3987"></A></span></div>
+for an interface type.<A NAME="I4106"></A><A NAME="I4107"></A> Type_Invariant'Class 
+determines a <I>class-wide type invariant</I> for a tagged type.<A NAME="I4108"></A><A NAME="I4109"></A><A NAME="I4110"></A></div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0254-1.TXT">AI05-0254-1</A></I>} 
 A class-wide type invariant cannot be hidden in the private part, as 
@@ -91,32 +90,28 @@ to be visible.&nbsp;</div>
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
-The expected type for an invariant expression is any boolean type.<A NAME="I3988"></A></div>
+The expected type for an invariant expression is any boolean type.<A NAME="I4111"></A></div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0150-1.TXT">AI12-0150-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
 [Within an invariant expression, the identifier of the first subtype 
 of the associated type denotes the current instance of the type.] Within 
-an invariant expression <span class="insert4">for the Type_Invariant 
-aspect of a</span><span class="delete4">&nbsp;associated with</span> type 
-<I>T</I>, the type of <span class="insert4">this</span><span class="delete4">&nbsp;the</span> 
-current instance is <I>T</I><span class="insert4">. Within an invariant 
-expression</span><span class="delete4">&nbsp;for the Type_Invariant aspect 
-and <I>T</I>'Class</span> for the Type_Invariant'Class aspect<span class="insert4">&nbsp;of a type <I>T</I>, the type of this current instance is interpreted 
-as though it had a (notional)&nbsp;</span><span class="insert5">nonabstract 
-</span><span class="insert4">type <I>NT</I> that is a visible formal 
-derived type whose ancestor type is <I>T</I>.[ The effect of this interpretation 
-is that the only operations that can be applied to this current instance 
-are those defined for such a formal derived type.]</span><span class="delete4">.</span></div>
+an invariant expression for the Type_Invariant aspect of a type <I>T</I>, 
+the type of this current instance is <I>T</I>. Within an invariant expression 
+for the Type_Invariant'Class aspect of a type <I>T</I>, the type of this 
+current instance is interpreted as though it had a (notional) <span class="insert5">nonabstract 
+</span>type <I>NT</I> that is a visible formal derived type whose ancestor 
+type is <I>T</I>.[ The effect of this interpretation is that the only 
+operations that can be applied to this current instance are those defined 
+for such a formal derived type.]</div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>The first sentence is given formally 
 in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4">The rules for Type_Invariant'Class ensure that 
-the invariant expression is well-defined for any type descended from 
-<I>T</I>.</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+The rules for Type_Invariant'Class ensure that the invariant expression 
+is well-defined for any type descended from <I>T</I>.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
@@ -129,10 +124,10 @@ type.</div>
 in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4">If a type extension occurs at a point where a private 
-operation of some ancestor is visible and inherited, and a Type_Invariant'Class 
-expression applies to that ancestor, then the inherited operation shall 
-be abstract or shall be overridden.</span>&nbsp;</div>
+If a type extension occurs at a point where a private operation of some 
+ancestor is visible and inherited, and a Type_Invariant'Class expression 
+applies to that ancestor, then the inherited operation shall be abstract 
+or shall be overridden.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
@@ -146,7 +141,7 @@ the invariant expression applies to <I>T</I>.]</div>
 for a tagged type <I>T</I>, then <span class="insert5">a <I>corresponding 
 expression</I> also applies to each nonabstract descendant <I>T1</I> 
 of <I>T</I> [(including <I>T</I> itself if it is nonabstract)]. The corresponding 
-expression is constructed from the associated expression as follows:<A NAME="I3989"></A></span><span class="delete5">&nbsp;the 
+expression is constructed from the associated expression as follows:<A NAME="I4112"></A></span><span class="delete5">&nbsp;the 
 invariant expression applies to all descendants of <I>T</I>.</span></div>
 <div class="paranum"><a name="p8.1">8.1/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0199-1.TXT">AI12-0199-1</A></I>} 
@@ -175,6 +170,56 @@ is formally defined in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 associated expression from which the corresponding expression is constructed 
 is the one that applies to the descendant type; &quot;applies&quot; is 
 formally defined in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+<div class="paranum"><a name="p8.3">8.3/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="insert5">If one or more invariant expressions apply to a 
+nonabstract type <I>T</I>, then a subprogram or entry is said to be <I>type-invariant 
+preserving</I> for <I>T</I> if<A NAME="I4113"></A></span></div>
+<div class="paranum"><a name="p8.4">8.4/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">it 
+is declared within the immediate scope of <I>T</I> (or by an instance 
+of a generic unit, and the generic is declared within the immediate scope 
+of type <I>T</I>), or is the Read or Input stream-oriented attribute 
+of type <I>T</I>, and either:</span></div>
+<div class="paranum"><a name="p8.5">8.5/5</a></div>
+<div class="Indented2NestedBulleted"><span class="insert5"><I>T</I> is 
+a private type or a private extension and the subprogram or entry is 
+visible outside the immediate scope of type <I>T</I> or overrides an 
+inherited operation that is visible outside the immediate scope of <I>T</I>; 
+or</span></div>
+<div class="paranum"><a name="p8.6">8.6/5</a></div>
+<div class="Indented2NestedBulleted"><span class="insert5"><I>T</I> is 
+a record extension, and the subprogram or entry is a primitive operation 
+visible outside the immediate scope of type <I>T</I> or overrides an 
+inherited operation that is visible outside the immediate scope of <I>T</I>.</span></div>
+<div class="paranum"><a name="p8.7">8.7/5</a></div>
+<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert5">and 
+at least one of the following applies to the callable entity:</span></div>
+<div class="paranum"><a name="p8.8">8.8/5</a></div>
+<div class="Indented2NestedBulleted"><span class="insert5">has a result 
+with a part of type <I>T</I>;</span></div>
+<div class="paranum"><a name="p8.9">8.9/5</a></div>
+<div class="Indented2NestedBulleted"><span class="insert5">has one or 
+more <B>out</B> or <B>in out</B> parameters with a part of type <I>T</I>;</span></div>
+<div class="paranum"><a name="p8.10">8.10/5</a></div>
+<div class="Indented2NestedBulleted"><span class="insert5">has an access-to-object 
+parameter or result whose designated type has a part of type <I>T</I>; 
+or</span></div>
+<div class="paranum"><a name="p8.11">8.11/5</a></div>
+<div class="Indented2NestedBulleted"><span class="insert5">is a procedure 
+or entry that has an <B>in</B> parameter with a part of type <I>T</I>.</span></div>
+<div class="paranum"><a name="p8.c">8.c/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Discussion:&nbsp;</B>We 
+don't check <B>in</B> parameters for functions to avoid infinite recursion 
+for calls to public functions appearing in invariant expressions. Such 
+function calls are unavoidable for class-wide invariants and likely for 
+other invariants. This is the simplest rule that avoids trouble, and 
+functions are much more likely to be queries that don't modify their 
+parameters than other callable entities.</span> ]}&nbsp;</div>
+<div class="paranum"><a name="p8.12">8.12/5</a></div>
+<div class="Bulleted-NoPrefix">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="insert5">Each such part of type <I>T</I> is said to be <I>subject 
+to an invariant check</I> for <I>T</I>.<A NAME="I4114"></A><A NAME="I4115"></A></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/4</a></div>
@@ -182,32 +227,31 @@ formally defined in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0247-1.TXT">AI05-0247-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0150-1.TXT">AI12-0150-1</A></I>} 
-If one or more invariant expressions apply to a <span class="insert4">nonabstract 
-</span>type <I>T</I>, then an invariant check is performed at the following 
-places, on the specified object(s):<A NAME="I3990"></A><A NAME="I3991"></A></div>
+If one or more invariant expressions apply to a nonabstract type <I>T</I>, 
+then an invariant check is performed at the following places, on the 
+specified object(s):<A NAME="I4116"></A><A NAME="I4117"></A></div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0133-1.TXT">AI12-0133-1</A></I>} 
-After successful <span class="delete4">default&nbsp;</span>initialization 
-of an object of type <I>T</I><span class="insert4">&nbsp;by default (see <A HREF="AA-3-3-1.html">3.3.1</A>)</span>, 
-the check is performed on the new object<span class="insert4">&nbsp;unless 
-the partial view of <I>T</I> has unknown discriminants</span>;</div>
+After successful initialization of an object of type <I>T</I> by default 
+(see <A HREF="AA-3-3-1.html">3.3.1</A>), the check is performed on the 
+new object unless the partial view of <I>T</I> has unknown discriminants;</div>
 <div class="paranum"><a name="p10.a">10.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0133-1.TXT">AI12-0133-1</A></I>} 
-<span class="insert4">The check applies everywhere, even in the package 
-body, because default initialization has to work the same for clients 
-as it does within the package. As such, checks within the package are 
-either harmless or will uncover a bug that could also happen to a client. 
-However, if the partial view of the type has unknown discriminants, no 
-client of the package can declare a default-initialized object. Therefore, 
-no invariant check is needed, as all default initialized objects are 
-necessarily inside the package.</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0133-1.TXT">AI12-0133-1</A></I>} 
+The check applies everywhere, even in the package body, because default 
+initialization has to work the same for clients as it does within the 
+package. As such, checks within the package are either harmless or will 
+uncover a bug that could also happen to a client. However, if the partial 
+view of the type has unknown discriminants, no client of the package 
+can declare a default-initialized object. Therefore, no invariant check 
+is needed, as all default initialized objects are necessarily inside 
+the package.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0049-1.TXT">AI12-0049-1</A></I>} 
-<span class="insert4">After successful explicit initialization of the 
-completion of a deferred constant with a part of type <I>T</I>, if the 
-completion is inside the immediate scope of the full view of <I>T</I>, 
-and the deferred constant is visible outside the immediate scope of <I>T</I>, 
-the check is performed on the part(s) of type <I>T</I>;</span></div>
+After successful explicit initialization of the completion of a deferred 
+constant with a part of type <I>T</I>, if the completion is inside the 
+immediate scope of the full view of <I>T</I>, and the deferred constant 
+is visible outside the immediate scope of <I>T</I>, the check is performed 
+on the part(s) of type <I>T</I>;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Bulleted">After successful conversion to type <I>T</I>, the 
 check is performed on the result of the conversion;</div>
@@ -244,83 +288,98 @@ the object to check and the tag of the target of the conversion, and
 which first checks if the passed tag is not for itself, and if not, checks 
 the its invariant on the object and then calls the operation of its parent 
 type. If the tag is for itself, the operation is complete.&nbsp;</div>
-<div class="paranum"><a name="p15">15/4</a></div>
+<div class="paranum"><a name="p15">15/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0146-1.TXT">AI12-0146-1</A></I>} 
-After a successful call on the Read or Input <span class="insert4">stream-oriented</span><span class="delete4">&nbsp;stream</span> 
-attribute of the type <I>T</I>, the check is performed on the object 
-initialized by the <span class="delete4">stream&nbsp;</span>attribute;</div>
-<div class="paranum"><a name="p16">16/3</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0193-1.TXT">AI12-0193-1</A></I>} 
+<span class="insert5">Upon</span><span class="delete5">&nbsp;After a</span> 
+successful <span class="insert5">return from a&nbsp;</span>call on <span class="insert5">any 
+subprogram or entry which is type-invariant preserving for <I>T</I>, 
+an invariant</span><span class="delete5">&nbsp;the Read or Input stream-oriented 
+attribute of the type <I>T</I>, the</span> check is performed on <span class="insert5">each 
+part of type <I>T</I> which is subject to an invariant check for <I>T</I>. 
+In the case of a call to a protected operation, the check is performed 
+before the end of the protected action. In the case of a call to a task 
+entry, the check is performed before the end of the rendezvous</span><span class="delete5">&nbsp;the 
+object initialized by the attribute</span>;</div>
+<div class="Bulleted-NoPrefix"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
+16 through 20 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="paranum"><a name="p16">16/5</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-An invariant is checked upon successful return from a call on any subprogram 
-or entry that:&nbsp;</div>
-<div class="paranum"><a name="p17">17/4</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">An invariant is checked upon successful return 
+from a call on any subprogram or entry that:</span>&nbsp;</div>
+<div class="paranum"><a name="p17">17/5</a></div>
 <div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-is declared within the immediate scope of type <I>T</I> (or by an instance 
-of a generic unit, and the generic is declared within the immediate scope 
-of type <I>T</I>),<span class="delete4">&nbsp;and</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">is declared within the immediate scope of type 
+<I>T</I> (or by an instance of a generic unit, and the generic is declared 
+within the immediate scope of type <I>T</I>),</span></div>
 <div class="paranum"><a name="p18">18/4</a></div>
 <div class="Indented2Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="delete4">is visible outside the immediate scope of type 
-<I>T</I> or overrides an operation that is visible outside the immediate 
-scope of <I>T</I>, and</span></div>
-<div class="paranum"><a name="p19">19/4</a></div>
-<div class="Indented2Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0289-1.TXT">AI05-0289-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
-<span class="insert4"></span><span class="insert4">and either:</span><span class="delete4">&nbsp;has 
-a result with a part of type <I>T</I>, or one or more parameters with 
-a part of type <I>T</I>, or an access to variable parameter whose designated 
-type has a part of type <I>T</I>.</span></div>
-<div class="paranum"><a name="p19.1">19.1/4</a></div>
+<span class="delete5"></span></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0289-1.TXT">AI05-0289-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">and either:</span></div>
+<div class="paranum"><a name="p19.1">19.1/5</a></div>
 <div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
-<span class="insert4">has a result with a part of type <I>T</I>, or</span></div>
-<div class="paranum"><a name="p19.2">19.2/4</a></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">has a result with a part of type <I>T</I>, or</span></div>
+<div class="paranum"><a name="p19.2">19.2/5</a></div>
 <div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
-<span class="insert4">has one or more <B>out</B> or <B>in out</B> parameters 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">has one or more <B>out</B> or <B>in out</B> parameters 
 with a part of type <I>T</I>, or</span></div>
-<div class="paranum"><a name="p19.3">19.3/4</a></div>
+<div class="paranum"><a name="p19.3">19.3/5</a></div>
 <div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0149-1.TXT">AI12-0149-1</A></I>} 
-<span class="insert4">has an access-to-object parameter or result whose 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0149-1.TXT">AI12-0149-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">has an access-to-object parameter or result whose 
 designated type has a part of type <I>T</I>, or</span></div>
-<div class="paranum"><a name="p19.4">19.4/4</a></div>
+<div class="paranum"><a name="p19.4">19.4/5</a></div>
 <div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
-<span class="insert4">is a procedure or entry that has an <B>in</B> parameter 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">is a procedure or entry that has an <B>in</B> parameter 
 with a part of type <I>T</I>,</span></div>
-<div class="paranum"><a name="p19.a">19.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>We 
-don't check <B>in</B> parameters for functions to avoid infinite recursion 
-for calls to public functions appearing in invariant expressions. Such 
-function calls are unavoidable for class-wide invariants and likely for 
-other invariants. This is the simplest rule that avoids trouble, and 
-functions are much more likely to be queries that don't modify their 
-parameters than other callable entities.</span>&nbsp;</div>
-<div class="paranum"><a name="p19.5">19.5/4</a></div>
-<div class="Indented2Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4">and either:</span></div>
-<div class="paranum"><a name="p19.6">19.6/4</a></div>
-<div class="Indented3Bulleted"><span class="insert4"><I>T</I> is a private 
-type or a private extension and the subprogram or entry is visible outside 
-the immediate scope of type <I>T</I> or overrides an inherited operation 
-that is visible outside the immediate scope of <I>T</I>, or</span></div>
-<div class="paranum"><a name="p19.7">19.7/4</a></div>
-<div class="Indented3Bulleted"><span class="insert4"><I>T</I> is a record 
-extension, and the subprogram or entry is a primitive operation visible 
-outside the immediate scope of type <I>T</I> or overrides an inherited 
-operation that is visible outside the immediate scope of <I>T</I>.</span> 
+<div class="paranum"><a name="p19.a">19.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">We don't check <B>in</B> parameters for functions 
+to avoid infinite recursion for calls to public functions appearing in 
+invariant expressions. Such function calls are unavoidable for class-wide 
+invariants and likely for other invariants. This is the simplest rule 
+that avoids trouble, and functions are much more likely to be queries 
+that don't modify their parameters than other callable entities.</span> 
 </div>
+<div class="paranum"><a name="p19.5">19.5/5</a></div>
+<div class="Indented2Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">and either:</span></div>
+<div class="paranum"><a name="p19.6">19.6/5</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5"><I>T</I> is a private type or a private extension 
+and the subprogram or entry is visible outside the immediate scope of 
+type <I>T</I> or overrides an inherited operation that is visible outside 
+the immediate scope of <I>T</I>, or</span></div>
+<div class="paranum"><a name="p19.7">19.7/5</a></div>
+<div class="Indented3Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5"><I>T</I> is a record extension, and the subprogram 
+or entry is a primitive operation visible outside the immediate scope 
+of type <I>T</I> or overrides an inherited operation that is visible 
+outside the immediate scope of <I>T</I>.</span>&nbsp;</div>
 <div class="paranum"><a name="p20">20/5</a></div>
 <div class="Bulleted-NoPrefix">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0193-1.TXT">AI12-0193-1</A></I>} 
-The check is performed on each such part of type <I>T</I>.<span class="insert5">&nbsp;In the case of a call to a protected operation, the check is performed 
-before the end of the protected action. In the case of a call to a task 
-entry, the check is performed before the end of the rendezvous.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="delete5">The check is performed on each such part of type 
+<I>T</I>.</span></div>
 <div class="paranum"><a name="p20.a.1">20.a.1/5</a></div>
 <div class="Annotations"><span class="insert5"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0167-1.TXT">AI12-0167-1</A></I>} 
 <span class="insert5">In all of the above, for a class-wide object, we 
@@ -330,15 +389,15 @@ some future extension component <I>might</I> have type <I>T</I> (contrast
 this to finalization, where we do intend that overhead).</span>&nbsp;</div>
 <div class="paranum"><a name="p20.1">20.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4">For a view conversion to a class-wide type occurring 
-within the immediate scope of <I>T</I>, from a specific type that is 
-a descendant of <I>T</I> (including <I>T</I> itself), a check is performed 
-on the part of the object that is of type <I>T</I>.</span></div>
+For a view conversion to a class-wide type occurring within the immediate 
+scope of <I>T</I>, from a specific type that is a descendant of <I>T</I> 
+(including <I>T</I> itself), a check is performed on the part of the 
+object that is of type <I>T</I>.</div>
 <div class="paranum"><a name="p20.a">20.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Reason:&nbsp;</B>Class-wide 
-objects are treated as though they exist outside the scope of every type, 
-and may be passed across package &quot;boundaries&quot; freely without 
-further invariant checks.</span></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Class-wide objects are treated 
+as though they exist outside the scope of every type, and may be passed 
+across package &quot;boundaries&quot; freely without further invariant 
+checks.</div>
 <div class="paranum"><a name="p20.b">20.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0167-1.TXT">AI12-0167-1</A></I>} 
 <span class="insert5">Despite this model, if an object of type <I>T</I> 
@@ -349,12 +408,11 @@ of the full view of type <I>T</I>, then there is no invariant check for
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0080-1.TXT">AI12-0080-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-If performing checks is required by the <span class="insert4">Type_Invariant</span><span class="delete4">&nbsp;Invariant</span> 
-or <span class="insert4">Type_Invariant'Class</span><span class="delete4">&nbsp;Invariant'Class</span> 
+If performing checks is required by the Type_Invariant or Type_Invariant'Class 
 assertion policies (see <A HREF="AA-11-4-2.html">11.4.2</A>) in effect 
-at the point of <span class="insert4">the&nbsp;</span>corresponding aspect 
-specification applicable to a given type, then the respective invariant 
-expression is considered <I>enabled</I>.<A NAME="I3992"></A></div>
+at the point of the corresponding aspect specification applicable to 
+a given type, then the respective invariant expression is considered 
+<I>enabled</I>.<A NAME="I4118"></A></div>
 <div class="paranum"><a name="p21.a">21.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If a class-wide invariant 
 expression is enabled for a type, it remains enabled when inherited by 
@@ -368,7 +426,7 @@ the inheriting type.&nbsp;</div>
 The invariant check consists of the evaluation of each enabled invariant 
 expression that applies to <I>T</I>, on each of the objects specified 
 above. If any of these evaluate to False, Assertions.Assertion_Error 
-is raised at the point of the object initialization, conversion, or call.<A NAME="I3993"></A> 
+is raised at the point of the object initialization, conversion, or call.<A NAME="I4119"></A> 
 If a given call requires more than one evaluation of an invariant expression, 
 either for multiple objects of a single type or for multiple types with 
 invariants, the evaluations are performed in an arbitrary order, and 
@@ -380,13 +438,13 @@ with <B>in out</B> or <B>out</B> parameters are performed in an arbitrary
 order.</div>
 <div class="paranum"><a name="p22.1">22.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0150-1.TXT">AI12-0150-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4">For an invariant check on a value of type <I>T1</I> 
-based on a class-wide invariant expression inherited from an ancestor 
-type <I>T</I>, any operations within the invariant expression that were 
-resolved as primitive operations of the (notional) formal derived type 
-<I>NT</I> are bound to the corresponding operations of type <I>T1</I> 
-in the evaluation of the invariant expression for the check on <I>T1</I>.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+For an invariant check on a value of type <I>T1</I> based on a class-wide 
+invariant expression inherited from an ancestor type <I>T</I>, any operations 
+within the invariant expression that were resolved as primitive operations 
+of the (notional) formal derived type <I>NT</I> are bound to the corresponding 
+operations of type <I>T1</I> in the evaluation of the invariant expression 
+for the check on <I>T1</I>.</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0146-1.TXT">AI05-0146-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0247-1.TXT">AI05-0247-1</A></I>} 
@@ -398,20 +456,19 @@ call, or as part of a call through an access-to-subprogram value.</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0149-1.TXT">AI12-0149-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0167-1.TXT">AI12-0167-1</A></I>} 
 Invariant checks on subprogram return are not performed on objects that 
-are accessible only through access values<span class="insert4">&nbsp;that 
-are subcomponents of some other object</span>. It is also possible to 
-call through an access-to-subprogram value and reach a subprogram body 
-that has visibility on the full declaration of a type, from outside the 
-immediate scope of the type. No invariant checks will be performed if 
-the designated subprogram is not itself externally visible. These cases 
-represent &quot;holes&quot; in the protection provided by invariant checks; 
-but note that these holes cannot be caused by clients of the type <I>T</I> 
-with the invariant<span class="insert4">. The designer of the package 
+are accessible only through access values that are subcomponents of some 
+other object. It is also possible to call through an access-to-subprogram 
+value and reach a subprogram body that has visibility on the full declaration 
+of a type, from outside the immediate scope of the type. No invariant 
+checks will be performed if the designated subprogram is not itself externally 
+visible. These cases represent &quot;holes&quot; in the protection provided 
+by invariant checks; but note that these holes cannot be caused by clients 
+of the type <I>T</I> with the invariant. The designer of the package 
 has to declare a visible type with an access-to-<I>T</I> subcomponent 
 and use it as a parameter or result to subprograms in the package, or 
 pass the client an access-to-subprogram value representing a private 
 operation of the package. In the absence of such things, all values that 
-the client can see will be checked for a private type or extension</span><span class="delete4">&nbsp;without help for the designer of the package containing <I>T</I></span>.<span class="insert5">&nbsp;Similar holes exist for class-wide objects as discussed above.</span> 
+the client can see will be checked for a private type or extension.<span class="insert5">&nbsp;Similar holes exist for class-wide objects as discussed above.</span> 
 </div>
 <div class="paranum"><a name="p23.b">23.b/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The implementation 
@@ -447,61 +504,60 @@ as that of an inherited subprogram.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0247-1.TXT">AI05-0247-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0250-1.TXT">AI05-0250-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0289-1.TXT">AI05-0289-1</A></I>} 
-<A NAME="I3994"></A>Type_Invariant aspects are new.&nbsp;</div>
+<A NAME="I4120"></A>Type_Invariant aspects are new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p24.c">24.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4"><A NAME="I3995"></A><B>Corrigendum:</B> Clarified 
-the definition of when invariant checks occur for inherited subprograms. 
-This might cause checks to be added or removed in some cases. These are 
-all rare cases involving class-wide type invariants and either record 
-extensions or multiple levels of derivation. Additionally, implementations 
-probably make the checks as the intent seems clear, even though the formal 
-language did not include them. So we do not expect this to be a problem 
-in practice.</span></div>
+<A NAME="I4121"></A><B>Corrigendum:</B> Clarified the definition of when 
+invariant checks occur for inherited subprograms. This might cause checks 
+to be added or removed in some cases. These are all rare cases involving 
+class-wide type invariants and either record extensions or multiple levels 
+of derivation. Additionally, implementations probably make the checks 
+as the intent seems clear, even though the formal language did not include 
+them. So we do not expect this to be a problem in practice.</div>
 <div class="paranum"><a name="p24.d">24.d/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Added invariant checks for 
-conversions to class-wide types. This might cause an invariant check 
-to fail in some cases where they would not be made in the original definition 
-of Ada 2012. Such cases represent a hole where a value that fails an 
-invariant could &quot;leak out&quot; of a package, and as such will detect 
-far more bugs than it causes.</span></div>
+<B>Corrigendum:</B> Added invariant checks for conversions to class-wide 
+types. This might cause an invariant check to fail in some cases where 
+they would not be made in the original definition of Ada 2012. Such cases 
+represent a hole where a value that fails an invariant could &quot;leak 
+out&quot; of a package, and as such will detect far more bugs than it 
+causes.</div>
 <div class="paranum"><a name="p24.e">24.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0044-1.TXT">AI12-0044-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Removed the invariant check 
-for <B>in</B> parameters of functions, so that typical invariants don't 
-cause infinite recursion. This is strictly inconsistent, as the Ada 2012 
-definition has this check; therefore, programs could depend on Assertion_Error 
-being raised upon the return from some call on a public function. However, 
-as the intent of assertion checking is to uncover bugs, a program that 
-depends on a bug occurring seems very unlikely.</span></div>
+<B>Corrigendum:</B> Removed the invariant check for <B>in</B> parameters 
+of functions, so that typical invariants don't cause infinite recursion. 
+This is strictly inconsistent, as the Ada 2012 definition has this check; 
+therefore, programs could depend on Assertion_Error being raised upon 
+the return from some call on a public function. However, as the intent 
+of assertion checking is to uncover bugs, a program that depends on a 
+bug occurring seems very unlikely.</div>
 <div class="paranum"><a name="p24.f">24.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0049-1.TXT">AI12-0049-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0149-1.TXT">AI12-0149-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Added an invariant check for 
-deferred constants and for access values returned from functions, so 
-they cannot be used to &ldquo;leak&rdquo; values that violate the invariant 
-from a package. This is strictly inconsistent, as the Ada 2012 definition 
-is missing these checks; therefore, programs could depend on using values 
-that violate an invariant outside of the package of definition. These 
-will not raise Assertion_Error in Ada 2012 as defined in the Ada 2012 
-Standard, but ought to do so (as noted by this change). As these are 
-a violation of the intent of invariants, we think that this change will 
-mainly reveal bugs rather than cause them.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0149-1.TXT">AI12-0149-1</A></I>} 
+<B>Corrigendum:</B> Added an invariant check for deferred constants and 
+for access values returned from functions, so they cannot be used to 
+&ldquo;leak&rdquo; values that violate the invariant from a package. 
+This is strictly inconsistent, as the Ada 2012 definition is missing 
+these checks; therefore, programs could depend on using values that violate 
+an invariant outside of the package of definition. These will not raise 
+Assertion_Error in Ada 2012 as defined in the Ada 2012 Standard, but 
+ought to do so (as noted by this change). As these are a violation of 
+the intent of invariants, we think that this change will mainly reveal 
+bugs rather than cause them.</div>
 <div class="paranum"><a name="p24.g">24.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0150-1.TXT">AI12-0150-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Eliminated unintentional redispatching 
-from class-wide type invariants. This means that a different body might 
-be evaluated for a type invariant check where the value has a different 
-tag than that of the type. The change means that the behavior of Type_Invariant 
-and Type_Invariant'Class will be the same for a particular subprogram, 
-and that the known behavior of the operations can be assumed. We expect 
-that this change will primarily fix bugs, as it will make class-wide 
-type invariants work more like expected. In the case where redispatching 
-is desired, an explicit conversion to a class-wide type can be used.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+<B>Corrigendum:</B> Eliminated unintentional redispatching from class-wide 
+type invariants. This means that a different body might be evaluated 
+for a type invariant check where the value has a different tag than that 
+of the type. The change means that the behavior of Type_Invariant and 
+Type_Invariant'Class will be the same for a particular subprogram, and 
+that the known behavior of the operations can be assumed. We expect that 
+this change will primarily fix bugs, as it will make class-wide type 
+invariants work more like expected. In the case where redispatching is 
+desired, an explicit conversion to a class-wide type can be used.</div>
 <div class="paranum"><a name="p24.h">24.h/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0199-1.TXT">AI12-0199-1</A></I>} 
 <span class="insert5"><B>Correction:</B> Class-wide type invariants are 
@@ -517,32 +573,36 @@ in practice.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p24.i">24.i/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0042-1.TXT">AI12-0042-1</A></I>} 
-<span class="insert4"><A NAME="I3996"></A><B>Corrigendum:</B> A private 
-operation that is inherited in the visible part of a package to which 
-a class-wide invariant applies now requires overriding. This is a very 
-unlikely situation, and will prevent problems with invariant checks being 
-added to routines that assume that they don't need them.</span>&nbsp;</div>
+<A NAME="I4122"></A><B>Corrigendum:</B> A private operation that is inherited 
+in the visible part of a package to which a class-wide invariant applies 
+now requires overriding. This is a very unlikely situation, and will 
+prevent problems with invariant checks being added to routines that assume 
+that they don't have them.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p24.j">24.j/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0041-1.TXT">AI12-0041-1</A></I>} 
-<span class="insert4"><A NAME="I3997"></A><B>Corrigendum:</B> Class-wide 
-type invariants can now be specified on interfaces as well as private 
-types.</span>&nbsp;</div>
+<A NAME="I4123"></A><B>Corrigendum:</B> Class-wide type invariants can 
+now be specified on interfaces as well as private types.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p24.k">24.k/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0133-1.TXT">AI12-0133-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Clarified that all objects 
-that are initialized by default should have an invariant check, and added 
-an exception for types with unknown discriminants, as in that case the 
-client cannot declare a default-initialized object. This exception to 
-the check is formally inconsistent, but since it is only removing an 
-assertion failure that occurs where no assertion should be checked anyway 
-(meaning it's more likely to fix a bug than cause one), and programs 
-depending on assertion failure should be very rare outside of test cases, 
-we don't document this as inconsistent.</span></div>
+<B>Corrigendum:</B> Clarified that all objects that are initialized by 
+default should have an invariant check, and added an exception for types 
+with unknown discriminants, as in that case the client cannot declare 
+a default-initialized object. This exception to the check is formally 
+inconsistent, but since it is only removing an assertion failure that 
+occurs where no assertion should be checked anyway (meaning it's more 
+likely to fix a bug than cause one), and programs depending on assertion 
+failure should be very rare outside of test cases, we don't document 
+this as inconsistent.</div>
 <div class="paranum"><a name="p24.l">24.l/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0075-1.TXT">AI12-0075-1</A></I>} 
+<span class="insert5">Defined the term &ldquo;type-invariant preserving&rdquo; 
+to allow rules in other subclauses to reference these rules. No semantic 
+change is intended.</span></div>
+<div class="paranum"><a name="p24.m">24.m/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0193-1.TXT">AI12-0193-1</A></I>} 
 <span class="insert5"><B>Correction:</B> Clarified when type invariant 
 checks happen for protected actions and entry calls.</span>&nbsp;</div>
@@ -553,7 +613,7 @@ checks happen for protected actions and entry calls.</span>&nbsp;</div>
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-7-3-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-7-4.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-7-3-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

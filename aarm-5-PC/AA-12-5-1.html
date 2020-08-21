@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -32,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -67,13 +65,13 @@ before its completion.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_private_type_definition</SPAN><A NAME="I5311"></A><A NAME="S0288"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B></div>
+<div class="Indented1"><SPAN Class="swiss">formal_private_type_definition</SPAN><A NAME="I5510"></A><A NAME="S0302"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
-<SPAN Class="swiss">formal_derived_type_definition</SPAN><A NAME="I5312"></A><A NAME="S0289"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<A NAME="I5313"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[[<B>and</B>&nbsp;<A NAME="I5314"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]<B>with</B>&nbsp;<B>private</B>]</div>
+<SPAN Class="swiss">formal_derived_type_definition</SPAN><A NAME="I5511"></A><A NAME="S0303"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<A NAME="I5512"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[[<B>and</B>&nbsp;<A NAME="I5513"></A><SPAN Class="swiss"><A HREF="AA-3-9-4.html#S0078">interface_list</A></SPAN>]<B>with</B>&nbsp;<B>private</B>]</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
@@ -91,9 +89,9 @@ by its initial value.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0237-1.TXT">AI05-0237-1</A></I>} 
-<A NAME="I5315"></A><A NAME="I5316"></A>The <I>ancestor subtype</I> of 
+<A NAME="I5514"></A><A NAME="I5515"></A>The <I>ancestor subtype</I> of 
 a formal derived type is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0289">formal_derived_type_definition</A></SPAN>. 
+of the <SPAN Class="swiss"><A HREF="AA-12-5-1.html#S0303">formal_derived_type_definition</A></SPAN>. 
 For a formal derived type declaration, the reserved words <B>with private</B> 
 shall appear if and only if the ancestor type is a tagged type; in this 
 case the formal derived type is a private extension of the ancestor type 
@@ -136,11 +134,11 @@ the progenitors are synchronized.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0036-1.TXT">AI12-0036-1</A></I>} 
 The actual type for a formal derived type shall be a descendant of [the 
 ancestor type and] every progenitor of the formal type. If the formal 
-type is nonlimited, the actual type shall be nonlimited. <span class="insert4">The 
-actual type for a formal derived type shall be tagged if and only if 
-the formal derived type is a private extension.&nbsp;</span>If the reserved 
-word <B>synchronized</B> appears in the declaration of the formal derived 
-type, the actual type shall be a synchronized tagged type.&nbsp;</div>
+type is nonlimited, the actual type shall be nonlimited. The actual type 
+for a formal derived type shall be tagged if and only if the formal derived 
+type is a private extension. If the reserved word <B>synchronized</B> 
+appears in the declaration of the formal derived type, the actual type 
+shall be a synchronized tagged type.&nbsp;</div>
 <div class="paranum"><a name="p5.d">5.d/2</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>The actual type has to be a descendant 
 of the ancestor type, in order that it be in the correct class. Thus, 
@@ -168,13 +166,13 @@ to match a nonlimited formal derived type. Otherwise, we could assign
 limited objects. Thus, we have to explicitly ban this case.</div>
 <div class="paranum"><a name="p5.g">5.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0036-1.TXT">AI12-0036-1</A></I>} 
-<span class="insert4">If we allowed actual types that differ from the 
-kind of the formal derived type, we could allow type conversions that 
-would not be allowed outside of the generic. That would be particularly 
-problematical if the actual is a tagged type with extension components; 
-we could have created an object of the type that is missing those components 
-by converting from the ancestor type to a formal derived type that is 
-not an extension.</span>&nbsp;</div>
+If we allowed actual types that differ from the kind of the formal derived 
+type, we could allow type conversions that would not be allowed outside 
+of the generic. That would be particularly problematical if the actual 
+is a tagged type with extension components; we could have created an 
+object of the type that is missing those components by converting from 
+the ancestor type to a formal derived type that is not an extension. 
+</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
 If a formal private or derived subtype is definite, then the actual subtype 
@@ -185,7 +183,7 @@ an indefinite formal subtype, the actual can be either definite or indefinite.
 </div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-12-5.html#S0286">formal_incomplete_type_declaration</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-12-5.html#S0300">formal_incomplete_type_declaration</A></SPAN> 
 declares a formal incomplete type. The only view of a formal incomplete 
 type is an incomplete view. [Thus, a formal incomplete type is subject 
 to the same usage restrictions as any other incomplete type &mdash; see 
@@ -248,7 +246,7 @@ of discriminants.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">The subtype of each discriminant of the actual 
 type shall statically match the subtype of the corresponding discriminant 
-of the formal type. <A NAME="I5317"></A></div>
+of the formal type. <A NAME="I5516"></A></div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We considered defining the first 
 and third rule to be called &ldquo;subtype conformance&rdquo; for <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>s. 
@@ -261,11 +259,11 @@ the actual may, but need not, have discriminants, and may be definite
 or indefinite.]</div>
 <div class="paranum"><a name="p15.1">15.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
-<span class="insert4">When enforcing Legality Rules, for the purposes 
-of determining within a generic body whether a type is unconstrained 
-in any partial view, a discriminated subtype is considered to have a 
-constrained partial view if it is a descendant of an untagged generic 
-formal private or derived type.</span></div>
+When enforcing Legality Rules, for the purposes of determining within 
+a generic body whether a type is unconstrained in any partial view, a 
+discriminated subtype is considered to have a constrained partial view 
+if it is a descendant of an untagged generic formal private or derived 
+type.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
@@ -284,7 +282,7 @@ determines whether the actual type may be abstract.]</div>
 <div class="paranum"><a name="p18.1">18.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
 The category determined for a formal incomplete type is the category 
-of all types, unless the <SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_declaration</A></SPAN> 
+of all types, unless the <SPAN Class="swiss"><A HREF="AA-12-5.html#S0298">formal_type_declaration</A></SPAN> 
 includes the reserved word <B>tagged</B>; in this case, it is the category 
 of all tagged types.</div>
 <div class="paranum"><a name="p19">19</a></div>
@@ -336,19 +334,18 @@ are determined by those of the primitive subprograms of the specified
 ancestor type (or progenitor type, for subprograms inherited from an 
 interface type).&nbsp;</div>
 <div class="paranum"><a name="p21.b">21.b/4</a></div>
-<div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
-<span class="insert4">The availability of stream attributes is not formally 
-a characteristic of a type, but it is still determined by the ancestor 
-type for a formal derived type in the same way as the characteristics 
-are. Availability is rechecked in the instance specification.</span> 
-</div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0030-1.TXT">AI12-0030-1</A></I>} 
+The availability of stream attributes is not formally a characteristic 
+of a type, but it is still determined by the ancestor type for a formal 
+derived type in the same way as the characteristics are. Availability 
+is rechecked in the instance specification.&nbsp;</div>
 <div class="paranum"><a name="p22">22/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 S that denotes a formal indefinite subtype, the following attribute is 
 defined:&nbsp;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="WideHanging-Term">S'Definite</div><div class="WideHanging-Body">
-<A NAME="I5318"></A><A NAME="I5319"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+<A NAME="I5517"></A><A NAME="I5518"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 S'Definite yields True if the actual subtype corresponding to S is definite; 
 otherwise, it yields False. The value of this attribute is of the predefined 
 type Boolean.&nbsp;</div>
@@ -383,7 +380,7 @@ of the call, according to the rules for tag-indeterminate calls (see
 <A HREF="AA-3-9-2.html">3.9.2</A> and <A HREF="AA-5-2.html">5.2</A>). 
 In the case where the tag would be statically determined to be that of 
 the formal type, the call raises Program_Error. If such a function is 
-renamed, any call on the renaming raises Program_Error. <A NAME="I5320"></A></div>
+renamed, any call on the renaming raises Program_Error. <A NAME="I5519"></A></div>
 <div class="paranum"><a name="p23.b">23.b/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>As it states in <A HREF="AA-6-3-1.html">6.3.1</A>, 
 the convention of an inherited subprogram of a generic formal tagged 
@@ -451,7 +448,7 @@ has to be definite.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p28.a">28.a</a></div>
-<div class="Annotations"><A NAME="I5321"></A>Ada 83 does not have <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN>s, 
+<div class="Annotations"><A NAME="I5520"></A>Ada 83 does not have <SPAN Class="swiss"><A HREF="AA-3-7.html#S0060">unknown_discriminant_part</A></SPAN>s, 
 so it allows indefinite subtypes to be passed to definite formals, and 
 applies a legality rule to the instance body. This is a contract model 
 violation. Ada 95 disallows such cases at the point of the instantiation. 
@@ -469,7 +466,7 @@ is changed from a run-time check to a compile-time check.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00401.TXT">AI95-00401-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00419.TXT">AI95-00419-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00443.TXT">AI95-00443-01</A></I>} 
-<A NAME="I5322"></A>A generic formal derived type can include progenitors 
+<A NAME="I5521"></A>A generic formal derived type can include progenitors 
 (interfaces) as well as a primary ancestor. It also may include <B>limited</B> 
 to indicate that it is a limited type, and <B>synchronized</B> to indicate 
 that it is a synchronized type.&nbsp;</div>
@@ -503,7 +500,7 @@ We change to &ldquo;determines a category&rdquo; as that is the new terminology
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p28.i">28.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0087-1.TXT">AI05-0087-1</A></I>} 
-<A NAME="I5323"></A><B>Correction:</B> Added wording to prevent a limited 
+<A NAME="I5522"></A><B>Correction:</B> Added wording to prevent a limited 
 type from being passed to a nonlimited formal derived type. While this 
 was allowed, it would break the contract for the limited type, so hopefully 
 no programs actually depend on that.&nbsp;</div>
@@ -511,7 +508,7 @@ no programs actually depend on that.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p28.j">28.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0213-1.TXT">AI05-0213-1</A></I>} 
-<A NAME="I5324"></A>Formal incomplete types are a new kind of generic 
+<A NAME="I5523"></A>Formal incomplete types are a new kind of generic 
 formal; these can be instantiated with incomplete types and unfrozen 
 private types.&nbsp;</div>
 
@@ -542,22 +539,22 @@ of test suites and thus is not documented as an incompatibility.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p28.o">28.o/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0036-1.TXT">AI12-0036-1</A></I>} 
-<span class="insert4"><A NAME="I5325"></A><B>Corrigendum:</B> Added a 
-requirement that a tagged type only match a formal derived type that 
-is a private extension. This is necessary to prevent type conversions 
-that would not be allowed outside of the generic. We expect that this 
-will be rare, as it only can happen if the formal derived type does not 
-accurately describe the actual type; in most such cases, extension will 
-be desired and a private extension used so that is allowed.</span>&nbsp;</div>
+<A NAME="I5524"></A><B>Corrigendum:</B> Added a requirement that a tagged 
+type only match a formal derived type that is a private extension. This 
+is necessary to prevent type conversions that would not be allowed outside 
+of the generic. We expect that this will be rare, as it only can happen 
+if the formal derived type does not accurately describe the actual type; 
+in most such cases, extension will be desired and a private extension 
+used so that is allowed.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p28.p">28.p/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0095-1.TXT">AI12-0095-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> The assume the worst rule for 
-determining within a generic body whether a type is unconstrained in 
-any partial view was moved here. While AI05-0041-1 added it to <A HREF="AA-3-10-2.html">3.10.2</A>, 
+<B>Corrigendum:</B> The assume the worst rule for determining within 
+a generic body whether a type is unconstrained in any partial view was 
+moved here. While AI05-0041-1 added it to <A HREF="AA-3-10-2.html">3.10.2</A>, 
 it's also needed (at least) in <A HREF="AA-4-6.html">4.6</A> and <A HREF="AA-6-4-1.html">6.4.1</A>. 
-Thus, it was moved here so that it applies generally.</span>&nbsp;</div>
+Thus, it was moved here so that it applies generally.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

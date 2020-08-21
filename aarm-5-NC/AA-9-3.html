@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,13 +40,13 @@
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4334"></A><A NAME="I4335"></A><A NAME="I4336"></A><A NAME="I4337"></A>Each 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4489"></A><A NAME="I4490"></A><A NAME="I4491"></A><A NAME="I4492"></A>Each 
 task (other than an environment task &mdash; see <A HREF="AA-10-2.html">10.2</A>) 
 <I>depends</I> on one or more masters (see <A HREF="AA-7-6-1.html">7.6.1</A>), 
 as follows:&nbsp;</div>
 <div class="paranum"><a name="p2">2/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0070-1.TXT">AI12-0070-1</A></I>} 
-If the task is created by the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+If the task is created by the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 for a given named access type, it depends on each master that includes 
 the elaboration of the declaration of the ultimate ancestor of the given 
 access type.</div>
@@ -68,7 +68,7 @@ of the return object changes. Note that its activation happens, if at
 all, only after the function returns and all accessibility level changes 
 have occurred.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I4338"></A>Furthermore, if a task depends 
+<div class="Normal"><A NAME="I4493"></A>Furthermore, if a task depends 
 on a given master, it is defined to depend on the task that executes 
 the master, and (recursively) on any master of that task.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
@@ -78,29 +78,29 @@ of dependences with the dependences among compilation units defined in
 Units - Library Units</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">A task is said to be <I>completed</I> when the execution 
-of its corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
+of its corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
 is completed. A task is said to be <I>terminated</I> when any finalization 
-of the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
 has been performed (see <A HREF="AA-7-6-1.html">7.6.1</A>). [The first 
-step of finalizing a master (including a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>) 
+step of finalizing a master (including a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>) 
 is to wait for the termination of any tasks dependent on the master.] 
-<A NAME="I4339"></A>The task executing the master is blocked until all 
+<A NAME="I4494"></A>The task executing the master is blocked until all 
 the dependents have terminated. [Any remaining finalization is then performed 
 and the master is left.]</div>
 <div class="paranum"><a name="p6">6/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">Completion of a task 
-(and the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>) 
-can occur when the task is blocked at a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN> 
-with an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
-(see <A HREF="AA-9-7-1.html">9.7.1</A>); the open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
+(and the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>) 
+can occur when the task is blocked at a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN> 
+with an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
+(see <A HREF="AA-9-7-1.html">9.7.1</A>); the open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
 is selected if and only if the following conditions are satisfied:&nbsp;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00415.TXT">AI95-00415-01</A></I>} 
 The task depends on some completed master; and</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Bulleted">Each task that depends on the master considered 
-is either already terminated or similarly blocked at a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN> 
-with an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>. 
+is either already terminated or similarly blocked at a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN> 
+with an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">When both conditions are satisfied, the task considered 
@@ -108,7 +108,7 @@ becomes completed, together with all tasks that depend on the master
 considered that are not yet completed.&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Any required finalization 
-is performed after the selection of <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>s. 
+is performed after the selection of <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>s. 
 The tasks are not callable during the finalization. In some ways it is 
 as though they were aborted.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
@@ -118,20 +118,20 @@ can be a task type, or can have subcomponents of a task type. Creation
 of an object of such a type creates dependences according to the full 
 type.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Notes">9&nbsp;&nbsp;An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN> 
+<div class="Notes">9&nbsp;&nbsp;An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 defines a new view of an existing entity and hence creates no further 
 dependence.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">10&nbsp;&nbsp;The rules given for the collective completion 
-of a group of tasks all blocked on <SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN>s 
-with open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>s 
+of a group of tasks all blocked on <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN>s 
+with open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>s 
 ensure that the collective completion can occur only when there are no 
 remaining active tasks that could call one of the tasks being collectively 
 completed.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Notes">11&nbsp;&nbsp;If two or more tasks are blocked on 
-<SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN>s 
-with open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>s, 
+<SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN>s 
+with open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>s, 
 and become completed collectively, their finalization actions proceed 
 concurrently.</div>
 <div class="paranum"><a name="p14">14</a></div>
@@ -140,14 +140,14 @@ of a task can occur due to any of the following:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Indented2SmallBulleted">the raising of an exception during 
 the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>;</div>
+of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Indented2SmallBulleted">the completion of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
-of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>;</div>
+<div class="Indented2SmallBulleted">the completion of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
+of the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Indented2SmallBulleted">the selection of an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0233">select_statement</A></SPAN> 
-in the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>;</div>
+<div class="Indented2SmallBulleted">the selection of an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN> 
+in the corresponding <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Indented2SmallBulleted">the abort of the task.&nbsp;</div>
 
@@ -182,16 +182,16 @@ with the definition of master now given in <A HREF="AA-7-6-1.html">7.6.1</A>,
 &ldquo;<A HREF="AA-7-6-1.html">Completion and Finalization</A>&rdquo;.</div>
 <div class="paranum"><a name="p20.b">20.b</a></div>
 <div class="Annotations">Tasks that used to depend on library packages 
-in Ada 83, now depend on the (implicit) <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN> 
+in Ada 83, now depend on the (implicit) <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN> 
 of the environment task (see <A HREF="AA-10-2.html">10.2</A>). Therefore, 
 the environment task has to wait for them before performing library level 
 finalization and terminating the partition. In Ada 83 the requirement 
 to wait for tasks that depended on library packages was not as clear.</div>
 <div class="paranum"><a name="p20.c">20.c</a></div>
 <div class="Annotations">What was &quot;collective termination&quot; 
-is now &quot;collective completion&quot; resulting from selecting <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>s. 
+is now &quot;collective completion&quot; resulting from selecting <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>s. 
 This is because finalization still occurs for such tasks, and this happens 
-after selecting the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0239">terminate_alternative</A></SPAN>, 
+after selecting the <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0253">terminate_alternative</A></SPAN>, 
 but before termination.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -199,13 +199,13 @@ but before termination.&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
 Added missing wording that explained the master of tasks that are neither 
 <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>s 
-nor <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s, 
+nor <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s, 
 such as function returns.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p20.e">20.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0070-1.TXT">AI12-0070-1</A></I>} 
-<B>Corrigendum:</B> Ensured that the master of tasks that are not <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+<B>Corrigendum:</B> Ensured that the master of tasks that are not <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
 of named access types is correctly determined. (Ignoring the accessibility 
 rules of <A HREF="AA-3-10-2.html">3.10.2</A> could not be intended.) 
 </div>

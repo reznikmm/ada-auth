@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,28 +42,24 @@
 can be used to complete an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>, 
 while redirecting the corresponding entry call to a new (or the same) 
-entry queue. <A NAME="I4180"></A>Such a <I>requeue</I> can be performed 
+entry queue. <A NAME="I4129"></A>Such a <I>requeue</I> can be performed 
 with or without allowing an intermediate cancellation of the call, due 
-to an abort or the expiration of a delay. <A NAME="I4181"></A><A NAME="I4182"></A></div>
+to an abort or the expiration of a delay. <A NAME="I4130"></A><A NAME="I4131"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">requeue_statement</SPAN><A NAME="I4183"></A><A NAME="S0226"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>requeue</B>&nbsp;<I></I><span class="insert3"><I>procedure_or_entry_</I></span><I></I><span class="delete3"><I>&nbsp;entry_</I></span><I></I><A NAME="I4184"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<B>abort</B>];</div>
+<div class="Indented1"><SPAN Class="swiss">requeue_statement</SPAN><A NAME="I4132"></A><A NAME="S0226"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>requeue</B>&nbsp;<I>procedure_or_entry_</I><A NAME="I4133"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<B>abort</B>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal"><span class="insert3"><A NAME="I4185"></A></span><span class="delete3"><A NAME="I4186"></A></span>The 
-<span class="insert3"><I>procedure_or_entry_</I></span><span class="delete3"><I>&nbsp;entry_</I></span><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I4134"></A>The <I>procedure_or_entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
-shall resolve to denote <span class="insert3">a procedure or&nbsp;</span>an 
-entry (the <span class="insert3"><I>requeue&nbsp;</I></span><I>target</I><span class="delete3"><I>&nbsp;entry</I></span>)<span class="insert3">. The profile of the entry, or 
-the profile or prefixed profile of the procedure, shall</span><span class="delete3">&nbsp;that</span> 
-either <span class="insert3">have</span><span class="delete3">&nbsp;has</span> 
-no parameters, or <span class="insert3">be</span><span class="delete3">&nbsp;that 
-has a profile that is</span> type conformant (see <A HREF="RM-6-3-1.html">6.3.1</A>) 
+shall resolve to denote a procedure or an entry (the <I>requeue&nbsp;</I><I>target</I>). 
+The profile of the entry, or the profile or prefixed profile of the procedure, 
+shall either have no parameters, or be type conformant (see <A HREF="RM-6-3-1.html">6.3.1</A>) 
 with the profile of the innermost enclosing <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>. 
-<A NAME="I4187"></A></div>
+<A NAME="I4135"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
@@ -75,11 +69,11 @@ or an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SP
 and this construct shall be the innermost enclosing body or callable 
 construct.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal">If the <span class="insert3">requeue&nbsp;</span>target<span class="delete3">&nbsp;entry</span> has parameters, then its <span class="insert3">(prefixed) 
-</span>profile shall be subtype conformant with the profile of the innermost 
-enclosing callable construct. <A NAME="I4188"></A></div>
+<div class="Normal">If the requeue target has parameters, then its (prefixed) 
+profile shall be subtype conformant with the profile of the innermost 
+enclosing callable construct. <A NAME="I4136"></A></div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4">Given 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert4">Given 
 a requeue_statement where the innermost enclosing callable construct 
 is for an entry <I>E1</I>, for every specific or class-wide postcondition 
 expression <I>P1</I> that applies to <I>E1</I>, there shall exist a postcondition 
@@ -94,12 +88,12 @@ formal paramter of <I>E1</I>; and</span></div>
 <div class="Bulleted"><span class="insert4">if <I>P1</I> is enabled, 
 then <I>P2</I> is also enabled.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.4">5.4/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">The requeue target shall not 
-have an applicable specific or class-wide postcondition which includes 
-an Oldattribute_reference.</span></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">The requeue target shall 
+not have an applicable specific or class-wide postcondition which includes 
+an Old attribute_reference.</span></div>
 <div class="paranum"><a name="p5.5">5.5/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">If the requeue target is declared 
-immediately within the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">If the requeue target is 
+declared immediately within the <SPAN Class="swiss"><A HREF="RM-9-1.html#S0207">task_definition</A></SPAN> 
 of a named task type or the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
 of a named protected type, and if the requeue statement occurs within 
 the body of that type, and if the requeue is an external requeue, then 
@@ -107,15 +101,14 @@ the requeue target shall not have a specific or class-wide postcondition
 which includes a name denoting either the current instance of that type 
 or any entity declared within the declaration of that type.</span></div>
 <div class="paranum"><a name="p5.6">5.6/4</a></div>
-<div class="Normal">&nbsp;<span class="insert3">If the target is a procedure, 
-the name shall denote a renaming of an entry, or shall denote a view 
-or a prefixed view of a primitive subprogram of a synchronized interface, 
-where the first parameter of the unprefixed view of the primitive subprogram 
-shall be a controlling parameter, and the Synchronization aspect shall 
-be specified with <SPAN Class="swiss"><A HREF="RM-9-5.html#S0217">synchronization_kind</A></SPAN> 
-By_Entry for the primitive subprogram.</span></div>
+<div class="Normal">&nbsp;&nbsp;If the target is a procedure, the name shall denote 
+a renaming of an entry, or shall denote a view or a prefixed view of 
+a primitive subprogram of a synchronized interface, where the first parameter 
+of the unprefixed view of the primitive subprogram shall be a controlling 
+parameter, and the Synchronization aspect shall be specified with <SPAN Class="swiss"><A HREF="RM-9-5.html#S0217">synchronization_kind</A></SPAN> 
+By_Entry for the primitive subprogram.</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal"><A NAME="I4189"></A>In a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
+<div class="Normal"><A NAME="I4137"></A>In a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
 of some task unit, either the target object shall be a part of a formal 
 parameter of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>, 
@@ -126,12 +119,13 @@ of an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>
 of some protected unit, either the target object shall be a part of a 
 formal parameter of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>, 
 or the accessibility level of the target object shall not be statically 
-deeper than that of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN><span class="insert3">&nbsp;for the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN></span>.</div>
+deeper than that of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+for the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN>.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7/4</a></div>
-<div class="Normal"><A NAME="I4190"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
-proceeds by first evaluating the <span class="insert3"><I>procedure_or_entry_</I></span><span class="delete3"><I>&nbsp;entry_</I></span><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
+<div class="Normal"><A NAME="I4138"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
+proceeds by first evaluating the <I>procedure_or_entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 including the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 identifying the target task or protected object and the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 identifying the entry within an entry family, if any. <span class="insert4">Precondition 
@@ -141,13 +135,13 @@ or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>
 enclosing the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
 is then completed, finalized, and left (see <A HREF="RM-7-6-1.html">7.6.1</A>).</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4191"></A>For the execution of a requeue 
+<div class="Normal"><A NAME="I4139"></A>For the execution of a requeue 
 on an entry of a target task, after leaving the enclosing callable construct, 
 the named entry is checked to see if it is open and the requeued call 
 is either selected immediately or queued, as for a normal entry call 
 (see <A HREF="RM-9-5-3.html">9.5.3</A>).</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4192"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4140"></A>For 
 the execution of a requeue on an entry of a target protected object, 
 after leaving the enclosing callable construct:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -163,8 +157,7 @@ object &mdash; see <A HREF="RM-9-5.html">9.5</A>), a protected action
 is started on the target object and proceeds as for a normal entry call 
 (see <A HREF="RM-9-5-3.html">9.5.3</A>).&nbsp;</div>
 <div class="paranum"><a name="p12">12/4</a></div>
-<div class="Normal">If the <span class="insert3">requeue target</span><span class="delete3">&nbsp;new 
-entry</span> named in the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
+<div class="Normal">&nbsp;If the requeue target named in the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
 has formal parameters, then during the execution of the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
 corresponding to the new entry<span class="insert4">&nbsp;and during the checking 
@@ -174,7 +167,7 @@ construct completed by the requeue. In any case, no parameters are specified
 in a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN>; 
 any parameter passing is implicit.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4193"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4141"></A>If 
 the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN> 
 includes the reserved words <B>with abort</B> (it is a <I>requeue-with-abort</I>), 
 then:&nbsp;</div>
@@ -197,7 +190,7 @@ the result of the <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_stat
 entry to an entry of an entry family, or vice-versa. The entry index, 
 if any, plays no part in the subtype conformance check between the profiles 
 of the two entries; an entry index is part of the <I>entry_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-for an entry of a family. <A NAME="I4194"></A></div>
+for an entry of a family. <A NAME="I4142"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p18">18</a></div>

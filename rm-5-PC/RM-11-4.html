@@ -36,23 +36,23 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">When an exception occurrence is raised, normal program 
 execution is abandoned and control is transferred to an applicable <SPAN Class="swiss"><A HREF="RM-11-2.html#S0283">exception_handler</A></SPAN>, 
-if any. <A NAME="I4773"></A>To <I>handle</I> an exception occurrence 
-is to respond to the exceptional event. <A NAME="I4774"></A>To <I>propagate</I> 
+if any. <A NAME="I4761"></A>To <I>handle</I> an exception occurrence 
+is to respond to the exceptional event. <A NAME="I4762"></A>To <I>propagate</I> 
 an exception occurrence is to raise it again in another context; that 
 is, to fail to respond to the exceptional event in the present context. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4775"></A><A NAME="I4776"></A>Within a 
+<div class="Normal"><A NAME="I4763"></A><A NAME="I4764"></A>Within a 
 given task, if the execution of construct <I>a</I> is defined by this 
 International Standard to consist (in part) of the execution of construct 
 <I>b</I>, then while <I>b</I> is executing, the execution of <I>a</I> 
-is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I4777"></A>The 
+is said to <I>dynamically enclose</I> the execution of <I>b</I>. <A NAME="I4765"></A>The 
 <I>innermost dynamically enclosing</I> execution of a given execution 
 is the dynamically enclosing execution that started most recently.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4778"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4766"></A>When 
 an exception occurrence is raised by the execution of a given construct, 
 the rest of the execution of that construct is <I>abandoned</I>; that 
 is, any portions of the execution that have not yet taken place are not 
@@ -67,11 +67,11 @@ of a <SPAN Class="swiss"><A HREF="RM-11-2.html#S0282">handled_sequence_of_statem
 that has a handler with a choice covering the exception, the occurrence 
 is handled by that handler;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I4779"></A>Otherwise, the occurrence is 
+<div class="Bulleted"><A NAME="I4767"></A>Otherwise, the occurrence is 
 <I>propagated</I> to the innermost dynamically enclosing execution, which 
 means that the occurrence is raised again in that context.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4780"></A><A NAME="I4781"></A><A NAME="I4782"></A>When 
+<div class="Normal"><A NAME="I4768"></A><A NAME="I4769"></A><A NAME="I4770"></A>When 
 an occurrence is <I>handled</I> by a given handler, the <SPAN Class="swiss"><A HREF="RM-11-2.html#S0284">choice_parameter_specification</A></SPAN>, 
 if any, is first elaborated, which creates the choice parameter and initializes 
 it to the occurrence. Then, the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN> 

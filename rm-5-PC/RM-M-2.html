@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -36,8 +34,8 @@
 <HR>
 <H1>M.2 Implementation-Defined Characteristics</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I9233"></A>The Ada language allows for certain 
-machine dependences in a controlled manner. <A NAME="I9234"></A>Each 
+<div class="Normal"><A NAME="I9215"></A>The Ada language allows for certain 
+machine dependences in a controlled manner. <A NAME="I9216"></A>Each 
 Ada implementation must document all implementation-defined characteristics: 
 </div>
 <div class="paranum"><a name="p2">2/2</a></div>
@@ -72,9 +70,9 @@ length. See <A HREF="RM-2-2.html">2.2</A>(14).</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Bulleted">Effect of pragma Optimize. See <A HREF="RM-2-8.html">2.8</A>(27).</div>
 <div class="paranum"><a name="p11.1">11.1/4</a></div>
-<div class="Bulleted"><span class="insert4">The message string associated 
-with the Assertion_Error exception raised by the failure of a predicate 
-check if there is no applicable Predicate_Failure aspect.</span><span class="insert4">&nbsp;See <A HREF="RM-3-2-4.html">3.2.4</A>(31).</span></div>
+<div class="Bulleted">The message string associated with the Assertion_Error 
+exception raised by the failure of a predicate check if there is no applicable 
+Predicate_Failure aspect. See <A HREF="RM-3-2-4.html">3.2.4</A>(31).</div>
 <div class="paranum"><a name="p11.2">11.2/2</a></div>
 <div class="Bulleted">The sequence of characters of the value returned 
 by S'Wide_Image when some of the graphic characters of S'Wide_Wide_Image 
@@ -268,9 +266,8 @@ nor the Storage_Pool is specified for an access type. See <A HREF="RM-13-11.html
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p56.1">56.1/4</a></div>
-<div class="Bulleted"><span class="insert4">The effect of specifying 
-aspect Default_Storage_Pool on an instance of a language-defined generic 
-unit.</span><span class="insert4">&nbsp;See <A HREF="RM-13-11-3.html">13.11.3</A>(5).</span></div>
+<div class="Bulleted">The effect of specifying aspect Default_Storage_Pool 
+on an instance of a language-defined generic unit. See <A HREF="RM-13-11-3.html">13.11.3</A>(5).</div>
 <div class="paranum"><a name="p57">57/3</a></div>
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -414,9 +411,8 @@ by the Attach_Handler and Interrupt_Handler aspects. See <A HREF="RM-C-3-1.html"
 <div class="Bulleted"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p85">85/4</a></div>
-<div class="Bulleted">The semantics of <span class="insert4">some attributes 
-and functions of an entity for which aspect</span><span class="delete4">&nbsp;pragma</span> 
-Discard_Names<span class="insert4">&nbsp;is True</span>. See <A HREF="RM-C-5.html">C.5</A>(7).</div>
+<div class="Bulleted">The semantics of some attributes and functions 
+of an entity for which aspect Discard_Names is True. See <A HREF="RM-C-5.html">C.5</A>(7).</div>
 <div class="paranum"><a name="p86">86</a></div>
 <div class="Bulleted">The result of the Task_Identification.Image attribute. 
 See <A HREF="RM-C-7-1.html">C.7.1</A>(7).</div>
@@ -460,7 +456,7 @@ See <A HREF="RM-D-2-2.html">D.2.2</A>(19).</div>
 <div class="Bulleted">The value of Default_Quantum in Dispatching.Round_Robin. 
 See <A HREF="RM-D-2-5.html">D.2.5</A>(4).</div>
 <div class="paranum"><a name="p98">98</a></div>
-<div class="Bulleted">Implementation-defined <I>policy_</I><A NAME="I9235"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
+<div class="Bulleted">Implementation-defined <I>policy_</I><A NAME="I9217"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 allowed in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy. See <A HREF="RM-D-3.html">D.3</A>(4).</div>
 <div class="paranum"><a name="p98.1">98.1/2</a></div>
@@ -483,10 +479,9 @@ was deleted.</I></SPAN></div>
 <div class="Bulleted">Any operations that implicitly require heap storage 
 allocation. See <A HREF="RM-D-7.html">D.7</A>(8).</div>
 <div class="paranum"><a name="p103.1">103.1/4</a></div>
-<div class="Bulleted"><span class="insert4">When restriction No_Dynamic_CPU_Assignment 
-applies to a partition, the processor on which a task with a CPU value 
-of a Not_A_Specific_CPU will execute.</span><span class="insert4">&nbsp;See 
-<A HREF="RM-D-7.html">D.7</A>(10).</span></div>
+<div class="Bulleted">When restriction No_Dynamic_CPU_Assignment applies 
+to a partition, the processor on which a task with a CPU value of a Not_A_Specific_CPU 
+will execute. See <A HREF="RM-D-7.html">D.7</A>(10).</div>
 <div class="paranum"><a name="p103.2">103.2/2</a></div>
 <div class="Bulleted">When restriction No_Task_Termination applies to 
 a partition, what happens when a task terminates. See <A HREF="RM-D-7.html">D.7</A>(15.1/2).</div>

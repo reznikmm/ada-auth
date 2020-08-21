@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,19 +46,19 @@ be used to request a reduction in storage used for the names of <span class="del
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
 <span class="insert4">An entity with <I>runtime name text</I> is a nonderived 
-enumeration first subtype, a tagged first subtype, or an exception.<A NAME="I8544"></A><A NAME="I8545"></A></span></div>
+enumeration first subtype, a tagged first subtype, or an exception.<A NAME="I8381"></A><A NAME="I8382"></A></span></div>
 <div class="paranum"><a name="p1.2">1.2/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
 <span class="insert4">For an entity with runtime name text, the following 
 language-defined representation aspect may be specified:</span></div>
 <div class="paranum"><a name="p1.3">1.3/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert4">Discard_Names</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4">Discard_Names</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert4">The type of aspect Discard_Names is Boolean. If 
 directly specified, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0309">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
-the aspect is False.<A NAME="I8546"></A><A NAME="I8547"></A></span></div>
+the aspect is False.<A NAME="I8383"></A><A NAME="I8384"></A></span></div>
 <div class="paranum"><a name="p1.a.1">1.a.1/4</a></div>
 <div class="Annotations"><span class="insert4"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert4"><B>Discard_Names:&nbsp;</B></span><span class="insert4">Requests 
@@ -71,13 +69,13 @@ a reduction in storage for names associated with an entity.</span></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8548"></A><A NAME="I8549"></A>Discard_Names[([On 
-=&gt; ] <A NAME="I8550"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8385"></A><A NAME="I8386"></A>Discard_Names[([On 
+=&gt; ] <A NAME="I8387"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
 immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0191">package_specification</A></SPAN>, 
-or as a configuration pragma. <A NAME="I8551"></A><A NAME="I8552"></A></div>
+or as a configuration pragma. <A NAME="I8388"></A><A NAME="I8389"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/4</a></div>
@@ -108,19 +106,17 @@ other types (see <A HREF="AA-13-1-1.html">13.1.1</A>)).</span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8553"></A><A NAME="I8554"></A>If a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN> 
+<div class="Normal"><A NAME="I8390"></A><A NAME="I8391"></A>If a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0306">local_name</A></SPAN> 
 is given, then a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Discard_Names is a representation pragma.</div>
 <div class="paranum"><a name="p6.a">6.a/4</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="delete4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0072-1.TXT">AI12-0072-1</A></I>} 
-<span class="delete4"></span><span class="insert3"><span class="delete4">Representation 
-pragmas automatically specify aspects of the same name, so Discard_Names 
-can be used as an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0308">aspect_mark</A></SPAN> 
+<span class="delete4">Representation pragmas automatically specify aspects 
+of the same name, so Discard_Names can be used as an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0308">aspect_mark</A></SPAN> 
 in an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
-instead of using the pragma on individual entities.</span></span><span class="delete4"></span> 
-</div>
+instead of using the pragma on individual entities.</span>&nbsp;</div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 

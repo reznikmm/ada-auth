@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,53 +40,53 @@
 <HR>
 <H1>3.5 Scalar Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1676"></A><I>Scalar</I> types comprise 
-enumeration types, integer types, and real types. <A NAME="I1677"></A>Enumeration 
-types and integer types are called <I>discrete</I> types; <A NAME="I1678"></A>each 
+<div class="Normal"><A NAME="I1683"></A><I>Scalar</I> types comprise 
+enumeration types, integer types, and real types. <A NAME="I1684"></A>Enumeration 
+types and integer types are called <I>discrete</I> types; <A NAME="I1685"></A>each 
 value of a discrete type has a <I>position number</I> which is an integer 
-value. <A NAME="I1679"></A>Integer types and real types are called <I>numeric</I> 
+value. <A NAME="I1686"></A>Integer types and real types are called <I>numeric</I> 
 types. [All scalar types are ordered, that is, all relational operators 
 are predefined for their values.]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">range_constraint</SPAN><A NAME="I1680"></A><A NAME="S0036"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I1681"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">range_constraint</SPAN><A NAME="I1687"></A><A NAME="S0036"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I1688"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">range</SPAN><A NAME="I1682"></A><A NAME="S0037"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1683"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1684"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>&nbsp;..&nbsp;<A NAME="I1685"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">range</SPAN><A NAME="I1689"></A><A NAME="S0037"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;<A NAME="I1690"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I1691"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;..&nbsp;<A NAME="I1692"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>These need to be <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
-rather than more general <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
-because ranges appear in membership tests and other contexts where <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-.. <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Annotations"><B>Discussion:&nbsp;</B>These need to be <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
+rather than more general <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
+because ranges appear in membership tests and other contexts where <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+.. <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 would be ambiguous.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I1686"></A><A NAME="I1687"></A><A NAME="I1688"></A><A NAME="I1689"></A>A 
+<div class="Normal"><A NAME="I1693"></A><A NAME="I1694"></A><A NAME="I1695"></A><A NAME="I1696"></A>A 
 <I>range</I> has a <I>lower bound</I> and an <I>upper bound</I> and specifies 
 a subset of the values of some scalar type (the <I>type of the range</I>). 
 A range with lower bound L and upper bound R is described by &ldquo;L 
-.. R&rdquo;. <A NAME="I1690"></A>If R is less than L, then the range 
+.. R&rdquo;. <A NAME="I1697"></A>If R is less than L, then the range 
 is a <I>null range</I>, and specifies an empty set of values. Otherwise, 
 the range specifies the values of the type from the lower bound to the 
-upper bound, inclusive. <A NAME="I1691"></A>A value <I>belongs</I> to 
+upper bound, inclusive. <A NAME="I1698"></A>A value <I>belongs</I> to 
 a range if it is of the type of the range, and is in the subset of values 
-specified by the range. <A NAME="I1692"></A>A value <I>satisfies</I> 
-a range constraint if it belongs to the associated range. <A NAME="I1693"></A>One 
+specified by the range. <A NAME="I1699"></A>A value <I>satisfies</I> 
+a range constraint if it belongs to the associated range. <A NAME="I1700"></A>One 
 range is <I>included</I> in another if all values that belong to the 
 first range also belong to the second.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I1694"></A>For a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<div class="Normal"><A NAME="I1701"></A>For a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 containing a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>, 
 either directly or as part of some other <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0030">scalar_constraint</A></SPAN>, 
 the type of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
 shall resolve to that of the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
-<A NAME="I1695"></A>For a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
-of a given type, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
+<A NAME="I1702"></A>For a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+of a given type, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
-(likewise, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
+(likewise, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
 of the equivalent <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
 for a <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN>) 
 are expected to be of the type of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>. 
@@ -121,7 +121,7 @@ we use &ldquo;shall resolve to&rdquo; instead.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1696"></A>The <I>base range</I> of a scalar 
+<div class="Normal"><A NAME="I1703"></A>The <I>base range</I> of a scalar 
 type is the range of finite values of the type that can be represented 
 in every unconstrained object of the type; it is also the range supported 
 at a minimum for intermediate values during the evaluation of expressions 
@@ -133,7 +133,7 @@ static), and register-resident variables might accommodate a wider range.
 The base range does not include the values of this wider range that are 
 not assignable without overflow to memory-resident objects.</div>
 <div class="paranum"><a name="p6.b">6.b</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I1697"></A>The 
+<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I1704"></A>The 
 base range of an enumeration type is the range of values of the enumeration 
 type.&nbsp;</div>
 <div class="paranum"><a name="p6.c">6.c</a></div>
@@ -149,17 +149,17 @@ values can be assigned, but on subsequent reading, a slightly different
 value might be retrieved, as (partially) determined by the number of 
 digits of precision of the type.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I1698"></A><A NAME="I1699"></A>[A constrained 
-scalar subtype is one to which a range constraint applies.] <A NAME="I1700"></A>The 
+<div class="Normal"><A NAME="I1705"></A><A NAME="I1706"></A>[A constrained 
+scalar subtype is one to which a range constraint applies.] <A NAME="I1707"></A>The 
 <I>range</I> of a constrained scalar subtype is the range associated 
 with the range constraint of the subtype. The <I>range</I> of an unconstrained 
 scalar subtype is the base range of its type.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I1701"></A>A range is <I>compatible</I> 
+<div class="Normal"><A NAME="I1708"></A>A range is <I>compatible</I> 
 with a scalar subtype if and only if it is either a null range or each 
-bound of the range belongs to the range of the subtype. <A NAME="I1702"></A>A 
+bound of the range belongs to the range of the subtype. <A NAME="I1709"></A>A 
 <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN> 
 is <I>compatible</I> with a scalar subtype if and only if its range is 
 compatible with the subtype.&nbsp;</div>
@@ -168,7 +168,7 @@ compatible with the subtype.&nbsp;</div>
 (explicit or implicit) impose conditions on the values of a scalar subtype. 
 The other <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0030">scalar_constraint</A></SPAN>s, 
 <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN>s 
-and <SPAN Class="swiss"><A HREF="AA-J-3.html#S0325">delta_constraint</A></SPAN>s 
+and <SPAN Class="swiss"><A HREF="AA-J-3.html#S0339">delta_constraint</A></SPAN>s 
 impose conditions on the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 but don't impose a condition on the values of the subtype being defined. 
@@ -179,14 +179,14 @@ without a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></
 nevertheless includes an implicit <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1703"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I1710"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN> 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>. 
-<A NAME="I1704"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
-determines a lower bound and an upper bound. If <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
+<A NAME="I1711"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
+determines a lower bound and an upper bound. If <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
 are given to specify bounds, the evaluation of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
-evaluates these <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
-in an arbitrary order, and converts them to the type of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>.<A NAME="I1705"></A> 
-<A NAME="I1706"></A>If a <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
+evaluates these <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
+in an arbitrary order, and converts them to the type of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>.<A NAME="I1712"></A> 
+<A NAME="I1713"></A>If a <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
 is given, the evaluation of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0102">range_attribute_reference</A></SPAN>.</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -196,31 +196,31 @@ consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S01
 S, the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term">S'First</div><div class="WideHanging-Body">
-<A NAME="I1707"></A><A NAME="I1708"></A>S'First denotes the lower bound 
+<A NAME="I1714"></A><A NAME="I1715"></A>S'First denotes the lower bound 
 of the range of S. The value of this attribute is of the type of S.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Evaluating S'First never 
 raises Constraint_Error.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="WideHanging-Term">S'Last</div><div class="WideHanging-Body">
-<A NAME="I1709"></A><A NAME="I1710"></A>S'Last denotes the upper bound 
+<A NAME="I1716"></A><A NAME="I1717"></A>S'Last denotes the upper bound 
 of the range of S. The value of this attribute is of the type of S.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Evaluating S'Last never 
 raises Constraint_Error.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="WideHanging-Term">S'Range</div><div class="WideHanging-Body">
-<A NAME="I1711"></A><A NAME="I1712"></A>S'Range is equivalent to the 
+<A NAME="I1718"></A><A NAME="I1719"></A>S'Range is equivalent to the 
 <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> S'First 
 .. S'Last.</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="WideHanging-Term">S'Base</div><div class="WideHanging-Body">
-<A NAME="I1713"></A><A NAME="I1714"></A>S'Base denotes an unconstrained 
+<A NAME="I1720"></A><A NAME="I1721"></A>S'Base denotes an unconstrained 
 subtype of the type of S. This unconstrained subtype is called the <I>base 
-subtype</I> of the type. <A NAME="I1715"></A></div>
+subtype</I> of the type. <A NAME="I1722"></A></div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Min</div><div class="WideHanging-Body">
-<A NAME="I1716"></A><A NAME="I1717"></A>S'Min denotes a function with 
+<A NAME="I1723"></A><A NAME="I1724"></A>S'Min denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Min(<SPAN Class="roman"><I>Left</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Right</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -229,7 +229,7 @@ the following specification:&nbsp;</div>
 <div class="WideHanging-Body">The function returns the lesser of the 
 values of the two parameters.&nbsp;</div>
 <div class="paranum"><a name="p18.a">18.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1718"></A>The formal 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I1725"></A>The formal 
 parameter names are italicized because they cannot be used in calls &mdash; 
 see <A HREF="AA-6-4.html">6.4</A>. Such a specification cannot be written 
 by the user because an <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
@@ -237,7 +237,7 @@ is not permitted as the designator of a user-defined function, nor can
 its formal parameters be anonymous.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Max</div><div class="WideHanging-Body">
-<A NAME="I1719"></A><A NAME="I1720"></A>S'Max denotes a function with 
+<A NAME="I1726"></A><A NAME="I1727"></A>S'Max denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Max(<SPAN Class="roman"><I>Left</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Right</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -247,21 +247,21 @@ the following specification:&nbsp;</div>
 values of the two parameters.</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Succ</div><div class="WideHanging-Body">
-<A NAME="I1721"></A><A NAME="I1722"></A>S'Succ denotes a function with 
+<A NAME="I1728"></A><A NAME="I1729"></A>S'Succ denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Succ(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="WideHanging-Body"><A NAME="I1723"></A>For an enumeration 
+<div class="WideHanging-Body"><A NAME="I1730"></A>For an enumeration 
 type, the function returns the value whose position number is one more 
-than that of the value of <I>Arg</I>; <A NAME="I1724"></A><A NAME="I1725"></A>Constraint_Error 
+than that of the value of <I>Arg</I>; <A NAME="I1731"></A><A NAME="I1732"></A>Constraint_Error 
 is raised if there is no such value of the type. For an integer type, 
 the function returns the result of adding one to the value of <I>Arg</I>. 
 For a fixed point type, the function returns the result of adding <I>small</I> 
 to the value of <I>Arg</I>. For a floating point type, the function returns 
 the machine number (as defined in <A HREF="AA-3-5-7.html">3.5.7</A>) 
-immediately above the value of <I>Arg</I>; <A NAME="I1726"></A><A NAME="I1727"></A>Constraint_Error 
+immediately above the value of <I>Arg</I>; <A NAME="I1733"></A><A NAME="I1734"></A>Constraint_Error 
 is raised if there is no such machine number.&nbsp;</div>
 <div class="paranum"><a name="p24.a">24.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>S'Succ for a modular integer 
@@ -271,21 +271,21 @@ of <I>Arg</I> is S'Base'Last, or it might return the out-of-base-range
 value S'Base'Last+1, as is permitted for all predefined numeric operations.</div>
 <div class="paranum"><a name="p25">25</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Pred</div><div class="WideHanging-Body">
-<A NAME="I1728"></A><A NAME="I1729"></A>S'Pred denotes a function with 
+<A NAME="I1735"></A><A NAME="I1736"></A>S'Pred denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p26">26</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Pred(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;S'Base</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="WideHanging-Body"><A NAME="I1730"></A>For an enumeration 
+<div class="WideHanging-Body"><A NAME="I1737"></A>For an enumeration 
 type, the function returns the value whose position number is one less 
-than that of the value of <I>Arg</I>; <A NAME="I1731"></A><A NAME="I1732"></A>Constraint_Error 
+than that of the value of <I>Arg</I>; <A NAME="I1738"></A><A NAME="I1739"></A>Constraint_Error 
 is raised if there is no such value of the type. For an integer type, 
 the function returns the result of subtracting one from the value of 
 <I>Arg</I>. For a fixed point type, the function returns the result of 
 subtracting <I>small</I> from the value of <I>Arg</I>. For a floating 
 point type, the function returns the machine number (as defined in <A HREF="AA-3-5-7.html">3.5.7</A>) 
-immediately below the value of <I>Arg</I>; <A NAME="I1733"></A><A NAME="I1734"></A>Constraint_Error 
+immediately below the value of <I>Arg</I>; <A NAME="I1740"></A><A NAME="I1741"></A>Constraint_Error 
 is raised if there is no such machine number.&nbsp;</div>
 <div class="paranum"><a name="p27.a">27.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>S'Pred for a modular integer 
@@ -296,14 +296,14 @@ value S'Base'First&ndash;1, as is permitted for all predefined numeric
 operations.</div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I1735"></A><A NAME="I1736"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1742"></A><A NAME="I1743"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 S'Wide_Wide_Image denotes a function with the following specification: 
 </div>
 <div class="paranum"><a name="p27.2">27.2/2</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String</div>
 <div class="paranum"><a name="p27.3">27.3/2</a></div>
-<div class="WideHanging-Body"><A NAME="I1737"></A>The function returns 
+<div class="WideHanging-Body"><A NAME="I1744"></A>The function returns 
 an <I>image</I> of the value of <I>Arg</I>, that is, a sequence of characters 
 representing the value in display form. The lower bound of the result 
 is one.</div>
@@ -320,7 +320,7 @@ zero. We don't have enough experience with such machines to know what
 is appropriate, and what other languages do. In any case, the implementation 
 should be consistent.&nbsp;</div>
 <div class="paranum"><a name="p27.5">27.5/2</a></div>
-<div class="WideHanging-Body"><A NAME="I1738"></A>The image of an enumeration 
+<div class="WideHanging-Body"><A NAME="I1745"></A>The image of an enumeration 
 value is either the corresponding identifier in upper case or the corresponding 
 character literal (including the two apostrophes); neither leading nor 
 trailing spaces are included. For a <I>nongraphic character</I> (a value 
@@ -330,8 +330,8 @@ example, the image of the nongraphic character identified as <I>nul</I>
 is &ldquo;NUL&rdquo; &mdash; the quotes are not part of the image).&nbsp;</div>
 <div class="paranum"><a name="p27.c">27.c/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>For an enumeration 
-type T that has &ldquo;holes&rdquo; (caused by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0314">enumeration_representation_clause</A></SPAN>), 
-<A NAME="I1739"></A>T'Wide_Image should raise Program_Error if the value 
+type T that has &ldquo;holes&rdquo; (caused by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0328">enumeration_representation_clause</A></SPAN>), 
+<A NAME="I1746"></A>T'Wide_Image should raise Program_Error if the value 
 is one of the holes (which is a bounded error anyway, since holes can 
 be generated only via uninitialized variables and similar things).&nbsp;</div>
 <div class="paranum"><a name="p27.6">27.6/2</a></div>
@@ -375,7 +375,7 @@ or &quot;&ndash;0.000&quot; is returned. See corresponding comment above
 about integer types with signed zeros.&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Image</div><div class="WideHanging-Body">
-<A NAME="I1740"></A><A NAME="I1741"></A>S'Wide_Image denotes a function 
+<A NAME="I1747"></A><A NAME="I1748"></A>S'Wide_Image denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p29">29</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -384,7 +384,7 @@ with the following specification:&nbsp;</div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I1742"></A>The function returns an image of the value of <I>Arg</I> 
+<A NAME="I1749"></A>The function returns an image of the value of <I>Arg</I> 
 as a Wide_String. The lower bound of the result is one. The image has 
 the same sequence of graphic characters as defined for S'Wide_Wide_Image 
 if all the graphic characters are defined in Wide_Character; otherwise, 
@@ -398,7 +398,7 @@ graphic characters of S'Wide_Wide_Image are not defined in Wide_Character.</div>
 31 through 34 were moved to Wide_Wide_Image.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p35">35</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Image</div><div class="WideHanging-Body">
-<A NAME="I1743"></A><A NAME="I1744"></A>S'Image denotes a function with 
+<A NAME="I1750"></A><A NAME="I1751"></A>S'Image denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p36">36</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Image(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;S'Base)<BR>
@@ -418,24 +418,24 @@ of characters of the value returned by S'Image when some of the graphic
 characters of S'Wide_Wide_Image are not defined in Character.</div>
 <div class="paranum"><a name="p37.1">37.1/2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Wide_Wide_Width</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I1745"></A><A NAME="I1746"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1752"></A><A NAME="I1753"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 S'Wide_Wide_Width denotes the maximum length of a Wide_Wide_String returned 
 by S'Wide_Wide_Image over all values of the subtype S. It denotes zero 
 for a subtype that has a null range. Its type is <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p38">38</a></div>
 <div class="WideHanging-Term">S'Wide_Width</div><div class="WideHanging-Body">
-<A NAME="I1747"></A><A NAME="I1748"></A>S'Wide_Width denotes the maximum 
+<A NAME="I1754"></A><A NAME="I1755"></A>S'Wide_Width denotes the maximum 
 length of a Wide_String returned by S'Wide_Image over all values of the 
 subtype S. It denotes zero for a subtype that has a null range. Its type 
 is <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p39">39</a></div>
 <div class="WideHanging-Term">S'Width</div><div class="WideHanging-Body">
-<A NAME="I1749"></A><A NAME="I1750"></A>S'Width denotes the maximum length 
+<A NAME="I1756"></A><A NAME="I1757"></A>S'Width denotes the maximum length 
 of a String returned by S'Image over all values of the subtype S. It 
 denotes zero for a subtype that has a null range. Its type is <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p39.1">39.1/2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Wide_Wide_Value</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I1751"></A><A NAME="I1752"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
+<A NAME="I1758"></A><A NAME="I1759"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 S'Wide_Wide_Value denotes a function with the following specification: 
 </div>
 <div class="paranum"><a name="p39.2">39.2/2</a></div>
@@ -447,13 +447,13 @@ image of the value as a Wide_Wide_String, ignoring any leading or trailing
 spaces.</div>
 <div class="paranum"><a name="p39.4">39.4/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I1753"></A><A NAME="I1754"></A>For the evaluation of a call 
+<A NAME="I1760"></A><A NAME="I1761"></A>For the evaluation of a call 
 on S'Wide_Wide_Value for an enumeration subtype S, if the sequence of 
 characters of the parameter (ignoring leading and trailing spaces) has 
 the syntax of an enumeration literal and if it corresponds to a literal 
 of the type of S (or corresponds to the result of S'Wide_Wide_Image for 
 a nongraphic character of the type), the result is the corresponding 
-enumeration value; <A NAME="I1755"></A><A NAME="I1756"></A>otherwise, 
+enumeration value; <A NAME="I1762"></A><A NAME="I1763"></A>otherwise, 
 Constraint_Error is raised.&nbsp;</div>
 <div class="paranum"><a name="p39.a.1">39.a.1/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>It's not crystal clear that 
@@ -470,18 +470,18 @@ does not raise Constraint_Error, even though Character'Wide_Wide_Image
 returns &quot;NUL&quot; for the nul character.&nbsp;</div>
 <div class="paranum"><a name="p39.5">39.5/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I1757"></A>For the evaluation of a call on S'Wide_Wide_Value 
+<A NAME="I1764"></A>For the evaluation of a call on S'Wide_Wide_Value 
 for an integer subtype S, if the sequence of characters of the parameter 
 (ignoring leading and trailing spaces) has the syntax of an integer literal, 
 with an optional leading sign character (plus or minus for a signed type; 
 only plus for a modular type), and the corresponding numeric value belongs 
-to the base range of the type of S, then that value is the result; <A NAME="I1758"></A><A NAME="I1759"></A>otherwise, 
+to the base range of the type of S, then that value is the result; <A NAME="I1765"></A><A NAME="I1766"></A>otherwise, 
 Constraint_Error is raised.</div>
 <div class="paranum"><a name="p39.a.3">39.a.3/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We considered allowing 'Value 
 to return a representable but out-of-range value without a Constraint_Error. 
 However, we currently require (see <A HREF="AA-4-9.html">4.9</A>) in 
-an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 like &quot;X := &lt;numeric_literal&gt;;&quot; that the value of the 
 numeric-literal be in X's base range (at compile time), so it seems unfriendly 
 and confusing to have a different range allowed for 'Value. Furthermore, 
@@ -506,14 +506,14 @@ has the syntax of one of the following:&nbsp;</div>
 </div>
 <div class="paranum"><a name="p39.12">39.12/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I1760"></A>with an optional leading sign character (plus or 
+<A NAME="I1767"></A>with an optional leading sign character (plus or 
 minus), and if the corresponding numeric value belongs to the base range 
-of the type of S, then that value is the result; <A NAME="I1761"></A><A NAME="I1762"></A>otherwise, 
+of the type of S, then that value is the result; <A NAME="I1768"></A><A NAME="I1769"></A>otherwise, 
 Constraint_Error is raised. The sign of a zero value is preserved (positive 
 if none has been specified) if S'Signed_Zeros is True.</div>
 <div class="paranum"><a name="p40">40</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Wide_Value</div><div class="WideHanging-Body">
-<A NAME="I1763"></A><A NAME="I1764"></A>S'Wide_Value denotes a function 
+<A NAME="I1770"></A><A NAME="I1771"></A>S'Wide_Value denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p41">41</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Wide_Value(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;Wide_String)<BR>
@@ -525,12 +525,12 @@ spaces.</div>
 <div class="paranum"><a name="p43">43/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I1765"></A><A NAME="I1766"></A>For the evaluation of a call 
+<A NAME="I1772"></A><A NAME="I1773"></A>For the evaluation of a call 
 on S'Wide_Value for an enumeration subtype S, if the sequence of characters 
 of the parameter (ignoring leading and trailing spaces) has the syntax 
 of an enumeration literal and if it corresponds to a literal of the type 
 of S (or corresponds to the result of S'Wide_Image for a value of the 
-type), the result is the corresponding enumeration value; <A NAME="I1767"></A><A NAME="I1768"></A>otherwise, 
+type), the result is the corresponding enumeration value; <A NAME="I1774"></A><A NAME="I1775"></A>otherwise, 
 Constraint_Error is raised. For a numeric subtype S, the evaluation of 
 a call on S'Wide_Value with <I>Arg</I> of type Wide_String is equivalent 
 to a call on S'Wide_Wide_Value for a corresponding <I>Arg</I> of type 
@@ -556,7 +556,7 @@ characters.&nbsp;</div>
 44 through 51 were moved to Wide_Wide_Value.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p52">52</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Value</div><div class="WideHanging-Body">
-<A NAME="I1769"></A><A NAME="I1770"></A>S'Value denotes a function with 
+<A NAME="I1776"></A><A NAME="I1777"></A>S'Value denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p53">53</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Value(<SPAN Class="roman"><I>Arg</I></SPAN>&nbsp;:&nbsp;String)<BR>
@@ -567,12 +567,12 @@ image of the value as a String, ignoring any leading or trailing spaces.</div>
 <div class="paranum"><a name="p55">55/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I1771"></A><A NAME="I1772"></A>For the evaluation of a call 
+<A NAME="I1778"></A><A NAME="I1779"></A>For the evaluation of a call 
 on S'Value for an enumeration subtype S, if the sequence of characters 
 of the parameter (ignoring leading and trailing spaces) has the syntax 
 of an enumeration literal and if it corresponds to a literal of the type 
 of S (or corresponds to the result of S'Image for a value of the type), 
-the result is the corresponding enumeration value; <A NAME="I1773"></A><A NAME="I1774"></A>otherwise, 
+the result is the corresponding enumeration value; <A NAME="I1780"></A><A NAME="I1781"></A>otherwise, 
 Constraint_Error is raised. For a numeric subtype S, the evaluation of 
 a call on S'Value with <I>Arg</I> of type String is equivalent to a call 
 on S'Wide_Wide_Value for a corresponding <I>Arg</I> of type Wide_Wide_String. 
@@ -581,26 +581,36 @@ on S'Wide_Wide_Value for a corresponding <I>Arg</I> of type Wide_Wide_String.
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 S'Value is subtly different from S'Wide_Wide_Value for enumeration subtypes; 
 see the discussion under S'Wide_Value.&nbsp;</div>
-<div class="paranum"><a name="p55.1">55.1/4</a></div>
+<div class="paranum"><a name="p55.1">55.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0225-1.TXT">AI12-0225-1</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-X that denotes an object of a scalar type[ (after any implicit dereference)], 
-the following attributes are defined:</div>
+X of a scalar type other than <I>universal_real</I> or <I>universal_fixed</I>[ 
+(after any implicit dereference)], the following attributes are defined:</div>
 <div class="paranum"><a name="p55.2">55.2/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;X'Wide_Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I1775"></A><A NAME="I1776"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+<A NAME="I1782"></A><A NAME="I1783"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
 X'Wide_Wide_Image denotes the result of calling function S'Wide_Wide_Image 
 with <I>Arg</I> being X, where S is the nominal subtype of X.</div>
 <div class="paranum"><a name="p55.3">55.3/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;X'Wide_Image</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I1777"></A><A NAME="I1778"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+<A NAME="I1784"></A><A NAME="I1785"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
 X'Wide_Image denotes the result of calling function S'Wide_Image with 
 <I>Arg</I> being X, where S is the nominal subtype of X.</div>
 <div class="paranum"><a name="p55.4">55.4/4</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;X'Image</div><div class="WideHanging-Body">
-<A NAME="I1779"></A><A NAME="I1780"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
+<A NAME="I1786"></A><A NAME="I1787"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
 X'Image denotes the result of calling function S'Image with <I>Arg</I> 
 being X, where S is the nominal subtype of X.</div>
+<div class="paranum"><a name="p55.b">55.b/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0225-1.TXT">AI12-0225-1</A></I>} 
+We do not allow universal real or fixed types as the details of the result 
+depends on the properties of the type, so a specific nominal subtype 
+is needed. On the other hand, the desired string for an integer type 
+does not depend upon the type, so we can allow any integer type, including 
+<I>universal_integer</I>. Such a type is evaluated as type <I>root_integer</I> 
+(as all universal integer runtime operations are), so Constraint_Error 
+may be raised if the magnitude of the value is too large.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p56">56/2</a></div>
@@ -633,13 +643,13 @@ where <I>X</I> is any character, including nongraphic characters.&nbsp;</div>
 <div class="paranum"><a name="p56.2">56.2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
 For a scalar type, the following language-defined representation aspect 
-may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):&nbsp;</div>
 <div class="paranum"><a name="p56.3">56.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;Default_Value</div><div class="WideHanging-Body"><br clear="left">
 This aspect shall be specified by a static expression, and that expression 
 shall be explicit, even if the aspect has a boolean type. Default_Value 
-shall be specified only on a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>.<A NAME="I1781"></A><A NAME="I1782"></A> 
+shall be specified only on a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN>.<A NAME="I1788"></A><A NAME="I1789"></A> 
 </div>
 <div class="paranum"><a name="p56.c">56.c/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The part about requiring an explicit 
@@ -667,9 +677,9 @@ rule that says that a boolean aspect with a value True cannot be changed.
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p56.5">56.5/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
-The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 specified for the Default_Value aspect is the type defined by the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-on which it appears.<A NAME="I1783"></A>&nbsp;</div>
+on which it appears.<A NAME="I1790"></A>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p57">57</a></div>
 <div class="Notes">27&nbsp;&nbsp;The evaluation of S'First or S'Last 
@@ -717,7 +727,7 @@ constraints:</I>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p63.a">63.a/1</a></div>
-<div class="Annotations"><A NAME="I1784"></A>S'Base is no longer defined 
+<div class="Annotations"><A NAME="I1791"></A>S'Base is no longer defined 
 for nonscalar types. One conceivable existing use of S'Base for nonscalar 
 types is S'Base'Size where S is a generic formal private type. However, 
 that is not generally useful because the actual subtype corresponding 
@@ -733,10 +743,10 @@ attribute Base for nonscalar types just so it can be used as a <SPAN Class="swis
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p63.b">63.b</a></div>
-<div class="Annotations"><A NAME="I1785"></A>The attribute S'Base for 
+<div class="Annotations"><A NAME="I1792"></A>The attribute S'Base for 
 a scalar subtype is now permitted anywhere a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 is permitted. S'Base'First .. S'Base'Last is the base range of the type. 
-Using an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>, 
+Using an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>, 
 one cannot specify any subtype-specific attributes for the subtype denoted 
 by S'Base (the base subtype).</div>
 <div class="paranum"><a name="p63.c">63.c</a></div>
@@ -768,7 +778,7 @@ characters.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p63.j">63.j/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I1786"></A>The attributes Wide_Wide_Image, Wide_Wide_Value, 
+<A NAME="I1793"></A>The attributes Wide_Wide_Image, Wide_Wide_Value, 
 and Wide_Wide_Width are new. Note that Wide_Image and Wide_Value are 
 now defined in terms of Wide_Wide_Image and Wide_Wide_Value, but the 
 image of types other than characters have not changed.&nbsp;</div>
@@ -783,7 +793,7 @@ have not changed.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p63.l">63.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0181-1.TXT">AI05-0181-1</A></I>} 
-<A NAME="I1787"></A><B>Correction:</B> Soft hyphen (code point 173) is 
+<A NAME="I1794"></A><B>Correction:</B> Soft hyphen (code point 173) is 
 nongraphic in ISO/IEC 10646:2011 (and also in the 2003 version of that 
 standard). Thus, we have given it the language-defined name <I>soft_hyphen</I>. 
 This changes the result of Character'Image (and all of the related types 
@@ -807,16 +817,21 @@ practice.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p63.n">63.n/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0228-1.TXT">AI05-0228-1</A></I>} 
-<A NAME="I1788"></A>The new aspect Default_Value allows defining implicit 
+<A NAME="I1795"></A>The new aspect Default_Value allows defining implicit 
 initial values (see <A HREF="AA-3-3-1.html">3.3.1</A>) for scalar types. 
 </div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p63.o">63.o/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0124-1.TXT">AI12-0124-1</A></I>} 
-<A NAME="I1789"></A><B>Corrigendum:</B> An object can be now used as 
+<A NAME="I1796"></A><B>Corrigendum:</B> An object can be now used as 
 the prefix of the Image attribute (as well as Wide_Image and Wide_Wide_Image), 
-a convenience feature already present in some implementations.&nbsp;</div>
+a convenience feature already present in some implementations.</div>
+<div class="paranum"><a name="p63.p">63.p/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0225-1.TXT">AI12-0225-1</A></I>} 
+<B>Correction:</B> Scalar values (as well as objects) can be now used 
+as the prefix of the Image attribute (as well as Wide_Image and Wide_Wide_Image). 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

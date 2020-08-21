@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,33 +37,33 @@
 <HR>
 <H1>D.3 Priority Ceiling Locking</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-specifies the interactions between priority task scheduling and protected 
-object ceilings. This interaction is based on the concept of the <I>ceiling 
-priority</I> of a protected object.&nbsp;</div>
+<div class="Normal">This subclause specifies the interactions between 
+priority task scheduling and protected object ceilings. This interaction 
+is based on the concept of the <I>ceiling priority</I> of a protected 
+object.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Locking_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8038"></A><A NAME="I8039"></A>Locking_Policy(<I>policy_</I><A NAME="I8040"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I7846"></A><A NAME="I7847"></A>Locking_Policy(<I>policy_</I><A NAME="I7848"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The <I>policy_</I><A NAME="I8041"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-shall either be Ceiling_Locking or an implementation-defined <A NAME="I8042"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
+<div class="Normal">The <I>policy_</I><A NAME="I7849"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall either be Ceiling_Locking or an implementation-defined <A NAME="I7850"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8043"></A><A NAME="I8044"></A>A Locking_Policy 
+<div class="Normal"><A NAME="I7851"></A><A NAME="I7852"></A>A Locking_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I8045"></A>A locking policy specifies the 
+<div class="Normal"><A NAME="I7853"></A>A locking policy specifies the 
 details of protected object locking. All protected objects have a priority. 
 The locking policy specifies the meaning of the priority of a protected 
 object, and the relationships between these priorities and task priorities. 
@@ -76,28 +74,25 @@ implementation-defined locking policies, the meaning of the priority
 of a protected object is implementation defined. If no Locking_Policy 
 pragma applies to any of the program units comprising a partition, the 
 locking policy for that partition, as well as the meaning of the priority 
-of a protected object, are implementation defined. <A NAME="I8046"></A></div>
+of a protected object, are implementation defined. <A NAME="I7854"></A></div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
-<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
-<span class="insert3">specified for the</span><span class="delete3">&nbsp;of 
-a</span> Priority or Interrupt_Priority <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-(see <A HREF="RM-D-1.html">D.1</A>) is evaluated as part of the creation 
-of the corresponding protected object and converted to the subtype System.Any_Priority 
-or System.Interrupt_Priority, respectively. The value of the expression 
-is the initial priority of the corresponding protected object. If no 
-Priority or Interrupt_Priority <span class="insert3">aspect is specified 
-for</span><span class="delete3">&nbsp;pragma applies to</span> a protected 
-object, the initial priority is specified by the locking policy. <span class="insert3"><A NAME="I8047"></A><A NAME="I8048"></A></span><span class="delete3"><A NAME="I8049"></A><A NAME="I8050"></A></span></div>
+<div class="Normal">&nbsp;&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+specified for the Priority or Interrupt_Priority aspect (see <A HREF="RM-D-1.html">D.1</A>) 
+is evaluated as part of the creation of the corresponding protected object 
+and converted to the subtype System.Any_Priority or System.Interrupt_Priority, 
+respectively. The value of the expression is the initial priority of 
+the corresponding protected object. If no Priority or Interrupt_Priority 
+aspect is specified for a protected object, the initial priority is specified 
+by the locking policy. <A NAME="I7855"></A><A NAME="I7856"></A></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">There is one predefined 
-locking policy, Ceiling_Locking; this policy is defined as follows:<span class="insert3"><A NAME="I8051"></A><A NAME="I8052"></A></span> 
+locking policy, Ceiling_Locking; this policy is defined as follows:<A NAME="I7857"></A><A NAME="I7858"></A> 
 </div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted"><A NAME="I8053"></A>Every protected object has 
+<div class="Bulleted"><A NAME="I7859"></A>Every protected object has 
 a <I>ceiling priority</I>, which is determined by either a Priority or 
-Interrupt_Priority <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-as defined in <A HREF="RM-D-1.html">D.1</A>, or by assignment to the 
-Priority attribute as described in <A HREF="RM-D-5-2.html">D.5.2</A>. 
+Interrupt_Priority aspect as defined in <A HREF="RM-D-1.html">D.1</A>, 
+or by assignment to the Priority attribute as described in <A HREF="RM-D-5-2.html">D.5.2</A>. 
 The ceiling priority of a protected object (or ceiling, for short) is 
 an upper bound on the active priority a task can have when it calls protected 
 operations of that protected object.</div>
@@ -105,50 +100,44 @@ operations of that protected object.</div>
 <div class="Bulleted">The initial ceiling priority of a protected object 
 is equal to the initial priority for that object.</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Bulleted">If an Interrupt_Handler or Attach_Handler <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-(see <A HREF="RM-C-3-1.html">C.3.1</A>) <span class="insert3">is specified 
-for a protected subprogram of a protected type that does not have&nbsp;</span><span class="insert4">either 
-</span><span class="insert3">the&nbsp;</span><span class="delete3">appears 
-in a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
-without an</span> <span class="insert4">Priority or&nbsp;</span>Interrupt_Priority 
-<span class="insert3">aspect specified</span><span class="delete3">&nbsp;pragma</span>, 
-the initial priority of protected objects of that type is implementation 
-defined, but in the range of the subtype System.Interrupt_Priority.&nbsp;</div>
+<div class="Bulleted">If an Interrupt_Handler or Attach_Handler aspect 
+(see <A HREF="RM-C-3-1.html">C.3.1</A>) is specified for a protected 
+subprogram of a protected type that does not have <span class="insert4">either 
+</span>the <span class="insert4">Priority or&nbsp;</span>Interrupt_Priority 
+aspect specified, the initial priority of protected objects of that type 
+is implementation defined, but in the range of the subtype System.Interrupt_Priority. 
+</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Bulleted">If <span class="insert3">neither aspect</span><span class="delete3">&nbsp;no 
-<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN></span> 
-Priority<span class="insert3">&nbsp;nor</span><span class="delete3">,</span> 
-Interrupt_Priority<span class="delete3">, Interrupt_Handler, or Attach_Handler</span> 
-is specified <span class="insert3">for a protected type, and no protected 
-subprogram of the type has aspect Interrupt_Handler or Attach_Handler 
-specified</span><span class="delete3">&nbsp;in the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN></span>, 
-then the initial priority of the corresponding protected object is System.Priority'Last.</div>
+<div class="Bulleted">If neither aspect Priority nor Interrupt_Priority 
+is specified for a protected type, and no protected subprogram of the 
+type has aspect Interrupt_Handler or Attach_Handler specified, then the 
+initial priority of the corresponding protected object is System.Priority'Last.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Bulleted">While a task executes a protected action, it inherits 
 the ceiling priority of the corresponding protected object.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted"><A NAME="I8054"></A><A NAME="I8055"></A><A NAME="I8056"></A>When 
+<div class="Bulleted"><A NAME="I7860"></A><A NAME="I7861"></A><A NAME="I7862"></A>When 
 a task calls a protected operation, a check is made that its active priority 
 is not higher than the ceiling of the corresponding protected object; 
 Program_Error is raised if this check fails.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;Following any change 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;Following any change 
 of priority, it is a bounded error for the active priority of any task 
 with a call queued on an entry of a protected object to be higher than 
-the ceiling priority of the protected object. <A NAME="I8057"></A>In 
+the ceiling priority of the protected object. <A NAME="I7863"></A>In 
 this case one of the following applies:</div>
 <div class="paranum"><a name="p13.2">13.2/2</a></div>
 <div class="Bulleted">at any time prior to executing the entry body Program_Error 
-is raised in the calling task; <A NAME="I8058"></A></div>
+is raised in the calling task; <A NAME="I7864"></A></div>
 <div class="paranum"><a name="p13.3">13.3/2</a></div>
 <div class="Bulleted">when the entry is open the entry body is executed 
 at the ceiling priority of the protected object;</div>
 <div class="paranum"><a name="p13.4">13.4/2</a></div>
 <div class="Bulleted">when the entry is open the entry body is executed 
 at the ceiling priority of the protected object and then Program_Error 
-is raised in the calling task; or <A NAME="I8059"></A></div>
+is raised in the calling task; or <A NAME="I7865"></A></div>
 <div class="paranum"><a name="p13.5">13.5/2</a></div>
 <div class="Bulleted">when the entry is open the entry body is executed 
 at the ceiling priority of the protected object that was in effect when 
@@ -160,7 +149,7 @@ the entry call was queued.&nbsp;</div>
 in a certain subrange of System.Priority or System.Interrupt_Priority 
 up to the top of that subrange, uniformly.&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">Implementations are allowed to define other locking 
+<div class="Normal">&nbsp;Implementations are allowed to define other locking 
 policies, but need not support more than one locking policy per partition.</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Normal">Since implementations are allowed to place restrictions 

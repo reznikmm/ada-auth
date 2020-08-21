@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -46,7 +44,7 @@ is a reference to an element within a container. Many operations on cursors
 are common to all of the containers. A cursor referencing an element 
 in a container is considered to be overlapping <span class="insert5">only 
 </span>with the <span class="insert5">element</span><span class="delete5">&nbsp;container 
-object</span> itself.<A NAME="I7021"></A> <A NAME="I7022"></A></div>
+object</span> itself.<A NAME="I7008"></A> <A NAME="I7009"></A></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">Within this clause we provide Implementation Advice 
 for the desired average or worst case time complexity of certain operations 
@@ -54,7 +52,7 @@ on a container. This advice is expressed using the Landau symbol <I>O</I>(X).
 Presuming f is some function of a length parameter N and t(N) is the 
 time the operation takes (on average or worst case, as specified) for 
 the length N, a complexity of <I>O</I>(f(N)) means that there exists 
-a finite A such that for any N, t(N)/f(N) &lt; A. <A NAME="I7023"></A><A NAME="I7024"></A></div>
+a finite A such that for any N, t(N)/f(N) &lt; A. <A NAME="I7010"></A><A NAME="I7011"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">If the advice suggests that the complexity should 
 be less than <I>O</I>(f(N)), then for any arbitrarily small positive 
@@ -63,43 +61,42 @@ M, t(N)/f(N) &lt; D.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">When a formal function is used to provide an ordering 
 for a container, it is generally required to define a strict weak ordering. 
-A function &quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7025"></A> 
+A function &quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7012"></A> 
 if it is irreflexive, asymmetric, transitive, and in addition, if <I>x</I> 
 &lt; <I>y</I> for any values <I>x</I> and <I>y</I>, then for all other 
 values <I>z</I>, (<I>x</I> &lt; <I>z</I>) or (<I>z</I> &lt; <I>y</I>).</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6/4</a></div>
-<div class="Normal"><span class="insert4">Certain subprograms declared 
-within instances of some of the generic packages presented in this clause 
-are said to <I>perform indefinite insertion</I>. These subprograms are 
-those corresponding (in the sense of the copying described in subclause 
-<A HREF="RM-12-3.html">12.3</A>) to subprograms that have formal parameters 
-of a generic formal indefinite type and that are identified as performing 
-indefinite insertion in the subclause defining the generic package.<A NAME="I7026"></A></span></div>
+<div class="Normal">Certain subprograms declared within instances of 
+some of the generic packages presented in this clause are said to <I>perform 
+indefinite insertion</I>. These subprograms are those corresponding (in 
+the sense of the copying described in subclause <A HREF="RM-12-3.html">12.3</A>) 
+to subprograms that have formal parameters of a generic formal indefinite 
+type and that are identified as performing indefinite insertion in the 
+subclause defining the generic package.<A NAME="I7013"></A></div>
 <div class="paranum"><a name="p7">7/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert4">If 
-a subprogram performs indefinite insertion, then certain run-time checks 
-are performed as part of a call to the subprogram; if any of these checks 
-fail, then the resulting exception is propagated to the caller and the 
-container is not modified by the call. These checks are performed for 
-each parameter corresponding (in the sense of the copying described in 
-<A HREF="RM-12-3.html">12.3</A>) to a parameter in the corresponding 
-generic whose type is a generic formal indefinite type. The checks performed 
-for a given parameter are those checks explicitly specified in subclause 
-<A HREF="RM-4-8.html">4.8</A> that would be performed as part of the 
-evaluation of an initialized allocator whose access type is declared 
-immediately within the instance, where:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">If a subprogram performs 
+indefinite insertion, then certain run-time checks are performed as part 
+of a call to the subprogram; if any of these checks fail, then the resulting 
+exception is propagated to the caller and the container is not modified 
+by the call. These checks are performed for each parameter corresponding 
+(in the sense of the copying described in <A HREF="RM-12-3.html">12.3</A>) 
+to a parameter in the corresponding generic whose type is a generic formal 
+indefinite type. The checks performed for a given parameter are those 
+checks explicitly specified in subclause <A HREF="RM-4-8.html">4.8</A> 
+that would be performed as part of the evaluation of an initialized allocator 
+whose access type is declared immediately within the instance, where:</div>
 <div class="paranum"><a name="p8">8/4</a></div>
-<div class="Bulleted"><span class="insert4">the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
-is that of the parameter; and</span></div>
+<div class="Bulleted">the value of the <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
+is that of the parameter; and</div>
 <div class="paranum"><a name="p9">9/4</a></div>
-<div class="Bulleted"><span class="insert4">the designated subtype of 
-the access type is the subtype of the parameter; and</span></div>
+<div class="Bulleted">the designated subtype of the access type is the 
+subtype of the parameter; and</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Bulleted"><span class="insert4">finalization of the collection 
-of the access type has started if and only if the finalization of the 
-instance has started.</span>&nbsp;</div>
+<div class="Bulleted">finalization of the collection of the access type 
+has started if and only if the finalization of the instance has started. 
+</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p11">11/5</a></div>

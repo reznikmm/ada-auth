@@ -19,14 +19,14 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -90,20 +90,20 @@ following language-defined library package exists:</span>&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Execution_Time.Group_Budgets;</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"><span class="insert2">The type Group_Budget represents 
+<div class="Normal">&nbsp;<span class="insert2">The type Group_Budget represents 
 an execution time budget to be used by a group of tasks. The type Group_Budget 
 needs finalization<A NAME="I8436"></A> (see <A HREF="RM-7-6.html">7.6</A>). 
 A task can belong to at most one group. Tasks of any priority can be 
 added to a group.</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="insert2">An object of type Group_Budget 
+<div class="Normal">&nbsp;<span class="insert2">An object of type Group_Budget 
 has an associated nonnegative value of type Time_Span known as its <I>budget</I>, 
 which is initially Time_Span_Zero. The type Group_Budget_Handler identifies 
 a protected procedure to be executed by the implementation when the budget 
 is <I>exhausted</I>, that is, reaches zero. Such a protected procedure 
 is called a <I>handler</I>.<A NAME="I8437"></A><A NAME="I8438"></A> <A NAME="I8439"></A></span></div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><span class="insert2">An object of type Group_Budget 
+<div class="Normal">&nbsp;<span class="insert2">An object of type Group_Budget 
 also includes a handler, which is a value of type Group_Budget_Handler. 
 The handler of the object is said to be <I>set</I> if it is not null 
 and <I>cleared</I> otherwise. The handler of all Group_Budget objects 
@@ -111,27 +111,27 @@ is initially cleared. <A NAME="I8440"></A><A NAME="I8441"></A></span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal"><span class="insert2">The procedure Add_Task adds 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Add_Task adds 
 the task identified by T to the group GB; if that task is already a member 
 of some other group, Group_Budget_Error is raised.</span></div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"><span class="insert2">The procedure Remove_Task removes 
-the task identified by T from the group GB; if that task is not a member 
-of the group GB, Group_Budget_Error is raised. After successful execution 
-of this procedure, the task is no longer a member of any group.</span></div>
+<div class="Normal">&nbsp;<span class="insert2">The procedure Remove_Task 
+removes the task identified by T from the group GB; if that task is not 
+a member of the group GB, Group_Budget_Error is raised. After successful 
+execution of this procedure, the task is no longer a member of any group.</span></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal"><span class="insert2">The function Is_Member returns 
+<div class="Normal">&nbsp;<span class="insert2">The function Is_Member returns 
 True if the task identified by T is a member of the group GB; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it&nbsp;</span><span class="insert3">returns</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;return</span></span><span class="insert2">&nbsp;False.</span></div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal"><span class="insert2">The function Is_A_Group_Member 
+<div class="Normal">&nbsp;<span class="insert2">The function Is_A_Group_Member 
 returns True if the task identified by T is a member of some group; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns False.</span></div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal"><span class="insert2">The function Members returns 
+<div class="Normal">&nbsp;<span class="insert2">The function Members returns 
 an array of values of type Task_Identification.Task_Id identifying the 
 members of the group GB. The order of the components of the array is 
 unspecified.</span></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal"><span class="insert2">The procedure Replenish loads 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Replenish loads 
 the group budget GB with To as the Time_Span value. The exception Group_Budget_Error 
 is raised if the Time_Span value To is nonpositive. Any execution&nbsp;</span><span class="insert3">on 
 CPU&nbsp;</span><span class="insert2">of any member of the group of tasks 
@@ -140,7 +140,7 @@ becomes exhausted (reaches Time_Span_Zero), the associated handler is
 executed if the handler of group budget GB is set. Nevertheless, the 
 tasks continue to execute.</span></div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal"><span class="insert2">The procedure Add modifies 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Add modifies 
 the budget of the group GB. A positive value for Interval increases the 
 budget. A negative value for Interval reduces the budget, but never below 
 Time_Span_Zero. A zero value for Interval has no effect. A call of procedure 
@@ -148,64 +148,64 @@ Add that results in the value of the budget going to Time_Span_Zero causes
 the associated handler to be executed if the handler of the group budget 
 GB is set.</span></div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Normal"><span class="insert2">The function Budget_Has_Expired 
+<div class="Normal">&nbsp;<span class="insert2">The function Budget_Has_Expired 
 returns True if the budget of group GB is exhausted (equal to Time_Span_Zero); 
 otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns False.</span></div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Normal"><span class="insert2">The function Budget_Remaining 
+<div class="Normal">&nbsp;<span class="insert2">The function Budget_Remaining 
 returns the remaining budget for the group GB. If the budget is exhausted 
 it returns Time_Span_Zero. This is the minimum value for a budget.</span></div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Normal"><span class="insert2">The procedure Set_Handler associates 
-the handler Handler with the Group_Budget GB</span><span class="insert3">:</span><span class="insert2"></span><span class="insert2"><span class="delete3">;</span></span><span class="insert2">&nbsp;if Handler is <B>null</B>, the handler of Group_Budget is cleared</span><span class="insert3">;</span><span class="insert2"></span><span class="insert2"><span class="delete3">,</span></span><span class="insert2">&nbsp;otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is set.</span></div>
+<div class="Normal">&nbsp;<span class="insert2">The procedure Set_Handler 
+associates the handler Handler with the Group_Budget GB</span><span class="insert3">:</span><span class="insert2"></span><span class="insert2"><span class="delete3">;</span></span><span class="insert2">&nbsp;if Handler is <B>null</B>, the handler of Group_Budget is cleared</span><span class="insert3">;</span><span class="insert2"></span><span class="insert2"><span class="delete3">,</span></span><span class="insert2">&nbsp;otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is set.</span></div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal"><span class="insert2">A call of Set_Handler for a 
-Group_Budget that already has a handler set replaces the handler; if 
+<div class="Normal">&nbsp;<span class="insert2">A call of Set_Handler for 
+a Group_Budget that already has a handler set replaces the handler; if 
 Handler is not <B>null</B>, the handler for Group_Budget remains set.</span></div>
 <div class="paranum"><a name="p27">27/3</a></div>
-<div class="Normal"><span class="insert2">The function Current_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The function Current_Handler 
 returns the handler associated with the group budget GB if the handler 
 for that group budget is set; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns <B>null</B>.</span></div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal"><span class="insert2">The procedure Cancel_Handler 
+<div class="Normal">&nbsp;<span class="insert2">The procedure Cancel_Handler 
 clears the handler for the group budget if it is set. Cancelled is assigned 
 True if the handler for the group budget was set prior to it being cleared; 
 otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it is assigned False.</span></div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Normal"><span class="insert2">The constant Min_Handler_Ceiling 
+<div class="Normal">&nbsp;<span class="insert2">The constant Min_Handler_Ceiling 
 is the minimum ceiling priority required for a protected object with 
 a handler to ensure that no ceiling violation will occur when that handler 
 is invoked.</span></div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal"><span class="insert2">The precision of the accounting 
+<div class="Normal">&nbsp;<span class="insert2">The precision of the accounting 
 of task execution time to a Group_Budget is the same as that defined 
 for execution-time clocks from the parent package.</span></div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal"><span class="insert2">As part of the finalization 
+<div class="Normal">&nbsp;<span class="insert2">As part of the finalization 
 of an object of type Group_Budget all member tasks are removed from the 
 group identified by that object.</span></div>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Normal"><span class="insert2">If a task is a member of a 
+<div class="Normal">&nbsp;<span class="insert2">If a task is a member of a 
 Group_Budget when it terminates</span><span class="insert3">,</span><span class="insert2">&nbsp;then as part of the finalization of the task it is removed from the group.</span></div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Normal"><span class="insert2">For all the operations defined 
+<div class="Normal">&nbsp;<span class="insert2">For all the operations defined 
 in this package, Tasking_Error is raised if the task identified by T 
 has terminated, and Program_Error is raised if the value of T is Task_Identification.Null_Task_Id.</span></div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Normal"><span class="insert2">An exception propagated from 
+<div class="Normal">&nbsp;<span class="insert2">An exception propagated from 
 a handler invoked when the budget of a group of tasks becomes exhausted 
 has no effect.</span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p35">35/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I8442"></A>For a call 
-of any of the subprograms defined in this package, if the task identified 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I8442"></A>For a 
+call of any of the subprograms defined in this package, if the task identified 
 by T no longer exists, the execution of the program is erroneous.</span> 
 </div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p36">36/2</a></div>
-<div class="Normal"><span class="insert2">For a given Group_Budget object, 
+<div class="Normal">&nbsp;<span class="insert2">For a given Group_Budget object, 
 the implementation shall perform the operations declared in this package 
 atomically with respect to any of these operations on the same Group_Budget 
 object. The replacement of a handler, by a call of Set_Handler, shall 

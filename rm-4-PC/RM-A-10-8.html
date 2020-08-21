@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -80,7 +78,7 @@ Num that corresponds to the sequence input.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">The exception Data_Error 
 is propagated if the sequence of characters read does not form a legal 
-integer literal or if the value obtained is not of the subtype Num<span class="delete3">&nbsp;(for Integer_IO) or is not in the base range of Num (for Modular_IO)</span>.</div>
+integer literal or if the value obtained is not of the subtype Num.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Put(File&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;File_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Num;<BR>
@@ -131,7 +129,7 @@ for Width.&nbsp;</div>
 a library package that is a nongeneric equivalent to Text_IO.Integer_IO 
 for the predefined type Integer:&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I6645"></A><BR>
+<div class="Examples"><B>with</B>&nbsp;Ada.Text_IO;<A NAME="I6548"></A><BR>
 <B>package</B>&nbsp;Ada.Integer_Text_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Ada.Text_IO.Integer_IO(Integer);</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Normal">For each predefined signed integer type, a nongeneric 
@@ -144,18 +142,16 @@ not, be actual instantiations of the generic package for the appropriate
 predefined type.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Notes">34&nbsp;&nbsp;<span class="delete3">For Modular_IO, 
-execution of Get propagates Data_Error if the sequence of characters 
-read forms an integer literal outside the range 0..Num'Last.</span>&nbsp;</div>
-<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-24 and 25 were deleted.</I></SPAN></span>&nbsp;</div>
+<div class="Notes"></div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 24 and 
+25 were deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p25">25/1</a></div>
 <div class="Examples"></div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Examples"><span class="insert3"><B>subtype</B>&nbsp;Byte_Int&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-127&nbsp;..&nbsp;127;<BR>
-</span><B>package</B>&nbsp;Int_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Integer_IO(<span class="insert3">Byte_Int</span><span class="delete3">&nbsp;Small_Int</span>);&nbsp;<B>use</B>&nbsp;Int_IO;<BR>
+<div class="Examples"><B>subtype</B>&nbsp;Byte_Int&nbsp;<B>is</B>&nbsp;Integer&nbsp;<B>range</B>&nbsp;-127&nbsp;..&nbsp;127;<BR>
+<B>package</B>&nbsp;Int_IO&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;Integer_IO(Byte_Int);&nbsp;<B>use</B>&nbsp;Int_IO;<BR>
 --<SPAN Class="roman"><I>&nbsp;default&nbsp;format&nbsp;used&nbsp;at&nbsp;instantiation,</I></SPAN><BR>
 --<SPAN Class="roman"><I>&nbsp;Default_Width&nbsp;=&nbsp;4,&nbsp;Default_Base&nbsp;=&nbsp;10</I></SPAN></div>
 <div class="paranum"><a name="p27">27</a></div>

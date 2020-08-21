@@ -17,13 +17,13 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,27 +40,27 @@ by an <SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SP
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">handled_sequence_of_statements</SPAN><A NAME="I4593"></A><A NAME="S0265"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4594"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">handled_sequence_of_statements</SPAN><A NAME="I4540"></A><A NAME="S0265"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4541"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN><BR>
 &nbsp;&nbsp;[<B>exception</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4595"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4596"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SPAN>}]</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4542"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I4543"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SPAN>}]</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">exception_handler</SPAN><A NAME="I4597"></A><A NAME="S0266"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<B>when</B>&nbsp;[<A NAME="I4598"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0267">choice_parameter_specification</A></SPAN>:]&nbsp;<A NAME="I4599"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0268">exception_choice</A></SPAN>&nbsp;{|&nbsp;<A NAME="I4600"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0268">exception_choice</A></SPAN>}&nbsp;=&gt;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4601"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">exception_handler</SPAN><A NAME="I4544"></A><A NAME="S0266"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>when</B>&nbsp;[<A NAME="I4545"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0267">choice_parameter_specification</A></SPAN>:]&nbsp;<A NAME="I4546"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0268">exception_choice</A></SPAN>&nbsp;{|&nbsp;<A NAME="I4547"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0268">exception_choice</A></SPAN>}&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4548"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">choice_parameter_specification</SPAN><A NAME="I4602"></A><A NAME="S0267"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4603"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">choice_parameter_specification</SPAN><A NAME="I4549"></A><A NAME="S0267"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4550"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">exception_choice</SPAN><A NAME="I4604"></A><A NAME="S0268"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>exception_</I><A NAME="I4605"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>others</B></div>
+<div class="Indented1"><SPAN Class="swiss">exception_choice</SPAN><A NAME="I4551"></A><A NAME="S0268"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>exception_</I><A NAME="I4552"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<B>others</B></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">An <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">An <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-11-2.html#S0268">exception_choice</A></SPAN> 
 shall denote an exception.</span></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I4606"></A>A choice with an <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I4553"></A>A choice with an <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 <I>covers</I> the named exception. A choice with <B>others</B> covers 
 all exceptions not named by previous choices of the same <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>. 
 Two choices in different <SPAN Class="swiss"><A HREF="RM-11-2.html#S0266">exception_handler</A></SPAN>s 
@@ -77,7 +77,7 @@ package.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I4607"></A>A <SPAN Class="swiss"><A HREF="RM-11-2.html#S0267">choice_parameter_specification</A></SPAN> 
+<div class="Normal"><A NAME="I4554"></A>A <SPAN Class="swiss"><A HREF="RM-11-2.html#S0267">choice_parameter_specification</A></SPAN> 
 declares a <I>choice parameter</I>, which is a constant object of type 
 Exception_Occurrence (see <A HREF="RM-11-4-1.html">11.4.1</A>). During 
 the handling of an exception occurrence, the choice parameter, if any, 
@@ -85,7 +85,7 @@ of the handler represents the exception occurrence that is being handled.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I4608"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
+<div class="Normal"><A NAME="I4555"></A>The execution of a <SPAN Class="swiss"><A HREF="RM-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
 consists of the execution of the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN>. 
 The optional handlers are used to handle any exceptions that are propagated 
 by the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145">sequence_of_statements</A></SPAN>. 

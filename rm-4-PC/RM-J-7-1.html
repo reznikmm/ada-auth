@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,29 +51,29 @@ is defined:</div>
 <div class="Normal" style="margin-bottom: 0.4em">For any task entry 
 X:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term"><A NAME="I8729"></A>X'<A NAME="I8730"></A><A NAME="I8731"></A>Address 
+<div class="WideHanging-Term"><A NAME="I8524"></A>X'<A NAME="I8525"></A><A NAME="I8526"></A>Address 
 </div><div class="WideHanging-Body">
 For a task entry whose address is specified (an <I>interrupt entry</I>), 
 the value refers to the corresponding hardware interrupt. For such an 
 entry, as for any other task entry, the meaning of this value is implementation 
 defined. The value of this attribute is of the type of the subtype System.Address.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Body"><A NAME="I8732"></A>Address may be specified 
+<div class="WideHanging-Body"><A NAME="I8527"></A>Address may be specified 
 for single entries via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0310">attribute_definition_clause</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I8733"></A>As part of the initialization 
+<div class="Normal"><A NAME="I8528"></A>As part of the initialization 
 of a task object, the address clause for an interrupt entry is elaborated, 
 which evaluates the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 of the address clause. A check is made that the address specified is 
 associated with some interrupt to which a task entry may be attached. 
-<A NAME="I8734"></A>If this check fails, Program_Error is raised. Otherwise, 
+<A NAME="I8529"></A>If this check fails, Program_Error is raised. Otherwise, 
 the interrupt entry is attached to the interrupt associated with the 
 specified address.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I8735"></A>Upon finalization of the task 
+<div class="Normal"><A NAME="I8530"></A>Upon finalization of the task 
 object, the interrupt entry, if any, is detached from the corresponding 
 interrupt and the default treatment is restored.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -89,7 +89,7 @@ on the specific interrupt.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8736"></A>It is a bounded error to evaluate 
+<div class="Normal"><A NAME="I8531"></A>It is a bounded error to evaluate 
 E'Caller (see <A HREF="RM-C-7-1.html">C.7.1</A>) in an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN> 
 for an interrupt entry. The possible effects are the same as for calling 
 Current_Task from an entry body.&nbsp;</div>
@@ -113,7 +113,7 @@ entry to be attached may be designated as reserved for the entire duration
 of program execution; that is, not just when they have an interrupt entry 
 attached to them.</div>
 <div class="paranum"><a name="p16">16/1</a></div>
-<div class="Normal">Interrupt entry calls may be implemented by having 
+<div class="Normal">&nbsp;Interrupt entry calls may be implemented by having 
 the hardware execute directly the appropriate <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0219">accept_statement</A></SPAN>. 
 Alternatively, the implementation is allowed to provide an internal interrupt 
 handler to simulate the effect of a normal task calling the entry.</div>

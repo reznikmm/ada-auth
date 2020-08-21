@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,18 +39,18 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
 <span class="insert5">@, known as the <I>target name</I> of an assignment 
 statement, provides an abbreviation to avoid repetition of potentially 
-long names in assignment statements.<A NAME="I3578"></A></span></div>
+long names in assignment statements.<A NAME="I3657"></A></span></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">target_name</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3579"></A><A NAME="S0154"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">@</span></div>
+<SPAN Class="swiss"></SPAN><span class="insert5"><SPAN Class="swiss">target_name</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3658"></A><A NAME="S0160"></A><span class="insert5"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert5">@</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<span class="insert5">[If a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN> 
-occurs in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+<span class="insert5">[If a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
+occurs in an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 <I>A</I>, the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 <I>V</I> of <I>A</I> is a complete context. The target name is a constant 
 view of <I>V</I>, having the nominal subtype of <I>V</I>.]</span></div>
@@ -64,24 +64,24 @@ Semantics.</span>&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<span class="insert5">A <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN> 
-shall only appear in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>.</span> 
+<span class="insert5">A <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
+shall only appear in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>.</span> 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
 <span class="insert5">[The <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is evaluated only once.] In particular, if a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN> 
-with nominal subtype <I>S</I> appears in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+is evaluated only once.] In particular, if a <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN> 
+with nominal subtype <I>S</I> appears in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 <I>A</I>, then <I>A</I> is equivalent to a call on a local anonymous 
 procedure with the actual parameter being the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of <I>A</I>, where the local anonymous procedure has an <B>in out</B> 
 parameter with unique name <I>P</I> of subtype <I>S</I>, with a body 
 being <I>A</I> with the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-being replaced by <I>P</I>, and any <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0154">target_name</A></SPAN>s 
+being replaced by <I>P</I>, and any <SPAN Class="swiss"><A HREF="AA-5-2-1.html#S0160">target_name</A></SPAN>s 
 being replaced by the qualified expression <I>S</I>'(<I>P</I>).</span></div>
 <div class="paranum"><a name="p5.a">5.a/5</a></div>
 <div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>This equivalence 
@@ -127,7 +127,7 @@ My_Complex_Array&nbsp;(Count)&nbsp;:=&nbsp;(Re&nbsp;=&gt;&nbsp;@.Re**2&nbsp;-&nb
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p7.a">7.a/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0125-3.TXT">AI12-0125-3</A></I>} 
-<span class="insert5"><A NAME="I3580"></A>The target name symbol @ is 
+<span class="insert5"><A NAME="I3659"></A>The target name symbol @ is 
 new.</span>&nbsp;</div>
 
 <HR>

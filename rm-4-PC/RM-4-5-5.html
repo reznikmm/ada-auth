@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +39,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2868"></A><A NAME="I2869"></A><A NAME="I2870"></A><A NAME="I2871"></A><A NAME="I2872"></A><A NAME="I2873"></A><A NAME="I2874"></A><A NAME="I2875"></A><A NAME="I2876"></A><A NAME="I2877"></A><A NAME="I2878"></A><A NAME="I2879"></A><A NAME="I2880"></A><A NAME="I2881"></A><A NAME="I2882"></A><A NAME="I2883"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2846"></A><A NAME="I2847"></A><A NAME="I2848"></A><A NAME="I2849"></A><A NAME="I2850"></A><A NAME="I2851"></A><A NAME="I2852"></A><A NAME="I2853"></A><A NAME="I2854"></A><A NAME="I2855"></A><A NAME="I2856"></A><A NAME="I2857"></A><A NAME="I2858"></A><A NAME="I2859"></A><A NAME="I2860"></A><A NAME="I2861"></A>The 
 multiplying operators * (multiplication), / (division), <B>mod</B> (modulus), 
 and <B>rem</B> (remainder) are predefined for every specific integer 
 type <I>T</I>:&nbsp;</div>
@@ -66,10 +64,10 @@ of B. Signed integer division satisfies the identity:&nbsp;</div>
 <div class="Examples">(-A)/B&nbsp;=&nbsp;-(A/B)&nbsp;=&nbsp;A/(-B)</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideAbove" style="margin-bottom: 0.4em">The signed integer 
-modulus operator is defined such that the result of A <B>mod</B> B <span class="insert3">is 
-either zero, or&nbsp;</span>has the sign of B and an absolute value less than 
-the absolute value of B; in addition, for some signed integer value N, 
-this result satisfies the relation:&nbsp;</div>
+modulus operator is defined such that the result of A <B>mod</B> B is 
+either zero, or has the sign of B and an absolute value less than the 
+absolute value of B; in addition, for some signed integer value N, this 
+result satisfies the relation:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples">A&nbsp;=&nbsp;B*N&nbsp;+&nbsp;(A&nbsp;<B>mod</B>&nbsp;B)</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -118,7 +116,7 @@ two predefined operators:&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The above two fixed-fixed 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;The above two fixed-fixed 
 multiplying operators shall not be used in a context where the expected 
 type for the result is itself <I>universal_fixed</I> &mdash; the context 
 has to identify some other numeric type to which the result is to be 
@@ -130,18 +128,17 @@ either operand is of a type having a user-defined primitive multiplication
 operator such that:&nbsp;</div>
 <div class="paranum"><a name="p19.2">19.2/3</a></div>
 <div class="Bulleted">it is declared immediately within the same declaration 
-list as the type<span class="insert3">&nbsp;or any partial or incomplete view 
-thereof</span>; and</div>
+list as the type or any partial or incomplete view thereof; and</div>
 <div class="paranum"><a name="p19.3">19.3/2</a></div>
 <div class="Bulleted">both of its formal parameters are of a fixed-point 
 type.&nbsp;</div>
 <div class="paranum"><a name="p19.4">19.4/2</a></div>
-<div class="Normal">&nbsp;&nbsp;A corresponding requirement applies to the universal 
+<div class="Normal">&nbsp;&nbsp;&nbsp;A corresponding requirement applies to the universal 
 fixed-fixed division operator.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal"></div>
+<div class="Normal">&nbsp;</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 20 was 
 deleted.</I></SPAN>&nbsp;</div>
 
@@ -155,9 +152,9 @@ the mathematical result is between two multiples of the <I>small</I>
 of the specific result type (possibly determined by context); for ordinary 
 fixed point types, if the mathematical result is between two multiples 
 of the <I>small</I>, it is unspecified which of the two is the result. 
-<A NAME="I2884"></A></div>
+<A NAME="I2862"></A></div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Normal"><A NAME="I2885"></A><A NAME="I2886"></A><A NAME="I2887"></A>The 
+<div class="Normal"><A NAME="I2863"></A><A NAME="I2864"></A><A NAME="I2865"></A>The 
 exception Constraint_Error is raised by integer division, <B>rem</B>, 
 and <B>mod</B> if the right operand is zero. Similarly, for a real type 
 <I>T</I> with <I>T'</I>Machine_Overflows True, division by zero raises 

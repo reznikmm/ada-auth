@@ -15,15 +15,15 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,7 +34,7 @@
 <HR>
 <H1>4.5 Operators and Expression Evaluation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2751"></A><A NAME="I2752"></A>The language 
+<div class="Normal"><A NAME="I2729"></A><A NAME="I2730"></A>The language 
 defines the following six categories of operators (given in order of 
 increasing precedence). The corresponding <SPAN Class="swiss"><A HREF="RM-6-1.html#S0170">operator_symbol</A></SPAN>s, 
 and only those, can be used as <SPAN Class="swiss"><A HREF="RM-6-1.html#S0167">designator</A></SPAN>s 
@@ -43,17 +43,17 @@ in declarations of functions for user-defined operators. See <A HREF="RM-6-6.htm
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">logical_operator</SPAN><A NAME="I2753"></A><A NAME="S0127"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;<B>and</B>&nbsp;|&nbsp;<B>or</B>&nbsp;&nbsp;|&nbsp;<B>xor</B></div>
+<div class="Indented1"><SPAN Class="swiss">logical_operator</SPAN><A NAME="I2731"></A><A NAME="S0127"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;<B>and</B>&nbsp;|&nbsp;<B>or</B>&nbsp;&nbsp;|&nbsp;<B>xor</B></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">relational_operator</SPAN><A NAME="I2754"></A><A NAME="S0128"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;|&nbsp;/=&nbsp;&nbsp;|&nbsp;&lt;&nbsp;&nbsp;&nbsp;|&nbsp;&lt;=&nbsp;|&nbsp;&gt;&nbsp;|&nbsp;&gt;=</div>
+<div class="Indented1"><SPAN Class="swiss">relational_operator</SPAN><A NAME="I2732"></A><A NAME="S0128"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;|&nbsp;/=&nbsp;&nbsp;|&nbsp;&lt;&nbsp;&nbsp;&nbsp;|&nbsp;&lt;=&nbsp;|&nbsp;&gt;&nbsp;|&nbsp;&gt;=</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">binary_adding_operator</SPAN><A NAME="I2755"></A><A NAME="S0129"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;&nbsp;&nbsp;&nbsp;|&nbsp;&amp;</div>
+<div class="Indented1"><SPAN Class="swiss">binary_adding_operator</SPAN><A NAME="I2733"></A><A NAME="S0129"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;&nbsp;&nbsp;&nbsp;|&nbsp;&amp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">unary_adding_operator</SPAN><A NAME="I2756"></A><A NAME="S0130"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;</div>
+<div class="Indented1"><SPAN Class="swiss">unary_adding_operator</SPAN><A NAME="I2734"></A><A NAME="S0130"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;|&nbsp;&ndash;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">multiplying_operator</SPAN><A NAME="I2757"></A><A NAME="S0131"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;|&nbsp;/&nbsp;&nbsp;&nbsp;|&nbsp;<B>mod</B>&nbsp;|&nbsp;<B>rem</B></div>
+<div class="Indented1"><SPAN Class="swiss">multiplying_operator</SPAN><A NAME="I2735"></A><A NAME="S0131"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;|&nbsp;/&nbsp;&nbsp;&nbsp;|&nbsp;<B>mod</B>&nbsp;|&nbsp;<B>rem</B></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">highest_precedence_operator</SPAN><A NAME="I2758"></A><A NAME="S0132"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;**&nbsp;&nbsp;|&nbsp;<B>abs</B>&nbsp;|&nbsp;<B>not</B></div>
+<div class="Indented1"><SPAN Class="swiss">highest_precedence_operator</SPAN><A NAME="I2736"></A><A NAME="S0132"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;&nbsp;**&nbsp;&nbsp;|&nbsp;<B>abs</B>&nbsp;|&nbsp;<B>not</B></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p8">8</a></div>
@@ -62,10 +62,10 @@ level, the operators are associated with their operands in textual order
 from left to right. Parentheses can be used to impose specific associations. 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I2759"></A><A NAME="I2760"></A>For each 
+<div class="Normal"><A NAME="I2737"></A><A NAME="I2738"></A>For each 
 form of type definition, certain of the above operators are <I>predefined</I>; 
 that is, they are implicitly declared immediately after the type definition. 
-<A NAME="I2761"></A><A NAME="I2762"></A><A NAME="I2763"></A><A NAME="I2764"></A>For 
+<A NAME="I2739"></A><A NAME="I2740"></A><A NAME="I2741"></A><A NAME="I2742"></A>For 
 each such implicit operator declaration, the parameters are called Left 
 and Right for <I>binary</I> operators; the single parameter is called 
 Right for <I>unary</I> operators. An expression of the form X op Y, where 
@@ -78,7 +78,7 @@ are described in subclauses <A HREF="RM-4-5-1.html">4.5.1</A> through
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I2765"></A>The predefined operations on 
+<div class="Normal"><A NAME="I2743"></A>The predefined operations on 
 integer types either yield the mathematically correct result or raise 
 the exception Constraint_Error. For implementations that support the 
 Numerics Annex, the predefined operations on real types yield results 
@@ -87,12 +87,12 @@ the exception Constraint_Error.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I2766"></A>The implementation of a predefined 
+<div class="Normal"><A NAME="I2744"></A>The implementation of a predefined 
 operator that delivers a result of an integer or fixed point type may 
 raise Constraint_Error only if the result is outside the base range of 
 the result type.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2767"></A>The implementation of a predefined 
+<div class="Normal"><A NAME="I2745"></A>The implementation of a predefined 
 operator that delivers a result of a floating point type may raise Constraint_Error 
 only if the result is outside the safe range of the result type.&nbsp;</div>
 

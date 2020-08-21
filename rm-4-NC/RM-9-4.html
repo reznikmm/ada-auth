@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -99,7 +99,7 @@ deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
+<div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
 defines a protected type and its first subtype. <A NAME="I3989"></A>The 
 list of <SPAN Class="swiss"><A HREF="RM-9-4.html#S0213">protected_operation_declaration</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN>, 
@@ -109,7 +109,7 @@ optional list of <SPAN Class="swiss"><A HREF="RM-9-4.html#S0214">protected_eleme
 after the reserved word <B>private</B> is called the private part of 
 the protected unit.&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;For a protected declaration with an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;For a protected declaration with an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>, 
 the protected type inherits user-defined primitive subprograms from each 
 progenitor type (see <A HREF="RM-3-9-4.html">3.9.4</A>), in the same 
 way that a derived type inherits user-defined primitive subprograms from 
@@ -127,24 +127,24 @@ the same profile as the inherited subprogram and which overrides it<A NAME="I399
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11.2">11.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I3995"></A>A protected declaration requires 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I3995"></A>A protected declaration requires 
 a completion, which shall be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0215">protected_body</A></SPAN>, 
 and every <SPAN Class="swiss"><A HREF="RM-9-4.html#S0215">protected_body</A></SPAN> 
 shall be the completion of some protected declaration.&nbsp;</div>
 <div class="paranum"><a name="p11.3">11.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;Each <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;Each <I>interface_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN> 
 appearing within a protected declaration shall denote a limited interface 
 type that is not a task interface.&nbsp;</div>
 <div class="paranum"><a name="p11.4">11.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The prefixed view profile of an explicitly declared 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The prefixed view profile of an explicitly declared 
 primitive subprogram of a tagged protected type shall not be type conformant 
 with any protected operation of the protected type, if the subprogram 
 has the same defining name as the protected operation and the first parameter 
 of the subprogram is of the protected type or is an access parameter 
 designating the protected type.<A NAME="I3996"></A>&nbsp;</div>
 <div class="paranum"><a name="p11.5">11.5/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For each primitive 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;For each primitive 
 subprogram inherited by the type declared by a protected declaration, 
 at most one of the following shall apply:</div>
 <div class="paranum"><a name="p11.6">11.6/2</a></div>
@@ -158,21 +158,21 @@ subprogram or single entry of the protected type, in which case its prefixed
 view profile shall be subtype conformant with that of the protected subprogram 
 or entry. <A NAME="I3998"></A></div>
 <div class="paranum"><a name="p11.8">11.8/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If neither applies, the inherited subprogram shall 
+<div class="Normal">&nbsp;&nbsp;&nbsp;If neither applies, the inherited subprogram shall 
 be a null procedure. <A NAME="I3999"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
 <div class="paranum"><a name="p11.9">11.9/3</a></div>
-<div class="Normal">&nbsp;&nbsp;If an inherited subprogram is implemented by a 
+<div class="Normal">&nbsp;&nbsp;&nbsp;If an inherited subprogram is implemented by a 
 protected procedure or an entry, then the first parameter of the inherited 
 subprogram shall be of mode <B>out</B> or <B>in out</B>, or an access-to-variable 
 parameter. If an inherited subprogram is implemented by a protected function, 
 then the first parameter of the inherited subprogram shall be of mode 
 <B>in</B>, but not an access-to-variable parameter.&nbsp;</div>
 <div class="paranum"><a name="p11.10">11.10/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;If a protected subprogram 
-declaration has an <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN>, 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;&nbsp;If a protected 
+subprogram declaration has an <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN>, 
 then at the point of the declaration:</div>
 <div class="paranum"><a name="p11.11">11.11/2</a></div>
 <div class="Bulleted">if the <SPAN Class="swiss"><A HREF="RM-8-3-1.html#S0195">overriding_indicator</A></SPAN> 
@@ -183,7 +183,7 @@ subprogram;</div>
 is <B>not overriding</B>, then the subprogram shall not implement any 
 inherited subprogram.</div>
 <div class="paranum"><a name="p11.13">11.13/2</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I4000"></A>In addition to the places 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4000"></A>In addition to the places 
 where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</div>
@@ -234,7 +234,7 @@ is raised at the place of the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I4009"></A>It is a bounded error to call 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I4009"></A>It is a bounded error to call 
 an entry or subprogram of a protected object after that object is finalized. 
 If the error is detected, Program_Error is raised. Otherwise, the call 
 proceeds normally, which may leave a task queued forever.&nbsp;</div>

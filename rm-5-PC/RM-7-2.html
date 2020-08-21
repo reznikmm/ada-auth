@@ -44,13 +44,13 @@ from the internal entities.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">package_body</SPAN><A NAME="I3740"></A><A NAME="S0209"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3741"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0186">defining_program_unit_name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3742"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3743"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">package_body</SPAN><A NAME="I3729"></A><A NAME="S0209"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3730"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0186">defining_program_unit_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3731"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3732"></A><SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;[<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3744"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3745"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN>.]<A NAME="I3746"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3733"></A><SPAN Class="swiss"><A HREF="RM-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3734"></A><SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN>.]<A NAME="I3735"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">If an <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0269">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
@@ -82,14 +82,14 @@ For a noninstance, nonlibrary package, this body occurs at the end of
 the <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 of the innermost enclosing program unit or <SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN>; 
 if there are several such packages, the order of the implicit <SPAN Class="swiss">package_bodies</SPAN> 
-is unspecified. <A NAME="I3747"></A>(For an instance, the implicit <SPAN Class="swiss"><A HREF="RM-7-2.html#S0209">package_body</A></SPAN> 
+is unspecified. <A NAME="I3736"></A>(For an instance, the implicit <SPAN Class="swiss"><A HREF="RM-7-2.html#S0209">package_body</A></SPAN> 
 occurs at the place of the instantiation (see <A HREF="RM-12-3.html">12.3</A>). 
 For a library package, the place is partially determined by the elaboration 
 dependences (see Clause <A HREF="RM-10.html">10</A>).)&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3748"></A>For the elaboration of a nongeneric 
+<div class="Normal"><A NAME="I3737"></A>For the elaboration of a nongeneric 
 <SPAN Class="swiss"><A HREF="RM-7-2.html#S0209">package_body</A></SPAN>, 
 its <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 is first elaborated, and its <SPAN Class="swiss"><A HREF="RM-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 

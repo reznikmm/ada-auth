@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>Procedural Iterators</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>5.5.3 Procedural Iterators</H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
+invokes a user-defined procedure, passing in the body of the enclosing 
+<SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+as a parameter of an anonymous access-to-procedure type, to allow the 
+loop body to be executed repeatedly as part of the invocation of the 
+user-defined procedure.&nbsp;</div>
+
+<H4 Class="centered">Syntax</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<SPAN Class="swiss">procedural_iterator</SPAN><A NAME="I3634"></A><A NAME="S0170"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3635"></A><SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN>&nbsp;<B>of</B>&nbsp;<A NAME="I3636"></A><SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0172">iterator_procedure_call</A></SPAN></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<SPAN Class="swiss">iterator_parameter_specification</SPAN><A NAME="I3637"></A><A NAME="S0171"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3638"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;(<A NAME="I3639"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>{,&nbsp;<A NAME="I3640"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>})</div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<SPAN Class="swiss">iterator_procedure_call</SPAN><A NAME="I3641"></A><A NAME="S0172"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3642"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3643"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3644"></A><SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<SPAN Class="swiss">iterator_actual_parameter_part</SPAN><A NAME="I3645"></A><A NAME="S0173"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3646"></A><SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0174">iterator_parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3647"></A><SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0174">iterator_parameter_association</A></SPAN>})</div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<SPAN Class="swiss">iterator_parameter_association</SPAN><A NAME="I3648"></A><A NAME="S0174"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3649"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0198">parameter_association</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I3650"></A><SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0175">parameter_association_with_box</A></SPAN></div>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+<SPAN Class="swiss">parameter_association_with_box</SPAN><A NAME="I3651"></A><A NAME="S0175"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[&nbsp;<I>formal_parameter_</I><A NAME="I3652"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;]&nbsp;&lt;&gt;</div>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+At most one <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0174">iterator_parameter_association</A></SPAN> 
+within an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN> 
+shall be a <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0175">parameter_association_with_box</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Name Resolution Rules</H4>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0292-1.TXT">AI12-0292-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> or 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> given 
+in an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
+shall resolve to denote a callable entity <I>C</I> that is a procedure, 
+or an entry renamed as (viewed as) a procedure. [When there is an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+can be an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN> 
+of an access-to-subprogram value.]</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+An <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
+without a <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
+is equivalent to one with an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0173">iterator_actual_parameter_part</A></SPAN> 
+with an additional <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
+at the end, with the <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+identifying the last formal parameter of the callable entity denoted 
+by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>.</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+An <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
+shall contain at most one <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0174">iterator_parameter_association</A></SPAN> 
+for each formal parameter of the callable entity <I>C</I>. Each formal 
+parameter without an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0174">iterator_parameter_association</A></SPAN> 
+shall have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
+(in the profile of the view of <I>C</I> denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>).[ 
+This rule is an overloading rule (see <A HREF="AA-8-6.html">8.6</A>).]</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+The formal parameter of the callable entity <I>C</I> associated with 
+the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
+shall be of an anonymous access-to-procedure type <I>A</I>.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+The anonymous access-to-procedure type <I>A</I> shall have at least one 
+formal parameter in its parameter profile. If the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN> 
+is a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN>, 
+then this <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
+shall be mode conformant with that of <I>A</I>. If the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN> 
+is a list of <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s, 
+the number of formal parameters of <I>A</I> shall be the same as the 
+length of this list.</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0292-1.TXT">AI12-0292-1</A></I>} 
+If the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+given in an <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
+denotes an abstract subprogram, the subprogram shall be a dispatching 
+subprogram.</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-5-5.html#S0165">iteration_scheme</A></SPAN> 
+that has a <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
+is equivalent to a local declaration of a procedure P followed by a <SPAN Class="swiss"><A HREF="AA-6-4.html#S0195">procedure_call_statement</A></SPAN> 
+that is formed from the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0172">iterator_procedure_call</A></SPAN> 
+by replacing the &lt;&gt; of the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0175">parameter_association_with_box</A></SPAN> 
+with P'Access. The <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
+of the locally declared procedure P is formed from the <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
+of the anonymous access-to-procedure type <I>A</I>, by replacing the 
+<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+of each formal parameter of this <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
+with the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+of the corresponding formal parameter or element of the list of <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
+given in the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0171">iterator_parameter_specification</A></SPAN>.</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+The following aspect may be specified for a subprogram or entry S that 
+has at least one formal parameter of an anonymous access-to-subprogram 
+type:</div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="WideHanging-Term">Allows_Exit</div><div class="WideHanging-Body">
+The Allows_Exit aspect is of type Boolean. The specified value shall 
+be static. The Allows_Exit of an inherited primitive subprogram is True 
+if Allows_Exit is True either for the corresponding subprogram of the 
+progenitor type or for any other inherited subprogram that it overrides. 
+If not specified or inherited as True, the Allows_Exit aspect of a subprogram 
+or entry is False.</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="WideHanging-Body">Specifying the Allows_Exit aspect True 
+for a subprogram asserts that the subprogram is prepared to be completed 
+by arbitrary transfers of control from the subprogram represented by 
+the access-to-subprogram value[, including propagation of exceptions. 
+A subprogram for which Allows_Exit is True should use finalization for 
+any necessary cleanup, and in particular should not use exception handling 
+to implement cleanup].</div>
+<div class="paranum"><a name="p18.a">18.a/5</a></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Allows_Exit: 
+</B>An assertion that a subprogram will operate correctly for arbitrary 
+transfers of control.</div>
+<div class="paranum"><a name="p18.b">18.b/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>A subprogram that does 
+not need cleanup meets the assertion, and thus can specify Allows_Exit 
+to True.&nbsp;</div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+If a subprogram or entry overrides an inherited dispatching subprogram 
+that has a True Allows_Exit aspect, only a confirming specification of 
+True is permitted for the aspect on the overriding declaration.</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
+as its <SPAN Class="swiss"><A HREF="AA-5-5.html#S0165">iteration_scheme</A></SPAN> 
+shall contain an <SPAN Class="swiss"><A HREF="AA-5-7.html#S0178">exit_statement</A></SPAN>, 
+return statement, <SPAN Class="swiss"><A HREF="AA-5-8.html#S0179">goto_statement</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-4.html#S0243">requeue_statement</A></SPAN> 
+that leaves the loop only if the callable entity <I>C</I> associated 
+with the <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
+has an Allows_Exit aspect specified True.</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
+The <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN> 
+with a <SPAN Class="swiss"><A HREF="AA-5-5-3.html#S0170">procedural_iterator</A></SPAN> 
+as its <SPAN Class="swiss"><A HREF="AA-5-5.html#S0165">iteration_scheme</A></SPAN> 
+shall not contain an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
+occurs outside the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0164">loop_statement</A></SPAN>.</div>
+<div class="paranum"><a name="p21.a">21.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>An <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+is not allowed in a procedure (see 9.5.2), it has to be directly in a 
+<SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>. 
+Since the loop body here is implemented as  a procedure, we can't allow 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>s 
+there, either, even if the loop itself is directly in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p21.b">21.b/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This includes cases where 
+the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN> 
+is part of another construct, for instance, a <SPAN Class="swiss"><A HREF="AA-9-7.html#S0247">select_statement</A></SPAN>. 
+</div>
+
+<H4 Class="centered">Examples</H4>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+Example of iterating over a map from My_Key_Type to My_Element_Type (see 
+<A HREF="AA-A-18-4.html">A.18.4</A>):</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples"><B>for</B>&nbsp;(C&nbsp;:&nbsp;Cursor)&nbsp;<B>of</B>&nbsp;My_Map.Iterate&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;Put_Line&nbsp;(My_Key_Type'Image&nbsp;(Key&nbsp;(C))&nbsp;&amp;&nbsp;&quot;&nbsp;=&gt;&nbsp;&quot;&nbsp;&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My_Element_Type'Image&nbsp;(Element&nbsp;(C)));<BR>
+<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;The&nbsp;above&nbsp;is&nbsp;equivalent&nbsp;to:</I></SPAN></div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Examples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;P&nbsp;(C&nbsp;:&nbsp;Cursor)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line&nbsp;(My_Key_Type'Image&nbsp;(Key&nbsp;(c))&nbsp;&amp;&nbsp;&quot;&nbsp;=&gt;&nbsp;&quot;&nbsp;&amp;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My_Element_Type'Image&nbsp;(Element&nbsp;(C)));<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;P;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;My_Map.Iterator&nbsp;(P'Access);<BR>
+<B>end</B>;</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+Example of iterating over the environment variables (see <A HREF="AA-A-17.html">A.17</A>):</div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Examples"><B>for</B>&nbsp;(Name,&nbsp;Val)&nbsp;<B>of</B>&nbsp;Ada.Environment_Variables.Iterate(&lt;&gt;)&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;&quot;(&lt;&gt;)&quot;&nbsp;is&nbsp;optional&nbsp;because&nbsp;it&nbsp;is&nbsp;the&nbsp;last&nbsp;parameter</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;Put_Line&nbsp;(Name&nbsp;&amp;&nbsp;&quot;&nbsp;=&gt;&nbsp;&quot;&nbsp;&amp;&nbsp;Val);<BR>
+<B>end&nbsp;loop</B>;</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Examples">--<SPAN Class="roman"><I>&nbsp;The&nbsp;above&nbsp;is&nbsp;equivalent&nbsp;to:</I></SPAN></div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Examples"><B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;P&nbsp;(Name&nbsp;:&nbsp;String;&nbsp;Val&nbsp;:&nbsp;String)&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Put_Line&nbsp;(Name&nbsp;&amp;&nbsp;&quot;&nbsp;=&gt;&nbsp;&quot;&nbsp;&amp;&nbsp;Val);<BR>
+&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;P;<BR>
+<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;Ada.Environment_Variables.Iterate&nbsp;(P'Access);<BR>
+<B>end</B>;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p29.a">29.a/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0189-1.TXT">AI12-0189-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0292-1.TXT">AI12-0292-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0294-1.TXT">AI12-0294-1</A></I>} 
+<A NAME="I3653"></A>Procedural iterators are new in Ada 2020.&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-5-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-5-6.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

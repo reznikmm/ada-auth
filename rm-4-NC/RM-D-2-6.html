@@ -15,18 +15,18 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -73,37 +73,37 @@ library package exists:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)&nbsp;<B>return</B>&nbsp;Deadline;<BR>
 <B>end</B>&nbsp;Ada.Dispatching.EDF;</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a task type (including 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For a task type (including 
 the anonymous type of a <SPAN Class="swiss"><A HREF="RM-9-1.html#S0206">single_task_declaration</A></SPAN>) 
 or subprogram, the following language-defined representation aspect may 
 be specified:</div>
 <div class="paranum"><a name="p9.2">9.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;Relative_Deadline</div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;Relative_Deadline</div><div class="WideHanging-Body"><br clear="left">
 The aspect Relative_Deadline is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Real_Time.Time_Span.<A NAME="I7827"></A><A NAME="I7828"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9.3">9.3/3</a></div>
-<div class="Normal">&nbsp;The Relative_Deadline aspect shall not be specified 
+<div class="Normal">&nbsp;&nbsp;The Relative_Deadline aspect shall not be specified 
 on a task interface type.&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">If the EDF_Across_Priorities policy is specified 
+<div class="Normal">&nbsp;If the EDF_Across_Priorities policy is specified 
 for a partition, then the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) 
 shall also be specified for the partition.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">If the EDF_Across_Priorities policy appears in a 
+<div class="Normal">&nbsp;If the EDF_Across_Priorities policy appears in a 
 Priority_Specific_Dispatching pragma (see <A HREF="RM-D-2-2.html">D.2.2</A>) 
 in a partition, then the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) 
 shall also be specified for the partition.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">The Relative_Deadline aspect has no effect if it 
+<div class="Normal">&nbsp;The Relative_Deadline aspect has no effect if it 
 is specified for a subprogram other than the main subprogram.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">The initial absolute deadline of a task for which 
+<div class="Normal">&nbsp;The initial absolute deadline of a task for which 
 aspect Relative_Deadline is specified is the value of Real_Time.Clock 
 + the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 that is the value of the aspect, where this entire expression, including 
@@ -114,26 +114,26 @@ The environment task is also given an initial deadline by this rule,
 using the value of the Relative_Deadline aspect of the main subprogram 
 (if any).</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal">The procedure Set_Deadline changes the absolute deadline 
-of the task to D. The function Get_Deadline returns the absolute deadline 
-of the task.</div>
+<div class="Normal">&nbsp;The procedure Set_Deadline changes the absolute 
+deadline of the task to D. The function Get_Deadline returns the absolute 
+deadline of the task.</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">The procedure Delay_Until_And_Set_Deadline delays 
+<div class="Normal">&nbsp;The procedure Delay_Until_And_Set_Deadline delays 
 the calling task until time Delay_Until_Time. When the task becomes runnable 
 again it will have deadline Delay_Until_Time + Deadline_Offset.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">On a system with a single processor, the setting 
+<div class="Normal">&nbsp;On a system with a single processor, the setting 
 of the deadline of a task to the new value occurs immediately at the 
 first point that is outside the execution of a protected action. If the 
 task is currently on a ready queue it is removed and re-entered on to 
 the ready queue determined by the rules defined below.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">When EDF_Across_Priorities is specified for priority 
+<div class="Normal">&nbsp;When EDF_Across_Priorities is specified for priority 
 range <I>Low</I>..<I>High</I> all ready queues in this range are ordered 
 by deadline. The task at the head of a queue is the one with the earliest 
 deadline.</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">A task dispatching 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A task dispatching 
 point occurs for the currently running task <I>T</I> to which policy 
 EDF_Across_Priorities applies:</div>
 <div class="paranum"><a name="p19">19/2</a></div>
@@ -146,10 +146,10 @@ or</div>
 <div class="Bulleted">there is a nonempty ready queue for that processor 
 with a higher priority than the active priority of the running task.</div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal">In these cases, the currently running task is said 
+<div class="Normal">&nbsp;In these cases, the currently running task is said 
 to be preempted and is returned to the ready queue for its active priority.</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For a task <I>T</I> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a task <I>T</I> 
 to which policy EDF_Across_Priorities applies, the base priority is not 
 a source of priority inheritance; the active priority when first activated 
 or while it is blocked is defined as the maximum of the following:</div>
@@ -168,39 +168,39 @@ has an earlier deadline than all other tasks on ready queues with priorities
 in the given EDF_Across_Priorities range that are strictly less than 
 <I>P</I>.&nbsp;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Normal">When a task <I>T</I> is first activated or becomes 
+<div class="Normal">&nbsp;When a task <I>T</I> is first activated or becomes 
 unblocked, it is added to the ready queue corresponding to this active 
 priority. Until it becomes blocked again, the active priority of <I>T</I> 
 remains no less than this value; it will exceed this value only while 
 it is inheriting a higher priority.</div>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal">When the setting of the base priority of a ready 
+<div class="Normal">&nbsp;When the setting of the base priority of a ready 
 task takes effect and the new priority is in a range specified as EDF_Across_Priorities, 
 the task is added to the ready queue corresponding to its new active 
 priority, as determined above.</div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Normal">For all the operations defined in Dispatching.EDF, 
+<div class="Normal">&nbsp;For all the operations defined in Dispatching.EDF, 
 Tasking_Error is raised if the task identified by T has terminated. Program_Error 
 is raised if the value of T is Null_Task_Id.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal"><A NAME="I7829"></A>If EDF_Across_Priorities is specified 
-for priority range <I>Low</I>..<I>High</I>, it is a bounded error to 
-declare a protected object with ceiling priority <I>Low</I> or to assign 
-the value <I>Low</I> to attribute 'Priority. In either case either Program_Error 
-is raised or the ceiling of the protected object is assigned the value 
-<I>Low</I>+1.</div>
+<div class="Normal">&nbsp;<A NAME="I7829"></A>If EDF_Across_Priorities is 
+specified for priority range <I>Low</I>..<I>High</I>, it is a bounded 
+error to declare a protected object with ceiling priority <I>Low</I> 
+or to assign the value <I>Low</I> to attribute 'Priority. In either case 
+either Program_Error is raised or the ceiling of the protected object 
+is assigned the value <I>Low</I>+1.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal"><A NAME="I7830"></A>If a value of Task_Id is passed 
+<div class="Normal">&nbsp;<A NAME="I7830"></A>If a value of Task_Id is passed 
 as a parameter to any of the subprograms of this package and the corresponding 
 task object no longer exists, the execution of the program is erroneous.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Normal">On a multiprocessor, the implementation shall document 
+<div class="Normal">&nbsp;On a multiprocessor, the implementation shall document 
 any conditions that cause the completion of the setting of the deadline 
 of a task to be delayed later than what is specified for a single processor. 
 </div>

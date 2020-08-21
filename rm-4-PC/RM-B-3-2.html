@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -63,54 +61,51 @@ package Interfaces.C.Pointers has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(Index&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;Element;<BR>
 &nbsp;&nbsp;&nbsp;Default_Terminator&nbsp;:&nbsp;Element;<BR>
-<B>package</B>&nbsp;Interfaces.C.Pointers&nbsp;<B>is</B><A NAME="I7681"></A><BR>
+<B>package</B>&nbsp;Interfaces.C.Pointers&nbsp;<B>is</B><A NAME="I7533"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Pointers);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7682"></A>Pointer&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Element;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7534"></A>Pointer&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Element;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7683"></A>Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7535"></A>Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Array;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7684"></A>Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7536"></A>Value(Ref&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Element_Array;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7685"></A>Pointer_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7537"></A>Pointer_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;C-style&nbsp;Pointer&nbsp;arithmetic</I></SPAN></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)&nbsp;<B>return</B>&nbsp;Pointer<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Pointer<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)&nbsp;<B>return</B>&nbsp;Pointer<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer)&nbsp;<B>return</B>&nbsp;ptrdiff_t<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)&nbsp;<B>return</B>&nbsp;Pointer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer)&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Pointer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t)&nbsp;<B>return</B>&nbsp;Pointer<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;&nbsp;&nbsp;&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer)&nbsp;<B>return</B>&nbsp;ptrdiff_t<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7686"></A>Increment&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer)<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7687"></A>Decrement&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer)<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7538"></A>Increment&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7539"></A>Decrement&nbsp;(Ref&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Pointer)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;&quot;+&quot;);<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;&quot;-&quot;);<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;Increment);<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Convention&nbsp;(Intrinsic,&nbsp;Decrement);</span></div>
+was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7688"></A>Virtual_Length&nbsp;(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7540"></A>Virtual_Length&nbsp;(Ref&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;Default_Terminator)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;ptrdiff_t;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7689"></A>Copy_Terminated_Array<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7541"></A>Copy_Terminated_Array<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Limit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t&nbsp;:=&nbsp;ptrdiff_t'Last;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terminator&nbsp;:&nbsp;<B>in</B>&nbsp;Element&nbsp;:=&nbsp;&nbsp;Default_Terminator);</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7690"></A>Copy_Array&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7542"></A>Copy_Array&nbsp;(Source&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Pointer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Length&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;ptrdiff_t);</div>
 <div class="paranum"><a name="p16">16</a></div>
@@ -191,23 +186,23 @@ Dereference_Error is propagated if either Source or Target is <B>null</B>.
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Normal"><A NAME="I7691"></A>It is erroneous to dereference 
+<div class="Normal"><A NAME="I7543"></A>It is erroneous to dereference 
 a Pointer that does not designate an aliased Element.&nbsp;</div>
 <div class="paranum"><a name="p36">36</a></div>
-<div class="Normal"><A NAME="I7692"></A>Execution of Value(Ref, Terminator) 
+<div class="Normal"><A NAME="I7544"></A>Execution of Value(Ref, Terminator) 
 is erroneous if Ref does not designate an aliased Element in an Element_Array 
 terminated by Terminator.</div>
 <div class="paranum"><a name="p37">37</a></div>
-<div class="Normal"><A NAME="I7693"></A>Execution of Value(Ref, Length) 
+<div class="Normal"><A NAME="I7545"></A>Execution of Value(Ref, Length) 
 is erroneous if Ref does not designate an aliased Element in an Element_Array 
 containing at least Length Elements between the designated Element and 
 the end of the array, inclusive.</div>
 <div class="paranum"><a name="p38">38</a></div>
-<div class="Normal"><A NAME="I7694"></A>Execution of Virtual_Length(Ref, 
+<div class="Normal"><A NAME="I7546"></A>Execution of Virtual_Length(Ref, 
 Terminator) is erroneous if Ref does not designate an aliased Element 
 in an Element_Array terminated by Terminator.</div>
 <div class="paranum"><a name="p39">39</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7695"></A>Execution 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7547"></A>Execution 
 of Copy_Terminated_Array(Source, Target, Limit, Terminator) is erroneous 
 in either of the following situations:&nbsp;</div>
 <div class="paranum"><a name="p40">40</a></div>
@@ -217,13 +212,13 @@ Value(Source, Limit) are erroneous, or</div>
 <div class="Bulleted">Copying writes past the end of the array containing 
 the Element designated by Target.&nbsp;</div>
 <div class="paranum"><a name="p42">42</a></div>
-<div class="Normal"><A NAME="I7696"></A>Execution of Copy_Array(Source, 
+<div class="Normal"><A NAME="I7548"></A>Execution of Copy_Array(Source, 
 Target, Length) is erroneous if either Value(Source, Length) is erroneous, 
 or copying writes past the end of the array containing the Element designated 
 by Target.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p43">43</a></div>
-<div class="Notes" style="margin-bottom: 0.4em">12&nbsp;&nbsp;To compose 
+<div class="Notes" style="margin-bottom: 0.4em">10&nbsp;&nbsp;To compose 
 a Pointer from an Element_Array, use 'Access on the first element. For 
 example (assuming appropriate instantiations):&nbsp;</div>
 <div class="paranum"><a name="p44">44</a></div>

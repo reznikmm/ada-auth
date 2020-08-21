@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -21,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,17 +38,18 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 generic library package exists:&nbsp;</div>
-<div class="paranum"><a name="p2">2</a></div>
-<div class="Examples"><A NAME="I5707"></A><B>generic</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
-<B>package</B>&nbsp;System.Address_To_Access_Conversions&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Address_To_Access_Conversions);</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<A NAME="I5916"></A><B>generic</B><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object(&lt;&gt;)&nbsp;<B>is</B>&nbsp;<B>limited</B>&nbsp;<B>private</B>;<BR>
+<B>package</B>&nbsp;System.Address_To_Access_Conversions&nbsp;<span class="delete5">&nbsp;<B>is</B></span><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Address_To_Access_Conversions);</span></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Object_Pointer&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;<B>all</B>&nbsp;Object;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5708"></A>To_Pointer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Object_Pointer<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5917"></A>To_Pointer(Value&nbsp;:&nbsp;Address)&nbsp;<B>return</B>&nbsp;Object_Pointer<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5709"></A>To_Address(Value&nbsp;:&nbsp;Object_Pointer)&nbsp;<B>return</B>&nbsp;Address<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I5918"></A>To_Address(Value&nbsp;:&nbsp;Object_Pointer)&nbsp;<B>return</B>&nbsp;Address<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -56,7 +59,7 @@ generic library package exists:&nbsp;</div>
 The To_Pointer and To_Address subprograms convert back and forth between 
 values of types Object_Pointer and Address. To_Pointer(X'Address) is 
 equal to X'Unchecked_Access for any X that allows Unchecked_Access. To_Pointer(Null_Address) 
-returns <B>null</B>. <A NAME="I5710"></A>For other addresses, the behavior 
+returns <B>null</B>. <A NAME="I5919"></A>For other addresses, the behavior 
 is unspecified. To_Address(<B>null</B>) returns Null_Address. To_Address(Y), 
 where Y /= <B>null</B>, returns Y.<B>all</B>'Address.&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>

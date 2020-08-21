@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,38 +35,38 @@
 <HR>
 <H1>8.5 Renaming Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN> 
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
 declares another name for an entity, such as an object, exception, package, 
-subprogram, entry, or generic unit. Alternatively, a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN> 
-can be the completion of a previous <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>.]</div>
+subprogram, entry, or generic unit. Alternatively, a <SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN> 
+can be the completion of a previous <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>.]</div>
 <div class="paranum"><a name="p1.a.1">1.a.1/2</a></div>
-<div class="Annotations"><B>Glossary entry:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN> 
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
 is a declaration that does not define a new entity, but instead defines 
 a view of an existing entity.</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">renaming_declaration</SPAN><A NAME="I4154"></A><A NAME="S0202"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4155"></A><SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4156"></A><SPAN Class="swiss"><A HREF="AA-8-5-2.html#S0204">exception_renaming_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4157"></A><SPAN Class="swiss"><A HREF="AA-8-5-3.html#S0205">package_renaming_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4158"></A><SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0206">subprogram_renaming_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4159"></A><SPAN Class="swiss"><A HREF="AA-8-5-5.html#S0207">generic_renaming_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">renaming_declaration</SPAN><A NAME="I4306"></A><A NAME="S0216"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4307"></A><SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4308"></A><SPAN Class="swiss"><A HREF="AA-8-5-2.html#S0218">exception_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4309"></A><SPAN Class="swiss"><A HREF="AA-8-5-3.html#S0219">package_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4310"></A><SPAN Class="swiss"><A HREF="AA-8-5-4.html#S0220">subprogram_renaming_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4311"></A><SPAN Class="swiss"><A HREF="AA-8-5-5.html#S0221">generic_renaming_declaration</A></SPAN></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4160"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I4312"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
 evaluates the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that follows the reserved word <B>renames</B> and thereby determines 
-the view and entity denoted by this name <A NAME="I4161"></A><A NAME="I4162"></A>(the 
+the view and entity denoted by this name <A NAME="I4313"></A><A NAME="I4314"></A>(the 
 <I>renamed view</I> and <I>renamed entity</I>). [A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes the <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN> 
+that denotes the <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN> 
 denotes (a new view of) the renamed entity.]&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Notes">9&nbsp;&nbsp;Renaming may be used to resolve name 
 conflicts and to act as a shorthand. Renaming with a different <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0173">operator_symbol</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0187">operator_symbol</A></SPAN> 
 does not hide the old <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
 the new <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and the old <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 

@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2835"></A><A NAME="I2836"></A><A NAME="I2837"></A><A NAME="I2838"></A><A NAME="I2839"></A><A NAME="I2840"></A><A NAME="I2841"></A><A NAME="I2842"></A><A NAME="I2843"></A><A NAME="I2844"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2813"></A><A NAME="I2814"></A><A NAME="I2815"></A><A NAME="I2816"></A><A NAME="I2817"></A><A NAME="I2818"></A><A NAME="I2819"></A><A NAME="I2820"></A><A NAME="I2821"></A><A NAME="I2822"></A>The 
 binary adding operators + (addition) and &ndash; (subtraction) are predefined 
 for every specific numeric type <I>T</I> with their conventional meaning. 
 They have the following specifications:&nbsp;</div>
@@ -45,7 +45,7 @@ They have the following specifications:&nbsp;</div>
 <div class="Examples"><B>function</B>&nbsp;&quot;+&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN><BR>
 <B>function</B>&nbsp;&quot;-&quot;(Left,&nbsp;Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2845"></A><A NAME="I2846"></A><A NAME="I2847"></A><A NAME="I2848"></A><A NAME="I2849"></A><A NAME="I2850"></A><A NAME="I2851"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2823"></A><A NAME="I2824"></A><A NAME="I2825"></A><A NAME="I2826"></A><A NAME="I2827"></A><A NAME="I2828"></A><A NAME="I2829"></A>The 
 concatenation operators &amp; are predefined for every nonlimited, one-dimensional 
 array type <I>T</I> with component type <I>C</I>. They have the following 
 specifications:&nbsp;</div>
@@ -57,7 +57,7 @@ specifications:&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2852"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2830"></A>For 
 the evaluation of a concatenation with result type <I>T</I>, if both 
 operands are of type <I>T</I>, the result of the concatenation is a one-dimensional 
 array whose length is the sum of the lengths of its operands, and whose 
@@ -75,18 +75,18 @@ defined by an <SPAN Class="swiss"><A HREF="RM-3-6.html#S0052">unconstrained_arra
 then the lower bound of the result is that of the left operand.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The upper bound is determined by the lower bound 
-and the length. <A NAME="I2853"></A><A NAME="I2854"></A>A check is made 
+and the length. <A NAME="I2831"></A><A NAME="I2832"></A>A check is made 
 that the upper bound of the result of the concatenation belongs to the 
-range of the index subtype, unless the result is a null array. <A NAME="I2855"></A>Constraint_Error 
+range of the index subtype, unless the result is a null array. <A NAME="I2833"></A>Constraint_Error 
 is raised if this check fails.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If either operand is of the component type <I>C</I>, 
 the result of the concatenation is given by the above rules, using in 
 place of such an operand an array having this operand as its only component 
 (converted to the component subtype) and having the lower bound of the 
-index subtype of the array type as its lower bound. <A NAME="I2856"></A></div>
+index subtype of the array type as its lower bound. <A NAME="I2834"></A></div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I2857"></A>The result of a concatenation 
+<div class="Normal"><A NAME="I2835"></A>The result of a concatenation 
 is defined in terms of an assignment to an anonymous object, as for any 
 function call (see <A HREF="RM-6-5.html">6.5</A>).&nbsp;</div>
 <div class="NotesHeader">NOTES</div>

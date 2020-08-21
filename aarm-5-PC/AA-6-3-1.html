@@ -13,8 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <HR>
 <H1>6.3.1 Conformance Rules</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3727"></A><A NAME="I3728"></A><A NAME="I3729"></A><A NAME="I3730"></A><A NAME="I3731"></A>[When 
+<div class="Normal"><A NAME="I3839"></A><A NAME="I3840"></A><A NAME="I3841"></A><A NAME="I3842"></A><A NAME="I3843"></A>[When 
 subprogram profiles are given in more than one place, they are required 
 to conform in one of four ways: type conformance, mode conformance, subtype 
 conformance, or full conformance.]&nbsp;</div>
@@ -47,7 +47,7 @@ conformance, or full conformance.]&nbsp;</div>
 <div class="paranum"><a name="p2">2/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="defect1.html#8652/0011">8652/0011</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00117.TXT">AI95-00117-01</A></I>} 
-<A NAME="I3732"></A><A NAME="I3733"></A>[As explained in <A HREF="AA-B-1.html">B.1</A>, 
+<A NAME="I3844"></A><A NAME="I3845"></A>[As explained in <A HREF="AA-B-1.html">B.1</A>, 
 &ldquo;<A HREF="AA-B-1.html">Interfacing Aspects</A>&rdquo;, a <I>convention</I> 
 can be specified for an entity.] Unless this International Standard states 
 otherwise, the default convention of an entity is Ada. [For a callable 
@@ -56,7 +56,7 @@ convention</I>.] The following conventions are defined by the language:
 </div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I3734"></A><A NAME="I3735"></A>The default calling convention 
+<A NAME="I3846"></A><A NAME="I3847"></A>The default calling convention 
 for any subprogram not listed below is <I>Ada</I>. [The Convention aspect 
 may be specified to override the default calling convention (see <A HREF="AA-B-1.html">B.1</A>)]. 
 </div>
@@ -64,7 +64,7 @@ may be specified to override the default calling convention (see <A HREF="AA-B-1
 <div class="Annotations"><B>Ramification:&nbsp;</B>See also the rule about 
 renamings-as-body in <A HREF="AA-8-5-4.html">8.5.4</A>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3736"></A><A NAME="I3737"></A>The 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I3848"></A><A NAME="I3849"></A>The 
 <I>Intrinsic</I> calling convention represents subprograms that are &ldquo;built 
 in&rdquo; to the compiler. The default calling convention is Intrinsic 
 for the following:&nbsp;</div>
@@ -119,13 +119,14 @@ type might be class-wide, and makes these Intrinsic, thus forbidding
 <div class="Indented2NestedBulleted">an attribute that is a subprogram;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00252.TXT">AI95-00252-01</A></I>} 
-a subprogram declared immediately within a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>;</div>
+a subprogram declared immediately within a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0232">protected_body</A></SPAN>;</div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
 <div class="Indented2NestedBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00252.TXT">AI95-00252-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00407.TXT">AI95-00407-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0107-1.TXT">AI12-0107-1</A></I>} 
-any prefixed view of a subprogram (see <A HREF="AA-4-1-3.html">4.1.3</A>)<span class="insert4">&nbsp;without synchronization kind (see <A HREF="AA-9-5.html">9.5</A>) By_Entry 
-or By_Protected_Procedure</span>.&nbsp;</div>
+any prefixed view of a subprogram (see <A HREF="AA-4-1-3.html">4.1.3</A>) 
+without synchronization kind (see <A HREF="AA-9-5.html">9.5</A>) By_Entry 
+or By_Protected_Procedure.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The profile of a prefixed view 
 is different than the &ldquo;real&rdquo; profile of the subprogram (it 
@@ -133,11 +134,11 @@ doesn't have the first parameter), so we don't want to be able to take
 'Access of it, as that would require generating a wrapper of some sort.</div>
 <div class="paranum"><a name="p10.b">10.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0107-1.TXT">AI12-0107-1</A></I>} 
-<span class="insert4">We except prefixed views that have synchronization 
-kind By_Protected_Procedure so that they can be used with an access-to-protected-procedure 
-type. These don't require special wrappers (this is the normal form for 
-a protected subprogram call). The By_Entry part is just for consistency 
-(there is no access-to-entry type in Ada).</span>&nbsp;</div>
+We except prefixed views that have synchronization kind By_Protected_Procedure 
+so that they can be used with an access-to-protected-procedure type. 
+These don't require special wrappers (this is the normal form for a protected 
+subprogram call). The By_Entry part is just for consistency (there is 
+no access-to-entry type in Ada).&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Bulleted-NoPrefix">[The Access attribute is not allowed for 
 Intrinsic subprograms.]&nbsp;</div>
@@ -172,24 +173,30 @@ a tagged type) and the inherited subprograms of untagged types.&nbsp;</div>
 <div class="paranum"><a name="p12">12/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0107-1.TXT">AI12-0107-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<A NAME="I3738"></A><A NAME="I3739"></A>The default calling convention 
-is <I>protected</I> for a protected subprogram,<span class="insert4">&nbsp;for a prefixed view of a subprogram with a synchronization kind of By_Protected_Procedure,</span> 
-and for an access-to-subprogram type with the reserved word <B>protected</B> 
+<A NAME="I3850"></A><A NAME="I3851"></A>The default calling convention 
+is <I>protected</I> for a protected subprogram, for a prefixed view of 
+a subprogram with a synchronization kind of By_Protected_Procedure, and 
+for an access-to-subprogram type with the reserved word <B>protected</B> 
 in its definition.</div>
 <div class="paranum"><a name="p13">13/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0107-1.TXT">AI12-0107-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
-<A NAME="I3740"></A><A NAME="I3741"></A>The default calling convention 
-is <I>entry</I> for an entry<span class="insert4">&nbsp;and for a prefixed 
-view of a subprogram with a synchronization kind of By_Entry</span>.</div>
-<div class="paranum"><a name="p13.1">13.1/3</a></div>
+<A NAME="I3852"></A><A NAME="I3853"></A>The default calling convention 
+is <I>entry</I> for an entry and for a prefixed view of a subprogram 
+with a synchronization kind of By_Entry.</div>
+<div class="paranum"><a name="p13.1">13.1/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0207-1.TXT">AI12-0207-1</A></I>} 
 The calling convention for an anonymous access-to-subprogram parameter 
 or anonymous access-to-subprogram result is <I>protected</I> if the reserved 
 word <B>protected</B> appears in its definition; otherwise, it is the 
-convention of the subprogram that contains the parameter.&nbsp;</div>
+convention of the <span class="insert5">entity</span><span class="delete5">&nbsp;subprogram</span> 
+that <span class="insert5">has</span><span class="delete5">&nbsp;contains</span> 
+the parameter<span class="insert5">&nbsp;or result, unless that entity has 
+convention <I>protected</I>, <I>entry</I>, or Intrinsic, in which case 
+the convention is Ada</span>.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The calling convention 
 for other anonymous access-to-subprogram types is Ada.&nbsp;</div>
@@ -217,12 +224,12 @@ cannot be used in the specification of Convention. Note that <B>protected</B>
 and <B>entry</B> are reserved words.&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
-<A NAME="I3742"></A><A NAME="I3743"></A>Two profiles are <I>type conformant</I> 
+<A NAME="I3854"></A><A NAME="I3855"></A>Two profiles are <I>type conformant</I> 
 if they have the same number of parameters, and both have a result if 
 either does, and corresponding parameter and result types are the same, 
 or, for access parameters or access results, corresponding designated 
 types are the same, or corresponding designated profiles are type conformant. 
-<A NAME="I3744"></A></div>
+<A NAME="I3856"></A></div>
 <div class="paranum"><a name="p15.a">15.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
 For anonymous access-to-object parameters, the designated types have 
@@ -239,7 +246,7 @@ profiles of the types, not the types themselves, have to be conformant.
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
-<A NAME="I3745"></A><A NAME="I3746"></A>Two profiles are <I>mode conformant</I> 
+<A NAME="I3857"></A><A NAME="I3858"></A>Two profiles are <I>mode conformant</I> 
 if:</div>
 <div class="paranum"><a name="p16.1">16.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0142-4.TXT">AI05-0142-4</A></I>} 
@@ -253,20 +260,20 @@ explicitly aliased parameters; and</div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0207-1.TXT">AI05-0207-1</A></I>} 
 for corresponding access parameters and any access result type, the designated 
 subtypes statically match and either both or neither are access-to-constant, 
-or the designated profiles are subtype conformant. <A NAME="I3747"></A></div>
+or the designated profiles are subtype conformant. <A NAME="I3859"></A></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0239-1.TXT">AI05-0239-1</A></I>} 
-<A NAME="I3748"></A><A NAME="I3749"></A>Two profiles are <I>subtype conformant</I> 
+<A NAME="I3860"></A><A NAME="I3861"></A>Two profiles are <I>subtype conformant</I> 
 if they are mode conformant, corresponding subtypes of the profile statically 
 match, and the associated calling conventions are the same. The profile 
 of a generic formal subprogram is not subtype conformant with any other 
-profile. <A NAME="I3750"></A></div>
+profile. <A NAME="I3862"></A></div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I3751"></A></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B><A NAME="I3863"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0134-1.TXT">AI05-0134-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<A NAME="I3752"></A><A NAME="I3753"></A>Two profiles are <I>fully conformant</I> 
+<A NAME="I3864"></A><A NAME="I3865"></A>Two profiles are <I>fully conformant</I> 
 if they are subtype conformant, if they have access-to-subprogram results 
 whose designated profiles are fully conformant, and for corresponding 
 parameters:&nbsp;</div>
@@ -304,9 +311,9 @@ in the specification and body of a subprogram. If that was allowed, it
 would be undefined which <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
 was used in a call of an access-to-subprogram parameter.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3754"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3866"></A>Two 
 expressions are <I>fully conformant</I> if, [after replacing each use 
-of an operator with the equivalent <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>:] 
+of an operator with the equivalent <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>:] 
 </div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Bulleted">each constituent construct of one corresponds to 
@@ -316,8 +323,8 @@ an expanded name may correspond to a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0
 or to a different expanded name in the other; and</div>
 <div class="paranum"><a name="p20.1">20.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0050-1.TXT">AI12-0050-1</A></I>} 
-<span class="insert4">corresponding <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
-occurring within the two expressions are the same; and</span></div>
+corresponding <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
+occurring within the two expressions are the same; and</div>
 <div class="paranum"><a name="p21">21/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0050-1.TXT">AI12-0050-1</A></I>} 
 each <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>, 
@@ -328,8 +335,8 @@ of an expanded name in one denotes the same declaration as the corresponding
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
-in the other<span class="insert4">, or they denote corresponding declarations 
-occurring within the two expressions</span>; and&nbsp;</div>
+in the other, or they denote corresponding declarations occurring within 
+the two expressions; and&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that it doesn't say 
 &ldquo;respectively&rdquo; because a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
@@ -369,14 +376,14 @@ are all fully conformant with one another. However, &ldquo;F&rdquo; and
 be bad news, since the two denoted views have different <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p21.f">21.f/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0050-1.TXT">AI12-0050-1</A></I>} 
-<span class="insert4">We talk about <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0050-1.TXT">AI12-0050-1</A></I>} 
+We talk about <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
 and &quot;corresponding declarations&quot; because of the possibility 
-of <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN>s 
-occurring within the expressions; each <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN> 
+of <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>s 
+occurring within the expressions; each <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN> 
 is a separate declaration, which we need to allow, but we do want to 
 require that the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
-are the same.</span>&nbsp;</div>
+are the same.&nbsp;</div>
 <div class="paranum"><a name="p21.1">21.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="defect1.html#8652/0018">8652/0018</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00175.TXT">AI95-00175-01</A></I>} 
@@ -385,7 +392,7 @@ each <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A><
 in one is the same as the corresponding <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 in the other; and</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted">each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">primary</A></SPAN> 
+<div class="Bulleted">each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
 that is a literal in one has the same value as the corresponding literal 
 in the other.&nbsp;</div>
 <div class="paranum"><a name="p22.a">22.a</a></div>
@@ -395,17 +402,17 @@ differently.&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that the above definition 
 makes full conformance a transitive relation.&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Normal"><A NAME="I3755"></A>Two <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>s 
+<div class="Normal"><A NAME="I3867"></A>Two <SPAN Class="swiss"><A HREF="AA-3-7.html#S0061">known_discriminant_part</A></SPAN>s 
 are <I>fully conformant</I> if they have the same number of discriminants, 
 and discriminants in the same positions have the same names, statically 
 matching subtypes, and <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>s 
-that are fully conformant with one another. <A NAME="I3756"></A></div>
+that are fully conformant with one another. <A NAME="I3868"></A></div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Normal"><A NAME="I3757"></A>Two <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
+<div class="Normal"><A NAME="I3869"></A>Two <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
 are <I>fully conformant</I> if they are both <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>s 
 or are both <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>s, 
 the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
-(if any) denote the same subtype, and the corresponding <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
+(if any) denote the same subtype, and the corresponding <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>s 
 (if any) fully conform.&nbsp;</div>
 <div class="paranum"><a name="p24.a">24.a</a></div>
@@ -418,14 +425,14 @@ cannot conform unless both or neither has a <SPAN Class="swiss"><A HREF="AA-3-5.
 <A HREF="AA-9-5-2.html">9.5.2</A>, &ldquo;<A HREF="AA-9-5-2.html">Entries 
 and Accept Statements</A>&rdquo; for the conformance required between 
 the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>s 
-of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN> 
-for a family of entries and the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0227">entry_index_specification</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>. 
+of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
+for a family of entries and the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0241">entry_index_specification</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p24.1">24.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00397.TXT">AI95-00397-01</A></I>} 
-<A NAME="I3758"></A>The <I>prefixed view profile</I> of a subprogram 
+<A NAME="I3870"></A>The <I>prefixed view profile</I> of a subprogram 
 is the profile obtained by omitting the first parameter of that subprogram. 
 There is no prefixed view profile for a parameterless subprogram. For 
 the purposes of defining subtype and mode conformance, the convention 
@@ -450,7 +457,7 @@ in a language-defined library unit to be intrinsic.</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p25.a">25.a</a></div>
-<div class="Annotations"><A NAME="I3759"></A>The rules for full conformance 
+<div class="Annotations"><A NAME="I3871"></A>The rules for full conformance 
 are relaxed &mdash; they are now based on the structure of constructs, 
 rather than the sequence of lexical elements. This implies, for example, 
 that &quot;(X, Y: T)&quot; conforms fully with &quot;(X: T; Y: T)&quot;, 
@@ -490,7 +497,7 @@ Defined the conformance of anonymous access-to-subprogram parameters.
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p25.h">25.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0046-1.TXT">AI05-0046-1</A></I>} 
-<A NAME="I3760"></A><B>Correction:</B> Now require <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>s 
+<A NAME="I3872"></A><B>Correction:</B> Now require <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>s 
 to match for full conformance. While this is technically incompatible 
 with Ada 2005 as defined by Amendment 1, it is a new Ada 2005 feature 
 and it is unlikely that users have been intentionally taking advantage 
@@ -522,25 +529,36 @@ taking advantage and writing mismatching access types.&nbsp;</div>
 Explicitly aliased parameters are included as part of mode conformance 
 (since it affects the parameter passing mechanism).&nbsp;</div>
 
+<H4 Class="centered">Incompatibilities With Ada 2012</H4>
+<div class="paranum"><a name="p25.l">25.l/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0207-1.TXT">AI12-0207-1</A></I>} 
+<span class="insert5"><A NAME="I3873"></A><B>Correction:</B> The convention 
+of an anonymous access-to-subprogram parameter of a protected entry or 
+subprogram is Ada; if one wants it to be <I>protected</I> it can be declared 
+with the keyword <B>protected</B>. This is incompatible, but only in 
+a very rare case; usually the intent is to pass a normal subprogram to 
+a protected subprogram (and this was impossible in Ada 2012).</span> 
+</div>
+
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p25.l">25.l/4</a></div>
+<div class="paranum"><a name="p25.m">25.m/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0107-1.TXT">AI05-0107-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
-<span class="insert4"><A NAME="I3761"></A><B>Corrigendum:</B> We now 
-define that a prefixed view of a subprogram with synchronization kind 
-By_Protected_Procedure can be used as the prefix of 'Access for an access-to-protected 
-type. We consider this a correction as it certainly appears that it ought 
-to work, but in original Ada 2012 it would have had a convention mismatch.</span> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
+<A NAME="I3874"></A><B>Corrigendum:</B> We now define that a prefixed 
+view of a subprogram with synchronization kind By_Protected_Procedure 
+can be used as the prefix of 'Access for an access-to-protected type. 
+We consider this a correction as it certainly appears that it ought to 
+work, but in original Ada 2012 it would have had a convention mismatch. 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p25.m">25.m/4</a></div>
+<div class="paranum"><a name="p25.n">25.n/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> We now define how two expressions 
-containing quantified expressions can fully conform. This isn't incompatible, 
-as the original Ada 2012 never allowed such expressions to conform (the 
-declarations in each formally being different). Neither is it an extension 
-as one would expect these to conform.</span>&nbsp;</div>
+<B>Corrigendum:</B> We now define how two expressions containing quantified 
+expressions can fully conform. This isn't incompatible, as the original 
+Ada 2012 never allowed such expressions to conform (the declarations 
+in each formally being different). Neither is it an extension as one 
+would expect these to conform.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

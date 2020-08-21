@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +38,7 @@
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00311.TXT">AI95-00311-01</A></I>} 
-<A NAME="I3372"></A>A constraint <I>statically matches</I> another constraint 
+<A NAME="I3433"></A>A constraint <I>statically matches</I> another constraint 
 if:&nbsp;</div>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
 <div class="Bulleted">both are null constraints;</div>
@@ -54,14 +54,14 @@ of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition
 or</div>
 <div class="paranum"><a name="p1.4">1.4/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00311.TXT">AI95-00311-01</A></I>} 
-both are nonstatic and come from the same <SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_declaration</A></SPAN>. 
+both are nonstatic and come from the same <SPAN Class="swiss"><A HREF="AA-12-5.html#S0298">formal_type_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0059-1.TXT">AI12-0059-1</A></I>} 
-<A NAME="I3373"></A>A subtype <I>statically matches</I> another subtype 
+<A NAME="I3434"></A>A subtype <I>statically matches</I> another subtype 
 of the same type if they have statically matching constraints, all predicate 
 specifications that apply to them come from the same declarations, Object_Size 
 (see <A HREF="AA-13-3.html">13.3</A>) has been specified to have a nonconfirming 
@@ -100,7 +100,7 @@ subtypes. We wrote the rules this way to avoid having wording that appeared
 to require predicting the future (&quot;would statically match if ...&quot;). 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3374"></A>Two ranges of the same type <I>statically 
+<div class="Normal"><A NAME="I3435"></A>Two ranges of the same type <I>statically 
 match</I> if both result from the same evaluation of a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN>, 
 or if both are static and have equal corresponding bounds.&nbsp;</div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
@@ -111,10 +111,10 @@ array subtypes have to statically match.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0086-1.TXT">AI05-0086-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-<A NAME="I3375"></A>A constraint is <I>statically compatible</I> with 
+<A NAME="I3436"></A>A constraint is <I>statically compatible</I> with 
 a scalar subtype if it statically matches the constraint of the subtype, 
 or if both are static and the constraint is compatible with the subtype. 
-<A NAME="I3376"></A>A constraint is <I>statically compatible</I> with 
+<A NAME="I3437"></A>A constraint is <I>statically compatible</I> with 
 an access or composite subtype if it statically matches the constraint 
 of the subtype, or if the subtype is unconstrained.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
@@ -128,7 +128,7 @@ does not imply compatible with a type. It is OK since the terms are used
 in different contexts.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0153-3.TXT">AI05-0153-3</A></I>} 
-<A NAME="I3377"></A>Two statically matching subtypes are statically compatible 
+<A NAME="I3438"></A>Two statically matching subtypes are statically compatible 
 with each other. In addition, a subtype <I>S1</I> is statically compatible 
 with a subtype <I>S2</I> if:&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
@@ -169,7 +169,7 @@ type statically matches itself.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p10.d">10.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0086-1.TXT">AI05-0086-1</A></I>} 
-<A NAME="I3378"></A><B>Correction:</B> Updated the statically compatible 
+<A NAME="I3439"></A><B>Correction:</B> Updated the statically compatible 
 rules to take null exclusions into account. This is technically incompatible, 
 as it could cause a legal Ada 2005 program to be rejected; however, such 
 a program violates the intent of the rules (for instance, <A HREF="AA-3-7.html">3.7</A>(15)) 

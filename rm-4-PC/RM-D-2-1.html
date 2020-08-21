@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,20 +38,18 @@ based on conceptual priority-ordered ready queues.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;The following language-defined 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Dispatching&nbsp;<B>is</B><A NAME="I7972"></A><BR>
-&nbsp;&nbsp;<B>pragma</B>&nbsp;<span class="insert3">Preelaborate</span><span class="delete3">&nbsp;Pure</span>(Dispatching);<span class="delete3"><BR>
-&nbsp;&nbsp;<A NAME="I7973"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-<B>end</B>&nbsp;Ada.Dispatching;</span></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Dispatching&nbsp;<B>is</B><A NAME="I7784"></A><BR>
+&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dispatching);</div>
 <div class="paranum"><a name="p1.3">1.3/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7974"></A>Yield;</span></div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7785"></A>Yield;</div>
 <div class="paranum"><a name="p1.4">1.4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;<A NAME="I7975"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-<B>end</B>&nbsp;Ada.Dispatching;</span></div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I7786"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+<B>end</B>&nbsp;Ada.Dispatching;</div>
 <div class="paranum"><a name="p1.5">1.5/2</a></div>
-<div class="Normal">&nbsp;Dispatching serves as the parent of other language-defined 
+<div class="Normal">&nbsp;&nbsp;Dispatching serves as the parent of other language-defined 
 library units concerned with task dispatching.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -67,7 +63,7 @@ based on each task's active priority.</div>
 a task that is waiting for access to a protected object keeps its processor 
 busy.&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Normal"><A NAME="I7976"></A><A NAME="I7977"></A><A NAME="I7978"></A><A NAME="I7979"></A><I>Task 
+<div class="Normal"><A NAME="I7787"></A><A NAME="I7788"></A><A NAME="I7789"></A><A NAME="I7790"></A><I>Task 
 dispatching</I> is the process by which one ready task is selected for 
 execution on a processor. This selection is done at certain points during 
 the execution of a task called <I>task dispatching points</I>. A task 
@@ -75,7 +71,7 @@ reaches a task dispatching point whenever it becomes blocked, and when
 it terminates. Other task dispatching points are defined throughout this 
 Annex for specific policies.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Normal"><A NAME="I7980"></A><A NAME="I7981"></A><A NAME="I7982"></A><A NAME="I7983"></A><A NAME="I7984"></A><A NAME="I7985"></A><I>Task 
+<div class="Normal"><A NAME="I7791"></A><A NAME="I7792"></A><A NAME="I7793"></A><A NAME="I7794"></A><A NAME="I7795"></A><A NAME="I7796"></A><I>Task 
 dispatching policies</I> are specified in terms of conceptual <I>ready 
 queues</I> and task states. A ready queue is an ordered list of ready 
 tasks. The first position in a queue is called the <I>head of the queue</I>, 
@@ -89,7 +85,7 @@ not running on any processor, and can be executed using that processor
 and other available resources. A task can be on the ready queues of more 
 than one processor.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I7986"></A>Each processor also has one <I>running 
+<div class="Normal"><A NAME="I7797"></A>Each processor also has one <I>running 
 task</I>, which is the task currently being executed by that processor. 
 Whenever a task running on a processor reaches a task dispatching point 
 it goes back to one or more ready queues; a task (possibly the same task) 
@@ -97,8 +93,8 @@ is then selected to run on that processor. The task selected is the one
 at the head of the highest priority nonempty ready queue; this task is 
 then removed from all ready queues to which it belongs.&nbsp;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><span class="insert3">A call of Yield is a task dispatching 
-point. Yield is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>).</span> 
+<div class="Normal">A call of Yield is a task dispatching point. Yield 
+is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>). 
 </div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
@@ -115,17 +111,17 @@ effect on task dispatching.&nbsp;</div>
 restrictions on tasks whose active priority is in the Interrupt_Priority 
 range.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;For optimization purposes, an implementation may 
+<div class="Normal">&nbsp;&nbsp;&nbsp;For optimization purposes, an implementation may 
 alter the points at which task dispatching occurs, in an implementation-defined 
 manner. However, a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0227">delay_statement</A></SPAN> 
 always corresponds to at least one task dispatching point.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Notes">7&nbsp;&nbsp;<span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="RM-9.html">9</A> specifies under which circumstances a task 
-becomes ready. The ready state is affected by the rules for task activation 
-and termination, delay statements, and entry calls. <A NAME="I7987"></A>When 
-a task is not ready, it is said to be blocked.</div>
+<div class="Notes">7&nbsp;&nbsp;Clause <A HREF="RM-9.html">9</A> specifies 
+under which circumstances a task becomes ready. The ready state is affected 
+by the rules for task activation and termination, delay statements, and 
+entry calls. <A NAME="I7798"></A>When a task is not ready, it is said 
+to be blocked.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">8&nbsp;&nbsp;An example of a possible implementation-defined 
 execution resource is a page of physical memory, which needs to be loaded 

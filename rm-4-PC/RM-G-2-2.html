@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented4 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented4 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 9.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,7 +46,7 @@ definitions add conditions to those in <A HREF="RM-A-5-3.html">A.5.3</A>.
 <div class="Normal" style="margin-bottom: 0.4em">For every subtype S 
 of a floating point type <I>T</I>:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8560"></A><A NAME="I8561"></A>Model_Mantissa 
+<div class="WideHanging-Term">S'<A NAME="I8355"></A><A NAME="I8356"></A>Model_Mantissa 
 </div><div class="WideHanging-Body"><br clear="left">
 Yields the number of digits in the mantissa of the canonical form of 
 the model numbers of <I>T</I> (see <A HREF="RM-A-5-3.html">A.5.3</A>). 
@@ -63,14 +61,14 @@ In addition, <I>T</I>'Model_Mantissa shall be less than or equal to the
 value of <I>T</I>'Machine_Mantissa. This attribute yields a value of 
 the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8562"></A><A NAME="I8563"></A>Model_Emin 
+<div class="WideHanging-Term">S'<A NAME="I8357"></A><A NAME="I8358"></A>Model_Emin 
 </div><div class="WideHanging-Body">
 Yields the minimum exponent of the canonical form of the model numbers 
 of <I>T</I> (see <A HREF="RM-A-5-3.html">A.5.3</A>). The value of this 
 attribute shall be greater than or equal to the value of <I>T</I>'Machine_Emin. 
 This attribute yields a value of the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8564"></A><A NAME="I8565"></A>Safe_First 
+<div class="WideHanging-Term">S'<A NAME="I8359"></A><A NAME="I8360"></A>Safe_First 
 </div><div class="WideHanging-Body">
 Yields the lower bound of the safe range of <I>T</I>. The value of this 
 attribute shall be a model number of <I>T</I> and greater than or equal 
@@ -85,7 +83,7 @@ otherwise, it shall be less than or equal to &ndash;10.0 <SUP><SPAN STYLE="font-
 where <SPAN Class="roman"><I>d</I></SPAN> is the requested decimal precision 
 of <I>T</I>. This attribute yields a value of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Term">S'<A NAME="I8566"></A><A NAME="I8567"></A>Safe_Last 
+<div class="WideHanging-Term">S'<A NAME="I8361"></A><A NAME="I8362"></A>Safe_Last 
 </div><div class="WideHanging-Body">
 Yields the upper bound of the safe range of <I>T</I>. The value of this 
 attribute shall be a model number of <I>T</I> and less than or equal 
@@ -100,13 +98,13 @@ otherwise, it shall be greater than or equal to 10.0 <SUP><SPAN STYLE="font-size
 where d is the requested decimal precision of <I>T</I>. This attribute 
 yields a value of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="WideHanging-Term"><A NAME="I8568"></A>S'<A NAME="I8569"></A><A NAME="I8570"></A>Model 
+<div class="WideHanging-Term"><A NAME="I8363"></A>S'<A NAME="I8364"></A><A NAME="I8365"></A>Model 
 </div><div class="WideHanging-Body">
 Denotes a function (of a parameter <I>X</I>) whose specification is given 
 in <A HREF="RM-A-5-3.html">A.5.3</A>. If <I>X</I> is a model number of 
 <I>T</I>, the function yields <I>X</I>; otherwise, it yields the value 
 obtained by rounding or truncating <I>X</I> to either one of the adjacent 
-model numbers of <I>T</I>. <A NAME="I8571"></A><A NAME="I8572"></A>Constraint_Error 
+model numbers of <I>T</I>. <A NAME="I8366"></A><A NAME="I8367"></A>Constraint_Error 
 is raised if the resulting model number is outside the safe range of 
 S. A zero result has the sign of <I>X</I> when S'Signed_Zeros is True. 
 </div>
@@ -128,12 +126,12 @@ the implementation satisfies the strict-mode requirements of <A HREF="RM-G-2-1.h
 in terms of the model numbers and safe range induced by these attributes 
 and the previously determined value of S'Model_Mantissa.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Bulleted">Finally, S'Safe_First and S'<span class="insert3">Safe_Last</span><span class="delete3">&nbsp;Safe_last</span> 
-are set (in either order) to the smallest and largest values, respectively, 
-for which the implementation satisfies the strict-mode requirements of 
-<A HREF="RM-G-2-1.html">G.2.1</A> in terms of the model numbers and safe 
-range induced by these attributes and the previously determined values 
-of S'Model_Mantissa and S'Model_Emin.&nbsp;</div>
+<div class="Bulleted">Finally, S'Safe_First and S'Safe_Last are set (in 
+either order) to the smallest and largest values, respectively, for which 
+the implementation satisfies the strict-mode requirements of <A HREF="RM-G-2-1.html">G.2.1</A> 
+in terms of the model numbers and safe range induced by these attributes 
+and the previously determined values of S'Model_Mantissa and S'Model_Emin. 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

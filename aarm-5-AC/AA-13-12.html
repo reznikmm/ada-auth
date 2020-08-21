@@ -31,7 +31,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -54,26 +54,26 @@ may facilitate the construction of simpler run-time environments.]&nbsp;</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Restrictions is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I6122"></A><A NAME="I6123"></A>Restrictions(<A NAME="I6124"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0323">restriction</A></SPAN>{, 
-<A NAME="I6125"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0323">restriction</A></SPAN>});</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I6348"></A><A NAME="I6349"></A>Restrictions(<A NAME="I6350"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0337">restriction</A></SPAN>{, 
+<A NAME="I6351"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0337">restriction</A></SPAN>});</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
-<SPAN Class="swiss">restriction</SPAN><A NAME="I6126"></A><A NAME="S0323"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>restriction_</I><A NAME="I6127"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>restriction_parameter_</I><A NAME="I6128"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;&nbsp;<span class="insert2"><A NAME="I6129"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN></span><span class="delete2"><A NAME="I6130"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">&nbsp;expression</A></SPAN></span></div>
+<SPAN Class="swiss">restriction</SPAN><A NAME="I6352"></A><A NAME="S0337"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>restriction_</I><A NAME="I6353"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<I>restriction_parameter_</I><A NAME="I6354"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;&nbsp;<span class="insert2"><A NAME="I6355"></A><SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN></span><span class="delete2"><A NAME="I6356"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">&nbsp;expression</A></SPAN></span></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">restriction_parameter_argument</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I6131"></A><A NAME="S0324"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><A NAME="I6132"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I6133"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">restriction_parameter_argument</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I6357"></A><A NAME="S0338"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><A NAME="I6358"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I6359"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I6134"></A>Unless otherwise specified for 
-a particular restriction, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Normal"><A NAME="I6360"></A>Unless otherwise specified for 
+a particular restriction, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is expected to be of any integer type.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">Unless otherwise specified for a particular restriction, 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 shall be static, and its value shall be nonnegative.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
@@ -92,7 +92,7 @@ Restrictions.</span></div>
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0013-1.TXT">AI05-0013-1</A></I>} 
-<span class="insert3"></span><A NAME="I6135"></A><A NAME="I6136"></A>A 
+<span class="insert3"></span><A NAME="I6361"></A><A NAME="I6362"></A>A 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Restrictions 
 is a configuration pragma<span class="insert3">. If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Restrictions applies to any compilation unit included in the partition, 
@@ -156,7 +156,7 @@ allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>
 Restrictions.</span></div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">An implementation may place limitations on the values 
-of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 that are supported, and limitations on the supported combinations of 
 restrictions. The consequences of violating such limitations are implementation 
 defined.&nbsp;</div>
@@ -191,8 +191,8 @@ that every execution of the partition would violate the restriction.</span>
 Profile is as follows:</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Indented1">&nbsp;&nbsp;<span class="insert3"><B>pragma</B> 
-<A NAME="I6137"></A><A NAME="I6138"></A>Profile (<I>profile_</I><A NAME="I6139"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-{, <I>profile_</I><A NAME="I6140"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>});</span></div>
+<A NAME="I6363"></A><A NAME="I6364"></A>Profile (<I>profile_</I><A NAME="I6365"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+{, <I>profile_</I><A NAME="I6366"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>});</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -213,7 +213,7 @@ pragmas that is defined for each usage profile.</span>&nbsp;</div>
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
-<span class="insert3"><A NAME="I6141"></A><A NAME="I6142"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<span class="insert3"><A NAME="I6367"></A><A NAME="I6368"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Profile is a configuration pragma. There may be more than one <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Profile for a partition.</span>&nbsp;</div>
 
@@ -248,14 +248,14 @@ sufficient to allow use of the more efficient and safe one.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p17.b">17.b</a></div>
-<div class="Annotations"><A NAME="I6143"></A>Pragma Restrictions is new 
+<div class="Annotations"><A NAME="I6369"></A>Pragma Restrictions is new 
 to Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p17.c">17.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00249.TXT">AI95-00249-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0246-1.TXT">AI05-0246-1</A></I>} 
-<span class="insert2"><A NAME="I6144"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+<span class="insert2"><A NAME="I6370"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
 Profile is new; it was moved here by Ada 2012 and renamed to a &quot;usage 
 profile&quot; but was otherwise unchanged.</span>&nbsp;</div>
 
@@ -276,7 +276,7 @@ documenting it as such would be unnecessarily alarming - there should
 not be any programs depending on the runtime failure of restrictions.</span></div>
 <div class="paranum"><a name="p17.f">17.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00381.TXT">AI95-00381-01</A></I>} 
-<span class="insert2">The syntax of a <SPAN Class="swiss"><A HREF="AA-13-12.html#S0324">restriction_parameter_argument</A></SPAN> 
+<span class="insert2">The syntax of a <SPAN Class="swiss"><A HREF="AA-13-12.html#S0338">restriction_parameter_argument</A></SPAN> 
 has been defined to better support restriction No_Dependence (see <A HREF="AA-13-12-1.html">13.12.1</A>).</span> 
 </div>
 

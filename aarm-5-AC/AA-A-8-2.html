@@ -19,6 +19,8 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -28,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -211,6 +213,29 @@ position is unchanged.</span></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert4">The 
 exception Status_Error is propagated if the file is not open. The exception 
 Mode_Error is propagated if the mode of the file is In_File.</span></div>
+<div class="paranum"><a name="p28.4">28.4/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0021-1.TXT">AI12-0021-1</A></I>} 
+<span class="insert5">The nested package Wide_File_Names provides operations 
+equivalent to the operations of the same name of the outer package except 
+that Wide_String is used instead of String for the name and form of the 
+external file.</span></div>
+<div class="paranum"><a name="p28.a">28.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0021-1.TXT">AI12-0021-1</A></I>} 
+<span class="insert5">The expectation is that if one opens a file with 
+this package and then requests the name with Name, the result will include 
+the same wide_characters that were used to open the file (rather than 
+some encoded form). Since file names are completely implementation-defined, 
+we can't say this normatively. We have no expectations when retrieving 
+the name of a file opened with this package using the String Name. Similar 
+considerations apply to the nested package Wide_Wide_File_Names (see 
+below).</span>&nbsp;</div>
+<div class="paranum"><a name="p28.5">28.5/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0021-1.TXT">AI12-0021-1</A></I>} 
+<span class="insert5">The nested package Wide_Wide_File_Names provides 
+operations equivalent to the operations of the same name of the outer 
+package except that Wide_Wide_String is used instead of String for the 
+name and form of the external file.</span></div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p29">29</a></div>
@@ -240,7 +265,11 @@ file.</span>&nbsp;</div>
 <div class="paranum"><a name="p29.d">29.d/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0130-1.TXT">AI12-0130-1</A></I>} 
 <span class="insert4">Procedure Flush is now defined here, so it can 
-be used for all of the I/O packages.</span>&nbsp;</div>
+be used for all of the I/O packages.</span></div>
+<div class="paranum"><a name="p29.e">29.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0021-1.TXT">AI12-0021-1</A></I>} 
+<span class="insert5">The nested Wide_File_Names and Wide_Wide_File_Names 
+packages are now described here.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

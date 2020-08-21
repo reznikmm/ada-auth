@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,14 +45,14 @@ declares a subtype of some previously declared type, as defined by a
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">subtype_declaration</SPAN><A NAME="I1476"></A><A NAME="S0026"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I1477"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<A NAME="I1478"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1479"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">subtype_declaration</SPAN><A NAME="I1482"></A><A NAME="S0026"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I1483"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<A NAME="I1484"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I1485"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<SPAN Class="swiss">subtype_indication</SPAN><A NAME="I1480"></A><A NAME="S0027"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;[<A NAME="I1481"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I1482"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[<A NAME="I1483"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>]</div>
+<SPAN Class="swiss">subtype_indication</SPAN><A NAME="I1486"></A><A NAME="S0027"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>&nbsp;[<A NAME="I1487"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;<A NAME="I1488"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[<A NAME="I1489"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">subtype_mark</SPAN><A NAME="I1484"></A><A NAME="S0028"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>subtype_</I><A NAME="I1485"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">subtype_mark</SPAN><A NAME="I1490"></A><A NAME="S0028"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>subtype_</I><A NAME="I1491"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Note that <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 includes <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>; 
@@ -63,18 +63,18 @@ thus, S'Base can be used as a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">
 to <SPAN Class="swiss">subtype_name</SPAN>. However, existing users are 
 used to the word &quot;mark,&quot; so we're keeping it.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">constraint</SPAN><A NAME="I1486"></A><A NAME="S0029"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1487"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0030">scalar_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1488"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">constraint</SPAN><A NAME="I1492"></A><A NAME="S0029"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1493"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0030">scalar_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1494"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0031">composite_constraint</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">scalar_constraint</SPAN><A NAME="I1489"></A><A NAME="S0030"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1490"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1491"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1492"></A><SPAN Class="swiss"><A HREF="AA-J-3.html#S0325">delta_constraint</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">scalar_constraint</SPAN><A NAME="I1495"></A><A NAME="S0030"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1496"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1497"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1498"></A><SPAN Class="swiss"><A HREF="AA-J-3.html#S0339">delta_constraint</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">composite_constraint</SPAN><A NAME="I1493"></A><A NAME="S0031"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1494"></A><SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0057">index_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1495"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">composite_constraint</SPAN><A NAME="I1499"></A><A NAME="S0031"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1500"></A><SPAN Class="swiss"><A HREF="AA-3-6-1.html#S0057">index_constraint</A></SPAN>&nbsp;|&nbsp;<A NAME="I1501"></A><SPAN Class="swiss"><A HREF="AA-3-7-1.html#S0064">discriminant_constraint</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-shall resolve to denote a subtype. <A NAME="I1496"></A>The type <I>determined 
+shall resolve to denote a subtype. <A NAME="I1502"></A>The type <I>determined 
 by</I> a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 is the type of the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
 </div>
@@ -87,10 +87,10 @@ mean a type with no nameable subtypes.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1497"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1503"></A>The 
 elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
-<A NAME="I1498"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<A NAME="I1504"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 creates a new subtype. If the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 does not include a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>, 
 the new subtype has the same (possibly null) constraint as that denoted 
@@ -102,7 +102,7 @@ proceeds as follows:&nbsp;</div>
 <div class="Bulleted">The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 is first elaborated.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Bulleted"><A NAME="I1499"></A><A NAME="I1500"></A>A check 
+<div class="Bulleted"><A NAME="I1505"></A><A NAME="I1506"></A>A check 
 is then made that the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 is <I>compatible</I> with the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
 </div>
@@ -114,13 +114,13 @@ constraint.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">The condition imposed by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 is the condition obtained after elaboration of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN>. 
-<A NAME="I1501"></A>The rules defining compatibility are given for each 
+<A NAME="I1507"></A>The rules defining compatibility are given for each 
 form of <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 in the appropriate subclause. These rules are such that if a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 is <I>compatible</I> with a subtype, then the condition imposed by the 
 <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 cannot contradict any condition already imposed by the subtype on its 
-values. <A NAME="I1502"></A>The exception Constraint_Error is raised 
+values. <A NAME="I1508"></A>The exception Constraint_Error is raised 
 if any check of compatibility fails.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The condition imposed by 
@@ -158,7 +158,7 @@ declarations:</I>&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p15.a">15.a</a></div>
-<div class="Annotations"><A NAME="I1503"></A>In Ada 95, all <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>s 
+<div class="Annotations"><A NAME="I1509"></A>In Ada 95, all <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>s 
 cause freezing of their type. Hence, a type-related representation item 
 for a scalar type has to precede any <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>s 
 whose type is the scalar type.&nbsp;</div>
@@ -178,14 +178,14 @@ since it always denotes a subtype.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p15.d">15.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
-<A NAME="I1504"></A>An optional <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
+<A NAME="I1510"></A>An optional <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 This is described in <A HREF="AA-3-10.html">3.10</A>.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p15.e">15.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I1505"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+<A NAME="I1511"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 

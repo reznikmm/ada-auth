@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,13 +46,13 @@ from the internal entities.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">package_body</SPAN><A NAME="I3942"></A><A NAME="S0192"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3943"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0169">defining_program_unit_name</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3944"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3945"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
+<SPAN Class="swiss">package_body</SPAN><A NAME="I3895"></A><A NAME="S0192"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I3896"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0169">defining_program_unit_name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3897"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3898"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;[<B>begin</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3946"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3947"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">parent_unit_name</A></SPAN>.]<A NAME="I3948"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3899"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;[[<A NAME="I3900"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">parent_unit_name</A></SPAN>.]<A NAME="I3901"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Indented1">If an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0252">parent_unit_name</A></SPAN>.<SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
@@ -97,11 +95,10 @@ For a noninstance, nonlibrary package, this body occurs at the end of
 the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 of the innermost enclosing program unit or <SPAN Class="swiss"><A HREF="AA-5-6.html#S0160">block_statement</A></SPAN>; 
 if there are several such packages, the order of the implicit <SPAN Class="swiss">package_bodies</SPAN> 
-is unspecified. <A NAME="I3949"></A>[(For an instance, the implicit <SPAN Class="swiss"><A HREF="AA-7-2.html#S0192">package_body</A></SPAN> 
+is unspecified. <A NAME="I3902"></A>[(For an instance, the implicit <SPAN Class="swiss"><A HREF="AA-7-2.html#S0192">package_body</A></SPAN> 
 occurs at the place of the instantiation (see <A HREF="AA-12-3.html">12.3</A>). 
 For a library package, the place is partially determined by the elaboration 
-dependences (see <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="AA-10.html">10</A>).)]&nbsp;</div>
+dependences (see Clause <A HREF="AA-10.html">10</A>).)]&nbsp;</div>
 <div class="paranum"><a name="p5.a">5.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Thus, for example, we can 
 refer to something happening just after the <B>begin</B> of a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0192">package_body</A></SPAN>, 
@@ -117,7 +114,7 @@ does not allow) a body. This is a bit strange, but not harmful.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3950"></A>For the elaboration of a nongeneric 
+<div class="Normal"><A NAME="I3903"></A>For the elaboration of a nongeneric 
 <SPAN Class="swiss"><A HREF="AA-7-2.html#S0192">package_body</A></SPAN>, 
 its <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 is first elaborated, and its <SPAN Class="swiss"><A HREF="AA-11-2.html#S0265">handled_sequence_of_statements</A></SPAN> 
@@ -200,9 +197,9 @@ is moved here, since it is more generally applicable.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p15.f">15.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<span class="insert3"><A NAME="I3951"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+<A NAME="I3904"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0192">package_body</A></SPAN>. 
-This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -93,7 +93,7 @@ a parameter or result of a type that does not support external streaming
 <div class="Bulleted">any public child of the library unit shall be a 
 remote call interface library unit.&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">A pragma All_Calls_Remote sets the All_Calls_Remote 
+<div class="Normal">&nbsp;A pragma All_Calls_Remote sets the All_Calls_Remote 
 representation aspect of <A NAME="I8164"></A><A NAME="I8165"></A>the 
 library unit to which the pragma applies to the value True. If the All_Calls_Remote 
 aspect of a library unit is True, the library unit shall be a remote 
@@ -117,7 +117,7 @@ assigned.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p19">19/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">If aspect All_Calls_Remote 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;If aspect All_Calls_Remote 
 is True for a given RCI library unit, then the implementation shall route 
 any of the following calls through the Partition Communication Subsystem 
 (PCS); see <A HREF="RM-E-5.html">E.5</A>:&nbsp;</div>
@@ -134,7 +134,7 @@ in the RCI unit.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal">An implementation need not support the Remote_Call_Interface 
+<div class="Normal">&nbsp;An implementation need not support the Remote_Call_Interface 
 pragma or aspect nor the All_Calls_Remote pragma. Explicit message-based 
 communication between active partitions can be supported as an alternative 
 to RPC.&nbsp;</div>

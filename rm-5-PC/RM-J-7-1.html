@@ -51,29 +51,29 @@ is defined:</div>
 <div class="Normal" style="margin-bottom: 0.4em">For any task entry 
 X:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term"><A NAME="I8854"></A>X'<A NAME="I8855"></A><A NAME="I8856"></A>Address 
+<div class="WideHanging-Term"><A NAME="I8838"></A>X'<A NAME="I8839"></A><A NAME="I8840"></A>Address 
 </div><div class="WideHanging-Body">
 For a task entry whose address is specified (an <I>interrupt entry</I>), 
 the value refers to the corresponding hardware interrupt. For such an 
 entry, as for any other task entry, the meaning of this value is implementation 
 defined. The value of this attribute is of the type of the subtype System.Address.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Body"><A NAME="I8857"></A>Address may be specified 
+<div class="WideHanging-Body"><A NAME="I8841"></A>Address may be specified 
 for single entries via an <SPAN Class="swiss"><A HREF="RM-13-3.html#S0327">attribute_definition_clause</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I8858"></A>As part of the initialization 
+<div class="Normal"><A NAME="I8842"></A>As part of the initialization 
 of a task object, the address clause for an interrupt entry is elaborated, 
 which evaluates the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 of the address clause. A check is made that the address specified is 
 associated with some interrupt to which a task entry may be attached. 
-<A NAME="I8859"></A>If this check fails, Program_Error is raised. Otherwise, 
+<A NAME="I8843"></A>If this check fails, Program_Error is raised. Otherwise, 
 the interrupt entry is attached to the interrupt associated with the 
 specified address.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I8860"></A>Upon finalization of the task 
+<div class="Normal"><A NAME="I8844"></A>Upon finalization of the task 
 object, the interrupt entry, if any, is detached from the corresponding 
 interrupt and the default treatment is restored.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -89,7 +89,7 @@ on the specific interrupt.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8861"></A>It is a bounded error to evaluate 
+<div class="Normal"><A NAME="I8845"></A>It is a bounded error to evaluate 
 E'Caller (see <A HREF="RM-C-7-1.html">C.7.1</A>) in an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN> 
 for an interrupt entry. The possible effects are the same as for calling 
 Current_Task from an entry body.&nbsp;</div>

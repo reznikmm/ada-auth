@@ -13,24 +13,22 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,8 +39,8 @@
 <HR>
 <H1>9.5.3 Entry Calls</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4525"></A>[An <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0225">entry_call_statement</A></SPAN> 
-(an <I>entry call</I>) can appear in various contexts.] <A NAME="I4526"></A><A NAME="I4527"></A>A 
+<div class="Normal"><A NAME="I4469"></A>[An <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0225">entry_call_statement</A></SPAN> 
+(an <I>entry call</I>) can appear in various contexts.] <A NAME="I4470"></A><A NAME="I4471"></A>A 
 <I>simple</I> entry call is a stand-alone statement that represents an 
 unconditional call on an entry of a target task or a protected object. 
 [Entry calls can also appear as part of <SPAN Class="swiss"><A HREF="AA-9-7.html#S0230">select_statement</A></SPAN>s 
@@ -50,7 +48,7 @@ unconditional call on an entry of a target task or a protected object.
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">entry_call_statement</SPAN><A NAME="I4528"></A><A NAME="S0225"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>entry_</I><A NAME="I4529"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I4530"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0180">actual_parameter_part</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">entry_call_statement</SPAN><A NAME="I4472"></A><A NAME="S0225"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>entry_</I><A NAME="I4473"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;[<A NAME="I4474"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0180">actual_parameter_part</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
@@ -70,27 +68,26 @@ entry or entry family, and the entry index, if any (see <A HREF="AA-9-5.html">9.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4531"></A><A NAME="I4532"></A><A NAME="I4533"></A><A NAME="I4534"></A>Under 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4475"></A><A NAME="I4476"></A><A NAME="I4477"></A><A NAME="I4478"></A>Under 
 certain circumstances (detailed below), an entry of a task or protected 
 object is checked to see whether it is <I>open</I> or <I>closed</I>: 
 </div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I4535"></A><A NAME="I4536"></A>An entry of a task is open if 
+<A NAME="I4479"></A><A NAME="I4480"></A>An entry of a task is open if 
 the task is blocked on an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN> 
 that corresponds to the entry (see <A HREF="AA-9-5-2.html">9.5.2</A>), 
 or on a <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0231">selective_accept</A></SPAN> 
 (see <A HREF="AA-9-7-1.html">9.7.1</A>) with an open <SPAN Class="swiss"><A HREF="AA-9-7-1.html#S0234">accept_alternative</A></SPAN> 
-that corresponds to the entry; otherwise<span class="insert3">,</span> 
-it is closed.</div>
+that corresponds to the entry; otherwise, it is closed.</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-<A NAME="I4537"></A><A NAME="I4538"></A>An entry of a protected object 
+<A NAME="I4481"></A><A NAME="I4482"></A>An entry of a protected object 
 is open if the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0223">entry_barrier</A></SPAN> 
 of the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN> 
-evaluates to True; otherwise<span class="insert3">,</span> it is closed. 
-<A NAME="I4539"></A>If the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
+evaluates to True; otherwise, it is closed. <A NAME="I4483"></A>If the 
+evaluation of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
 propagates an exception, the exception Program_Error is propagated to 
 all current callers of all entries of the protected object.&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
@@ -110,14 +107,14 @@ implementations to evaluate the barrier expression more or less often
 than it is checked, but the basic semantic model presumes it is evaluated 
 at the times when it is checked.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4540"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4484"></A>For 
 the execution of an <SPAN Class="swiss"><A HREF="AA-9-5-3.html#S0225">entry_call_statement</A></SPAN>, 
 evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and of the parameter associations is as for a subprogram call (see <A HREF="AA-6-4.html">6.4</A>). 
-<A NAME="I4541"></A>The entry call is then <I>issued</I>: For a call 
+<A NAME="I4485"></A>The entry call is then <I>issued</I>: For a call 
 on an entry of a protected object, a new protected action is started 
 on the object (see <A HREF="AA-9-5-1.html">9.5.1</A>). The named entry 
-is checked to see if it is open; <A NAME="I4542"></A>if open, the entry 
+is checked to see if it is open; <A NAME="I4486"></A>if open, the entry 
 call is said to be <I>selected immediately</I>, and the execution of 
 the call proceeds as follows:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -146,11 +143,11 @@ action and releasing the associated execution resource.&nbsp;</div>
 <div class="Normal">If the named entry is closed, the entry call is added 
 to an <I>entry queue</I> (as part of the protected action, for a call 
 on a protected entry), and the call remains queued until it is selected 
-or cancelled; <A NAME="I4543"></A>there is a separate (logical) entry 
+or cancelled; <A NAME="I4487"></A>there is a separate (logical) entry 
 queue for each entry of a given task or protected object [(including 
 each entry of an entry family)].</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4544"></A><A NAME="I4545"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4488"></A><A NAME="I4489"></A>When 
 a queued call is <I>selected</I>, it is removed from its entry queue. 
 Selecting a queued call from a particular entry queue is called <I>servicing</I> 
 the entry queue. An entry with queued calls can be serviced under the 
@@ -167,16 +164,16 @@ protected object, an <span class="insert4">exclusive protected&nbsp;</span>opera
 on the object<span class="delete4">&nbsp;other than a call on a protected 
 function</span>, the entry is checked and found to be open.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I4546"></A>If there is at least one call 
+<div class="Normal"><A NAME="I4490"></A>If there is at least one call 
 on a queue corresponding to an open entry, then one such call is selected 
 according to the <I>entry queuing policy</I> in effect (see below), and 
 the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN> 
 is executed as above for an entry call that is selected immediately.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I4547"></A>The entry queuing policy controls 
+<div class="Normal"><A NAME="I4491"></A>The entry queuing policy controls 
 selection among queued calls both for task and protected entry queues. 
-<A NAME="I4548"></A><A NAME="I4549"></A>The default entry queuing policy 
+<A NAME="I4492"></A><A NAME="I4493"></A>The default entry queuing policy 
 is to select calls on a given entry queue in order of arrival. If calls 
 from two or more queues are simultaneously eligible for selection, the 
 default entry queuing policy does not specify which queue is serviced 
@@ -196,7 +193,7 @@ access) the execution resource associated with the protected object,
 which cannot be done while another protected action is already in progress. 
 </div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I4550"></A>For an entry call that is added 
+<div class="Normal"><A NAME="I4494"></A>For an entry call that is added 
 to a queue, and that is not the <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0243">triggering_statement</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-9-7-4.html#S0241">asynchronous_select</A></SPAN> 
 (see <A HREF="AA-9-7-4.html">9.7.4</A>), the calling task is blocked 
@@ -210,7 +207,7 @@ during a rendezvous.</div>
 entry, the caller is not blocked if the call is selected immediately, 
 unless a requeue causes the call to be queued.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal"><A NAME="I4551"></A>An attempt can be made to cancel 
+<div class="Normal"><A NAME="I4495"></A>An attempt can be made to cancel 
 an entry call upon an abort (see <A HREF="AA-9-8.html">9.8</A>) and as 
 part of certain forms of <SPAN Class="swiss"><A HREF="AA-9-7.html#S0230">select_statement</A></SPAN> 
 (see <A HREF="AA-9-7-2.html">9.7.2</A>, <A HREF="AA-9-7-3.html">9.7.3</A>, 
@@ -230,7 +227,7 @@ have to be performed by the calling task itself if the ceiling priority
 of the protected object is lower than the priority of the task initiating 
 the abort.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Normal"><A NAME="I4552"></A>A call on an entry of a task 
+<div class="Normal"><A NAME="I4496"></A>A call on an entry of a task 
 that has already completed its execution raises the exception Tasking_Error 
 at the point of the call; similarly, this exception is raised at the 
 point of the call if the called task completes its execution or becomes 
@@ -254,7 +251,7 @@ invisible, since the thread is not abortable in any case, and the &quot;current_
 function is not guaranteed to work during a protected action (see <A HREF="AA-C-7-1.html">C.7.1</A>). 
 </div>
 <div class="paranum"><a name="p23">23/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0129-1.TXT">AI12-0129-1</A></I>} 
 When the entry of a protected object is checked to see whether it is 
 open, the implementation need not reevaluate the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
 of the corresponding <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0223">entry_barrier</A></SPAN> 

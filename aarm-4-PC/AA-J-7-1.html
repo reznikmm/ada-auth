@@ -15,17 +15,17 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -52,14 +52,14 @@ is defined:</div>
 <div class="Normal" style="margin-bottom: 0.4em">For any task entry 
 X:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="WideHanging-Term"><A NAME="I9502"></A>X'<A NAME="I9503"></A><A NAME="I9504"></A>Address 
+<div class="WideHanging-Term"><A NAME="I9292"></A>X'<A NAME="I9293"></A><A NAME="I9294"></A>Address 
 </div><div class="WideHanging-Body">
 For a task entry whose address is specified (an <I>interrupt entry</I>), 
 the value refers to the corresponding hardware interrupt. For such an 
 entry, as for any other task entry, the meaning of this value is implementation 
 defined. The value of this attribute is of the type of the subtype System.Address.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="WideHanging-Body"><A NAME="I9505"></A>Address may be specified 
+<div class="WideHanging-Body"><A NAME="I9295"></A>Address may be specified 
 for single entries via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
@@ -70,16 +70,16 @@ an interrupt entry may be specified via either notation.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I9506"></A>As part of the initialization 
+<div class="Normal"><A NAME="I9296"></A>As part of the initialization 
 of a task object, the address clause for an interrupt entry is elaborated[, 
 which evaluates the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 of the address clause]. A check is made that the address specified is 
 associated with some interrupt to which a task entry may be attached. 
-<A NAME="I9507"></A>If this check fails, Program_Error is raised. Otherwise, 
+<A NAME="I9297"></A>If this check fails, Program_Error is raised. Otherwise, 
 the interrupt entry is attached to the interrupt associated with the 
 specified address.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I9508"></A>Upon finalization of the task 
+<div class="Normal"><A NAME="I9298"></A>Upon finalization of the task 
 object, the interrupt entry, if any, is detached from the corresponding 
 interrupt and the default treatment is restored.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -95,7 +95,7 @@ on the specific interrupt.</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9509"></A>It is a bounded error to evaluate 
+<div class="Normal"><A NAME="I9299"></A>It is a bounded error to evaluate 
 E'Caller (see <A HREF="AA-C-7-1.html">C.7.1</A>) in an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN> 
 for an interrupt entry. The possible effects are the same as for calling 
 Current_Task from an entry body.&nbsp;</div>
@@ -125,7 +125,7 @@ entry to be attached may be designated as reserved for the entire duration
 of program execution[; that is, not just when they have an interrupt 
 entry attached to them].</div>
 <div class="paranum"><a name="p16">16/1</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0077">8652/0077</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0077">8652/0077</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00111.TXT">AI95-00111-01</A></I>} 
 Interrupt entry calls may be implemented by having the hardware execute 
 directly the appropriate <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN>. 

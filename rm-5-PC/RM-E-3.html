@@ -42,21 +42,21 @@ P that statically denotes a program unit, the following attributes are
 defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">P'Version</div><div class="WideHanging-Body">
-<A NAME="I8513"></A><A NAME="I8514"></A>Yields a value of the predefined 
+<A NAME="I8498"></A><A NAME="I8499"></A>Yields a value of the predefined 
 type String that identifies the version of the compilation unit that 
 contains the declaration of the program unit.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">P'Body_Version</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I8515"></A><A NAME="I8516"></A>Yields a value of the predefined 
+<A NAME="I8500"></A><A NAME="I8501"></A>Yields a value of the predefined 
 type String that identifies the version of the compilation unit that 
 contains the body (but not any subunits) of the program unit.&nbsp;</div>
 <div class="paranum"><a name="p5">5/1</a></div>
-<div class="Normal"><A NAME="I8517"></A>The <I>version</I> of a compilation 
+<div class="Normal"><A NAME="I8502"></A>The <I>version</I> of a compilation 
 unit changes whenever the compilation unit changes in a semantically 
 significant way. This International Standard does not define the exact 
 meaning of &quot;semantically significant&quot;. It is unspecified whether 
 there are other events (such as recompilation) that result in the version 
-of a compilation unit changing. <A NAME="I8518"></A></div>
+of a compilation unit changing. <A NAME="I8503"></A></div>
 <div class="paranum"><a name="p5.1">5.1/1</a></div>
 <div class="Normal">&nbsp;If P is not a library unit, and P has no completion, 
 then P'Body_Version returns the Body_Version of the innermost program 
@@ -66,13 +66,13 @@ from Body_Version of any version of P that has a completion.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8519"></A><A NAME="I8520"></A>In a distributed 
+<div class="Normal"><A NAME="I8504"></A><A NAME="I8505"></A>In a distributed 
 program, a library unit is <I>consistent</I> if the same version of its 
 declaration is used throughout. It is a bounded error to elaborate a 
 partition of a distributed program that contains a compilation unit that 
 depends on a different version of the declaration of a shared passive 
 or RCI library unit than that included in the partition to which the 
-shared passive or RCI library unit was assigned. <A NAME="I8521"></A>As 
+shared passive or RCI library unit was assigned. <A NAME="I8506"></A>As 
 a result of this error, Program_Error can be raised in one or both partitions 
 during elaboration; in any case, the partitions become inaccessible to 
 one another.&nbsp;</div>

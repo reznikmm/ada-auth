@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -93,7 +93,7 @@ Numerics.Float_Random has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Numerics.Float_Random;</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The type Generator needs finalization<A NAME="I6159"></A> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The type Generator needs finalization<A NAME="I6159"></A> 
 (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Normal">The generic library package Numerics.Discrete_Random 
@@ -132,7 +132,7 @@ has the following declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Numerics.Discrete_Random;</div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;The type Generator needs finalization<A NAME="I6171"></A> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The type Generator needs finalization<A NAME="I6171"></A> 
 (see <A HREF="RM-7-6.html">7.6</A>) in every instantiation of Numerics.Discrete_Random.</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Normal">An object of the limited private type Generator is 
@@ -144,8 +144,8 @@ from one program execution to another; they may also be explicitly initialized,
 or reinitialized, to a time-dependent state, to a previously saved state, 
 or to a state uniquely denoted by an integer value.&nbsp;</div>
 <div class="paranum"><a name="p29">29/3</a></div>
-<div class="Normal">An object of the private type State can be used to 
-hold the internal state of a generator. Such objects are only needed 
+<div class="Normal">&nbsp;An object of the private type State can be used 
+to hold the internal state of a generator. Such objects are only needed 
 if the application is designed to save and restore generator states or 
 to examine or manufacture them. The implicit initial value of type State 
 corresponds to the implicit initial value of all generators.</div>
@@ -203,12 +203,12 @@ Save.&nbsp;</div>
 of Numerics.Discrete_Random with a subtype having a null range raises 
 Constraint_Error.</div>
 <div class="paranum"><a name="p40">40/1</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p40.1">40.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;It is a bounded error to invoke Value with a string 
+<div class="Normal">&nbsp;&nbsp;&nbsp;It is a bounded error to invoke Value with a string 
 that is not the image of any generator state. <A NAME="I6178"></A><A NAME="I6179"></A>If 
 the error is detected, Constraint_Error or Program_Error is raised. Otherwise, 
 a call to Reset with the resulting state will produce a generator such 

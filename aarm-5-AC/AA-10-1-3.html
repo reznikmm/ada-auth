@@ -31,7 +31,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,54 +44,54 @@
 <div class="paranum"><a name="p1">1</a></div>
 <div class="Normal">[Subunits are like child units, with these (important) 
 differences: subunits support the separate compilation of bodies only 
-(not declarations); the parent contains a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+(not declarations); the parent contains a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 to indicate the existence and place of each of its subunits; declarations 
 appearing in the parent's body can be visible within the subunits.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">body_stub</SPAN><A NAME="I5026"></A><A NAME="S0261"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5027"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN>&nbsp;|&nbsp;<A NAME="I5028"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0263">package_body_stub</A></SPAN>&nbsp;|&nbsp;<A NAME="I5029"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0264">task_body_stub</A></SPAN>&nbsp;|&nbsp;<A NAME="I5030"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0265">protected_body_stub</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">body_stub</SPAN><A NAME="I5229"></A><A NAME="S0275"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5230"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0276">subprogram_body_stub</A></SPAN>&nbsp;|&nbsp;<A NAME="I5231"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0277">package_body_stub</A></SPAN>&nbsp;|&nbsp;<A NAME="I5232"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0278">task_body_stub</A></SPAN>&nbsp;|&nbsp;<A NAME="I5233"></A><SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0279">protected_body_stub</A></SPAN></div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">subprogram_body_stub</SPAN><A NAME="I5031"></A><A NAME="S0262"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;[<A NAME="I5032"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;</span><A NAME="I5033"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0167">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5034"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">subprogram_body_stub</SPAN><A NAME="I5234"></A><A NAME="S0276"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;[<A NAME="I5235"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;</span><A NAME="I5236"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0181">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5237"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Although this syntax allows 
-a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>, 
 that is disallowed by <A HREF="AA-10-1-1.html">10.1.1</A>, &ldquo;<A HREF="AA-10-1-1.html">Compilation 
 Units - Library Units</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">package_body_stub</SPAN><A NAME="I5035"></A><A NAME="S0263"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;</span><B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I5036"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5037"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">package_body_stub</SPAN><A NAME="I5238"></A><A NAME="S0277"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;</span><B>package</B>&nbsp;<B>body</B>&nbsp;<A NAME="I5239"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5240"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">task_body_stub</SPAN><A NAME="I5038"></A><A NAME="S0264"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;</span><B>task</B>&nbsp;<B>body</B>&nbsp;<A NAME="I5039"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5040"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">task_body_stub</SPAN><A NAME="I5241"></A><A NAME="S0278"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;</span><B>task</B>&nbsp;<B>body</B>&nbsp;<A NAME="I5242"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5243"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<SPAN Class="swiss">protected_body_stub</SPAN><A NAME="I5041"></A><A NAME="S0265"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;</span><B>protected</B>&nbsp;<B>body</B>&nbsp;<A NAME="I5042"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5043"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">protected_body_stub</SPAN><A NAME="I5244"></A><A NAME="S0279"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;</span><B>protected</B>&nbsp;<B>body</B>&nbsp;<A NAME="I5245"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>separate</B><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5246"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><SPAN Class="swiss">subunit</SPAN><A NAME="I5044"></A><A NAME="S0266"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>separate</B>&nbsp;(<A NAME="I5045"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>)&nbsp;<A NAME="I5046"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">subunit</SPAN><A NAME="I5247"></A><A NAME="S0280"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>separate</B>&nbsp;(<A NAME="I5248"></A><SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>)&nbsp;<A NAME="I5249"></A><SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00243.TXT">AI95-00243-01</A></I>} 
-<A NAME="I5047"></A>The <I>parent body</I> of a subunit is the body of 
-the program unit denoted by its <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0255">parent_unit_name</A></SPAN>. 
-<A NAME="I5048"></A> The term <I>subunit</I> is used to refer to a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN> 
+<A NAME="I5250"></A>The <I>parent body</I> of a subunit is the body of 
+the program unit denoted by its <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0269">parent_unit_name</A></SPAN>. 
+<A NAME="I5251"></A> The term <I>subunit</I> is used to refer to a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0280">subunit</A></SPAN> 
 and also to the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN>. 
+of a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0280">subunit</A></SPAN>. 
 <span class="insert2">The <I>subunits of a program unit</I> include any 
 subunit that names that program unit as its parent, as well as any subunit 
-that names such a subunit as its parent (recursively).<A NAME="I5049"></A></span> 
+that names such a subunit as its parent (recursively).<A NAME="I5252"></A></span> 
 </div>
 <div class="paranum"><a name="p8.a.1">8.a.1/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00243.TXT">AI95-00243-01</A></I>} 
@@ -99,76 +99,76 @@ that names such a subunit as its parent (recursively).<A NAME="I5049"></A></span
 to a subunit of a subunit as well.</span>&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">The parent body of a subunit shall be present in 
-the current environment, and shall contain a corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+the current environment, and shall contain a corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 as the subunit.&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This can't be a Name Resolution 
-Rule, because a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN> 
+Rule, because a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0280">subunit</A></SPAN> 
 is not a complete context.&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0263">package_body_stub</A></SPAN> 
-shall be the completion of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0276">generic_package_declaration</A></SPAN>; 
-a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0264">task_body_stub</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0277">package_body_stub</A></SPAN> 
+shall be the completion of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0290">generic_package_declaration</A></SPAN>; 
+a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0278">task_body_stub</A></SPAN> 
 shall be the completion of a <span class="insert3">task declaration</span><span class="delete3"><SPAN Class="swiss">&nbsp;task_declaration</SPAN></span>; 
-a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0265">protected_body_stub</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0279">protected_body_stub</A></SPAN> 
 shall be the completion of a <span class="insert3">protected declaration</span><span class="delete3"><SPAN Class="swiss">&nbsp;protected_declaration</SPAN></span>.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal">In contrast, a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN> 
+<div class="Normal">In contrast, a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0276">subprogram_body_stub</A></SPAN> 
 need not be the completion of a previous declaration, [in which case 
 the <SPAN Class="swiss">_stub</SPAN> declares the subprogram]. If the 
 <SPAN Class="swiss">_stub</SPAN> is a completion, it shall be the completion 
-of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0275">generic_subprogram_declaration</A></SPAN>. 
-The profile of a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>. 
+The profile of a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0276">subprogram_body_stub</A></SPAN> 
 that completes a declaration shall conform fully to that of the declaration. 
-<A NAME="I5050"></A></div>
+<A NAME="I5253"></A></div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>The part about <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN>s 
+<div class="Annotations"><B>Discussion:&nbsp;</B>The part about <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0276">subprogram_body_stub</A></SPAN>s 
 echoes the corresponding rule for <SPAN Class="swiss">subprogram_bodies</SPAN> 
 in <A HREF="AA-6-3.html">6.3</A>, &ldquo;<A HREF="AA-6-3.html">Subprogram 
 Bodies</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal">A subunit that corresponds to a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+<div class="Normal">A subunit that corresponds to a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 shall be of the same kind (<SPAN Class="swiss">package_</SPAN>, <SPAN Class="swiss">subprogram_</SPAN>, 
 <SPAN Class="swiss">task_</SPAN>, or <SPAN Class="swiss">protected_</SPAN>) 
-as the <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN>. 
-The profile of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
-subunit shall be fully conformant to that of the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN>. 
-<A NAME="I5051"></A></div>
+as the <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN>. 
+The profile of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
+subunit shall be fully conformant to that of the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN>. 
+<A NAME="I5254"></A></div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 shall appear immediately within the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 of a compilation unit body. This rule does not apply within an instance 
 of a generic unit.&nbsp;</div>
 <div class="paranum"><a name="p13.a">13.a</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I5052"></A>This 
+<div class="Annotations"><B>Discussion:&nbsp;</B><A NAME="I5255"></A>This 
 is a methodological restriction; that is, it is not necessary for the 
 semantics of the language to make sense.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Normal">The <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>s 
-of all <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN>s 
+of all <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN>s 
 that appear immediately within a particular <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
 shall be distinct.&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal">For each <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN>, 
+<div class="Normal">For each <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN>, 
 there shall be a subunit containing the corresponding <SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN>. 
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Notes" style="margin-bottom: 0.4em">4&nbsp;&nbsp;The rules 
 in <A HREF="AA-10-1-4.html">10.1.4</A>, &ldquo;<A HREF="AA-10-1-4.html">The 
-Compilation Process</A>&rdquo; say that a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+Compilation Process</A>&rdquo; say that a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 is equivalent to the corresponding <SPAN Class="swiss"><A HREF="AA-3-11.html#S0090">proper_body</A></SPAN>. 
 This implies:&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
 <div class="Indented2SmallBulleted">Visibility within a subunit is the 
-visibility that would be obtained at the place of the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
-(within the parent body) if the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0256">context_clause</A></SPAN> 
+visibility that would be obtained at the place of the corresponding <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
+(within the parent body) if the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0270">context_clause</A></SPAN> 
 of the subunit were appended to that of the parent body.&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Recursively. Note that 
@@ -177,23 +177,23 @@ true equivalence, but applies only to visibility within the subunit.
 </div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Indented2SmallBulleted">The effect of the elaboration of 
-a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 is to elaborate the subunit.&nbsp;</div>
 <div class="paranum"><a name="p18.a">18.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The elaboration of a subunit 
 is part of its parent body's elaboration, whereas the elaboration of 
 a child unit is not part of its parent declaration's elaboration.&nbsp;</div>
 <div class="paranum"><a name="p18.b">18.b</a></div>
-<div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
-that is mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN> 
+that is mentioned in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN> 
 of a subunit can be hidden (from direct <span class="insert2">visibility</span><span class="delete2">&nbsp;visiblity</span>) 
 by a declaration (with the same <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>) 
-given in the subunit. Moreover, such a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN> 
+given in the subunit. Moreover, such a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN> 
 can even be hidden by a declaration given within the parent body since 
 a library unit is declared in its parent's declarative region; this however 
-does not affect the interpretation of the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s 
-themselves, since only <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s 
-are visible or directly visible in <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN>s.</div>
+does not affect the interpretation of the <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN>s 
+themselves, since only <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
+are visible or directly visible in <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN>s.</div>
 <div class="paranum"><a name="p18.c">18.c</a></div>
 <div class="Annotations">The body of a protected operation cannot be 
 a subunit. This follows from the syntax rules. The body of a protected 
@@ -235,14 +235,14 @@ Inner may be turned into a subunit by rewriting the package body as follows
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p24.a">24.a</a></div>
-<div class="Annotations"><A NAME="I5053"></A>Subunits of the same ancestor 
+<div class="Annotations"><A NAME="I5256"></A>Subunits of the same ancestor 
 library unit are no longer restricted to have distinct identifiers. Instead, 
 we require only that the full expanded names be distinct.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p24.b">24.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
-<span class="insert2"><A NAME="I5054"></A>An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+<span class="insert2"><A NAME="I5257"></A>An <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN> 
 (see <A HREF="AA-8-3-1.html">8.3.1</A>) is allowed on a subprogram stub.</span> 
 </div>
 
@@ -255,8 +255,8 @@ a subunit.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p24.d">24.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<span class="insert3"><A NAME="I5055"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN>. 
+<span class="insert3"><A NAME="I5258"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
 
 <HR>

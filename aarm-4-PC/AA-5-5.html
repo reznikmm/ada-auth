@@ -13,25 +13,23 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,19 +46,19 @@ that is to be executed repeatedly, zero or more times.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">loop_statement</SPAN><A NAME="I3483"></A><A NAME="S0156"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<I>loop_</I><A NAME="I3484"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">statement_identifier</A></SPAN>:]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3485"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN>]&nbsp;<B>loop</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3486"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;[<I>loop_</I><A NAME="I3487"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">loop_statement</SPAN><A NAME="I3455"></A><A NAME="S0156"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>loop_</I><A NAME="I3456"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">statement_identifier</A></SPAN>:]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3457"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN>]&nbsp;<B>loop</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3458"></A><SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>loop</B>&nbsp;[<I>loop_</I><A NAME="I3459"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<SPAN Class="swiss">iteration_scheme</SPAN><A NAME="I3488"></A><A NAME="S0157"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>while</B>&nbsp;<A NAME="I3489"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3490"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3491"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN></span></div>
+<SPAN Class="swiss">iteration_scheme</SPAN><A NAME="I3460"></A><A NAME="S0157"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>while</B>&nbsp;<A NAME="I3461"></A><SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3462"></A><SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<B>for</B>&nbsp;<A NAME="I3463"></A><SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">loop_parameter_specification</SPAN><A NAME="I3492"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3493"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<A NAME="I3494"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">loop_parameter_specification</SPAN><A NAME="I3464"></A><A NAME="S0158"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3465"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>in</B>&nbsp;[<B>reverse</B>]&nbsp;<A NAME="I3466"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Indented1">If a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
 has a <I>loop_</I><SPAN Class="swiss"><A HREF="AA-5-1.html#S0151">statement_identifier</A></SPAN>, 
@@ -71,14 +69,14 @@ after the <B>end loop</B>.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3495"></A>A <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN> 
+<div class="Normal"><A NAME="I3467"></A>A <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN> 
 declares a <I>loop parameter</I>, which is an object whose subtype is 
 that defined by the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
-<A NAME="I3496"></A></div>
+<A NAME="I3468"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3497"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I3469"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
 is executed repeatedly, zero or more times, until the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
 is complete. The <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
@@ -86,7 +84,7 @@ is complete when a transfer of control occurs that transfers control
 out of the loop, or, in the case of an <SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN>, 
 as specified below.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3498"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
+<div class="Normal"><A NAME="I3470"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
 with a <B>while</B> <SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN>, 
 the condition is evaluated before each execution of the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN>; 
 if the value of the <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">condition</A></SPAN> 
@@ -97,9 +95,9 @@ is complete.</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
-<A NAME="I3499"></A><A NAME="I3500"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
-with <span class="insert3">the</span><span class="delete3">&nbsp;a <B>for</B></span> 
-<SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN><span class="insert3">&nbsp;being <B>for</B> <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN></span>, 
+<A NAME="I3471"></A><A NAME="I3472"></A>For the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
+with the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN> 
+being <B>for</B> <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0158">loop_parameter_specification</A></SPAN> 
 is first elaborated. This elaboration creates the loop parameter and 
 elaborates the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN>. 
@@ -108,12 +106,13 @@ defines a subtype with a null range, the execution of the <SPAN Class="swiss"><A
 is complete. Otherwise, the <SPAN Class="swiss"><A HREF="AA-5-1.html#S0145">sequence_of_statements</A></SPAN> 
 is executed once for each value of the discrete subtype defined by the 
 <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
-<span class="insert3">that satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of the subtype&nbsp;</span>(or until the loop is left as a consequence of 
-a transfer of control). <A NAME="I3501"></A>Prior to each such iteration, 
-the corresponding value of the discrete subtype is assigned to the loop 
-parameter. These values are assigned in increasing order unless the reserved 
-word <B>reverse</B> is present, in which case the values are assigned 
-in decreasing order.&nbsp;</div>
+that satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of the subtype (or until the loop is left as a consequence of a transfer 
+of control). <A NAME="I3473"></A>Prior to each such iteration, the corresponding 
+value of the discrete subtype is assigned to the loop parameter. These 
+values are assigned in increasing order unless the reserved word <B>reverse</B> 
+is present, in which case the values are assigned in decreasing order. 
+</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The order of creating the 
 loop parameter and evaluating the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
@@ -122,33 +121,31 @@ effects (other than possibly raising Storage_Error, but anything can
 do that).</div>
 <div class="paranum"><a name="p9.b">9.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">The predicate (if any) necessarily has to be a 
-static predicate as a dynamic predicate is explicitly disallowed &mdash; 
-see <A HREF="AA-3-2-4.html">3.2.4</A>.</span></div>
+The predicate (if any) necessarily has to be a static predicate as a 
+dynamic predicate is explicitly disallowed &mdash; see <A HREF="AA-3-2-4.html">3.2.4</A>.</div>
 <div class="paranum"><a name="p9.c">9.c/3</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Reason: 
-</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">If there is a predicate, the loop still visits 
-the values in the order of the underlying base type; the order of the 
-values in the predicate is irrelevant. This is the case so that the following 
-loops have the same sequence of calls and parameters on procedure Call 
-for any subtype S:</span>&nbsp;</div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+If there is a predicate, the loop still visits the values in the order 
+of the underlying base type; the order of the values in the predicate 
+is irrelevant. This is the case so that the following loops have the 
+same sequence of calls and parameters on procedure Call for any subtype 
+S:&nbsp;</div>
 <div class="paranum"><a name="p9.d">9.d</a></div>
-<div class="SmallExamples"><span class="insert3"><B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;S&nbsp;<B>loop</B><BR>
+<div class="SmallExamples"><B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;S&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;Call&nbsp;(I);<BR>
-<B>end&nbsp;loop</B>;</span></div>
+<B>end&nbsp;loop</B>;</div>
 <div class="paranum"><a name="p9.e">9.e</a></div>
-<div class="SmallExamples"><span class="insert3"><B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;S'Base&nbsp;<B>loop</B><BR>
+<div class="SmallExamples"><B>for</B>&nbsp;I&nbsp;<B>in</B>&nbsp;S'Base&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;I&nbsp;<B>in</B>&nbsp;S&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;(I);<BR>
 &nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
-<B>end&nbsp;loop</B>;</span></div>
+<B>end&nbsp;loop</B>;</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">[For details about the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+[For details about the execution of a <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN> 
 with the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0157">iteration_scheme</A></SPAN> 
 being <B>for</B> <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN>, 
-see <A HREF="AA-5-5-2.html">5.5.2</A>.]</span></div>
+see <A HREF="AA-5-5-2.html">5.5.2</A>.]</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Notes">5&nbsp;&nbsp;A loop parameter is a constant; it cannot 
@@ -225,17 +222,18 @@ and Named Numbers</A>&rdquo;.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p21.b">21.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3">Generalized <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN>s 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Generalized <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN>s 
 are allowed in <B>for</B> loops; these are documented as an extension 
-in the appropriate subclause.</span>&nbsp;</div>
+in the appropriate subclause.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p21.c">21.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0071-1.TXT">AI12-0071-1</A></I>} 
 <span class="insert4"><B>Corrigendum:</B> Updated wording of loop execution 
-to use the new term &quot;satisfies the predicates&quot; (see <A HREF="AA-3-2-4.html">3.2.4</A>).</span></div>
+to use the new term &quot;satisfies the predicates&quot; (see <A HREF="AA-3-2-4.html">3.2.4</A>).</span> 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

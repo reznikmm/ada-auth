@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,59 +41,49 @@ through technical committees established by the respective organization
 to deal with particular fields of technical activity. ISO and IEC technical 
 committees collaborate in fields of mutual interest. Other international 
 organizations, governmental and non-governmental, in liaison with ISO 
-and IEC, also take part in the work.<span class="insert3">&nbsp;In the field 
-of information technology, ISO and IEC have established a joint technical 
-committee, ISO/IEC JTC 1.</span></div>
+and IEC, also take part in the work. In the field of information technology, 
+ISO and IEC have established a joint technical committee, ISO/IEC JTC 
+1.</div>
 <div class="paranum"><a name="p1.1">1.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">International Standards are 
-drafted in accordance with the rules given in the ISO/IEC Directives, 
-Part 2.</span></div>
+<div class="Normal">&nbsp;&nbsp;International Standards are drafted in accordance 
+with the rules given in the ISO/IEC Directives, Part 2.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><span class="insert3">The main task of the</span><span class="delete3">&nbsp;In 
-the field of information technology, ISO and IEC have established a</span> 
-joint technical committee<span class="insert3">&nbsp;is to prepare International 
-Standards</span><span class="delete3">, ISO/IEC JTC 1</span>. Draft International 
-Standards adopted by the joint technical committee are circulated to 
-national bodies for voting. Publication as an International Standard 
-requires approval by at least 75 % of the national bodies casting a vote.</div>
+<div class="Normal">The main task of the joint technical committee is 
+to prepare International Standards. Draft International Standards adopted 
+by the joint technical committee are circulated to national bodies for 
+voting. Publication as an International Standard requires approval by 
+at least 75 % of the national bodies casting a vote.</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">Attention is drawn to the 
-possibility that some of the elements of this document may be the subject 
-of patent rights. ISO and IEC shall not be held responsible for identifying 
-any or all such patent rights.</span></div>
+<div class="Normal">&nbsp;&nbsp;Attention is drawn to the possibility that some 
+of the elements of this document may be the subject of patent rights. 
+ISO and IEC shall not be held responsible for identifying any or all 
+such patent rights.</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">International Standard ISO/IEC 8652 was prepared 
-by Joint Technical Committee ISO/IEC JTC 1, <I>Information Technology</I><span class="insert3">&nbsp;Subcommittee SC22, <I>Programming languages, their environments and system 
-software interfaces</I></span>.</div>
+by Joint Technical Committee ISO/IEC JTC 1, <I>Information Technology</I> 
+Subcommittee SC22, <I>Programming languages, their environments and system 
+software interfaces</I>.</div>
 <div class="paranum"><a name="p4">4/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 This <span class="insert4">consolidated edition updates the third edition 
-(ISO/IEC 8652:2012).</span><span class="delete4"></span><span class="insert3"><span class="delete4">&nbsp;third</span></span><span class="delete4"></span><span class="delete3">&nbsp;consolidated</span><span class="delete4">&nbsp;edition&nbsp;</span><span class="insert3"><span class="delete4">cancels and 
-replaces</span></span><span class="delete4"></span><span class="delete3">&nbsp;updates</span><span class="delete4">&nbsp;the second edition (ISO</span><span class="insert3"><span class="delete4">/IEC</span></span><span class="delete4">&nbsp;8652:1995)</span><span class="insert3"><span class="delete4">, which 
-has been technically revised. It also incorporates the Technical Corrigendum 
-ISO/IEC 8652:1995:COR.1:2001 and Amendment ISO/IEC 8652:1995:AMD 1:2007</span></span><span class="delete4">.</span> 
-</div>
+(ISO/IEC 8652:2012).</span><span class="delete4">&nbsp;third edition cancels 
+and replaces the second edition (ISO/IEC 8652:1995), which has been technically 
+revised. It also incorporates the Technical Corrigendum ISO/IEC 8652:1995:COR.1:2001 
+and Amendment ISO/IEC 8652:1995:AMD 1:2007.</span>&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B><span class="delete3">The 
-above is unofficial wording added just to avoid confusion. If ISO decides 
-to publish a new standard, the above would be replaced by &ldquo;This 
-third edition cancels and replaces the second edition (ISO 8652:1995), 
-of which it constitutes a technical revision&rdquo;. The first three 
-paragraphs in this section also would be replaced by the current ISO 
-boilerplate.</span>&nbsp;</div>
+<div class="Annotations"></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00440.TXT">AI95-00440-01</A></I>} 
-<span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="delete3">Annexes A to J form an integral part of this International 
-Standard. Annexes K to Q are for information only.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+</div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>This document is the Annotated 
-Ada Reference Manual (AARM). It contains the entire text of the Ada <span class="insert3">2012</span><span class="delete3">&nbsp;95</span> 
-standard (ISO/IEC 8652:<span class="insert3">2012</span><span class="delete3">&nbsp;1995</span>), 
-plus various annotations. It is intended primarily for compiler writers, 
-validation test writers, and other language lawyers. The annotations 
-include detailed rationale for individual rules and explanations of some 
-of the more arcane interactions among the rules.&nbsp;</div>
+Ada Reference Manual (AARM). It contains the entire text of the Ada 2012 
+standard (ISO/IEC 8652:2012), plus various annotations. It is intended 
+primarily for compiler writers, validation test writers, and other language 
+lawyers. The annotations include detailed rationale for individual rules 
+and explanations of some of the more arcane interactions among the rules. 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

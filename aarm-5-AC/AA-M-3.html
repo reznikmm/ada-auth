@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,7 +41,7 @@
 <HR>
 <H1>M.3 <span class="insert2">Implementation Advice</span><span class="delete2"></span></H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I10211"></A><A NAME="I10212"></A>This 
+<div class="Normal"><span class="insert2"><A NAME="I10553"></A><A NAME="I10554"></A>This 
 International Standard sometimes gives advice about handling certain 
 target machine dependences. Each Ada implementation must document whether 
 that advice is followed:</span>&nbsp;</div>
@@ -65,7 +65,7 @@ should have no semantic effect for error-free programs.</span><span class="inser
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Bulleted"><span class="insert2">Implementation-defined pragmas 
 should not make an illegal program legal, unless they complete a declaration 
-or configure the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s 
+or configure the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
 in an environment.</span><span class="insert2">&nbsp;See <A HREF="AA-2-8.html">2.8</A>(19).</span></div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Bulleted"><span class="insert2">Long_Integer should be declared 
@@ -98,7 +98,7 @@ should be rounded the same as the target system.</span><span class="insert2">&nb
 <div class="Bulleted"><span class="insert2">The value of Duration'Small 
 should be no greater than 100 microseconds.</span><span class="insert2">&nbsp;See <A HREF="AA-9-6.html">9.6</A>(30).</span></div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Bulleted"><span class="insert2">The time base for <SPAN Class="swiss"><A HREF="AA-9-6.html#S0232">delay_relative_statement</A></SPAN>s 
+<div class="Bulleted"><span class="insert2">The time base for <SPAN Class="swiss"><A HREF="AA-9-6.html#S0246">delay_relative_statement</A></SPAN>s 
 should be monotonic.</span><span class="insert2">&nbsp;See <A HREF="AA-9-6.html">9.6</A>(31).</span></div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Bulleted"><span class="insert2">Leap seconds should be supported 
@@ -182,11 +182,11 @@ of a subtype should equal the Object_Size of the subtype.</span><span class="ins
 support for the Component_Size attribute should be followed.</span><span class="insert2">&nbsp;See <A HREF="AA-13-3.html">13.3</A>(73).</span></div>
 <div class="paranum"><a name="p33">33/2</a></div>
 <div class="Bulleted"><span class="insert2">The recommended level of 
-support for <SPAN Class="swiss"><A HREF="AA-13-4.html#S0314">enumeration_representation_clause</A></SPAN>s 
+support for <SPAN Class="swiss"><A HREF="AA-13-4.html#S0328">enumeration_representation_clause</A></SPAN>s 
 should be followed.</span><span class="insert2">&nbsp;See <A HREF="AA-13-4.html">13.4</A>(10).</span></div>
 <div class="paranum"><a name="p34">34/2</a></div>
 <div class="Bulleted"><span class="insert2">The recommended level of 
-support for <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>s 
+support for <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>s 
 should be followed.</span><span class="insert2">&nbsp;See <A HREF="AA-13-5-1.html">13.5.1</A>(22).</span></div>
 <div class="paranum"><a name="p35">35/2</a></div>
 <div class="Bulleted"><span class="insert2">If a component is represented 
@@ -219,7 +219,7 @@ should be avoided.</span><span class="insert2">&nbsp;See <A HREF="AA-13-9.html">
 support for Unchecked_Conversion should be followed.</span><span class="insert2">&nbsp;See <A HREF="AA-13-9.html">13.9</A>(17).</span></div>
 <div class="paranum"><a name="p42">42/2</a></div>
 <div class="Bulleted"><span class="insert2">Any cases in which heap storage 
-is dynamically allocated other than as part of the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+is dynamically allocated other than as part of the evaluation of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 should be documented.</span><span class="insert2">&nbsp;See <A HREF="AA-13-11.html">13.11</A>(23).</span></div>
 <div class="paranum"><a name="p43">43/2</a></div>
 <div class="Bulleted"><span class="insert2">A default storage pool for 
@@ -228,7 +228,7 @@ of individual objects.</span><span class="insert2">&nbsp;See <A HREF="AA-13-11.h
 <div class="paranum"><a name="p44">44/2</a></div>
 <div class="Bulleted"><span class="insert2">Usually, a storage pool for 
 an access discriminant or access parameter should be created at the point 
-of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>, 
+of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>, 
 and be reclaimed when the designated object becomes inaccessible. For 
 other anonymous access types, the pool should be created at the point 
 where the type is elaborated and need not support deallocation of individual 
@@ -241,6 +241,9 @@ an instance of Unchecked_Deallocation should actually reclaim the storage.</span
 Unchecked_Deallocation with a nonnull access value should raise Program_Error 
 if the actual access type of the instance is a type for which the Storage_Size 
 has been specified to be zero or is defined by the language to be zero.</span><span class="insert3">&nbsp;See <A HREF="AA-13-11-2.html">13.11.2</A>(17.1/3).</span></div>
+<div class="paranum"><a name="p45.2">45.2/5</a></div>
+<div class="Bulleted"><span class="insert5">Streams.FIFO_Streams.Bounded.Stream_Type 
+objects should be implemented without implicit pointers or dynamic allocation.</span><span class="insert5">&nbsp;See <A HREF="AA-13-13-1.html">13.13.1</A>(37).</span></div>
 <div class="paranum"><a name="p46">46/2</a></div>
 <div class="Bulleted"><span class="insert2">If not specified, the value 
 of Stream_Size for an elementary type should be the number of bits that 
@@ -488,6 +491,9 @@ be implemented without implicit pointers or dynamic allocation.</span><span clas
 <div class="paranum"><a name="p81.4">81.4/3</a></div>
 <div class="Bulleted"><span class="insert3">Bounded priority queue objects 
 should be implemented without implicit pointers or dynamic allocation.</span><span class="insert3">&nbsp;See <A HREF="AA-A-18-31.html">A.18.31</A>(14/3).</span></div>
+<div class="paranum"><a name="p81.5">81.5/5</a></div>
+<div class="Bulleted"><span class="insert5">Bounded holder objects should 
+be implemented without dynamic allocation.</span><span class="insert5">&nbsp;See <A HREF="AA-A-18-32.html">A.18.32</A>(13/5).</span></div>
 <div class="paranum"><a name="p82">82/3</a></div>
 <div class="Bulleted"><span class="insert2">If&nbsp;</span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 </span></span><span class="insert2">&nbsp;Export is supported for a language, 
@@ -602,7 +608,7 @@ should be used for implementation-defined locking policies.</span><span class="i
 <div class="Bulleted"><span class="insert2">Names that end with &ldquo;_Queuing&rdquo; 
 should be used for implementation-defined queuing policies.</span><span class="insert2">&nbsp;See <A HREF="AA-D-4.html">D.4</A>(16).</span></div>
 <div class="paranum"><a name="p107">107/2</a></div>
-<div class="Bulleted"><span class="insert2">The <SPAN Class="swiss"><A HREF="AA-9-8.html#S0248">abort_statement</A></SPAN> 
+<div class="Bulleted"><span class="insert2">The <SPAN Class="swiss"><A HREF="AA-9-8.html#S0262">abort_statement</A></SPAN> 
 should not require the task executing the statement to block.</span><span class="insert2">&nbsp;See <A HREF="AA-D-6.html">D.6</A>(9).</span></div>
 <div class="paranum"><a name="p108">108/2</a></div>
 <div class="Bulleted"><span class="insert2">On a multi-processor, the 
@@ -624,7 +630,7 @@ application through Real_Time.Clock.</span><span class="insert2">&nbsp;See
 <A HREF="AA-D-8.html">D.8</A>(49).</span></div>
 <div class="paranum"><a name="p112.1">112.1/3</a></div>
 <div class="Bulleted"><span class="insert3">On a multiprocessor system, 
-each processor should have a separate and disjoint ready queue.</span><span class="insert3">&nbsp;See <A HREF="AA-D-13.html">D.13</A>(9).</span></div>
+each processor should have a separate and disjoint ready queue.</span><span class="insert3">&nbsp;See <A HREF="AA-D-13.html">D.13</A>(10).</span></div>
 <div class="paranum"><a name="p113">113/2</a></div>
 <div class="Bulleted"><span class="insert2">When appropriate, implementations 
 should provide configuration mechanisms to change the value of Execution_Time.CPU_Tick.</span><span class="insert2">&nbsp;See <A HREF="AA-D-14.html">D.14</A>(29/2).</span></div>

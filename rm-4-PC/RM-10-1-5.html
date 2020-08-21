@@ -13,17 +13,15 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,8 +38,8 @@ units, library units, and <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">com
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4483"></A><A NAME="I4484"></A>Certain <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
-are defined to be <I>program unit pragmas</I>. <A NAME="I4485"></A>A 
+<div class="Normal"><A NAME="I4431"></A><A NAME="I4432"></A>Certain <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
+are defined to be <I>program unit pragmas</I>. <A NAME="I4433"></A>A 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> given 
 as the argument of a program unit pragma shall resolve to denote the 
 declarations or renamings of one or more program units that occur immediately 
@@ -85,22 +83,20 @@ or a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0276">generic_instantiation</A><
 of the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN> 
 or program unit declaration.&nbsp;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><A NAME="I4486"></A><A NAME="I4487"></A><A NAME="I4488"></A><A NAME="I4489"></A>Certain 
-program unit pragmas are defined to be <I>library unit pragmas</I>. <span class="insert3">If 
+<div class="Normal"><A NAME="I4434"></A><A NAME="I4435"></A><A NAME="I4436"></A><A NAME="I4437"></A>Certain 
+program unit pragmas are defined to be <I>library unit pragmas</I>. If 
 a library unit pragma applies to a program unit, the program unit shall 
-be</span><span class="delete3">&nbsp;The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
-if any, in a library unit pragma shall denote the declaration of</span> 
-a library unit.&nbsp;</div>
+be a library unit.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p7.1">7.1/1</a></div>
-<div class="Normal">&nbsp;A library unit pragma that applies to a generic 
+<div class="Normal">&nbsp;&nbsp;A library unit pragma that applies to a generic 
 unit does not apply to its instances, unless a specific rule for the 
 pragma specifies the contrary.&nbsp;</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I4490"></A><A NAME="I4491"></A>Certain <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
+<div class="Normal"><A NAME="I4438"></A><A NAME="I4439"></A>Certain <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>s 
 are defined to be <I>configuration pragmas</I>; they shall appear before 
 the first <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0247">compilation_unit</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>. 
@@ -122,7 +118,7 @@ confirm the initially selected partition-wide or system-wide options.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p10">10/1</a></div>
-<div class="Normal">When applied to a generic unit, a program unit pragma 
+<div class="Normal">&nbsp;When applied to a generic unit, a program unit pragma 
 that is not a library unit pragma should apply to each instance of the 
 generic unit for which there is not an overriding pragma applied directly 
 to the instance.&nbsp;</div>

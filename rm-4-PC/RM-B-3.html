@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,212 +38,205 @@
 <HR>
 <H1>B.3 Interfacing with C and C++</H1>
 <div class="paranum"><a name="p1">1/4</a></div>
-<div class="Normal"><A NAME="I7593"></A><A NAME="I7594"></A>The facilities 
+<div class="Normal"><A NAME="I7445"></A><A NAME="I7446"></A>The facilities 
 relevant to interfacing with the C language and the corresponding subset 
-of the C++ language are the package Interfaces.C and its children<span class="insert3">, 
-and&nbsp;</span><span class="delete3">;&nbsp;</span>support for <span class="insert3">specifying 
-</span>the <span class="delete3">Import, Export, and</span> Convention 
-<span class="insert3">aspect</span><span class="delete3">&nbsp;pragmas</span> 
-with <span class="insert3"><I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s</span><span class="delete3"><I>&nbsp;convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN></span> 
-C<span class="insert3"></span><span class="insert4">,</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;and</span></span><span class="insert3"></span><span class="delete3">; 
-and support for the Convention pragma with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN></span> 
-C_Pass_By_Copy<span class="insert4">, and any of the C_Variadic_<I>n</I> 
-conventions described below</span>.</div>
+of the C++ language are the package Interfaces.C and its children, and 
+support for specifying the Convention aspect with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
+C<span class="insert4">,</span><span class="delete4">&nbsp;and</span> C_Pass_By_Copy<span class="insert4">, 
+and any of the C_Variadic_<I>n</I> conventions described below</span>.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">The package Interfaces.C contains the basic types, 
-constants<span class="insert3">,</span> and subprograms that allow an 
-Ada program to pass scalars and strings to C and C++ functions. When 
-this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-mentions a C entity, the reference also applies to the corresponding 
-entity in C++.&nbsp;</div>
+constants, and subprograms that allow an Ada program to pass scalars 
+and strings to C and C++ functions. When this subclause mentions a C 
+entity, the reference also applies to the corresponding entity in C++. 
+</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Interfaces.C has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples"><B>package</B>&nbsp;Interfaces.C&nbsp;<B>is</B><A NAME="I7595"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Interfaces.C&nbsp;<B>is</B><A NAME="I7447"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(C);</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Declarations&nbsp;based&nbsp;on&nbsp;C's&nbsp;&lt;limits.h&gt;</I></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7596"></A>CHAR_BIT&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;8</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7597"></A>SCHAR_MIN&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;&ndash;128</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7598"></A>SCHAR_MAX&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;127</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I7599"></A>UCHAR_MAX&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;255</I></SPAN></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7448"></A>CHAR_BIT&nbsp;&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;8</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7449"></A>SCHAR_MIN&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;&ndash;128</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7450"></A>SCHAR_MAX&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;127</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I7451"></A>UCHAR_MAX&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;typically&nbsp;255</I></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Signed&nbsp;and&nbsp;Unsigned&nbsp;Integers</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7600"></A>int&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7601"></A>short&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7602"></A>long&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7452"></A>int&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7453"></A>short&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7454"></A>long&nbsp;&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7603"></A>signed_char&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;SCHAR_MIN&nbsp;..&nbsp;SCHAR_MAX;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7455"></A>signed_char&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;SCHAR_MIN&nbsp;..&nbsp;SCHAR_MAX;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;signed_char'Size&nbsp;<B>use</B>&nbsp;CHAR_BIT;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7604"></A>unsigned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7605"></A>unsigned_short&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7606"></A>unsigned_long&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7456"></A>unsigned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7457"></A>unsigned_short&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7458"></A>unsigned_long&nbsp;&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7607"></A>unsigned_char&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;(UCHAR_MAX+1);<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7459"></A>unsigned_char&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;(UCHAR_MAX+1);<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;unsigned_char'Size&nbsp;<B>use</B>&nbsp;CHAR_BIT;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7608"></A>plain_char&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I7460"></A>plain_char&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7609"></A>ptrdiff_t&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7461"></A>ptrdiff_t&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7610"></A>size_t&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7462"></A>size_t&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Floating&nbsp;Point</I></SPAN></div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7611"></A>C_float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7463"></A>C_float&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7612"></A>double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7464"></A>double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7613"></A>long_double&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7465"></A>long_double&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Characters&nbsp;and&nbsp;Strings&nbsp;</I></SPAN></div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7614"></A>char&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7466"></A>char&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
 <div class="paranum"><a name="p20">20/1</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7615"></A>nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7467"></A>nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7616"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;char;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7468"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Character)&nbsp;<B>return</B>&nbsp;char;</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7617"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char)&nbsp;<B>return</B>&nbsp;Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7469"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char)&nbsp;<B>return</B>&nbsp;Character;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7618"></A>char_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;char<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span><span class="delete3">;<BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(char_array)</span>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7470"></A>char_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;char<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;<BR>
 &nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;char_array'Component_Size&nbsp;<B>use</B>&nbsp;CHAR_BIT;</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7619"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7471"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7620"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7472"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;char_array;</div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7621"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7473"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7622"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7474"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;char_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7623"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7475"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p29">29</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Wide&nbsp;Character&nbsp;and&nbsp;Wide&nbsp;String</I></SPAN></div>
 <div class="paranum"><a name="p30">30/1</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7624"></A>wchar_t&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7476"></A>wchar_t&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
 <div class="paranum"><a name="p31">31/1</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7625"></A>wide_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;wchar_t&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7477"></A>wide_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;wchar_t&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7626"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;wchar_t;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7627"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7478"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;wchar_t;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7479"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_t&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7628"></A>wchar_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;wchar_t<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7480"></A>wchar_array&nbsp;<B>is</B>&nbsp;<B>array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;<B>aliased</B>&nbsp;wchar_t<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p34">34/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(wchar_array);</span></div>
+was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7629"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7481"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p36">36</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7630"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7482"></A>To_C&nbsp;&nbsp;&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;wchar_array;</div>
 <div class="paranum"><a name="p37">37</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7631"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7483"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;wchar_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p38">38</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7632"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7484"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;wchar_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p39">39</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7633"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;wchar_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7485"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;wchar_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p39.1">39.1/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>ISO/IEC&nbsp;10646:2003&nbsp;compatible&nbsp;types&nbsp;defined&nbsp;by&nbsp;ISO/IEC&nbsp;TR&nbsp;19769:2004.</I></SPAN></div>
 <div class="paranum"><a name="p39.2">39.2/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7634"></A>char16_t&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7486"></A>char16_t&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
 <div class="paranum"><a name="p39.3">39.3/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7635"></A>char16_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char16_t&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7487"></A>char16_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char16_t&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p39.4">39.4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7636"></A>To_C&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;char16_t;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7637"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char16_t)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7488"></A>To_C&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Character)&nbsp;<B>return</B>&nbsp;char16_t;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7489"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char16_t)&nbsp;<B>return</B>&nbsp;Wide_Character;</div>
 <div class="paranum"><a name="p39.5">39.5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7638"></A>char16_array&nbsp;<B>is&nbsp;array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of&nbsp;aliased</B>&nbsp;char16_t<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7490"></A>char16_array&nbsp;<B>is&nbsp;array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of&nbsp;aliased</B>&nbsp;char16_t<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p39.6">39.6/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(char16_array);</span></div>
+was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p39.7">39.7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7639"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char16_array)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7640"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7491"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char16_array)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7492"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;char16_array;</div>
 <div class="paranum"><a name="p39.8">39.8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7641"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char16_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7493"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char16_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_String;</div>
 <div class="paranum"><a name="p39.9">39.9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7642"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7494"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;char16_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p39.10">39.10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7643"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char16_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7495"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char16_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p39.11">39.11/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7644"></A>char32_t&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7496"></A>char32_t&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>&lt;implementation-defined&nbsp;character&nbsp;type&gt;</I></SPAN>;</div>
 <div class="paranum"><a name="p39.12">39.12/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7645"></A>char32_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char32_t&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7497"></A>char32_nul&nbsp;:&nbsp;<B>constant</B>&nbsp;char32_t&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p39.13">39.13/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7646"></A>To_C&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character)&nbsp;<B>return</B>&nbsp;char32_t;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7647"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char32_t)&nbsp;<B>return</B>&nbsp;Wide_Wide_Character;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7498"></A>To_C&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character)&nbsp;<B>return</B>&nbsp;char32_t;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7499"></A>To_Ada&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char32_t)&nbsp;<B>return</B>&nbsp;Wide_Wide_Character;</div>
 <div class="paranum"><a name="p39.14">39.14/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7648"></A>char32_array&nbsp;<B>is&nbsp;array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of&nbsp;aliased</B>&nbsp;char32_t<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack</span>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7500"></A>char32_array&nbsp;<B>is&nbsp;array</B>&nbsp;(size_t&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of&nbsp;aliased</B>&nbsp;char32_t<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pack;</div>
 <div class="paranum"><a name="p39.15">39.15/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pack(char32_array);</span></div>
+was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p39.16">39.16/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7649"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char32_array)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7650"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7501"></A>Is_Nul_Terminated&nbsp;(Item&nbsp;:&nbsp;<B>in</B>&nbsp;char32_array)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7502"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;char32_array;</div>
 <div class="paranum"><a name="p39.17">39.17/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7651"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char32_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7503"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;char32_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean&nbsp;:=&nbsp;True)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p39.18">39.18/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7652"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_Wide_String;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7504"></A>To_C&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;char32_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;size_t;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Append_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p39.19">39.19/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7653"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char32_array;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7505"></A>To_Ada&nbsp;(Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;char32_array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Target&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Wide_Wide_String;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Natural;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim_Nul&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Boolean&nbsp;:=&nbsp;True);</div>
 <div class="paranum"><a name="p40">40</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7654"></A>Terminator_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I7506"></A>Terminator_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p41">41</a></div>
 <div class="Examples"><B>end</B>&nbsp;Interfaces.C;</div>
 <div class="paranum"><a name="p42">42</a></div>
 <div class="Normal">Each of the types declared in Interfaces.C is C-compatible.</div>
 <div class="paranum"><a name="p43">43/2</a></div>
-<div class="Normal">The types int, short, long, unsigned, ptrdiff_t, 
+<div class="Normal">&nbsp;The types int, short, long, unsigned, ptrdiff_t, 
 size_t, double, char, wchar_t, char16_t, and char32_t correspond respectively 
 to the C types having the same names. The types signed_char, unsigned_short, 
 unsigned_long, unsigned_char, C_float, and long_double correspond respectively 
@@ -304,14 +295,14 @@ is True and Item does not contain nul.</div>
 (via the To_C function) to a char, which is assigned to the corresponding 
 element of Target. If Append_Nul is True, nul is then assigned to the 
 next element of Target. In either case, Count is set to the number of 
-Target elements assigned. <A NAME="I7655"></A>If Target is not long enough, 
+Target elements assigned. <A NAME="I7507"></A>If Target is not long enough, 
 Constraint_Error is propagated.</div>
 <div class="paranum"><a name="p54">54</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">For procedure To_Ada, 
 each element of Item (if Trim_Nul is False) or each element of Item preceding 
 the first nul (if Trim_Nul is True) is converted (via the To_Ada function) 
 to a Character, which is assigned to the corresponding element of Target. 
-Count is set to the number of Target elements assigned. <A NAME="I7656"></A>If 
+Count is set to the number of Target elements assigned. <A NAME="I7508"></A>If 
 Target is not long enough, Constraint_Error is propagated. If Trim_Nul 
 is True and Item does not contain nul, then Terminator_Error is propagated.</div>
 <div class="paranum"><a name="p55">55</a></div>
@@ -417,22 +408,19 @@ subprograms that convert between Wide_Wide_String and char32_array have
 analogous effects to the To_C and To_Ada subprograms that convert between 
 String and char_array, except that char32_nul is used instead of nul.</div>
 <div class="paranum"><a name="p60.13">60.13/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">The</span><span class="delete3">&nbsp;A</span> 
-Convention <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-C_Pass_By_Copy shall only be <span class="insert3">specified for</span><span class="delete3">&nbsp;applied 
-to</span> a type.</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;The Convention aspect with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+C_Pass_By_Copy shall only be specified for a type.</div>
 <div class="paranum"><a name="p60.14">60.14/2</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;The eligibility rules in <A HREF="RM-B-1.html">B.1</A> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;The eligibility rules in <A HREF="RM-B-1.html">B.1</A> 
 do not apply to convention C_Pass_By_Copy. Instead, a type T is eligible 
 for convention C_Pass_By_Copy if T is an unchecked union type or if T 
 is a record type that has no discriminants and that only has components 
 with statically constrained subtypes, and each component is C-compatible.</div>
 <div class="paranum"><a name="p60.15">60.15/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;If a type is C_Pass_By_Copy-compatible<span class="insert3">,</span> 
-then it is also C-compatible.</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;If a type is C_Pass_By_Copy-compatible, then 
+it is also C-compatible.</div>
 <div class="paranum"><a name="p60.16">60.16/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The identifiers C_Variadic_0, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4">The identifiers C_Variadic_0, 
 C_Variadic_1, C_Variadic_2, and so on are <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s. 
 These conventions are said to be <I>C_Variadic</I>. The convention C_Variadic_<I>n</I> 
 is the calling convention for a variadic C function taking <I>n</I> fixed 
@@ -440,16 +428,14 @@ parameters and then a variable number of additional parameters. The C_Variadic_<
 convention shall only be specified as the convention aspect for a subprogram, 
 or for an access-to-subprogram type, having at least <I>n</I> parameters. 
 A type is compatible with a C_Variadic convention if and only if the 
-type is C-compatible.<A NAME="I7657"></A><A NAME="I7658"></A></span></div>
+type is C-compatible.<A NAME="I7509"></A><A NAME="I7510"></A></span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p61">61/3</a></div>
-<div class="Normal">An implementation shall support <span class="insert3">specifying 
-aspect</span><span class="delete3">&nbsp;pragma</span> Convention with a C 
-<I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">&nbsp;An implementation shall support specifying aspect 
+Convention with a C <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 for a C-eligible type (see <A HREF="RM-B-1.html">B.1</A>). An implementation 
-shall support <span class="insert3">specifying aspect</span><span class="delete3">&nbsp;pragma</span> 
-Convention with a C_Pass_By_Copy <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+shall support specifying aspect Convention with a C_Pass_By_Copy <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 for a C_Pass_By_Copy-eligible type.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
@@ -457,24 +443,22 @@ for a C_Pass_By_Copy-eligible type.&nbsp;</div>
 <div class="Normal">An implementation may provide additional declarations 
 in the C interface packages.</div>
 <div class="paranum"><a name="p62.1">62.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">An 
-implementation need not support specifying the Convention aspect with 
-<I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
-C in the following cases:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;An implementation 
+need not support specifying the Convention aspect with <I>convention_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+C in the following cases:</div>
 <div class="paranum"><a name="p62.2">62.2/3</a></div>
-<div class="Bulleted"><span class="insert3">for a subprogram that has 
-a parameter of an unconstrained array subtype, unless the Import aspect 
-has the value True for the subprogram;</span></div>
+<div class="Bulleted">for a subprogram that has a parameter of an unconstrained 
+array subtype, unless the Import aspect has the value True for the subprogram;</div>
 <div class="paranum"><a name="p62.3">62.3/3</a></div>
-<div class="Bulleted"><span class="insert3">for a function with an unconstrained 
-array result subtype;</span></div>
+<div class="Bulleted">for a function with an unconstrained array result 
+subtype;</div>
 <div class="paranum"><a name="p62.4">62.4/3</a></div>
-<div class="Bulleted"><span class="insert3">for an object whose nominal 
-subtype is an unconstrained array subtype.</span>&nbsp;</div>
+<div class="Bulleted">for an object whose nominal subtype is an unconstrained 
+array subtype.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p62.5">62.5/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The constants nul, wide_nul, char16_nul, and char32_nul 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The constants nul, wide_nul, char16_nul, and char32_nul 
 should have a representation of zero.&nbsp;</div>
 <div class="paranum"><a name="p63">63</a></div>
 <div class="Normal">An implementation should support the following interface 
@@ -521,31 +505,29 @@ t is the C type corresponding to the Ada type T.</div>
 is passed as a pointer to a C function whose prototype corresponds to 
 the designated subprogram's specification.</div>
 <div class="paranum"><a name="p71.1">71.1/3</a></div>
-<div class="Bulleted"><span class="insert3">An Ada parameter of a private 
-type is passed as specified for the full view of the type.</span></div>
+<div class="Bulleted">An Ada parameter of a private type is passed as 
+specified for the full view of the type.</div>
 <div class="paranum"><a name="p71.2">71.2/3</a></div>
-<div class="Bulleted"><span class="insert3">The rules of correspondence 
-given above for parameters of mode <B>in</B> also apply to the return 
-object of a function.</span></div>
+<div class="Bulleted">The rules of correspondence given above for parameters 
+of mode <B>in</B> also apply to the return object of a function.</div>
 <div class="paranum"><a name="p71.3">71.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3">An Ada parameter of a private 
-type is passed as specified for the full view of the type.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+was deleted.</I></SPAN></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p72">72</a></div>
-<div class="Notes">8&nbsp;&nbsp;Values of type char_array are not implicitly 
+<div class="Notes">6&nbsp;&nbsp;Values of type char_array are not implicitly 
 terminated with nul. If a char_array is to be passed as a parameter to 
 an imported C function requiring nul termination, it is the programmer's 
 responsibility to obtain this effect.</div>
 <div class="paranum"><a name="p73">73</a></div>
-<div class="Notes">9&nbsp;&nbsp;To obtain the effect of C's sizeof(item_type), 
+<div class="Notes">7&nbsp;&nbsp;To obtain the effect of C's sizeof(item_type), 
 where Item_Type is the corresponding Ada type, evaluate the expression: 
 size_t(Item_Type'Size/CHAR_BIT).</div>
 <div class="paranum"><a name="p74">74/2</a></div>
 <div class="Notes"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN></div>
 <div class="paranum"><a name="p75">75/4</a></div>
-<div class="Notes">10&nbsp;&nbsp;A <span class="insert4">variadic&nbsp;</span>C 
+<div class="Notes">8&nbsp;&nbsp;A <span class="insert4">variadic&nbsp;</span>C 
 function <span class="delete4">that takes a variable number of arguments 
 </span>can correspond to several Ada subprograms, taking various specific 
 numbers and types of parameters.&nbsp;</div>
@@ -568,11 +550,11 @@ the Interfaces.C package:</I>&nbsp;</div>
 <div class="paranum"><a name="p78">78/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;Note:&nbsp;since&nbsp;the&nbsp;C&nbsp;function's&nbsp;return&nbsp;value&nbsp;is&nbsp;of&nbsp;no&nbsp;interest,&nbsp;the&nbsp;Ada&nbsp;interface&nbsp;is&nbsp;a&nbsp;procedure</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Strcpy&nbsp;(Target&nbsp;:&nbsp;<B>out</B>&nbsp;C.char_array;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;C.char_array)<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Import&nbsp;=&gt;&nbsp;True,&nbsp;Convention&nbsp;=&gt;&nbsp;C,&nbsp;External_Name&nbsp;=&gt;&nbsp;&quot;strcpy&quot;</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;C.char_array)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Import&nbsp;=&gt;&nbsp;True,&nbsp;Convention&nbsp;=&gt;&nbsp;C,&nbsp;External_Name&nbsp;=&gt;&nbsp;&quot;strcpy&quot;;</div>
 <div class="paranum"><a name="p79">79/3</a></div>
 <div class="Examples"><SPAN STYLE="font-size: 80%"><I>This paragraph 
-was deleted.</I></SPAN><span class="delete3">&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Import(C,&nbsp;Strcpy,&nbsp;&quot;strcpy&quot;);</span></div>
+was deleted.</I></SPAN></div>
 <div class="paranum"><a name="p80">80</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;Chars1&nbsp;:&nbsp;&nbsp;C.char_array(1..20);<BR>
 &nbsp;&nbsp;&nbsp;Chars2&nbsp;:&nbsp;&nbsp;C.char_array(1..20);</div>

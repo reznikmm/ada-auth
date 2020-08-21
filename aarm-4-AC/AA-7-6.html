@@ -21,16 +21,16 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -160,7 +160,7 @@ The latter rule would prevent a tagged private type from being completed
 with a derivation from Controlled or Limited_Controlled &mdash; a very 
 common idiom.</span>&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00360.TXT">AI95-00360-01</A></I>} 
 <span class="insert2">A type is said to <I>need finalization</I> if:<A NAME="I4166"></A><A NAME="I4167"></A></span></div>
 <div class="paranum"><a name="p9.2">9.2/2</a></div>
 <div class="Bulleted"><span class="insert2">it is a controlled type, 
@@ -196,7 +196,7 @@ eliminate all controlled parts, not just ones that are visible.</span>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
 <span class="delete2"><A NAME="I4168"></A></span>During the elaboration 
 <span class="insert2">or evaluation of a construct that causes an object 
 to be initialized by default</span><span class="delete2">&nbsp;of an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN></span>, 
@@ -208,7 +208,7 @@ the object.<span class="delete2">&nbsp;The same applies to the evaluation
 of an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0143">allocator</A></SPAN>, 
 as explained in <A HREF="AA-4-8.html">4.8</A>.</span></div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="defect1.html#8652/0021">8652/0021</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0021">8652/0021</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00182.TXT">AI95-00182-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00373.TXT">AI95-00373-01</A></I>} 
 For an <SPAN Class="swiss"><A HREF="AA-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
@@ -292,7 +292,7 @@ of the target is <I>adjusted.</I>&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If any parts of the object 
 are controlled, abort is deferred during the assignment operation.&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
 <A NAME="I4173"></A><A NAME="I4174"></A>To adjust the value of a <span class="delete3">[(nonlimited)] 
 </span>composite object, the values of the components of the object are 
 first adjusted in an arbitrary order, and then, if the object is <span class="insert3">nonlimited 
@@ -371,7 +371,7 @@ to handle this sort of case.</div>
 <div class="Annotations">Forbidding such cases is not an option &mdash; 
 it would cause generic contract model violations.&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
 <span class="insert3">When a function call or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 is used to initialize an object, the result of the function call or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 is an anonymous object, which is assigned into the newly-created object. 
@@ -472,7 +472,7 @@ for determining when to build in place. That includes making the decision
 on a call-by-call basis. Reasonable programs will not care what decision 
 is made here anyway.</span>&nbsp;</div>
 <div class="paranum"><a name="p17.5">17.5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
 <span class="insert3">Notwithstanding<A NAME="I4180"></A> what this International 
 Standard says elsewhere, if an object is built in place:</span></div>
 <div class="paranum"><a name="p17.6">17.6/3</a></div>
@@ -546,7 +546,7 @@ It seems that this model requires the full power of tracing garbage collection.<
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p17.12">17.12/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0022">8652/0022</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0022">8652/0022</A></I>} 
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00083.TXT">AI95-00083-01</A></I>} 
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
@@ -600,7 +600,7 @@ required to be built-in-place (see <A HREF="AA-7-5.html">7.5</A>).</span></span>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0067-1.TXT">AI05-0067-1</A></I>} 
 An implementation is allowed to relax the above rules <span class="insert3">for 
 <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>s</span><span class="delete3">&nbsp;[(for 
 nonlimited controlled types)]</span> in the following ways:&nbsp;</div>
@@ -694,7 +694,7 @@ or otherwise position-dependent.<span class="insert2">&nbsp;This Adjust can
 be eliminated only by using one of the following permissions.</span> 
 </div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00147.TXT">AI95-00147-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00147.TXT">AI95-00147-01</A></I>} 
 <span class="insert2">Furthermore, an implementation is permitted to 
 omit implicit Initialize, Adjust, and Finalize calls and associated assignment 
 operations on an object of a nonlimited controlled type provided that:</span></div>
@@ -726,7 +726,7 @@ do so prior to assigning a new value to the object, and</span></div>
 <div class="Bulleted"><span class="insert2">the assignment operations 
 associated with omitted Adjust calls are also omitted.</span>&nbsp;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Normal"><span class="insert2">This permission applies to 
+<div class="Normal">&nbsp;<span class="insert2">This permission applies to 
 Adjust and Finalize calls even if the implicit calls have additional 
 external effects.</span>&nbsp;</div>
 <div class="paranum"><a name="p27.a">27.a/2</a></div>

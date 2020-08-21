@@ -17,12 +17,12 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,11 +42,11 @@ for its <I>delta</I>, as reflected by its Delta attribute.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/4</a></div>
-<div class="Indented1"><SPAN Class="swiss">delta_constraint</SPAN><A NAME="I8715"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;<I>static_</I><span class="insert4"><A NAME="I8716"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><A NAME="I8717"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span>&nbsp;[<A NAME="I8718"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">delta_constraint</SPAN><A NAME="I8510"></A><A NAME="S0322"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>delta</B>&nbsp;<I>static_</I><span class="insert4"><A NAME="I8511"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><A NAME="I8512"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span>&nbsp;[<A NAME="I8513"></A><SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>]</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/4</a></div>
-<div class="Normal"><A NAME="I8719"></A>The <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
+<div class="Normal"><A NAME="I8514"></A>The <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
 of a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0322">delta_constraint</A></SPAN> 
 is expected to be of any real type.&nbsp;</div>
 
@@ -61,7 +61,7 @@ with a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0322">delta_constraint</A></SPA
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 shall denote an ordinary fixed point subtype.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8720"></A>For a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
+<div class="Normal"><A NAME="I8515"></A>For a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 shall denote either a decimal fixed point subtype or a floating point 
@@ -93,20 +93,20 @@ then the floating point subtype is constrained by the <SPAN Class="swiss"><A HRE
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/4</a></div>
-<div class="Normal"><A NAME="I8721"></A>A <SPAN Class="swiss"><A HREF="RM-J-3.html#S0322">delta_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I8516"></A>A <SPAN Class="swiss"><A HREF="RM-J-3.html#S0322">delta_constraint</A></SPAN> 
 is <I>compatible</I> with an ordinary fixed point subtype if the value 
 of the <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
 is no less than the <I>delta</I> of the subtype, and the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
 if any, is compatible with the subtype.</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Normal"><A NAME="I8722"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+<div class="Normal">&nbsp;<A NAME="I8517"></A>A <SPAN Class="swiss"><A HREF="RM-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 is <I>compatible</I> with a floating point subtype if the value of the 
 <span class="insert4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
 is no greater than the requested decimal precision of the subtype, and 
 the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
 if any, is compatible with the subtype.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I8723"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0322">delta_constraint</A></SPAN> 
+<div class="Normal"><A NAME="I8518"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-J-3.html#S0322">delta_constraint</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
 if any.&nbsp;</div>
 

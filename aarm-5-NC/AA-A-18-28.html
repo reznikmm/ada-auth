@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,27 +43,27 @@ provides type Queue, which implements the interface type Containers.Synchronized
 <B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Queue_Interfaces&nbsp;<B>is&nbsp;new</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;Default_Ceiling&nbsp;:&nbsp;System.Any_Priority&nbsp;:=&nbsp;System.Priority'Last;<BR>
-<B>package</B>&nbsp;Ada.Containers.Unbounded_Synchronized_Queues&nbsp;<B>is</B><A NAME="I8059"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Unbounded_Synchronized_Queues&nbsp;<B>is</B><A NAME="I8350"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Unbounded_Synchronized_Queues);</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Implementation&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Implementation;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>protected&nbsp;type</B>&nbsp;<A NAME="I8060"></A>Queue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>protected&nbsp;type</B>&nbsp;<A NAME="I8351"></A>Queue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Ceiling&nbsp;:&nbsp;System.Any_Priority&nbsp;:=&nbsp;Default_Ceiling)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Priority&nbsp;=&gt;&nbsp;Ceiling&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Queue_Interfaces.Queue&nbsp;<B>with</B></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8061"></A>Enqueue&nbsp;(New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Queue_Interfaces.Element_Type);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8352"></A>Enqueue&nbsp;(New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Queue_Interfaces.Element_Type);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8062"></A>Dequeue&nbsp;(Element&nbsp;:&nbsp;<B>out</B>&nbsp;Queue_Interfaces.Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I8353"></A>Dequeue&nbsp;(Element&nbsp;:&nbsp;<B>out</B>&nbsp;Queue_Interfaces.Element_Type);</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8063"></A>Current_Use&nbsp;<B>return</B>&nbsp;Count_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8354"></A>Current_Use&nbsp;<B>return</B>&nbsp;Count_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8064"></A>Peak_Use&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8355"></A>Peak_Use&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -97,7 +97,7 @@ of nested package Implementation.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p12.c">12.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
-<A NAME="I8065"></A> The generic package Containers.Unbounded_Synchronized_Queues 
+<A NAME="I8356"></A> The generic package Containers.Unbounded_Synchronized_Queues 
 is new.&nbsp;</div>
 
 <HR>

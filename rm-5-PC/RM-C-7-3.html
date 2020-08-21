@@ -40,31 +40,31 @@ library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
 <div class="Examples"><B>with</B>&nbsp;Ada.Task_Identification;<BR>
 <B>with</B>&nbsp;Ada.Exceptions;<BR>
-<B>package</B>&nbsp;Ada.Task_Termination<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8067"></A><BR>
+<B>package</B>&nbsp;Ada.Task_Termination<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8052"></A><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Task_Termination);</span></div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8068"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8053"></A>Cause_Of_Termination&nbsp;<B>is</B>&nbsp;(Normal,&nbsp;Abnormal,&nbsp;Unhandled_Exception);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8069"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8054"></A>Termination_Handler&nbsp;<B>is&nbsp;access&nbsp;protected&nbsp;procedure</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Cause&nbsp;:&nbsp;<B>in</B>&nbsp;Cause_Of_Termination;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Exceptions.Exception_Occurrence);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8070"></A>Set_Dependents_Fallback_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8055"></A>Set_Dependents_Fallback_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Handler:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8071"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8056"></A>Current_Task_Fallback_Handler&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8072"></A>Set_Specific_Handler<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8057"></A>Set_Specific_Handler<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handler&nbsp;:&nbsp;<B>in</B>&nbsp;Termination_Handler);<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8073"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8058"></A>Specific_Handler&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Termination_Handler;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Task_Termination;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><A NAME="I8074"></A><A NAME="I8075"></A>The type 
+<div class="Normal"><A NAME="I8059"></A><A NAME="I8060"></A>The type 
 Termination_Handler identifies a protected procedure to be executed by 
 the implementation when a task terminates. Such a protected procedure 
 is called a <I>handler</I>. In all cases T identifies the task that is 
@@ -81,7 +81,7 @@ Independent of how the task completes, if finalization of the task propagates
 an exception, then Cause is either Unhandled_Exception or Abnormal, and 
 X is an exception occurrence that identifies the Program_Error exception.</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"><A NAME="I8076"></A><A NAME="I8077"></A><A NAME="I8078"></A><A NAME="I8079"></A><A NAME="I8080"></A><A NAME="I8081"></A>Each 
+<div class="Normal"><A NAME="I8061"></A><A NAME="I8062"></A><A NAME="I8063"></A><A NAME="I8064"></A><A NAME="I8065"></A><A NAME="I8066"></A>Each 
 task has two termination handlers, a <I>fall-back handler</I> and a <I>specific 
 handler</I>. The specific handler applies only to the task itself, while 
 the fall-back handler applies only to the dependent tasks of the task. 

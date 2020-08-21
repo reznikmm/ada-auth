@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,23 +48,23 @@ has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
-<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;<B>is</B><A NAME="I8073"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;<B>is</B><A NAME="I8366"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Synchronized_Queue_Interfaces);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8074"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8367"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8075"></A>Enqueue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8368"></A>Enqueue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8076"></A>Dequeue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8369"></A>Dequeue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8077"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8078"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8370"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8371"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
@@ -76,7 +76,7 @@ has the following declaration:&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 A queue type that implements this interface is allowed to have a bounded 
-<I>capacity</I><A NAME="I8079"></A>. If the queue object has a bounded 
+<I>capacity</I><A NAME="I8372"></A>. If the queue object has a bounded 
 capacity, and the number of existing elements equals the capacity, then 
 Enqueue blocks until storage becomes available; otherwise, Enqueue does 
 not block. In any case, it then copies New_Item onto the queue.</div>
@@ -125,7 +125,7 @@ would be raised), and that is rarely going to be possible.&nbsp;</div>
 <div class="paranum"><a name="p17.b">17.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0251-1.TXT">AI05-0251-1</A></I>} 
-<A NAME="I8080"></A> The generic package Containers.Synchronized_Queue_Interfaces 
+<A NAME="I8373"></A> The generic package Containers.Synchronized_Queue_Interfaces 
 is new.&nbsp;</div>
 
 <HR>

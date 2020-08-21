@@ -19,15 +19,15 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -76,7 +76,7 @@ imported function, an instance of Unchecked_Conversion, or the stream
 attribute T'Input, if after return from the function the representation 
 of the return object does not represent a value of the function's subtype.</span></div>
 <div class="paranum"><a name="p6.2">6.2/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2">For an imported object, it 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">For an imported object, it 
 is the programmer's responsibility to ensure that the object remains 
 in a normal state.</span>&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
@@ -116,7 +116,7 @@ unpredictable execution, or to other objects becoming abnormal.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I5415"></A>A call to an imported function 
+<div class="Normal">&nbsp;<A NAME="I5415"></A>A call to an imported function 
 or an instance of Unchecked_Conversion is erroneous if the result is 
 scalar, <span class="delete2">and&nbsp;</span>the result object has an invalid 
 representation<span class="insert2">, and the result is used other than 
@@ -130,7 +130,7 @@ the target of the assignment, then any use of the target object prior
 to a further assignment to the target object, other than as the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of a Valid attribute reference, is erroneous</span>.&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><A NAME="I5416"></A>The dereference of an access 
+<div class="Normal">&nbsp;<A NAME="I5416"></A>The dereference of an access 
 value is erroneous if it does not designate an object of an appropriate 
 type or a subprogram with an appropriate profile, if it designates a 
 nonexistent object, or if it is an access-to-variable value that designates 

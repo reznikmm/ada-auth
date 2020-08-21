@@ -21,6 +21,8 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -36,7 +38,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,16 +52,16 @@
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3">An <I>interfacing</I> aspect is a representation 
 aspect that is one of the aspects Import, Export, Link_Name, External_Name, 
-or Convention.<A NAME="I8397"></A><A NAME="I8398"></A></span></div>
+or Convention.<A NAME="I8708"></A><A NAME="I8709"></A></span></div>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3"><A NAME="I8399"></A><A NAME="I8400"></A>Specifying 
+<span class="insert3"><A NAME="I8710"></A><A NAME="I8711"></A>Specifying 
 the</span><span class="delete3">&nbsp;A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
 Import <span class="insert3">aspect  to have the value True&nbsp;</span>is 
 used to import an entity defined in a foreign language into an Ada program, 
 thus allowing a foreign-language subprogram to be called from Ada, or 
-a foreign-language variable to be accessed from Ada. In contrast, <span class="insert3"><A NAME="I8401"></A><A NAME="I8402"></A>specifying 
+a foreign-language variable to be accessed from Ada. In contrast, <span class="insert3"><A NAME="I8712"></A><A NAME="I8713"></A>specifying 
 the</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
 Export <span class="insert3">aspect to have the value True&nbsp;</span>is 
 used to export an Ada entity to a foreign language, thus allowing an 
@@ -70,8 +72,8 @@ for objects and subprograms, although implementations are allowed to
 support other entities.<span class="insert3">&nbsp;The Link_Name and External_Name 
 aspects are used to specify the link name and external name, respectively, 
 to be used to identify imported or exported entities in the external 
-environment.<A NAME="I8403"></A><A NAME="I8404"></A><A NAME="I8405"></A><A NAME="I8406"></A> 
-<A NAME="I8407"></A><A NAME="I8408"></A><A NAME="I8409"></A><A NAME="I8410"></A><A NAME="I8411"></A></span></div>
+environment.<A NAME="I8714"></A><A NAME="I8715"></A><A NAME="I8716"></A><A NAME="I8717"></A> 
+<A NAME="I8718"></A><A NAME="I8719"></A><A NAME="I8720"></A><A NAME="I8721"></A><A NAME="I8722"></A></span></div>
 <div class="paranum"><a name="p1.a">1.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Aspect Description 
 for&nbsp;</B></span><span class="insert3"><B>Import:&nbsp;</B></span><span class="insert3">Entity 
@@ -91,7 +93,7 @@ symbol used to identify an imported or exported entity.</span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3">The</span><span class="delete3">&nbsp;A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
-Convention <span class="insert3">aspect<A NAME="I8412"></A><A NAME="I8413"></A> 
+Convention <span class="insert3">aspect<A NAME="I8723"></A><A NAME="I8724"></A> 
 </span>is used to <span class="insert3">indicate</span><span class="delete3">&nbsp;specify</span> 
 that an Ada entity should use the conventions of another language. It 
 is intended primarily for types and &ldquo;callback&rdquo; subprograms. 
@@ -113,8 +115,8 @@ when a given compilation unit is included in a partition.</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">The form of a</span><span class="delete3"><A NAME="I8414"></A> 
-<A NAME="I8415"></A><A NAME="I8416"></A><A NAME="I8417"></A><A NAME="I8418"></A><A NAME="I8419"></A><A NAME="I8420"></A><A NAME="I8421"></A>An 
+<span class="insert3">The form of a</span><span class="delete3"><A NAME="I8725"></A> 
+<A NAME="I8726"></A><A NAME="I8727"></A><A NAME="I8728"></A><A NAME="I8729"></A><A NAME="I8730"></A><A NAME="I8731"></A><A NAME="I8732"></A>An 
 <I>interfacing pragma</I> is a representation <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 that is one of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 Import, Export, or Convention. Their forms, together with that of the 
@@ -126,25 +128,25 @@ are</span> as follows:&nbsp;</div>
 Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8422"></A><A NAME="I8423"></A>Import(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I8424"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
-[Entity =&gt;] <A NAME="I8425"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN><BR>
-&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I8426"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>] 
-[, [Link_Name =&gt;] <I>string_</I><A NAME="I8427"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]);</span></div>
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8733"></A><A NAME="I8734"></A>Import(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I8735"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I8736"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I8737"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I8738"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]);</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8428"></A><A NAME="I8429"></A>Export(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I8430"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
-[Entity =&gt;] <A NAME="I8431"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN><BR>
-&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I8432"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>] 
-[, [Link_Name =&gt;] <I>string_</I><A NAME="I8433"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]);</span></div>
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8739"></A><A NAME="I8740"></A>Export(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Convention =&gt;] <I>convention_</I><A NAME="I8741"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
+[Entity =&gt;] <A NAME="I8742"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN><BR>
+&nbsp;&nbsp;[, [External_Name =&gt;] <I>string_</I><A NAME="I8743"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>] 
+[, [Link_Name =&gt;] <I>string_</I><A NAME="I8744"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]);</span></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8434"></A><A NAME="I8435"></A>Convention([Convention 
-=&gt;] <I>convention_</I><A NAME="I8436"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>,[Entity 
-=&gt;] <A NAME="I8437"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>);</span></div>
+&nbsp;&nbsp;<span class="delete3"><B>pragma</B> <A NAME="I8745"></A><A NAME="I8746"></A>Convention([Convention 
+=&gt;] <I>convention_</I><A NAME="I8747"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>,[Entity 
+=&gt;] <A NAME="I8748"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>);</span></div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8438"></A><A NAME="I8439"></A>Linker_Options(<I>string_</I><A NAME="I8440"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8749"></A><A NAME="I8750"></A>Linker_Options(<I>string_</I><A NAME="I8751"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>);</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options is allowed only at the place of a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN>.</div>
@@ -167,7 +169,7 @@ unless the argument for External_Name is given.</span></span><span class="insert
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The <span class="insert3">Link_Name and External_Name aspects are of</span><span class="delete3">&nbsp;expected</span> 
-type <span class="delete3">for a <I>string_</I><A NAME="I8441"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN><A NAME="I8442"></A> 
+type <span class="delete3">for a <I>string_</I><A NAME="I8752"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN><A NAME="I8753"></A> 
 in an interfacing pragma or in pragma Linker_Options is&nbsp;</span>String. 
 </div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
@@ -175,17 +177,17 @@ in an interfacing pragma or in pragma Linker_Options is&nbsp;</span>String.
 support for external or link names of type Wide_String, or of other string 
 types. Implementations may, of course, have additional <span class="insert3">aspects</span><span class="delete3">&nbsp;pragmas</span> 
 for that purpose. Note that allowing both String and Wide_String in the 
-same <span class="insert3"><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN></span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
+same <span class="insert3"><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN></span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">&nbsp;pragma</A></SPAN></span> 
 would cause ambiguities.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I8443"></A>The expected type for the <I>string_</I><A NAME="I8444"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<span class="insert3"><A NAME="I8754"></A>The expected type for the <I>string_</I><A NAME="I8755"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 in pragma Linker_Options is String.</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8445"></A>The <span class="insert3">aspect Convention shall 
+<A NAME="I8756"></A>The <span class="insert3">aspect Convention shall 
 be specified by a&nbsp;</span><I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 <span class="insert3">which</span><span class="delete3">&nbsp;of an interfacing 
 pragma</span> shall be the name of a <I>convention</I>. The convention 
@@ -193,7 +195,7 @@ names are implementation defined, except for certain language-defined
 ones, such as Ada and Intrinsic, as explained in <A HREF="AA-6-3-1.html">6.3.1</A>, 
 &ldquo;<A HREF="AA-6-3-1.html">Conformance Rules</A>&rdquo;. [Additional 
 convention names generally represent the calling conventions of foreign 
-languages, language implementations, or specific run-time models.] <A NAME="I8446"></A>The 
+languages, language implementations, or specific run-time models.] <A NAME="I8757"></A>The 
 convention of a callable entity is its <I>calling convention</I>.&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
@@ -208,7 +210,7 @@ do this because it seems to introduce extra complexity, and because the
 list of available languages is better represented as the list of children 
 of package Interfaces &mdash; a more open-ended sort of list.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8447"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I8758"></A>If 
 <I>L</I> is a <I>convention_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 for a language, then a type T is said to be <I>compatible with convention 
 L</I>, (alternatively, is said to be an <I>L-compatible type</I>) if 
@@ -220,7 +222,7 @@ to <I>L</I> and is defined to be <I>L</I>-compatible (see <A HREF="AA-B-3.html">
 <A HREF="AA-B-4.html">B.4</A>, <A HREF="AA-B-5.html">B.5</A>),</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8448"></A>Convention <I>L</I> has been specified for T<span class="delete3">&nbsp;in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I8759"></A>Convention <I>L</I> has been specified for T<span class="delete3">&nbsp;in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Convention</span>, and T is <I>eligible for convention L</I>; that is: 
 </div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
@@ -247,6 +249,21 @@ and its designated profile's parameter and result types are all <I>L</I>-compati
 </div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Bulleted">T is derived from an <I>L</I>-compatible type,</div>
+<div class="paranum"><a name="p19.1">19.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0207-1.TXT">AI12-0207-1</A></I>} 
+<span class="insert5">T is an anonymous access type, and T is eligible 
+for convention <I>L</I>,</span></div>
+<div class="paranum"><a name="p19.a">19.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>We say 
+this so that the presence of an anonymous access component does not necessarily 
+prevent a type from being eligible for convention <I>L</I>. We want the 
+anonymous access type to take the convention from the enclosing type, 
+but if we only said that, the definition would be circular (one can only 
+portably apply the convention <I>L</I> to a record type R if the components 
+of R already have convention <I>L</I>; but the anonymous components of 
+R have to take the convention from R). We include the part of about T 
+being eligible for convention <I>L</I> so that we don't force convention 
+<I>L</I> on some type that is incompatible with it.</span>&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
 <div class="Bulleted">The implementation permits T as an <I>L</I>-compatible 
 type.</div>
@@ -276,10 +293,21 @@ but in the complete declaration each component must be <I>L</I>-compatible.</div
 If each component of a record type is <I>L</I>-compatible, then the record 
 type itself is only <I>L</I>-compatible if it has <span class="insert3">a 
 specified</span><span class="delete3">&nbsp;a pragma</span> Convention.&nbsp;</div>
+<div class="paranum"><a name="p21.1">21.1/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0207-1.TXT">AI12-0207-1</A></I>} 
+<span class="insert5">If convention <I>L</I> is specified for a type 
+T, for each component of T that has an anonymous access type, the convention 
+of the anonymous access type is <I>L</I>. If convention <I>L</I> is specified 
+for an object that has an anonymous access type, the convention of the 
+anonymous access type is <I>L</I>.</span></div>
+<div class="paranum"><a name="p21.d">21.d/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>This 
+applies to both anonymous access-to-object and anonymous access-to-subprogram 
+types.</span>&nbsp;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="delete3">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Import shall be the completion of a declaration.</span><A NAME="I8449"></A> 
+Import shall be the completion of a declaration.</span><A NAME="I8760"></A> 
 Notwithstanding any rule to the contrary, <span class="insert3">a declaration 
 with a True</span><span class="delete3">&nbsp;a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
 Import <span class="insert3">aspect shall not have a</span><span class="delete3">&nbsp;may 
@@ -287,13 +315,13 @@ serve as the</span> completion<span class="delete3">&nbsp;of any kind of (explic
 declaration if supported by an implementation for that kind of declaration. 
 If a completion is a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Import, then it shall appear in the same <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-9-1.html#S0210">task_definition</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0215">protected_definition</A></SPAN> 
-as the declaration. For a library unit, it shall appear in the same <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>, 
-before any subsequent <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-1.html#S0224">task_definition</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0229">protected_definition</A></SPAN> 
+as the declaration. For a library unit, it shall appear in the same <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>, 
+before any subsequent <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
 other than <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s. 
-If the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+If the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 denotes more than one entity, then the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Import is the completion of all of them</span>.&nbsp;</div>
 <div class="paranum"><a name="p22.a">22.a/3</a></div>
@@ -313,7 +341,7 @@ etc., it may do so, and the normal completion is then not allowed for
 that declaration.&nbsp;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I8450"></A> <A NAME="I8451"></A>An entity <span class="insert3">with 
+<A NAME="I8761"></A> <A NAME="I8762"></A>An entity <span class="insert3">with 
 a True</span><span class="delete3">&nbsp;specified as the Entity argument 
 to a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
 Import<span class="insert3">&nbsp;aspect</span> (or <span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -345,14 +373,14 @@ aspect, if any</span><span class="delete3">&nbsp;convention specified in the
 corresponding pragma</span>.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+<span class="insert3">The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 (if any) used to directly specify an</span><span class="delete3">&nbsp;The 
-external name and link name <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
+external name and link name <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN></span> 
 Import<span class="insert3">,</span><span class="delete3">&nbsp;or</span> 
 Export, <span class="insert3">External_Name, or Link_Name aspect shall 
 be a static expression. The</span><span class="delete3">&nbsp;and the</span> 
-<I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Linker_Options<span class="delete3">,</span> shall be static.<span class="insert3">&nbsp;An External_Name or Link_Name aspect shall be specified only for an entity 
 that is either imported or exported.</span></div>
@@ -362,22 +390,22 @@ that is either imported or exported.</span></div>
 28 and 29 were deleted.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p28">28/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3"><A NAME="I8452"></A><A NAME="I8453"></A><A NAME="I8454"></A><A NAME="I8455"></A><A NAME="I8456"></A><A NAME="I8457"></A><A NAME="I8458"></A><A NAME="I8459"></A>Import, 
+<span class="delete3"><A NAME="I8763"></A><A NAME="I8764"></A><A NAME="I8765"></A><A NAME="I8766"></A><A NAME="I8767"></A><A NAME="I8768"></A><A NAME="I8769"></A><A NAME="I8770"></A>Import, 
 Export, and Convention <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 are representation pragmas that specify the <I>convention</I> aspect 
-of representation. <A NAME="I8460"></A><A NAME="I8461"></A><A NAME="I8462"></A><A NAME="I8463"></A>In 
+of representation. <A NAME="I8771"></A><A NAME="I8772"></A><A NAME="I8773"></A><A NAME="I8774"></A>In 
 addition, Import and Export <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 specify the <I>imported</I> and <I>exported</I> aspects of representation, 
 respectively.</span></div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3"><A NAME="I8464"></A><A NAME="I8465"></A><A NAME="I8466"></A><A NAME="I8467"></A><A NAME="I8468"></A><A NAME="I8469"></A>An 
+<span class="delete3"><A NAME="I8775"></A><A NAME="I8776"></A><A NAME="I8777"></A><A NAME="I8778"></A><A NAME="I8779"></A><A NAME="I8780"></A>An 
 interfacing pragma is a program unit pragma when applied to a program 
 unit (see <A HREF="AA-10-1-5.html">10.1.5</A>).</span></div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="delete3">An interfacing pragma defines the convention of 
-the entity denoted by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>. 
+the entity denoted by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>. 
 </span>The <span class="insert3">Convention aspect</span><span class="delete3">&nbsp;convention</span> 
 represents the calling convention or representation convention of the 
 entity. For an access-to-subprogram type, it represents the calling convention 
@@ -398,12 +426,12 @@ is never inherited; if not directly specified, the Export aspect is False.</span
 Import or Export <span class="insert3">aspect, an</span><span class="delete3">&nbsp;optionally 
 specifies an entity's</span> external name, link name, or both<span class="insert3">&nbsp;may also be specified</span>.&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Normal"><A NAME="I8470"></A>An <I>external name</I> is a 
+<div class="Normal"><A NAME="I8781"></A>An <I>external name</I> is a 
 string value for the name used by a foreign language program either for 
 an entity that an Ada program imports, or for referring to an entity 
 that an Ada program exports.</div>
 <div class="paranum"><a name="p35">35</a></div>
-<div class="Normal"><A NAME="I8471"></A>A <I>link name</I> is a string 
+<div class="Normal"><A NAME="I8782"></A>A <I>link name</I> is a string 
 value for the name of an exported or imported entity, based on the conventions 
 of the foreign language's compiler in interfacing with the system's linker 
 tool.</div>
@@ -440,10 +468,10 @@ pragma Linker_Options.</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p38">38/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I8472"></A></span><span class="delete3"><A NAME="I8473"></A></span><A NAME="I8474"></A>Notwithstanding 
+<span class="insert3"><A NAME="I8783"></A></span><span class="delete3"><A NAME="I8784"></A></span><A NAME="I8785"></A>Notwithstanding 
 what this International Standard says elsewhere, the elaboration of a 
 declaration <span class="insert3">with a True Import aspect</span><span class="delete3">&nbsp;denoted 
-by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+by the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Import</span> does not create the entity. Such an elaboration has no 
 other effect than to allow the defining name to denote the external entity. 
@@ -455,7 +483,7 @@ For example, an imported access object is <I>not</I> initialized to <B>null</B>.
 <div class="paranum"><a name="p38.b">38.b/3</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">Note that the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+<span class="delete3">Note that the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Import might denote more than one declaration; in that case, the entity 
 of all of those declarations will be the external entity.</span>&nbsp;</div>
@@ -469,11 +497,14 @@ of elaboration. It says we recognize the contradiction, and this rule
 takes precedence.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
-<div class="paranum"><a name="p38.1">38.1/3</a></div>
+<div class="paranum"><a name="p38.1">38.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00320.TXT">AI95-00320-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert2"><A NAME="I8475"></A>It is the programmer's responsibility 
-to ensure that the use of interfacing&nbsp;</span><span class="insert3">aspects</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragmas</span></span><span class="insert2">&nbsp;does not violate Ada semantics; otherwise, program execution is erroneous.</span> 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0219-1.TXT">AI12-0219-1</A></I>} 
+<span class="insert2"><A NAME="I8786"></A>It is the programmer's responsibility 
+to ensure that the use of interfacing&nbsp;</span><span class="insert3">aspects</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;pragmas</span></span><span class="insert2">&nbsp;does not violate Ada semantics; otherwise, program execution is erroneous.</span><span class="insert5">&nbsp;For example, passing an object with mode <B>in</B> to imported code that 
+modifies it causes erroneous execution. Similarly, calling an imported 
+subprogram that is not pure from a pure package causes erroneous execution.</span><span class="insert2"></span> 
 </div>
 
 <H4 Class="centered">Implementation Advice</H4>
@@ -489,7 +520,7 @@ mechanism is to provide two subprograms whose link names are &quot;adainit&quot;
 and &quot;adafinal&quot;. Adainit should contain the elaboration code 
 for library units. Adafinal should contain the finalization code. These 
 subprograms should have no effect the second and subsequent time they 
-are called. <span class="insert1"><A NAME="I8476"></A><A NAME="I8477"></A><A NAME="I8478"></A><A NAME="I8479"></A></span></div>
+are called. <span class="insert1"><A NAME="I8787"></A><A NAME="I8788"></A><A NAME="I8789"></A><A NAME="I8790"></A></span></div>
 <div class="paranum"><a name="p39.a.1">39.a.1/3</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B><span class="insert2">If 
 </span><span class="insert2"><span class="delete3"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -591,7 +622,7 @@ for the access-to-subprogram type and the specific subprogram(s) to which
 Export, or Convention for a given entity.</span></div>
 <div class="paranum"><a name="p46">46/3</a></div>
 <div class="Notes">5&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+<span class="delete3">The <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 in an interfacing pragma can denote more than one entity in the case 
 of overloading. Such a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 applies to all of the denoted entities.</span></div>
@@ -649,7 +680,7 @@ that violates Ada semantics.</span>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p51.a">51.a</a></div>
-<div class="Annotations"><A NAME="I8480"></A>Interfacing pragmas are 
+<div class="Annotations"><A NAME="I8791"></A>Interfacing pragmas are 
 new to Ada 95. Pragma Import replaces Ada 83's pragma Interface. Existing 
 implementations can continue to support pragma Interface for upward compatibility. 
 </div>
@@ -670,7 +701,7 @@ code doesn't follow the semantics promised by the Ada specifications.</span>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p51.d">51.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0002-1.TXT">AI05-0002-1</A></I>} 
-<span class="insert3"><A NAME="I8481"></A><B>Correction:</B> Access types 
+<span class="insert3"><A NAME="I8792"></A><B>Correction:</B> Access types 
 that designate unconstrained arrays are no longer defined to be <I>L</I>-compatible. 
 Such access-to-arrays require bounds information, which is likely to 
 be incompatible with a foreign language. The change will allow (but not 
@@ -684,17 +715,39 @@ or not the language allowed doing so formally).</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p51.e">51.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I8482"></A>Aspects Convention, Import, 
+<span class="insert3"><A NAME="I8793"></A>Aspects Convention, Import, 
 Export, Link_Name, and External_Name are new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 Convention, Import, and Export are now obsolescent.</span>&nbsp;</div>
 
+<H4 Class="centered">Incompatibilities With Ada 2012</H4>
+<div class="paranum"><a name="p51.f">51.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0207-1.TXT">AI12-0207-1</A></I>} 
+<span class="insert5"><A NAME="I8794"></A><B>Correction:</B> The convention 
+of anonymous access components is that of the enclosing type (in Ada 
+2012, it was Ada). Similarly, the convention of the anonymous access 
+type of an object is that of the object (again, in Ada 2012 it was Ada). 
+While this is formally incompatible, it should be more useful in portable 
+code; it makes little sense to have a component of an Ada access type 
+in a record with a C convention. For most implementations, this will 
+have no real effect as convention Ada anonymous access types were allowed 
+as C-compatible anyway. But such code was not portable, as this was not 
+required in Ada 2012.</span>&nbsp;</div>
+
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p51.f">51.f/4</a></div>
+<div class="paranum"><a name="p51.g">51.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0135-1.TXT">AI12-0135-1</A></I>} 
-<span class="insert4"><A NAME="I8483"></A><B>Corrigendum:</B> Added a 
+<span class="insert4"><A NAME="I8795"></A><B>Corrigendum:</B> Added a 
 suggestion that convention be supported for enumeration types. This will 
 make the use of enumeration types portable for implementations that support 
 interfacing to a particular language.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p51.h">51.h/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0219-1.TXT">AI12-0219-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Added some examples to the erroneous 
+execution text; this is a very important rule as it means that Ada compilers 
+can assume that provided interfacing declarations reflect the actual 
+foreign code.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

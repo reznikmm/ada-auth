@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +37,7 @@
 <HR>
 <H1>2.8 Pragmas</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1317"></A>A pragma is a compiler directive. 
+<div class="Normal"><A NAME="I1322"></A>A pragma is a compiler directive. 
 There are language-defined pragmas that give instructions for optimization, 
 listing control, etc. An implementation may support additional (implementation-defined) 
 pragmas.&nbsp;</div>
@@ -60,29 +60,29 @@ legal.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">pragma</SPAN><A NAME="I1318"></A><A NAME="S0019"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<A NAME="I1319"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;[(<A NAME="I1320"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1321"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>})];</div>
+<div class="Indented1"><SPAN Class="swiss">pragma</SPAN><A NAME="I1323"></A><A NAME="S0019"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;<A NAME="I1324"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;[(<A NAME="I1325"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I1326"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>})];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-<SPAN Class="swiss">pragma_argument_association</SPAN><A NAME="I1322"></A><A NAME="S0020"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<I>pragma_argument_</I><A NAME="I1323"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1324"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;[<I>pragma_argument_</I><A NAME="I1325"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1326"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1327"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1328"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1329"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1330"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></div>
+<SPAN Class="swiss">pragma_argument_association</SPAN><A NAME="I1327"></A><A NAME="S0020"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<I>pragma_argument_</I><A NAME="I1328"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1329"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;[<I>pragma_argument_</I><A NAME="I1330"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I1331"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1332"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1333"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<I>pragma_argument_</I><A NAME="I1334"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>&nbsp;=&gt;&nbsp;&nbsp;<A NAME="I1335"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 In a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>, 
 any <SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN>s 
 without a <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 shall precede any associations with a <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
-or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>.</div>
+or <I>pragma_argument_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em"><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN>s 
 are only allowed at the following places in a program:&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Indented2Bulleted">After a semicolon delimiter, but not within 
-a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0177">formal_part</A></SPAN> 
+a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0191">formal_part</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-7.html#S0059">discriminant_part</A></SPAN>.</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0100-1.TXT">AI05-0100-1</A></I>} 
@@ -92,16 +92,16 @@ category whose name ends with &ldquo;<SPAN Class="swiss">declaration</SPAN>&rdqu
 &ldquo;<SPAN Class="swiss">item</SPAN>&rdquo;, &ldquo;<SPAN Class="swiss">statement</SPAN>&rdquo;, 
 &ldquo;<SPAN Class="swiss">clause</SPAN>&rdquo;, or &ldquo;<SPAN Class="swiss">alternative</SPAN>&rdquo;, 
 or one of the syntactic categories <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-11-2.html#S0269">exception_handler</A></SPAN>; 
+or <SPAN Class="swiss"><A HREF="AA-11-2.html#S0283">exception_handler</A></SPAN>; 
 but not in place of such a construct if the construct is required, or 
 is part of a list that is required to have at least one such construct.</div>
 <div class="paranum"><a name="p7.1">7.1/3</a></div>
 <div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0163-1.TXT">AI05-0163-1</A></I>} 
-In place of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN> 
-in a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>.</div>
+In place of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN> 
+in a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>.</div>
 <div class="paranum"><a name="p7.2">7.2/3</a></div>
 <div class="Indented2Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0100-1.TXT">AI05-0100-1</A></I>} 
-At any place where a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
+At any place where a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN> 
 is allowed.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Indented1">Additional syntax rules and placement restrictions 
@@ -112,13 +112,13 @@ in text, rather than in BNF; the syntactic category <SPAN Class="swiss"><A HREF=
 is not used in any BNF syntax rule.&nbsp;</div>
 <div class="paranum"><a name="p8.b">8.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-is allowed where a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+is allowed where a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
 is allowed.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1331"></A><A NAME="I1332"></A>The <I>name</I> 
+<div class="Normal"><A NAME="I1336"></A><A NAME="I1337"></A>The <I>name</I> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-is the identifier following the reserved word <B>pragma</B>. <A NAME="I1333"></A><A NAME="I1334"></A>The 
-<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+is the identifier following the reserved word <B>pragma</B>. <A NAME="I1338"></A><A NAME="I1339"></A>The 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0020">pragma_argument_association</A></SPAN> 
 is a <I>pragma argument</I>.</div>
 <div class="paranum"><a name="p9.a">9.a/2</a></div>
@@ -129,7 +129,7 @@ may also be &ldquo;<B>interface</B>&rdquo;, which is not an identifier
 </div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
-<A NAME="I1335"></A><A NAME="I1336"></A>An <I>identifier specific to 
+<A NAME="I1340"></A><A NAME="I1341"></A>An <I>identifier specific to 
 a pragma</I> is an identifier or reserved word that is used in a pragma 
 argument with special meaning for that pragma.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
@@ -220,10 +220,10 @@ However, the syntax rules have to be obeyed.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1337"></A><A NAME="I1338"></A>Any <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal"><A NAME="I1342"></A><A NAME="I1343"></A>Any <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 that appears at the place of an executable construct is executed. Unless 
 otherwise specified for a particular pragma, this execution consists 
-of the evaluation of each evaluable pragma argument in an arbitrary order.<A NAME="I1339"></A> 
+of the evaluation of each evaluable pragma argument in an arbitrary order.<A NAME="I1344"></A> 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -231,7 +231,7 @@ that appears at the place of an elaborable construct, execution is elaboration.<
 <div class="paranum"><a name="p12.b">12.b</a></div>
 <div class="Annotations">An identifier specific to a pragma is neither 
 a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> nor 
-an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 &mdash; such identifiers are not evaluated (unless an implementation 
 defines them to be evaluated in the case of an implementation-defined 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>).</div>
@@ -318,12 +318,12 @@ Import just sets aspect Import which disallows having any completion.
 </div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Bulleted">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-used to configure the environment by adding, removing, or replacing <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s. 
+used to configure the environment by adding, removing, or replacing <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p19.a.1">19.a.1/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Implementation-defined 
 pragmas should not make an illegal program legal, unless they complete 
-a declaration or configure the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0251">library_item</A></SPAN>s 
+a declaration or configure the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0265">library_item</A></SPAN>s 
 in an environment.</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>For example, it is OK to 
@@ -342,7 +342,7 @@ lie, it is best if the user gets an error message.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p19.c">19.c</a></div>
-<div class="Annotations"><A NAME="I1340"></A>In Ada 83, &ldquo;bad&rdquo; 
+<div class="Annotations"><A NAME="I1345"></A>In Ada 83, &ldquo;bad&rdquo; 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s are 
 ignored. In Ada 95, they are illegal, except in the case where the name 
 of the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -350,7 +350,7 @@ itself is not recognized by the implementation.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p19.d">19.d</a></div>
-<div class="Annotations"><A NAME="I1341"></A>Implementation-defined <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+<div class="Annotations"><A NAME="I1346"></A>Implementation-defined <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 may affect the legality of a program.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
@@ -365,16 +365,16 @@ or &ldquo;elaborating&rdquo; a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">p
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p19.f">19.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0163-1.TXT">AI05-0163-1</A></I>} 
-<A NAME="I1342"></A><B>Correction:</B> Allow <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
-in place of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>, 
-even if there are no other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN>s 
-in a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0146">sequence_of_statements</A></SPAN>.</div>
+<A NAME="I1347"></A><B>Correction:</B> Allow <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
+in place of a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>, 
+even if there are no other <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN>s 
+in a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0152">sequence_of_statements</A></SPAN>.</div>
 <div class="paranum"><a name="p19.g">19.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0272-1.TXT">AI05-0272-1</A></I>} 
 Identifiers specific to a pragma can be reserved words.</div>
 <div class="paranum"><a name="p19.h">19.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-Pragma arguments can be identified with <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>s; 
+Pragma arguments can be identified with <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>s; 
 this allows <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>'Class 
 in this context. As usual, this is only allowed if specifically allowed 
 by a particular pragma.&nbsp;</div>
@@ -391,11 +391,11 @@ are (and are not) allowed.&nbsp;</div>
 Page, and Optimize <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
 are as follows:</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1343"></A><A NAME="I1344"></A>List(<A NAME="I1345"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1348"></A><A NAME="I1349"></A>List(<A NAME="I1350"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1346"></A><A NAME="I1347"></A>Page;</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1351"></A><A NAME="I1352"></A>Page;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1348"></A><A NAME="I1349"></A>Optimize(<A NAME="I1350"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I1353"></A><A NAME="I1354"></A>Optimize(<A NAME="I1355"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p24">24</a></div>
 <div class="Indented1">[Other pragmas are defined throughout this International 
 Standard, and are summarized in <A HREF="AA-L.html">Annex L</A>.]&nbsp;</div>
@@ -428,8 +428,8 @@ Time, Space, or Off as the single argument. This <SPAN Class="swiss"><A HREF="AA
 is allowed anywhere a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 is allowed, and it applies until the end of the immediately enclosing 
 declarative region, or for a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-at the place of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>, 
-to the end of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>. 
+at the place of a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>, 
+to the end of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>. 
 It gives advice to the implementation as to whether time or space is 
 the primary optimization criterion, or that optional optimizations should 
 be turned off. [It is implementation defined how this advice is followed.] 
@@ -465,7 +465,7 @@ the pragma altogether.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p29.a">29.a</a></div>
-<div class="Annotations"><A NAME="I1351"></A>The Optimize <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Annotations"><A NAME="I1356"></A>The Optimize <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 now allows the identifier Off to request that normal optimization be 
 turned off.</div>
 <div class="paranum"><a name="p29.b">29.b</a></div>

@@ -15,6 +15,8 @@
     DT {display: compact}
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -23,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,12 +46,14 @@ interrupt handlers.</span>&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
 <span class="insert3">The following language-defined library package 
 exists:</span>&nbsp;</div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><span class="insert3"><B>with</B>&nbsp;Ada.Interrupts;<BR>
-<B>package</B>&nbsp;Ada.Execution_Time.Interrupts&nbsp;<B>is</B><A NAME="I9254"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9255"></A>Clock&nbsp;(Interrupt&nbsp;:&nbsp;Ada.Interrupts.Interrupt_Id)<BR>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<span class="insert3"><B>with</B>&nbsp;Ada.Interrupts;<BR>
+<B>package</B>&nbsp;Ada.Execution_Time.Interrupts</span><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking</span><span class="insert3">&nbsp;<B>is</B><A NAME="I9581"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9582"></A>Clock&nbsp;(Interrupt&nbsp;:&nbsp;Ada.Interrupts.Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;CPU_Time;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9256"></A>Supported&nbsp;(Interrupt&nbsp;:&nbsp;Ada.Interrupts.Interrupt_Id)<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9583"></A>Supported&nbsp;(Interrupt&nbsp;:&nbsp;Ada.Interrupts.Interrupt_Id)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>end</B>&nbsp;Ada.Execution_Time.Interrupts;</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
@@ -88,7 +92,7 @@ return a value equal to Ada.Execution_Time.Time_Of(0).</span></div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p7.a">7.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
-<span class="insert3"><A NAME="I9257"></A>The package Execution_Time.Interrupts 
+<span class="insert3"><A NAME="I9584"></A>The package Execution_Time.Interrupts 
 is new.</span>&nbsp;</div>
 
 <HR>

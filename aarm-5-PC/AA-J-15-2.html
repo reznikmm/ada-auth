@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -21,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,27 +39,33 @@
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 No_Return, which is a representation pragma (see <A HREF="AA-13-1.html">13.1</A>), 
-is as follows:<A NAME="I9399"></A> <A NAME="I9400"></A></div>
-<div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9401"></A><A NAME="I9402"></A>No_Return 
-(<I>procedure_</I><A NAME="I9403"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>{, 
-<I>procedure_</I><A NAME="I9404"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>}); 
+is as follows:<A NAME="I9713"></A> <A NAME="I9714"></A></div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+&nbsp;&nbsp;<B>pragma</B> <A NAME="I9715"></A><A NAME="I9716"></A>No_Return 
+(<span class="insert5"><I>subprogram_</I><A NAME="I9717"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span><span class="delete5"><I>&nbsp;procedure_</I><A NAME="I9718"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span>{, 
+<span class="insert5"><I>subprogram_</I><A NAME="I9719"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span><span class="delete5"><I>&nbsp;procedure_</I><A NAME="I9720"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
-<div class="paranum"><a name="p3">3/3</a></div>
+<div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-Each <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
-shall denote one or more procedures or generic procedures. [The <I>procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+Each <span class="insert5"><I>subprogram_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span><span class="delete5"><I>&nbsp;procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span> 
+shall denote one or more <span class="insert5">subprograms</span><span class="delete5">&nbsp;procedures</span> 
+or generic <span class="insert5">subprograms</span><span class="delete5">&nbsp;procedures</span>. 
+[The <span class="insert5"><I>subprogram_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span><span class="delete5"><I>&nbsp;procedure_</I><SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN></span> 
 shall not denote a null procedure nor an instance of a generic unit.] 
 </div>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p4">4/3</a></div>
+<div class="paranum"><a name="p4">4/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> No_Return 
 specifies that the No_Return aspect (see <A HREF="AA-6-5-1.html">6.5.1</A>) 
-for each procedure denoted by each <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
+for each <span class="insert5">subprogram</span><span class="delete5">&nbsp;procedure</span> 
+denoted by each <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
 given in the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 has the value True.&nbsp;</div>
 
@@ -67,6 +75,13 @@ has the value True.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 This subclause is new. Pragma No_Return was moved here from <A HREF="AA-6-5-1.html">6.5.1</A>; 
 aspect No_Return lives there now.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p4.b">4.b/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0269-1.TXT">AI12-0269-1</A></I>} 
+<span class="insert5">This subclause is new. Pragma No_Return was moved 
+here from <A HREF="AA-6-5-1.html">6.5.1</A>; aspect No_Return lives there 
+now.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -46,23 +46,23 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Element_Type&nbsp;<B>is&nbsp;private</B>;<BR>
-<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;<B>is</B><A NAME="I7657"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;<B>is</B><A NAME="I7642"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Synchronized_Queue_Interfaces);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7658"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7643"></A>Queue&nbsp;<B>is&nbsp;synchronized&nbsp;interface</B>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7659"></A>Enqueue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7644"></A>Enqueue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7660"></A>Dequeue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7645"></A>Dequeue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Queue;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Synchronization&nbsp;=&gt;&nbsp;By_Entry;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7661"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7662"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7646"></A>Current_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7647"></A>Peak_Use&nbsp;(Container&nbsp;:&nbsp;Queue)&nbsp;<B>return</B>&nbsp;Count_Type&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
@@ -71,7 +71,7 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:
 &nbsp;&nbsp;&nbsp;New_Item&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Type)&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">A queue type that 
-implements this interface is allowed to have a bounded <I>capacity</I><A NAME="I7663"></A>. 
+implements this interface is allowed to have a bounded <I>capacity</I><A NAME="I7648"></A>. 
 If the queue object has a bounded capacity, and the number of existing 
 elements equals the capacity, then Enqueue blocks until storage becomes 
 available; otherwise, Enqueue does not block. In any case, it then copies 

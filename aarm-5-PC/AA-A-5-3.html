@@ -30,7 +30,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,16 +43,16 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6820"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7053"></A>The 
 following <I>representation-oriented attributes</I> are defined for every 
 subtype S of a floating point type <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="WideHanging-Term">S'Machine_Radix</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6821"></A><A NAME="I6822"></A>Yields the radix of the hardware 
+<A NAME="I7054"></A><A NAME="I7055"></A>Yields the radix of the hardware 
 representation of the type <I>T</I>. The value of this attribute is of 
 the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I6823"></A>The values of other representation-oriented 
+<div class="Normal"><A NAME="I7056"></A>The values of other representation-oriented 
 attributes of a floating point subtype, and of the &ldquo;primitive function&rdquo; 
 attributes of a floating point subtype described later, are defined in 
 terms of a particular representation of nonzero values called the <I>canonical 
@@ -67,7 +67,7 @@ where&nbsp;</div>
 <div class="Bulleted"><I>exponent</I> is an integer.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="WideHanging-Term">S'Machine_Mantissa</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6824"></A><A NAME="I6825"></A>Yields the largest value of <SPAN Class="roman"><I>p</I></SPAN> 
+<A NAME="I7057"></A><A NAME="I7058"></A>Yields the largest value of <SPAN Class="roman"><I>p</I></SPAN> 
 such that every value expressible in the canonical form (for the type 
 <I>T</I>), having a <SPAN Class="roman"><I>p</I></SPAN>-digit <I>mantissa</I> 
 and an <I>exponent</I> between <I>T</I>'Machine_Emin and <I>T</I>'Machine_Emax, 
@@ -81,14 +81,14 @@ since they cannot be expressed in the canonical form with a sufficiently
 short <I>mantissa</I>.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="WideHanging-Term">S'Machine_Emin</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6826"></A><A NAME="I6827"></A>Yields the smallest (most negative) 
+<A NAME="I7059"></A><A NAME="I7060"></A>Yields the smallest (most negative) 
 value of <I>exponent</I> such that every value expressible in the canonical 
 form (for the type <I>T</I>), having a <I>mantissa</I> of <I>T</I>'Machine_Mantissa 
 digits, is a machine number (see <A HREF="AA-3-5-7.html">3.5.7</A>) of 
 the type <I>T</I>. This attribute yields a value of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="WideHanging-Term">S'Machine_Emax</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6828"></A><A NAME="I6829"></A>Yields the largest (most positive) 
+<A NAME="I7061"></A><A NAME="I7062"></A>Yields the largest (most positive) 
 value of <I>exponent</I> such that every value expressible in the canonical 
 form (for the type <I>T</I>), having a <I>mantissa</I> of <I>T</I>'Machine_Mantissa 
 digits, is a machine number (see <A HREF="AA-3-5-7.html">3.5.7</A>) of 
@@ -101,7 +101,7 @@ of floating point types. The implementation may choose any set of values
 that collectively satisfies the definitions.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">S'Denorm</div><div class="WideHanging-Body">
-<A NAME="I6830"></A><A NAME="I6831"></A>Yields the value True if every 
+<A NAME="I7063"></A><A NAME="I7064"></A>Yields the value True if every 
 value expressible in the form<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&plusmn; <SPAN Class="roman"><I>mantissa</I></SPAN> 
 &middot; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>T</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%">'Machine_Emin</SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP><BR>
@@ -111,10 +111,10 @@ zero, is a machine number (see <A HREF="AA-3-5-7.html">3.5.7</A>) of
 the type <I>T</I>; yields the value False otherwise. The value of this 
 attribute is of the predefined type Boolean.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I6832"></A>The values described by the formula 
+<div class="Normal"><A NAME="I7065"></A>The values described by the formula 
 in the definition of S'Denorm are called <I>denormalized numbers</I>. 
-<A NAME="I6833"></A>A nonzero machine number that is not a denormalized 
-number is a <I>normalized number</I>. <A NAME="I6834"></A><A NAME="I6835"></A>A 
+<A NAME="I7066"></A>A nonzero machine number that is not a denormalized 
+number is a <I>normalized number</I>. <A NAME="I7067"></A><A NAME="I7068"></A>A 
 normalized number <SPAN Class="roman"><I>x</I></SPAN> of a given type 
 <I>T</I> is said to be <I>represented in canonical form</I> when it is 
 expressed in the canonical form (for the type <I>T</I>) with a <I>mantissa</I> 
@@ -127,7 +127,7 @@ circumstances defined by IEC 559:1989, though the latter requirement
 is not formalized here.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="WideHanging-Term">S'Machine_Rounds</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6836"></A><A NAME="I6837"></A>Yields the value True if rounding 
+<A NAME="I7069"></A><A NAME="I7070"></A>Yields the value True if rounding 
 is performed on inexact results of every predefined operation that yields 
 a result of the type <I>T</I>; yields the value False otherwise. The 
 value of this attribute is of the predefined type Boolean.&nbsp;</div>
@@ -154,21 +154,21 @@ use of extended registers when S'Machine_Rounds could otherwise be True.
 </div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term">S'Machine_Overflows</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6838"></A><A NAME="I6839"></A>Yields the value True if overflow 
+<A NAME="I7071"></A><A NAME="I7072"></A>Yields the value True if overflow 
 and divide-by-zero are detected and reported by raising Constraint_Error 
 for every predefined operation that yields a result of the type <I>T</I>; 
 yields the value False otherwise. The value of this attribute is of the 
 predefined type Boolean.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="WideHanging-Term">S'Signed_Zeros</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6840"></A><A NAME="I6841"></A>Yields the value True if the 
+<A NAME="I7073"></A><A NAME="I7074"></A>Yields the value True if the 
 hardware representation for the type <I>T</I> has the capability of representing 
 both positively and negatively signed zeros, these being generated and 
 used by the predefined operations of the type <I>T</I> as specified in 
 IEC 559:1989; yields the value False otherwise. The value of this attribute 
 is of the predefined type Boolean.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6842"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7075"></A>For 
 every value <SPAN Class="roman"><I>x</I></SPAN> of a floating point type 
 <I>T</I>, the <I>normalized exponent</I> of <SPAN Class="roman"><I>x</I></SPAN> 
 is defined as follows:&nbsp;</div>
@@ -189,12 +189,12 @@ of <I>exponent</I> in the canonical-form representation of <SPAN Class="roman"><
 <div class="Annotations">The normalized exponent of a denormalized number 
 is less than the value of <I>T</I>'Machine_Emin.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I6843"></A>The 
+<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I7076"></A>The 
 following <I>primitive function attributes</I> are defined for any subtype 
 S of a floating point type <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Exponent</div><div class="WideHanging-Body">
-<A NAME="I6844"></A><A NAME="I6845"></A>S'Exponent denotes a function 
+<A NAME="I7077"></A><A NAME="I7078"></A>S'Exponent denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Exponent&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -204,7 +204,7 @@ with the following specification:&nbsp;</div>
 of <I>X</I>.</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Fraction</div><div class="WideHanging-Body">
-<A NAME="I6846"></A><A NAME="I6847"></A>S'Fraction denotes a function 
+<A NAME="I7079"></A><A NAME="I7080"></A>S'Fraction denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p22">22</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Fraction&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -233,14 +233,14 @@ the <I>exponent</I> by zero in the canonical-form representation of the
 result of scaling <I>X</I> up sufficiently to normalize it.&nbsp;</div>
 <div class="paranum"><a name="p24">24</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Compose</div><div class="WideHanging-Body">
-<A NAME="I6848"></A><A NAME="I6849"></A>S'Compose denotes a function 
+<A NAME="I7081"></A><A NAME="I7082"></A>S'Compose denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Compose&nbsp;(<SPAN Class="roman"><I>Fraction</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Exponent</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="WideHanging-Body"><A NAME="I6850"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
+<div class="WideHanging-Body"><A NAME="I7083"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
 be the value <SPAN Class="roman"><I>Fraction</I></SPAN> &middot; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>Exponent</I></SPAN></SPAN><SPAN STYLE="font-size: 64%">&ndash;</SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>k</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP>, 
 where <SPAN Class="roman"><I>k</I></SPAN> is the normalized exponent 
 of <I>Fraction</I>. If <SPAN Class="roman"><I>v</I></SPAN> is a machine 
@@ -248,7 +248,7 @@ number of the type <I>T</I>, or if |<SPAN Class="roman"><I>v</I></SPAN>|
 &ge; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Model_Small</SPAN>, 
 the function yields <SPAN Class="roman"><I>v</I></SPAN>; otherwise, it 
 yields either one of the machine numbers of the type <I>T</I> adjacent 
-to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I6851"></A><A NAME="I6852"></A>Constraint_Error 
+to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I7084"></A><A NAME="I7085"></A>Constraint_Error 
 is optionally raised if <SPAN Class="roman"><I>v</I></SPAN> is outside 
 the base range of S. A zero result has the sign of <I>Fraction</I> when 
 S'Signed_Zeros is True.&nbsp;</div>
@@ -265,20 +265,20 @@ is either zero, <I>T</I>'Model_Small, or (if <I>T</I>'Denorm is True)
 a denormalized number.&nbsp;</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Scaling</div><div class="WideHanging-Body">
-<A NAME="I6853"></A><A NAME="I6854"></A>S'Scaling denotes a function 
+<A NAME="I7086"></A><A NAME="I7087"></A>S'Scaling denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Scaling&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="roman"><I>Adjustment</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>universal_integer</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="WideHanging-Body"><A NAME="I6855"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
+<div class="WideHanging-Body"><A NAME="I7088"></A>Let <SPAN Class="roman"><I>v</I></SPAN> 
 be the value <SPAN Class="roman"><I>X</I></SPAN> &middot; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>Adjustment</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP>. 
 If <SPAN Class="roman"><I>v</I></SPAN> is a machine number of the type 
 <I>T</I>, or if |<SPAN Class="roman"><I>v</I></SPAN>| &ge; <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Model_Small</SPAN>, 
 the function yields <SPAN Class="roman"><I>v</I></SPAN>; otherwise, it 
 yields either one of the machine numbers of the type <I>T</I> adjacent 
-to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I6856"></A><A NAME="I6857"></A>Constraint_Error 
+to <SPAN Class="roman"><I>v</I></SPAN>. <A NAME="I7089"></A><A NAME="I7090"></A>Constraint_Error 
 is optionally raised if <SPAN Class="roman"><I>v</I></SPAN> is outside 
 the base range of S. A zero result has the sign of <I>X</I> when S'Signed_Zeros 
 is True.&nbsp;</div>
@@ -294,7 +294,7 @@ zero, <I>T</I>'Model_Small, or (if <I>T</I>'Denorm is True) a denormalized
 number.&nbsp;</div>
 <div class="paranum"><a name="p30">30</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Floor</div><div class="WideHanging-Body">
-<A NAME="I6858"></A><A NAME="I6859"></A>S'Floor denotes a function with 
+<A NAME="I7091"></A><A NAME="I7092"></A>S'Floor denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p31">31</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Floor&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -306,7 +306,7 @@ i.e., the largest (most positive) integral value less than or equal to
 a zero result otherwise has a positive sign.</div>
 <div class="paranum"><a name="p33">33</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Ceiling</div><div class="WideHanging-Body">
-<A NAME="I6860"></A><A NAME="I6861"></A>S'Ceiling denotes a function 
+<A NAME="I7093"></A><A NAME="I7094"></A>S'Ceiling denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Ceiling&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -318,7 +318,7 @@ to <I>X</I>. When <I>X</I> is zero, the result has the sign of <I>X</I>;
 a zero result otherwise has a negative sign when S'Signed_Zeros is True.</div>
 <div class="paranum"><a name="p36">36</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Rounding</div><div class="WideHanging-Body">
-<A NAME="I6862"></A><A NAME="I6863"></A>S'Rounding denotes a function 
+<A NAME="I7095"></A><A NAME="I7096"></A>S'Rounding denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p37">37</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Rounding&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -330,7 +330,7 @@ halfway between two integers. A zero result has the sign of <I>X</I>
 when S'Signed_Zeros is True.</div>
 <div class="paranum"><a name="p39">39</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Unbiased_Rounding</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6864"></A><A NAME="I6865"></A>S'Unbiased_Rounding denotes a 
+<A NAME="I7097"></A><A NAME="I7098"></A>S'Unbiased_Rounding denotes a 
 function with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p40">40</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Unbiased_Rounding&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -342,7 +342,7 @@ exactly halfway between two integers. A zero result has the sign of <I>X</I>
 when S'Signed_Zeros is True.</div>
 <div class="paranum"><a name="p41.1">41.1/2</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">&nbsp;&nbsp;S'Machine_Rounding</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6866"></A><A NAME="I6867"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00267.TXT">AI95-00267-01</A></I>} 
+<A NAME="I7099"></A><A NAME="I7100"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00267.TXT">AI95-00267-01</A></I>} 
 S'Machine_Rounding denotes a function with the following specification: 
 </div>
 <div class="paranum"><a name="p41.2">41.2/2</a></div>
@@ -354,7 +354,7 @@ nearest to <I>X</I>. If <I>X</I> lies exactly halfway between two integers,
 one of those integers is returned, but which of them is returned is unspecified. 
 A zero result has the sign of <I>X</I> when S'Signed_Zeros is True. This 
 function provides access to the rounding behavior which is most efficient 
-on the target processor.<A NAME="I6868"></A></div>
+on the target processor.<A NAME="I7101"></A></div>
 <div class="paranum"><a name="p41.a.1">41.a.1/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We leave the rounding unspecified, 
 so that users cannot depend on a particular rounding. This attribute 
@@ -364,7 +364,7 @@ two integers are rounded, one of the other rounding attributes should
 be used.&nbsp;</div>
 <div class="paranum"><a name="p42">42</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Truncation</div><div class="WideHanging-Body">
-<A NAME="I6869"></A><A NAME="I6870"></A>S'Truncation denotes a function 
+<A NAME="I7102"></A><A NAME="I7103"></A>S'Truncation denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p43">43</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Truncation&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -376,13 +376,13 @@ otherwise. A zero result has the sign of <I>X</I> when S'Signed_Zeros
 is True.</div>
 <div class="paranum"><a name="p45">45</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Remainder</div><div class="WideHanging-Body">
-<A NAME="I6871"></A><A NAME="I6872"></A>S'Remainder denotes a function 
+<A NAME="I7104"></A><A NAME="I7105"></A>S'Remainder denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p46">46</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Remainder&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Y</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p47">47</a></div>
-<div class="WideHanging-Body"><A NAME="I6873"></A>For nonzero <I>Y</I>, 
+<div class="WideHanging-Body"><A NAME="I7106"></A>For nonzero <I>Y</I>, 
 let <SPAN Class="roman"><I>v</I></SPAN> be the value <SPAN Class="roman"><I>X</I></SPAN> 
 &ndash; <SPAN Class="roman"><I>n</I></SPAN> &middot; <SPAN Class="roman"><I>Y</I></SPAN>, 
 where <SPAN Class="roman"><I>n</I></SPAN> is the integer nearest to the 
@@ -391,7 +391,7 @@ if |<SPAN Class="roman"><I>n</I></SPAN> &ndash; <SPAN Class="roman"><I>X</I></SP
 = 1/2, then <SPAN Class="roman"><I>n</I></SPAN> is chosen to be even. 
 If <SPAN Class="roman"><I>v</I></SPAN> is a machine number of the type 
 <I>T</I>, the function yields <SPAN Class="roman"><I>v</I></SPAN>; otherwise, 
-it yields zero. <A NAME="I6874"></A><A NAME="I6875"></A>Constraint_Error 
+it yields zero. <A NAME="I7107"></A><A NAME="I7108"></A>Constraint_Error 
 is raised if <I>Y</I> is zero. A zero result has the sign of <I>X</I> 
 when S'Signed_Zeros is True.&nbsp;</div>
 <div class="paranum"><a name="p47.a">47.a</a></div>
@@ -405,17 +405,17 @@ is in the neighborhood of zero, <I>X</I> is sufficiently close to a multiple
 of <I>Y</I>, and <I>T</I>'Denorm is False.&nbsp;</div>
 <div class="paranum"><a name="p48">48</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Adjacent</div><div class="WideHanging-Body">
-<A NAME="I6876"></A><A NAME="I6877"></A>S'Adjacent denotes a function 
+<A NAME="I7109"></A><A NAME="I7110"></A>S'Adjacent denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p49">49</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Adjacent&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Towards</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p50">50</a></div>
-<div class="WideHanging-Body"><A NAME="I6878"></A>If <SPAN Class="roman"><I>Towards</I></SPAN> 
+<div class="WideHanging-Body"><A NAME="I7111"></A>If <SPAN Class="roman"><I>Towards</I></SPAN> 
 = <SPAN Class="roman"><I>X</I></SPAN>, the function yields <I>X</I>; 
 otherwise, it yields the machine number of the type <I>T</I> adjacent 
 to <I>X</I> in the direction of <I>Towards</I>, if that machine number 
-exists. <A NAME="I6879"></A><A NAME="I6880"></A>If the result would be 
+exists. <A NAME="I7112"></A><A NAME="I7113"></A>If the result would be 
 outside the base range of S, Constraint_Error is raised. When <I>T</I>'Signed_Zeros 
 is True, a zero result has the sign of <I>X</I>. When <I>Towards</I> 
 is zero, its sign has no bearing on the result.&nbsp;</div>
@@ -426,16 +426,16 @@ when <I>T</I>'Denorm is False and the smallest denormalized positive
 number of the type <I>T</I> when <I>T</I>'Denorm is True.&nbsp;</div>
 <div class="paranum"><a name="p51">51</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Copy_Sign</div><div class="WideHanging-Body">
-<A NAME="I6881"></A><A NAME="I6882"></A>S'Copy_Sign denotes a function 
+<A NAME="I7114"></A><A NAME="I7115"></A>S'Copy_Sign denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p52">52</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Copy_Sign&nbsp;(<SPAN Class="roman"><I>Value</I></SPAN>,&nbsp;<SPAN Class="roman"><I>Sign</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p53">53</a></div>
-<div class="WideHanging-Body"><A NAME="I6883"></A>If the value of <I>Value</I> 
+<div class="WideHanging-Body"><A NAME="I7116"></A>If the value of <I>Value</I> 
 is nonzero, the function yields a result whose magnitude is that of <I>Value</I> 
 and whose sign is that of <I>Sign</I>; otherwise, it yields the value 
-zero. <A NAME="I6884"></A><A NAME="I6885"></A>Constraint_Error is optionally 
+zero. <A NAME="I7117"></A><A NAME="I7118"></A>Constraint_Error is optionally 
 raised if the result is outside the base range of S. A zero result has 
 the sign of <I>Sign</I> when S'Signed_Zeros is True.&nbsp;</div>
 <div class="paranum"><a name="p53.a">53.a</a></div>
@@ -450,7 +450,7 @@ by transferring the sign of the zero quantity to a nonzero quantity and
 then testing for a negative result.&nbsp;</div>
 <div class="paranum"><a name="p54">54</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Leading_Part</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6886"></A><A NAME="I6887"></A>S'Leading_Part denotes a function 
+<A NAME="I7119"></A><A NAME="I7120"></A>S'Leading_Part denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p55">55</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Leading_Part&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;<BR>
@@ -470,7 +470,7 @@ and <I>Radix_Digits</I> is positive;</div>
 &middot; <SPAN Class="roman"><I>v</I></SPAN>, when <I>X</I> is negative 
 and <I>Radix_Digits</I> is positive.&nbsp;</div>
 <div class="paranum"><a name="p59">59</a></div>
-<div class="WideHanging-Body"><A NAME="I6888"></A><A NAME="I6889"></A><A NAME="I6890"></A>Constraint_Error 
+<div class="WideHanging-Body"><A NAME="I7121"></A><A NAME="I7122"></A><A NAME="I7123"></A>Constraint_Error 
 is raised when <I>Radix_Digits</I> is zero or negative. A zero result[, 
 which can only occur when <I>X</I> is zero,] has the sign of <I>X</I>. 
 </div>
@@ -487,16 +487,16 @@ leading digits, then scaling the result back down if <I>X</I> was scaled
 up.&nbsp;</div>
 <div class="paranum"><a name="p60">60</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Machine</div><div class="WideHanging-Body">
-<A NAME="I6891"></A><A NAME="I6892"></A>S'Machine denotes a function 
+<A NAME="I7124"></A><A NAME="I7125"></A>S'Machine denotes a function 
 with the following specification:&nbsp;</div>
 <div class="paranum"><a name="p61">61</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Machine&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
 &nbsp;&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p62">62</a></div>
-<div class="WideHanging-Body"><A NAME="I6893"></A>If <I>X</I> is a machine 
+<div class="WideHanging-Body"><A NAME="I7126"></A>If <I>X</I> is a machine 
 number of the type <I>T</I>, the function yields <I>X</I>; otherwise, 
 it yields the value obtained by rounding or truncating <I>X</I> to either 
-one of the adjacent machine numbers of the type <I>T</I>. <A NAME="I6894"></A><A NAME="I6895"></A>Constraint_Error 
+one of the adjacent machine numbers of the type <I>T</I>. <A NAME="I7127"></A><A NAME="I7128"></A>Constraint_Error 
 is raised if rounding or truncating <I>X</I> to the precision of the 
 machine numbers results in a value outside the base range of S. A zero 
 result has the sign of <I>X</I> when S'Signed_Zeros is True.&nbsp;</div>
@@ -529,12 +529,12 @@ when it is more efficient than the former; it is mandatory when the former
 cannot deliver the required accuracy due to limitations of the implementation's 
 arithmetic operations.&nbsp;</div>
 <div class="paranum"><a name="p63">63</a></div>
-<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I6896"></A>The 
+<div class="WideAbove" style="margin-bottom: 0.4em"><A NAME="I7129"></A>The 
 following <I>model-oriented attributes</I> are defined for any subtype 
 S of a floating point type <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p64">64</a></div>
 <div class="WideHanging-Term">S'Model_Mantissa</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6897"></A><A NAME="I6898"></A>If the Numerics Annex is not 
+<A NAME="I7130"></A><A NAME="I7131"></A>If the Numerics Annex is not 
 supported, this attribute yields an implementation defined value that 
 is greater than or equal to <I>Ceiling</I>(<SPAN Class="roman"><I>d</I></SPAN> 
 &middot; log(10) / log(<SPAN Class="roman"><I>T</I></SPAN>'<SPAN Class="roman">Machine_Radix</SPAN>)) 
@@ -545,14 +545,14 @@ to implementations supporting the Numerics Annex. The value of this attribute
 is of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p65">65</a></div>
 <div class="WideHanging-Term">S'Model_Emin</div><div class="WideHanging-Body">
-<A NAME="I6899"></A><A NAME="I6900"></A>If the Numerics Annex is not 
+<A NAME="I7132"></A><A NAME="I7133"></A>If the Numerics Annex is not 
 supported, this attribute yields an implementation defined value that 
 is greater than or equal to the value of <I>T</I>'Machine_Emin. See <A HREF="AA-G-2-2.html">G.2.2</A> 
 for further requirements that apply to implementations supporting the 
 Numerics Annex. The value of this attribute is of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p66">66</a></div>
 <div class="WideHanging-Term">S'Model_Epsilon</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6901"></A><A NAME="I6902"></A>Yields the value <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1 
+<A NAME="I7134"></A><A NAME="I7135"></A>Yields the value <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%">1 
 &ndash;&nbsp;</SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>T</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%">'Model_Mantissa</SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN></SPAN></SUP>. 
 The value of this attribute is of the type <I>universal_real</I>.&nbsp;</div>
 <div class="paranum"><a name="p66.a">66.a</a></div>
@@ -563,7 +563,7 @@ when added to one, yields a machine number different from one. Further
 discussion can be found in <A HREF="AA-G-2-2.html">G.2.2</A>.&nbsp;</div>
 <div class="paranum"><a name="p67">67</a></div>
 <div class="WideHanging-Term">S'Model_Small</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I6903"></A><A NAME="I6904"></A>Yields the value <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>T</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%">'Model_Emin</SPAN></SPAN><SPAN STYLE="font-size: 64%">&nbsp;&ndash; 1</SPAN></SPAN></SUP>. The value of this attribute is of the 
+<A NAME="I7136"></A><A NAME="I7137"></A>Yields the value <SPAN Class="roman"><I>T</I></SPAN><SPAN Class="roman">'Machine_Radix</SPAN><SUP><SPAN STYLE="font-size: 140%"><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%"><I>T</I></SPAN></SPAN><SPAN STYLE="font-size: 64%"></SPAN><SPAN Class="roman"><SPAN STYLE="font-size: 64%">'Model_Emin</SPAN></SPAN><SPAN STYLE="font-size: 64%">&nbsp;&ndash; 1</SPAN></SPAN></SUP>. The value of this attribute is of the 
 type <I>universal_real</I>.&nbsp;</div>
 <div class="paranum"><a name="p67.a">67.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>In most implementations, 
@@ -577,7 +577,7 @@ underflow threshold (i.e., it exceeds the latter). Further discussion
 can be found in <A HREF="AA-G-2-2.html">G.2.2</A>.&nbsp;</div>
 <div class="paranum"><a name="p68">68</a></div>
 <div class="WideHanging-Term" style="margin-bottom: 0.4em">S'Model</div><div class="WideHanging-Body">
-<A NAME="I6905"></A><A NAME="I6906"></A>S'Model denotes a function with 
+<A NAME="I7138"></A><A NAME="I7139"></A>S'Model denotes a function with 
 the following specification:&nbsp;</div>
 <div class="paranum"><a name="p69">69</a></div>
 <div class="Indented4Examples"><B>function</B>&nbsp;S'Model&nbsp;(<SPAN Class="roman"><I>X</I></SPAN>&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)<BR>
@@ -589,7 +589,7 @@ for the definition that applies to implementations supporting the Numerics
 Annex.</div>
 <div class="paranum"><a name="p71">71</a></div>
 <div class="WideHanging-Term">S'Safe_First</div><div class="WideHanging-Body">
-<A NAME="I6907"></A><A NAME="I6908"></A>Yields the lower bound of the 
+<A NAME="I7140"></A><A NAME="I7141"></A>Yields the lower bound of the 
 safe range (see <A HREF="AA-3-5-7.html">3.5.7</A>) of the type <I>T</I>. 
 If the Numerics Annex is not supported, the value of this attribute is 
 implementation defined; see <A HREF="AA-G-2-2.html">G.2.2</A> for the 
@@ -597,7 +597,7 @@ definition that applies to implementations supporting the Numerics Annex.
 The value of this attribute is of the type <I>universal_real</I>.</div>
 <div class="paranum"><a name="p72">72</a></div>
 <div class="WideHanging-Term">S'Safe_Last</div><div class="WideHanging-Body">
-<A NAME="I6909"></A><A NAME="I6910"></A>Yields the upper bound of the 
+<A NAME="I7142"></A><A NAME="I7143"></A>Yields the upper bound of the 
 safe range (see <A HREF="AA-3-5-7.html">3.5.7</A>) of the type <I>T</I>. 
 If the Numerics Annex is not supported, the value of this attribute is 
 implementation defined; see <A HREF="AA-G-2-2.html">G.2.2</A> for the 
@@ -617,7 +617,7 @@ Safe_Last attributes, if the Numerics Annex is not supported.</div>
 
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p72.d">72.d</a></div>
-<div class="Annotations"><A NAME="I6911"></A>The Epsilon and Mantissa 
+<div class="Annotations"><A NAME="I7144"></A>The Epsilon and Mantissa 
 attributes of floating point types are removed from the language and 
 replaced by Model_Epsilon and Model_Mantissa, which may have different 
 values (as a result of changes in the definition of model numbers); the 
@@ -643,7 +643,7 @@ with their former values.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p72.g">72.g</a></div>
-<div class="Annotations"><A NAME="I6912"></A>The Model_Emin attribute 
+<div class="Annotations"><A NAME="I7145"></A>The Model_Emin attribute 
 is new. It is conceptually similar to the negation of Safe_Emax attribute 
 of Ada 83, adjusted for the fact that the model numbers now have the 
 hardware radix. It is a fundamental determinant, along with Model_Mantissa, 
@@ -655,7 +655,7 @@ as are all of the primitive function attributes.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p72.i">72.i/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00388.TXT">AI95-00388-01</A></I>} 
-<A NAME="I6913"></A>The Machine_Rounding attribute is new.&nbsp;</div>
+<A NAME="I7146"></A>The Machine_Rounding attribute is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

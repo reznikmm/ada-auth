@@ -18,7 +18,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -111,10 +111,12 @@ Tagged Types</A><BR>
         4.1.5&nbsp;<A HREF="AA-4-1-5.html">User-Defined References</A><BR>
         4.1.6&nbsp;<A HREF="AA-4-1-6.html">User-Defined Indexing</A><BR>
     4.2&nbsp;<A HREF="AA-4-2.html">Literals</A><BR>
+        4.2.1&nbsp;<A HREF="AA-4-2-1.html">User-Defined Literals</A><BR>
     4.3&nbsp;<A HREF="AA-4-3.html">Aggregates</A><BR>
         4.3.1&nbsp;<A HREF="AA-4-3-1.html">Record Aggregates</A><BR>
         4.3.2&nbsp;<A HREF="AA-4-3-2.html">Extension Aggregates</A><BR>
         4.3.3&nbsp;<A HREF="AA-4-3-3.html">Array Aggregates</A><BR>
+        4.3.4&nbsp;<A HREF="AA-4-3-4.html">Delta Aggregates</A><BR>
     4.4&nbsp;<A HREF="AA-4-4.html">Expressions</A><BR>
     4.5&nbsp;<A HREF="AA-4-5.html">Operators and Expression Evaluation</A><BR>
         4.5.1&nbsp;<A HREF="AA-4-5-1.html">Logical Operators and Short-circuit 
@@ -127,6 +129,7 @@ Tests</A><BR>
         4.5.6&nbsp;<A HREF="AA-4-5-6.html">Highest Precedence Operators</A><BR>
         4.5.7&nbsp;<A HREF="AA-4-5-7.html">Conditional Expressions</A><BR>
         4.5.8&nbsp;<A HREF="AA-4-5-8.html">Quantified Expressions</A><BR>
+        4.5.9&nbsp;<A HREF="AA-4-5-9.html">Anonymous Functions</A><BR>
     4.6&nbsp;<A HREF="AA-4-6.html">Type Conversions</A><BR>
     4.7&nbsp;<A HREF="AA-4-7.html">Qualified Expressions</A><BR>
     4.8&nbsp;<A HREF="AA-4-8.html">Allocators</A><BR>
@@ -143,12 +146,16 @@ of Statements</A><BR>
     5.5&nbsp;<A HREF="AA-5-5.html">Loop Statements</A><BR>
         5.5.1&nbsp;<A HREF="AA-5-5-1.html">User-Defined Iterator Types</A><BR>
         5.5.2&nbsp;<A HREF="AA-5-5-2.html">Generalized Loop Iteration</A><BR>
+        5.5.3&nbsp;<A HREF="AA-5-5-3.html">Procedural Iterators</A><BR>
     5.6&nbsp;<A HREF="AA-5-6.html">Block Statements</A><BR>
+        5.6.1&nbsp;<A HREF="AA-5-6-1.html">Parallel Block Statements</A><BR>
     5.7&nbsp;<A HREF="AA-5-7.html">Exit Statements</A><BR>
     5.8&nbsp;<A HREF="AA-5-8.html">Goto Statements</A></div>
 <div class="Normal">6. <A HREF="AA-6.html">Subprograms</A><BR>
     6.1&nbsp;<A HREF="AA-6-1.html">Subprogram Declarations</A><BR>
         6.1.1&nbsp;<A HREF="AA-6-1-1.html">Preconditions and Postconditions</A><BR>
+        6.1.2&nbsp;<A HREF="AA-6-1-2.html">The Global and Global'Class 
+Aspects</A><BR>
     6.2&nbsp;<A HREF="AA-6-2.html">Formal Parameter Modes</A><BR>
     6.3&nbsp;<A HREF="AA-6-3.html">Subprogram Bodies</A><BR>
         6.3.1&nbsp;<A HREF="AA-6-3-1.html">Conformance Rules</A><BR>
@@ -156,7 +163,7 @@ of Statements</A><BR>
     6.4&nbsp;<A HREF="AA-6-4.html">Subprogram Calls</A><BR>
         6.4.1&nbsp;<A HREF="AA-6-4-1.html">Parameter Associations</A><BR>
     6.5&nbsp;<A HREF="AA-6-5.html">Return Statements</A><BR>
-        6.5.1&nbsp;<A HREF="AA-6-5-1.html">Nonreturning Procedures</A><BR>
+        6.5.1&nbsp;<A HREF="AA-6-5-1.html">Nonreturning Subprograms</A><BR>
     6.6&nbsp;<A HREF="AA-6-6.html">Overloading of Operators</A><BR>
     6.7&nbsp;<A HREF="AA-6-7.html">Null Procedures</A><BR>
     6.8&nbsp;<A HREF="AA-6-8.html">Expression Functions</A></div>
@@ -166,6 +173,8 @@ of Statements</A><BR>
     7.3&nbsp;<A HREF="AA-7-3.html">Private Types and Private Extensions</A><BR>
         7.3.1&nbsp;<A HREF="AA-7-3-1.html">Private Operations</A><BR>
         7.3.2&nbsp;<A HREF="AA-7-3-2.html">Type Invariants</A><BR>
+        7.3.3&nbsp;<A HREF="AA-7-3-3.html">Default Initial Conditions</A><BR>
+        7.3.4&nbsp;<A HREF="AA-7-3-4.html">Stable Properties of a Type</A><BR>
     7.4&nbsp;<A HREF="AA-7-4.html">Deferred Constants</A><BR>
     7.5&nbsp;<A HREF="AA-7-5.html">Limited Types</A><BR>
     7.6&nbsp;<A HREF="AA-7-6.html">Assignment and Finalization</A><BR>
@@ -206,6 +215,7 @@ other operations for Time</A><BR>
 of Statements</A><BR>
     9.9&nbsp;<A HREF="AA-9-9.html">Task and Entry Attributes</A><BR>
     9.10&nbsp;<A HREF="AA-9-10.html">Shared Variables</A><BR>
+        9.10.1&nbsp;<A HREF="AA-9-10-1.html">Conflict Check Policies</A><BR>
     9.11&nbsp;<A HREF="AA-9-11.html">Example of Tasking and Synchronization</A></div>
 <div class="Normal">10. <A HREF="AA-10.html">Program Structure and Compilation 
 Issues</A><BR>
@@ -351,9 +361,15 @@ Wide Text Input-Output</A><BR>
     A.13&nbsp;<A HREF="AA-A-13.html">Exceptions in Input-Output</A><BR>
     A.14&nbsp;<A HREF="AA-A-14.html">File Sharing</A><BR>
     A.15&nbsp;<A HREF="AA-A-15.html">The Package Command_Line</A><BR>
+        A.15.1&nbsp;<A HREF="AA-A-15-1.html">The Packages Wide_Command_Line 
+and Wide_Wide_Command_Line</A><BR>
     A.16&nbsp;<A HREF="AA-A-16.html">The Package Directories</A><BR>
         A.16.1&nbsp;<A HREF="AA-A-16-1.html">The Package Directories.Hierarchical_File_Names</A><BR>
+        A.16.2&nbsp;<A HREF="AA-A-16-2.html">The Packages Wide_Directories 
+and Wide_Wide_Directories</A><BR>
     A.17&nbsp;<A HREF="AA-A-17.html">The Package Environment_Variables</A><BR>
+        A.17.1&nbsp;<A HREF="AA-A-17-1.html">The Packages Wide_Environment_Variables 
+and Wide_Wide_Environment_Variables</A><BR>
     A.18&nbsp;<A HREF="AA-A-18.html">Containers</A><BR>
         A.18.1&nbsp;<A HREF="AA-A-18-1.html">The Package Containers</A><BR>
         A.18.2&nbsp;<A HREF="AA-A-18-2.html">The Generic Package Containers.Vectors</A><BR>
@@ -386,7 +402,8 @@ Wide Text Input-Output</A><BR>
         A.18.29&nbsp;<A HREF="AA-A-18-29.html">The Generic Package Containers.Bounded_Synchronized_Queues</A><BR>
         A.18.30&nbsp;<A HREF="AA-A-18-30.html">The Generic Package Containers.Unbounded_Priority_Queues</A><BR>
         A.18.31&nbsp;<A HREF="AA-A-18-31.html">The Generic Package Containers.Bounded_Priority_Queues</A><BR>
-        A.18.32&nbsp;<A HREF="AA-A-18-32.html">Example of Container Use</A><BR>
+        A.18.32&nbsp;<A HREF="AA-A-18-32.html">The Generic Package Containers.Bounded_Indefinite_Holders</A><BR>
+        A.18.33&nbsp;<A HREF="AA-A-18-33.html">Example of Container Use</A><BR>
     A.19&nbsp;<A HREF="AA-A-19.html">The Package Locales</A></div>
 <div class="Normal">B. <A HREF="AA-B.html">Interface to Other Languages</A><BR>
     B.1&nbsp;<A HREF="AA-B-1.html">Interfacing Aspects</A><BR>
@@ -421,6 +438,7 @@ Wide Text Input-Output</A><BR>
         D.2.6&nbsp;<A HREF="AA-D-2-6.html">Earliest Deadline First Dispatching</A><BR>
     D.3&nbsp;<A HREF="AA-D-3.html">Priority Ceiling Locking</A><BR>
     D.4&nbsp;<A HREF="AA-D-4.html">Entry Queuing Policies</A><BR>
+        D.4.1&nbsp;<A HREF="AA-D-4-1.html">Admission Policies</A><BR>
     D.5&nbsp;<A HREF="AA-D-5.html">Dynamic Priorities</A><BR>
         D.5.1&nbsp;<A HREF="AA-D-5-1.html">Dynamic Priorities for Tasks</A><BR>
         D.5.2&nbsp;<A HREF="AA-D-5-2.html">Dynamic Priorities for Protected 
@@ -434,7 +452,7 @@ Objects</A><BR>
     D.11&nbsp;<A HREF="AA-D-11.html">Asynchronous Task Control</A><BR>
     D.12&nbsp;<A HREF="AA-D-12.html">Other Optimizations and Determinism 
 Rules</A><BR>
-    D.13&nbsp;<A HREF="AA-D-13.html">The Ravenscar Profile</A><BR>
+    D.13&nbsp;<A HREF="AA-D-13.html">The Ravenscar and Jorvik Profiles</A><BR>
     D.14&nbsp;<A HREF="AA-D-14.html">Execution Time</A><BR>
         D.14.1&nbsp;<A HREF="AA-D-14-1.html">Execution Time Timers</A><BR>
         D.14.2&nbsp;<A HREF="AA-D-14-2.html">Group Execution Time Budgets</A><BR>
@@ -495,6 +513,7 @@ Complex Arithmetic</A><BR>
         H.3.1&nbsp;<A HREF="AA-H-3-1.html">Pragma Reviewable</A><BR>
         H.3.2&nbsp;<A HREF="AA-H-3-2.html">Pragma Inspection_Point</A><BR>
     H.4&nbsp;<A HREF="AA-H-4.html">High Integrity Restrictions</A><BR>
+        H.4.1&nbsp;<A HREF="AA-H-4-1.html">Aspect No_Controlled_Parts</A><BR>
     H.5&nbsp;<A HREF="AA-H-5.html">Pragma Detect_Blocking</A><BR>
     H.6&nbsp;<A HREF="AA-H-6.html">Pragma Partition_Elaboration_Policy</A></div>
 <div class="Normal">J. <A HREF="AA-J.html">Obsolescent Features</A><BR>

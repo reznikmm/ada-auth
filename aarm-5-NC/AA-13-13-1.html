@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,36 +45,47 @@ the requirements of the particular kind of stream. The predefined stream-oriente
 attributes like T'Read and T'Write make dispatching calls on the Read 
 and Write procedures of the Root_Stream_Type. (User-defined T'Read and 
 T'Write attributes can also make such calls, or can call the Read and 
-Write attributes of other types.)&nbsp;</div>
-<div class="paranum"><a name="p2">2</a></div>
-<div class="Examples"><A NAME="I5902"></A><B>package</B>&nbsp;Ada.Streams&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Streams)<A NAME="I5903"></A>;</div>
+Write attributes of other types.)</div>
+<div class="paranum"><a name="p1.1">1.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The library package Ada.Streams has the following declaration:</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<A NAME="I6112"></A><B>package</B>&nbsp;Ada.Streams<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False&nbsp;<B>is</B></div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5904"></A>Root_Stream_Type&nbsp;<B>is</B>&nbsp;<B>abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6113"></A>Root_Stream_Type&nbsp;<B>is</B>&nbsp;<B>abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Root_Stream_Type);</div>
 <div class="paranum"><a name="p4">4/1</a></div>
 <div class="Examples">{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00181.TXT">AI95-00181-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5905"></A>Stream_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5906"></A>Stream_Element_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I5907"></A>Stream_Element_Count&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6114"></A>Stream_Element&nbsp;<B>is</B>&nbsp;<B>mod</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6115"></A>Stream_Element_Offset&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6116"></A>Stream_Element_Count&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_Element_Offset&nbsp;<B>range</B>&nbsp;0..Stream_Element_Offset'Last;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I5908"></A>Stream_Element_Array&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6117"></A>Stream_Element_Array&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>array</B>(Stream_Element_Offset&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B><B>&nbsp;aliased</B>&nbsp;Stream_Element;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5909"></A>Read(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6118"></A>Read(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Root_Stream_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Offset)&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5910"></A>Write(<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6119"></A>Write(<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in</B>&nbsp;<B>out</B>&nbsp;Root_Stream_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Stream_Element_Array)&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Streams;</div>
+<div class="paranum"><a name="p7.a">7.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+This package must allow blocking (Nonblocking =&gt; False) for compatibility. 
+The purpose of this package is to provide a template for overriding user-defined 
+routines; and such routines can only allow blocking if the root type 
+does so. Users can still declare their overridding routines nonblocking 
+if they wish.&nbsp;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00227.TXT">AI95-00227-01</A></I>} 
 The Read operation transfers stream elements from the specified stream 
@@ -104,48 +115,211 @@ Last value is not in Stream_Element_Offset. This implies that the Stream_Element
 passed to these subprograms should not have a lower bound of Stream_Element_Offset'First, 
 because then a read of 0 elements would always raise Constraint_Error. 
 A better choice of lower bound is 0 or 1.&nbsp;</div>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+In addition, three packages provide stream implementations which do not 
+make use of any file operations. These three packages provide the same 
+operations, with Streams.FIFO_Streams providing an abstract interface, 
+and two child packages providing implementations of that interface. The 
+difference is that for Streams.FIFO_Streams.Bounded, the maximum storage 
+is bounded.</div>
+<div class="paranum"><a name="p11">11/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The library package Ada.Streams.FIFO_Streams has the following declaration:</div>
+<div class="paranum"><a name="p12">12/5</a></div>
+<div class="Examples"><A NAME="I6120"></A><B>package</B>&nbsp;Ada.Streams.FIFO_Streams<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p13">13/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6121"></A>FIFO_Stream&nbsp;<B>is&nbsp;abstract&nbsp;new</B>&nbsp;Root_Stream_Type&nbsp;<B>with&nbsp;private</B>;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6122"></A>Element_Count&nbsp;(Stream&nbsp;:&nbsp;FIFO_Stream)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Stream_Element_Count&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p15">15/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6123"></A>Clear&nbsp;(Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;FIFO_Stream)&nbsp;<B>is&nbsp;abstract</B>;</div>
+<div class="paranum"><a name="p16">16/5</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Streams.FIFO_Streams;</div>
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The library package Ada.Streams.FIFO_Streams.Unbounded has the following 
+declaration:</div>
+<div class="paranum"><a name="p18">18/5</a></div>
+<div class="Examples"><A NAME="I6124"></A><B>package</B>&nbsp;Ada.Streams.FIFO_Streams.Unbounded<BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Prelaborated,&nbsp;Nonblocking&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p19">19/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6125"></A>Stream_Type&nbsp;<B>is&nbsp;new</B>&nbsp;FIFO_Stream&nbsp;<B>with&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Default_Initial_Condition&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream_Type)&nbsp;=&nbsp;0;</div>
+<div class="paranum"><a name="p20">20/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6126"></A>Read&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Offset)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Num_Read&nbsp;:&nbsp;<B>constant</B>&nbsp;Stream_Element_Count&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_Element_Count'Min<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element_Count(Stream)'Old,&nbsp;Item'Length);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;=&nbsp;Num_Read&nbsp;+&nbsp;Item'First&nbsp;-&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>and</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)&nbsp;=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)'Old&nbsp;-&nbsp;Num_Read);</div>
+<div class="paranum"><a name="p20.a">20.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>Num_Read is the number of 
+elements read; this is the minimum of Item'Length and the number of available 
+elements. Last then is determined by that, and the Element_Count decreases 
+by the number of elements read.&nbsp;</div>
+<div class="paranum"><a name="p21">21/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6127"></A>Write&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Stream_Element_Array)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)&nbsp;=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)'Old&nbsp;+&nbsp;Item'Length;</div>
+<div class="paranum"><a name="p22">22/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6128"></A>Element_Count&nbsp;(Stream&nbsp;:&nbsp;Stream_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Stream_Element_Count;</div>
+<div class="paranum"><a name="p23">23/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6129"></A>Clear&nbsp;(Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Stream_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Element_Count&nbsp;(Stream)&nbsp;=&nbsp;0;</div>
+<div class="paranum"><a name="p24">24/5</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Streams.FIFO_Streams.Unbounded;</div>
+<div class="paranum"><a name="p25">25/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The library package Ada.Streams.FIFO_Streams.Bounded has the following 
+declaration:</div>
+<div class="paranum"><a name="p26">26/5</a></div>
+<div class="Examples"><A NAME="I6130"></A><B>package</B>&nbsp;Ada.Streams.FIFO_Streams.Bounded<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;<B>is</B></div>
+<div class="paranum"><a name="p27">27/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6131"></A>Stream_Type&nbsp;(Max_Elements&nbsp;:&nbsp;Stream_Element_Count)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>is&nbsp;new</B>&nbsp;FIFO_Stream&nbsp;<B>with&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Default_Initial_Condition&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream_Type)&nbsp;=&nbsp;0;</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6132"></A>Read&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Array;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Stream_Element_Offset)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>declare</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Num_Read&nbsp;:&nbsp;<B>constant</B>&nbsp;Stream_Element_Count&nbsp;:=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream_Element_Count'Min<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element_Count(Stream)'Old,&nbsp;Item'Length);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last&nbsp;=&nbsp;Num_Read&nbsp;+&nbsp;Item'First&nbsp;-&nbsp;1<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>and</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)&nbsp;=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)'Old&nbsp;-&nbsp;Num_Read);</div>
+<div class="paranum"><a name="p29">29/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6133"></A>Write&nbsp;(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Stream_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Stream_Element_Array)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Pre&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)&nbsp;+&nbsp;Item'Length&nbsp;&lt;=&nbsp;Stream.Max_Elements<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>or&nbsp;else</B>&nbsp;(<B>raise</B>&nbsp;Constraint_Error),<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Post&nbsp;=&gt;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)&nbsp;=<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element_Count&nbsp;(Stream)'Old&nbsp;+&nbsp;Item'Length;</div>
+<div class="paranum"><a name="p30">30/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6134"></A>Element_Count&nbsp;(Stream&nbsp;:&nbsp;Stream_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Stream_Element_Count<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Element_Count'Result&nbsp;&lt;=&nbsp;Stream.Max_Elements;</div>
+<div class="paranum"><a name="p31">31/5</a></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I6135"></A>Clear&nbsp;(Stream&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Stream_Type)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Post&nbsp;=&gt;&nbsp;Element_Count&nbsp;(Stream)&nbsp;=&nbsp;0;</div>
+<div class="paranum"><a name="p32">32/5</a></div>
+<div class="Examples"><B>private</B><BR>
+&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
+<B>end</B>&nbsp;Ada.Streams.FIFO_Streams.Bounded;</div>
+<div class="paranum"><a name="p33">33/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The Element_Count functions return the number of stream elements that 
+are available for reading from the given stream.</div>
+<div class="paranum"><a name="p34">34/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The Read and Write procedures behave as described for package Ada.Streams 
+above. Stream elements are read in FIFO (first-in, first-out) order; 
+stream elements are available for reading immediately after they are 
+written.</div>
+<div class="paranum"><a name="p35">35/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+The Clear procedures remove any available stream elements from the given 
+stream.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
-<div class="paranum"><a name="p9.1">9.1/1</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
+<div class="paranum"><a name="p36">36/5</a></div>
+<div class="Normal">{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00181.TXT">AI95-00181-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
 If Stream_Element'Size is not a multiple of System.Storage_Unit, then 
 the components of Stream_Element_Array need not be aliased.&nbsp;</div>
-<div class="paranum"><a name="p9.b.1">9.b.1/2</a></div>
+<div class="paranum"><a name="p36.a">36.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
 If the Stream_Element'Size is less than the size of System.Storage_Unit, 
 then components of Stream_Element_Array need not be aliased. This is 
 necessary as the components of type Stream_Element size might not be 
 addressable on the target architecture.&nbsp;</div>
+
+<H4 Class="centered">Implementation Advice</H4>
+<div class="paranum"><a name="p37">37/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+Streams.FIFO_Streams.Bounded.Stream_Type objects should be implemented 
+without implicit pointers or dynamic allocation.</div>
+<div class="paranum"><a name="p37.a.1">37.a.1/5</a></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Streams.FIFO_Streams.Bounded.Stream_Type 
+objects should be implemented without implicit pointers or dynamic allocation.</div>
+<div class="paranum"><a name="p37.a">37.a/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>The Streams.FIFO_Streams.Bounded 
+package is provided in orde to make available an alternative to the Streaams.FIFO_Streams.Unbounded 
+package which gives more predictable memory usage.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p10">10</a></div>
+<div class="paranum"><a name="p38">38</a></div>
 <div class="Notes">38&nbsp;&nbsp;See <A HREF="AA-A-12-1.html">A.12.1</A>, 
 &ldquo;<A HREF="AA-A-12-1.html">The Package Streams.Stream_IO</A>&rdquo; 
 for an example of extending type Root_Stream_Type.</div>
-<div class="paranum"><a name="p11">11/2</a></div>
+<div class="paranum"><a name="p39">39/2</a></div>
 <div class="Notes">39&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00227.TXT">AI95-00227-01</A></I>} 
 If the end of stream has been reached, and Item'First is Stream_Element_Offset'First, 
 Read will raise Constraint_Error.&nbsp;</div>
-<div class="paranum"><a name="p11.a">11.a/2</a></div>
+<div class="paranum"><a name="p39.a">39.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Thus, Stream_Element_Arrays 
 should start at 0 or 1, not Stream_Element_Offset'First.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
-<div class="paranum"><a name="p11.b">11.b/2</a></div>
+<div class="paranum"><a name="p39.b">39.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00161.TXT">AI95-00161-01</A></I>} 
-<A NAME="I5911"></A><B>Amendment Correction:</B> Added <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I6136"></A><B>Amendment Correction:</B> Added <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Preelaborable_Initialization to type Root_Stream_Type.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
-<div class="paranum"><a name="p11.c">11.c/2</a></div>
+<div class="paranum"><a name="p39.c">39.c/2</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0044">8652/0044</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00181.TXT">AI95-00181-01</A></I>} 
 <B>Corrigendum:</B> Stream elements are aliased presuming that makes 
 sense.</div>
-<div class="paranum"><a name="p11.d">11.d/2</a></div>
+<div class="paranum"><a name="p39.d">39.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00227.TXT">AI95-00227-01</A></I>} 
 Fixed the wording for Read to properly define the result in Last when 
 no stream elements are transfered.&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p39.e">39.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0293-1.TXT">AI12-0293-1</A></I>} 
+<A NAME="I6137"></A>Package Ada.Streams.FIFO_Streams and its children 
+are new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

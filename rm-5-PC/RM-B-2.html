@@ -44,7 +44,7 @@ to assembly language).&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Interfaces has the following skeletal declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><A NAME="I7743"></A><BR>
+<div class="Examples"><A NAME="I7728"></A><BR>
 <B>package</B>&nbsp;Interfaces&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Interfaces);</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -62,7 +62,7 @@ Interfaces has the following skeletal declaration:&nbsp;</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;Rotate_Right&nbsp;(Value&nbsp;:&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;&nbsp;Amount&nbsp;:&nbsp;Natural)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Unsigned_<SPAN Class="roman"><I>n</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;...<A NAME="I7744"></A><A NAME="I7745"></A><A NAME="I7746"></A><A NAME="I7747"></A><A NAME="I7748"></A><BR>
+&nbsp;&nbsp;&nbsp;...<A NAME="I7729"></A><A NAME="I7730"></A><A NAME="I7731"></A><A NAME="I7732"></A><A NAME="I7733"></A><BR>
 <B>end</B>&nbsp;Interfaces;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -75,10 +75,10 @@ provide the following declarations in the visible part of package Interfaces:
 if supported by the target architecture, for each <I>n</I> that is at 
 least the size of a storage element and that is a factor of the word 
 size. The names of these types are of the form Integer_<I>n</I> for the 
-signed types, and Unsigned_<I>n</I> for the modular types;<A NAME="I7749"></A><A NAME="I7750"></A> 
+signed types, and Unsigned_<I>n</I> for the modular types;<A NAME="I7734"></A><A NAME="I7735"></A> 
 </div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I7751"></A><A NAME="I7752"></A>For each 
+<div class="Bulleted"><A NAME="I7736"></A><A NAME="I7737"></A>For each 
 such modular type in Interfaces, shifting and rotating subprograms as 
 specified in the declaration of Interfaces above. These subprograms are 
 Intrinsic. They operate on a bit-by-bit basis, using the binary representation 

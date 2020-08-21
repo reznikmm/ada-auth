@@ -13,26 +13,24 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,16 +48,16 @@ an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>.]
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">assignment_statement</SPAN><A NAME="I3435"></A><A NAME="S0152"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<I>variable_</I><A NAME="I3436"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;:=&nbsp;<A NAME="I3437"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">assignment_statement</SPAN><A NAME="I3411"></A><A NAME="S0152"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<I>variable_</I><A NAME="I3412"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;:=&nbsp;<A NAME="I3413"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
 includes the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 and the <I>assignment</I> of the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-into the <I>target</I>. <A NAME="I3438"></A><A NAME="I3439"></A>[An assignment 
+into the <I>target</I>. <A NAME="I3414"></A><A NAME="I3415"></A>[An assignment 
 operation (as opposed to an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>) 
 is performed in other contexts as well, including object initialization 
-and by-copy parameter passing.] <A NAME="I3440"></A><A NAME="I3441"></A>The 
+and by-copy parameter passing.] <A NAME="I3416"></A><A NAME="I3417"></A>The 
 <I>target</I> of an assignment operation is the view of the object to 
 which a value is being assigned; the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
 is the variable denoted by the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
@@ -82,9 +80,9 @@ of the assignment operation.&nbsp;</div>
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I3442"></A>The <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<A NAME="I3418"></A>The <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
-is expected to be of any type. <A NAME="I3443"></A>The expected type 
+is expected to be of any type. <A NAME="I3419"></A>The expected type 
 for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is the type of the target.&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
@@ -130,10 +128,10 @@ have one of the dispatching operations in the tag-indeterminate expression.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I3444"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I3420"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
 the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-are first evaluated in an arbitrary order.<A NAME="I3445"></A>&nbsp;</div>
+are first evaluated in an arbitrary order.<A NAME="I3421"></A>&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Other rules of the language 
 may require that the bounds of the variable be determined prior to evaluating 
@@ -144,7 +142,7 @@ as pointed out by the ACID.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">When the type of the 
 target is class-wide:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I3446"></A>If the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+<div class="Bulleted"><A NAME="I3422"></A>If the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is tag-indeterminate (see <A HREF="AA-3-9-2.html">3.9.2</A>), then the 
 controlling tag value for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is the tag of the target;&nbsp;</div>
@@ -153,7 +151,7 @@ is the tag of the target;&nbsp;</div>
 &ldquo;<A HREF="AA-3-9-2.html">Dispatching Operations of Tagged Types</A>&rdquo;. 
 </div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted"><A NAME="I3447"></A><A NAME="I3448"></A><A NAME="I3449"></A>Otherwise 
+<div class="Bulleted"><A NAME="I3423"></A><A NAME="I3424"></A><A NAME="I3425"></A>Otherwise 
 [(the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is dynamically tagged)], a check is made that the tag of the value of 
 the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
@@ -162,7 +160,7 @@ is raised.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">The value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is converted to the subtype of the target. [The conversion might raise 
-an exception (see <A HREF="AA-4-6.html">4.6</A>).] <A NAME="I3450"></A></div>
+an exception (see <A HREF="AA-4-6.html">4.6</A>).] <A NAME="I3426"></A></div>
 <div class="paranum"><a name="p11.a">11.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B><A HREF="AA-4-6.html">4.6</A>, 
 &ldquo;<A HREF="AA-4-6.html">Type Conversions</A>&rdquo; defines what 
@@ -175,7 +173,7 @@ so long as it is the same length.&nbsp;</div>
 <div class="Normal">In cases involving controlled types, the target is 
 finalized, and an anonymous object might be used as an intermediate in 
 the assignment, as described in <A HREF="AA-7-6-1.html">7.6.1</A>, &ldquo;<A HREF="AA-7-6-1.html">Completion 
-and Finalization</A>&rdquo;. <A NAME="I3451"></A><A NAME="I3452"></A>In 
+and Finalization</A>&rdquo;. <A NAME="I3427"></A><A NAME="I3428"></A>In 
 any case, the converted value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is then <I>assigned</I> to the target, which consists of the following 
 two steps:&nbsp;</div>
@@ -189,8 +187,7 @@ does nothing.&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 If any part of the target is controlled, its value is adjusted as explained 
-in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="AA-7-6.html">7.6</A>. <A NAME="I3453"></A></div>
+in subclause <A HREF="AA-7-6.html">7.6</A>. <A NAME="I3429"></A></div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If any parts of the object 
 are controlled, abort is deferred during the assignment operation itself, 
@@ -268,7 +265,7 @@ would be incorrect.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p28.a">28.a</a></div>
-<div class="Annotations"><A NAME="I3454"></A>We now allow user-defined 
+<div class="Annotations"><A NAME="I3430"></A>We now allow user-defined 
 finalization and value adjustment actions as part of <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>s 
 (see <A HREF="AA-7-6.html">7.6</A>, &ldquo;<A HREF="AA-7-6.html">Assignment 
 and Finalization</A>&rdquo;).&nbsp;</div>
@@ -290,7 +287,7 @@ is a subcomponent that depends on discriminants.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p28.d">28.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I3455"></A>The change of the limited check from a resolution 
+<A NAME="I3431"></A>The change of the limited check from a resolution 
 rule to a legality rule is not quite upward compatible. For example&nbsp;</div>
 <div class="paranum"><a name="p28.e">28.e/2</a></div>
 <div class="SmallExamples"><B>type</B>&nbsp;AccNonLim&nbsp;<B>is</B>&nbsp;<B>access</B>&nbsp;NonLim;<BR>

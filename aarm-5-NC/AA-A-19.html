@@ -21,12 +21,12 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-A-18-32.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-33.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-B.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
@@ -34,7 +34,7 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-2.TXT">AI05-0127-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-A <I>locale</I><A NAME="I8089"></A> identifies a geopolitical place or 
+A <I>locale</I><A NAME="I8383"></A> identifies a geopolitical place or 
 region and its associated language, which can be used to determine other 
 internationalization-related characteristics.&nbsp;</div>
 
@@ -43,15 +43,15 @@ internationalization-related characteristics.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-2.TXT">AI05-0127-2</A></I>} 
 The library package Locales has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Locales&nbsp;<B>is</B><A NAME="I8090"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Locales&nbsp;<B>is</B><A NAME="I8384"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Locales);<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Remote_Types(Locales);</div>
 <div class="paranum"><a name="p4">4/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0037-1.TXT">AI12-0037-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8091"></A>Language_Code&nbsp;<B>is&nbsp;new</B>&nbsp;String&nbsp;(1&nbsp;..&nbsp;3)<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8385"></A>Language_Code&nbsp;<B>is&nbsp;new</B>&nbsp;String&nbsp;(1&nbsp;..&nbsp;3)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>for&nbsp;all</B>&nbsp;E&nbsp;<B>of</B>&nbsp;Language_Code&nbsp;=&gt;&nbsp;E&nbsp;<B>in</B>&nbsp;'a'&nbsp;..&nbsp;'z');<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8092"></A>Country_Code&nbsp;<B>is&nbsp;new</B>&nbsp;String&nbsp;(1&nbsp;..&nbsp;2)<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8386"></A>Country_Code&nbsp;<B>is&nbsp;new</B>&nbsp;String&nbsp;(1&nbsp;..&nbsp;2)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Dynamic_Predicate&nbsp;=&gt;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<B>for&nbsp;all</B>&nbsp;E&nbsp;<B>of</B>&nbsp;Country_Code&nbsp;&nbsp;=&gt;&nbsp;E&nbsp;<B>in</B>&nbsp;'A'&nbsp;..&nbsp;'Z');</div>
 <div class="paranum"><a name="p4.a">4.a/4</a></div>
@@ -64,17 +64,17 @@ allow converting between unrelated types with components that don't statically
 match, so we cannot declare new types with constrained components if 
 we want conversions to or from type String.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8093"></A>Language_Unknown&nbsp;:&nbsp;<B>constant</B>&nbsp;Language_Code&nbsp;:=&nbsp;&quot;und&quot;;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8094"></A>Country_Unknown&nbsp;:&nbsp;<B>constant</B>&nbsp;Country_Code&nbsp;:=&nbsp;&quot;ZZ&quot;;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8387"></A>Language_Unknown&nbsp;:&nbsp;<B>constant</B>&nbsp;Language_Code&nbsp;:=&nbsp;&quot;und&quot;;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8388"></A>Country_Unknown&nbsp;:&nbsp;<B>constant</B>&nbsp;Country_Code&nbsp;:=&nbsp;&quot;ZZ&quot;;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8095"></A>Language&nbsp;<B>return</B>&nbsp;Language_Code;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8096"></A>Country&nbsp;<B>return</B>&nbsp;Country_Code;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8389"></A>Language&nbsp;<B>return</B>&nbsp;Language_Code;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8390"></A>Country&nbsp;<B>return</B>&nbsp;Country_Code;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Locales;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-2.TXT">AI05-0127-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0233-1.TXT">AI05-0233-1</A></I>} 
-The <I>active locale</I><A NAME="I8097"></A><A NAME="I8098"></A> is the 
+The <I>active locale</I><A NAME="I8391"></A><A NAME="I8392"></A> is the 
 locale associated with the partition of the current task.</div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0233-1.TXT">AI05-0233-1</A></I>} 
@@ -123,12 +123,12 @@ cannot be determined from the environment, then Country returns Country_Unknown.
 <div class="paranum"><a name="p12.a">12.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0127-2.TXT">AI05-0127-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0233-1.TXT">AI05-0233-1</A></I>} 
-<A NAME="I8099"></A>Package Locales is new.&nbsp;</div>
+<A NAME="I8393"></A>Package Locales is new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p12.b">12.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0037-1.TXT">AI12-0037-1</A></I>} 
-<A NAME="I8100"></A><B>Corrigendum:</B> Types Language_Code and Country_Code 
+<A NAME="I8394"></A><B>Corrigendum:</B> Types Language_Code and Country_Code 
 are defined with predicates rather than constrained components so that 
 they can be converted to/from type String. This changes the exception 
 raised from Constraint_Error to Assertion_Error if an assignment is attempted 
@@ -144,7 +144,7 @@ to be a lot of code using it.)&nbsp;</div>
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-A-18-32.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-18-33.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-B.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">

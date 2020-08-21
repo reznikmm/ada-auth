@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,26 +42,26 @@
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 [This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 specifies the language-defined model for hardware interrupts in addition 
-to mechanisms for handling interrupts.] <A NAME="I8713"></A></div>
+to mechanisms for handling interrupts.] <A NAME="I9025"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I8714"></A>[An <I>interrupt</I> represents 
+<div class="Normal"><A NAME="I9026"></A>[An <I>interrupt</I> represents 
 a class of events that are detected by the hardware or the system software.] 
-<A NAME="I8715"></A>Interrupts are said to occur. An <I>occurrence</I> 
-of an interrupt is separable into generation and delivery. <A NAME="I8716"></A><I>Generation</I> 
+<A NAME="I9027"></A>Interrupts are said to occur. An <I>occurrence</I> 
+of an interrupt is separable into generation and delivery. <A NAME="I9028"></A><I>Generation</I> 
 of an interrupt is the event in the underlying hardware or system that 
-makes the interrupt available to the program. <A NAME="I8717"></A><I>Delivery</I> 
+makes the interrupt available to the program. <A NAME="I9029"></A><I>Delivery</I> 
 is the action that invokes part of the program as response to the interrupt 
-occurrence. <A NAME="I8718"></A>Between generation and delivery, the 
-interrupt occurrence [(or interrupt)] is <I>pending</I>. <A NAME="I8719"></A>Some 
+occurrence. <A NAME="I9030"></A>Between generation and delivery, the 
+interrupt occurrence [(or interrupt)] is <I>pending</I>. <A NAME="I9031"></A>Some 
 or all interrupts may be <I>blocked</I>. When an interrupt is blocked, 
 all occurrences of that interrupt are prevented from being delivered. 
-<A NAME="I8720"></A><A NAME="I8721"></A>Certain interrupts are <I>reserved</I>. 
+<A NAME="I9032"></A><A NAME="I9033"></A>Certain interrupts are <I>reserved</I>. 
 The set of reserved interrupts is implementation defined. A reserved 
 interrupt is either an interrupt for which user-defined handlers are 
 not supported, or one which already has an attached handler by some other 
-implementation-defined means. <A NAME="I8722"></A><A NAME="I8723"></A>Program 
+implementation-defined means. <A NAME="I9034"></A><A NAME="I9035"></A>Program 
 units can be connected to nonreserved interrupts. While connected, the 
 program unit is said to be <I>attached</I> to that interrupt. The execution 
 of that program unit, the <I>interrupt handler</I>, is invoked upon delivery 
@@ -83,7 +83,7 @@ handler executes, the corresponding interrupt is blocked.</div>
 that interrupt are prevented from being delivered. Whether such occurrences 
 remain pending or are lost is implementation defined.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8724"></A>Each interrupt has a <I>default 
+<div class="Normal"><A NAME="I9036"></A>Each interrupt has a <I>default 
 treatment</I> which determines the system's response to an occurrence 
 of that interrupt when no user-defined handler is attached. The set of 
 possible default treatments is implementation defined, as is the method 

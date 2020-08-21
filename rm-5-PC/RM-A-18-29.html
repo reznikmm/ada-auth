@@ -44,28 +44,28 @@ provides type Queue, which implements the interface type Containers.Synchronized
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;package</B>&nbsp;Queue_Interfaces&nbsp;<B>is&nbsp;new</B>&nbsp;Ada.Containers.Synchronized_Queue_Interfaces&nbsp;(&lt;&gt;);<BR>
 &nbsp;&nbsp;&nbsp;Default_Capacity&nbsp;:&nbsp;Count_Type;<BR>
 &nbsp;&nbsp;&nbsp;Default_Ceiling&nbsp;&nbsp;:&nbsp;System.Any_Priority&nbsp;:=&nbsp;System.Priority'Last;<BR>
-<B>package</B>&nbsp;Ada.Containers.Bounded_Synchronized_Queues&nbsp;<B>is</B><A NAME="I7670"></A><BR>
+<B>package</B>&nbsp;Ada.Containers.Bounded_Synchronized_Queues&nbsp;<B>is</B><A NAME="I7655"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Bounded_Synchronized_Queues);</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>package</B>&nbsp;Implementation&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;Implementation;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>protected&nbsp;type</B>&nbsp;<A NAME="I7671"></A>Queue<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>protected&nbsp;type</B>&nbsp;<A NAME="I7656"></A>Queue<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;Default_Capacity;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ceiling&nbsp;&nbsp;:&nbsp;System.Any_Priority&nbsp;:=&nbsp;Default_Ceiling)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Priority&nbsp;=&gt;&nbsp;Ceiling&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>new</B>&nbsp;Queue_Interfaces.Queue&nbsp;<B>with</B></div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I7672"></A>Enqueue&nbsp;(New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Queue_Interfaces.Element_Type);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I7657"></A>Enqueue&nbsp;(New_Item&nbsp;:&nbsp;<B>in</B>&nbsp;Queue_Interfaces.Element_Type);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I7673"></A>Dequeue&nbsp;(Element&nbsp;:&nbsp;<B>out</B>&nbsp;Queue_Interfaces.Element_Type);</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>entry</B>&nbsp;<A NAME="I7658"></A>Dequeue&nbsp;(Element&nbsp;:&nbsp;<B>out</B>&nbsp;Queue_Interfaces.Element_Type);</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7674"></A>Current_Use&nbsp;<B>return</B>&nbsp;Count_Type;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7659"></A>Current_Use&nbsp;<B>return</B>&nbsp;Count_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>overriding</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7675"></A>Peak_Use&nbsp;<B>return</B>&nbsp;Count_Type;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7660"></A>Peak_Use&nbsp;<B>return</B>&nbsp;Count_Type;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>

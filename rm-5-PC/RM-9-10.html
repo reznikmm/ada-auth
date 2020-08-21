@@ -36,7 +36,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/5</a></div>
-<div class="Normal"><A NAME="I4511"></A><A NAME="I4512"></A>If two different 
+<div class="Normal"><A NAME="I4499"></A><A NAME="I4500"></A>If two different 
 objects, including nonoverlapping parts of the same object, are <I>independently 
 addressable</I>, they can be manipulated concurrently by two different 
 <span class="insert5">logical threads of control</span><span class="delete5">&nbsp;tasks</span> 
@@ -47,7 +47,7 @@ are independently addressable except when they are both parts of a composite
 object for which a nonconfirming value is specified for any of the following 
 representation aspects: (record) Layout, Component_Size, Pack, Atomic, 
 or Convention; in this case it is unspecified whether the parts are independently 
-addressable.<A NAME="I4513"></A>&nbsp;</div>
+addressable.<A NAME="I4501"></A>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/5</a></div>
@@ -61,7 +61,7 @@ of variables shared between <span class="insert5">them</span><span class="delete
 tasks</span>. The actions of two different <span class="insert5">logical 
 threads of control</span><span class="delete5">&nbsp;tasks</span> are synchronized 
 in this sense when an action of one <span class="delete5">task&nbsp;</span><I>signals</I> 
-an action of the other<span class="delete5">&nbsp;task</span>; <A NAME="I4514"></A>an 
+an action of the other<span class="delete5">&nbsp;task</span>; <A NAME="I4502"></A>an 
 action A1 is defined to signal an action A2 under the following circumstances: 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
@@ -101,11 +101,11 @@ for the same protected object;&nbsp;</div>
 <div class="Bulleted" style="margin-bottom: 0.3em">If A1 signals some 
 action that in turn signals A2.&nbsp;</div>
 <div class="paranum"><a name="p11">11/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"><A NAME="I4515"></A>Given 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"><A NAME="I4503"></A>Given 
 an action of assigning to an object, and an action of reading or updating 
 a part of the same object (or of a neighboring object if the two are 
 not independently addressable), then the execution of the actions is 
-erroneous unless the actions are <I>sequential</I>.</span><A NAME="I4516"></A><A NAME="I4517"></A> 
+erroneous unless the actions are <I>sequential</I>.</span><A NAME="I4504"></A><A NAME="I4505"></A> 
 Two actions <span class="insert5">are defined to be <I>sequential</I></span><span class="delete5">&nbsp;are 
 sequential</span> if one of the following is true:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -126,10 +126,10 @@ be specified to ensure that certain reads and updates are sequential
 &mdash; see <A HREF="RM-C-6.html">C.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><span class="insert5">Two actions that are not sequential 
-are defined to be <I>concurrent</I> actions.<A NAME="I4518"></A><A NAME="I4519"></A></span></div>
+are defined to be <I>concurrent</I> actions.<A NAME="I4506"></A><A NAME="I4507"></A></span></div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Normal"><span class="insert5">Two actions are defined to 
-<I>conflict</I> if one action<A NAME="I4520"></A><A NAME="I4521"></A> 
+<I>conflict</I> if one action<A NAME="I4508"></A><A NAME="I4509"></A> 
 assigns to an object, and the other action reads or assigns to a part 
 of the same object (or of a neighboring object if the two are not independently 
 addressable).  The action comprising a call on a subprogram or an entry 
@@ -139,9 +139,9 @@ of the called subprogram or entry is such that a conflicting action would
 be possible during the execution of the call. Similarly two calls are 
 considered to potentially conflict if they each have Global (or Global'Class 
 in the case of a dispatching call) aspects such that conflicting actions 
-would be possible during the execution of the calls.<A NAME="I4522"></A><A NAME="I4523"></A><A NAME="I4524"></A></span></div>
+would be possible during the execution of the calls.<A NAME="I4510"></A><A NAME="I4511"></A><A NAME="I4512"></A></span></div>
 <div class="paranum"><a name="p18">18/5</a></div>
-<div class="Normal"><span class="insert5">A <I>synchronized</I> object<A NAME="I4525"></A> 
+<div class="Normal"><span class="insert5">A <I>synchronized</I> object<A NAME="I4513"></A> 
 is an object of a task or protected type, an atomic object (see <A HREF="RM-C-6.html">C.6</A>), 
 a suspension object (see <A HREF="RM-D-10.html">D.10</A>), or a synchronous 
 barrier (see <A HREF="RM-D-10-1.html">D.10.1</A>). Operations on such 
@@ -151,7 +151,7 @@ are never considered to conflict.</span></div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Normal"><span class="insert5">The execution of two concurrent 
-actions is erroneous<A NAME="I4526"></A> if the actions make conflicting 
+actions is erroneous<A NAME="I4514"></A> if the actions make conflicting 
 uses of a shared variable (or neighboring variables that are not independently 
 addressable).</span></div>
 

@@ -21,11 +21,11 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,7 +45,7 @@ references to more formal definitions of all of the terms used in this
 International Standard</span><span class="delete2">&nbsp;To find more formal 
 definitions, look the term up in the index</span>.</div>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I9350"></A><span class="insert2"><B>Abstract 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I9350"></A><span class="insert2"><B>Abstract 
 type.</B></span> <span class="insert2">An abstract type is a tagged type 
 intended for use as an ancestor of other types, but which is not allowed 
 to have objects of its own.</span></div>
@@ -61,7 +61,7 @@ allocated by allocators are aliased. Objects can also be explicitly declared
 as aliased with the reserved word <B>aliased</B>. The Access attribute 
 can be used to create an access value designating an aliased object.</div>
 <div class="paranum"><a name="p3.1">3.1/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I9353"></A><span class="insert2"><B>Ancestor.</B></span> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I9353"></A><span class="insert2"><B>Ancestor.</B></span> 
 <span class="insert2">An ancestor of a type is the type itself or, in 
 the case of a type derived from other types, its parent type or one of 
 its progenitor types or one of their ancestors. Note that ancestor and 
@@ -71,19 +71,19 @@ descendant are inverse relationships.</span></div>
 is a composite type whose components are all of the same type. Components 
 are selected by indexing.</div>
 <div class="paranum"><a name="p4.1">4.1/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I9355"></A><span class="insert3"><B>Aspect.</B></span> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I9355"></A><span class="insert3"><B>Aspect.</B></span> 
 <span class="insert3">An aspect is a specifiable property of an entity. 
 An aspect may be specified by an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 on the declaration of the entity. Some aspects may be queried via attributes.</span></div>
 <div class="paranum"><a name="p4.2">4.2/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I9356"></A><span class="insert3"><B>Assertion.</B></span> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I9356"></A><span class="insert3"><B>Assertion.</B></span> 
 <span class="insert3">An assertion is a boolean expression that appears 
 in any of the following: a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Assert, a predicate, a precondition, a postcondition, an invariant, a 
 constraint, or a null exclusion. An assertion is expected to be True 
 at run time at certain specified places.</span></div>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I9357"></A><span class="insert2"><B>Category 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I9357"></A><span class="insert2"><B>Category 
 (of types).</B></span> <span class="insert2">A category of types is a 
 set of types with one or more common properties, such as primitive operations. 
 A category of types that is closed under derivation is also known as 
@@ -114,7 +114,7 @@ components.</div>
 is a piece of text (explicit or implicit) that is an instance of a syntactic 
 category defined under &ldquo;Syntax&rdquo;.</div>
 <div class="paranum"><a name="p9.1">9.1/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I9364"></A><span class="insert3"><B>Container.</B></span> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I9364"></A><span class="insert3"><B>Container.</B></span> 
 <span class="insert3">A container is an object that contain other objects 
 all of the same type, which could be class-wide. Several predefined container 
 types are provided by the children of package Ada.Containers (see <A HREF="RM-A-18-1.html">A.18.1</A>).</span></div>
@@ -130,7 +130,7 @@ in the program text (an <I>explicit</I> declaration), or may be supposed
 to occur at a given place in the text as a consequence of the semantics 
 of another construct (an <I>implicit</I> declaration).</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN><span class="delete2"><B>Definition.</B></span> <span class="delete2"><A NAME="I9369"></A>All 
 declarations contain a <I>definition</I> for a <I>view</I> of an entity. 
 A view consists of an identification of the entity (the entity <I>of</I> 
@@ -142,7 +142,7 @@ for the entity itself (a <SPAN Class="swiss"><A HREF="RM-8-5.html#S0199">renamin
 is an example of a declaration that does not define a new entity, but 
 instead defines a view of an existing entity (see <A HREF="RM-8-5.html">8.5</A>)).</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"><A NAME="I9370"></A><B>Derived type.</B> A derived 
+<div class="Normal">&nbsp;<A NAME="I9370"></A><B>Derived type.</B> A derived 
 type is a type defined in terms of <span class="insert2">one or more 
 other types given in a derived type definition. The first of those types</span><span class="delete2">&nbsp;another 
 type, which</span> is the parent type of the derived type<span class="insert2">&nbsp;and any others are progenitor types</span>. Each class containing the 
@@ -152,7 +152,7 @@ and primitive operations from the parent<span class="insert2">&nbsp;and progenit
 A type together with the types derived from it (directly or indirectly) 
 form a derivation class.</div>
 <div class="paranum"><a name="p13.1">13.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9371"></A><span class="insert2"><B>Descendant.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9371"></A><span class="insert2"><B>Descendant.</B></span> 
 <span class="insert2">A type is a descendant of itself, its parent and 
 progenitor types, and their ancestors. Note that descendant and ancestor 
 are inverse relationships.</span></div>
@@ -162,7 +162,7 @@ type is either an integer type or an enumeration type. Discrete types
 may be used, for example, in <SPAN Class="swiss"><A HREF="RM-5-4.html#S0154">case_statement</A></SPAN>s 
 and as array indices.</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><A NAME="I9373"></A><B>Discriminant.</B> A discriminant 
+<div class="Normal">&nbsp;<A NAME="I9373"></A><B>Discriminant.</B> A discriminant 
 is a parameter <span class="insert2">for</span><span class="delete2">&nbsp;of</span> 
 a composite type. It can control, for example, the bounds of a component 
 of the type if <span class="insert2">the component is</span><span class="delete2">&nbsp;that 
@@ -170,7 +170,7 @@ type is</span> an array<span class="delete2">&nbsp;type</span>. A discriminant
 <span class="insert2">for</span><span class="delete2">&nbsp;of</span> a task 
 type can be used to pass data to a task of the type upon creation.</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9374"></A><span class="insert2"><B>Elaboration.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9374"></A><span class="insert2"><B>Elaboration.</B></span> 
 <span class="insert2">The process by which a declaration achieves its 
 run-time effect is called elaboration. Elaboration is one of the forms 
 of execution.</span></div>
@@ -182,7 +182,7 @@ type does not have components.</div>
 type is defined by an enumeration of its values, which may be named by 
 identifiers or character literals.</div>
 <div class="paranum"><a name="p17.1">17.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9377"></A><span class="insert2"><B>Evaluation.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9377"></A><span class="insert2"><B>Evaluation.</B></span> 
 <span class="insert2">The process by which an expression achieves its 
 run-time effect is called evaluation. Evaluation is one of the forms 
 of execution.</span></div>
@@ -201,7 +201,7 @@ by which a construct achieves its run-time effect is called <I>execution</I>.
 also called <I>elaboration</I>. Execution of an expression is also called 
 <I>evaluation</I>.</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9384"></A><span class="insert2"><B>Function.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9384"></A><span class="insert2"><B>Function.</B></span> 
 <span class="insert2">A function is a form of subprogram that returns 
 a result and can be called as part of an expression.</span></div>
 <div class="paranum"><a name="p20">20</a></div>
@@ -216,13 +216,13 @@ of a generic unit represents a contract between the body of the generic
 and instances of the generic. Generic units can be used to perform the 
 role that macros sometimes play in other languages.</div>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9386"></A><span class="insert2"><B>Incomplete 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9386"></A><span class="insert2"><B>Incomplete 
 type.</B></span> <span class="insert2">An incomplete type gives a view 
 of a type that reveals only some of its properties. The remaining properties 
 are provided by the full view given elsewhere. Incomplete types can be 
 used for defining recursive data structures.</span></div>
 <div class="paranum"><a name="p20.2">20.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9387"></A><span class="insert3"><B>Indexable 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9387"></A><span class="insert3"><B>Indexable 
 container type.</B></span> <span class="insert3">An indexable container 
 type is one that has user-defined behavior for indexing, via the Constant_Indexing 
 or Variable_Indexing aspects.</span></div>
@@ -236,23 +236,23 @@ bound is zero, and has operations with &ldquo;wraparound&rdquo; semantics.
 Modular types subsume what are called &ldquo;unsigned types&rdquo; in 
 some other languages.</div>
 <div class="paranum"><a name="p21.1">21.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9389"></A><span class="insert2"><B>Interface 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9389"></A><span class="insert2"><B>Interface 
 type.</B></span> <span class="insert2">An interface type is a form of 
 abstract tagged type which has no components or concrete operations except 
 possibly null procedures. Interface types are used for composing other 
 interfaces and tagged types and thereby provide multiple inheritance. 
 Only an interface type can be used as a progenitor of another type.</span></div>
 <div class="paranum"><a name="p21.2">21.2/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9390"></A><span class="insert4"><B>Invariant.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9390"></A><span class="insert4"><B>Invariant.</B></span> 
 <span class="insert3"></span><span class="insert4">An</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;A</span></span><span class="insert3">&nbsp;invariant is an assertion that is expected to be True for all objects 
 of a given private type when viewed from outside the defining package.</span></div>
 <div class="paranum"><a name="p21.3">21.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9391"></A><span class="insert3"><B>Iterable 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9391"></A><span class="insert3"><B>Iterable 
 container type.</B></span> <span class="insert3">An iterable container 
 type is one that has user-defined behavior for iteration, via the Default_Iterator 
 and Iterator_Element aspects.</span></div>
 <div class="paranum"><a name="p21.4">21.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9392"></A><span class="insert3"><B>Iterator.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9392"></A><span class="insert3"><B>Iterator.</B></span> 
 <span class="insert3">An iterator is a construct that is used to loop 
 over the elements of an array or container. Iterators may be user defined, 
 and may perform arbitrary computations to access elements from a container.</span></div>
@@ -264,7 +264,7 @@ nested) library units as children, and may have other program units physically
 nested within them. <A NAME="I9394"></A>A root library unit, together 
 with its children and grandchildren and so on, form a <I>subsystem</I>.</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Normal"><A NAME="I9395"></A><B>Limited type.</B> A limited 
+<div class="Normal">&nbsp;<A NAME="I9395"></A><B>Limited type.</B> A limited 
 type is <span class="delete2">(a view of)&nbsp;</span>a type for which <span class="insert2">copying 
 (such as in an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>)</span><span class="delete2">&nbsp;the 
 assignment operation</span> is not allowed. A nonlimited type is a <span class="delete2">(view 
@@ -278,7 +278,7 @@ or by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>.
 A formal parameter is (a view of) an object. A subcomponent of an object 
 is an object.</div>
 <div class="paranum"><a name="p24.1">24.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9397"></A><span class="insert2"><B>Overriding 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9397"></A><span class="insert2"><B>Overriding 
 operation.</B></span> <span class="insert2">An overriding operation is 
 one that replaces an inherited primitive operation. Operations may be 
 marked explicitly as overriding or not overriding.</span></div>
@@ -290,7 +290,7 @@ a private type or private extension) along with the declarations of primitive
 subprograms of the type, which can be called from outside the package, 
 while their inner workings remain hidden from outside users.</div>
 <div class="paranum"><a name="p25.1">25.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9399"></A><span class="insert2"><B>Parent.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9399"></A><span class="insert2"><B>Parent.</B></span> 
 <span class="insert2">The parent of a derived type is the first type 
 given in the definition of the derived type. The parent can be almost 
 any kind of type, including an interface type.</span></div>
@@ -301,7 +301,7 @@ Each partition may run in a separate address space, possibly on a separate
 computer. A program may contain just one partition. A distributed program 
 typically contains multiple partitions, which can execute concurrently.</div>
 <div class="paranum"><a name="p26.1">26.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9401"></A><span class="insert3"><B>Postcondition.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9401"></A><span class="insert3"><B>Postcondition.</B></span> 
 <span class="insert3">A postcondition is an assertion that is expected 
 to be True when a given subprogram returns normally.</span></div>
 <div class="paranum"><a name="p27">27</a></div>
@@ -310,11 +310,11 @@ compiler directive. There are language-defined pragmas that give instructions
 for optimization, listing control, etc. An implementation may support 
 additional (implementation-defined) pragmas.</div>
 <div class="paranum"><a name="p27.1">27.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9403"></A><span class="insert3"><B>Precondition.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9403"></A><span class="insert3"><B>Precondition.</B></span> 
 <span class="insert3">A precondition is an assertion that is expected 
 to be True when a given subprogram is called.</span></div>
 <div class="paranum"><a name="p27.2">27.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9404"></A><span class="insert3"><B>Predicate.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9404"></A><span class="insert3"><B>Predicate.</B></span> 
 <span class="insert3">A predicate is an assertion that is expected to 
 be True for all objects of a given subtype.</span></div>
 <div class="paranum"><a name="p28">28</a></div>
@@ -328,13 +328,13 @@ the subprogram body invoked is determined at compile time. Alternatively,
 a dispatching subprogram may be called using a dispatching call, in which 
 case the subprogram body invoked is determined at run time.</div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Normal"><A NAME="I9406"></A><B>Private extension.</B> A private 
-extension is <span class="insert2">a type that extends another type, 
-with the additional properties</span><span class="delete2">&nbsp;like a record 
-extension, except that the components of the extension part are</span> 
-hidden from its clients.</div>
+<div class="Normal">&nbsp;<A NAME="I9406"></A><B>Private extension.</B> A 
+private extension is <span class="insert2">a type that extends another 
+type, with the additional properties</span><span class="delete2">&nbsp;like 
+a record extension, except that the components of the extension part 
+are</span> hidden from its clients.</div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal"><A NAME="I9407"></A><B>Private type.</B> A private 
+<div class="Normal">&nbsp;<A NAME="I9407"></A><B>Private type.</B> A private 
 type <span class="insert2">gives a</span><span class="delete2">&nbsp;is a 
 partial</span> view of a type <span class="insert2">that reveals only 
 some of its properties. The remaining properties are provided by the</span><span class="delete2">&nbsp;whose</span> 
@@ -343,11 +343,11 @@ used for defining abstractions that hide unnecessary details</span><span class="
 hidden</span> from <span class="insert2">their</span><span class="delete2">&nbsp;its</span> 
 clients.</div>
 <div class="paranum"><a name="p30.1">30.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9408"></A><span class="insert2"><B>Procedure.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9408"></A><span class="insert2"><B>Procedure.</B></span> 
 <span class="insert2">A procedure is a form of subprogram that does not 
 return a result and can only be called by a <SPAN Class="swiss"><A HREF="RM-5-1.html#S0146">statement</A></SPAN>.</span></div>
 <div class="paranum"><a name="p30.2">30.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9409"></A><span class="insert2"><B>Progenitor.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9409"></A><span class="insert2"><B>Progenitor.</B></span> 
 <span class="insert2">A progenitor of a derived type is one of the types 
 given in the definition of the derived type other than the first. A progenitor 
 is always an interface type. Interfaces, tasks, and protected types may 
@@ -365,7 +365,7 @@ an enumeration literal. Certain kinds of program units can be separately
 compiled. Alternatively, they can appear physically nested within other 
 program units.</div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Normal"><A NAME="I9412"></A><B>Protected type.</B> A protected 
+<div class="Normal">&nbsp;<A NAME="I9412"></A><B>Protected type.</B> A protected 
 type is a composite type whose components are <span class="insert2">accessible 
 only through one of its protected operations which synchronize</span><span class="delete2">&nbsp;protected 
 from</span> concurrent access by multiple tasks.</div>
@@ -381,12 +381,12 @@ extension is a type that extends another type by adding additional components.</
 type is a composite type consisting of zero or more named components, 
 possibly of different types.</div>
 <div class="paranum"><a name="p36.1">36.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9416"></A><span class="insert3"><B>Reference 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9416"></A><span class="insert3"><B>Reference 
 type.</B></span> <span class="insert3">A reference type is one that has 
 user-defined behavior for &ldquo;.<B>all</B>&rdquo;, defined by the Implicit_Dereference 
 aspect.</span></div>
 <div class="paranum"><a name="p36.2">36.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9417"></A><span class="insert2"><B>Renaming.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9417"></A><span class="insert2"><B>Renaming.</B></span> 
 <span class="insert2">A <SPAN Class="swiss"><A HREF="RM-8-5.html#S0199">renaming_declaration</A></SPAN> 
 is a declaration that does not define a new entity, but instead defines 
 a view of an existing entity.</span></div>
@@ -394,7 +394,7 @@ a view of an existing entity.</span></div>
 <div class="Normal"><A NAME="I9418"></A><B>Scalar type.</B> A scalar 
 type is either a discrete type or a real type.</div>
 <div class="paranum"><a name="p37.1">37.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9419"></A><span class="insert3"><B>Storage 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9419"></A><span class="insert3"><B>Storage 
 pool.</B></span> <span class="insert3">Each access-to-object type has 
 an associated storage pool object. The storage for an object created 
 by an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
@@ -402,26 +402,26 @@ comes from the storage pool of the type of the <SPAN Class="swiss"><A HREF="RM-4
 Some storage pools may be partitioned into subpools in order to support 
 finer-grained storage management.</span></div>
 <div class="paranum"><a name="p37.2">37.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9420"></A><span class="insert3"><B>Stream.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9420"></A><span class="insert3"><B>Stream.</B></span> 
 <span class="insert3">A stream is a sequence of elements that can be 
 used, along with the stream-oriented attributes, to support marshalling 
 and unmarshalling of values of most types.</span></div>
 <div class="paranum"><a name="p37.3">37.3/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9421"></A><span class="insert2"><B>Subprogram.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9421"></A><span class="insert2"><B>Subprogram.</B></span> 
 <span class="insert2">A subprogram is a section of a program that can 
 be executed in various contexts. It is invoked by a subprogram call that 
 may qualify the effect of the subprogram through the passing of parameters. 
 There are two forms of subprograms: functions, which return values, and 
 procedures, which do not.</span></div>
 <div class="paranum"><a name="p38">38/3</a></div>
-<div class="Normal"><A NAME="I9422"></A><B>Subtype.</B> A subtype is 
+<div class="Normal">&nbsp;<A NAME="I9422"></A><B>Subtype.</B> A subtype is 
 a type together with <span class="insert3">optional constraints, null 
 exclusions, and predicates</span><span class="delete3">&nbsp;a constraint</span><span class="insert2"><span class="delete3">&nbsp;or null exclusion</span></span><span class="delete3"></span>, which <span class="insert3">constrain</span><span class="delete3">&nbsp;constrains</span> 
 the values of the subtype to satisfy <span class="delete3">a&nbsp;</span>certain 
 <span class="insert3">conditions</span><span class="delete3">&nbsp;condition</span>. 
 The values of a subtype are a subset of the values of its type.</div>
 <div class="paranum"><a name="p38.1">38.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9423"></A><span class="insert2"><B>Synchronized.</B></span> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9423"></A><span class="insert2"><B>Synchronized.</B></span> 
 <span class="insert2">A synchronized entity is one that will work safely 
 with multiple tasks at one time. A synchronized interface can be an ancestor 
 of a task or a protected type. Such a task or protected type is called 
@@ -435,14 +435,14 @@ subprogram body to invoke. Nondispatching calls, in which the subprogram
 body to invoke is determined at compile time, are also allowed. Tagged 
 types may be extended with additional components.</div>
 <div class="paranum"><a name="p40">40/2</a></div>
-<div class="Normal"><A NAME="I9425"></A><B>Task type.</B> A task type 
+<div class="Normal">&nbsp;<A NAME="I9425"></A><B>Task type.</B> A task type 
 is a composite type <span class="insert2">used to represent</span><span class="delete2">&nbsp;whose 
 values are tasks, which are</span> active entities <span class="insert2">which</span><span class="delete2">&nbsp;that 
 may</span> execute concurrently <span class="insert2">and which can communicate 
 via queued task entries</span><span class="delete2">&nbsp;with other tasks</span>. 
 The top-level task of a partition is called the environment task.</div>
 <div class="paranum"><a name="p41">41/2</a></div>
-<div class="Normal"><A NAME="I9426"></A><B>Type.</B> Each object has 
+<div class="Normal">&nbsp;<A NAME="I9426"></A><B>Type.</B> Each object has 
 a type. A <I>type</I> has an associated set of values, and a set of <I>primitive 
 operations</I> which implement the fundamental aspects of its semantics. 
 Types are grouped into <span class="insert2"><I>categories</I></span><span class="delete2"><I>&nbsp;classes</I></span>. 
@@ -452,10 +452,10 @@ class share a set of primitive operations. <A NAME="I9427"></A> Classes
 are closed under derivation; that is, if a type is in a class, then all 
 of its derivatives are in that class</span>.</div>
 <div class="paranum"><a name="p41.1">41.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I9428"></A><span class="insert4"><B>Type 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I9428"></A><span class="insert4"><B>Type 
 Invariant.</B></span> <span class="insert4">See Invariant.</span></div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Normal"><A NAME="I9429"></A><B>View.</B> <span class="insert2">A 
+<div class="Normal">&nbsp;<A NAME="I9429"></A><B>View.</B> <span class="insert2">A 
 view of an entity reveals some or all of the properties of the entity. 
 A single entity may have multiple views.</span><span class="delete2">(See 
 <B>Definition</B>.)</span></div>

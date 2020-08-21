@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,23 +42,23 @@ This clause presents the specifications of the package Containers and
 several child packages, which provide facilities for storing collections 
 of elements.</div>
 <div class="paranum"><a name="p1.a.1">1.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Glossary entry:&nbsp;</B>A 
-container is an object that contain other objects all of the same type, 
-which could be class-wide. Several predefined container types are provided 
-by the children of package Ada.Containers (see <A HREF="AA-A-18-1.html">A.18.1</A>).</span></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>A container is an object 
+that contain other objects all of the same type, which could be class-wide. 
+Several predefined container types are provided by the children of package 
+Ada.Containers (see <A HREF="AA-A-18-1.html">A.18.1</A>).</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 A variety of sequence and associative containers are provided. Each container 
 includes a <I>cursor</I> type. A cursor is a reference to an element 
 within a container. Many operations on cursors are common to all of the 
 containers. A cursor referencing an element in a container is considered 
-to be overlapping with the container object itself.<A NAME="I7431"></A> 
-<A NAME="I7432"></A></div>
+to be overlapping with the container object itself.<A NAME="I7329"></A> 
+<A NAME="I7330"></A></div>
 <div class="paranum"><a name="p2.a">2.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The last sentence is intended 
 to clarify that operations that just use a cursor are on the same footing 
 as operations that use a container in terms of the reentrancy rules of 
-<A HREF="AA-A.html">Annex A</A>.&nbsp;</div>
+Annex A.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Within this clause we provide Implementation Advice for the desired average 
@@ -69,7 +67,7 @@ advice is expressed using the Landau symbol <I>O</I>(X). Presuming f
 is some function of a length parameter N and t(N) is the time the operation 
 takes (on average or worst case, as specified) for the length N, a complexity 
 of <I>O</I>(f(N)) means that there exists a finite A such that for any 
-N, t(N)/f(N) &lt; A. <A NAME="I7433"></A><A NAME="I7434"></A></div>
+N, t(N)/f(N) &lt; A. <A NAME="I7331"></A><A NAME="I7332"></A></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Of course, an implementation 
 can do better than a specified <I>O</I>(f(N)): for example, <I>O</I>(1) 
@@ -77,7 +75,7 @@ meets the requirements for <I>O</I>(log N).</div>
 <div class="paranum"><a name="p3.b">3.b/2</a></div>
 <div class="Annotations">This concept seems to have as many names as 
 there are authors. We used &ldquo;Landau symbol&rdquo; because that's 
-what our reference does. But we'd also seen this referred as big-O notation<A NAME="I7435"></A> 
+what our reference does. But we'd also seen this referred as big-O notation<A NAME="I7333"></A> 
 (sometimes written as <I>big-oh</I>), and as Bachmann notation. Whatever 
 the name, it always has the above definition.&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
@@ -87,23 +85,22 @@ real D, there should exist a positive integer M such that for all N &gt;
 M, t(N)/f(N) &lt; D.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
-<span class="insert3">When a formal function is used to provide an ordering 
-for a container, it is generally required to define a strict weak ordering. 
-A function &quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7436"></A> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
+When a formal function is used to provide an ordering for a container, 
+it is generally required to define a strict weak ordering. A function 
+&quot;&lt;&quot; defines a <I>strict weak ordering</I><A NAME="I7334"></A> 
 if it is irreflexive, asymmetric, transitive, and in addition, if <I>x</I> 
 &lt; <I>y</I> for any values <I>x</I> and <I>y</I>, then for all other 
-values <I>z</I>, (<I>x</I> &lt; <I>z</I>) or (<I>z</I> &lt; <I>y</I>).</span></div>
+values <I>z</I>, (<I>x</I> &lt; <I>z</I>) or (<I>z</I> &lt; <I>y</I>).</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-provides a number of useful containers for Ada. Only the most useful 
-containers are provided. Ones that are relatively easy to code, redundant, 
-or rarely used are omitted from this set, even if they are generally 
-included in containers libraries.</div>
+This subclause provides a number of useful containers for Ada. Only the 
+most useful containers are provided. Ones that are relatively easy to 
+code, redundant, or rarely used are omitted from this set, even if they 
+are generally included in containers libraries.</div>
 <div class="paranum"><a name="p5.b">5.b/2</a></div>
 <div class="Annotations">The containers packages are modeled on the Standard 
 Template Library (STL), an algorithms and data structure library popularized 
@@ -126,29 +123,28 @@ type, and containing any nonlimited type;</div>
 type, and containing any nonlimited type;</div>
 <div class="paranum"><a name="p5.h">5.h/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-Hashed Sets of any nonlimited hashable type;<span class="delete3">&nbsp;and</span></div>
+Hashed Sets of any nonlimited hashable type;</div>
 <div class="paranum"><a name="p5.i">5.i/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-Ordered Sets of any nonlimited ordered type<span class="insert3">;</span><span class="delete3">.</span></div>
+Ordered Sets of any nonlimited ordered type;</div>
 <div class="paranum"><a name="p5.i.1">5.i.1/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-<span class="insert3">Multiway Trees of any nonlimited type;</span></div>
+Multiway Trees of any nonlimited type;</div>
 <div class="paranum"><a name="p5.i.2">5.i.2/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0069-1.TXT">AI05-0069-1</A></I>} 
-<span class="insert3">Holders of any (indefinite) nonlimited type;</span></div>
+Holders of any (indefinite) nonlimited type;</div>
 <div class="paranum"><a name="p5.i.3">5.i.3/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
-<span class="insert3">Synchronized queues of any definite nonlimited 
-type; and</span></div>
+Synchronized queues of any definite nonlimited type; and</div>
 <div class="paranum"><a name="p5.i.4">5.i.4/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0159-1.TXT">AI05-0159-1</A></I>} 
-<span class="insert3">Priority queues of any definite nonlimited type.</span> 
-</div>
+Priority queues of any definite nonlimited type.&nbsp;</div>
 <div class="paranum"><a name="p5.j">5.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 Separate versions for definite and indefinite element types are provided, 
-as those for definite types can be implemented more efficiently.<span class="insert3">&nbsp;Similarly, a separate bounded version is provided in order to give more 
-predictable memory usage.</span></div>
+as those for definite types can be implemented more efficiently. Similarly, 
+a separate bounded version is provided in order to give more predictable 
+memory usage.</div>
 <div class="paranum"><a name="p5.k">5.k/2</a></div>
 <div class="Annotations">Each container includes a cursor, which is a 
 reference to an element within a container. Cursors generally remain 
@@ -193,10 +189,10 @@ containers and/or cursors. This prevents the abstraction from breaking
 unexpectedly.</div>
 <div class="paranum"><a name="p5.q.1">5.q.1/3</a></div>
 <div class="SmallBulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0048-1.TXT">AI05-0048-1</A></I>} 
-<span class="insert3">Redispatching is not allowed (unless it is required). 
-That means that overriding a container operation will not change the 
-behavior of any other predefined container operation. This provides a 
-stable base for extensions.</span>&nbsp;</div>
+Redispatching is not allowed (unless it is required). That means that 
+overriding a container operation will not change the behavior of any 
+other predefined container operation. This provides a stable base for 
+extensions.&nbsp;</div>
 <div class="paranum"><a name="p5.r">5.r/2</a></div>
 <div class="Annotations">If a container's element type is controlled, 
 the point at which the element is finalized will depend on the implementation 
@@ -231,7 +227,7 @@ We don't try to state this formally in most cases, because it is hard
 to define precisely what is and is not allowed behavior.&nbsp;</div>
 <div class="paranum"><a name="p5.v">5.v/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>When this clause 
-says that the behavior of something is unspecified<A NAME="I7437"></A>, 
+says that the behavior of something is unspecified<A NAME="I7335"></A>, 
 we really mean that any result of executing Ada code short of erroneous 
 execution is allowed. We do not mean that memory not belonging to the 
 parameters of the operation can be trashed. When we mean to allow erroneous 
@@ -253,7 +249,7 @@ indefinite insertion</I>. These subprograms are those corresponding (in
 the sense of the copying described in subclause <A HREF="AA-12-3.html">12.3</A>) 
 to subprograms that have formal parameters of a generic formal indefinite 
 type and that are identified as performing indefinite insertion in the 
-subclause defining the generic package.<A NAME="I7438"></A></span></div>
+subclause defining the generic package.<A NAME="I7336"></A></span></div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0035-1.TXT">AI12-0035-1</A></I>} 
 <span class="insert4">If a subprogram performs indefinite insertion, 
@@ -305,15 +301,13 @@ this is necessary to allow an all-Ada implementation of these packages.</span>
 <div class="paranum"><a name="p10.c">10.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I7439"></A>This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-is new. It just provides an introduction to the following subclauses. 
-</div>
+<A NAME="I7337"></A>This subclause is new. It just provides an introduction 
+to the following subclauses.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p10.d">10.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added a definition of strict 
-weak ordering.</span>&nbsp;</div>
+<B>Correction:</B> Added a definition of strict weak ordering.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p10.e">10.e/4</a></div>

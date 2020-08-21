@@ -40,7 +40,7 @@ become <I>abnormal</I>. Subsequent uses of abnormal objects can be erroneous.</d
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">A scalar object can have an <I>invalid representation</I>, 
 which means that the object's representation does not represent any value 
-of the object's subtype. <A NAME="I5399"></A>The primary cause of invalid 
+of the object's subtype. <A NAME="I5387"></A>The primary cause of invalid 
 representations is uninitialized variables.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">Abnormal objects and invalid representations are 
@@ -48,14 +48,14 @@ explained in this subclause.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5400"></A><A NAME="I5401"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5388"></A><A NAME="I5389"></A>When 
 an object is first created, and any explicit or default initializations 
 have been performed, the object and all of its parts are in the <I>normal</I> 
 state. Subsequent operations generally leave them normal. However, an 
 object or part of an object can become <I>abnormal</I> in the following 
 ways:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted"><A NAME="I5402"></A>An assignment to the object 
+<div class="Bulleted"><A NAME="I5390"></A>An assignment to the object 
 is disrupted due to an abort (see <A HREF="RM-9-8.html">9.8</A>) or due 
 to the failure of a language-defined check (see <A HREF="RM-11-6.html">11.6</A>).</div>
 <div class="paranum"><a name="p6">6/2</a></div>
@@ -74,14 +74,14 @@ a value of the function's subtype.</div>
 <div class="Normal">&nbsp;For an imported object, it is the programmer's responsibility 
 to ensure that the object remains in a normal state.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5403"></A>Whether or not an object actually 
+<div class="Normal"><A NAME="I5391"></A>Whether or not an object actually 
 becomes abnormal in these cases is not specified. An abnormal object 
 becomes normal again upon successful completion of an assignment to the 
 object as a whole.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I5404"></A>It is erroneous to evaluate a 
+<div class="Normal"><A NAME="I5392"></A>It is erroneous to evaluate a 
 <SPAN Class="swiss"><A HREF="RM-4-4.html#S0131">primary</A></SPAN> that 
 is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denoting an abnormal object, or to evaluate a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
@@ -89,11 +89,11 @@ that denotes an abnormal object.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5405"></A><A NAME="I5406"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5393"></A><A NAME="I5394"></A>If 
 the representation of a scalar object does not represent a value of the 
 object's subtype (perhaps because the object was not initialized), the 
 object is said to have an <I>invalid representation</I>. It is a bounded 
-error to evaluate the value of such an object. <A NAME="I5407"></A><A NAME="I5408"></A>If 
+error to evaluate the value of such an object. <A NAME="I5395"></A><A NAME="I5396"></A>If 
 the error is detected, either Constraint_Error or Program_Error is raised. 
 Otherwise, execution continues using the invalid representation. The 
 rules of the language outside this subclause assume that all objects 
@@ -110,7 +110,7 @@ unpredictable execution, or to other objects becoming abnormal.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I5409"></A>A call to an imported function 
+<div class="Normal"><A NAME="I5397"></A>A call to an imported function 
 or an instance of Unchecked_Conversion is erroneous if the result is 
 scalar, the result object has an invalid representation, and the result 
 is used other than as the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
@@ -125,7 +125,7 @@ the target of the assignment, then any use of the target object prior
 to a further assignment to the target object, other than as the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of a Valid attribute reference, is erroneous.&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><A NAME="I5410"></A>The dereference of an access 
+<div class="Normal"><A NAME="I5398"></A>The dereference of an access 
 value is erroneous if it does not designate an object of an appropriate 
 type or a subprogram with an appropriate profile, if it designates a 
 nonexistent object, or if it is an access-to-variable value that designates 

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -41,7 +39,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3895"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3883"></A>For 
 each of the following constructs, there is a portion of the program text 
 called its <I>declarative region</I>, within which nested declarations 
 can occur:&nbsp;</div>
@@ -49,7 +47,7 @@ can occur:&nbsp;</div>
 <div class="Bulleted">any declaration, other than that of an enumeration 
 type, that is not a completion of a previous declaration;</div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
-<div class="Bulleted"><span class="insert4">an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>;</span></div>
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-5-6.html#S0176">block_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -89,19 +87,19 @@ if any.&nbsp;</div>
 the <I>declarative region</I> of any view or entity declared by the declaration. 
 </div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I3896"></A><A NAME="I3897"></A><A NAME="I3898"></A><A NAME="I3899"></A><A NAME="I3900"></A>A 
+<div class="Normal"><A NAME="I3884"></A><A NAME="I3885"></A><A NAME="I3886"></A><A NAME="I3887"></A><A NAME="I3888"></A>A 
 declaration occurs <I>immediately within</I> a declarative region if 
 this region is the innermost declarative region that encloses the declaration 
 (the <I>immediately enclosing</I> declarative region), not counting the 
 declarative region (if any) associated with the declaration itself.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I3901"></A>A declaration is <I>local</I> 
+<div class="Normal"><A NAME="I3889"></A>A declaration is <I>local</I> 
 to a declarative region if the declaration occurs immediately within 
 the declarative region. An entity is <I>local</I> to a declarative region 
 if the entity is declared by a declaration that is local to the declarative 
 region.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I3902"></A>A declaration is <I>global</I> 
+<div class="Normal"><A NAME="I3890"></A>A declaration is <I>global</I> 
 to a declarative region if the declaration occurs immediately within 
 another declarative region that encloses the declarative region. An entity 
 is <I>global</I> to a declarative region if the entity is declared by 

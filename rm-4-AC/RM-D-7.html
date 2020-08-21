@@ -23,15 +23,15 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -105,7 +105,7 @@ require heap storage allocation are implementation defined.&nbsp;</div>
 There are no semantic dependences on the package Dynamic_Priorities<span class="insert2">, 
 and no occurrences of the attribute Priority</span>. <A NAME="I8265"></A><span class="insert3"><A NAME="I8266"></A></span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="WideHanging-Term"><span class="insert2"><A NAME="I8267"></A></span><span class="insert3"><A NAME="I8268"></A></span><span class="insert2">No_Dynamic_Attachment</span><span class="delete2"><A NAME="I8269"></A> No_Asynchronous_Control</span> 
+<div class="WideHanging-Term">&nbsp;<span class="insert2"><A NAME="I8267"></A></span><span class="insert3"><A NAME="I8268"></A></span><span class="insert2">No_Dynamic_Attachment</span><span class="delete2"><A NAME="I8269"></A> No_Asynchronous_Control</span> 
 </div><div class="WideHanging-Body"><br clear="left">
 There <span class="insert2">is no&nbsp;</span><span class="insert3">use of 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> denoting</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;call 
@@ -115,7 +115,7 @@ Exchange_Handler, Detach_Handler, and Reference).</span><span class="delete2">&n
 no semantic dependences on the package Asynchronous_Task_Control.</span> 
 </div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4"><A NAME="I8270"></A><A NAME="I8271"></A>No_Dynamic_CPU_Assignment 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert4"><A NAME="I8270"></A><A NAME="I8271"></A>No_Dynamic_CPU_Assignment 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert4">No task has the CPU aspect specified to be a non-static 
 expression. Each task (including the environment task) that has the CPU 
@@ -125,17 +125,17 @@ when the CPU aspect is not specified. Any other task without a CPU aspect
 will activate and execute on the same processor as its activating task.</span> 
 </div>
 <div class="paranum"><a name="p10.2">10.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8272"></A></span><span class="insert3"><A NAME="I8273"></A></span><span class="insert2">No_Local_Protected_Objects 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8272"></A></span><span class="insert3"><A NAME="I8273"></A></span><span class="insert2">No_Local_Protected_Objects 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">Protected objects&nbsp;</span><span class="insert3">are</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;shall 
 be</span></span><span class="insert2">&nbsp;declared only at library level.</span></div>
 <div class="paranum"><a name="p10.3">10.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8274"></A></span><span class="insert3"><A NAME="I8275"></A></span><span class="insert2">No_Local_Timing_Events 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8274"></A></span><span class="insert3"><A NAME="I8275"></A></span><span class="insert2">No_Local_Timing_Events 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">Timing_Events&nbsp;</span><span class="insert3">are</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;shall 
 be</span></span><span class="insert2">&nbsp;declared only at library level.</span></div>
 <div class="paranum"><a name="p10.4">10.4/2</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8276"></A></span><span class="insert3"><A NAME="I8277"></A></span><span class="insert2">No_Protected_Type_Allocators 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8276"></A></span><span class="insert3"><A NAME="I8277"></A></span><span class="insert2">No_Protected_Type_Allocators 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There are no <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN>s 
 for protected types or types containing protected type subcomponents.</span></div>
@@ -147,29 +147,29 @@ check is made that the specific type of the allocated object has no protected
 subcomponents. Program_Error is raised if this check fails.<A NAME="I8278"></A></span> 
 </div>
 <div class="paranum"><a name="p10.6">10.6/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8279"></A></span><span class="insert3"><A NAME="I8280"></A></span><span class="insert2">No_Relative_Delay 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8279"></A></span><span class="insert3"><A NAME="I8280"></A></span><span class="insert2">No_Relative_Delay 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There are no <SPAN Class="swiss"><A HREF="RM-9-6.html#S0229">delay_relative_statement</A></SPAN>s</span><span class="insert3">, 
 and there is no use of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes the Timing_Events.Set_Handler subprogram that has a Time_Span 
 parameter</span><span class="insert2">.</span></div>
 <div class="paranum"><a name="p10.7">10.7/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8281"></A></span><span class="insert3"><A NAME="I8282"></A></span><span class="insert2">No_Requeue_Statements 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8281"></A></span><span class="insert3"><A NAME="I8282"></A></span><span class="insert2">No_Requeue_Statements 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There are no <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0226">requeue_statement</A></SPAN>s.</span></div>
 <div class="paranum"><a name="p10.8">10.8/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8283"></A></span><span class="insert3"><A NAME="I8284"></A></span><span class="insert2">No_Select_Statements 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8283"></A></span><span class="insert3"><A NAME="I8284"></A></span><span class="insert2">No_Select_Statements 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There are no <SPAN Class="swiss"><A HREF="RM-9-7.html#S0230">select_statement</A></SPAN>s.</span></div>
 <div class="paranum"><a name="p10.9">10.9/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8285"></A></span><span class="insert3"><A NAME="I8286"></A></span><span class="insert2">No_Specific_Termination_Handlers 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8285"></A></span><span class="insert3"><A NAME="I8286"></A></span><span class="insert2">No_Specific_Termination_Handlers 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">There&nbsp;</span><span class="insert3">is no use of 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> denoting</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;are 
 no calls to</span></span><span class="insert2">&nbsp;the Set_Specific_Handler 
 and Specific_Handler subprograms in Task_Termination.</span></div>
 <div class="paranum"><a name="p10.10">10.10/4</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert4"><A NAME="I8287"></A><A NAME="I8288"></A>No_Tasks_Unassigned_To_CPU 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4"><A NAME="I8287"></A><A NAME="I8288"></A>No_Tasks_Unassigned_To_CPU 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert4">The CPU aspect is specified for the environment 
 task. No CPU aspect is specified to be statically equal to Not_A_Specific_CPU. 
@@ -178,7 +178,7 @@ then Program_Error is raised. If Set_CPU or Delay_Until_And_Set_CPU are
 called with the CPU parameter equal to Not_A_Specific_CPU, then Program_Error 
 is raised.</span>&nbsp;</div>
 <div class="paranum"><a name="p10.11">10.11/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8289"></A></span><span class="insert3"><A NAME="I8290"></A></span><span class="insert2">Simple_Barriers 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8289"></A></span><span class="insert3"><A NAME="I8290"></A></span><span class="insert2">Simple_Barriers 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">The Boolean expression in&nbsp;</span><span class="insert3">each</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;an</span></span><span class="insert2">&nbsp;entry barrier&nbsp;</span><span class="insert3">is</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;shall 
 be</span></span><span class="insert2">&nbsp;either a static&nbsp;</span><span class="insert2"><span class="delete3">Boolean 
@@ -207,14 +207,14 @@ defined by a discriminant of a subtype whose corresponding bound is static.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">The 
 following <I>restriction_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 is language defined:</span><span class="delete1">&nbsp;If the following restrictions 
 are violated, the behavior is implementation defined. <A NAME="I8297"></A><A NAME="I8298"></A><A NAME="I8299"></A>If 
 an implementation chooses to detect such a violation, Storage_Error should 
 be raised.</span></div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8300"></A></span><span class="insert3"><A NAME="I8301"></A></span><span class="insert2">No_Task_Termination 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8300"></A></span><span class="insert3"><A NAME="I8301"></A></span><span class="insert2">No_Task_Termination 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">All tasks are nonterminating. It is implementation-defined 
 what happens if a task attempts to terminate. If there is a fall-back 
@@ -224,7 +224,7 @@ first task attempts to terminate.</span>&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following <I>restriction_parameter_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>s 
 are language defined:&nbsp;</div>
 <div class="paranum"><a name="p17">17/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8302"></A><span class="insert3"><A NAME="I8303"></A></span>Max_Storage_At_Blocking 
+<div class="WideHanging-Term">&nbsp;<A NAME="I8302"></A><span class="insert3"><A NAME="I8303"></A></span>Max_Storage_At_Blocking 
 </div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum portion (in storage elements) of a task's Storage_Size 
 that can be retained by a blocked task<span class="insert1">. If an implementation 
@@ -232,7 +232,7 @@ chooses to detect a violation of this restriction, Storage_Error should
 be raised; <A NAME="I8304"></A><A NAME="I8305"></A><A NAME="I8306"></A>otherwise, 
 the behavior is implementation defined</span>.&nbsp;</div>
 <div class="paranum"><a name="p18">18/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8307"></A><span class="insert3"><A NAME="I8308"></A></span>Max_Asynchronous_Select_Nesting 
+<div class="WideHanging-Term">&nbsp;<A NAME="I8307"></A><span class="insert3"><A NAME="I8308"></A></span>Max_Asynchronous_Select_Nesting 
 </div><div class="WideHanging-Body"><br clear="left">
 Specifies the maximum dynamic nesting level of <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN>s. 
 A value of zero prevents the use of any <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN><span class="insert1">&nbsp;and, if a program contains an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0241">asynchronous_select</A></SPAN>, 
@@ -241,7 +241,7 @@ this restriction for values other than zero, Storage_Error should be
 raised; <A NAME="I8309"></A><A NAME="I8310"></A><A NAME="I8311"></A>otherwise, 
 the behavior is implementation defined</span>.&nbsp;</div>
 <div class="paranum"><a name="p19">19/1</a></div>
-<div class="WideHanging-Term"><A NAME="I8312"></A><span class="insert3"><A NAME="I8313"></A></span>Max_Tasks 
+<div class="WideHanging-Term">&nbsp;<A NAME="I8312"></A><span class="insert3"><A NAME="I8313"></A></span>Max_Tasks 
 </div><div class="WideHanging-Body">
 Specifies the maximum number of task creations that may be executed over 
 the lifetime of a partition, not counting the creation of the environment 
@@ -251,13 +251,13 @@ chooses to detect a violation of this restriction, Storage_Error should
 be raised; <A NAME="I8314"></A><A NAME="I8315"></A><A NAME="I8316"></A>otherwise, 
 the behavior is implementation defined</span>.&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert2"><A NAME="I8317"></A></span><span class="insert3"><A NAME="I8318"></A></span><span class="insert2">Max_Entry_Queue_Length 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert2"><A NAME="I8317"></A></span><span class="insert3"><A NAME="I8318"></A></span><span class="insert2">Max_Entry_Queue_Length 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert2">Max_Entry_Queue_Length defines the maximum number 
 of calls that are queued on an entry. Violation of this restriction results 
 in the raising of Program_Error at the point of the call or requeue.<A NAME="I8319"></A></span></div>
 <div class="paranum"><a name="p19.2">19.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert3"><A NAME="I8320"></A><A NAME="I8321"></A>No_Standard_Allocators_After_Elaboration 
+<div class="WideHanging-Term">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I8320"></A><A NAME="I8321"></A>No_Standard_Allocators_After_Elaboration 
 </span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Specifies that an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0143">allocator</A></SPAN> 
 using a standard storage pool (see <A HREF="RM-13-11.html">13.11</A>) 

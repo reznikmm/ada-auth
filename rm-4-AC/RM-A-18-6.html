@@ -19,13 +19,13 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -237,13 +237,13 @@ was deleted.</I></SPAN><span class="insert2"></span><span class="insert2"><span 
 <div class="paranum"><a name="p54">54/2</a></div>
 <div class="Examples"><span class="insert2"><B>end</B>&nbsp;Ada.Containers.Ordered_Maps;</span></div>
 <div class="paranum"><a name="p55">55/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7281"></A>Two keys 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I7281"></A>Two keys 
 <I>K1</I> and <I>K2</I> are <I>equivalent</I> if both <I>K1</I> &lt; 
 <I>K2</I> and <I>K2</I> &lt; <I>K1</I> return False, using the generic 
 formal &quot;&lt;&quot; operator for keys. Function Equivalent_Keys returns 
 True if Left and Right are equivalent, and False otherwise.</span></div>
 <div class="paranum"><a name="p56">56/3</a></div>
-<div class="Normal"><span class="insert2">The actual function for the 
+<div class="Normal">&nbsp;<span class="insert2">The actual function for the 
 generic formal function &quot;&lt;&quot; on Key_Type values is expected 
 to return the same value each time it is called with a particular pair 
 of key values. It should define a strict&nbsp;</span><span class="insert3">weak 
@@ -253,12 +253,12 @@ If the actual for &quot;&lt;&quot; behaves in some other manner, the
 behavior of this package is unspecified. Which subprograms of this package 
 call &quot;&lt;&quot; and how many times they call it, is unspecified.<A NAME="I7282"></A></span></div>
 <div class="paranum"><a name="p57">57/2</a></div>
-<div class="Normal"><span class="insert2">If the value of a key stored 
+<div class="Normal">&nbsp;<span class="insert2">If the value of a key stored 
 in a map is changed other than by an operation in this package such that 
 at least one of &quot;&lt;&quot; or &quot;=&quot; give different results, 
 the behavior of this package is unspecified.<A NAME="I7283"></A></span></div>
 <div class="paranum"><a name="p58">58/3</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I7284"></A><A NAME="I7285"></A><A NAME="I7286"></A></span><span class="insert3"><A NAME="I7287"></A></span><span class="insert2">The 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I7284"></A><A NAME="I7285"></A><A NAME="I7286"></A></span><span class="insert3"><A NAME="I7287"></A></span><span class="insert2">The 
 </span><span class="insert3"><I>first node</I></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;first 
 node</span></span><span class="insert2">&nbsp;of a nonempty map is the one 
 whose key is less than the key of all the other nodes in the map. The 
@@ -419,12 +419,12 @@ denotes this object). The iterator object needs finalization.</span></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p95">95/2</a></div>
-<div class="Normal"><span class="insert2">If <I>N</I> is the length of 
-a map, then the worst-case time complexity of the Element, Insert, Include, 
-Replace, Delete, Exclude and Find operations that take a key parameter 
-should be <I>O</I>((log <I>N</I>)**2) or better. The worst-case time 
-complexity of the subprograms that take a cursor parameter should be 
-<I>O</I>(1).</span>&nbsp;</div>
+<div class="Normal">&nbsp;<span class="insert2">If <I>N</I> is the length 
+of a map, then the worst-case time complexity of the Element, Insert, 
+Include, Replace, Delete, Exclude and Find operations that take a key 
+parameter should be <I>O</I>((log <I>N</I>)**2) or better. The worst-case 
+time complexity of the subprograms that take a cursor parameter should 
+be <I>O</I>(1).</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

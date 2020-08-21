@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,10 +40,10 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3"><A NAME="I9906"></A>This subclause summarizes the 
-definitions given elsewhere of the language-defined aspects. Aspects 
+<span class="insert3"><A NAME="I10238"></A>This subclause summarizes 
+the definitions given elsewhere of the language-defined aspects. Aspects 
 are properties of entities that can be specified by the Ada program; 
-unless otherwise specified below, aspects can be specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>.</span></div>
+unless otherwise specified below, aspects can be specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>.</span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term">Address</div><div class="WideHanging-Body">
 <span class="insert3">Machine address of an entity.</span><span class="insert3">&nbsp;See <A HREF="AA-13-3.html">13.3</A>.</span></div>
@@ -60,6 +60,11 @@ remote subprogram calls and all direct</span><span class="insert3">&nbsp;remote
 </span><span class="insert4">subprogram</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;procedure</span></span><span class="insert3">&nbsp;calls should use the Partition Communication Subsystem</span><span class="insert3"><span class="delete4">, 
 even if they are local</span></span><span class="insert3">.</span> See 
 <A HREF="AA-E-2-3.html">E.2.3</A>.</div>
+<div class="paranum"><a name="p5.1">5.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;<span class="insert5">Allows_Exit</span></div><div class="WideHanging-Body">
+<span class="insert5">An assertion that a subprogram will operate correctly 
+for arbitrary transfers of control.</span><span class="insert5">&nbsp;See 
+<A HREF="AA-5-5-3.html">5.5.3</A>.</span></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="WideHanging-Term">Asynchronous</div><div class="WideHanging-Body">
 <span class="insert3">Remote procedure calls are asynchronous; the caller 
@@ -76,12 +81,12 @@ object are atomic.</span><span class="insert3">&nbsp;See <A HREF="AA-C-6.html">C
 <span class="insert3">Protected procedure is attached to an interrupt.</span><span class="insert3">&nbsp;See <A HREF="AA-C-3-1.html">C.3.1</A>.</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="WideHanging-Term">Bit_Order</div><div class="WideHanging-Body">
-<span class="insert3">Order of bit numbering in a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>.</span><span class="insert3">&nbsp;See <A HREF="AA-13-5-3.html">13.5.3</A>.</span></div>
+<span class="insert3">Order of bit numbering in a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>.</span><span class="insert3">&nbsp;See <A HREF="AA-13-5-3.html">13.5.3</A>.</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="WideHanging-Term">Coding</div><div class="WideHanging-Body">
 <span class="insert3">Internal representation of enumeration literals. 
-Specified by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0314">enumeration_representation_clause</A></SPAN>, 
-not by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>.</span><span class="insert3">&nbsp;See <A HREF="AA-13-4.html">13.4</A>.</span></div>
+Specified by an <SPAN Class="swiss"><A HREF="AA-13-4.html#S0328">enumeration_representation_clause</A></SPAN>, 
+not by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>.</span><span class="insert3">&nbsp;See <A HREF="AA-13-4.html">13.4</A>.</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="WideHanging-Term">Component_Size</div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Size in bits of a component of an array type.</span><span class="insert3">&nbsp;See <A HREF="AA-13-3.html">13.3</A>.</span></div>
@@ -99,6 +104,10 @@ interfacing to other languages.</span><span class="insert3">&nbsp;See <A HREF="A
 <div class="WideHanging-Term">Default_Component_Value</div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Default value for the components of an array-of-scalar 
 subtype.</span><span class="insert3">&nbsp;See <A HREF="AA-3-6.html">3.6</A>.</span></div>
+<div class="paranum"><a name="p16.1">16.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Default_Initial_Condition</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">A condition that must hold true after the default 
+initialization of an object.</span><span class="insert5">&nbsp;See <A HREF="AA-7-3-3.html">7.3.3</A>.</span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="WideHanging-Term">Default_Iterator</div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Default iterator to be used in <B>for</B> loops.</span><span class="insert3">&nbsp;See <A HREF="AA-5-5-1.html">5.5.1</A>.</span></div>
@@ -164,6 +173,10 @@ type, including any bounds and discriminants.</span><span class="insert3">&nbsp;
 <span class="insert4">Function to read a value from a stream for a the 
 class-wide type associated with a given type, including any bounds and 
 discriminants.</span><span class="insert4">&nbsp;See <A HREF="AA-13-13-2.html">13.13.2</A>.</span></div>
+<div class="paranum"><a name="p31.2">31.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Integer_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Defines a function to implement user-defined integer 
+literals.</span><span class="insert5">&nbsp;See <A HREF="AA-4-2-1.html">4.2.1</A>.</span></div>
 <div class="paranum"><a name="p32">32/3</a></div>
 <div class="WideHanging-Term">Interrupt_Handler</div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Protected procedure may be attached to interrupts.</span><span class="insert3">&nbsp;See <A HREF="AA-C-3-1.html">C.3.1</A>.</span></div>
@@ -176,8 +189,8 @@ of a protected object or type; the priority is in the interrupt range.</span><sp
 <span class="insert3">Element type to be used for user-defined iterators.</span><span class="insert3">&nbsp;See <A HREF="AA-5-5-1.html">5.5.1</A>.</span></div>
 <div class="paranum"><a name="p35">35/3</a></div>
 <div class="WideHanging-Term">Layout (record)</div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">Layout of record components. Specified by a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0316">record_representation_clause</A></SPAN>, 
-not by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>.</span><span class="insert3">&nbsp;See <A HREF="AA-13-5-1.html">13.5.1</A>.</span></div>
+<span class="insert3">Layout of record components. Specified by a <SPAN Class="swiss"><A HREF="AA-13-5-1.html#S0330">record_representation_clause</A></SPAN>, 
+not by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>.</span><span class="insert3">&nbsp;See <A HREF="AA-13-5-1.html">13.5.1</A>.</span></div>
 <div class="paranum"><a name="p36">36/3</a></div>
 <div class="WideHanging-Term">Link_Name</div><div class="WideHanging-Body">
 <span class="insert3">Linker symbol used to identify an imported or exported 
@@ -190,9 +203,17 @@ fixed point type.</span><span class="insert3">&nbsp;See <A HREF="AA-F-1.html">F.
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Max_Entry_Queue_Length</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert5">The maximum entry queue length for a task type, 
 protected type, or entry.</span><span class="insert5">&nbsp;See <A HREF="AA-D-4.html">D.4</A>.</span></div>
-<div class="paranum"><a name="p38">38/3</a></div>
+<div class="paranum"><a name="p37.2">37.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">No_Controlled_Parts</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">A specification that a type and its descendants 
+do not have controlled parts.</span><span class="insert5">&nbsp;See <A HREF="AA-H-4-1.html">H.4.1</A>.</span></div>
+<div class="paranum"><a name="p38">38/5</a></div>
 <div class="WideHanging-Term">No_Return</div><div class="WideHanging-Body">
-<span class="insert3">A procedure will not return normally.</span><span class="insert3">&nbsp;See <A HREF="AA-6-5-1.html">6.5.1</A>.</span></div>
+<span class="insert3">A&nbsp;</span><span class="insert5">subprogram</span><span class="insert3"></span><span class="insert3"><span class="delete5">&nbsp;procedure</span></span><span class="insert3">&nbsp;will not return normally.</span> See <A HREF="AA-6-5-1.html">6.5.1</A>.</div>
+<div class="paranum"><a name="p38.1">38.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Nonblocking</span></div><div class="WideHanging-Body">
+<span class="insert5">Specifies that an associated subprogram does not 
+block.</span><span class="insert5">&nbsp;See <A HREF="AA-9-5.html">9.5</A>.</span></div>
 <div class="paranum"><a name="p39">39/3</a></div>
 <div class="WideHanging-Term">Output</div><div class="WideHanging-Body">
 <span class="insert3">Procedure to write a value to a stream for a given 
@@ -242,6 +263,10 @@ type.</span><span class="insert3">&nbsp;See <A HREF="AA-13-13-2.html">13.13.2</A
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4">Read'Class</span></div><div class="WideHanging-Body">
 <span class="insert4">Procedure to read a value from a stream for the 
 class-wide type associated with a given type.</span><span class="insert4">&nbsp;See <A HREF="AA-13-13-2.html">13.13.2</A>.</span></div>
+<div class="paranum"><a name="p48.2">48.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Real_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Defines a function to implement user-defined real 
+literals.</span><span class="insert5">&nbsp;See <A HREF="AA-4-2-1.html">4.2.1</A>.</span></div>
 <div class="paranum"><a name="p49">49/3</a></div>
 <div class="WideHanging-Term">Record layout</div><div class="WideHanging-Body">
 <span class="insert3">See Layout.</span><span class="insert3">&nbsp;See <A HREF="AA-13-5-1.html">13.5.1</A>.</span></div>
@@ -270,6 +295,20 @@ in a distributed system.</span><span class="insert3">&nbsp;See <A HREF="AA-E-2-1
 <div class="paranum"><a name="p56">56/3</a></div>
 <div class="WideHanging-Term">Small</div><div class="WideHanging-Body">
 <span class="insert3">Scale factor for a fixed point type.</span><span class="insert3">&nbsp;See <A HREF="AA-3-5-10.html">3.5.10</A>.</span></div>
+<div class="paranum"><a name="p56.1">56.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Stable_Properties</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">A list of functions describing characteristics 
+that usually are unchanged by primitive operations of the type or an 
+individual primitive subprogram.</span><span class="insert5">&nbsp;See <A HREF="AA-7-3-4.html">7.3.4</A>.</span></div>
+<div class="paranum"><a name="p56.2">56.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Stable_Properties'Class</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">A list of functions describing characteristics 
+that usually are unchanged by primitive operations of a class of types 
+or a primitive subprogram for such a class.</span><span class="insert5">&nbsp;See <A HREF="AA-7-3-4.html">7.3.4</A>.</span></div>
+<div class="paranum"><a name="p56.3">56.3/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Static</span></div><div class="WideHanging-Body">
+<span class="insert5">Specifies that an associated expression function 
+can be used in static expressions.</span><span class="insert5">&nbsp;See <A HREF="AA-6-8.html">6.8</A>.</span></div>
 <div class="paranum"><a name="p57">57/3</a></div>
 <div class="WideHanging-Term">Static_Predicate</div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Condition that must hold true for objects of a 
@@ -290,6 +329,10 @@ or single task object.</span><span class="insert3">&nbsp;See <A HREF="AA-13-3.ht
 <div class="WideHanging-Term">Stream_Size</div><div class="WideHanging-Body">
 <span class="insert3">Size in bits used to represent elementary objects 
 in a stream.</span><span class="insert3">&nbsp;See <A HREF="AA-13-13-2.html">13.13.2</A>.</span></div>
+<div class="paranum"><a name="p61.1">61.1/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">String_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">Defines a function to implement user-defined string 
+literals.</span><span class="insert5">&nbsp;See <A HREF="AA-4-2-1.html">4.2.1</A>.</span></div>
 <div class="paranum"><a name="p62">62/3</a></div>
 <div class="WideHanging-Term">Synchronization</div><div class="WideHanging-Body"><br clear="left">
 <span class="insert3">Defines whether a given primitive operation of 
@@ -324,6 +367,10 @@ type.</span><span class="insert3">&nbsp;See <A HREF="AA-13-13-2.html">13.13.2</A
 <div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4">Write'Class</span></div><div class="WideHanging-Body">
 <span class="insert4">Procedure to write a value to a stream for a the 
 class-wide type associated with a given type.</span><span class="insert4">&nbsp;See <A HREF="AA-13-13-2.html">13.13.2</A>.</span></div>
+<div class="paranum"><a name="p69.2">69.2/5</a></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert5">Yield</span></div><div class="WideHanging-Body">
+<span class="insert5">Ensures that a callable entity includes a task 
+dispatching point.</span><span class="insert5">&nbsp;See <A HREF="AA-D-2-1.html">D.2.1</A>.</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

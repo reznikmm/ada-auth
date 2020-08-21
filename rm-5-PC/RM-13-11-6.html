@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -74,7 +72,7 @@ using subpools:</div>
 <div class="paranum"><a name="p11">11/4</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Mark_Release_Pool_Type&nbsp;(Pool_Size&nbsp;:&nbsp;Storage_Count)&nbsp;<B>is&nbsp;new</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subpools.Root_Storage_Pool_With_Subpools&nbsp;<B>with&nbsp;record</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Storage_Array&nbsp;(0&nbsp;..&nbsp;Pool_Size<span class="delete4">-1</span>);<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Storage_Array&nbsp;(0&nbsp;..&nbsp;Pool_Size);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next_Allocation&nbsp;:&nbsp;Storage_Count&nbsp;:=&nbsp;0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Markers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Subpool_Array;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current_Pool&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Subpool_Indexes&nbsp;:=&nbsp;1;<BR>
@@ -174,11 +172,11 @@ using subpools:</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;Program_Error;&nbsp;--&nbsp;<SPAN Class="roman"><I>Only&nbsp;the&nbsp;last&nbsp;marked&nbsp;subpool&nbsp;can&nbsp;be&nbsp;used&nbsp;for&nbsp;allocations.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;</div>
 <div class="paranum"><a name="p28">28/4</a></div>
-<div class="Examples"><span class="insert4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Check&nbsp;for&nbsp;the&nbsp;maximum&nbsp;supported&nbsp;alignment,&nbsp;which&nbsp;is&nbsp;the&nbsp;alignment&nbsp;of&nbsp;the&nbsp;storage&nbsp;area:</I></SPAN><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Check&nbsp;for&nbsp;the&nbsp;maximum&nbsp;supported&nbsp;alignment,&nbsp;which&nbsp;is&nbsp;the&nbsp;alignment&nbsp;of&nbsp;the&nbsp;storage&nbsp;area:</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Alignment&nbsp;&gt;&nbsp;Pool.Storage'Alignment&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>raise</B>&nbsp;Program_Error;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;if</B>;<BR>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Correct&nbsp;the&nbsp;alignment&nbsp;if&nbsp;necessary:</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Correct&nbsp;the&nbsp;alignment&nbsp;if&nbsp;necessary:</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pool.Next_Allocation&nbsp;:=&nbsp;Pool.Next_Allocation&nbsp;+<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((-Pool.Next_Allocation)&nbsp;<B>mod</B>&nbsp;Alignment);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if</B>&nbsp;Pool.Next_Allocation&nbsp;+&nbsp;Size_In_Storage_Elements&nbsp;&gt;<BR>

@@ -19,13 +19,13 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -86,18 +86,18 @@ has type <I>T</I>, if the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.ht
 denotes a constant or the Variable_Indexing aspect is not specified for 
 <I>T</I>, then the Constant_Indexing aspect shall be specified for <I>T</I>.</span></div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">The <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">The <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of an <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A></SPAN> 
 shall not denote a subcomponent that depends on discriminants of an object 
 whose nominal subtype is unconstrained, unless the object is known to 
 be constrained.</span></div>
 <div class="paranum"><a name="p6.2">6.2/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">A container element iterator 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">A container element iterator 
 is illegal if the call of the default iterator function that creates 
 the loop iterator (see below) is illegal.</span></div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">A generalized iterator is 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">A generalized iterator is 
 illegal if the iteration cursor subtype of the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is a limited type at the point of the generalized iterator. A container 
 element iterator is illegal if the default cursor subtype of the type 
@@ -136,7 +136,7 @@ the <SPAN Class="swiss"><A HREF="RM-5-5-2.html#S0159">iterator_specification</A>
 is first elaborated. This elaboration elaborates the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 if any.</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><span class="insert3">For a generalized iterator, 
+<div class="Normal">&nbsp;<span class="insert3">For a generalized iterator, 
 the loop parameter is created, the <I>iterator_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is evaluated, and the denoted iterator object becomes the <I>loop iterator</I>.<A NAME="I3387"></A> 
 In a forward generalized iterator, the operation First of the iterator 
@@ -152,7 +152,7 @@ or the loop is left as a consequence of a transfer of control. For a
 reverse generalized iterator, the operations Last and Previous are called 
 rather than First and Next.</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><span class="insert3">For an array component iterator, 
+<div class="Normal">&nbsp;<span class="insert3">For an array component iterator, 
 the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted array object becomes the <I>array for the 
 loop</I>.<A NAME="I3388"></A> If the array for the loop is a null array, 
@@ -171,7 +171,7 @@ loop iteration proceeds until the <SPAN Class="swiss"><A HREF="RM-5-1.html#S0145
 has been executed for each component of the array for the loop, or until 
 the loop is left as a consequence of a transfer of control.</span></div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><span class="insert3">For a container element iterator, 
+<div class="Normal">&nbsp;<span class="insert3">For a container element iterator, 
 the <I>iterable_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is evaluated and the denoted iterable container object becomes the <I>iterable 
 container object for the loop</I>.<A NAME="I3390"></A> The default iterator 
@@ -180,7 +180,7 @@ called on the iterable container object and the result is the <I>loop
 iterator</I>.<A NAME="I3391"></A> An object of the default cursor subtype 
 is created (the <I>loop cursor</I>).<A NAME="I3392"></A></span></div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><span class="insert3">For a forward container element 
+<div class="Normal">&nbsp;<span class="insert3">For a forward container element 
 iterator, the operation First of the iterator type is called on the loop 
 iterator, to produce the initial value for the loop cursor. If the result 
 of calling Has_Element on the initial value is False, then the execution 
@@ -199,7 +199,7 @@ parameter is a constant (see above), then the indexing uses the default
 constant indexing function for the type of the iterable container object 
 for the loop; otherwise it uses the default variable indexing function.</span></div>
 <div class="paranum"><a name="p14">14/4</a></div>
-<div class="Normal"><span class="insert4">Any exception propagated by 
+<div class="Normal">&nbsp;<span class="insert4">Any exception propagated by 
 the execution of a generalized iterator or container element iterator 
 is propagated by the immediately enclosing loop statement.</span></div>
 
@@ -210,7 +210,7 @@ is propagated by the immediately enclosing loop statement.</span></div>
 &nbsp;&nbsp;&nbsp;Element&nbsp;:=&nbsp;Element&nbsp;*&nbsp;2.0;&nbsp;--&nbsp;<SPAN Class="roman"><I>Double&nbsp;each&nbsp;element&nbsp;of&nbsp;Board,&nbsp;a&nbsp;two-dimensional&nbsp;array.</I></SPAN><BR>
 <B>end&nbsp;loop</B>;</span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert3">For examples of use of generalized 
+<div class="Normal">&nbsp;<span class="insert3">For examples of use of generalized 
 iterators, see <A HREF="RM-A-18-32.html">A.18.32</A> and the corresponding 
 container packages in <A HREF="RM-A-18-2.html">A.18.2</A> and <A HREF="RM-A-18-3.html">A.18.3</A>.</span> 
 </div>

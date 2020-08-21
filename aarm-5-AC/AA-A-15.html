@@ -19,6 +19,8 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -30,13 +32,13 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-A-16.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-15-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>A.15 The Package Command_Line</H1>
@@ -53,22 +55,23 @@ package Command_Line. The bounds of type Command_Line.Exit_Status</span>.</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Ada.Command_Line has the following declaration:&nbsp;</div>
-<div class="paranum"><a name="p3">3</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Command_Line&nbsp;<B>is</B><A NAME="I7559"></A><BR>
-&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Command_Line);</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<B>package</B>&nbsp;Ada.Command_Line<span class="delete5">&nbsp;<B>is</B></span><A NAME="I7847"></A><BR>
+&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Command_Line);</span></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7560"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7848"></A>Argument_Count&nbsp;<B>return</B>&nbsp;Natural;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7561"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7849"></A>Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7562"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
+<div class="Examples">&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I7850"></A>Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7563"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I7851"></A>Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;<A NAME="I7564"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
-&nbsp;&nbsp;<A NAME="I7565"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
+<div class="Examples">&nbsp;&nbsp;<A NAME="I7852"></A>Success&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;<BR>
+&nbsp;&nbsp;<A NAME="I7853"></A>Failure&nbsp;:&nbsp;<B>constant</B>&nbsp;Exit_Status;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7566"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
+<div class="Examples">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I7854"></A>Set_Exit_Status&nbsp;(Code&nbsp;:&nbsp;<B>in</B>&nbsp;Exit_Status);</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -85,24 +88,25 @@ it returns 0. The meaning of &ldquo;number of arguments&rdquo; is implementation
 defined.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Examples"><B>function</B>&nbsp;Argument&nbsp;(Number&nbsp;:&nbsp;<B>in</B>&nbsp;Positive)&nbsp;<B>return</B>&nbsp;String;</div>
-<div class="paranum"><a name="p14">14</a></div>
-<div class="Indented2" style="margin-bottom: 0.9em">If the external 
-execution environment supports passing arguments to a program, then Argument 
-returns an implementation-defined value corresponding to the argument 
-at relative position Number. <A NAME="I7567"></A>If Number is outside 
-the range 1..Argument_Count, then Constraint_Error is propagated.&nbsp;</div>
+<div class="paranum"><a name="p14">14/5</a></div>
+<div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0259-1.TXT">AI12-0259-1</A></I>} 
+If the external execution environment supports passing arguments to a 
+program, then Argument returns an implementation-defined value<span class="insert5">&nbsp;with lower bound 1</span> corresponding to the argument at relative position 
+Number. <A NAME="I7855"></A>If Number is outside the range 1..Argument_Count, 
+then Constraint_Error is propagated.&nbsp;</div>
 <div class="paranum"><a name="p14.a">14.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the external execution 
 environment does not support passing arguments to a program, then Argument(N) 
 for any N will raise Constraint_Error, since Argument_Count is 0.</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Examples"><B>function</B>&nbsp;Command_Name&nbsp;<B>return</B>&nbsp;String;</div>
-<div class="paranum"><a name="p16">16/3</a></div>
+<div class="paranum"><a name="p16">16/5</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0259-1.TXT">AI12-0259-1</A></I>} 
 If the external execution environment supports passing arguments to a 
-program, then Command_Name returns an implementation-defined value corresponding 
-to the name of the command invoking the program; otherwise<span class="insert3">,</span> 
-Command_Name returns the null string.</div>
+program, then Command_Name returns an implementation-defined value<span class="insert5">&nbsp;with lower bound 1</span> corresponding to the name of the command invoking 
+the program; otherwise<span class="insert3">,</span> Command_Name returns 
+the null string.</div>
 <div class="paranum"><a name="p16.1">16.1/1</a></div>
 <div class="Examples"><span class="insert1"><B>type</B>&nbsp;Exit_Status&nbsp;<B>is</B>&nbsp;<SPAN Class="roman"><I>implementation-defined&nbsp;integer&nbsp;type</I></SPAN>;</span></div>
 <div class="paranum"><a name="p17">17</a></div>
@@ -121,7 +125,7 @@ has been set, then the value Success. If a program terminates abnormally,
 the status set by Set_Exit_Status is ignored, and an implementation-defined 
 exit status value is set.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Indented2"><span class="delete1"><A NAME="I7568"></A></span>If 
+<div class="Indented2"><span class="delete1"><A NAME="I7856"></A></span>If 
 the external execution environment does not support returning an exit 
 value from a program, then Set_Exit_Status does nothing.&nbsp;</div>
 
@@ -144,8 +148,17 @@ does not.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p22.b">22.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I7569"></A>This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
+<A NAME="I7857"></A>This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
 is new in Ada 95.&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p22.c">22.c/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0259-1.TXT">AI12-0259-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Defined the lower bound of functions 
+Argument and Command_Name. This could be inconsistent if someone depended 
+on the lower bound of these routines (and it wasn't 1), but such code 
+was never portable (even to later versions of the same implementation). 
+Thus we don't document it as an inconsistency.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
@@ -153,7 +166,7 @@ is new in Ada 95.&nbsp;</div>
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-A-14.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-A-16.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-A-15-1.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

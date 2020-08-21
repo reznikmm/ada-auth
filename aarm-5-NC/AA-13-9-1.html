@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,7 +42,7 @@ become <I>abnormal</I>. Subsequent uses of abnormal objects can be erroneous.</d
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">A scalar object can have an <I>invalid representation</I>, 
 which means that the object's representation does not represent any value 
-of the object's subtype. <A NAME="I5713"></A>The primary cause of invalid 
+of the object's subtype. <A NAME="I5918"></A>The primary cause of invalid 
 representations is uninitialized variables.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">Abnormal objects and invalid representations are 
@@ -50,14 +50,14 @@ explained in this subclause.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5714"></A><A NAME="I5715"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5919"></A><A NAME="I5920"></A>When 
 an object is first created, and any explicit or default initializations 
 have been performed, the object and all of its parts are in the <I>normal</I> 
 state. Subsequent operations generally leave them normal. However, an 
 object or part of an object can become <I>abnormal</I> in the following 
 ways:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted"><A NAME="I5716"></A>An assignment to the object 
+<div class="Bulleted"><A NAME="I5921"></A>An assignment to the object 
 is disrupted due to an abort (see <A HREF="AA-9-8.html">9.8</A>) or due 
 to the failure of a language-defined check (see <A HREF="AA-11-6.html">11.6</A>).</div>
 <div class="paranum"><a name="p6">6/2</a></div>
@@ -93,15 +93,15 @@ that the object remains in a normal state.]&nbsp;</div>
 rule of interfacing; the programmer must ensure that Ada semantics are 
 followed (see <A HREF="AA-B-1.html">B.1</A>).&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5717"></A>Whether or not an object actually 
+<div class="Normal"><A NAME="I5922"></A>Whether or not an object actually 
 becomes abnormal in these cases is not specified. An abnormal object 
 becomes normal again upon successful completion of an assignment to the 
 object as a whole.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I5718"></A>It is erroneous to evaluate a 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">primary</A></SPAN> that 
+<div class="Normal"><A NAME="I5923"></A>It is erroneous to evaluate a 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> that 
 is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting an abnormal object, or to evaluate a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 that denotes an abnormal object.&nbsp;</div>
@@ -130,11 +130,11 @@ The same is true if the discriminants have been destroyed.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5719"></A><A NAME="I5720"></A>If 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5924"></A><A NAME="I5925"></A>If 
 the representation of a scalar object does not represent a value of the 
 object's subtype (perhaps because the object was not initialized), the 
 object is said to have an <I>invalid representation</I>. It is a bounded 
-error to evaluate the value of such an object. <A NAME="I5721"></A><A NAME="I5722"></A>If 
+error to evaluate the value of such an object. <A NAME="I5926"></A><A NAME="I5927"></A>If 
 the error is detected, either Constraint_Error or Program_Error is raised. 
 Otherwise, execution continues using the invalid representation. The 
 rules of the language outside this subclause assume that all objects 
@@ -160,7 +160,7 @@ unpredictable execution, or to other objects becoming abnormal.&nbsp;</div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00426.TXT">AI95-00426-01</A></I>} 
 This means that the implementation must take care not to use an invalid 
 representation in a way that might cause erroneous execution. For instance, 
-the exception mandated for <SPAN Class="swiss"><A HREF="AA-5-4.html#S0156">case_statement</A></SPAN>s 
+the exception mandated for <SPAN Class="swiss"><A HREF="AA-5-4.html#S0162">case_statement</A></SPAN>s 
 must be raised. Array indexing must not cause memory outside of the array 
 to be written (and usually, not read either). These cases and similar 
 cases may require explicit checks by the implementation.&nbsp;</div>
@@ -169,14 +169,14 @@ cases may require explicit checks by the implementation.&nbsp;</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00167.TXT">AI95-00167-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0279-1.TXT">AI05-0279-1</A></I>} 
-<A NAME="I5723"></A>A call to an imported function or an instance of 
+<A NAME="I5928"></A>A call to an imported function or an instance of 
 Unchecked_Conversion is erroneous if the result is scalar, the result 
 object has an invalid representation, and the result is used other than 
-as the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+as the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
 as the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN>, 
+of an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>, 
 or as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of a Valid attribute. If such a result object is used as the source of 
 an assignment, and the assigned value is an invalid representation for 
@@ -270,7 +270,7 @@ operator such as =, &lt;, and <B>xor</B> to a composite operand with
 an invalid scalar subcomponent.&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
-<A NAME="I5724"></A>The dereference of an access value is erroneous if 
+<A NAME="I5929"></A>The dereference of an access value is erroneous if 
 it does not designate an object of an appropriate type or a subprogram 
 with an appropriate profile, if it designates a nonexistent object, or 
 if it is an access-to-variable value that designates a constant object 
@@ -322,9 +322,9 @@ that all of the possibilities are included.&nbsp;</div>
 <div class="paranum"><a name="p14.e">14.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0054-2.TXT">AI05-0054-2</A></I>} 
 <B>Correction:</B> Common programming techniques such as squirreling 
-away<A NAME="I5725"></A> an access to a controlled object during initialization 
+away<A NAME="I5930"></A> an access to a controlled object during initialization 
 and using a self-referencing discriminant (the so-called &ldquo;Rosen 
-trick&rdquo;<A NAME="I5726"></A>) no longer are immediately erroneous 
+trick&rdquo;<A NAME="I5931"></A>) no longer are immediately erroneous 
 if the object is declared constant, so these techniques can be used portably 
 and safely. Practically, these techniques already worked as compilers 
 did not take much advantage of this rule, so the impact of this change 

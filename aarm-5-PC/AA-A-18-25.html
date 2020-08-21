@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,7 +35,7 @@
 <H1>A.18.25 The Generic Package Containers.Bounded_Multiway_Trees</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
-The language-defined generic package Containers.Bounded_Multiway_Trees 
+The language-defined generic package Containers.Bounded_Multiway_Trees<A NAME="I8354"></A> 
 provides a private type Tree and a set of operations. It provides the 
 same operations as the package Containers.Multiway_Trees (see <A HREF="AA-A-18-10.html">A.18.10</A>), 
 with the difference that the maximum storage is bounded.</div>
@@ -80,7 +78,7 @@ declared as follows:&nbsp;</div>
 <div class="paranum"><a name="p10">10/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
 &nbsp;&nbsp;<B>function</B>&nbsp;Copy&nbsp;(Source&nbsp;:&nbsp;Tree;&nbsp;Capacity&nbsp;:&nbsp;Count_Type&nbsp;:=&nbsp;0)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;<span class="insert4">Tree</span><span class="delete4">&nbsp;List</span>;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Tree;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Bulleted-NoPrefix">If Capacity is 0, then the tree capacity 
 is the count of Source; if Capacity is equal to or greater than Source.Count, 
@@ -105,7 +103,7 @@ propagates Capacity_Error.&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<A NAME="I8062"></A>It is a bounded error to assign from a bounded tree 
+<A NAME="I8355"></A>It is a bounded error to assign from a bounded tree 
 object while tampering with elements [or cursors] of that object is prohibited. 
 Either Program_Error is raised by the assignment, execution proceeds 
 with the target object prohibiting tampering with elements [or cursors], 
@@ -120,7 +118,7 @@ with elements here; we mention cursors for clarity.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 When a bounded tree object <I>T</I> is finalized, if tampering with cursors 
 is prohibited for <I>T</I> other than due to an assignment from another 
-tree, then execution is erroneous. <A NAME="I8063"></A></div>
+tree, then execution is erroneous. <A NAME="I8356"></A></div>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This is a tampering event, but 
 since the implementation is not allowed to use Ada.Finalization, it is 
@@ -173,7 +171,7 @@ trees.</div>
 <div class="paranum"><a name="p20.a">20.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0136-1.TXT">AI05-0136-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0184-1.TXT">AI05-0184-1</A></I>} 
-<A NAME="I8064"></A>The generic package Containers.Bounded_Multiway_Trees 
+<A NAME="I8357"></A>The generic package Containers.Bounded_Multiway_Trees 
 is new.&nbsp;</div>
 
 <HR>

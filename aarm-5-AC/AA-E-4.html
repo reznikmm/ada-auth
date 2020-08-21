@@ -19,6 +19,8 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -32,7 +34,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,7 +45,7 @@
 <HR>
 <H1>E.4 Remote Subprogram Calls</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I9397"></A><A NAME="I9398"></A><A NAME="I9399"></A><A NAME="I9400"></A><A NAME="I9401"></A>A 
+<div class="Normal"><A NAME="I9724"></A><A NAME="I9725"></A><A NAME="I9726"></A><A NAME="I9727"></A><A NAME="I9728"></A>A 
 <I>remote subprogram call</I> is a subprogram call that invokes the execution 
 of a subprogram in another partition. The partition that originates the 
 remote subprogram call is the <I>calling partition</I>, and the partition 
@@ -88,11 +90,27 @@ programs.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">In a dispatching call with two or more controlling 
 operands, if one controlling operand is designated by a value of a remote 
-access-to-class-wide type, then all shall be.&nbsp;</div>
+access-to-class-wide type, then all shall be.</div>
+<div class="paranum"><a name="p8.1">8.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0283-1.TXT">AI12-0283-1</A></I>} 
+<span class="insert5">A nonblocking program unit shall not contain, other 
+than within nested units with Nonblocking specified as statically False, 
+a dispatching call with a controlling operand designated by a value of 
+a remote access-to-class-wide type.</span></div>
+<div class="paranum"><a name="p8.a">8.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>Such a 
+dispatching call is a potentially blocking call (see below) even if the 
+called subprogram is nonblocking, so we must not assert that no blocking 
+is possible.</span>&nbsp;</div>
+<div class="paranum"><a name="p8.b">8.b/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B>The 
+calls is illegal if the Nonblocking aspect of the containing unit is 
+True, either implicitly by inheritance or by explicit specification.</span> 
+</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I9402"></A><A NAME="I9403"></A><A NAME="I9404"></A>For 
+<div class="Normal"><A NAME="I9729"></A><A NAME="I9730"></A><A NAME="I9731"></A>For 
 the execution of a remote subprogram call, subprogram parameters (and 
 later the results, if any) are passed using a stream-oriented representation 
 (see <A HREF="AA-13-13-1.html">13.13.1</A>) [which is suitable for transmission 
@@ -104,7 +122,7 @@ is done in the called partition. After the remote subprogram completes,
 marshalling is performed in the called partition, and finally unmarshalling 
 is done in the calling partition.]</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I9405"></A><A NAME="I9406"></A>A <I>calling 
+<div class="Normal"><A NAME="I9732"></A><A NAME="I9733"></A>A <I>calling 
 stub</I> is the sequence of code that replaces the subprogram body of 
 a remotely called subprogram in the calling partition. A <I>receiving 
 stub</I> is the sequence of code (the &ldquo;wrapper&rdquo;) that receives 
@@ -112,12 +130,12 @@ a remote subprogram call on the called partition and invokes the appropriate
 subprogram body.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The use of the term <I>stub</I> 
-in this annex should not be confused with <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
+in this annex should not be confused with <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
 as defined in <A HREF="AA-10-1-3.html">10.1.3</A>. The term <I>stub</I> 
 is used here because it is a commonly understood term when talking about 
 the RPC paradigm.&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I9407"></A>Remote subprogram calls are executed 
+<div class="Normal"><A NAME="I9734"></A>Remote subprogram calls are executed 
 at most once, that is, if the subprogram call returns normally, then 
 the called subprogram's body was executed exactly once.</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -126,7 +144,7 @@ until the subprogram in the called partition returns, unless the call
 is asynchronous. For an asynchronous remote procedure call, the calling 
 task can become ready before the procedure in the called partition returns.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I9408"></A>If a construct containing a remote 
+<div class="Normal"><A NAME="I9735"></A>If a construct containing a remote 
 call is aborted, the remote subprogram call is <I>cancelled</I>. Whether 
 the execution of the remote subprogram is immediately aborted as a result 
 of the cancellation is implementation defined.&nbsp;</div>
@@ -148,9 +166,10 @@ completion of the remotely called subprogram, any exception is lost.</div>
 <div class="Normal">The exception Communication_Error (see <A HREF="AA-E-5.html">E.5</A>) 
 is raised if a remote call cannot be completed due to difficulties in 
 communicating with the called partition.</div>
-<div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I9409"></A><A NAME="I9410"></A>All forms 
-of remote subprogram calls are potentially blocking operations (see <A HREF="AA-9-5-1.html">9.5.1</A>). 
+<div class="paranum"><a name="p17">17/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0183-1.TXT">AI12-0183-1</A></I>} 
+<A NAME="I9736"></A><A NAME="I9737"></A>All forms of remote subprogram 
+calls are potentially blocking operations (see <span class="insert5"><A HREF="AA-9-5.html">9.5</A></span><span class="delete5"><A HREF="AA-9-5-1.html">&nbsp;9.5.1</A></span>). 
 </div>
 <div class="paranum"><a name="p17.a">17.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Asynchronous remote procedure 
@@ -160,11 +179,11 @@ for the availability of shared resources to initiate the remote call.
 <div class="paranum"><a name="p18">18/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0085">8652/0085</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00215.TXT">AI95-00215-01</A></I>} 
-<A NAME="I9411"></A><A NAME="I9412"></A>In a remote subprogram call with 
+<A NAME="I9738"></A><A NAME="I9739"></A>In a remote subprogram call with 
 a formal parameter of a class-wide type, a check is made that the tag 
 of the actual parameter identifies a tagged type declared in a declared-pure 
 or shared passive library unit, or in the visible part of a remote types 
-or remote call interface library unit. <A NAME="I9413"></A>Program_Error 
+or remote call interface library unit. <A NAME="I9740"></A>Program_Error 
 is raised if this check fails. <span class="insert1">In a remote function 
 call which returns a class-wide type, the same check is made on the function 
 result.</span>&nbsp;</div>
@@ -192,13 +211,13 @@ partitions. However, that interfered with other uses of tags. The new
 rule allows tags to agree in all partitions, even for those types which 
 are not &quot;safe&quot; to pass in an RPC.&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Normal"><A NAME="I9414"></A><A NAME="I9415"></A>In a dispatching 
+<div class="Normal"><A NAME="I9741"></A><A NAME="I9742"></A>In a dispatching 
 call with two or more controlling operands that are designated by values 
 of a remote access-to-class-wide type, a check is made [(in addition 
 to the normal Tag_Check &mdash; see <A HREF="AA-11-5.html">11.5</A>)] 
 that all the remote access-to-class-wide values originated from Access 
 <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s 
-that were evaluated by tasks of the same active partition. <A NAME="I9416"></A>Constraint_Error 
+that were evaluated by tasks of the same active partition. <A NAME="I9743"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 <div class="paranum"><a name="p19.a">19.a</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>When a remote access-to-class-wide 
@@ -310,7 +329,7 @@ they are evaluated dynamically.</div>
 <div class="Annotations">For each remote access-to-class-wide type, a 
 calling stub is generated for each dispatching operation of the designated 
 type. In addition, receiving stubs are generated to perform the remote 
-dispatching operations in the called partition. The appropriate <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+dispatching operations in the called partition. The appropriate <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 is determined as for a local dispatching call once the receiving stub 
 has been reached.</div>
 <div class="paranum"><a name="p20.s">20.s</a></div>
@@ -329,7 +348,7 @@ target partition, etc. This approach has the advantage that less special-casing
 is required in the compiler. All access values can remain just a simple 
 address.</div>
 <div class="paranum"><a name="p20.u">20.u</a></div>
-<div class="Annotations"><A NAME="I9417"></A>For a call to Do_RPC or 
+<div class="Annotations"><A NAME="I9744"></A>For a call to Do_RPC or 
 Do_APC: The partition ID of all controlling operands are checked for 
 equality (a Constraint_Error is raised if this check fails). The partition 
 ID value is used for the Partition parameter. An index into the <I>tagged-type-descriptor</I> 
@@ -344,7 +363,7 @@ already present in the other parameters).</div>
 has transferred control to the appropriate receiving stub) the parameters 
 are first unmarshalled. Then, the tags of the controlling operands (obtained 
 by dereferencing the pointer to the object) are checked for equality. 
-<A NAME="I9418"></A>If the check fails Constraint_Error is raised and 
+<A NAME="I9745"></A>If the check fails Constraint_Error is raised and 
 propagated back to the calling partition, unless it is a result of an 
 asynchronous call. Finally, a dispatching call to the specific subprogram 
 (based on the controlling object's tag) is made. Note that since this 
@@ -394,6 +413,12 @@ call functions.</span>&nbsp;</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0101-1.TXT">AI05-0101-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Corrected the text to note that 
 remote access types can be defined in remote types units.</span>&nbsp;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p22.e">22.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0283-1.TXT">AI12-0283-1</A></I>} 
+<span class="insert5">Added a rule to ensure that potentially blocking 
+remote calls are not considered nonblocking.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

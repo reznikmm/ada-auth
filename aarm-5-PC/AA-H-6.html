@@ -25,7 +25,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -47,8 +47,8 @@ for user control over elaboration policy.&nbsp;</div>
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Partition_Elaboration_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9345"></A><A NAME="I9346"></A>Partition_Elaboration_Policy 
-(<I>policy_</I><A NAME="I9347"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I9660"></A><A NAME="I9661"></A>Partition_Elaboration_Policy 
+(<I>policy_</I><A NAME="I9662"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 shall be either Sequential, Concurrent or an implementation-defined identifier. 
@@ -69,7 +69,7 @@ separately.&nbsp;</div>
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00265.TXT">AI95-00265-01</A></I>} 
-<A NAME="I9348"></A><A NAME="I9349"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I9663"></A><A NAME="I9664"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Partition_Elaboration_Policy is a configuration pragma. It specifies 
 the elaboration policy for a partition. At most one elaboration policy 
 shall be specified for a partition.</div>
@@ -82,7 +82,7 @@ If the Sequential policy is specified for a partition, then pragma Restrictions
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00265.TXT">AI95-00265-01</A></I>} 
-Notwithstanding<A NAME="I9350"></A> what this International Standard 
+Notwithstanding<A NAME="I9665"></A> what this International Standard 
 says elsewhere, this <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 allows partition elaboration rules concerning task activation and interrupt 
 attachment to be changed. If the <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
@@ -154,7 +154,7 @@ could be handled within a library unit.&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00265.TXT">AI95-00265-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00421.TXT">AI95-00421-01</A></I>} 
-<A NAME="I9351"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
+<A NAME="I9666"></A><SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">Pragma</A></SPAN> 
 Partition_Elaboration_Policy is new.&nbsp;</div>
 
 <HR>

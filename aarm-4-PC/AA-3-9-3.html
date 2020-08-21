@@ -13,25 +13,23 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,10 +41,10 @@
 <H1>3.9.3 Abstract Types and Subprograms</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-[<A NAME="I2359"></A> <A NAME="I2360"></A><A NAME="I2361"></A><A NAME="I2362"></A>An 
+[<A NAME="I2342"></A> <A NAME="I2343"></A><A NAME="I2344"></A><A NAME="I2345"></A>An 
 <I>abstract type</I> is a tagged type intended for use as an ancestor 
 of other types, but which is not allowed to have objects of its own. 
-<A NAME="I2363"></A><A NAME="I2364"></A>An <I>abstract subprogram</I> 
+<A NAME="I2346"></A><A NAME="I2347"></A>An <I>abstract subprogram</I> 
 is a subprogram that has no body, but is intended to be overridden at 
 some point when inherited. Because objects of an abstract type cannot 
 be created, a dispatching call to an abstract subprogram always dispatches 
@@ -59,29 +57,29 @@ is not allowed to have objects of its own.</div>
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-An abstract subprogram has no body, so the rules in this <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-are designed to ensure (at compile time) that the body will never be 
-invoked. We do so primarily by disallowing the creation of values of 
-the abstract type. Therefore, since type conversion and parameter passing 
-don't change the tag, we know we will never get a class-wide value with 
-a tag identifying an abstract type. This means that we only have to disallow 
-nondispatching calls on abstract subprograms (dispatching calls will 
-never reach them).&nbsp;</div>
+An abstract subprogram has no body, so the rules in this subclause are 
+designed to ensure (at compile time) that the body will never be invoked. 
+We do so primarily by disallowing the creation of values of the abstract 
+type. Therefore, since type conversion and parameter passing don't change 
+the tag, we know we will never get a class-wide value with a tag identifying 
+an abstract type. This means that we only have to disallow nondispatching 
+calls on abstract subprograms (dispatching calls will never reach them). 
+</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1.1">1.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">abstract_subprogram_declaration</SPAN><A NAME="I2365"></A><A NAME="S0076"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2366"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0195">overriding_indicator</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2367"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0164">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2368"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>;</div>
+<SPAN Class="swiss">abstract_subprogram_declaration</SPAN><A NAME="I2348"></A><A NAME="S0076"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2349"></A><SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0195">overriding_indicator</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2350"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0164">subprogram_specification</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>abstract</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2351"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.2">1.2/2</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I2369"></A><A NAME="I2370"></A>Interface types (see <A HREF="AA-3-9-4.html">3.9.4</A>) 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
+<A NAME="I2352"></A><A NAME="I2353"></A>Interface types (see <A HREF="AA-3-9-4.html">3.9.4</A>) 
 are abstract types. In addition, a tagged type that has the reserved 
 word <B>abstract</B> in its declaration is an abstract type. The class-wide 
 type (see <A HREF="AA-3-4-1.html">3.4.1</A>) rooted at an abstract type 
@@ -106,7 +104,7 @@ be different from T'Tag.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I2371"></A><A NAME="I2372"></A>A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+<A NAME="I2354"></A><A NAME="I2355"></A>A subprogram declared by an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0298">formal_abstract_subprogram_declaration</A></SPAN> 
 (see <A HREF="AA-12-6.html">12.6</A>) is an <I>abstract subprogram</I>. 
 If it is a primitive subprogram of a tagged type, then the tagged type 
@@ -163,50 +161,46 @@ as they are never primitive operations of a type.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0097-1.TXT">AI05-0097-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0198-1.TXT">AI05-0198-1</A></I>} 
 If a type has an implicitly declared primitive subprogram that is inherited 
-or is <span class="insert3">a</span><span class="delete3">&nbsp;the</span> 
-predefined <span class="delete3">equality&nbsp;</span>operator, and the corresponding 
-primitive subprogram of the parent or ancestor type is abstract or is 
-a function with a controlling access result, or if a type other than 
-a <span class="insert3">nonabstract&nbsp;</span>null extension inherits a 
-function with a controlling result, then:&nbsp;</div>
+or is a predefined operator, and the corresponding primitive subprogram 
+of the parent or ancestor type is abstract or is a function with a controlling 
+access result, or if a type other than a nonabstract null extension inherits 
+a function with a controlling result, then:&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0068-1.TXT">AI05-0068-1</A></I>} 
-<span class="insert3">These rules apply to each view of the type individually. 
-That is necessary to preserve privacy. For instance, in the following 
-example:</span>&nbsp;</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0068-1.TXT">AI05-0068-1</A></I>} 
+These rules apply to each view of the type individually. That is necessary 
+to preserve privacy. For instance, in the following example:&nbsp;</div>
 <div class="paranum"><a name="p4.b">4.b/3</a></div>
-<div class="SmallExamples"><span class="insert3"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;I&nbsp;<B>is&nbsp;interface</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op&nbsp;(X&nbsp;:&nbsp;I)&nbsp;<B>is&nbsp;abstract</B>;<BR>
-<B>end</B>&nbsp;P;</span></div>
+<B>end</B>&nbsp;P;</div>
 <div class="paranum"><a name="p4.c">4.c/3</a></div>
-<div class="SmallExamples"><span class="insert3"><B>with</B>&nbsp;P;<BR>
+<div class="SmallExamples"><B>with</B>&nbsp;P;<BR>
 <B>package</B>&nbsp;Q&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;abstract&nbsp;new</B>&nbsp;P.I&nbsp;<B>with&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Op&nbsp;inherited&nbsp;here.</I></SPAN><BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;abstract&nbsp;new</B>&nbsp;P.I&nbsp;<B>with&nbsp;null&nbsp;record</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;Op&nbsp;(X&nbsp;:&nbsp;T)&nbsp;<B>is&nbsp;null</B>;<BR>
-<B>end</B>&nbsp;Q;</span></div>
+<B>end</B>&nbsp;Q;</div>
 <div class="paranum"><a name="p4.d">4.d/3</a></div>
-<div class="SmallExamples"><span class="insert3"><B>with</B>&nbsp;Q;<BR>
+<div class="SmallExamples"><B>with</B>&nbsp;Q;<BR>
 <B>package</B>&nbsp;R&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T2&nbsp;<B>is&nbsp;new</B>&nbsp;Q.T&nbsp;<B>with&nbsp;null&nbsp;record</B>;<BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Illegal.&nbsp;Op&nbsp;inherited&nbsp;here,&nbsp;but&nbsp;requires&nbsp;overriding.</I></SPAN><BR>
-<B>end</B>&nbsp;R;</span></div>
+<B>end</B>&nbsp;R;</div>
 <div class="paranum"><a name="p4.e">4.e/3</a></div>
-<div class="Annotations"><span class="insert3">If this did not depend 
-on the view, this would be legal. But in that case, the fact that Op 
-is overridden in the private part would be visible; package R would have 
-to be illegal if no overriding was in the private part.</span></div>
+<div class="Annotations">If this did not depend on the view, this would 
+be legal. But in that case, the fact that Op is overridden in the private 
+part would be visible; package R would have to be illegal if no overriding 
+was in the private part.</div>
 <div class="paranum"><a name="p4.f">4.f/3</a></div>
-<div class="Annotations"><span class="insert3">Note that this means that 
-whether an inherited subprogram is abstract or concrete depends on where 
-it inherited. In the case of Q, Q.Op in the visible part is abstract, 
-while Q.Op in the private part is concrete. That is, R is illegal since 
-it is an unrelated unit (and thus it cannot see the private part), but 
-if R had been a private child of Q, it would have been legal.</span> 
-</div>
+<div class="Annotations">Note that this means that whether an inherited 
+subprogram is abstract or concrete depends on where it inherited. In 
+the case of Q, Q.Op in the visible part is abstract, while Q.Op in the 
+private part is concrete. That is, R is illegal since it is an unrelated 
+unit (and thus it cannot see the private part), but if R had been a private 
+child of Q, it would have been legal.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00251.TXT">AI95-00251-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00334.TXT">AI95-00334-01</A></I>} 
@@ -223,7 +217,7 @@ or, in the case of a private extension inheriting a <span class="insert4">nonabs
 </span>function with a controlling result, have a full type that is a 
 null extension[; for a type declared in the visible part of a package, 
 the overriding may be either in the visible or the private part]. Such 
-a subprogram is said to <I>require overriding</I>.<A NAME="I2373"></A> 
+a subprogram is said to <I>require overriding</I>.<A NAME="I2356"></A> 
 However, if the type is a generic formal type, the subprogram need not 
 be overridden for the formal type itself; [a nonabstract version will 
 necessarily be provided by the actual type.]&nbsp;</div>
@@ -308,12 +302,11 @@ or a generic formal object of mode <B>in</B>, shall not be abstract.
 The type of the target of an assignment operation (see <A HREF="AA-5-2.html">5.2</A>) 
 shall not be abstract. The type of a component shall not be abstract. 
 If the result type of a function is abstract, then the function shall 
-be abstract.<span class="insert3">&nbsp;If a function has an access result 
-type designating an abstract type, then the function shall be abstract. 
-The type denoted by a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">return_subtype_indication</A></SPAN> 
+be abstract. If a function has an access result type designating an abstract 
+type, then the function shall be abstract. The type denoted by a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">return_subtype_indication</A></SPAN> 
 (see <A HREF="AA-6-5.html">6.5</A>) shall not be abstract. A generic 
 function shall not have an abstract result type or an access result type 
-designating an abstract type.</span>&nbsp;</div>
+designating an abstract type.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This ensures that values of an 
 abstract type cannot be created, which ensures that a dispatching call 
@@ -325,13 +318,13 @@ Generic formal objects of mode <B>in out</B> are like renamings; therefore,
 abstract types are OK for them, though probably not terribly useful.</div>
 <div class="paranum"><a name="p8.c">8.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
-<span class="insert3">Generic functions returning a formal abstract type 
-are illegal because any instance would have to be instantiated with a 
-nonabstract type in order to avoid violating the function rule (generic 
-functions cannot be declared abstract). But that would be an implied 
-contract; it would be better for the contract to be explicit by the formal 
-type not being declared abstract. Moreover, the implied contract does 
-not add any capability.</span>&nbsp;</div>
+Generic functions returning a formal abstract type are illegal because 
+any instance would have to be instantiated with a nonabstract type in 
+order to avoid violating the function rule (generic functions cannot 
+be declared abstract). But that would be an implied contract; it would 
+be better for the contract to be explicit by the formal type not being 
+declared abstract. Moreover, the implied contract does not add any capability. 
+</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">If a partial view is not abstract, the corresponding 
 full view shall not be abstract. If a generic formal type is abstract, 
@@ -382,14 +375,14 @@ to P (4) is the one which is not overridden, that is, P (3): the overridden
 operation P (2) does not &ldquo;reemerge&rdquo;. Therefore, the instantiation 
 is illegal.&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
 For an abstract type declared in a visible part, an abstract primitive 
 subprogram shall not be declared in the private part, unless it is overriding 
 an abstract subprogram implicitly declared in the visible part. For a 
 tagged type declared in a visible part, a primitive function with a controlling 
-result<span class="insert3">&nbsp;or a controlling access result</span> shall 
-not be declared in the private part, unless it is overriding a function 
-implicitly declared in the visible part.&nbsp;</div>
+result or a controlling access result shall not be declared in the private 
+part, unless it is overriding a function implicitly declared in the visible 
+part.&nbsp;</div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>The 
 &ldquo;visible part&rdquo; could be that of a package or a generic package. 
@@ -415,7 +408,7 @@ one; the private part should override P with a nonabstract version. On
 the other hand, if the P were abstract for both T1 and T2, the example 
 would be legal as is.&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 A generic actual subprogram shall not be an abstract subprogram unless 
 the generic formal subprogram is declared by a <SPAN Class="swiss"><A HREF="AA-12-6.html#S0298">formal_abstract_subprogram_declaration</A></SPAN>. 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -435,8 +428,8 @@ Of course, an abstract formal subprogram's actual subprogram can be abstract.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
-<A NAME="I2374"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00348.TXT">AI95-00348-01</A></I>} 
+<A NAME="I2357"></A>The elaboration of an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p12">12</a></div>
@@ -506,7 +499,7 @@ but then clients of the package would not have visibility to T.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p16.d">16.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00391.TXT">AI95-00391-01</A></I>} 
-<A NAME="I2375"></A>It is not necessary to override functions with a 
+<A NAME="I2358"></A>It is not necessary to override functions with a 
 controlling result for a null extension. This makes it easier to derive 
 a tagged type to complete a private type.&nbsp;</div>
 
@@ -536,39 +529,38 @@ to understand.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p16.j">16.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
-<span class="insert3"><A NAME="I2376"></A><B>Correction:</B> Added rules 
-to eliminate holes with controlling access results and generic functions 
-that return abstract types. While these changes are technically incompatible, 
-it is unlikely that they could be used in a program without violating 
-some other rule of the use of abstract types.</span></div>
+<A NAME="I2359"></A><B>Correction:</B> Added rules to eliminate holes 
+with controlling access results and generic functions that return abstract 
+types. While these changes are technically incompatible, it is unlikely 
+that they could be used in a program without violating some other rule 
+of the use of abstract types.</div>
 <div class="paranum"><a name="p16.k">16.k/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0097-1.TXT">AI05-0097-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Corrected a minor glitch having 
-to do with abstract null extensions. The Ada 2005 rule allowed such extensions 
-to inherit concrete operations in some rare cases. It is unlikely that 
-these cases exist in user code.</span>&nbsp;</div>
+<B>Correction:</B> Corrected a minor glitch having to do with abstract 
+null extensions. The Ada 2005 rule allowed such extensions to inherit 
+concrete operations in some rare cases. It is unlikely that these cases 
+exist in user code.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p16.l">16.l/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I2377"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
+<A NAME="I2360"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0307">aspect_specification</A></SPAN> 
 can be used in an <SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN>. 
-This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p16.m">16.m/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0198-1.TXT">AI05-0198-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Clarified that the predefined 
-operator corresponding to an inherited abstract operator is also abstract. 
-The Ada 2005 rules caused the predefined operator and the inherited operator 
-to override each other, which is weird. But the effect is the same either 
-way (the operator is not considered for resolution).</span></div>
+<B>Correction:</B> Clarified that the predefined operator corresponding 
+to an inherited abstract operator is also abstract. The Ada 2005 rules 
+caused the predefined operator and the inherited operator to override 
+each other, which is weird. But the effect is the same either way (the 
+operator is not considered for resolution).</div>
 <div class="paranum"><a name="p16.n">16.n/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0203-1.TXT">AI05-0203-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added wording to disallow abstract 
-return objects. These were illegal in Ada 2005 by other rules; the extension 
-to support class-wide type better opened a hole which has now been plugged.</span> 
-</div>
+<B>Correction:</B> Added wording to disallow abstract return objects. 
+These were illegal in Ada 2005 by other rules; the extension to support 
+class-wide type better opened a hole which has now been plugged.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

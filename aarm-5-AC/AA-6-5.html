@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,54 +45,54 @@
 <H1>6.5 Return Statements</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-A <span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-(collectively called a <I>return statement</I>) <A NAME="I3967"></A></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">return_statement</A></SPAN></span> 
-is used to complete the execution of the innermost enclosing <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>, 
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN>. 
+A <span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+(collectively called a <I>return statement</I>) <A NAME="I4093"></A></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">return_statement</A></SPAN></span> 
+is used to complete the execution of the innermost enclosing <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">simple_return_statement</SPAN></span><SPAN Class="swiss"></SPAN><span class="delete2"><SPAN Class="swiss">&nbsp;return_statement</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3968"></A><A NAME="S0186"></A><A NAME="S0187"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>return</B>&nbsp;[<A NAME="I3969"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>];</div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">simple_return_statement</SPAN></span><SPAN Class="swiss"></SPAN><span class="delete2"><SPAN Class="swiss">&nbsp;return_statement</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4094"></A><A NAME="S0200"></A><A NAME="S0201"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>return</B>&nbsp;[<A NAME="I4095"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>];</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">extended_return_object_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3970"></A><A NAME="S0188"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3971"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>][<B>constant</B>]&nbsp;<A NAME="I3972"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3973"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]</span></div>
+<SPAN Class="swiss"></SPAN><span class="insert3"><SPAN Class="swiss">extended_return_object_declaration</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4096"></A><A NAME="S0202"></A><span class="insert3"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4097"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;[<B>aliased</B>][<B>constant</B>]&nbsp;<A NAME="I4098"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I4099"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]</span></div>
 <div class="paranum"><a name="p2.2">2.2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0053-1.TXT">AI05-0053-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">extended_return_statement</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3974"></A><A NAME="S0189"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;</span><span class="insert3"><A NAME="I3975"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I3976"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">&nbsp;defining_identifier</A></SPAN>&nbsp;:&nbsp;[</span></span><span class="insert3"><span class="delete3"><B>&nbsp;constant</B></span></span><span class="insert2"><span class="delete3"><B>&nbsp;aliased</B>]&nbsp;<A NAME="I3977"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I3978"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]</span></span><span class="insert2">&nbsp;[<B>do</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I3979"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN><BR>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">extended_return_statement</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4100"></A><A NAME="S0203"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;</span><span class="insert3"><A NAME="I4101"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete3"><A NAME="I4102"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">&nbsp;defining_identifier</A></SPAN>&nbsp;:&nbsp;[</span></span><span class="insert3"><span class="delete3"><B>&nbsp;constant</B></span></span><span class="insert2"><span class="delete3"><B>&nbsp;aliased</B>]&nbsp;<A NAME="I4103"></A><SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I4104"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]</span></span><span class="insert2">&nbsp;[<B>do</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4105"></A><SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>return</B>];</span></div>
 <div class="paranum"><a name="p2.3">2.3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">return_subtype_indication</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I3980"></A><A NAME="S0190"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><A NAME="I3981"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I3982"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span></div>
+<SPAN Class="swiss"></SPAN><span class="insert2"><SPAN Class="swiss">return_subtype_indication</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4106"></A><A NAME="S0204"></A><span class="insert2"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert2"><A NAME="I4107"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>&nbsp;|&nbsp;<A NAME="I4108"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
-<span class="insert2"><A NAME="I3983"></A>The <I>result subtype</I> of 
+<span class="insert2"><A NAME="I4109"></A>The <I>result subtype</I> of 
 a function is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 or defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
-after the reserved word <B>return</B> in the profile of the function.<A NAME="I3984"></A></span><span class="delete2"><A NAME="I3985"></A> 
-The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-if any, of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">return_statement</A></SPAN> 
-is called the <I>return expression</I>. <A NAME="I3986"></A>The <I>result 
+after the reserved word <B>return</B> in the profile of the function.<A NAME="I4110"></A></span><span class="delete2"><A NAME="I4111"></A> 
+The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+if any, of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">return_statement</A></SPAN> 
+is called the <I>return expression</I>. <A NAME="I4112"></A>The <I>result 
 subtype</I> of a function is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-after the reserved word <B>return</B> in the profile of the function.<A NAME="I3987"></A></span> 
-The expected type for <span class="insert2">the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-if any, of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN></span><span class="delete2">&nbsp;a 
-return expression</span> is the result type of the corresponding function.<span class="insert2">&nbsp;</span><span class="insert5"><A NAME="I3988"></A></span><span class="insert2"></span><span class="insert2"><span class="delete5"><A NAME="I3989"></A></span></span><span class="insert2">The 
-expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an&nbsp;</span><span class="insert5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">&nbsp;extended_return_statement</A></SPAN></span></span><span class="insert2">&nbsp;is that of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>.</span> 
+after the reserved word <B>return</B> in the profile of the function.<A NAME="I4113"></A></span> 
+The expected type for <span class="insert2">the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+if any, of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN></span><span class="delete2">&nbsp;a 
+return expression</span> is the result type of the corresponding function.<span class="insert2">&nbsp;</span><span class="insert5"><A NAME="I4114"></A></span><span class="insert2"></span><span class="insert2"><span class="delete5"><A NAME="I4115"></A></span></span><span class="insert2">The 
+expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an&nbsp;</span><span class="insert5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">&nbsp;extended_return_statement</A></SPAN></span></span><span class="insert2">&nbsp;is that of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The same applies to generic 
@@ -101,14 +101,14 @@ functions.&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><A NAME="I3990"></A></span><span class="delete2"><A NAME="I3991"></A></span>A 
-<span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+<span class="insert2"><A NAME="I4116"></A></span><span class="delete2"><A NAME="I4117"></A></span>A 
+<span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 shall be within a callable construct, and it <I>applies to</I> the innermost 
-<span class="insert2">callable construct or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+<span class="insert2">callable construct or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
 that contains it</span><span class="delete2">&nbsp;one</span>. A <span class="insert2">return 
-statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 shall not be within a body that is within the construct to which the 
-<span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+<span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 applies.</div>
 <div class="paranum"><a name="p4.a">4.a/4</a></div>
 <div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0089-1.TXT">AI12-0089-1</A></I>} 
@@ -121,35 +121,35 @@ subprogram is a callable construct, but not a generic subprogram itself.)</span>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
 A function body shall contain at least one <span class="insert2">return 
-statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
-that applies to the function body, unless the function contains <SPAN Class="swiss"><A HREF="AA-13-8.html#S0321">code_statement</A></SPAN>s. 
-A <span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
-shall include <span class="insert2">an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></span><span class="delete2">&nbsp;a 
-return expression</span> if and only if it applies to a function body.<span class="insert2">&nbsp;An <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-shall apply to a function body.</span><span class="insert3">&nbsp;An&nbsp;</span><span class="insert5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">&nbsp;extended_return_statement</A></SPAN></span></span><span class="insert3">&nbsp;with the reserved word <B>constant</B> shall include an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>.</span></div>
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
+that applies to the function body, unless the function contains <SPAN Class="swiss"><A HREF="AA-13-8.html#S0335">code_statement</A></SPAN>s. 
+A <span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
+shall include <span class="insert2">an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></span><span class="delete2">&nbsp;a 
+return expression</span> if and only if it applies to a function body.<span class="insert2">&nbsp;An <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+shall apply to a function body.</span><span class="insert3">&nbsp;An&nbsp;</span><span class="insert5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN></span><span class="insert3"></span><span class="insert3"><span class="delete5"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">&nbsp;extended_return_statement</A></SPAN></span></span><span class="insert3">&nbsp;with the reserved word <B>constant</B> shall include an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p5.a">5.a/4</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0022-1.TXT">AI12-0022-1</A></I>} 
 The requirement that a function body has to have at least one <span class="insert2">return 
-statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 is a &ldquo;helpful&rdquo; restriction. There <span class="insert2">has</span><span class="delete2">&nbsp;was</span> 
 been some interest in lifting this restriction, or allowing a raise statement 
-to substitute for the <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span>. 
+to substitute for the <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span>. 
 However, there was enough interest in leaving it as is that we decided 
 not to change it.<span class="insert4">&nbsp;Note that for Ada 2012, Corrigendum 
-1, a return statement whose expression is a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
-can be given in <I>any</I> function body (the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+1, a return statement whose expression is a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
+can be given in <I>any</I> function body (the <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 will match any type), so there is much less need to eliminate this rule.</span> 
 </div>
 <div class="paranum"><a name="p5.b">5.b/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2">A return statement can apply to an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
-so a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-without an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-can be given in one. However, neither <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-nor an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-can be given inside an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+<span class="insert2">A return statement can apply to an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
+so a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+without an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+can be given in one. However, neither <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+nor an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+can be given inside an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
 as they must apply (directly) to a function body.</span></div>
 <div class="paranum"><a name="p5.b.1">5.b.1/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0089-1.TXT">AI12-0089-1</A></I>} 
@@ -159,13 +159,13 @@ to generic function bodies as well as non-generic function bodies. This
 is true even though a generic function is not a function.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.1">5.1/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
-<span class="insert5">The <I></I><SPAN Class="swiss"><I><A HREF="AA-4-4.html#S0118">expression</A></I></SPAN><I>&nbsp;of an&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-6-5.html#S0189">extended_return_statement</A></I></SPAN><I></I> 
-is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>.<A NAME="I3992"></A></span></div>
+<span class="insert5">The <I></I><SPAN Class="swiss"><I><A HREF="AA-4-4.html#S0122">expression</A></I></SPAN><I>&nbsp;of an&nbsp;</I><SPAN Class="swiss"><I><A HREF="AA-6-5.html#S0203">extended_return_statement</A></I></SPAN><I></I> 
+is the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>.<A NAME="I4118"></A></span></div>
 <div class="paranum"><a name="p5.2">5.2/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2">For an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+<span class="insert2">For an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
 that applies to a function body:</span></div>
 <div class="paranum"><a name="p5.3">5.3/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
@@ -173,7 +173,7 @@ that applies to a function body:</span></div>
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0103-1.TXT">AI05-0103-1</A></I>} 
 <span class="insert2">If the result subtype of the function is defined 
 by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN>. 
 The type of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 shall be</span><span class="insert3">&nbsp;covered by</span><span class="insert2">&nbsp;the result type of the function.&nbsp;</span><span class="insert3">The</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;If 
@@ -183,15 +183,15 @@ result subtype of the function; if the result type of the function is
 elementary, the two subtypes</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;also 
 be constrained and</span></span><span class="insert2">&nbsp;shall statically 
 match</span><span class="insert2"><span class="delete3">&nbsp;this result 
-subtype</span></span><span class="insert2">.<A NAME="I3993"></A> If the 
+subtype</span></span><span class="insert2">.<A NAME="I4119"></A> If the 
 result subtype of the function is&nbsp;</span><span class="insert3">indefinite</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;unconstrained</span></span><span class="insert2">, 
 then the subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-shall be a definite subtype, or there shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>.</span></div>
+shall be a definite subtype, or there shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.</span></div>
 <div class="paranum"><a name="p5.4">5.4/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="insert2">If the result subtype of the function is defined 
 by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 shall be an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
 The subtype defined by the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 shall statically match the result subtype of the function. [The accessibility 
@@ -205,14 +205,14 @@ is defined in the Heart of Darkness (aka <A HREF="AA-3-10-2.html">3.10.2</A>).</
 <div class="paranum"><a name="p5.5">5.5/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
 <span class="insert3">If the result subtype of the function is class-wide, 
-the accessibility level of the type of the subtype defined by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+the accessibility level of the type of the subtype defined by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 shall not be statically deeper than that of the master that elaborated 
 the function body.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.b.3">5.b.3/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>In this 
-case, the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+case, the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 could be a specific type initialized by default; in that case there is 
-no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 to check.</span>&nbsp;</div>
 <div class="paranum"><a name="p5.6">5.6/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
@@ -223,18 +223,18 @@ body:</span></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
 <span class="insert2">[If the result subtype of the function is limited, 
-then the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+then the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of the return statement (if any) shall&nbsp;</span><span class="insert3">meet 
 the restrictions described in <A HREF="AA-7-5.html">7.5</A></span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;be 
 an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
-a function call (or equivalent use of an operator), or a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+a function call (or equivalent use of an operator), or a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 or parenthesized expression whose operand is one of these</span></span><span class="insert2">.]</span> 
 </div>
 <div class="paranum"><a name="p5.c">5.c/3</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0188-1.TXT">AI05-0188-1</A></I>} 
 <span class="delete3"></span><span class="insert2"><span class="delete3">In 
-other words, if limited, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+other words, if limited, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 must produce a &ldquo;new&rdquo; object, rather than being the name of 
 a preexisting object (which would imply copying).</span></span><span class="delete3"></span> 
 </div>
@@ -243,14 +243,14 @@ a preexisting object (which would imply copying).</span></span><span class="dele
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
 <span class="insert2">If the result subtype of the function is class-wide, 
-the accessibility level of the type of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+the accessibility level of the type of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 </span><span class="insert3">(if any)&nbsp;</span><span class="insert2">of 
 the return statement shall not be statically deeper than that of the 
 master that elaborated the function body.</span><span class="insert2"><span class="delete3">&nbsp;If the result subtype has one or more unconstrained access discriminants, 
 the accessibility level of the anonymous access type of each access discriminant, 
-as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-or the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>, 
+as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN>, 
 shall not be statically deeper than that of the master that elaborated 
 the function body.</span></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p5.d">5.d/4</a></div>
@@ -259,22 +259,22 @@ the function body.</span></span><span class="insert2"></span></div>
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 <span class="insert2"></span><span class="insert3">If</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;We 
 know that if</span></span><span class="insert2">&nbsp;the result type is&nbsp;</span><span class="insert4">class-wide</span><span class="insert2"></span><span class="insert2"><span class="delete4">&nbsp;class 
-wide</span></span><span class="insert2">, then there must be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+wide</span></span><span class="insert2">, then there must be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of the return statement</span><span class="insert3">&nbsp;unless this is an 
-<SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-whose <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+whose <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 is a specific type. We have a separate rule to cover that case. Note 
-that if an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-has an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+that if an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+has an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 then both this rule and the next one must be satisfied</span><span class="insert2"></span><span class="insert2"><span class="delete3">. 
-Similarly, if the result subtype is unconstrained, then either the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
-(if any) is constrained, or there must be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></span></span><span class="insert2">.</span> 
+Similarly, if the result subtype is unconstrained, then either the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
+(if any) is constrained, or there must be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></span></span><span class="insert2">.</span> 
 </div>
 <div class="paranum"><a name="p5.9">5.9/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0051-1.TXT">AI05-0051-1</A></I>} 
-<span class="insert3">If the subtype determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-or by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+<span class="insert3">If the subtype determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+or by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 has one or more access discriminants, the accessibility level of the 
 anonymous access type of each access discriminant shall not be statically 
 deeper than that of the master that elaborated the function body.</span></div>
@@ -287,7 +287,7 @@ for a class-wide type).</span>&nbsp;</div>
 <div class="paranum"><a name="p5.10">5.10/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
 <span class="insert3">If the keyword <B>aliased</B> is present in an 
-<SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN>, 
+<SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN>, 
 the type of the extended return object shall be immutably limited.</span> 
 </div>
 
@@ -296,9 +296,9 @@ the type of the extended return object shall be immutably limited.</span>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
-<span class="insert2"><A NAME="I3994"></A>Within an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+<span class="insert2"><A NAME="I4120"></A>Within an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
 the <I>return object</I> is declared with the given <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>, 
-with the nominal subtype defined by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN>.</span><span class="insert3">&nbsp;An <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+with the nominal subtype defined by the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN>.</span><span class="insert3">&nbsp;An <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
 with the reserved word <B>constant</B> is a full constant declaration 
 that declares the return object to be a constant object.</span><span class="insert2"></span> 
 </div>
@@ -308,32 +308,32 @@ that declares the return object to be a constant object.</span><span class="inse
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
-<span class="insert2"><A NAME="I3995"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
+<span class="insert2"><A NAME="I4121"></A>For the execution of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 is elaborated. This creates the nominal subtype of the return object. 
-If there is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+If there is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 it is evaluated and converted to the nominal subtype (which might raise 
-Constraint_Error &mdash; see <A HREF="AA-4-6.html">4.6</A><A NAME="I3996"></A>); 
+Constraint_Error &mdash; see <A HREF="AA-4-6.html">4.6</A><A NAME="I4122"></A>); 
 the return object is created and the converted value is assigned to the 
 return object. Otherwise, the return object is created and initialized 
 by default as for a stand-alone object of its nominal subtype (see <A HREF="AA-3-3-1.html">3.3.1</A>). 
 If the nominal subtype is indefinite, the return object is constrained 
-by its initial value.<A NAME="I3997"></A><A NAME="I3998"></A></span><span class="insert3">&nbsp;A check is made that the value of the return object belongs to the function 
-result subtype. Constraint_Error is raised if this check fails.<A NAME="I3999"></A> 
-<A NAME="I4000"></A><A NAME="I4001"></A></span><span class="insert2"></span></div>
+by its initial value.<A NAME="I4123"></A><A NAME="I4124"></A></span><span class="insert3">&nbsp;A check is made that the value of the return object belongs to the function 
+result subtype. Constraint_Error is raised if this check fails.<A NAME="I4125"></A> 
+<A NAME="I4126"></A><A NAME="I4127"></A></span><span class="insert2"></span></div>
 <div class="paranum"><a name="p5.e">5.e/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>If 
 the result type is controlled or has a controlled part, appropriate calls 
-on Initialize or Adjust are performed prior to executing the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>, 
+on Initialize or Adjust are performed prior to executing the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>, 
 except when the initial expression is an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 (which requires build-in-place with no call on Adjust).</span></div>
 <div class="paranum"><a name="p5.f">5.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 <span class="insert2">If the return statement is left without resulting 
-in a return (for example, due to an exception propagated from the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>, 
-or a goto out of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>), 
+in a return (for example, due to an exception propagated from the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>, 
+or a goto out of the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>), 
 </span><span class="insert3">if&nbsp;</span><span class="insert2">the return 
 object&nbsp;</span><span class="insert3">has been created, it&nbsp;</span><span class="insert2">is 
 finalized prior to leaving the return statement.</span><span class="insert3">&nbsp;If it has not been created when the return statement is left, it is not 
@@ -347,12 +347,12 @@ either the subtypes have to match or the function's subtype is unconstrained
 and needs no checking.</span>&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><A NAME="I4002"></A></span><span class="delete2"><A NAME="I4003"></A></span>For 
-the execution of a <span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span>, 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<span class="insert2"><A NAME="I4128"></A></span><span class="delete2"><A NAME="I4129"></A></span>For 
+the execution of a <span class="insert2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 (if any) is first evaluated<span class="insert2">,</span><span class="delete2">&nbsp;and</span> converted to the result subtype<span class="insert2">, and 
-then is assigned to the anonymous <I>return object</I>. <A NAME="I4004"></A></span><span class="delete2">.</span> 
-<A NAME="I4005"></A></div>
+then is assigned to the anonymous <I>return object</I>. <A NAME="I4130"></A></span><span class="delete2">.</span> 
+<A NAME="I4131"></A></div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The conversion might raise 
 Constraint_Error &mdash; (see <A HREF="AA-4-6.html">4.6</A>).&nbsp;</div>
@@ -363,7 +363,7 @@ Constraint_Error &mdash; (see <A HREF="AA-4-6.html">4.6</A>).&nbsp;</div>
 the activation of those tasks does not occur until after the function 
 returns (see <A HREF="AA-9-2.html">9.2</A>).]</span><span class="delete2">&nbsp;If 
 the result type is class-wide, then the tag of the result is the tag 
-of the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>.</span> 
+of the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Proof:&nbsp;</B>This is 
@@ -387,23 +387,23 @@ used to initialize part of a declared object.</span>&nbsp;</div>
 a function&nbsp;</span>is a specific tagged type<span class="insert2">, the 
 tag of the return object is that of the result type. If the result type 
 is class-wide, the tag of the return object is that of&nbsp;</span><span class="insert4">the 
-value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-unless the return object is defined by an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+unless the return object is defined by an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 that is specific, in which case it is that of&nbsp;</span><span class="insert2"></span><span class="insert3">the 
 type of the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete4"></span></span><span class="insert3"><span class="delete4">&nbsp;if it is specific, or otherwise that of&nbsp;</span></span><span class="insert2"><span class="delete4">the 
-value of the&nbsp;</span></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN></span></span><span class="insert2"><span class="delete4"></span></span><span class="insert2"><span class="delete3">&nbsp;expression</span></span><span class="insert2"><span class="delete4"></span></span><span class="insert2">. 
+value of the&nbsp;</span></span><span class="insert3"><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN></span></span><span class="insert2"><span class="delete4"></span></span><span class="insert2"><span class="delete3">&nbsp;expression</span></span><span class="insert2"><span class="delete4"></span></span><span class="insert2">. 
 A check is made that the&nbsp;</span><span class="insert3">master</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;accessibility 
 level</span></span><span class="insert2">&nbsp;of the type identified by the 
 tag of the result&nbsp;</span><span class="insert3">includes the elaboration</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;is 
 not deeper than that</span></span><span class="insert2">&nbsp;of the master 
 that elaborated the function body. If this check fails, Program_Error 
-is raised.<A NAME="I4006"></A> <A NAME="I4007"></A><A NAME="I4008"></A></span><span class="delete2">:</span></div>
+is raised.<A NAME="I4132"></A> <A NAME="I4133"></A><A NAME="I4134"></A></span><span class="delete2">:</span></div>
 <div class="paranum"><a name="p8.a">8.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="insert2">The first sentence is true even if the tag of the 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is different, which could happen if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is different, which could happen if the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 were a view conversion or a dereference of an access value. Note that 
 for a limited type, because of the restriction to <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 and function calls (and no conversions), the tag will already match</span>. 
@@ -431,22 +431,22 @@ to it from the accept statement, and this object was itself a parameter
 to the accept statement.</span>&nbsp;</div>
 <div class="paranum"><a name="p8.d.1">8.d.1/4</a></div>
 <div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0097-1.TXT">AI12-0097-1</A></I>} 
-<span class="insert4">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-here is the return expression if the return statement is a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>, 
-and the initializing expression of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
-if the return statement is an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-(ignoring any inner <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>s, 
-which necessarily cannot have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-and any other <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>s 
-inside of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>).</span> 
+<span class="insert4">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+here is the return expression if the return statement is a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN>, 
+and the initializing expression of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN> 
+if the return statement is an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+(ignoring any inner <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN>s, 
+which necessarily cannot have an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+and any other <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>s 
+inside of the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>).</span> 
 </div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0073-1.TXT">AI05-0073-1</A></I>} 
-<span class="insert3"><A NAME="I4009"></A><A NAME="I4010"></A>If the 
+<span class="insert3"><A NAME="I4135"></A><A NAME="I4136"></A>If the 
 result subtype of the function is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 designating a specific tagged type <I>T</I>, a check is made that the 
 result value is null or the tag of the object designated by the result 
-value identifies <I>T</I>. <A NAME="I4011"></A>Constraint_Error is raised 
+value identifies <I>T</I>. <A NAME="I4137"></A>Constraint_Error is raised 
 if this check fails.</span>&nbsp;</div>
 <div class="paranum"><a name="p8.e">8.e/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>This check 
@@ -459,9 +459,9 @@ assumed by the dispatching rules.</span>&nbsp;</div>
 9 through 20 were deleted.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="delete2"><A NAME="I4012"></A><A NAME="I4013"></A>If it is 
+<span class="delete2"><A NAME="I4138"></A><A NAME="I4139"></A>If it is 
 limited, then a check is made that the tag of the value of the return 
-expression identifies the result type. <A NAME="I4014"></A>Constraint_Error 
+expression identifies the result type. <A NAME="I4140"></A>Constraint_Error 
 is raised if this check fails.</span></div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
@@ -481,7 +481,7 @@ amount of space to hold the value being returned (assuming there are
 no discriminants).</span>&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="delete2"><A NAME="I4015"></A>A type is a <I>return-by-reference</I> 
+<span class="delete2"><A NAME="I4141"></A>A type is a <I>return-by-reference</I> 
 type if it is a descendant of one of the following:</span>&nbsp;</div>
 <div class="paranum"><a name="p12">12/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
@@ -509,7 +509,7 @@ to minimize upward incompatibilities relating to return-by-reference.</span>
 </div>
 <div class="paranum"><a name="p17">17/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="delete2"><A NAME="I4016"></A><A NAME="I4017"></A>If the 
+<span class="delete2"><A NAME="I4142"></A><A NAME="I4143"></A>If the 
 result type is a return-by-reference type, then a check is made that 
 the return expression is one of the following:</span>&nbsp;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
@@ -525,11 +525,11 @@ parenthetical remark &quot;(or a value with an associated object, see
 </div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="delete2">a parenthesized expression or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<span class="delete2">a parenthesized expression or <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 whose operand is one of these kinds of expressions.</span></div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="delete2"><A NAME="I4018"></A>The exception Program_Error 
+<span class="delete2"><A NAME="I4144"></A>The exception Program_Error 
 is raised if this check fails.</span>&nbsp;</div>
 <div class="paranum"><a name="p20.a">20.a/2</a></div>
 <div class="Annotations"><span class="delete2"><B>Discussion:&nbsp;</B>Compare 
@@ -540,7 +540,7 @@ types are all limited types except those that are limited only because
 of a limited private type with a nonlimited untagged full type.</span> 
 </div>
 <div class="paranum"><a name="p20.c">20.c/2</a></div>
-<div class="Annotations"><span class="delete2"><B>Reason:&nbsp;</B><A NAME="I4019"></A>This 
+<div class="Annotations"><span class="delete2"><B>Reason:&nbsp;</B><A NAME="I4145"></A>This 
 check can often be performed at compile time. It is defined to be a run-time 
 check to avoid generic contract model problems. In a future version of 
 the standard, we anticipate that function return of a local variable 
@@ -557,19 +557,19 @@ result subtype</span></span><span class="insert2">&nbsp;of a function&nbsp;</spa
 coextension thereof)&nbsp;</span><span class="insert2">has one or more&nbsp;</span><span class="insert2"><span class="delete3">unconstrained 
 </span></span><span class="insert2">access discriminants</span><span class="insert3">&nbsp;whose value is not constrained by the result subtype of the function</span><span class="insert2">, 
 a check is made that the accessibility level of the anonymous access 
-type of each access discriminant, as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+type of each access discriminant, as determined by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 of the&nbsp;</span><span class="insert3">return statement</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;function</span></span><span class="insert2">, 
 is not deeper than&nbsp;</span><span class="insert3">the level of the master 
 of the call (see <A HREF="AA-3-10-2.html">3.10.2</A>)</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;that 
 of the master that elaborated the function body</span></span><span class="insert2">. 
-If this check fails, Program_Error is raised. <A NAME="I4020"></A><A NAME="I4021"></A><A NAME="I4022"></A></span><span class="delete2">For 
+If this check fails, Program_Error is raised. <A NAME="I4146"></A><A NAME="I4147"></A><A NAME="I4148"></A></span><span class="delete2">For 
 a function with a return-by-reference result type the result is returned 
 by reference; that is, the function call denotes a constant view of the 
-object associated with the value of the return expression. <A NAME="I4023"></A>For 
+object associated with the value of the return expression. <A NAME="I4149"></A>For 
 any other function, the result is returned by copy; that is, the converted 
 value is assigned into an anonymous constant created at the point of 
-the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">return_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">return_statement</A></SPAN>, 
 and the function call denotes that object.</span>&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
@@ -582,8 +582,8 @@ when the anonymous constant is finalized.</span>&nbsp;</div>
 <div class="Annotations"><span class="insert2"><B>Reason:&nbsp;</B>The check 
 prevents the returned object (for a nonlimited type) from outliving the 
 object designated by one of its discriminants. The check is made on the 
-values of the discriminants, which may come from the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
-(if constrained), or the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+values of the discriminants, which may come from the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
+(if constrained), or the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 but it is never necessary to check both.</span>&nbsp;</div>
 <div class="paranum"><a name="p21.c">21.c/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Implementation Note: 
@@ -616,8 +616,8 @@ descriptor.</span></div>
 case where the result object might have access discriminants that might 
 have subtypes with &quot;bad&quot; accessibility levels (as determined 
 by the rules of <A HREF="AA-3-10-2.html">3.10.2</A> for determining the 
-accessibility level of the type of an access discriminant in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+accessibility level of the type of an access discriminant in the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 of a return statement).</span></div>
 <div class="paranum"><a name="p21.f">21.f/3</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3">Thus, 
@@ -681,31 +681,31 @@ the aforementioned descriptor bit and conditionally raising Program_Error.</span
 <div class="paranum"><a name="p22">22/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0058-1.TXT">AI05-0058-1</A></I>} 
-<span class="insert2">For the execution of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
-the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN> 
-is executed. Within this <SPAN Class="swiss"><A HREF="AA-11-2.html#S0268">handled_sequence_of_statements</A></SPAN>, 
-the execution of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-that applies to the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-causes a transfer of control that completes the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>. 
-Upon completion of a return statement that applies to a callable construct</span><span class="insert3">&nbsp;by the normal completion of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-or by reaching the <B>end return</B> of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN></span><span class="insert2"></span><span class="delete2">&nbsp;Finally</span>, 
+<span class="insert2">For the execution of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN> 
+is executed. Within this <SPAN Class="swiss"><A HREF="AA-11-2.html#S0282">handled_sequence_of_statements</A></SPAN>, 
+the execution of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+that applies to the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+causes a transfer of control that completes the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>. 
+Upon completion of a return statement that applies to a callable construct</span><span class="insert3">&nbsp;by the normal completion of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+or by reaching the <B>end return</B> of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN></span><span class="insert2"></span><span class="delete2">&nbsp;Finally</span>, 
 a transfer of control is performed which completes the execution of the 
-callable construct<span class="delete2">&nbsp;to which the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">return_statement</A></SPAN> 
+callable construct<span class="delete2">&nbsp;to which the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">return_statement</A></SPAN> 
 applies</span>, and returns to the caller.</div>
 <div class="paranum"><a name="p22.a">22.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0058-1.TXT">AI05-0058-1</A></I>} 
-<span class="insert3">A transfer of control that completes an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+<span class="insert3">A transfer of control that completes an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
 (such as an exit or goto) does not cause a return to the caller unless 
-it is caused by <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
+it is caused by <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
 (that is, triggers the second sentence of this paragraph). The return 
-to the caller occurs for the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN> 
-that applies to an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-because the last sentence says &ldquo;the normal completion of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>&rdquo;, 
-which includes the one nested in the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>.</span> 
+to the caller occurs for the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN> 
+that applies to an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+because the last sentence says &ldquo;the normal completion of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN>&rdquo;, 
+which includes the one nested in the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2">In the case of a function, the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+<span class="insert2">In the case of a function, the <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 denotes a constant view of the return object.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
@@ -718,8 +718,8 @@ the result subtype of a function is unconstrained, and a call on the
 function is used to provide the initial value of an</span></span><span class="insert2">&nbsp;object with a constrained nominal subtype</span><span class="insert3">&nbsp;or used to initialize a return object that is built in place into such 
 an object:</span><span class="insert2"></span><span class="insert2"><span class="delete3">, 
 Constraint_Error may be raised at the point of the call (after abandoning 
-the execution of the function body) if, while elaborating the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
-or evaluating the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+the execution of the function body) if, while elaborating the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
+or evaluating the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a return statement that applies to the function body, it is determined 
 that the value of the result will violate the constraint of the subtype 
 of this object.</span></span><span class="insert2"></span></div>
@@ -764,10 +764,10 @@ in that case a return object can be created with the &ldquo;wrong&rdquo;
 discriminants and then changed to the &ldquo;right&rdquo; discriminants 
 later (but before returning). We don't want this case raising an exception 
 when the canonical semantics will not do so.</span><span class="delete3"></span><span class="insert2"><span class="delete3">&nbsp;This 
-permission is allowed during the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>, 
-because the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
-may be unconstrained and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+permission is allowed during the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>, 
+because the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
+may be unconstrained and the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 then would provide the constraints.</span></span><span class="delete3"></span></div>
 <div class="paranum"><a name="p24.c">24.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
@@ -794,8 +794,8 @@ permissions can be sidestepped by not building in place.</span></div>
 statements:</I>&nbsp;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<B>return</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;procedure&nbsp;body,&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN><SPAN Class="roman"><I>,</I></SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN><SPAN Class="roman"><I>,&nbsp;or&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="roman"><I>&nbsp;or&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0222">accept_statement</A></SPAN></span></div>
+<B>return</B>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;procedure&nbsp;body,&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN><SPAN Class="roman"><I>,</I></SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN><SPAN Class="roman"><I>,&nbsp;or&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN></span><span class="delete2"><SPAN Class="roman"><I>&nbsp;or&nbsp;</I></SPAN><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0236">accept_statement</A></SPAN></span></div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Examples"><B>return</B>&nbsp;Key_Value(Last_Index);&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;in&nbsp;a&nbsp;function&nbsp;body</I></SPAN></div>
 <div class="paranum"><a name="p28">28/2</a></div>
@@ -808,7 +808,7 @@ statements:</I>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 83</H4>
 <div class="paranum"><a name="p28.a">28.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I4024"></A>In Ada 95, if the result type of a function has a 
+<A NAME="I4150"></A>In Ada 95, if the result type of a function has a 
 part that is a task, then an attempt to return a local variable will 
 raise Program_Error. <span class="insert2">This is illegal in Ada 2005, 
 see below.&nbsp;</span>In Ada 83, if a function returns a local variable containing 
@@ -834,14 +834,14 @@ has been moved here from chapter 5, since it has mainly to do with subprograms.<
 This is necessary so that controlled types will work.</div>
 <div class="paranum"><a name="p28.e">28.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-We have clarified that a <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+We have clarified that a <span class="insert2">return statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 applies to a callable construct, not to a callable entity.</div>
 <div class="paranum"><a name="p28.f">28.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 There is no need to mention generics in the rules about where a <span class="insert2">return 
-statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0187">&nbsp;return_statement</A></SPAN></span> 
+statement</span><span class="delete2"><SPAN Class="swiss"><A HREF="AA-6-5.html#S0201">&nbsp;return_statement</A></SPAN></span> 
 can appear and what it applies to; the phrase &ldquo;body of a subprogram 
-or generic subprogram&rdquo; is syntactic, and refers exactly to &ldquo;<SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>&rdquo;. 
+or generic subprogram&rdquo; is syntactic, and refers exactly to &ldquo;<SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>&rdquo;. 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
@@ -849,7 +849,7 @@ or generic subprogram&rdquo; is syntactic, and refers exactly to &ldquo;<SPAN Cl
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-0416-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
-<span class="insert2"><A NAME="I4025"></A>Added an Implementation Permission 
+<span class="insert2"><A NAME="I4151"></A>Added an Implementation Permission 
 allowing early raising of Constraint_Error if the result cannot fit in 
 the ultimate object. This gives implementations more flexibility to do 
 built-in-place returns, and is essential for limited types (which cannot 
@@ -864,12 +864,12 @@ should be little practical impact.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p28.g">28.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><A NAME="I4026"></A> The entire business about 
-return-by-reference types has been dropped. Instead, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<span class="insert2"><A NAME="I4152"></A> The entire business about 
+return-by-reference types has been dropped. Instead, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a return statement of a limited type can only be an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN> 
 (see <A HREF="AA-7-5.html">7.5</A>). This means that returning a global 
-object or <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN>, 
+object or <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN>, 
 legal in Ada 95, is now illegal. Such functions can be converted to use 
 anonymous access return types by adding <B>access</B> in the function 
 definition and return statement, adding .<B>all</B> in uses, and adding 
@@ -885,7 +885,7 @@ limited types useful in more circumstances.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p28.i">28.i/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<span class="insert2"><A NAME="I4027"></A>The <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+<span class="insert2"><A NAME="I4153"></A>The <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
 is new. This provides a name for the object being returned, which reduces 
 the copying needed to return complex objects (including no copying at 
 all for limited objects). It also allows component-by-component construction 
@@ -899,8 +899,8 @@ return subtypes.</span></div>
 <div class="paranum"><a name="p28.k">28.k/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 <span class="insert2">The term &ldquo;return expression&rdquo; was dropped 
-because reviewers found it confusing when applied to the default <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>.</span></div>
+because reviewers found it confusing when applied to the default <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>.</span></div>
 <div class="paranum"><a name="p28.l">28.l/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
@@ -913,14 +913,14 @@ have been at the same level as the type of the object).</span></div>
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00416.TXT">AI95-00416-01</A></I>} 
 <span class="insert2">Added accessibility checks to return statements 
 for types with access discriminants. Since such types have to be limited 
-in Ada 95, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+in Ada 95, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a return statement would have been illegal in order for this check 
 to fail.</span>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p28.n">28.n/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0050-1.TXT">AI05-0050-1</A></I>} 
-<span class="insert3"><A NAME="I4028"></A><B>Correction:</B> The Implementation 
+<span class="insert3"><A NAME="I4154"></A><B>Correction:</B> The Implementation 
 Permission allowing early raising of Constraint_Error was modified to 
 remove the most common of these cases from the permission (returning 
 an object with mutable discriminants, where the return object is created 
@@ -954,7 +954,7 @@ the behavior that now raises an exception.</span>&nbsp;</div>
 <div class="paranum"><a name="p28.q">28.q/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0053-1.TXT">AI05-0053-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
-<span class="insert3"><A NAME="I4029"></A><B>Correction:</B> The <B>aliased</B> 
+<span class="insert3"><A NAME="I4155"></A><B>Correction:</B> The <B>aliased</B> 
 keyword can now only appear on extended return objects with an immutably 
 limited type. Other types would provide a way to get an aliased view 
 of an object that is not necessarily aliased, which would be very bad. 
@@ -969,7 +969,7 @@ matching for unconstrained access types in extended return statements.
 This disallows adding or omitting null exclusions, and adding access 
 constraints, in the declaration of the return object. While this is incompatible, 
 the incompatible cases in question are either useless (access constraints 
-&ndash; the constraint can be given on an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN> 
+&ndash; the constraint can be given on an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN> 
 if necessary, and still must be given there even if given on the return 
 object) or wrong (null exclusions &ndash; null could be returned from 
 a function declared to be null excluding), so we expect them to be extremely 
@@ -979,14 +979,14 @@ rare in practice.</span>&nbsp;</div>
 <div class="paranum"><a name="p28.s">28.s/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0015-1.TXT">AI05-0015-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0144-2.TXT">AI05-0144-2</A></I>} 
-<span class="insert3"><A NAME="I4030"></A>The return object of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
+<span class="insert3"><A NAME="I4156"></A>The return object of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
 can be declared constant; this works similarly to a constant object declaration.</span></div>
 <div class="paranum"><a name="p28.t">28.t/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0032-1.TXT">AI05-0032-1</A></I>} 
-<span class="insert3">Added wording to allow the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0190">return_subtype_indication</A></SPAN> 
+<span class="insert3">Added wording to allow the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0204">return_subtype_indication</A></SPAN> 
 to have a specific type if the return subtype of the function is class-wide. 
 Specifying the (specific) type of the return object is awkward without 
-this change, and this is consistent with the way <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>s 
+this change, and this is consistent with the way <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>s 
 work.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -997,13 +997,13 @@ tags since the masters may be for different tasks and thus incomparable.</span><
 <div class="paranum"><a name="p28.v">28.v/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0058-1.TXT">AI05-0058-1</A></I>} 
 <span class="insert3"><B>Correction:</B> Corrected the wording defining 
-returns for <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>s, 
+returns for <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>s, 
 since leaving by an exit or goto is considered &ldquo;normal&rdquo; completion 
 of the statement.</span></div>
 <div class="paranum"><a name="p28.w">28.w/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0205-1.TXT">AI05-0205-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0277-1.TXT">AI05-0277-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
+<span class="insert3"><B>Correction:</B> Added the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN> 
 to make other rules easier to write and eliminate the problem described 
 in AI05-0205-1.</span>&nbsp;</div>
 
@@ -1014,7 +1014,7 @@ in AI05-0205-1.</span>&nbsp;</div>
 it is clear where the tag of the return object comes from. While a literal 
 reading of the original Ada 2012 rule could have caused some weird results 
 (by using some nearby <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-to provide the tag in the case of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0186">simple_return_statement</A></SPAN>, 
+to provide the tag in the case of a <SPAN Class="swiss"><A HREF="AA-6-5.html#S0200">simple_return_statement</A></SPAN>, 
 such a reading would be so unlike the rest of the language that we do 
 not believe anyone would ever have thought it was intended. As such, 
 we do not believe any implementation ever did this wrong (at least because 
@@ -1022,12 +1022,12 @@ of the old wording), and thus do not document this as a possible inconsistency.<
 <div class="paranum"><a name="p28.y">28.y/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0173-1.TXT">AI12-0173-1</A></I>} 
 <span class="insert5"><B>Correction:</B> Added a definition of the term 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>. 
-That wording was commonly used before the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0188">extended_return_object_declaration</A></SPAN> 
-was split into a separate syntax production, leaving the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN> 
-without any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of its own. Moreover, the wording often just uses &ldquo;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>. 
+That wording was commonly used before the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0202">extended_return_object_declaration</A></SPAN> 
+was split into a separate syntax production, leaving the <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN> 
+without any <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of its own. Moreover, the wording often just uses &ldquo;<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 a return statement&rdquo; to cover both kinds of return statement. Changing 
 the wording in more than a dozen places was unappealing, and some of 
 the changes would be awkward to read, so we defined the term and letf 

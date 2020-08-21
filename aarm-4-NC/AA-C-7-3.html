@@ -15,13 +15,13 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -91,20 +91,20 @@ A handler is said to be <I>set</I> if it is associated with a nonnull
 value of type Termination_Handler, and <I>cleared</I> otherwise. When 
 a task is created, its specific handler and fall-back handler are cleared.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 The procedure Set_Dependents_Fallback_Handler changes the fall-back handler 
 for the calling task: if Handler is <B>null</B>, that fall-back handler 
 is cleared; otherwise, it is set to be Handler.<B>all</B>. If a fall-back 
 handler had previously been set it is replaced.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 The function Current_Task_Fallback_Handler returns the fall-back handler 
 that is currently set for the calling task, if one is set; otherwise, 
 it returns <B>null</B>.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 The procedure Set_Specific_Handler changes the specific handler for the 
 task identified by T: if Handler is <B>null</B>, that specific handler 
@@ -122,13 +122,13 @@ finalized is a Bounded (Run-Time) Error (see <A HREF="AA-9-4.html">9.4</A>).
 This might work in a particular implementation, but it cannot be depended 
 upon.&nbsp;</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 The function Specific_Handler returns the specific handler that is currently 
 set for the task identified by T, if one is set; otherwise, it returns 
 <B>null</B>.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 As part of the finalization of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">task_body</A></SPAN>, 
 after performing the actions specified in <A HREF="AA-7-6.html">7.6</A> 
 for finalization of a master, the specific handler for the task, if one 
@@ -137,18 +137,18 @@ a fall-back handler proceeds by recursively following the master relationship
 for the task. If a task is found whose fall-back handler is set, that 
 handler is executed; otherwise, no handler is executed.</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 For Set_Specific_Handler or Specific_Handler, Tasking_Error is raised 
 if the task identified by T has already terminated. Program_Error is 
 raised if the value of T is Ada.Task_Identification.Null_Task_Id.</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 An exception propagated from a handler that is invoked as part of the 
 termination of a task has no effect.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10266.TXT">AI95-00266-02</A></I>} 
 For a call of Set_Specific_Handler or Specific_Handler, if the task identified 
 by T no longer exists, the execution of the program is erroneous.&nbsp;</div>
 

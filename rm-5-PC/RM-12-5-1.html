@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -52,10 +50,10 @@ rooted at the ancestor type.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_private_type_definition</SPAN><A NAME="I5024"></A><A NAME="S0302"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B></div>
+<div class="Indented1"><SPAN Class="swiss">formal_private_type_definition</SPAN><A NAME="I5012"></A><A NAME="S0302"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B></div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">formal_derived_type_definition</SPAN><A NAME="I5025"></A><A NAME="S0303"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<A NAME="I5026"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[[<B>and</B>&nbsp;<A NAME="I5027"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]<B>with</B>&nbsp;<B>private</B>]</div>
+<div class="Indented1"><SPAN Class="swiss">formal_derived_type_definition</SPAN><A NAME="I5013"></A><A NAME="S0303"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<A NAME="I5014"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;[[<B>and</B>&nbsp;<A NAME="I5015"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]<B>with</B>&nbsp;<B>private</B>]</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
@@ -63,7 +61,7 @@ rooted at the ancestor type.&nbsp;</div>
 then it shall not include a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 for a discriminant.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal"><A NAME="I5028"></A><A NAME="I5029"></A>The <I>ancestor 
+<div class="Normal"><A NAME="I5016"></A><A NAME="I5017"></A>The <I>ancestor 
 subtype</I> of a formal derived type is the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-12-5-1.html#S0303">formal_derived_type_definition</A></SPAN>. 
 For a formal derived type declaration, the reserved words <B>with private</B> 
@@ -82,11 +80,10 @@ appears.</div>
 <div class="Normal">&nbsp;The actual type for a formal derived type shall 
 be a descendant of the ancestor type and every progenitor of the formal 
 type. If the formal type is nonlimited, the actual type shall be nonlimited. 
-<span class="insert4">The actual type for a formal derived type shall 
-be tagged if and only if the formal derived type is a private extension. 
-</span>If the reserved word <B>synchronized</B> appears in the declaration 
-of the formal derived type, the actual type shall be a synchronized tagged 
-type.&nbsp;</div>
+The actual type for a formal derived type shall be tagged if and only 
+if the formal derived type is a private extension. If the reserved word 
+<B>synchronized</B> appears in the declaration of the formal derived 
+type, the actual type shall be a synchronized tagged type.&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">If a formal private or derived subtype is definite, 
 then the actual subtype shall also be definite.&nbsp;</div>
@@ -129,17 +126,17 @@ of discriminants.</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">The subtype of each discriminant of the actual 
 type shall statically match the subtype of the corresponding discriminant 
-of the formal type. <A NAME="I5030"></A></div>
+of the formal type. <A NAME="I5018"></A></div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Normal">For a generic formal type with an <SPAN Class="swiss"><A HREF="RM-3-7.html#S0060">unknown_discriminant_part</A></SPAN>, 
 the actual may, but need not, have discriminants, and may be definite 
 or indefinite.</div>
 <div class="paranum"><a name="p15.1">15.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">When enforcing Legality Rules, 
-for the purposes of determining within a generic body whether a type 
-is unconstrained in any partial view, a discriminated subtype is considered 
-to have a constrained partial view if it is a descendant of an untagged 
-generic formal private or derived type.</span></div>
+<div class="Normal">&nbsp;&nbsp;When enforcing Legality Rules, for the purposes 
+of determining within a generic body whether a type is unconstrained 
+in any partial view, a discriminated subtype is considered to have a 
+constrained partial view if it is a descendant of an untagged generic 
+formal private or derived type.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p16">16/2</a></div>
@@ -192,7 +189,7 @@ S that denotes a formal indefinite subtype, the following attribute is
 defined:&nbsp;</div>
 <div class="paranum"><a name="p23">23/3</a></div>
 <div class="WideHanging-Term">S'Definite</div><div class="WideHanging-Body">
-<A NAME="I5031"></A><A NAME="I5032"></A>S'Definite yields True if the 
+<A NAME="I5019"></A><A NAME="I5020"></A>S'Definite yields True if the 
 actual subtype corresponding to S is definite; otherwise, it yields False. 
 The value of this attribute is of the predefined type Boolean.&nbsp;</div>
 
@@ -216,7 +213,7 @@ by the context of the call, according to the rules for tag-indeterminate
 calls (see <A HREF="RM-3-9-2.html">3.9.2</A> and <A HREF="RM-5-2.html">5.2</A>). 
 In the case where the tag would be statically determined to be that of 
 the formal type, the call raises Program_Error. If such a function is 
-renamed, any call on the renaming raises Program_Error. <A NAME="I5033"></A></div>
+renamed, any call on the renaming raises Program_Error. <A NAME="I5021"></A></div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p24">24/2</a></div>
 <div class="Notes" style="margin-bottom: 0.4em">9&nbsp;&nbsp;In accordance 

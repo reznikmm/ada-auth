@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 8.7em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,9 +39,8 @@
 <H1>D.5.1 Dynamic Priorities for Tasks</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-describes how the base priority of a task can be modified or queried 
-at run time.]&nbsp;</div>
+[This subclause describes how the base priority of a task can be modified 
+or queried at run time.]&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
@@ -53,14 +50,14 @@ library package exists:&nbsp;</div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
 <B>with</B>&nbsp;System;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;&nbsp;<SPAN Class="roman"><I>--&nbsp;See&nbsp;<A HREF="AA-C-7-1.html">C.7.1</A></I></SPAN><BR>
-<B>package</B>&nbsp;Ada.Dynamic_Priorities&nbsp;<B>is</B><A NAME="I8785"></A><BR>
+<B>package</B>&nbsp;Ada.Dynamic_Priorities&nbsp;<B>is</B><A NAME="I8586"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dynamic_Priorities);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8786"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8587"></A>Set_Priority(Priority&nbsp;:&nbsp;<B>in</B>&nbsp;System.Any_Priority;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8787"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8588"></A>Get_Priority&nbsp;(T&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;System.Any_Priority;</div>
 <div class="paranum"><a name="p6">6</a></div>
@@ -73,7 +70,7 @@ of the specified task to the specified Priority value. Set_Priority has
 no effect if the task is terminated.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The function Get_Priority returns T's current base 
-priority. <A NAME="I8788"></A>Tasking_Error is raised if the task is 
+priority. <A NAME="I8589"></A>Tasking_Error is raised if the task is 
 terminated.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>There is no harm in setting the 
@@ -92,10 +89,10 @@ Therefore, we make Get_Priority of a terminated task raise an exception;
 the implementation need not continue to store the priority of a task 
 that has terminated.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I8789"></A>Program_Error is raised by Set_Priority 
+<div class="Normal"><A NAME="I8590"></A>Program_Error is raised by Set_Priority 
 and Get_Priority if T is equal to Null_Task_Id.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
 On a system with a single processor, the setting of the base priority 
 of a task <I>T</I> to the new value occurs immediately at the first point 
 when <I>T</I> is outside the execution of a protected action.</div>
@@ -142,16 +139,16 @@ help, because one would normally want the third task to have high priority.
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 </div>
 <div class="paranum"><a name="p11.a">11.a/2</a></div>
 <div class="Annotations"></div>
-<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraph 
-11 was deleted.</I></SPAN></span>&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 11 was 
+deleted.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I8790"></A>If any subprogram in this package 
+<div class="Normal"><A NAME="I8591"></A>If any subprogram in this package 
 is called with a parameter T that specifies a task object that no longer 
 exists, the execution of the program is erroneous.&nbsp;</div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
@@ -163,7 +160,7 @@ exists, calling Get_Priority causes erroneous execution.&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p12.1">12.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
 On a multiprocessor, the implementation shall document any conditions 
 that cause the completion of the setting of the priority of a task to 
 be delayed later than what is specified for a single processor.&nbsp;</div>
@@ -217,11 +214,10 @@ A</A>, &ldquo;<A HREF="AA-A.html">Predefined Language Environment</A>&rdquo;.
 <div class="Notes">29&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0092-1.TXT">AI05-0092-1</A></I>} 
 The rule for when Tasking_Error is raised for Set_Priority or Get_Priority 
 is different from the rule for when Tasking_Error is raised on an entry 
-call (see <A HREF="AA-9-5-3.html">9.5.3</A>). In particular, <span class="delete3">setting 
-or&nbsp;</span>querying the priority of a completed or an abnormal task is 
-allowed, so long as the task is not yet terminated<span class="insert3">, 
-and setting the priority of a task is allowed for any task state (including 
-for terminated tasks)</span>.</div>
+call (see <A HREF="AA-9-5-3.html">9.5.3</A>). In particular, querying 
+the priority of a completed or an abnormal task is allowed, so long as 
+the task is not yet terminated, and setting the priority of a task is 
+allowed for any task state (including for terminated tasks).</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Notes">30&nbsp;&nbsp;Changing the priorities of a set of 
 tasks can be performed by a series of calls to Set_Priority for each 
@@ -233,7 +229,7 @@ tasks.</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
-<A NAME="I8791"></A><B>Amendment Correction:</B> Priority changes are 
+<A NAME="I8592"></A><B>Amendment Correction:</B> Priority changes are 
 now required to be done immediately so long as the target task is not 
 on an entry queue.</div>
 <div class="paranum"><a name="p19.b">19.b/2</a></div>
@@ -245,10 +241,8 @@ units.&nbsp;</div>
 <div class="paranum"><a name="p19.c">19.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00327.TXT">AI95-00327-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-This Ada 95 <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-was <span class="insert3">moved down a level</span><span class="delete3">&nbsp;turned 
-into a subclause</span>. The paragraph numbers are the same as those 
-for <A HREF="AA-D-5.html">D.5</A> in Ada 95.</div>
+This Ada 95 subclause was moved down a level. The paragraph numbers are 
+the same as those for <A HREF="AA-D-5.html">D.5</A> in Ada 95.</div>
 <div class="paranum"><a name="p19.d">19.d/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
 There is no &ldquo;standard&rdquo; policy anymore, so that phrase was 

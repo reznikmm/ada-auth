@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -58,7 +58,7 @@ or as a configuration pragma.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3.3">3.3/3</a></div>
-<div class="Normal">&nbsp;The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is expected to be of type Root_Storage_Pool'Class.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
@@ -66,14 +66,14 @@ is expected to be of type Root_Storage_Pool'Class.&nbsp;</div>
 <div class="Normal">The <I>storage_pool_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 shall denote a variable.</div>
 <div class="paranum"><a name="p4.1">4.1/4</a></div>
-<div class="Normal">&nbsp;The Standard <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0319">storage_pool_indicator</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The Standard <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0319">storage_pool_indicator</A></SPAN> 
 is an identifier specific to a pragma (see <A HREF="RM-2-8.html">2.8</A>) 
 and does not denote any declaration. If the <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0319">storage_pool_indicator</A></SPAN> 
 is Standard, then there shall not be a declaration with <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
 Standard that is immediately visible at the point of the pragma, other 
 than package Standard itself.</div>
 <div class="paranum"><a name="p4.2">4.2/4</a></div>
-<div class="Normal">&nbsp;If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 is used as a configuration pragma, the <SPAN Class="swiss"><A HREF="RM-13-11-3.html#S0319">storage_pool_indicator</A></SPAN> 
 shall be either <B>null</B> or Standard, and it defines the <I>default 
 pool</I><A NAME="I5251"></A><A NAME="I5252"></A><A NAME="I5253"></A> 
@@ -86,7 +86,7 @@ immediate scope of the pragma to be the given <SPAN Class="swiss"><A HREF="RM-13
 except within the immediate scope of a later pragma Default_Storage_Pool. 
 Thus, an inner pragma overrides an outer one.</div>
 <div class="paranum"><a name="p4.3">4.3/4</a></div>
-<div class="Normal">&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Default_Storage_Pool shall not be used as a configuration pragma that 
 applies to a compilation unit that is within the immediate scope of another 
 <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Default_Storage_Pool.</div>
@@ -98,21 +98,21 @@ may be specified for a generic instance; it defines the default pool
 for access types within an instance.<A NAME="I5254"></A><A NAME="I5255"></A> 
 .</div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Normal">&nbsp;The Default_Storage_Pool aspect may be specified 
+<div class="Normal">&nbsp;&nbsp;The Default_Storage_Pool aspect may be specified 
 as Standard, which is an identifier specific to an aspect (see <A HREF="RM-13-1-1.html">13.1.1</A>) 
 and defines the default pool to be Standard. In this case, there shall 
 not be a declaration with <SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN> 
 Standard that is immediately visible at the point of the aspect specification, 
 other than package Standard itself.</div>
 <div class="paranum"><a name="p5.2">5.2/4</a></div>
-<div class="Normal">&nbsp;Otherwise, the expected type for the Default_Storage_Pool 
+<div class="Normal">&nbsp;&nbsp;Otherwise, the expected type for the Default_Storage_Pool 
 aspect is Root_Storage_Pool'Class and the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0309">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that denotes a variable. This aspect overrides any Default_Storage_Pool 
 pragma that might apply to the generic unit; if the aspect is not specified, 
 the default pool of the instance is that defined for the generic unit.</div>
 <div class="paranum"><a name="p5.3">5.3/4</a></div>
-<div class="Normal">&nbsp;The effect of specifying the aspect Default_Storage_Pool 
+<div class="Normal">&nbsp;&nbsp;The effect of specifying the aspect Default_Storage_Pool 
 on an instance of a language-defined generic unit is implementation-defined.</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For nonderived access 
@@ -128,7 +128,7 @@ for such a type is illegal.</div>
 <div class="Bulleted">If the default pool is neither <B>null</B> nor 
 Standard, the Storage_Pool attribute is that pool.</div>
 <div class="paranum"><a name="p6.3">6.3/4</a></div>
-<div class="Normal">&nbsp;Otherwise (including when the default pool is specified 
+<div class="Normal">&nbsp;&nbsp;Otherwise (including when the default pool is specified 
 as Standard), the standard storage pool is used for the type as described 
 in <A HREF="RM-13-11.html">13.11</A>.</div>
 <div class="paranum"><a name="p7">7/3</a></div>

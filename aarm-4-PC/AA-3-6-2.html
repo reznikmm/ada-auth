@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -59,52 +57,50 @@ defined if A is a subtype-mark for an access-to-array subtype. They are
 defined (by implicit dereference) for access-to-array values.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">A'First</div><div class="WideHanging-Body">
-<A NAME="I2088"></A><A NAME="I2089"></A>A'First denotes the lower bound 
+<A NAME="I2075"></A><A NAME="I2076"></A>A'First denotes the lower bound 
 of the first index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">A'First(N)</div><div class="WideHanging-Body">
-<A NAME="I2090"></A><A NAME="I2091"></A>A'First(N) denotes the lower 
+<A NAME="I2077"></A><A NAME="I2078"></A>A'First(N) denotes the lower 
 bound of the N-th index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="WideHanging-Term">A'Last</div><div class="WideHanging-Body">
-<A NAME="I2092"></A><A NAME="I2093"></A>A'Last denotes the upper bound 
+<A NAME="I2079"></A><A NAME="I2080"></A>A'Last denotes the upper bound 
 of the first index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="WideHanging-Term">A'Last(N)</div><div class="WideHanging-Body">
-<A NAME="I2094"></A><A NAME="I2095"></A>A'Last(N) denotes the upper bound 
+<A NAME="I2081"></A><A NAME="I2082"></A>A'Last(N) denotes the upper bound 
 of the N-th index range; its type is the corresponding index type.</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="WideHanging-Term">A'Range</div><div class="WideHanging-Body">
-<A NAME="I2096"></A><A NAME="I2097"></A>A'Range is equivalent to the 
+<A NAME="I2083"></A><A NAME="I2084"></A>A'Range is equivalent to the 
 range A'First .. A'Last, except that the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 A is only evaluated once.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="WideHanging-Term">A'Range(N)</div><div class="WideHanging-Body">
-<A NAME="I2098"></A><A NAME="I2099"></A>A'Range(N) is equivalent to the 
+<A NAME="I2085"></A><A NAME="I2086"></A>A'Range(N) is equivalent to the 
 range A'First(N) .. A'Last(N), except that the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 A is only evaluated once.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">A'Length</div><div class="WideHanging-Body">
-<A NAME="I2100"></A><A NAME="I2101"></A>A'Length denotes the number of 
+<A NAME="I2087"></A><A NAME="I2088"></A>A'Length denotes the number of 
 values of the first index range (zero for a null range); its type is 
 <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="WideHanging-Term">A'Length(N)</div><div class="WideHanging-Body">
-<A NAME="I2102"></A><A NAME="I2103"></A>A'Length(N) denotes the number 
+<A NAME="I2089"></A><A NAME="I2090"></A>A'Length(N) denotes the number 
 of values of the N-th index range (zero for a null range); its type is 
 <I>universal_integer</I>.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 An implementation should normally represent multidimensional arrays in 
 row-major order, consistent with the notation used for multidimensional 
 array aggregates (see <A HREF="AA-4-3-3.html">4.3.3</A>). However, if 
-<span class="insert3">convention&nbsp;</span><span class="delete3">a <B>pragma</B> 
-Convention(</span>Fortran<span class="insert3">&nbsp;is specified for</span><span class="delete3">, 
-...) applies to</span> a multidimensional array type, then column-major 
-order should be used instead (see <A HREF="AA-B-5.html">B.5</A>, &ldquo;<A HREF="AA-B-5.html">Interfacing 
-with Fortran</A>&rdquo;).&nbsp;</div>
+convention Fortran is specified for a multidimensional array type, then 
+column-major order should be used instead (see <A HREF="AA-B-5.html">B.5</A>, 
+&ldquo;<A HREF="AA-B-5.html">Interfacing with Fortran</A>&rdquo;).&nbsp;</div>
 <div class="paranum"><a name="p11.a">11.a/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Multidimensional 
 arrays should be represented in row-major order, unless the array has 
@@ -123,7 +119,7 @@ type:&nbsp;</div>
 <div class="Notes">54&nbsp;&nbsp;An array type is limited if its component 
 type is limited (see <A HREF="AA-7-5.html">7.5</A>).</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Notes">55&nbsp;&nbsp;<A NAME="I2104"></A>The predefined operations 
+<div class="Notes">55&nbsp;&nbsp;<A NAME="I2091"></A>The predefined operations 
 of an array type include the membership tests, qualification, and explicit 
 conversion. If the array type is not limited, they also include assignment 
 and the predefined equality operators. For a one-dimensional array type, 

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -31,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,10 +40,10 @@
 <HR>
 <H1>3.9 Tagged Types and Type Extensions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I2237"></A> <A NAME="I2238"></A><A NAME="I2239"></A><A NAME="I2240"></A><A NAME="I2241"></A>Tagged 
+<div class="Normal">[<A NAME="I2245"></A> <A NAME="I2246"></A><A NAME="I2247"></A><A NAME="I2248"></A><A NAME="I2249"></A>Tagged 
 types and type extensions support object-oriented programming, based 
 on inheritance with extension and run-time polymorphism via <I>dispatching 
-operations</I>. <A NAME="I2242"></A><A NAME="I2243"></A><A NAME="I2244"></A>]</div>
+operations</I>. <A NAME="I2250"></A><A NAME="I2251"></A><A NAME="I2252"></A>]</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p1.a">1.a/2</a></div>
@@ -145,18 +143,18 @@ of types declared in the specification of the generic unit.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I2245"></A>A record type or private type that has the reserved 
+<A NAME="I2253"></A>A record type or private type that has the reserved 
 word <B>tagged</B> in its declaration is called a <I>tagged</I> type. 
 In addition, an interface type is a tagged type, as is a task or protected 
 type derived from an interface (see <A HREF="AA-3-9-4.html">3.9.4</A>). 
 [When deriving from a tagged type, as for any derived type, additional 
 primitive subprograms may be defined, and inherited primitive subprograms 
-may be overridden.] <A NAME="I2246"></A><A NAME="I2247"></A>The derived 
+may be overridden.] <A NAME="I2254"></A><A NAME="I2255"></A>The derived 
 type is called an <I>extension</I> of its ancestor types, or simply a 
 <I>type extension</I>.</div>
 <div class="paranum"><a name="p2.1">2.1/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00345.TXT">AI95-00345-01</A></I>} 
-<A NAME="I2248"></A><A NAME="I2249"></A><A NAME="I2250"></A>Every type 
+<A NAME="I2256"></A><A NAME="I2257"></A><A NAME="I2258"></A>Every type 
 extension is also a tagged type, and is a <I>record extension</I> or 
 a <I>private extension</I> of some other tagged type, or a noninterface 
 synchronized tagged type (see <A HREF="AA-3-9-4.html">3.9.4</A>). A record 
@@ -178,41 +176,41 @@ invoke is determined at compile time, are also allowed. Tagged types
 may be extended with additional components.</div>
 <div class="paranum"><a name="p2.b">2.b/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20218.TXT">AI95-00218-03</A></I>} 
-If a tagged type is declared other than in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+If a tagged type is declared other than in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
 it is impossible to add new primitive subprograms for that type, although 
 it can inherit primitive subprograms, and those can be overridden. If 
 the user incorrectly thinks a certain subprogram is primitive when it 
 is not, and tries to call it with a dispatching call, an error message 
-will be given at the call site. Similarly, by using an <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN> 
+will be given at the call site. Similarly, by using an <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN> 
 (see <A HREF="AA-6-1.html">6.1</A>), the user can declare that a subprogram 
 is intended to be overriding, and get an error message when they made 
-a mistake. The use of <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0198">overriding_indicator</A></SPAN>s 
+a mistake. The use of <SPAN Class="swiss"><A HREF="AA-8-3-1.html#S0212">overriding_indicator</A></SPAN>s 
 is highly recommended in new code that does not need to be compatible 
 with Ada 95.</div>
 <div class="paranum"><a name="p2.c">2.c/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 </div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I2251"></A>An object of a tagged type has 
+<div class="Normal"><A NAME="I2259"></A>An object of a tagged type has 
 an associated (run-time) <I>tag</I> that identifies the specific tagged 
 type used to create the object originally. [ The tag of an operand of 
 a class-wide tagged type <I>T</I>'Class controls which subprogram body 
 is to be executed when a primitive subprogram of type <I>T</I> is applied 
-to the operand (see <A HREF="AA-3-9-2.html">3.9.2</A>); <A NAME="I2252"></A>using 
+to the operand (see <A HREF="AA-3-9-2.html">3.9.2</A>); <A NAME="I2260"></A>using 
 a tag to control which body to execute is called <I>dispatching</I>.] 
-<A NAME="I2253"></A><A NAME="I2254"></A><A NAME="I2255"></A><A NAME="I2256"></A></div>
+<A NAME="I2261"></A><A NAME="I2262"></A><A NAME="I2263"></A><A NAME="I2264"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 The tag of a specific tagged type identifies the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 of the type, and for a type extension, is sufficient to uniquely identify 
 the type among all descendants of the same ancestor. If a declaration 
-for a tagged type occurs within a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0276">generic_package_declaration</A></SPAN>, 
+for a tagged type occurs within a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0290">generic_package_declaration</A></SPAN>, 
 then the corresponding type declarations in distinct instances of the 
 generic package are associated with distinct tags. For a tagged type 
 that is local to a generic package body and with all of its ancestors 
 (if any) also local to the generic body, the language does not specify 
 whether repeated instantiations of the generic body result in distinct 
-tags.<A NAME="I2257"></A>&nbsp;</div>
+tags.<A NAME="I2265"></A>&nbsp;</div>
 <div class="paranum"><a name="p4.a">4.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
@@ -258,41 +256,42 @@ an identical tag.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
-<div class="paranum"><a name="p6">6/2</a></div>
+<div class="paranum"><a name="p6">6/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I2258"></A><B>package</B>&nbsp;Ada.Tags&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Tags);<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I2259"></A>Tag&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<A NAME="I2266"></A><B>package</B>&nbsp;Ada.Tags&nbsp;<span class="delete5">&nbsp;<B>is</B></span><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Tag);</span><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I2267"></A>Tag&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Tag);</div>
 <div class="paranum"><a name="p6.1">6.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2260"></A>No_Tag&nbsp;:&nbsp;<B>constant</B>&nbsp;Tag;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2268"></A>No_Tag&nbsp;:&nbsp;<B>constant</B>&nbsp;Tag;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2261"></A>Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2262"></A>Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2263"></A>Wide_Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2264"></A>External_Tag(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2265"></A>Internal_Tag(External&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Tag;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2269"></A>Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2270"></A>Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2271"></A>Wide_Wide_Expanded_Name(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Wide_Wide_String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2272"></A>External_Tag(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2273"></A>Internal_Tag(External&nbsp;:&nbsp;String)&nbsp;<B>return</B>&nbsp;Tag;</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2266"></A>Descendant_Tag(External&nbsp;:&nbsp;String;&nbsp;Ancestor&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2267"></A>Is_Descendant_At_Same_Level(Descendant,&nbsp;Ancestor&nbsp;:&nbsp;Tag)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2274"></A>Descendant_Tag(External&nbsp;:&nbsp;String;&nbsp;Ancestor&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2275"></A>Is_Descendant_At_Same_Level(Descendant,&nbsp;Ancestor&nbsp;:&nbsp;Tag)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p7.2">7.2/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2268"></A>Parent_Tag&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2276"></A>Parent_Tag&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag;</div>
 <div class="paranum"><a name="p7.3">7.3/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I2269"></A>Tag_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Tag;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I2277"></A>Tag_Array&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Tag;</div>
 <div class="paranum"><a name="p7.4">7.4/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2270"></A>Interface_Ancestor_Tags&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag_Array;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2278"></A>Interface_Ancestor_Tags&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Tag_Array;</div>
 <div class="paranum"><a name="p7.5">7.5/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0173-1.TXT">AI05-0173-1</A></I>} 
-&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2271"></A>Is_Abstract&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Boolean;</div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I2279"></A>Is_Abstract&nbsp;(T&nbsp;:&nbsp;Tag)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2272"></A>Tag_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2280"></A>Tag_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
@@ -319,16 +318,16 @@ to <B>null</B>.&nbsp;</div>
 The function Wide_Wide_Expanded_Name returns the full expanded name of 
 the first subtype of the specific type identified by the tag, in upper 
 case, starting with a root library unit. The result is implementation 
-defined if the type is declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>. 
+defined if the type is declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p10.a">10.a</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>This name, as well as each 
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> of 
-it, does not denote a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>. 
+it, does not denote a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p10.b">10.b/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The result of 
-Tags.Wide_Wide_Expanded_Name for types declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0163">block_statement</A></SPAN>.</div>
+Tags.Wide_Wide_Expanded_Name for types declared within an unnamed <SPAN Class="swiss"><A HREF="AA-5-6.html#S0176">block_statement</A></SPAN>.</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 The function Expanded_Name (respectively, Wide_Expanded_Name) returns 
@@ -351,7 +350,7 @@ S'External_Tag (see <A HREF="AA-13-3.html">13.3</A>).&nbsp;</div>
 <div class="Annotations"><B>Reason:&nbsp;</B>It might seem redundant to provide 
 both the function External_Tag and the attribute External_Tag. The function 
 is needed because the attribute can't be applied to values of type Tag. 
-The attribute is needed so that it can be specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>. 
+The attribute is needed so that it can be specified via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00417.TXT">AI95-00417-01</A></I>} 
@@ -422,7 +421,7 @@ and Is_Descendant_At_Same_Level, a tagged type T2 is a <I>descendant</I>
 of a type T1 if it is the same as T1, or if its parent type or one of 
 its progenitor types is a descendant of type T1 by this rule[, even if 
 at the point of the declaration of T2, one of the derivations in the 
-chain is not visible].<A NAME="I2273"></A></div>
+chain is not visible].<A NAME="I2281"></A></div>
 <div class="paranum"><a name="p12.c.1">12.c.1/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>In other contexts, &ldquo;descendant&rdquo; 
 is dependent on visibility, and the particular view a derived type has 
@@ -432,14 +431,13 @@ of its parent type. See <A HREF="AA-7-3-1.html">7.3.1</A>.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
 The function Parent_Tag returns the tag of the parent type of the type 
 whose tag is T. If the type does not have a parent type (that is, it 
-was not <span class="insert4">defined</span><span class="delete4">&nbsp;declared</span> 
-by a <span class="insert4"><SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN></span><span class="delete4">&nbsp;derived_type_declaration</span>), 
+was not defined by a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>), 
 then No_Tag is returned.</div>
 <div class="paranum"><a name="p12.d">12.d/4</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 The parent type is always the parent of the full type; a private extension 
 appears to define a parent type, but it does not (only the various forms 
-of derivation do that). As this is a run-time operation, ignoring <span class="insert4">privacy</span><span class="delete4">&nbsp;privateness</span> 
+of derivation do that). As this is a run-time operation, ignoring privacy 
 is OK.&nbsp;</div>
 <div class="paranum"><a name="p12.5">12.5/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
@@ -448,7 +446,7 @@ tag of each interface ancestor type of the type whose tag is T, other
 than T itself. The lower bound of the returned array is 1, and the order 
 of the returned tags is unspecified. Each tag appears in the result exactly 
 once.[ If the type whose tag is T has no interface ancestors, a null 
-array is returned.]<A NAME="I2274"></A></div>
+array is returned.]<A NAME="I2282"></A></div>
 <div class="paranum"><a name="p12.e">12.e/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The result of Interface_Ancestor_Tags 
 includes the tag of the parent type, if the parent is an interface.</div>
@@ -467,12 +465,12 @@ and False otherwise.</div>
 or class-wide), the following attributes are defined:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
-<A NAME="I2275"></A><A NAME="I2276"></A>S'Class denotes a subtype of 
+<A NAME="I2283"></A><A NAME="I2284"></A>S'Class denotes a subtype of 
 the class-wide type (called <I>T</I>'Class in this International Standard) 
 for the class rooted at <I>T</I> (or if S already denotes a class-wide 
 subtype, then S'Class is the same as S).</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="WideHanging-Body"><A NAME="I2277"></A><A NAME="I2278"></A>S'Class 
+<div class="WideHanging-Body"><A NAME="I2285"></A><A NAME="I2286"></A>S'Class 
 is unconstrained. However, if S is constrained, then the values of S'Class 
 are only those that when converted to the type <I>T</I> belong to S. 
 </div>
@@ -495,7 +493,7 @@ to the concept of universal types provided for the predefined numeric
 classes.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="WideHanging-Term">S'Tag</div><div class="WideHanging-Body">
-<A NAME="I2279"></A><A NAME="I2280"></A>S'Tag denotes the tag of the 
+<A NAME="I2287"></A><A NAME="I2288"></A>S'Tag denotes the tag of the 
 type <I>T</I> (or if <I>T</I> is class-wide, the tag of the root type 
 of the corresponding class). The value of this attribute is of type Tag. 
 </div>
@@ -509,7 +507,7 @@ X that is of a class-wide tagged type [(after any implicit dereference)],
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
 <div class="WideHanging-Term">X'Tag</div><div class="WideHanging-Body">
-<A NAME="I2281"></A><A NAME="I2282"></A>X'Tag denotes the tag of X. The 
+<A NAME="I2289"></A><A NAME="I2290"></A>X'Tag denotes the tag of X. The 
 value of this attribute is of type Tag.&nbsp;</div>
 <div class="paranum"><a name="p18.a">18.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>X'Tag is not defined if X is 
@@ -521,9 +519,10 @@ type.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00441.TXT">AI95-00441-01</A></I>} 
 The following language-defined generic function exists:</div>
-<div class="paranum"><a name="p18.2">18.2/3</a></div>
+<div class="paranum"><a name="p18.2">18.2/5</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<A NAME="I2283"></A><B>generic</B><BR>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<A NAME="I2291"></A><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Parameters&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Constructor&nbsp;(Params&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Parameters)<BR>
@@ -531,8 +530,9 @@ The following language-defined generic function exists:</div>
 <B>function</B>&nbsp;Ada.Tags.Generic_Dispatching_Constructor<BR>
 &nbsp;&nbsp;&nbsp;(The_Tag&nbsp;:&nbsp;Tag;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Params&nbsp;&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Parameters)&nbsp;<B>return</B>&nbsp;T'Class<BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Convention&nbsp;=&gt;&nbsp;Intrinsic;<BR>
-<B>pragma</B>&nbsp;Preelaborate(Generic_Dispatching_Constructor);</div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<span class="insert5">Preelaborate,&nbsp;</span>Convention&nbsp;=&gt;&nbsp;Intrinsic<span class="insert5">,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nonblocking&nbsp;=&gt;&nbsp;Constructor'Nonblocking</span>;<span class="delete5"><BR>
+<B>pragma</B>&nbsp;Preelaborate(Generic_Dispatching_Constructor);</span></div>
 <div class="paranum"><a name="p18.3">18.3/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 Tags.Generic_Dispatching_Constructor provides a mechanism to create an 
@@ -557,7 +557,7 @@ match T (see <A HREF="AA-12-5-1.html">12.5.1</A>)</span>.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The tag associated 
 with an object of a tagged type is determined as follows:&nbsp;</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Bulleted"><A NAME="I2284"></A>The tag of a stand-alone object, 
+<div class="Bulleted"><A NAME="I2292"></A>The tag of a stand-alone object, 
 a component, or an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 of a specific tagged type <I>T</I> identifies <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p20.a">20.a</a></div>
@@ -565,7 +565,7 @@ of a specific tagged type <I>T</I> identifies <I>T</I>.&nbsp;</div>
 of type <I>T</I> is not necessarily the tag of <I>T</I>, if, for example, 
 the actual was a type conversion.&nbsp;</div>
 <div class="paranum"><a name="p21">21</a></div>
-<div class="Bulleted"><A NAME="I2285"></A>The tag of an object created 
+<div class="Bulleted"><A NAME="I2293"></A>The tag of an object created 
 by an allocator for an access type with a specific designated tagged 
 type <I>T</I>, identifies <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a</a></div>
@@ -573,17 +573,17 @@ type <I>T</I>, identifies <I>T</I>.&nbsp;</div>
 by a value of such an access type might not be <I>T</I>, if, for example, 
 the access value is the result of a type conversion.</div>
 <div class="paranum"><a name="p22">22</a></div>
-<div class="Bulleted"><A NAME="I2286"></A>The tag of an object of a class-wide 
+<div class="Bulleted"><A NAME="I2294"></A>The tag of an object of a class-wide 
 tagged type is that of its initialization expression.&nbsp;</div>
 <div class="paranum"><a name="p22.a">22.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The tag of an object (even 
 a class-wide one) cannot be changed after it is initialized, since a 
-&ldquo;class-wide&rdquo; <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+&ldquo;class-wide&rdquo; <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 raises Constraint_Error if the tags don't match, and a &ldquo;specific&rdquo; 
-<SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 does not affect the tag.&nbsp;</div>
 <div class="paranum"><a name="p23">23</a></div>
-<div class="Bulleted"><A NAME="I2287"></A>The tag of the result returned 
+<div class="Bulleted"><A NAME="I2295"></A>The tag of the result returned 
 by a function whose result type is a specific tagged type <I>T</I> identifies 
 <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p23.a">23.a/2</a></div>
@@ -595,10 +595,10 @@ of the function return. See <A HREF="AA-6-5.html">6.5</A>, &ldquo;<A HREF="AA-6-
 Statements</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p24">24/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
-<A NAME="I2288"></A>The tag of the result returned by a function with 
+<A NAME="I2296"></A>The tag of the result returned by a function with 
 a class-wide result type is that of the return object.&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Normal"><A NAME="I2289"></A>The tag is preserved by type 
+<div class="Normal"><A NAME="I2297"></A>The tag is preserved by type 
 conversion and by parameter passing. The tag of a value is the tag of 
 the associated object (see <A HREF="AA-6-2.html">6.2</A>).</div>
 <div class="paranum"><a name="p25.1">25.1/3</a></div>
@@ -632,7 +632,7 @@ used.&nbsp;</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p25.3">25.3/2</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
-<A NAME="I2290"></A>If an internal tag provided to an instance of Tags.Generic_Dispatching_Constructor 
+<A NAME="I2298"></A>If an internal tag provided to an instance of Tags.Generic_Dispatching_Constructor 
 or to any subprogram declared in package Tags identifies either a type 
 that is not library-level and whose tag has not been created (see <A HREF="AA-13-14.html">13.14</A>), 
 or a type that does not exist in the partition at the time of the call, 
@@ -640,7 +640,7 @@ then execution is erroneous.</div>
 <div class="paranum"><a name="p25.b">25.b/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>One reason that a type 
 might not exist in the partition is that the tag refers to a type whose 
-declaration was elaborated as part of an execution of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
+declaration was elaborated as part of an execution of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN> 
 which has been left (see <A HREF="AA-7-6-1.html">7.6.1</A>).</div>
 <div class="paranum"><a name="p25.c">25.c/2</a></div>
 <div class="Annotations">We exclude tags of library-level types from 
@@ -726,7 +726,7 @@ but some other tag can be returned as well.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Notes">70&nbsp;&nbsp;A type declared with the reserved word 
-<B>tagged</B> should normally be declared in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+<B>tagged</B> should normally be declared in a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
 so that new primitive subprograms can be declared for it.</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Notes">71&nbsp;&nbsp;Once an object has been created, its 
@@ -736,7 +736,7 @@ tag never changes.</div>
 unknown discriminants (see <A HREF="AA-3-7.html">3.7</A>). This means 
 that objects of a class-wide type have to be explicitly initialized (whether 
 created by an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0144">allocator</A></SPAN>), 
+or an <SPAN Class="swiss"><A HREF="AA-4-8.html#S0150">allocator</A></SPAN>), 
 and that <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>s 
 have to be explicitly qualified with a specific type when their expected 
 type is class-wide.</div>
@@ -744,7 +744,7 @@ type is class-wide.</div>
 <div class="Notes">73&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00326.TXT">AI95-00326-01</A></I>} 
 The capability provided by Tags.Generic_Dispatching_Constructor is sometimes 
-known as a <I>factory</I>.<A NAME="I2291"></A><A NAME="I2292"></A>&nbsp;</div>
+known as a <I>factory</I>.<A NAME="I2299"></A><A NAME="I2300"></A>&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p31">31</a></div>
@@ -761,13 +761,13 @@ record types:</I>&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p33.a">33.a</a></div>
-<div class="Annotations"><A NAME="I2293"></A>Tagged types are a new concept. 
+<div class="Annotations"><A NAME="I2301"></A>Tagged types are a new concept. 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 95</H4>
 <div class="paranum"><a name="p33.b">33.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00279.TXT">AI95-00279-01</A></I>} 
-<A NAME="I2294"></A><B>Amendment Correction:</B> Added wording specifying 
+<A NAME="I2302"></A><B>Amendment Correction:</B> Added wording specifying 
 that Internal_Tag must raise Tag_Error if the tag of a library-level 
 type has not yet been created. Ada 95 gave an Implementation Permission 
 to do this; we require it to avoid erroneous execution when streaming 
@@ -796,20 +796,20 @@ Ada 95 implementations, so it should be very rare.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00400.TXT">AI95-00400-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00405.TXT">AI95-00405-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<A NAME="I2295"></A>Constant No_Tag, and functions Parent_Tag, Interface_Ancestor_Tags, 
+<A NAME="I2303"></A>Constant No_Tag, and functions Parent_Tag, Interface_Ancestor_Tags, 
 Descendant_Tag, Is_Descendant_At_Same_Level, Wide_Expanded_Name, and 
 Wide_Wide_Expanded_Name are added to Ada.Tags. If Ada.Tags is referenced 
-in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
 and an entity <I>E</I> with the same <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 as a new entity in Ada.Tags is defined in a package that is also referenced 
-in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN>, 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
 This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p33.e">33.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<A NAME="I2296"></A>Ada.Tags is now defined to be preelaborated.</div>
+<A NAME="I2304"></A>Ada.Tags is now defined to be preelaborated.</div>
 <div class="paranum"><a name="p33.f">33.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10260.TXT">AI95-00260-02</A></I>} 
 Generic function Tags.Generic_Dispatching_Constructor is new.&nbsp;</div>
@@ -818,7 +818,7 @@ Generic function Tags.Generic_Dispatching_Constructor is new.&nbsp;</div>
 <div class="paranum"><a name="p33.g">33.g/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 We talk about return objects rather than return expressions, as functions 
-can return using an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>.</div>
+can return using an <SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>.</div>
 <div class="paranum"><a name="p33.h">33.h/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00344.TXT">AI95-00344-01</A></I>} 
 Added wording to define that tags for all descendants of a tagged type 
@@ -829,7 +829,7 @@ for types that were allowed in Ada 95.&nbsp;</div>
 <H4 Class="centered">Inconsistencies With Ada 2005</H4>
 <div class="paranum"><a name="p33.i">33.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0113-1.TXT">AI05-0113-1</A></I>} 
-<A NAME="I2297"></A><B>Correction:</B> Added wording specifying that 
+<A NAME="I2305"></A><B>Correction:</B> Added wording specifying that 
 Dependent_Tag must raise Tag_Error if there is more than one type which 
 matches the requirements. If an implementation had returned a random 
 tag of the matching types, a program may have worked properly. However, 
@@ -841,10 +841,10 @@ body with multiple instances in the same scope).&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p33.j">33.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0173-1.TXT">AI05-0173-1</A></I>} 
-<A NAME="I2298"></A>Function Is_Abstract is added to Ada.Tags. If Ada.Tags 
-is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN>, 
+<A NAME="I2306"></A>Function Is_Abstract is added to Ada.Tags. If Ada.Tags 
+is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
 and an entity <I>E</I> with the <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
-Is_Abstract is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0199">use_clause</A></SPAN>, 
+Is_Abstract is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0213">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
 This should be rare and is easily fixed if it does occur.&nbsp;</div>
 

@@ -19,15 +19,15 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -134,7 +134,7 @@ exist that have the same name, Process is called once for each such variable.</s
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I6973"></A>It 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><A NAME="I6973"></A>It 
 is a bounded error to call Value if more than one environment variable 
 exists with the given name; the possible outcomes are that:</span>&nbsp;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
@@ -147,27 +147,27 @@ changes to the environment; or</span></div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Normal"><span class="insert2"><A NAME="I6974"></A>Making 
+<div class="Normal">&nbsp;<span class="insert2"><A NAME="I6974"></A>Making 
 calls to the procedures Set or Clear concurrently with calls to any subprogram 
 of package Environment_Variables, or to any instantiation of Iterate, 
 results in erroneous execution.</span></div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Normal"><span class="insert2">Making calls to the procedures 
+<div class="Normal">&nbsp;<span class="insert2">Making calls to the procedures 
 Set or Clear in the actual subprogram corresponding to the Process parameter 
 of Iterate results in erroneous execution.</span>&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal"><span class="insert2">An implementation shall document 
+<div class="Normal">&nbsp;<span class="insert2">An implementation shall document 
 how the operations of this package behave if environment variables are 
 changed by external mechanisms (for instance, calling operating system 
 services).</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal"><span class="insert2">An implementation running on 
-a system that does not support environment variables is permitted to 
-define the operations of package Environment_Variables with the semantics 
+<div class="Normal">&nbsp;<span class="insert2">An implementation running 
+on a system that does not support environment variables is permitted 
+to define the operations of package Environment_Variables with the semantics 
 corresponding to the case where the external execution environment does 
 support environment variables. In this case, it shall provide a mechanism 
 to initialize a nonempty set of environment variables prior to the execution 
@@ -175,12 +175,12 @@ of a partition.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Normal"><span class="insert2">If the execution environment 
+<div class="Normal">&nbsp;<span class="insert2">If the execution environment 
 supports subprocesses, the currently defined environment variables should 
 be used to initialize the environment variables of a subprocess.</span> 
 </div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Normal"><span class="insert2">Changes to the environment 
+<div class="Normal">&nbsp;<span class="insert2">Changes to the environment 
 variables made outside the control of this package should be reflected 
 immediately in the effect of the operations of this package. Changes 
 to the environment variables made using this package should be reflected 

@@ -13,17 +13,15 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -32,90 +30,86 @@
 &nbsp;<A HREF="AA-D-11.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>D.10.1 <span class="insert3">Synchronous Barriers</span><span class="delete3"></span></H1>
+<H1>D.10.1 Synchronous Barriers</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3">This subclause introduces a language-defined package 
-to synchronously release a group of tasks after the number of blocked 
-tasks reaches a specified count value.</span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This subclause introduces a language-defined package to synchronously 
+release a group of tasks after the number of blocked tasks reaches a 
+specified count value.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">The following language-defined library package 
-exists:</span>&nbsp;</div>
+The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><span class="insert3"><B>package</B>&nbsp;Ada.Synchronous_Barriers&nbsp;<B>is</B><A NAME="I8914"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Synchronous_Barriers);</span></div>
+<div class="Examples"><B>package</B>&nbsp;Ada.Synchronous_Barriers&nbsp;<B>is</B><A NAME="I8715"></A><BR>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Synchronous_Barriers);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8915"></A>Barrier_Limit&nbsp;<B>is</B>&nbsp;Positive&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8716"></A>Barrier_Limit&nbsp;<B>is</B>&nbsp;Positive&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p4.a.1">4.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation defined: 
-</B></span><span class="insert3">The value of Barrier_Limit'Last in Synchronous_Barriers.</span></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
+Barrier_Limit'Last in Synchronous_Barriers.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8916"></A>Synchronous_Barrier&nbsp;(Release_Threshold&nbsp;:&nbsp;Barrier_Limit)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8717"></A>Synchronous_Barrier&nbsp;(Release_Threshold&nbsp;:&nbsp;Barrier_Limit)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8917"></A>Wait_For_Release&nbsp;(The_Barrier&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronous_Barrier;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notified&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8718"></A>Wait_For_Release&nbsp;(The_Barrier&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Synchronous_Barrier;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notified&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;<B>out</B>&nbsp;Boolean);</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Examples"><span class="insert3"><B>private</B><BR>
+<div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
-<B>end</B>&nbsp;Ada.Synchronous_Barriers;</span></div>
+<B>end</B>&nbsp;Ada.Synchronous_Barriers;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">Type Synchronous_Barrier needs finalization (see 
-<A HREF="AA-7-6.html">7.6</A>).</span>&nbsp;</div>
+Type Synchronous_Barrier needs finalization (see <A HREF="AA-7-6.html">7.6</A>). 
+</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">Each call to Wait_For_Release blocks the calling 
-task until the number of blocked tasks associated with the Synchronous_Barrier 
-object is equal to Release_Threshold, at which time all blocked tasks 
-are released. Notified is set to True for one of the released tasks, 
-and set to False for all other released tasks.</span></div>
+Each call to Wait_For_Release blocks the calling task until the number 
+of blocked tasks associated with the Synchronous_Barrier object is equal 
+to Release_Threshold, at which time all blocked tasks are released. Notified 
+is set to True for one of the released tasks, and set to False for all 
+other released tasks.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">The mechanism for determining which task sets Notified 
-to True is implementation defined.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
+The mechanism for determining which task sets Notified to True is implementation 
+defined.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">Once all tasks have been released, a Synchronous_Barrier 
-object may be reused to block another Release_Threshold number of tasks.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
+Once all tasks have been released, a Synchronous_Barrier object may be 
+reused to block another Release_Threshold number of tasks.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">As the first step of the finalization of a Synchronous_Barrier, 
-each blocked task is unblocked and Program_Error is raised at the place 
-of the call to Wait_For_Release.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
+As the first step of the finalization of a Synchronous_Barrier, each 
+blocked task is unblocked and Program_Error is raised at the place of 
+the call to Wait_For_Release.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">It is implementation defined whether an abnormal 
-task which is waiting on a Synchronous_Barrier object is aborted immediately 
-or aborted when the tasks waiting on the object are released.</span> 
-</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
+It is implementation defined whether an abnormal task which is waiting 
+on a Synchronous_Barrier object is aborted immediately or aborted when 
+the tasks waiting on the object are released.&nbsp;</div>
 <div class="paranum"><a name="p13.a.1">13.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation defined: 
-</B></span><span class="insert3">When an aborted task that is waiting 
-on a Synchronous_Barrier is aborted.</span></div>
+<div class="Annotations"><B>Implementation defined:&nbsp;</B>When an aborted 
+task that is waiting on a Synchronous_Barrier is aborted.</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">Wait_For_Release is a potentially blocking operation 
-(see <A HREF="AA-9-5-1.html">9.5.1</A>).</span>&nbsp;</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
+Wait_For_Release is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>). 
+</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3">It is a bounded error to call Wait_For_Release 
-on a Synchronous_Barrier object after that object is finalized. If the 
-error is detected, Program_Error is raised. Otherwise, the call proceeds 
-normally, which may leave a task blocked forever.</span>&nbsp;</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
+It is a bounded error to call Wait_For_Release on a Synchronous_Barrier 
+object after that object is finalized. If the error is detected, Program_Error 
+is raised. Otherwise, the call proceeds normally, which may leave a task 
+blocked forever.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0174-1.TXT">AI05-0174-1</A></I>} 
-<span class="insert3"><A NAME="I8918"></A>The package Ada.Synchronous_Barriers 
-is new.</span>&nbsp;</div>
+<A NAME="I8719"></A>The package Ada.Synchronous_Barriers is new.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

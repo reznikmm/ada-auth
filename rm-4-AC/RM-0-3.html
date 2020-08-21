@@ -23,17 +23,17 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -185,12 +185,12 @@ or with interleaved execution on a single processor. A task unit may
 define either a single executing task or a task type permitting the creation 
 of any number of similar tasks.</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal">A protected unit is the basic unit for defining protected 
-operations for the coordinated use of data shared between tasks. Simple 
-mutual exclusion is provided automatically, and more elaborate sharing 
-protocols can be defined. A protected operation can either be a subprogram 
-or an entry. A protected entry specifies a Boolean expression (an entry 
-barrier) that must be <span class="insert2">True</span><span class="delete2">&nbsp;true</span> 
+<div class="Normal">&nbsp;A protected unit is the basic unit for defining 
+protected operations for the coordinated use of data shared between tasks. 
+Simple mutual exclusion is provided automatically, and more elaborate 
+sharing protocols can be defined. A protected operation can either be 
+a subprogram or an entry. A protected entry specifies a Boolean expression 
+(an entry barrier) that must be <span class="insert2">True</span><span class="delete2">&nbsp;true</span> 
 before the body of the entry is executed. A protected unit may define 
 a single protected object or a protected type permitting the creation 
 of several similar objects.</div>
@@ -262,7 +262,7 @@ a set of values and a set of applicable operations. The main classes
 of types are elementary types (comprising enumeration, numeric, and access 
 types) and composite types (including array and record types).</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Normal">An enumeration type defines an ordered set of distinct 
+<div class="Normal">&nbsp;An enumeration type defines an ordered set of distinct 
 enumeration literals, for example a list of states or an alphabet of 
 characters. The enumeration types Boolean, Character, <span class="delete2">and 
 </span>Wide_Character<span class="insert2">, and Wide_Wide_Character</span> 
@@ -275,10 +275,10 @@ use either fixed point types, with absolute bounds on the error, or floating
 point types, with relative bounds on the error. The numeric types Integer, 
 Float, and Duration are predefined.</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Normal">Composite types allow definitions of structured objects 
-with related components. The composite types in the language include 
-arrays and records. An array is an object with indexed components of 
-the same type. A record is an object with named components of possibly 
+<div class="Normal">&nbsp;Composite types allow definitions of structured 
+objects with related components. The composite types in the language 
+include arrays and records. An array is an object with indexed components 
+of the same type. A record is an object with named components of possibly 
 different types. Task and protected types are also forms of composite 
 types. The array types String<span class="insert2">,</span><span class="delete2">&nbsp;and</span> Wide_String<span class="insert2">, and Wide_Wide_String</span> 
 are predefined.</div>
@@ -316,11 +316,11 @@ of a tagged type is applied to an operand whose specific type is not
 known until run time, implicit dispatching is performed based on the 
 tag of the operand.</div>
 <div class="paranum"><a name="p38.1">38.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">Interface types provide abstract 
-models from which other interfaces and types may be composed and derived. 
-This provides a reliable form of multiple inheritance. Interface types 
-may also be implemented by task types and protected types thereby enabling 
-concurrent programming and inheritance to be merged.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">Interface types provide 
+abstract models from which other interfaces and types may be composed 
+and derived. This provides a reliable form of multiple inheritance. Interface 
+types may also be implemented by task types and protected types thereby 
+enabling concurrent programming and inheritance to be merged.</span></div>
 <div class="paranum"><a name="p39">39</a></div>
 <div class="Normal">The concept of a type is further refined by the concept 
 of a subtype, whereby a user can constrain the set of allowed values 
@@ -330,7 +330,7 @@ with particular discriminant values.</div>
 <div class="paranum"><a name="p40">40</a></div>
 <div class="Normal"><I>Other Facilities</I></div>
 <div class="paranum"><a name="p41">41/2</a></div>
-<div class="Normal"><span class="insert2">Aspect</span><span class="delete2">&nbsp;Representation</span> 
+<div class="Normal">&nbsp;<span class="insert2">Aspect</span><span class="delete2">&nbsp;Representation</span> 
 clauses can be used to specify the mapping between types and features 
 of an underlying machine. For example, the user can specify that objects 
 of a given type must be represented with a given number of bits, or that 
@@ -339,7 +339,7 @@ layout. Other features allow the controlled use of low level, nonportable,
 or implementation-dependent aspects, including the direct insertion of 
 machine code.</div>
 <div class="paranum"><a name="p42">42/2</a></div>
-<div class="Normal">The predefined environment of the language provides 
+<div class="Normal">&nbsp;The predefined environment of the language provides 
 for input-output and other capabilities <span class="delete2">(such as 
 string manipulation and random number generation)&nbsp;</span>by means of 
 standard library packages. Input-output is supported for values of user-defined 
@@ -348,15 +348,15 @@ in display form are also provided.<span class="delete2">&nbsp;Other standard
 library packages are defined in annexes of the standard to support systems 
 with specialized requirements.</span></div>
 <div class="paranum"><a name="p42.1">42.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The predefined standard library 
-packages provide facilities such as string manipulation, containers of 
-various kinds (vectors, lists, maps, etc.), mathematical functions, random 
-number generation, and access to the execution environment.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The predefined standard 
+library packages provide facilities such as string manipulation, containers 
+of various kinds (vectors, lists, maps, etc.), mathematical functions, 
+random number generation, and access to the execution environment.</span></div>
 <div class="paranum"><a name="p42.2">42.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The specialized annexes define 
-further predefined library packages and facilities with emphasis on areas 
-such as real-time scheduling, interrupt handling, distributed systems, 
-numerical computation, and high-integrity systems.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The specialized annexes 
+define further predefined library packages and facilities with emphasis 
+on areas such as real-time scheduling, interrupt handling, distributed 
+systems, numerical computation, and high-integrity systems.</span></div>
 <div class="paranum"><a name="p43">43</a></div>
 <div class="Normal">Finally, the language provides a powerful means of 
 parameterization of program units, called generic program units. The 
@@ -369,7 +369,7 @@ Changes</B></SPAN></SPAN></div>
 44 through 57 have been removed as they described differences from the 
 first edition of Ada (Ada 83).</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p44">44/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="delete3">This 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="delete3">This 
 </span><span class="insert2"><span class="delete3">amended&nbsp;</span></span><span class="delete3">International 
 Standard&nbsp;</span><span class="insert2"><span class="delete3">updates the 
 edition of 1995 which replaced</span></span><span class="delete3"></span><span class="delete2">&nbsp;replaces</span><span class="delete3">&nbsp;the first edition of 1987. In&nbsp;</span><span class="insert2"><span class="delete3">the 
@@ -446,7 +446,7 @@ G</A>, &ldquo;<A HREF="RM-G.html">Numerics</A>&rdquo;</span></div>
 H</A>, &ldquo;<A HREF="RM-H.html">High Integrity Systems</A>&rdquo;</span> 
 </div>
 <div class="paranum"><a name="p57.1">57.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2"></span><span class="insert3">This 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2"></span><span class="insert3">This 
 International Standard replaces the second edition of 1995. It</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Amendment 
 1</span></span><span class="insert2">&nbsp;modifies the&nbsp;</span><span class="insert3">previous 
 edition</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;1995 
@@ -458,7 +458,7 @@ particular the changes</span></span><span class="insert2">&nbsp;were designed
 to improve the portability of programs, interfacing to other languages, 
 and both the object-oriented and real-time capabilities.</span></div>
 <div class="paranum"><a name="p57.2">57.2/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2"></span><span class="insert3">Significant</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert2"></span><span class="insert3">Significant</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;The 
 following significant</span></span><span class="insert2">&nbsp;changes</span><span class="insert3">&nbsp;originating in Amendment 1</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;with 
 respect to the 1995 edition</span></span><span class="insert2">&nbsp;are incorporated:</span></div>
 <div class="paranum"><a name="p57.3">57.3/3</a></div>
@@ -516,14 +516,14 @@ making assertions and giving better control over the suppression of checks.
 See&nbsp;</span><span class="insert3">subclauses</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;clauses</span></span><span class="insert2">&nbsp;<A HREF="RM-6-1.html">6.1</A>, <A HREF="RM-11-4-2.html">11.4.2</A>, and 
 <A HREF="RM-11-5.html">11.5</A>.</span></div>
 <div class="paranum"><a name="p57.12">57.12/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">In addition, this third 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3">In addition, this third 
 edition makes enhancements to address two important issues, namely, the 
 particular problems of multiprocessor architectures, and the need to 
 further increase the capabilities regarding assertions for correctness. 
 It also makes additional changes and additions that improve the capability 
 of the language and the reliability of programs written in the language.</span></div>
 <div class="paranum"><a name="p57.13">57.13/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3">The 
 following significant changes with respect to the 1995 edition as amended 
 by Amendment 1 are incorporated:</span></div>
 <div class="paranum"><a name="p57.14">57.14/3</a></div>
@@ -594,7 +594,7 @@ and <A HREF="RM-5-5-2.html">5.5.2</A>.</span>&nbsp;</div>
 <div class="WideAbove"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Instructions 
 for Comment Submission</B></SPAN></SPAN></div>
 <div class="paranum"><a name="p58">58/1</a></div>
-<div class="Normal"><A NAME="I1003"></A><A NAME="I1004"></A>Informal 
+<div class="Normal">&nbsp;<A NAME="I1003"></A><A NAME="I1004"></A>Informal 
 comments on this International Standard may be sent via e-mail to <span class="insert1"><B>ada-comment@ada-auth.org</B></span><span class="delete1"><B>&nbsp;ada-comment@sw-eng.falls-church.va.us</B></span>. 
 If appropriate, the Project Editor will initiate the defect correction 
 procedure.</div>
@@ -609,12 +609,12 @@ procedure.</div>
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>text&nbsp;of&nbsp;discussion</I></div>
 <div class="paranum"><a name="p61">61/3</a></div>
-<div class="Normal">where <I>ss.ss</I> is the <span class="delete3">section, 
+<div class="Normal">&nbsp;where <I>ss.ss</I> is the <span class="delete3">section, 
 </span>clause or subclause number, <I>pp</I> is the paragraph number 
 where applicable, and <I>yy-mm-dd</I> is the date the comment was sent. 
 The date is optional, as is the <B>!keywords</B> line.</div>
 <div class="paranum"><a name="p62">62/1</a></div>
-<div class="Normal"><span class="delete1">Multiple comments per e-mail 
+<div class="Normal">&nbsp;<span class="delete1">Multiple comments per e-mail 
 message are acceptable.</span> Please use a descriptive &ldquo;Subject&rdquo; 
 in your e-mail message<span class="insert1">, and limit each message 
 to a single comment.</span><span class="delete1">.</span></div>
@@ -639,11 +639,11 @@ with the procedures.</div>
 <div class="WideAbove"><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Ada 83 edition</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p65.1">65.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Ada is the result of a collective 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Ada is the result of a collective 
 effort to design a common language for programming large scale and real-time 
 systems.</span></div>
 <div class="paranum"><a name="p65.2">65.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">The common high order language 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">The common high order language 
 program began in 1974. The requirements of the United States Department 
 of Defense were formalized in a series of documents which were extensively 
 reviewed by the Services, industrial organizations, universities, and 
@@ -651,19 +651,19 @@ foreign military departments. The Ada language was designed in accordance
 with the final (1978) form of these requirements, embodied in the Steelman 
 specification.</span></div>
 <div class="paranum"><a name="p65.3">65.3/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">The Ada design team was led 
-by Jean D. Ichbiah and has included Bernd Krieg-Brueckner, Brian A. Wichmann, 
-Henry F. Ledgard, Jean-Claude Heliard, Jean-Loup Gailly, Jean-Raymond 
-Abrial, John G.P. Barnes, Mike Woodger, Olivier Roubine, Paul N. Hilfinger, 
-and Robert Firth.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">The Ada design team was 
+led by Jean D. Ichbiah and has included Bernd Krieg-Brueckner, Brian 
+A. Wichmann, Henry F. Ledgard, Jean-Claude Heliard, Jean-Loup Gailly, 
+Jean-Raymond Abrial, John G.P. Barnes, Mike Woodger, Olivier Roubine, 
+Paul N. Hilfinger, and Robert Firth.</span></div>
 <div class="paranum"><a name="p65.4">65.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">At various stages of the 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">At various stages of the 
 project, several people closely associated with the design team made 
 major contributions. They include J.B. Goodenough, R.F. Brender, M.W. 
 Davis, G. Ferran, K. Lester, L. MacLaren, E. Morel, I.R. Nassi, I.C. 
 Pyle, S.A. Schuman, and S.C. Vestal.</span></div>
 <div class="paranum"><a name="p65.5">65.5/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Two parallel efforts that 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Two parallel efforts that 
 were started in the second phase of this design had a deep influence 
 on the language. One was the development of a formal definition using 
 denotational semantics, with the participation of V. Donzeau-Gouge, G. 
@@ -674,7 +674,7 @@ the dedicated assistance of Lyn Churchill and Marion Myers, and the effective
 technical support of B. Gravem, W.L. Heimerdinger, and P. Cleve. H.G. 
 Schmitz served as program manager.</span></div>
 <div class="paranum"><a name="p65.6">65.6/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Over the five years spent 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Over the five years spent 
 on this project, several intense week-long design reviews were conducted, 
 with the participation of P. Belmont, B. Brosgol, P. Cohen, R. Dewar, 
 A. Evans, G. Fisher, H. Harte, A.L. Hisgen, P. Knueven, M. Kronental, 
@@ -682,7 +682,7 @@ N. Lomuto, E. Ploedereder, G. Seegmueller, V. Stenning, D. Taffs, and
 also F. Belz, R. Converse, K. Correll, A.N. Habermann, J. Sammet, S. 
 Squires, J. Teller, P. Wegner, and P.R. Wetherall.</span></div>
 <div class="paranum"><a name="p65.7">65.7/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Several persons had a constructive 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Several persons had a constructive 
 influence with their comments, criticisms and suggestions. They include 
 P. Brinch Hansen, G. Goos, C.A.R. Hoare, Mark Rain, W.A. Wulf, and also 
 E. Boebert, P. Bonnard, H. Clausen, M. Cox, G. Dismukes, R. Eachus, T. 
@@ -692,7 +692,7 @@ Singer, D. Slosberg, I.C. Wand, the reviewers of Ada-Europe, AdaTech,
 Afcet, those of the LMSC review team, and those of the Ada Tokyo Study 
 Group.</span></div>
 <div class="paranum"><a name="p65.8">65.8/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">These reviews and comments, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">These reviews and comments, 
 the numerous evaluation reports received at the end of the first and 
 second phase, the nine hundred language issue reports and test and evaluation 
 reports received from fifteen different countries during the third phase 
@@ -701,7 +701,7 @@ and the on-going work of the IFIP Working Group 2.4 on system implementation
 languages and that of the Purdue Europe LTPL-E committee, all had a substantial 
 influence on the final definition of Ada.</span></div>
 <div class="paranum"><a name="p65.9">65.9/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">The Military Departments 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">The Military Departments 
 and Agencies have provided a broad base of support including funding, 
 extensive reviews, and countless individual contributions by the members 
 of the High Order Language Working Group and other interested personnel. 
@@ -710,7 +710,7 @@ during the formative stages. David A. Fisher was responsible for the
 successful development and refinement of the language requirement documents 
 that led to the Steelman specification.</span></div>
 <div class="paranum"><a name="p65.10">65.10/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">The Ada 83 language definition 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3">The Ada 83 language definition 
 was developed by Cii Honeywell Bull and later Alsys, and by Honeywell 
 Systems and Research Center, under contract to the United States Department 
 of Defense. William E. Carlson and later Larry E. Druffel served as the 
@@ -766,38 +766,38 @@ Program Office. Christine M. Anderson at the Air Force Phillips Laboratory
 <div class="WideAbove"><span class="insert1"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Corrigendum version</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p71.1">71.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">The editor [R. Brukardt (USA)] 
-would like to thank the many people whose hard work and assistance has 
-made this&nbsp;</span><span class="insert3">update</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;revision</span></span><span class="insert1">&nbsp;possible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">The editor [R. Brukardt 
+(USA)] would like to thank the many people whose hard work and assistance 
+has made this&nbsp;</span><span class="insert3">update</span><span class="insert1"></span><span class="insert1"><span class="delete3">&nbsp;revision</span></span><span class="insert1">&nbsp;possible.</span></div>
 <div class="paranum"><a name="p71.2">71.2/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">Thanks go out to all of the 
-members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work 
-on creating and editing the wording corrections was critical to the entire 
-process. Especially valuable contributions came from the chairman of 
-the ARG, E. Ploedereder (Germany), who kept the process moving; J. Barnes 
-(UK) and K. Ishihata (Japan), whose extremely detailed reviews kept the 
-editor on his toes; G. Dismukes (USA), M. Kamrad (USA), P. Leroy (France), 
-S. Michell (Canada), T. Taft (USA), J. Tokar (USA), and other members 
-too numerous to mention.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">Thanks go out to all of 
+the members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose 
+work on creating and editing the wording corrections was critical to 
+the entire process. Especially valuable contributions came from the chairman 
+of the ARG, E. Ploedereder (Germany), who kept the process moving; J. 
+Barnes (UK) and K. Ishihata (Japan), whose extremely detailed reviews 
+kept the editor on his toes; G. Dismukes (USA), M. Kamrad (USA), P. Leroy 
+(France), S. Michell (Canada), T. Taft (USA), J. Tokar (USA), and other 
+members too numerous to mention.</span></div>
 <div class="paranum"><a name="p71.3">71.3/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">Special thanks go to R. Duff 
-(USA) for his explanations of the previous system of formatting of these 
-documents during the tedious conversion to more modern formats. Special 
-thanks also go to the convenor of ISO/IEC JTC 1/SC 22/WG 9, J. Moore 
-(USA), without whose help and support the Corrigendum and this consolidated 
-reference manual would not have been possible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">Special thanks go to R. 
+Duff (USA) for his explanations of the previous system of formatting 
+of these documents during the tedious conversion to more modern formats. 
+Special thanks also go to the convenor of ISO/IEC JTC 1/SC 22/WG 9, J. 
+Moore (USA), without whose help and support the Corrigendum and this 
+consolidated reference manual would not have been possible.</span></div>
 <div class="WideAbove"><span class="insert2"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Amendment 1 version</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p71.4">71.4/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The editor [R. Brukardt (USA)] 
-would like to thank the many people whose hard work and assistance has 
-made this&nbsp;</span><span class="insert3">update</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;revision</span></span><span class="insert2">&nbsp;possible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The editor [R. Brukardt 
+(USA)] would like to thank the many people whose hard work and assistance 
+has made this&nbsp;</span><span class="insert3">update</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;revision</span></span><span class="insert2">&nbsp;possible.</span></div>
 <div class="paranum"><a name="p71.5">71.5/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">Thanks go out to all of the 
-members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work 
-on creating and editing the wording corrections was critical to the entire 
-process. Especially valuable contributions came from the chairman of 
-the ARG, P. Leroy (France), who kept the process on schedule; J. Barnes 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">Thanks go out to all of 
+the members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose 
+work on creating and editing the wording corrections was critical to 
+the entire process. Especially valuable contributions came from the chairman 
+of the ARG, P. Leroy (France), who kept the process on schedule; J. Barnes 
 (UK) whose careful reviews found many typographical errors; T. Taft (USA), 
 who always seemed to have a suggestion when we were stuck, and who also 
 was usually able to provide the valuable service of explaining why things 
@@ -808,7 +808,7 @@ G. Dismukes (USA), R. Duff (USA), K. Ishihata (Japan), S. Michell (Canada),
 E. Ploedereder (Germany), J.P. Rosen (France), E. Schonberg (USA), J. 
 Tokar (USA), and T. Vardanega (Italy).</span></div>
 <div class="paranum"><a name="p71.6">71.6/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">Special thanks go to Ada-Europe 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">Special thanks go to Ada-Europe 
 and the Ada Resource Association, without whose help and support the 
 Amendment and this consolidated reference manual would not have been 
 possible. M. Heaney (USA) requires special thanks for his tireless work 
@@ -818,15 +818,15 @@ through the standardization process.</span></div>
 <div class="WideAbove"><span class="insert3"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Ada 2012 edition</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p71.7">71.7/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">The editor [R. Brukardt (USA)] 
-would like to thank the many people whose hard work and assistance has 
-made this revision possible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">The editor [R. Brukardt 
+(USA)] would like to thank the many people whose hard work and assistance 
+has made this revision possible.</span></div>
 <div class="paranum"><a name="p71.8">71.8/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Thanks go out to all of the 
-members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work 
-on creating and editing the wording changes was critical to the entire 
-process. Especially valuable contributions came from the chairman of 
-the ARG, E. Schonberg (USA), who guided the work; T. Taft (USA), whose 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Thanks go out to all of 
+the members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose 
+work on creating and editing the wording changes was critical to the 
+entire process. Especially valuable contributions came from the chairman 
+of the ARG, E. Schonberg (USA), who guided the work; T. Taft (USA), whose 
 insights broke many logjams, both in design and wording; J. Barnes (UK) 
 whose careful reviews uncovered many editorial errors; S. Baird (USA), 
 who repeatedly found obscure interactions with the proposals that the 
@@ -835,7 +835,7 @@ A. Burns (UK), J. Cousins (UK), R. Dewar (USA), G. Dismukes (USA), R.
 Duff (USA), P. Leroy (France), B. Moore (Canada), E. Ploedereder (Germany), 
 J.P. Rosen (France), B. Thomas (USA), and T. Vardanega (Italy).</span></div>
 <div class="paranum"><a name="p71.9">71.9/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Special thanks go to Ada-Europe 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Special thanks go to Ada-Europe 
 and the Ada Resource Association, without whose help and support this 
 third edition of the Ada Standard would not have been possible. A special 
 mention has to go to A. Beneschan (USA) for his efforts in eliminating 
@@ -846,11 +846,11 @@ the document through the standardization process.</span>&nbsp;</div>
 <div class="WideAbove"><span class="insert4"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Ada 2012 Corrigendum 1 version</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p71.10">71.10/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The editor [R. Brukardt 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4">The editor [R. Brukardt 
 (USA)] would like to thank the many people whose hard work and assistance 
 has made this update possible.</span></div>
 <div class="paranum"><a name="p71.11">71.11/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Thanks go out to all of 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4">Thanks go out to all of 
 the members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose 
 work on creating and editing the wording changes was critical to the 
 entire process. Especially valuable contributions came from the chairman 
@@ -863,7 +863,7 @@ contributed were: A. Burns (UK), R. Dewar (USA), G. Dismukes (USA), R.
 Duff (USA), B. Moore (Canada), E. Ploedereder (Germany), J.P. Rosen (France), 
 E. Schonberg (USA), and T. Vardanega (Italy).</span></div>
 <div class="paranum"><a name="p71.12">71.12/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Finally, special thanks 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4">Finally, special thanks 
 go to the convenor of ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided 
 the document through the standardization process.</span>&nbsp;</div>
 <div class="WideAbove"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Changes</B></SPAN></SPAN></div>
@@ -901,7 +901,7 @@ included in the International Standard.</span>&nbsp;</div>
 <div class="WideAbove"><span class="insert1"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Using 
 this version of the Ada Reference Manual</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p77.4">77.4/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">This document has been revised 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">This document has been revised 
 with&nbsp;</span><span class="insert4">the corrections specified in Technical 
 Corrigendum 1 (ISO/IEC 8652:2012/COR.1:2016)</span><span class="insert1"></span><span class="insert1"><span class="delete4">&nbsp;the 
 corrections specified in Technical Corrigendum 1 (ISO/IEC 8652:1995/COR.1:2001)</span></span><span class="insert2"><span class="delete4">&nbsp;and Amendment 1 (ISO/IEC 8652/AMD 1:2007)</span></span><span class="insert3"><span class="delete4">, 
@@ -909,8 +909,8 @@ along with changes specifically for this third edition</span></span><span class=
 In addition, a variety of editorial errors have been corrected.</span> 
 </div>
 <div class="paranum"><a name="p77.5">77.5/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">Changes to the original 8652:1995 
-can be identified by the version number&nbsp;</span><span class="insert1"><span class="delete2">/1 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">Changes to the original 
+8652:1995 can be identified by the version number&nbsp;</span><span class="insert1"><span class="delete2">/1 
 </span></span><span class="insert1">following the paragraph number.</span><span class="insert2">&nbsp;Paragraphs with a version number of /1 were changed by Technical Corrigendum 
 1&nbsp;</span><span class="insert4">for Ada 95&nbsp;</span><span class="insert2">or 
 were editorial corrections at that time, while paragraphs with a version 

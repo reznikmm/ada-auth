@@ -13,26 +13,24 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,101 +42,79 @@
 <H1>D.1 Task Priorities</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-specifies the priority model for real-time systems. In addition, the 
-methods for specifying priorities are defined.]&nbsp;</div>
-<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-2 through 6 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
-Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+[This subclause specifies the priority model for real-time systems. In 
+addition, the methods for specifying priorities are defined.]&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 2 through 
+6 were moved to <A HREF="AA-J.html">Annex J</A>, &ldquo;<A HREF="AA-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Priority is as follows:</span>&nbsp;</div>
-<div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8650"></A><A NAME="I8651"></A>Priority(<A NAME="I8652"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>);</span></div>
-<div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Interrupt_Priority is as follows:</span>&nbsp;</div>
-<div class="paranum"><a name="p5">5/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I8653"></A><A NAME="I8654"></A>Interrupt_Priority[(<A NAME="I8655"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>)</span>;] 
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 </div>
+<div class="paranum"><a name="p3">3/3</a></div>
+<div class="Indented1"></div>
+<div class="paranum"><a name="p4">4/3</a></div>
+<div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+</div>
+<div class="paranum"><a name="p5">5/3</a></div>
+<div class="Indented1"></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3"><A NAME="I8656"></A><A NAME="I8657"></A>The expected 
-type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-in a Priority or Interrupt_Priority pragma is Integer.</span>&nbsp;</div>
+</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">For a task type (including the anonymous type of 
-a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>), 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>), 
 protected type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0211">single_protected_declaration</A></SPAN>), 
 or subprogram, the following language-defined representation aspects 
-may be specified:</span></div>
+may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">Priority</span></div><div class="WideHanging-Body">
-<span class="insert3">The aspect Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I8658"></A><A NAME="I8659"></A></span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Priority</div><div class="WideHanging-Body">
+The aspect Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+which shall be of type Integer.<A NAME="I8467"></A><A NAME="I8468"></A></div>
 <div class="paranum"><a name="p6.a">6.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>Priority:&nbsp;</B></span><span class="insert3">Priority 
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Priority:&nbsp;</B>Priority 
 of a task object or type, or priority of a protected object or type; 
-the priority is not in the interrupt range.</span></div>
+the priority is not in the interrupt range.</div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">Interrupt_Priority</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">The aspect Interrupt_Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
-which shall be of type Integer.<A NAME="I8660"></A><A NAME="I8661"></A></span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Interrupt_Priority</div><div class="WideHanging-Body"><br clear="left">
+The aspect Interrupt_Priority is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+which shall be of type Integer.<A NAME="I8469"></A><A NAME="I8470"></A></div>
 <div class="paranum"><a name="p6.b">6.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>Interrupt_Priority:&nbsp;</B></span><span class="insert3">Priority 
-of a task object or type, or priority of a protected object or type; 
-the priority is in the interrupt range.</span></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Interrupt_Priority: 
+</B>Priority of a task object or type, or priority of a protected object 
+or type; the priority is in the interrupt range.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">A Priority pragma is allowed only immediately within 
-a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">task_definition</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0212">protected_definition</A></SPAN>, 
-or the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN>. 
-An Interrupt_Priority pragma is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">task_definition</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0212">protected_definition</A></SPAN>. 
-At most one such pragma shall appear within a given construct.</span></div>
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">If the</span><span class="delete3">&nbsp;For a</span> 
-Priority <span class="insert3">aspect is specified for a subprogram</span><span class="delete3">&nbsp;pragma 
-that appears in the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN></span>, 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+If the Priority aspect is specified for a subprogram, the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 shall be static, and its value shall be in the range of System.Priority. 
 </div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This value is needed before it 
 gets elaborated, when the environment task starts executing.&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">At most one of the Priority and Interrupt_Priority 
-aspects may be specified for a given entity.</span></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+At most one of the Priority and Interrupt_Priority aspects may be specified 
+for a given entity.</div>
 <div class="paranum"><a name="p8.b">8.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-includes specifying via pragmas (see <A HREF="AA-J-15-11.html">J.15.11</A>). 
-Note that <A HREF="AA-13-1.html">13.1</A> prevents multiple specifications 
-of a single representation aspect by any means.</span>&nbsp;</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This includes specifying 
+via pragmas (see <A HREF="AA-J-15-11.html">J.15.11</A>). Note that <A HREF="AA-13-1.html">13.1</A> 
+prevents multiple specifications of a single representation aspect by 
+any means.&nbsp;</div>
 <div class="paranum"><a name="p8.2">8.2/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">Neither of the Priority or Interrupt_Priority aspects 
-shall be specified for a synchronized interface type.</span></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+Neither of the Priority or Interrupt_Priority aspects shall be specified 
+for a synchronized interface type.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
@@ -163,25 +139,18 @@ or more interrupts is specified by the subtype Interrupt_Priority. [The
 subrange of priority values below System.Interrupt_Priority'First is 
 specified by the subtype System.Priority.]</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="delete3">The priority specified by a Priority or Interrupt_Priority 
-pragma is the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-in the pragma, if any. If there is no <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-in an Interrupt_Priority pragma, the priority value is Interrupt_Priority'Last.</span></div>
+<div class="Normal">&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph was 
+deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3">The</span><span class="delete3">&nbsp;A</span> Priority 
-<span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-has no effect if it <span class="insert3">is specified for</span><span class="delete3">&nbsp;it 
-occurs in the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of the <SPAN Class="swiss"><A HREF="AA-6-3.html#S0177">subprogram_body</A></SPAN> 
-of</span> a subprogram other than the main subprogram<span class="insert3">; 
-the Priority value is not associated with any task</span>.</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The Priority aspect has no effect if it is specified for a subprogram 
+other than the main subprogram; the Priority value is not associated 
+with any task.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I8662"></A><A NAME="I8663"></A><A NAME="I8664"></A><A NAME="I8665"></A><A NAME="I8666"></A>A 
+<div class="Normal"><A NAME="I8471"></A><A NAME="I8472"></A><A NAME="I8473"></A><A NAME="I8474"></A><A NAME="I8475"></A>A 
 <I>task priority</I> is an integer value that indicates a degree of urgency 
 and is the basis for resolving competing demands of tasks for resources. 
 Unless otherwise specified, whenever tasks compete for processors or 
@@ -198,54 +167,40 @@ is used in the evaluation of another task's active priority.&nbsp;</div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
 execution resources.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-The effect of specifying <span class="insert3">a Priority or Interrupt_Priority 
-aspect for a protected type or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0211">single_protected_declaration</A></SPAN></span><span class="delete3">&nbsp;such 
-a pragma in a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0212">protected_definition</A></SPAN></span> 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+The effect of specifying a Priority or Interrupt_Priority aspect for 
+a protected type or <SPAN Class="swiss"><A HREF="AA-9-4.html#S0211">single_protected_declaration</A></SPAN> 
 is discussed in <A HREF="AA-D-3.html">D.3</A>.</div>
 <div class="paranum"><a name="p17">17/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0081-1.TXT">AI12-0081-1</A></I>} 
-<A NAME="I8667"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-<span class="insert3">specified for the</span><span class="delete3">&nbsp;in 
-a</span> Priority or Interrupt_Priority <span class="insert3">aspect 
-of a task</span><span class="insert4">&nbsp;type</span><span class="insert3"></span><span class="delete3">&nbsp;pragma 
-that appears in a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">task_definition</A></SPAN></span> 
-is evaluated <span class="delete4">for&nbsp;</span>each <span class="insert4">time 
+<A NAME="I8476"></A>The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+specified for the Priority or Interrupt_Priority aspect of a task<span class="insert4">&nbsp;type</span> is evaluated <span class="delete4">for&nbsp;</span>each <span class="insert4">time 
 an</span><span class="delete4">&nbsp;task</span> object<span class="insert4">&nbsp;of the task type is created</span> (see <A HREF="AA-9-1.html">9.1</A>). 
-For <span class="insert3">the</span><span class="delete3">&nbsp;a</span> Priority 
-<span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span>, 
-the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-is converted to the subtype Priority; for <span class="insert3">the</span><span class="delete3">&nbsp;an</span> 
-Interrupt_Priority <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span>, 
+For the Priority aspect, the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+is converted to the subtype Priority; for the Interrupt_Priority aspect, 
 this value is converted to the subtype Any_Priority. The priority value 
-is then associated with the task object<span class="delete4">whose&nbsp;</span><span class="insert3"><span class="delete4">task 
-declaration specifies the aspect</span></span><span class="delete4"></span><span class="delete3"><SPAN Class="swiss"><A HREF="AA-9-1.html#S0207">&nbsp;task_definition</A></SPAN> 
-contains the pragma</span><span class="delete4"></span>. <span class="insert3"><A NAME="I8668"></A><A NAME="I8669"></A></span><span class="delete3"><A NAME="I8670"></A><A NAME="I8671"></A></span></div>
+is then associated with the task object<span class="delete4">whose task 
+declaration specifies the aspect</span>. <A NAME="I8477"></A><A NAME="I8478"></A></div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 Likewise, the priority value is associated with the environment task 
-if the <span class="insert3">aspect is specified for</span><span class="delete3">&nbsp;pragma 
-appears in the <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-of</span> the main subprogram.</div>
+if the aspect is specified for the main subprogram.</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 The initial value of a task's base priority is specified by default or 
-by means of a Priority or Interrupt_Priority <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span>. 
-[After a task is created, its base priority can be changed only by a 
-call to Dynamic_Priorities.Set_Priority (see <A HREF="AA-D-5.html">D.5</A>).] 
-The initial base priority of a task in the absence of <span class="insert3">an 
-aspect</span><span class="delete3">&nbsp;a pragma</span> is the base priority 
-of the task that creates it at the time of creation (see <A HREF="AA-9-1.html">9.1</A>). 
-If <span class="insert3">the aspect</span><span class="delete3">&nbsp;a pragma</span> 
-Priority <span class="insert3">is not specified for</span><span class="delete3">&nbsp;does 
-not apply to</span> the main subprogram, the initial base priority of 
-the environment task is System.Default_Priority. [The task's active priority 
-is used when the task competes for processors. Similarly, the task's 
-active priority is used to determine the task's position in any queue 
-when Priority_Queuing is specified (see <A HREF="AA-D-4.html">D.4</A>).]</div>
+by means of a Priority or Interrupt_Priority aspect. [After a task is 
+created, its base priority can be changed only by a call to Dynamic_Priorities.Set_Priority 
+(see <A HREF="AA-D-5.html">D.5</A>).] The initial base priority of a 
+task in the absence of an aspect is the base priority of the task that 
+creates it at the time of creation (see <A HREF="AA-9-1.html">9.1</A>). 
+If the aspect Priority is not specified for the main subprogram, the 
+initial base priority of the environment task is System.Default_Priority. 
+[The task's active priority is used when the task competes for processors. 
+Similarly, the task's active priority is used to determine the task's 
+position in any queue when Priority_Queuing is specified (see <A HREF="AA-D-4.html">D.4</A>).]</div>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00357.TXT">AI95-00357-01</A></I>} 
 At any time, the active priority of a task is the maximum of all the 
 priorities the task is inheriting at that instant. For a task that is 
 not held (see <A HREF="AA-D-11.html">D.11</A>), its base priority is 
@@ -294,19 +249,18 @@ another source, its active priority is re-evaluated. This is in addition
 to other instances described in this Annex for such re-evaluation.</div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Notes">6&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-An implementation may provide a <span class="insert3">nonstandard</span><span class="delete3">&nbsp;non-standard</span> 
-mode in which tasks inherit priorities under conditions other than those 
-specified above.&nbsp;</div>
+An implementation may provide a nonstandard mode in which tasks inherit 
+priorities under conditions other than those specified above.&nbsp;</div>
 <div class="paranum"><a name="p29.a">29.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-The use of a Priority or Interrupt_Priority <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-does not require the package System to be named in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
+The use of a Priority or Interrupt_Priority aspect does not require the 
+package System to be named in a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0255">with_clause</A></SPAN> 
 for the enclosing <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0247">compilation_unit</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p29.b">29.b</a></div>
-<div class="Annotations"><A NAME="I8672"></A>The priority of a task is 
+<div class="Annotations"><A NAME="I8479"></A>The priority of a task is 
 per-object and not per-type.</div>
 <div class="paranum"><a name="p29.c">29.c</a></div>
 <div class="Annotations">Priorities need not be static anymore (except 
@@ -332,9 +286,9 @@ the differences between the existing and new dispatching policies.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p29.g">29.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-<span class="insert3"><A NAME="I8673"></A>Aspects Priority and Interrupt_Priority 
-are new; <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s 
-Priority and Interrupt_Priority are now obsolescent.</span>&nbsp;</div>
+<A NAME="I8480"></A>Aspects Priority and Interrupt_Priority are new; 
+<SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>s Priority 
+and Interrupt_Priority are now obsolescent.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p29.h">29.h/4</a></div>

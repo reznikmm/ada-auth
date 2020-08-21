@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -36,219 +34,220 @@
 &nbsp;<A HREF="AA-E.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>D.16.1 <span class="insert3">Multiprocessor Dispatching Domains</span><span class="delete3"></span></H1>
+<H1>D.16.1 Multiprocessor Dispatching Domains</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3">This subclause</span><span class="insert3"><span class="delete3">&nbsp;clause</span></span><span class="insert3">&nbsp;allows implementations on multiprocessor platforms to be partitioned 
-into distinct dispatching domains during program startup.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+This subclause allows implementations on multiprocessor platforms to 
+be partitioned into distinct dispatching domains during program startup.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">The following language-defined library package 
-exists:</span>&nbsp;</div>
+The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><span class="insert3"><B>with</B>&nbsp;Ada.Real_Time;<BR>
+<div class="Examples"><B>with</B>&nbsp;Ada.Real_Time;<BR>
 <B>with</B>&nbsp;Ada.Task_Identification;<BR>
-<B>package</B>&nbsp;System.Multiprocessors.Dispatching_Domains&nbsp;<B>is</B><A NAME="I9025"></A></span></div>
+<B>package</B>&nbsp;System.Multiprocessors.Dispatching_Domains&nbsp;<B>is</B><A NAME="I8820"></A></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I9026"></A>Dispatching_Domain_Error&nbsp;:&nbsp;<B>exception</B>;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8821"></A>Dispatching_Domain_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9027"></A>Dispatching_Domain&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8822"></A>Dispatching_Domain&nbsp;(&lt;&gt;)&nbsp;<B>is&nbsp;limited&nbsp;private</B>;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<A NAME="I9028"></A>System_Dispatching_Domain&nbsp;:&nbsp;<B>constant</B>&nbsp;Dispatching_Domain;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8823"></A>System_Dispatching_Domain&nbsp;:&nbsp;<B>constant</B>&nbsp;Dispatching_Domain;</div>
 <div class="paranum"><a name="p7">7/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9029"></A>Create&nbsp;(First</span><span class="insert3"><span class="delete4">,&nbsp;Last</span></span><span class="insert3">&nbsp;:&nbsp;CPU</span><span class="insert4">;&nbsp;Last&nbsp;:&nbsp;CPU_Range</span><span class="insert3">)&nbsp;<B>return</B>&nbsp;Dispatching_Domain;</span></div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8824"></A>Create&nbsp;(First<span class="delete4">,&nbsp;Last</span>&nbsp;:&nbsp;CPU<span class="insert4">;&nbsp;Last&nbsp;:&nbsp;CPU_Range</span>)&nbsp;<B>return</B>&nbsp;Dispatching_Domain;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9030"></A>Get_First_CPU&nbsp;(Domain&nbsp;:&nbsp;Dispatching_Domain)&nbsp;<B>return</B>&nbsp;CPU;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8825"></A>Get_First_CPU&nbsp;(Domain&nbsp;:&nbsp;Dispatching_Domain)&nbsp;<B>return</B>&nbsp;CPU;</div>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9031"></A>Get_Last_CPU&nbsp;&nbsp;(Domain&nbsp;:&nbsp;Dispatching_Domain)&nbsp;<B>return</B>&nbsp;</span><span class="insert4">CPU_Range</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;CPU</span></span><span class="insert3">;</span></div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8826"></A>Get_Last_CPU&nbsp;&nbsp;(Domain&nbsp;:&nbsp;Dispatching_Domain)&nbsp;<B>return</B>&nbsp;<span class="insert4">CPU_Range</span><span class="delete4">&nbsp;CPU</span>;</div>
 <div class="paranum"><a name="p9.1">9.1/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert4">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9032"></A>CPU_Set&nbsp;<B>is&nbsp;array</B>(CPU&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
+<span class="insert4">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8827"></A>CPU_Set&nbsp;<B>is&nbsp;array</B>(CPU&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Boolean;</span></div>
 <div class="paranum"><a name="p9.2">9.2/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert4">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9033"></A>Create&nbsp;(Set&nbsp;:&nbsp;CPU_Set)&nbsp;<B>return</B>&nbsp;Dispatching_Domain;</span></div>
+<span class="insert4">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8828"></A>Create&nbsp;(Set&nbsp;:&nbsp;CPU_Set)&nbsp;<B>return</B>&nbsp;Dispatching_Domain;</span></div>
 <div class="paranum"><a name="p9.3">9.3/4</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert4">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9034"></A>Get_CPU_Set&nbsp;(Domain&nbsp;:&nbsp;Dispatching_Domain)&nbsp;<B>return</B>&nbsp;CPU_Set;</span></div>
+<span class="insert4">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8829"></A>Get_CPU_Set&nbsp;(Domain&nbsp;:&nbsp;Dispatching_Domain)&nbsp;<B>return</B>&nbsp;CPU_Set;</span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9035"></A>Get_Dispatching_Domain<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8830"></A>Get_Dispatching_Domain<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;&nbsp;&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Dispatching_Domain;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Dispatching_Domain;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9036"></A>Assign_Task<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8831"></A>Assign_Task<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Domain&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Dispatching_Domain;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU_Range&nbsp;:=&nbsp;Not_A_Specific_CPU;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9037"></A>Set_CPU<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8832"></A>Set_CPU<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(CPU&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Range;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task);</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9038"></A>Get_CPU<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8833"></A>Get_CPU<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;&nbsp;&nbsp;:&nbsp;Ada.Task_Identification.Task_Id&nbsp;:=<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ada.Task_Identification.Current_Task)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;CPU_Range;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;CPU_Range;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9039"></A>Delay_Until_And_Set_CPU<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;&nbsp;CPU&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Range);</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8834"></A>Delay_Until_And_Set_CPU<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Delay_Until_Time&nbsp;:&nbsp;<B>in</B>&nbsp;Ada.Real_Time.Time;&nbsp;CPU&nbsp;:&nbsp;<B>in</B>&nbsp;CPU_Range);</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Examples"><span class="insert3"><B>private</B><BR>
+<div class="Examples"><B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
-<B>end</B>&nbsp;System.Multiprocessors.Dispatching_Domains;</span></div>
+<B>end</B>&nbsp;System.Multiprocessors.Dispatching_Domains;</div>
 <div class="paranum"><a name="p16">16/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
-<span class="insert3"></span><span class="insert4">A <I>dispatching domain</I><A NAME="I9040"></A></span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;The 
-type Dispatching_Domain</span></span><span class="insert3">&nbsp;represents 
-a&nbsp;</span><span class="insert4">set</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;series</span></span><span class="insert3">&nbsp;of processors on which a task may execute. Each processor is contained 
-within exactly one&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">. 
-</span><span class="insert4">An object of type Dispatching_Domain identifies 
-a dispatching domain.&nbsp;</span><span class="insert3">System_Dispatching_Domain 
-</span><span class="insert4">identifies a domain that&nbsp;</span><span class="insert3">contains 
-the processor or processors on which the environment task executes. At 
-program start-up all processors are contained within&nbsp;</span><span class="insert4">this 
-domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;System_Dispatching_Domain</span></span><span class="insert3">.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
+<span class="insert4">A <I>dispatching domain</I><A NAME="I8835"></A></span><span class="delete4">&nbsp;The 
+type Dispatching_Domain</span> represents a <span class="insert4">set</span><span class="delete4">&nbsp;series</span> 
+of processors on which a task may execute. Each processor is contained 
+within exactly one <span class="insert4">dispatching domain</span><span class="delete4">&nbsp;Dispatching_Domain</span>. 
+<span class="insert4">An object of type Dispatching_Domain identifies 
+a dispatching domain.&nbsp;</span>System_Dispatching_Domain <span class="insert4">identifies 
+a domain that&nbsp;</span>contains the processor or processors on which the 
+environment task executes. At program start-up all processors are contained 
+within <span class="insert4">this domain</span><span class="delete4">&nbsp;System_Dispatching_Domain</span>.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">For a task type (including the anonymous type of 
-a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>), 
-the following language-defined representation aspect may be specified:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+For a task type (including the anonymous type of a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0206">single_task_declaration</A></SPAN>), 
+the following language-defined representation aspect may be specified:</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="WideHanging-Term"><span class="insert3">Dispatching_Domain</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">The value of aspect Dispatching_Domain is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
+<div class="WideHanging-Term">&nbsp;Dispatching_Domain</div><div class="WideHanging-Body"><br clear="left">
+The value of aspect Dispatching_Domain is an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Dispatching_Domains.Dispatching_Domain. This aspect 
 is the domain to which the task (or all objects of the task type) are 
-assigned.<A NAME="I9041"></A><A NAME="I9042"></A></span></div>
+assigned.<A NAME="I8836"></A><A NAME="I8837"></A></div>
 <div class="paranum"><a name="p18.a">18.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>Dispatching_Domain:&nbsp;</B></span><span class="insert3">Domain 
-(group of processors) on which a given task should run.</span></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Dispatching_Domain: 
+</B>Domain (group of processors) on which a given task should run.</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">The Dispatching_Domain aspect shall not be specified 
-for a task interface.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+The Dispatching_Domain aspect shall not be specified for a task interface.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert3">The expression specified for the Dispatching_Domain 
-aspect of a task&nbsp;</span><span class="insert4">type&nbsp;</span><span class="insert3">is 
-evaluated&nbsp;</span><span class="insert4">each time an object of the task 
-type is created</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;for 
-each task object</span></span><span class="insert3">&nbsp;(see <A HREF="AA-9-1.html">9.1</A>). 
-</span><span class="insert4">If the identified dispatching domain is 
-empty, then Dispatching_Domain_Error is raised; otherwise the newly created 
-task is assigned to the domain identified by the value of the expression</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;The 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
+The expression specified for the Dispatching_Domain aspect of a task 
+<span class="insert4">type&nbsp;</span>is evaluated <span class="insert4">each 
+time an object of the task type is created</span><span class="delete4">&nbsp;for 
+each task object</span> (see <A HREF="AA-9-1.html">9.1</A>). <span class="insert4">If 
+the identified dispatching domain is empty, then Dispatching_Domain_Error 
+is raised; otherwise the newly created task is assigned to the domain 
+identified by the value of the expression</span><span class="delete4">&nbsp;The 
 Dispatching_Domain value is then associated with the task object whose 
-task declaration specifies the aspect</span></span><span class="insert3">.</span></div>
+task declaration specifies the aspect</span>.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">If a task is not explicitly assigned to any domain, 
-it is assigned to that of the activating task. A task always executes 
-on some CPU in its domain.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+If a task is not explicitly assigned to any domain, it is assigned to 
+that of the activating task. A task always executes on some CPU in its 
+domain.</div>
 <div class="paranum"><a name="p22">22/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
-<span class="insert3">If both&nbsp;</span><span class="insert4">the dispatching 
-domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;and CPU are specified for a task, and the CPU value is not contained 
-within the&nbsp;</span><span class="insert4">set</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;range</span></span><span class="insert3">&nbsp;of processors for the domain (and is not Not_A_Specific_CPU), the activation 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
+If both <span class="insert4">the dispatching domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> 
+and CPU are specified for a task, and the CPU value is not contained 
+within the <span class="insert4">set</span><span class="delete4">&nbsp;range</span> 
+of processors for the domain (and is not Not_A_Specific_CPU), the activation 
 of the task is defined to have failed, and it becomes a completed task 
-(see <A HREF="AA-9-2.html">9.2</A>).</span></div>
+(see <A HREF="AA-9-2.html">9.2</A>).</div>
 <div class="paranum"><a name="p23">23/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert3">The function Create&nbsp;</span><span class="insert4">with 
-First and Last parameters&nbsp;</span><span class="insert3">creates and returns 
-a&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;containing all the processors in the range First .. Last.&nbsp;</span><span class="insert4">The 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
+The function Create <span class="insert4">with First and Last parameters 
+</span>creates and returns a <span class="insert4">dispatching domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> 
+containing all the processors in the range First .. Last. <span class="insert4">The 
 function Create with a Set parameter creates and returns a dispatching 
-domain containing the processors for which Set(I) is True.</span><span class="insert3">&nbsp;These processors are removed from System_Dispatching_Domain. A call of 
-Create will raise Dispatching_Domain_Error if any designated processor 
-is not currently in System_Dispatching_Domain, or if the system cannot 
-support a distinct domain over the processors identified, or if a processor 
-has a task assigned to it, or if the allocation would leave System_Dispatching_Domain 
+domain containing the processors for which Set(I) is True.</span> These 
+processors are removed from System_Dispatching_Domain. A call of Create 
+will raise Dispatching_Domain_Error if any designated processor is not 
+currently in System_Dispatching_Domain, or if the system cannot support 
+a distinct domain over the processors identified, or if a processor has 
+a task assigned to it, or if the allocation would leave System_Dispatching_Domain 
 empty. A call of Create will raise Dispatching_Domain_Error if the calling 
 task is not the environment task, or if Create is called after the call 
-to the main subprogram.</span></div>
+to the main subprogram.</div>
 <div class="paranum"><a name="p24">24/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert3">The function Get_First_CPU returns the first CPU 
-in Domain</span><span class="insert4">, or CPU'First if Domain is empty</span><span class="insert3">; 
-Get_Last_CPU returns the last&nbsp;</span><span class="insert4">CPU in Domain, 
-or CPU_Range'First if Domain is empty. The function Get_CPU_Set(D) returns 
-an array whose low bound is Get_First_CPU(D), whose high bound is Get_Last_CPU(D), 
-with True values in the Set corresponding to the CPUs that are in the 
-given Domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;one</span></span><span class="insert3">.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
+The function Get_First_CPU returns the first CPU in Domain<span class="insert4">, 
+or CPU'First if Domain is empty</span>; Get_Last_CPU returns the last 
+<span class="insert4">CPU in Domain, or CPU_Range'First if Domain is 
+empty. The function Get_CPU_Set(D) returns an array whose low bound is 
+Get_First_CPU(D), whose high bound is Get_Last_CPU(D), with True values 
+in the Set corresponding to the CPUs that are in the given Domain</span><span class="delete4">&nbsp;one</span>.</div>
 <div class="paranum"><a name="p25">25/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
-<span class="insert3">The function Get_Dispatching_Domain returns the 
-</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;on which the task is assigned.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
+The function Get_Dispatching_Domain returns the <span class="insert4">dispatching 
+domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> on which 
+the task is assigned.</div>
 <div class="paranum"><a name="p26">26/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0278-1.TXT">AI05-0278-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert3">A call of the procedure Assign_Task assigns task 
-T to the CPU within&nbsp;</span><span class="insert4">the dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;Domain. Task T can now execute only on CPU</span><span class="insert4">,</span><span class="insert3">&nbsp;unless CPU designates Not_A_Specific_CPU</span><span class="insert3"><span class="delete4">,</span></span><span class="insert3">&nbsp;in which case it can execute on any processor within Domain. The exception 
-Dispatching_Domain_Error is propagated if</span><span class="insert4">&nbsp;Domain is empty,</span><span class="insert3">&nbsp;T is already assigned to 
-a&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;other than System_Dispatching_Domain, or if CPU is not one of the processors 
-of Domain (and is not Not_A_Specific_CPU). A call of Assign_Task is a 
-task dispatching point for task T unless T is inside of a protected action, 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0278-1.TXT">AI05-0278-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
+A call of the procedure Assign_Task assigns task T to the CPU within 
+<span class="insert4">the dispatching domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> 
+Domain. Task T can now execute only on CPU<span class="insert4">,</span> 
+unless CPU designates Not_A_Specific_CPU<span class="delete4">,</span> 
+in which case it can execute on any processor within Domain. The exception 
+Dispatching_Domain_Error is propagated if<span class="insert4">&nbsp;Domain 
+is empty,</span> T is already assigned to a <span class="insert4">dispatching 
+domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> other than 
+System_Dispatching_Domain, or if CPU is not one of the processors of 
+Domain (and is not Not_A_Specific_CPU). A call of Assign_Task is a task 
+dispatching point for task T unless T is inside of a protected action, 
 in which case the effect on task T is delayed until its next task dispatching 
 point. If T is the Current_Task the effect is immediate if T is not inside 
 a protected action, otherwise the effect is as soon as practical. Assigning 
-a task&nbsp;</span><span class="insert4">already assigned&nbsp;</span><span class="insert3">to 
-System_Dispatching_Domain&nbsp;</span><span class="insert3"><span class="delete4">that 
-is already assigned&nbsp;</span></span><span class="insert3">to that domain 
-has no effect.</span></div>
+a task <span class="insert4">already assigned&nbsp;</span>to System_Dispatching_Domain 
+<span class="delete4">that is already assigned&nbsp;</span>to that domain 
+has no effect.</div>
 <div class="paranum"><a name="p27">27/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0278-1.TXT">AI05-0278-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
-<span class="insert3">A call of procedure Set_CPU assigns task T to the 
-CPU. Task T can now execute only on CPU, unless CPU designates Not_A_Specific_CPU, 
-in which case it can execute on any processor within its&nbsp;</span><span class="insert4">dispatching 
-domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">. 
-The exception Dispatching_Domain_Error is propagated if CPU is not one 
-of the processors of the&nbsp;</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;on which T is assigned (and is not Not_A_Specific_CPU). A call of Set_CPU 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0278-1.TXT">AI05-0278-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
+A call of procedure Set_CPU assigns task T to the CPU. Task T can now 
+execute only on CPU, unless CPU designates Not_A_Specific_CPU, in which 
+case it can execute on any processor within its <span class="insert4">dispatching 
+domain</span><span class="delete4">&nbsp;Dispatching_Domain</span>. The exception 
+Dispatching_Domain_Error is propagated if CPU is not one of the processors 
+of the <span class="insert4">dispatching domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> 
+on which T is assigned (and is not Not_A_Specific_CPU). A call of Set_CPU 
 is a task dispatching point for task T unless T is inside of a protected 
 action, in which case the effect on task T is delayed until its next 
 task dispatching point. If T is the Current_Task the effect is immediate 
 if T is not inside a protected action, otherwise the effect is as soon 
-as practical.</span></div>
+as practical.</div>
 <div class="paranum"><a name="p28">28/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">The function Get_CPU returns the processor assigned 
-to task T, or Not_A_Specific_CPU if the task is not assigned to a processor.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+The function Get_CPU returns the processor assigned to task T, or Not_A_Specific_CPU 
+if the task is not assigned to a processor.</div>
 <div class="paranum"><a name="p29">29/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
-<span class="insert3">A call of Delay_Until_And_Set_CPU delays the calling 
-task for the designated time and then assigns the task to the specified 
-processor when the delay expires. The exception Dispatching_Domain_Error 
-is propagated if P is not one of the processors of the calling task's 
-</span><span class="insert4">dispatching domain</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;Dispatching_Domain</span></span><span class="insert3">&nbsp;(and is not Not_A_Specific_CPU).</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0082-1.TXT">AI12-0082-1</A></I>} 
+A call of Delay_Until_And_Set_CPU delays the calling task for the designated 
+time and then assigns the task to the specified processor when the delay 
+expires. The exception Dispatching_Domain_Error is propagated if P is 
+not one of the processors of the calling task's <span class="insert4">dispatching 
+domain</span><span class="delete4">&nbsp;Dispatching_Domain</span> (and is 
+not Not_A_Specific_CPU).</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p30">30/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">The implementation shall perform the operations 
-Assign_Task, Set_CPU, Get_CPU and Delay_Until_And_Set_CPU atomically 
-with respect to any of these operations on the same dispatching_domain, 
-processor or task.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+The implementation shall perform the operations Assign_Task, Set_CPU, 
+Get_CPU and Delay_Until_And_Set_CPU atomically with respect to any of 
+these operations on the same dispatching_domain, processor or task.</div>
 <div class="paranum"><a name="p30.1">30.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0048-1.TXT">AI12-0048-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0048-1.TXT">AI12-0048-1</A></I>} 
 <span class="insert4">Any task that belongs to the system dispatching 
 domain can execute on any CPU within that domain, unless the assignment 
 of the task has been specified.</span></div>
@@ -276,13 +275,11 @@ task, or by calling a dynamic operation like Set_CPU or Assign_Task.</span>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p31">31/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">Each dispatching domain should have separate and 
-disjoint ready queues.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+Each dispatching domain should have separate and disjoint ready queues.</div>
 <div class="paranum"><a name="p31.a">31.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
-</B></span><span class="insert3">Each dispatching domain should have 
-separate and disjoint ready queues.</span></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>Each dispatching 
+domain should have separate and disjoint ready queues.</div>
 <div class="paranum"><a name="p31.b">31.b/4</a></div>
 <div class="Annotations"><span class="insert4"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0048-1.TXT">AI12-0048-1</A></I>} 
 <span class="insert4">&ldquo;Ready queue&rdquo; here doesn't mean the 
@@ -292,36 +289,34 @@ by the implementation.</span>&nbsp;</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p32">32/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">The implementation shall document the processor(s) 
-on which the clock interrupt is handled and hence where delay queue and 
-ready queue manipulations occur. For any Interrupt_Id whose handler can 
-execute on more than one processor the implementation shall also document 
-this set of processors.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+The implementation shall document the processor(s) on which the clock 
+interrupt is handled and hence where delay queue and ready queue manipulations 
+occur. For any Interrupt_Id whose handler can execute on more than one 
+processor the implementation shall also document this set of processors.</div>
 <div class="paranum"><a name="p32.a">32.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Documentation Requirement: 
-</B></span><span class="insert3">The processor(s) on which the clock 
-interrupt is handled; the processors on which each Interrupt_Id can be 
-handled.</span></div>
+<div class="Annotations"><B>Documentation Requirement:&nbsp;</B>The processor(s) 
+on which the clock interrupt is handled; the processors on which each 
+Interrupt_Id can be handled.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p33">33/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3">An implementation may limit the number of dispatching 
-domains that can be created and raise Dispatching_Domain_Error if an 
-attempt is made to exceed this number.</span></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
+An implementation may limit the number of dispatching domains that can 
+be created and raise Dispatching_Domain_Error if an attempt is made to 
+exceed this number.</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p33.a">33.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0167-1.TXT">AI05-0167-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0278-1.TXT">AI05-0278-1</A></I>} 
-<span class="insert3"><A NAME="I9043"></A>The package System.Multiprocessors.Dispatching_Domains 
-and the aspect Dispatching_Domains are new.</span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0278-1.TXT">AI05-0278-1</A></I>} 
+<A NAME="I8838"></A>The package System.Multiprocessors.Dispatching_Domains 
+and the aspect Dispatching_Domains are new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p33.b">33.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0033-1.TXT">AI12-0033-1</A></I>} 
-<span class="insert4"><A NAME="I9044"></A><B>Corrigendum:</B> We now 
+<span class="insert4"><A NAME="I8839"></A><B>Corrigendum:</B> We now 
 explicitly allow empty dispatching domains, as it would be difficult 
 to avoid declaring them when a system is configured at runtime. Therefore, 
 assigning a task to an empty domain now raises Dispatching_Domain_Error; 
@@ -335,7 +330,7 @@ program can't do anything useful).</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p33.c">33.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0033-1.TXT">AI05-0033-1</A></I>} 
-<span class="insert4"><A NAME="I9045"></A><B>Corrigendum:</B> The subtypes 
+<span class="insert4"><A NAME="I8840"></A><B>Corrigendum:</B> The subtypes 
 of the parameter or result of several routines were changed to support 
 empty domains. These changes will cause rules requiring subtype conformance 
 to fail on these routines (such as 'Access). We believe such uses are 

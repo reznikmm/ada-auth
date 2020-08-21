@@ -33,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -50,7 +50,7 @@ and Containers.Ordered_Sets provide private types Set and Cursor, and
 a set of operations for each type. A set container allows elements of 
 an arbitrary type to be stored without duplication. A hashed set uses 
 a hash function to organize elements, while an ordered set orders its 
-element per a specified relation.<A NAME="I7986"></A> <A NAME="I7987"></A></span></div>
+element per a specified relation.<A NAME="I8287"></A> <A NAME="I8288"></A></span></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
@@ -69,7 +69,7 @@ and symmetric relationship and return the same result value each time
 it is called with a particular pair of values. If it behaves in some 
 other manner, the function &quot;=&quot; on set values returns an unspecified 
 value. The exact arguments and number of calls of this generic formal 
-function by the function &quot;=&quot; on set values are unspecified.<A NAME="I7988"></A></span></div>
+function by the function &quot;=&quot; on set values are unspecified.<A NAME="I8289"></A></span></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Ramification:&nbsp;</B>If 
 the actual function for &quot;=&quot; is not symmetric and consistent, 
@@ -83,17 +83,17 @@ aren't expected to use &quot;=&quot;).</span>&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">The type Set is used to represent sets. The type 
-Set needs finalization<A NAME="I7989"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
+Set needs finalization<A NAME="I8290"></A> (see <A HREF="AA-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">A set contains elements. Set cursors designate 
 elements. There exists an equivalence relation on elements, whose definition 
 is different for hashed sets and ordered sets. A set never contains two 
 or more equivalent elements. The <I>length</I> of a set is the number 
-of elements it contains.<A NAME="I7990"></A></span></div>
+of elements it contains.<A NAME="I8291"></A></span></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<span class="insert2"><A NAME="I7991"></A><A NAME="I7992"></A><A NAME="I7993"></A>Each 
+<span class="insert2"><A NAME="I8292"></A><A NAME="I8293"></A><A NAME="I8294"></A>Each 
 nonempty set has two particular elements called the <I>first element</I> 
 and the <I>last element</I> (which may be the same). Each element except 
 for the last element has a <I>successor element</I>. If there are no 
@@ -113,7 +113,7 @@ of a container because they depend on elements of the container not being
 replaced.]</span></div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<span class="insert2"><A NAME="I7994"></A>A subprogram is said to <I>tamper 
+<span class="insert2"><A NAME="I8295"></A>A subprogram is said to <I>tamper 
 with cursors</I> of a set object <I>S</I> if:</span></div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Bulleted"><span class="insert2">it inserts or deletes elements 
@@ -138,7 +138,7 @@ as it is defined in terms of Replace_Element.</span>&nbsp;</div>
 the Target parameter; or</span></div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>We 
-don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>, 
+don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>, 
 because that finalizes the target object as part of the operation, and 
 finalization of an object is already defined as tampering with cursors.</span> 
 </div>
@@ -150,7 +150,7 @@ with <I>S</I> as a parameter; or</span></div>
 defined to tamper with cursors of <I>S</I>.</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<span class="insert2"><A NAME="I7995"></A>A subprogram is said to <I>tamper 
+<span class="insert2"><A NAME="I8296"></A>A subprogram is said to <I>tamper 
 with elements</I> of a set object <I>S</I> if:</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Bulleted"><span class="insert2">it tampers with cursors of 
@@ -171,7 +171,7 @@ containers.</span>&nbsp;</div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
-<span class="insert3"><A NAME="I7996"></A><A NAME="I7997"></A>When tampering 
+<span class="insert3"><A NAME="I8297"></A><A NAME="I8298"></A>When tampering 
 with cursors is <I>prohibited</I> for a particular set object <I>S</I>, 
 Program_Error is propagated by a call of any language-defined subprogram 
 that is defined to tamper with the cursors of <I>S</I>, leaving <I>S</I> 
@@ -351,7 +351,7 @@ Any exception raised by Process.<B>all</B> is propagated.</span></div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
 <div class="paranum"><a name="p36.2">36.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The type Constant_Reference_Type needs finalization.<A NAME="I7998"></A></span></div>
+<span class="insert3">The type Constant_Reference_Type needs finalization.<A NAME="I8299"></A></span></div>
 <div class="paranum"><a name="p36.3">36.3/3</a></div>
 <div class="Indented2"><span class="insert3">The default initialization 
 of an object of type Constant_Reference_Type propagates Program_Error.</span></div>
@@ -389,7 +389,7 @@ finalized.</span></div>
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 <span class="insert3">If Target denotes the same object as Source, the 
 operation has no effect. Otherwise, the elements of Source are copied 
-to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 assigning Source to Target.</span>&nbsp;</div>
 <div class="paranum"><a name="p36.b">36.b/3</a></div>
 <div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
@@ -680,13 +680,13 @@ an element) instead of a complete element. The formal function Key of
 Generic_Keys extracts a key value from an element. It is expected to 
 return the same value each time it is called with a particular element. 
 The behavior of Generic_Keys is unspecified if Key behaves in some other 
-manner.<A NAME="I7999"></A></span></div>
+manner.<A NAME="I8300"></A></span></div>
 <div class="paranum"><a name="p88">88/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">A key is expected to unambiguously determine a 
 single equivalence class for elements. The behavior of Generic_Keys is 
 unspecified if the formal parameters of this package behave in some other 
-manner.<A NAME="I8000"></A></span></div>
+manner.<A NAME="I8301"></A></span></div>
 <div class="paranum"><a name="p89">89/2</a></div>
 <div class="Examples"><span class="insert2"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type;</span></div>
 <div class="paranum"><a name="p90">90/2</a></div>
@@ -748,7 +748,7 @@ must be possible to change the discriminants of the element in place.</span>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
 <div class="paranum"><a name="p96.2">96.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The type Reference_Type needs finalization.<A NAME="I8001"></A></span></div>
+<span class="insert3">The type Reference_Type needs finalization.<A NAME="I8302"></A></span></div>
 <div class="paranum"><a name="p96.3">96.3/3</a></div>
 <div class="Indented2"><span class="insert3">The default initialization 
 of an object of type Reference_Type propagates Program_Error.</span></div>
@@ -807,7 +807,7 @@ individual element of a set given a key value.</span></div>
 <div class="paranum"><a name="p96.13">96.13/3</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
 <span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3"><A NAME="I8002"></A>It is a bounded error for the 
+<span class="insert3"><A NAME="I8303"></A>It is a bounded error for the 
 actual function associated with a generic formal subprogram, when called 
 as part of an operation of a set package, to tamper with elements of 
 any set parameter of the operation. Either Program_Error is raised, or 
@@ -815,7 +815,7 @@ the operation works as defined on the value of the set either prior to,
 or subsequent to, some or all of the modifications to the set.</span></div>
 <div class="paranum"><a name="p96.14">96.14/3</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
-<span class="insert3"><A NAME="I8003"></A>It is a bounded error to call 
+<span class="insert3"><A NAME="I8304"></A>It is a bounded error to call 
 any subprogram declared in the visible part of a set package when the 
 associated container has been finalized. If the operation takes Container 
 as an <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
@@ -826,7 +826,7 @@ or it raises Constraint_Error or Program_Error.</span>&nbsp;</div>
 <div class="paranum"><a name="p97">97/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">A Cursor value is <I>invalid</I> if any of the 
-following have occurred since it was created:<A NAME="I8004"></A> <A NAME="I8005"></A></span></div>
+following have occurred since it was created:<A NAME="I8305"></A> <A NAME="I8306"></A></span></div>
 <div class="paranum"><a name="p98">98/2</a></div>
 <div class="Bulleted"><span class="insert2">The set that contains the 
 element it designates has been finalized;</span></div>
@@ -834,7 +834,7 @@ element it designates has been finalized;</span></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 <span class="insert3">The set that contains the element it designates 
 has been used as the Target of a call to Assign, or as the target of 
-an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>;</span></div>
+an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>;</span></div>
 <div class="paranum"><a name="p99">99/2</a></div>
 <div class="Bulleted"><span class="insert2">The set that contains the 
 element it designates has been used as the Source or Target of a call 
@@ -853,9 +853,9 @@ procedures Intersection, Difference, and Symmetric_Difference.</span>
 <div class="paranum"><a name="p101">101/2</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2">The result of &quot;=&quot; or Has_Element is unspecified 
-if these functions are called with an invalid cursor parameter.<A NAME="I8006"></A> 
+if these functions are called with an invalid cursor parameter.<A NAME="I8307"></A> 
 Execution is erroneous if any other subprogram declared in Containers.Hashed_Sets 
-or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I8007"></A></span></div>
+or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I8308"></A></span></div>
 <div class="paranum"><a name="p101.a">101.a/2</a></div>
 <div class="Annotations"><span class="insert2"><B>Discussion:&nbsp;</B>The 
 list above is intended to be exhaustive. In other cases, a cursor value 
@@ -894,7 +894,7 @@ lost upon assignment or scope exit.</span></div>
 <div class="paranum"><a name="p103">103/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN> 
+<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN> 
 for a set shall have the effect of copying the elements from the source 
 set object to the target set object</span><span class="insert3">&nbsp;and 
 changing the length of the target object to that of the source object</span><span class="insert2">.</span></div>
@@ -949,7 +949,7 @@ are documented with the specific packages.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p105.d">105.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"><A NAME="I8008"></A>Added reference support to 
+<span class="insert3"><A NAME="I8309"></A>Added reference support to 
 make set containers more convenient to use.</span>&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
@@ -982,7 +982,7 @@ the exception raised.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p105.k">105.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
-<span class="insert5"><A NAME="I8009"></A><B>Correction:</B> Replace_Element 
+<span class="insert5"><A NAME="I8310"></A><B>Correction:</B> Replace_Element 
 is now defined such that it can be used concurrently so long as it operates 
 on different elements. This allows some container operations to be used 
 in parallel without separate synchronization.</span>&nbsp;</div>

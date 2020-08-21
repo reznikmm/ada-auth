@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -28,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -41,29 +39,32 @@
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 [Certain representation or operational aspects of an entity may be specified 
-as part of its declaration using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>, 
+as part of its declaration using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
 rather than using a separate representation or operational item.] The 
-declaration with the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-is termed the <I>associated declaration</I>.<A NAME="I5448"></A>&nbsp;</div>
+declaration with the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+is termed the <I>associated declaration</I>.<A NAME="I5647"></A>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">aspect_specification</SPAN><A NAME="I5449"></A><A NAME="S0310"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5450"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5451"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN>]&nbsp;{,<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5452"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5453"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN>]&nbsp;}</div>
+<SPAN Class="swiss">aspect_specification</SPAN><A NAME="I5648"></A><A NAME="S0324"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<A NAME="I5649"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5650"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN>]&nbsp;{,<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5651"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>&nbsp;[=&gt;&nbsp;<A NAME="I5652"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN>]&nbsp;}</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">aspect_mark</SPAN><A NAME="I5454"></A><A NAME="S0311"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>aspect_</I><A NAME="I5455"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>['Class]</div>
-<div class="paranum"><a name="p4">4/3</a></div>
+<SPAN Class="swiss">aspect_mark</SPAN><A NAME="I5653"></A><A NAME="S0325"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>aspect_</I><A NAME="I5654"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>['Class]</div>
+<div class="paranum"><a name="p4">4/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">aspect_definition</SPAN><A NAME="I5456"></A><A NAME="S0312"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I5457"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5458"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I5459"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0187-1.TXT">AI12-0187-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0285-1.TXT">AI12-0285-1</A></I>} 
+<SPAN Class="swiss">aspect_definition</SPAN><A NAME="I5655"></A><A NAME="S0326"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert5"><BR>
+&nbsp;&nbsp;&nbsp;</span><A NAME="I5656"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I5657"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;|&nbsp;<A NAME="I5658"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><span class="insert5">&nbsp;|&nbsp;<A NAME="I5659"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN></span></div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 is an optional element in most kinds of declarations. Here is a list 
 of all kinds of declarations and an indication of whether or not they 
 allow aspect clauses, and in some cases a short discussion of why (* 
@@ -76,140 +77,160 @@ are followed by their subdivisions (which have indications).</div>
 &nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0024">full_type_declaration</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>type&nbsp;declaration&nbsp;syntax</I>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-1.html#S0208">task_type_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-4.html#S0213">protected_type_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-1.html#S0222">task_type_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-4.html#S0227">protected_type_declaration</A></SPAN>*<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-10-1.html#S0085">incomplete_type_declaration</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Incomplete&nbsp;type&nbsp;aspects&nbsp;cannot&nbsp;be&nbsp;read&nbsp;by&nbsp;an&nbsp;attribute&nbsp;or&nbsp;specified&nbsp;by&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></I></SPAN><SPAN Class="roman"><I>s&nbsp;</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Incomplete&nbsp;type&nbsp;aspects&nbsp;cannot&nbsp;be&nbsp;read&nbsp;by&nbsp;an&nbsp;attribute&nbsp;or&nbsp;specified&nbsp;by&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></I></SPAN><SPAN Class="roman"><I>s&nbsp;</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>(the&nbsp;attribute&nbsp;name&nbsp;is&nbsp;illegal),&nbsp;so&nbsp;it&nbsp;would&nbsp;not&nbsp;make&nbsp;sense&nbsp;to&nbsp;allow&nbsp;this&nbsp;in&nbsp;another&nbsp;way.</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-7-3.html#S0196">private_type_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-7-3.html#S0197">private_extension_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-7-3.html#S0210">private_type_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-7-3.html#S0211">private_extension_declaration</A></SPAN>*<BR>
 &nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>*<BR>
 &nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<I>object&nbsp;declaration&nbsp;syntax</I>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-1.html#S0209">single_task_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-4.html#S0214">single_protected_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-1.html#S0223">single_task_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-9-4.html#S0228">single_protected_declaration</A></SPAN>*<BR>
 &nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<span class="insert5"><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">iterated_component_association</A></SPAN>&nbsp;&nbsp;--&nbsp;NO</span><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0118">iterated_component_association</A></SPAN>&nbsp;&nbsp;--&nbsp;NO</span><BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>*<BR>
 &nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-3-9-3.html#S0076">abstract_subprogram_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-6-7.html#S0191">null_procedure_declaration</A></SPAN>*<span class="insert4"><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-6-8.html#S0192">expression_function_declaration</A></SPAN>*</span><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN>*&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>via</I></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN>*&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>via</I></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN><BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>*<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>There&nbsp;are&nbsp;no&nbsp;language-defined&nbsp;aspects&nbsp;that&nbsp;may&nbsp;be&nbsp;specified</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>on&nbsp;renames,&nbsp;but&nbsp;implementations&nbsp;might&nbsp;support&nbsp;some.</I></SPAN><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-11-1.html#S0267">exception_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-1.html#S0274">generic_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-1.html#S0275">generic_subprogram_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-1.html#S0276">generic_package_declaration</A></SPAN>*&nbsp;--&nbsp;<SPAN Class="roman"><I>via</I></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-11-1.html#S0281">exception_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-1.html#S0288">generic_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-1.html#S0289">generic_subprogram_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-1.html#S0290">generic_package_declaration</A></SPAN>*&nbsp;--&nbsp;<SPAN Class="roman"><I>via</I></SPAN>&nbsp;<SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN><BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>*<BR>
 <SPAN Class="swiss"><A HREF="AA-3-5-1.html#S0039">enumeration_literal_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
 <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
 <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-5-5.html#S0160">loop_parameter_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
-<SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0161">iterator_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
-<SPAN Class="swiss"><A HREF="AA-6-1.html#S0178">parameter_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
-<SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>*&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>&nbsp;-&nbsp;but&nbsp;language-defined&nbsp;aspects&nbsp;only&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;explicit&nbsp;specification</I></SPAN><BR>
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0227">entry_index_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
-<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN>*&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>&nbsp;-&nbsp;but&nbsp;language-defined&nbsp;aspects&nbsp;only&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;explicit&nbsp;specification</I></SPAN><BR>
-<SPAN Class="swiss"><A HREF="AA-11-2.html#S0270">choice_parameter_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
-<SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN><BR>
+<SPAN Class="swiss"><A HREF="AA-5-5.html#S0167">loop_parameter_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
+<SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0168">iterator_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
+<SPAN Class="swiss"><A HREF="AA-6-1.html#S0192">parameter_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
+<SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>*&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>&nbsp;-&nbsp;but&nbsp;language-defined&nbsp;aspects&nbsp;only&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;explicit&nbsp;specification</I></SPAN><BR>
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN>*<BR>
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0241">entry_index_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
+<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0276">subprogram_body_stub</A></SPAN>*&nbsp;&nbsp;--&nbsp;&nbsp;<SPAN Class="roman"><I>&nbsp;-&nbsp;but&nbsp;language-defined&nbsp;aspects&nbsp;only&nbsp;if&nbsp;there&nbsp;is&nbsp;no&nbsp;explicit&nbsp;specification</I></SPAN><BR>
+<SPAN Class="swiss"><A HREF="AA-11-2.html#S0284">choice_parameter_specification</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO<BR>
+<SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>There&nbsp;are&nbsp;no&nbsp;language-defined&nbsp;aspects&nbsp;that&nbsp;may&nbsp;be&nbsp;specified</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>on&nbsp;generic&nbsp;formals,&nbsp;but&nbsp;implementations&nbsp;might&nbsp;support&nbsp;some.</I></SPAN><BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-4.html#S0283">formal_object_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-5.html#S0284">formal_type_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-6.html#S0299">formal_subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-6.html#S0300">formal_concrete_subprogram_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-6.html#S0301">formal_abstract_subprogram_declaration</A></SPAN>*<BR>
-&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-6-5.html#S0189">extended_return_statement</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO</div>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-4.html#S0297">formal_object_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-5.html#S0298">formal_type_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-6.html#S0313">formal_subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-6.html#S0314">formal_concrete_subprogram_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-6.html#S0315">formal_abstract_subprogram_declaration</A></SPAN>*<BR>
+&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="AA-12-7.html#S0318">formal_package_declaration</A></SPAN>*<BR>
+<SPAN Class="swiss"><A HREF="AA-6-5.html#S0203">extended_return_statement</A></SPAN>&nbsp;&nbsp;--&nbsp;&nbsp;NO</div>
 <div class="paranum"><a name="p4.c">4.c/5</a></div>
 <div class="SmallIndented3">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0169-1.TXT">AI12-0169-1</A></I>} 
---&nbsp;<SPAN Class="roman"><I>We&nbsp;also&nbsp;allow&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></I></SPAN><SPAN Class="roman"><I>s&nbsp;on&nbsp;all&nbsp;kinds&nbsp;of&nbsp;bodies,&nbsp;but&nbsp;are&nbsp;no&nbsp;language-defined&nbsp;aspects</I></SPAN><BR>
+--&nbsp;<SPAN Class="roman"><I>We&nbsp;also&nbsp;allow&nbsp;</I></SPAN><SPAN Class="swiss"><I><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></I></SPAN><SPAN Class="roman"><I>s&nbsp;on&nbsp;all&nbsp;kinds&nbsp;of&nbsp;bodies,&nbsp;but&nbsp;are&nbsp;no&nbsp;language-defined&nbsp;aspects</I></SPAN><BR>
 --&nbsp;<SPAN Class="roman"><I>that&nbsp;may&nbsp;be&nbsp;specified&nbsp;on&nbsp;a&nbsp;body.&nbsp;These&nbsp;are&nbsp;allowed&nbsp;for&nbsp;implementation-defined&nbsp;aspects.</I></SPAN><BR>
 --&nbsp;<SPAN Class="roman"><I>See&nbsp;above&nbsp;for&nbsp;subprogram&nbsp;bodies&nbsp;and&nbsp;stubs&nbsp;(as&nbsp;these&nbsp;can&nbsp;be&nbsp;declarations).</I></SPAN><BR>
-<SPAN Class="swiss"><A HREF="AA-7-2.html#S0195">package_body</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>*<span class="insert5"><BR>
-<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>*</span><BR>
-<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0263">package_body_stub</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0264">task_body_stub</A></SPAN>*<BR>
-<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0265">protected_body_stub</A></SPAN>*</div>
+<SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN>*<BR>
+<SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>*<BR>
+<SPAN Class="swiss"><A HREF="AA-9-4.html#S0232">protected_body</A></SPAN>*<span class="insert5"><BR>
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>*</span><BR>
+<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0277">package_body_stub</A></SPAN>*<BR>
+<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0278">task_body_stub</A></SPAN>*<BR>
+<SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0279">protected_body_stub</A></SPAN>*</div>
 <div class="paranum"><a name="p4.d">4.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-Syntactically, <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
+Syntactically, <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s 
 generally are located at the end of declarations. When a declaration 
-is all in one piece such as a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0191">null_procedure_declaration</A></SPAN>, 
+is all in one piece such as a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN> 
-the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 goes at the end of the declaration; it is then more visible and less 
 likely to interfere with the layout of the rest of the structure. However, 
 we make an exception for program units (other than subprogram specifications) 
-and bodies, in which the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+and bodies, in which the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 goes before the <B>is</B>. In these cases, the entity could be large 
-and could contain other declarations that also have <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s, 
-so it is better to put the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+and could contain other declarations that also have <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s, 
+so it is better to put the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 toward the top of the declaration. (Some aspects &ndash; such as Pure 
 &ndash; also affect the legality of the contents of a unit, so it would 
 be annoying to only see those after reading the entire unit.)</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
-<div class="paranum"><a name="p5">5/3</a></div>
+<div class="paranum"><a name="p5">5/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-An <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+An <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 identifies an aspect of the entity defined by the associated declaration 
-(the <I>associated entity</I><A NAME="I5460"></A>); the aspect denotes 
-an object, a value, an expression, a subprogram, or some other kind of 
-entity. If the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+(the <I>associated entity</I><A NAME="I5660"></A>); the aspect denotes 
+an object, a value, an expression, <span class="insert5">an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+</span>a subprogram, or some other kind of entity. If the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 identifies:&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Bulleted">an aspect that denotes an object, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+<div class="Bulleted">an aspect that denotes an object, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 The expected type for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is the type of the identified aspect of the associated entity;<A NAME="I5461"></A></div>
+is the type of the identified aspect of the associated entity;<A NAME="I5661"></A> 
+<A NAME="I5662"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Bulleted">an aspect that is a value or an expression, the 
-<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
-shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>. 
-The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is the type of the identified aspect of the associated entity;<A NAME="I5462"></A><A NAME="I5463"></A></div>
+<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>. 
+The expected type for the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is the type of the identified aspect of the associated entity;<A NAME="I5663"></A><A NAME="I5664"></A></div>
+<div class="paranum"><a name="p7.1">7.1/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+<span class="insert5">an aspect that is an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+the aspect definition shall be an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+that is an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+with the form of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+determined by the identified aspect;</span></div>
+<div class="paranum"><a name="p7.a">7.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+<span class="insert5">The only requirement here is that the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is syntactically an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>; 
+there is no requirement that it resolve to some particular type or even 
+that it should resolve like an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>. 
+Each aspect that uses an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+is responsible for specifying how the choice(s), component(s), and other 
+contents of the <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
+are resolved and interpreted.</span>&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted">an aspect that denotes a subprogram, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+<div class="Bulleted">an aspect that denotes a subprogram, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
 the expected profile for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is the profile required for the aspect of the associated entity;<A NAME="I5464"></A></div>
+is the profile required for the aspect of the associated entity;<A NAME="I5665"></A></div>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Bulleted">an aspect that denotes some other kind of entity, 
-the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
 and the name shall resolve to denote an entity of the appropriate kind;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Bulleted">an aspect that is given by an identifier specific 
-to the aspect, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+to the aspect, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be an <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>, 
 and the <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 shall be one of the identifiers specific to the identified aspect.&nbsp;</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-The usage names in an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+The usage names in an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 [ are not resolved at the point of the associated declaration, but rather] 
 are resolved at the end of the immediately enclosing declaration list.</div>
 <div class="paranum"><a name="p12">12/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0180-1.TXT">AI12-0180-1</A></I>} 
-If the associated declaration is for a subprogram or entry, the names 
-of the formal parameters are directly visible within the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN>, 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+If the associated declaration is for a subprogram<span class="insert5">,</span><span class="delete5">&nbsp;or</span> entry, <span class="insert5">&nbsp;or access-to-subprogram type,</span> 
+the names of the formal parameters are directly visible within the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN>, 
 as are certain attributes, as specified elsewhere in this International 
 Standard for the identified aspect. If the associated declaration is 
 a <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
-within the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+within the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 the names of any <span class="insert5">visible&nbsp;</span>components<span class="insert5">, 
 protected subprograms, and entries</span> are directly visible, and the 
 name of the first subtype denotes the current instance of the type (see 
 <A HREF="AA-8-6.html">8.6</A>). If the associated declaration is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0026">subtype_declaration</A></SPAN>, 
-within the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+within the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 the name of the new subtype denotes the current instance of the subtype. 
 </div>
 
@@ -218,67 +239,67 @@ the name of the new subtype denotes the current instance of the subtype.
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 If the first freezing point of the associated entity comes before the 
 end of the immediately enclosing declaration list, then each usage name 
-in the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall resolve to the same entity at the first freezing point as it does 
 at the end of the immediately enclosing declaration list.</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-At most one occurrence of each <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-is allowed within a single <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>. 
-The aspect identified by the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+At most one occurrence of each <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+is allowed within a single <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>. 
+The aspect identified by the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 shall be an aspect that can be specified for the associated entity (or 
 view of the entity defined by the associated declaration).</div>
 <div class="paranum"><a name="p14.a">14.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0116-1.TXT">AI12-0116-1</A></I>} 
-<span class="insert4">This rule prevents multiple specifications in the 
-same <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>. 
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0116-1.TXT">AI12-0116-1</A></I>} 
+This rule prevents multiple specifications in the same <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>. 
 Rules in <A HREF="AA-13-1.html">13.1</A> prevent multiple specifications 
-in different <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
+in different <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s 
 (on different views of the same type, for instance) or between operational 
-or representation items and an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>, 
-even for aspects that are neither operational nor representation aspects.</span></div>
+or representation items and an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
+even for aspects that are neither operational nor representation aspects.</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
-associated with a given <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-may be omitted only when the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+associated with a given <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+may be omitted only when the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 identifies an aspect of a boolean type, in which case it is equivalent 
-to the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+to the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 being specified as True.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-If the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+If the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 includes 'Class, then the associated entity shall be a tagged type or 
 a primitive subprogram of a tagged type.</div>
 <div class="paranum"><a name="p17">17/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0194-1.TXT">AI12-0194-1</A></I>} 
-There are no language-defined aspects that may be specified on a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0266">subunit</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0195">package_body</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0212">task_body</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0218">protected_body</A></SPAN>, 
-<span class="insert5">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
-</span>or a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0261">body_stub</A></SPAN> 
-other than a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN>. 
+There are no language-defined aspects that may be specified on a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>, 
+<span class="delete5">a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN>, 
+</span>a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0280">subunit</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-9-1.html#S0226">task_body</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-9-4.html#S0232">protected_body</A></SPAN>, 
+<span class="insert5">an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
+</span>or a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0275">body_stub</A></SPAN> 
+other than a <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0276">subprogram_body_stub</A></SPAN>. 
 </div>
-<div class="paranum"><a name="p17.a">17.a/3</a></div>
-<div class="Annotations"><B>Discussion:&nbsp;</B>Implementation-defined aspects 
-can be allowed on these, of course; the implementation will need to define 
-the semantics. In particular, the implementation will need to define 
-actual type matching rules for any aspects allowed on formal types; there 
-are no default matching rules defined by the language.&nbsp;</div>
+<div class="paranum"><a name="p17.a">17.a/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
+Implementation-defined aspects can be allowed on these, of course; the 
+implementation will need to define the semantics. In <span class="insert5">addition</span><span class="delete5">&nbsp;particular</span>, 
+<span class="insert5">the language does not define default aspect matching 
+rules for generic formals; only the handful of aspects allowed on formals 
+have such rules. Therefore,&nbsp;</span>the implementation will need to define 
+actual type matching rules for any aspects allowed on formal types<span class="delete5">; 
+there are no default matching rules defined by the language</span>.&nbsp;</div>
 <div class="paranum"><a name="p18">18/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0105-1.TXT">AI12-0105-1</A></I>} 
-A language-defined aspect shall not be specified in an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-given on a <span class="delete4"><SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-10-1-3.html#S0262">subprogram_body_stub</A></SPAN> 
-that is a&nbsp;</span>completion of <span class="insert4">a subprogram or 
-generic subprogram</span><span class="delete4">&nbsp;another declaration</span>.</div>
+A language-defined aspect shall not be specified in an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+given on a completion of a subprogram or generic subprogram.</div>
 <div class="paranum"><a name="p18.a">18.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Most language-defined aspects 
 (for example, preconditions) are intended to be available to callers, 
@@ -292,81 +313,94 @@ and what happens if they are specified on both the declaration and body
 of a unit.&nbsp;</div>
 <div class="paranum"><a name="p18.1">18.1/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4">If an aspect of a derived type is inherited from 
-an ancestor type and has the boolean value True, the inherited value 
-shall not be overridden to have the value False for the derived type, 
-unless otherwise specified in this International Standard.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
+If an aspect of a derived type is inherited from an ancestor type and 
+has the boolean value True, the inherited value shall not be overridden 
+to have the value False for the derived type, unless otherwise specified 
+in this International Standard.</div>
 <div class="paranum"><a name="p18.2">18.2/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
-<span class="insert4">Certain type-related aspects are defined to be 
-<I>nonoverridable</I></span><span class="insert4"><span class="delete5">; 
-all such aspects are specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
-that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span></span><span class="insert4">.<A NAME="I5465"></A></span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+Certain type-related aspects are defined to be <I>nonoverridable</I><span class="delete5">; 
+all such aspects are specified using an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span>.<A NAME="I5666"></A></div>
 <div class="paranum"><a name="p18.3">18.3/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
-<span class="insert4">If a nonoverridable aspect is directly specified 
-for a type <I>T</I>, then any explicit specification of that aspect for 
-any other descendant of <I>T</I> shall be <A NAME="I5466"></A><I>confirming</I></span><span class="insert5">. 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0211-1.TXT">AI12-0211-1</A></I>} 
+If a nonoverridable aspect is directly specified for a type <I>T</I>, 
+then any explicit specification of that aspect for any <span class="delete5">other 
+</span>descendant of <I>T</I> <span class="insert5">(other than <I>T</I> 
+itself)&nbsp;</span>shall be <A NAME="I5667"></A><I>confirming</I><span class="insert5">. 
 In the case of an aspect whose value is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-this means that</span><span class="insert4"></span><span class="insert4"><span class="delete5">; 
-that is,</span></span><span class="insert4">&nbsp;the specified <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall <I>match</I><A NAME="I5467"></A> the inherited aspect</span><span class="insert5">&nbsp;and therefore</span><span class="insert4"></span><span class="insert4"><span class="delete5">, 
-meaning that the specified <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall</span></span><span class="insert4">&nbsp;denote the same declarations 
-as would the inherited <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</span></div>
+this means that</span><span class="delete5">; that is,</span> the specified 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> shall 
+<I>match</I><A NAME="I5668"></A> the inherited aspect<span class="insert5">&nbsp;in the sense that it</span><span class="delete5">, meaning that the specified 
+<SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span> 
+shall denote the same declarations as would the inherited <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.</div>
 <div class="paranum"><a name="p18.4">18.4/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4">If a full type has a partial view, and a given 
-nonoverridable aspect is allowed for both the full view and the partial 
-view, then the given aspect for the partial view and the full view shall 
-be the same: the aspect shall be directly specified only on the partial 
-view; if the full type inherits the aspect, then a matching definition 
-shall be specified (directly or by inheritance) for the partial view.</span></div>
-<div class="paranum"><a name="p18.b">18.b</a></div>
-<div class="Annotations"><span class="insert4"><B>Ramification:&nbsp;</B>In 
-order to enforce these rules without breaking privacy, we cannot allow 
-a private type that could have a particular overridable aspect to have 
-a hidden definition of that aspect. There is no problem if the private 
-type does not allow the aspect (as the aspect could not be specified 
-on descendants in that case).</span>&nbsp;</div>
-<div class="paranum"><a name="p18.5">18.5/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4"><A NAME="I5468"></A>In addition to the places where 
-Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
-these rules about nonoverridable aspects also apply in the private part 
-of an instance of a generic unit.</span></div>
+If a full type has a partial view, and a given nonoverridable aspect 
+is allowed for both the full view and the partial view, then the given 
+aspect for the partial view and the full view shall be the same: the 
+aspect shall be directly specified only on the partial view; if the full 
+type inherits the aspect, then a matching definition shall be specified 
+(directly or by inheritance) for the partial view.</div>
+<div class="paranum"><a name="p18.b">18.b/4</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>In order to enforce these 
+rules without breaking privacy, we cannot allow a private type that could 
+have a particular overridable aspect to have a hidden definition of that 
+aspect. There is no problem if the private type does not allow the aspect 
+(as the aspect could not be specified on descendants in that case).&nbsp;</div>
+<div class="paranum"><a name="p18.5">18.5/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0211-1.TXT">AI12-0211-1</A></I>} 
+<span class="insert5">If a type inherits a nonoverridable aspect from 
+multiple ancestors, the value of the aspect inherited from any given 
+ancestor shall be confirming of the values inherited from all other ancestors.</span></div>
+<div class="paranum"><a name="p18.c">18.c/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Reason:&nbsp;</B>If more 
+than one progenitor of a type <I>T</I> specifies a nonoverridable aspect, 
+they all have to specify the same primitive of <I>T</I>. Otherwise, we'd 
+have two different values for the aspect that depend on the view of the 
+type; that would violate the definition of type aspects being the same 
+for all views of a type.</span>&nbsp;</div>
 <div class="paranum"><a name="p18.6">18.6/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
-<span class="insert4">[The Default_Iterator, Iterator_Element, Implicit_Dereference, 
-Constant_Indexing,&nbsp;</span><span class="insert4"><span class="delete5">and 
-</span></span><span class="insert4">Variable_Indexing</span><span class="insert5">, 
-and Max_Entry_Queue_Length</span><span class="insert4">&nbsp;aspects are nonoverridable.]</span></div>
-<div class="paranum"><a name="p18.c">18.c/5</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B>We 
-don't need an assume-the-worst rule for most nonoverridable aspects as 
-they only work on tagged types and deriving from formal tagged types 
-is not allowed in generic bodies. In the case of Implicit_Dereference, 
-a derivation in a generic body does not cause problems (the ancestor 
-necessarily cannot have the aspect, else specifying the aspect would 
-be illegal), as there could be no place with visibility on both aspects.</span><span class="insert5">&nbsp;In the case of Max_Entry_Queue_Length, it is only allowed on task types 
-and protected types, and entries, and there are not formal versions of 
-any of those things.</span><span class="insert4"></span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0211-1.TXT">AI12-0211-1</A></I>} 
+<A NAME="I5669"></A>In addition to the places where Legality Rules normally 
+apply (see <A HREF="AA-12-3.html">12.3</A>), these rules about nonoverridable 
+aspects also apply in the private part of an instance of a generic unit.</div>
+<div class="paranum"><a name="p18.7">18.7/5</a></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0256-1.TXT">AI12-0256-1</A></I>} 
+[The Default_Iterator, Iterator_Element, Implicit_Dereference, Constant_Indexing, 
+<span class="delete5">and&nbsp;</span>Variable_Indexing<span class="insert5">, 
+Max_Entry_Queue_Length, and No_Controlled_Parts</span> aspects are nonoverridable.]</div>
+<div class="paranum"><a name="p18.d">18.d/5</a></div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>We don't need an assume-the-worst 
+rule for most nonoverridable aspects as they only work on tagged types 
+and deriving from formal tagged types is not allowed in generic bodies. 
+In the case of Implicit_Dereference, a derivation in a generic body does 
+not cause problems (the ancestor necessarily cannot have the aspect, 
+else specifying the aspect would be illegal), as there could be no place 
+with visibility on both aspects.<span class="insert5">&nbsp;In the case of 
+Max_Entry_Queue_Length, it is only allowed on task and protected types, 
+and on entries, and there are not formal versions of any of those things. 
+In the case of No_Controlled_Parts, we defined an assume-the-worst rule 
+with the aspect.</span>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p19">19/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-Depending on which aspect is identified by the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>, 
-an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+Depending on which aspect is identified by the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 specifies:&nbsp;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes a subprogram, object, or other kind of entity;</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+<div class="Bulleted">an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 which is either evaluated to produce a single value, or which (as in 
 a precondition) is to be evaluated at particular points during later 
 execution; or</div>
@@ -377,66 +411,78 @@ specific to the aspect.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 The identified aspect of the associated entity, or in some cases, the 
 view of the entity defined by the declaration, is as specified by the 
-<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
-(or by the default of True when boolean). Whether an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+(or by the default of True when boolean). Whether an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 <I>applies</I> to an entity or only to the particular view of the entity 
-defined by the declaration is determined by the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-and the kind of entity. The following aspects are view specific:<A NAME="I5469"></A></div>
+defined by the declaration is determined by the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+and the kind of entity. The following aspects are view specific:<A NAME="I5670"></A></div>
 <div class="paranum"><a name="p24">24/3</a></div>
 <div class="Bulleted">An aspect specified on an <SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0032">object_declaration</A></SPAN>;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
-<div class="Bulleted">An aspect specified on a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>;</div>
+<div class="Bulleted">An aspect specified on a <SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>;</div>
 <div class="paranum"><a name="p26">26/3</a></div>
-<div class="Bulleted">An aspect specified on a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>.</div>
+<div class="Bulleted">An aspect specified on a <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>.</div>
 <div class="paranum"><a name="p27">27/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-All other <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
+All other <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s 
 are associated with the entity, and <I>apply</I> to all views of the 
-entity, unless otherwise specified in this International Standard.<A NAME="I5470"></A></div>
+entity, unless otherwise specified in this International Standard.<A NAME="I5671"></A></div>
 <div class="paranum"><a name="p28">28/4</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
-If the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-includes 'Class<span class="insert4">&nbsp;(a <I>class-wide aspect</I>)<A NAME="I5471"></A><A NAME="I5472"></A></span>, 
-then<span class="insert4">, unless specified otherwise for a particular 
-class-wide aspect</span>:&nbsp;</div>
+If the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+includes 'Class (a <I>class-wide aspect</I>)<A NAME="I5672"></A><A NAME="I5673"></A>, 
+then, unless specified otherwise for a particular class-wide aspect: 
+</div>
 <div class="paranum"><a name="p29">29/3</a></div>
 <div class="Bulleted">if the associated entity is a tagged type, the 
-specification <I>applies</I> to all descendants of the type;<A NAME="I5473"></A></div>
+specification <I>applies</I> to all descendants of the type;<A NAME="I5674"></A></div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="Bulleted">if the associated entity is a primitive subprogram 
 of a tagged type <I>T</I>, the specification <I>applies</I> to the corresponding 
-primitive subprogram of all descendants of <I>T</I>.<A NAME="I5474"></A> 
+primitive subprogram of all descendants of <I>T</I>.<A NAME="I5675"></A> 
 </div>
 <div class="paranum"><a name="p31">31/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 All specifiable operational and representation attributes may be specified 
-with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-instead of an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+instead of an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 (see <A HREF="AA-13-3.html">13.3</A>).</div>
 <div class="paranum"><a name="p31.a">31.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The name of the aspect 
 is the same as that of the attribute (see <A HREF="AA-13-3.html">13.3</A>), 
-so the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+so the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 is the <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0101">attribute_designator</A></SPAN> 
-of the attribute.&nbsp;</div>
+of the attribute.</div>
+<div class="paranum"><a name="p31.b">31.b/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
+<span class="insert5">Unless specified otherwise, all of the requirements 
+for specifying a particular aspect with an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
+also apply to an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+for the aspect. These are enforced at the freezing point of the entity. 
+For example, when specifying the Size aspect of a subtype, the expression 
+has to be a static expression with an integer type and a nonnegative 
+value, all of the recommended level of support requirements apply if 
+<A HREF="AA-C.html">Annex C</A> is supported (see <A HREF="AA-C-2.html">C.2</A>), 
+and so on.</span>&nbsp;</div>
 <div class="paranum"><a name="p32">32/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0154-1.TXT">AI12-0154-1</A></I>} 
 Any aspect specified by a representation pragma or library unit pragma 
-that has a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN> 
-as its single argument may be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>, 
-with the entity being the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0309">local_name</A></SPAN>. 
-The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
-is expected to be of type Boolean. The expression shall be static.<span class="insert4">&nbsp;Notwithstanding what this International Standard says elsewhere, the 
-expression of an aspect that can be specified by a library unit pragma 
-is resolved and evaluated at the point where it occurs in the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>[, 
-rather than the first freezing point of the associated package].<A NAME="I5475"></A></span></div>
+that has a <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN> 
+as its single argument may be specified by an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
+with the entity being the <SPAN Class="swiss"><A HREF="AA-13-1.html#S0323">local_name</A></SPAN>. 
+The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
+is expected to be of type Boolean. The expression shall be static. Notwithstanding 
+what this International Standard says elsewhere, the expression of an 
+aspect that can be specified by a library unit pragma is resolved and 
+evaluated at the point where it occurs in the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>[, 
+rather than the first freezing point of the associated package].<A NAME="I5676"></A></div>
 <div class="paranum"><a name="p32.a">32.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The name of the aspect 
 is the same as that of the pragma (see <A HREF="AA-13-1.html">13.1</A>), 
-so the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+so the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 is the name of the pragma.&nbsp;</div>
 <div class="paranum"><a name="p33">33/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
@@ -447,16 +493,13 @@ as specified elsewhere in this International Standard.</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
 deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="delete4">If an aspect of a derived type is inherited from 
-an ancestor type and has the boolean value True, the inherited value 
-shall not be overridden to have the value False for the derived type, 
-unless otherwise specified in this International Standard.</span></div>
+</div>
 <div class="paranum"><a name="p35">35/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 If a Legality Rule or Static Semantics rule only applies when a particular 
 aspect has been specified, the aspect is considered to have been specified 
-only when the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+only when the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 is visible (see <A HREF="AA-8-3.html">8.3</A>) at the point of the application 
 of the rule.</div>
 <div class="paranum"><a name="p35.a">35.a/3</a></div>
@@ -475,10 +518,10 @@ as specified elsewhere in this International Standard.</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p37">37/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-At the freezing point of the associated entity, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-is elaborated. The elaboration of the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+At the freezing point of the associated entity, the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+is elaborated. The elaboration of the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 includes the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
+or <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
 if any, unless the aspect itself is an expression. If the corresponding 
 aspect represents an expression (as in a precondition), the elaboration 
 has no effect; the expression is evaluated later at points within the 
@@ -488,16 +531,16 @@ particular aspect.&nbsp;</div>
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p38">38/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-Implementations may support implementation-defined aspects. The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+Implementations may support implementation-defined aspects. The <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 for an implementation-defined aspect may use an implementation-defined 
-syntax for the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN>, 
+syntax for the <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN>, 
 and may follow implementation-defined legality and semantics rules.&nbsp;</div>
 <div class="paranum"><a name="p38.a">38.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The intent is to allow implementations 
 to support aspects that are defined, for example, by a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
-rather than an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+rather than an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
-We chose not to try to enumerate all possible <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0312">aspect_definition</A></SPAN> 
+We chose not to try to enumerate all possible <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 syntaxes, but to give implementations maximum freedom. Unrecognized aspects 
 are illegal whether or not they use custom syntax, so this freedom does 
 not reduce portability.&nbsp;</div>
@@ -511,12 +554,12 @@ rules for such aspects.</div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0267-1.TXT">AI05-0267-1</A></I>} 
-<A NAME="I5476"></A>Aspect specifications are new.&nbsp;</div>
+<A NAME="I5677"></A>Aspect specifications are new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p38.c">38.c/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0180-1.TXT">AI12-0180-1</A></I>} 
-<span class="insert5"><A NAME="I5477"></A><B>Correction:</B> Names of 
+<span class="insert5"><A NAME="I5678"></A><B>Correction:</B> Names of 
 protected subprograms and entries are now directly visible in an aspect 
 of a type declaration. This was always intended to be the case, but it 
 was omitted from the Standard by an editing error. In the unlikely case 
@@ -529,43 +572,68 @@ cause a resolution failure.</span>&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p38.d">38.d/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0154-1.TXT">AI12-0154-1</A></I>} 
-<span class="insert4"><A NAME="I5478"></A><B>Corrigendum:</B> Added a 
-clarification that aspects that correspond to library unit pragmas are 
-resolved and evaluated immediately. This is incompatible, as a reference 
-to an entity defined after the aspect will now be illegal. However, this 
-would have require retroactive enforcement of such aspects, which is 
-a new capability not available from the associated pragma, and moreover 
-no known Ada 2012 implementation has ever allowed late evaluation of 
-such aspects. As such, there should be no practical incompatibility.</span> 
+<A NAME="I5679"></A><B>Corrigendum:</B> Added a clarification that aspects 
+that correspond to library unit pragmas are resolved and evaluated immediately. 
+This is incompatible, as a reference to an entity defined after the aspect 
+will now be illegal. However, this would have required retroactive enforcement 
+of such aspects, which is a new capability not available from the associated 
+pragma, and moreover no known Ada 2012 implementation has ever allowed 
+late evaluation of such aspects. As such, there should be no practical 
+incompatibility.</div>
+<div class="paranum"><a name="p38.e">38.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+<span class="insert5">Parameters of access-to-subprogram types are now 
+visible in aspect specifications. This can be incompatible if some entity 
+with the same name as a parameter is used in an existing aspect specification. 
+We believe that all such aspects require either static expressions or 
+statically denoting of a subprogram; since a parameter can be neither 
+of these and hides everything else, all such cases will be caught at 
+compile-time. In addition, we expect such cases to be very rare.</span> 
 </div>
 
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p38.f">38.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0212-1.TXT">AI12-0212-1</A></I>} 
+<span class="insert5"><A NAME="I5680"></A>An aspect can be an unresolved 
+<SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>, 
+these can be used to specify a list of entities, or to set a group of 
+different but related properties with a single aspect.</span>&nbsp;</div>
+
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p38.e">38.e/4</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0105-1.TXT">AI12-0105-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Clarified the wording so that 
-the restriction against language-defined aspects on subprogram completions 
-includes completions that are expressions functions and null procedures.</span></div>
-<div class="paranum"><a name="p38.f">38.f/4</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Defined class-wide aspect for 
-use in rules in <A HREF="AA-13-13-2.html">13.13.2</A>.</span></div>
 <div class="paranum"><a name="p38.g">38.g/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0105-1.TXT">AI12-0105-1</A></I>} 
+<B>Corrigendum:</B> Clarified the wording so that the restriction against 
+language-defined aspects on subprogram completions includes completions 
+that are expressions functions and null procedures.</div>
+<div class="paranum"><a name="p38.h">38.h/4</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0106-1.TXT">AI12-0106-1</A></I>} 
+<B>Corrigendum:</B> Defined class-wide aspect for use in rules in <A HREF="AA-13-13-2.html">13.13.2</A>.</div>
+<div class="paranum"><a name="p38.i">38.i/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Added a definition of nonoverridable 
-aspects. This is necessary to prevent generic contract problems with 
-formal derived types.</span></div>
-<div class="paranum"><a name="p38.h">38.h/5</a></div>
+<B>Corrigendum:</B> Added a definition of nonoverridable aspects. This 
+is necessary to prevent generic contract problems with formal derived 
+types.</div>
+<div class="paranum"><a name="p38.j">38.j/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0194-1.TXT">AI12-0194-1</A></I>} 
-<span class="insert5"><B>Correction:</B> Added <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
+<span class="insert5"><B>Correction:</B> Added <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
 to the list of entities that don't allow any language-defined aspects. 
 This was an oversight in <A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0169-1.TXT">AI12-0169-1</A> 
-which allowed <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
-on an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN> 
+which allowed <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s 
+on an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN> 
 in the first place.</span></div>
-<div class="paranum"><a name="p38.i">38.i/4</a></div>
+<div class="paranum"><a name="p38.k">38.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0206-1.TXT">AI12-0206-1</A></I>} 
-<span class="insert4"><B>Correction:</B> Extended the definition of nonoverridable 
+<span class="insert5"><B>Correction:</B> Extended the definition of nonoverridable 
 aspects to cover most kinds of aspects.</span></div>
+<div class="paranum"><a name="p38.l">38.l/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0211-1.TXT">AI12-0211-1</A></I>} 
+<span class="insert5"><B>Correction:</B> Added a rule so that the a nonoverridable 
+aspect has to be the same for every ancestor of a type.</span></div>
+<div class="paranum"><a name="p38.m">38.m/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0064-2.TXT">AI12-0064-2</A></I>} 
+<span class="insert5">Removed formal parameters from the list of entities 
+that don't have any language-defined aspects, since Nonblocking (see 
+<A HREF="AA-9-5.html">9.5</A>) is language-defined.</span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

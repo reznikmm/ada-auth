@@ -13,16 +13,14 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,12 +33,11 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-describes the package Text_IO, which provides facilities for input and 
-output in human-readable form. Each file is read or written sequentially, 
-as a sequence of characters grouped into lines, and as a sequence of 
-lines grouped into pages. The specification of the package is given below 
-in subclause <A HREF="RM-A-10-1.html">A.10.1</A>.</div>
+<div class="Normal">This subclause describes the package Text_IO, which 
+provides facilities for input and output in human-readable form. Each 
+file is read or written sequentially, as a sequence of characters grouped 
+into lines, and as a sequence of lines grouped into pages. The specification 
+of the package is given below in subclause <A HREF="RM-A-10-1.html">A.10.1</A>.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">The facilities for file management given above, in 
 subclauses <A HREF="RM-A-8-2.html">A.8.2</A> and <A HREF="RM-A-8-3.html">A.8.3</A>, 
@@ -50,14 +47,14 @@ from text files, and output values to them. These values are provided
 to the Put procedures, and returned by the Get procedures, in a parameter 
 Item. Several overloaded procedures of these names exist, for different 
 types of Item. These Get procedures analyze the input sequences of characters 
-based on lexical elements (see <span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="RM-2.html">2</A>) and return the corresponding values; the Put 
-procedures output the given values as appropriate lexical elements. Procedures 
-Get and Put are also available that input and output individual characters 
-treated as character values rather than as lexical elements. Related 
-to character input are procedures to look ahead at the next character 
-without reading it, and to read a character &ldquo;immediately&rdquo; 
-without waiting for an end-of-line to signal availability.</div>
+based on lexical elements (see Clause <A HREF="RM-2.html">2</A>) and 
+return the corresponding values; the Put procedures output the given 
+values as appropriate lexical elements. Procedures Get and Put are also 
+available that input and output individual characters treated as character 
+values rather than as lexical elements. Related to character input are 
+procedures to look ahead at the next character without reading it, and 
+to read a character &ldquo;immediately&rdquo; without waiting for an 
+end-of-line to signal availability.</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal">In addition to the procedures Get and Put for numeric 
 and enumeration types of Item that operate on text files, analogous procedures 
@@ -71,7 +68,7 @@ a file parameter. Each such Get procedure operates on an input file,
 and each such Put procedure operates on an output file. If no file is 
 specified, a default input file or a default output file is used.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I6471"></A><A NAME="I6472"></A>At the beginning 
+<div class="Normal"><A NAME="I6374"></A><A NAME="I6375"></A>At the beginning 
 of program execution the default input and output files are the so-called 
 standard input file and standard output file. These files are open, have 
 respectively the current modes In_File and Out_File, and are associated 
@@ -79,13 +76,13 @@ with two implementation-defined external files. Procedures are provided
 to change the current default input file and the current default output 
 file.&nbsp;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I6473"></A>At the beginning of program execution 
+<div class="Normal"><A NAME="I6376"></A>At the beginning of program execution 
 a default file for program-dependent error-related text output is the 
 so-called standard error file. This file is open, has the current mode 
 Out_File, and is associated with an implementation-defined external file. 
 A procedure is provided to change the current default error file.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I6474"></A><A NAME="I6475"></A><A NAME="I6476"></A>From 
+<div class="Normal"><A NAME="I6377"></A><A NAME="I6378"></A><A NAME="I6379"></A>From 
 a logical point of view, a text file is a sequence of pages, a page is 
 a sequence of lines, and a line is a sequence of characters; the end 
 of a line is marked by a <I>line terminator</I>; the end of a page is 
@@ -105,9 +102,9 @@ characters. Whether they are characters (and if so which ones) in any
 particular implementation need not concern a user who neither explicitly 
 outputs nor explicitly inputs control characters. The effect of input 
 (Get) or output (Put) of control characters (other than horizontal tabulation) 
-is not specified by the language. <A NAME="I6477"></A></div>
+is not specified by the language. <A NAME="I6380"></A></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I6478"></A><A NAME="I6479"></A><A NAME="I6480"></A><A NAME="I6481"></A>The 
+<div class="Normal"><A NAME="I6381"></A><A NAME="I6382"></A><A NAME="I6383"></A><A NAME="I6384"></A>The 
 characters of a line are numbered, starting from one; the number of a 
 character is called its <I>column number</I>. For a line terminator, 
 a column number is also defined: it is one more than the number of characters 
@@ -122,7 +119,7 @@ used to indicate special conditions).&nbsp;</div>
 <div class="Examples" style="margin-bottom: 0.9em"><B>type</B>&nbsp;Count&nbsp;<B>is</B>&nbsp;<B>range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
 <B>subtype</B>&nbsp;Positive_Count&nbsp;<B>is</B>&nbsp;Count&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;Count'Last;</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I6482"></A><A NAME="I6483"></A>For an output 
+<div class="Normal"><A NAME="I6385"></A><A NAME="I6386"></A>For an output 
 file or an append file, a <I>maximum line length</I> can be specified 
 and a <I>maximum page length</I> can be specified. If a value to be output 
 cannot fit on the current line, for a specified maximum line length, 

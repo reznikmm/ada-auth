@@ -20,7 +20,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -31,29 +31,29 @@
 <HR>
 <H1>10.1 Separate Compilation</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I4737"></A> <A NAME="I4738"></A><A NAME="I4739"></A>A 
+<div class="Normal">[<A NAME="I4925"></A> <A NAME="I4926"></A><A NAME="I4927"></A>A 
 <I>program unit</I> is either a package, a task unit, a protected unit, 
 a protected entry, a generic unit, or an explicitly declared subprogram 
 other than an enumeration literal. Certain kinds of program units can 
 be separately compiled. Alternatively, they can appear physically nested 
 within other program units.</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I4740"></A>The text of a program can be 
-submitted to the compiler in one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>s. 
-Each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
-is a succession of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>s. 
-A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN> 
+<div class="Normal"><A NAME="I4928"></A>The text of a program can be 
+submitted to the compiler in one or more <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>s. 
+Each <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
+is a succession of <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s. 
+A <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN> 
 contains either the declaration, the body, or a renaming of a program 
-unit.] The representation for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+unit.] The representation for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
 is implementation-defined.&nbsp;</div>
 <div class="paranum"><a name="p2.a">2.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The representation 
-for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>.</div>
+for a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>.</div>
 <div class="paranum"><a name="p2.b">2.b</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>Some implementations might 
-choose to make a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+choose to make a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
 be a source (text) file. Others might allow multiple source files to 
-be automatically concatenated to form a single <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>. 
+be automatically concatenated to form a single <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>. 
 Others still may represent the source in a nontextual form such as a 
 parse tree. Note that the RM95 does not even define the concept of a 
 source file.</div>
@@ -65,30 +65,30 @@ unit.</div>
 <div class="Annotations">A protected entry is a program unit, but protected 
 entries cannot be separately compiled.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4741"></A>A library unit is a separately 
+<div class="Normal"><A NAME="I4929"></A>A library unit is a separately 
 compiled program unit, and is always a package, subprogram, or generic 
 unit. Library units may have other (logically nested) library units as 
 children, and may have other program units physically nested within them. 
-<A NAME="I4742"></A>A root library unit, together with its children and 
+<A NAME="I4930"></A>A root library unit, together with its children and 
 grandchildren and so on, form a <I>subsystem</I>.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Normal">An implementation may impose implementation-defined 
-restrictions on <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>s 
-that contain multiple <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>s. 
+restrictions on <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>s 
+that contain multiple <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s. 
 </div>
 <div class="paranum"><a name="p4.a">4.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Any restrictions 
-on <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN>s 
-that contain multiple <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>s.</div>
+on <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN>s 
+that contain multiple <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s.</div>
 <div class="paranum"><a name="p4.b">4.b</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>For example, an implementation 
-might disallow a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
+might disallow a <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
 that contains two versions of the same compilation unit, or that contains 
 the declarations for library packages P1 and P2, where P1 precedes P2 
-in the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0249">compilation</A></SPAN> 
-but P1 has a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0258">with_clause</A></SPAN> 
+in the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0263">compilation</A></SPAN> 
+but P1 has a <SPAN Class="swiss"><A HREF="AA-10-1-2.html#S0272">with_clause</A></SPAN> 
 that mentions P2.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>

@@ -42,22 +42,22 @@
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Task_Identification<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8035"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Task_Identification<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8020"></A><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Task_Identification);</span><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8036"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8021"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Task_Id);<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8037"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8022"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8038"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8039"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8040"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8041"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id)<span class="insert5"><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8023"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8024"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8025"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8026"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id)<span class="insert5"><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False</span>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8042"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8043"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8044"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8027"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8028"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8029"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Task_Identification;</div>
@@ -101,7 +101,7 @@ T that is of a task type (after any implicit dereference), the following
 attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term">T'Identity</div><div class="WideHanging-Body">
-<A NAME="I8045"></A><A NAME="I8046"></A>Yields a value of the type Task_Id 
+<A NAME="I8030"></A><A NAME="I8031"></A>Yields a value of the type Task_Id 
 that identifies the task denoted by T.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
@@ -109,7 +109,7 @@ E that denotes an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declar
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="WideHanging-Term">E'Caller</div><div class="WideHanging-Body">
-<A NAME="I8047"></A><A NAME="I8048"></A>Yields a value of the type Task_Id 
+<A NAME="I8032"></A><A NAME="I8033"></A>Yields a value of the type Task_Id 
 that identifies the task whose call is now being serviced. Use of this 
 attribute is allowed only inside an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0236">accept_statement</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
@@ -117,26 +117,26 @@ after the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0240">entry_barrier</A></S
 corresponding to the <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN> 
 denoted by E.&nbsp;</div>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Normal"><A NAME="I8049"></A>Program_Error is raised if a 
+<div class="Normal"><A NAME="I8034"></A>Program_Error is raised if a 
 value of Null_Task_Id is passed as a parameter to Abort_Task, <span class="insert5">Activation_Is_Complete, 
 </span>Is_Terminated, and Is_Callable.</div>
 <div class="paranum"><a name="p16">16/5</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete5"><A NAME="I8050"></A><A NAME="I8051"></A>Abort_Task 
+deleted.</I></SPAN><span class="delete5"><A NAME="I8035"></A><A NAME="I8036"></A>Abort_Task 
 is a potentially blocking operation (see <A HREF="RM-9-5-1.html">9.5.1</A>).</span> 
 </div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I8052"></A>It is a bounded error to call 
+<div class="Normal"><A NAME="I8037"></A>It is a bounded error to call 
 the Current_Task function from an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN>, 
-interrupt handler, or finalization of a task attribute. <A NAME="I8053"></A>Program_Error 
+interrupt handler, or finalization of a task attribute. <A NAME="I8038"></A>Program_Error 
 is raised, or an implementation-defined value of the type Task_Id is 
 returned.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8054"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I8039"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package (or 
 any language-defined child of this package), and the corresponding task 
 object no longer exists, the execution of the program is erroneous.&nbsp;</div>

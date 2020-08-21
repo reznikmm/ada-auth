@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -36,22 +34,22 @@
 <HR>
 <H1>4.1.4 Attributes</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2450"></A>An <I>attribute</I> is a characteristic 
+<div class="Normal"><A NAME="I2446"></A>An <I>attribute</I> is a characteristic 
 of an entity that can be queried via an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>. 
 </div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">attribute_reference</SPAN><A NAME="I2451"></A><A NAME="S0100"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2452"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2453"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">attribute_reference</SPAN><A NAME="I2447"></A><A NAME="S0100"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2448"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2449"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN></div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">attribute_designator</SPAN><A NAME="I2454"></A><A NAME="S0101"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2455"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>[(<I>static_</I><A NAME="I2456"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)]<BR>
+<div class="Indented1"><SPAN Class="swiss">attribute_designator</SPAN><A NAME="I2450"></A><A NAME="S0101"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2451"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>[(<I>static_</I><A NAME="I2452"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)]<BR>
 &nbsp;&nbsp;|&nbsp;Access&nbsp;|&nbsp;Delta&nbsp;|&nbsp;Digits&nbsp;|&nbsp;Mod</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">range_attribute_reference</SPAN><A NAME="I2457"></A><A NAME="S0102"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2458"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2459"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0103">range_attribute_designator</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">range_attribute_reference</SPAN><A NAME="I2453"></A><A NAME="S0102"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2454"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>'<A NAME="I2455"></A><SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0103">range_attribute_designator</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">range_attribute_designator</SPAN><A NAME="I2460"></A><A NAME="S0103"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>Range[(<I>static_</I><A NAME="I2461"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)]</div>
+<div class="Indented1"><SPAN Class="swiss">range_attribute_designator</SPAN><A NAME="I2456"></A><A NAME="S0103"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>Range[(<I>static_</I><A NAME="I2457"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)]</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
@@ -74,7 +72,7 @@ consists of a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>
 that denotes a function, it is interpreted as a parameterless <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2462"></A><A NAME="I2463"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
+<div class="Normal"><A NAME="I2458"></A><A NAME="I2459"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
 if any, in an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0101">attribute_designator</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0103">range_attribute_designator</A></SPAN> 
 is expected to be of any integer type.&nbsp;</div>
@@ -90,20 +88,19 @@ shall be static.&nbsp;</div>
 <div class="paranum"><a name="p9">9/4</a></div>
 <div class="Normal">An <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 denotes a value, an object, a subprogram, or some other kind of program 
-entity. <span class="insert4">Unless explicitly specified otherwise, 
-for</span><span class="delete4">&nbsp;For</span> an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+entity. Unless explicitly specified otherwise, for an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 that denotes a value or an object, if its type is scalar, then its nominal 
 subtype is the base subtype of the type; if its type is tagged, its nominal 
 subtype is the first subtype of the type; otherwise, its nominal subtype 
-is a subtype of the type without any constraint<span class="insert4">,</span><span class="delete4">&nbsp;or</span> <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN><span class="insert4">, 
-or predicate</span>. Similarly, unless explicitly specified otherwise, 
-for an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
+is a subtype of the type without any constraint, <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>, 
+or predicate. Similarly, unless explicitly specified otherwise, for an 
+<SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 that denotes a function, when its result type is scalar, its result subtype 
 is the base subtype of the type, when its result type is tagged, the 
 result subtype is the first subtype of the type, and when the result 
 type is some other type, the result subtype is a subtype of the type 
-without any constraint<span class="insert4">,</span><span class="delete4">&nbsp;or</span> <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN><span class="insert4">, 
-or predicate</span>.&nbsp;</div>
+without any constraint, <SPAN Class="swiss"><A HREF="RM-3-10.html#S0083">null_exclusion</A></SPAN>, 
+or predicate.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
 X'Range(N) is equivalent to the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
@@ -114,7 +111,7 @@ is only evaluated once.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Normal"><A NAME="I2464"></A><A NAME="I2465"></A>The evaluation 
+<div class="Normal"><A NAME="I2460"></A><A NAME="I2461"></A>The evaluation 
 of an <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0100">attribute_reference</A></SPAN> 
 (or <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN>) 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>. 
@@ -142,7 +139,7 @@ has to be a single access type, and the resolution of the <SPAN Class="swiss"><A
 can use the fact that the type of the object or the profile of the callable 
 entity denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 has to match the designated type or be type conformant with the designated 
-profile of the access type. <A NAME="I2466"></A></div>
+profile of the access type. <A NAME="I2462"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p15">15</a></div>

@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,23 +43,23 @@ characteristics that can be used directly by outside program units (that
 is, the logical properties) from other characteristics whose direct use 
 is confined to the package (the details of the definition of the type 
 itself). See <A HREF="RM-3-9-1.html">3.9.1</A> for an overview of type 
-extensions. <A NAME="I3650"></A><A NAME="I3651"></A><A NAME="I3652"></A><A NAME="I3653"></A><A NAME="I3654"></A></div>
+extensions. <A NAME="I3606"></A><A NAME="I3607"></A><A NAME="I3608"></A><A NAME="I3609"></A><A NAME="I3610"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">private_type_declaration</SPAN><A NAME="I3655"></A><A NAME="S0193"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3656"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3657"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3658"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>;</div>
+<div class="Indented1"><SPAN Class="swiss">private_type_declaration</SPAN><A NAME="I3611"></A><A NAME="S0193"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3612"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3613"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B>&nbsp;[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<B>private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3614"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">private_extension_declaration</SPAN><A NAME="I3659"></A><A NAME="S0194"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3660"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3661"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<I>ancestor_</I><A NAME="I3662"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>and</B>&nbsp;<A NAME="I3663"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;<B>with&nbsp;private</B><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3664"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>]</span>;</div>
+<div class="Indented1"><SPAN Class="swiss">private_extension_declaration</SPAN><A NAME="I3615"></A><A NAME="S0194"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3616"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I3617"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>abstract</B>]&nbsp;[<B>limited</B>&nbsp;|&nbsp;<B>synchronized</B>]&nbsp;<B>new</B>&nbsp;<I>ancestor_</I><A NAME="I3618"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>and</B>&nbsp;<A NAME="I3619"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>]&nbsp;<B>with&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I3620"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0307">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I3665"></A><A NAME="I3666"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I3621"></A><A NAME="I3622"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN> 
 declares a <I>partial view</I> of the type; such a declaration is allowed 
 only as a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0087">declarative_item</A></SPAN> 
@@ -98,7 +96,7 @@ view is untagged and the full view is tagged, no derivatives of the partial
 view are allowed within the immediate scope of the partial view; derivatives 
 of the full view are allowed.&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;If a full type has 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;If a full type has 
 a partial view that is tagged, then:&nbsp;</div>
 <div class="paranum"><a name="p7.2">7.2/2</a></div>
 <div class="Bulleted">the partial view shall be a synchronized tagged 
@@ -109,7 +107,7 @@ type is a synchronized tagged type;</div>
 type (see 3.9.4) if and only if the full type is a descendant of the 
 interface type.</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I3667"></A>The <I>ancestor subtype</I> of 
+<div class="Normal"><A NAME="I3623"></A>The <I>ancestor subtype</I> of 
 a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN> 
 is the subtype defined by the <I>ancestor_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>; 
 the ancestor type shall be a specific tagged type. The full view of a 
@@ -117,10 +115,10 @@ private extension shall be derived (directly or indirectly) from the
 ancestor type. In addition to the places where Legality Rules normally 
 apply (see <A HREF="RM-12-3.html">12.3</A>), the requirement that the 
 ancestor be specific applies also in the private part of an instance 
-of a generic unit.<A NAME="I3668"></A>&nbsp;</div>
+of a generic unit.<A NAME="I3624"></A>&nbsp;</div>
 <div class="paranum"><a name="p8.1">8.1/2</a></div>
-<div class="Normal">&nbsp;If the reserved word <B>limited</B> appears in a 
-<SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN>, 
+<div class="Normal">&nbsp;&nbsp;If the reserved word <B>limited</B> appears in 
+a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN>, 
 the ancestor type shall be a limited type. If the reserved word <B>synchronized</B> 
 appears in a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN>, 
 the ancestor type shall be a limited interface.</div>
@@ -129,7 +127,7 @@ the ancestor type shall be a limited interface.</div>
 then the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 shall have a fully conforming (explicit) <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN> 
 (see <A HREF="RM-6-3-1.html">6.3.1</A>, &ldquo;<A HREF="RM-6-3-1.html">Conformance 
-Rules</A>&rdquo;). <A NAME="I3669"></A>The ancestor subtype may be unconstrained; 
+Rules</A>&rdquo;). <A NAME="I3625"></A>The ancestor subtype may be unconstrained; 
 the parent subtype of the full view is required to be constrained (see 
 <A HREF="RM-3-7.html">3.7</A>).&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -139,9 +137,8 @@ discriminants from the ancestor subtype, and the parent subtype of the
 full view shall be constrained if and only if the ancestor subtype is 
 constrained.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
-for a private extension <span class="insert3">includes</span><span class="delete3">&nbsp;is</span> 
-a <span class="insert3"><SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN></span><span class="delete3"><SPAN Class="swiss">&nbsp;derived_type_declaration</SPAN></span>, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
+for a private extension includes a <SPAN Class="swiss"><A HREF="RM-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then the reserved word <B>limited</B> shall appear in the <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 if and only if it also appears in the <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN>. 
 </div>
@@ -156,48 +153,41 @@ shall define a definite subtype.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal">If the ancestor subtype of a private extension has 
 constrained discriminants, then the parent subtype of the full view shall 
-impose a statically matching constraint on those discriminants. <A NAME="I3670"></A></div>
+impose a statically matching constraint on those discriminants. <A NAME="I3626"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I3671"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
-declares a private type and its first subtype. <A NAME="I3672"></A>Similarly, 
+<div class="Normal"><A NAME="I3627"></A>A <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
+declares a private type and its first subtype. <A NAME="I3628"></A>Similarly, 
 a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN> 
 declares a private extension and its first subtype.&nbsp;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal">A declaration of a partial view and the corresponding 
+<div class="Normal">&nbsp;A declaration of a partial view and the corresponding 
 <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 define two views of a single type. The declaration of a partial view 
 together with the visible part define the operations that are available 
 to outside program units; the declaration of the full view together with 
 the private part define other operations whose direct use is possible 
-only within the declarative region of the package itself. <span class="delete3"><A NAME="I3673"></A></span>Moreover, 
-within the scope of the declaration of the full view, the <span class="insert3">characteristics 
-(see <A HREF="RM-3-4.html">3.4</A>)</span><span class="delete3"><I>&nbsp;characteristics</I></span> 
-of the type are determined by the full view; in particular, within its 
-scope, the full view determines the classes that include the type, which 
-components, entries, and protected subprograms are visible, what attributes 
-and other predefined operations are allowed, and whether the first subtype 
-is static. See <A HREF="RM-7-3-1.html">7.3.1</A>.</div>
+only within the declarative region of the package itself. Moreover, within 
+the scope of the declaration of the full view, the characteristics (see 
+<A HREF="RM-3-4.html">3.4</A>) of the type are determined by the full 
+view; in particular, within its scope, the full view determines the classes 
+that include the type, which components, entries, and protected subprograms 
+are visible, what attributes and other predefined operations are allowed, 
+and whether the first subtype is static. See <A HREF="RM-7-3-1.html">7.3.1</A>.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert3">For a</span><span class="delete3">&nbsp;A</span> 
-private extension<span class="insert3">, the characteristics</span><span class="delete3">&nbsp;inherits 
-components</span> (including <span class="insert3">components, but excluding 
-</span>discriminants <span class="insert3">if</span><span class="delete3">&nbsp;unless</span> 
-there is a new <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN> 
-specified)<span class="insert3">, predefined operators,</span> and <span class="insert3">inherited 
-</span>user-defined primitive subprograms <span class="insert3">are determined 
-by</span><span class="delete3">&nbsp;from</span> its ancestor type and its 
-progenitor types (if any), in the same way that<span class="insert3">&nbsp;those of</span> a record extension <span class="insert3">are determined 
-by those of</span><span class="delete3">&nbsp;inherits components and user-defined 
-primitive subprograms from</span> its parent type and its progenitor 
-types (see <A HREF="RM-3-4.html">3.4</A><span class="insert3">&nbsp;and <A HREF="RM-7-3-1.html">7.3.1</A></span>). 
-</div>
+<div class="Normal">&nbsp;For a private extension, the characteristics (including 
+components, but excluding discriminants if there is a new <SPAN Class="swiss"><A HREF="RM-3-7.html#S0059">discriminant_part</A></SPAN> 
+specified), predefined operators, and inherited user-defined primitive 
+subprograms are determined by its ancestor type and its progenitor types 
+(if any), in the same way that those of a record extension are determined 
+by those of its parent type and its progenitor types (see <A HREF="RM-3-4.html">3.4</A> 
+and <A HREF="RM-7-3-1.html">7.3.1</A>).&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I3674"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
-creates a partial view of a type. <A NAME="I3675"></A>The elaboration 
+<div class="Normal"><A NAME="I3629"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0193">private_type_declaration</A></SPAN> 
+creates a partial view of a type. <A NAME="I3630"></A>The elaboration 
 of a <SPAN Class="swiss"><A HREF="RM-7-3.html#S0194">private_extension_declaration</A></SPAN> 
 elaborates the <I>ancestor_</I><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN>, 
 and creates a partial view of a type.&nbsp;</div>

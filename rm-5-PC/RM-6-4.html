@@ -35,7 +35,7 @@
 <HR>
 <H1>6.4 Subprogram Calls</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3587"></A>A <I>subprogram call</I> is either 
+<div class="Normal"><A NAME="I3576"></A>A <I>subprogram call</I> is either 
 a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0195">procedure_call_statement</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN>; 
 it invokes the execution of the <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>. 
@@ -44,23 +44,23 @@ with formal parameters of the subprogram.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">procedure_call_statement</SPAN><A NAME="I3588"></A><A NAME="S0195"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3589"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>;<BR>
-&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3590"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3591"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">procedure_call_statement</SPAN><A NAME="I3577"></A><A NAME="S0195"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>procedure_</I><A NAME="I3578"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>;<BR>
+&nbsp;&nbsp;|&nbsp;<I>procedure_</I><A NAME="I3579"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3580"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">function_call</SPAN><A NAME="I3592"></A><A NAME="S0196"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>function_</I><A NAME="I3593"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<I>function_</I><A NAME="I3594"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3595"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">function_call</SPAN><A NAME="I3581"></A><A NAME="S0196"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>function_</I><A NAME="I3582"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>function_</I><A NAME="I3583"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I3584"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">actual_parameter_part</SPAN><A NAME="I3596"></A><A NAME="S0197"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3597"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3598"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN>})</div>
+<div class="Indented1"><SPAN Class="swiss">actual_parameter_part</SPAN><A NAME="I3585"></A><A NAME="S0197"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;(<A NAME="I3586"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3587"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN>})</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">parameter_association</SPAN><A NAME="I3599"></A><A NAME="S0198"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;[<I>formal_parameter_</I><A NAME="I3600"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I3601"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0199">explicit_actual_parameter</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">parameter_association</SPAN><A NAME="I3588"></A><A NAME="S0198"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;[<I>formal_parameter_</I><A NAME="I3589"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I3590"></A><SPAN Class="swiss"><A HREF="RM-6-4.html#S0199">explicit_actual_parameter</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">explicit_actual_parameter</SPAN><A NAME="I3602"></A><A NAME="S0199"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3603"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I3604"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_actual_parameter</SPAN><A NAME="I3591"></A><A NAME="S0199"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3592"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>&nbsp;|&nbsp;<I>variable_</I><A NAME="I3593"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Indented1"><A NAME="I3605"></A><A NAME="I3606"></A>A <SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN> 
+<div class="Indented1"><A NAME="I3594"></A><A NAME="I3595"></A>A <SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN> 
 is <I>named</I> or <I>positional</I> according to whether or not the 
 <I>formal_parameter_</I><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN> 
 is specified. Any positional associations shall precede any named associations. 
@@ -95,7 +95,7 @@ This rule is an overloading rule (see <A HREF="RM-8-6.html">8.6</A>).
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal"><A NAME="I3607"></A>For the execution of a subprogram 
+<div class="Normal"><A NAME="I3596"></A>For the execution of a subprogram 
 call, the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of the call is evaluated, and each <SPAN Class="swiss"><A HREF="RM-6-4.html#S0198">parameter_association</A></SPAN> 
@@ -106,7 +106,7 @@ order. The <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></
 is then executed, or a call on an entry or protected subprogram is performed 
 (see <A HREF="RM-3-9-2.html">3.9.2</A>). Finally, if the subprogram completes 
 normally, then after it is left, any necessary assigning back of formal 
-to actual parameters occurs (see <A HREF="RM-6-4-1.html">6.4.1</A>).<A NAME="I3608"></A></div>
+to actual parameters occurs (see <A HREF="RM-6-4-1.html">6.4.1</A>).<A NAME="I3597"></A></div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;If the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
@@ -118,7 +118,7 @@ if the first formal parameter is an access parameter), and the remaining
 actual parameters given by the <SPAN Class="swiss"><A HREF="RM-6-4.html#S0197">actual_parameter_part</A></SPAN>, 
 if any.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal"><A NAME="I3609"></A>The exception Program_Error is 
+<div class="Normal"><A NAME="I3598"></A>The exception Program_Error is 
 raised at the point of a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN> 
 if the function completes normally without executing a return statement. 
 </div>
@@ -126,7 +126,7 @@ if the function completes normally without executing a return statement.
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-6-4.html#S0196">function_call</A></SPAN> 
 denotes a constant, as defined in <A HREF="RM-6-5.html">6.5</A>; the 
 nominal subtype of the constant is given by the nominal subtype of the 
-function result. <A NAME="I3610"></A><A NAME="I3611"></A></div>
+function result. <A NAME="I3599"></A><A NAME="I3600"></A></div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p13">13</a></div>

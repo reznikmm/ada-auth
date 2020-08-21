@@ -19,16 +19,16 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -95,25 +95,25 @@ while the library-level tasks are activated.</span></div>
 the main subprogram (if any) concurrently with these executing tasks.</span> 
 </div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal"><span class="insert2">If several dynamic interrupt 
+<div class="Normal">&nbsp;<span class="insert2">If several dynamic interrupt 
 handler attachments for the same interrupt are deferred, then the most 
 recent call of Attach_Handler or Exchange_Handler determines which handler 
 is attached.</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Normal"><span class="insert2">If any deferred task activation 
+<div class="Normal">&nbsp;<span class="insert2">If any deferred task activation 
 fails, Tasking_Error is raised at the beginning of the sequence of statements 
 of the body of the environment task prior to calling the main subprogram.</span></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal"><span class="insert2">If the partition elaboration 
+<div class="Normal">&nbsp;<span class="insert2">If the partition elaboration 
 policy is Sequential and the Environment task becomes permanently blocked 
 during elaboration</span><span class="insert3">,</span><span class="insert2">&nbsp;then the partition is deadlocked and it is recommended that the partition 
 be immediately terminated.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert2">If the partition elaboration 
+<div class="Normal">&nbsp;<span class="insert2">If the partition elaboration 
 policy is Sequential and any task activation fails</span><span class="insert3">,</span><span class="insert2">&nbsp;then an implementation may immediately terminate the active partition 
 to mitigate the hazard posed by continuing to execute with a subset of 
 the tasks being active.</span>&nbsp;</div>

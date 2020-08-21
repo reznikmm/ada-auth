@@ -30,22 +30,25 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-6-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
 <H1>6.1.1 Preconditions and Postconditions</H1>
-<div class="paranum"><a name="p1">1/4</a></div>
+<div class="paranum"><a name="p1">1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0247-1.TXT">AI05-0247-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0045-1.TXT">AI12-0045-1</A></I>} 
-For a noninstance subprogram, a generic subprogram, or an entry, the 
-following language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
+For a noninstance subprogram [(including a generic formal subprogram)], 
+a generic subprogram, an entry, or an access-to-subprogram type, the 
+following language-defined aspects may be specified with an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 (see <A HREF="AA-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p1.a">1.a/4</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0045-1.TXT">AI12-0045-1</A></I>} 
@@ -55,13 +58,18 @@ specified on the generic subprogram. If preconditions or postconditions
 need to be added to an instance of a generic subprogram, it can be accomplished 
 by creating a separate subprogram specification and then completing that 
 specification with a renames-as-body of the instance.&nbsp;</div>
-<div class="paranum"><a name="p2">2/3</a></div>
-<div class="WideHanging-Term">Pre</div><div class="WideHanging-Body">
-This aspect specifies a specific precondition for a callable entity; 
-it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-called a <I>specific precondition expression</I>.<A NAME="I3634"></A><A NAME="I3635"></A> 
+<div class="paranum"><a name="p1.b">1.b/5</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
+A generic formal subprogram is a subprogram, and there are no rules to 
+prevent using these attributes on it.&nbsp;</div>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+Pre</div><div class="WideHanging-Body"><br clear="left">
+This aspect specifies a specific precondition for a callable entity or 
+an access-to-subprogram type; it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+called a <I>specific precondition expression</I>.<A NAME="I3747"></A><A NAME="I3748"></A> 
 If not specified for an entity, the specific precondition expression 
-for the entity is the enumeration literal True.<A NAME="I3636"></A><A NAME="I3637"></A></div>
+for the entity is the enumeration literal True.<A NAME="I3749"></A><A NAME="I3750"></A></div>
 <div class="paranum"><a name="p2.a">2.a/3</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>In this and the following 
 rules, we are talking about the enumeration literal True declared in 
@@ -77,11 +85,11 @@ a condition that must hold true before a call.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 Pre'Class</div><div class="WideHanging-Body"><br clear="left">
 This aspect specifies a class-wide precondition for an operation of a 
-tagged type and its descendants; it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-called a <I>class-wide precondition expression</I>.<A NAME="I3638"></A><A NAME="I3639"></A> 
+tagged type and its descendants; it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+called a <I>class-wide precondition expression</I>.<A NAME="I3751"></A><A NAME="I3752"></A> 
 If not specified for an entity, then if no other class-wide precondition 
 applies to the entity, the class-wide precondition expression for the 
-entity is the enumeration literal True.<A NAME="I3640"></A><A NAME="I3641"></A></div>
+entity is the enumeration literal True.<A NAME="I3753"></A><A NAME="I3754"></A></div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0254-1.TXT">AI05-0254-1</A></I>} 
 If other class-wide preconditions apply to the entity and no class-wide 
@@ -91,17 +99,24 @@ apply are still going to be checked. We need subprograms that don't have
 ancestors and don't specify a class-wide precondition to have a class-wide 
 precondition of True, so that adding such a precondition to a descendant 
 has no effect (necessary as a dispatching call through the root routine 
-would not check any precondition).&nbsp;</div>
-<div class="paranum"><a name="p3.b">3.b/3</a></div>
+would not check any precondition).</div>
+<div class="paranum"><a name="p3.b">3.b/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+Pre'Class cannot be specified on an access-to-subprogram type because 
+of a Legality Rule found in <A HREF="AA-13-1-1.html">13.1.1</A> that 
+limits 'Class aspects to tagged types and primitive subprograms of tagged 
+types. The same is true for Post'Class (below).&nbsp;</div>
+<div class="paranum"><a name="p3.c">3.c/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Pre'Class: 
 </B>Precondition inherited on type derivation.</div>
-<div class="paranum"><a name="p4">4/3</a></div>
-<div class="WideHanging-Term">Post</div><div class="WideHanging-Body">
-This aspect specifies a specific postcondition for a callable entity; 
-it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-called a <I>specific postcondition expression</I>.<A NAME="I3642"></A><A NAME="I3643"></A> 
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+Post</div><div class="WideHanging-Body"><br clear="left">
+This aspect specifies a specific postcondition for a callable entity 
+or an access-to-subprogram type; it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+called a <I>specific postcondition expression</I>.<A NAME="I3755"></A><A NAME="I3756"></A> 
 If not specified for an entity, the specific postcondition expression 
-for the entity is the enumeration literal True.<A NAME="I3644"></A><A NAME="I3645"></A></div>
+for the entity is the enumeration literal True.<A NAME="I3757"></A><A NAME="I3758"></A></div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Post:&nbsp;</B>Postcondition; 
 a condition that must hold true after a call.</div>
@@ -109,10 +124,10 @@ a condition that must hold true after a call.</div>
 <div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 Post'Class</div><div class="WideHanging-Body"><br clear="left">
 This aspect specifies a class-wide postcondition for an operation of 
-a tagged type and its descendants; it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>, 
-called a <I>class-wide postcondition expression</I>.<A NAME="I3646"></A><A NAME="I3647"></A> 
+a tagged type and its descendants; it shall be specified by an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>, 
+called a <I>class-wide postcondition expression</I>.<A NAME="I3759"></A><A NAME="I3760"></A> 
 If not specified for an entity, the class-wide postcondition expression 
-for the entity is the enumeration literal True.<A NAME="I3648"></A><A NAME="I3649"></A> 
+for the entity is the enumeration literal True.<A NAME="I3761"></A><A NAME="I3762"></A> 
 </div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Post'Class: 
@@ -122,7 +137,7 @@ for the entity is the enumeration literal True.<A NAME="I3648"></A><A NAME="I364
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 The expected type for a precondition or postcondition expression is any 
-boolean type.<A NAME="I3650"></A><A NAME="I3651"></A></div>
+boolean type.<A NAME="I3763"></A><A NAME="I3764"></A></div>
 <div class="paranum"><a name="p7">7/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
@@ -196,7 +211,7 @@ then:</div>
 declared subprogram <I>P</I> is <I>abstract</I>.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Bulleted">Otherwise, the subprogram <I>P</I> <I>requires 
-overriding</I> and shall be overridden with a nonabstract subprogram.<A NAME="I3652"></A></div>
+overriding</I> and shall be overridden with a nonabstract subprogram.<A NAME="I3765"></A></div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>We use the term &quot;requires 
 overriding&quot; here so that this rule is taken into account when calculating 
@@ -272,7 +287,7 @@ if the parent subprogram has explicitly specified a precondition of True).
 </div>
 <div class="paranum"><a name="p17.2">17.2/4</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0131-1.TXT">AI12-0131-1</A></I>} 
-<A NAME="I3653"></A>In addition to the places where Legality Rules normally 
+<A NAME="I3766"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), these rules also apply in 
 the private part of an instance of a generic unit.&nbsp;</div>
 
@@ -287,7 +302,7 @@ If a Pre'Class or Post'Class aspect is specified for a primitive subprogram
 then a corresponding expression also applies to the corresponding primitive 
 subprogram <I>S</I> of each descendant of <I>T</I> [(including <I>T</I> 
 itself)]. The <I>corresponding expression</I> is constructed from the 
-associated expression as follows:<A NAME="I3654"></A> <A NAME="I3655"></A></div>
+associated expression as follows:<A NAME="I3767"></A> <A NAME="I3768"></A></div>
 <div class="paranum"><a name="p18.a">18.a/4</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>A Pre'Class defaults to 
 True only if no class-wide preconditions are inherited for the subprogram. 
@@ -324,15 +339,16 @@ which cases can cause this to happen, both now and in the future.&nbsp;</div>
 expressions on abstract subprograms as they could never be evaluated, 
 and we need to allow such expressions to contain calls to abstract subprograms. 
 </div>
-<div class="paranum"><a name="p19">19/3</a></div>
+<div class="paranum"><a name="p19">19/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
 If performing checks is required by the Pre, Pre'Class, Post, or Post'Class 
 assertion policies (see <A HREF="AA-11-4-2.html">11.4.2</A>) in effect 
 at the point of a corresponding aspect specification applicable to a 
-given subprogram or entry, then the respective precondition or postcondition 
-expressions are considered <I>enabled</I>.<A NAME="I3656"></A><A NAME="I3657"></A></div>
+given subprogram, entry, or access-to-subprogram type, then the respective 
+precondition or postcondition expressions are considered <I>enabled</I>.<A NAME="I3769"></A><A NAME="I3770"></A></div>
 <div class="paranum"><a name="p19.a">19.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 If a class-wide precondition or postcondition expression is enabled, 
@@ -340,22 +356,22 @@ it remains enabled when inherited by an overriding subprogram, even if
 the policy in effect is Ignore for the inheriting subprogram.&nbsp;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0273-1.TXT">AI05-0273-1</A></I>} 
-An <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-is <I>potentially unevaluated</I> if it occurs within:<A NAME="I3658"></A></div>
+An <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+is <I>potentially unevaluated</I> if it occurs within:<A NAME="I3771"></A></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Bulleted">any part of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0135">if_expression</A></SPAN> 
-other than the first <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0136">condition</A></SPAN>;</div>
+<div class="Bulleted">any part of an <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0139">if_expression</A></SPAN> 
+other than the first <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0140">condition</A></SPAN>;</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Bulleted">a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0137">case_expression</A></SPAN>;</div>
+<div class="Bulleted">a <I>dependent_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-5-7.html#S0141">case_expression</A></SPAN>;</div>
 <div class="paranum"><a name="p22.1">22.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0032-1.TXT">AI12-0032-1</A></I>} 
-a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0141">predicate</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0139">quantified_expression</A></SPAN>;</div>
+a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0145">predicate</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>;</div>
 <div class="paranum"><a name="p22.2">22.2/5</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0198-1.TXT">AI12-0198-1</A></I>} 
-the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0116">array_component_association</A></SPAN>, 
+the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-4-3-3.html#S0117">array_component_association</A></SPAN>, 
 if the associated choice is a <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> that 
 defines a nonstatic or null range, or is an <B>others</B> choice and 
@@ -364,8 +380,33 @@ the applicable index constraint is nonstatic or null;</div>
 <div class="Bulleted">the right operand of a short-circuit control form; 
 or</div>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">membership_choice</A></SPAN> 
+<div class="Bulleted">a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">membership_choice</A></SPAN> 
 other than the first of a membership operation.&nbsp;</div>
+<div class="paranum"><a name="p24.1">24.1/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0217-1.TXT">AI12-0217-1</A></I>} 
+A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> <I>statically 
+names</I> an object if it:<A NAME="I3772"></A>&nbsp;</div>
+<div class="paranum"><a name="p24.2">24.2/5</a></div>
+<div class="Bulleted">statically denotes the declaration of an object 
+[(possibly through one or more renames)];&nbsp;</div>
+<div class="paranum"><a name="p24.a">24.a/5</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Follows from the definition of 
+statically denotes (see <A HREF="AA-4-9.html">4.9</A>).&nbsp;</div>
+<div class="paranum"><a name="p24.3">24.3/5</a></div>
+<div class="Bulleted">is a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN> 
+whose prefix statically names an object, there is no implicit dereference 
+of the prefix, and the <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
+names a component that does not depend on a discriminant; or&nbsp;</div>
+<div class="paranum"><a name="p24.b">24.b/5</a></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>We disallow components that depend 
+on a discriminant so that no discriminant checks are needed to evaluate 
+the <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>. 
+</div>
+<div class="paranum"><a name="p24.4">24.4/5</a></div>
+<div class="Bulleted">is an <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN> 
+whose prefix statically names an object, the object is statically constrained, 
+and the index expressions of the object are static and have values that 
+are within the range of the index constraint.&nbsp;</div>
 <div class="paranum"><a name="p25">25/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -373,7 +414,7 @@ X that denotes an object of a nonlimited type, the following attribute
 is defined:&nbsp;</div>
 <div class="paranum"><a name="p26">26/4</a></div>
 <div class="WideHanging-Term">X'Old</div><div class="WideHanging-Body">
-<A NAME="I3659"></A><A NAME="I3660"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
+<A NAME="I3773"></A><A NAME="I3774"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0273-1.TXT">AI05-0273-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0032-1.TXT">AI12-0032-1</A></I>} 
@@ -423,10 +464,11 @@ anonymous array type or a universal type.&nbsp;</div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0032-1.TXT">AI12-0032-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0185-1.TXT">AI12-0185-1</A></I>} 
 The type and nominal subtype of X'Old is as implied by the above definitions.</div>
-<div class="paranum"><a name="p27">27/3</a></div>
+<div class="paranum"><a name="p27">27/5</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0273-1.TXT">AI05-0273-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0217-1.TXT">AI12-0217-1</A></I>} 
 Reference to this attribute is only allowed within a postcondition expression. 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of an Old <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
@@ -434,10 +476,10 @@ shall not contain a Result <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">att
 nor an Old <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>, 
 nor a use of an entity declared within the postcondition expression but 
 not within <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-itself (for example, the loop parameter of an enclosing <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0139">quantified_expression</A></SPAN>). 
+itself (for example, the loop parameter of an enclosing <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>). 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of an Old <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN> 
-that is potentially unevaluated shall statically denote an entity.</div>
+that is potentially unevaluated shall statically name an entity.</div>
 <div class="paranum"><a name="p27.a">27.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 X can be any nonlimited object that obeys the syntax for prefix other 
@@ -476,7 +518,7 @@ allow build-in-place, but it's not worth the trouble.&nbsp;</div>
 Since the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 is evaluated unconditionally when the subprogram is called, we cannot 
 allow it to include values that do not exist at that time (like 'Result 
-and loop parameters of <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0139">quantified_expression</A></SPAN>s). 
+and loop parameters of <SPAN Class="swiss"><A HREF="AA-4-5-8.html#S0143">quantified_expression</A></SPAN>s). 
 We also do not allow it to include 'Old references, as those would be 
 redundant (the entire <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 is evaluated when the subprogram is called), and allowing them would 
@@ -555,25 +597,33 @@ constant declarations (if any) are elaborated after the start of the
 protected action. Postcondition checks (which might reference these constants) 
 are performed before the end of the protected action as described below. 
 </div>
-<div class="paranum"><a name="p28">28/3</a></div>
+<div class="paranum"><a name="p28">28/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0220-1.TXT">AI05-0220-1</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-F that denotes a function declaration, the following attribute is defined: 
-</div>
+F that denotes a function declaration or an access-to-function type, 
+the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p29">29/5</a></div>
 <div class="WideHanging-Term">F'Result</div><div class="WideHanging-Body">
-<A NAME="I3661"></A><A NAME="I3662"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
+<A NAME="I3775"></A><A NAME="I3776"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0185-1.TXT">AI12-0185-1</A></I>} 
-Within a postcondition expression for function F, denotes the result 
-object of the function. The type of this attribute is that of the function 
-result except within a Post'Class postcondition expression for a function 
-with a controlling result or with a controlling access result; in those 
-cases the type of the attribute was described previously.</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+Within a postcondition expression for F, denotes the return object of 
+the function call for which the postcondition expression is evaluated. 
+The type of this attribute is that of the result subtype of the function 
+or access-to-function type  except within a Post'Class postcondition 
+expression for a function with a controlling result or with a controlling 
+access result; in those cases the type of the attribute was described 
+previously.</div>
 <div class="paranum"><a name="p30">30/3</a></div>
 <div class="WideHanging-Body">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 Use of this attribute is allowed only within a postcondition expression 
 for F.&nbsp;</div>
+<div class="paranum"><a name="p30.a">30.a/5</a></div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0220-1.TXT">AI05-0220-1</A></I>} 
+An &ldquo;access-to-function type&rdquo; is an access-to-subprogram type 
+whose designated profile is a function profile.&nbsp;</div>
 <div class="paranum"><a name="p30.1">30.1/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0143-1.TXT">AI12-0143-1</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
@@ -581,7 +631,7 @@ E that denotes an entry declaration of an entry family (see <A HREF="AA-9-5-2.ht
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p30.2">30.2/5</a></div>
 <div class="WideHanging-Term">&nbsp;&nbsp;E'Index</div><div class="WideHanging-Body">
-<A NAME="I3663"></A><A NAME="I3664"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0143-1.TXT">AI12-0143-1</A></I>} 
+<A NAME="I3777"></A><A NAME="I3778"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0143-1.TXT">AI12-0143-1</A></I>} 
 Within a precondition or postcondition expression for entry family E, 
 denotes the value of the entry index for the call of E. The nominal subtype 
 of this attribute is the entry index subtype.</div>
@@ -602,12 +652,12 @@ precondition checks are performed as follows:</div>
 evaluation of the specific precondition expression that applies to the 
 subprogram or entry, if it is enabled; if the expression evaluates to 
 False, Assertions.Assertion_Error is raised; if the expression is not 
-enabled, the check succeeds.<A NAME="I3665"></A><A NAME="I3666"></A><A NAME="I3667"></A></div>
+enabled, the check succeeds.<A NAME="I3779"></A><A NAME="I3780"></A><A NAME="I3781"></A></div>
 <div class="paranum"><a name="p33">33/3</a></div>
 <div class="Bulleted">The class-wide precondition check begins with the 
 evaluation of any enabled class-wide precondition expressions that apply 
 to the subprogram or entry. If and only if all the class-wide precondition 
-expressions evaluate to False, Assertions.Assertion_Error is raised.<A NAME="I3668"></A><A NAME="I3669"></A><A NAME="I3670"></A></div>
+expressions evaluate to False, Assertions.Assertion_Error is raised.<A NAME="I3782"></A><A NAME="I3783"></A><A NAME="I3784"></A></div>
 <div class="paranum"><a name="p33.a">33.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The class-wide precondition 
 expressions of the entity itself as well as those of any parent or progenitor 
@@ -631,7 +681,7 @@ The precondition checks and any check for elaboration of the subprogram
 body are performed in an arbitrary order. In a call on a protected operation, 
 the checks are performed before starting the protected action. For an 
 entry call, the checks are performed prior to checking whether the entry 
-is open.<A NAME="I3671"></A><A NAME="I3672"></A></div>
+is open.<A NAME="I3785"></A><A NAME="I3786"></A></div>
 <div class="paranum"><a name="p34.a">34.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We need to explicitly allow short-circuiting 
 of the evaluation of the class-wide precondition check if any expression 
@@ -655,7 +705,7 @@ expressions are evaluated in an arbitrary order, and if any postcondition
 expression evaluates to False, it is not specified whether any other 
 postcondition expressions are evaluated. The postcondition check, and 
 any constraint or predicate checks associated with <B>in out</B> or <B>out</B> 
-parameters are performed in an arbitrary order.<A NAME="I3673"></A><A NAME="I3674"></A><A NAME="I3675"></A><A NAME="I3676"></A><A NAME="I3677"></A></div>
+parameters are performed in an arbitrary order.<A NAME="I3787"></A><A NAME="I3788"></A><A NAME="I3789"></A><A NAME="I3790"></A><A NAME="I3791"></A></div>
 <div class="paranum"><a name="p35.a">35.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The class-wide postcondition 
 expressions of the entity itself as well as those of any parent or progenitor 
@@ -747,7 +797,15 @@ that is ultimately dispatched to. The class-wide precondition of the
 resolved call is necessarily the same or stronger than that of the invoked 
 call. For a statically bound call, these are the same; for an access-to-subprogram, 
 (which has no class-wide preconditions of its own), we check the class-wide 
-preconditions of the invoked routine.&nbsp;</div>
+preconditions of the invoked routine.</div>
+<div class="paranum"><a name="p38.a.1">38.a.1/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0233-1.TXT">AI12-0233-1</A></I>} 
+Since this check is based on the &ldquo;callable entity&rdquo;, it does 
+not depend on the view of the entity. This matters any time the ancestor 
+type (if any) of the partial view differs from the parent type of the 
+full view. In such a case, the view of the callable entity associated 
+with the full view might inherit a Pre'Class while the view of the same 
+callable entity associated with the partial view does not.&nbsp;</div>
 <div class="paranum"><a name="p38.b">38.b/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>These rules imply 
 that logically, class-wide preconditions of routines must be checked 
@@ -790,16 +848,52 @@ pre- and postcondition expressions are equivalent for <I>S</I> and <I>S</I>'
 because none of the primitive subprograms called in those expressions 
 were overridden, no wrapper is needed. Otherwise, a wrapper is presumably 
 needed to provide the correct logic.&nbsp;</div>
-<div class="paranum"><a name="p39">39/3</a></div>
+<div class="paranum"><a name="p39">39/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0247-1.TXT">AI05-0247-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0254-1.TXT">AI05-0254-1</A></I>} 
-For a call via an access-to-subprogram value, all precondition and postcondition 
-checks performed are determined by the subprogram or entry denoted by 
-the prefix of the Access attribute reference that produced the value. 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+For a call via an access-to-subprogram value, precondition and postcondition 
+checks performed are as determined by the subprogram or entry denoted 
+by the prefix of the Access attribute reference that produced the value. 
+In addition, a precondition check of any precondition expression associated 
+with the access-to-subprogram type is performed. Similarly, a postcondition 
+check of any postcondition expression associated with the access-to-subprogram 
+type is performed.</div>
+<div class="paranum"><a name="p39.a">39.a/5</a></div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+A call via an access-to-subprogram value can be considered equivalent 
+(with respect to dynamic semantics) to call to a notional &quot;wrapper&quot; 
+subprogram which has the Pre and Post aspects and the profile of the 
+access-to-subprogram type and whose body contains (and returns, in the 
+case of a function) only a call to the designated subprogram. However, 
+other evaluation orders for the checks are allowed beyond those allowed 
+by strictly following this model. This equivalence can be used to determine 
+the appropriate point at which the constant associated with an Old attribute 
+reference in the Post aspect for an access-to-subprogram type is elaborated 
+and finalized.&nbsp;</div>
+<div class="paranum"><a name="p39.b">39.b/5</a></div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+In the case of type conversion between two access-to-subprogram types, 
+the Pre and Post aspects of the source type of the conversion play no 
+role in any subsequent call via the conversion result; only the Pre and 
+Post aspects of the target type of the conversion are relevant in that 
+case. The same applies in the case of a &ldquo;conversion&rdquo; (using 
+the term loosely) which is accomplished by combining a dereference and 
+an Access attribute reference, as in <TT>Some_Pointer.<B>all</B>'Access</TT>. 
 </div>
+<div class="paranum"><a name="p40">40/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
+[For a call on a generic formal subprogram, precondition and postcondition 
+checks performed are as determined by the subprogram or entry denoted 
+by the actual subprogram, along with any specific precondition and specific 
+postcondition of the formal subprogram itself.]</div>
+<div class="paranum"><a name="p40.a">40.a</a></div>
+<div class="Annotations"><B>Proof:&nbsp;</B>This follows from the general 
+Dynamic Semantics rules given above, but we mention it explicitly so 
+that there can be no doubt that it is intended.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
-<div class="paranum"><a name="p40">40/3</a></div>
+<div class="paranum"><a name="p41">41/3</a></div>
 <div class="Notes">5&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 A precondition is checked just before the call. If another task can change 
@@ -807,7 +901,7 @@ any value that the precondition expression depends on, the precondition
 need not hold within the subprogram or entry body.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
-<div class="paranum"><a name="p40.a">40.a/3</a></div>
+<div class="paranum"><a name="p41.a">41.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0145-2.TXT">AI05-0145-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0230-1.TXT">AI05-0230-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0247-1.TXT">AI05-0247-1</A></I>} 
@@ -815,19 +909,19 @@ need not hold within the subprogram or entry body.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0273-1.TXT">AI05-0273-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
-<A NAME="I3678"></A>Pre and Post aspects are new.&nbsp;</div>
+<A NAME="I3792"></A>Pre and Post aspects are new.&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
-<div class="paranum"><a name="p40.b">40.b/4</a></div>
+<div class="paranum"><a name="p41.b">41.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0032-1.TXT">AI12-0032-1</A></I>} 
-<A NAME="I3679"></A><B>Corrigendum:</B> The Old attribute is defined 
+<A NAME="I3793"></A><B>Corrigendum:</B> The Old attribute is defined 
 more carefully. This changes the nominal subtype and place of declaration 
 of the attribute compared to the published Ada 2012 Standard. In extreme 
 cases, this could change the runtime behavior of the attribute (for instance, 
 the tag might be different). The changes are most likely going to prevent 
 bugs by being more intuitive, but it is possible that a program that 
 previously worked might fail.</div>
-<div class="paranum"><a name="p40.c">40.c/4</a></div>
+<div class="paranum"><a name="p41.c">41.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0113-1.TXT">AI12-0113-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
 <B>Corrigendum:</B> Eliminated unintentional redispatching from class-wide 
@@ -840,7 +934,7 @@ that subprogram for Pre'Class. We expect that this change will primarily
 fix bugs, as it will make Pre'Class and Post'Class work more like expected. 
 In the case where redispatching is desired, an explicit conversion to 
 a class-wide type can be used.</div>
-<div class="paranum"><a name="p40.d">40.d/5</a></div>
+<div class="paranum"><a name="p41.d">41.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0166-1.TXT">AI12-0166-1</A></I>} 
 <B>Correction:</B> Specified that precondition checks always take place 
 before starting a protected action. Original Ada 2012 left this unspecified, 
@@ -849,7 +943,7 @@ action, and a program depended upon that, the program might fail in a
 different compiler. But such a program was depending on unspecified behavior 
 anyway, and thus was never portable; as such, such programs should be 
 rare.</div>
-<div class="paranum"><a name="p40.d.1">40.d.1/5</a></div>
+<div class="paranum"><a name="p41.d.1">41.d.1/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0195-1.TXT">AI12-0195-1</A></I>} 
 <B>Correction:</B> Specified that an inherited subprogram check both 
 the original and new versions of a class-wide precondition. If a call 
@@ -863,9 +957,9 @@ preconditions and postconditions is to use them in cases where LSP is
 followed).&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
-<div class="paranum"><a name="p40.e">40.e/4</a></div>
+<div class="paranum"><a name="p41.e">41.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0045-1.TXT">AI12-0045-1</A></I>} 
-<A NAME="I3680"></A><B>Corrigendum:</B> Precondition and postcondition 
+<A NAME="I3794"></A><B>Corrigendum:</B> Precondition and postcondition 
 aspects cannot be specified on instances of generic subprograms (they 
 should be specified on the generic subprogram instead). This was (unintentionally) 
 allowed by the Ada 2012 standard. These are not be allowed on instances 
@@ -874,7 +968,7 @@ to subprograms declared within the instance of a generic package. Therefore,
 allowing specification on a subprogram instance could present a maintenance 
 problem in the future if the entity needs to be converted to a generic 
 package (a common conversion).</div>
-<div class="paranum"><a name="p40.f">40.f/4</a></div>
+<div class="paranum"><a name="p41.f">41.f/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0131-1.TXT">AI12-0131-1</A></I>} 
 <B>Corrigendum:</B> Pre'Class is no longer allowed to be specified for 
 an overriding primitive subprogram unless there are also inherited class-wide 
@@ -890,9 +984,9 @@ change was necessary to eliminate cases where the evaluated class-wide
 precondition on a dispatching call would have been weaker than the class-wide 
 precondition of a statically bound call. (The original Ada 2012 violated 
 the LSP semantics that class-wide preconditions were intended to model.)</div>
-<div class="paranum"><a name="p40.g">40.g/5</a></div>
+<div class="paranum"><a name="p41.g">41.g/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0198-1.TXT">AI12-0198-1</A></I>} 
-<B>Correction:</B> A component <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<B>Correction:</B> A component <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 in an array aggregate can now be potentially unevaluated, requiring the 
 prefix to be statically determined. Existing code that uses the Old attribute 
 with a dynamic prefix in such contexts will now be illegal. However, 
@@ -904,17 +998,29 @@ is usually easily fixed by moving Old to an outer object (such as the
 entire aggregate).&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
-<div class="paranum"><a name="p40.h">40.h/5</a></div>
-<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0143-1.TXT">AI05-0143-1</A></I>} 
-<A NAME="I3681"></A>The Index attribute is new.&nbsp;</div>
+<div class="paranum"><a name="p41.h">41.h/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0143-1.TXT">AI12-0143-1</A></I>} 
+<A NAME="I3795"></A>The Index attribute is new.</div>
+<div class="paranum"><a name="p41.i">41.i/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0217-1.TXT">AI12-0217-1</A></I>} 
+<B>Correction:</B> The prefix of a statically unevaluated Old attribute 
+can be a <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>. 
+This is considered a correction as the old rule is unintentionally too 
+fierce, rejecting safe cases.</div>
+<div class="paranum"><a name="p41.j">41.j/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0220-1.TXT">AI12-0220-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
+Pre and Post can be given on an access-to-subprogram type and on a generic 
+formal subprogram.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
-<div class="paranum"><a name="p40.i">40.i/5</a></div>
+<div class="paranum"><a name="p41.k">41.k/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0170-1.TXT">AI05-0170-1</A></I>} 
 <B>Correction:</B> Clarified the wording about the meaning of the notional 
 type <I>NT</I> and the corresponding expression. Both changes follow 
 from other rules but are nonobvious.</div>
-<div class="paranum"><a name="p40.j">40.j/5</a></div>
+<div class="paranum"><a name="p41.l">41.l/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0185-1.TXT">AI05-0185-1</A></I>} 
 <B>Correction:</B> Removed redundant (and sometimes incorrect) wording 
 about the resolution of the Old and Result attributes.&nbsp;</div>
@@ -925,7 +1031,7 @@ about the resolution of the Old and Result attributes.&nbsp;</div>
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-6-1.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
-&nbsp;<A HREF="AA-6-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-6-1-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
 <SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>

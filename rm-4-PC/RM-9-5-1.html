@@ -17,18 +17,18 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,7 +39,7 @@
 <HR>
 <H1>9.5.1 Protected Subprograms and Protected Actions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4085"></A><A NAME="I4086"></A><A NAME="I4087"></A>A 
+<div class="Normal"><A NAME="I4034"></A><A NAME="I4035"></A><A NAME="I4036"></A>A 
 <I>protected subprogram</I> is a subprogram declared immediately within 
 a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN>. 
 Protected procedures provide exclusive read-write access to the data 
@@ -58,29 +58,29 @@ and within an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></
 the current instance is defined to be a variable (updating is permitted). 
 </div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4">For 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert4">For 
 a type declared by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
 or for the anonymous type of an object declared by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0211">single_protected_declaration</A></SPAN>, 
 the following language-defined type-related representation aspect may 
 be specified:</span></div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert4">Exclusive_Functions</span></div><div class="WideHanging-Body"><br clear="left">
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4">Exclusive_Functions</span></div><div class="WideHanging-Body"><br clear="left">
 <span class="insert4">The type of aspect Exclusive_Functions is Boolean. 
-If not specified (including by inheritance), the aspect is False.<A NAME="I4088"></A><A NAME="I4089"></A></span></div>
+If not specified (including by inheritance), the aspect is False.<A NAME="I4037"></A><A NAME="I4038"></A></span></div>
 <div class="paranum"><a name="p2.3">2.3/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert4"></span></div><div class="WideHanging-Body">
+<div class="WideHanging-Term">&nbsp;&nbsp;<span class="insert4"></span></div><div class="WideHanging-Body">
 <span class="insert4">A value of True for this aspect indicates that 
 protected functions behave in the same way as protected procedures with 
 respect to mutual exclusion and queue servicing (see below).</span></div>
 <div class="paranum"><a name="p2.4">2.4/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">A protected procedure or entry 
-is an <I>exclusive</I> protected operation.<A NAME="I4090"></A> A protected 
-function of a protected type <I>P</I> is an exclusive protected operation 
-if the Exclusive_Functions aspect of <I>P</I> is True.</span></div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">A protected procedure or 
+entry is an <I>exclusive</I> protected operation.<A NAME="I4039"></A> 
+A protected function of a protected type <I>P</I> is an exclusive protected 
+operation if the Exclusive_Functions aspect of <I>P</I> is True.</span></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4091"></A>For the execution of a call on 
+<div class="Normal"><A NAME="I4040"></A>For the execution of a call on 
 a protected subprogram, the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 and of the parameter associations, and any assigning back of <B>in out</B> 
@@ -93,14 +93,14 @@ action</I> on the target protected object; the protected action completes
 after the body of the subprogram is executed. A protected action can 
 also be started by an entry call (see <A HREF="RM-9-5-3.html">9.5.3</A>).</div>
 <div class="paranum"><a name="p4">4/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4092"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4041"></A>A 
 new protected action is not started on a protected object while another 
 protected action on the same protected object is underway, unless both 
 actions are the result of a call on a <span class="insert4">nonexclusive 
 </span>protected function. This rule is expressible in terms of the execution 
 resource associated with the protected object:&nbsp;</div>
 <div class="paranum"><a name="p5">5/4</a></div>
-<div class="Bulleted"><A NAME="I4093"></A><A NAME="I4094"></A><I>Starting</I> 
+<div class="Bulleted"><A NAME="I4042"></A><A NAME="I4043"></A><I>Starting</I> 
 a protected action on a protected object corresponds to <I>acquiring</I> 
 the execution resource associated with the protected object, either for 
 <span class="insert4">exclusive read-write</span><span class="delete4">&nbsp;concurrent 
@@ -109,7 +109,7 @@ exclusive protected operation</span><span class="delete4">&nbsp;a protected
 function</span>, or for <span class="insert4">concurrent read-only</span><span class="delete4">&nbsp;exclusive 
 read-write</span> access otherwise;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I4095"></A><A NAME="I4096"></A><I>Completing</I> 
+<div class="Bulleted"><A NAME="I4044"></A><A NAME="I4045"></A><I>Completing</I> 
 the protected action corresponds to <I>releasing</I> the associated execution 
 resource.&nbsp;</div>
 <div class="paranum"><a name="p7">7/4</a></div>
@@ -120,9 +120,9 @@ object are serviced (see <A HREF="RM-9-5-3.html">9.5.3</A>).&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4097"></A>During 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4046"></A>During 
 a protected action, it is a bounded error to invoke an operation that 
-is <I>potentially blocking</I>. <A NAME="I4098"></A><A NAME="I4099"></A>The 
+is <I>potentially blocking</I>. <A NAME="I4047"></A><A NAME="I4048"></A>The 
 following are defined to be potentially blocking operations:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Bulleted">a <SPAN Class="swiss"><A HREF="RM-9-7.html#S0230">select_statement</A></SPAN>;</div>
@@ -144,7 +144,7 @@ action;&nbsp;</div>
 <div class="Bulleted">a call on a subprogram whose body contains a potentially 
 blocking operation.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I4100"></A>If the bounded error is detected, 
+<div class="Normal"><A NAME="I4049"></A>If the bounded error is detected, 
 Program_Error is raised. If not detected, the bounded error might result 
 in deadlock or a (nested) protected action on the same target object.</div>
 <div class="paranum"><a name="p18">18</a></div>

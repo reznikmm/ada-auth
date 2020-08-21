@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -45,13 +43,13 @@ declaration:&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Real&nbsp;<B>is&nbsp;digits</B>&nbsp;&lt;&gt;;<BR>
-<B>package</B>&nbsp;Ada.Numerics.Generic_Real_Arrays&nbsp;<B>is</B><A NAME="I9355"></A><BR>
+<B>package</B>&nbsp;Ada.Numerics.Generic_Real_Arrays&nbsp;<B>is</B><A NAME="I9145"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Generic_Real_Arrays);</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Types</I></SPAN></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9356"></A>Real_Vector&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Real'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9357"></A>Real_Matrix&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;,&nbsp;Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9146"></A>Real_Vector&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)&nbsp;<B>of</B>&nbsp;Real'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I9147"></A>Real_Matrix&nbsp;<B>is&nbsp;array</B>&nbsp;(Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;,&nbsp;Integer&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>of</B>&nbsp;Real'Base;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Subprograms&nbsp;for&nbsp;Real_Vector&nbsp;types</I></SPAN></div>
@@ -80,7 +78,7 @@ declaration:&nbsp;</div>
 <div class="paranum"><a name="p13">13/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Other&nbsp;Real_Vector&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9358"></A>Unit_Vector&nbsp;(Index&nbsp;:&nbsp;Integer;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9148"></A>Unit_Vector&nbsp;(Index&nbsp;:&nbsp;Integer;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order&nbsp;:&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
@@ -91,7 +89,7 @@ declaration:&nbsp;</div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;<B>abs</B>&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9359"></A>Transpose&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9149"></A>Transpose&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;+&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
@@ -115,29 +113,29 @@ declaration:&nbsp;</div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Real_Matrix&nbsp;inversion&nbsp;and&nbsp;related&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9360"></A>Solve&nbsp;(A&nbsp;:&nbsp;Real_Matrix;&nbsp;X&nbsp;:&nbsp;Real_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9361"></A>Solve&nbsp;(A,&nbsp;X&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9362"></A>Inverse&nbsp;(A&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9363"></A>Determinant&nbsp;(A&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9150"></A>Solve&nbsp;(A&nbsp;:&nbsp;Real_Matrix;&nbsp;X&nbsp;:&nbsp;Real_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9151"></A>Solve&nbsp;(A,&nbsp;X&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9152"></A>Inverse&nbsp;(A&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Matrix;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9153"></A>Determinant&nbsp;(A&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real'Base;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Eigenvalues&nbsp;and&nbsp;vectors&nbsp;of&nbsp;a&nbsp;real&nbsp;symmetric&nbsp;matrix</I></SPAN></div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9364"></A>Eigenvalues&nbsp;(A&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9154"></A>Eigenvalues&nbsp;(A&nbsp;:&nbsp;Real_Matrix)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9365"></A>Eigensystem&nbsp;(A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Real_Matrix;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I9155"></A>Eigensystem&nbsp;(A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;Real_Matrix;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Values&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Real_Vector;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vectors&nbsp;:&nbsp;<B>out</B>&nbsp;Real_Matrix);</div>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Other&nbsp;Real_Matrix&nbsp;operations</I></SPAN></div>
 <div class="paranum"><a name="p29">29/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9366"></A>Unit_Matrix&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Positive;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I9156"></A>Unit_Matrix&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First_1,&nbsp;First_2&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Real_Arrays;</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
-<A NAME="I9367"></A>The library package Numerics.Real_Arrays is declared 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<A NAME="I9157"></A>The library package Numerics.Real_Arrays is declared 
 pure and defines the same types and subprograms as Numerics.Generic_Real_Arrays, 
 except that the predefined type Float is systematically substituted for 
 Real'Base throughout. Nongeneric equivalents for each of the other predefined 
@@ -149,7 +147,7 @@ provided to allow the programmer to construct simple mathematical applications
 without being required to understand and use generics, and to be consistent 
 with other Numerics packages.&nbsp;</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 Two types are defined and exported by Numerics.Generic_Real_Arrays. The 
 composite type Real_Vector is provided to represent a vector with components 
 of type Real; it is defined as an unconstrained, one-dimensional array 
@@ -157,7 +155,7 @@ with an index of type Integer. The composite type Real_Matrix is provided
 to represent a matrix with components of type Real; it is defined as 
 an unconstrained, two-dimensional array with indices of type Integer.</div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 The effect of the various subprograms is as described below. In most 
 cases the subprograms are described in terms of corresponding scalar 
 operations of the type Real; any exception raised by those operations 
@@ -165,11 +163,11 @@ is propagated by the array operation. Moreover, the accuracy of the result
 for each individual component is as defined for the scalar operation 
 unless stated otherwise.</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 In the case of those operations which are defined to <I>involve an inner 
 product</I>, Constraint_Error may be raised if an intermediate result 
 is outside the range of Real'Base even though the mathematical final 
-result would not be.<A NAME="I9368"></A></div>
+result would not be.<A NAME="I9158"></A></div>
 <div class="paranum"><a name="p35">35/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;+&quot;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Real_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
 <B>function</B>&nbsp;&quot;-&quot;&nbsp;&nbsp;&nbsp;(Right&nbsp;:&nbsp;Real_Vector)&nbsp;<B>return</B>&nbsp;Real_Vector;<BR>
@@ -237,7 +235,7 @@ index range of the result is Left'Range.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)&nbsp;<B>return</B>&nbsp;Real_Vector;</div>
 <div class="paranum"><a name="p48">48/2</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
-This function returns a <I>unit vector</I><A NAME="I9369"></A> with Order 
+This function returns a <I>unit vector</I><A NAME="I9159"></A> with Order 
 components and a lower bound of First. All components are set to 0.0 
 except for the Index component which is set to 1.0. Constraint_Error 
 is raised if Index &lt; First, Index &gt; First + Order &ndash; 1 or 
@@ -385,24 +383,22 @@ whose columns are the eigenvectors of the matrix A. The order of the
 columns corresponds to the order of the eigenvalues. The eigenvectors 
 are normalized and mutually orthogonal (they are orthonormal), including 
 when there are repeated eigenvalues. Constraint_Error is raised if A'Length(1) 
-is not equal to A'Length(2)<span class="insert3">, or if Values'Range 
-is not equal to A'Range(1), or if the</span><span class="delete3">. The</span> 
-index ranges of the parameter Vectors are <span class="insert3">not equal 
-to&nbsp;</span>those of A. Argument_Error is raised if the matrix A is not 
-symmetric.<span class="insert3">&nbsp;Constraint_Error is also raised in implementation-defined 
-circumstances if the algorithm used does not converge quickly enough.</span></div>
+is not equal to A'Length(2), or if Values'Range is not equal to A'Range(1), 
+or if the index ranges of the parameter Vectors are not equal to those 
+of A. Argument_Error is raised if the matrix A is not symmetric. Constraint_Error 
+is also raised in implementation-defined circumstances if the algorithm 
+used does not converge quickly enough.</div>
 <div class="paranum"><a name="p78.a">78.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0047-1.TXT">AI05-0047-1</A></I>} 
-<span class="insert3">There is no requirement on the absolute direction 
-of the returned eigenvectors. Thus they might be multiplied by -1. It 
-is only the ratios of the components that matter. This is standard practice.</span> 
-</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0047-1.TXT">AI05-0047-1</A></I>} 
+There is no requirement on the absolute direction of the returned eigenvectors. 
+Thus they might be multiplied by -1. It is only the ratios of the components 
+that matter. This is standard practice.&nbsp;</div>
 <div class="paranum"><a name="p79">79/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Unit_Matrix&nbsp;(Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Positive;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First_1,&nbsp;First_2&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;1)&nbsp;<B>return</B>&nbsp;Real_Matrix;</div>
 <div class="paranum"><a name="p80">80/2</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
-This function returns a square <I>unit matrix</I><A NAME="I9370"></A> 
+This function returns a square <I>unit matrix</I><A NAME="I9160"></A> 
 with Order**2 components and lower bounds of First_1 and First_2 (for 
 the first and second index ranges respectively). All components are set 
 to 0.0 except for the main diagonal, whose components are set to 1.0. 
@@ -411,7 +407,7 @@ or First_2 + Order &ndash; 1 &gt; Integer'Last.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p81">81/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 Accuracy requirements for the subprograms Solve, Inverse, Determinant, 
 Eigenvalues and Eigensystem are implementation defined.&nbsp;</div>
 <div class="paranum"><a name="p81.a">81.a/2</a></div>
@@ -419,11 +415,11 @@ Eigenvalues and Eigensystem are implementation defined.&nbsp;</div>
 requirements for the subprograms Solve, Inverse, Determinant, Eigenvalues 
 and Eigensystem for type Real_Matrix.</div>
 <div class="paranum"><a name="p82">82/2</a></div>
-<div class="Normal">For operations not involving an inner product, the 
+<div class="Normal">&nbsp;For operations not involving an inner product, the 
 accuracy requirements are those of the corresponding operations of the 
 type Real in both the strict mode and the relaxed mode (see <A HREF="AA-G-2.html">G.2</A>).</div>
 <div class="paranum"><a name="p83">83/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For operations involving 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For operations involving 
 an inner product, no requirements are specified in the relaxed mode. 
 In the strict mode the modulus of the absolute error of the inner product 
 <I>X</I>*<I>Y</I> shall not exceed <I>g</I>*<B>abs</B>(<I>X</I>)*<B>abs</B>(<I>Y</I>) 
@@ -431,7 +427,7 @@ where <I>g</I> is defined as&nbsp;</div>
 <div class="paranum"><a name="p84">84/2</a></div>
 <div class="Indented1"><I>g</I>&nbsp;=&nbsp;<I>X</I>'Length&nbsp;*&nbsp;Real'Machine_Radix**(1&nbsp;&ndash;&nbsp;Real'Model_Mantissa)</div>
 <div class="paranum"><a name="p85">85/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00418.TXT">AI95-00418-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00418.TXT">AI95-00418-01</A></I>} 
 For the L2-norm, no accuracy requirements are specified in the relaxed 
 mode. In the strict mode the relative error on the norm shall not exceed 
 <I>g</I> / 2.0 + 3.0 * Real'Model_Epsilon where <I>g</I> is defined as 
@@ -445,7 +441,7 @@ adding an extra Real'Model_Epsilon to account for higher order effects.
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p86">86/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 Implementations shall document any techniques used to reduce cancellation 
 errors such as extended precision arithmetic.&nbsp;</div>
 <div class="paranum"><a name="p86.a">86.a/2</a></div>
@@ -464,37 +460,36 @@ Stability of Numerical Algorithms By N J Higham (ISBN 0-89871-355-2),
 Section 3.1.</div>
 <div class="paranum"><a name="p86.c">86.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0047-1.TXT">AI05-0047-1</A></I>} 
-<span class="insert3">Note moreover that the componentwise accuracy requirements 
-are not met by subcubic methods for matrix multiplication such as that 
-devised by Strassen. These methods, which are typically used for the 
-fast multiplication of very large matrices (e.g. order more than a few 
-thousands), have normwise accuracy properties. If it is desired to use 
-such methods, then distinct subprograms should be provided (perhaps in 
-a child package). See Section 22.2.2 in the above reference.</span>&nbsp;</div>
+Note moreover that the componentwise accuracy requirements are not met 
+by subcubic methods for matrix multiplication such as that devised by 
+Strassen. These methods, which are typically used for the fast multiplication 
+of very large matrices (e.g. order more than a few thousands), have normwise 
+accuracy properties. If it is desired to use such methods, then distinct 
+subprograms should be provided (perhaps in a child package). See Section 
+22.2.2 in the above reference.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p87">87/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 The nongeneric equivalent packages may, but need not, be actual instantiations 
 of the generic package for the appropriate predefined type.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p88">88/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
 Implementations should implement the Solve and Inverse functions using 
 established techniques such as LU decomposition with row interchanges 
 followed by back and forward substitution. Implementations are recommended 
 to refine the result by performing an iteration on the residuals; if 
-this is done<span class="insert3">,</span> then it should be documented. 
-</div>
+this is done, then it should be documented.&nbsp;</div>
 <div class="paranum"><a name="p88.a">88.a/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>Solve and Inverse 
 for Numerics.Generic_Real_Arrays should be implemented using established 
 techniques such as LU decomposition and the result should be refined 
 by an iteration on the residuals.</div>
 <div class="paranum"><a name="p89">89/2</a></div>
-<div class="Normal">It is not the intention that any special provision 
+<div class="Normal">&nbsp;It is not the intention that any special provision 
 should be made to determine whether a matrix is ill-conditioned or not. 
 The naturally occurring overflow (including division by zero) which will 
 result from executing these functions with an ill-conditioned matrix 
@@ -503,41 +498,39 @@ and thus raise Constraint_Error is sufficient.&nbsp;</div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>There isn't any advice for 
 the implementation to document with this paragraph.&nbsp;</div>
 <div class="paranum"><a name="p90">90/2</a></div>
-<div class="Normal">The test that a matrix is symmetric should be performed 
+<div class="Normal">&nbsp;The test that a matrix is symmetric should be performed 
 by using the equality operator to compare the relevant components.&nbsp;</div>
 <div class="paranum"><a name="p90.a">90.a/2</a></div>
 <div class="Annotations"><B>Implementation Advice:&nbsp;</B>The equality operator 
 should be used to test that a matrix in Numerics.Generic_Real_Arrays 
 is symmetric.</div>
 <div class="paranum"><a name="p91">91/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0047-1.TXT">AI05-0047-1</A></I>} 
-<span class="insert3">An implementation should minimize the circumstances 
-under which the algorithm used for Eigenvalues and Eigensystem fails 
-to converge.</span>&nbsp;</div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0047-1.TXT">AI05-0047-1</A></I>} 
+An implementation should minimize the circumstances under which the algorithm 
+used for Eigenvalues and Eigensystem fails to converge.&nbsp;</div>
 <div class="paranum"><a name="p91.a.1">91.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Advice: 
-</B></span><span class="insert3">An implementation should minimize the 
-circumstances under which the algorithm used for Numerics.Generic_Real_Arrays.Eigenvalues 
-and Numerics.Generic_Real_Arrays.Eigensystem fails to converge.</span></div>
+<div class="Annotations"><B>Implementation Advice:&nbsp;</B>An implementation 
+should minimize the circumstances under which the algorithm used for 
+Numerics.Generic_Real_Arrays.Eigenvalues and Numerics.Generic_Real_Arrays.Eigensystem 
+fails to converge.</div>
 <div class="paranum"><a name="p91.a">91.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Note: 
-</B>J. H. Wilkinson is the acknowledged expert in this area. See for 
-example Wilkinson, J. H., and Reinsch, C. , Linear Algebra , vol II of 
-Handbook for Automatic Computation, Springer-Verlag, or Wilkinson, J. 
-H., The Algebraic Eigenvalue Problem, Oxford University Press.</span> 
-</div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>J. H. Wilkinson 
+is the acknowledged expert in this area. See for example Wilkinson, J. 
+H., and Reinsch, C. , Linear Algebra , vol II of Handbook for Automatic 
+Computation, Springer-Verlag, or Wilkinson, J. H., The Algebraic Eigenvalue 
+Problem, Oxford University Press.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p91.b">91.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00296.TXT">AI95-00296-01</A></I>} 
-<A NAME="I9371"></A>The package Numerics.Generic_Real_Arrays and its 
+<A NAME="I9161"></A>The package Numerics.Generic_Real_Arrays and its 
 nongeneric equivalents are new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p91.c">91.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0047-1.TXT">AI05-0047-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Corrected various accuracy and 
-definition issues.</span>&nbsp;</div>
+<B>Correction:</B> Corrected various accuracy and definition issues. 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -51,15 +49,15 @@ denote attributes of any of the foregoing.]&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<SPAN Class="swiss">name</SPAN><A NAME="I2563"></A><A NAME="S0091"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2564"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2565"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2566"></A><SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2567"></A><SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2568"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2569"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2570"></A><SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>&nbsp;|&nbsp;<A NAME="I2571"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0179">function_call</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2572"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN><span class="insert3">&nbsp;|&nbsp;<A NAME="I2573"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2574"></A><SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN>&nbsp;|&nbsp;<A NAME="I2575"></A><SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN></span></div>
+<SPAN Class="swiss">name</SPAN><A NAME="I2545"></A><A NAME="S0091"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2546"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2547"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2548"></A><SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2549"></A><SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2550"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>&nbsp;|&nbsp;<A NAME="I2551"></A><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2552"></A><SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>&nbsp;|&nbsp;<A NAME="I2553"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0179">function_call</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2554"></A><SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>&nbsp;|&nbsp;<A NAME="I2555"></A><SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2556"></A><SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN>&nbsp;|&nbsp;<A NAME="I2557"></A><SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">direct_name</SPAN><A NAME="I2576"></A><A NAME="S0092"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2577"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I2578"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0170">operator_symbol</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">direct_name</SPAN><A NAME="I2558"></A><A NAME="S0092"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2559"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>&nbsp;|&nbsp;<A NAME="I2560"></A><SPAN Class="swiss"><A HREF="AA-6-1.html#S0170">operator_symbol</A></SPAN></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00114.TXT">AI95-00114-01</A></I>} 
 <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN> 
@@ -68,18 +66,18 @@ is no longer a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></
 are usable even when the corresponding enumeration type declaration is 
 not visible. See <A HREF="AA-4-2.html">4.2</A>.&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">prefix</SPAN><A NAME="I2579"></A><A NAME="S0093"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2580"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2581"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">prefix</SPAN><A NAME="I2561"></A><A NAME="S0093"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2562"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;|&nbsp;<A NAME="I2563"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">explicit_dereference</SPAN><A NAME="I2582"></A><A NAME="S0094"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2583"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.<B>all</B></div>
+<div class="Indented1"><SPAN Class="swiss">explicit_dereference</SPAN><A NAME="I2564"></A><A NAME="S0094"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2565"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>.<B>all</B></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">implicit_dereference</SPAN><A NAME="I2584"></A><A NAME="S0095"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2585"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">implicit_dereference</SPAN><A NAME="I2566"></A><A NAME="S0095"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2567"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
 [Certain forms of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (<SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s, 
 <SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0098">selected_component</A></SPAN>s, 
 <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN>s, 
-and <span class="insert3"><SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s</span><span class="delete3"><SPAN Class="swiss">&nbsp;attribute</SPAN>s</span>) 
+and <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s) 
 include a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 that is either itself a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes some related entity, or an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN> 
@@ -87,7 +85,7 @@ of an access value that designates some related entity.]&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2586"></A><A NAME="I2587"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2568"></A><A NAME="I2569"></A>The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a <I>dereference</I> (either an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="AA-4-1.html#S0094">explicit_dereference</A></SPAN>) 
 is expected to be of any access type.&nbsp;</div>
@@ -95,15 +93,15 @@ is expected to be of any access type.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<A NAME="I2588"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<A NAME="I2570"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a dereference is some access-to-object type <I>T</I>, then the dereference 
 denotes a view of an object, the <I>nominal subtype</I> of the view being 
-the designated subtype of <I>T</I>.<span class="insert3">&nbsp;If the designated 
-subtype has unconstrained discriminants, the (actual) subtype of the 
-view is constrained by the values of the discriminants of the designated 
-object, except when there is a partial view of the type of the designated 
-subtype that does not have discriminants, in which case the dereference 
-is not constrained by its discriminant values.</span>&nbsp;</div>
+the designated subtype of <I>T</I>. If the designated subtype has unconstrained 
+discriminants, the (actual) subtype of the view is constrained by the 
+values of the discriminants of the designated object, except when there 
+is a partial view of the type of the designated subtype that does not 
+have discriminants, in which case the dereference is not constrained 
+by its discriminant values.&nbsp;</div>
 <div class="paranum"><a name="p9.a">9.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the value of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 is the result of an access type conversion, the dereference denotes a 
@@ -111,35 +109,32 @@ view created as part of the conversion. The nominal subtype of the view
 is not necessarily the same as that used to create the designated object. 
 See <A HREF="AA-4-6.html">4.6</A>.&nbsp;</div>
 <div class="paranum"><a name="p9.b">9.b</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I2589"></A>We 
+<div class="Annotations"><B>To be honest:&nbsp;</B><A NAME="I2571"></A>We 
 sometimes refer to the nominal subtype of a particular kind of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 rather than the nominal subtype of the view denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 (presuming the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denotes a view of an object). These two uses of nominal subtype are intended 
 to mean the same thing.&nbsp;</div>
 <div class="paranum"><a name="p9.c">9.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<span class="insert3">The last sentence was not present in Ada 95; it 
-is necessary in Ada 2005 because general access types can designate unconstrained 
-objects, which was not possible in Ada 95. Thus, the rules that had this 
-effect in Ada 95 (the object being constrained by its initial value) 
-don't work in Ada 2005 and we have to say this explicitly.</span></div>
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+The last sentence was not present in Ada 95; it is necessary in Ada 2005 
+because general access types can designate unconstrained objects, which 
+was not possible in Ada 95. Thus, the rules that had this effect in Ada 
+95 (the object being constrained by its initial value) don't work in 
+Ada 2005 and we have to say this explicitly.</div>
 <div class="paranum"><a name="p9.d">9.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<span class="insert3">The &ldquo;except&rdquo; part of the last sentence 
-prevents privacy &ldquo;breaking&rdquo;, so that if a private type has 
-discriminants only in the full view, they don't interfere with freely 
-interassigning values between objects of the type, even when the objects 
-live in the heap.</span>&nbsp;</div>
+The &ldquo;except&rdquo; part of the last sentence prevents privacy &ldquo;breaking&rdquo;, 
+so that if a private type has discriminants only in the full view, they 
+don't interfere with freely interassigning values between objects of 
+the type, even when the objects live in the heap.&nbsp;</div>
 <div class="paranum"><a name="p9.e">9.e/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Implementation Note: 
-</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<span class="insert3">Since we don't depend on whether the designated 
-object is constrained, it is not necessary to include a constrained bit 
-in every object that could be designated by a general access type.</span> 
-</div>
+<div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
+Since we don't depend on whether the designated object is constrained, 
+it is not necessary to include a constrained bit in every object that 
+could be designated by a general access type.&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I2590"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2572"></A>If the type of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a dereference is some access-to-subprogram type <I>S</I>, then the 
 dereference denotes a view of a subprogram, the <I>profile</I> of the 
 view being the designated profile of <I>S</I>.&nbsp;</div>
@@ -154,30 +149,30 @@ since 'Access requires only subtype conformance, not full conformance.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00415.TXT">AI95-00415-01</A></I>} 
-<A NAME="I2591"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00415.TXT">AI95-00415-01</A></I>} 
+<A NAME="I2573"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 determines the entity denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 This evaluation has no other effect for a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 or a <SPAN Class="swiss"><A HREF="AA-2-5.html#S0015">character_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2592"></A>[The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I2574"></A>[The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that has a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 includes the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>.] 
-<A NAME="I2593"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
+<A NAME="I2575"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN>. 
 The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 denotes the entity denoted by the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0095">implicit_dereference</A></SPAN>.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I2594"></A>The evaluation of a dereference 
+<div class="Normal"><A NAME="I2576"></A>The evaluation of a dereference 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and the determination of the object or subprogram that is designated 
 by the value of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
-<A NAME="I2595"></A><A NAME="I2596"></A>A check is made that the value 
+<A NAME="I2577"></A><A NAME="I2578"></A>A check is made that the value 
 of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-is not the null access value. <A NAME="I2597"></A>Constraint_Error is 
+is not the null access value. <A NAME="I2579"></A>Constraint_Error is 
 raised if this check fails. The dereference denotes the object or subprogram 
 designated by the value of the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>. 
 </div>
@@ -205,7 +200,7 @@ Next_Car.Owner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p17.a">17.a</a></div>
-<div class="Annotations"><A NAME="I2598"></A>Type conversions and function 
+<div class="Annotations"><A NAME="I2580"></A>Type conversions and function 
 calls are now considered names that denote the result of the operation. 
 In the case of a type conversion used as an actual parameter or that 
 is of a tagged type, the type conversion is considered a variable if 
@@ -282,7 +277,7 @@ implicit dereference.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p17.h">17.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
-<span class="insert3"><A NAME="I2599"></A>A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
+<A NAME="I2581"></A>A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
 is now a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting a constant view; this allows them to be used as a prefix and 
 to be renamed as an object. They are often used to remove ambiguity from 
@@ -291,23 +286,22 @@ a <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN>
 of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0142">qualified_expression</A></SPAN> 
 is already legal in these contexts, so this change mainly reduces clutter 
 by eliminating an otherwise unneeded <SPAN Class="swiss"><A HREF="AA-4-6.html#S0141">type_conversion</A></SPAN> 
-from some expressions.</span>&nbsp;</div>
+from some expressions.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p17.i">17.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added a missing rule so that 
-most dereferences are assumed constrained (without determining whether 
-the designated object is). This is just confirming the Ada 95 rules; 
-Ada 2005 failed to ensure that this property was unchanged.</span></div>
+<B>Correction:</B> Added a missing rule so that most dereferences are 
+assumed constrained (without determining whether the designated object 
+is). This is just confirming the Ada 95 rules; Ada 2005 failed to ensure 
+that this property was unchanged.</div>
 <div class="paranum"><a name="p17.j">17.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3">Added <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
+Added <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 as types of <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>; 
-these are documented as extensions in the appropriate subclauses.</span> 
-</div>
+these are documented as extensions in the appropriate subclauses.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -43,42 +41,42 @@ of the type, causes freezing of the entity in some contexts, as described
 below. The Legality Rules forbid certain kinds of uses of an entity in 
 the region of text where it is frozen.&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I5654"></A><A NAME="I5655"></A>The <I>freezing</I> 
+<div class="Normal"><A NAME="I5641"></A><A NAME="I5642"></A>The <I>freezing</I> 
 of an entity occurs at one or more places (<I>freezing points</I>) in 
 the program text where the representation for the entity has to be fully 
 determined. Each entity is frozen from its first freezing point to the 
 end of the program text (given the ordering of compilation units defined 
 in <A HREF="RM-10-1-4.html">10.1.4</A>).&nbsp;</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I5656"></A>This subclause also defines 
+<div class="Normal">&nbsp;<A NAME="I5643"></A>This subclause also defines 
 a place in the program text where the profile of each declared callable 
 entity becomes <I>frozen</I>. A use of a callable entity causes freezing 
 of its profile in some contexts, as described below. At the place where 
 the profile of a callable entity becomes frozen, the entity itself becomes 
 frozen.</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Normal"><A NAME="I5657"></A>The end of a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
+<div class="Normal"><A NAME="I5644"></A>The end of a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN>, 
 or a declaration of a library package or generic library package, causes 
-<I>freezing</I> of each entity and profile declared within it<span class="delete5">&nbsp;except for incomplete types</span>. <A NAME="I5658"></A>A <span class="insert4"></span><span class="insert5">noninstance 
-</span><span class="insert4"><SPAN Class="swiss"><A HREF="RM-3-11.html#S0090">proper_body</A></SPAN>, 
+<I>freezing</I> of each entity and profile declared within it<span class="delete5">&nbsp;except for incomplete types</span>. <A NAME="I5645"></A>A <span class="insert5">noninstance 
+</span><SPAN Class="swiss"><A HREF="RM-3-11.html#S0090">proper_body</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0275">body_stub</A></SPAN>, 
-or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN></span><span class="delete4">&nbsp;noninstance 
-body other than a renames-as-body</span> causes freezing of each entity 
-and profile declared before it within the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><span class="delete5">&nbsp;that is not an incomplete type; it only causes freezing of an incomplete 
+or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN> 
+causes freezing of each entity and profile declared before it within 
+the same <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN><span class="delete5">&nbsp;that is not an incomplete type; it only causes freezing of an incomplete 
 type if the body is within the immediate scope of the incomplete type</span>. 
 </div>
 <div class="paranum"><a name="p4">4/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5659"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5646"></A>A 
 construct that (explicitly or implicitly) references an entity can cause 
 the <I>freezing</I> of the entity, as defined by subsequent paragraphs. 
-<A NAME="I5660"></A>At the place where a construct causes freezing, each 
+<A NAME="I5647"></A>At the place where a construct causes freezing, each 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> within 
 the construct causes freezing:&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Bulleted"><A NAME="I5661"></A>The occurrence of a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0293">generic_instantiation</A></SPAN> 
+<div class="Bulleted"><A NAME="I5648"></A>The occurrence of a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0293">generic_instantiation</A></SPAN> 
 causes freezing, except that a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 which is a generic actual parameter whose corresponding generic formal 
 parameter is a formal incomplete type (see <A HREF="RM-12-5-1.html">12.5.1</A>) 
@@ -87,19 +85,18 @@ is defaulted, the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expres
 or <SPAN Class="swiss"><A HREF="RM-12-6.html#S0317">default_name</A></SPAN> 
 for that parameter causes freezing.</div>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
-<div class="Bulleted"><span class="insert4">At the occurrence of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
+<div class="Bulleted">At the occurrence of an <SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN> 
 that is a completion, the return expression of the expression function 
-causes freezing.</span></div>
+causes freezing.</div>
 <div class="paranum"><a name="p5.2">5.2/4</a></div>
-<div class="Bulleted"><span class="insert4">At the occurrence of a renames-as-body 
-whose <I>callable_entity_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted">At the occurrence of a renames-as-body whose <I>callable_entity_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes an expression function, the return expression of the expression 
-function causes freezing.</span></div>
+function causes freezing.</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I5662"></A>The occurrence of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
+<div class="Bulleted"><A NAME="I5649"></A>The occurrence of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
 that has no corresponding completion causes freezing.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Bulleted"><A NAME="I5663"></A>The declaration of a record 
+<div class="Bulleted"><A NAME="I5650"></A>The declaration of a record 
 extension causes freezing of the parent subtype.&nbsp;</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
 <div class="Bulleted">The declaration of a record extension, interface 
@@ -115,24 +112,23 @@ cause freezing. Any static expressions within an <SPAN Class="swiss"><A HREF="RM
 also cause freezing at the end of the immediately enclosing declaration 
 list.&nbsp;</div>
 <div class="paranum"><a name="p8">8/4</a></div>
-<div class="Normal"><A NAME="I5664"></A>A static expression (other than 
+<div class="Normal"><A NAME="I5651"></A>A static expression (other than 
 within an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>) 
-causes freezing where it occurs. <A NAME="I5665"></A>An object name or 
+causes freezing where it occurs. <A NAME="I5652"></A>An object name or 
 nonstatic expression causes freezing where it occurs, unless the name 
 or expression is part of a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN>, 
 a <SPAN Class="swiss"><A HREF="RM-12-6.html#S0317">default_name</A></SPAN>, 
-the <span class="insert4">return expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">&nbsp;expression</A></SPAN></span> 
-of an expression function, an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
+the return expression of an expression function, an <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
 or a per-object expression of a component's <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0029">constraint</A></SPAN>, 
 in which case, the freezing occurs later as part of another construct 
 or at the freezing point of an associated entity.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I5666"></A>An implicit call freezes the 
+<div class="Normal">&nbsp;<A NAME="I5653"></A>An implicit call freezes the 
 same entities and profiles that would be frozen by an explicit call. 
 This is true even if the implicit call is removed via implementation 
 permissions.</div>
 <div class="paranum"><a name="p8.2">8.2/1</a></div>
-<div class="Normal">&nbsp;<A NAME="I5667"></A>If an expression is implicitly 
+<div class="Normal">&nbsp;<A NAME="I5654"></A>If an expression is implicitly 
 converted to a type or subtype <I>T</I>, then at the place where the 
 expression causes freezing, <I>T</I> is frozen.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -140,7 +136,7 @@ expression causes freezing, <I>T</I> is frozen.</div>
 define which entities are frozen at the place where a construct causes 
 freezing:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5668"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5655"></A>At 
 the place where an expression causes freezing, the type of the expression 
 is frozen, unless the expression is an enumeration literal used as a 
 <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0074">discrete_choice</A></SPAN> 
@@ -148,67 +144,65 @@ of the <SPAN Class="swiss"><A HREF="RM-4-3-3.html#S0113">array_aggregate</A></SP
 of an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0328">enumeration_representation_clause</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p10.1">10.1/4</a></div>
-<div class="Bulleted"><A NAME="I5669"></A><A NAME="I5670"></A>At the 
+<div class="Bulleted"><A NAME="I5656"></A><A NAME="I5657"></A>At the 
 place where a function call causes freezing, the profile of the function 
 is frozen. Furthermore, if a parameter of the call is defaulted, the 
 <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 for that parameter causes freezing. If the function call is to an expression 
-function, the <span class="insert4">return expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">&nbsp;expression</A></SPAN></span> 
-of the expression function causes freezing.</div>
+function, the return expression of the expression function causes freezing.</div>
 <div class="paranum"><a name="p10.2">10.2/4</a></div>
-<div class="Bulleted"><A NAME="I5671"></A><A NAME="I5672"></A>At the 
+<div class="Bulleted"><A NAME="I5658"></A><A NAME="I5659"></A>At the 
 place where a <SPAN Class="swiss"><A HREF="RM-12-3.html#S0293">generic_instantiation</A></SPAN> 
 causes freezing of a callable entity, the profile of that entity is frozen 
 unless the formal subprogram corresponding to the callable entity has 
 a parameter or result of a formal untagged incomplete type; if the callable 
-entity is an expression function, the <span class="insert4">return expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">&nbsp;expression</A></SPAN></span> 
-of the expression function causes freezing.</div>
+entity is an expression function, the return expression of the expression 
+function causes freezing.</div>
 <div class="paranum"><a name="p10.3">10.3/4</a></div>
-<div class="Bulleted"><A NAME="I5673"></A>At the place where a use of 
+<div class="Bulleted"><A NAME="I5660"></A>At the place where a use of 
 the Access or Unchecked_Access attribute whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-denotes an expression function causes freezing, the <span class="insert4">return 
-expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">&nbsp;expression</A></SPAN></span> 
+denotes an expression function causes freezing, the return expression 
 of the expression function causes freezing.</div>
 <div class="paranum"><a name="p11">11</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5674"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5661"></A>At 
 the place where a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 causes freezing, the entity denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is frozen, unless the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-of an expanded name; <A NAME="I5675"></A>at the place where an object 
+of an expanded name; <A NAME="I5662"></A>at the place where an object 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> causes 
 freezing, the nominal subtype associated with the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 is frozen.&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/1</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5676"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5663"></A>At 
 the place where an <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN> 
 causes freezing, the nominal subtype associated with the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0095">implicit_dereference</A></SPAN> 
 is frozen.</div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5677"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5664"></A>At 
 the place where a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
 causes freezing, the type of the <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
 is frozen.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5678"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5665"></A>At 
 the place where an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
 causes freezing, the designated subtype of its type is frozen. If the 
 type of the <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN> 
 is a derived type, then all ancestor types are also frozen.&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5679"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5666"></A>At 
 the place where a profile is frozen, each subtype of the profile is frozen. 
 If the corresponding callable entity is a member of an entry family, 
 the index subtype of the family is frozen.&nbsp;</div>
 <div class="paranum"><a name="p15">15/5</a></div>
-<div class="Bulleted"><A NAME="I5680"></A>At the place where a subtype 
-is frozen, its type is frozen. <A NAME="I5681"></A><A NAME="I5682"></A>At 
+<div class="Bulleted"><A NAME="I5667"></A>At the place where a subtype 
+is frozen, its type is frozen. <A NAME="I5668"></A><A NAME="I5669"></A>At 
 the place where a type is frozen, any expressions or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 within the full type definition cause freezing<span class="insert5">, 
 other than those that occur within an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0079">access_type_definition</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="RM-3-10.html#S0084">access_definition</A></SPAN></span>; 
 the first subtype, and any component subtypes, index subtypes, and parent 
-subtype of the type are frozen as well. <A NAME="I5683"></A><A NAME="I5684"></A>For 
+subtype of the type are frozen as well. <A NAME="I5670"></A><A NAME="I5671"></A>For 
 a specific tagged type, the corresponding class-wide type is frozen as 
 well. For a class-wide type, the corresponding specific type is frozen 
 as well.&nbsp;</div>
@@ -243,7 +237,7 @@ the entity is frozen (see <A HREF="RM-13-1.html">13.1</A>).&nbsp;</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Normal">The tag (see <A HREF="RM-3-9.html">3.9</A>) of a 
-tagged type T is created at the point where T is frozen.<A NAME="I5685"></A> 
+tagged type T is created at the point where T is frozen.<A NAME="I5672"></A> 
 </div>
 
 <HR>

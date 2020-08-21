@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -113,13 +111,12 @@ error file, respectively.</div>
 <B>procedure</B>&nbsp;Flush;</div>
 <div class="paranum"><a name="p21">21/4</a></div>
 <div class="Indented2">The effect of Flush is the same as the corresponding 
-subprogram in <span class="insert4">Sequential_IO (see <A HREF="RM-A-8-2.html">A.8.2</A>)</span><span class="delete4">&nbsp;Streams.Stream_IO 
-(see <A HREF="RM-A-12-1.html">A.12.1</A>)</span>. If File is not explicitly 
-specified, Current_Output is used.&nbsp;</div>
+subprogram in Sequential_IO (see <A HREF="RM-A-8-2.html">A.8.2</A>). 
+If File is not explicitly specified, Current_Output is used.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p22">22/1</a></div>
-<div class="Normal"><A NAME="I6821"></A>The execution of a program is 
+<div class="Normal"><A NAME="I6808"></A>The execution of a program is 
 erroneous if it invokes an operation on a current default input, default 
 output, or default error file, and if the corresponding file object is 
 closed or no longer exists.&nbsp;</div>

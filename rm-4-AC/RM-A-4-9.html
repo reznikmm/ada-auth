@@ -19,13 +19,13 @@
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -88,7 +88,7 @@ library function Strings.Unbounded.Hash has the following declaration:</span>
 to</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;Strings.Unbounded.Hash 
 is equivalent to the function call</span></span><span class="insert2">&nbsp;Strings.Hash (To_String (Key));</span></div>
 <div class="paranum"><a name="p11.1">11.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">The 
 library function Strings.Hash_Case_Insensitive has the following declaration:</span></div>
 <div class="paranum"><a name="p11.2">11.2/3</a></div>
 <div class="Examples"><span class="insert3"><B>with</B>&nbsp;Ada.Containers;<BR>
@@ -102,7 +102,7 @@ converted to lower case. If A and B are strings such that Strings.Equal_Case_Ins
 (A, B) (see <A HREF="RM-A-4-10.html">A.4.10</A>) is True, then Hash_Case_Insensitive(A) 
 equals Hash_Case_Insensitive(B).</span>&nbsp;</div>
 <div class="paranum"><a name="p11.4">11.4/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">The 
 library function Strings.Fixed.Hash_Case_Insensitive has the following 
 declaration:</span></div>
 <div class="paranum"><a name="p11.5">11.5/3</a></div>
@@ -110,7 +110,7 @@ declaration:</span></div>
 <B>function</B>&nbsp;Ada.Strings.Fixed.Hash_Case_Insensitive&nbsp;(Key&nbsp;:&nbsp;String)<A NAME="I6313"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Containers.Hash_Type&nbsp;<B>renames</B>&nbsp;Ada.Strings.Hash_Case_Insensitive;</span></div>
 <div class="paranum"><a name="p11.6">11.6/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">The 
 generic library function Strings.Bounded.Hash_Case_Insensitive has the 
 following declaration:</span></div>
 <div class="paranum"><a name="p11.7">11.7/3</a></div>
@@ -125,7 +125,7 @@ following declaration:</span></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert3">Equivalent 
 to Strings.Hash_Case_Insensitive (Bounded.To_String (Key));</span>&nbsp;</div>
 <div class="paranum"><a name="p11.9">11.9/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert3">The 
 library function Strings.Unbounded.Hash_Case_Insensitive has the following 
 declaration:</span></div>
 <div class="paranum"><a name="p11.10">11.10/3</a></div>
@@ -139,8 +139,8 @@ to Strings.Hash_Case_Insensitive (To_String (Key));</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Normal"><span class="insert2">The Hash functions should be 
-good hash functions, returning a wide spread of values for different 
+<div class="Normal">&nbsp;<span class="insert2">The Hash functions should 
+be good hash functions, returning a wide spread of values for different 
 string values. It should be unlikely for similar strings to return the 
 same value.</span>&nbsp;</div>
 

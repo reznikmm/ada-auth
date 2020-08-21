@@ -35,7 +35,7 @@
 <HR>
 <H1>7.6 Assignment and Finalization</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I3834"></A><A NAME="I3835"></A>Three kinds 
+<div class="Normal"><A NAME="I3822"></A><A NAME="I3823"></A>Three kinds 
 of actions are fundamental to the manipulation of objects: initialization, 
 finalization, and assignment. Every object is initialized, either explicitly 
 or by default, after being created (for example, by an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -45,12 +45,12 @@ a <SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN>
 containing an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN>, 
 or by a call to an instance of Unchecked_Deallocation). An assignment 
 operation is used as part of <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>s, 
-explicit initialization, parameter passing, and other operations. <A NAME="I3836"></A><A NAME="I3837"></A><A NAME="I3838"></A></div>
+explicit initialization, parameter passing, and other operations. <A NAME="I3824"></A><A NAME="I3825"></A><A NAME="I3826"></A></div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal">Default definitions for these three fundamental operations 
-are provided by the language, but <A NAME="I3839"></A>a <I>controlled</I> 
+are provided by the language, but <A NAME="I3827"></A>a <I>controlled</I> 
 type gives the user additional control over parts of these operations. 
-<A NAME="I3840"></A><A NAME="I3841"></A><A NAME="I3842"></A>In particular, 
+<A NAME="I3828"></A><A NAME="I3829"></A><A NAME="I3830"></A>In particular, 
 the user can define, for a controlled type, an Initialize procedure which 
 is invoked immediately after the normal default initialization of a controlled 
 object, a Finalize procedure which is invoked immediately before finalization 
@@ -63,26 +63,26 @@ controlled object.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p4">4/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Finalization<span class="delete5">&nbsp;<B>is</B></span><A NAME="I3843"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Finalization<span class="delete5">&nbsp;<B>is</B></span><A NAME="I3831"></A><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B>&nbsp;Pure,&nbsp;Nonblocking&nbsp;=&gt;&nbsp;False&nbsp;<B>is</B></span><span class="delete5"><B>&nbsp;pragma</B>&nbsp;Pure(Finalization);</span></div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3844"></A>Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3832"></A>Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Controlled);</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3845"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3846"></A>Adjust&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3847"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3833"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3834"></A>Adjust&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3835"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Controlled)&nbsp;<B>is&nbsp;null</B>;</div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3848"></A>Limited_Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3836"></A>Limited_Controlled&nbsp;<B>is&nbsp;abstract&nbsp;tagged&nbsp;limited&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Limited_Controlled);</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3849"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3850"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3837"></A>Initialize&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I3838"></A>Finalize&nbsp;&nbsp;&nbsp;(Object&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Limited_Controlled)&nbsp;<B>is&nbsp;null</B>;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Finalization;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Normal"><A NAME="I3851"></A>A controlled type is a descendant 
+<div class="Normal"><A NAME="I3839"></A>A controlled type is a descendant 
 of Controlled or Limited_Controlled. The predefined &quot;=&quot; operator 
 of type Controlled always returns True, since this operator is incorporated 
 into the implementation of the predefined equality operator of types 
@@ -91,7 +91,7 @@ The type Limited_Controlled is like Controlled, except that it is limited
 and it lacks the primitive subprogram Adjust.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;A type is said to 
-<I>need finalization</I> if:<A NAME="I3852"></A><A NAME="I3853"></A></div>
+<I>need finalization</I> if:<A NAME="I3840"></A><A NAME="I3841"></A></div>
 <div class="paranum"><a name="p9.2">9.2/2</a></div>
 <div class="Bulleted">it is a controlled type, a task type or a protected 
 type; or</div>
@@ -123,7 +123,7 @@ denoting a controlled subtype, the Initialize procedure of the ancestor
 type is called, unless that Initialize procedure is abstract.&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Normal">Initialize and other initialization operations are 
-done in an arbitrary order, except as follows.<A NAME="I3854"></A> Initialize 
+done in an arbitrary order, except as follows.<A NAME="I3842"></A> Initialize 
 is applied to an object after initialization of its subcomponents, if 
 any (including both implicit initialization and Initialize calls). If 
 an object has a component with an access discriminant constrained by 
@@ -134,24 +134,24 @@ them in order of their <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component
 For an <SPAN Class="swiss"><A HREF="RM-4-8.html#S0150">allocator</A></SPAN>, 
 any task activations follow all calls on Initialize.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3855"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3843"></A>When 
 a target object with any controlled parts is assigned a value, either 
 when created or in a subsequent <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>, 
 the <I>assignment operation</I> proceeds as follows:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">The value of the target becomes the assigned value.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I3856"></A><A NAME="I3857"></A>The value 
+<div class="Bulleted"><A NAME="I3844"></A><A NAME="I3845"></A>The value 
 of the target is <I>adjusted.</I>&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><A NAME="I3858"></A><A NAME="I3859"></A>To adjust 
+<div class="Normal"><A NAME="I3846"></A><A NAME="I3847"></A>To adjust 
 the value of a composite object, the values of the components of the 
 object are first adjusted in an arbitrary order, and then, if the object 
-is nonlimited controlled, Adjust is called.<A NAME="I3860"></A> Adjusting 
+is nonlimited controlled, Adjust is called.<A NAME="I3848"></A> Adjusting 
 the value of an elementary object has no effect, nor does adjusting the 
 value of a composite object with no controlled parts.&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I3861"></A>For an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>, 
+<div class="Normal"><A NAME="I3849"></A>For an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0159">assignment_statement</A></SPAN>, 
  after the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 have been evaluated, and any conversion (including constraint checking) 
@@ -169,7 +169,7 @@ Statements</A>&rdquo;.&nbsp;</div>
 or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 is used to initialize an object, the result of the function call or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 is an anonymous object, which is assigned into the newly-created object. 
-For such an assignment, the anonymous object might be <I>built in place</I>,<A NAME="I3862"></A><A NAME="I3863"></A> 
+For such an assignment, the anonymous object might be <I>built in place</I>,<A NAME="I3850"></A><A NAME="I3851"></A> 
 in which case the assignment does not involve any copying. Under certain 
 circumstances, the anonymous object is required to be built in place. 
 In particular:</div>
@@ -182,9 +182,9 @@ if the full type of any part of the newly-created object is controlled,
 the anonymous object is built in place.</div>
 <div class="paranum"><a name="p17.4">17.4/3</a></div>
 <div class="Bulleted">In other cases, it is unspecified whether the anonymous 
-object is built in place.<A NAME="I3864"></A></div>
+object is built in place.<A NAME="I3852"></A></div>
 <div class="paranum"><a name="p17.5">17.5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;Notwithstanding<A NAME="I3865"></A> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;Notwithstanding<A NAME="I3853"></A> 
 what this International Standard says elsewhere, if an object is built 
 in place:</div>
 <div class="paranum"><a name="p17.6">17.6/3</a></div>
@@ -192,7 +192,7 @@ in place:</div>
 or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>, 
 the anonymous object <I>mutates into</I> the newly-created object; that 
 is, the anonymous object ceases to exist, and the newly-created object 
-appears in its place.<A NAME="I3866"></A></div>
+appears in its place.<A NAME="I3854"></A></div>
 <div class="paranum"><a name="p17.7">17.7/3</a></div>
 <div class="Bulleted">Finalization is not performed on the anonymous 
 object.</div>

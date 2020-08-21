@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -59,18 +59,18 @@ P that statically denotes a program unit, the following attributes are
 defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="WideHanging-Term">P'Version</div><div class="WideHanging-Body">
-<A NAME="I9388"></A><A NAME="I9389"></A>Yields a value of the predefined 
+<A NAME="I9715"></A><A NAME="I9716"></A>Yields a value of the predefined 
 type String that identifies the version of the compilation unit that 
 contains the declaration of the program unit.</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="WideHanging-Term">P'Body_Version</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I9390"></A><A NAME="I9391"></A>Yields a value of the predefined 
+<A NAME="I9717"></A><A NAME="I9718"></A>Yields a value of the predefined 
 type String that identifies the version of the compilation unit that 
 contains the body (but not any subunits) of the program unit.&nbsp;</div>
 <div class="paranum"><a name="p5">5/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0084">8652/0084</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00104.TXT">AI95-00104-01</A></I>} 
-<A NAME="I9392"></A>The <I>version</I> of a compilation unit changes 
+<A NAME="I9719"></A>The <I>version</I> of a compilation unit changes 
 whenever the <span class="delete1">version changes for any&nbsp;</span>compilation 
 unit <span class="insert1">changes in a semantically significant way. 
 This International Standard does not define the exact meaning of &quot;semantically 
@@ -78,7 +78,7 @@ significant&quot;</span><span class="delete1">&nbsp;on which it depends semantic
 The version also changes whenever the compilation unit itself changes 
 in a semantically significant way</span>. It is <span class="insert1">unspecified</span><span class="delete1">&nbsp;implementation 
 defined</span> whether there are other events (such as recompilation) 
-that result in the version of a compilation unit changing. <span class="insert1"><A NAME="I9393"></A></span></div>
+that result in the version of a compilation unit changing. <span class="insert1"><A NAME="I9720"></A></span></div>
 <div class="paranum"><a name="p5.a">5.a/1</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="delete1"><B>Implementation defined: 
@@ -95,13 +95,13 @@ from Body_Version of any version of P that has a completion.</span>&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I9394"></A><A NAME="I9395"></A>In a distributed 
+<div class="Normal"><A NAME="I9721"></A><A NAME="I9722"></A>In a distributed 
 program, a library unit is <I>consistent</I> if the same version of its 
 declaration is used throughout. It is a bounded error to elaborate a 
 partition of a distributed program that contains a compilation unit that 
 depends on a different version of the declaration of a shared passive 
 or RCI library unit than that included in the partition to which the 
-shared passive or RCI library unit was assigned. <A NAME="I9396"></A>As 
+shared passive or RCI library unit was assigned. <A NAME="I9723"></A>As 
 a result of this error, Program_Error can be raised in one or both partitions 
 during elaboration; in any case, the partitions become inaccessible to 
 one another.&nbsp;</div>

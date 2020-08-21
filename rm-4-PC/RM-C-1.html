@@ -13,17 +13,15 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,13 +32,12 @@
 <HR>
 <H1>C.1 Access to Machine Operations</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal">This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-specifies rules regarding access to machine instructions from within 
-an Ada program.&nbsp;</div>
+<div class="Normal">This subclause specifies rules regarding access to 
+machine instructions from within an Ada program.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal"><A NAME="I7789"></A>The implementation shall support 
+<div class="Normal"><A NAME="I7638"></A>The implementation shall support 
 machine code insertions (see <A HREF="RM-13-8.html">13.8</A>) or intrinsic 
 subprograms (see <A HREF="RM-6-3-1.html">6.3.1</A>) (or both). Implementation-defined 
 attributes shall be provided to allow the use of Ada entities as operands. 
@@ -53,11 +50,10 @@ access to all operations normally available to assembly language programmers
 for the target environment, including privileged instructions, if any. 
 </div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I7790"></A><A NAME="I7791"></A><A NAME="I7792"></A><A NAME="I7793"></A>The 
-<span class="insert3">support for&nbsp;</span>interfacing <span class="insert3">aspects</span><span class="delete3">&nbsp;pragmas</span> 
-(see <A HREF="RM-B.html">Annex B</A>) should <span class="insert3">include</span><span class="delete3">&nbsp;support</span> 
-interface to assembler; the default assembler should be associated with 
-the convention identifier Assembler.&nbsp;</div>
+<div class="Normal"><A NAME="I7639"></A><A NAME="I7640"></A><A NAME="I7641"></A><A NAME="I7642"></A>The 
+support for interfacing aspects (see <A HREF="RM-B.html">Annex B</A>) 
+should include interface to assembler; the default assembler should be 
+associated with the convention identifier Assembler.&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">If an entity is exported to assembly language, then 
 the implementation should allocate it at an addressable location, and 
@@ -79,10 +75,9 @@ entities.&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">The implementation shall document the subprogram 
 calling conventions associated with the convention identifiers available 
-for use with the <span class="insert3">Convention aspect</span><span class="delete3">&nbsp;interfacing 
-pragmas</span> (Ada and Assembler, at a minimum), including register 
-saving, exception propagation, parameter passing, and function value 
-returning.&nbsp;</div>
+for use with the Convention aspect (Ada and Assembler, at a minimum), 
+including register saving, exception propagation, parameter passing, 
+and function value returning.&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">For exported and imported subprograms, the implementation 
 shall document the mapping between the Link_Name string, if specified, 

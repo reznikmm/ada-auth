@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -43,7 +41,7 @@ and Containers.Ordered_Sets provide private types Set and Cursor, and
 a set of operations for each type. A set container allows elements of 
 an arbitrary type to be stored without duplication. A hashed set uses 
 a hash function to organize elements, while an ordered set orders its 
-element per a specified relation.<A NAME="I7330"></A> <A NAME="I7331"></A></div>
+element per a specified relation.<A NAME="I7317"></A> <A NAME="I7318"></A></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">This subclause describes the declarations that are 
 common to both kinds of sets. See <A HREF="RM-A-18-8.html">A.18.8</A> 
@@ -59,18 +57,18 @@ and symmetric relationship and return the same result value each time
 it is called with a particular pair of values. If it behaves in some 
 other manner, the function &quot;=&quot; on set values returns an unspecified 
 value. The exact arguments and number of calls of this generic formal 
-function by the function &quot;=&quot; on set values are unspecified.<A NAME="I7332"></A></div>
+function by the function &quot;=&quot; on set values are unspecified.<A NAME="I7319"></A></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">The type Set is used to represent sets. The type 
-Set needs finalization<A NAME="I7333"></A> (see <A HREF="RM-7-6.html">7.6</A>).</div>
+Set needs finalization<A NAME="I7320"></A> (see <A HREF="RM-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">A set contains elements. Set cursors designate elements. 
 There exists an equivalence relation on elements, whose definition is 
 different for hashed sets and ordered sets. A set never contains two 
 or more equivalent elements. The <I>length</I> of a set is the number 
-of elements it contains.<A NAME="I7334"></A></div>
+of elements it contains.<A NAME="I7321"></A></div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I7335"></A><A NAME="I7336"></A><A NAME="I7337"></A>Each 
+<div class="Normal"><A NAME="I7322"></A><A NAME="I7323"></A><A NAME="I7324"></A>Each 
 nonempty set has two particular elements called the <I>first element</I> 
 and the <I>last element</I> (which may be the same). Each element except 
 for the last element has a <I>successor element</I>. If there are no 
@@ -87,7 +85,7 @@ they depend on the set of elements of the container remaining constant,
 and others check for &ldquo;tampering with elements&rdquo; of a container 
 because they depend on elements of the container not being replaced.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7338"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7325"></A>A 
 subprogram is said to <I>tamper with cursors</I> of a set object <I>S</I> 
 if:</div>
 <div class="paranum"><a name="p9">9/2</a></div>
@@ -106,13 +104,13 @@ parameter; or</div>
 <div class="Bulleted">it calls one of the operations defined to tamper 
 with cursors of <I>S</I>.</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7339"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I7326"></A>A 
 subprogram is said to <I>tamper with elements</I> of a set object <I>S</I> 
 if:</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Bulleted">it tampers with cursors of <I>S</I>.</div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7340"></A><A NAME="I7341"></A>When tampering 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I7327"></A><A NAME="I7328"></A>When tampering 
 with cursors is <I>prohibited</I> for a particular set object <I>S</I>, 
 Program_Error is propagated by a call of any language-defined subprogram 
 that is defined to tamper with the cursors of <I>S</I>, leaving <I>S</I> 
@@ -120,9 +118,8 @@ unmodified. Similarly, when tampering with elements is <I>prohibited</I>
 for a particular set object <I>S</I>, Program_Error is propagated by 
 a call of any language-defined subprogram that is defined to tamper with 
 the elements of <I>S</I> (or tamper with the cursors of <I>S</I>), leaving 
-<I>S</I> unmodified.<span class="insert4">&nbsp;These checks are made before 
-any other defined behavior of the body of the language-defined subprogram.</span> 
-</div>
+<I>S</I> unmodified. These checks are made before any other defined behavior 
+of the body of the language-defined subprogram.&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Normal">Empty_Set represents the empty Set object. It has 
 a length of 0. If an object of type Set is not otherwise initialized, 
@@ -230,7 +227,7 @@ propagated.</div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p36.2">36.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">The type Constant_Reference_Type 
-needs finalization.<A NAME="I7342"></A></div>
+needs finalization.<A NAME="I7329"></A></div>
 <div class="paranum"><a name="p36.3">36.3/3</a></div>
 <div class="Indented2">The default initialization of an object of type 
 Constant_Reference_Type propagates Program_Error.</div>
@@ -455,11 +452,11 @@ an element) instead of a complete element. The formal function Key of
 Generic_Keys extracts a key value from an element. It is expected to 
 return the same value each time it is called with a particular element. 
 The behavior of Generic_Keys is unspecified if Key behaves in some other 
-manner.<A NAME="I7343"></A></div>
+manner.<A NAME="I7330"></A></div>
 <div class="paranum"><a name="p88">88/2</a></div>
 <div class="Normal">A key is expected to unambiguously determine a single 
 equivalence class for elements. The behavior of Generic_Keys is unspecified 
-if the formal parameters of this package behave in some other manner.<A NAME="I7344"></A></div>
+if the formal parameters of this package behave in some other manner.<A NAME="I7331"></A></div>
 <div class="paranum"><a name="p89">89/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;Key&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Key_Type;</div>
 <div class="paranum"><a name="p90">90/2</a></div>
@@ -504,7 +501,7 @@ shall be unconstrained.</div>
 &nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p96.2">96.2/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">The type Reference_Type 
-needs finalization.<A NAME="I7345"></A></div>
+needs finalization.<A NAME="I7332"></A></div>
 <div class="paranum"><a name="p96.3">96.3/3</a></div>
 <div class="Indented2">The default initialization of an object of type 
 Reference_Type propagates Program_Error.</div>
@@ -553,14 +550,14 @@ Find (Container, Key)).&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p96.13">96.13/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7346"></A>It is a bounded error for 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7333"></A>It is a bounded error for 
 the actual function associated with a generic formal subprogram, when 
 called as part of an operation of a set package, to tamper with elements 
 of any set parameter of the operation. Either Program_Error is raised, 
 or the operation works as defined on the value of the set either prior 
 to, or subsequent to, some or all of the modifications to the set.</div>
 <div class="paranum"><a name="p96.14">96.14/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7347"></A>It is a bounded error to call 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7334"></A>It is a bounded error to call 
 any subprogram declared in the visible part of a set package when the 
 associated container has been finalized. If the operation takes Container 
 as an <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
@@ -570,8 +567,8 @@ or it raises Constraint_Error or Program_Error.&nbsp;</div>
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p97">97/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A Cursor value is <I>invalid</I> 
-if any of the following have occurred since it was created:<A NAME="I7348"></A> 
-<A NAME="I7349"></A></div>
+if any of the following have occurred since it was created:<A NAME="I7335"></A> 
+<A NAME="I7336"></A></div>
 <div class="paranum"><a name="p98">98/2</a></div>
 <div class="Bulleted">The set that contains the element it designates 
 has been finalized;</div>
@@ -587,9 +584,9 @@ has been used as the Source or Target of a call to Move; or</div>
 the set that previously contained the element.&nbsp;</div>
 <div class="paranum"><a name="p101">101/2</a></div>
 <div class="Normal">&nbsp;The result of &quot;=&quot; or Has_Element is unspecified 
-if these functions are called with an invalid cursor parameter.<A NAME="I7350"></A> 
+if these functions are called with an invalid cursor parameter.<A NAME="I7337"></A> 
 Execution is erroneous if any other subprogram declared in Containers.Hashed_Sets 
-or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I7351"></A></div>
+or Containers.Ordered_Sets is called with an invalid cursor parameter.<A NAME="I7338"></A></div>
 <div class="paranum"><a name="p101.1">101.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;&nbsp;Execution is erroneous if the set associated with 
 the result of a call to Reference or Constant_Reference is finalized 

@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -45,14 +43,14 @@ platforms to be configured.&nbsp;</div>
 <div class="Normal" style="margin-bottom: 0.4em">The following language-defined 
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p3">3/5</a></div>
-<div class="Examples"><B>package</B>&nbsp;System.Multiprocessors<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8413"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;System.Multiprocessors<span class="delete5">&nbsp;<B>is</B></span><A NAME="I8398"></A><BR>
 &nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Multiprocessors);</span></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8414"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8415"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8416"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8399"></A>CPU_Range&nbsp;<B>is&nbsp;range</B>&nbsp;0&nbsp;..&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8400"></A>Not_A_Specific_CPU&nbsp;:&nbsp;<B>constant</B>&nbsp;CPU_Range&nbsp;:=&nbsp;0;<BR>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I8401"></A>CPU&nbsp;<B>is</B>&nbsp;CPU_Range&nbsp;<B>range</B>&nbsp;1&nbsp;..&nbsp;CPU_Range'Last;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8417"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I8402"></A>Number_Of_CPUs&nbsp;<B>return</B>&nbsp;CPU;<BR>
 <B>end</B>&nbsp;System.Multiprocessors;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">A call of Number_Of_CPUs returns the number of processors 
@@ -66,7 +64,7 @@ be specified:</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="WideHanging-Term">CPU</div><div class="WideHanging-Body">
 The aspect CPU is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I8418"></A><A NAME="I8419"></A></div>
+which shall be of type System.Multiprocessors.CPU_Range.<A NAME="I8403"></A><A NAME="I8404"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
@@ -80,11 +78,9 @@ type.</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p11">11/4</a></div>
 <div class="Normal">The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-specified for the CPU aspect of a task<span class="insert4">&nbsp;type</span> 
-is evaluated <span class="delete4">for&nbsp;</span>each <span class="insert4">time 
-an</span><span class="delete4">&nbsp;task</span> object <span class="insert4">of 
-the task type is created&nbsp;</span>(see <A HREF="RM-9-1.html">9.1</A>). 
-The CPU value is then associated with the task object<span class="delete4">&nbsp;whose task declaration specifies the aspect</span>.</div>
+specified for the CPU aspect of a task type is evaluated each time an 
+object of the task type is created (see <A HREF="RM-9-1.html">9.1</A>). 
+The CPU value is then associated with the task object.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">The CPU aspect has no effect if it is specified for 
 a subprogram other than the main subprogram; the CPU value is not associated 

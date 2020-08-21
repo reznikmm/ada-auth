@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,25 +42,25 @@
 library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00362.TXT">AI95-00362-01</A></I>} 
-<B>package</B>&nbsp;Ada.Task_Identification&nbsp;<B>is</B><A NAME="I8598"></A><BR>
+<B>package</B>&nbsp;Ada.Task_Identification&nbsp;<B>is</B><A NAME="I8415"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Task_Identification);<BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8599"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I8416"></A>Task_Id&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization&nbsp;(Task_Id);<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8600"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8417"></A>Null_Task_Id&nbsp;:&nbsp;<B>constant</B>&nbsp;Task_Id;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples">{<I><A HREF="defect1.html#8652/0070">8652/0070</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00101.TXT">AI95-00101-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8601"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8602"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8603"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;</span><BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8604"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id);</div>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8418"></A>Image&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;String;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8419"></A>Current_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8420"></A>Environment_Task&nbsp;<B>return</B>&nbsp;Task_Id;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8421"></A>Abort_Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;<B>in</B>&nbsp;Task_Id);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8605"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8606"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8607"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;</span><BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8422"></A>Is_Terminated&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8423"></A>Is_Callable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&nbsp;<A NAME="I8424"></A>Activation_Is_Complete&nbsp;(T&nbsp;:&nbsp;Task_Id)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Task_Identification;</div>
@@ -86,9 +84,9 @@ the Task_Identification.Image attribute.</div>
 <div class="Normal">The function Current_Task returns a value that identifies 
 the calling task.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-<span class="insert3">The function Environment_Task returns a value that 
-identifies the environment task.</span></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
+The function Environment_Task returns a value that identifies the environment 
+task.</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Normal">The effect of Abort_Task is the same as the <SPAN Class="swiss"><A HREF="AA-9-8.html#S0245">abort_statement</A></SPAN> 
 for the task identified by T. [In addition, if T identifies the environment 
@@ -106,54 +104,52 @@ task. Is_Terminated will always be False for such a call, but Is_Callable
 the termination of dependent tasks. Thus, a dependent task can use Is_Callable 
 to determine if the main subprogram has completed.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-<span class="insert3">The function Activation_Is_Complete returns True 
-if the task identified by T has completed its activation (whether successfully 
-or not). It returns False otherwise. If T identifies the environment 
-task, Activation_Is_Complete returns True after the elaboration of the 
-<SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN>s 
-of the partition has completed.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
+The function Activation_Is_Complete returns True if the task identified 
+by T has completed its activation (whether successfully or not). It returns 
+False otherwise. If T identifies the environment task, Activation_Is_Complete 
+returns True after the elaboration of the <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0248">library_item</A></SPAN>s 
+of the partition has completed.</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 T that is of a task type [(after any implicit dereference)], the following 
 attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideHanging-Term">T'Identity</div><div class="WideHanging-Body">
-<A NAME="I8608"></A><A NAME="I8609"></A>Yields a value of the type Task_Id 
+<A NAME="I8425"></A><A NAME="I8426"></A>Yields a value of the type Task_Id 
 that identifies the task denoted by T.</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">For a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 E that denotes an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0218">entry_declaration</A></SPAN>, 
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="WideHanging-Term">E'Caller</div><div class="WideHanging-Body">
-<A NAME="I8610"></A><A NAME="I8611"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+<div class="WideHanging-Term">&nbsp;E'Caller</div><div class="WideHanging-Body">
+<A NAME="I8427"></A><A NAME="I8428"></A>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 Yields a value of the type Task_Id that identifies the task whose call 
 is now being serviced. Use of this attribute is allowed only inside an 
-<span class="delete3"><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN> 
-or&nbsp;</span><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN><span class="insert3">, 
+<SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0219">accept_statement</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN> 
 after the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0223">entry_barrier</A></SPAN>, 
-</span>corresponding to the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0218">entry_declaration</A></SPAN> 
+corresponding to the <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0218">entry_declaration</A></SPAN> 
 denoted by E.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I8612"></A>Program_Error is raised if a 
+<div class="Normal"><A NAME="I8429"></A>Program_Error is raised if a 
 value of Null_Task_Id is passed as a parameter to Abort_Task, Is_Terminated, 
 and Is_Callable.</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I8613"></A><A NAME="I8614"></A>Abort_Task 
+<div class="Normal"><A NAME="I8430"></A><A NAME="I8431"></A>Abort_Task 
 is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>). 
 </div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00237.TXT">AI95-00237-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<A NAME="I8615"></A>It is a bounded error to call the Current_Task function 
-from an <span class="insert3"><SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN></span><span class="delete3">&nbsp;entry 
-body</span>, interrupt handler, or finalization of a task attribute. 
-<A NAME="I8616"></A>Program_Error is raised, or an implementation-defined 
-value of the type Task_Id is returned.&nbsp;</div>
+<A NAME="I8432"></A>It is a bounded error to call the Current_Task function 
+from an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_body</A></SPAN>, 
+interrupt handler, or finalization of a task attribute. <A NAME="I8433"></A>Program_Error 
+is raised, or an implementation-defined value of the type Task_Id is 
+returned.&nbsp;</div>
 <div class="paranum"><a name="p17.a">17.a/2</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>The value of 
 Current_Task when in a protected entry, interrupt handler, or finalization 
@@ -170,7 +166,7 @@ rule.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8617"></A>If a value of Task_Id is passed 
+<div class="Normal"><A NAME="I8434"></A>If a value of Task_Id is passed 
 as a parameter to any of the operations declared in this package (or 
 any language-defined child of this package), and the corresponding task 
 object no longer exists, the execution of the program is erroneous.&nbsp;</div>
@@ -216,14 +212,14 @@ operations.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p21.d">21.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0189-1.TXT">AI05-0189-1</A></I>} 
-<span class="insert3"><A NAME="I8618"></A>Functions Environment_Task 
-and Activation_Is_Complete are added to Task_Identification. If Task_Identification 
-is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+<A NAME="I8435"></A>Functions Environment_Task and Activation_Is_Complete 
+are added to Task_Identification. If Task_Identification is referenced 
+in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 of Environment_Task or Activation_Is_Complete is defined in a package 
 that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
-This should be rare and is easily fixed if it does occur.</span>&nbsp;</div>
+This should be rare and is easily fixed if it does occur.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

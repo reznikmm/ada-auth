@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -49,10 +47,10 @@ X that denotes a scalar object (after any implicit dereference), the
 following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p3">3/4</a></div>
 <div class="WideHanging-Term">X'Valid</div><div class="WideHanging-Body">
-<A NAME="I5411"></A><A NAME="I5412"></A>Yields True if and only if the 
-object denoted by X is normal, has a valid representation, and <span class="insert4">then, 
-if the preceding conditions hold, the value of X also satisfies the predicates<A NAME="I5413"></A></span><span class="delete4">&nbsp;the 
-predicate<A NAME="I5414"></A></span> of the nominal subtype of X<span class="delete4">&nbsp;evaluates to True</span>. The value of this attribute is of the predefined 
+<A NAME="I5399"></A><A NAME="I5400"></A>Yields True if and only if the 
+object denoted by X is normal, has a valid representation, and then, 
+if the preceding conditions hold, the value of X also satisfies the predicates<A NAME="I5401"></A> 
+of the nominal subtype of X. The value of this attribute is of the predefined 
 type Boolean.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p4">4</a></div>
@@ -78,18 +76,16 @@ and</div>
 <div class="Indented2SmallBulleted">use of an object whose Address has 
 been specified.&nbsp;</div>
 <div class="paranum"><a name="p12">12/4</a></div>
-<div class="Notes">23&nbsp;&nbsp;<span class="insert4">Determining whether 
-X is normal and has a valid representation as part of the evaluation 
-of&nbsp;</span>X'Valid is not considered to <span class="insert4">include 
-an evaluation</span><span class="delete4">&nbsp;be a read</span> of X; hence, 
-it is not an error to check the validity of <span class="insert4">an 
-object that is invalid or abnormal. Determining whether X satisfies the 
-predicates of its nominal subtype may include an evaluation of X, but 
-only after it has been determined that X has a valid representation</span><span class="delete4">&nbsp;invalid 
-data</span>.</div>
+<div class="Notes">23&nbsp;&nbsp;Determining whether X is normal and 
+has a valid representation as part of the evaluation of X'Valid is not 
+considered to include an evaluation of X; hence, it is not an error to 
+check the validity of an object that is invalid or abnormal. Determining 
+whether X satisfies the predicates of its nominal subtype may include 
+an evaluation of X, but only after it has been determined that X has 
+a valid representation.</div>
 <div class="paranum"><a name="p13">13/4</a></div>
-<div class="Notes"><span class="insert4">If X is volatile, the evaluation 
-of X'Valid is considered a read of X.</span></div>
+<div class="Notes">If X is volatile, the evaluation of X'Valid is considered 
+a read of X.</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Notes">24&nbsp;&nbsp;The Valid attribute may be used to check 
 the result of calling an instance of Unchecked_Conversion (or any other 

@@ -13,25 +13,23 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented3Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented3Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -48,14 +46,13 @@ provide private types Map and Cursor, and a set of operations for each
 type. A map container allows an arbitrary type to be used as a key to 
 find the element associated with that key. A hashed map uses a hash function 
 to organize the keys, while an ordered map orders the keys per a specified 
-relation. <A NAME="I7624"></A><A NAME="I7625"></A></div>
+relation. <A NAME="I7520"></A><A NAME="I7521"></A></div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-This <span class="insert3">subclause</span><span class="delete3">&nbsp;section</span> 
-describes the declarations that are common to both kinds of maps. See 
-<A HREF="AA-A-18-5.html">A.18.5</A> for a description of the semantics 
-specific to Containers.Hashed_Maps and <A HREF="AA-A-18-6.html">A.18.6</A> 
+This subclause describes the declarations that are common to both kinds 
+of maps. See <A HREF="AA-A-18-5.html">A.18.5</A> for a description of 
+the semantics specific to Containers.Hashed_Maps and <A HREF="AA-A-18-6.html">A.18.6</A> 
 for a description of the semantics specific to Containers.Ordered_Maps. 
 </div>
 
@@ -68,7 +65,7 @@ and return the same result value each time it is called with a particular
 pair of values. If it behaves in some other manner, the function &quot;=&quot; 
 on map values returns an unspecified value. The exact arguments and number 
 of calls of this generic formal function by the function &quot;=&quot; 
-on map values are unspecified.<A NAME="I7626"></A></div>
+on map values are unspecified.<A NAME="I7522"></A></div>
 <div class="paranum"><a name="p3.a">3.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>If the actual function 
 for &quot;=&quot; is not symmetric and consistent, the result returned 
@@ -81,20 +78,20 @@ other subprograms are not allowed to break if &quot;=&quot; is bad (they
 aren't expected to use &quot;=&quot;).&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-The type Map is used to represent maps. The type Map needs finalization<A NAME="I7627"></A> 
+The type Map is used to represent maps. The type Map needs finalization<A NAME="I7523"></A> 
 (see <A HREF="AA-7-6.html">7.6</A>).</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7628"></A>A map contains pairs of keys and elements, called 
+<A NAME="I7524"></A>A map contains pairs of keys and elements, called 
 <I>nodes</I>. Map cursors designate nodes, but also can be thought of 
 as designating an element (the element contained in the node) for consistency 
 with the other containers. There exists an equivalence relation on keys, 
 whose definition is different for hashed maps and ordered maps. A map 
 never contains two or more nodes with equivalent keys. The <I>length</I> 
-of a map is the number of nodes it contains.<A NAME="I7629"></A></div>
+of a map is the number of nodes it contains.<A NAME="I7525"></A></div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7630"></A><A NAME="I7631"></A><A NAME="I7632"></A>Each nonempty 
+<A NAME="I7526"></A><A NAME="I7527"></A><A NAME="I7528"></A>Each nonempty 
 map has two particular nodes called the <I>first node</I> and the <I>last 
 node</I> (which may be the same). Each node except for the last node 
 has a <I>successor node</I>. If there are no other intervening operations, 
@@ -113,7 +110,7 @@ and others check for &ldquo;tampering with elements&rdquo; of a container
 because they depend on elements of the container not being replaced.]</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7633"></A>A subprogram is said to <I>tamper with cursors</I> 
+<A NAME="I7529"></A>A subprogram is said to <I>tamper with cursors</I> 
 of a map object <I>M</I> if:</div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Bulleted">it inserts or deletes elements of <I>M</I>, that 
@@ -128,13 +125,13 @@ are included.&nbsp;</div>
 <div class="Bulleted">it finalizes <I>M</I>; or</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">it calls the Assign procedure with <I>M</I> as 
-the Target parameter; or</span></div>
+it calls the Assign procedure with <I>M</I> as the Target parameter; 
+or</div>
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>We 
-don't need to explicitly mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
+<div class="Annotations"><B>Ramification:&nbsp;</B>We don't need to explicitly 
+mention <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>, 
 because that finalizes the target object as part of the operation, and 
-finalization of an object is already defined as tampering with cursors.</span> 
+finalization of an object is already defined as tampering with cursors. 
 </div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Bulleted">it calls the Move procedure with <I>M</I> as a 
@@ -147,8 +144,8 @@ with the cursors of <I>M</I>.</div>
 key and element rather than rehashing, so it does not tamper with cursors. 
 </div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
-<A NAME="I7634"></A>A subprogram is said to <I>tamper with elements</I> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<A NAME="I7530"></A>A subprogram is said to <I>tamper with elements</I> 
 of a map object <I>M</I> if:</div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Bulleted">it tampers with cursors of <I>M</I>; or</div>
@@ -163,40 +160,38 @@ onto a reference to it. That can't be allowed. However, a simple modification
 of (part of) an element is not a problem, so Update_Element does not 
 cause a problem.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
-<span class="insert3"><A NAME="I7635"></A><A NAME="I7636"></A>When tampering 
-with cursors is <I>prohibited</I> for a particular map object <I>M</I>, 
-Program_Error is propagated by a call of any language-defined subprogram 
-that is defined to tamper with the cursors of <I>M</I>, leaving <I>M</I> 
-unmodified. Similarly, when tampering with elements is <I>prohibited</I> 
-for a particular map object <I>M</I>, Program_Error is propagated by 
-a call of any language-defined subprogram that is defined to tamper with 
-the elements of <I>M</I> [(or tamper with the cursors of <I>M</I>)], 
-leaving <I>M</I> unmodified.</span><span class="insert4">&nbsp;These checks 
-are made before any other defined behavior of the body of the language-defined 
-subprogram.</span><span class="insert3"></span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0110-1.TXT">AI12-0110-1</A></I>} 
+<A NAME="I7531"></A><A NAME="I7532"></A>When tampering with cursors is 
+<I>prohibited</I> for a particular map object <I>M</I>, Program_Error 
+is propagated by a call of any language-defined subprogram that is defined 
+to tamper with the cursors of <I>M</I>, leaving <I>M</I> unmodified. 
+Similarly, when tampering with elements is <I>prohibited</I> for a particular 
+map object <I>M</I>, Program_Error is propagated by a call of any language-defined 
+subprogram that is defined to tamper with the elements of <I>M</I> [(or 
+tamper with the cursors of <I>M</I>)], leaving <I>M</I> unmodified.<span class="insert4">&nbsp;These checks are made before any other defined behavior of the body of 
+the language-defined subprogram.</span>&nbsp;</div>
 <div class="paranum"><a name="p15.b">15.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Proof:&nbsp;</B>Tampering 
-with elements includes tampering with cursors, so we mention it only 
-from completeness in the second sentence.</span>&nbsp;</div>
+<div class="Annotations"><B>Proof:&nbsp;</B>Tampering with elements includes 
+tampering with cursors, so we mention it only from completeness in the 
+second sentence.&nbsp;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Empty_Map represents the empty Map object. It has a length of 0. If an 
 object of type Map is not otherwise initialized, it is initialized to 
 the same value as Empty_Map.</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 No_Element represents a cursor that designates no node. If an object 
 of type Cursor is not otherwise initialized, it is initialized to the 
 same value as No_Element.</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The predefined &quot;=&quot; operator for type Cursor returns True if 
 both cursors are No_Element, or designate the same element in the same 
 container.</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Execution of the default implementation of the Input, Output, Read, or 
 Write attribute of type Cursor raises Program_Error.</div>
 <div class="paranum"><a name="p19.a">19.a/2</a></div>
@@ -207,35 +202,33 @@ we mandate that streaming of cursors raise Program_Error by default.
 The attributes can always be specified if there is a need to support 
 streaming.&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">Map'Write for a Map object <I>M</I> writes Length(<I>M</I>) 
-elements of the map to the stream. It also may write additional information 
-about the map.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+Map'Write for a Map object <I>M</I> writes Length(<I>M</I>) elements 
+of the map to the stream. It also may write additional information about 
+the map.</div>
 <div class="paranum"><a name="p19.2">19.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-<span class="insert3">Map'Read reads the representation of a map from 
-the stream, and assigns to <I>Item</I> a map with the same length and 
-elements as was written by Map'Write.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
+Map'Read reads the representation of a map from the stream, and assigns 
+to <I>Item</I> a map with the same length and elements as was written 
+by Map'Write.</div>
 <div class="paranum"><a name="p19.b">19.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>Streaming 
-more elements than the container length is wrong. For implementation 
-implications of this rule, see the Implementation Note in <A HREF="AA-A-18-2.html">A.18.2</A>.</span> 
+<div class="Annotations"><B>Ramification:&nbsp;</B>Streaming more elements 
+than the container length is wrong. For implementation implications of 
+this rule, see the Implementation Note in <A HREF="AA-A-18-2.html">A.18.2</A>. 
 </div>
 <div class="paranum"><a name="p19.3">19.3/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p19.4">19.4/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">Returns True if Position designates an element, 
-and returns False otherwise.</span></div>
+Returns True if Position designates an element, and returns False otherwise.</div>
 <div class="paranum"><a name="p19.c">19.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>To be honest:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">This function might not detect cursors that designate 
-deleted elements; such cursors are invalid (see below) and the result 
-of calling Has_Element with an invalid cursor is unspecified (but not 
-erroneous).</span>&nbsp;</div>
+<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+This function might not detect cursors that designate deleted elements; 
+such cursors are invalid (see below) and the result of calling Has_Element 
+with an invalid cursor is unspecified (but not erroneous).&nbsp;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Map)&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p21">21/2</a></div>
@@ -298,11 +291,10 @@ Element returns the element component of the node designated by Position.</div>
 <div class="paranum"><a name="p36">36/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0264-1.TXT">AI05-0264-1</A></I>} 
-{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0196-1.TXT">AI12-0196-1</A></I>} 
 If Position equals No_Element, then Constraint_Error is propagated; if 
 Position does not designate an element in Container, then Program_Error 
-is propagated. Otherwise<span class="insert3">,</span> Replace_Element 
-assigns New_Item to the element of the node designated by Position.</div>
+is propagated. Otherwise, Replace_Element assigns New_Item to the element 
+of the node designated by Position.</div>
 <div class="paranum"><a name="p37">37/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Query_Element<BR>
 &nbsp;&nbsp;(Position&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor;<BR>
@@ -314,10 +306,9 @@ assigns New_Item to the element of the node designated by Position.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 If Position equals No_Element, then Constraint_Error is propagated. Otherwise, 
 Query_Element calls Process.<B>all</B> with the key and element from 
-the node designated by Position as the arguments. <span class="insert3">Tampering</span><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span> with the elements 
-of <span class="insert3">the map that contains the element designated 
-by Position is prohibited during the execution of the call on Process.<B>all</B></span><span class="delete3">&nbsp;Container</span>. 
+the node designated by Position as the arguments. Tampering with the 
+elements of the map that contains the element designated by Position 
+is prohibited during the execution of the call on Process.<B>all</B>. 
 Any exception raised by Process.<B>all</B> is propagated.</div>
 <div class="paranum"><a name="p39">39/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Update_Element<BR>
@@ -331,12 +322,10 @@ Any exception raised by Process.<B>all</B> is propagated.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 If Position equals No_Element, then Constraint_Error is propagated; if 
 Position does not designate an element in Container, then Program_Error 
-is propagated. Otherwise<span class="insert3">,</span> Update_Element 
-calls Process.<B>all</B> with the key and element from the node designated 
-by Position as the arguments. <span class="insert3">Tampering</span><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span> with the elements 
-of Container<span class="insert3">&nbsp;is prohibited during the execution 
-of the call on Process.<B>all</B></span>. Any exception raised by Process.<B>all</B> 
+is propagated. Otherwise, Update_Element calls Process.<B>all</B> with 
+the key and element from the node designated by Position as the arguments. 
+Tampering with the elements of Container is prohibited during the execution 
+of the call on Process.<B>all</B>. Any exception raised by Process.<B>all</B> 
 is propagated.</div>
 <div class="paranum"><a name="p41">41/2</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">If Element_Type 
@@ -347,110 +336,105 @@ shall be unconstrained.</div>
 cannot be directly allocated from the heap; it must be possible to change 
 the discriminants of the element in place.&nbsp;</div>
 <div class="paranum"><a name="p41.1">41.1/3</a></div>
-<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Constant_Reference_Type<BR>
+<div class="Examples"><B>type</B>&nbsp;Constant_Reference_Type<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access&nbsp;constant</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p41.2">41.2/3</a></div>
-<div class="Examples"><span class="insert3"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
-&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</span></div>
+<div class="Examples"><B>type</B>&nbsp;Reference_Type&nbsp;(Element&nbsp;:&nbsp;<B>not&nbsp;null&nbsp;access</B>&nbsp;Element_Type)&nbsp;<B>is&nbsp;private</B><BR>
+&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;Implicit_Dereference&nbsp;=&gt;&nbsp;Element;</div>
 <div class="paranum"><a name="p41.3">41.3/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">The types Constant_Reference_Type and Reference_Type 
-need finalization.<A NAME="I7637"></A></span></div>
+The types Constant_Reference_Type and Reference_Type need finalization.<A NAME="I7533"></A></div>
 <div class="paranum"><a name="p41.4">41.4/3</a></div>
-<div class="Indented2"><span class="insert3">The default initialization 
-of an object of type Constant_Reference_Type or Reference_Type propagates 
-Program_Error.</span></div>
+<div class="Indented2">The default initialization of an object of type 
+Constant_Reference_Type or Reference_Type propagates Program_Error.</div>
 <div class="paranum"><a name="p41.b">41.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>It is expected 
-that Reference_Type (and Constant_Reference_Type) will be a controlled 
-type, for which finalization will have some action to terminate the tampering 
-check for the associated container. If the object is created by default, 
-however, there is no associated container. Since this is useless, and 
-supporting this case would take extra work, we define it to raise an 
-exception.</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>It is expected that Reference_Type 
+(and Constant_Reference_Type) will be a controlled type, for which finalization 
+will have some action to terminate the tampering check for the associated 
+container. If the object is created by default, however, there is no 
+associated container. Since this is useless, and supporting this case 
+would take extra work, we define it to raise an exception.&nbsp;</div>
 <div class="paranum"><a name="p41.5">41.5/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+<div class="Examples"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
 <div class="paranum"><a name="p41.6">41.6/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Constant_Indexing 
-and Implicit_Dereference aspects) provides a convenient way to gain read 
-access to an individual element of a map given a cursor.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a map given a cursor.</div>
 <div class="paranum"><a name="p41.7">41.7/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3">If Position equals No_Element, then Constraint_Error 
-is propagated; if Position does not designate an element in Container, 
-then Program_Error is propagated. Otherwise, Constant_Reference returns 
-an object whose discriminant is an access value that designates the element 
-designated by Position. Tampering with the elements of Container is prohibited 
-while the object returned by Constant_Reference exists and has not been 
-finalized.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+If Position equals No_Element, then Constraint_Error is propagated; if 
+Position does not designate an element in Container, then Program_Error 
+is propagated. Otherwise, Constant_Reference returns an object whose 
+discriminant is an access value that designates the element designated 
+by Position. Tampering with the elements of Container is prohibited while 
+the object returned by Constant_Reference exists and has not been finalized.</div>
 <div class="paranum"><a name="p41.8">41.8/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Position&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
 <div class="paranum"><a name="p41.9">41.9/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Variable_Indexing 
-and Implicit_Dereference aspects) provides a convenient way to gain read 
-and write access to an individual element of a map given a cursor.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Variable_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to an 
+individual element of a map given a cursor.</div>
 <div class="paranum"><a name="p41.10">41.10/3</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3">If Position equals No_Element, then Constraint_Error 
-is propagated; if Position does not designate an element in Container, 
-then Program_Error is propagated. Otherwise, Reference returns an object 
-whose discriminant is an access value that designates the element designated 
-by Position. Tampering with the elements of Container is prohibited while 
-the object returned by Reference exists and has not been finalized.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
+If Position equals No_Element, then Constraint_Error is propagated; if 
+Position does not designate an element in Container, then Program_Error 
+is propagated. Otherwise, Reference returns an object whose discriminant 
+is an access value that designates the element designated by Position. 
+Tampering with the elements of Container is prohibited while the object 
+returned by Reference exists and has not been finalized.</div>
 <div class="paranum"><a name="p41.11">41.11/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
+<div class="Examples"><B>function</B>&nbsp;Constant_Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Constant_Reference_Type;</div>
 <div class="paranum"><a name="p41.12">41.12/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Constant_Indexing 
-and Implicit_Dereference aspects) provides a convenient way to gain read 
-access to an individual element of a map given a key value.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Constant_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read access to an individual 
+element of a map given a key value.</div>
 <div class="paranum"><a name="p41.13">41.13/3</a></div>
-<div class="Indented2"><span class="insert3">Equivalent to Constant_Reference 
-(Container, Find (Container, Key)).</span></div>
+<div class="Indented2">Equivalent to Constant_Reference (Container, Find 
+(Container, Key)).</div>
 <div class="paranum"><a name="p41.14">41.14/3</a></div>
-<div class="Examples"><span class="insert3"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
+<div class="Examples"><B>function</B>&nbsp;Reference&nbsp;(Container&nbsp;:&nbsp;<B>aliased&nbsp;in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Key_Type)<BR>
-&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</span></div>
+&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Reference_Type;</div>
 <div class="paranum"><a name="p41.15">41.15/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">This function (combined with the Variable_Indexing 
-and Implicit_Dereference aspects) provides a convenient way to gain read 
-and write access to an individual element of a map given a key value.</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+This function (combined with the Variable_Indexing and Implicit_Dereference 
+aspects) provides a convenient way to gain read and write access to an 
+individual element of a map given a key value.</div>
 <div class="paranum"><a name="p41.16">41.16/3</a></div>
-<div class="Indented2"><span class="insert3">Equivalent to Reference 
-(Container, Find (Container, Key)).</span></div>
+<div class="Indented2">Equivalent to Reference (Container, Find (Container, 
+Key)).</div>
 <div class="paranum"><a name="p41.17">41.17/3</a></div>
-<div class="Examples"><span class="insert3"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map);</span></div>
+<div class="Examples"><B>procedure</B>&nbsp;Assign&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;&nbsp;Source&nbsp;:&nbsp;<B>in</B>&nbsp;Map);</div>
 <div class="paranum"><a name="p41.18">41.18/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3">If Target denotes the same object as Source, the 
-operation has no effect. Otherwise, the key/element pairs of Source are 
-copied to Target as for an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
-assigning Source to Target.</span>&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+If Target denotes the same object as Source, the operation has no effect. 
+Otherwise, the key/element pairs of Source are copied to Target as for 
+an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
+assigning Source to Target.&nbsp;</div>
 <div class="paranum"><a name="p41.c">41.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<span class="insert3">This routine exists for compatibility with the 
-bounded map containers. For an unbounded map, <TT>Assign(A, B)</TT> and 
-<TT>A := B</TT> behave identically. For a bounded map, := will raise 
-an exception if the container capacities are different, while Assign 
-will not raise an exception if there is enough room in the target.</span> 
-</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
+This routine exists for compatibility with the bounded map containers. 
+For an unbounded map, <TT>Assign(A, B)</TT> and <TT>A := B</TT> behave 
+identically. For a bounded map, := will raise an exception if the container 
+capacities are different, while Assign will not raise an exception if 
+there is enough room in the target.&nbsp;</div>
 <div class="paranum"><a name="p42">42/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Move&nbsp;(Target&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Source&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map);</div>
@@ -459,13 +443,9 @@ will not raise an exception if there is enough room in the target.</span>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-If Target denotes the same object as Source, then <span class="insert3">the 
-operation</span><span class="delete3">&nbsp;Move</span> has no effect. Otherwise, 
-<span class="insert3">the operation is equivalent to Assign (Target, 
-Source) followed by Clear (Source)</span><span class="delete3">&nbsp;Move 
-first calls Clear (Target). Then, each node from Source is removed from 
-Source and inserted into Target. The length of Source is 0 after a successful 
-call to Move</span>.</div>
+If Target denotes the same object as Source, then the operation has no 
+effect. Otherwise, the operation is equivalent to Assign (Target, Source) 
+followed by Clear (Source).</div>
 <div class="paranum"><a name="p44">44/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Insert&nbsp;(Container&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;Map;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key_Type;<BR>
@@ -628,20 +608,16 @@ Equivalent to Element (Find (Container, Key)).</div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Equivalent to Find (Container, Key) /= No_Element.</div>
 <div class="paranum"><a name="p72">72/3</a></div>
-<div class="Examples"><span class="delete3"><B>function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;</span></div>
+<div class="Examples"></div>
 <div class="paranum"><a name="p73">73/3</a></div>
 <div class="Indented2" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="delete3">Returns True if Position designates an element, 
-and returns False otherwise.</span></div>
+</div>
 <div class="paranum"><a name="p73.a">73.a/3</a></div>
-<div class="Annotations"><B>To be honest:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="delete3">This function may not detect cursors that designate 
-deleted elements; such cursors are invalid (see below) and the result 
-of calling Has_Element with an invalid cursor is unspecified (but not 
-erroneous).</span>&nbsp;</div>
-<div class="Indented2"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-72 and 73 were moved above.</I></SPAN></span>&nbsp;</div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+</div>
+<div class="Indented2"><SPAN STYLE="font-size: 80%"><I>Paragraphs 72 
+and 73 were moved above.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p74">74/2</a></div>
 <div class="Examples"><B>procedure</B>&nbsp;Iterate<BR>
 &nbsp;&nbsp;(Container&nbsp;:&nbsp;<B>in</B>&nbsp;Map;<BR>
@@ -651,11 +627,9 @@ erroneous).</span>&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
 Iterate calls Process.<B>all</B> with a cursor that designates each node 
 in Container, starting with the first node and moving the cursor according 
-to the successor relation. <span class="insert3">Tampering</span><span class="delete3">&nbsp;Program_Error 
-is propagated if Process.<B>all</B> tampers</span> with the cursors of 
-Container<span class="insert3">&nbsp;is prohibited during the execution of 
-a call on Process.<B>all</B></span>. Any exception raised by Process.<B>all</B> 
-is propagated.</div>
+to the successor relation. Tampering with the cursors of Container is 
+prohibited during the execution of a call on Process.<B>all</B>. Any 
+exception raised by Process.<B>all</B> is propagated.</div>
 <div class="paranum"><a name="p75.a">75.a/2</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>The &ldquo;tamper 
 with cursors&rdquo; check takes place when the operations that insert 
@@ -666,53 +640,51 @@ for a suggested implementation of the check.&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p75.1">75.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
-<span class="insert3"><A NAME="I7638"></A>It is a bounded error for the 
-actual function associated with a generic formal subprogram, when called 
-as part of an operation of a map package, to tamper with elements of 
-any map parameter of the operation. Either Program_Error is raised, or 
-the operation works as defined on the value of the map either prior to, 
-or subsequent to, some or all of the modifications to the map.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0248-1.TXT">AI05-0248-1</A></I>} 
+<A NAME="I7534"></A>It is a bounded error for the actual function associated 
+with a generic formal subprogram, when called as part of an operation 
+of a map package, to tamper with elements of any map parameter of the 
+operation. Either Program_Error is raised, or the operation works as 
+defined on the value of the map either prior to, or subsequent to, some 
+or all of the modifications to the map.</div>
 <div class="paranum"><a name="p75.2">75.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
-<span class="insert3"><A NAME="I7639"></A>It is a bounded error to call 
-any subprogram declared in the visible part of a map package when the 
-associated container has been finalized. If the operation takes Container 
-as an <B>in out</B> parameter, then it raises Constraint_Error or Program_Error. 
-Otherwise, the operation either proceeds as it would for an empty container, 
-or it raises Constraint_Error or Program_Error.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
+<A NAME="I7535"></A>It is a bounded error to call any subprogram declared 
+in the visible part of a map package when the associated container has 
+been finalized. If the operation takes Container as an <B>in out</B> 
+parameter, then it raises Constraint_Error or Program_Error. Otherwise, 
+the operation either proceeds as it would for an empty container, or 
+it raises Constraint_Error or Program_Error.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p76">76/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 A Cursor value is <I>invalid</I> if any of the following have occurred 
-since it was created:<A NAME="I7640"></A> <A NAME="I7641"></A></div>
+since it was created:<A NAME="I7536"></A> <A NAME="I7537"></A></div>
 <div class="paranum"><a name="p77">77/2</a></div>
 <div class="Bulleted">The map that contains the node it designates has 
 been finalized;</div>
 <div class="paranum"><a name="p77.1">77.1/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
-<span class="insert3">The map that contains the node it designates has 
-been used as the Target of a call to Assign, or as the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>;</span></div>
+The map that contains the node it designates has been used as the Target 
+of a call to Assign, or as the target of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN>;</div>
 <div class="paranum"><a name="p78">78/2</a></div>
 <div class="Bulleted">The map that contains the node it designates has 
 been used as the Source or Target of a call to Move; or</div>
 <div class="paranum"><a name="p79">79/3</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
-The node it designates has been <span class="insert3">removed</span><span class="delete3">&nbsp;deleted</span> 
-from the map<span class="insert3">&nbsp;that previously contained the node</span>. 
-</div>
+The node it designates has been removed from the map that previously 
+contained the node.&nbsp;</div>
 <div class="paranum"><a name="p79.a">79.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
-<span class="insert3">This can happen directly via calls to Clear, Exclude, 
-and Delete.</span>&nbsp;</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
+This can happen directly via calls to Clear, Exclude, and Delete.&nbsp;</div>
 <div class="paranum"><a name="p80">80/2</a></div>
-<div class="Normal">The result of &quot;=&quot; or Has_Element is unspecified 
-if these functions are called with an invalid cursor parameter.<A NAME="I7642"></A> 
+<div class="Normal">&nbsp;The result of &quot;=&quot; or Has_Element is unspecified 
+if these functions are called with an invalid cursor parameter.<A NAME="I7538"></A> 
 Execution is erroneous if any other subprogram declared in Containers.Hashed_Maps 
-or Containers.Ordered_Maps is called with an invalid cursor parameter.<A NAME="I7643"></A></div>
+or Containers.Ordered_Maps is called with an invalid cursor parameter.<A NAME="I7539"></A></div>
 <div class="paranum"><a name="p80.a">80.a/2</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>The list above is intended 
 to be exhaustive. In other cases, a cursor value continues to designate 
@@ -724,48 +696,48 @@ in many cases the overhead necessary to make the check is substantial
 in time or space. Implementations are encouraged to check for as many 
 of these cases as possible and raise Program_Error if detected.&nbsp;</div>
 <div class="paranum"><a name="p80.1">80.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3">Execution is erroneous if the map associated with 
-the result of a call to Reference or Constant_Reference is finalized 
-before the result object returned by the call to Reference or Constant_Reference 
-is finalized.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
+Execution is erroneous if the map associated with the result of a call 
+to Reference or Constant_Reference is finalized before the result object 
+returned by the call to Reference or Constant_Reference is finalized. 
+</div>
 <div class="paranum"><a name="p80.c">80.c/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B>Each object 
-of Reference_Type and Constant_Reference_Type probably contains some 
-reference to the originating container. If that container is prematurely 
-finalized (which is only possible via Unchecked_Deallocation, as accessibility 
-checks prevent passing a container to Reference that will not live as 
-long as the result), the finalization of the object of Reference_Type 
-will try to access a nonexistent object. This is a normal case of a dangling 
-pointer created by Unchecked_Deallocation; we have to explicitly mention 
-it here as the pointer in question is not visible in the specification 
-of the type. (This is the same reason we have to say this for invalid 
-cursors.)</span>&nbsp;</div>
+<div class="Annotations"><B>Reason:&nbsp;</B>Each object of Reference_Type 
+and Constant_Reference_Type probably contains some reference to the originating 
+container. If that container is prematurely finalized (which is only 
+possible via Unchecked_Deallocation, as accessibility checks prevent 
+passing a container to Reference that will not live as long as the result), 
+the finalization of the object of Reference_Type will try to access a 
+nonexistent object. This is a normal case of a dangling pointer created 
+by Unchecked_Deallocation; we have to explicitly mention it here as the 
+pointer in question is not visible in the specification of the type. 
+(This is the same reason we have to say this for invalid cursors.)&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p81">81/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 No storage associated with a Map object shall be lost upon assignment 
 or scope exit.</div>
 <div class="paranum"><a name="p82">82/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0262-1.TXT">AI05-0262-1</A></I>} 
 The execution of an <SPAN Class="swiss"><A HREF="AA-5-2.html#S0152">assignment_statement</A></SPAN> 
 for a map shall have the effect of copying the elements from the source 
-map object to the target map object<span class="insert3">&nbsp;and changing 
-the length of the target object to that of the source object</span>.</div>
+map object to the target map object and changing the length of the target 
+object to that of the source object.</div>
 <div class="paranum"><a name="p82.a">82.a/3</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0298-1.TXT">AI05-0298-1</A></I>} 
 An assignment of a Map is a &ldquo;deep&rdquo; copy; that is the elements 
 are copied as well as the data structures. We say &ldquo;effect of&rdquo; 
 in order to allow the implementation to avoid copying elements immediately 
 if it wishes. For instance, an implementation that avoided copying until 
-one of the containers is modified would be allowed.<span class="insert3">&nbsp;(Note that this implementation would require care, see <A HREF="AA-A-18-2.html">A.18.2</A> 
-for more.)</span>&nbsp;</div>
+one of the containers is modified would be allowed. (Note that this implementation 
+would require care, see <A HREF="AA-A-18-2.html">A.18.2</A> for more.) 
+</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p83">83/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 Move should not copy elements, and should minimize copying of internal 
 data structures.&nbsp;</div>
 <div class="paranum"><a name="p83.a">83.a/2</a></div>
@@ -777,7 +749,7 @@ structures.</div>
 be accomplished simply by moving the pointer(s) to the internal data 
 structures from the Source container to the Target container.&nbsp;</div>
 <div class="paranum"><a name="p84">84/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 If an exception is propagated from a map operation, no storage should 
 be lost, nor any elements removed from a map unless specified by the 
 operation.&nbsp;</div>
@@ -800,35 +772,35 @@ specific packages.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p84.d">84.d/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0212-1.TXT">AI05-0212-1</A></I>} 
-<span class="insert3"><A NAME="I7644"></A>Added reference support to 
-make map containers more convenient to use.</span>&nbsp;</div>
+<A NAME="I7540"></A>Added reference support to make map containers more 
+convenient to use.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p84.e">84.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">Added procedure Assign; the extension and incompatibility 
-is documented with the specific packages.</span></div>
+Added procedure Assign; the extension and incompatibility is documented 
+with the specific packages.</div>
 <div class="paranum"><a name="p84.f">84.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0001-1.TXT">AI05-0001-1</A></I>} 
-<span class="insert3">Generalized the definition of Move. Specified which 
-elements are read/written by stream attributes.</span></div>
+Generalized the definition of Move. Specified which elements are read/written 
+by stream attributes.</div>
 <div class="paranum"><a name="p84.g">84.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0022-1.TXT">AI05-0022-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added a Bounded (Run-Time) Error 
-to cover tampering by generic actual subprograms.</span></div>
+<B>Correction:</B> Added a Bounded (Run-Time) Error to cover tampering 
+by generic actual subprograms.</div>
 <div class="paranum"><a name="p84.h">84.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0027-1.TXT">AI05-0027-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Added a Bounded (Run-Time) Error 
-to cover access to finalized map containers.</span></div>
+<B>Correction:</B> Added a Bounded (Run-Time) Error to cover access to 
+finalized map containers.</div>
 <div class="paranum"><a name="p84.i">84.i/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0160-1.TXT">AI05-0160-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Revised the definition of invalid 
-cursors to cover missing (and new) cases.</span></div>
+<B>Correction:</B> Revised the definition of invalid cursors to cover 
+missing (and new) cases.</div>
 <div class="paranum"><a name="p84.j">84.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0265-1.TXT">AI05-0265-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Defined when a container prohibits 
-tampering in order to more clearly define where the check is made and 
-the exception raised.</span>&nbsp;</div>
+<B>Correction:</B> Defined when a container prohibits tampering in order 
+to more clearly define where the check is made and the exception raised. 
+</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p84.k">84.k/4</a></div>

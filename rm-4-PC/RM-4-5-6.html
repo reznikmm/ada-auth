@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,14 +35,14 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2888"></A><A NAME="I2889"></A><A NAME="I2890"></A><A NAME="I2891"></A><A NAME="I2892"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2866"></A><A NAME="I2867"></A><A NAME="I2868"></A><A NAME="I2869"></A><A NAME="I2870"></A>The 
 highest precedence unary operator <B>abs</B> (absolute value) is predefined 
 for every specific numeric type <I>T</I>, with the following specification: 
 </div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;<B>abs</B>&quot;(Right&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2893"></A><A NAME="I2894"></A><A NAME="I2895"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2871"></A><A NAME="I2872"></A><A NAME="I2873"></A>The 
 highest precedence unary operator <B>not</B> (logical negation) is predefined 
 for every boolean type <I>T</I>, every modular type <I>T</I>, and for 
 every one-dimensional array type <I>T</I> whose components are of a boolean 
@@ -62,12 +60,12 @@ of the value of the operand.</div>
 array of boolean components yields a one-dimensional boolean array with 
 the same bounds; each component of the result is obtained by logical 
 negation of the corresponding component of the operand (that is, the 
-component that has the same index value). <A NAME="I2896"></A><A NAME="I2897"></A><A NAME="I2898"></A>A 
+component that has the same index value). <A NAME="I2874"></A><A NAME="I2875"></A><A NAME="I2876"></A>A 
 check is made that each component of the result belongs to the component 
 subtype; the exception Constraint_Error is raised if this check fails. 
 </div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2899"></A><A NAME="I2900"></A><A NAME="I2901"></A><A NAME="I2902"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2877"></A><A NAME="I2878"></A><A NAME="I2879"></A><A NAME="I2880"></A>The 
 highest precedence <I>exponentiation</I> operator ** is predefined for 
 every specific integer type <I>T</I> with the following specification: 
 </div>
@@ -81,19 +79,17 @@ or the floating point type):&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
 <div class="Examples"><B>function</B>&nbsp;&quot;**&quot;(Left&nbsp;:&nbsp;<SPAN Class="roman"><I>T</I></SPAN>;&nbsp;Right&nbsp;:&nbsp;Integer'Base)&nbsp;<B>return</B>&nbsp;<SPAN Class="roman"><I>T</I></SPAN></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I2903"></A>The right operand of an exponentiation 
-is the <I>exponent</I>. The <span class="insert3">value of</span><span class="delete3">&nbsp;expression</span> 
-X**N with the value of the exponent N positive is <span class="insert3">the 
-same as the value of</span><span class="delete3">&nbsp;equivalent to the expression</span> 
-X*X*...X (with N&ndash;1 multiplications) except that the multiplications 
-are associated in an arbitrary order. With N equal to zero, the result 
-is one. With the value of N negative (only defined for a floating point 
-operand), the result is the reciprocal of the result using the absolute 
-value of N as the exponent.&nbsp;</div>
+<div class="Normal">&nbsp;<A NAME="I2881"></A>The right operand of an exponentiation 
+is the <I>exponent</I>. The value of X**N with the value of the exponent 
+N positive is the same as the value of X*X*...X (with N&ndash;1 multiplications) 
+except that the multiplications are associated in an arbitrary order. 
+With N equal to zero, the result is one. With the value of N negative 
+(only defined for a floating point operand), the result is the reciprocal 
+of the result using the absolute value of N as the exponent.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I2904"></A>The implementation of exponentiation 
+<div class="Normal"><A NAME="I2882"></A>The implementation of exponentiation 
 for the case of a negative exponent is allowed to raise Constraint_Error 
 if the intermediate result of the repeated multiplications is outside 
 the safe range of the type, even though the final result (after taking 
@@ -101,9 +97,9 @@ the reciprocal) would not be. (The best machine approximation to the
 final result in this case would generally be 0.0.)&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Notes">19&nbsp;&nbsp;<A NAME="I2905"></A><A NAME="I2906"></A>As 
+<div class="Notes">19&nbsp;&nbsp;<A NAME="I2883"></A><A NAME="I2884"></A>As 
 implied by the specification given above for exponentiation of an integer 
-type, a check is made that the exponent is not negative. <A NAME="I2907"></A>Constraint_Error 
+type, a check is made that the exponent is not negative. <A NAME="I2885"></A>Constraint_Error 
 is raised if this check fails.&nbsp;</div>
 
 <HR>

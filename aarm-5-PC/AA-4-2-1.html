@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+    <TITLE>User-Defined Literals</TITLE>
+    <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <META NAME="Author" CONTENT="JTC1/SC22/WG9/ARG, by Randall Brukardt, ARG Editor">
+    <META NAME="GENERATOR" CONTENT="Arm_Form.Exe, Ada Reference Manual generator">
+    <STYLE type="text/css">
+    H4.centered {text-align: center}
+    SPAN.swiss {font-family: Arial, Helvetica, sans-serif; font-size: 92%}
+    SPAN.roman {font-family: "Times New Roman", Times, serif}
+    DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
+    TT {font-family: "Courier New", monospace}
+    DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
+    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.SmallBulleted {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 9.3em; margin-right: 2.5em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    </STYLE>
+</HEAD>
+<BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<HR>
+<H1>4.2.1 <span class="insert5">User-Defined Literals</span><span class="delete5"></span></H1>
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">Using one or more of the aspects defined below, 
+a type may be specified to allow the use of one or more kinds of literals 
+as values of the type.</span>&nbsp;</div>
+
+<H4 Class="centered">Static Semantics</H4>
+<div class="paranum"><a name="p2">2/5</a></div>
+<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">The following nonoverridable, type-related operational 
+aspects may be specified for any type <I>T</I>:</span></div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">Integer_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes a primitive function of <I>T</I> with one parameter of type 
+String and a result type of <I>T</I>.<A NAME="I2712"></A><A NAME="I2713"></A></span></div>
+<div class="paranum"><a name="p3.a">3.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert5"><B>Integer_Literal:&nbsp;</B></span><span class="insert5">Defines 
+a function to implement user-defined integer literals.</span></div>
+<div class="paranum"><a name="p4">4/5</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">Real_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes a primitive function of <I>T</I> with one parameter of type 
+String and a result type of <I>T</I>.<A NAME="I2714"></A><A NAME="I2715"></A></span></div>
+<div class="paranum"><a name="p4.a">4.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert5"><B>Real_Literal:&nbsp;</B></span><span class="insert5">Defines 
+a function to implement user-defined real literals.</span></div>
+<div class="paranum"><a name="p5">5/5</a></div>
+<div class="WideHanging-Term">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
+<span class="insert5">String_Literal</span></div><div class="WideHanging-Body"><br clear="left">
+<span class="insert5">This aspect is specified by a <I>function_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+that denotes a primitive function of <I>T</I> with one parameter of type 
+Wide_Wide_String and a result type of <I>T</I>.<A NAME="I2716"></A><A NAME="I2717"></A></span></div>
+<div class="paranum"><a name="p5.a">5.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Aspect Description 
+for&nbsp;</B></span><span class="insert5"><B>String_Literal:&nbsp;</B></span><span class="insert5">Defines 
+a function to implement user-defined string literals.</span></div>
+<div class="paranum"><a name="p6">6/5</a></div>
+<div class="WideHanging-Body"><span class="insert5">[A type with a specified 
+String_Literal aspect is considered a <I>string type</I>.]<A NAME="I2718"></A></span></div>
+
+<H4 Class="centered">Legality Rules</H4>
+<div class="paranum"><a name="p7">7/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
+<span class="insert5">The Integer_Literal or Real_Literal aspect shall 
+not be specified for a type <I>T</I> if the full view of <I>T</I> is 
+a numeric type. The String_Literal aspect shall not be specified for 
+a type <I>T</I> if the full view of <I>T</I> is a string type (in the 
+absence of the String_Literal aspect specification). <A NAME="I2719"></A>In 
+addition to the places where Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
+these rules also apply in the private part of an instance of a generic 
+unit.</span>&nbsp;</div>
+
+<H4 Class="centered">Dynamic Semantics</H4>
+<div class="paranum"><a name="p8">8/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">For the evaluation of an integer (or real) literal 
+with expected type having an Integer_Literal (or Real_Literal) aspect 
+specified, the value is the result of a call on the function specified 
+by the aspect, with the parameter being a string with lower bound one 
+whose value corresponds to the textual representation of the integer 
+(or real) literal.</span></div>
+<div class="paranum"><a name="p9">9/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
+<span class="insert5">For the evaluation of a <SPAN Class="swiss"><A HREF="AA-2-6.html#S0016">string_literal</A></SPAN> 
+with expected type having a String_Literal aspect specified, the value 
+is the result of a call on the function specified by the aspect, with 
+the parameter being the Wide_Wide_String with lower bound one that corresponds 
+to the literal.</span>&nbsp;</div>
+
+<H4 Class="centered">Bounded (Run-Time) Errors</H4>
+<div class="paranum"><a name="p10">10/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">It is a bounded error if the evaluation of a literal 
+with expected type having a corresponding _Literal aspect specified, 
+propagates an exception. The possible effect is that an error is reported 
+prior to run time, or Program_Error or the exception propagated by the 
+evaluation is raised at the point of use of the value of the literal.</span></div>
+<div class="paranum"><a name="p10.a">10.a/5</a></div>
+<div class="Annotations"><span class="insert5"><B>Implementation Note: 
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5">As always, an implementation may apply &quot;as-if&quot; 
+optimizations (those that result in the same external effects in the 
+absence of erroneous execution) to the function calls associated with 
+user-defined literals. In particular, if the function associated with 
+a _Literal aspect has a Global aspect that indicates no references to 
+global variables, then a number of optimizations are available to the 
+implementation:</span>&nbsp;</div>
+<div class="paranum"><a name="p10.b">10.b/5</a></div>
+<div class="SmallBulleted"><span class="insert5">The implementation can 
+evaluate a user-defined literal function at compile-time if it has access 
+to the body of the function (for example, if it is inlined), and that 
+body doesn't reference anything evaluated at runtime. If the compile-time 
+evaluation results in an exception, this bounded error allows the compilation 
+unit to be rejected.</span></div>
+<div class="paranum"><a name="p10.c">10.c/5</a></div>
+<div class="SmallBulleted"><span class="insert5">Implementations can 
+use existing permissions (see <A HREF="AA-6-1-2.html">6.1.2</A>) to avoid 
+evaluating the function associated with a user-defined literal more than 
+once for a particular literal value. This evaluation can be &quot;hoisted&quot; 
+(done once per compilation unit during the elaboration of the unit) if 
+the compiler can prove that the function doesn't depend on any constants 
+or locals with a runtime value not yet elaborated.</span></div>
+<div class="paranum"><a name="p10.d">10.d/5</a></div>
+<div class="SmallBulleted"><span class="insert5">If the literal value 
+is not needed by the execution of the program, the function call can 
+be omitted even if it might have side-effects (again, see <A HREF="AA-6-1-2.html">6.1.2</A>).</span> 
+</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p10.e">10.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0249-1.TXT">AI12-0249-1</A></I>} 
+<span class="insert5"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0295-1.TXT">AI12-0295-1</A></I>} 
+<span class="insert5"><A NAME="I2720"></A>The user-defined literal aspects 
+Integer_Literal, Real_Literal, and String_Literal are new.</span>&nbsp;</div>
+
+<HR>
+<div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-SRCH.html"><IMG SRC="find.gif" ALT="Search" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-2.html"><IMG SRC="prev.gif" ALT="Previous" BORDER=0></A>&nbsp;
+&nbsp;<A HREF="AA-4-3.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
+</div>
+<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
+<SPAN Style="vertical-align: middle; font-size:120%">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>
+</BODY>
+</HTML>

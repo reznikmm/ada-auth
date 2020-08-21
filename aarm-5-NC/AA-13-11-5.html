@@ -23,7 +23,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +44,7 @@ A subpool may be explicitly deallocated using Unchecked_Deallocate_Subpool.
 The following language-defined library procedure exists:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;System.Storage_Pools.Subpools;<BR>
-<A NAME="I5850"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
+<A NAME="I6060"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
 &nbsp;&nbsp;&nbsp;(Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;System.Storage_Pools.Subpools.Subpool_Handle);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
@@ -58,10 +58,10 @@ Finalization of a subpool has the following effects:</div>
 <div class="Bulleted">The subpool no longer belongs to any pool;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Bulleted">Any of the objects allocated from the subpool that 
-still exist are finalized in an arbitrary order;<A NAME="I5851"></A></div>
+still exist are finalized in an arbitrary order;<A NAME="I6061"></A></div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0148-1.TXT">AI12-0148-1</A></I>} 
-All of the objects allocated from the subpool cease to exist;<A NAME="I5852"></A></div>
+All of the objects allocated from the subpool cease to exist;<A NAME="I6062"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The following [dispatching] 
 call is then made:&nbsp;</div>
@@ -83,7 +83,7 @@ get from the address of the object to the subpool.</div>
 <div class="paranum"><a name="p10.c">10.c/3</a></div>
 <div class="Annotations">There is no Deallocate_From_Subpool. There is 
 no efficient way for the implementation to determine the subpool for 
-an arbitrary object, and if the pool implementer can determinate that, 
+an arbitrary object, and if the pool implementer can determine that, 
 they can use that as part of the implementation of Deallocate.</div>
 <div class="paranum"><a name="p10.d">10.d/3</a></div>
 <div class="Annotations">If Unchecked_Deallocation is not called (the 
@@ -97,7 +97,7 @@ be finalized when the Pool_With_Subpools is finalized (by permission
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p10.f">10.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0111-3.TXT">AI05-0111-3</A></I>} 
-<A NAME="I5853"></A>Unchecked_Deallocate_Subpool is new.&nbsp;</div>
+<A NAME="I6063"></A>Unchecked_Deallocate_Subpool is new.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p10.g">10.g/4</a></div>

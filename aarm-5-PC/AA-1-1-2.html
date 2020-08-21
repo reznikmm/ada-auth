@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -30,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -177,10 +175,9 @@ can conform to all of them.&nbsp;</div>
 <div class="paranum"><a name="p24">24/4</a></div>
 <div class="WideAbove">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0056-1.TXT">AI12-0056-1</A></I>} 
-Each <span class="insert4">clause</span><span class="delete4">&nbsp;section</span> 
-is divided into  subclauses that have a common structure. Each clause 
-and subclause first introduces its subject. After the introductory text, 
-text is labeled with the following headings:&nbsp;</div>
+Each clause is divided into  subclauses that have a common structure. 
+Each clause and subclause first introduces its subject. After the introductory 
+text, text is labeled with the following headings:&nbsp;</div>
 
 <H4 Class="centered">Language Design Principles</H4>
 <div class="paranum"><a name="p24.a">24.a</a></div>
@@ -218,7 +215,7 @@ it sometimes makes no semantic difference whether a given rule is a Name
 Resolution Rule or a Legality Rule, and it is sometimes difficult to 
 decide which it should be. We generally make a given rule a Name Resolution 
 Rule only if it has to be. For example, &ldquo;The <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>, 
-if any, in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN> 
+if any, in a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN> 
 shall be the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of an exception.&rdquo; is under &ldquo;Legality Rules.&rdquo;&nbsp;</div>
 
@@ -260,7 +257,7 @@ of the Post-Compilation Rules.&nbsp;</div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>It is not specified exactly 
 when these rules are checked, so long as they are checked for any given 
 partition before that partition starts running. An implementation may 
-choose to check some such rules at compile time, and reject <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0250">compilation_unit</A></SPAN>s 
+choose to check some such rules at compile time, and reject <SPAN Class="swiss"><A HREF="AA-10-1-1.html#S0264">compilation_unit</A></SPAN>s 
 accordingly. Alternatively, an implementation may check such rules when 
 the partition is created (usually known as &ldquo;link time&rdquo;), 
 or when the partition is mapped to a particular piece of hardware (but 
@@ -658,124 +655,123 @@ speaking belong to Ada 2005; other items only belong to Ada 2012.</div>
 and does not appear in the Ada 2012<span class="insert5">&nbsp;or Ada 202x</span> 
 RM.&nbsp;</div>
 <div class="paranum"><a name="p39.ll">39.ll/5</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert4"><B>Discussion: 
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
 </B>&nbsp;<BR>
  <BR>
-The next three headings list all language changes between&nbsp;</span><span class="insert5">Ada 
+The next three headings list all language changes between <span class="insert5">Ada 
 2012 (the language defined by ISO/IEC 8652:2012(E)) and Ada 202x (the 
-language defined by this edition of the Standard)</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;original 
+language defined by this edition of the Standard)</span><span class="delete5">&nbsp;original 
 Ada 2012 (the language defined by unmodified ISO/IEC 8652:2012(E)) and 
 current Ada 2012 (the language defined by ISO/IEC 8652:2012(E) as corrected 
-by the Corrigendum ISO/IEC 8652:2012/Cor 1:2016)</span></span><span class="insert4">. 
-Each language change falls into one of the following three categories:</span> 
-</div>
+by the Corrigendum ISO/IEC 8652:2012/Cor 1:2016)</span>. Each language 
+change falls into one of the following three categories:&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p39.mm">39.mm/5</a></div>
-<div class="Annotations"><span class="insert4"><A NAME="I1064"></A>This 
-heading lists all of the upward inconsistencies between&nbsp;</span><span class="insert5">Ada 
-2012 and Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;original 
-and current Ada 2012</span></span><span class="insert4">. Upward inconsistencies 
-are situations in which a legal&nbsp;</span><span class="insert5">Ada 2012 
-program is a legal Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;original Ada 2012 program is a legal current Ada 2012</span></span><span class="insert4">&nbsp;program with different semantics.</span></div>
+<div class="Annotations"><A NAME="I1064"></A>This heading lists all of 
+the upward inconsistencies between <span class="insert5">Ada 2012 and 
+Ada 202x</span><span class="delete5">&nbsp;original and current Ada 2012</span>. 
+Upward inconsistencies are situations in which a legal <span class="insert5">Ada 
+2012 program is a legal Ada 202x</span><span class="delete5">&nbsp;original 
+Ada 2012 program is a legal current Ada 2012</span> program with different 
+semantics.</div>
 <div class="paranum"><a name="p39.nn">39.nn/5</a></div>
-<div class="Annotations"><span class="insert4">Inconsistencies marked 
-with <B>Corrigendum:</B><A NAME="I1065"></A> are corrections to the original 
-Ada 2012 definition added by Technical Corrigendum 1 to Ada 2012.</span><span class="insert5">&nbsp;Inconsistencies marked with <B>Correction:</B><A NAME="I1066"></A> are 
-corrections to the original Ada 2012 definition added by this edition 
-of the Standard.</span><span class="insert4">&nbsp;Formally, these are inconsistencies 
-caused by Ada Issues classified as Binding Interpretations; implementations 
-of Ada 2012 are supposed to follow these corrections, not the original 
-flawed language definition. Thus, these strictly speaking are not inconsistencies 
-between&nbsp;</span><span class="insert5">Ada 2012 and Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;current 
-and original Ada 2012</span></span><span class="insert4">. Practically, 
-however, they very well may be, as early Ada 2012 implementations might 
-not follow the recommendation. Inconsistencies so marked are not portable 
-between Ada 2012 implementations</span><span class="insert5">, while 
-usually Ada 202x will have more clearly defined behavior</span><span class="insert4">. 
-Therefore, we document these for completeness.</span></div>
+<div class="Annotations">Inconsistencies marked with <B>Corrigendum:</B><A NAME="I1065"></A> 
+are corrections to the original Ada 2012 definition added by Technical 
+Corrigendum 1 to Ada 2012.<span class="insert5">&nbsp;Inconsistencies marked 
+with <B>Correction:</B><A NAME="I1066"></A> are corrections to the original 
+Ada 2012 definition added by this edition of the Standard.</span> Formally, 
+these are inconsistencies caused by Ada Issues classified as Binding 
+Interpretations; implementations of Ada 2012 are supposed to follow these 
+corrections, not the original flawed language definition. Thus, these 
+strictly speaking are not inconsistencies between <span class="insert5">Ada 
+2012 and Ada 202x</span><span class="delete5">&nbsp;current and original Ada 
+2012</span>. Practically, however, they very well may be, as early Ada 
+2012 implementations might not follow the recommendation. Inconsistencies 
+so marked are not portable between Ada 2012 implementations<span class="insert5">, 
+while usually Ada 202x will have more clearly defined behavior</span>. 
+Therefore, we document these for completeness.</div>
 <div class="paranum"><a name="p39.oo">39.oo/4</a></div>
-<div class="Annotations"><span class="insert4">This is not part of the 
-definition of the language, and does not appear in any version of the 
-Ada RM.</span>&nbsp;</div>
+<div class="Annotations">This is not part of the definition of the language, 
+and does not appear in any version of the Ada RM.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p39.pp">39.pp/5</a></div>
-<div class="Annotations"><span class="insert4"><A NAME="I1067"></A>This 
-heading lists all of the upward incompatibilities between&nbsp;</span><span class="insert5">Ada 
-2012 and Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;original 
-and current Ada 2012</span></span><span class="insert4">, except for 
-the ones listed under &ldquo;Inconsistencies With Ada 2012&rdquo; above. 
-These are the situations in which a legal&nbsp;</span><span class="insert5">Ada 
-2012 program is illegal in Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;original Ada 2012 program is illegal in current Ada 2012</span></span><span class="insert4">.</span></div>
+<div class="Annotations"><A NAME="I1067"></A>This heading lists all of 
+the upward incompatibilities between <span class="insert5">Ada 2012 and 
+Ada 202x</span><span class="delete5">&nbsp;original and current Ada 2012</span>, 
+except for the ones listed under &ldquo;Inconsistencies With Ada 2012&rdquo; 
+above. These are the situations in which a legal <span class="insert5">Ada 
+2012 program is illegal in Ada 202x</span><span class="delete5">&nbsp;original 
+Ada 2012 program is illegal in current Ada 2012</span>.</div>
 <div class="paranum"><a name="p39.qq">39.qq/5</a></div>
-<div class="Annotations"><span class="insert4">As with inconsistencies, 
-incompatibilities marked with <B>Corrigendum:</B><A NAME="I1068"></A> 
-are corrections to the original Ada 2012 definition added by Corrigendum 
-1 to Ada 2012</span><span class="insert5">, and incompatibilities marked 
-with <B>Correction:</B><A NAME="I1069"></A> are corrections to the original 
-Ada 2012 definition added by this edition.</span><span class="insert4">&nbsp;Formally, these are incompatibilities caused by Ada Issues classified 
+<div class="Annotations">As with inconsistencies, incompatibilities marked 
+with <B>Corrigendum:</B><A NAME="I1068"></A> are corrections to the original 
+Ada 2012 definition added by Corrigendum 1 to Ada 2012<span class="insert5">, 
+and incompatibilities marked with <B>Correction:</B><A NAME="I1069"></A> 
+are corrections to the original Ada 2012 definition added by this edition.</span> 
+Formally, these are incompatibilities caused by Ada Issues classified 
 as Binding Interpretations; implementations of Ada 2012 are supposed 
 to follow these corrections, not the original flawed language definition. 
-Thus, these strictly speaking are not incompatibilities between&nbsp;</span><span class="insert5">Ada 
-2012 and Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;current 
-and original Ada 2012</span></span><span class="insert4">. Practically, 
-however, they very well may be, as early Ada 2012 implementations might 
-not follow the recommendation. Therefore, some Ada 2012 implementations 
-may be able to compile the examples, while others might not.</span><span class="insert5">&nbsp;In contrast, Ada 202x compilers will have consistent behavior.</span><span class="insert4">&nbsp;Therefore, we document these for completeness.</span></div>
+Thus, these strictly speaking are not incompatibilities between <span class="insert5">Ada 
+2012 and Ada 202x</span><span class="delete5">&nbsp;current and original Ada 
+2012</span>. Practically, however, they very well may be, as early Ada 
+2012 implementations might not follow the recommendation. Therefore, 
+some Ada 2012 implementations may be able to compile the examples, while 
+others might not.<span class="insert5">&nbsp;In contrast, Ada 202x compilers 
+will have consistent behavior.</span> Therefore, we document these for 
+completeness.</div>
 <div class="paranum"><a name="p39.rr">39.rr/4</a></div>
-<div class="Annotations"><span class="insert4">This is not part of the 
-definition of the language, and does not appear in any version of the 
-Ada RM.</span>&nbsp;</div>
+<div class="Annotations">This is not part of the definition of the language, 
+and does not appear in any version of the Ada RM.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 2012</H4>
 <div class="paranum"><a name="p39.ss">39.ss/5</a></div>
-<div class="Annotations"><span class="insert4"><A NAME="I1070"></A>This 
-heading is used to list all upward compatible language changes; that 
-is, language extensions. These are the situations in which a legal&nbsp;</span><span class="insert5">Ada 
-202x program is not a legal Ada 202x</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;current Ada 2012 program is not a legal original Ada 2012</span></span><span class="insert4">&nbsp;program. The vast majority of language changes fall into this category.</span></div>
+<div class="Annotations"><A NAME="I1070"></A>This heading is used to 
+list all upward compatible language changes; that is, language extensions. 
+These are the situations in which a legal <span class="insert5">Ada 202x 
+program is not a legal Ada 202x</span><span class="delete5">&nbsp;current 
+Ada 2012 program is not a legal original Ada 2012</span> program. The 
+vast majority of language changes fall into this category.</div>
 <div class="paranum"><a name="p39.tt">39.tt/5</a></div>
-<div class="Annotations"><span class="insert4">As with incompatibilities, 
-extensions marked with <B>Corrigendum:</B><A NAME="I1071"></A> are corrections 
-to the original Ada 2012 definition added by Corrigendum 1 to Ada 2012</span><span class="insert5">, 
+<div class="Annotations">As with incompatibilities, extensions marked 
+with <B>Corrigendum:</B><A NAME="I1071"></A> are corrections to the original 
+Ada 2012 definition added by Corrigendum 1 to Ada 2012<span class="insert5">, 
 and extensions marked with <B>Correction:</B> are corrections to the 
-original Ada 2012 definition added by this edition</span><span class="insert4">. 
-Formally, these are extensions allowed by Ada Issues classified as Binding 
-Interpretations. As corrections, implementations of Ada 2012 (and sometimes 
-Ada 95) are allowed to implement these extensions. Thus, these strictly 
-speaking are not extensions of Ada 2012; they're part of Ada 2012. Practically, 
+original Ada 2012 definition added by this edition</span>. Formally, 
+these are extensions allowed by Ada Issues classified as Binding Interpretations. 
+As corrections, implementations of Ada 2012 (and sometimes Ada 95) are 
+allowed to implement these extensions. Thus, these strictly speaking 
+are not extensions of Ada 2012; they're part of Ada 2012. Practically, 
 however, they very well may be extensions, as early Ada 2012 implementations 
 might not implement the extension. Therefore, some Ada 2012 implementations 
-may be able to compile the examples, while others might not.</span><span class="insert5">&nbsp;In contrast, Ada 202x compilers will always support the extensions.</span><span class="insert4">&nbsp;Therefore, we document these for completeness.</span></div>
+may be able to compile the examples, while others might not.<span class="insert5">&nbsp;In contrast, Ada 202x compilers will always support the extensions.</span> 
+Therefore, we document these for completeness.</div>
 <div class="paranum"><a name="p39.uu">39.uu/4</a></div>
-<div class="Annotations"><span class="insert4">This is not part of the 
-definition of the language, and does not appear in any version of the 
-Ada RM.</span></div>
+<div class="Annotations">This is not part of the definition of the language, 
+and does not appear in any version of the Ada RM.</div>
 <div class="paranum"><a name="p39.vv">39.vv/4</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert4">&nbsp;<BR>
+<div class="Annotations" style="margin-bottom: 0.4em">&nbsp;<BR>
  <BR>
 As explained above, the next heading does not represent any language 
-change:</span>&nbsp;</div>
+change:&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p39.ww">39.ww/5</a></div>
-<div class="Annotations"><span class="insert4"><A NAME="I1072"></A>This 
-heading lists some of the nonsemantic changes between the&nbsp;</span><span class="insert5">Ada 
-2012 RM and the Ada 202x RM</span><span class="insert4"></span><span class="insert4"><span class="delete5">&nbsp;original 
-and corrected Ada 2012 RM</span></span><span class="insert4">. This heading 
-lists only &ldquo;interesting&rdquo; changes (for instance, editorial 
-corrections are not listed). Items marked <B>Corrigendum:</B><A NAME="I1073"></A> 
-are included in Corrigendum 1 to Ada 2012</span><span class="insert5">, 
-and items marked with <B>Correction:</B> are added by this edition. In 
-both cases, the</span><span class="insert4"></span><span class="insert4"><span class="delete5">. 
-These</span></span><span class="insert4">&nbsp;items come from Ada Issues 
-classified as Binding Interpretations and strictly speaking belong to 
-Ada 2012</span><span class="insert5">; other items only belong to Ada 
-202x</span><span class="insert4">.</span></div>
+<div class="Annotations"><A NAME="I1072"></A>This heading lists some 
+of the nonsemantic changes between the <span class="insert5">Ada 2012 
+RM and the Ada 202x RM</span><span class="delete5">&nbsp;original and corrected 
+Ada 2012 RM</span>. This heading lists only &ldquo;interesting&rdquo; 
+changes (for instance, editorial corrections are not listed). Items marked 
+<B>Corrigendum:</B><A NAME="I1073"></A> are included in Corrigendum 1 
+to Ada 2012<span class="insert5">, and items marked with <B>Correction:</B> 
+are added by this edition. In both cases, the</span><span class="delete5">. 
+These</span> items come from Ada Issues classified as Binding Interpretations 
+and strictly speaking belong to Ada 2012<span class="insert5">; other 
+items only belong to Ada 202x</span>.</div>
 <div class="paranum"><a name="p39.xx">39.xx/4</a></div>
-<div class="Annotations"><span class="insert4">This is not part of the 
-definition of the language, and does not appear in any version of the 
-Ada RM.</span>&nbsp;</div>
+<div class="Annotations">This is not part of the definition of the language, 
+and does not appear in any version of the Ada RM.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

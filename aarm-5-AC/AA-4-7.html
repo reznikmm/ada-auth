@@ -28,7 +28,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,20 +39,20 @@
 <HR>
 <H1>4.7 Qualified Expressions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<div class="Normal">[A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 is used to state explicitly the type, and to verify the subtype, of an 
-operand that is either an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+operand that is either an <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>. 
-<A NAME="I3411"></A>]</div>
+<A NAME="I3477"></A>]</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3412"></A><A NAME="S0143"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3413"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3414"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3415"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3416"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3478"></A><A NAME="S0149"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3479"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3480"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3481"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3482"></A><SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3417"></A>The <I>operand</I> (the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Normal"><A NAME="I3483"></A>The <I>operand</I> (the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN>) 
 shall resolve to be of the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 or a universal type that covers it.&nbsp;</div>
@@ -60,9 +60,9 @@ or a universal type that covers it.&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p3.1">3.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
-<span class="insert3">[If the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
-denotes an object, the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
-denotes a constant view of that object.] The nominal subtype of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<span class="insert3">[If the operand of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+denotes an object, the <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+denotes a constant view of that object.] The nominal subtype of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>.</span> 
 </div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
@@ -73,12 +73,12 @@ is the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/4</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0100-1.TXT">AI12-0100-1</A></I>} 
-<A NAME="I3418"></A><A NAME="I3419"></A><A NAME="I3420"></A><A NAME="I3421"></A><A NAME="I3422"></A><A NAME="I3423"></A><A NAME="I3424"></A>The 
-evaluation of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<A NAME="I3484"></A><A NAME="I3485"></A><A NAME="I3486"></A><A NAME="I3487"></A><A NAME="I3488"></A><A NAME="I3489"></A><A NAME="I3490"></A>The 
+evaluation of a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 evaluates the operand (and if of a universal type, converts it to the 
 type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>) 
 and checks that its value belongs to the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
-<A NAME="I3425"></A><A NAME="I3426"></A>The exception Constraint_Error 
+<A NAME="I3491"></A><A NAME="I3492"></A>The exception Constraint_Error 
 is raised if this check fails.<span class="insert4">&nbsp;Furthermore, if 
 predicate checks are enabled for the subtype denoted by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 a check is performed as defined in subclause <A HREF="AA-3-2-4.html">3.2.4</A>, 
@@ -96,21 +96,21 @@ in <A HREF="AA-3-2-4.html">3.2.4</A>; such a check could raise any exception,
 not just Constraint_Error or Assertion_Error.</span>&nbsp;</div>
 <div class="paranum"><a name="p4.b">4.b</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>Implicit subtype conversion is 
-not provided because a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+not provided because a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 with a constrained target subtype is essentially an assertion about the 
 subtype of the operand, rather than a request for conversion. An explicit 
-<SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
-can be used rather than a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
+can be used rather than a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 if subtype conversion is desired.</div>
 <div class="paranum"><a name="p4.c">4.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0100-1.TXT">AI12-0100-1</A></I>} 
-<span class="insert4">We do a predicate check here so that a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
-never allows something that the equivalent <SPAN Class="swiss"><A HREF="AA-4-6.html#S0142">type_conversion</A></SPAN> 
+<span class="insert4">We do a predicate check here so that a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
+never allows something that the equivalent <SPAN Class="swiss"><A HREF="AA-4-6.html#S0148">type_conversion</A></SPAN> 
 would not allow.</span>&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Notes">25&nbsp;&nbsp;When a given context does not uniquely 
-identify an expected type, a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+identify an expected type, a <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 can be used to do so. In particular, if an overloaded <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
 is passed to an overloaded subprogram, it might be necessary to qualify 
@@ -137,13 +137,13 @@ Print&nbsp;(Code'(Dec));&nbsp;&nbsp;<SPAN Class="roman"><I>--&nbsp;&nbsp;Dec&nbs
 <div class="paranum"><a name="p10.a">10.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0003-1.TXT">AI05-0003-1</A></I>} 
 <span class="insert3">Added a definition of the nominal subtype of a 
-<SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN>.</span> 
+<SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN>.</span> 
 </div>
 
 <H4 Class="centered">Inconsistencies With Ada 2012</H4>
 <div class="paranum"><a name="p10.b">10.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0100-1.TXT">AI12-0100-1</A></I>} 
-<span class="insert4"><A NAME="I3427"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0143">qualified_expression</A></SPAN> 
+<span class="insert4"><A NAME="I3493"></A><B>Corrigendum:</B> A <SPAN Class="swiss"><A HREF="AA-4-7.html#S0149">qualified_expression</A></SPAN> 
 now performs a predicate check for the named subtype (if it is enabled). 
 Original Ada 2012 did not include that check (an omission). While this 
 is formally inconsistent (an exception could be raised when none would 

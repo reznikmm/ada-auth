@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,54 +49,54 @@ package Numerics.Generic_Elementary_Functions has the following declaration:
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Examples"><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Float_Type&nbsp;<B>is</B>&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
-<A NAME="I6220"></A><BR>
+<A NAME="I6123"></A><BR>
 <B>package</B>&nbsp;Ada.Numerics.Generic_Elementary_Functions&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Generic_Elementary_Functions);</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6221"></A>Sqrt&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6222"></A>Log&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6223"></A>Log&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6224"></A>Exp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6124"></A>Sqrt&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6125"></A>Log&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6126"></A>Log&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Base&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6127"></A>Exp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;**&quot;&nbsp;&nbsp;&nbsp;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6225"></A>Sin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6226"></A>Sin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6227"></A>Cos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6228"></A>Cos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6229"></A>Tan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6230"></A>Tan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6231"></A>Cot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6232"></A>Cot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6128"></A>Sin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6129"></A>Sin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6130"></A>Cos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6131"></A>Cos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6132"></A>Tan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6133"></A>Tan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6134"></A>Cot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6135"></A>Cot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6233"></A>Arcsin&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6234"></A>Arcsin&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6235"></A>Arccos&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6236"></A>Arccos&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6237"></A>Arctan&nbsp;&nbsp;(Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6136"></A>Arcsin&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6137"></A>Arcsin&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6138"></A>Arccos&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6139"></A>Arccos&nbsp;&nbsp;(X,&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6140"></A>Arctan&nbsp;&nbsp;(Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6238"></A>Arctan&nbsp;&nbsp;(Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6141"></A>Arctan&nbsp;&nbsp;(Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6239"></A>Arccot&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6142"></A>Arccot&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6240"></A>Arccot&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6143"></A>Arccot&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base&nbsp;:=&nbsp;1.0;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cycle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6241"></A>Sinh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6242"></A>Cosh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6243"></A>Tanh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6244"></A>Coth&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6245"></A>Arcsinh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6246"></A>Arccosh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6247"></A>Arctanh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6248"></A>Arccoth&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6144"></A>Sinh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6145"></A>Cosh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6146"></A>Tanh&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6147"></A>Coth&nbsp;&nbsp;&nbsp;&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6148"></A>Arcsinh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6149"></A>Arccosh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6150"></A>Arctanh&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6151"></A>Arccoth&nbsp;(X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Float_Type'Base)&nbsp;<B>return</B>&nbsp;Float_Type'Base;</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Elementary_Functions;</div>
 <div class="paranum"><a name="p9">9/1</a></div>
-<div class="Normal"><A NAME="I6249"></A>The library package Numerics.Elementary_Functions 
+<div class="Normal"><A NAME="I6152"></A>The library package Numerics.Elementary_Functions 
 is declared pure and defines the same subprograms as Numerics.Generic_Elementary_Functions, 
 except that the predefined type Float is systematically substituted for 
 Float_Type'Base throughout. Nongeneric equivalents of Numerics.Generic_Elementary_Functions 
@@ -191,7 +191,7 @@ parameter X is less than one; and</div>
 <div class="Bulleted">by the Arccoth function, when the absolute value 
 of the parameter X is less than one.&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6250"></A><A NAME="I6251"></A><A NAME="I6252"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6153"></A><A NAME="I6154"></A><A NAME="I6155"></A>The 
 exception Constraint_Error is raised, signaling a pole of the mathematical 
 function (analogous to dividing by zero), in the following cases, provided 
 that Float_Type'Machine_Overflows is True:&nbsp;</div>
@@ -212,11 +212,11 @@ and</div>
 <div class="Bulleted">by the Arctanh and Arccoth functions, when the 
 absolute value of the parameter X is one.&nbsp;</div>
 <div class="paranum"><a name="p34">34</a></div>
-<div class="Normal"><A NAME="I6253"></A>Constraint_Error can also be 
+<div class="Normal"><A NAME="I6156"></A>Constraint_Error can also be 
 raised when a finite result overflows (see <A HREF="RM-G-2-4.html">G.2.4</A>); 
 this may occur for parameter values sufficiently <I>near</I> poles, and, 
 in the case of some of the functions, for parameter values with sufficiently 
-large magnitudes.<A NAME="I6254"></A> When Float_Type'Machine_Overflows 
+large magnitudes.<A NAME="I6157"></A> When Float_Type'Machine_Overflows 
 is False, the result at poles is unspecified.&nbsp;</div>
 <div class="paranum"><a name="p35">35</a></div>
 <div class="Normal">When one parameter of a function with multiple parameters 
@@ -230,7 +230,7 @@ the range of intermediate values allowed during the calculation of a
 final result shall not be affected by any range constraint of the subtype 
 Float_Type.&nbsp;</div>
 <div class="paranum"><a name="p37">37</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6255"></A>In 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I6158"></A>In 
 the following cases, evaluation of an elementary function shall yield 
 the <I>prescribed result</I>, provided that the preceding rules do not 
 call for an exception to be raised:&nbsp;</div>

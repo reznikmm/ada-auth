@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -47,23 +45,23 @@ value, using either a named or a positional association.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_aggregate</SPAN><A NAME="I2533"></A><A NAME="S0107"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(<A NAME="I2534"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
+<div class="Indented1"><SPAN Class="swiss">record_aggregate</SPAN><A NAME="I2528"></A><A NAME="S0107"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>(<A NAME="I2529"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>)</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_component_association_list</SPAN><A NAME="I2535"></A><A NAME="S0108"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2536"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2537"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">record_component_association_list</SPAN><A NAME="I2530"></A><A NAME="S0108"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2531"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I2532"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN>}<BR>
 &nbsp;&nbsp;|&nbsp;<B>null&nbsp;record</B></div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_component_association</SPAN><A NAME="I2538"></A><A NAME="S0109"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2539"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I2540"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2541"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
+<div class="Indented1"><SPAN Class="swiss">record_component_association</SPAN><A NAME="I2533"></A><A NAME="S0109"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2534"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;]&nbsp;<A NAME="I2535"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I2536"></A><SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0110">component_choice_list</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p5">5/5</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_choice_list</SPAN><A NAME="I2542"></A><A NAME="S0110"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I2543"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{<span class="insert5">'|'</span><span class="delete5">&nbsp;|</span>&nbsp;<I>component_</I><A NAME="I2544"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">component_choice_list</SPAN><A NAME="I2537"></A><A NAME="S0110"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I2538"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;{<span class="insert5">'|'</span><span class="delete5">&nbsp;|</span>&nbsp;<I>component_</I><A NAME="I2539"></A><SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0099">selector_name</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;|&nbsp;<B>others</B></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><A NAME="I2545"></A>A <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
+<div class="Indented1"><A NAME="I2540"></A>A <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 is a <I>named component association</I> if it has a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0110">component_choice_list</A></SPAN>; 
-<A NAME="I2546"></A>otherwise, it is a <I>positional component association</I>. 
+<A NAME="I2541"></A>otherwise, it is a <I>positional component association</I>. 
 Any positional component associations shall precede any named component 
 associations. If there is a named association with a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0110">component_choice_list</A></SPAN> 
 of <B>others</B>, it shall come last.&nbsp;</div>
@@ -74,10 +72,10 @@ if there is only one association, it shall be a named association.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I2547"></A>The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I2542"></A>The expected type for a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN> 
 shall be a single record type or record extension.&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
-<div class="Normal"><A NAME="I2548"></A>For the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
+<div class="Normal"><A NAME="I2543"></A>For the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN>, 
 all components of the composite value defined by the aggregate are <I>needed</I>; 
 for the association list of an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN>, 
@@ -91,10 +89,10 @@ of a <SPAN Class="swiss"><A HREF="RM-4-3-4.html#S0120">record_delta_aggregate</A
 (see <A HREF="RM-4-3-4.html">4.3.4</A>) shall denote a nondiscriminant 
 component of the type of the <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>.</span></div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2549"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2544"></A>The 
 expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
-is the type of the <I>associated</I> component(s); <A NAME="I2550"></A>the 
+is the type of the <I>associated</I> component(s); <A NAME="I2545"></A>the 
 associated component(s) are as follows:&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Bulleted">For a positional association, the component (including 
@@ -137,8 +135,8 @@ aggregate.</span><span class="delete5">&nbsp;If a <SPAN Class="swiss"><A HREF="R
 with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 has two or more associated components, all of them shall be of the same 
 type, or all of them shall be of anonymous access types whose subtypes 
-statically match.</span><span class="insert4"><span class="delete5">&nbsp;In addition, Legality Rules are enforced separately for each associated 
-component.</span></span><span class="delete5"></span></div>
+statically match. In addition, Legality Rules are enforced separately 
+for each associated component.</span></div>
 <div class="paranum"><a name="p16.1">16.1/5</a></div>
 <div class="Normal">&nbsp;&nbsp;<span class="insert5">If a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
@@ -198,24 +196,24 @@ of the same <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I2551"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN> 
+<div class="Normal"><A NAME="I2546"></A>The evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0107">record_aggregate</A></SPAN> 
 consists of the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>.</div>
 <div class="paranum"><a name="p19">19/5</a></div>
-<div class="Normal"><A NAME="I2552"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>, 
+<div class="Normal"><A NAME="I2547"></A>For the evaluation of a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN>, 
 any per-object constraints (see <A HREF="RM-3-8.html">3.8</A>) for components 
 specified in the association list are elaborated and any <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>s 
 are evaluated and converted to the subtype of the associated component. 
-<A NAME="I2553"></A>Any constraint elaborations and <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<A NAME="I2548"></A>Any constraint elaborations and <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 evaluations (and conversions) occur in an arbitrary order, except that 
 the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 for a discriminant is evaluated (and converted) prior to the elaboration 
 of any per-object constraint that depends on it, which in turn occurs 
 prior to the evaluation and conversion of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-for the component with the per-object constraint.<A NAME="I2554"></A><span class="insert5">&nbsp;If the value of a discriminant that governs a selected <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
+for the component with the per-object constraint.<A NAME="I2549"></A><span class="insert5">&nbsp;If the value of a discriminant that governs a selected <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
  <I>P</I> is given by a nonstatic <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
 and the evaluation of that <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 yields a value that does not belong to the nominal subtype of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-then Constraint_Error is raised.<A NAME="I2555"></A></span></div>
+then Constraint_Error is raised.<A NAME="I2550"></A></span></div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
 <div class="Normal">&nbsp;&nbsp;For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 

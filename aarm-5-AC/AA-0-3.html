@@ -36,7 +36,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -251,22 +251,26 @@ an exit statement is encountered.</div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Normal">A block statement comprises a sequence of statements 
 preceded by the declaration of local entities used by the statements.</div>
-<div class="paranum"><a name="p28">28</a></div>
-<div class="Normal">Certain statements are associated with concurrent 
-execution. A delay statement delays the execution of a task for a specified 
-duration or until a specified time. An entry call statement is written 
-as a procedure call statement; it requests an operation on a task or 
-on a protected object, blocking the caller until the operation can be 
-performed. A called task may accept an entry call by executing a corresponding 
-accept statement, which specifies the actions then to be performed as 
-part of the rendezvous with the calling task. An entry call on a protected 
-object is processed when the corresponding entry barrier evaluates to 
-true, whereupon the body of the entry is executed. The requeue statement 
-permits the provision of a service as a number of related activities 
-with preference control. One form of the select statement allows a selective 
-wait for one of several alternative rendezvous. Other forms of the select 
-statement allow conditional or timed entry calls and the asynchronous 
-transfer of control in response to some triggering event.</div>
+<div class="paranum"><a name="p28">28/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0119-1.TXT">AI12-0119-1</A></I>} 
+Certain statements are associated with concurrent execution. A delay 
+statement delays the execution of a task for a specified duration or 
+until a specified time. An entry call statement is written as a procedure 
+call statement; it requests an operation on a task or on a protected 
+object, blocking the caller until the operation can be performed. A called 
+task may accept an entry call by executing a corresponding accept statement, 
+which specifies the actions then to be performed as part of the rendezvous 
+with the calling task. An entry call on a protected object is processed 
+when the corresponding entry barrier evaluates to true, whereupon the 
+body of the entry is executed. The requeue statement permits the provision 
+of a service as a number of related activities with preference control. 
+One form of the select statement allows a selective wait for one of several 
+alternative rendezvous. Other forms of the select statement allow conditional 
+or timed entry calls and the asynchronous transfer of control in response 
+to some triggering event.<span class="insert5">&nbsp;Various parallel constructs, 
+including parallel loops and parallel blocks, support the initiation 
+of multiple logical threads of control designed to execute in parallel 
+when multiple processors are available.</span></div>
 <div class="paranum"><a name="p29">29</a></div>
 <div class="Normal">Execution of a program unit may encounter error situations 
 in which normal program execution cannot continue. For example, an arithmetic 

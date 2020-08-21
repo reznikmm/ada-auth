@@ -19,6 +19,8 @@
     SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }
     SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
     SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -31,7 +33,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -42,27 +44,33 @@
 <HR>
 <H1>8.5.1 Object Renaming Declarations</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN> 
+<div class="Normal">[An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 is used to rename an object.]&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
-<div class="paranum"><a name="p2">2/3</a></div>
+<div class="paranum"><a name="p2">2/5</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I4358"></A><A NAME="S0203"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4359"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<span class="insert2">[<A NAME="I4360"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I4361"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4362"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4363"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span>;<span class="insert2"><BR>
-&nbsp;&nbsp;|&nbsp;<A NAME="I4364"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I4365"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4366"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span><span class="insert3"><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4367"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0275-1.TXT">AI12-0275-1</A></I>} 
+<SPAN Class="swiss">object_renaming_declaration</SPAN><A NAME="I4521"></A><A NAME="S0217"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><span class="insert2"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span><A NAME="I4522"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<span class="insert5">[</span>:&nbsp;<span class="insert2">[<A NAME="I4523"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>]&nbsp;</span><A NAME="I4524"></A><SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert5">]</span>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4525"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4526"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span>;<span class="insert2"><BR>
+&nbsp;&nbsp;|&nbsp;<A NAME="I4527"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;:&nbsp;<A NAME="I4528"></A><SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>&nbsp;<B>renames</B>&nbsp;<I>object_</I><A NAME="I4529"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></span><span class="insert3"><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4530"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>]</span><span class="insert2">;</span></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
-<div class="paranum"><a name="p3">3/2</a></div>
+<div class="paranum"><a name="p3">3/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0275-1.TXT">AI12-0275-1</A></I>} 
 The type of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall resolve to the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert2">, 
+shall resolve to the type determined by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN><span class="insert5">, 
+if present. If no <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
+is present, the expected type of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+is any type</span><span class="delete5"></span><span class="insert2"><span class="delete5">, 
 or in the case where the type is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
 to an anonymous access type. If the anonymous access type is an access-to-object 
 type, the type of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -70,7 +78,18 @@ shall have the same designated type as that of the <SPAN Class="swiss"><A HREF="
 If the anonymous access type is an access-to-subprogram type, the type 
 of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 shall have a designated profile that is type conformant with that of 
-the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span>.</div>
+the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN></span></span><span class="delete5"></span>.</div>
+<div class="paranum"><a name="p3.1">3.1/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0275-1.TXT">AI12-0275-1</A></I>} 
+<span class="insert5">In the case where the type is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>, 
+the type of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall resolve to an anonymous access type. If the anonymous access type 
+is an access-to-object type, the type of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall have the same designated type as that of the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>. 
+If the anonymous access type is an access-to-subprogram type, the type 
+of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall have a designated profile that is type conformant with that of 
+the <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN>.</span></div>
 <div class="paranum"><a name="p3.a">3.a</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><B>Reason:&nbsp;</B>A 
 previous version of Ada 9X used the usual &ldquo;expected type&rdquo; 
@@ -99,7 +118,7 @@ the rule for renaming. That makes the rule different for <B>in</B> vs.
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The renamed entity shall be an object.</div>
+<div class="Normal">The renamed entity shall be an object.<A NAME="I4531"></A></div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
@@ -111,36 +130,62 @@ the type of the renamed object and the type defined by the <SPAN Class="swiss"><
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
 <span class="insert2">shall both be access-to-object types with statically 
 matching designated subtypes and with both or neither being access-to-constant 
-types; or <A NAME="I4368"></A></span></div>
+types; or <A NAME="I4532"></A></span></div>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
 <span class="insert2">shall both be access-to-subprogram types with subtype 
-conformant designated profiles. <A NAME="I4369"></A></span></div>
-<div class="paranum"><a name="p4.4">4.4/2</a></div>
+conformant designated profiles. <A NAME="I4533"></A></span></div>
+<div class="paranum"><a name="p4.4">4.4/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00423.TXT">AI95-00423-01</A></I>} 
-<span class="insert2">For an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN> 
+<span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert2">For an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 with a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
-that has a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>:</span></div>
-<div class="paranum"><a name="p4.5">4.5/2</a></div>
-<div class="Bulleted"><span class="insert2">if the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-denotes a generic formal object of a generic unit <I>G</I>, and the <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN> 
+that has a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN></span><span class="insert5">, 
+the subtype of the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+shall exclude null. In addition, if the <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
+occurs within the body of a generic unit <I>G</I> or within the body 
+of a generic unit declared within the declarative region of generic unit 
+<I>G</I>, then</span><span class="insert2">:</span></div>
+<div class="paranum"><a name="p4.5">4.5/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert2">if the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+</span><span class="insert5">statically&nbsp;</span><span class="insert2">denotes 
+a generic formal object&nbsp;</span><span class="insert5">of mode <B>in out</B> 
+</span><span class="insert2">of&nbsp;</span><span class="insert2"><span class="delete5">a 
+generic unit&nbsp;</span></span><span class="insert2"><I>G</I>,&nbsp;</span><span class="insert2"><span class="delete5">and 
+the <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 occurs within the body of <I>G</I> or within the body of a generic unit 
-declared within the declarative region of <I>G</I>, then the declaration 
-of the formal object of <I>G</I> shall have a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>;</span></div>
-<div class="paranum"><a name="p4.6">4.6/2</a></div>
-<div class="Bulleted"><span class="insert2">otherwise, the subtype of 
-the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-shall exclude null. <A NAME="I4370"></A>In addition to the places where 
+declared within the declarative region of <I>G</I>,&nbsp;</span></span><span class="insert2">then 
+the declaration of&nbsp;</span><span class="insert5">that</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;the 
+formal</span></span><span class="insert2">&nbsp;object&nbsp;</span><span class="insert2"><span class="delete5">of 
+<I>G</I>&nbsp;</span></span><span class="insert2">shall have a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>;</span></div>
+<div class="paranum"><a name="p4.6">4.6/5</a></div>
+<div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert2"></span><span class="insert5">if</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;otherwise, 
+the subtype of</span></span><span class="insert2">&nbsp;the <I>object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+</span><span class="insert5">statically denotes a call of a generic formal 
+function of <I>G</I>, then the declaration of the result of that function 
+shall have a <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN></span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;shall 
+exclude null. <A NAME="I4534"></A>In addition to the places where Legality 
+Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), this rule 
+applies also in the private part of an instance of a generic unit</span></span><span class="insert2">.</span> 
+</div>
+<div class="paranum"><a name="p4.7">4.7/5</a></div>
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert5"><A NAME="I4535"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="AA-12-3.html">12.3</A>), 
 this rule applies also in the private part of an instance of a generic 
 unit.</span></div>
-<div class="paranum"><a name="p4.a">4.a/2</a></div>
+<div class="paranum"><a name="p4.a">4.a/5</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em"><span class="insert2"><B>Reason: 
-</B>This rule prevents &ldquo;lying&rdquo;. <B>Null</B> must never be 
-the value of an object with an explicit <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>. 
-The first bullet is an assume-the-worst rule which prevents trouble in 
-one obscure case:</span>&nbsp;</div>
+</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert2">This rule prevents &ldquo;lying&rdquo;. <B>Null</B> 
+must never be the value of an object with an explicit <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN>. 
+The&nbsp;</span><span class="insert5">bullets are</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;first 
+bullet is</span></span><span class="insert2">&nbsp;an assume-the-worst rule 
+which prevents trouble in&nbsp;</span><span class="insert5">two</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;one</span></span><span class="insert2">&nbsp;obscure&nbsp;</span><span class="insert5">cases</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;case</span></span><span class="insert2">:</span> 
+</div>
 <div class="paranum"><a name="p4.b">4.b/2</a></div>
 <div class="SmallExamples"><span class="insert2"><B>type</B>&nbsp;Acc_I&nbsp;<B>is&nbsp;access</B>&nbsp;Integer;<BR>
 <B>subtype</B>&nbsp;Acc_NN_I&nbsp;<B>is&nbsp;not&nbsp;null</B>&nbsp;Acc_I;<BR>
@@ -157,15 +202,18 @@ Obj&nbsp;:&nbsp;Acc_I&nbsp;:=&nbsp;<B>null</B>;</span></div>
 <B>end</B>&nbsp;Gen;</span></div>
 <div class="paranum"><a name="p4.e">4.e/2</a></div>
 <div class="SmallExamples"><span class="insert2"><B>package</B>&nbsp;Inst&nbsp;<B>is&nbsp;new</B>&nbsp;Gen&nbsp;(B&nbsp;=&gt;&nbsp;Obj);</span></div>
-<div class="paranum"><a name="p4.f">4.f/2</a></div>
-<div class="Annotations"><span class="insert2">Without the first bullet 
-rule, D would be legal, and contain the value <B>null</B>, because the 
-rule about lying is satisfied for generic matching (Obj matches B; B 
-does not explicitly state <B>not null</B>), Legality Rules are not rechecked 
-in the body of any instance, and the template passes the lying rule as 
-well. The rule is so complex because it has to apply to formals used 
-in bodies of child generics as well as in the bodies of generics.</span> 
-</div>
+<div class="paranum"><a name="p4.f">4.f/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert2">Without the first bullet rule, D would be legal, 
+and contain the value <B>null</B>, because the rule about lying is satisfied 
+for generic matching (Obj matches B; B does not explicitly state <B>not 
+null</B>), Legality Rules are not rechecked in the body of any instance, 
+and the template passes the lying rule as well. The&nbsp;</span><span class="insert5">second 
+bullet handles a similar case involving formal functions. The rules are</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;rule 
+is</span></span><span class="insert2">&nbsp;so complex because&nbsp;</span><span class="insert5">they 
+have</span><span class="insert2"></span><span class="insert2"><span class="delete5">&nbsp;it 
+has</span></span><span class="insert2">&nbsp;to apply to formals used in bodies 
+of child generics as well as in the bodies of generics.</span>&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0017">8652/0017</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00184.TXT">AI95-00184-01</A></I>} 
@@ -179,7 +227,7 @@ subtype is indefinite, or the variable is&nbsp;</span><span class="insert2"><spa
 by its initial value</span></span><span class="delete3"></span><span class="delete2">&nbsp;aliased</span><span class="delete3"></span>. 
 A <SPAN Class="swiss"><A HREF="AA-4-1-2.html#S0097">slice</A></SPAN> 
 of an array shall not be renamed if this restriction disallows renaming 
-of the array. <span class="insert1"><A NAME="I4371"></A>In addition to 
+of the array. <span class="insert1"><A NAME="I4536"></A>In addition to 
 the places where Legality Rules normally apply, these rules apply also 
 in the private part of an instance of a generic unit.</span><span class="insert1"><span class="delete3">&nbsp;These rules also apply for a renaming that appears in the body of a generic 
 unit, with the additional requirement that even if the nominal subtype 
@@ -228,7 +276,7 @@ rules include assume-the-worst rules for generic bodies partially to
 prevent such problems.</span></div>
 <div class="paranum"><a name="p5.b">5.b</a></div>
 <div class="Annotations"><B>Implementation Note:&nbsp;</B>Note that if an 
-implementation chooses to deallocate-then-reallocate on <SPAN Class="swiss"><A HREF="AA-5-2.html#S0153">assignment_statement</A></SPAN>s 
+implementation chooses to deallocate-then-reallocate on <SPAN Class="swiss"><A HREF="AA-5-2.html#S0159">assignment_statement</A></SPAN>s 
 assigning to unconstrained definite objects, then it cannot represent 
 renamings and access values as simple addresses, because the above rule 
 does not apply to all components of such an object.&nbsp;</div>
@@ -241,21 +289,21 @@ as appropriate.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
-An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN> 
+An <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 declares a new view [of the renamed object] whose properties are identical 
 to those of the renamed view. [Thus, the properties of the renamed object 
-are not affected by the <SPAN Class="swiss"><A HREF="AA-8-5.html#S0202">renaming_declaration</A></SPAN>. 
+are not affected by the <SPAN Class="swiss"><A HREF="AA-8-5.html#S0216">renaming_declaration</A></SPAN>. 
 In particular, its value and whether or not it is a constant are unaffected; 
 similarly, the<span class="insert2">&nbsp;null exclusion or</span> constraints 
 that apply to an object are not affected by renaming (any constraint 
 implied by the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 <span class="insert2">or <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
-</span>of the <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN> 
+</span>of the <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 is ignored).]&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>Because the constraints are 
 ignored, it is a good idea to use the nominal subtype of the renamed 
-object when writing an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN>.</div>
+object when writing an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>.</div>
 <div class="paranum"><a name="p6.b">6.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
 <span class="insert2">If no <SPAN Class="swiss"><A HREF="AA-3-10.html#S0083">null_exclusion</A></SPAN> 
@@ -286,7 +334,7 @@ an indefinite unconstrained nominal subtype.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 95</H4>
 <div class="paranum"><a name="p8.b">8.b/2</a></div>
 <div class="Annotations" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
-<span class="insert2"><A NAME="I4372"></A>Aliased variables are not necessarily 
+<span class="insert2"><A NAME="I4537"></A>Aliased variables are not necessarily 
 constrained in Ada 2005 (see <A HREF="AA-3-6.html">3.6</A>). Therefore, 
 a subcomponent of an aliased variable may disappear or change shape, 
 and renaming such a subcomponent thus is illegal, while the same operation 
@@ -307,7 +355,7 @@ using the type T2 of the previous example:</span>&nbsp;</div>
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00231.TXT">AI95-00231-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00254.TXT">AI95-00254-01</A></I>} 
 <span class="insert2"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00409.TXT">AI95-00409-01</A></I>} 
-<span class="insert2"><A NAME="I4373"></A>A renaming can have an anonymous 
+<span class="insert2"><A NAME="I4538"></A>A renaming can have an anonymous 
 access type. In that case, the accessibility of the renaming is that 
 of the original object (accessibility is not lost as it is for assignment 
 to a component or stand-alone object).</span></div>
@@ -330,7 +378,7 @@ depends-on-discriminant components if the type <I>might</I> be definite.</span>
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p8.g">8.g/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0008-1.TXT">AI05-0008-1</A></I>} 
-<span class="insert3"><A NAME="I4374"></A><B>Correction:</B> Simplified 
+<span class="insert3"><A NAME="I4539"></A><B>Correction:</B> Simplified 
 the description of when a discriminant-dependent component is allowed 
 to be renamed &mdash; it's now simply when the object is known to be 
 constrained. This fixes a confusion as to whether a subcomponent of an 
@@ -343,9 +391,28 @@ of constants are known to be constrained.</span>&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p8.h">8.h/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<span class="insert3"><A NAME="I4375"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-can be used in an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0203">object_renaming_declaration</A></SPAN>. 
+<span class="insert3"><A NAME="I4540"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+can be used in an <SPAN Class="swiss"><A HREF="AA-8-5-1.html#S0217">object_renaming_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.</span>&nbsp;</div>
+
+<H4 Class="centered">Incompatibilities With Ada 2012</H4>
+<div class="paranum"><a name="p8.i">8.i/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0287-1.TXT">AI12-0287-1</A></I>} 
+<span class="insert5"><A NAME="I4541"></A><B>Correction:</B> The Legality 
+Rules for renames with null exclusions no longer applies to generic formal 
+objects of mode <B>in</B>, but does apply to renames of generic formal 
+functions. This means a few unlikely programs are now illegal that were 
+previously allowed by original Ada 2012, while more programs that were 
+previously llegal will be allowed.</span>&nbsp;</div>
+
+<H4 Class="centered">Extensions to Ada 2012</H4>
+<div class="paranum"><a name="p8.j">8.j/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0275-1.TXT">AI12-0275-1</A></I>} 
+<span class="insert5"><A NAME="I4542"></A>The <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0028">subtype_mark</A></SPAN> 
+in an object renaming is now optional, as the subtype information it 
+provides is not trustworthy anyway (that comes from the renamed object 
+and there is no requirement that it is the same as that of the object).</span> 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

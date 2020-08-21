@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -40,16 +38,16 @@
 is used to state explicitly the type, and to verify the subtype, of an 
 operand that is either an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 or an <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>. 
-<A NAME="I3106"></A></div>
+<A NAME="I3096"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3107"></A><A NAME="S0149"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I3108"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3109"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3110"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3111"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">qualified_expression</SPAN><A NAME="I3097"></A><A NAME="S0149"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I3098"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>'(<A NAME="I3099"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>)&nbsp;|&nbsp;<A NAME="I3100"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>'<A NAME="I3101"></A><SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3112"></A>The <I>operand</I> (the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
+<div class="Normal"><A NAME="I3102"></A>The <I>operand</I> (the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN>) 
 shall resolve to be of the type determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 or a universal type that covers it.&nbsp;</div>
@@ -64,17 +62,17 @@ is the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/4</a></div>
-<div class="Normal"><A NAME="I3113"></A><A NAME="I3114"></A><A NAME="I3115"></A><A NAME="I3116"></A><A NAME="I3117"></A><A NAME="I3118"></A><A NAME="I3119"></A>The 
+<div class="Normal"><A NAME="I3103"></A><A NAME="I3104"></A><A NAME="I3105"></A><A NAME="I3106"></A><A NAME="I3107"></A><A NAME="I3108"></A><A NAME="I3109"></A>The 
 evaluation of a <SPAN Class="swiss"><A HREF="RM-4-7.html#S0149">qualified_expression</A></SPAN> 
 evaluates the operand (and if of a universal type, converts it to the 
 type determined by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>) 
 and checks that its value belongs to the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>. 
-<A NAME="I3120"></A><A NAME="I3121"></A>The exception Constraint_Error 
-is raised if this check fails.<span class="insert4">&nbsp;Furthermore, if 
-predicate checks are enabled for the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
+<A NAME="I3110"></A><A NAME="I3111"></A>The exception Constraint_Error 
+is raised if this check fails. Furthermore, if predicate checks are enabled 
+for the subtype denoted by the <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>, 
 a check is performed as defined in subclause <A HREF="RM-3-2-4.html">3.2.4</A>, 
 &ldquo;<A HREF="RM-3-2-4.html">Subtype Predicates</A>&rdquo; that the 
-value satifies the predicates of the subtype.</span>&nbsp;</div>
+value satifies the predicates of the subtype.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Notes">24&nbsp;&nbsp;When a given context does not uniquely 

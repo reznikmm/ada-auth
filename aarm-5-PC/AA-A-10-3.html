@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -26,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -117,27 +115,26 @@ error file, respectively.</div>
 <B>procedure</B>&nbsp;Flush;</div>
 <div class="paranum"><a name="p21">21/4</a></div>
 <div class="Indented2">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0130-1.TXT">AI12-0130-1</A></I>} 
-[The effect of Flush is the same as the corresponding subprogram in <span class="insert4">Sequential_IO 
-(see <A HREF="AA-A-8-2.html">A.8.2</A>)</span><span class="delete4">&nbsp;Streams.Stream_IO 
-(see <A HREF="AA-A-12-1.html">A.12.1</A>)</span>.] If File is not explicitly 
-specified, Current_Output is used.&nbsp;</div>
+[The effect of Flush is the same as the corresponding subprogram in Sequential_IO 
+(see <A HREF="AA-A-8-2.html">A.8.2</A>).] If File is not explicitly specified, 
+Current_Output is used.&nbsp;</div>
 <div class="paranum"><a name="p21.a">21.a/4</a></div>
-<div class="Annotations"><span class="insert4"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0052-1.TXT">AI12-0052-1</A></I>} 
-<span class="insert4">For the purpose of determining whether concurrent 
-calls on text input-output subprograms are required to perform as specified, 
-subprograms that implicitly operate on one of the default input-output 
-files are considered to have a parameter of Current_Input or Current_Output 
-(as appropriate). The result of Current_Output is considered to be overlapping 
-with the file given to the latest call of Set_Output (or Standard_Output 
-if Set_Output hasn't been called); a corresponding consideration applies 
-to the result of Current_Input. See the introduction of <A HREF="AA-A.html">Annex 
-A</A> for details.</span>&nbsp;</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0052-1.TXT">AI12-0052-1</A></I>} 
+For the purpose of determining whether concurrent calls on text input-output 
+subprograms are required to perform as specified, subprograms that implicitly 
+operate on one of the default input-output files are considered to have 
+a parameter of Current_Input or Current_Output (as appropriate). The 
+result of Current_Output is considered to be overlapping with the file 
+given to the latest call of Set_Output (or Standard_Output if Set_Output 
+hasn't been called); a corresponding consideration applies to the result 
+of Current_Input. See the introduction of <A HREF="AA-A.html">Annex A</A> 
+for details.&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p22">22/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0053">8652/0053</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00063.TXT">AI95-00063-01</A></I>} 
-<A NAME="I7186"></A>The execution of a program is erroneous if it invokes 
+<A NAME="I7450"></A>The execution of a program is erroneous if it invokes 
 an operation on a current default input, default output, or default error 
 file, and if the corresponding file object is closed or no longer exists. 
 </div>
@@ -182,9 +179,8 @@ closed default file is accessed.&nbsp;</div>
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p25.d">25.d/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0130-1.TXT">AI12-0130-1</A></I>} 
-<span class="insert4"><B>Corrigendum:</B> Moved the definition of Flush 
-to <A HREF="AA-A-8-2.html">A.8.2</A>, as all input-output packages now 
-have it.</span>&nbsp;</div>
+<B>Corrigendum:</B> Moved the definition of Flush to <A HREF="AA-A-8-2.html">A.8.2</A>, 
+as all input-output packages now have it.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

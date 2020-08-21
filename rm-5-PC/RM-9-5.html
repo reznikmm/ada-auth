@@ -39,7 +39,7 @@
 <HR>
 <H1>9.5 Intertask Communication</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4194"></A><A NAME="I4195"></A>The primary 
+<div class="Normal"><A NAME="I4182"></A><A NAME="I4183"></A>The primary 
 means for intertask communication is provided by calls on entries and 
 protected subprograms. Calls on protected subprograms allow coordinated 
 access to shared data objects. Entry calls allow for blocking the caller 
@@ -50,7 +50,7 @@ or indirectly via a shared protected object.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4196"></A>When 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4184"></A>When 
 a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> or 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> denotes 
 an entry, protected subprogram, or a prefixed view of a primitive subprogram 
@@ -62,14 +62,14 @@ a <I>target object</I>, as follows:&nbsp;</div>
 <div class="Bulleted">If it is a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0092">direct_name</A></SPAN> 
 or expanded name that denotes the declaration (or body) of the operation, 
 then the target object is implicitly specified to be the current instance 
-of the task or protected unit immediately enclosing the operation; <A NAME="I4197"></A>a 
+of the task or protected unit immediately enclosing the operation; <A NAME="I4185"></A>a 
 call using such a name is defined to be an <I>internal call</I>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Bulleted">If it is a <SPAN Class="swiss"><A HREF="RM-4-1-3.html#S0098">selected_component</A></SPAN> 
 that is not an expanded name, then the target object is explicitly specified 
 to be the  object denoted by the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>; 
-<A NAME="I4198"></A>a call using such a name is defined to be an <I>external 
+<A NAME="I4186"></A>a call using such a name is defined to be an <I>external 
 call</I>;&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
 <div class="Bulleted">If the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
@@ -95,7 +95,7 @@ whose first parameter is a controlling parameter, in which case the target
 object is identified explicitly by the first parameter. This latter case 
 is an <I>external call</I>.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4199"></A><A NAME="I4200"></A><A NAME="I4201"></A>A 
+<div class="Normal"><A NAME="I4187"></A><A NAME="I4188"></A><A NAME="I4189"></A>A 
 corresponding definition of target object applies to a <SPAN Class="swiss"><A HREF="RM-9-5-4.html#S0243">requeue_statement</A></SPAN> 
 (see <A HREF="RM-9-5-4.html">9.5.4</A>), with a corresponding distinction 
 between an <I>internal requeue</I> and an <I>external requeue</I>.</div>
@@ -128,7 +128,7 @@ on such an entry.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">synchronization_kind</SPAN><A NAME="I4202"></A><A NAME="S0234"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>By_Entry&nbsp;|&nbsp;By_Protected_Procedure&nbsp;|&nbsp;Optional</div>
+<div class="Indented1"><SPAN Class="swiss">synchronization_kind</SPAN><A NAME="I4190"></A><A NAME="S0234"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>By_Entry&nbsp;|&nbsp;By_Protected_Procedure&nbsp;|&nbsp;Optional</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -138,7 +138,7 @@ language-defined representation aspect may be specified with an <SPAN Class="swi
 (see <A HREF="RM-13-1-1.html">13.1.1</A>):</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="WideHanging-Term">Synchronization</div><div class="WideHanging-Body"><br clear="left">
-If specified, the aspect definition shall be a <SPAN Class="swiss"><A HREF="RM-9-5.html#S0234">synchronization_kind</A></SPAN>.<A NAME="I4203"></A><A NAME="I4204"></A></div>
+If specified, the aspect definition shall be a <SPAN Class="swiss"><A HREF="RM-9-5.html#S0234">synchronization_kind</A></SPAN>.<A NAME="I4191"></A><A NAME="I4192"></A></div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Normal">Inherited subprograms inherit the Synchronization 
 aspect, if any, from the corresponding subprogram of the parent or progenitor 
@@ -165,7 +165,7 @@ for which the Synchronization aspect has been specified to be By_Entry
 or By_Protected_Procedure, then any specification of the aspect Synchronization 
 applied to the overriding operation shall have the same <SPAN Class="swiss"><A HREF="RM-9-5.html#S0234">synchronization_kind</A></SPAN>.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><A NAME="I4205"></A>In addition to the places where 
+<div class="Normal"><A NAME="I4193"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -174,7 +174,7 @@ unit.&nbsp;</div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">An 
 <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
-is <I>nonblocking-static</I> if it is one of the following:<A NAME="I4206"></A><A NAME="I4207"></A></span></div>
+is <I>nonblocking-static</I> if it is one of the following:<A NAME="I4194"></A><A NAME="I4195"></A></span></div>
 <div class="paranum"><a name="p19">19/5</a></div>
 <div class="Bulleted"><span class="insert5">a static expression;</span></div>
 <div class="paranum"><a name="p20">20/5</a></div>
@@ -199,12 +199,12 @@ operational aspect is defined:</span></div>
 <div class="WideHanging-Term"><span class="insert5">Nonblocking</span></div><div class="WideHanging-Body">
 <span class="insert5">This aspect specifies the blocking restriction 
 for the entity; it shall be specified by an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN>, 
-called a <I>nonblocking expression</I>.<A NAME="I4208"></A> If directly 
+called a <I>nonblocking expression</I>.<A NAME="I4196"></A> If directly 
 specified, the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a nonblocking-static expression. The expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 is the predefined type Boolean. The <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 can be omitted from the specification of this aspect; in that case the 
-nonblocking expression for the entity is the enumeration literal True.<A NAME="I4209"></A><A NAME="I4210"></A></span></div>
+nonblocking expression for the entity is the enumeration literal True.<A NAME="I4197"></A><A NAME="I4198"></A></span></div>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">The Nonblocking aspect 
 may be specified for all entities for which it is defined, except for 
@@ -216,7 +216,7 @@ expression is static for an entity, the expression is evaluated to produce
 a static value for the aspect. When aspect Nonblocking is statically 
 False for an entity, the entity might contain a potentially blocking 
 operation; such an entity <I>allows blocking</I>. If the aspect is statically 
-True for an entity, the entity is said to be <I>nonblocking</I>.<A NAME="I4211"></A><A NAME="I4212"></A><A NAME="I4213"></A><A NAME="I4214"></A></span></div>
+True for an entity, the entity is said to be <I>nonblocking</I>.<A NAME="I4199"></A><A NAME="I4200"></A><A NAME="I4201"></A><A NAME="I4202"></A></span></div>
 <div class="paranum"><a name="p28">28/5</a></div>
 <div class="WideHanging-Body"><span class="insert5">For a generic instantiation 
 and entities declared within such an instance, the aspect is determined 
@@ -279,7 +279,7 @@ a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> S
 that denotes a subprogram (including a formal subprogram):</span></div>
 <div class="paranum"><a name="p41">41/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">S'Nonblocking</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I4215"></A><A NAME="I4216"></A></span><span class="insert5">Denotes 
+<span class="insert5"><A NAME="I4203"></A><A NAME="I4204"></A></span><span class="insert5">Denotes 
 whether subprogram S is considered nonblocking; the type of this attribute 
 is the predefined type Boolean.</span></div>
 <div class="paranum"><a name="p42">42/5</a></div>
@@ -295,7 +295,7 @@ a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> P
 that denotes a package (including a formal package):</span></div>
 <div class="paranum"><a name="p45">45/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">P'Nonblocking</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I4217"></A><A NAME="I4218"></A></span><span class="insert5">Denotes 
+<span class="insert5"><A NAME="I4205"></A><A NAME="I4206"></A></span><span class="insert5">Denotes 
 whether package P is considered nonblocking; the type of this attribute 
 is the predefined type Boolean.</span> <span class="insert5">P'Nonblocking 
 represents the nonblocking expression of P; evaluation of P'Nonblocking 
@@ -306,7 +306,7 @@ a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> S
 that denotes a subtype (including formal subtypes):</span></div>
 <div class="paranum"><a name="p47">47/5</a></div>
 <div class="WideHanging-Term"><span class="insert5">S'Nonblocking</span></div><div class="WideHanging-Body">
-<span class="insert5"><A NAME="I4219"></A><A NAME="I4220"></A></span><span class="insert5">Denotes 
+<span class="insert5"><A NAME="I4207"></A><A NAME="I4208"></A></span><span class="insert5">Denotes 
 whether predefined operators (and in the case of access-to-subprogram 
 subtypes) a subprogram designated by a value of type S are considered 
 nonblocking; the type of this attribute is the predefined type Boolean.</span> 
@@ -314,8 +314,8 @@ nonblocking; the type of this attribute is the predefined type Boolean.</span>
 of S; evaluation of S'Nonblocking evaluates that expression.</span>&nbsp;</div>
 <div class="paranum"><a name="p48">48/5</a></div>
 <div class="Normal" style="margin-bottom: 0.4em"><span class="insert5">The 
-following are defined to be <I>potentially blocking</I> operations:<A NAME="I4221"></A> 
-<A NAME="I4222"></A></span></div>
+following are defined to be <I>potentially blocking</I> operations:<A NAME="I4209"></A> 
+<A NAME="I4210"></A></span></div>
 <div class="paranum"><a name="p49">49/5</a></div>
 <div class="Bulleted"><span class="insert5">a <SPAN Class="swiss"><A HREF="RM-9-7.html#S0247">select_statement</A></SPAN>;</span></div>
 <div class="paranum"><a name="p50">50/5</a></div>
@@ -421,7 +421,7 @@ of a nonblocking access-to-subprogram type;</span></div>
 <div class="Bulleted"><span class="insert5">the actual instance corresponding 
 to a nonblocking formal package shall be nonblocking.</span></div>
 <div class="paranum"><a name="p78">78/5</a></div>
-<div class="Normal"><span class="insert5"><A NAME="I4223"></A>In addition 
+<div class="Normal"><span class="insert5"><A NAME="I4211"></A>In addition 
 to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 the above rules also apply in the private part of an instance of a generic 
 unit.</span></div>

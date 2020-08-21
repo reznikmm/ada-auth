@@ -38,23 +38,23 @@
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Decimal has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Decimal&nbsp;<B>is</B><A NAME="I8567"></A><BR>
+<div class="Examples"><B>package</B>&nbsp;Ada.Decimal&nbsp;<B>is</B><A NAME="I8552"></A><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Decimal);</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8568"></A>Max_Scale&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8569"></A>Min_Scale&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8553"></A>Max_Scale&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8554"></A>Min_Scale&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8570"></A>Min_Delta&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;10.0**(-Max_Scale);<BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I8571"></A>Max_Delta&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;10.0**(-Min_Scale);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8555"></A>Min_Delta&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;10.0**(-Max_Scale);<BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I8556"></A>Max_Delta&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;10.0**(-Min_Scale);</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8572"></A>Max_Decimal_Digits&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I8557"></A>Max_Decimal_Digits&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<SPAN Class="roman"><I>implementation-defined</I></SPAN>;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Dividend_Type&nbsp;&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Divisor_Type&nbsp;&nbsp;&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Quotient_Type&nbsp;&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Remainder_Type&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;&lt;&gt;&nbsp;<B>digits</B>&nbsp;&lt;&gt;;<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8573"></A>Divide&nbsp;(Dividend&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Dividend_Type;<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8558"></A>Divide&nbsp;(Dividend&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Dividend_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Divisor&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Divisor_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quotient&nbsp;&nbsp;:&nbsp;<B>out</B>&nbsp;Quotient_Type;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remainder&nbsp;:&nbsp;<B>out</B>&nbsp;Remainder_Type)<BR>

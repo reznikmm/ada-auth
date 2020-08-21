@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,52 +35,48 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1714"></A>An enumeration type is said to 
+<div class="Normal"><A NAME="I1704"></A>An enumeration type is said to 
 be a <I>character type</I> if at least one of its enumeration literals 
 is a <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I1715"></A><A NAME="I1716"></A><span class="insert3"><A NAME="I1717"></A></span><span class="delete3"><A NAME="I1718"></A></span><A NAME="I1719"></A>The 
+<div class="Normal"><A NAME="I1705"></A><A NAME="I1706"></A><A NAME="I1707"></A><A NAME="I1708"></A>The 
 predefined type Character is a character type whose values correspond 
-to the 256 code <span class="insert3">points</span><span class="delete3">&nbsp;positions</span> 
-of Row 00 (also known as Latin-1) of the ISO/IEC 10646:<span class="insert3">2011</span><span class="delete3">&nbsp;2003</span> 
-Basic Multilingual Plane (BMP). Each of the graphic characters of Row 
-00 of the BMP has a corresponding <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
-in Character. Each of the nongraphic <span class="insert3">characters</span><span class="delete3">&nbsp;positions</span> 
-of Row 00<span class="delete3">&nbsp;(0000-001F and 007F-009F)</span> has 
-a corresponding language-defined name, which is not usable as an enumeration 
-literal, but which is usable with the attributes Image, Wide_Image, Wide_Wide_Image, 
+to the 256 code points of Row 00 (also known as Latin-1) of the ISO/IEC 
+10646:2011 Basic Multilingual Plane (BMP). Each of the graphic characters 
+of Row 00 of the BMP has a corresponding <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
+in Character. Each of the nongraphic characters of Row 00 has a corresponding 
+language-defined name, which is not usable as an enumeration literal, 
+but which is usable with the attributes Image, Wide_Image, Wide_Wide_Image, 
 Value, Wide_Value, and Wide_Wide_Value; these names are given in the 
 definition of type Character in <A HREF="RM-A-1.html">A.1</A>, &ldquo;<A HREF="RM-A-1.html">The 
-Package Standard</A>&rdquo;, but are set in <I>italics</I>. <A NAME="I1720"></A><span class="insert3"><A NAME="I1721"></A></span></div>
+Package Standard</A>&rdquo;, but are set in <I>italics</I>. <A NAME="I1709"></A><A NAME="I1710"></A></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Normal"><A NAME="I1722"></A><A NAME="I1723"></A><span class="insert3"><A NAME="I1724"></A></span><span class="delete3"><A NAME="I1725"></A></span>The 
+<div class="Normal"><A NAME="I1711"></A><A NAME="I1712"></A><A NAME="I1713"></A>The 
 predefined type Wide_Character is a character type whose values correspond 
-to the 65536 code <span class="insert3">points</span><span class="delete3">&nbsp;positions</span> 
-of the ISO/IEC 10646:<span class="insert3">2011</span><span class="delete3">&nbsp;2003</span> 
-Basic Multilingual Plane (BMP). Each of the graphic characters of the 
-BMP has a corresponding <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
+to the 65536 code points of the ISO/IEC 10646:2011 Basic Multilingual 
+Plane (BMP). Each of the graphic characters of the BMP has a corresponding 
+<SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
 in Wide_Character. The first 256 values of Wide_Character have the same 
 <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
 or language-defined name as defined for Character. Each of the <SPAN Class="swiss">graphic_character</SPAN>s 
 has a corresponding <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I1726"></A><span class="insert3"><A NAME="I1727"></A></span><span class="delete3"><A NAME="I1728"></A></span>The 
-predefined type Wide_Wide_Character is a character type whose values 
-correspond to the 2147483648 code <span class="insert3">points</span><span class="delete3">&nbsp;positions</span> 
-of the ISO/IEC 10646:<span class="insert3">2011</span><span class="delete3">&nbsp;2003</span> 
-character set. Each of the <SPAN Class="swiss">graphic_character</SPAN>s 
-has a corresponding <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
+<div class="Normal"><A NAME="I1714"></A><A NAME="I1715"></A>The predefined 
+type Wide_Wide_Character is a character type whose values correspond 
+to the 2147483648 code points of the ISO/IEC 10646:2011 character set. 
+Each of the <SPAN Class="swiss">graphic_character</SPAN>s has a corresponding 
+<SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
 in Wide_Wide_Character. The first 65536 values of Wide_Wide_Character 
 have the same <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN> 
 or language-defined name as defined for Wide_Character.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal">The characters whose code <span class="insert3">point</span><span class="delete3">&nbsp;position</span> 
-is larger than 16#FF# and which are not <SPAN Class="swiss">graphic_character</SPAN>s 
-have language-defined names which are formed by appending to the string 
-&quot;Hex_&quot; the representation of their code <span class="insert3">point</span><span class="delete3">&nbsp;position</span> 
-in hexadecimal as eight extended digits. As with other language-defined 
-names, these names are usable only with the attributes (Wide_)Wide_Image 
-and (Wide_)Wide_Value; they are not usable as enumeration literals.</div>
+<div class="Normal">The characters whose code point is larger than 16#FF# 
+and which are not <SPAN Class="swiss">graphic_character</SPAN>s have 
+language-defined names which are formed by appending to the string &quot;Hex_&quot; 
+the representation of their code point in hexadecimal as eight extended 
+digits. As with other language-defined names, these names are usable 
+only with the attributes (Wide_)Wide_Image and (Wide_)Wide_Value; they 
+are not usable as enumeration literals.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
@@ -103,8 +97,7 @@ and special characters of the predefined type Character.&nbsp;</div>
 <div class="Notes">32&nbsp;&nbsp;A conventional character set such as 
 <I>EBCDIC</I> can be declared as a character type; the internal codes 
 of the characters can be specified by an <SPAN Class="swiss"><A HREF="RM-13-4.html#S0311">enumeration_representation_clause</A></SPAN> 
-as explained in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="RM-13-4.html">13.4</A>.&nbsp;</div>
+as explained in subclause <A HREF="RM-13-4.html">13.4</A>.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p10">10</a></div>

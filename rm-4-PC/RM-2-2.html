@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -37,9 +35,9 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1187"></A>The text of a program consists 
+<div class="Normal"><A NAME="I1179"></A>The text of a program consists 
 of the texts of one or more <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN>s. 
-<A NAME="I1188"></A><A NAME="I1189"></A>The text of each <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
+<A NAME="I1180"></A><A NAME="I1181"></A>The text of each <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
 is a sequence of separate <I>lexical elements</I>. Each lexical element 
 is formed from a sequence of characters, and is either a delimiter, an 
 <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
@@ -51,14 +49,13 @@ sequences of lexical elements that form its <SPAN Class="swiss"><A HREF="RM-10-1
 excluding <SPAN Class="swiss"><A HREF="RM-2-7.html#S0018">comment</A></SPAN>s.</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Normal">The text of a <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0246">compilation</A></SPAN> 
-is divided into <A NAME="I1190"></A><I>lines</I>. <A NAME="I1191"></A>In 
+is divided into <A NAME="I1182"></A><I>lines</I>. <A NAME="I1183"></A>In 
 general, the representation for an end of line is implementation defined. 
 However, a sequence of one or more <SPAN Class="swiss">format_effector</SPAN>s 
-other than the character whose code <span class="insert3">point</span><span class="delete3">&nbsp;position</span> 
-is 16#09# (CHARACTER TABULATION) signifies at least one end of line. 
-</div>
+other than the character whose code point is 16#09# (CHARACTER TABULATION) 
+signifies at least one end of line.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1192"></A>In 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1184"></A>In 
 some cases an explicit <I>separator</I> is required to separate adjacent 
 lexical elements. A separator is any of a <SPAN Class="swiss">separator_space</SPAN>, 
 a <SPAN Class="swiss">format_effector</SPAN>, or the end of a line, as 
@@ -69,8 +66,8 @@ a separator except within a <SPAN Class="swiss"><A HREF="RM-2-7.html#S0018">comm
 a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN>, 
 or a <SPAN Class="swiss"><A HREF="RM-2-5.html#S0015">character_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Bulleted">The character whose code <span class="insert3">point</span><span class="delete3">&nbsp;position</span> 
-is 16#09# (CHARACTER TABULATION) is a separator except within a <SPAN Class="swiss"><A HREF="RM-2-7.html#S0018">comment</A></SPAN>.</div>
+<div class="Bulleted">The character whose code point is 16#09# (CHARACTER 
+TABULATION) is a separator except within a <SPAN Class="swiss"><A HREF="RM-2-7.html#S0018">comment</A></SPAN>.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Bulleted">The end of a line is always a separator.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
@@ -81,16 +78,16 @@ a reserved word, or a <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_li
 and an adjacent <SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>, 
 reserved word, or <SPAN Class="swiss"><A HREF="RM-2-4.html#S0006">numeric_literal</A></SPAN>.</div>
 <div class="paranum"><a name="p7.1">7.1/3</a></div>
-<div class="Normal">&nbsp;<span class="insert3">One or more <SPAN Class="swiss">other_format</SPAN> 
+<div class="Normal">&nbsp;&nbsp;One or more <SPAN Class="swiss">other_format</SPAN> 
 characters are allowed anywhere that a separator is; any such characters 
-have no effect on the meaning of an Ada program.</span></div>
+have no effect on the meaning of an Ada program.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Normal"><A NAME="I1193"></A>A <I>delimiter</I> is either 
+<div class="Normal"><A NAME="I1185"></A>A <I>delimiter</I> is either 
 one of the following characters:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">&amp;&nbsp;&nbsp;&nbsp;&nbsp;'&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;|</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1194"></A>or one of the following <I>compound 
+<div class="Normal"><A NAME="I1186"></A>or one of the following <I>compound 
 delimiters</I> each composed of two adjacent special characters&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Indented1">=&gt;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;:=&nbsp;&nbsp;&nbsp;&nbsp;/=&nbsp;&nbsp;&nbsp;&nbsp;&gt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;=&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&gt;</div>

@@ -15,13 +15,13 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -46,7 +46,7 @@ determined. Each entity is frozen from its first freezing point to the
 end of the program text (given the ordering of compilation units defined 
 in <A HREF="RM-10-1-4.html">10.1.4</A>).&nbsp;</div>
 <div class="paranum"><a name="p2.1">2.1/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I5401"></A>This subclause also defines 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5401"></A>This subclause also defines 
 a place in the program text where the profile of each declared callable 
 entity becomes <I>frozen</I>. A use of a callable entity causes freezing 
 of its profile in some contexts, as described below. At the place where 
@@ -56,7 +56,7 @@ frozen.</div>
 <div class="Normal"><A NAME="I5402"></A>The end of a <SPAN Class="swiss"><A HREF="RM-3-11.html#S0086">declarative_part</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-9-4.html#S0215">protected_body</A></SPAN>, 
 or a declaration of a library package or generic library package, causes 
-<I>freezing</I> of each entity and profile declared within it except 
+<I>freezing</I> of each entity and profile declared within it, except 
 for incomplete types. <A NAME="I5403"></A>A <SPAN Class="swiss"><A HREF="RM-3-11.html#S0090">proper_body</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-10-1-3.html#S0258">body_stub</A></SPAN>, 
 or <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0221">entry_body</A></SPAN> 
@@ -122,12 +122,12 @@ or a per-object expression of a component's <SPAN Class="swiss"><A HREF="RM-3-2-
 in which case, the freezing occurs later as part of another construct 
 or at the freezing point of an associated entity.</div>
 <div class="paranum"><a name="p8.1">8.1/3</a></div>
-<div class="Normal">&nbsp;<A NAME="I5411"></A>An implicit call freezes the 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5411"></A>An implicit call freezes the 
 same entities and profiles that would be frozen by an explicit call. 
 This is true even if the implicit call is removed via implementation 
 permissions.</div>
 <div class="paranum"><a name="p8.2">8.2/1</a></div>
-<div class="Normal">&nbsp;<A NAME="I5412"></A>If an expression is implicitly 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I5412"></A>If an expression is implicitly 
 converted to a type or subtype <I>T</I>, then at the place where the 
 expression causes freezing, <I>T</I> is frozen.</div>
 <div class="paranum"><a name="p9">9</a></div>
@@ -194,8 +194,8 @@ the place where a profile is frozen, each subtype of the profile is frozen.
 If the corresponding callable entity is a member of an entry family, 
 the index subtype of the family is frozen.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I5425"></A>At the place where a subtype 
-is frozen, its type is frozen. <A NAME="I5426"></A><A NAME="I5427"></A>At 
+<div class="Bulleted" style="margin-bottom: 0.3em"><A NAME="I5425"></A>At 
+the place where a subtype is frozen, its type is frozen. <A NAME="I5426"></A><A NAME="I5427"></A>At 
 the place where a type is frozen, any expressions or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 within the full type definition cause freezing; the first subtype, and 
 any component subtypes, index subtypes, and parent subtype of the type 
@@ -224,13 +224,14 @@ and <A HREF="RM-7-3.html">7.3</A>).</div>
 deferred constant declaration shall occur before the constant is frozen 
 (see <A HREF="RM-7-4.html">7.4</A>).</div>
 <div class="paranum"><a name="p19">19/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">An operational or representation 
-item that directly specifies an aspect of an entity shall appear before 
-the entity is frozen (see <A HREF="RM-13-1.html">13.1</A>).&nbsp;</div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;An operational or 
+representation item that directly specifies an aspect of an entity shall 
+appear before the entity is frozen (see <A HREF="RM-13-1.html">13.1</A>). 
+</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p20">20/2</a></div>
-<div class="Normal">The tag (see <A HREF="RM-3-9.html">3.9</A>) of a 
+<div class="Normal">&nbsp;The tag (see <A HREF="RM-3-9.html">3.9</A>) of a 
 tagged type T is created at the point where T is frozen.<A NAME="I5430"></A> 
 </div>
 

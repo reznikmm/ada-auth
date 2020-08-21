@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -460,23 +458,22 @@ manner than through pragmas. See subclause <A HREF="RM-13-1-1.html">13.1.1</A>.<
 <div class="paranum"><a name="p57.15">57.15/4</a></div>
 <div class="Bulleted">The concept of assertions introduced in the 2005 
 edition is extended with the ability to specify preconditions and postconditions 
-for subprograms, and invariants for private types<span class="insert4">&nbsp;and interfaces</span>. The concept of constraints in defining subtypes 
-is supplemented with subtype predicates that enable subsets to be specified 
-other than as simple ranges. These properties are all indicated using 
-aspect specifications. See subclauses <A HREF="RM-3-2-4.html">3.2.4</A>, 
-<A HREF="RM-6-1-1.html">6.1.1</A>, and <A HREF="RM-7-3-2.html">7.3.2</A>.</div>
+for subprograms, and invariants for private types and interfaces. The 
+concept of constraints in defining subtypes is supplemented with subtype 
+predicates that enable subsets to be specified other than as simple ranges. 
+These properties are all indicated using aspect specifications. See subclauses 
+<A HREF="RM-3-2-4.html">3.2.4</A>, <A HREF="RM-6-1-1.html">6.1.1</A>, 
+and <A HREF="RM-7-3-2.html">7.3.2</A>.</div>
 <div class="paranum"><a name="p57.16">57.16/4</a></div>
 <div class="Bulleted">New forms of expressions are introduced. These 
-are if expressions, case expressions, quantified expressions, <span class="delete4">and 
-</span>expression functions<span class="insert4">, and raise expressions</span>. 
-As well as being useful for programming in general by avoiding the introduction 
-of unnecessary assignments, they are especially valuable in conditions 
-and invariants since they avoid the need to introduce auxiliary functions. 
-See subclauses <A HREF="RM-4-5-7.html">4.5.7</A>, <A HREF="RM-4-5-8.html">4.5.8</A>, 
-<span class="delete4">and&nbsp;</span><A HREF="RM-6-8.html">6.8</A><span class="insert4">, 
-and <A HREF="RM-11-3.html">11.3</A></span>. Membership tests are also 
-made more flexible. See subclauses <A HREF="RM-4-4.html">4.4</A> and 
-<A HREF="RM-4-5-2.html">4.5.2</A>.</div>
+are if expressions, case expressions, quantified expressions, expression 
+functions, and raise expressions. As well as being useful for programming 
+in general by avoiding the introduction of unnecessary assignments, they 
+are especially valuable in conditions and invariants since they avoid 
+the need to introduce auxiliary functions. See subclauses <A HREF="RM-4-5-7.html">4.5.7</A>, 
+<A HREF="RM-4-5-8.html">4.5.8</A>, <A HREF="RM-6-8.html">6.8</A>, and 
+<A HREF="RM-11-3.html">11.3</A>. Membership tests are also made more 
+flexible. See subclauses <A HREF="RM-4-4.html">4.4</A> and <A HREF="RM-4-5-2.html">4.5.2</A>.</div>
 <div class="paranum"><a name="p57.17">57.17/3</a></div>
 <div class="Bulleted">A number of changes are made to subprogram parameters. 
 Functions may now have parameters of all modes. In order to mitigate 
@@ -757,29 +754,28 @@ wording. M. Heaney (USA) also deserves a mention for his efforts to improve
 the containers packages. Finally, special thanks go to the convenor of 
 ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided the document through 
 the standardization process.&nbsp;</div>
-<div class="WideAbove"><span class="insert4"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
-for the Ada 2012 Corrigendum 1 version</B></SPAN></SPAN></span></div>
+<div class="WideAbove"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
+for the Ada 2012 Corrigendum 1 version</B></SPAN></SPAN></div>
 <div class="paranum"><a name="p71.10">71.10/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The editor [R. Brukardt 
-(USA)] would like to thank the many people whose hard work and assistance 
-has made this update possible.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;The editor [R. Brukardt (USA)] would like to thank 
+the many people whose hard work and assistance has made this update possible.</div>
 <div class="paranum"><a name="p71.11">71.11/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Thanks go out to all of 
-the members of the ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose 
-work on creating and editing the wording changes was critical to the 
-entire process. Especially valuable contributions came from the chairman 
-of the ARG, J. Cousins (UK), who guided the work; T. Taft (USA), who 
-seems to have the ability to cut any Gordian knot we encounter in wording; 
-; J. Barnes (UK) who continues to be able to find editorial errors invisible 
-to most; S. Baird (USA), who so frequently finds obscure interactions 
-that we now have named such things for him. Other ARG members who substantially 
-contributed were: A. Burns (UK), R. Dewar (USA), G. Dismukes (USA), R. 
-Duff (USA), B. Moore (Canada), E. Ploedereder (Germany), J.P. Rosen (France), 
-E. Schonberg (USA), and T. Vardanega (Italy).</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;Thanks go out to all of the members of the ISO/IEC 
+JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work on creating and editing 
+the wording changes was critical to the entire process. Especially valuable 
+contributions came from the chairman of the ARG, J. Cousins (UK), who 
+guided the work; T. Taft (USA), who seems to have the ability to cut 
+any Gordian knot we encounter in wording; ; J. Barnes (UK) who continues 
+to be able to find editorial errors invisible to most; S. Baird (USA), 
+who so frequently finds obscure interactions that we now have named such 
+things for him. Other ARG members who substantially contributed were: 
+A. Burns (UK), R. Dewar (USA), G. Dismukes (USA), R. Duff (USA), B. Moore 
+(Canada), E. Ploedereder (Germany), J.P. Rosen (France), E. Schonberg 
+(USA), and T. Vardanega (Italy).</div>
 <div class="paranum"><a name="p71.12">71.12/4</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">Finally, special thanks 
-go to the convenor of ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided 
-the document through the standardization process.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;Finally, special thanks go to the convenor of 
+ISO/IEC JTC 1/SC 22/WG 9, J. Tokar (USA), who guided the document through 
+the standardization process.&nbsp;</div>
 <div class="WideAbove"><span class="insert5"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Acknowledgements 
 for the Ada 202x version</B></SPAN></SPAN></span></div>
 <div class="paranum"><a name="p71.13">71.13/5</a></div>
@@ -821,33 +817,32 @@ Standard.&nbsp;</div>
 <div class="WideAbove"><SPAN Class="swiss"><SPAN STYLE="font-size: 156%"><B>Using 
 this version of the Ada Reference Manual</B></SPAN></SPAN></div>
 <div class="paranum"><a name="p78.4">78.4/5</a></div>
-<div class="Normal">&nbsp;&nbsp;This document has been revised with <span class="insert4">the 
-corrections specified in Technical Corrigendum 1 (ISO/IEC 8652:2012/COR.1:2016)</span><span class="insert5">&nbsp;and other changes specifically for Ada 202x</span><span class="insert4"></span><span class="delete4">&nbsp;the 
-corrections specified in Technical Corrigendum 1 (ISO/IEC 8652:1995/COR.1:2001) 
-and Amendment 1 (ISO/IEC 8652/AMD 1:2007), along with changes specifically 
-for this third edition</span>. In addition, a variety of editorial errors 
-have been corrected.&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;This document has been revised with the corrections 
+specified in Technical Corrigendum 1 (ISO/IEC 8652:2012/COR.1:2016)<span class="insert5">&nbsp;and other changes specifically for Ada 202x</span>. In addition, a variety 
+of editorial errors have been corrected.&nbsp;</div>
 <div class="paranum"><a name="p78.5">78.5/5</a></div>
 <div class="Normal">&nbsp;&nbsp;Changes to the original 8652:1995 can be identified 
 by the version number following the paragraph number. Paragraphs with 
-a version number of /1 were changed by Technical Corrigendum 1 <span class="insert4">for 
-Ada 95&nbsp;</span>or were editorial corrections at that time, while paragraphs 
-with a version number of /2 were changed by Amendment 1 or were more 
-recent editorial corrections, and paragraphs with a version number of 
-/3 were changed by the third (2012) edition of the Standard or were still 
-more recent editorial corrections.<span class="insert4">&nbsp;Paragraphs with 
-a version number of /4 are changed by Technical Corrigendum 1 for Ada 
-2012 or were editorial corrections at that time.</span><span class="insert5">&nbsp;Paragraphs with a version number of /5 are changes or editorial corrections 
-for Ada 202x.</span> Paragraphs not so marked are unchanged by <span class="insert5">Ada 
-202x,&nbsp;</span><span class="insert4">Technical Corrigendum 1 for Ada 2012, 
-</span>the third edition, Amendment 1, Technical Corrigendum 1<span class="insert4">&nbsp;for Ada 95</span>, or editorial corrections. Paragraph numbers of unchanged 
-paragraphs are the same as in the 1995 edition of the Ada Reference Manual. 
-In addition, some versions of this document include revision bars near 
-the paragraph numbers. Where paragraphs are inserted, the paragraph numbers 
-are of the form pp.nn, where pp is the number of the preceding paragraph, 
-and nn is an insertion number. For instance, the first paragraph inserted 
-after paragraph 8 is numbered 8.1, the second paragraph inserted is numbered 
-8.2, and so on. Deleted paragraphs are indicated by the text <I></I><SPAN STYLE="font-size: 80%"><I>This 
+a version number of /1 were changed by Technical Corrigendum 1 for Ada 
+95 or were editorial corrections at that time, while paragraphs with 
+a version number of /2 were changed by Amendment 1 or were more recent 
+editorial corrections, and paragraphs with a version number of /3 were 
+changed by the third (2012) edition of the Standard or were still more 
+recent editorial corrections. Paragraphs with a version number of /4 
+are changed by Technical Corrigendum 1 for Ada 2012 or were editorial 
+corrections at that time.<span class="insert5">&nbsp;Paragraphs with a version 
+number of /5 are changes or editorial corrections for Ada 202x.</span> 
+Paragraphs not so marked are unchanged by <span class="insert5">Ada 202x, 
+</span>Technical Corrigendum 1 for Ada 2012, the third edition, Amendment 
+1, Technical Corrigendum 1 for Ada 95, or editorial corrections. Paragraph 
+numbers of unchanged paragraphs are the same as in the 1995 edition of 
+the Ada Reference Manual. In addition, some versions of this document 
+include revision bars near the paragraph numbers. Where paragraphs are 
+inserted, the paragraph numbers are of the form pp.nn, where pp is the 
+number of the preceding paragraph, and nn is an insertion number. For 
+instance, the first paragraph inserted after paragraph 8 is numbered 
+8.1, the second paragraph inserted is numbered 8.2, and so on. Deleted 
+paragraphs are indicated by the text <I></I><SPAN STYLE="font-size: 80%"><I>This 
 paragraph was deleted.</I></SPAN><I></I> Deleted paragraphs include empty 
 paragraphs that were numbered in the 1995 edition of the Ada Reference 
 Manual.&nbsp;</div>

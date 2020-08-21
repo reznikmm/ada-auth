@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -61,10 +59,10 @@ the attribute T'Round may be used to imply explicit conversion with rounding
 (see <A HREF="RM-3-5-10.html">3.5.10</A>).</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Normal">When the result type is a floating point type, the 
-accuracy is as given in <A HREF="RM-G-2-1.html">G.2.1</A>. <A NAME="I8573"></A>For 
+accuracy is as given in <A HREF="RM-G-2-1.html">G.2.1</A>. <A NAME="I8368"></A>For 
 some combinations of the operand and result types in the remaining cases, 
 the result is required to belong to a small set of values called the 
-<I>perfect result set</I>; <A NAME="I8574"></A>for other combinations, 
+<I>perfect result set</I>; <A NAME="I8369"></A>for other combinations, 
 it is required merely to belong to a generally larger and implementation-defined 
 set of values called the <I>close result set</I>. When the result type 
 is a decimal fixed point type, the perfect result set contains a single 
@@ -111,10 +109,10 @@ is a decimal type with a <I>small</I> of <SPAN Class="roman"><I>s</I></SPAN>,
 is an integer multiple of <SPAN Class="roman"><I>s</I></SPAN>, then the 
 perfect result set contains only the value <SPAN Class="roman"><I>v</I></SPAN>;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Indented2NestedBulleted">otherwise, if truncation applies<span class="insert3">,</span> 
+<div class="Indented2NestedBulleted">otherwise, if truncation applies, 
 then it contains only the integer multiple of <SPAN Class="roman"><I>s</I></SPAN> 
-in the direction toward zero, whereas if rounding applies<span class="insert3">,</span> 
-then it contains only the nearest integer multiple of <SPAN Class="roman"><I>s</I></SPAN> 
+in the direction toward zero, whereas if rounding applies, then it contains 
+only the nearest integer multiple of <SPAN Class="roman"><I>s</I></SPAN> 
 (with ties broken by rounding away from zero).&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Bulleted-NoPrefix">The close result set is an implementation-defined 
@@ -187,12 +185,12 @@ operand to a fixed point type shall belong to the perfect result set.</div>
 <div class="Normal">The possibility of overflow in the result of a predefined 
 arithmetic operation or conversion yielding a result of a fixed point 
 type T is analogous to that for floating point types, except for being 
-related to the base range instead of the safe range. <A NAME="I8575"></A><A NAME="I8576"></A>If 
+related to the base range instead of the safe range. <A NAME="I8370"></A><A NAME="I8371"></A>If 
 all of the permitted results belong to the base range of T, then the 
 implementation shall deliver one of the permitted results; otherwise, 
 </div>
 <div class="paranum"><a name="p26">26</a></div>
-<div class="Bulleted"><A NAME="I8577"></A>if T'Machine_Overflows is True, 
+<div class="Bulleted"><A NAME="I8372"></A>if T'Machine_Overflows is True, 
 the implementation shall either deliver one of the permitted results 
 or raise Constraint_Error;</div>
 <div class="paranum"><a name="p27">27</a></div>

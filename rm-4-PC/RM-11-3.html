@@ -17,17 +17,17 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Indented2Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,10 +43,10 @@ raises an exception.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">raise_statement</SPAN><A NAME="I4609"></A><A NAME="S0269"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>;<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I4610"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I4611"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">raise_statement</SPAN><A NAME="I4556"></A><A NAME="S0269"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>raise</B>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<B>raise</B>&nbsp;<I>exception_</I><A NAME="I4557"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I4558"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>];</div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
-<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert4"><SPAN Class="swiss">raise_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4612"></A><A NAME="S0270"></A><span class="insert4"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert4"><B>raise</B>&nbsp;<I>exception_</I><A NAME="I4613"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I4614"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>]</span></div>
+<div class="Indented1"><SPAN Class="swiss"></SPAN><span class="insert4"><SPAN Class="swiss">raise_expression</SPAN></span><SPAN Class="swiss"></SPAN><A NAME="I4559"></A><A NAME="S0270"></A><span class="insert4"><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN></span><span class="insert4"><B>raise</B>&nbsp;<I>exception_</I><A NAME="I4560"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;[<B>with</B>&nbsp;<I>string_</I><A NAME="I4561"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN>]</span></div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em"><span class="insert4">If 
 a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0270">raise_expression</A></SPAN> 
@@ -76,27 +76,27 @@ shall appear within a pair of parentheses within the <SPAN Class="swiss"><A HREF
 if any, <span class="insert4">of</span><span class="delete4">&nbsp;in</span> 
 a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
 <span class="insert4">or <SPAN Class="swiss"><A HREF="RM-11-3.html#S0270">raise_expression</A></SPAN> 
-</span>shall denote an exception. <A NAME="I4615"></A>A <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
+</span>shall denote an exception. <A NAME="I4562"></A>A <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
 with no <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 (that is, a <I>re-raise statement</I>) shall be within a handler, but 
 not within a body enclosed by that handler.&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3.1">3.1/4</a></div>
-<div class="Normal">&nbsp;The <span class="insert4"><I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The <span class="insert4"><I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 or <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span>, 
 if any, <span class="insert4">of</span><span class="delete4">&nbsp;in</span> 
 a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN><span class="insert4">&nbsp;or <SPAN Class="swiss"><A HREF="RM-11-3.html#S0270">raise_expression</A></SPAN></span><span class="delete4">,</span> 
 is expected to be of type String.</div>
 <div class="paranum"><a name="p3.2">3.2/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">The expected type for a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0270">raise_expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert4">The expected type for a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0270">raise_expression</A></SPAN> 
 shall be any single type.</span>&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p4">4/4</a></div>
-<div class="Normal"><A NAME="I4616"></A>To <I>raise an exception</I> 
+<div class="Normal"><A NAME="I4563"></A>To <I>raise an exception</I> 
 is to raise a new occurrence of that exception, as explained in <A HREF="RM-11-4.html">11.4</A>. 
-<A NAME="I4617"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
+<A NAME="I4564"></A>For the execution of a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0269">raise_statement</A></SPAN> 
 with an <I>exception_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
 the named exception is raised.<span class="insert4">&nbsp;Similarly, for the 
 evaluation of a <SPAN Class="swiss"><A HREF="RM-11-3.html#S0270">raise_expression</A></SPAN>, 
@@ -105,7 +105,7 @@ these cases, if</span><span class="delete4">&nbsp;If</span> a <I>string_</I><SPA
 <span class="insert4">or <I>string_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">simple_expression</A></SPAN> 
 </span>is present, the <span class="insert4">expression</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
 is evaluated and its value is associated with the exception occurrence. 
-<A NAME="I4618"></A>For the execution of a re-raise statement, the exception 
+<A NAME="I4565"></A>For the execution of a re-raise statement, the exception 
 occurrence that caused transfer of control to the innermost enclosing 
 handler is raised again.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>

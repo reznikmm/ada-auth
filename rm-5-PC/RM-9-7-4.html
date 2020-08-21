@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -41,22 +39,22 @@ call or the expiration of a delay.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I4461"></A><A NAME="S0258"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">asynchronous_select</SPAN><A NAME="I4449"></A><A NAME="S0258"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;<B>select</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4462"></A><SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0259">triggering_alternative</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4450"></A><SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0259">triggering_alternative</A></SPAN><BR>
 &nbsp;&nbsp;<B>then&nbsp;abort</B><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I4463"></A><SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0261">abortable_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I4451"></A><SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0261">abortable_part</A></SPAN><BR>
 &nbsp;&nbsp;<B>end&nbsp;select</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I4464"></A><A NAME="S0259"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4465"></A><SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0260">triggering_statement</A></SPAN>&nbsp;[<A NAME="I4466"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">triggering_alternative</SPAN><A NAME="I4452"></A><A NAME="S0259"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4453"></A><SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0260">triggering_statement</A></SPAN>&nbsp;[<A NAME="I4454"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN>]</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Indented1"><SPAN Class="swiss">triggering_statement</SPAN><A NAME="I4467"></A><A NAME="S0260"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4468"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0256">procedure_or_entry_call</A></SPAN>&nbsp;|&nbsp;<A NAME="I4469"></A><SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">triggering_statement</SPAN><A NAME="I4455"></A><A NAME="S0260"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4456"></A><SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0256">procedure_or_entry_call</A></SPAN>&nbsp;|&nbsp;<A NAME="I4457"></A><SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I4470"></A><A NAME="S0261"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4471"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">abortable_part</SPAN><A NAME="I4458"></A><A NAME="S0261"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4459"></A><SPAN Class="swiss"><A HREF="RM-5-1.html#S0152">sequence_of_statements</A></SPAN></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Normal"><A NAME="I4472"></A><A NAME="I4473"></A>For the execution 
+<div class="Normal"><A NAME="I4460"></A><A NAME="I4461"></A>For the execution 
 of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0260">triggering_statement</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-9-7-2.html#S0256">procedure_or_entry_call</A></SPAN>, 
@@ -77,7 +75,7 @@ of the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0259">triggering_alternative<
 the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0261">abortable_part</A></SPAN> 
 is never started.</div>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I4474"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
+<div class="Normal"><A NAME="I4462"></A>For the execution of an <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0258">asynchronous_select</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0260">triggering_statement</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-9-6.html#S0244">delay_statement</A></SPAN>, 
 the <I>delay_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
@@ -103,7 +101,7 @@ is left.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4475"></A><A NAME="I4476"></A><A NAME="I4477"></A><I>Example 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4463"></A><A NAME="I4464"></A><A NAME="I4465"></A><I>Example 
 of a main command loop for a command interpreter:</I>&nbsp;</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Examples"><B>loop</B><BR>
@@ -119,7 +117,7 @@ of a main command loop for a command interpreter:</I>&nbsp;</div>
 <B>end</B>&nbsp;<B>loop</B>;</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="WideAbove" style="margin-bottom: 0.4em"><I>Example of a 
-time-limited calculation:</I> <A NAME="I4478"></A><A NAME="I4479"></A><A NAME="I4480"></A><A NAME="I4481"></A><A NAME="I4482"></A></div>
+time-limited calculation:</I> <A NAME="I4466"></A><A NAME="I4467"></A><A NAME="I4468"></A><A NAME="I4469"></A><A NAME="I4470"></A></div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Examples"><B>select</B><BR>
 &nbsp;&nbsp;&nbsp;<B>delay</B>&nbsp;5.0;<BR>
@@ -130,8 +128,8 @@ time-limited calculation:</I> <A NAME="I4478"></A><A NAME="I4479"></A><A NAME="I
 &nbsp;&nbsp;&nbsp;Horribly_Complicated_Recursive_Function(X,&nbsp;Y);<BR>
 <B>end</B>&nbsp;<B>select</B>;</div>
 <div class="paranum"><a name="p14">14/4</a></div>
-<div class="Normal"><span class="insert4">Note that these examples presume 
-that there are abort completion points within the execution of the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0261">abortable_part</A></SPAN>.</span> 
+<div class="Normal">Note that these examples presume that there are abort 
+completion points within the execution of the <SPAN Class="swiss"><A HREF="RM-9-7-4.html#S0261">abortable_part</A></SPAN>. 
 </div>
 
 <HR>

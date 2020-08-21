@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -162,7 +160,7 @@ of the loop:</div>
 <div class="paranum"><a name="p29">29/4</a></div>
 <div class="Examples"><B>for</B>&nbsp;C&nbsp;<B>in</B>&nbsp;G&nbsp;(Next).Iterate&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;<B>declare</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;:&nbsp;Edge&nbsp;<B>renames</B>&nbsp;G&nbsp;(Next)(C)<span class="delete4">.<B>all</B></span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;:&nbsp;Edge&nbsp;<B>renames</B>&nbsp;G&nbsp;(Next)(C);<BR>
 &nbsp;&nbsp;&nbsp;<B>begin</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(E.To)&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>
@@ -178,7 +176,7 @@ of the loop:</div>
 <B>begin</B><BR>
 &nbsp;&nbsp;&nbsp;<B>while</B>&nbsp;Has_Element&nbsp;(C)&nbsp;<B>loop</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>declare</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;:&nbsp;Edge&nbsp;<B>renames</B>&nbsp;L(C)<span class="delete4">.<B>all</B></span>;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E&nbsp;:&nbsp;Edge&nbsp;<B>renames</B>&nbsp;L(C);<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>begin</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>if&nbsp;not</B>&nbsp;Reached(E.To)&nbsp;<B>then</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<BR>

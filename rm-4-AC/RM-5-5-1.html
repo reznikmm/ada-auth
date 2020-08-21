@@ -19,16 +19,16 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -93,10 +93,10 @@ The iteration cursor subtype for the default iterator subtype is the
 that denotes a subtype. This is the <I>default element subtype</I> for 
 <I>T</I>.<A NAME="I3359"></A><A NAME="I3360"></A><A NAME="I3361"></A></span></div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><span class="insert3">These aspects are inherited 
+<div class="Normal">&nbsp;<span class="insert3">These aspects are inherited 
 by descendants of type <I>T</I> (including <I>T</I>'Class).</span></div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><span class="insert3">An <I>iterable container type</I> 
+<div class="Normal">&nbsp;<span class="insert3">An <I>iterable container type</I> 
 is an indexable container type with specified Default_Iterator and Iterator_Element 
 aspects.<A NAME="I3362"></A> A <I>reversible iterable container type</I> 
 is an iterable container type with the default iterator type being a 
@@ -105,12 +105,12 @@ object</I> is an object of an iterable container type.<A NAME="I3364"></A>
 A <I>reversible iterable container object</I> is an object of a reversible 
 iterable container type.<A NAME="I3365"></A></span></div>
 <div class="paranum"><a name="p11.1">11.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert4">The Default_Iterator and 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert4">The Default_Iterator and 
 Iterator_Element aspects are nonoverridable (see <A HREF="RM-13-1-1.html">13.1.1</A>).</span></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">The 
 Constant_Indexing aspect (if any) of an iterable container type <I>T</I> 
 shall denote exactly one function with the following properties:</span></div>
 <div class="paranum"><a name="p13">13/3</a></div>
@@ -125,10 +125,10 @@ of the function covers the default cursor type for <I>T</I>;</span></div>
 <div class="Bulleted"><span class="insert3">if there are more than two 
 parameters, the additional parameters all have default expressions.</span></div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert3">This function (if any) is the 
-<I>default constant indexing function</I> for <I>T</I>.<A NAME="I3366"></A></span></div>
+<div class="Normal">&nbsp;<span class="insert3">This function (if any) is 
+the <I>default constant indexing function</I> for <I>T</I>.<A NAME="I3366"></A></span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">The 
 Variable_Indexing aspect (if any) of an iterable container type <I>T</I> 
 shall denote exactly one function with the following properties:</span></div>
 <div class="paranum"><a name="p18">18/3</a></div>
@@ -143,8 +143,8 @@ of the function covers the default cursor type for <I>T</I>;</span></div>
 <div class="Bulleted"><span class="insert3">if there are more than two 
 parameters, the additional parameters all have default expressions.</span></div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal"><span class="insert3">This function (if any) is the 
-<I>default variable indexing function</I> for <I>T</I>.<A NAME="I3367"></A></span></div>
+<div class="Normal">&nbsp;<span class="insert3">This function (if any) is 
+the <I>default variable indexing function</I> for <I>T</I>.<A NAME="I3367"></A></span></div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

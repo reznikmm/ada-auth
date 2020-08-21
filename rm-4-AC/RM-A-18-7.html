@@ -21,15 +21,15 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -111,14 +111,14 @@ with <I>S</I> as a parameter; or</span></div>
 <div class="Bulleted"><span class="insert2">it calls one of the operations 
 defined to tamper with cursors of <I>S</I>.</span></div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2"><A NAME="I7297"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2"><A NAME="I7297"></A>A 
 subprogram is said to <I>tamper with elements</I> of a set object <I>S</I> 
 if:</span></div>
 <div class="paranum"><a name="p14">14/2</a></div>
 <div class="Bulleted"><span class="insert2">it tampers with cursors of 
 <I>S</I>.</span></div>
 <div class="paranum"><a name="p14.1">14.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3"><A NAME="I7298"></A><A NAME="I7299"></A>When 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7298"></A><A NAME="I7299"></A>When 
 tampering with cursors is <I>prohibited</I> for a particular set object 
 <I>S</I>, Program_Error is propagated by a call of any language-defined 
 subprogram that is defined to tamper with the cursors of <I>S</I>, leaving 
@@ -130,27 +130,27 @@ the elements of <I>S</I> (or tamper with the cursors of <I>S</I>), leaving
 before any other defined behavior of the body of the language-defined 
 subprogram.</span><span class="insert3"></span>&nbsp;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal"><span class="insert2">Empty_Set represents the empty 
+<div class="Normal">&nbsp;<span class="insert2">Empty_Set represents the empty 
 Set object. It has a length of 0. If an object of type Set is not otherwise 
 initialized, it is initialized to the same value as Empty_Set.</span></div>
 <div class="paranum"><a name="p16">16/2</a></div>
-<div class="Normal"><span class="insert2">No_Element represents a cursor 
+<div class="Normal">&nbsp;<span class="insert2">No_Element represents a cursor 
 that designates no element. If an object of type Cursor is not otherwise 
 initialized, it is initialized to the same value as No_Element.</span></div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Normal"><span class="insert2">The predefined &quot;=&quot; 
+<div class="Normal">&nbsp;<span class="insert2">The predefined &quot;=&quot; 
 operator for type Cursor returns True if both cursors are No_Element, 
 or designate the same element in the same container.</span></div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal"><span class="insert2">Execution of the default implementation 
+<div class="Normal">&nbsp;<span class="insert2">Execution of the default implementation 
 of the Input, Output, Read, or Write attribute of type Cursor raises 
 Program_Error.</span></div>
 <div class="paranum"><a name="p18.1">18.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Set'Write for a Set object 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Set'Write for a Set object 
 <I>S</I> writes Length(<I>S</I>) elements of the set to the stream. It 
 also may write additional information about the set.</span></div>
 <div class="paranum"><a name="p18.2">18.2/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert3">Set'Read reads the representation 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Set'Read reads the representation 
 of a set from the stream, and assigns to <I>Item</I> a set with the same 
 length and elements as was written by Set'Write.</span></div>
 <div class="paranum"><a name="p18.3">18.3/3</a></div>
@@ -463,7 +463,7 @@ is propagated if Process.<B>all</B> tampers</span></span><span class="insert2">&
 during the execution of a call on Process.<B>all</B></span><span class="insert2">. 
 Any exception raised by Process.<B>all</B> is propagated.</span></div>
 <div class="paranum"><a name="p87">87/2</a></div>
-<div class="Normal"><span class="insert2">Both Containers.Hashed_Set 
+<div class="Normal">&nbsp;<span class="insert2">Both Containers.Hashed_Set 
 and Containers.Ordered_Set declare a nested generic package Generic_Keys, 
 which provides operations that allow set manipulation in terms of a key 
 (typically, a portion of an element) instead of a complete element. The 
@@ -472,7 +472,7 @@ It is expected to return the same value each time it is called with a
 particular element. The behavior of Generic_Keys is unspecified if Key 
 behaves in some other manner.<A NAME="I7301"></A></span></div>
 <div class="paranum"><a name="p88">88/2</a></div>
-<div class="Normal"><span class="insert2">A key is expected to unambiguously 
+<div class="Normal">&nbsp;<span class="insert2">A key is expected to unambiguously 
 determine a single equivalence class for elements. The behavior of Generic_Keys 
 is unspecified if the formal parameters of this package behave in some 
 other manner.<A NAME="I7302"></A></span></div>
@@ -482,7 +482,7 @@ other manner.<A NAME="I7302"></A></span></div>
 <div class="Indented2" style="margin-bottom: 0.9em"><span class="insert2">Equivalent 
 to Key (Element (Position)).</span>&nbsp;</div>
 <div class="paranum"><a name="p91">91/2</a></div>
-<div class="Normal"><span class="insert2">The subprograms in package 
+<div class="Normal">&nbsp;<span class="insert2">The subprograms in package 
 Generic_Keys named Contains, Find, Element, Delete, and Exclude, are 
 equivalent to the corresponding subprograms in the parent package, with 
 the difference that the Key parameter is used to locate an element in 
@@ -574,25 +574,25 @@ a key value.</span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p96.13">96.13/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7304"></A>It is 
-a bounded error for the actual function associated with a generic formal 
-subprogram, when called as part of an operation of a set package, to 
-tamper with elements of any set parameter of the operation. Either Program_Error 
-is raised, or the operation works as defined on the value of the set 
-either prior to, or subsequent to, some or all of the modifications to 
-the set.</span></div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7304"></A>It 
+is a bounded error for the actual function associated with a generic 
+formal subprogram, when called as part of an operation of a set package, 
+to tamper with elements of any set parameter of the operation. Either 
+Program_Error is raised, or the operation works as defined on the value 
+of the set either prior to, or subsequent to, some or all of the modifications 
+to the set.</span></div>
 <div class="paranum"><a name="p96.14">96.14/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7305"></A>It is 
-a bounded error to call any subprogram declared in the visible part of 
-a set package when the associated container has been finalized. If the 
-operation takes Container as an <B>in out</B> parameter, then it raises 
-Constraint_Error or Program_Error. Otherwise, the operation either proceeds 
-as it would for an empty container, or it raises Constraint_Error or 
-Program_Error.</span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3"><A NAME="I7305"></A>It 
+is a bounded error to call any subprogram declared in the visible part 
+of a set package when the associated container has been finalized. If 
+the operation takes Container as an <B>in out</B> parameter, then it 
+raises Constraint_Error or Program_Error. Otherwise, the operation either 
+proceeds as it would for an empty container, or it raises Constraint_Error 
+or Program_Error.</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p97">97/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert2">A 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert2">A 
 Cursor value is <I>invalid</I> if any of the following have occurred 
 since it was created:<A NAME="I7306"></A> <A NAME="I7307"></A></span></div>
 <div class="paranum"><a name="p98">98/2</a></div>
@@ -611,33 +611,33 @@ to Move; or</span></div>
 has been&nbsp;</span><span class="insert3">removed</span><span class="insert2"></span><span class="insert2"><span class="delete3">&nbsp;deleted</span></span><span class="insert2">&nbsp;from the set</span><span class="insert3">&nbsp;that previously contained the 
 element</span><span class="insert2">.</span>&nbsp;</div>
 <div class="paranum"><a name="p101">101/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2">The result of &quot;=&quot; 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">The result of &quot;=&quot; 
 or Has_Element is unspecified if these functions are called with an invalid 
 cursor parameter.<A NAME="I7308"></A> Execution is erroneous if any other 
 subprogram declared in Containers.Hashed_Sets or Containers.Ordered_Sets 
 is called with an invalid cursor parameter.<A NAME="I7309"></A></span></div>
 <div class="paranum"><a name="p101.1">101.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert3">Execution is erroneous if 
-the set associated with the result of a call to Reference or Constant_Reference 
+<div class="Normal">&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert3">Execution is erroneous 
+if the set associated with the result of a call to Reference or Constant_Reference 
 is finalized before the result object returned by the call to Reference 
 or Constant_Reference is finalized.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p102">102/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2">No storage associated with 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">No storage associated with 
 a Set object shall be lost upon assignment or scope exit.</span></div>
 <div class="paranum"><a name="p103">103/3</a></div>
-<div class="Normal">&nbsp;<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">The execution of an <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN> 
 for a set shall have the effect of copying the elements from the source 
 set object to the target set object</span><span class="insert3">&nbsp;and 
 changing the length of the target object to that of the source object</span><span class="insert2">.</span></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p104">104/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2">Move should not copy elements, 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">Move should not copy elements, 
 and should minimize copying of internal data structures.</span>&nbsp;</div>
 <div class="paranum"><a name="p105">105/2</a></div>
-<div class="Normal">&nbsp;<span class="insert2">If an exception is propagated 
+<div class="Normal">&nbsp;&nbsp;<span class="insert2">If an exception is propagated 
 from a set operation, no storage should be lost, nor any elements removed 
 from a set unless specified by the operation.</span>&nbsp;</div>
 

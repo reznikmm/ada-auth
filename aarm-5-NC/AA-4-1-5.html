@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,17 +43,17 @@ aspect may be specified:</div>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="WideHanging-Term">Implicit_Dereference</div><div class="WideHanging-Body"><br clear="left">
 This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-that denotes an access discriminant declared for the type <I>T</I>.<A NAME="I2645"></A><A NAME="I2646"></A></div>
+that denotes an access discriminant declared for the type <I>T</I>.<A NAME="I2653"></A><A NAME="I2654"></A></div>
 <div class="paranum"><a name="p2.a">2.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Implicit_Dereference: 
 </B>Mechanism for user-defined implicit .<B>all</B>.</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 A (view of a) type with a specified Implicit_Dereference aspect is a 
-<I>reference type</I>.<A NAME="I2647"></A> A <I>reference object</I> 
-is an object of a reference type.<A NAME="I2648"></A> The discriminant 
+<I>reference type</I>.<A NAME="I2655"></A> A <I>reference object</I> 
+is an object of a reference type.<A NAME="I2656"></A> The discriminant 
 named by the Implicit_Dereference aspect is the <I>reference discriminant</I> 
-of the reference type or reference object.<A NAME="I2649"></A> [A <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
+of the reference type or reference object.<A NAME="I2657"></A> [A <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that identifies a reference object, and denotes the object or subprogram 
 designated by the reference discriminant of the reference object.]</div>
@@ -65,7 +65,7 @@ by the Implicit_Dereference aspect.</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<SPAN Class="swiss">generalized_reference</SPAN><A NAME="I2650"></A><A NAME="S0104"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reference_object_</I><A NAME="I2651"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
+<SPAN Class="swiss">generalized_reference</SPAN><A NAME="I2658"></A><A NAME="S0104"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>reference_object_</I><A NAME="I2659"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
@@ -73,7 +73,7 @@ by the Implicit_Dereference aspect.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
 The expected type for the <I>reference_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 in a <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
-is any reference type.<A NAME="I2652"></A>&nbsp;</div>
+is any reference type.<A NAME="I2660"></A>&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5.1">5.1/4</a></div>
@@ -97,7 +97,7 @@ if confirming)]. If a descendant type constrains the value of the reference
 discriminant of <I>T</I> by a new discriminant, that new discriminant 
 is the reference discriminant of the descendant. [If the descendant type 
 constrains the value of the reference discriminant of <I>T</I> by an 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 other than the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 of a new discriminant, a <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 that identifies an object of the descendant type denotes the object or 
@@ -106,12 +106,12 @@ subprogram designated by the value of this constraining expression.]</div>
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<A NAME="I2653"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
+<A NAME="I2661"></A>The evaluation of a <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 consists of the evaluation of the <I>reference_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 and a determination of the object or subprogram designated by the reference 
-discriminant of the named reference object. <A NAME="I2654"></A><A NAME="I2655"></A>A 
+discriminant of the named reference object. <A NAME="I2662"></A><A NAME="I2663"></A>A 
 check is made that the value of the reference discriminant is not the 
-null access value. <A NAME="I2656"></A>Constraint_Error is raised if 
+null access value. <A NAME="I2664"></A>Constraint_Error is raised if 
 this check fails. The <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 denotes the object or subprogram designated by the value of the reference 
 discriminant of the named reference object.</div>
@@ -152,13 +152,13 @@ Find&nbsp;(B,&nbsp;&quot;grape&quot;).Data.<B>all</B>&nbsp;:=&nbsp;Element'(...)
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<A NAME="I2657"></A>The aspect Implicit_Dereference and the <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
+<A NAME="I2665"></A>The aspect Implicit_Dereference and the <SPAN Class="swiss"><A HREF="AA-4-1-5.html#S0104">generalized_reference</A></SPAN> 
 are new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p15.b">15.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<A NAME="I2658"></A><B>Corrigendum:</B> Defined Implicit_Dereference 
+<A NAME="I2666"></A><B>Corrigendum:</B> Defined Implicit_Dereference 
 to be nonoveridable, which makes redefinitions and hiding of the aspect 
 illegal. It's possible that some program could violate one of these new 
 restrictions, but this is not very likely as reference types are not 

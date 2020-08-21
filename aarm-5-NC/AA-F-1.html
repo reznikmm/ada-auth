@@ -21,7 +21,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -33,13 +33,14 @@
 <H1>F.1 Machine_Radix Attribute Definition Clause</H1>
 
 <H4 Class="centered">Static Semantics</H4>
-<div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I9036"></A><A NAME="I9037"></A>Machine_Radix 
-may be specified for a decimal first subtype (see <A HREF="AA-3-5-9.html">3.5.9</A>) 
-via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN>; 
+<div class="paranum"><a name="p1">1/5</a></div>
+<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
+<A NAME="I9339"></A><A NAME="I9340"></A>The representation attribute 
+Machine_Radix may be specified for a decimal first subtype (see <A HREF="AA-3-5-9.html">3.5.9</A>) 
+via an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN>; 
 the expression of such a clause shall be static, and its value shall 
 be 2 or 10. A value of 2 implies a binary base range; a value of 10 implies 
-a decimal base range.<A NAME="I9038"></A><A NAME="I9039"></A>&nbsp;</div>
+a decimal base range.<A NAME="I9341"></A><A NAME="I9342"></A>&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>In the absence of a Machine_Radix 
 clause, the choice of 2 versus 10 for S'Machine_Radix is not specified. 
@@ -76,6 +77,11 @@ attribute definition clause:</I>&nbsp;</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Examples"><B>type</B>&nbsp;Money&nbsp;<B>is</B>&nbsp;<B>delta</B>&nbsp;0.01&nbsp;<B>digits</B>&nbsp;15;<BR>
 <B>for</B>&nbsp;Money'Machine_Radix&nbsp;<B>use</B>&nbsp;10;</div>
+
+<H4 Class="centered">Wording Changes from Ada 2012</H4>
+<div class="paranum"><a name="p4.a">4.a/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0272-1.TXT">AI12-0272-1</A></I>} 
+Clarified that Machine_Radix is a representation aspect.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

@@ -13,26 +13,24 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 7.4em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallIndented2Examples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,32 +41,32 @@
 <HR>
 <H1>3.5.9 Fixed Point Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1955"></A><A NAME="I1956"></A><A NAME="I1957"></A>A 
+<div class="Normal"><A NAME="I1942"></A><A NAME="I1943"></A><A NAME="I1944"></A>A 
 fixed point type is either an ordinary fixed point type, or a decimal 
-fixed point type. <A NAME="I1958"></A>The error bound of a fixed point 
+fixed point type. <A NAME="I1945"></A>The error bound of a fixed point 
 type is specified as an absolute value, called the <I>delta</I> of the 
 fixed point type.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">fixed_point_definition</SPAN><A NAME="I1959"></A><A NAME="S0047"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1960"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1961"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">fixed_point_definition</SPAN><A NAME="I1946"></A><A NAME="S0047"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I1947"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN>&nbsp;|&nbsp;<A NAME="I1948"></A><SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">ordinary_fixed_point_definition</SPAN><A NAME="I1962"></A><A NAME="S0048"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1963"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;&nbsp;<A NAME="I1964"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">ordinary_fixed_point_definition</SPAN><A NAME="I1949"></A><A NAME="S0048"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1950"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;&nbsp;<A NAME="I1951"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">decimal_fixed_point_definition</SPAN><A NAME="I1965"></A><A NAME="S0049"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1966"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;<B>digits</B>&nbsp;<I>static_</I><A NAME="I1967"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;[<A NAME="I1968"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">decimal_fixed_point_definition</SPAN><A NAME="I1952"></A><A NAME="S0049"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>delta</B>&nbsp;<I>static_</I><A NAME="I1953"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;<B>digits</B>&nbsp;<I>static_</I><A NAME="I1954"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>&nbsp;[<A NAME="I1955"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>]</div>
 <div class="paranum"><a name="p5">5/4</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<SPAN Class="swiss">digits_constraint</SPAN><A NAME="I1969"></A><A NAME="S0050"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>digits</B>&nbsp;<I>static_</I><span class="insert4"><A NAME="I1970"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><A NAME="I1971"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">&nbsp;expression</A></SPAN></span>&nbsp;[<A NAME="I1972"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>]</div>
+<SPAN Class="swiss">digits_constraint</SPAN><A NAME="I1956"></A><A NAME="S0050"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<B>digits</B>&nbsp;<I>static_</I><span class="insert4"><A NAME="I1957"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><A NAME="I1958"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">&nbsp;expression</A></SPAN></span>&nbsp;[<A NAME="I1959"></A><SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>]</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1973"></A>For a type defined by a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN>, 
+<div class="Normal"><A NAME="I1960"></A>For a type defined by a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN>, 
 the <I>delta</I> of the type is specified by the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 given after the reserved word <B>delta</B>; this <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
-is expected to be of any real type. <A NAME="I1974"></A><A NAME="I1975"></A><A NAME="I1976"></A>For 
+is expected to be of any real type. <A NAME="I1961"></A><A NAME="I1962"></A><A NAME="I1963"></A>For 
 a type defined by a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
 (a <I>decimal</I> fixed point type), the number of significant decimal 
 digits for its first subtype (the <I>digits</I> of the first subtype) 
@@ -76,7 +74,7 @@ is specified by the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</
 given after the reserved word <B>digits</B>; this <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 is expected to be of any integer type.</div>
 <div class="paranum"><a name="p6.1">6.1/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0159-1.TXT">AI12-0159-1</A></I>} 
 <span class="insert4">The <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 is expected to be of any integer type.</span>&nbsp;</div>
@@ -90,11 +88,11 @@ given after the reserved words <B>delta</B> and <B>digits</B> shall be
 static; their values shall be positive.</div>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00100.TXT">AI95-00100-01</A></I>} 
-<A NAME="I1977"></A>The set of values of a fixed point type comprise 
-the integral multiples of a number called the <I>small</I> of the type.<A NAME="I1978"></A> 
+<A NAME="I1964"></A>The set of values of a fixed point type comprise 
+the integral multiples of a number called the <I>small</I> of the type.<A NAME="I1965"></A> 
 The <I>machine numbers</I> of a fixed point type are the values of the 
 type that can be represented exactly in every unconstrained variable 
-of the type. <A NAME="I1979"></A>For a type defined by an <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
+of the type. <A NAME="I1966"></A>For a type defined by an <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
 (an <I>ordinary</I> fixed point type), the <I>small</I> may be specified 
 by an <SPAN Class="swiss"><A HREF="AA-13-3.html#S0310">attribute_definition_clause</A></SPAN> 
 (see <A HREF="AA-13-3.html">13.3</A>); if so specified, it shall be no 
@@ -130,43 +128,43 @@ a floating point subtype is permitted &mdash; see <A HREF="AA-J-3.html">J.3</A>.
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1980"></A>The base range (see <A HREF="AA-3-5.html">3.5</A>) 
+<div class="Normal"><A NAME="I1967"></A>The base range (see <A HREF="AA-3-5.html">3.5</A>) 
 of a fixed point type is symmetric around zero, except possibly for an 
 extra negative value in some implementations.</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1981"></A>An 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I1968"></A>An 
 <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
 defines an ordinary fixed point type whose base range includes at least 
 all multiples of <I>small</I> that are between the bounds specified in 
 the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>. 
 The base range of the type does not necessarily include the specified 
-bounds themselves. <A NAME="I1982"></A><A NAME="I1983"></A>An <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
+bounds themselves. <A NAME="I1969"></A><A NAME="I1970"></A>An <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0048">ordinary_fixed_point_definition</A></SPAN> 
 also defines a constrained first subtype of the type, with each bound 
 of its range given by the closer to zero of:&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
 <div class="Bulleted">the value of the conversion to the fixed point 
 type of the corresponding <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>; 
-<A NAME="I1984"></A></div>
+<A NAME="I1971"></A></div>
 <div class="paranum"><a name="p14.a.1">14.a.1/1</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The conversion mentioned 
 above is not an <I>implicit subtype conversion</I> (which is something 
 that happens at overload resolution, see <A HREF="AA-4-6.html">4.6</A>), 
 although it happens implicitly. Therefore, the freezing rules are not 
 invoked on the type (which is important so that representation items 
-can be given for the type). <A NAME="I1985"></A></div>
+can be given for the type). <A NAME="I1972"></A></div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Bulleted">the corresponding bound of the base range.&nbsp;</div>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I1986"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1973"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
 defines a decimal fixed point type whose base range includes at least 
 the range &ndash;(10**<I>digits</I>&ndash;1)*<I>delta</I> .. +(10**<I>digits</I>&ndash;1)*<I>delta</I>. 
-<A NAME="I1987"></A><A NAME="I1988"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
+<A NAME="I1974"></A><A NAME="I1975"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0049">decimal_fixed_point_definition</A></SPAN> 
 also defines a constrained first subtype of the type. If a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 is given, the bounds of the first subtype are given by a conversion of 
 the values of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>. 
-<A NAME="I1989"></A>Otherwise, the range of the first subtype is &ndash;(10**<I>digits</I>&ndash;1)*<I>delta</I> 
+<A NAME="I1976"></A>Otherwise, the range of the first subtype is &ndash;(10**<I>digits</I>&ndash;1)*<I>delta</I> 
 .. +(10**<I>digits</I>&ndash;1)*<I>delta</I>.</div>
 <div class="paranum"><a name="p16.a.1">16.a.1/1</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>The conversion mentioned 
@@ -174,21 +172,21 @@ above is not an <I>implicit subtype conversion</I> (which is something
 that happens at overload resolution, see <A HREF="AA-4-6.html">4.6</A>), 
 although it happens implicitly. Therefore, the freezing rules are not 
 invoked on the type (which is important so that representation items 
-can be given for the type). <A NAME="I1990"></A></div>
+can be given for the type). <A NAME="I1977"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I1991"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1978"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0047">fixed_point_definition</A></SPAN> 
 creates the fixed point type and its first subtype.</div>
 <div class="paranum"><a name="p18">18/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
 For a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 on a decimal fixed point subtype with a given <I>delta</I>, if it does 
 not have a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>, 
 then it specifies an implicit range &ndash;(10**<I>D</I>&ndash;1)*<I>delta</I> 
 .. +(10**<I>D</I>&ndash;1)*<I>delta</I>, where <I>D</I> is the value 
 of the <span class="insert4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">&nbsp;expression</A></SPAN></span>. 
-<A NAME="I1992"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+<A NAME="I1979"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 is <I>compatible</I> with a decimal fixed point subtype if the value 
 of the <span class="insert4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
 is no greater than the <I>digits</I> of the subtype, and if it specifies 
@@ -229,14 +227,14 @@ the <I>digits</I> of the subtype being further constrained, and a constraint
 on the range of the subtype being defined, either explicit or implicit. 
 </div>
 <div class="paranum"><a name="p19">19/4</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<A NAME="I1993"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
+<A NAME="I1980"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN>, 
-if any. <A NAME="I1994"></A><A NAME="I1995"></A>If a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN> 
+if any. <A NAME="I1981"></A><A NAME="I1982"></A>If a <SPAN Class="swiss"><A HREF="AA-3-5.html#S0036">range_constraint</A></SPAN> 
 is given, a check is made that the bounds of the range are both in the 
 range &ndash;(10**<I>D</I>&ndash;1)*<I>delta</I> .. +(10**<I>D</I>&ndash;1)*<I>delta</I>, 
 where <I>D</I> is the value of the (static) <span class="insert4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">&nbsp;expression</A></SPAN></span> 
-given after the reserved word <B>digits</B>. <A NAME="I1996"></A>If this 
+given after the reserved word <B>digits</B>. <A NAME="I1983"></A>If this 
 check fails, Constraint_Error is raised.&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -299,7 +297,7 @@ point types and subtypes:</I>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p28.a">28.a</a></div>
-<div class="Annotations"><A NAME="I1997"></A>In Ada 95, S'Small always 
+<div class="Annotations"><A NAME="I1984"></A>In Ada 95, S'Small always 
 equals S'Base'Small, so if an implementation chooses a <I>small</I> for 
 a fixed point type smaller than required by the <I>delta</I>, the value 
 of S'Small in Ada 95 might not be the same as it was in Ada 83.&nbsp;</div>
@@ -307,13 +305,12 @@ of S'Small in Ada 95 might not be the same as it was in Ada 83.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p28.b">28.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
-<A NAME="I1998"></A>Decimal fixed point types are new, though their capabilities 
+<A NAME="I1985"></A>Decimal fixed point types are new, though their capabilities 
 are essentially similar to that available in Ada 83 with a fixed point 
-type whose <I>small</I> equals its <I>delta</I> <span class="insert3">and 
-both are</span><span class="delete3">&nbsp;equals</span> a power of 10. However, 
-in the Information Systems Annex, additional requirements are placed 
-on the support of decimal fixed point types (e.g. a minimum of 18 digits 
-of precision).&nbsp;</div>
+type whose <I>small</I> equals its <I>delta</I> and both are a power 
+of 10. However, in the Information Systems Annex, additional requirements 
+are placed on the support of decimal fixed point types (e.g. a minimum 
+of 18 digits of precision).&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 83</H4>
 <div class="paranum"><a name="p28.c">28.c</a></div>
@@ -333,7 +330,7 @@ is needed by the static evaluation rules.&nbsp;</div>
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p28.e">28.e/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0152-1.TXT">AI12-0152-1</A></I>} 
-<span class="insert4"><A NAME="I1999"></A><B>Corrigendum:</B> Changed 
+<span class="insert4"><A NAME="I1986"></A><B>Corrigendum:</B> Changed 
 the syntax so that the value following <B>digits</B> in a <SPAN Class="swiss"><A HREF="AA-3-5-9.html#S0050">digits_constraint</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0123">simple_expression</A></SPAN>. 
 This is compatible with one very unlikely exception: if the <B>digits</B> 

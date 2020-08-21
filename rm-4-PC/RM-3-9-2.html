@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,7 +36,7 @@
 <HR>
 <H1>3.9.2 Dispatching Operations of Tagged Types</H1>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I2167"></A><A NAME="I2168"></A><A NAME="I2169"></A><A NAME="I2170"></A><A NAME="I2171"></A><A NAME="I2172"></A><A NAME="I2173"></A><A NAME="I2174"></A>The 
+<div class="Normal"><A NAME="I2150"></A><A NAME="I2151"></A><A NAME="I2152"></A><A NAME="I2153"></A><A NAME="I2154"></A><A NAME="I2155"></A><A NAME="I2156"></A><A NAME="I2157"></A>The 
 primitive subprograms of a tagged type, the subprograms declared by <SPAN Class="swiss"><A HREF="RM-12-6.html#S0298">formal_abstract_subprogram_declaration</A></SPAN>s, 
 and the stream attributes of a specific tagged type that are available 
 (see <A HREF="RM-13-13-2.html">13.13.2</A>) at the end of the declaration 
@@ -52,28 +50,28 @@ below, the properties of the operands and the context of a particular
 call on a dispatching operation determine how the controlling tag is 
 determined, and hence whether or not the call is a dispatching call. 
 Run-time polymorphism is achieved when a dispatching operation is called 
-by a dispatching call. <A NAME="I2175"></A><A NAME="I2176"></A><A NAME="I2177"></A><A NAME="I2178"></A><A NAME="I2179"></A></div>
+by a dispatching call. <A NAME="I2158"></A><A NAME="I2159"></A><A NAME="I2160"></A><A NAME="I2161"></A><A NAME="I2162"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I2180"></A><A NAME="I2181"></A>A <I>call 
+<div class="Normal"><A NAME="I2163"></A><A NAME="I2164"></A>A <I>call 
 on a dispatching operation</I> is a call whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
-denotes the declaration of a dispatching operation. <A NAME="I2182"></A>A 
+denotes the declaration of a dispatching operation. <A NAME="I2165"></A>A 
 <I>controlling operand</I> in a call on a dispatching operation of a 
 tagged type <I>T</I> is one whose corresponding formal parameter is of 
 type <I>T</I> or is of an anonymous access type with designated type 
-<I>T</I>; <A NAME="I2183"></A>the corresponding formal parameter is called 
+<I>T</I>; <A NAME="I2166"></A>the corresponding formal parameter is called 
 a <I>controlling formal parameter</I>. If the controlling formal parameter 
 is an access parameter, the controlling operand is the object designated 
-by the actual parameter, rather than the actual parameter itself. <A NAME="I2184"></A><span class="insert3"><A NAME="I2185"></A></span>If 
-the call is to a (primitive) function with result type <I>T</I><span class="insert3">&nbsp;(a <I>function with a controlling result</I>)</span>, then the call has 
-a <I>controlling result</I> &mdash; the context of the call can control 
-the dispatching. Similarly, if the call is to a function with <span class="insert3">an 
-</span>access result type designating <I>T</I><span class="insert3">&nbsp;(a <I>function with a controlling access result</I>)</span>, then the 
-call has a <I>controlling access result</I>, and the context can similarly 
-control dispatching.<span class="insert3"><A NAME="I2186"></A><A NAME="I2187"></A></span> 
-</div>
+by the actual parameter, rather than the actual parameter itself. <A NAME="I2167"></A><A NAME="I2168"></A>If 
+the call is to a (primitive) function with result type <I>T</I> (a <I>function 
+with a controlling result</I>), then the call has a <I>controlling result</I> 
+&mdash; the context of the call can control the dispatching. Similarly, 
+if the call is to a function with an access result type designating <I>T</I> 
+(a <I>function with a controlling access result</I>), then the call has 
+a <I>controlling access result</I>, and the context can similarly control 
+dispatching.<A NAME="I2169"></A><A NAME="I2170"></A>&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">A <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression of a tagged type is either <I>statically</I> tagged, <I>dynamically</I> 
@@ -85,17 +83,17 @@ or parenthesized expression is statically, dynamically, or indeterminately
 tagged according to its operand. For other kinds of <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>s 
 and expressions, this is determined as follows:&nbsp;</div>
 <div class="paranum"><a name="p4">4/2</a></div>
-<div class="Bulleted"><A NAME="I2188"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted"><A NAME="I2171"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression is <I>statically tagged</I> if it is of a specific tagged 
 type and, if it is a call with a controlling result or controlling access 
 result, it has at least one statically tagged controlling operand;&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Bulleted"><A NAME="I2189"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted"><A NAME="I2172"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression is <I>dynamically tagged</I> if it is of a class-wide type, 
 or it is a call with a controlling result or controlling access result 
 and at least one dynamically tagged controlling operand;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Bulleted"><A NAME="I2190"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
+<div class="Bulleted"><A NAME="I2173"></A>The <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or expression is <I>tag indeterminate</I> if it is a call with a controlling 
 result or controlling access result, all of whose controlling operands 
 (if any) are tag indeterminate.&nbsp;</div>
@@ -125,12 +123,12 @@ an expression is an anonymous access-to-specific tagged type, then the
 object designated by the expression shall not be dynamically tagged unless 
 it is a controlling operand in a call on a dispatching operation.&nbsp;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">In the declaration of a dispatching operation of 
+<div class="Normal">&nbsp;In the declaration of a dispatching operation of 
 a tagged type, everywhere a subtype of the tagged type appears as a subtype 
 of the profile (see <A HREF="RM-6-1.html">6.1</A>), it shall statically 
-match the first subtype of the tagged type. <A NAME="I2191"></A>If the 
+match the first subtype of the tagged type. <A NAME="I2174"></A>If the 
 dispatching operation overrides an inherited subprogram, it shall be 
-subtype conformant with the inherited subprogram. <A NAME="I2192"></A>The 
+subtype conformant with the inherited subprogram. <A NAME="I2175"></A>The 
 convention of an inherited dispatching operation is the convention of 
 the corresponding primitive operation of the parent or progenitor type. 
 The default convention of a dispatching operation that overrides an inherited 
@@ -139,11 +137,11 @@ the operation overrides multiple inherited operations, then they shall
 all have the same convention. An explicitly declared dispatching operation 
 shall not be of convention Intrinsic.&nbsp;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">The <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
+<div class="Normal">&nbsp;The <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 for a controlling formal parameter of a dispatching operation shall be 
 tag indeterminate.&nbsp;</div>
 <div class="paranum"><a name="p11.1">11.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;If a dispatching operation is defined by a <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0203">subprogram_renaming_declaration</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;If a dispatching operation is defined by a <SPAN Class="swiss"><A HREF="RM-8-5-4.html#S0203">subprogram_renaming_declaration</A></SPAN> 
 or the instantiation of a generic subprogram, any access parameter of 
 the renamed subprogram or the generic subprogram that corresponds to 
 a controlling access parameter of the dispatching operation, shall have 
@@ -160,20 +158,20 @@ it, nor after a body.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2193"></A><A NAME="I2194"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I2176"></A><A NAME="I2177"></A>For 
 the execution of a call on a dispatching operation of a type <I>T</I>, 
 the <I>controlling tag value</I> determines which subprogram body is 
 executed. The controlling tag value is defined as follows:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Bulleted"><A NAME="I2195"></A>If one or more controlling 
+<div class="Bulleted"><A NAME="I2178"></A>If one or more controlling 
 operands are statically tagged, then the controlling tag value is <I>statically 
 determined</I> to be the tag of <I>T</I>.</div>
 <div class="paranum"><a name="p16">16</a></div>
 <div class="Bulleted">If one or more controlling operands are dynamically 
 tagged, then the controlling tag value is not statically determined, 
-but is rather determined by the tags of the controlling operands. <A NAME="I2196"></A><A NAME="I2197"></A>If 
+but is rather determined by the tags of the controlling operands. <A NAME="I2179"></A><A NAME="I2180"></A>If 
 there is more than one dynamically tagged controlling operand, a check 
-is made that they all have the same tag. <A NAME="I2198"></A>If this 
+is made that they all have the same tag. <A NAME="I2181"></A>If this 
 check fails, Constraint_Error is raised unless the call is a <SPAN Class="swiss"><A HREF="RM-6-4.html#S0179">function_call</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 denotes the declaration of an equality operator (predefined or user defined) 
@@ -198,45 +196,38 @@ or dereferenced) is the expression of an <SPAN Class="swiss"><A HREF="RM-5-2.htm
 whose target is of a class-wide type, then its controlling tag value 
 is determined by the target;</div>
 <div class="paranum"><a name="p19">19</a></div>
-<div class="Indented2NestedBulleted"><A NAME="I2199"></A>Otherwise, the 
+<div class="Indented2NestedBulleted"><A NAME="I2182"></A>Otherwise, the 
 controlling tag value is statically determined to be the tag of type 
 <I>T</I>.&nbsp;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For the execution of 
-a call on a dispatching operation, the action performed is determined 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For the execution 
+of a call on a dispatching operation, the action performed is determined 
 by the properties of the corresponding dispatching operation of the specific 
-type identified by the controlling tag value<span class="insert3">:</span><span class="delete3">. 
-If the corresponding operation is explicitly declared for this type, 
-even if the declaration occurs in a private part, then the action comprises 
-an invocation of the explicit body for the operation. If the corresponding 
-operation is implicitly declared for this type:</span></div>
+type identified by the controlling tag value:</div>
 <div class="paranum"><a name="p20.1">20.1/3</a></div>
-<div class="Bulleted"><span class="insert3">if the corresponding operation 
-is explicitly declared for this type, even if the declaration occurs 
-in a private part, then the action comprises an invocation of the explicit 
-body for the operation;</span></div>
+<div class="Bulleted">if the corresponding operation is explicitly declared 
+for this type, even if the declaration occurs in a private part, then 
+the action comprises an invocation of the explicit body for the operation;</div>
 <div class="paranum"><a name="p20.2">20.2/3</a></div>
-<div class="Bulleted">if the <span class="insert3">corresponding&nbsp;</span>operation 
-is <span class="insert3">implicitly declared for this type and is&nbsp;</span>implemented 
-by an entry or protected subprogram (see <A HREF="RM-9-1.html">9.1</A> 
-and <A HREF="RM-9-4.html">9.4</A>), then the action comprises a call 
-on this entry or protected subprogram, with the target object being given 
-by the first actual parameter of the call, and the actual parameters 
-of the entry or protected subprogram being given by the remaining actual 
-parameters of the call, if any;</div>
+<div class="Bulleted">if the corresponding operation is implicitly declared 
+for this type and is implemented by an entry or protected subprogram 
+(see <A HREF="RM-9-1.html">9.1</A> and <A HREF="RM-9-4.html">9.4</A>), 
+then the action comprises a call on this entry or protected subprogram, 
+with the target object being given by the first actual parameter of the 
+call, and the actual parameters of the entry or protected subprogram 
+being given by the remaining actual parameters of the call, if any;</div>
 <div class="paranum"><a name="p20.3">20.3/3</a></div>
-<div class="Bulleted"><span class="insert3">if the corresponding operation 
-is a predefined operator then the action comprises an invocation of that 
-operator;</span></div>
+<div class="Bulleted">if the corresponding operation is a predefined 
+operator then the action comprises an invocation of that operator;</div>
 <div class="paranum"><a name="p20.4">20.4/3</a></div>
 <div class="Bulleted">otherwise, the action is the same as the action 
-for the corresponding operation of the parent type<span class="insert3">&nbsp;or progenitor type from which the operation was inherited except that 
-additional invariant checks (see <A HREF="RM-7-3-2.html">7.3.2</A>) and 
-class-wide postcondition checks (see <A HREF="RM-6-1-1.html">6.1.1</A>) 
-may apply. If there is more than one such corresponding operation, the 
-action is that for the operation that is not a null procedure, if any; 
-otherwise, the action is that of an arbitrary one of the operations</span>. 
-</div>
+for the corresponding operation of the parent type or progenitor type 
+from which the operation was inherited except that additional invariant 
+checks (see <A HREF="RM-7-3-2.html">7.3.2</A>) and class-wide postcondition 
+checks (see <A HREF="RM-6-1-1.html">6.1.1</A>) may apply. If there is 
+more than one such corresponding operation, the action is that for the 
+operation that is not a null procedure, if any; otherwise, the action 
+is that of an arbitrary one of the operations.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p21">21</a></div>
 <div class="Notes">78&nbsp;&nbsp;The body to be executed for a call on 

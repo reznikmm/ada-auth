@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -65,13 +63,13 @@ or a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A>
 the following representation aspects may be specified:</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
 <div class="WideHanging-Term">&nbsp;Atomic</div><div class="WideHanging-Body">
-The type of aspect Atomic is Boolean.<A NAME="I8015"></A><A NAME="I8016"></A></div>
+The type of aspect Atomic is Boolean.<A NAME="I8000"></A><A NAME="I8001"></A></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
 <div class="WideHanging-Term">&nbsp;Independent</div><div class="WideHanging-Body">
-The type of aspect Independent is Boolean.<A NAME="I8017"></A><A NAME="I8018"></A></div>
+The type of aspect Independent is Boolean.<A NAME="I8002"></A><A NAME="I8003"></A></div>
 <div class="paranum"><a name="p6.4">6.4/3</a></div>
 <div class="WideHanging-Term">&nbsp;Volatile</div><div class="WideHanging-Body">
-The type of aspect Volatile is Boolean.<A NAME="I8019"></A><A NAME="I8020"></A></div>
+The type of aspect Volatile is Boolean.<A NAME="I8004"></A><A NAME="I8005"></A></div>
 <div class="paranum"><a name="p6.5">6.5/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 of an array type (including the anonymous type of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -79,10 +77,10 @@ of an anonymous array object), the following representation aspects may
 be specified:</div>
 <div class="paranum"><a name="p6.6">6.6/3</a></div>
 <div class="WideHanging-Term">&nbsp;Atomic_Components</div><div class="WideHanging-Body"><br clear="left">
-The type of aspect Atomic_Components is Boolean.<A NAME="I8021"></A><A NAME="I8022"></A></div>
+The type of aspect Atomic_Components is Boolean.<A NAME="I8006"></A><A NAME="I8007"></A></div>
 <div class="paranum"><a name="p6.7">6.7/3</a></div>
 <div class="WideHanging-Term">&nbsp;Volatile_Components</div><div class="WideHanging-Body"><br clear="left">
-The type of aspect Volatile_Components is Boolean.<A NAME="I8023"></A><A NAME="I8024"></A></div>
+The type of aspect Volatile_Components is Boolean.<A NAME="I8008"></A><A NAME="I8009"></A></div>
 <div class="paranum"><a name="p6.8">6.8/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN> 
 (including the anonymous type of an <SPAN Class="swiss"><A HREF="RM-3-3-1.html#S0032">object_declaration</A></SPAN> 
@@ -90,21 +88,21 @@ of an anonymous array object), the following representation aspect may
 be specified:</div>
 <div class="paranum"><a name="p6.9">6.9/3</a></div>
 <div class="WideHanging-Term">&nbsp;Independent_Components</div><div class="WideHanging-Body"><br clear="left">
-The type of aspect Independent_Components is Boolean.<A NAME="I8025"></A><A NAME="I8026"></A></div>
+The type of aspect Independent_Components is Boolean.<A NAME="I8010"></A><A NAME="I8011"></A></div>
 <div class="paranum"><a name="p6.10">6.10/3</a></div>
 <div class="Normal">&nbsp;&nbsp;If any of these aspects are directly specified, 
 the <SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0326">aspect_definition</A></SPAN> 
 shall be a static expression. If not specified (including by inheritance), 
 each of these aspects is False.</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><A NAME="I8027"></A>An <I>atomic</I> type is one 
+<div class="Normal"><A NAME="I8012"></A>An <I>atomic</I> type is one 
 for which the aspect Atomic is True. An <I>atomic</I> object (including 
 a component) is one for which the aspect Atomic is True, or a component 
 of an array for which the aspect Atomic_Components is True for the associated 
 type, or any object of an atomic type, other than objects obtained by 
 evaluating a slice.&nbsp;</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal"><A NAME="I8028"></A>A <I>volatile</I> type is one 
+<div class="Normal"><A NAME="I8013"></A>A <I>volatile</I> type is one 
 for which the aspect Volatile is True. A <I>volatile</I> object (including 
 a component) is one for which the aspect Volatile is True, or a component 
 of an array for which the aspect Volatile_Components is True for the 
@@ -116,8 +114,8 @@ not apply to atomic).</div>
 <div class="Normal">&nbsp;When True, the aspects Independent and Independent_Components 
 <I>specify as independently addressable</I> the named object or component(s), 
 or in the case of a type, all objects or components of that type. All 
-atomic objects <span class="insert4">and aliased objects&nbsp;</span>are considered 
-to be specified as independently addressable.<A NAME="I8029"></A><A NAME="I8030"></A></div>
+atomic objects and aliased objects are considered to be specified as 
+independently addressable.<A NAME="I8014"></A><A NAME="I8015"></A></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraph 9 was moved 
 to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
 Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
@@ -132,17 +130,16 @@ Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 a <SPAN Class="swiss"><A HREF="RM-3-2-1.html#S0024">full_type_declaration</A></SPAN>, 
 the declaration shall be that of an array or record type.</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Normal"><A NAME="I8031"></A>It is illegal to specify either 
+<div class="Normal"><A NAME="I8016"></A>It is illegal to specify either 
 of the aspects Atomic or Atomic_Components to have the value True for 
 an object or type if the implementation cannot support the indivisible 
-<span class="insert4">and independent&nbsp;</span>reads and updates required 
-by the aspect (see below).</div>
+and independent reads and updates required by the aspect (see below).</div>
 <div class="paranum"><a name="p11">11/4</a></div>
 <div class="Normal">It is illegal to specify the Size attribute of an 
 atomic object, the Component_Size attribute for an array type with atomic 
 components, or the layout attributes of an atomic component, in a way 
 that prevents the implementation from performing the required indivisible 
-<span class="insert4">and independent&nbsp;</span>reads and updates.</div>
+and independent reads and updates.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal">If an atomic object is passed as a parameter, then 
 the formal parameter shall either have an atomic type or allow pass by 
@@ -202,11 +199,11 @@ variables. A use of an atomic variable or other mechanism may be necessary
 to avoid erroneous execution and to ensure that access to nonatomic volatile 
 variables is sequential (see <A HREF="RM-9-10.html">9.10</A>).</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I8032"></A>Two actions are sequential (see 
+<div class="Normal"><A NAME="I8017"></A>Two actions are sequential (see 
 <A HREF="RM-9-10.html">9.10</A>) if each is the read or update of the 
 same atomic object.</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8033"></A>If a type is atomic or volatile 
+<div class="Normal"><A NAME="I8018"></A>If a type is atomic or volatile 
 and it is not a by-copy type, then the type is defined to be a by-reference 
 type. If any subcomponent of a type is atomic or volatile, then the type 
 is defined to be a by-reference type.</div>
@@ -221,7 +218,7 @@ reading and/or writing all of the nearest enclosing atomic object.</span></div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p20">20/5</a></div>
-<div class="Normal"><A NAME="I8034"></A>The external effect of a program 
+<div class="Normal"><A NAME="I8019"></A>The external effect of a program 
 (see <A HREF="RM-1-1-3.html">1.1.3</A>) is defined to include each read 
 and update of a volatile or atomic object. The implementation shall not 
 generate any memory reads or updates of atomic or volatile objects other 
@@ -232,10 +229,7 @@ and/or writing neighboring storage, and that neighboring storage might
 overlap a volatile object.</span>&nbsp;</div>
 <div class="paranum"><a name="p21">21/4</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete4">If the Pack aspect is True for 
-a type any of whose subcomponents are atomic, the implementation shall 
-not pack the atomic subcomponents more tightly than that for which it 
-can support indivisible reads and updates.</span>&nbsp;</div>
+deleted.</I></SPAN></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p22">22/5</a></div>
@@ -253,9 +247,8 @@ possible, be implemented by a single load or store instruction.&nbsp;</div>
 behaves as a constant (i.e. read-only) with respect to other parts of 
 the Ada program, but can still be modified by an &ldquo;external source.&rdquo;</div>
 <div class="paranum"><a name="p25">25/4</a></div>
-<div class="Notes">10&nbsp;&nbsp;<span class="insert4">Specifying the 
-Pack aspect cannot override the effect of specifying an Atomic or Atomic_Components 
-aspect.</span></div>
+<div class="Notes">10&nbsp;&nbsp;Specifying the Pack aspect cannot override 
+the effect of specifying an Atomic or Atomic_Components aspect.</div>
 <div class="paranum"><a name="p26">26/5</a></div>
 <div class="Notes">11&nbsp;&nbsp;<span class="insert5">When mapping an 
 Ada object to a memory-mapped hardware register, the Ada object should 

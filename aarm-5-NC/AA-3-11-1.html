@@ -26,7 +26,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,15 +40,15 @@
 <div class="Normal">{<I><A HREF="defect1.html#8652/0014">8652/0014</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00064.TXT">AI95-00064-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0177-1.TXT">AI05-0177-1</A></I>} 
-Declarations sometimes come in two parts. <A NAME="I2539"></A>A declaration 
-that requires a second part is said to <I>require completion</I>. <A NAME="I2540"></A>The 
+Declarations sometimes come in two parts. <A NAME="I2548"></A>A declaration 
+that requires a second part is said to <I>require completion</I>. <A NAME="I2549"></A>The 
 second part is called the <I>completion</I> of the declaration (and of 
 the entity declared), and is either another declaration, a body, or a 
 <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>. A 
-<A NAME="I2541"></A><I>body</I> is a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0089">body</A></SPAN>, 
-an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0224">entry_body</A></SPAN>, 
-a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0191">null_procedure_declaration</A></SPAN> 
-or an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0192">expression_function_declaration</A></SPAN> 
+<A NAME="I2550"></A><I>body</I> is a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0089">body</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0238">entry_body</A></SPAN>, 
+a <SPAN Class="swiss"><A HREF="AA-6-7.html#S0205">null_procedure_declaration</A></SPAN> 
+or an <SPAN Class="swiss"><A HREF="AA-6-8.html#S0206">expression_function_declaration</A></SPAN> 
 that completes another declaration, or a renaming-as-body (see <A HREF="AA-8-5-4.html">8.5.4</A>). 
 </div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
@@ -98,7 +98,7 @@ only if:&nbsp;</div>
 <div class="Bulleted">The declaration and the completion occur immediately 
 within the same declarative region;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Bulleted">The defining name or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0172">defining_program_unit_name</A></SPAN> 
+<div class="Bulleted">The defining name or <SPAN Class="swiss"><A HREF="AA-6-1.html#S0186">defining_program_unit_name</A></SPAN> 
 in the completion is the same as in the declaration, or in the case of 
 a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -106,12 +106,12 @@ applies to the declaration;</div>
 <div class="paranum"><a name="p5">5</a></div>
 <div class="Bulleted">If the declaration is overloadable, then the completion 
 either has a type-conformant profile, or is a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN>. 
-<A NAME="I2542"></A></div>
+<A NAME="I2551"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
-An implicit declaration shall not have a completion. <A NAME="I2543"></A>For 
+An implicit declaration shall not have a completion. <A NAME="I2552"></A>For 
 any explicit declaration that is specified to <I>require completion</I>, 
 there shall be a corresponding explicit completion, unless the declared 
 entity is imported (see <A HREF="AA-B-1.html">B.1</A>).&nbsp;</div>
@@ -126,13 +126,13 @@ ones. So they do not <I>require</I> a completion, they have one by <I>fiat</I>.
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 The implicit declarations of predefined operators are not allowed to 
 have a completion. Enumeration literals, although they are subprograms, 
-are not allowed to have a corresponding <SPAN Class="swiss"><A HREF="AA-6-3.html#S0180">subprogram_body</A></SPAN>. 
+are not allowed to have a corresponding <SPAN Class="swiss"><A HREF="AA-6-3.html#S0194">subprogram_body</A></SPAN>. 
 That's because the completion rules are described in terms of constructs 
-(<SPAN Class="swiss"><A HREF="AA-6-1.html#S0166">subprogram_declaration</A></SPAN>s) 
+(<SPAN Class="swiss"><A HREF="AA-6-1.html#S0180">subprogram_declaration</A></SPAN>s) 
 and not entities (subprograms). When a completion is required, it has 
-to be explicit; the implicit null <SPAN Class="swiss"><A HREF="AA-7-2.html#S0195">package_body</A></SPAN> 
+to be explicit; the implicit null <SPAN Class="swiss"><A HREF="AA-7-2.html#S0209">package_body</A></SPAN> 
 that Clause <A HREF="AA-7.html">7</A> talks about cannot serve as the 
-completion of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0193">package_declaration</A></SPAN> 
+completion of a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0207">package_declaration</A></SPAN> 
 if a completion is required.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">At most one completion is allowed for a given declaration. 
@@ -148,7 +148,7 @@ For example, a limited private type can be completed with a task type,
 which can then be completed with a task body. This is not a violation 
 of the &ldquo;at most one completion&rdquo; rule.&nbsp;</div>
 <div class="paranum"><a name="p8">8</a></div>
-<div class="Normal"><A NAME="I2544"></A>A type is <I>completely defined</I> 
+<div class="Normal"><A NAME="I2553"></A>A type is <I>completely defined</I> 
 at a place that is after its full type definition (if it has one) and 
 after all of its subcomponent types are completely defined. A type shall 
 be completely defined before it is frozen (see <A HREF="AA-13-14.html">13.14</A> 

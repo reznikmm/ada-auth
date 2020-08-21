@@ -27,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,38 +38,38 @@
 <HR>
 <H1>3.8 Record Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I2171"></A><A NAME="I2172"></A>A record 
+<div class="Normal"><A NAME="I2179"></A><A NAME="I2180"></A>A record 
 object is a composite object consisting of named components. The value 
 of a record object is a composite value consisting of the values of the 
-components. <A NAME="I2173"></A></div>
+components. <A NAME="I2181"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_type_definition</SPAN><A NAME="I2174"></A><A NAME="S0066"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<A NAME="I2175"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">record_type_definition</SPAN><A NAME="I2182"></A><A NAME="S0066"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN>[[<B>abstract</B>]&nbsp;<B>tagged</B>]&nbsp;[<B>limited</B>]&nbsp;<A NAME="I2183"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_definition</SPAN><A NAME="I2176"></A><A NAME="S0067"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">record_definition</SPAN><A NAME="I2184"></A><A NAME="S0067"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2177"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2185"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B><BR>
 &nbsp;&nbsp;|&nbsp;<B>null&nbsp;record</B></div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_list</SPAN><A NAME="I2178"></A><A NAME="S0068"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2179"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>&nbsp;{<A NAME="I2180"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>}<BR>
-&nbsp;&nbsp;&nbsp;|&nbsp;{<A NAME="I2181"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>}&nbsp;<A NAME="I2182"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN><BR>
+<div class="Indented1"><SPAN Class="swiss">component_list</SPAN><A NAME="I2186"></A><A NAME="S0068"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I2187"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>&nbsp;{<A NAME="I2188"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>}<BR>
+&nbsp;&nbsp;&nbsp;|&nbsp;{<A NAME="I2189"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>}&nbsp;<A NAME="I2190"></A><SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN><BR>
 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<B>null</B>;</div>
 <div class="paranum"><a name="p5">5/1</a></div>
 <div class="Indented1">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-<SPAN Class="swiss">component_item</SPAN><A NAME="I2183"></A><A NAME="S0069"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2184"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I2185"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0307">aspect_clause</A></SPAN></div>
+<SPAN Class="swiss">component_item</SPAN><A NAME="I2191"></A><A NAME="S0069"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I2192"></A><SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>&nbsp;|&nbsp;<A NAME="I2193"></A><SPAN Class="swiss"><A HREF="AA-13-1.html#S0321">aspect_clause</A></SPAN></div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">component_declaration</SPAN><A NAME="I2186"></A><A NAME="S0070"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;<A NAME="I2187"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I2188"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2189"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2190"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">component_declaration</SPAN><A NAME="I2194"></A><A NAME="S0070"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;<A NAME="I2195"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<A NAME="I2196"></A><SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>&nbsp;[:=&nbsp;<A NAME="I2197"></A><SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I2198"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I2191"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
+<div class="Normal"><A NAME="I2199"></A>The expected type for the <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN>, 
 if any, in a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 is the type of the component.&nbsp;</div>
 
@@ -80,7 +80,7 @@ deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/A
 </div>
 <div class="paranum"><a name="p9">9/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00366.TXT">AI95-00366-01</A></I>} 
-<A NAME="I2192"></A>Each <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
+<A NAME="I2200"></A>Each <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 declares a component of the record type. Besides components declared 
 by <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>s, 
 the components of a record type include any components declared by <SPAN Class="swiss"><A HREF="AA-3-7.html#S0062">discriminant_specification</A></SPAN>s 
@@ -101,7 +101,7 @@ only in the following cases:</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0295-1.TXT">AI05-0295-1</A></I>} 
 A <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> that 
 denotes any component, protected subprogram, or entry is allowed within 
-an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>, 
+an <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>, 
 an operational item, or a representation item that occurs within the 
 declaration of the composite type.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
@@ -114,7 +114,7 @@ the bounds of an entry family, or the constraint of the parent subtype
 in a <SPAN Class="swiss"><A HREF="AA-3-4.html#S0035">derived_type_definition</A></SPAN>, 
 then its name shall appear alone as a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0092">direct_name</A></SPAN> 
 (not as part of a larger expression or expanded name). A discriminant 
-shall not be used to define the constraint of a scalar component.<A NAME="I2193"></A> 
+shall not be used to define the constraint of a scalar component.<A NAME="I2201"></A> 
 </div>
 <div class="paranum"><a name="p12.a">12.a</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>The penultimate restriction simplifies 
@@ -144,7 +144,7 @@ cannot depend on the value of another one. They also prevent circularities.
 <div class="paranum"><a name="p12.f">12.f/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0295-1.TXT">AI05-0295-1</A></I>} 
 Inherited discriminants are not allowed to be denoted, except within 
-<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>s 
+<SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>s 
 and representation items. However, the <I>discriminant_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
 of the parent <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 is allowed to denote a discriminant of the parent.&nbsp;</div>
@@ -166,11 +166,11 @@ could affect the size of the object, which would be bad.&nbsp;</div>
 <div class="paranum"><a name="p13.1">13.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10318.TXT">AI95-00318-02</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0004-1.TXT">AI05-0004-1</A></I>} 
-<A NAME="I2194"></A><A NAME="I2195"></A>If a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN> 
+<A NAME="I2202"></A><A NAME="I2203"></A>If a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN> 
 includes the reserved word <B>limited</B>, the type is called an <I>explicitly 
 limited record</I> type.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I2196"></A>The <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2204"></A>The <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 defines the (nominal) subtype of the component. If the reserved word 
 <B>aliased</B> appears in the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>, 
@@ -180,7 +180,7 @@ then the component is aliased (see <A HREF="AA-3-10.html">3.10</A>).
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00363.TXT">AI95-00363-01</A></I>} 
 </div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I2197"></A>If the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
+<div class="Normal"><A NAME="I2205"></A>If the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
 of a record type is defined by the reserved word <B>null</B> and there 
 are no discriminants, then the record type has no components and all 
 records of the type are <I>null records</I>. A <SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN> 
@@ -193,17 +193,17 @@ both for declaring a record type and a record extension &mdash; see <A HREF="AA-
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I2198"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN> 
+<div class="Normal"><A NAME="I2206"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0066">record_type_definition</A></SPAN> 
 creates the record type and its first subtype, and consists of the elaboration 
 of the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN>. 
-<A NAME="I2199"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN> 
+<A NAME="I2207"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN> 
 consists of the elaboration of its <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN>, 
 if any.</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I2200"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
+<div class="Normal"><A NAME="I2208"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0068">component_list</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-8.html#S0069">component_item</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0071">variant_part</A></SPAN>, 
-if any, in the order in which they appear. <A NAME="I2201"></A>The elaboration 
+if any, in the order in which they appear. <A NAME="I2209"></A>The elaboration 
 of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 consists of the elaboration of the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN>. 
 </div>
@@ -218,7 +218,7 @@ in the list.&nbsp;</div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0002">8652/0002</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00171.TXT">AI95-00171-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00230.TXT">AI95-00230-01</A></I>} 
-<A NAME="I2202"></A><A NAME="I2203"></A><A NAME="I2204"></A>Within the 
+<A NAME="I2210"></A><A NAME="I2211"></A><A NAME="I2212"></A>Within the 
 definition of a composite type, if a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 (see <A HREF="AA-9-5-2.html">9.5.2</A>) includes a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -228,11 +228,11 @@ denotes the current instance of the type, the expression containing the
 <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> is called 
 a <I>per-object expression</I>, and the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-5.html#S0037">range</A></SPAN> being 
-defined is called a <I>per-object constraint</I>. <A NAME="I2205"></A>For 
+defined is called a <I>per-object constraint</I>. <A NAME="I2213"></A>For 
 the elaboration of a <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 or the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
-of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN> 
+of an <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
 for an entry family (see <A HREF="AA-9-5-2.html">9.5.2</A>), if the component 
 subtype is defined by an <SPAN Class="swiss"><A HREF="AA-3-10.html#S0084">access_definition</A></SPAN> 
 or if the <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0029">constraint</A></SPAN> 
@@ -252,11 +252,11 @@ each associated discriminant.</div>
 <div class="paranum"><a name="p18.1">18.1/1</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="defect1.html#8652/0002">8652/0002</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00171.TXT">AI95-00171-01</A></I>} 
-<A NAME="I2206"></A>When a per-object constraint is elaborated [(as part 
+<A NAME="I2214"></A>When a per-object constraint is elaborated [(as part 
 of creating an object)], each per-object expression of the constraint 
 is evaluated. For other expressions, the values determined during the 
 elaboration of the <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0221">entry_declaration</A></SPAN> 
+or <SPAN Class="swiss"><A HREF="AA-9-5-2.html#S0235">entry_declaration</A></SPAN> 
 are used. Any checks associated with the enclosing <SPAN Class="swiss"><A HREF="AA-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="AA-3-6.html#S0055">discrete_subtype_definition</A></SPAN> 
 are performed[, including the subtype compatibility check (see <A HREF="AA-3-2-2.html">3.2.2</A>),] 
@@ -292,7 +292,7 @@ then the same components are present in all values of the type.</div>
 reserved word <B>limited</B> in its definition, or if any of its components 
 are limited (see <A HREF="AA-7-5.html">7.5</A>).</div>
 <div class="paranum"><a name="p24">24</a></div>
-<div class="Notes">68&nbsp;&nbsp;<A NAME="I2207"></A>The predefined operations 
+<div class="Notes">68&nbsp;&nbsp;<A NAME="I2215"></A>The predefined operations 
 of a record type include membership tests, qualification, and explicit 
 conversion. If the record type is nonlimited, they also include assignment 
 and the predefined equality operators.</div>
@@ -329,7 +329,7 @@ A,&nbsp;B,&nbsp;C&nbsp;:&nbsp;Complex;</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p31.a">31.a</a></div>
-<div class="Annotations"><A NAME="I2208"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
+<div class="Annotations"><A NAME="I2216"></A>The syntax rule for <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN> 
 is modified to use <SPAN Class="swiss"><A HREF="AA-3-6.html#S0056">component_definition</A></SPAN> 
 (instead of <SPAN Class="swiss">component_subtype_definition</SPAN>). 
 The effect of this change is to allow the reserved word <B>aliased</B> 
@@ -351,25 +351,25 @@ makes perfect sense for nonprivate types such as record types.&nbsp;</div>
 <div class="paranum"><a name="p31.d">31.d/1</a></div>
 <div class="Annotations">{<I><A HREF="defect1.html#8652/0009">8652/0009</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00137.TXT">AI95-00137-01</A></I>} 
-The syntax rules now allow <SPAN Class="swiss"><A HREF="AA-13-1.html#S0307">aspect_clause</A></SPAN>s 
+The syntax rules now allow <SPAN Class="swiss"><A HREF="AA-13-1.html#S0321">aspect_clause</A></SPAN>s 
 to appear in a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0067">record_definition</A></SPAN>. 
 This is not a language extension, because Legality Rules prevent all 
 language-defined representation clauses from appearing there. However, 
-an implementation-defined <SPAN Class="swiss"><A HREF="AA-13-3.html#S0313">attribute_definition_clause</A></SPAN> 
+an implementation-defined <SPAN Class="swiss"><A HREF="AA-13-3.html#S0327">attribute_definition_clause</A></SPAN> 
 could appear there. The reason for this change is to allow the rules 
-for <SPAN Class="swiss"><A HREF="AA-13-1.html#S0307">aspect_clause</A></SPAN>s 
+for <SPAN Class="swiss"><A HREF="AA-13-1.html#S0321">aspect_clause</A></SPAN>s 
 and representation pragmas to be as similar as possible.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p31.e">31.e/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I2209"></A>Record components can have an anonymous access type.</div>
+<A NAME="I2217"></A>Record components can have an anonymous access type.</div>
 <div class="paranum"><a name="p31.f">31.f/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00287.TXT">AI95-00287-01</A></I>} 
-<A NAME="I2210"></A>Limited components can be initialized, so long as 
+<A NAME="I2218"></A>Limited components can be initialized, so long as 
 the expression is one that allows building the object in place (such 
 as an <SPAN Class="swiss"><A HREF="AA-4-3.html#S0106">aggregate</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0182">function_call</A></SPAN>). 
+or <SPAN Class="swiss"><A HREF="AA-6-4.html#S0196">function_call</A></SPAN>). 
 </div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -391,7 +391,7 @@ Defined <I>explicitly limited record</I> type to use in other rules.
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p31.j">31.j/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I2211"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
+<A NAME="I2219"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
 can be used in a <SPAN Class="swiss"><A HREF="AA-3-8.html#S0070">component_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 

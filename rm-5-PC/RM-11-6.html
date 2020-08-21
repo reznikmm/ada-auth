@@ -34,13 +34,13 @@
 <HR>
 <H1>11.6 Exceptions and Optimization</H1>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Normal"><A NAME="I4869"></A><A NAME="I4870"></A><A NAME="I4871"></A><A NAME="I4872"></A><A NAME="I4873"></A><A NAME="I4874"></A>This 
+<div class="Normal"><A NAME="I4857"></A><A NAME="I4858"></A><A NAME="I4859"></A><A NAME="I4860"></A><A NAME="I4861"></A><A NAME="I4862"></A>This 
 subclause gives permission to the implementation to perform certain &ldquo;optimizations&rdquo; 
 that do not necessarily preserve the canonical semantics.&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I4875"></A>The rest of this International 
+<div class="Normal"><A NAME="I4863"></A>The rest of this International 
 Standard (outside this subclause) defines the <I>canonical semantics</I> 
 of the language. The canonical semantics of a given (legal) program determines 
 a set of possible external effects that can result from the execution 
@@ -60,7 +60,7 @@ that is allowed by the canonical semantics, or by the rules of this subclause.
 <div class="Normal" style="margin-bottom: 0.4em">The following additional 
 permissions are granted to the implementation:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Bulleted"><A NAME="I4876"></A><A NAME="I4877"></A>An implementation 
+<div class="Bulleted"><A NAME="I4864"></A><A NAME="I4865"></A>An implementation 
 need not always raise an exception when a language-defined check fails. 
 Instead, the operation that failed the check can simply yield an <I>undefined 
 result</I>. The exception need be raised by the implementation only if, 
@@ -72,7 +72,7 @@ type, if scalar. Having removed the raise of the exception, the canonical
 semantics will in general allow the implementation to omit the code for 
 the check, and some or all of the operation itself.&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Bulleted"><A NAME="I4878"></A>If an exception is raised due 
+<div class="Bulleted"><A NAME="I4866"></A>If an exception is raised due 
 to the failure of a language-defined check, then upon reaching the corresponding 
 <SPAN Class="swiss"><A HREF="RM-11-2.html#S0283">exception_handler</A></SPAN> 
 (or the termination of the task, if none), the external interactions 
@@ -83,9 +83,9 @@ possibly earlier (or later if the interactions are independent of the
 result of the checked operation) than that defined by the canonical semantics, 
 but not within the execution of some abort-deferred operation or <I>independent</I> 
 subprogram that does not dynamically enclose the execution of the construct 
-whose check failed. <A NAME="I4879"></A>An independent subprogram is 
+whose check failed. <A NAME="I4867"></A>An independent subprogram is 
 one that is defined outside the library unit containing the construct 
-whose check failed, and for which the Inline aspect is False. <A NAME="I4880"></A><A NAME="I4881"></A><A NAME="I4882"></A>Any 
+whose check failed, and for which the Inline aspect is False. <A NAME="I4868"></A><A NAME="I4869"></A><A NAME="I4870"></A>Any 
 assignment that occurred outside of such abort-deferred operations or 
 independent subprograms can be disrupted by the raising of the exception, 
 causing the object or its parts to become abnormal, and certain subsequent 

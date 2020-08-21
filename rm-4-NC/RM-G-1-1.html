@@ -15,16 +15,16 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -147,7 +147,7 @@ package Numerics.Generic_Complex_Types has the following declaration:
 <div class="paranum"><a name="p24">24</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Complex_Types;</div>
 <div class="paranum"><a name="p25">25/1</a></div>
-<div class="Normal"><A NAME="I8279"></A>The library package Numerics.Complex_Types 
+<div class="Normal">&nbsp;<A NAME="I8279"></A>The library package Numerics.Complex_Types 
 is declared pure and defines the same types, constants, and subprograms 
 as Numerics.Generic_Complex_Types, except that the predefined type Float 
 is systematically substituted for Real'Base throughout. Nongeneric equivalents 
@@ -155,7 +155,7 @@ of Numerics.Generic_Complex_Types for each of the other predefined floating
 point types are defined similarly, with the names Numerics.Short_Complex_Types, 
 Numerics.Long_Complex_Types, etc.&nbsp;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Normal">Complex is a visible type with Cartesian components. 
+<div class="Normal">&nbsp;Complex is a visible type with Cartesian components. 
 </div>
 <div class="paranum"><a name="p27">27</a></div>
 <div class="Normal">Imaginary is a private type; its full type is derived 
@@ -302,7 +302,7 @@ defined when Real'Signed_Zeros is True.&nbsp;</div>
 not, be actual instantiations of the generic package for the appropriate 
 predefined type.</div>
 <div class="paranum"><a name="p55">55/2</a></div>
-<div class="Normal">Implementations may obtain the result of exponentiation 
+<div class="Normal">&nbsp;Implementations may obtain the result of exponentiation 
 of a complex or pure-imaginary operand by repeated complex multiplication, 
 with arbitrary association of the factors and with a possible final complex 
 reciprocation (when the exponent is negative). Implementations are also 

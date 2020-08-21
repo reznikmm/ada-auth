@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,8 +35,8 @@
 <HR>
 <H1>12.7 Formal Packages</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal">[<A NAME="I5359"></A> <A NAME="I5360"></A>Formal 
-packages can be used to pass packages to a generic unit. The <SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN> 
+<div class="Normal">[<A NAME="I5554"></A> <A NAME="I5555"></A>Formal 
+packages can be used to pass packages to a generic unit. The <SPAN Class="swiss"><A HREF="AA-12-7.html#S0318">formal_package_declaration</A></SPAN> 
 declares that the formal package is an instance of a given generic package. 
 Upon instantiation, the actual package has to be an instance of that 
 generic package.]&nbsp;</div>
@@ -44,68 +44,68 @@ generic package.]&nbsp;</div>
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<SPAN Class="swiss">formal_package_declaration</SPAN><A NAME="I5361"></A><A NAME="S0304"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;<A NAME="I5362"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5363"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;&nbsp;<A NAME="I5364"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5365"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN>];</div>
+<SPAN Class="swiss">formal_package_declaration</SPAN><A NAME="I5556"></A><A NAME="S0318"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>with</B>&nbsp;<B>package</B>&nbsp;<A NAME="I5557"></A><SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;<B>is</B>&nbsp;<B>new</B>&nbsp;<I>generic_package_</I><A NAME="I5558"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN>&nbsp;&nbsp;<A NAME="I5559"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I5560"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN>];</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-<SPAN Class="swiss">formal_package_actual_part</SPAN><A NAME="I5366"></A><A NAME="S0305"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+<SPAN Class="swiss">formal_package_actual_part</SPAN><A NAME="I5561"></A><A NAME="S0319"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;([<B>others</B>&nbsp;=&gt;]&nbsp;&lt;&gt;)<BR>
-&nbsp;&nbsp;|&nbsp;[<A NAME="I5367"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0280">generic_actual_part</A></SPAN>]<BR>
-&nbsp;&nbsp;|&nbsp;(<A NAME="I5368"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5369"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>}&nbsp;[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;])</div>
+&nbsp;&nbsp;|&nbsp;[<A NAME="I5562"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0294">generic_actual_part</A></SPAN>]<BR>
+&nbsp;&nbsp;|&nbsp;(<A NAME="I5563"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>&nbsp;{,&nbsp;<A NAME="I5564"></A><SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>}&nbsp;[,&nbsp;<B>others</B>&nbsp;=&gt;&nbsp;&lt;&gt;])</div>
 <div class="paranum"><a name="p3.1">3.1/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-<SPAN Class="swiss">formal_package_association</SPAN><A NAME="I5370"></A><A NAME="S0306"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5371"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0281">generic_association</A></SPAN><BR>
-&nbsp;&nbsp;|&nbsp;<I>generic_formal_parameter_</I><A NAME="I5372"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
+<SPAN Class="swiss">formal_package_association</SPAN><A NAME="I5565"></A><A NAME="S0320"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I5566"></A><SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN><BR>
+&nbsp;&nbsp;|&nbsp;<I>generic_formal_parameter_</I><A NAME="I5567"></A><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN>&nbsp;=&gt;&nbsp;&lt;&gt;</div>
 <div class="paranum"><a name="p3.2">3.2/2</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-Any positional <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
-shall precede any named <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s. 
+Any positional <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>s 
+shall precede any named <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>s. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I5373"></A>The <I>generic_package_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="Normal"><A NAME="I5568"></A>The <I>generic_package_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 shall denote a generic package (the <I>template</I> for the formal package); 
 the formal package is an instance of the template.</div>
 <div class="paranum"><a name="p4.1">4.1/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0025-1.TXT">AI05-0025-1</A></I>} 
 The <I>generic_formal_parameter_</I><SPAN Class="swiss"><A HREF="AA-4-1-3.html#S0099">selector_name</A></SPAN> 
-of a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
-shall denote a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+of a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN> 
+shall denote a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
 of the template. If two or more formal subprograms of the template have 
 the same defining name, then named associations are not allowed for the 
 corresponding actuals.</div>
 <div class="paranum"><a name="p4.2">4.2/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00398.TXT">AI95-00398-01</A></I>} 
-A <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
-shall contain at most one <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
-for each formal parameter. If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+A <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
+shall contain at most one <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN> 
+for each formal parameter. If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
 does not include &ldquo;<B>others</B> =&gt; &lt;&gt;&rdquo;, each formal 
 parameter without an association shall have a <SPAN Class="swiss"><A HREF="AA-3-7.html#S0063">default_expression</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0302">subprogram_default</A></SPAN>.</div>
+or <SPAN Class="swiss"><A HREF="AA-12-6.html#S0316">subprogram_default</A></SPAN>.</div>
 <div class="paranum"><a name="p4.3">4.3/3</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0200-1.TXT">AI05-0200-1</A></I>} 
-The rules for matching between <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
+The rules for matching between <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>s 
 and the generic formals of the template are as follows:&nbsp;</div>
 <div class="paranum"><a name="p4.4">4.4/3</a></div>
-<div class="Bulleted">If all of the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
-are given by generic associations, the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0282">explicit_generic_actual_parameter</A></SPAN>s 
-of the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN>s 
+<div class="Bulleted">If all of the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>s 
+are given by generic associations, the <SPAN Class="swiss"><A HREF="AA-12-3.html#S0296">explicit_generic_actual_parameter</A></SPAN>s 
+of the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN>s 
 shall be legal for an instantiation of the template.</div>
 <div class="paranum"><a name="p4.5">4.5/3</a></div>
-<div class="Bulleted">If a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
+<div class="Bulleted">If a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN> 
 for a formal type <I>T</I> of the template is given by &lt;&gt;, then 
-the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0306">formal_package_association</A></SPAN> 
-for any other <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0320">formal_package_association</A></SPAN> 
+for any other <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
 of the template that mentions <I>T</I> directly or indirectly must be 
 given by &lt;&gt; as well.</div>
 <div class="paranum"><a name="p4.a">4.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0200-1.TXT">AI05-0200-1</A></I>} 
 The above rule is simple to state, though it does not reflect the fact 
 that the formal package functions like an instantiation of a special 
-kind, where each box association for a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0278">generic_formal_parameter_declaration</A></SPAN> 
+kind, where each box association for a <SPAN Class="swiss"><A HREF="AA-12-1.html#S0292">generic_formal_parameter_declaration</A></SPAN> 
 <I>F</I> is replaced with a new entity <I>F</I>' that has the same characteristics 
 as <I>F</I>: if <I>F</I> is a formal discrete type then <I>F</I>' is 
 a discrete type, if <I>F</I> is a formal subprogram then <I>F</I>' is 
@@ -114,17 +114,17 @@ by making the association into a copy of the declaration of the generic
 formal.</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-The actual shall be an instance of the template. If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+The actual shall be an instance of the template. If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
 is (&lt;&gt;) or (<B>others</B> =&gt; &lt;&gt;), [then the actual may 
 be any instance of the template]; otherwise, certain of the actual parameters 
 of the actual instance shall match the corresponding actual parameters 
 of the formal package, determined as follows:</div>
 <div class="paranum"><a name="p5.1">5.1/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
-includes <SPAN Class="swiss"><A HREF="AA-12-3.html#S0281">generic_association</A></SPAN>s 
+If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
+includes <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN>s 
 as well as associations with &lt;&gt;, then only the actual parameters 
-specified explicitly with <SPAN Class="swiss"><A HREF="AA-12-3.html#S0281">generic_association</A></SPAN>s 
+specified explicitly with <SPAN Class="swiss"><A HREF="AA-12-3.html#S0295">generic_association</A></SPAN>s 
 are required to match;</div>
 <div class="paranum"><a name="p5.2">5.2/2</a></div>
 <div class="Bulleted">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
@@ -145,7 +145,7 @@ conformance between the two actual parameter expressions, because the
 two expressions are being evaluated at different times.&nbsp;</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Bulleted">For a formal subtype, the actuals match if they 
-denote statically matching subtypes. <A NAME="I5374"></A></div>
+denote statically matching subtypes. <A NAME="I5569"></A></div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Bulleted">For other kinds of formals, the actuals match if 
 they statically denote the same entity.&nbsp;</div>
@@ -158,13 +158,13 @@ actual expression (recursively).&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN> 
+<div class="Normal">A <SPAN Class="swiss"><A HREF="AA-12-7.html#S0318">formal_package_declaration</A></SPAN> 
 declares a generic formal package.</div>
 <div class="paranum"><a name="p10">10/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-<A NAME="I5375"></A>The visible part of a formal package includes the 
+<A NAME="I5570"></A>The visible part of a formal package includes the 
 first list of <SPAN Class="swiss"><A HREF="AA-3-11.html#S0088">basic_declarative_item</A></SPAN>s 
-of the <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>. 
+of the <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>. 
 In addition, for each actual parameter that is not required to match, 
 a copy of the declaration of the corresponding formal parameter of the 
 template is included in the visible part of the formal package. If the 
@@ -173,9 +173,9 @@ of the primitive subprograms of the formal type are also included in
 the visible part of the formal package.</div>
 <div class="paranum"><a name="p10.a">10.a/2</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
-If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+If the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
 is (&lt;&gt;), then the declarations that occur immediately within the 
-<SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN> 
 of the template for the formal package are visible outside the formal 
 package, and can be denoted by expanded names outside the formal package.If 
 only some of the actual parameters are given by &lt;&gt;, then the declaration 
@@ -189,7 +189,7 @@ get some funny anomalies since they denote the same entity, but, in the
 case of types at least, they might have different and inconsistent sets 
 of primitive operators due to predefined operator &ldquo;reemergence.&rdquo; 
 Formal derived types exacerbate the difference. We want the implicit 
-declarations of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0277">generic_formal_part</A></SPAN> 
+declarations of the <SPAN Class="swiss"><A HREF="AA-12-1.html#S0291">generic_formal_part</A></SPAN> 
 as well as the explicit declarations, so we get operations on the formal 
 types.&nbsp;</div>
 <div class="paranum"><a name="p10.c">10.c</a></div>
@@ -200,7 +200,7 @@ formal package as an actual to another generic formal package.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
 For the purposes of matching, if the actual instance <I>A</I> is itself 
 a formal package, then the actual parameters of <I>A</I> are those specified 
-explicitly or implicitly in the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0305">formal_package_actual_part</A></SPAN> 
+explicitly or implicitly in the <SPAN Class="swiss"><A HREF="AA-12-7.html#S0319">formal_package_actual_part</A></SPAN> 
 for <I>A</I>, plus, for those not specified, the copies of the formal 
 parameters of the template included in the visible part of <I>A</I>.</div>
 
@@ -256,14 +256,14 @@ parameters of the template included in the visible part of <I>A</I>.</div>
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p25.a">25.a</a></div>
-<div class="Annotations"><A NAME="I5376"></A>Formal packages are new 
+<div class="Annotations"><A NAME="I5571"></A>Formal packages are new 
 to Ada 95.&nbsp;</div>
 
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p25.b">25.b/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00317.TXT">AI95-00317-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00398.TXT">AI95-00398-01</A></I>} 
-<A NAME="I5377"></A>It's now allowed to mix actuals of a formal package 
+<A NAME="I5572"></A>It's now allowed to mix actuals of a formal package 
 that are specified with those that are not specified.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 95</H4>
@@ -284,7 +284,7 @@ is a formal package.&nbsp;</div>
 <div class="paranum"><a name="p25.e">25.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0025-1.TXT">AI05-0025-1</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0200-1.TXT">AI05-0200-1</A></I>} 
-<A NAME="I5378"></A><B>Correction:</B> Added missing rules for parameters 
+<A NAME="I5573"></A><B>Correction:</B> Added missing rules for parameters 
 of generic formal package that parallel those in <A HREF="AA-12-3.html">12.3</A>, 
 as well as some specific to &lt;&gt; parameters. These are technically 
 incompatibilities because generic formal package parameters that Ada 
@@ -296,8 +296,8 @@ implementations already enforce some of these rules.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p25.f">25.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0183-1.TXT">AI05-0183-1</A></I>} 
-<A NAME="I5379"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0310">aspect_specification</A></SPAN> 
-can be used in a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0304">formal_package_declaration</A></SPAN>. 
+<A NAME="I5574"></A>An optional <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0324">aspect_specification</A></SPAN> 
+can be used in a <SPAN Class="swiss"><A HREF="AA-12-7.html#S0318">formal_package_declaration</A></SPAN>. 
 This is described in <A HREF="AA-13-1-1.html">13.1.1</A>.&nbsp;</div>
 
 <HR>

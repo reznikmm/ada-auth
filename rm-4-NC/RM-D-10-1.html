@@ -15,12 +15,12 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -65,26 +65,26 @@ object is equal to Release_Threshold, at which time all blocked tasks
 are released. Notified is set to True for one of the released tasks, 
 and set to False for all other released tasks.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal">The mechanism for determining which task sets Notified 
+<div class="Normal">&nbsp;The mechanism for determining which task sets Notified 
 to True is implementation defined.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">Once all tasks have been released, a Synchronous_Barrier 
+<div class="Normal">&nbsp;Once all tasks have been released, a Synchronous_Barrier 
 object may be reused to block another Release_Threshold number of tasks.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal">As the first step of the finalization of a Synchronous_Barrier, 
+<div class="Normal">&nbsp;As the first step of the finalization of a Synchronous_Barrier, 
 each blocked task is unblocked and Program_Error is raised at the place 
 of the call to Wait_For_Release.</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Normal">It is implementation defined whether an abnormal 
+<div class="Normal">&nbsp;It is implementation defined whether an abnormal 
 task which is waiting on a Synchronous_Barrier object is aborted immediately 
 or aborted when the tasks waiting on the object are released.&nbsp;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Normal">Wait_For_Release is a potentially blocking operation 
+<div class="Normal">&nbsp;Wait_For_Release is a potentially blocking operation 
 (see <A HREF="RM-9-5-1.html">9.5.1</A>).&nbsp;</div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal">It is a bounded error to call Wait_For_Release on 
+<div class="Normal">&nbsp;It is a bounded error to call Wait_For_Release on 
 a Synchronous_Barrier object after that object is finalized. If the error 
 is detected, Program_Error is raised. Otherwise, the call proceeds normally, 
 which may leave a task blocked forever.&nbsp;</div>

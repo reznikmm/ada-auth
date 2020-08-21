@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -131,28 +131,28 @@ package Numerics.Generic_Real_Arrays has the following declaration:&nbsp;</div>
 <div class="paranum"><a name="p30">30/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Numerics.Generic_Real_Arrays;</div>
 <div class="paranum"><a name="p31">31/2</a></div>
-<div class="Normal"><A NAME="I8382"></A>The library package Numerics.Real_Arrays 
+<div class="Normal">&nbsp;<A NAME="I8382"></A>The library package Numerics.Real_Arrays 
 is declared pure and defines the same types and subprograms as Numerics.Generic_Real_Arrays, 
 except that the predefined type Float is systematically substituted for 
 Real'Base throughout. Nongeneric equivalents for each of the other predefined 
 floating point types are defined similarly, with the names Numerics.Short_Real_Arrays, 
 Numerics.Long_Real_Arrays, etc.&nbsp;</div>
 <div class="paranum"><a name="p32">32/2</a></div>
-<div class="Normal">Two types are defined and exported by Numerics.Generic_Real_Arrays. 
+<div class="Normal">&nbsp;Two types are defined and exported by Numerics.Generic_Real_Arrays. 
 The composite type Real_Vector is provided to represent a vector with 
 components of type Real; it is defined as an unconstrained, one-dimensional 
 array with an index of type Integer. The composite type Real_Matrix is 
 provided to represent a matrix with components of type Real; it is defined 
 as an unconstrained, two-dimensional array with indices of type Integer.</div>
 <div class="paranum"><a name="p33">33/2</a></div>
-<div class="Normal">The effect of the various subprograms is as described 
+<div class="Normal">&nbsp;The effect of the various subprograms is as described 
 below. In most cases the subprograms are described in terms of corresponding 
 scalar operations of the type Real; any exception raised by those operations 
 is propagated by the array operation. Moreover, the accuracy of the result 
 for each individual component is as defined for the scalar operation 
 unless stated otherwise.</div>
 <div class="paranum"><a name="p34">34/2</a></div>
-<div class="Normal">In the case of those operations which are defined 
+<div class="Normal">&nbsp;In the case of those operations which are defined 
 to <I>involve an inner product</I>, Constraint_Error may be raised if 
 an intermediate result is outside the range of Real'Base even though 
 the mathematical final result would not be.<A NAME="I8383"></A></div>
@@ -344,15 +344,15 @@ or First_2 + Order &ndash; 1 &gt; Integer'Last.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p81">81/2</a></div>
-<div class="Normal">Accuracy requirements for the subprograms Solve, 
+<div class="Normal">&nbsp;Accuracy requirements for the subprograms Solve, 
 Inverse, Determinant, Eigenvalues and Eigensystem are implementation 
 defined.&nbsp;</div>
 <div class="paranum"><a name="p82">82/2</a></div>
-<div class="Normal">For operations not involving an inner product, the 
+<div class="Normal">&nbsp;For operations not involving an inner product, the 
 accuracy requirements are those of the corresponding operations of the 
 type Real in both the strict mode and the relaxed mode (see <A HREF="RM-G-2.html">G.2</A>).</div>
 <div class="paranum"><a name="p83">83/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">For operations involving 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For operations involving 
 an inner product, no requirements are specified in the relaxed mode. 
 In the strict mode the modulus of the absolute error of the inner product 
 <I>X</I>*<I>Y</I> shall not exceed <I>g</I>*<B>abs</B>(<I>X</I>)*<B>abs</B>(<I>Y</I>) 
@@ -360,41 +360,41 @@ where <I>g</I> is defined as&nbsp;</div>
 <div class="paranum"><a name="p84">84/2</a></div>
 <div class="Indented1"><I>g</I>&nbsp;=&nbsp;<I>X</I>'Length&nbsp;*&nbsp;Real'Machine_Radix**(1&nbsp;&ndash;&nbsp;Real'Model_Mantissa)</div>
 <div class="paranum"><a name="p85">85/2</a></div>
-<div class="Normal">For the L2-norm, no accuracy requirements are specified 
+<div class="Normal">&nbsp;For the L2-norm, no accuracy requirements are specified 
 in the relaxed mode. In the strict mode the relative error on the norm 
 shall not exceed <I>g</I> / 2.0 + 3.0 * Real'Model_Epsilon where <I>g</I> 
 is defined as above.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p86">86/2</a></div>
-<div class="Normal">Implementations shall document any techniques used 
+<div class="Normal">&nbsp;Implementations shall document any techniques used 
 to reduce cancellation errors such as extended precision arithmetic. 
 </div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p87">87/2</a></div>
-<div class="Normal">The nongeneric equivalent packages may, but need 
+<div class="Normal">&nbsp;The nongeneric equivalent packages may, but need 
 not, be actual instantiations of the generic package for the appropriate 
 predefined type.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p88">88/3</a></div>
-<div class="Normal">Implementations should implement the Solve and Inverse 
+<div class="Normal">&nbsp;Implementations should implement the Solve and Inverse 
 functions using established techniques such as LU decomposition with 
 row interchanges followed by back and forward substitution. Implementations 
 are recommended to refine the result by performing an iteration on the 
 residuals; if this is done, then it should be documented.&nbsp;</div>
 <div class="paranum"><a name="p89">89/2</a></div>
-<div class="Normal">It is not the intention that any special provision 
+<div class="Normal">&nbsp;It is not the intention that any special provision 
 should be made to determine whether a matrix is ill-conditioned or not. 
 The naturally occurring overflow (including division by zero) which will 
 result from executing these functions with an ill-conditioned matrix 
 and thus raise Constraint_Error is sufficient.&nbsp;</div>
 <div class="paranum"><a name="p90">90/2</a></div>
-<div class="Normal">The test that a matrix is symmetric should be performed 
+<div class="Normal">&nbsp;The test that a matrix is symmetric should be performed 
 by using the equality operator to compare the relevant components.&nbsp;</div>
 <div class="paranum"><a name="p91">91/3</a></div>
-<div class="Normal">An implementation should minimize the circumstances 
+<div class="Normal">&nbsp;An implementation should minimize the circumstances 
 under which the algorithm used for Eigenvalues and Eigensystem fails 
 to converge.&nbsp;</div>
 

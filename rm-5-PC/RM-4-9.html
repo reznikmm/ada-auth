@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -42,13 +40,13 @@
 <div class="Normal">Certain expressions of a scalar or string type are 
 defined to be static. Similarly, certain discrete ranges are defined 
 to be static, and certain scalar and string subtypes are defined to be 
-static subtypes. <A NAME="I3168"></A><I>Static</I> means determinable 
+static subtypes. <A NAME="I3158"></A><I>Static</I> means determinable 
 at compile time, using the declared properties or values of the program 
-entities. <A NAME="I3169"></A></div>
+entities. <A NAME="I3159"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3170"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3160"></A>A 
 static expression is a scalar or string expression that is one of the 
 following:</div>
 <div class="paranum"><a name="p3">3/5</a></div>
@@ -94,10 +92,10 @@ whose <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>
 denotes a static (scalar or string) subtype, and whose operand is a static 
 expression;&nbsp;</div>
 <div class="paranum"><a name="p11">11/4</a></div>
-<div class="Bulleted">a membership test whose <span class="insert4"><I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">&nbsp;simple_expression</A></SPAN></span> 
+<div class="Bulleted">a membership test whose <I>tested_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
 is a static expression, and whose <SPAN Class="swiss"><A HREF="RM-4-4.html#S0126">membership_choice_list</A></SPAN> 
 consists only of <SPAN Class="swiss"><A HREF="RM-4-4.html#S0127">membership_choice</A></SPAN>s 
-that are either static <span class="insert4"><I>choice_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN>s</span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">&nbsp;choice_expression</A></SPAN>s</span>, 
+that are either static <I>choice_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN>s, 
 static <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>s, 
 or <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>s 
 that denote a static (scalar or string) subtype;&nbsp;</div>
@@ -113,7 +111,7 @@ are static expressions;</div>
 <div class="paranum"><a name="p13">13</a></div>
 <div class="Bulleted">a static expression enclosed in parentheses.&nbsp;</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3171"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3161"></A>A 
 <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> <I>statically 
 denotes</I> an entity if it denotes the entity and:&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
@@ -130,7 +128,7 @@ statically denotes some entity; or</div>
 with a <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 that statically denotes the renamed entity.&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3172"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3162"></A>A 
 <I>static function</I> is one of the following:&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
 <div class="Bulleted">a predefined operator whose parameter and result 
@@ -158,28 +156,28 @@ are scalar.&nbsp;</div>
 <div class="Normal">In any case, a generic formal subprogram is not a 
 static function.</div>
 <div class="paranum"><a name="p24">24/5</a></div>
-<div class="Normal"><A NAME="I3173"></A>A <I>static constant</I> is a 
+<div class="Normal"><A NAME="I3163"></A>A <I>static constant</I> is a 
 constant view declared by a full constant declaration or an <SPAN Class="swiss"><A HREF="RM-8-5-1.html#S0217">object_renaming_declaration</A></SPAN> 
 with a static nominal subtype, having a value defined by a static scalar 
 expression or by a static string expression<span class="delete5">&nbsp;whose 
 value has a length not exceeding the maximum length of a <SPAN Class="swiss"><A HREF="RM-2-6.html#S0016">string_literal</A></SPAN> 
 in the implementation</span>.&nbsp;</div>
 <div class="paranum"><a name="p25">25</a></div>
-<div class="Normal"><A NAME="I3174"></A>A <I>static range</I> is a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
+<div class="Normal"><A NAME="I3164"></A>A <I>static range</I> is a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
 whose bounds are static expressions, or a <SPAN Class="swiss"><A HREF="RM-4-1-4.html#S0102">range_attribute_reference</A></SPAN> 
 that is equivalent to such a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>. 
-<A NAME="I3175"></A>A <I>static&nbsp;</I><SPAN Class="swiss"><I><A HREF="RM-3-6-1.html#S0058">discrete_range</A></I></SPAN><I></I> 
+<A NAME="I3165"></A>A <I>static&nbsp;</I><SPAN Class="swiss"><I><A HREF="RM-3-6-1.html#S0058">discrete_range</A></I></SPAN><I></I> 
 is one that is a static range or is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0027">subtype_indication</A></SPAN> 
 that defines a static scalar subtype. The base range of a scalar type 
 is a static range, unless the type is a descendant of a formal scalar 
 type.</div>
 <div class="paranum"><a name="p26">26/5</a></div>
-<div class="Normal"><A NAME="I3176"></A>A <I>static subtype</I> is either 
-a <I>static scalar subtype</I> or a <I>static string subtype</I>. <A NAME="I3177"></A>A 
+<div class="Normal"><A NAME="I3166"></A>A <I>static subtype</I> is either 
+a <I>static scalar subtype</I> or a <I>static string subtype</I>. <A NAME="I3167"></A>A 
 static scalar subtype is an unconstrained scalar subtype whose type is 
 not a descendant of a formal type, or a constrained scalar subtype formed 
 by imposing a compatible static constraint on a static scalar subtype. 
-<A NAME="I3178"></A>A static string subtype is <span class="insert5">a 
+<A NAME="I3168"></A>A static string subtype is <span class="insert5">a 
 string subtype that does not have a specified String_Literal aspect, 
 and that is&nbsp;</span>an unconstrained <span class="insert5">array</span><span class="delete5">&nbsp;string</span> 
 subtype whose index subtype and component subtype are static, or a constrained 
@@ -190,21 +188,21 @@ mode <B>in out</B>, and the result subtype of a generic formal function,
 are not static. Also, a subtype is not static if any Dynamic_Predicate 
 specifications apply to it.&nbsp;</div>
 <div class="paranum"><a name="p27">27</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3179"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3169"></A>The 
 different kinds of <I>static constraint</I> are defined as follows:&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Bulleted">A null constraint is always static;</div>
 <div class="paranum"><a name="p29">29</a></div>
-<div class="Bulleted"><A NAME="I3180"></A><A NAME="I3181"></A><A NAME="I3182"></A>A 
+<div class="Bulleted"><A NAME="I3170"></A><A NAME="I3171"></A><A NAME="I3172"></A>A 
 scalar constraint is static if it has no <SPAN Class="swiss"><A HREF="RM-3-5.html#S0036">range_constraint</A></SPAN>, 
 or one with a static range;</div>
 <div class="paranum"><a name="p30">30</a></div>
-<div class="Bulleted"><A NAME="I3183"></A>An index constraint is static 
+<div class="Bulleted"><A NAME="I3173"></A>An index constraint is static 
 if each <SPAN Class="swiss"><A HREF="RM-3-6-1.html#S0058">discrete_range</A></SPAN> 
 is static, and each index subtype of the corresponding array type is 
 static;</div>
 <div class="paranum"><a name="p31">31</a></div>
-<div class="Bulleted"><A NAME="I3184"></A>A discriminant constraint is 
+<div class="Bulleted"><A NAME="I3174"></A>A discriminant constraint is 
 static if each <SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN> 
 of the constraint is static, and the subtype of each discriminant is 
 static.&nbsp;</div>
@@ -212,7 +210,7 @@ static.&nbsp;</div>
 <div class="Normal">&nbsp;&nbsp;In any case, the constraint of the first subtype 
 of a scalar formal type is neither static nor null.</div>
 <div class="paranum"><a name="p32">32</a></div>
-<div class="Normal"><A NAME="I3185"></A>A subtype is <I>statically constrained</I> 
+<div class="Normal"><A NAME="I3175"></A>A subtype is <I>statically constrained</I> 
 if it is constrained, and its constraint is static. An object is <I>statically 
 constrained</I> if its nominal subtype is statically constrained, or 
 if it is a static string constant.&nbsp;</div>
@@ -220,7 +218,7 @@ if it is a static string constant.&nbsp;</div>
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p32.1">32.1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;An expression is 
-<I>statically unevaluated</I> if it is part of:<A NAME="I3186"></A></div>
+<I>statically unevaluated</I> if it is part of:<A NAME="I3176"></A></div>
 <div class="paranum"><a name="p32.2">32.2/3</a></div>
 <div class="Bulleted">the right operand of a static short-circuit control 
 form whose value is determined by its left operand; or</div>
@@ -244,7 +242,7 @@ whose <I>selecting_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expressio
 is static and whose value is not covered by the corresponding <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0073">discrete_choice_list</A></SPAN>; 
 or</div>
 <div class="paranum"><a name="p32.6">32.6/4</a></div>
-<div class="Bulleted">a <span class="insert4"><I>choice_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></span><span class="delete4"><SPAN Class="swiss"><A HREF="RM-4-4.html#S0123">&nbsp;choice_expression</A></SPAN></span> 
+<div class="Bulleted">a <I>choice_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
 (or a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN> 
 that occurs as a <SPAN Class="swiss"><A HREF="RM-4-4.html#S0127">membership_choice</A></SPAN> 
@@ -274,7 +272,7 @@ be a multiple of the <I>small</I> of the decimal type. This restriction
 does not apply if the expected type is a descendant of a formal scalar 
 type (or a corresponding actual type in an instance).&nbsp;</div>
 <div class="paranum"><a name="p37">37/2</a></div>
-<div class="Normal"><A NAME="I3187"></A>In addition to the places where 
+<div class="Normal"><A NAME="I3177"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 the above restrictions also apply in the private part of an instance 
 of a generic unit.</div>

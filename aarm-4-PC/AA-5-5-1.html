@@ -13,23 +13,21 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,91 +36,88 @@
 &nbsp;<A HREF="AA-5-5-2.html"><IMG SRC="next.gif" ALT="Next" BORDER=0></A>&nbsp;
 </div>
 <HR>
-<H1>5.5.1 <span class="insert3">User-Defined Iterator Types</span><span class="delete3"></span></H1>
+<H1>5.5.1 User-Defined Iterator Types</H1>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3">The following language-defined generic library 
-package exists:</span>&nbsp;</div>
+The following language-defined generic library package exists:&nbsp;</div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Examples"><span class="insert3"><A NAME="I3502"></A><B>generic</B><BR>
+<div class="Examples"><A NAME="I3474"></A><B>generic</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;Cursor;<BR>
 &nbsp;&nbsp;&nbsp;<B>with&nbsp;function</B>&nbsp;Has_Element&nbsp;(Position&nbsp;:&nbsp;Cursor)&nbsp;<B>return</B>&nbsp;Boolean;<BR>
 <B>package</B>&nbsp;Ada.Iterator_Interfaces&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Iterator_Interfaces);</span></div>
+&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure&nbsp;(Iterator_Interfaces);</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3503"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3504"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3505"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3475"></A>Forward_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3476"></A>First&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3477"></A>Next&nbsp;(Object&nbsp;:&nbsp;Forward_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Examples"><span class="insert3">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3506"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3507"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
-&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3508"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</span></div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I3478"></A>Reversible_Iterator&nbsp;<B>is&nbsp;limited&nbsp;interface&nbsp;and</B>&nbsp;Forward_Iterator;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3479"></A>Last&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator)&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I3480"></A>Previous&nbsp;(Object&nbsp;:&nbsp;Reversible_Iterator;&nbsp;Position&nbsp;:&nbsp;Cursor)<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Cursor&nbsp;<B>is&nbsp;abstract</B>;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Examples"><span class="insert3"><B>end</B>&nbsp;Ada.Iterator_Interfaces;</span></div>
+<div class="Examples"><B>end</B>&nbsp;Ada.Iterator_Interfaces;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3">An <I>iterator type</I> is a type descended from 
-the Forward_Iterator interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3509"></A> 
+An <I>iterator type</I> is a type descended from the Forward_Iterator 
+interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3481"></A> 
 A <I>reversible iterator type</I> is a type descended from the Reversible_Iterator 
-interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3510"></A> 
-An <I>iterator object</I> is an object of an iterator type.<A NAME="I3511"></A> 
+interface from some instance of Ada.Iterator_Interfaces.<A NAME="I3482"></A> 
+An <I>iterator object</I> is an object of an iterator type.<A NAME="I3483"></A> 
 A <I>reversible iterator object</I> is an object of a reversible iterator 
-type.<A NAME="I3512"></A> The formal subtype Cursor from the associated 
+type.<A NAME="I3484"></A> The formal subtype Cursor from the associated 
 instance of Ada.Iterator_Interfaces is the <I>iteration cursor subtype</I> 
-for the iterator type.<A NAME="I3513"></A></span></div>
+for the iterator type.<A NAME="I3485"></A></div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-<span class="insert3">The following type-related operational aspects 
-may be specified for an indexable container type <I>T</I> (see <A HREF="AA-4-1-6.html">4.1.6</A>):</span></div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
+The following type-related operational aspects may be specified for an 
+indexable container type <I>T</I> (see <A HREF="AA-4-1-6.html">4.1.6</A>):</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="WideHanging-Term"><span class="insert3">Default_Iterator</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="WideHanging-Term">Default_Iterator</div><div class="WideHanging-Body"><br clear="left">
+This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes exactly one function declared immediately within the same 
 declaration list in which <I>T</I> is declared, whose first parameter 
 is of type <I>T</I> or <I>T</I>'Class or an access parameter whose designated 
 type is type <I>T</I> or <I>T</I>'Class, whose other parameters, if any, 
 have default expressions, and whose result type is an iterator type. 
-This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3514"></A> 
-Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3515"></A> 
+This function is the <I>default iterator function</I> for <I>T</I>.<A NAME="I3486"></A> 
+Its result subtype is the <I>default iterator subtype</I> for <I>T</I>.<A NAME="I3487"></A> 
 The iteration cursor subtype for the default iterator subtype is the 
-<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3516"></A><A NAME="I3517"></A><A NAME="I3518"></A></span></div>
+<I>default cursor subtype</I> for <I>T</I>.<A NAME="I3488"></A><A NAME="I3489"></A><A NAME="I3490"></A></div>
 <div class="paranum"><a name="p8.a">8.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>Default_Iterator:&nbsp;</B></span><span class="insert3">Default 
-iterator to be used in <B>for</B> loops.</span></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Default_Iterator: 
+</B>Default iterator to be used in <B>for</B> loops.</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="WideHanging-Term"><span class="insert3">Iterator_Element</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
+<div class="WideHanging-Term">Iterator_Element</div><div class="WideHanging-Body"><br clear="left">
+This aspect is specified by a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes a subtype. This is the <I>default element subtype</I> for 
-<I>T</I>.<A NAME="I3519"></A><A NAME="I3520"></A><A NAME="I3521"></A></span></div>
+<I>T</I>.<A NAME="I3491"></A><A NAME="I3492"></A><A NAME="I3493"></A></div>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Aspect Description 
-for&nbsp;</B></span><span class="insert3"><B>Iterator_Element:&nbsp;</B></span><span class="insert3">Element 
-type to be used for user-defined iterators.</span></div>
+<div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Iterator_Element: 
+</B>Element type to be used for user-defined iterators.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><span class="insert3">These aspects are inherited 
-by descendants of type <I>T</I> (including <I>T</I>'Class).</span></div>
+<div class="Normal">&nbsp;These aspects are inherited by descendants of type 
+<I>T</I> (including <I>T</I>'Class).</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-<span class="insert3">An <I>iterable container type</I> is an indexable 
-container type with specified Default_Iterator and Iterator_Element aspects.<A NAME="I3522"></A> 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
+An <I>iterable container type</I> is an indexable container type with 
+specified Default_Iterator and Iterator_Element aspects.<A NAME="I3494"></A> 
 A <I>reversible iterable container type</I> is an iterable container 
-type with the default iterator type being a reversible iterator type.<A NAME="I3523"></A> 
+type with the default iterator type being a reversible iterator type.<A NAME="I3495"></A> 
 An <I>iterable container object</I> is an object of an iterable container 
-type.<A NAME="I3524"></A> A <I>reversible iterable container object</I> 
-is an object of a reversible iterable container type.<A NAME="I3525"></A></span></div>
+type.<A NAME="I3496"></A> A <I>reversible iterable container object</I> 
+is an object of a reversible iterable container type.<A NAME="I3497"></A></div>
 <div class="paranum"><a name="p11.a.1">11.a.1/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Glossary entry:&nbsp;</B>An 
-iterable container type is one that has user-defined behavior for iteration, 
-via the Default_Iterator and Iterator_Element aspects.</span></div>
+<div class="Annotations"><B>Glossary entry:&nbsp;</B>An iterable container 
+type is one that has user-defined behavior for iteration, via the Default_Iterator 
+and Iterator_Element aspects.</div>
 <div class="paranum"><a name="p11.1">11.1/4</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
 <span class="insert4">The Default_Iterator and Iterator_Element aspects 
 are nonoverridable (see <A HREF="AA-13-1-1.html">13.1.1</A>).</span></div>
 <div class="paranum"><a name="p11.a">11.a/4</a></div>
@@ -133,64 +128,61 @@ derived types.</span>&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-<span class="insert3">The Constant_Indexing aspect (if any) of an iterable 
-container type <I>T</I> shall denote exactly one function with the following 
-properties:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
+The Constant_Indexing aspect (if any) of an iterable container type <I>T</I> 
+shall denote exactly one function with the following properties:</div>
 <div class="paranum"><a name="p13">13/3</a></div>
-<div class="Bulleted"><span class="insert3">the result type of the function 
-is covered by the default element type of <I>T</I> or is a reference 
-type (see <A HREF="AA-4-1-5.html">4.1.5</A>) with an access discriminant 
-designating a type covered by the default element type of <I>T</I>;</span></div>
+<div class="Bulleted">the result type of the function is covered by the 
+default element type of <I>T</I> or is a reference type (see <A HREF="AA-4-1-5.html">4.1.5</A>) 
+with an access discriminant designating a type covered by the default 
+element type of <I>T</I>;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
-<div class="Bulleted"><span class="insert3">the type of the second parameter 
-of the function covers the default cursor type for <I>T</I>;</span></div>
+<div class="Bulleted">the type of the second parameter of the function 
+covers the default cursor type for <I>T</I>;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Bulleted"><span class="insert3">if there are more than two 
-parameters, the additional parameters all have default expressions.</span></div>
+<div class="Bulleted">if there are more than two parameters, the additional 
+parameters all have default expressions.</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert3">This function (if any) is the 
-<I>default constant indexing function</I> for <I>T</I>.<A NAME="I3526"></A></span></div>
+<div class="Normal">&nbsp;This function (if any) is the <I>default constant 
+indexing function</I> for <I>T</I>.<A NAME="I3498"></A></div>
 <div class="paranum"><a name="p16.a">16.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Ramification:&nbsp;</B>This 
-does not mean that Constant_Indexing has to designate only one subprogram, 
-only that there is only one routine that meets all of these properties. 
-There can be other routines designated by Constant_Indexing, but they 
-cannot have the profile described above. For instance, map containers 
-have a version of Constant_Indexing that takes a key instead of a cursor; 
-this is allowed.</span>&nbsp;</div>
+<div class="Annotations"><B>Ramification:&nbsp;</B>This does not mean that 
+Constant_Indexing has to designate only one subprogram, only that there 
+is only one routine that meets all of these properties. There can be 
+other routines designated by Constant_Indexing, but they cannot have 
+the profile described above. For instance, map containers have a version 
+of Constant_Indexing that takes a key instead of a cursor; this is allowed. 
+</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-<span class="insert3">The Variable_Indexing aspect (if any) of an iterable 
-container type <I>T</I> shall denote exactly one function with the following 
-properties:</span></div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
+The Variable_Indexing aspect (if any) of an iterable container type <I>T</I> 
+shall denote exactly one function with the following properties:</div>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Bulleted"><span class="insert3">the result type of the function 
-is a reference type (see <A HREF="AA-4-1-5.html">4.1.5</A>) with an access 
-discriminant designating a type covered by the default element type of 
-<I>T</I>;</span></div>
+<div class="Bulleted">the result type of the function is a reference 
+type (see <A HREF="AA-4-1-5.html">4.1.5</A>) with an access discriminant 
+designating a type covered by the default element type of <I>T</I>;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Bulleted"><span class="insert3">the type of the second parameter 
-of the function covers the default cursor type for <I>T</I>;</span></div>
+<div class="Bulleted">the type of the second parameter of the function 
+covers the default cursor type for <I>T</I>;</div>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Bulleted"><span class="insert3">if there are more than two 
-parameters, the additional parameters all have default expressions.</span></div>
+<div class="Bulleted">if there are more than two parameters, the additional 
+parameters all have default expressions.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal"><span class="insert3">This function (if any) is the 
-<I>default variable indexing function</I> for <I>T</I>.<A NAME="I3527"></A></span></div>
+<div class="Normal">&nbsp;This function (if any) is the <I>default variable 
+indexing function</I> for <I>T</I>.<A NAME="I3499"></A></div>
 
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p21.a">21.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<span class="insert3"><A NAME="I3528"></A>User-defined iterator types 
-are new in Ada 2012.</span>&nbsp;</div>
+<A NAME="I3500"></A>User-defined iterator types are new in Ada 2012. 
+</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p21.b">21.b/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0138-1.TXT">AI12-0138-1</A></I>} 
-<span class="insert4"><A NAME="I3529"></A><B>Corrigendum:</B> Defined 
+<span class="insert4"><A NAME="I3501"></A><B>Corrigendum:</B> Defined 
 Default_Iterator and Iterator_Element to be nonoveridable, which makes 
 redefinitions and hiding of these aspects illegal. It's possible that 
 some program could violate one of these new restrictions, but in most 

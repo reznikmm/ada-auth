@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,13 +39,15 @@
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
 Pragma Assert is used to assert the truth of a boolean expression at 
 a point within a sequence of declarations or statements.</div>
-<div class="paranum"><a name="p1.1">1.1/3</a></div>
+<div class="paranum"><a name="p1.1">1.1/5</a></div>
 <div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
 Assert pragmas, subtype predicates (see <A HREF="AA-3-2-4.html">3.2.4</A>), 
 preconditions and postconditions (see <A HREF="AA-6-1-1.html">6.1.1</A>), 
-and type invariants (see <A HREF="AA-7-3-2.html">7.3.2</A>) are collectively 
+type invariants (see <A HREF="AA-7-3-2.html">7.3.2</A>), and default 
+initial conditions (see <A HREF="AA-7-3-3.html">7.3.3</A>) are collectively 
 referred to as <I>assertions</I>; their boolean expressions are referred 
-to as <I>assertion expressions</I>.<A NAME="I5055"></A><A NAME="I5056"></A></div>
+to as <I>assertion expressions</I>.<A NAME="I5244"></A><A NAME="I5245"></A></div>
 <div class="paranum"><a name="p1.a.1">1.a.1/3</a></div>
 <div class="Annotations"><B>Glossary entry:&nbsp;</B>A predicate is an assertion 
 that is expected to be True for all objects of a given subtype.</div>
@@ -80,65 +82,66 @@ some implementation-defined manner.&nbsp;</div>
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5057"></A><A NAME="I5058"></A>Assert([Check 
-=&gt;] <I>boolean_</I><A NAME="I5059"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>[, 
-[Message =&gt;] <I>string_</I><A NAME="I5060"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>]);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5246"></A><A NAME="I5247"></A>Assert([Check 
+=&gt;] <I>boolean_</I><A NAME="I5248"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>[, 
+[Message =&gt;] <I>string_</I><A NAME="I5249"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>]);</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Indented1">A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert is allowed at the place where a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0087">declarative_item</A></SPAN> 
-or a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0147">statement</A></SPAN> 
+or a <SPAN Class="swiss"><A HREF="AA-5-1.html#S0153">statement</A></SPAN> 
 is allowed.</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5061"></A><A NAME="I5062"></A>Assertion_Policy(<I>policy_</I><A NAME="I5063"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I5250"></A><A NAME="I5251"></A>Assertion_Policy(<I>policy_</I><A NAME="I5252"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>);</div>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-&nbsp;&nbsp;<B>pragma</B> <A NAME="I5064"></A><A NAME="I5065"></A>Assertion_Policy(<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I5066"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-=&gt; <I>policy_</I><A NAME="I5067"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I5068"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
-=&gt; <I>policy_</I><A NAME="I5069"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>});</div>
+&nbsp;&nbsp;<B>pragma</B> <A NAME="I5253"></A><A NAME="I5254"></A>Assertion_Policy(<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<I>assertion_</I><A NAME="I5255"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I5256"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{, <I>assertion_</I><A NAME="I5257"></A><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
+=&gt; <I>policy_</I><A NAME="I5258"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>});</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-<A NAME="I5070"></A><A NAME="I5071"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
+<A NAME="I5259"></A><A NAME="I5260"></A>A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy is allowed only immediately within a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN>, 
-immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN>, 
+immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN>, 
 or as a configuration pragma.</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p8">8/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
-The expected type for the <I>boolean_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+The expected type for the <I>boolean_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Assert is any boolean type. The expected type for the <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+Assert is any boolean type. The expected type for the <I>string_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert is type String.&nbsp;</div>
 <div class="paranum"><a name="p8.a">8.a/2</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We allow any boolean type to 
-be like <SPAN Class="swiss"><A HREF="AA-5-3.html#S0155">if_statement</A></SPAN>s 
+be like <SPAN Class="swiss"><A HREF="AA-5-3.html#S0161">if_statement</A></SPAN>s 
 and other conditionals; we only allow String for the message in order 
-to match <SPAN Class="swiss"><A HREF="AA-11-3.html#S0272">raise_statement</A></SPAN>s. 
+to match <SPAN Class="swiss"><A HREF="AA-11-3.html#S0286">raise_statement</A></SPAN>s. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-The <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
+The <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy shall be one of Assert, Static_Predicate, Dynamic_Predicate, 
 Pre, Pre'Class, Post, Post'Class, Type_Invariant, Type_Invariant'Class, 
-or some implementation defined <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>. 
+Default_Initial_Condition, or some implementation defined <SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>. 
 The <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 shall be either Check, Ignore, or some implementation-defined <SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p9.a">9.a/3</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
 <I>policy_</I><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>s 
-and <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>s 
+and <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>s 
 allowed in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy.</div>
 
@@ -159,11 +162,11 @@ predicate aspects (see <A HREF="AA-3-2-4.html">3.2.4</A>), even when
 the applicable Assertion_Policy is Ignore, the predicate will still be 
 evaluated as part of membership tests and Valid <SPAN Class="swiss"><A HREF="AA-4-1-4.html#S0100">attribute_reference</A></SPAN>s, 
 and if static, will still have an effect on loop iteration over the subtype, 
-and the selection of <SPAN Class="swiss"><A HREF="AA-5-4.html#S0157">case_statement_alternative</A></SPAN>s 
+and the selection of <SPAN Class="swiss"><A HREF="AA-5-4.html#S0163">case_statement_alternative</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="AA-3-8-1.html#S0072">variant</A></SPAN>s.]</div>
 <div class="paranum"><a name="p10.1">10.1/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-If no <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0311">aspect_mark</A></SPAN>s 
+If no <I>assertion_</I><SPAN Class="swiss"><A HREF="AA-13-1-1.html#S0325">aspect_mark</A></SPAN>s 
 are specified in the pragma, the specified policy applies to all assertion 
 aspects.</div>
 <div class="paranum"><a name="p10.2">10.2/3</a></div>
@@ -172,7 +175,7 @@ A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> Assertion_Po
 applies to the named assertion aspects in a specific region, and applies 
 to all assertion expressions specified in that region. A <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy given in a <SPAN Class="swiss"><A HREF="AA-3-11.html#S0086">declarative_part</A></SPAN> 
-or immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0194">package_specification</A></SPAN> 
+or immediately within a <SPAN Class="swiss"><A HREF="AA-7-1.html#S0208">package_specification</A></SPAN> 
 applies from the place of the pragma to the end of the innermost enclosing 
 declarative region. The region for a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy given as a configuration pragma is the declarative region 
@@ -180,7 +183,7 @@ for the entire compilation unit (or units) to which it applies.</div>
 <div class="paranum"><a name="p10.3">10.3/3</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
 If a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
-Assertion_Policy applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0279">generic_instantiation</A></SPAN>, 
+Assertion_Policy applies to a <SPAN Class="swiss"><A HREF="AA-12-3.html#S0293">generic_instantiation</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assertion_Policy applies to the entire instance.</div>
 <div class="paranum"><a name="p10.a.1">10.a.1/3</a></div>
@@ -203,13 +206,13 @@ policy.</div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 The following language-defined library package exists:</div>
 <div class="paranum"><a name="p12">12/2</a></div>
-<div class="Examples"><A NAME="I5072"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
+<div class="Examples"><A NAME="I5261"></A><B>package</B>&nbsp;Ada.Assertions&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Pure(Assertions);</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5073"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I5262"></A>Assertion_Error&nbsp;:&nbsp;<B>exception</B>;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5074"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
-&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5075"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5263"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean);<BR>
+&nbsp;&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I5264"></A>Assert(Check&nbsp;:&nbsp;<B>in</B>&nbsp;Boolean;&nbsp;Message&nbsp;:&nbsp;<B>in</B>&nbsp;String);</div>
 <div class="paranum"><a name="p15">15/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Assertions;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
@@ -232,7 +235,7 @@ at the place of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SP
 Assert, the elaboration of the pragma consists of evaluating the boolean 
 expression, and if the result is False, evaluating the Message argument, 
 if any, and raising the exception Assertions.Assertion_Error, with a 
-message if the Message argument is provided.<A NAME="I5076"></A><A NAME="I5077"></A></div>
+message if the Message argument is provided.<A NAME="I5265"></A><A NAME="I5266"></A></div>
 <div class="paranum"><a name="p19">19/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 Calling the procedure Assertions.Assert without a Message parameter is 
@@ -267,33 +270,37 @@ action, it might result in deadlock or a (nested) protected action.&nbsp;</div>
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p23.2">23.2/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0179-1.TXT">AI12-0179-1</A></I>} 
-Any postcondition expression or type invariant expression occurring in 
-the specification of a language-defined unit is enabled (see <A HREF="AA-6-1-1.html">6.1.1</A> 
-and <A HREF="AA-7-3-2.html">7.3.2</A>).</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
+Any postcondition expression, type invariant expression, or default initial 
+condition expression occurring in the specification of a language-defined 
+unit is enabled (see <A HREF="AA-6-1-1.html">6.1.1</A>, <A HREF="AA-7-3-2.html">7.3.2</A>, 
+and <A HREF="AA-7-3-3.html">7.3.3</A>).</div>
 <div class="paranum"><a name="p23.a">23.a/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>The Assertion_Policy does 
-not have an effect on such postconditions and invariants. This has no 
-execution impact since such assertions shouldn't fail anyway (see the 
-next rule).&nbsp;</div>
+not have an effect on such postconditions, invariants, and default initial 
+conditions. This has no execution impact since such assertions shouldn't 
+fail anyway (see the next rule).&nbsp;</div>
 <div class="paranum"><a name="p23.3">23.3/5</a></div>
 <div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0179-1.TXT">AI12-0179-1</A></I>} 
-The evaluation of any such postcondition or type invariant expression 
-shall either yield True or propagate an exception from a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
+The evaluation of any such postcondition, type invariant, or default 
+initial condition expression shall either yield True or propagate an 
+exception from a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 that appears within the assertion expression.</div>
 <div class="paranum"><a name="p23.b">23.b/5</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>In other words, evaluating 
 such an an assertion expression will not return a result of False, nor 
-will it propagate an exception other than by evaluating a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0273">raise_expression</A></SPAN> 
+will it propagate an exception other than by evaluating a <SPAN Class="swiss"><A HREF="AA-11-3.html#S0287">raise_expression</A></SPAN> 
 which is syntactically all or part of the assertion expression.&nbsp;</div>
 <div class="paranum"><a name="p23.c">23.c/5</a></div>
 <div class="Annotations"><B>To be honest:&nbsp;</B>Evaluation of any expression 
 might raise Storage_Error.&nbsp;</div>
 <div class="paranum"><a name="p23.d">23.d/5</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>This allows the Standard to express 
-semantic requirements as postconditions or invariants (which are invariably 
-clearer than English prose would be) while keeping it clear that failing 
-the assertion check (or any other run time check) is not conforming behavior. 
-</div>
+semantic requirements as postconditions, invariants, or default initial 
+conditions (which are invariably clearer than English prose would be) 
+while keeping it clear that failing the assertion check (or any other 
+run time check) is not conforming behavior.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p24">24/2</a></div>
@@ -361,7 +368,7 @@ that compilers can reject such pathologies. Perhaps in a future version
 of Ada we'll be able to tighten this up.&nbsp;</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p28">28/2</a></div>
-<div class="Notes">3&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
+<div class="Notes">4&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
 Normally, the boolean expression in a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Assert should not call functions that have significant side effects when 
 the result of the expression is True, so that the particular assertion 
@@ -370,13 +377,13 @@ policy in effect will not affect normal operation of the program.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 95</H4>
 <div class="paranum"><a name="p28.a">28.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00286.TXT">AI95-00286-01</A></I>} 
-<A NAME="I5078"></A>Pragmas Assert and Assertion_Policy, and package 
+<A NAME="I5267"></A>Pragmas Assert and Assertion_Policy, and package 
 Assertions are new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p28.b">28.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0274-1.TXT">AI05-0274-1</A></I>} 
-<A NAME="I5079"></A>There now is an Implementation Permission to reject 
+<A NAME="I5268"></A>There now is an Implementation Permission to reject 
 an assertion expression that calls a function that has a side effect 
 such that an immediate reevalution of the expression could produce a 
 different value. This means that a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
@@ -391,16 +398,21 @@ behavior.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p28.c">28.c/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0290-1.TXT">AI05-0290-1</A></I>} 
-<A NAME="I5080"></A>Assertion_Policy pragmas are now allowed in more 
+<A NAME="I5269"></A>Assertion_Policy pragmas are now allowed in more 
 places and can specify behavior for individual kinds of assertions.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p28.d">28.d/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0179-1.TXT">AI12-0179-1</A></I>} 
-<B>Correction:</B> Added wording that postconditions and type invariants 
-given on language-defined units cannot fail. This is not considered an 
-inconsistency, since there are no such postconditions or invariants in 
-Ada 2012.&nbsp;</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
+<B>Correction:</B> Added wording that postconditions, type invariants, 
+and default initial conditions given on language-defined units cannot 
+fail. This is not considered an inconsistency, since there are no such 
+postconditions, invariants, or default initial conditions in Ada 2012.</div>
+<div class="paranum"><a name="p28.e">28.e/5</a></div>
+<div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0265-1.TXT">AI12-0265-1</A></I>} 
+Added default initial conditions to the kinds of assertions (see <A HREF="AA-7-3-3.html">7.3.3</A>). 
+</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

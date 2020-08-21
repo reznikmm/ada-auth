@@ -13,22 +13,20 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -38,121 +36,86 @@
 </div>
 <HR>
 <H1>C.3.1 Protected Procedure Handlers</H1>
-<div class="Normal"><span class="insert3"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
-1 through 6 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
-Features</A>&rdquo;.</I></SPAN></span>&nbsp;</div>
+<div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 1 through 
+6 were moved to <A HREF="RM-J.html">Annex J</A>, &ldquo;<A HREF="RM-J.html">Obsolescent 
+Features</A>&rdquo;.</I></SPAN>&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p1">1/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3">The 
-form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-Interrupt_Handler is as follows:</span>&nbsp;</div>
+<div class="Indented1"></div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I7807"></A><A NAME="I7808"></A>Interrupt_Handler(<I>handler_</I><A NAME="I7809"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>);</span></div>
+<div class="Indented1"></div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><span class="delete3">The 
-form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
-Attach_Handler is as follows:</span>&nbsp;</div>
+<div class="Indented1"></div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<span class="delete3"><B>pragma</B> 
-<A NAME="I7810"></A><A NAME="I7811"></A>Attach_Handler(<I>handler_</I><A NAME="I7812"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>, 
-<A NAME="I7813"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>);</span> 
-</div>
+<div class="Indented1"></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal"><span class="delete3">For the Interrupt_Handler and 
-Attach_Handler pragmas, the <I>handler_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
-shall resolve to denote a protected procedure with a parameterless profile.</span></div>
+<div class="Normal"></div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Normal"><span class="delete3">For the Attach_Handler pragma, 
-the expected type for the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
-is Interrupts.Interrupt_Id (see <A HREF="RM-C-3-2.html">C.3.2</A>).</span> 
-</div>
+<div class="Normal"></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6.1">6.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert3">For 
-a parameterless protected procedure, the following language-defined representation 
-aspects may be specified:</span>&nbsp;</div>
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For a parameterless 
+protected procedure, the following language-defined representation aspects 
+may be specified:&nbsp;</div>
 <div class="paranum"><a name="p6.2">6.2/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">Interrupt_Handler</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">&nbsp;The type of aspect Interrupt_Handler is Boolean. 
-If directly specified, the aspect_definition shall be a static expression. 
-This aspect is never inherited; if not directly specified, the aspect 
-is False.<A NAME="I7814"></A><A NAME="I7815"></A></span></div>
+<div class="WideHanging-Term">&nbsp;&nbsp;Interrupt_Handler</div><div class="WideHanging-Body"><br clear="left">
+ The type of aspect Interrupt_Handler is Boolean. If directly specified, 
+the aspect_definition shall be a static expression. This aspect is never 
+inherited; if not directly specified, the aspect is False.<A NAME="I7656"></A><A NAME="I7657"></A></div>
 <div class="paranum"><a name="p6.3">6.3/3</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert3">Attach_Handler</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert3">&nbsp;The aspect Attach_Handler is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
+<div class="WideHanging-Term">&nbsp;&nbsp;Attach_Handler</div><div class="WideHanging-Body"><br clear="left">
+ The aspect Attach_Handler is an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
 which shall be of type Interrupts.Interrupt_Id. This aspect is never 
-inherited.<A NAME="I7816"></A><A NAME="I7817"></A></span></div>
+inherited.<A NAME="I7658"></A><A NAME="I7659"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><span class="insert3">If either the</span><span class="delete3">&nbsp;The</span> 
-Attach_Handler <span class="insert3">or Interrupt_Handler aspect are 
-specified for a protected procedure, the</span><span class="delete3">&nbsp;pragma 
-is only allowed immediately within the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
-where the corresponding subprogram is declared. The</span> corresponding 
-<SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
+<div class="Normal">If either the Attach_Handler or Interrupt_Handler 
+aspect are specified for a protected procedure, the corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0211">single_protected_declaration</A></SPAN> 
-shall be a library-level declaration<span class="insert3">&nbsp;and shall 
-not be declared within a generic body. <A NAME="I7818"></A>In addition 
-to the places where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
-this rule also applies in the private part of an instance of a generic 
-unit</span>.</div>
+shall be a library-level declaration and shall not be declared within 
+a generic body. <A NAME="I7660"></A>In addition to the places where Legality 
+Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), this rule 
+also applies in the private part of an instance of a generic unit.</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
-deleted.</I></SPAN><span class="delete3">The Interrupt_Handler pragma 
-is only allowed immediately within the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN> 
-where the corresponding subprogram is declared. The corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
-or <SPAN Class="swiss"><A HREF="RM-9-4.html#S0211">single_protected_declaration</A></SPAN> 
-shall be a library-level declaration.</span>&nbsp;</div>
+deleted.</I></SPAN></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Normal">If the <span class="delete3">pragma&nbsp;</span>Interrupt_Handler 
-<span class="insert3">aspect of a protected procedure is True</span><span class="delete3">&nbsp;appears 
-in a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN></span>, 
-then the <span class="delete3">corresponding&nbsp;</span>procedure <span class="insert3">may</span><span class="delete3">&nbsp;can</span> 
-be attached dynamically, as a handler, to interrupts (see <A HREF="RM-C-3-2.html">C.3.2</A>). 
-Such procedures are allowed to be attached to multiple interrupts.</div>
+<div class="Normal">If the Interrupt_Handler aspect of a protected procedure 
+is True, then the procedure may be attached dynamically, as a handler, 
+to interrupts (see <A HREF="RM-C-3-2.html">C.3.2</A>). Such procedures 
+are allowed to be attached to multiple interrupts.</div>
 <div class="paranum"><a name="p10">10/3</a></div>
-<div class="Normal"><A NAME="I7819"></A><A NAME="I7820"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
-<span class="insert3">specified for</span><span class="delete3">&nbsp;in</span> 
-the Attach_Handler <span class="insert3">aspect of a protected procedure 
-<I>P</I> is evaluated as part of the creation of the protected object 
-that contains <I>P</I>. The value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
-identifies</span><span class="delete3">&nbsp;pragma as evaluated at object 
-creation time specifies</span> an interrupt. As part of the initialization 
-of that object, <span class="insert3"><I>P</I> (</span><span class="delete3">&nbsp;if 
-the Attach_Handler pragma is specified,&nbsp;</span>the <I>handler</I> procedure<span class="insert3">)</span> 
-is attached to the <span class="insert3">identified</span><span class="delete3">&nbsp;specified</span> 
-interrupt. <A NAME="I7821"></A><A NAME="I7822"></A>A check is made that 
-the corresponding interrupt is not reserved. <A NAME="I7823"></A>Program_Error 
+<div class="Normal">&nbsp;<A NAME="I7661"></A><A NAME="I7662"></A>The <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+specified for the Attach_Handler aspect of a protected procedure <I>P</I> 
+is evaluated as part of the creation of the protected object that contains 
+<I>P</I>. The value of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+identifies an interrupt. As part of the initialization of that object, 
+<I>P</I> (the <I>handler</I> procedure) is attached to the identified 
+interrupt. <A NAME="I7663"></A><A NAME="I7664"></A>A check is made that 
+the corresponding interrupt is not reserved. <A NAME="I7665"></A>Program_Error 
 is raised if the check fails, and the existing treatment for the interrupt 
 is not affected.</div>
 <div class="paranum"><a name="p11">11/3</a></div>
-<div class="Normal"><A NAME="I7824"></A><A NAME="I7825"></A><A NAME="I7826"></A>If 
+<div class="Normal">&nbsp;<A NAME="I7666"></A><A NAME="I7667"></A><A NAME="I7668"></A>If 
 the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) is in 
-effect, then upon the initialization of a protected object <span class="insert3">that 
-contains a protected procedure&nbsp;</span>for which either <span class="insert3">the</span><span class="delete3">&nbsp;an</span> 
-Attach_Handler<span class="insert3">&nbsp;aspect is specified</span> or <span class="insert3">the 
-</span> Interrupt_Handler <span class="insert3">aspect is True</span><span class="delete3">&nbsp;pragma 
-applies to one of its procedures</span>, a check is made that the <span class="insert3">initial 
-</span>ceiling priority <span class="insert3">of the object</span><span class="delete3">&nbsp;defined 
-in the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0212">protected_definition</A></SPAN></span> 
-is in the range of System.Interrupt_Priority. <A NAME="I7827"></A>If 
-the check fails, Program_Error is raised.</div>
+effect, then upon the initialization of a protected object that contains 
+a protected procedure for which either the Attach_Handler aspect is specified 
+or the  Interrupt_Handler aspect is True, a check is made that the initial 
+ceiling priority of the object is in the range of System.Interrupt_Priority. 
+<A NAME="I7669"></A>If the check fails, Program_Error is raised.</div>
 <div class="paranum"><a name="p12">12/3</a></div>
-<div class="Normal"><A NAME="I7828"></A>When a protected object is finalized, 
+<div class="Normal">&nbsp;<A NAME="I7670"></A>When a protected object is finalized, 
 for any of its procedures that are attached to interrupts, the handler 
 is detached. If the handler was attached by a procedure in the Interrupts 
 package or if no user handler was previously attached to the interrupt, 
-the default treatment is restored. If <span class="insert3">the</span><span class="delete3">&nbsp;an</span> 
-Attach_Handler <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-was <span class="insert3">specified</span><span class="delete3">&nbsp;used</span> 
+the default treatment is restored. If the Attach_Handler aspect was specified 
 and the most recently attached handler for the same interrupt is the 
 same as the one that was attached at the time the protected object was 
 initialized, the previous handler is restored.&nbsp;</div>
@@ -164,21 +127,20 @@ containing the handler.</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I7829"></A>If the Ceiling_Locking policy 
+<div class="Normal"><A NAME="I7671"></A>If the Ceiling_Locking policy 
 (see <A HREF="RM-D-3.html">D.3</A>) is in effect and an interrupt is 
 delivered to a handler, and the interrupt hardware priority is higher 
 than the ceiling priority of the corresponding protected object, the 
 execution of the program is erroneous.</div>
 <div class="paranum"><a name="p14.1">14.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I7830"></A>If the handlers for a given 
-interrupt attached via <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-Attach_Handler are not attached and detached in a stack-like (LIFO) order, 
-program execution is erroneous. In particular, when a protected object 
-is finalized, the execution is erroneous if any of the procedures of 
-the protected object are attached to interrupts via <span class="insert3">aspect</span><span class="delete3">&nbsp;pragma</span> 
-Attach_Handler and the most recently attached handler for the same interrupt 
-is not the same as the one that was attached at the time the protected 
-object was initialized.&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I7672"></A>If the handlers for a given 
+interrupt attached via aspect Attach_Handler are not attached and detached 
+in a stack-like (LIFO) order, program execution is erroneous. In particular, 
+when a protected object is finalized, the execution is erroneous if any 
+of the procedures of the protected object are attached to interrupts 
+via aspect Attach_Handler and the most recently attached handler for 
+the same interrupt is not the same as the one that was attached at the 
+time the protected object was initialized.&nbsp;</div>
 
 <H4 Class="centered">Metrics</H4>
 <div class="paranum"><a name="p15">15</a></div>
@@ -197,11 +159,9 @@ of the same procedure called via an interrupt.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal">When the <span class="insert3">aspects</span><span class="delete3">&nbsp;pragmas</span> 
-Attach_Handler or Interrupt_Handler <span class="insert3">are specified 
-for</span><span class="delete3">&nbsp;apply to</span> a protected procedure, 
-the implementation is allowed to impose implementation-defined restrictions 
-on the corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
+<div class="Normal">&nbsp;When the aspects Attach_Handler or Interrupt_Handler 
+are specified for a protected procedure, the implementation is allowed 
+to impose implementation-defined restrictions on the corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0210">protected_type_declaration</A></SPAN> 
 and <SPAN Class="swiss"><A HREF="RM-9-4.html#S0215">protected_body</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p18">18</a></div>
@@ -209,9 +169,9 @@ and <SPAN Class="swiss"><A HREF="RM-9-4.html#S0215">protected_body</A></SPAN>.
 invoking a protected procedure in response to a hardware interrupt than 
 is used for a call to that protected procedure from a task.&nbsp;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
-<div class="Normal"><A NAME="I7831"></A>Notwithstanding what this subclause 
-says elsewhere, the Attach_Handler and Interrupt_Handler <span class="insert3">aspects</span><span class="delete3">&nbsp;pragmas</span> 
-are allowed to be used for other, implementation defined, forms of interrupt 
+<div class="Normal">&nbsp;<A NAME="I7673"></A>Notwithstanding what this subclause 
+says elsewhere, the Attach_Handler and Interrupt_Handler aspects are 
+allowed to be used for other, implementation defined, forms of interrupt 
 handlers.&nbsp;</div>
 
 <H4 Class="centered">Implementation Advice</H4>
@@ -224,10 +184,9 @@ violations of any implementation-defined restrictions before run time.
 </div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p22">22/3</a></div>
-<div class="Notes">4&nbsp;&nbsp;The Attach_Handler <span class="insert3">aspect 
-may</span><span class="delete3">&nbsp;pragma can</span> provide static attachment 
-of handlers to interrupts if the implementation supports preelaboration 
-of protected objects. (See <A HREF="RM-C-4.html">C.4</A>.)</div>
+<div class="Notes">4&nbsp;&nbsp;The Attach_Handler aspect may provide 
+static attachment of handlers to interrupts if the implementation supports 
+preelaboration of protected objects. (See <A HREF="RM-C-4.html">C.4</A>.)</div>
 <div class="paranum"><a name="p23">23/2</a></div>
 <div class="Notes">5&nbsp;&nbsp;A protected object that has a (protected) 
 procedure attached to an interrupt should have a ceiling priority at 

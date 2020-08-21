@@ -13,18 +13,16 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,22 +37,21 @@
 declares a named number.&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a/3</a></div>
 <div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<A NAME="I1620"></A>If a value or other property of a construct is required 
+<A NAME="I1610"></A>If a value or other property of a construct is required 
 to be <I>static</I> that means it is required to be determined prior 
 to execution. A <I>static</I> expression is an expression whose value 
 is computed at compile time and is usable in contexts where the actual 
 value might affect the legality of the construct. This is fully defined 
-in <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="AA-4-9.html">4.9</A>.&nbsp;</div>
+in subclause <A HREF="AA-4-9.html">4.9</A>.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">number_declaration</SPAN><A NAME="I1621"></A><A NAME="S0034"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1622"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<I>static_</I><A NAME="I1623"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">number_declaration</SPAN><A NAME="I1611"></A><A NAME="S0034"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I1612"></A><SPAN Class="swiss"><A HREF="AA-3-3-1.html#S0033">defining_identifier_list</A></SPAN>&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;<I>static_</I><A NAME="I1613"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I1624"></A>The <I>static_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal"><A NAME="I1614"></A>The <I>static_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 given for a <SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN> 
 is expected to be of any numeric type.&nbsp;</div>
 
@@ -63,8 +60,7 @@ is expected to be of any numeric type.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
 The <I>static_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
 given for a number declaration shall be a static expression, as defined 
-by <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-<A HREF="AA-4-9.html">4.9</A>.&nbsp;</div>
+by subclause <A HREF="AA-4-9.html">4.9</A>.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p5">5</a></div>
@@ -76,11 +72,11 @@ is a real type.</div>
 <div class="paranum"><a name="p6">6</a></div>
 <div class="Normal">The value denoted by the named number is the value 
 of the <I>static_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN>, 
-converted to the corresponding universal type. <A NAME="I1625"></A></div>
+converted to the corresponding universal type. <A NAME="I1615"></A></div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I1626"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN> 
+<div class="Normal"><A NAME="I1616"></A>The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-3-2.html#S0034">number_declaration</A></SPAN> 
 has no effect.&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a</a></div>
 <div class="Annotations"><B>Proof:&nbsp;</B>Since the <I>static_</I><SPAN Class="swiss"><A HREF="AA-4-4.html#S0117">expression</A></SPAN> 
@@ -101,7 +97,7 @@ One,&nbsp;Un,&nbsp;Eins&nbsp;:&nbsp;<B>constant</B>&nbsp;:=&nbsp;1;&nbsp;&nbsp;&
 
 <H4 Class="centered">Extensions to Ada 83</H4>
 <div class="paranum"><a name="p10.a">10.a</a></div>
-<div class="Annotations"><A NAME="I1627"></A>We now allow a static expression 
+<div class="Annotations"><A NAME="I1617"></A>We now allow a static expression 
 of any numeric type to initialize a named number. For integer types, 
 it was possible in Ada 83 to use 'Pos to define a named number, but there 
 was no way to use a static expression of some nonuniversal real type 

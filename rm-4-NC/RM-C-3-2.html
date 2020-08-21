@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -98,11 +98,11 @@ if the specified interrupt is reserved.</div>
 <div class="Normal">The Is_Attached function returns True if and only 
 if a user-specified interrupt handler is attached to the interrupt.</div>
 <div class="paranum"><a name="p16">16/1</a></div>
-<div class="Normal">The Current_Handler function returns a value that 
+<div class="Normal">&nbsp;The Current_Handler function returns a value that 
 represents the attached handler of the interrupt. If no user-defined 
 handler is attached to the interrupt, Current_Handler returns <B>null</B>.</div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal">The Attach_Handler procedure attaches the specified 
+<div class="Normal">&nbsp;The Attach_Handler procedure attaches the specified 
 handler to the interrupt, overriding any existing treatment (including 
 a user handler) in effect for that interrupt. If New_Handler is <B>null</B>, 
 the default treatment is restored. <A NAME="I7671"></A>If New_Handler 
@@ -110,7 +110,7 @@ designates a protected procedure for which the aspect Interrupt_Handler
 is False, Program_Error is raised. In this case, the operation does not 
 modify the existing interrupt treatment.</div>
 <div class="paranum"><a name="p18">18/1</a></div>
-<div class="Normal">The Exchange_Handler procedure operates in the same 
+<div class="Normal">&nbsp;The Exchange_Handler procedure operates in the same 
 manner as Attach_Handler with the addition that the value returned in 
 Old_Handler designates the previous treatment for the specified interrupt. 
 If the previous treatment is not a user-defined handler, <B>null</B> 
@@ -124,20 +124,20 @@ a parameter of type Interrupt_Id, with the exception of Is_Reserved and
 Reference, a check is made that the specified interrupt is not reserved. 
 <A NAME="I7672"></A>Program_Error is raised if this check fails.</div>
 <div class="paranum"><a name="p21">21/3</a></div>
-<div class="Normal">If, by using the Attach_Handler, Detach_Handler, 
+<div class="Normal">&nbsp;If, by using the Attach_Handler, Detach_Handler, 
 or Exchange_Handler procedures, an attempt is made to detach a handler 
 that was attached statically (using the aspect Attach_Handler), the handler 
 is not detached and Program_Error is raised. <A NAME="I7673"></A></div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal">The Reference function returns a value of type System.Address 
+<div class="Normal">&nbsp;The Reference function returns a value of type System.Address 
 that can be used to attach a task entry via an address clause (see <A HREF="RM-J-7-1.html">J.7.1</A>) 
 to the interrupt specified by Interrupt. This function raises Program_Error 
 if attaching task entries to interrupts (or to this particular interrupt) 
 is not supported. <A NAME="I7674"></A></div>
 <div class="paranum"><a name="p22.1">22.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;The function Get_CPU returns the processor on which 
-the handler for Interrupt is executed. If the handler can execute on 
-more than one processor the value System.Multiprocessors.Not_A_Specific_CPU 
+<div class="Normal">&nbsp;&nbsp;&nbsp;The function Get_CPU returns the processor on 
+which the handler for Interrupt is executed. If the handler can execute 
+on more than one processor the value System.Multiprocessors.Not_A_Specific_CPU 
 is returned.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
@@ -147,7 +147,7 @@ shall the current handler of the corresponding interrupt be undefined.</div>
 
 <H4 Class="centered">Documentation Requirements</H4>
 <div class="paranum"><a name="p24">24/3</a></div>
-<div class="Normal">If the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) 
+<div class="Normal">&nbsp;If the Ceiling_Locking policy (see <A HREF="RM-D-3.html">D.3</A>) 
 is in effect, the implementation shall document the default ceiling priority 
 assigned to a protected object that contains a protected procedure that 
 specifies either the Attach_Handler or Interrupt_Handler aspects, but 

@@ -41,28 +41,28 @@
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN> 
 specifies the storage representation of records and record extensions, 
 that is, the order, position, and size of components (including discriminants, 
-if any). <A NAME="I5292"></A></div>
+if any). <A NAME="I5280"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I5293"></A><A NAME="S0330"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5294"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>use</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I5295"></A><SPAN Class="swiss"><A HREF="RM-J-8.html#S0341">mod_clause</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I5296"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>}<BR>
+<div class="Indented1"><SPAN Class="swiss">record_representation_clause</SPAN><A NAME="I5281"></A><A NAME="S0330"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>for</B>&nbsp;<I>first_subtype_</I><A NAME="I5282"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>use</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B>&nbsp;[<A NAME="I5283"></A><SPAN Class="swiss"><A HREF="RM-J-8.html#S0341">mod_clause</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<A NAME="I5284"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0331">component_clause</A></SPAN>}<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end</B>&nbsp;<B>record</B>;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I5297"></A><A NAME="S0331"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I5298"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I5299"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I5300"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I5301"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">component_clause</SPAN><A NAME="I5285"></A><A NAME="S0331"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<I>component_</I><A NAME="I5286"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0323">local_name</A></SPAN>&nbsp;<B>at</B>&nbsp;<A NAME="I5287"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>&nbsp;<B>range</B>&nbsp;<A NAME="I5288"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>&nbsp;..&nbsp;<A NAME="I5289"></A><SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I5302"></A><A NAME="S0332"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5303"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">position</SPAN><A NAME="I5290"></A><A NAME="S0332"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5291"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0122">expression</A></SPAN></div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I5304"></A><A NAME="S0333"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5305"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">first_bit</SPAN><A NAME="I5292"></A><A NAME="S0333"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5293"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I5306"></A><A NAME="S0334"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5307"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">last_bit</SPAN><A NAME="I5294"></A><A NAME="S0334"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>static_</I><A NAME="I5295"></A><SPAN Class="swiss"><A HREF="RM-4-4.html#S0128">simple_expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p7">7</a></div>
-<div class="Normal"><A NAME="I5308"></A><A NAME="I5309"></A><A NAME="I5310"></A><A NAME="I5311"></A>Each 
+<div class="Normal"><A NAME="I5296"></A><A NAME="I5297"></A><A NAME="I5298"></A><A NAME="I5299"></A>Each 
 <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0332">position</A></SPAN>, 
 <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0333">first_bit</A></SPAN>, 
 and <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0334">last_bit</A></SPAN> 
@@ -180,7 +180,7 @@ storage place is not specified explicitly in the <SPAN Class="swiss"><A HREF="RM
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5312"></A>The 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5300"></A>The 
 recommended level of support for <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0330">record_representation_clause</A></SPAN>s 
 is:&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/2</a></div>

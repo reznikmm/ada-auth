@@ -13,24 +13,22 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left:  10.2em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.SmallExamples {font-family: "Courier New", monospace; font-size: 72%; line-height: 122%; margin-left: 9.6em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,7 +42,7 @@
 <div class="Normal">[For a type declared in the visible part of a package 
 or generic package, certain operations on the type do not become visible 
 until later in the package &mdash; either in the private part or the 
-body. <A NAME="I3984"></A>Such <I>private operations</I> are available 
+body. <A NAME="I3936"></A>Such <I>private operations</I> are available 
 only inside the declarative region of the package or generic package.] 
 </div>
 
@@ -69,25 +67,24 @@ If later immediately within the declarative region in which the composite
 type is declared additional characteristics become visible for a component 
 type, then any corresponding characteristics become visible for the composite 
 type. Any additional predefined operators are implicitly declared at 
-that place.<span class="insert3">&nbsp;If there is no such place, then additional 
-predefined operators are not declared at all, but they still exist.</span></div>
+that place. If there is no such place, then additional predefined operators 
+are not declared at all, but they still exist.</div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Reason:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
-<span class="insert3">We say that the predefined operators exist because 
-they can emerge in some unusual generic instantiations. See <A HREF="AA-12-5.html">12.5</A>.</span> 
+<div class="Annotations"><B>Reason:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+We say that the predefined operators exist because they can emerge in 
+some unusual generic instantiations. See <A HREF="AA-12-5.html">12.5</A>. 
 </div>
 <div class="paranum"><a name="p3.b">3.b/3</a></div>
-<div class="Annotations"><span class="insert3"><B>Discussion:&nbsp;</B></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
-<span class="insert3">The predefined operators for the underlying class 
-of a type always exist, even if there is no visibility on that underlying 
-class. This rule is simply about where (if ever) those operators are 
-declared (and thus become usable). The &ldquo;additional predefined operators&rdquo; 
-defined by this rule are any that are not declared at the point of the 
-original type declaration. For instance, a type derived from a private 
-type whose full type is type String always will have a &quot;&gt;&quot; 
-operator, but where that operator is declared (and thus whether it is 
-visible) will depend on the visibility of the full type of the parent 
-type.</span>&nbsp;</div>
+<div class="Annotations"><B>Discussion:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
+The predefined operators for the underlying class of a type always exist, 
+even if there is no visibility on that underlying class. This rule is 
+simply about where (if ever) those operators are declared (and thus become 
+usable). The &ldquo;additional predefined operators&rdquo; defined by 
+this rule are any that are not declared at the point of the original 
+type declaration. For instance, a type derived from a private type whose 
+full type is type String always will have a &quot;&gt;&quot; operator, 
+but where that operator is declared (and thus whether it is visible) 
+will depend on the visibility of the full type of the parent type.&nbsp;</div>
 <div class="paranum"><a name="p4">4/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
@@ -98,7 +95,7 @@ become visible.</div>
 <div class="paranum"><a name="p5">5/1</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
-<A NAME="I3985"></A><A NAME="I3986"></A><A NAME="I3987"></A>[For example, 
+<A NAME="I3937"></A><A NAME="I3938"></A><A NAME="I3939"></A>[For example, 
 an array type whose component type is limited private becomes nonlimited 
 if the full view of the component type is nonlimited and visible at some 
 later place immediately within the declarative region in which the array 
@@ -106,68 +103,67 @@ type is declared. In such a case, the predefined &quot;=&quot; operator
 is implicitly declared at that place, and assignment is allowed after 
 that place.]</div>
 <div class="paranum"><a name="p5.1">5.1/3</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
-<span class="insert3">A type is a <I>descendant</I><A NAME="I3988"></A> 
-of the full view of some ancestor of its parent type only if the current 
-view it has of its parent is a descendant of the full view of that ancestor. 
-More generally, at any given place, a type is descended from the same 
-view of an ancestor as that from which the current view of its parent 
-is descended. This view determines what characteristics are inherited 
-from the ancestor[, and, for example, whether the type is considered 
-to be a descendant of a record type, or a descendant only through record 
-extensions of a more distant ancestor].</span></div>
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0269-1.TXT">AI05-0269-1</A></I>} 
+A type is a <I>descendant</I><A NAME="I3940"></A> of the full view of 
+some ancestor of its parent type only if the current view it has of its 
+parent is a descendant of the full view of that ancestor. More generally, 
+at any given place, a type is descended from the same view of an ancestor 
+as that from which the current view of its parent is descended. This 
+view determines what characteristics are inherited from the ancestor[, 
+and, for example, whether the type is considered to be a descendant of 
+a record type, or a descendant only through record extensions of a more 
+distant ancestor].</div>
 <div class="paranum"><a name="p5.2">5.2/4</a></div>
-<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0065-1.TXT">AI12-0065-1</A></I>} 
-<span class="insert3">[</span><span class="insert4">&nbsp;Furthermore, it</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;It</span></span><span class="insert3">&nbsp;is possible for there to be places where a derived type is&nbsp;</span><span class="insert4">known 
-to be derived indirectly from</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;visibly 
-a descendant of</span></span><span class="insert3">&nbsp;an ancestor type, 
-but&nbsp;</span><span class="insert4">is&nbsp;</span><span class="insert3">not 
+<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0065-1.TXT">AI12-0065-1</A></I>} 
+[<span class="insert4">Furthermore, it</span><span class="delete4">&nbsp;It</span> 
+is possible for there to be places where a derived type is <span class="insert4">known 
+to be derived indirectly from</span><span class="delete4">&nbsp;visibly a 
+descendant of</span> an ancestor type, but <span class="insert4">is&nbsp;</span>not 
 a descendant of even a partial view of the ancestor type, because the 
 parent of the derived type is not visibly a descendant of the ancestor. 
  In this case, the derived type inherits no characteristics from that 
 ancestor, but nevertheless is within the derivation class of the ancestor 
 for the purposes of type conversion, the &quot;covers&quot; relationship, 
 and matching against a formal derived type. In this case the derived 
-type is&nbsp;</span><span class="insert4">effectively</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;considered 
-to be</span></span><span class="insert3">&nbsp;a <I>descendant</I> of an incomplete 
-view of the ancestor.</span><span class="insert3"><span class="delete4"><A NAME="I3989"></A></span></span><span class="insert3">&nbsp;]</span></div>
+type is <span class="insert4">effectively</span><span class="delete4">&nbsp;considered 
+to be</span> a <I>descendant</I> of an incomplete view of the ancestor.<span class="delete4"><A NAME="I3941"></A></span>]</div>
 <div class="paranum"><a name="p5.a">5.a/3</a></div>
-<div class="Annotations" style="margin-bottom: 0.4em"><span class="insert3"><B>Discussion: 
-</B>Here is an example of this situation:</span>&nbsp;</div>
+<div class="Annotations" style="margin-bottom: 0.4em"><B>Discussion: 
+</B>Here is an example of this situation:&nbsp;</div>
 <div class="paranum"><a name="p5.b">5.b/3</a></div>
-<div class="SmallExamples"><span class="insert3"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
+<div class="SmallExamples"><B>package</B>&nbsp;P&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is</B>&nbsp;<B>private</B>;<BR>
 &nbsp;&nbsp;&nbsp;C&nbsp;:&nbsp;<B>constant</B>&nbsp;T;<BR>
 <B>private</B><BR>
 &nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T&nbsp;<B>is&nbsp;new</B>&nbsp;Integer;<BR>
 &nbsp;&nbsp;&nbsp;C&nbsp;:&nbsp;<B>constant</B>&nbsp;T&nbsp;:=&nbsp;42;<BR>
-<B>end</B>&nbsp;P;</span></div>
+<B>end</B>&nbsp;P;</div>
 <div class="paranum"><a name="p5.c">5.c/4</a></div>
 <div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0065-1.TXT">AI12-0065-1</A></I>} 
-<span class="insert3"><B>with</B>&nbsp;P;<BR>
+<B>with</B>&nbsp;P;<BR>
 <B>package</B>&nbsp;Q&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T2&nbsp;<B>is&nbsp;new</B>&nbsp;P.T;</span><span class="insert4">&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>T2&nbsp;is&nbsp;<B>not</B>&nbsp;a&nbsp;descendant&nbsp;of&nbsp;Integer</I></SPAN></span><span class="insert3"><BR>
-<B>end</B>&nbsp;Q;</span></div>
+&nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T2&nbsp;<B>is&nbsp;new</B>&nbsp;P.T;<span class="insert4">&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>T2&nbsp;is&nbsp;<B>not</B>&nbsp;a&nbsp;descendant&nbsp;of&nbsp;Integer</I></SPAN></span><BR>
+<B>end</B>&nbsp;Q;</div>
 <div class="paranum"><a name="p5.d">5.d/4</a></div>
 <div class="SmallExamples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0065-1.TXT">AI12-0065-1</A></I>} 
-<span class="insert3"><B>with</B>&nbsp;Q;<BR>
+<B>with</B>&nbsp;Q;<BR>
 <B>package</B>&nbsp;P.Child&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;T3&nbsp;<B>is&nbsp;new</B>&nbsp;Q.T2;<BR>
 <B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert4">--&nbsp;<SPAN Class="roman"><I>Here&nbsp;T3&nbsp;is&nbsp;known&nbsp;to&nbsp;be&nbsp;indirectly&nbsp;derived&nbsp;from&nbsp;Integer,&nbsp;but&nbsp;inherits</I></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="insert4">--&nbsp;<SPAN Class="roman"><I>Here&nbsp;T3&nbsp;is&nbsp;known&nbsp;to&nbsp;be&nbsp;indirectly&nbsp;derived&nbsp;from&nbsp;Integer,&nbsp;but&nbsp;inherits</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I><B>no</B>&nbsp;characteristics&nbsp;from&nbsp;Integer,&nbsp;since&nbsp;T2&nbsp;inherits&nbsp;no&nbsp;characteristics</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>from&nbsp;Integer.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>However,&nbsp;we&nbsp;allow&nbsp;an&nbsp;explicit&nbsp;conversion&nbsp;of&nbsp;T3&nbsp;to/from&nbsp;Integer.</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Hence,&nbsp;T3&nbsp;is&nbsp;effectively&nbsp;a&nbsp;descendant&nbsp;of&nbsp;an&nbsp;&quot;incomplete&quot;&nbsp;view&nbsp;of&nbsp;Integer.</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="insert3">Int&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;52;<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;</span>Int&nbsp;:&nbsp;Integer&nbsp;:=&nbsp;52;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;V&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(P.C);&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal:&nbsp;conversion&nbsp;allowed</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;W&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(Int);&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal:&nbsp;conversion&nbsp;allowed</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(42);&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Error:&nbsp;T3&nbsp;is&nbsp;not&nbsp;a&nbsp;numeric&nbsp;type</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Y&nbsp;:&nbsp;T3&nbsp;:=&nbsp;X&nbsp;+&nbsp;1;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Error:&nbsp;no&nbsp;visible&nbsp;&quot;+&quot;&nbsp;operator</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;Z&nbsp;:&nbsp;T3&nbsp;:=&nbsp;T3(Integer(W)&nbsp;+&nbsp;1);&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Legal:&nbsp;convert&nbsp;to&nbsp;Integer&nbsp;first</I></SPAN><BR>
-<B>end</B>&nbsp;P.Child;</span></div>
+<B>end</B>&nbsp;P.Child;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
 <div class="Normal">{<I><A HREF="defect1.html#8652/0019">8652/0019</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00033.TXT">AI95-00033-01</A></I>} 
@@ -178,12 +174,9 @@ place, if any, immediately within the declarative region in which the
 <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN> 
 occurs, but after the <SPAN Class="swiss"><A HREF="AA-3-2-1.html#S0023">type_declaration</A></SPAN>, 
 where the corresponding declaration from the parent is visible. If there 
-is no such place, then the inherited subprogram is not declared at all<span class="insert3">, 
-but it still exists</span>. [<span class="insert3">For a tagged type, 
-it is possible to dispatch to an</span><span class="delete3">&nbsp;An</span> 
-inherited subprogram that is not declared at all<span class="delete3">cannot 
-be named in a call and cannot be overridden, but for a tagged type, it 
-is possible to dispatch to it</span>.]</div>
+is no such place, then the inherited subprogram is not declared at all, 
+but it still exists. [For a tagged type, it is possible to dispatch to 
+an inherited subprogram that is not declared at all.]</div>
 <div class="paranum"><a name="p7">7</a></div>
 <div class="Normal">For a <SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN>, 
 each inherited subprogram is declared immediately after the <SPAN Class="swiss"><A HREF="AA-7-3.html#S0194">private_extension_declaration</A></SPAN> 
@@ -342,7 +335,7 @@ for every subtype S of an untagged private type whose full view is tagged,
 the following attribute is defined:&nbsp;</div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="WideHanging-Term">S'Class</div><div class="WideHanging-Body">
-<A NAME="I3990"></A><A NAME="I3991"></A>Denotes the class-wide subtype 
+<A NAME="I3942"></A><A NAME="I3943"></A>Denotes the class-wide subtype 
 corresponding to the full view of S. This attribute is allowed only from 
 the beginning of the private part in which the full view is declared, 
 until the declaration of the full view. [After the full view, the Class 
@@ -450,23 +443,22 @@ types do have an assignment operation, but not <SPAN Class="swiss"><A HREF="AA-5
 <H4 Class="centered">Wording Changes from Ada 2005</H4>
 <div class="paranum"><a name="p20.e">20.e/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0029-1.TXT">AI05-0029-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Revised the wording to say that 
-predefined operations still exist even if they are never declared, because 
-it is possible to reference them in a generic unit.</span></div>
+<B>Correction:</B> Revised the wording to say that predefined operations 
+still exist even if they are never declared, because it is possible to 
+reference them in a generic unit.</div>
 <div class="paranum"><a name="p20.f">20.f/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0115-1.TXT">AI05-0115-1</A></I>} 
-<span class="insert3"><B>Correction:</B> Clarified that the characteristics 
-of a descendant of a private type depend on the visibility of the full 
-view of the direct ancestor. This has to be the case (so that privacy 
-is not violated), but it wasn't spelled out in earlier versions of Ada.</span> 
-</div>
+<B>Correction:</B> Clarified that the characteristics of a descendant 
+of a private type depend on the visibility of the full view of the direct 
+ancestor. This has to be the case (so that privacy is not violated), 
+but it wasn't spelled out in earlier versions of Ada.&nbsp;</div>
 
 <H4 Class="centered">Wording Changes from Ada 2012</H4>
 <div class="paranum"><a name="p20.g">20.g/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0065-1.TXT">AI12-0065-1</A></I>} 
 <span class="insert4"><B>Corrigendum:</B> Clarified the clarification 
 added by AI05-0115-1, as it turned out to not be that clear. Hopefully 
-this version is better.</span></div>
+this version is better.</span>&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

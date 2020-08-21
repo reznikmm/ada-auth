@@ -15,13 +15,13 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.8em; margin-top: 0em; margin-bottom: 0.6em}
-    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0em; margin-bottom: 0em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.WideHanging-Body {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 7.2em; margin-top: 0em; margin-bottom: 0.6em}
+    DIV.WideHanging-Term {float: left; font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0em; margin-bottom: 0em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -34,12 +34,12 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5176"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I5091"></A>For 
 a component C of a composite, non-array object R, the <I>storage place 
 attributes</I> are defined:&nbsp;</div>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="WideHanging-Term">R.C'Position</div><div class="WideHanging-Body">
-<A NAME="I5177"></A><A NAME="I5178"></A>If the nondefault bit ordering 
+<A NAME="I5092"></A><A NAME="I5093"></A>If the nondefault bit ordering 
 applies to the composite type, and if a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN> 
 specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0315">position</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>; 
@@ -47,7 +47,7 @@ otherwise, denotes the same value as R.C'Address &ndash; R'Address. The
 value of this attribute is of the type <I>universal_integer</I>.&nbsp;</div>
 <div class="paranum"><a name="p3">3/2</a></div>
 <div class="WideHanging-Term">R.C'First_Bit</div><div class="WideHanging-Body"><br clear="left">
-<A NAME="I5179"></A><A NAME="I5180"></A>If the nondefault bit ordering 
+<A NAME="I5094"></A><A NAME="I5095"></A>If the nondefault bit ordering 
 applies to the composite type, and if a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN> 
 specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0316">first_bit</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>; 
@@ -57,7 +57,7 @@ measured in bits. The first bit of a storage element is numbered zero.
 The value of this attribute is of the type <I>universal_integer</I>.</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="WideHanging-Term">R.C'Last_Bit</div><div class="WideHanging-Body">
-<A NAME="I5181"></A><A NAME="I5182"></A>If the nondefault bit ordering 
+<A NAME="I5096"></A><A NAME="I5097"></A>If the nondefault bit ordering 
 applies to the composite type, and if a <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN> 
 specifies the placement of C, denotes the value given for the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0317">last_bit</A></SPAN> 
 of the <SPAN Class="swiss"><A HREF="RM-13-5-1.html#S0314">component_clause</A></SPAN>; 
@@ -68,7 +68,7 @@ measured in bits. The value of this attribute is of the type <I>universal_intege
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I5183"></A><A NAME="I5184"></A>If a component 
+<div class="Normal"><A NAME="I5098"></A><A NAME="I5099"></A>If a component 
 is represented using some form of pointer (such as an offset) to the 
 actual data of the component, and this data is contiguous with the rest 
 of the object, then the storage place attributes should reflect the place 

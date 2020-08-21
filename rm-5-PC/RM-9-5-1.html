@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
     SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
@@ -41,7 +39,7 @@
 <HR>
 <H1>9.5.1 Protected Subprograms and Protected Actions</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4224"></A><A NAME="I4225"></A><A NAME="I4226"></A>A 
+<div class="Normal"><A NAME="I4212"></A><A NAME="I4213"></A><A NAME="I4214"></A>A 
 <I>protected subprogram</I> is a subprogram declared immediately within 
 a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>. 
 Protected procedures provide exclusive read-write access to the data 
@@ -60,29 +58,29 @@ and within an <SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></
 the current instance is defined to be a variable (updating is permitted). 
 </div>
 <div class="paranum"><a name="p2.1">2.1/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4">For 
-a type declared by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0227">protected_type_declaration</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;For a type declared 
+by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0227">protected_type_declaration</A></SPAN> 
 or for the anonymous type of an object declared by a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN>, 
 the following language-defined type-related representation aspect may 
-be specified:</span></div>
+be specified:</div>
 <div class="paranum"><a name="p2.2">2.2/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert4">Exclusive_Functions</span></div><div class="WideHanging-Body"><br clear="left">
-<span class="insert4">The type of aspect Exclusive_Functions is Boolean. 
-If not specified (including by inheritance), the aspect is False.<A NAME="I4227"></A><A NAME="I4228"></A></span></div>
+<div class="WideHanging-Term">&nbsp;Exclusive_Functions</div><div class="WideHanging-Body"><br clear="left">
+The type of aspect Exclusive_Functions is Boolean. If not specified (including 
+by inheritance), the aspect is False.<A NAME="I4215"></A><A NAME="I4216"></A></div>
 <div class="paranum"><a name="p2.3">2.3/4</a></div>
-<div class="WideHanging-Term">&nbsp;<span class="insert4"></span></div><div class="WideHanging-Body">
-<span class="insert4">A value of True for this aspect indicates that 
-protected functions behave in the same way as protected procedures with 
-respect to mutual exclusion and queue servicing (see below).</span></div>
+<div class="WideHanging-Term">&nbsp;</div><div class="WideHanging-Body">
+A value of True for this aspect indicates that protected functions behave 
+in the same way as protected procedures with respect to mutual exclusion 
+and queue servicing (see below).</div>
 <div class="paranum"><a name="p2.4">2.4/4</a></div>
-<div class="Normal">&nbsp;<span class="insert4">A protected procedure or entry 
-is an <I>exclusive</I> protected operation.<A NAME="I4229"></A> A protected 
-function of a protected type <I>P</I> is an exclusive protected operation 
-if the Exclusive_Functions aspect of <I>P</I> is True.</span></div>
+<div class="Normal">&nbsp;A protected procedure or entry is an <I>exclusive</I> 
+protected operation.<A NAME="I4217"></A> A protected function of a protected 
+type <I>P</I> is an exclusive protected operation if the Exclusive_Functions 
+aspect of <I>P</I> is True.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I4230"></A>For the execution of a call on 
+<div class="Normal"><A NAME="I4218"></A>For the execution of a call on 
 a protected subprogram, the evaluation of the <SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 or <SPAN Class="swiss"><A HREF="RM-4-1.html#S0093">prefix</A></SPAN> 
 and of the parameter associations, and any assigning back of <B>in out</B> 
@@ -95,30 +93,28 @@ action</I> on the target protected object; the protected action completes
 after the body of the subprogram is executed. A protected action can 
 also be started by an entry call (see <A HREF="RM-9-5-3.html">9.5.3</A>).</div>
 <div class="paranum"><a name="p4">4/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4231"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I4219"></A>A 
 new protected action is not started on a protected object while another 
 protected action on the same protected object is underway, unless both 
-actions are the result of a call on a <span class="insert4">nonexclusive 
-</span>protected function. This rule is expressible in terms of the execution 
-resource associated with the protected object:&nbsp;</div>
+actions are the result of a call on a nonexclusive protected function. 
+This rule is expressible in terms of the execution resource associated 
+with the protected object:&nbsp;</div>
 <div class="paranum"><a name="p5">5/4</a></div>
-<div class="Bulleted"><A NAME="I4232"></A><A NAME="I4233"></A><I>Starting</I> 
+<div class="Bulleted"><A NAME="I4220"></A><A NAME="I4221"></A><I>Starting</I> 
 a protected action on a protected object corresponds to <I>acquiring</I> 
 the execution resource associated with the protected object, either for 
-<span class="insert4">exclusive read-write</span><span class="delete4">&nbsp;concurrent 
-read-only</span> access if the protected action is for a call on <span class="insert4">an 
-exclusive protected operation</span><span class="delete4">&nbsp;a protected 
-function</span>, or for <span class="insert4">concurrent read-only</span><span class="delete4">&nbsp;exclusive 
-read-write</span> access otherwise;</div>
+exclusive read-write access if the protected action is for a call on 
+an exclusive protected operation, or for concurrent read-only access 
+otherwise;</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Bulleted"><A NAME="I4234"></A><A NAME="I4235"></A><I>Completing</I> 
+<div class="Bulleted"><A NAME="I4222"></A><A NAME="I4223"></A><I>Completing</I> 
 the protected action corresponds to <I>releasing</I> the associated execution 
 resource.&nbsp;</div>
 <div class="paranum"><a name="p7">7/4</a></div>
-<div class="Normal">After performing an <span class="insert4">exclusive 
-protected&nbsp;</span>operation on a protected object<span class="delete4">&nbsp;other than a call on a protected function</span>, but prior to completing 
-the associated protected action, the entry queues (if any) of the protected 
-object are serviced (see <A HREF="RM-9-5-3.html">9.5.3</A>).</div>
+<div class="Normal">After performing an exclusive protected operation 
+on a protected object, but prior to completing the associated protected 
+action, the entry queues (if any) of the protected object are serviced 
+(see <A HREF="RM-9-5-3.html">9.5.3</A>).</div>
 <div class="paranum"><a name="p7.1">7.1/5</a></div>
 <div class="Normal">&nbsp;<span class="insert5">If a parallel construct occurs 
 within a protected action, no new logical threads of control are created. 
@@ -130,10 +126,10 @@ order.</span></div>
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p8">8/5</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"></span><A NAME="I4236"></A>During 
+<div class="Normal" style="margin-bottom: 0.4em"><span class="delete5"></span><A NAME="I4224"></A>During 
 a protected action, it is a bounded error to invoke an operation that 
 is <span class="insert5">potentially blocking (see <A HREF="RM-9-5.html">9.5</A>).</span><span class="delete5"><I>&nbsp;potentially 
-blocking</I>. <A NAME="I4237"></A><A NAME="I4238"></A>The following are 
+blocking</I>. <A NAME="I4225"></A><A NAME="I4226"></A>The following are 
 defined to be potentially blocking operations:</span>&nbsp;</div>
 <div class="Normal"><span class="insert5"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 9 through 16 were moved to <A HREF="RM-9-5.html">9.5</A>.</I></SPAN></span> 
@@ -158,13 +154,13 @@ of the protected action;</span>&nbsp;</div>
 <div class="Bulleted"><span class="delete5">a call on a subprogram whose 
 body contains a potentially blocking operation.</span>&nbsp;</div>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I4239"></A>If the bounded error is detected, 
+<div class="Normal"><A NAME="I4227"></A>If the bounded error is detected, 
 Program_Error is raised. If not detected, the bounded error might result 
 in deadlock or a (nested) protected action on the same target object.</div>
 <div class="paranum"><a name="p18">18/5</a></div>
 <div class="Normal"><span class="insert5">During a protected action, 
 a call on a subprogram whose body contains a potentially blocking operation 
-is a bounded error. <A NAME="I4240"></A><A NAME="I4241"></A>If the bounded 
+is a bounded error. <A NAME="I4228"></A><A NAME="I4229"></A>If the bounded 
 error is detected, Program_Error is raised; otherwise, the call proceeds 
 normally.&nbsp;</span><span class="delete5">Certain language-defined subprograms 
 are potentially blocking. In particular, the subprograms of the language-defined 

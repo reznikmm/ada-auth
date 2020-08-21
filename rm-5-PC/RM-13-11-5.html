@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -44,7 +42,7 @@
 library procedure exists:</div>
 <div class="paranum"><a name="p3">3/3</a></div>
 <div class="Examples"><B>with</B>&nbsp;System.Storage_Pools.Subpools;<BR>
-<A NAME="I5526"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
+<A NAME="I5513"></A><B>procedure</B>&nbsp;Ada.Unchecked_Deallocate_Subpool<BR>
 &nbsp;&nbsp;&nbsp;(Subpool&nbsp;:&nbsp;<B>in&nbsp;out</B>&nbsp;System.Storage_Pools.Subpools.Subpool_Handle);</div>
 <div class="paranum"><a name="p4">4/3</a></div>
 <div class="Normal">If Subpool is <B>null</B>, a call on Unchecked_Deallocate_Subpool 
@@ -57,10 +55,10 @@ has the following effects:</div>
 <div class="Bulleted">The subpool no longer belongs to any pool;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Bulleted">Any of the objects allocated from the subpool that 
-still exist are finalized in an arbitrary order;<A NAME="I5527"></A></div>
+still exist are finalized in an arbitrary order;<A NAME="I5514"></A></div>
 <div class="paranum"><a name="p7.1">7.1/4</a></div>
-<div class="Bulleted"><span class="insert4">All of the objects allocated 
-from the subpool cease to exist;<A NAME="I5528"></A></span></div>
+<div class="Bulleted">All of the objects allocated from the subpool cease 
+to exist;<A NAME="I5515"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Bulleted" style="margin-bottom: 0.3em">The following dispatching 
 call is then made:&nbsp;</div>

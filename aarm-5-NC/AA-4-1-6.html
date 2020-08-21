@@ -29,7 +29,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -52,7 +52,7 @@ that denotes one or more functions declared immediately within the same
 declaration list in which <I>T</I> is declared. All such functions shall 
 have at least two parameters, the first of which is of type <I>T</I> 
 or <I>T</I>'Class, or is an access-to-constant parameter with designated 
-type <I>T</I> or <I>T</I>'Class.<A NAME="I2659"></A><A NAME="I2660"></A></div>
+type <I>T</I> or <I>T</I>'Class.<A NAME="I2667"></A><A NAME="I2668"></A></div>
 <div class="paranum"><a name="p2.a">2.a/3</a></div>
 <div class="Annotations"><B>Aspect Description for&nbsp;</B><B>Constant_Indexing: 
 </B>Defines function(s) to implement user-defined <SPAN Class="swiss"><A HREF="AA-4-1-1.html#S0096">indexed_component</A></SPAN>s.</div>
@@ -65,7 +65,7 @@ have at least two parameters, the first of which is of type <I>T</I>
 or <I>T</I>'Class, or is an access parameter with designated type <I>T</I> 
 or <I>T</I>'Class. All such functions shall have a return type that is 
 a reference type (see <A HREF="AA-4-1-5.html">4.1.5</A>), whose reference 
-discriminant is of an access-to-variable type.<A NAME="I2661"></A><A NAME="I2662"></A> 
+discriminant is of an access-to-variable type.<A NAME="I2669"></A><A NAME="I2670"></A> 
 </div>
 <div class="paranum"><a name="p3.a">3.a/3</a></div>
 <div class="Annotations"><B>Reason:&nbsp;</B>We require these functions to 
@@ -89,9 +89,9 @@ and Variable_Indexing aspects.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 An <I>indexable container type</I> is (a view of) a tagged type with 
-at least one of the aspects Constant_Indexing or Variable_Indexing specified.<A NAME="I2663"></A> 
+at least one of the aspects Constant_Indexing or Variable_Indexing specified.<A NAME="I2671"></A> 
 An <I>indexable container object</I> is an object of an indexable container 
-type.<A NAME="I2664"></A> [A <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
+type.<A NAME="I2672"></A> [A <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 that denotes the result of calling a function named by a Constant_Indexing 
 or Variable_Indexing aspect.]</div>
@@ -134,7 +134,7 @@ shall match the inherited aspect (see <A HREF="AA-13-1-1.html">13.1.1</A>).
 8 were deleted.</I></SPAN>&nbsp;</div>
 <div class="paranum"><a name="p9">9/5</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0160-1.TXT">AI12-0160-1</A></I>} 
-<A NAME="I2665"></A>In addition to the places where Legality Rules normally 
+<A NAME="I2673"></A>In addition to the places where Legality Rules normally 
 apply (see <A HREF="AA-12-3.html">12.3</A>), this rule applies also in 
 the private part of an instance of a generic unit.</div>
 <div class="paranum"><a name="p9.1">9.1/5</a></div>
@@ -146,7 +146,7 @@ is illegal if the equivalent prefixed view (see below) is illegal.&nbsp;</div>
 <div class="paranum"><a name="p10">10/3</a></div>
 <div class="Indented1">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
-<SPAN Class="swiss">generalized_indexing</SPAN><A NAME="I2666"></A><A NAME="S0105"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>indexable_container_object_</I><A NAME="I2667"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I2668"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN></div>
+<SPAN Class="swiss">generalized_indexing</SPAN><A NAME="I2674"></A><A NAME="S0105"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><I>indexable_container_object_</I><A NAME="I2675"></A><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>&nbsp;<A NAME="I2676"></A><SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p11">11/3</a></div>
@@ -154,14 +154,14 @@ is illegal if the equivalent prefixed view (see below) is illegal.&nbsp;</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 The expected type for the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is any indexable container type.<A NAME="I2669"></A></div>
+is any indexable container type.<A NAME="I2677"></A></div>
 <div class="paranum"><a name="p12">12/3</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0292-1.TXT">AI05-0292-1</A></I>} 
 If the Constant_Indexing aspect is specified for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN>, 
 then the <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is interpreted as a <I>constant indexing</I> under the following circumstances:<A NAME="I2670"></A><A NAME="I2671"></A></div>
+is interpreted as a <I>constant indexing</I> under the following circumstances:<A NAME="I2678"></A><A NAME="I2679"></A></div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Bulleted">when the Variable_Indexing aspect is not specified 
 for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>;</div>
@@ -170,13 +170,13 @@ for the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HRE
 denotes a constant;</div>
 <div class="paranum"><a name="p15">15/3</a></div>
 <div class="Bulleted">when the <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is used within a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">primary</A></SPAN> 
+is used within a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN> 
 where a <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 denoting a constant is permitted.</div>
 <div class="paranum"><a name="p15.a">15.a/3</a></div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>This means it is not interpreted 
 as a constant indexing for the <I>variable_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
-in the LHS of an assignment (not inside a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0127">primary</A></SPAN>), 
+in the LHS of an assignment (not inside a <SPAN Class="swiss"><A HREF="AA-4-4.html#S0131">primary</A></SPAN>), 
 nor for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
 used for an <B>out</B> or <B>in out</B> parameter (not allowed to be 
 a constant), nor for the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -184,13 +184,13 @@ in an object renaming (not inside a primary), unless there is no Variable_Indexi
 aspect defined.&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
 <div class="Normal">Otherwise, the <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
-is interpreted as a <I>variable indexing</I>.<A NAME="I2672"></A><A NAME="I2673"></A></div>
+is interpreted as a <I>variable indexing</I>.<A NAME="I2680"></A><A NAME="I2681"></A></div>
 <div class="paranum"><a name="p17">17/3</a></div>
 <div class="Normal">When a <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is interpreted as a constant (or variable) indexing, it is equivalent 
 to a call on a prefixed view of one of the functions named by the Constant_Indexing 
 (or Variable_Indexing) aspect of the type of the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
-with the given <SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN>, 
+with the given <SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN>, 
 and with the <I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 as the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN> 
 of the prefixed view.</div>
@@ -199,7 +199,7 @@ of the prefixed view.</div>
 </B>In other words, the <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 is equivalent to:</div>
 <div class="paranum"><a name="p17.b">17.b/3</a></div>
-<div class="SmallExamples"><I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>.Indexing&nbsp;<SPAN Class="swiss"><A HREF="AA-6-4.html#S0183">actual_parameter_part</A></SPAN></div>
+<div class="SmallExamples"><I>indexable_container_object_</I><SPAN Class="swiss"><A HREF="AA-4-1.html#S0093">prefix</A></SPAN>.Indexing&nbsp;<SPAN Class="swiss"><A HREF="AA-6-4.html#S0197">actual_parameter_part</A></SPAN></div>
 <div class="paranum"><a name="p17.c">17.c/4</a></div>
 <div class="Annotations" style="margin-bottom: 0.9em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 
 where Indexing is the <SPAN Class="swiss"><A HREF="AA-4-1.html#S0091">name</A></SPAN> 
@@ -241,14 +241,14 @@ IB&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&quot;pear&quot;).Data.<B>all</B>&nbsp;:=
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p22.a">22.a/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0139-2.TXT">AI05-0139-2</A></I>} 
-<A NAME="I2674"></A>Aspects Constant_Indexing and Variable_Indexing, 
+<A NAME="I2682"></A>Aspects Constant_Indexing and Variable_Indexing, 
 and the <SPAN Class="swiss"><A HREF="AA-4-1-6.html#S0105">generalized_indexing</A></SPAN> 
 syntax are new.&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2012</H4>
 <div class="paranum"><a name="p22.b">22.b/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0160-1.TXT">AI12-0160-1</A></I>} 
-<A NAME="I2675"></A><B>Correction:</B> Prevented a derived type from 
+<A NAME="I2683"></A><B>Correction:</B> Prevented a derived type from 
 specifying Constant_Indexing if the ancestor specified Variable_Indexing 
 (and vice versa). This is necessary to preserve the intent that for an 
 object Obj whose tag is that of its nominal subtype, T'Class(Obj)(I) 
@@ -256,7 +256,7 @@ always has the same meaning as Obj(I). Situations like this should be
 rare in practice; most types will either define both aspects or neither.</div>
 <div class="paranum"><a name="p22.c">22.c/5</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0204-1.TXT">AI12-0204-1</A></I>} 
-<A NAME="I2676"></A><B>Correction:</B> Added a rule that a generalized 
+<A NAME="I2684"></A><B>Correction:</B> Added a rule that a generalized 
 indexing is illegal if the equivalent prefixed view would be illegal. 
 If the prefixed view would be illegal for any reason, Ada 2012 would 
 have allowed the generalized indexing while Ada 202x does not. This violated 

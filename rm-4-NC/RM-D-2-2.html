@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -55,7 +55,7 @@ Priority_Specific_Dispatching is as follows:&nbsp;</div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p3.3">3.3/2</a></div>
-<div class="Normal">&nbsp;The expected type for <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The expected type for <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 is Integer.&nbsp;</div>
 
@@ -66,22 +66,22 @@ used in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN>
 Task_Dispatching_Policy shall be the name of a task dispatching policy. 
 </div>
 <div class="paranum"><a name="p4.1">4.1/2</a></div>
-<div class="Normal">&nbsp;The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;The <I>policy_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 used in a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Priority_Specific_Dispatching shall be the name of a task dispatching 
 policy.</div>
 <div class="paranum"><a name="p4.2">4.2/2</a></div>
-<div class="Normal">&nbsp;Both <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;Both <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 and <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 shall be static expressions in the range of System.Any_Priority; <I>last_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 shall have a value greater than or equal to <I>first_priority_</I><SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>.</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p4.3">4.3/2</a></div>
-<div class="Normal">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN> 
 Task_Dispatching_Policy specifies the single task dispatching policy.</div>
 <div class="paranum"><a name="p4.4">4.4/2</a></div>
-<div class="Normal">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">Pragma</A></SPAN> 
 Priority_Specific_Dispatching specifies the task dispatching policy for 
 the specified range of priorities. Tasks with base priorities within 
 the range of priorities specified in a Priority_Specific_Dispatching 
@@ -90,7 +90,7 @@ dispatching policy. Tasks with active priorities within the range of
 priorities specified in a Priority_Specific_Dispatching pragma are dispatched 
 according to the specified dispatching policy.&nbsp;</div>
 <div class="paranum"><a name="p4.5">4.5/3</a></div>
-<div class="Normal">&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
+<div class="Normal">&nbsp;&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
 pragmas, the dispatching policy for priorities not covered by any Priority_Specific_Dispatching 
 pragmas is FIFO_Within_Priorities.</div>
 
@@ -100,10 +100,11 @@ pragmas is FIFO_Within_Priorities.</div>
 pragma is a configuration pragma. A Priority_Specific_Dispatching pragma 
 is a configuration pragma. <A NAME="I7794"></A><A NAME="I7795"></A></div>
 <div class="paranum"><a name="p5.1">5.1/2</a></div>
-<div class="Normal">&nbsp;The priority ranges specified in more than one Priority_Specific_Dispatching 
-pragma within the same partition shall not be overlapping.</div>
+<div class="Normal">&nbsp;&nbsp;The priority ranges specified in more than one 
+Priority_Specific_Dispatching pragma within the same partition shall 
+not be overlapping.</div>
 <div class="paranum"><a name="p5.2">5.2/2</a></div>
-<div class="Normal">&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
+<div class="Normal">&nbsp;&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
 pragmas it shall not contain a Task_Dispatching_Policy pragma.</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>This paragraph was 
@@ -118,16 +119,16 @@ into and deleted from the ready queues. A single task dispatching policy
 is specified by a Task_Dispatching_Policy pragma. Pragma Priority_Specific_Dispatching 
 assigns distinct dispatching policies to subranges of System.Any_Priority.</div>
 <div class="paranum"><a name="p7.1">7.1/2</a></div>
-<div class="Normal">&nbsp;<A NAME="I7797"></A>If neither <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I7797"></A>If neither <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 applies to any of the program units comprising a partition, the task 
 dispatching policy for that partition is unspecified.</div>
 <div class="paranum"><a name="p7.2">7.2/3</a></div>
-<div class="Normal">&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
+<div class="Normal">&nbsp;&nbsp;If a partition contains one or more Priority_Specific_Dispatching 
 pragmas, a task dispatching point occurs for the currently running task 
 of a processor whenever there is a nonempty ready queue for that processor 
 with a higher priority than the priority of the running task.</div>
 <div class="paranum"><a name="p7.3">7.3/2</a></div>
-<div class="Normal">&nbsp;A task that has its base priority changed may move 
+<div class="Normal">&nbsp;&nbsp;A task that has its base priority changed may move 
 from one dispatching policy to another. It is immediately subject to 
 the new dispatching policy.</div>
 <div class="Normal"><SPAN STYLE="font-size: 80%"><I>Paragraphs 7 through 
@@ -135,7 +136,7 @@ the new dispatching policy.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p14.1">14.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;An implementation shall allow, for a single partition, 
+<div class="Normal">&nbsp;&nbsp;&nbsp;An implementation shall allow, for a single partition, 
 both the locking policy (see <A HREF="RM-D-3.html">D.3</A>) to be specified 
 as Ceiling_Locking and also one or more Priority_Specific_Dispatching 
 pragmas to be given.&nbsp;</div>
@@ -146,11 +147,11 @@ pragmas to be given.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Normal">Implementations are allowed to define other task 
+<div class="Normal">&nbsp;Implementations are allowed to define other task 
 dispatching policies, but need not support more than one task dispatching 
 policy per partition.</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Normal">An implementation need not support <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Normal">&nbsp;An implementation need not support <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Priority_Specific_Dispatching if it is infeasible to support it in the 
 target environment.</div>
 <div class="NotesHeader">NOTES</div>

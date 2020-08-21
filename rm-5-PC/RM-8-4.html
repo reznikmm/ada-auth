@@ -42,11 +42,11 @@ achieves direct visibility of the primitive operators of a type.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I3956"></A><A NAME="S0213"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3957"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I3958"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">use_clause</SPAN><A NAME="I3944"></A><A NAME="S0213"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I3945"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN>&nbsp;|&nbsp;<A NAME="I3946"></A><SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN></div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I3959"></A><A NAME="S0214"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I3960"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I3961"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">use_package_clause</SPAN><A NAME="I3947"></A><A NAME="S0214"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;<I>package_</I><A NAME="I3948"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>&nbsp;{,&nbsp;<I>package_</I><A NAME="I3949"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>};</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">use_type_clause</SPAN><A NAME="I3962"></A><A NAME="S0215"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;[<B>all</B>]&nbsp;<B>type</B>&nbsp;<A NAME="I3963"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3964"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>};</div>
+<div class="Indented1"><SPAN Class="swiss">use_type_clause</SPAN><A NAME="I3950"></A><A NAME="S0215"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><B>use</B>&nbsp;[<B>all</B>]&nbsp;<B>type</B>&nbsp;<A NAME="I3951"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>&nbsp;{,&nbsp;<A NAME="I3952"></A><SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN>};</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p5">5/2</a></div>
@@ -56,7 +56,7 @@ shall denote a nonlimited view of a package.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I3965"></A>For each <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>, 
+<div class="Normal"><A NAME="I3953"></A>For each <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>, 
 there is a certain region of text called the <I>scope</I> of the <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN>. 
 For a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
 within a <SPAN Class="swiss"><A HREF="RM-10-1-2.html#S0270">context_clause</A></SPAN> 
@@ -81,9 +81,9 @@ of any public descendant of that library unit.&nbsp;</div>
 if it is denoted by a <I>package_</I><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN> 
 of that clause. A type is <I>named</I> in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0215">use_type_clause</A></SPAN> 
 if it is determined by a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
-of that clause.<A NAME="I3966"></A></div>
+of that clause.<A NAME="I3954"></A></div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3967"></A>For 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3955"></A>For 
 each package named in a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0214">use_package_clause</A></SPAN> 
 whose scope encloses a place, each declaration that occurs immediately 
 within the declarative region of the package is <I>potentially use-visible</I> 
@@ -106,7 +106,7 @@ and that operates on a class-wide type that covers <I>T</I>.&nbsp;</div>
 <div class="Normal">&nbsp;Certain implicit declarations may become potentially 
 use-visible in certain contexts as described in <A HREF="RM-12-6.html">12.6</A>.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3968"></A><A NAME="I3969"></A>A 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3956"></A><A NAME="I3957"></A>A 
 declaration is <I>use-visible</I> if it is potentially use-visible, except 
 in these naming-conflict cases:&nbsp;</div>
 <div class="paranum"><a name="p10">10</a></div>
@@ -121,7 +121,7 @@ are not use-visible unless each of them is an overloadable declaration.
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I3970"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
+<div class="Normal"><A NAME="I3958"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-8-4.html#S0213">use_clause</A></SPAN> 
 has no effect.&nbsp;</div>
 
 <H4 Class="centered">Examples</H4>

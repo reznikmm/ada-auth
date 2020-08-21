@@ -13,20 +13,18 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -43,35 +41,36 @@ calls) between active partitions.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8362"></A><A NAME="I8363"></A>The 
+<div class="Indented1" style="margin-bottom: 0.4em"><A NAME="I8162"></A><A NAME="I8163"></A>The 
 form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 Remote_Call_Interface is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8364"></A><A NAME="I8365"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I8366"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8164"></A><A NAME="I8165"></A>Remote_Call_Interface[(<I>library_unit_</I><A NAME="I8166"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p4">4</a></div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 All_Calls_Remote is as follows:&nbsp;</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8367"></A><A NAME="I8368"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I8369"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8167"></A><A NAME="I8168"></A>All_Calls_Remote[(<I>library_unit_</I><A NAME="I8169"></A><SPAN Class="swiss"><A HREF="RM-4-1.html#S0091">name</A></SPAN>)];</div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><A NAME="I8370"></A><A NAME="I8371"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
+<div class="Indented1"><A NAME="I8170"></A><A NAME="I8171"></A>A <SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> 
 All_Calls_Remote is a library unit pragma.&nbsp;</div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Normal"><A NAME="I8372"></A><A NAME="I8373"></A><A NAME="I8374"></A><A NAME="I8375"></A><A NAME="I8376"></A>A<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Call_Interface 
-is used to specify that a library unit is a</span> <I>remote call interface 
-(RCI)</I><span class="insert3">, namely that the</span><span class="delete3">&nbsp;is a library unit to which the pragma</span> Remote_Call_Interface <span class="insert3">aspect<A NAME="I8377"></A><A NAME="I8378"></A> 
-of the library unit is True</span><span class="delete3">&nbsp;applies</span>. 
-A subprogram declared in the visible part of such a library unit, or 
-declared by such a library unit, is called a <I>remote subprogram</I>.</div>
+<div class="Normal"><A NAME="I8172"></A><A NAME="I8173"></A><A NAME="I8174"></A><A NAME="I8175"></A><A NAME="I8176"></A>A 
+<SPAN Class="swiss"><A HREF="RM-2-8.html#S0019">pragma</A></SPAN> Remote_Call_Interface 
+is used to specify that a library unit is a <I>remote call interface 
+(RCI)</I>, namely that the Remote_Call_Interface aspect<A NAME="I8177"></A><A NAME="I8178"></A> 
+of the library unit is True. A subprogram declared in the visible part 
+of such a library unit, or declared by such a library unit, is called 
+a <I>remote subprogram</I>.</div>
 <div class="paranum"><a name="p8">8/3</a></div>
 <div class="Normal">The declaration of an RCI library unit shall be preelaborable 
 (see <A HREF="RM-10-2-1.html">10.2.1</A>), and shall depend semantically 
-only upon declared pure<span class="insert3">&nbsp;<SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s</span>, 
-shared passive<span class="insert3">&nbsp;library units</span>, remote types<span class="insert3">&nbsp;library units</span>, <span class="delete3">or&nbsp;</span>other remote call 
-interface library units<span class="insert3">, or preelaborated normal 
-library units that are mentioned only in private with clauses</span>.</div>
+only upon declared pure <SPAN Class="swiss"><A HREF="RM-10-1-1.html#S0248">library_item</A></SPAN>s, 
+shared passive library units, remote types library units, other remote 
+call interface library units, or preelaborated normal library units that 
+are mentioned only in private with clauses.</div>
 <div class="paranum"><a name="p9">9/1</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">In addition, the following 
 restrictions apply to an RCI library unit:&nbsp;</div>
@@ -86,25 +85,21 @@ of a limited type;&nbsp;</div>
 </div>
 <div class="paranum"><a name="p13">13/3</a></div>
 <div class="Bulleted">it shall not be, nor shall its visible part contain, 
-the declaration of a subprogram <span class="insert3">for</span><span class="delete3">&nbsp;to</span> 
-which <span class="insert3">aspect</span><span class="delete3">&nbsp;a pragma</span> 
-Inline <span class="insert3">is True</span><span class="delete3">&nbsp;applies</span>;</div>
+the declaration of a subprogram for which aspect Inline is True;</div>
 <div class="paranum"><a name="p14">14/3</a></div>
 <div class="Bulleted">it shall not be, nor shall its visible part contain, 
 a subprogram (or access-to-subprogram) declaration whose profile has 
-<span class="delete3">an access parameter or</span> a parameter <span class="insert3">or 
-result&nbsp;</span>of a type that does not support external streaming (see 
-<A HREF="RM-13-13-2.html">13.13.2</A>);</div>
+a parameter or result of a type that does not support external streaming 
+(see <A HREF="RM-13-13-2.html">13.13.2</A>);</div>
 <div class="paranum"><a name="p15">15</a></div>
 <div class="Bulleted">any public child of the library unit shall be a 
 remote call interface library unit.&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><span class="insert3">A</span><span class="delete3">&nbsp;If 
-a</span> pragma All_Calls_Remote <span class="insert3">sets the All_Calls_Remote 
-representation aspect of <A NAME="I8379"></A><A NAME="I8380"></A>the</span><span class="delete3">&nbsp;applies 
-to a</span> library unit<span class="insert3">&nbsp;to which the pragma applies 
-to the value True. If the All_Calls_Remote aspect of a library unit is 
-True</span>, the library unit shall be a remote call interface.</div>
+<div class="Normal">&nbsp;A pragma All_Calls_Remote sets the All_Calls_Remote 
+representation aspect of <A NAME="I8179"></A><A NAME="I8180"></A>the 
+library unit to which the pragma applies to the value True. If the All_Calls_Remote 
+aspect of a library unit is True, the library unit shall be a remote 
+call interface.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p17">17</a></div>
@@ -113,7 +108,7 @@ to at most one partition of a given program. A remote call interface
 library unit whose parent is also an RCI library unit shall be assigned 
 only to the same partition as its parent.&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Normal"><A NAME="I8381"></A><A NAME="I8382"></A><A NAME="I8383"></A>Notwithstanding 
+<div class="Normal"><A NAME="I8181"></A><A NAME="I8182"></A><A NAME="I8183"></A>Notwithstanding 
 the rule given in <A HREF="RM-10-2.html">10.2</A>, a compilation unit 
 in a given partition that semantically depends on the declaration of 
 an RCI library unit, <I>needs</I> (in the sense of <A HREF="RM-10-2.html">10.2</A>) 
@@ -124,14 +119,12 @@ assigned.</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p19">19/4</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert4"></span>If 
-<span class="insert3">aspect</span><span class="delete3">&nbsp;a pragma</span> 
-All_Calls_Remote <span class="insert3">is True for</span><span class="delete3">&nbsp;applies 
-to</span> a given RCI library unit, then the implementation shall route 
-any <span class="insert4">of the following calls</span><span class="delete4">&nbsp;call 
-to a subprogram of the RCI unit from outside the declarative region of 
-the unit</span> through the Partition Communication Subsystem (PCS); 
-see <A HREF="RM-E-5.html">E.5</A><span class="insert4">:</span><span class="delete4">. 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;<span class="insert4"></span>If 
+aspect All_Calls_Remote is True for a given RCI library unit, then the 
+implementation shall route any <span class="insert4">of the following 
+calls</span><span class="delete4">&nbsp;call to a subprogram of the RCI unit 
+from outside the declarative region of the unit</span> through the Partition 
+Communication Subsystem (PCS); see <A HREF="RM-E-5.html">E.5</A><span class="insert4">:</span><span class="delete4">. 
 Calls to such subprograms from within the declarative region of the unit 
 are defined to be local and shall not go through the PCS.</span>&nbsp;</div>
 <div class="paranum"><a name="p19.1">19.1/4</a></div>
@@ -148,10 +141,10 @@ whose tag identifies a type declared in the RCI unit.</span>&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p20">20/3</a></div>
-<div class="Normal">An implementation need not support the Remote_Call_Interface 
-pragma <span class="insert3">or aspect&nbsp;</span>nor the All_Calls_Remote 
-pragma. Explicit message-based communication between active partitions 
-can be supported as an alternative to RPC.&nbsp;</div>
+<div class="Normal">&nbsp;An implementation need not support the Remote_Call_Interface 
+pragma or aspect nor the All_Calls_Remote pragma. Explicit message-based 
+communication between active partitions can be supported as an alternative 
+to RPC.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

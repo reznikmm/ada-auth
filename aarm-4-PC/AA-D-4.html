@@ -13,19 +13,17 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -39,10 +37,9 @@
 <div class="Normal">{<I><A HREF="defect1.html#8652/0074">8652/0074</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00068.TXT">AI95-00068-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-[<A NAME="I8771"></A> This <span class="insert3">subclause</span><span class="delete3">&nbsp;clause</span> 
-specifies a mechanism for a user to choose an entry <I>queuing policy</I>. 
-It also defines two such policies. Other policies are implementation 
-defined.]&nbsp;</div>
+[<A NAME="I8572"></A> This subclause specifies a mechanism for a user 
+to choose an entry <I>queuing policy</I>. It also defines two such policies. 
+Other policies are implementation defined.]&nbsp;</div>
 <div class="paranum"><a name="p1.a">1.a</a></div>
 <div class="Annotations"><B>Implementation defined:&nbsp;</B>Implementation-defined 
 queuing policies.</div>
@@ -52,23 +49,23 @@ queuing policies.</div>
 <div class="Indented1" style="margin-bottom: 0.4em">The form of a <SPAN Class="swiss"><A HREF="AA-2-8.html#S0019">pragma</A></SPAN> 
 Queuing_Policy is as follows:&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8772"></A><A NAME="I8773"></A>Queuing_Policy(<I>policy_</I><A NAME="I8774"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
+<div class="Indented1">&nbsp;&nbsp;<B>pragma</B> <A NAME="I8573"></A><A NAME="I8574"></A>Queuing_Policy(<I>policy_</I><A NAME="I8575"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>); 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal">The <I>policy_</I><A NAME="I8775"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
+<div class="Normal">The <I>policy_</I><A NAME="I8576"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN> 
 shall be either FIFO_Queuing, Priority_Queuing or an implementation-defined 
-<A NAME="I8776"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.</div>
+<A NAME="I8577"></A><SPAN Class="swiss"><A HREF="AA-2-3.html#S0002">identifier</A></SPAN>.</div>
 
 <H4 Class="centered">Post-Compilation Rules</H4>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I8777"></A><A NAME="I8778"></A>A Queuing_Policy 
+<div class="Normal"><A NAME="I8578"></A><A NAME="I8579"></A>A Queuing_Policy 
 pragma is a configuration pragma.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I8779"></A>[A <I>queuing policy</I> governs 
+<div class="Normal"><A NAME="I8580"></A>[A <I>queuing policy</I> governs 
 the order in which tasks are queued for entry service, and the order 
 in which different entry queues are considered for service.] The queuing 
 policy is specified by a Queuing_Policy pragma.&nbsp;</div>
@@ -83,14 +80,14 @@ is True.&nbsp;</div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 Two queuing policies, FIFO_Queuing and Priority_Queuing, are language 
 defined. If no Queuing_Policy pragma applies to any of the program units 
-comprising the partition, the queuing policy for that partition is FIFO_Queuing.<span class="insert3"><A NAME="I8780"></A><A NAME="I8781"></A></span> 
+comprising the partition, the queuing policy for that partition is FIFO_Queuing.<A NAME="I8581"></A><A NAME="I8582"></A> 
 The rules for this policy are specified in <A HREF="AA-9-5-3.html">9.5.3</A> 
 and <A HREF="AA-9-7-1.html">9.7.1</A>.</div>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The Priority_Queuing 
-policy is defined as follows:<span class="insert3"><A NAME="I8782"></A><A NAME="I8783"></A></span></div>
+policy is defined as follows:<A NAME="I8583"></A><A NAME="I8584"></A></div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Bulleted"><A NAME="I8784"></A>The calls to an entry [(including 
+<div class="Bulleted"><A NAME="I8585"></A>The calls to an entry [(including 
 a member of an entry family)] are queued in an order consistent with 
 the priorities of the calls. The <I>priority of an entry call</I> is 
 initialized from the active priority of the calling task at the time 
@@ -185,7 +182,7 @@ is selected.</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p15">15/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00256.TXT">AI95-00256-01</A></I>} 
 Implementations are allowed to define other queuing policies, but need 
 not support more than one queuing policy per partition.&nbsp;</div>
 <div class="paranum"><a name="p15.a.1">15.a.1/2</a></div>
@@ -197,7 +194,7 @@ allows an implementation to limit the use of configuration pragmas to
 an empty environment. In that case, there would be no way to have multiple 
 policies in a partition.&nbsp;</div>
 <div class="paranum"><a name="p15.1">15.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-10188.TXT">AI95-00188-02</A></I>} 
 Implementations are allowed to defer the reordering of entry queues following 
 a change of base priority of a task blocked on the entry call if it is 
 not practical to reorder the queue immediately.&nbsp;</div>

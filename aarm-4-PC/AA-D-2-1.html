@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -44,23 +42,21 @@ priority-ordered ready queues.]&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00355.TXT">AI95-00355-01</A></I>} 
 The following language-defined library package exists:&nbsp;</div>
 <div class="paranum"><a name="p1.2">1.2/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<B>package</B>&nbsp;Ada.Dispatching&nbsp;<B>is</B><A NAME="I8674"></A><BR>
-&nbsp;&nbsp;<B>pragma</B>&nbsp;<span class="insert3">Preelaborate</span><span class="delete3">&nbsp;Pure</span>(Dispatching);<span class="delete3"><BR>
-&nbsp;&nbsp;<A NAME="I8675"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-<B>end</B>&nbsp;Ada.Dispatching;</span></div>
+<B>package</B>&nbsp;Ada.Dispatching&nbsp;<B>is</B><A NAME="I8481"></A><BR>
+&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Dispatching);</div>
 <div class="paranum"><a name="p1.3">1.3/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8676"></A>Yield;</span></div>
+&nbsp;&nbsp;<B>procedure</B>&nbsp;<A NAME="I8482"></A>Yield;</div>
 <div class="paranum"><a name="p1.4">1.4/3</a></div>
 <div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<span class="insert3">&nbsp;&nbsp;<A NAME="I8677"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
-<B>end</B>&nbsp;Ada.Dispatching;</span></div>
+&nbsp;&nbsp;<A NAME="I8483"></A>Dispatching_Policy_Error&nbsp;:&nbsp;<B>exception</B>;<BR>
+<B>end</B>&nbsp;Ada.Dispatching;</div>
 <div class="paranum"><a name="p1.5">1.5/2</a></div>
-<div class="Normal">&nbsp;Dispatching serves as the parent of other language-defined 
+<div class="Normal">&nbsp;&nbsp;Dispatching serves as the parent of other language-defined 
 library units concerned with task dispatching.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
@@ -79,7 +75,7 @@ multiprocessor, a task that is waiting for access to a protected object
 keeps its processor busy.</div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I8678"></A><A NAME="I8679"></A><A NAME="I8680"></A><A NAME="I8681"></A><I>Task 
+<A NAME="I8484"></A><A NAME="I8485"></A><A NAME="I8486"></A><A NAME="I8487"></A><I>Task 
 dispatching</I> is the process by which one ready task is selected for 
 execution on a processor. This selection is done at certain points during 
 the execution of a task called <I>task dispatching points</I>. A task 
@@ -92,7 +88,7 @@ more than one task can be chosen, at the same time, for execution on
 more than one processor, as explained below.&nbsp;</div>
 <div class="paranum"><a name="p5">5/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I8682"></A><A NAME="I8683"></A><A NAME="I8684"></A><A NAME="I8685"></A><A NAME="I8686"></A><A NAME="I8687"></A><I>Task 
+<A NAME="I8488"></A><A NAME="I8489"></A><A NAME="I8490"></A><A NAME="I8491"></A><A NAME="I8492"></A><A NAME="I8493"></A><I>Task 
 dispatching policies</I> are specified in terms of conceptual <I>ready 
 queues</I> and task states. A ready queue is an ordered list of ready 
 tasks. The first position in a queue is called the <I>head of the queue</I>, 
@@ -111,7 +107,7 @@ a ready task as one that is not blocked. Here we refine this definition
 and talk about ready queues.&nbsp;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<A NAME="I8688"></A>Each processor also has one <I>running task</I>, 
+<A NAME="I8494"></A>Each processor also has one <I>running task</I>, 
 which is the task currently being executed by that processor. Whenever 
 a task running on a processor reaches a task dispatching point it goes 
 back to one or more ready queues; a task (possibly the same task) is 
@@ -123,10 +119,9 @@ then removed from all ready queues to which it belongs.&nbsp;</div>
 one task to run, if we count the idle task.&nbsp;</div>
 <div class="paranum"><a name="p7">7/3</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
-<span class="insert3"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<span class="insert3">A call of Yield is a task dispatching point. Yield 
-is a potentially blocking operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).</span> 
-</div>
+{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
+A call of Yield is a task dispatching point. Yield is a potentially blocking 
+operation (see <A HREF="AA-9-5-1.html">9.5.1</A>).&nbsp;</div>
 <div class="paranum"><a name="p7.a">7.a/2</a></div>
 <div class="Annotations"><SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN></div>
@@ -156,11 +151,10 @@ range.&nbsp;</div>
 <div class="Annotations"><B>Ramification:&nbsp;</B>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0229-1.TXT">AI05-0229-1</A></I>} 
 For example, on some operating systems, it might be necessary to disallow 
 them altogether. This permission applies to tasks whose priority is set 
-to interrupt level for any reason: via <span class="insert3">an aspect</span><span class="delete3">&nbsp;a 
-pragma</span>, via a call to Dynamic_Priorities.Set_Priority, or via 
-priority inheritance.&nbsp;</div>
+to interrupt level for any reason: via an aspect, via a call to Dynamic_Priorities.Set_Priority, 
+or via priority inheritance.&nbsp;</div>
 <div class="paranum"><a name="p10.1">10.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00321.TXT">AI95-00321-01</A></I>} 
 [For optimization purposes,] an implementation may alter the points at 
 which task dispatching occurs, in an implementation-defined manner. However, 
 a <SPAN Class="swiss"><A HREF="AA-9-6.html#S0227">delay_statement</A></SPAN> 
@@ -168,10 +162,9 @@ always corresponds to at least one task dispatching point.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p11">11/3</a></div>
 <div class="Notes">7&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0299-1.TXT">AI05-0299-1</A></I>} 
-<span class="insert3">Clause</span><span class="delete3">&nbsp;Section</span> 
-<A HREF="AA-9.html">9</A> specifies under which circumstances a task 
-becomes ready. The ready state is affected by the rules for task activation 
-and termination, delay statements, and entry calls. <A NAME="I8689"></A>When 
+Clause <A HREF="AA-9.html">9</A> specifies under which circumstances 
+a task becomes ready. The ready state is affected by the rules for task 
+activation and termination, delay statements, and entry calls. <A NAME="I8495"></A>When 
 a task is not ready, it is said to be blocked.</div>
 <div class="paranum"><a name="p12">12</a></div>
 <div class="Notes">8&nbsp;&nbsp;An example of a possible implementation-defined 
@@ -211,18 +204,18 @@ affected task performs a protected action.</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0005-1.TXT">AI05-0005-1</A></I>} 
 This description is simplified to describe only the parts of the dispatching 
 model common to all policies. In particular, rules about preemption are 
-moved elsewhere. This makes it easier to add other policies (which <span class="insert3">might</span><span class="delete3">&nbsp;may</span> 
+moved elsewhere. This makes it easier to add other policies (which might 
 not involve preemption).&nbsp;</div>
 
 <H4 Class="centered">Incompatibilities With Ada 2005</H4>
 <div class="paranum"><a name="p17.b">17.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
-<span class="insert3"><A NAME="I8690"></A>Procedure Yield is added to 
-Dispatching. If Dispatching is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
+<A NAME="I8496"></A>Procedure Yield is added to Dispatching. If Dispatching 
+is referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 and an entity <I>E</I> with a <SPAN Class="swiss"><A HREF="AA-3-1.html#S0022">defining_identifier</A></SPAN> 
 of Yield is defined in a package that is also referenced in a <SPAN Class="swiss"><A HREF="AA-8-4.html#S0196">use_clause</A></SPAN>, 
 the entity <I>E</I> may no longer be use-visible, resulting in errors. 
-This should be rare and is easily fixed if it does occur.</span></div>
+This should be rare and is easily fixed if it does occur.</div>
 <div class="paranum"><a name="p17.c">17.c/4</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0166-1.TXT">AI05-0166-1</A></I>} 
 <span class="insert4"></span>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0005-1.TXT">AI12-0005-1</A></I>} 

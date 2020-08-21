@@ -13,21 +13,19 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert3 {text-decoration: underline; color: rgb(102,51,0) }
-    SPAN.delete3 {text-decoration: line-through; color: rgb(102,51,0) }
     SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
-    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Indented2NestedBulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Indented2NestedBulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -40,7 +38,7 @@
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1">1/2</a></div>
-<div class="Normal"><A NAME="I3139"></A>A constraint <I>statically matches</I> 
+<div class="Normal"><A NAME="I3116"></A>A constraint <I>statically matches</I> 
 another constraint if:&nbsp;</div>
 <div class="paranum"><a name="p1.1">1.1/2</a></div>
 <div class="Bulleted">both are null constraints;</div>
@@ -58,52 +56,50 @@ or</div>
 <div class="Bulleted">both are nonstatic and come from the same <SPAN Class="swiss"><A HREF="RM-12-5.html#S0281">formal_type_declaration</A></SPAN>. 
 </div>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Normal"><A NAME="I3140"></A>A subtype <I>statically matches</I> 
+<div class="Normal"><A NAME="I3117"></A>A subtype <I>statically matches</I> 
 another subtype of the same type if they have statically matching constraints, 
-<span class="insert3">all predicate specifications that apply to them 
-come from the same declarations,&nbsp;</span>and, for access subtypes, either 
-both or neither exclude null. Two anonymous access-to-object subtypes 
-statically match if their designated subtypes statically match, and either 
-both or neither exclude null, and either both or neither are access-to-constant. 
-Two anonymous access-to-subprogram subtypes statically match if their 
-designated profiles are subtype conformant, and either both or neither 
-exclude null.&nbsp;</div>
+all predicate specifications that apply to them come from the same declarations, 
+and, for access subtypes, either both or neither exclude null. Two anonymous 
+access-to-object subtypes statically match if their designated subtypes 
+statically match, and either both or neither exclude null, and either 
+both or neither are access-to-constant. Two anonymous access-to-subprogram 
+subtypes statically match if their designated profiles are subtype conformant, 
+and either both or neither exclude null.&nbsp;</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Normal"><A NAME="I3141"></A>Two ranges of the same type <I>statically 
+<div class="Normal"><A NAME="I3118"></A>Two ranges of the same type <I>statically 
 match</I> if both result from the same evaluation of a <SPAN Class="swiss"><A HREF="RM-3-5.html#S0037">range</A></SPAN>, 
 or if both are static and have equal corresponding bounds.&nbsp;</div>
 <div class="paranum"><a name="p4">4/3</a></div>
-<div class="Normal"><A NAME="I3142"></A>A constraint is <I>statically 
+<div class="Normal"><A NAME="I3119"></A>A constraint is <I>statically 
 compatible</I> with a scalar subtype if it statically matches the constraint 
 of the subtype, or if both are static and the constraint is compatible 
-with the subtype. <A NAME="I3143"></A>A constraint is <I>statically compatible</I> 
+with the subtype. <A NAME="I3120"></A>A constraint is <I>statically compatible</I> 
 with an access or composite subtype if it statically matches the constraint 
-of the subtype, or if the subtype is unconstrained.<span class="delete3">&nbsp;<A NAME="I3144"></A>One subtype is <I>statically compatible</I> with 
-a second subtype if the constraint of the first is statically compatible 
-with the second subtype.</span>&nbsp;</div>
+of the subtype, or if the subtype is unconstrained.&nbsp;</div>
 <div class="paranum"><a name="p5">5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em"><span class="insert3"><A NAME="I3145"></A>Two 
+<div class="Normal" style="margin-bottom: 0.4em"><A NAME="I3121"></A>Two 
 statically matching subtypes are statically compatible with each other. 
 In addition, a subtype <I>S1</I> is statically compatible with a subtype 
-<I>S2</I> if:</span>&nbsp;</div>
+<I>S2</I> if:&nbsp;</div>
 <div class="paranum"><a name="p6">6/3</a></div>
-<div class="Bulleted"><span class="insert3">the constraint of <I>S1</I> 
-is statically compatible with <I>S2</I>, and</span></div>
+<div class="Bulleted">the constraint of <I>S1</I> is statically compatible 
+with <I>S2</I>, and</div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Bulleted"><span class="insert3">if <I>S2</I> excludes null, 
-so does <I>S1</I>, and</span></div>
+<div class="Bulleted">if <I>S2</I> excludes null, so does <I>S1</I>, 
+and</div>
 <div class="paranum"><a name="p8">8/3</a></div>
-<div class="Bulleted" style="margin-bottom: 0.3em"><span class="insert3">either:</span> 
-</div>
+<div class="Bulleted" style="margin-bottom: 0.3em">either:&nbsp;</div>
 <div class="paranum"><a name="p9">9/3</a></div>
-<div class="Indented2NestedBulleted"><span class="insert3">all predicate 
-specifications that apply to <I>S2</I> apply also to <I>S1</I>, or</span></div>
+<div class="Indented2NestedBulleted">all predicate specifications that 
+apply to <I>S2</I> apply also to <I>S1</I>, or</div>
 <div class="paranum"><a name="p10">10/4</a></div>
-<div class="Indented2NestedBulleted"><span class="insert3">both subtypes 
-are static, every value that satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of <I>S1</I> also satisfies the&nbsp;</span><span class="insert4">predicates</span><span class="insert3"></span><span class="insert3"><span class="delete4">&nbsp;predicate</span></span><span class="insert3">&nbsp;of <I>S2</I>, and it is not the case that both types each have at least 
+<div class="Indented2NestedBulleted">both subtypes are static, every 
+value that satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of <I>S1</I> also satisfies the <span class="insert4">predicates</span><span class="delete4">&nbsp;predicate</span> 
+of <I>S2</I>, and it is not the case that both types each have at least 
 one applicable predicate specification, predicate checks are enabled 
 (see <A HREF="RM-11-4-2.html">11.4.2</A>) for <I>S2</I>, and predicate 
-checks are not enabled for <I>S1</I>.</span>&nbsp;</div>
+checks are not enabled for <I>S1</I>.&nbsp;</div>
 
 <HR>
 <div style="margin-top: 0.0em; margin-bottom: 0.6em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;

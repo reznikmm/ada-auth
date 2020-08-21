@@ -13,6 +13,8 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
+    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }
+    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -25,7 +27,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -49,39 +51,40 @@ Strings.Wide_Wide_Bounded.Wide_Wide_Hash_Case_Insensitive, Strings.Wide_Wide_Unb
 Strings.Wide_Wide_Equal_Case_Insensitive, Strings.Wide_Wide_Fixed.Wide_Wide_Equal_Case_Insensitive, 
 Strings.Wide_Wide_Bounded.Wide_Wide_Equal_Case_Insensitive, and Strings.Wide_Wide_Unbounded.Wide_Wide_Equal_Case_Insensitive. 
 They provide the same string-handling operations as the corresponding 
-packages and functions for strings of Character elements. <A NAME="I6636"></A><A NAME="I6637"></A><A NAME="I6638"></A><A NAME="I6639"></A><A NAME="I6640"></A><A NAME="I6641"></A><A NAME="I6642"></A><A NAME="I6643"></A><A NAME="I6644"></A><A NAME="I6645"></A><A NAME="I6646"></A><A NAME="I6647"></A><A NAME="I6648"></A><A NAME="I6649"></A><A NAME="I6650"></A><A NAME="I6651"></A></div>
+packages and functions for strings of Character elements. <A NAME="I6869"></A><A NAME="I6870"></A><A NAME="I6871"></A><A NAME="I6872"></A><A NAME="I6873"></A><A NAME="I6874"></A><A NAME="I6875"></A><A NAME="I6876"></A><A NAME="I6877"></A><A NAME="I6878"></A><A NAME="I6879"></A><A NAME="I6880"></A><A NAME="I6881"></A><A NAME="I6882"></A><A NAME="I6883"></A><A NAME="I6884"></A></div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p2">2/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 The library package Strings.Wide_Wide_Maps has the following declaration.</div>
-<div class="paranum"><a name="p3">3/2</a></div>
-<div class="Examples"><B>package</B>&nbsp;Ada.Strings.Wide_Wide_Maps&nbsp;<B>is</B><A NAME="I6652"></A><BR>
-&nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborate(Wide_Wide_Maps);</div>
+<div class="paranum"><a name="p3">3/5</a></div>
+<div class="Examples">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/AI12-0241-1.TXT">AI12-0241-1</A></I>} 
+<B>package</B>&nbsp;Ada.Strings.Wide_Wide_Maps<span class="delete5">&nbsp;<B>is</B></span><A NAME="I6885"></A><BR>
+&nbsp;&nbsp;&nbsp;<span class="insert5"><B>with</B></span><span class="delete5"><B>&nbsp;pragma</B></span>&nbsp;Preelaborate<span class="insert5">,&nbsp;Nonblocking&nbsp;<B>is</B></span><span class="delete5">(Wide_Wide_Maps);</span></div>
 <div class="paranum"><a name="p4">4/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Representation&nbsp;for&nbsp;a&nbsp;set&nbsp;of&nbsp;Wide_Wide_Character&nbsp;values:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6653"></A>Wide_Wide_Character_Set&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6886"></A>Wide_Wide_Character_Set&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Wide_Wide_Character_Set);</div>
 <div class="paranum"><a name="p5">5/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6654"></A>Null_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Character_Set;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6887"></A>Null_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Character_Set;</div>
 <div class="paranum"><a name="p6">6/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6655"></A>Wide_Wide_Character_Range&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6888"></A>Wide_Wide_Character_Range&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>record</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low&nbsp;&nbsp;:&nbsp;Wide_Wide_Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;High&nbsp;:&nbsp;Wide_Wide_Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>end&nbsp;record</B>;<BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Represents&nbsp;Wide_Wide_Character&nbsp;range&nbsp;Low..High</I></SPAN></div>
 <div class="paranum"><a name="p7">7/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6656"></A>Wide_Wide_Character_Ranges&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6889"></A>Wide_Wide_Character_Ranges&nbsp;<B>is&nbsp;array</B>&nbsp;(Positive&nbsp;<B>range</B>&nbsp;&lt;&gt;)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>of</B>&nbsp;Wide_Wide_Character_Range;</div>
 <div class="paranum"><a name="p8">8/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6657"></A>To_Set&nbsp;(Ranges&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Ranges)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6890"></A>To_Set&nbsp;(Ranges&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Ranges)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Set;</div>
 <div class="paranum"><a name="p9">9/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6658"></A>To_Set&nbsp;(Span&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Range)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6891"></A>To_Set&nbsp;(Span&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Range)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Set;</div>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6659"></A>To_Ranges&nbsp;(Set&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6892"></A>To_Ranges&nbsp;(Set&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Ranges;</div>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;=&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)&nbsp;<B>return</B>&nbsp;Boolean;</div>
@@ -97,11 +100,11 @@ The library package Strings.Wide_Wide_Maps has the following declaration.</div>
 &nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;&quot;-&quot;&nbsp;(Left,&nbsp;Right&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Set;</div>
 <div class="paranum"><a name="p13">13/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6660"></A>Is_In&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6893"></A>Is_In&nbsp;(Element&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p14">14/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6661"></A>Is_Subset&nbsp;(Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6894"></A>Is_Subset&nbsp;(Elements&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean;</div>
 <div class="paranum"><a name="p15">15/2</a></div>
@@ -110,38 +113,38 @@ The library package Strings.Wide_Wide_Maps has the following declaration.</div>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Boolean&nbsp;<B>renames</B>&nbsp;Is_Subset;</div>
 <div class="paranum"><a name="p16">16/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Alternative&nbsp;representation&nbsp;for&nbsp;a&nbsp;set&nbsp;of&nbsp;Wide_Wide_Character&nbsp;values:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6662"></A>Wide_Wide_Character_Sequence&nbsp;<B>is</B>&nbsp;Wide_Wide_String;</div>
+&nbsp;&nbsp;&nbsp;<B>subtype</B>&nbsp;<A NAME="I6895"></A>Wide_Wide_Character_Sequence&nbsp;<B>is</B>&nbsp;Wide_Wide_String;</div>
 <div class="paranum"><a name="p17">17/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6663"></A>To_Set&nbsp;(Sequence&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Sequence)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6896"></A>To_Set&nbsp;(Sequence&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Sequence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Set;</div>
 <div class="paranum"><a name="p18">18/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6664"></A>To_Set&nbsp;(Singleton&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6897"></A>To_Set&nbsp;(Singleton&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Set;</div>
 <div class="paranum"><a name="p19">19/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6665"></A>To_Sequence&nbsp;(Set&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6898"></A>To_Sequence&nbsp;(Set&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Set)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Sequence;</div>
 <div class="paranum"><a name="p20">20/2</a></div>
 <div class="Examples">&nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>Representation&nbsp;for&nbsp;a&nbsp;Wide_Wide_Character&nbsp;to&nbsp;Wide_Wide_Character</I></SPAN><BR>
 &nbsp;&nbsp;&nbsp;--&nbsp;<SPAN Class="roman"><I>mapping:</I></SPAN><BR>
-&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6666"></A>Wide_Wide_Character_Mapping&nbsp;<B>is&nbsp;private</B>;<BR>
+&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6899"></A>Wide_Wide_Character_Mapping&nbsp;<B>is&nbsp;private</B>;<BR>
 &nbsp;&nbsp;&nbsp;<B>pragma</B>&nbsp;Preelaborable_Initialization(Wide_Wide_Character_Mapping);</div>
 <div class="paranum"><a name="p21">21/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6667"></A>Value&nbsp;(Map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Mapping;<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6900"></A>Value&nbsp;(Map&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Mapping;<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Element&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character;</div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6668"></A>Identity&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Character_Mapping;</div>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<A NAME="I6901"></A>Identity&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Character_Mapping;</div>
 <div class="paranum"><a name="p23">23/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6669"></A>To_Mapping&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Sequence)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6902"></A>To_Mapping&nbsp;(From,&nbsp;To&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Sequence)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Mapping;</div>
 <div class="paranum"><a name="p24">24/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6670"></A>To_Domain&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Mapping)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6903"></A>To_Domain&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Mapping)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Sequence;</div>
 <div class="paranum"><a name="p25">25/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6671"></A>To_Range&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Mapping)<BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>function</B>&nbsp;<A NAME="I6904"></A>To_Range&nbsp;(Map&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character_Mapping)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character_Sequence;</div>
 <div class="paranum"><a name="p26">26/2</a></div>
-<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6672"></A>Wide_Wide_Character_Mapping_Function&nbsp;<B>is</B><BR>
+<div class="Examples">&nbsp;&nbsp;&nbsp;<B>type</B>&nbsp;<A NAME="I6905"></A>Wide_Wide_Character_Mapping_Function&nbsp;<B>is</B><BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>access&nbsp;function</B>&nbsp;(From&nbsp;:&nbsp;<B>in</B>&nbsp;Wide_Wide_Character)<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>return</B>&nbsp;Wide_Wide_Character;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
@@ -150,7 +153,7 @@ The library package Strings.Wide_Wide_Maps has the following declaration.</div>
 <B>end</B>&nbsp;Ada.Strings.Wide_Wide_Maps;</div>
 <div class="paranum"><a name="p28">28/2</a></div>
 <div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I6673"></A>The context clause for each of the packages Strings.Wide_Wide_Fixed, 
+<A NAME="I6906"></A>The context clause for each of the packages Strings.Wide_Wide_Fixed, 
 Strings.Wide_Wide_Bounded, and Strings.Wide_Wide_Unbounded identifies 
 Strings.Wide_Wide_Maps instead of Strings.Maps.</div>
 <div class="paranum"><a name="p28.1">28.1/3</a></div>
@@ -208,10 +211,10 @@ Set_Unbounded_Wide_Wide_String replaces Set_Unbounded_String</div>
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
 The following additional declarations are present in Strings.Wide_Wide_Maps.Wide_Wide_Constants:</div>
 <div class="paranum"><a name="p48">48/2</a></div>
-<div class="Examples"><A NAME="I6674"></A>Character_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Maps.Wide_Wide_Character_Set;<BR>
+<div class="Examples"><A NAME="I6907"></A>Character_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Maps.Wide_Wide_Character_Set;<BR>
 --&nbsp;<SPAN Class="roman"><I>Contains&nbsp;each&nbsp;Wide_Wide_Character&nbsp;value&nbsp;WWC&nbsp;such&nbsp;that</I></SPAN><BR>
 --&nbsp;<SPAN Class="roman"><I>Characters.Conversions.Is_Character(WWC)&nbsp;is&nbsp;True</I></SPAN><BR>
-<A NAME="I6675"></A>Wide_Character_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Maps.Wide_Wide_Character_Set;<BR>
+<A NAME="I6908"></A>Wide_Character_Set&nbsp;:&nbsp;<B>constant</B>&nbsp;Wide_Wide_Maps.Wide_Wide_Character_Set;<BR>
 --&nbsp;<SPAN Class="roman"><I>Contains&nbsp;each&nbsp;Wide_Wide_Character&nbsp;value&nbsp;WWC&nbsp;such&nbsp;that</I></SPAN><BR>
 --&nbsp;<SPAN Class="roman"><I>Characters.Conversions.Is_Wide_Character(WWC)&nbsp;is&nbsp;True</I></SPAN></div>
 <div class="paranum"><a name="p49">49/2</a></div>
@@ -229,7 +232,7 @@ Preelaborate in Strings.Wide_Wide_Maps.Wide_Wide_Constants.</div>
 <div class="NotesHeader">NOTES</div>
 <div class="paranum"><a name="p51">51/2</a></div>
 <div class="Notes">17&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
-<A NAME="I6676"></A>If a null Wide_Wide_Character_Mapping_Function is 
+<A NAME="I6909"></A>If a null Wide_Wide_Character_Mapping_Function is 
 passed to any of the Wide_Wide_String handling subprograms, Constraint_Error 
 is propagated.&nbsp;</div>
 
@@ -237,7 +240,7 @@ is propagated.&nbsp;</div>
 <div class="paranum"><a name="p51.a">51.a/2</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00285.TXT">AI95-00285-01</A></I>} 
 {<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-00395.TXT">AI95-00395-01</A></I>} 
-<A NAME="I6677"></A>The double-wide string-handling packages (Strings.Wide_Wide_Maps, 
+<A NAME="I6910"></A>The double-wide string-handling packages (Strings.Wide_Wide_Maps, 
 Strings.Wide_Wide_Fixed, Strings.Wide_Wide_Bounded, Strings.Wide_Wide_Unbounded, 
 and Strings.Wide_Wide_Maps.Wide_Wide_Constants), and functions Strings.Wide_Wide_Hash 
 and Strings.Wide_Wide_Unbounded.Wide_Wide_Hash are new.&nbsp;</div>
@@ -245,7 +248,7 @@ and Strings.Wide_Wide_Unbounded.Wide_Wide_Hash are new.&nbsp;</div>
 <H4 Class="centered">Extensions to Ada 2005</H4>
 <div class="paranum"><a name="p51.b">51.b/3</a></div>
 <div class="Annotations">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0286-1.TXT">AI05-0286-1</A></I>} 
-<A NAME="I6678"></A>The case insenstive library functions (Strings.Wide_Wide_Equal_Case_Insensitive, 
+<A NAME="I6911"></A>The case insenstive library functions (Strings.Wide_Wide_Equal_Case_Insensitive, 
 Strings.Wide_Wide_Fixed.Wide_Wide_Equal_Case_Insensitive, Strings.Wide_Wide_Bounded.Wide_Wide_Equal_Case_Insensitive, 
 Strings.Wide_Wide_Unbounded.Wide_Wide_Equal_Case_Insensitive, Strings.Wide_Wide_Hash_Case_Insensitive, 
 Strings.Wide_Wide_Fixed.Wide_Wide_Hash_Case_Insensitive, Strings.Wide_Wide_Bounded.Wide_Wide_Hash_Case_Insensitive, 

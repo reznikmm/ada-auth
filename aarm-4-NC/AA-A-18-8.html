@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.8em; margin-bottom: 0.6em}
-    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented2 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 5.2em; margin-bottom: 0.6em}
+    DIV.Annotations {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 6.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -277,18 +277,18 @@ was deleted.</I></SPAN>{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/A
 <div class="paranum"><a name="p62">62/2</a></div>
 <div class="Examples"><B>end</B>&nbsp;Ada.Containers.Hashed_Sets;</div>
 <div class="paranum"><a name="p63">63/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <A NAME="I7727"></A>An object of type Set contains an expandable hash 
 table, which is used to provide direct access to elements. The <I>capacity</I> 
 of an object of type Set is the maximum number of elements that can be 
 inserted into the hash table prior to it being automatically expanded.</div>
 <div class="paranum"><a name="p64">64/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <A NAME="I7728"></A>Two elements <I>E1</I> and <I>E2</I> are defined 
 to be <I>equivalent</I> if Equivalent_Elements (<I>E1</I>, <I>E2</I>) 
 returns True.</div>
 <div class="paranum"><a name="p65">65/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The actual function for the generic formal function Hash is expected 
 to return the same value each time it is called with a particular element 
 value. For any two equivalent elements, the actual for Hash is expected 
@@ -296,7 +296,7 @@ to return the same value. If the actual for Hash behaves in some other
 manner, the behavior of this package is unspecified. Which subprograms 
 of this package call Hash, and how many times they call it, is unspecified.<A NAME="I7729"></A></div>
 <div class="paranum"><a name="p66">66/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 The actual function for the generic formal function Equivalent_Elements 
 is expected to return the same value each time it is called with a particular 
 pair of Element values. It should define an equivalence relationship, 
@@ -305,12 +305,12 @@ behaves in some other manner, the behavior of this package is unspecified.
 Which subprograms of this package call Equivalent_Elements, and how many 
 times they call it, is unspecified.<A NAME="I7730"></A></div>
 <div class="paranum"><a name="p66.1">66.1/3</a></div>
-<div class="Normal">&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
+<div class="Normal">&nbsp;&nbsp;&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI05s/AI05-0044-1.TXT">AI05-0044-1</A></I>} 
 If the actual function for the generic formal function &quot;=&quot; 
 returns True for any pair of nonequivalent elements, then the behavior 
 of the container function &quot;=&quot; is unspecified.<A NAME="I7731"></A></div>
 <div class="paranum"><a name="p67">67/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 If the value of an element stored in a set is changed other than by an 
 operation in this package such that at least one of Hash or Equivalent_Elements 
 give different results, the behavior of this package is unspecified.<A NAME="I7732"></A></div>
@@ -321,7 +321,7 @@ for a suggested implementation, and for justification of the restrictions
 regarding Hash and Equivalent_Elements. Note that sets only need to store 
 elements, not key/element pairs.&nbsp;</div>
 <div class="paranum"><a name="p68">68/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 <A NAME="I7733"></A><A NAME="I7734"></A><A NAME="I7735"></A>Which elements 
 are the first element and the last element of a set, and which element 
 is the successor of a given element, are unspecified, other than the 
@@ -425,7 +425,7 @@ of the <SPAN Class="swiss"><A HREF="AA-5-5.html#S0156">loop_statement</A></SPAN>
 whose <SPAN Class="swiss"><A HREF="AA-5-5-2.html#S0159">iterator_specification</A></SPAN> 
 denotes this object). The iterator object needs finalization.</div>
 <div class="paranum"><a name="p86">86/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 For any element <I>E</I>, the actual function for the generic formal 
 function Generic_Keys.Hash is expected to be such that Hash (<I>E</I>) 
 = Generic_Keys.Hash (Key (<I>E</I>)). If the actuals for Key or Generic_Keys.Hash 
@@ -433,7 +433,7 @@ behave in some other manner, the behavior of Generic_Keys is unspecified.
 Which subprograms of Generic_Keys call Generic_Keys.Hash, and how many 
 times they call it, is unspecified.<A NAME="I7737"></A></div>
 <div class="paranum"><a name="p87">87/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 For any two elements <I>E1</I> and <I>E2</I>, the boolean values Equivalent_Elements 
 (<I>E1</I>, <I>E2</I>) and Equivalent_Keys (Key (<I>E1</I>), Key (<I>E2</I>)) 
 are expected to be equal. If the actuals for Key or Equivalent_Keys behave 
@@ -443,7 +443,7 @@ they call it, is unspecified.<A NAME="I7738"></A></div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p88">88/2</a></div>
-<div class="Normal">{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
+<div class="Normal">&nbsp;{<I><A HREF="http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AIs/AI-20302.TXT">AI95-00302-03</A></I>} 
 If <I>N</I> is the length of a set, the average time complexity of the 
 subprograms Insert, Include, Replace, Delete, Exclude and Find that take 
 an element parameter should be <I>O</I>(log <I>N</I>). The average time 

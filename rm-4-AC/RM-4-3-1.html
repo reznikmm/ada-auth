@@ -21,18 +21,18 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-bottom: 0.6em}
-    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-top: 0.6em; margin-bottom: 0.6em}
-    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em; margin-bottom: 0.6em}
-    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 4.3em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Indented1 {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-bottom: 0.6em}
+    DIV.WideAbove {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-top: 0.6em; margin-bottom: 0.6em}
+    DIV.Notes {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em; margin-bottom: 0.6em}
+    DIV.NotesHeader {font-family: "Times New Roman", Times, serif; font-size: 80%; line-height: 122%; margin-left: 3.7em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -114,14 +114,14 @@ previous association.&nbsp;</div>
 is a record extension, then it shall be a descendant of a record type, 
 through one or more record extensions (and no private extensions).</div>
 <div class="paranum"><a name="p15">15/3</a></div>
-<div class="Normal"><span class="insert3">The reserved words <B>null 
+<div class="Normal">&nbsp;<span class="insert3">The reserved words <B>null 
 record</B> may appear only if</span><span class="delete3">&nbsp;If</span> 
 there are no components needed in a given <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0108">record_component_association_list</A></SPAN><span class="delete3">, 
 then the reserved words <B>null record</B> shall appear rather than a 
 list of <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN>s</span>. 
 </div>
 <div class="paranum"><a name="p16">16/4</a></div>
-<div class="Normal">Each <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN><span class="insert2">&nbsp;other than an <B>others</B> choice with a &lt;&gt;</span> shall have 
+<div class="Normal">&nbsp;Each <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN><span class="insert2">&nbsp;other than an <B>others</B> choice with a &lt;&gt;</span> shall have 
 at least one associated component, and each needed component shall be 
 associated with exactly one <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN>. 
 If a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
@@ -131,17 +131,17 @@ the same type<span class="insert3">, or all of them shall be of anonymous
 access types whose subtypes statically match</span>.<span class="insert4">&nbsp;In addition, Legality Rules are enforced separately for each associated 
 component.</span></div>
 <div class="paranum"><a name="p17">17/3</a></div>
-<div class="Normal"><span class="insert3">The</span><span class="delete3">&nbsp;If 
+<div class="Normal">&nbsp;<span class="insert3">The</span><span class="delete3">&nbsp;If 
 the components of a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
 are needed, then the</span> value of a discriminant that governs <span class="insert3">a</span><span class="delete3">&nbsp;the</span> 
 <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
 <span class="insert3"><I>P</I>&nbsp;</span>shall be given by a static expression<span class="insert3">, 
-</span><span class="insert3">unless <I>P</I> is nested within a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0072">variant</A></SPAN> 
+unless <I>P</I> is nested within a <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0072">variant</A></SPAN> 
 <I>V</I> that is not selected by the discriminant value governing the 
 <SPAN Class="swiss"><A HREF="RM-3-8-1.html#S0071">variant_part</A></SPAN> 
 enclosing <I>V</I></span>.&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">A <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 for a discriminant without a <SPAN Class="swiss"><A HREF="RM-3-7.html#S0063">default_expression</A></SPAN> 
 shall have an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 rather than &lt;&gt;.</span>&nbsp;</div>
@@ -161,9 +161,10 @@ the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>
 for a discriminant is evaluated (and converted) prior to the elaboration 
 of any per-object constraint that depends on it, which in turn occurs 
 prior to the evaluation and conversion of the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
-for the component with the per-object constraint.<A NAME="I2621"></A></div>
+for the component with the per-object constraint.<A NAME="I2621"></A> 
+</div>
 <div class="paranum"><a name="p19.1">19.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
 with an <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN>, 
 the <SPAN Class="swiss"><A HREF="RM-4-4.html#S0117">expression</A></SPAN> 
 defines the value for the associated component(s). For a <SPAN Class="swiss"><A HREF="RM-4-3-1.html#S0109">record_component_association</A></SPAN> 
@@ -202,7 +203,7 @@ aggregates with named associations:</I>&nbsp;</div>
 <div class="Examples">(Disk,&nbsp;Closed,&nbsp;Track&nbsp;=&gt;&nbsp;5,&nbsp;Cylinder&nbsp;=&gt;&nbsp;12)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-8-1.html">3.8.1</A></I></SPAN><BR>
 (Unit&nbsp;=&gt;&nbsp;Disk,&nbsp;Status&nbsp;=&gt;&nbsp;Closed,&nbsp;Cylinder&nbsp;=&gt;&nbsp;9,&nbsp;Track&nbsp;=&gt;&nbsp;1)</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="WideAbove" style="margin-bottom: 0.4em"><I></I><span class="insert2"><I>Examples</I></span><I></I><span class="delete2"><I>&nbsp;Example</I></span><I>&nbsp;of component&nbsp;</I><span class="insert2"><I>associations</I></span><I></I><span class="delete2"><I>&nbsp;association</I></span><I>&nbsp;with several choices:</I>&nbsp;</div>
+<div class="WideAbove" style="margin-bottom: 0.4em">&nbsp;<I></I><span class="insert2"><I>Examples</I></span><I></I><span class="delete2"><I>&nbsp;Example</I></span><I>&nbsp;of component&nbsp;</I><span class="insert2"><I>associations</I></span><I></I><span class="delete2"><I>&nbsp;association</I></span><I>&nbsp;with several choices:</I>&nbsp;</div>
 <div class="paranum"><a name="p28">28</a></div>
 <div class="Examples">(Value&nbsp;=&gt;&nbsp;0,&nbsp;Succ|Pred&nbsp;=&gt;&nbsp;<B>new</B>&nbsp;Cell'(0,&nbsp;<B>null</B>,&nbsp;<B>null</B>))&nbsp;&nbsp;&nbsp;--<SPAN Class="roman"><I>&nbsp;&nbsp;see&nbsp;<A HREF="RM-3-10-1.html">3.10.1</A></I></SPAN></div>
 <div class="paranum"><a name="p29">29</a></div>

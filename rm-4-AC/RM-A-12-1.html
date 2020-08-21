@@ -23,14 +23,14 @@
     SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -53,12 +53,13 @@ for a general discussion of streams.&nbsp;</div>
 
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p1.1">1.1/1</a></div>
-<div class="Normal">&nbsp;<span class="insert1">The elements of a stream file 
-are stream elements. If positioning is supported for the specified external 
-file, a current index and current size are maintained for the file as 
-described in <A HREF="RM-A-8.html">A.8</A>. If positioning is not supported, 
-a current index is not maintained, and the current size is implementation 
-defined.<A NAME="I6831"></A><A NAME="I6832"></A></span>&nbsp;</div>
+<div class="Normal">&nbsp;&nbsp;<span class="insert1">The elements of a stream 
+file are stream elements. If positioning is supported for the specified 
+external file, a current index and current size are maintained for the 
+file as described in <A HREF="RM-A-8.html">A.8</A>. If positioning is 
+not supported, a current index is not maintained, and the current size 
+is implementation defined.<A NAME="I6831"></A><A NAME="I6832"></A></span> 
+</div>
 <div class="paranum"><a name="p2">2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">The library package 
 Streams.Stream_IO has the following declaration:&nbsp;</div>
@@ -154,17 +155,17 @@ was deleted.</I></SPAN><span class="delete1">&nbsp;</span></div>
 &nbsp;&nbsp;&nbsp;...&nbsp;--&nbsp;<SPAN Class="roman"><I>not&nbsp;specified&nbsp;by&nbsp;the&nbsp;language</I></SPAN><BR>
 <B>end</B>&nbsp;Ada.Streams.Stream_IO;</div>
 <div class="paranum"><a name="p27.1">27.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert2">The type File_Type needs 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert2">The type File_Type needs 
 finalization<A NAME="I6867"></A> (see <A HREF="RM-7-6.html">7.6</A>).</span></div>
 <div class="paranum"><a name="p28">28/4</a></div>
-<div class="Normal">The subprograms <span class="insert2">given in subclause 
+<div class="Normal">&nbsp;The subprograms <span class="insert2">given in subclause 
 <A HREF="RM-A-8-2.html">A.8.2</A> for the control of external files (</span> Create, 
 Open, Close, Delete, Reset, Mode, Name, Form,<span class="insert2"></span><span class="insert2"><span class="delete4">&nbsp;and</span></span><span class="insert2"></span> Is_Open<span class="insert2"></span><span class="insert4">, 
 and Flush</span><span class="insert2">) are available for stream files</span><span class="delete2">, 
 and End_of_File have the same effect as the corresponding subprograms 
 in Sequential_IO (see <A HREF="RM-A-8-2.html">A.8.2</A>)</span>.</div>
 <div class="paranum"><a name="p28.1">28.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert2">The 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert2">The 
 End_Of_File function:</span>&nbsp;</div>
 <div class="paranum"><a name="p28.2">28.2/2</a></div>
 <div class="Bulleted"><span class="insert2">Propagates Mode_Error if 
@@ -178,36 +179,36 @@ index exceeds the size of the external file; otherwise</span><span class="insert
 for the given external file, the function returns True if no more elements 
 can be read from the given file; otherwise</span><span class="insert3">,</span><span class="insert2">&nbsp;it returns False.</span>&nbsp;</div>
 <div class="paranum"><a name="p28.5">28.5/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">The Set_Mode procedure&nbsp;</span><span class="insert2">sets</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;changes</span></span><span class="insert1">&nbsp;the mode of the file. If the new mode is Append_File, the file is positioned 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">The Set_Mode procedure&nbsp;</span><span class="insert2">sets</span><span class="insert1"></span><span class="insert1"><span class="delete2">&nbsp;changes</span></span><span class="insert1">&nbsp;the mode of the file. If the new mode is Append_File, the file is positioned 
 to its end; otherwise, the position in the file is unchanged.</span></div>
 <div class="paranum"><a name="p28.6">28.6/4</a></div>
-<div class="Normal">&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<SPAN STYLE="font-size: 80%"><I>This paragraph 
 was deleted.</I></SPAN><span class="insert1"></span><span class="insert1"><span class="delete4">&nbsp;The 
 Flush procedure synchronizes the external file with the internal file 
 (by flushing any internal buffers) without closing the file or changing 
 the position. Mode_Error is propagated if the mode of the file is In_File.</span></span><span class="insert1"></span></div>
 <div class="paranum"><a name="p29">29/1</a></div>
-<div class="Normal">The Stream function returns a Stream_Access result 
+<div class="Normal">&nbsp;The Stream function returns a Stream_Access result 
 from a File_Type object, thus allowing the stream-oriented attributes 
 Read, Write, Input, and Output to be used on the same file for multiple 
 types. <span class="insert1">Stream propagates Status_Error if File is 
 not open.</span></div>
 <div class="paranum"><a name="p30">30/2</a></div>
-<div class="Normal">The procedures Read and Write are equivalent to the 
-corresponding operations in the package Streams. Read propagates Mode_Error 
-if the mode of File is not In_File. Write propagates Mode_Error if the 
-mode of File is not Out_File or Append_File. The Read procedure with 
-a Positive_Count parameter starts reading at the specified index. The 
-Write procedure with a Positive_Count parameter starts writing at the 
-specified index.<span class="insert2">&nbsp;For a file that supports positioning, 
+<div class="Normal">&nbsp;The procedures Read and Write are equivalent to 
+the corresponding operations in the package Streams. Read propagates 
+Mode_Error if the mode of File is not In_File. Write propagates Mode_Error 
+if the mode of File is not Out_File or Append_File. The Read procedure 
+with a Positive_Count parameter starts reading at the specified index. 
+The Write procedure with a Positive_Count parameter starts writing at 
+the specified index.<span class="insert2">&nbsp;For a file that supports positioning, 
 Read without a Positive_Count parameter starts reading at the current 
 index, and Write without a Positive_Count parameter starts writing at 
 the current index.</span></div>
 <div class="paranum"><a name="p30.1">30.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1">The Size function returns 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1">The Size function returns 
 the current size of the file.</span></div>
 <div class="paranum"><a name="p31">31/1</a></div>
-<div class="Normal">The Index function returns the current <span class="delete1">file 
+<div class="Normal">&nbsp;The Index function returns the current <span class="delete1">file 
 </span>index<span class="delete1">, as a count (in stream elements) from 
 the beginning of the file. The position of the first element in the file 
 is 1</span>.&nbsp;</div>
@@ -215,7 +216,7 @@ is 1</span>.&nbsp;</div>
 <div class="Normal">The Set_Index procedure sets the current index to 
 the specified value.</div>
 <div class="paranum"><a name="p32.1">32.1/1</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;<span class="insert1">If 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;<span class="insert1">If 
 positioning is supported for the external file, the current index is 
 maintained as follows:</span></div>
 <div class="paranum"><a name="p32.2">32.2/1</a></div>
@@ -247,21 +248,21 @@ call of Read or Write with a Positive_Count parameter propagates Use_Error.</div
 <div class="Normal"><span class="insert2"><SPAN STYLE="font-size: 80%"><I>Paragraphs 
 34 through 36 were deleted.</I></SPAN></span>&nbsp;</div>
 <div class="paranum"><a name="p34">34/1</a></div>
-<div class="Normal"><span class="delete1">The Size function returns the 
-current size of the file, in stream elements.</span></div>
+<div class="Normal">&nbsp;<span class="delete1">The Size function returns 
+the current size of the file, in stream elements.</span></div>
 <div class="paranum"><a name="p35">35/1</a></div>
-<div class="Normal"><span class="delete1">The Set_Mode procedure changes 
+<div class="Normal">&nbsp;<span class="delete1">The Set_Mode procedure changes 
 the mode of the file. If the new mode is Append_File, the file is positioned 
 to its end; otherwise, the position in the file is unchanged.</span></div>
 <div class="paranum"><a name="p36">36/1</a></div>
-<div class="Normal"><span class="delete1">The Flush procedure synchronizes 
+<div class="Normal">&nbsp;<span class="delete1">The Flush procedure synchronizes 
 the external file with the internal file (by flushing any internal buffers) 
 without closing the file or changing the position. Mode_Error is propagated 
 if the mode of the file is In_File.</span>&nbsp;</div>
 
 <H4 Class="centered">Erroneous Execution</H4>
 <div class="paranum"><a name="p36.1">36.1/1</a></div>
-<div class="Normal">&nbsp;&nbsp;<span class="insert1"><A NAME="I6868"></A>If the 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<span class="insert1"><A NAME="I6868"></A>If the 
 File_Type object passed to the Stream function is later closed or finalized, 
 and the stream-oriented attributes are subsequently called (explicitly 
 or implicitly) on the Stream_Access value returned by Stream, execution 

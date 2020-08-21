@@ -15,14 +15,14 @@
     DT {display: compact}
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
-    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
-    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 4.0em; margin-bottom: 0.6em}
-    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
-    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.8em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
+    DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.2em; margin-bottom: 0.6em}
+    DIV.Examples {font-family: "Courier New", monospace; font-size: 90%; line-height: 122%; margin-left: 3.4em; margin-bottom: 0.6em}
+    DIV.Bulleted-NoPrefix {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em}
+    DIV.Bulleted {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 3.2em; margin-right: 2.0em; margin-top: 0em; margin-bottom: 0.5em; display: list-item; list-style-type: disc}
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B> (Ada 202x Draft 11)</SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="RM-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="RM-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="RM-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -88,7 +88,7 @@ derived from Controlled, as explained in <A HREF="RM-4-5-2.html">4.5.2</A>.
 The type Limited_Controlled is like Controlled, except that it is limited 
 and it lacks the primitive subprogram Adjust.&nbsp;</div>
 <div class="paranum"><a name="p9.1">9.1/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;A type is said to 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;A type is said to 
 <I>need finalization</I> if:<A NAME="I3670"></A><A NAME="I3671"></A></div>
 <div class="paranum"><a name="p9.2">9.2/2</a></div>
 <div class="Bulleted">it is a controlled type, a task type or a protected 
@@ -107,14 +107,14 @@ that are explicitly defined to need finalization.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p10">10/2</a></div>
-<div class="Normal">During the elaboration or evaluation of a construct 
+<div class="Normal">&nbsp;During the elaboration or evaluation of a construct 
 that causes an object to be initialized by default, for every controlled 
 subcomponent of the object that is not assigned an initial value (as 
 defined in <A HREF="RM-3-3-1.html">3.3.1</A>), Initialize is called on 
 that subcomponent. Similarly, if the object that is initialized by default 
 as a whole is controlled, Initialize is called on the object.</div>
 <div class="paranum"><a name="p11">11/2</a></div>
-<div class="Normal">For an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
+<div class="Normal">&nbsp;For an <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0111">extension_aggregate</A></SPAN> 
 whose <SPAN Class="swiss"><A HREF="RM-4-3-2.html#S0112">ancestor_part</A></SPAN> 
 is a <SPAN Class="swiss"><A HREF="RM-3-2-2.html#S0028">subtype_mark</A></SPAN> 
 denoting a controlled subtype, the Initialize procedure of the ancestor 
@@ -142,7 +142,7 @@ the <I>assignment operation</I> proceeds as follows:&nbsp;</div>
 <div class="Bulleted"><A NAME="I3674"></A><A NAME="I3675"></A>The value 
 of the target is <I>adjusted.</I>&nbsp;</div>
 <div class="paranum"><a name="p16">16/3</a></div>
-<div class="Normal"><A NAME="I3676"></A><A NAME="I3677"></A>To adjust 
+<div class="Normal">&nbsp;<A NAME="I3676"></A><A NAME="I3677"></A>To adjust 
 the value of a composite object, the values of the components of the 
 object are first adjusted in an arbitrary order, and then, if the object 
 is nonlimited controlled, Adjust is called.<A NAME="I3678"></A> Adjusting 
@@ -163,8 +163,8 @@ may eliminate the intermediate anonymous object, so this description
 subsumes the one given in <A HREF="RM-5-2.html">5.2</A>, &ldquo;<A HREF="RM-5-2.html">Assignment 
 Statements</A>&rdquo;.&nbsp;</div>
 <div class="paranum"><a name="p17.1">17.1/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;When a function call 
-or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;When a function 
+call or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 is used to initialize an object, the result of the function call or <SPAN Class="swiss"><A HREF="RM-4-3.html#S0106">aggregate</A></SPAN> 
 is an anonymous object, which is assigned into the newly-created object. 
 For such an assignment, the anonymous object might be <I>built in place</I>,<A NAME="I3680"></A><A NAME="I3681"></A> 
@@ -182,7 +182,7 @@ the anonymous object is built in place.</div>
 <div class="Bulleted">In other cases, it is unspecified whether the anonymous 
 object is built in place.<A NAME="I3682"></A></div>
 <div class="paranum"><a name="p17.5">17.5/3</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;Notwithstanding<A NAME="I3683"></A> 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;&nbsp;Notwithstanding<A NAME="I3683"></A> 
 what this International Standard says elsewhere, if an object is built 
 in place:</div>
 <div class="paranum"><a name="p17.6">17.6/3</a></div>
@@ -209,8 +209,8 @@ of the newly-created object.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p18">18/3</a></div>
-<div class="Normal">An implementation is allowed to relax the above rules 
-for <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>s 
+<div class="Normal">&nbsp;An implementation is allowed to relax the above 
+rules for <SPAN Class="swiss"><A HREF="RM-5-2.html#S0152">assignment_statement</A></SPAN>s 
 in the following ways:&nbsp;</div>
 <div class="paranum"><a name="p19">19/3</a></div>
 <div class="Bulleted">If an object is assigned the value of that same 
@@ -231,7 +231,7 @@ one component at a time (for an overlapping array assignment), or not
 at all (for an assignment where the target and the source of the assignment 
 are the same object).&nbsp;</div>
 <div class="paranum"><a name="p22">22/2</a></div>
-<div class="Normal" style="margin-bottom: 0.4em">Furthermore, an implementation 
+<div class="Normal" style="margin-bottom: 0.4em">&nbsp;Furthermore, an implementation 
 is permitted to omit implicit Initialize, Adjust, and Finalize calls 
 and associated assignment operations on an object of a nonlimited controlled 
 type provided that:</div>
@@ -253,7 +253,7 @@ do so prior to assigning a new value to the object, and</div>
 <div class="Bulleted">the assignment operations associated with omitted 
 Adjust calls are also omitted.&nbsp;</div>
 <div class="paranum"><a name="p27">27/2</a></div>
-<div class="Normal">This permission applies to Adjust and Finalize calls 
+<div class="Normal">&nbsp;This permission applies to Adjust and Finalize calls 
 even if the implicit calls have additional external effects.&nbsp;</div>
 
 <HR>

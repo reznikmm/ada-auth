@@ -24,7 +24,7 @@
     </STYLE>
 </HEAD>
 <BODY TEXT="#000000" BGCOLOR="#FFFFF0" LINK="#000080" VLINK="#330033" ALINK="#0000FF">
-<DIV><B><SPAN Style="font-size:200%; color: rgb(0,51,153)">Annotated</SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)">&nbsp;Ada Reference Manual (Ada 202x Draft 11)</SPAN></B> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
+<DIV><SPAN Style="font-size:200%; color: rgb(0,51,153)"><B>Annotated</B></SPAN><SPAN Style="font-size:200%; color: rgb(0,0,102)"><B>&nbsp;Ada Reference Manual</B> (Ada 202x Draft 16)</SPAN> &mdash; <A HREF="AA-TTL.html"><B>Legal Information</B></A></DIV>
 <div style="margin-top: 0.6em; margin-bottom: 0.0em"><A HREF="AA-TOC.html"><IMG SRC="cont.gif" ALT="Contents" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-0-5.html"><IMG SRC="index.gif" ALT="Index" BORDER=0></A>&nbsp;
 &nbsp;<A HREF="AA-STDS.html"><IMG SRC="lib.gif" ALT="References" BORDER=0></A>&nbsp;
@@ -35,40 +35,40 @@
 <HR>
 <H1>3.5.7 Floating Point Types</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I1910"></A>For floating point types, the 
+<div class="Normal"><A NAME="I1917"></A>For floating point types, the 
 error bound is specified as a relative precision by giving the required 
 minimum number of significant decimal digits.&nbsp;</div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2</a></div>
-<div class="Indented1"><SPAN Class="swiss">floating_point_definition</SPAN><A NAME="I1911"></A><A NAME="S0045"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<B>digits</B>&nbsp;<I>static_</I><A NAME="I1912"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN>&nbsp;[<A NAME="I1913"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>]</div>
+<div class="Indented1"><SPAN Class="swiss">floating_point_definition</SPAN><A NAME="I1918"></A><A NAME="S0045"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>digits</B>&nbsp;<I>static_</I><A NAME="I1919"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN>&nbsp;[<A NAME="I1920"></A><SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN>]</div>
 <div class="paranum"><a name="p3">3</a></div>
-<div class="Indented1"><SPAN Class="swiss">real_range_specification</SPAN><A NAME="I1914"></A><A NAME="S0046"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<B>range</B>&nbsp;<I>static_</I><A NAME="I1915"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>&nbsp;..&nbsp;<I>static_</I><A NAME="I1916"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">real_range_specification</SPAN><A NAME="I1921"></A><A NAME="S0046"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>range</B>&nbsp;<I>static_</I><A NAME="I1922"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>&nbsp;..&nbsp;<I>static_</I><A NAME="I1923"></A><SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN></div>
 
 <H4 Class="centered">Name Resolution Rules</H4>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Normal"><A NAME="I1917"></A>The <I>requested decimal precision</I>, 
+<div class="Normal"><A NAME="I1924"></A>The <I>requested decimal precision</I>, 
 which is the minimum number of significant decimal digits required for 
-the floating point type, is specified by the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
-given after the reserved word <B>digits</B>. <A NAME="I1918"></A>This 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+the floating point type, is specified by the value of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
+given after the reserved word <B>digits</B>. <A NAME="I1925"></A>This 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 is expected to be of any integer type.</div>
 <div class="paranum"><a name="p5">5</a></div>
-<div class="Normal"><A NAME="I1919"></A>Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN> 
+<div class="Normal"><A NAME="I1926"></A>Each <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 is expected to be of any real type[; the types need not be the same]. 
 </div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Normal"><A NAME="I1920"></A>The requested decimal precision 
-shall be specified by a static <SPAN Class="swiss"><A HREF="AA-4-4.html#S0118">expression</A></SPAN> 
+<div class="Normal"><A NAME="I1927"></A>The requested decimal precision 
+shall be specified by a static <SPAN Class="swiss"><A HREF="AA-4-4.html#S0122">expression</A></SPAN> 
 whose value is positive and no greater than System.Max_Base_Digits. Each 
-<SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN> 
+<SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN> 
 of a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
-shall also be static. <A NAME="I1921"></A>If the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
+shall also be static. <A NAME="I1928"></A>If the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 is omitted, the requested decimal precision shall be no greater than 
 System.Max_Digits.&nbsp;</div>
 <div class="paranum"><a name="p6.a">6.a</a></div>
@@ -91,10 +91,10 @@ types.</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p8">8</a></div>
 <div class="Normal">The set of values for a floating point type is the 
-(infinite) set of rational numbers. <A NAME="I1922"></A>The <I>machine 
+(infinite) set of rational numbers. <A NAME="I1929"></A>The <I>machine 
 numbers</I> of a floating point type are the values of the type that 
 can be represented exactly in every unconstrained variable of the type. 
-<A NAME="I1923"></A>The base range (see <A HREF="AA-3-5.html">3.5</A>) 
+<A NAME="I1930"></A>The base range (see <A HREF="AA-3-5.html">3.5</A>) 
 of a floating point type is symmetric around zero, except that it can 
 include some extra negative values in some implementations.</div>
 <div class="paranum"><a name="p8.a">8.a</a></div>
@@ -108,9 +108,9 @@ is True, then minus zero could in a sense be considered a value of the
 type. However, for most purposes, minus zero behaves the same as plus 
 zero.</div>
 <div class="paranum"><a name="p9">9</a></div>
-<div class="Normal"><A NAME="I1924"></A>The <I>base decimal precision</I> 
+<div class="Normal"><A NAME="I1931"></A>The <I>base decimal precision</I> 
 of a floating point type is the number of decimal digits of precision 
-representable in objects of the type. <A NAME="I1925"></A>The <I>safe 
+representable in objects of the type. <A NAME="I1932"></A>The <I>safe 
 range</I> of a floating point type is that part of its base range for 
 which the accuracy corresponding to the base decimal precision is preserved 
 by all predefined operations.&nbsp;</div>
@@ -121,9 +121,9 @@ near the boundaries of the base range might result in excessive inaccuracies
 or spurious overflows when used with certain predefined operations. For 
 such hardware, the safe range would omit such values.</div>
 <div class="paranum"><a name="p10">10</a></div>
-<div class="Normal"><A NAME="I1926"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1933"></A>A <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
 defines a floating point type whose base decimal precision is no less 
-than the requested decimal precision. <A NAME="I1927"></A><A NAME="I1928"></A>If 
+than the requested decimal precision. <A NAME="I1934"></A><A NAME="I1935"></A>If 
 a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 is given, the safe range of the floating point type (and hence, also 
 its base range) includes at least the values of the simple expressions 
@@ -136,10 +136,10 @@ values as well. The attributes Safe_First and Safe_Last give the actual
 bounds of the safe range.]</div>
 <div class="paranum"><a name="p11">11</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
-also defines a first subtype of the type. <A NAME="I1929"></A><A NAME="I1930"></A>If 
+also defines a first subtype of the type. <A NAME="I1936"></A><A NAME="I1937"></A>If 
 a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 is given, then the subtype is constrained to a range whose bounds are 
-given by a conversion of the values of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0124">simple_expression</A></SPAN>s 
+given by a conversion of the values of the <SPAN Class="swiss"><A HREF="AA-4-4.html#S0128">simple_expression</A></SPAN>s 
 of the <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0046">real_range_specification</A></SPAN> 
 to the type being defined. Otherwise, the subtype is unconstrained.</div>
 <div class="paranum"><a name="p11.a.1">11.a.1/1</a></div>
@@ -148,30 +148,30 @@ above is not an <I>implicit subtype conversion</I> (which is something
 that happens at overload resolution, see <A HREF="AA-4-6.html">4.6</A>), 
 although it happens implicitly. Therefore, the freezing rules are not 
 invoked on the type (which is important so that representation items 
-can be given for the type). <A NAME="I1931"></A></div>
+can be given for the type). <A NAME="I1938"></A></div>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I1932"></A>There is a predefined, unconstrained, 
+<div class="Normal"><A NAME="I1939"></A>There is a predefined, unconstrained, 
 floating point subtype named Float[, declared in the visible part of 
 package Standard].&nbsp;</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I1933"></A>[The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
+<div class="Normal"><A NAME="I1940"></A>[The elaboration of a <SPAN Class="swiss"><A HREF="AA-3-5-7.html#S0045">floating_point_definition</A></SPAN> 
 creates the floating point type and its first subtype.]&nbsp;</div>
 
 <H4 Class="centered">Implementation Requirements</H4>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I1934"></A>In an implementation that supports 
+<div class="Normal"><A NAME="I1941"></A>In an implementation that supports 
 floating point types with 6 or more digits of precision, the requested 
 decimal precision for Float shall be at least 6.</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I1935"></A>If Long_Float is predefined for 
+<div class="Normal"><A NAME="I1942"></A>If Long_Float is predefined for 
 an implementation, then its requested decimal precision shall be at least 
 11.&nbsp;</div>
 
 <H4 Class="centered">Implementation Permissions</H4>
 <div class="paranum"><a name="p16">16</a></div>
-<div class="Normal"><A NAME="I1936"></A><A NAME="I1937"></A>An implementation 
+<div class="Normal"><A NAME="I1943"></A><A NAME="I1944"></A>An implementation 
 is allowed to provide additional predefined floating point types[, declared 
 in the visible part of Standard], whose (unconstrained) first subtypes 
 have names of the form Short_Float, Long_Float, Short_Short_Float, Long_Long_Float, 
@@ -188,7 +188,7 @@ floating point types declared in Standard.</div>
 
 <H4 Class="centered">Implementation Advice</H4>
 <div class="paranum"><a name="p17">17</a></div>
-<div class="Normal"><A NAME="I1938"></A>An implementation should support 
+<div class="Normal"><A NAME="I1945"></A>An implementation should support 
 Long_Float in addition to Float if the target machine supports 11 or 
 more digits of precision. No other named floating point subtypes are 
 recommended for package Standard. Instead, appropriate named floating 
@@ -228,7 +228,7 @@ point types and subtypes:</I>&nbsp;</div>
 
 <H4 Class="centered">Inconsistencies With Ada 83</H4>
 <div class="paranum"><a name="p22.a">22.a</a></div>
-<div class="Annotations"><A NAME="I1939"></A>No Range_Checks, only Overflow_Checks, 
+<div class="Annotations"><A NAME="I1946"></A>No Range_Checks, only Overflow_Checks, 
 are performed on variables (or parameters) of an unconstrained floating 
 point subtype. This is upward compatible for programs that do not raise 
 Constraint_Error. For those that do raise Constraint_Error, it is possible 

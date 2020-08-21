@@ -13,8 +13,6 @@
     DIV.paranum {float: left; font-family: Arial, Helvetica, sans-serif; font-size: 64%; width: 2.8em; margin-left: -0.4em; margin-right: -3.0em; margin-top: 0.2em}
     TT {font-family: "Courier New", monospace}
     DT {display: compact}
-    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }
-    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }
     A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}
     DIV.Normal {font-family: "Times New Roman", Times, serif; line-height: 122%; margin-left: 1.8em; margin-bottom: 0.6em}
@@ -39,57 +37,57 @@
 <HR>
 <H1>9.4 Protected Units and Protected Objects</H1>
 <div class="paranum"><a name="p1">1</a></div>
-<div class="Normal"><A NAME="I4131"></A><A NAME="I4132"></A><A NAME="I4133"></A><A NAME="I4134"></A>A 
+<div class="Normal"><A NAME="I4119"></A><A NAME="I4120"></A><A NAME="I4121"></A><A NAME="I4122"></A>A 
 <I>protected object</I> provides coordinated access to shared data, through 
 calls on its visible <I>protected operations</I>, which can be <I>protected 
-subprograms</I> or <I>protected entries</I>. <A NAME="I4135"></A><A NAME="I4136"></A><A NAME="I4137"></A>A 
+subprograms</I> or <I>protected entries</I>. <A NAME="I4123"></A><A NAME="I4124"></A><A NAME="I4125"></A>A 
 <I>protected unit</I> is declared by a <I>protected declaration</I>, 
 which has a corresponding <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN>. 
 A protected declaration may be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0227">protected_type_declaration</A></SPAN>, 
 in which case it declares a named protected type; alternatively, it may 
 be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN>, 
 in which case it defines an anonymous protected type, as well as declaring 
-a named protected object of that type. <A NAME="I4138"></A></div>
+a named protected object of that type. <A NAME="I4126"></A></div>
 
 <H4 Class="centered">Syntax</H4>
 <div class="paranum"><a name="p2">2/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">protected_type_declaration</SPAN><A NAME="I4139"></A><A NAME="S0227"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<B>protected</B>&nbsp;<B>type</B>&nbsp;<A NAME="I4140"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4141"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4142"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4143"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4144"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">protected_type_declaration</SPAN><A NAME="I4127"></A><A NAME="S0227"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>protected</B>&nbsp;<B>type</B>&nbsp;<A NAME="I4128"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN>&nbsp;[<A NAME="I4129"></A><SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4130"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4131"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4132"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>;</div>
 <div class="paranum"><a name="p3">3/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">single_protected_declaration</SPAN><A NAME="I4145"></A><A NAME="S0228"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<B>protected</B>&nbsp;<A NAME="I4146"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4147"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4148"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4149"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>;</div>
+<div class="Indented1"><SPAN Class="swiss">single_protected_declaration</SPAN><A NAME="I4133"></A><A NAME="S0228"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>protected</B>&nbsp;<A NAME="I4134"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4135"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<B>new</B>&nbsp;<A NAME="I4136"></A><SPAN Class="swiss"><A HREF="RM-3-9-4.html#S0078">interface_list</A></SPAN>&nbsp;<B>with</B>]<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A NAME="I4137"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>;</div>
 <div class="paranum"><a name="p4">4</a></div>
-<div class="Indented1"><SPAN Class="swiss">protected_definition</SPAN><A NAME="I4150"></A><A NAME="S0229"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I4151"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0230">protected_operation_declaration</A></SPAN>&nbsp;}<BR>
+<div class="Indented1"><SPAN Class="swiss">protected_definition</SPAN><A NAME="I4138"></A><A NAME="S0229"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I4139"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0230">protected_operation_declaration</A></SPAN>&nbsp;}<BR>
 [&nbsp;<B>private</B><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I4152"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0231">protected_element_declaration</A></SPAN>&nbsp;}&nbsp;]<BR>
-&nbsp;&nbsp;<B>end</B>&nbsp;[<I>protected_</I><A NAME="I4153"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
+&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I4140"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0231">protected_element_declaration</A></SPAN>&nbsp;}&nbsp;]<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>protected_</I><A NAME="I4141"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>]</div>
 <div class="paranum"><a name="p5">5/1</a></div>
-<div class="Indented1"><SPAN Class="swiss">protected_operation_declaration</SPAN><A NAME="I4154"></A><A NAME="S0230"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4155"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4156"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4157"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">protected_operation_declaration</SPAN><A NAME="I4142"></A><A NAME="S0230"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4143"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4144"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0235">entry_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4145"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
 <div class="paranum"><a name="p6">6</a></div>
-<div class="Indented1"><SPAN Class="swiss">protected_element_declaration</SPAN><A NAME="I4158"></A><A NAME="S0231"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4159"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0230">protected_operation_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4160"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">protected_element_declaration</SPAN><A NAME="I4146"></A><A NAME="S0231"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4147"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0230">protected_operation_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4148"></A><SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN></div>
 <div class="paranum"><a name="p7">7/3</a></div>
-<div class="Indented1"><SPAN Class="swiss">protected_body</SPAN><A NAME="I4161"></A><A NAME="S0232"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
-&nbsp;&nbsp;<B>protected</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4162"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4163"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
-&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I4164"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0233">protected_operation_item</A></SPAN>&nbsp;}<BR>
-&nbsp;&nbsp;<B>end</B>&nbsp;[<I>protected_</I><A NAME="I4165"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
+<div class="Indented1"><SPAN Class="swiss">protected_body</SPAN><A NAME="I4149"></A><A NAME="S0232"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><BR>
+&nbsp;&nbsp;<B>protected</B>&nbsp;<B>body</B>&nbsp;<A NAME="I4150"></A><SPAN Class="swiss"><A HREF="RM-3-1.html#S0022">defining_identifier</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<A NAME="I4151"></A><SPAN Class="swiss"><A HREF="RM-13-1-1.html#S0324">aspect_specification</A></SPAN>]&nbsp;<B>is</B><BR>
+&nbsp;&nbsp;&nbsp;{&nbsp;<A NAME="I4152"></A><SPAN Class="swiss"><A HREF="RM-9-4.html#S0233">protected_operation_item</A></SPAN>&nbsp;}<BR>
+&nbsp;&nbsp;<B>end</B>&nbsp;[<I>protected_</I><A NAME="I4153"></A><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN>];</div>
 <div class="paranum"><a name="p8">8/4</a></div>
-<div class="Indented1"><SPAN Class="swiss">protected_operation_item</SPAN><A NAME="I4166"></A><A NAME="S0233"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4167"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4168"></A><SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<span class="insert4"><A NAME="I4169"></A><SPAN Class="swiss"><A HREF="RM-6-7.html#S0205">null_procedure_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4170"></A><SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</span><A NAME="I4171"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN><BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4172"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
+<div class="Indented1"><SPAN Class="swiss">protected_operation_item</SPAN><A NAME="I4154"></A><A NAME="S0233"></A><SPAN Class="swiss">&nbsp;::=&nbsp;</SPAN><A NAME="I4155"></A><SPAN Class="swiss"><A HREF="RM-6-1.html#S0180">subprogram_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4156"></A><SPAN Class="swiss"><A HREF="RM-6-3.html#S0194">subprogram_body</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4157"></A><SPAN Class="swiss"><A HREF="RM-6-7.html#S0205">null_procedure_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4158"></A><SPAN Class="swiss"><A HREF="RM-6-8.html#S0206">expression_function_declaration</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4159"></A><SPAN Class="swiss"><A HREF="RM-9-5-2.html#S0238">entry_body</A></SPAN><BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;<A NAME="I4160"></A><SPAN Class="swiss"><A HREF="RM-13-1.html#S0321">aspect_clause</A></SPAN></div>
 <div class="paranum"><a name="p9">9</a></div>
 <div class="Indented1">If a <I>protected_</I><SPAN Class="swiss"><A HREF="RM-2-3.html#S0002">identifier</A></SPAN> 
 appears at the end of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN> 
@@ -106,11 +104,11 @@ deleted.</I></SPAN>&nbsp;</div>
 <H4 Class="centered">Static Semantics</H4>
 <div class="paranum"><a name="p11">11/2</a></div>
 <div class="Normal">A <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN> 
-defines a protected type and its first subtype. <A NAME="I4173"></A>The 
+defines a protected type and its first subtype. <A NAME="I4161"></A>The 
 list of <SPAN Class="swiss"><A HREF="RM-9-4.html#S0230">protected_operation_declaration</A></SPAN>s 
 of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>, 
 together with the <SPAN Class="swiss"><A HREF="RM-3-7.html#S0061">known_discriminant_part</A></SPAN>, 
-if any, is called the visible part of the protected unit. <A NAME="I4174"></A>The 
+if any, is called the visible part of the protected unit. <A NAME="I4162"></A>The 
 optional list of <SPAN Class="swiss"><A HREF="RM-9-4.html#S0231">protected_element_declaration</A></SPAN>s 
 after the reserved word <B>private</B> is called the private part of 
 the protected unit.&nbsp;</div>
@@ -128,12 +126,12 @@ the protected declaration, whose profile is type conformant with the
 prefixed view profile of the inherited subprogram, the inherited subprogram 
 is said to be <I>implemented</I> by the conforming protected subprogram 
 or entry using an implicitly declared nonabstract subprogram which has 
-the same profile as the inherited subprogram and which overrides it<A NAME="I4175"></A>.<A NAME="I4176"></A><A NAME="I4177"></A> 
-<A NAME="I4178"></A></div>
+the same profile as the inherited subprogram and which overrides it<A NAME="I4163"></A>.<A NAME="I4164"></A><A NAME="I4165"></A> 
+<A NAME="I4166"></A></div>
 
 <H4 Class="centered">Legality Rules</H4>
 <div class="paranum"><a name="p11.2">11.2/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I4179"></A>A protected declaration requires 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I4167"></A>A protected declaration requires 
 a completion, which shall be a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN>, 
 and every <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN> 
 shall be the completion of some protected declaration.&nbsp;</div>
@@ -148,7 +146,7 @@ primitive subprogram of a tagged protected type shall not be type conformant
 with any protected operation of the protected type, if the subprogram 
 has the same defining name as the protected operation and the first parameter 
 of the subprogram is of the protected type or is an access parameter 
-designating the protected type.<A NAME="I4180"></A>&nbsp;</div>
+designating the protected type.<A NAME="I4168"></A>&nbsp;</div>
 <div class="paranum"><a name="p11.5">11.5/2</a></div>
 <div class="Normal" style="margin-bottom: 0.4em">&nbsp;&nbsp;For each primitive 
 subprogram inherited by the type declared by a protected declaration, 
@@ -157,15 +155,15 @@ at most one of the following shall apply:</div>
 <div class="Bulleted">the inherited subprogram is overridden with a primitive 
 subprogram of the protected type, in which case the overriding subprogram 
 shall be subtype conformant with the inherited subprogram and not abstract; 
-or<A NAME="I4181"></A></div>
+or<A NAME="I4169"></A></div>
 <div class="paranum"><a name="p11.7">11.7/2</a></div>
 <div class="Bulleted">the inherited subprogram is implemented by a protected 
 subprogram or single entry of the protected type, in which case its prefixed 
 view profile shall be subtype conformant with that of the protected subprogram 
-or entry. <A NAME="I4182"></A></div>
+or entry. <A NAME="I4170"></A></div>
 <div class="paranum"><a name="p11.8">11.8/2</a></div>
 <div class="Normal">&nbsp;&nbsp;If neither applies, the inherited subprogram shall 
-be a null procedure. <A NAME="I4183"></A>In addition to the places where 
+be a null procedure. <A NAME="I4171"></A>In addition to the places where 
 Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.&nbsp;</div>
@@ -189,29 +187,29 @@ subprogram;</div>
 is <B>not overriding</B>, then the subprogram shall not implement any 
 inherited subprogram.</div>
 <div class="paranum"><a name="p11.13">11.13/2</a></div>
-<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I4184"></A>In addition to the places 
+<div class="Normal">&nbsp;&nbsp;&nbsp;<A NAME="I4172"></A>In addition to the places 
 where Legality Rules normally apply (see <A HREF="RM-12-3.html">12.3</A>), 
 these rules also apply in the private part of an instance of a generic 
 unit.</div>
 
 <H4 Class="centered">Dynamic Semantics</H4>
 <div class="paranum"><a name="p12">12</a></div>
-<div class="Normal"><A NAME="I4185"></A>The elaboration of a protected 
+<div class="Normal"><A NAME="I4173"></A>The elaboration of a protected 
 declaration elaborates the <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN>. 
-<A NAME="I4186"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN> 
+<A NAME="I4174"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0228">single_protected_declaration</A></SPAN> 
 also creates an object of an (anonymous) protected type.&nbsp;</div>
 <div class="paranum"><a name="p13">13</a></div>
-<div class="Normal"><A NAME="I4187"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN> 
+<div class="Normal"><A NAME="I4175"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0229">protected_definition</A></SPAN> 
 creates the protected type and its first subtype; it also includes the 
 elaboration of the <SPAN Class="swiss"><A HREF="RM-3-8.html#S0070">component_declaration</A></SPAN>s 
 and <SPAN Class="swiss"><A HREF="RM-9-4.html#S0230">protected_operation_declaration</A></SPAN>s 
 in the given order.</div>
 <div class="paranum"><a name="p14">14</a></div>
-<div class="Normal"><A NAME="I4188"></A>As part of the initialization 
+<div class="Normal"><A NAME="I4176"></A>As part of the initialization 
 of a protected object, any per-object constraints (see <A HREF="RM-3-8.html">3.8</A>) 
 are elaborated.&nbsp;</div>
 <div class="paranum"><a name="p15">15</a></div>
-<div class="Normal"><A NAME="I4189"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN> 
+<div class="Normal"><A NAME="I4177"></A>The elaboration of a <SPAN Class="swiss"><A HREF="RM-9-4.html#S0232">protected_body</A></SPAN> 
 has no other effect than to establish that protected operations of the 
 type can from then on be called without failing the Elaboration_Check.</div>
 <div class="paranum"><a name="p16">16</a></div>
@@ -222,7 +220,7 @@ of a given protected type includes:&nbsp;</div>
 including (implicitly) an entry queue for each entry declared for the 
 protected object;&nbsp;</div>
 <div class="paranum"><a name="p18">18</a></div>
-<div class="Bulleted"><A NAME="I4190"></A>A representation of the state 
+<div class="Bulleted"><A NAME="I4178"></A>A representation of the state 
 of the execution resource <I>associated</I> with the protected object 
 (one such resource is associated with each protected object).&nbsp;</div>
 <div class="paranum"><a name="p19">19</a></div>
@@ -232,7 +230,7 @@ object; it can be acquired (as part of a protected action &mdash; see
 <A HREF="RM-9-5-1.html">9.5.1</A>) either for concurrent read-only access, 
 or for exclusive read-write access.</div>
 <div class="paranum"><a name="p20">20</a></div>
-<div class="Normal"><A NAME="I4191"></A><A NAME="I4192"></A>As the first 
+<div class="Normal"><A NAME="I4179"></A><A NAME="I4180"></A>As the first 
 step of the <I>finalization</I> of a protected object, each call remaining 
 on any entry queue of the object is removed from its queue and Program_Error 
 is raised at the place of the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-3.html#S0242">entry_call_statement</A></SPAN>. 
@@ -240,7 +238,7 @@ is raised at the place of the corresponding <SPAN Class="swiss"><A HREF="RM-9-5-
 
 <H4 Class="centered">Bounded (Run-Time) Errors</H4>
 <div class="paranum"><a name="p20.1">20.1/2</a></div>
-<div class="Normal">&nbsp;&nbsp;<A NAME="I4193"></A>It is a bounded error to call 
+<div class="Normal">&nbsp;&nbsp;<A NAME="I4181"></A>It is a bounded error to call 
 an entry or subprogram of a protected object after that object is finalized. 
 If the error is detected, Program_Error is raised. Otherwise, the call 
 proceeds normally, which may leave a task queued forever.&nbsp;</div>
